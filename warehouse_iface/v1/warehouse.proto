@@ -1,0 +1,146 @@
+syntax = "proto3";
+
+package warehouse_iface.v1;
+
+option go_package = "github.com/pdcgo/schema/services/warehouse_iface/v1;warehouse_iface";
+
+service WarehouseService {}
+
+service WarehouseFinanceService {
+  // balance
+  rpc ExpenseAccountGet(ExpenseAccountGetRequest) returns (ExpenseAccountGetResponse);
+  // rpc ExpenseAccountCreate(ExpenseAccountCreateReq) returns (ExpenseAccountGetResponse); // backup
+  // rpc ExpenseAccountEdit(ExpenseAccountEditReq) returns (ExpenseAccountGetResponse); // backup
+  //   rpc ExpenseAccountDelete(CommonReq) returns (CommonRes);
+  // rpc ExpenseAccountList(ExpenseAccountListRequest) returns (ExpenseAccountListRes);
+  // //   history
+  // rpc ExpenseHistoryAdd(ExpenseHistoryAddReq) returns (ExpenseHistoryAddRes);
+  // rpc ExpenseHistoryEdit(ExpenseHistoryEditReq) returns (ExpenseHistoryEditRes);
+  // rpc ExpenseHistoryList(ExpenseHistoryListReq) returns (ExpenseHistoryListRes);
+  // //   report
+  // rpc ExpenseReportDaily(ExpenseReportDailyReq) returns (ExpenseReportDailyRes);
+}
+
+message ExpenseReportDailyReq {
+  uint64 account_id = 1;
+  uint64 warehouse_id = 2;
+}
+
+message ReportDaily {
+  int64 start_date = 1;
+  int64 end_date = 2;
+  double expense = 3;
+  double income = 4;
+  double system_diff_amount = 5;
+  double actual_diff_amount = 6;
+  double err_diff_amount = 7;
+}
+
+message ExpenseReportDailyRes {
+  string message = 1;
+  repeated ReportDaily data = 2;
+}
+
+message ExpenseHistoryListReq {
+  uint64 account_id = 1;
+  uint64 warehouse_id = 2;
+  bool is_ops_account = 3;
+  string expense_type = 4;
+  int64 start_date = 5;
+  int64 end_date = 6;
+}
+
+message ExpenseHistoryListRes {
+  string message = 1;
+  repeated WarehouseExpenseHistory data = 2;
+}
+
+message WarehouseExpenseHistory {
+  uint64 id = 1;
+  uint64 account_id = 2;
+  uint64 warehouse_id = 3;
+  bool is_ops_account = 4;
+  string expense_type = 5;
+  double amount = 6;
+}
+
+message ExpenseHistoryAddReq {
+  uint64 account_id = 1;
+  uint64 warehouse_id = 2;
+  uint64 created_by_id = 3;
+  string expense_type = 4;
+  double amount = 5;
+  string note = 6;
+  // google.protobuf.Timestamp at = 7;
+}
+
+message ExpenseHistoryAddRes {
+  string message = 1;
+}
+
+message ExpenseHistoryEditReq {
+  uint64 hist_id = 1;
+  uint64 account_id = 2;
+  uint64 warehouse_id = 3;
+  uint64 created_by_id = 4;
+  string expense_type = 5;
+  double amount = 6;
+  string note = 7;
+  // google.protobuf.Timestamp at = 8;
+}
+
+message ExpenseHistoryEditRes {
+  string message = 1;
+}
+
+message ExpenseAccountGetRequest {
+  uint64 id = 1;
+  uint64 warehouse_id = 2;
+  bool is_ops_account = 3;
+}
+
+message ExpenseAccountCreateReq {
+  uint64 domain_id = 1;
+  uint64 warehouse_id = 2;
+  uint64 account_type_id = 3;
+  string name = 4;
+  string number_id = 5;
+  bool is_ops_account = 6;
+}
+
+message ExpenseAccountEditReq {
+  uint64 domain_id = 1;
+  uint64 account_id = 2;
+  uint64 warehouse_id = 3;
+  uint64 account_type_id = 4;
+  bool is_ops_account = 5;
+  string name = 6;
+  string number_id = 7;
+}
+
+message ExpenseAccountGetResponse {
+  uint64 id = 1;
+  uint64 warehouse_id = 2;
+  uint64 account_type_id = 3;
+  string name = 4;
+  string number_id = 5;
+  bool is_ops_account = 6;
+  bool disabled = 7;
+  // google.protobuf.Timestamp created_at = 8;
+}
+
+message ExpenseAccountListRequest {
+  uint64 warehouse_id = 1;
+  string number_id = 2;
+  string name = 3;
+  bool is_ops_account = 4;
+}
+message ExpenseAccountListRes {
+  string message = 1;
+  repeated ExpenseAccountGetResponse data = 2;
+}
+
+message EmptyReq {}
+message EmptyRes {
+  string message = 1;
+}

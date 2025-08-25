@@ -1,0 +1,9 @@
+version: v2
+
+name: buf.build/pdcbuild/schema
+lint:
+  use:
+    - STANDARD
+breaking:
+  use:
+    - FILE

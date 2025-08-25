@@ -1,0 +1,12 @@
+version: v2
+plugins:
+  - remote: buf.build/protocolbuffers/go
+    out: services
+    opt:
+      - paths=source_relative
+      # - module=github.com/pdcgo/schema
+  - remote: buf.build/connectrpc/go
+    out: services
+    opt:
+      - paths=source_relative
+      # - module=github.com/pdcgo/schema
