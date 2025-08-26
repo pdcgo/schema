@@ -1,30 +1,11 @@
 syntax = "proto3";
 package accounting_iface.v1;
 
+import "common/v1/common.proto";
+
 option go_package = "github.com/pdcgo/schema/services/accounting_iface/v1;accounting_iface";
 
-message KeyName {
-  string key = 1;
-  string name = 2;
-}
-
-message Pagination {
-  int64 current_page = 1;
-  int64 total_page = 2;
-  int64 total_items = 3;
-}
-
-service ExpenseService {
-  rpc ExpenseCreate(ExpenseCreateRequest) returns (ExpenseCreateResponse);
-  rpc ExpenseList(ExpenseListRequest) returns (ExpenseListResponse);
-}
-
-message ExpenseCreateRequest {}
-message ExpenseCreateResponse {}
-message ExpenseListRequest {}
-message ExpenseListResponse {}
-
-// service untuk accouting rekening
+// Service untuk accouting rekening
 service AccountService {
   rpc AccountCreate(AccountCreateRequest) returns (AccountCreateResponse);
   rpc AccountList(AccountListRequest) returns (AccountListResponse);
@@ -37,14 +18,14 @@ message LabelListRequest {
   string keyword = 1;
 }
 message LabelListResponse {
-  repeated KeyName data = 1;
+  repeated common.v1.KeyName data = 1;
 }
 
 message AccountUpdateRequest {
   uint64 team_id = 1;
   string name = 2;
   string number_id = 3;
-  repeated KeyName labels = 4;
+  repeated common.v1.KeyName labels = 4;
 }
 
 message AccountUpdateResponse {
@@ -65,7 +46,7 @@ message AccountItem {
   string name = 3;
   string number_id = 4;
   string account_type = 5;
-  repeated KeyName labels = 6;
+  repeated common.v1.KeyName labels = 6;
 }
 
 message AccountListRequest {
@@ -83,7 +64,7 @@ message AccountCreateRequest {
   string name = 2;
   string number_id = 3;
   string account_type = 4;
-  repeated KeyName labels = 5;
+  repeated common.v1.KeyName labels = 5;
 }
 
 message AccountCreateResponse {
@@ -118,7 +99,7 @@ message TransferListResponse {
 message TransferTypeListRequest {}
 message TransferTypeListResponse {
   string message = 1;
-  repeated KeyName data = 2;
+  repeated common.v1.KeyName data = 2;
 }
 
 message TransferCreateResponse {

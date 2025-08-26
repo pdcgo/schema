@@ -21,8 +21,6 @@ import (
 const _ = connect.IsAtLeastVersion1_13_0
 
 const (
-	// ExpenseServiceName is the fully-qualified name of the ExpenseService service.
-	ExpenseServiceName = "accounting_iface.v1.ExpenseService"
 	// AccountServiceName is the fully-qualified name of the AccountService service.
 	AccountServiceName = "accounting_iface.v1.AccountService"
 	// TransferServiceName is the fully-qualified name of the TransferService service.
@@ -37,12 +35,6 @@ const (
 // reflection-formatted method names, remove the leading slash and convert the remaining slash to a
 // period.
 const (
-	// ExpenseServiceExpenseCreateProcedure is the fully-qualified name of the ExpenseService's
-	// ExpenseCreate RPC.
-	ExpenseServiceExpenseCreateProcedure = "/accounting_iface.v1.ExpenseService/ExpenseCreate"
-	// ExpenseServiceExpenseListProcedure is the fully-qualified name of the ExpenseService's
-	// ExpenseList RPC.
-	ExpenseServiceExpenseListProcedure = "/accounting_iface.v1.ExpenseService/ExpenseList"
 	// AccountServiceAccountCreateProcedure is the fully-qualified name of the AccountService's
 	// AccountCreate RPC.
 	AccountServiceAccountCreateProcedure = "/accounting_iface.v1.AccountService/AccountCreate"
@@ -71,102 +63,6 @@ const (
 	// TransferTypeList RPC.
 	TransferServiceTransferTypeListProcedure = "/accounting_iface.v1.TransferService/TransferTypeList"
 )
-
-// ExpenseServiceClient is a client for the accounting_iface.v1.ExpenseService service.
-type ExpenseServiceClient interface {
-	ExpenseCreate(context.Context, *connect.Request[v1.ExpenseCreateRequest]) (*connect.Response[v1.ExpenseCreateResponse], error)
-	ExpenseList(context.Context, *connect.Request[v1.ExpenseListRequest]) (*connect.Response[v1.ExpenseListResponse], error)
-}
-
-// NewExpenseServiceClient constructs a client for the accounting_iface.v1.ExpenseService service.
-// By default, it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped
-// responses, and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the
-// connect.WithGRPC() or connect.WithGRPCWeb() options.
-//
-// The URL supplied here should be the base URL for the Connect or gRPC server (for example,
-// http://api.acme.com or https://acme.com/grpc).
-func NewExpenseServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) ExpenseServiceClient {
-	baseURL = strings.TrimRight(baseURL, "/")
-	expenseServiceMethods := v1.File_accounting_iface_v1_accounting_proto.Services().ByName("ExpenseService").Methods()
-	return &expenseServiceClient{
-		expenseCreate: connect.NewClient[v1.ExpenseCreateRequest, v1.ExpenseCreateResponse](
-			httpClient,
-			baseURL+ExpenseServiceExpenseCreateProcedure,
-			connect.WithSchema(expenseServiceMethods.ByName("ExpenseCreate")),
-			connect.WithClientOptions(opts...),
-		),
-		expenseList: connect.NewClient[v1.ExpenseListRequest, v1.ExpenseListResponse](
-			httpClient,
-			baseURL+ExpenseServiceExpenseListProcedure,
-			connect.WithSchema(expenseServiceMethods.ByName("ExpenseList")),
-			connect.WithClientOptions(opts...),
-		),
-	}
-}
-
-// expenseServiceClient implements ExpenseServiceClient.
-type expenseServiceClient struct {
-	expenseCreate *connect.Client[v1.ExpenseCreateRequest, v1.ExpenseCreateResponse]
-	expenseList   *connect.Client[v1.ExpenseListRequest, v1.ExpenseListResponse]
-}
-
-// ExpenseCreate calls accounting_iface.v1.ExpenseService.ExpenseCreate.
-func (c *expenseServiceClient) ExpenseCreate(ctx context.Context, req *connect.Request[v1.ExpenseCreateRequest]) (*connect.Response[v1.ExpenseCreateResponse], error) {
-	return c.expenseCreate.CallUnary(ctx, req)
-}
-
-// ExpenseList calls accounting_iface.v1.ExpenseService.ExpenseList.
-func (c *expenseServiceClient) ExpenseList(ctx context.Context, req *connect.Request[v1.ExpenseListRequest]) (*connect.Response[v1.ExpenseListResponse], error) {
-	return c.expenseList.CallUnary(ctx, req)
-}
-
-// ExpenseServiceHandler is an implementation of the accounting_iface.v1.ExpenseService service.
-type ExpenseServiceHandler interface {
-	ExpenseCreate(context.Context, *connect.Request[v1.ExpenseCreateRequest]) (*connect.Response[v1.ExpenseCreateResponse], error)
-	ExpenseList(context.Context, *connect.Request[v1.ExpenseListRequest]) (*connect.Response[v1.ExpenseListResponse], error)
-}
-
-// NewExpenseServiceHandler builds an HTTP handler from the service implementation. It returns the
-// path on which to mount the handler and the handler itself.
-//
-// By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
-// and JSON codecs. They also support gzip compression.
-func NewExpenseServiceHandler(svc ExpenseServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
-	expenseServiceMethods := v1.File_accounting_iface_v1_accounting_proto.Services().ByName("ExpenseService").Methods()
-	expenseServiceExpenseCreateHandler := connect.NewUnaryHandler(
-		ExpenseServiceExpenseCreateProcedure,
-		svc.ExpenseCreate,
-		connect.WithSchema(expenseServiceMethods.ByName("ExpenseCreate")),
-		connect.WithHandlerOptions(opts...),
-	)
-	expenseServiceExpenseListHandler := connect.NewUnaryHandler(
-		ExpenseServiceExpenseListProcedure,
-		svc.ExpenseList,
-		connect.WithSchema(expenseServiceMethods.ByName("ExpenseList")),
-		connect.WithHandlerOptions(opts...),
-	)
-	return "/accounting_iface.v1.ExpenseService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		switch r.URL.Path {
-		case ExpenseServiceExpenseCreateProcedure:
-			expenseServiceExpenseCreateHandler.ServeHTTP(w, r)
-		case ExpenseServiceExpenseListProcedure:
-			expenseServiceExpenseListHandler.ServeHTTP(w, r)
-		default:
-			http.NotFound(w, r)
-		}
-	})
-}
-
-// UnimplementedExpenseServiceHandler returns CodeUnimplemented from all methods.
-type UnimplementedExpenseServiceHandler struct{}
-
-func (UnimplementedExpenseServiceHandler) ExpenseCreate(context.Context, *connect.Request[v1.ExpenseCreateRequest]) (*connect.Response[v1.ExpenseCreateResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("accounting_iface.v1.ExpenseService.ExpenseCreate is not implemented"))
-}
-
-func (UnimplementedExpenseServiceHandler) ExpenseList(context.Context, *connect.Request[v1.ExpenseListRequest]) (*connect.Response[v1.ExpenseListResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("accounting_iface.v1.ExpenseService.ExpenseList is not implemented"))
-}
 
 // AccountServiceClient is a client for the accounting_iface.v1.AccountService service.
 type AccountServiceClient interface {

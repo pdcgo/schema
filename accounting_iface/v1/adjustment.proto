@@ -1,0 +1,6 @@
+syntax = "proto3";
+package accounting_iface.v1;
+
+option go_package = "github.com/pdcgo/schema/services/accounting_iface/v1;accounting_iface";
+
+service AdjustmentService {}

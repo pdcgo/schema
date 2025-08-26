@@ -1,0 +1,35 @@
+syntax = "proto3";
+package common.v1;
+
+option go_package = "github.com/pdcgo/schema/services/common/v1;common";
+
+message User {
+  uint64 id = 1;
+  string name = 2;
+  string username = 3;
+  string profile_picture = 4;
+}
+
+message Team {
+  uint64 id = 1;
+}
+
+message KeyName {
+  string key = 1;
+  string name = 2;
+}
+
+message TimeFilter {
+  int64 start_date = 1;
+  int64 end_date = 2;
+}
+
+message PageFilter {
+  int64 page = 1;
+}
+
+message PageInfo {
+  int64 current_page = 1;
+  int64 total_page = 2;
+  int64 total_items = 3;
+}
