@@ -38,7 +38,7 @@ message ExpenseItem {
   uint64 team_id = 2;
   uint64 created_by_id = 3;
   string desc = 4;
-  string expense_type = 5;
+  ExpenseType expense_type = 5;
   double amount = 6;
   int64 expense_at = 7;
   int64 created_at = 8;
@@ -48,9 +48,10 @@ message ExpenseItem {
 message ExpenseCreateRequest {
   uint64 team_id = 1;
   string desc = 2;
-  string expense_type = 3;
-  double amount = 4;
-  int64 expense_at = 5;
+  ExpenseType expense_type = 3;
+  string expense_key = 4;
+  double amount = 5;
+  int64 expense_at = 6;
 }
 
 message ExpenseCreateResponse {

@@ -256,7 +256,7 @@ type ExpenseItem struct {
 	TeamId        uint64                 `protobuf:"varint,2,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
 	CreatedById   uint64                 `protobuf:"varint,3,opt,name=created_by_id,json=createdById,proto3" json:"created_by_id,omitempty"`
 	Desc          string                 `protobuf:"bytes,4,opt,name=desc,proto3" json:"desc,omitempty"`
-	ExpenseType   string                 `protobuf:"bytes,5,opt,name=expense_type,json=expenseType,proto3" json:"expense_type,omitempty"`
+	ExpenseType   ExpenseType            `protobuf:"varint,5,opt,name=expense_type,json=expenseType,proto3,enum=accounting_iface.v1.ExpenseType" json:"expense_type,omitempty"`
 	Amount        float64                `protobuf:"fixed64,6,opt,name=amount,proto3" json:"amount,omitempty"`
 	ExpenseAt     int64                  `protobuf:"varint,7,opt,name=expense_at,json=expenseAt,proto3" json:"expense_at,omitempty"`
 	CreatedAt     int64                  `protobuf:"varint,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
@@ -323,11 +323,11 @@ func (x *ExpenseItem) GetDesc() string {
 	return ""
 }
 
-func (x *ExpenseItem) GetExpenseType() string {
+func (x *ExpenseItem) GetExpenseType() ExpenseType {
 	if x != nil {
 		return x.ExpenseType
 	}
-	return ""
+	return ExpenseType_EXPENSE_TYPE_UNSPECIFIED
 }
 
 func (x *ExpenseItem) GetAmount() float64 {
@@ -362,9 +362,10 @@ type ExpenseCreateRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
 	Desc          string                 `protobuf:"bytes,2,opt,name=desc,proto3" json:"desc,omitempty"`
-	ExpenseType   string                 `protobuf:"bytes,3,opt,name=expense_type,json=expenseType,proto3" json:"expense_type,omitempty"`
-	Amount        float64                `protobuf:"fixed64,4,opt,name=amount,proto3" json:"amount,omitempty"`
-	ExpenseAt     int64                  `protobuf:"varint,5,opt,name=expense_at,json=expenseAt,proto3" json:"expense_at,omitempty"`
+	ExpenseType   ExpenseType            `protobuf:"varint,3,opt,name=expense_type,json=expenseType,proto3,enum=accounting_iface.v1.ExpenseType" json:"expense_type,omitempty"`
+	ExpenseKey    string                 `protobuf:"bytes,4,opt,name=expense_key,json=expenseKey,proto3" json:"expense_key,omitempty"`
+	Amount        float64                `protobuf:"fixed64,5,opt,name=amount,proto3" json:"amount,omitempty"`
+	ExpenseAt     int64                  `protobuf:"varint,6,opt,name=expense_at,json=expenseAt,proto3" json:"expense_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -413,9 +414,16 @@ func (x *ExpenseCreateRequest) GetDesc() string {
 	return ""
 }
 
-func (x *ExpenseCreateRequest) GetExpenseType() string {
+func (x *ExpenseCreateRequest) GetExpenseType() ExpenseType {
 	if x != nil {
 		return x.ExpenseType
+	}
+	return ExpenseType_EXPENSE_TYPE_UNSPECIFIED
+}
+
+func (x *ExpenseCreateRequest) GetExpenseKey() string {
+	if x != nil {
+		return x.ExpenseKey
 	}
 	return ""
 }
@@ -618,27 +626,29 @@ const file_accounting_iface_v1_expense_proto_rawDesc = "" +
 	"\x04type\x18\x01 \x01(\x0e2 .accounting_iface.v1.ExpenseTypeR\x04type\"[\n" +
 	"\x17ExpenseTypeListResponse\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\x12&\n" +
-	"\x04data\x18\x02 \x03(\v2\x12.common.v1.KeyNameR\x04data\"\x97\x02\n" +
+	"\x04data\x18\x02 \x03(\v2\x12.common.v1.KeyNameR\x04data\"\xb9\x02\n" +
 	"\vExpenseItem\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x17\n" +
 	"\ateam_id\x18\x02 \x01(\x04R\x06teamId\x12\"\n" +
 	"\rcreated_by_id\x18\x03 \x01(\x04R\vcreatedById\x12\x12\n" +
-	"\x04desc\x18\x04 \x01(\tR\x04desc\x12!\n" +
-	"\fexpense_type\x18\x05 \x01(\tR\vexpenseType\x12\x16\n" +
+	"\x04desc\x18\x04 \x01(\tR\x04desc\x12C\n" +
+	"\fexpense_type\x18\x05 \x01(\x0e2 .accounting_iface.v1.ExpenseTypeR\vexpenseType\x12\x16\n" +
 	"\x06amount\x18\x06 \x01(\x01R\x06amount\x12\x1d\n" +
 	"\n" +
 	"expense_at\x18\a \x01(\x03R\texpenseAt\x12\x1d\n" +
 	"\n" +
 	"created_at\x18\b \x01(\x03R\tcreatedAt\x12.\n" +
 	"\n" +
-	"created_by\x18\t \x01(\v2\x0f.common.v1.UserR\tcreatedBy\"\x9d\x01\n" +
+	"created_by\x18\t \x01(\v2\x0f.common.v1.UserR\tcreatedBy\"\xe0\x01\n" +
 	"\x14ExpenseCreateRequest\x12\x17\n" +
 	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12\x12\n" +
-	"\x04desc\x18\x02 \x01(\tR\x04desc\x12!\n" +
-	"\fexpense_type\x18\x03 \x01(\tR\vexpenseType\x12\x16\n" +
-	"\x06amount\x18\x04 \x01(\x01R\x06amount\x12\x1d\n" +
+	"\x04desc\x18\x02 \x01(\tR\x04desc\x12C\n" +
+	"\fexpense_type\x18\x03 \x01(\x0e2 .accounting_iface.v1.ExpenseTypeR\vexpenseType\x12\x1f\n" +
+	"\vexpense_key\x18\x04 \x01(\tR\n" +
+	"expenseKey\x12\x16\n" +
+	"\x06amount\x18\x05 \x01(\x01R\x06amount\x12\x1d\n" +
 	"\n" +
-	"expense_at\x18\x05 \x01(\x03R\texpenseAt\"1\n" +
+	"expense_at\x18\x06 \x01(\x03R\texpenseAt\"1\n" +
 	"\x15ExpenseCreateResponse\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\"\xac\x01\n" +
 	"\x12ExpenseListRequest\x12\x17\n" +
@@ -697,24 +707,26 @@ var file_accounting_iface_v1_expense_proto_goTypes = []any{
 var file_accounting_iface_v1_expense_proto_depIdxs = []int32{
 	0,  // 0: accounting_iface.v1.ExpenseTypeListRequest.type:type_name -> accounting_iface.v1.ExpenseType
 	10, // 1: accounting_iface.v1.ExpenseTypeListResponse.data:type_name -> common.v1.KeyName
-	11, // 2: accounting_iface.v1.ExpenseItem.created_by:type_name -> common.v1.User
-	12, // 3: accounting_iface.v1.ExpenseListRequest.time_range:type_name -> common.v1.TimeFilter
-	13, // 4: accounting_iface.v1.ExpenseListRequest.page:type_name -> common.v1.PageFilter
-	5,  // 5: accounting_iface.v1.ExpenseListResponse.data:type_name -> accounting_iface.v1.ExpenseItem
-	14, // 6: accounting_iface.v1.ExpenseListResponse.page_info:type_name -> common.v1.PageInfo
-	6,  // 7: accounting_iface.v1.ExpenseService.ExpenseCreate:input_type -> accounting_iface.v1.ExpenseCreateRequest
-	8,  // 8: accounting_iface.v1.ExpenseService.ExpenseList:input_type -> accounting_iface.v1.ExpenseListRequest
-	3,  // 9: accounting_iface.v1.ExpenseService.ExpenseTypeList:input_type -> accounting_iface.v1.ExpenseTypeListRequest
-	1,  // 10: accounting_iface.v1.ExpenseService.ExpenseSetup:input_type -> accounting_iface.v1.ExpenseSetupRequest
-	7,  // 11: accounting_iface.v1.ExpenseService.ExpenseCreate:output_type -> accounting_iface.v1.ExpenseCreateResponse
-	9,  // 12: accounting_iface.v1.ExpenseService.ExpenseList:output_type -> accounting_iface.v1.ExpenseListResponse
-	4,  // 13: accounting_iface.v1.ExpenseService.ExpenseTypeList:output_type -> accounting_iface.v1.ExpenseTypeListResponse
-	2,  // 14: accounting_iface.v1.ExpenseService.ExpenseSetup:output_type -> accounting_iface.v1.ExpenseSetupResponse
-	11, // [11:15] is the sub-list for method output_type
-	7,  // [7:11] is the sub-list for method input_type
-	7,  // [7:7] is the sub-list for extension type_name
-	7,  // [7:7] is the sub-list for extension extendee
-	0,  // [0:7] is the sub-list for field type_name
+	0,  // 2: accounting_iface.v1.ExpenseItem.expense_type:type_name -> accounting_iface.v1.ExpenseType
+	11, // 3: accounting_iface.v1.ExpenseItem.created_by:type_name -> common.v1.User
+	0,  // 4: accounting_iface.v1.ExpenseCreateRequest.expense_type:type_name -> accounting_iface.v1.ExpenseType
+	12, // 5: accounting_iface.v1.ExpenseListRequest.time_range:type_name -> common.v1.TimeFilter
+	13, // 6: accounting_iface.v1.ExpenseListRequest.page:type_name -> common.v1.PageFilter
+	5,  // 7: accounting_iface.v1.ExpenseListResponse.data:type_name -> accounting_iface.v1.ExpenseItem
+	14, // 8: accounting_iface.v1.ExpenseListResponse.page_info:type_name -> common.v1.PageInfo
+	6,  // 9: accounting_iface.v1.ExpenseService.ExpenseCreate:input_type -> accounting_iface.v1.ExpenseCreateRequest
+	8,  // 10: accounting_iface.v1.ExpenseService.ExpenseList:input_type -> accounting_iface.v1.ExpenseListRequest
+	3,  // 11: accounting_iface.v1.ExpenseService.ExpenseTypeList:input_type -> accounting_iface.v1.ExpenseTypeListRequest
+	1,  // 12: accounting_iface.v1.ExpenseService.ExpenseSetup:input_type -> accounting_iface.v1.ExpenseSetupRequest
+	7,  // 13: accounting_iface.v1.ExpenseService.ExpenseCreate:output_type -> accounting_iface.v1.ExpenseCreateResponse
+	9,  // 14: accounting_iface.v1.ExpenseService.ExpenseList:output_type -> accounting_iface.v1.ExpenseListResponse
+	4,  // 15: accounting_iface.v1.ExpenseService.ExpenseTypeList:output_type -> accounting_iface.v1.ExpenseTypeListResponse
+	2,  // 16: accounting_iface.v1.ExpenseService.ExpenseSetup:output_type -> accounting_iface.v1.ExpenseSetupResponse
+	13, // [13:17] is the sub-list for method output_type
+	9,  // [9:13] is the sub-list for method input_type
+	9,  // [9:9] is the sub-list for extension type_name
+	9,  // [9:9] is the sub-list for extension extendee
+	0,  // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_accounting_iface_v1_expense_proto_init() }
