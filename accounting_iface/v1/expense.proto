@@ -5,15 +5,57 @@ import "common/v1/common.proto";
 
 option go_package = "github.com/pdcgo/schema/services/accounting_iface/v1;accounting_iface";
 
-// # Service untuk mencatat pengeluaran dari selling, warehouse, dan internal yang baru
+message KeyValueMetric {
+  string key = 1;
+  double value = 2;
+}
+
+message KeyValueMetricList {
+  repeated KeyValueMetric data = 1;
+}
+
+// ## Service untuk mencatat pengeluaran dari selling, warehouse, dan internal yang baru
 service ExpenseService {
   rpc ExpenseCreate(ExpenseCreateRequest) returns (ExpenseCreateResponse);
   rpc ExpenseList(ExpenseListRequest) returns (ExpenseListResponse);
   rpc ExpenseTypeList(ExpenseTypeListRequest) returns (ExpenseTypeListResponse);
   rpc ExpenseSetup(ExpenseSetupRequest) returns (ExpenseSetupResponse);
+  /*
+   #### Untuk Metric Overview
+  */
+  rpc ExpenseOverviewMetric(ExpenseOverviewMetricRequest) returns (ExpenseOverviewMetricResponse);
+  /*
+     #### Untuk Metric berdasarkan waktu
+     contoh ketika pengen metric expense daily, monthly dak kawan kawan
+  */
+  rpc ExpenseTimeMetric(ExpenseTimeMetricRequest) returns (ExpenseTimeMetricResponse);
 }
 
-message ExpenseSetupRequest {}
+message ExpenseTimeMetricRequest {
+  uint64 team_id = 1;
+  string expense_key = 2;
+  common.v1.TimeType time_type = 3;
+  common.v1.TimeFilter time_range = 4;
+}
+
+message ExpenseTimeMetricResponse {
+  double expense_total = 1;
+  map<int64, KeyValueMetricList> data = 2;
+}
+
+message ExpenseOverviewMetricRequest {
+  uint64 team_id = 1;
+  common.v1.TimeFilter time_range = 2;
+}
+
+message ExpenseOverviewMetricResponse {
+  double expense_total = 1;
+  map<string, double> expense_details = 2;
+}
+
+message ExpenseSetupRequest {
+  uint64 team_id = 1;
+}
 message ExpenseSetupResponse {
   string message = 1;
 }
@@ -47,6 +89,7 @@ message ExpenseItem {
 
 message ExpenseCreateRequest {
   uint64 team_id = 1;
+  string ref_id = 7;
   string desc = 2;
   ExpenseType expense_type = 3;
   string expense_key = 4;

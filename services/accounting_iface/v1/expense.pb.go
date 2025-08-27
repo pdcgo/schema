@@ -74,15 +74,336 @@ func (ExpenseType) EnumDescriptor() ([]byte, []int) {
 	return file_accounting_iface_v1_expense_proto_rawDescGZIP(), []int{0}
 }
 
+type KeyValueMetric struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Key           string                 `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
+	Value         float64                `protobuf:"fixed64,2,opt,name=value,proto3" json:"value,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *KeyValueMetric) Reset() {
+	*x = KeyValueMetric{}
+	mi := &file_accounting_iface_v1_expense_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *KeyValueMetric) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*KeyValueMetric) ProtoMessage() {}
+
+func (x *KeyValueMetric) ProtoReflect() protoreflect.Message {
+	mi := &file_accounting_iface_v1_expense_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use KeyValueMetric.ProtoReflect.Descriptor instead.
+func (*KeyValueMetric) Descriptor() ([]byte, []int) {
+	return file_accounting_iface_v1_expense_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *KeyValueMetric) GetKey() string {
+	if x != nil {
+		return x.Key
+	}
+	return ""
+}
+
+func (x *KeyValueMetric) GetValue() float64 {
+	if x != nil {
+		return x.Value
+	}
+	return 0
+}
+
+type KeyValueMetricList struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Data          []*KeyValueMetric      `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *KeyValueMetricList) Reset() {
+	*x = KeyValueMetricList{}
+	mi := &file_accounting_iface_v1_expense_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *KeyValueMetricList) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*KeyValueMetricList) ProtoMessage() {}
+
+func (x *KeyValueMetricList) ProtoReflect() protoreflect.Message {
+	mi := &file_accounting_iface_v1_expense_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use KeyValueMetricList.ProtoReflect.Descriptor instead.
+func (*KeyValueMetricList) Descriptor() ([]byte, []int) {
+	return file_accounting_iface_v1_expense_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *KeyValueMetricList) GetData() []*KeyValueMetric {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+type ExpenseTimeMetricRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	ExpenseKey    string                 `protobuf:"bytes,2,opt,name=expense_key,json=expenseKey,proto3" json:"expense_key,omitempty"`
+	TimeType      v1.TimeType            `protobuf:"varint,3,opt,name=time_type,json=timeType,proto3,enum=common.v1.TimeType" json:"time_type,omitempty"`
+	TimeRange     *v1.TimeFilter         `protobuf:"bytes,4,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ExpenseTimeMetricRequest) Reset() {
+	*x = ExpenseTimeMetricRequest{}
+	mi := &file_accounting_iface_v1_expense_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ExpenseTimeMetricRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ExpenseTimeMetricRequest) ProtoMessage() {}
+
+func (x *ExpenseTimeMetricRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_accounting_iface_v1_expense_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ExpenseTimeMetricRequest.ProtoReflect.Descriptor instead.
+func (*ExpenseTimeMetricRequest) Descriptor() ([]byte, []int) {
+	return file_accounting_iface_v1_expense_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *ExpenseTimeMetricRequest) GetTeamId() uint64 {
+	if x != nil {
+		return x.TeamId
+	}
+	return 0
+}
+
+func (x *ExpenseTimeMetricRequest) GetExpenseKey() string {
+	if x != nil {
+		return x.ExpenseKey
+	}
+	return ""
+}
+
+func (x *ExpenseTimeMetricRequest) GetTimeType() v1.TimeType {
+	if x != nil {
+		return x.TimeType
+	}
+	return v1.TimeType(0)
+}
+
+func (x *ExpenseTimeMetricRequest) GetTimeRange() *v1.TimeFilter {
+	if x != nil {
+		return x.TimeRange
+	}
+	return nil
+}
+
+type ExpenseTimeMetricResponse struct {
+	state         protoimpl.MessageState        `protogen:"open.v1"`
+	ExpenseTotal  float64                       `protobuf:"fixed64,1,opt,name=expense_total,json=expenseTotal,proto3" json:"expense_total,omitempty"`
+	Data          map[int64]*KeyValueMetricList `protobuf:"bytes,2,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ExpenseTimeMetricResponse) Reset() {
+	*x = ExpenseTimeMetricResponse{}
+	mi := &file_accounting_iface_v1_expense_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ExpenseTimeMetricResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ExpenseTimeMetricResponse) ProtoMessage() {}
+
+func (x *ExpenseTimeMetricResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_accounting_iface_v1_expense_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ExpenseTimeMetricResponse.ProtoReflect.Descriptor instead.
+func (*ExpenseTimeMetricResponse) Descriptor() ([]byte, []int) {
+	return file_accounting_iface_v1_expense_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *ExpenseTimeMetricResponse) GetExpenseTotal() float64 {
+	if x != nil {
+		return x.ExpenseTotal
+	}
+	return 0
+}
+
+func (x *ExpenseTimeMetricResponse) GetData() map[int64]*KeyValueMetricList {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+type ExpenseOverviewMetricRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	TimeRange     *v1.TimeFilter         `protobuf:"bytes,2,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ExpenseOverviewMetricRequest) Reset() {
+	*x = ExpenseOverviewMetricRequest{}
+	mi := &file_accounting_iface_v1_expense_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ExpenseOverviewMetricRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ExpenseOverviewMetricRequest) ProtoMessage() {}
+
+func (x *ExpenseOverviewMetricRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_accounting_iface_v1_expense_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ExpenseOverviewMetricRequest.ProtoReflect.Descriptor instead.
+func (*ExpenseOverviewMetricRequest) Descriptor() ([]byte, []int) {
+	return file_accounting_iface_v1_expense_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *ExpenseOverviewMetricRequest) GetTeamId() uint64 {
+	if x != nil {
+		return x.TeamId
+	}
+	return 0
+}
+
+func (x *ExpenseOverviewMetricRequest) GetTimeRange() *v1.TimeFilter {
+	if x != nil {
+		return x.TimeRange
+	}
+	return nil
+}
+
+type ExpenseOverviewMetricResponse struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	ExpenseTotal   float64                `protobuf:"fixed64,1,opt,name=expense_total,json=expenseTotal,proto3" json:"expense_total,omitempty"`
+	ExpenseDetails map[string]float64     `protobuf:"bytes,2,rep,name=expense_details,json=expenseDetails,proto3" json:"expense_details,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"fixed64,2,opt,name=value"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *ExpenseOverviewMetricResponse) Reset() {
+	*x = ExpenseOverviewMetricResponse{}
+	mi := &file_accounting_iface_v1_expense_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ExpenseOverviewMetricResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ExpenseOverviewMetricResponse) ProtoMessage() {}
+
+func (x *ExpenseOverviewMetricResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_accounting_iface_v1_expense_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ExpenseOverviewMetricResponse.ProtoReflect.Descriptor instead.
+func (*ExpenseOverviewMetricResponse) Descriptor() ([]byte, []int) {
+	return file_accounting_iface_v1_expense_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *ExpenseOverviewMetricResponse) GetExpenseTotal() float64 {
+	if x != nil {
+		return x.ExpenseTotal
+	}
+	return 0
+}
+
+func (x *ExpenseOverviewMetricResponse) GetExpenseDetails() map[string]float64 {
+	if x != nil {
+		return x.ExpenseDetails
+	}
+	return nil
+}
+
 type ExpenseSetupRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ExpenseSetupRequest) Reset() {
 	*x = ExpenseSetupRequest{}
-	mi := &file_accounting_iface_v1_expense_proto_msgTypes[0]
+	mi := &file_accounting_iface_v1_expense_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -94,7 +415,7 @@ func (x *ExpenseSetupRequest) String() string {
 func (*ExpenseSetupRequest) ProtoMessage() {}
 
 func (x *ExpenseSetupRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_expense_proto_msgTypes[0]
+	mi := &file_accounting_iface_v1_expense_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -107,7 +428,14 @@ func (x *ExpenseSetupRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExpenseSetupRequest.ProtoReflect.Descriptor instead.
 func (*ExpenseSetupRequest) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_expense_proto_rawDescGZIP(), []int{0}
+	return file_accounting_iface_v1_expense_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *ExpenseSetupRequest) GetTeamId() uint64 {
+	if x != nil {
+		return x.TeamId
+	}
+	return 0
 }
 
 type ExpenseSetupResponse struct {
@@ -119,7 +447,7 @@ type ExpenseSetupResponse struct {
 
 func (x *ExpenseSetupResponse) Reset() {
 	*x = ExpenseSetupResponse{}
-	mi := &file_accounting_iface_v1_expense_proto_msgTypes[1]
+	mi := &file_accounting_iface_v1_expense_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -131,7 +459,7 @@ func (x *ExpenseSetupResponse) String() string {
 func (*ExpenseSetupResponse) ProtoMessage() {}
 
 func (x *ExpenseSetupResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_expense_proto_msgTypes[1]
+	mi := &file_accounting_iface_v1_expense_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -144,7 +472,7 @@ func (x *ExpenseSetupResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExpenseSetupResponse.ProtoReflect.Descriptor instead.
 func (*ExpenseSetupResponse) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_expense_proto_rawDescGZIP(), []int{1}
+	return file_accounting_iface_v1_expense_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *ExpenseSetupResponse) GetMessage() string {
@@ -163,7 +491,7 @@ type ExpenseTypeListRequest struct {
 
 func (x *ExpenseTypeListRequest) Reset() {
 	*x = ExpenseTypeListRequest{}
-	mi := &file_accounting_iface_v1_expense_proto_msgTypes[2]
+	mi := &file_accounting_iface_v1_expense_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -175,7 +503,7 @@ func (x *ExpenseTypeListRequest) String() string {
 func (*ExpenseTypeListRequest) ProtoMessage() {}
 
 func (x *ExpenseTypeListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_expense_proto_msgTypes[2]
+	mi := &file_accounting_iface_v1_expense_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -188,7 +516,7 @@ func (x *ExpenseTypeListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExpenseTypeListRequest.ProtoReflect.Descriptor instead.
 func (*ExpenseTypeListRequest) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_expense_proto_rawDescGZIP(), []int{2}
+	return file_accounting_iface_v1_expense_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *ExpenseTypeListRequest) GetType() ExpenseType {
@@ -208,7 +536,7 @@ type ExpenseTypeListResponse struct {
 
 func (x *ExpenseTypeListResponse) Reset() {
 	*x = ExpenseTypeListResponse{}
-	mi := &file_accounting_iface_v1_expense_proto_msgTypes[3]
+	mi := &file_accounting_iface_v1_expense_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -220,7 +548,7 @@ func (x *ExpenseTypeListResponse) String() string {
 func (*ExpenseTypeListResponse) ProtoMessage() {}
 
 func (x *ExpenseTypeListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_expense_proto_msgTypes[3]
+	mi := &file_accounting_iface_v1_expense_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -233,7 +561,7 @@ func (x *ExpenseTypeListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExpenseTypeListResponse.ProtoReflect.Descriptor instead.
 func (*ExpenseTypeListResponse) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_expense_proto_rawDescGZIP(), []int{3}
+	return file_accounting_iface_v1_expense_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *ExpenseTypeListResponse) GetMessage() string {
@@ -267,7 +595,7 @@ type ExpenseItem struct {
 
 func (x *ExpenseItem) Reset() {
 	*x = ExpenseItem{}
-	mi := &file_accounting_iface_v1_expense_proto_msgTypes[4]
+	mi := &file_accounting_iface_v1_expense_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -279,7 +607,7 @@ func (x *ExpenseItem) String() string {
 func (*ExpenseItem) ProtoMessage() {}
 
 func (x *ExpenseItem) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_expense_proto_msgTypes[4]
+	mi := &file_accounting_iface_v1_expense_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -292,7 +620,7 @@ func (x *ExpenseItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExpenseItem.ProtoReflect.Descriptor instead.
 func (*ExpenseItem) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_expense_proto_rawDescGZIP(), []int{4}
+	return file_accounting_iface_v1_expense_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *ExpenseItem) GetId() uint64 {
@@ -361,6 +689,7 @@ func (x *ExpenseItem) GetCreatedBy() *v1.User {
 type ExpenseCreateRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	RefId         string                 `protobuf:"bytes,7,opt,name=ref_id,json=refId,proto3" json:"ref_id,omitempty"`
 	Desc          string                 `protobuf:"bytes,2,opt,name=desc,proto3" json:"desc,omitempty"`
 	ExpenseType   ExpenseType            `protobuf:"varint,3,opt,name=expense_type,json=expenseType,proto3,enum=accounting_iface.v1.ExpenseType" json:"expense_type,omitempty"`
 	ExpenseKey    string                 `protobuf:"bytes,4,opt,name=expense_key,json=expenseKey,proto3" json:"expense_key,omitempty"`
@@ -372,7 +701,7 @@ type ExpenseCreateRequest struct {
 
 func (x *ExpenseCreateRequest) Reset() {
 	*x = ExpenseCreateRequest{}
-	mi := &file_accounting_iface_v1_expense_proto_msgTypes[5]
+	mi := &file_accounting_iface_v1_expense_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -384,7 +713,7 @@ func (x *ExpenseCreateRequest) String() string {
 func (*ExpenseCreateRequest) ProtoMessage() {}
 
 func (x *ExpenseCreateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_expense_proto_msgTypes[5]
+	mi := &file_accounting_iface_v1_expense_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -397,7 +726,7 @@ func (x *ExpenseCreateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExpenseCreateRequest.ProtoReflect.Descriptor instead.
 func (*ExpenseCreateRequest) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_expense_proto_rawDescGZIP(), []int{5}
+	return file_accounting_iface_v1_expense_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *ExpenseCreateRequest) GetTeamId() uint64 {
@@ -405,6 +734,13 @@ func (x *ExpenseCreateRequest) GetTeamId() uint64 {
 		return x.TeamId
 	}
 	return 0
+}
+
+func (x *ExpenseCreateRequest) GetRefId() string {
+	if x != nil {
+		return x.RefId
+	}
+	return ""
 }
 
 func (x *ExpenseCreateRequest) GetDesc() string {
@@ -451,7 +787,7 @@ type ExpenseCreateResponse struct {
 
 func (x *ExpenseCreateResponse) Reset() {
 	*x = ExpenseCreateResponse{}
-	mi := &file_accounting_iface_v1_expense_proto_msgTypes[6]
+	mi := &file_accounting_iface_v1_expense_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -463,7 +799,7 @@ func (x *ExpenseCreateResponse) String() string {
 func (*ExpenseCreateResponse) ProtoMessage() {}
 
 func (x *ExpenseCreateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_expense_proto_msgTypes[6]
+	mi := &file_accounting_iface_v1_expense_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -476,7 +812,7 @@ func (x *ExpenseCreateResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExpenseCreateResponse.ProtoReflect.Descriptor instead.
 func (*ExpenseCreateResponse) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_expense_proto_rawDescGZIP(), []int{6}
+	return file_accounting_iface_v1_expense_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *ExpenseCreateResponse) GetMessage() string {
@@ -498,7 +834,7 @@ type ExpenseListRequest struct {
 
 func (x *ExpenseListRequest) Reset() {
 	*x = ExpenseListRequest{}
-	mi := &file_accounting_iface_v1_expense_proto_msgTypes[7]
+	mi := &file_accounting_iface_v1_expense_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -510,7 +846,7 @@ func (x *ExpenseListRequest) String() string {
 func (*ExpenseListRequest) ProtoMessage() {}
 
 func (x *ExpenseListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_expense_proto_msgTypes[7]
+	mi := &file_accounting_iface_v1_expense_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -523,7 +859,7 @@ func (x *ExpenseListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExpenseListRequest.ProtoReflect.Descriptor instead.
 func (*ExpenseListRequest) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_expense_proto_rawDescGZIP(), []int{7}
+	return file_accounting_iface_v1_expense_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *ExpenseListRequest) GetTeamId() uint64 {
@@ -565,7 +901,7 @@ type ExpenseListResponse struct {
 
 func (x *ExpenseListResponse) Reset() {
 	*x = ExpenseListResponse{}
-	mi := &file_accounting_iface_v1_expense_proto_msgTypes[8]
+	mi := &file_accounting_iface_v1_expense_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -577,7 +913,7 @@ func (x *ExpenseListResponse) String() string {
 func (*ExpenseListResponse) ProtoMessage() {}
 
 func (x *ExpenseListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_expense_proto_msgTypes[8]
+	mi := &file_accounting_iface_v1_expense_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -590,7 +926,7 @@ func (x *ExpenseListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExpenseListResponse.ProtoReflect.Descriptor instead.
 func (*ExpenseListResponse) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_expense_proto_rawDescGZIP(), []int{8}
+	return file_accounting_iface_v1_expense_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *ExpenseListResponse) GetMessage() string {
@@ -618,8 +954,37 @@ var File_accounting_iface_v1_expense_proto protoreflect.FileDescriptor
 
 const file_accounting_iface_v1_expense_proto_rawDesc = "" +
 	"\n" +
-	"!accounting_iface/v1/expense.proto\x12\x13accounting_iface.v1\x1a\x16common/v1/common.proto\"\x15\n" +
-	"\x13ExpenseSetupRequest\"0\n" +
+	"!accounting_iface/v1/expense.proto\x12\x13accounting_iface.v1\x1a\x16common/v1/common.proto\"8\n" +
+	"\x0eKeyValueMetric\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\x01R\x05value\"M\n" +
+	"\x12KeyValueMetricList\x127\n" +
+	"\x04data\x18\x01 \x03(\v2#.accounting_iface.v1.KeyValueMetricR\x04data\"\xbc\x01\n" +
+	"\x18ExpenseTimeMetricRequest\x12\x17\n" +
+	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12\x1f\n" +
+	"\vexpense_key\x18\x02 \x01(\tR\n" +
+	"expenseKey\x120\n" +
+	"\ttime_type\x18\x03 \x01(\x0e2\x13.common.v1.TimeTypeR\btimeType\x124\n" +
+	"\n" +
+	"time_range\x18\x04 \x01(\v2\x15.common.v1.TimeFilterR\ttimeRange\"\xf0\x01\n" +
+	"\x19ExpenseTimeMetricResponse\x12#\n" +
+	"\rexpense_total\x18\x01 \x01(\x01R\fexpenseTotal\x12L\n" +
+	"\x04data\x18\x02 \x03(\v28.accounting_iface.v1.ExpenseTimeMetricResponse.DataEntryR\x04data\x1a`\n" +
+	"\tDataEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\x03R\x03key\x12=\n" +
+	"\x05value\x18\x02 \x01(\v2'.accounting_iface.v1.KeyValueMetricListR\x05value:\x028\x01\"m\n" +
+	"\x1cExpenseOverviewMetricRequest\x12\x17\n" +
+	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x124\n" +
+	"\n" +
+	"time_range\x18\x02 \x01(\v2\x15.common.v1.TimeFilterR\ttimeRange\"\xf8\x01\n" +
+	"\x1dExpenseOverviewMetricResponse\x12#\n" +
+	"\rexpense_total\x18\x01 \x01(\x01R\fexpenseTotal\x12o\n" +
+	"\x0fexpense_details\x18\x02 \x03(\v2F.accounting_iface.v1.ExpenseOverviewMetricResponse.ExpenseDetailsEntryR\x0eexpenseDetails\x1aA\n" +
+	"\x13ExpenseDetailsEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\x01R\x05value:\x028\x01\".\n" +
+	"\x13ExpenseSetupRequest\x12\x17\n" +
+	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\"0\n" +
 	"\x14ExpenseSetupResponse\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\"N\n" +
 	"\x16ExpenseTypeListRequest\x124\n" +
@@ -639,9 +1004,10 @@ const file_accounting_iface_v1_expense_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\b \x01(\x03R\tcreatedAt\x12.\n" +
 	"\n" +
-	"created_by\x18\t \x01(\v2\x0f.common.v1.UserR\tcreatedBy\"\xe0\x01\n" +
+	"created_by\x18\t \x01(\v2\x0f.common.v1.UserR\tcreatedBy\"\xf7\x01\n" +
 	"\x14ExpenseCreateRequest\x12\x17\n" +
-	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12\x12\n" +
+	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12\x15\n" +
+	"\x06ref_id\x18\a \x01(\tR\x05refId\x12\x12\n" +
 	"\x04desc\x18\x02 \x01(\tR\x04desc\x12C\n" +
 	"\fexpense_type\x18\x03 \x01(\x0e2 .accounting_iface.v1.ExpenseTypeR\vexpenseType\x12\x1f\n" +
 	"\vexpense_key\x18\x04 \x01(\tR\n" +
@@ -666,12 +1032,14 @@ const file_accounting_iface_v1_expense_proto_rawDesc = "" +
 	"\x18EXPENSE_TYPE_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15EXPENSE_TYPE_INTERNAL\x10\x01\x12\x18\n" +
 	"\x14EXPENSE_TYPE_SELLING\x10\x02\x12\x1a\n" +
-	"\x16EXPENSE_TYPE_WAREHOUSE\x10\x032\xad\x03\n" +
+	"\x16EXPENSE_TYPE_WAREHOUSE\x10\x032\xa1\x05\n" +
 	"\x0eExpenseService\x12f\n" +
 	"\rExpenseCreate\x12).accounting_iface.v1.ExpenseCreateRequest\x1a*.accounting_iface.v1.ExpenseCreateResponse\x12`\n" +
 	"\vExpenseList\x12'.accounting_iface.v1.ExpenseListRequest\x1a(.accounting_iface.v1.ExpenseListResponse\x12l\n" +
 	"\x0fExpenseTypeList\x12+.accounting_iface.v1.ExpenseTypeListRequest\x1a,.accounting_iface.v1.ExpenseTypeListResponse\x12c\n" +
-	"\fExpenseSetup\x12(.accounting_iface.v1.ExpenseSetupRequest\x1a).accounting_iface.v1.ExpenseSetupResponseBGZEgithub.com/pdcgo/schema/services/accounting_iface/v1;accounting_ifaceb\x06proto3"
+	"\fExpenseSetup\x12(.accounting_iface.v1.ExpenseSetupRequest\x1a).accounting_iface.v1.ExpenseSetupResponse\x12~\n" +
+	"\x15ExpenseOverviewMetric\x121.accounting_iface.v1.ExpenseOverviewMetricRequest\x1a2.accounting_iface.v1.ExpenseOverviewMetricResponse\x12r\n" +
+	"\x11ExpenseTimeMetric\x12-.accounting_iface.v1.ExpenseTimeMetricRequest\x1a..accounting_iface.v1.ExpenseTimeMetricResponseBGZEgithub.com/pdcgo/schema/services/accounting_iface/v1;accounting_ifaceb\x06proto3"
 
 var (
 	file_accounting_iface_v1_expense_proto_rawDescOnce sync.Once
@@ -686,47 +1054,67 @@ func file_accounting_iface_v1_expense_proto_rawDescGZIP() []byte {
 }
 
 var file_accounting_iface_v1_expense_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_accounting_iface_v1_expense_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_accounting_iface_v1_expense_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
 var file_accounting_iface_v1_expense_proto_goTypes = []any{
-	(ExpenseType)(0),                // 0: accounting_iface.v1.ExpenseType
-	(*ExpenseSetupRequest)(nil),     // 1: accounting_iface.v1.ExpenseSetupRequest
-	(*ExpenseSetupResponse)(nil),    // 2: accounting_iface.v1.ExpenseSetupResponse
-	(*ExpenseTypeListRequest)(nil),  // 3: accounting_iface.v1.ExpenseTypeListRequest
-	(*ExpenseTypeListResponse)(nil), // 4: accounting_iface.v1.ExpenseTypeListResponse
-	(*ExpenseItem)(nil),             // 5: accounting_iface.v1.ExpenseItem
-	(*ExpenseCreateRequest)(nil),    // 6: accounting_iface.v1.ExpenseCreateRequest
-	(*ExpenseCreateResponse)(nil),   // 7: accounting_iface.v1.ExpenseCreateResponse
-	(*ExpenseListRequest)(nil),      // 8: accounting_iface.v1.ExpenseListRequest
-	(*ExpenseListResponse)(nil),     // 9: accounting_iface.v1.ExpenseListResponse
-	(*v1.KeyName)(nil),              // 10: common.v1.KeyName
-	(*v1.User)(nil),                 // 11: common.v1.User
-	(*v1.TimeFilter)(nil),           // 12: common.v1.TimeFilter
-	(*v1.PageFilter)(nil),           // 13: common.v1.PageFilter
-	(*v1.PageInfo)(nil),             // 14: common.v1.PageInfo
+	(ExpenseType)(0),                      // 0: accounting_iface.v1.ExpenseType
+	(*KeyValueMetric)(nil),                // 1: accounting_iface.v1.KeyValueMetric
+	(*KeyValueMetricList)(nil),            // 2: accounting_iface.v1.KeyValueMetricList
+	(*ExpenseTimeMetricRequest)(nil),      // 3: accounting_iface.v1.ExpenseTimeMetricRequest
+	(*ExpenseTimeMetricResponse)(nil),     // 4: accounting_iface.v1.ExpenseTimeMetricResponse
+	(*ExpenseOverviewMetricRequest)(nil),  // 5: accounting_iface.v1.ExpenseOverviewMetricRequest
+	(*ExpenseOverviewMetricResponse)(nil), // 6: accounting_iface.v1.ExpenseOverviewMetricResponse
+	(*ExpenseSetupRequest)(nil),           // 7: accounting_iface.v1.ExpenseSetupRequest
+	(*ExpenseSetupResponse)(nil),          // 8: accounting_iface.v1.ExpenseSetupResponse
+	(*ExpenseTypeListRequest)(nil),        // 9: accounting_iface.v1.ExpenseTypeListRequest
+	(*ExpenseTypeListResponse)(nil),       // 10: accounting_iface.v1.ExpenseTypeListResponse
+	(*ExpenseItem)(nil),                   // 11: accounting_iface.v1.ExpenseItem
+	(*ExpenseCreateRequest)(nil),          // 12: accounting_iface.v1.ExpenseCreateRequest
+	(*ExpenseCreateResponse)(nil),         // 13: accounting_iface.v1.ExpenseCreateResponse
+	(*ExpenseListRequest)(nil),            // 14: accounting_iface.v1.ExpenseListRequest
+	(*ExpenseListResponse)(nil),           // 15: accounting_iface.v1.ExpenseListResponse
+	nil,                                   // 16: accounting_iface.v1.ExpenseTimeMetricResponse.DataEntry
+	nil,                                   // 17: accounting_iface.v1.ExpenseOverviewMetricResponse.ExpenseDetailsEntry
+	(v1.TimeType)(0),                      // 18: common.v1.TimeType
+	(*v1.TimeFilter)(nil),                 // 19: common.v1.TimeFilter
+	(*v1.KeyName)(nil),                    // 20: common.v1.KeyName
+	(*v1.User)(nil),                       // 21: common.v1.User
+	(*v1.PageFilter)(nil),                 // 22: common.v1.PageFilter
+	(*v1.PageInfo)(nil),                   // 23: common.v1.PageInfo
 }
 var file_accounting_iface_v1_expense_proto_depIdxs = []int32{
-	0,  // 0: accounting_iface.v1.ExpenseTypeListRequest.type:type_name -> accounting_iface.v1.ExpenseType
-	10, // 1: accounting_iface.v1.ExpenseTypeListResponse.data:type_name -> common.v1.KeyName
-	0,  // 2: accounting_iface.v1.ExpenseItem.expense_type:type_name -> accounting_iface.v1.ExpenseType
-	11, // 3: accounting_iface.v1.ExpenseItem.created_by:type_name -> common.v1.User
-	0,  // 4: accounting_iface.v1.ExpenseCreateRequest.expense_type:type_name -> accounting_iface.v1.ExpenseType
-	12, // 5: accounting_iface.v1.ExpenseListRequest.time_range:type_name -> common.v1.TimeFilter
-	13, // 6: accounting_iface.v1.ExpenseListRequest.page:type_name -> common.v1.PageFilter
-	5,  // 7: accounting_iface.v1.ExpenseListResponse.data:type_name -> accounting_iface.v1.ExpenseItem
-	14, // 8: accounting_iface.v1.ExpenseListResponse.page_info:type_name -> common.v1.PageInfo
-	6,  // 9: accounting_iface.v1.ExpenseService.ExpenseCreate:input_type -> accounting_iface.v1.ExpenseCreateRequest
-	8,  // 10: accounting_iface.v1.ExpenseService.ExpenseList:input_type -> accounting_iface.v1.ExpenseListRequest
-	3,  // 11: accounting_iface.v1.ExpenseService.ExpenseTypeList:input_type -> accounting_iface.v1.ExpenseTypeListRequest
-	1,  // 12: accounting_iface.v1.ExpenseService.ExpenseSetup:input_type -> accounting_iface.v1.ExpenseSetupRequest
-	7,  // 13: accounting_iface.v1.ExpenseService.ExpenseCreate:output_type -> accounting_iface.v1.ExpenseCreateResponse
-	9,  // 14: accounting_iface.v1.ExpenseService.ExpenseList:output_type -> accounting_iface.v1.ExpenseListResponse
-	4,  // 15: accounting_iface.v1.ExpenseService.ExpenseTypeList:output_type -> accounting_iface.v1.ExpenseTypeListResponse
-	2,  // 16: accounting_iface.v1.ExpenseService.ExpenseSetup:output_type -> accounting_iface.v1.ExpenseSetupResponse
-	13, // [13:17] is the sub-list for method output_type
-	9,  // [9:13] is the sub-list for method input_type
-	9,  // [9:9] is the sub-list for extension type_name
-	9,  // [9:9] is the sub-list for extension extendee
-	0,  // [0:9] is the sub-list for field type_name
+	1,  // 0: accounting_iface.v1.KeyValueMetricList.data:type_name -> accounting_iface.v1.KeyValueMetric
+	18, // 1: accounting_iface.v1.ExpenseTimeMetricRequest.time_type:type_name -> common.v1.TimeType
+	19, // 2: accounting_iface.v1.ExpenseTimeMetricRequest.time_range:type_name -> common.v1.TimeFilter
+	16, // 3: accounting_iface.v1.ExpenseTimeMetricResponse.data:type_name -> accounting_iface.v1.ExpenseTimeMetricResponse.DataEntry
+	19, // 4: accounting_iface.v1.ExpenseOverviewMetricRequest.time_range:type_name -> common.v1.TimeFilter
+	17, // 5: accounting_iface.v1.ExpenseOverviewMetricResponse.expense_details:type_name -> accounting_iface.v1.ExpenseOverviewMetricResponse.ExpenseDetailsEntry
+	0,  // 6: accounting_iface.v1.ExpenseTypeListRequest.type:type_name -> accounting_iface.v1.ExpenseType
+	20, // 7: accounting_iface.v1.ExpenseTypeListResponse.data:type_name -> common.v1.KeyName
+	0,  // 8: accounting_iface.v1.ExpenseItem.expense_type:type_name -> accounting_iface.v1.ExpenseType
+	21, // 9: accounting_iface.v1.ExpenseItem.created_by:type_name -> common.v1.User
+	0,  // 10: accounting_iface.v1.ExpenseCreateRequest.expense_type:type_name -> accounting_iface.v1.ExpenseType
+	19, // 11: accounting_iface.v1.ExpenseListRequest.time_range:type_name -> common.v1.TimeFilter
+	22, // 12: accounting_iface.v1.ExpenseListRequest.page:type_name -> common.v1.PageFilter
+	11, // 13: accounting_iface.v1.ExpenseListResponse.data:type_name -> accounting_iface.v1.ExpenseItem
+	23, // 14: accounting_iface.v1.ExpenseListResponse.page_info:type_name -> common.v1.PageInfo
+	2,  // 15: accounting_iface.v1.ExpenseTimeMetricResponse.DataEntry.value:type_name -> accounting_iface.v1.KeyValueMetricList
+	12, // 16: accounting_iface.v1.ExpenseService.ExpenseCreate:input_type -> accounting_iface.v1.ExpenseCreateRequest
+	14, // 17: accounting_iface.v1.ExpenseService.ExpenseList:input_type -> accounting_iface.v1.ExpenseListRequest
+	9,  // 18: accounting_iface.v1.ExpenseService.ExpenseTypeList:input_type -> accounting_iface.v1.ExpenseTypeListRequest
+	7,  // 19: accounting_iface.v1.ExpenseService.ExpenseSetup:input_type -> accounting_iface.v1.ExpenseSetupRequest
+	5,  // 20: accounting_iface.v1.ExpenseService.ExpenseOverviewMetric:input_type -> accounting_iface.v1.ExpenseOverviewMetricRequest
+	3,  // 21: accounting_iface.v1.ExpenseService.ExpenseTimeMetric:input_type -> accounting_iface.v1.ExpenseTimeMetricRequest
+	13, // 22: accounting_iface.v1.ExpenseService.ExpenseCreate:output_type -> accounting_iface.v1.ExpenseCreateResponse
+	15, // 23: accounting_iface.v1.ExpenseService.ExpenseList:output_type -> accounting_iface.v1.ExpenseListResponse
+	10, // 24: accounting_iface.v1.ExpenseService.ExpenseTypeList:output_type -> accounting_iface.v1.ExpenseTypeListResponse
+	8,  // 25: accounting_iface.v1.ExpenseService.ExpenseSetup:output_type -> accounting_iface.v1.ExpenseSetupResponse
+	6,  // 26: accounting_iface.v1.ExpenseService.ExpenseOverviewMetric:output_type -> accounting_iface.v1.ExpenseOverviewMetricResponse
+	4,  // 27: accounting_iface.v1.ExpenseService.ExpenseTimeMetric:output_type -> accounting_iface.v1.ExpenseTimeMetricResponse
+	22, // [22:28] is the sub-list for method output_type
+	16, // [16:22] is the sub-list for method input_type
+	16, // [16:16] is the sub-list for extension type_name
+	16, // [16:16] is the sub-list for extension extendee
+	0,  // [0:16] is the sub-list for field type_name
 }
 
 func init() { file_accounting_iface_v1_expense_proto_init() }
@@ -740,7 +1128,7 @@ func file_accounting_iface_v1_expense_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_accounting_iface_v1_expense_proto_rawDesc), len(file_accounting_iface_v1_expense_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   9,
+			NumMessages:   17,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

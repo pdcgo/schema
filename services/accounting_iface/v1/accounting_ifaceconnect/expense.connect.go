@@ -45,6 +45,12 @@ const (
 	// ExpenseServiceExpenseSetupProcedure is the fully-qualified name of the ExpenseService's
 	// ExpenseSetup RPC.
 	ExpenseServiceExpenseSetupProcedure = "/accounting_iface.v1.ExpenseService/ExpenseSetup"
+	// ExpenseServiceExpenseOverviewMetricProcedure is the fully-qualified name of the ExpenseService's
+	// ExpenseOverviewMetric RPC.
+	ExpenseServiceExpenseOverviewMetricProcedure = "/accounting_iface.v1.ExpenseService/ExpenseOverviewMetric"
+	// ExpenseServiceExpenseTimeMetricProcedure is the fully-qualified name of the ExpenseService's
+	// ExpenseTimeMetric RPC.
+	ExpenseServiceExpenseTimeMetricProcedure = "/accounting_iface.v1.ExpenseService/ExpenseTimeMetric"
 )
 
 // ExpenseServiceClient is a client for the accounting_iface.v1.ExpenseService service.
@@ -53,6 +59,11 @@ type ExpenseServiceClient interface {
 	ExpenseList(context.Context, *connect.Request[v1.ExpenseListRequest]) (*connect.Response[v1.ExpenseListResponse], error)
 	ExpenseTypeList(context.Context, *connect.Request[v1.ExpenseTypeListRequest]) (*connect.Response[v1.ExpenseTypeListResponse], error)
 	ExpenseSetup(context.Context, *connect.Request[v1.ExpenseSetupRequest]) (*connect.Response[v1.ExpenseSetupResponse], error)
+	// #### Untuk Metric Overview
+	ExpenseOverviewMetric(context.Context, *connect.Request[v1.ExpenseOverviewMetricRequest]) (*connect.Response[v1.ExpenseOverviewMetricResponse], error)
+	// #### Untuk Metric berdasarkan waktu
+	// contoh ketika pengen metric expense daily, monthly dak kawan kawan
+	ExpenseTimeMetric(context.Context, *connect.Request[v1.ExpenseTimeMetricRequest]) (*connect.Response[v1.ExpenseTimeMetricResponse], error)
 }
 
 // NewExpenseServiceClient constructs a client for the accounting_iface.v1.ExpenseService service.
@@ -90,15 +101,29 @@ func NewExpenseServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			connect.WithSchema(expenseServiceMethods.ByName("ExpenseSetup")),
 			connect.WithClientOptions(opts...),
 		),
+		expenseOverviewMetric: connect.NewClient[v1.ExpenseOverviewMetricRequest, v1.ExpenseOverviewMetricResponse](
+			httpClient,
+			baseURL+ExpenseServiceExpenseOverviewMetricProcedure,
+			connect.WithSchema(expenseServiceMethods.ByName("ExpenseOverviewMetric")),
+			connect.WithClientOptions(opts...),
+		),
+		expenseTimeMetric: connect.NewClient[v1.ExpenseTimeMetricRequest, v1.ExpenseTimeMetricResponse](
+			httpClient,
+			baseURL+ExpenseServiceExpenseTimeMetricProcedure,
+			connect.WithSchema(expenseServiceMethods.ByName("ExpenseTimeMetric")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // expenseServiceClient implements ExpenseServiceClient.
 type expenseServiceClient struct {
-	expenseCreate   *connect.Client[v1.ExpenseCreateRequest, v1.ExpenseCreateResponse]
-	expenseList     *connect.Client[v1.ExpenseListRequest, v1.ExpenseListResponse]
-	expenseTypeList *connect.Client[v1.ExpenseTypeListRequest, v1.ExpenseTypeListResponse]
-	expenseSetup    *connect.Client[v1.ExpenseSetupRequest, v1.ExpenseSetupResponse]
+	expenseCreate         *connect.Client[v1.ExpenseCreateRequest, v1.ExpenseCreateResponse]
+	expenseList           *connect.Client[v1.ExpenseListRequest, v1.ExpenseListResponse]
+	expenseTypeList       *connect.Client[v1.ExpenseTypeListRequest, v1.ExpenseTypeListResponse]
+	expenseSetup          *connect.Client[v1.ExpenseSetupRequest, v1.ExpenseSetupResponse]
+	expenseOverviewMetric *connect.Client[v1.ExpenseOverviewMetricRequest, v1.ExpenseOverviewMetricResponse]
+	expenseTimeMetric     *connect.Client[v1.ExpenseTimeMetricRequest, v1.ExpenseTimeMetricResponse]
 }
 
 // ExpenseCreate calls accounting_iface.v1.ExpenseService.ExpenseCreate.
@@ -121,12 +146,27 @@ func (c *expenseServiceClient) ExpenseSetup(ctx context.Context, req *connect.Re
 	return c.expenseSetup.CallUnary(ctx, req)
 }
 
+// ExpenseOverviewMetric calls accounting_iface.v1.ExpenseService.ExpenseOverviewMetric.
+func (c *expenseServiceClient) ExpenseOverviewMetric(ctx context.Context, req *connect.Request[v1.ExpenseOverviewMetricRequest]) (*connect.Response[v1.ExpenseOverviewMetricResponse], error) {
+	return c.expenseOverviewMetric.CallUnary(ctx, req)
+}
+
+// ExpenseTimeMetric calls accounting_iface.v1.ExpenseService.ExpenseTimeMetric.
+func (c *expenseServiceClient) ExpenseTimeMetric(ctx context.Context, req *connect.Request[v1.ExpenseTimeMetricRequest]) (*connect.Response[v1.ExpenseTimeMetricResponse], error) {
+	return c.expenseTimeMetric.CallUnary(ctx, req)
+}
+
 // ExpenseServiceHandler is an implementation of the accounting_iface.v1.ExpenseService service.
 type ExpenseServiceHandler interface {
 	ExpenseCreate(context.Context, *connect.Request[v1.ExpenseCreateRequest]) (*connect.Response[v1.ExpenseCreateResponse], error)
 	ExpenseList(context.Context, *connect.Request[v1.ExpenseListRequest]) (*connect.Response[v1.ExpenseListResponse], error)
 	ExpenseTypeList(context.Context, *connect.Request[v1.ExpenseTypeListRequest]) (*connect.Response[v1.ExpenseTypeListResponse], error)
 	ExpenseSetup(context.Context, *connect.Request[v1.ExpenseSetupRequest]) (*connect.Response[v1.ExpenseSetupResponse], error)
+	// #### Untuk Metric Overview
+	ExpenseOverviewMetric(context.Context, *connect.Request[v1.ExpenseOverviewMetricRequest]) (*connect.Response[v1.ExpenseOverviewMetricResponse], error)
+	// #### Untuk Metric berdasarkan waktu
+	// contoh ketika pengen metric expense daily, monthly dak kawan kawan
+	ExpenseTimeMetric(context.Context, *connect.Request[v1.ExpenseTimeMetricRequest]) (*connect.Response[v1.ExpenseTimeMetricResponse], error)
 }
 
 // NewExpenseServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -160,6 +200,18 @@ func NewExpenseServiceHandler(svc ExpenseServiceHandler, opts ...connect.Handler
 		connect.WithSchema(expenseServiceMethods.ByName("ExpenseSetup")),
 		connect.WithHandlerOptions(opts...),
 	)
+	expenseServiceExpenseOverviewMetricHandler := connect.NewUnaryHandler(
+		ExpenseServiceExpenseOverviewMetricProcedure,
+		svc.ExpenseOverviewMetric,
+		connect.WithSchema(expenseServiceMethods.ByName("ExpenseOverviewMetric")),
+		connect.WithHandlerOptions(opts...),
+	)
+	expenseServiceExpenseTimeMetricHandler := connect.NewUnaryHandler(
+		ExpenseServiceExpenseTimeMetricProcedure,
+		svc.ExpenseTimeMetric,
+		connect.WithSchema(expenseServiceMethods.ByName("ExpenseTimeMetric")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/accounting_iface.v1.ExpenseService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case ExpenseServiceExpenseCreateProcedure:
@@ -170,6 +222,10 @@ func NewExpenseServiceHandler(svc ExpenseServiceHandler, opts ...connect.Handler
 			expenseServiceExpenseTypeListHandler.ServeHTTP(w, r)
 		case ExpenseServiceExpenseSetupProcedure:
 			expenseServiceExpenseSetupHandler.ServeHTTP(w, r)
+		case ExpenseServiceExpenseOverviewMetricProcedure:
+			expenseServiceExpenseOverviewMetricHandler.ServeHTTP(w, r)
+		case ExpenseServiceExpenseTimeMetricProcedure:
+			expenseServiceExpenseTimeMetricHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -193,4 +249,12 @@ func (UnimplementedExpenseServiceHandler) ExpenseTypeList(context.Context, *conn
 
 func (UnimplementedExpenseServiceHandler) ExpenseSetup(context.Context, *connect.Request[v1.ExpenseSetupRequest]) (*connect.Response[v1.ExpenseSetupResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("accounting_iface.v1.ExpenseService.ExpenseSetup is not implemented"))
+}
+
+func (UnimplementedExpenseServiceHandler) ExpenseOverviewMetric(context.Context, *connect.Request[v1.ExpenseOverviewMetricRequest]) (*connect.Response[v1.ExpenseOverviewMetricResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("accounting_iface.v1.ExpenseService.ExpenseOverviewMetric is not implemented"))
+}
+
+func (UnimplementedExpenseServiceHandler) ExpenseTimeMetric(context.Context, *connect.Request[v1.ExpenseTimeMetricRequest]) (*connect.Response[v1.ExpenseTimeMetricResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("accounting_iface.v1.ExpenseService.ExpenseTimeMetric is not implemented"))
 }

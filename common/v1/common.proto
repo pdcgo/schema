@@ -3,6 +3,19 @@ package common.v1;
 
 option go_package = "github.com/pdcgo/schema/services/common/v1;common";
 
+enum TimeType {
+  TIME_TYPE_UNSPECIFIED = 0;
+  TIME_TYPE_DAILY = 1;
+  TIME_TYPE_MONTHLY = 2;
+  TIME_TYPE_YEARLY = 3;
+}
+
+message TimeKeyValueMetric {
+  int64 time = 1;
+  string key = 2;
+  double value = 3;
+}
+
 message User {
   uint64 id = 1;
   string name = 2;

@@ -21,6 +21,118 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type TimeType int32
+
+const (
+	TimeType_TIME_TYPE_UNSPECIFIED TimeType = 0
+	TimeType_TIME_TYPE_DAILY       TimeType = 1
+	TimeType_TIME_TYPE_MONTHLY     TimeType = 2
+	TimeType_TIME_TYPE_YEARLY      TimeType = 3
+)
+
+// Enum value maps for TimeType.
+var (
+	TimeType_name = map[int32]string{
+		0: "TIME_TYPE_UNSPECIFIED",
+		1: "TIME_TYPE_DAILY",
+		2: "TIME_TYPE_MONTHLY",
+		3: "TIME_TYPE_YEARLY",
+	}
+	TimeType_value = map[string]int32{
+		"TIME_TYPE_UNSPECIFIED": 0,
+		"TIME_TYPE_DAILY":       1,
+		"TIME_TYPE_MONTHLY":     2,
+		"TIME_TYPE_YEARLY":      3,
+	}
+)
+
+func (x TimeType) Enum() *TimeType {
+	p := new(TimeType)
+	*p = x
+	return p
+}
+
+func (x TimeType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (TimeType) Descriptor() protoreflect.EnumDescriptor {
+	return file_common_v1_common_proto_enumTypes[0].Descriptor()
+}
+
+func (TimeType) Type() protoreflect.EnumType {
+	return &file_common_v1_common_proto_enumTypes[0]
+}
+
+func (x TimeType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use TimeType.Descriptor instead.
+func (TimeType) EnumDescriptor() ([]byte, []int) {
+	return file_common_v1_common_proto_rawDescGZIP(), []int{0}
+}
+
+type TimeKeyValueMetric struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Time          int64                  `protobuf:"varint,1,opt,name=time,proto3" json:"time,omitempty"`
+	Key           string                 `protobuf:"bytes,2,opt,name=key,proto3" json:"key,omitempty"`
+	Value         float64                `protobuf:"fixed64,3,opt,name=value,proto3" json:"value,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TimeKeyValueMetric) Reset() {
+	*x = TimeKeyValueMetric{}
+	mi := &file_common_v1_common_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TimeKeyValueMetric) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TimeKeyValueMetric) ProtoMessage() {}
+
+func (x *TimeKeyValueMetric) ProtoReflect() protoreflect.Message {
+	mi := &file_common_v1_common_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TimeKeyValueMetric.ProtoReflect.Descriptor instead.
+func (*TimeKeyValueMetric) Descriptor() ([]byte, []int) {
+	return file_common_v1_common_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *TimeKeyValueMetric) GetTime() int64 {
+	if x != nil {
+		return x.Time
+	}
+	return 0
+}
+
+func (x *TimeKeyValueMetric) GetKey() string {
+	if x != nil {
+		return x.Key
+	}
+	return ""
+}
+
+func (x *TimeKeyValueMetric) GetValue() float64 {
+	if x != nil {
+		return x.Value
+	}
+	return 0
+}
+
 type User struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	Id             uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -33,7 +145,7 @@ type User struct {
 
 func (x *User) Reset() {
 	*x = User{}
-	mi := &file_common_v1_common_proto_msgTypes[0]
+	mi := &file_common_v1_common_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -45,7 +157,7 @@ func (x *User) String() string {
 func (*User) ProtoMessage() {}
 
 func (x *User) ProtoReflect() protoreflect.Message {
-	mi := &file_common_v1_common_proto_msgTypes[0]
+	mi := &file_common_v1_common_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -58,7 +170,7 @@ func (x *User) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use User.ProtoReflect.Descriptor instead.
 func (*User) Descriptor() ([]byte, []int) {
-	return file_common_v1_common_proto_rawDescGZIP(), []int{0}
+	return file_common_v1_common_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *User) GetId() uint64 {
@@ -98,7 +210,7 @@ type Team struct {
 
 func (x *Team) Reset() {
 	*x = Team{}
-	mi := &file_common_v1_common_proto_msgTypes[1]
+	mi := &file_common_v1_common_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -110,7 +222,7 @@ func (x *Team) String() string {
 func (*Team) ProtoMessage() {}
 
 func (x *Team) ProtoReflect() protoreflect.Message {
-	mi := &file_common_v1_common_proto_msgTypes[1]
+	mi := &file_common_v1_common_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -123,7 +235,7 @@ func (x *Team) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Team.ProtoReflect.Descriptor instead.
 func (*Team) Descriptor() ([]byte, []int) {
-	return file_common_v1_common_proto_rawDescGZIP(), []int{1}
+	return file_common_v1_common_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *Team) GetId() uint64 {
@@ -143,7 +255,7 @@ type KeyName struct {
 
 func (x *KeyName) Reset() {
 	*x = KeyName{}
-	mi := &file_common_v1_common_proto_msgTypes[2]
+	mi := &file_common_v1_common_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -155,7 +267,7 @@ func (x *KeyName) String() string {
 func (*KeyName) ProtoMessage() {}
 
 func (x *KeyName) ProtoReflect() protoreflect.Message {
-	mi := &file_common_v1_common_proto_msgTypes[2]
+	mi := &file_common_v1_common_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -168,7 +280,7 @@ func (x *KeyName) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use KeyName.ProtoReflect.Descriptor instead.
 func (*KeyName) Descriptor() ([]byte, []int) {
-	return file_common_v1_common_proto_rawDescGZIP(), []int{2}
+	return file_common_v1_common_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *KeyName) GetKey() string {
@@ -195,7 +307,7 @@ type TimeFilter struct {
 
 func (x *TimeFilter) Reset() {
 	*x = TimeFilter{}
-	mi := &file_common_v1_common_proto_msgTypes[3]
+	mi := &file_common_v1_common_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -207,7 +319,7 @@ func (x *TimeFilter) String() string {
 func (*TimeFilter) ProtoMessage() {}
 
 func (x *TimeFilter) ProtoReflect() protoreflect.Message {
-	mi := &file_common_v1_common_proto_msgTypes[3]
+	mi := &file_common_v1_common_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -220,7 +332,7 @@ func (x *TimeFilter) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TimeFilter.ProtoReflect.Descriptor instead.
 func (*TimeFilter) Descriptor() ([]byte, []int) {
-	return file_common_v1_common_proto_rawDescGZIP(), []int{3}
+	return file_common_v1_common_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *TimeFilter) GetStartDate() int64 {
@@ -246,7 +358,7 @@ type PageFilter struct {
 
 func (x *PageFilter) Reset() {
 	*x = PageFilter{}
-	mi := &file_common_v1_common_proto_msgTypes[4]
+	mi := &file_common_v1_common_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -258,7 +370,7 @@ func (x *PageFilter) String() string {
 func (*PageFilter) ProtoMessage() {}
 
 func (x *PageFilter) ProtoReflect() protoreflect.Message {
-	mi := &file_common_v1_common_proto_msgTypes[4]
+	mi := &file_common_v1_common_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -271,7 +383,7 @@ func (x *PageFilter) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PageFilter.ProtoReflect.Descriptor instead.
 func (*PageFilter) Descriptor() ([]byte, []int) {
-	return file_common_v1_common_proto_rawDescGZIP(), []int{4}
+	return file_common_v1_common_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *PageFilter) GetPage() int64 {
@@ -292,7 +404,7 @@ type PageInfo struct {
 
 func (x *PageInfo) Reset() {
 	*x = PageInfo{}
-	mi := &file_common_v1_common_proto_msgTypes[5]
+	mi := &file_common_v1_common_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -304,7 +416,7 @@ func (x *PageInfo) String() string {
 func (*PageInfo) ProtoMessage() {}
 
 func (x *PageInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_common_v1_common_proto_msgTypes[5]
+	mi := &file_common_v1_common_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -317,7 +429,7 @@ func (x *PageInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PageInfo.ProtoReflect.Descriptor instead.
 func (*PageInfo) Descriptor() ([]byte, []int) {
-	return file_common_v1_common_proto_rawDescGZIP(), []int{5}
+	return file_common_v1_common_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *PageInfo) GetCurrentPage() int64 {
@@ -345,7 +457,11 @@ var File_common_v1_common_proto protoreflect.FileDescriptor
 
 const file_common_v1_common_proto_rawDesc = "" +
 	"\n" +
-	"\x16common/v1/common.proto\x12\tcommon.v1\"o\n" +
+	"\x16common/v1/common.proto\x12\tcommon.v1\"P\n" +
+	"\x12TimeKeyValueMetric\x12\x12\n" +
+	"\x04time\x18\x01 \x01(\x03R\x04time\x12\x10\n" +
+	"\x03key\x18\x02 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x03 \x01(\x01R\x05value\"o\n" +
 	"\x04User\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1a\n" +
@@ -369,7 +485,12 @@ const file_common_v1_common_proto_rawDesc = "" +
 	"\n" +
 	"total_page\x18\x02 \x01(\x03R\ttotalPage\x12\x1f\n" +
 	"\vtotal_items\x18\x03 \x01(\x03R\n" +
-	"totalItemsB3Z1github.com/pdcgo/schema/services/common/v1;commonb\x06proto3"
+	"totalItems*g\n" +
+	"\bTimeType\x12\x19\n" +
+	"\x15TIME_TYPE_UNSPECIFIED\x10\x00\x12\x13\n" +
+	"\x0fTIME_TYPE_DAILY\x10\x01\x12\x15\n" +
+	"\x11TIME_TYPE_MONTHLY\x10\x02\x12\x14\n" +
+	"\x10TIME_TYPE_YEARLY\x10\x03B3Z1github.com/pdcgo/schema/services/common/v1;commonb\x06proto3"
 
 var (
 	file_common_v1_common_proto_rawDescOnce sync.Once
@@ -383,14 +504,17 @@ func file_common_v1_common_proto_rawDescGZIP() []byte {
 	return file_common_v1_common_proto_rawDescData
 }
 
-var file_common_v1_common_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_common_v1_common_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_common_v1_common_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_common_v1_common_proto_goTypes = []any{
-	(*User)(nil),       // 0: common.v1.User
-	(*Team)(nil),       // 1: common.v1.Team
-	(*KeyName)(nil),    // 2: common.v1.KeyName
-	(*TimeFilter)(nil), // 3: common.v1.TimeFilter
-	(*PageFilter)(nil), // 4: common.v1.PageFilter
-	(*PageInfo)(nil),   // 5: common.v1.PageInfo
+	(TimeType)(0),              // 0: common.v1.TimeType
+	(*TimeKeyValueMetric)(nil), // 1: common.v1.TimeKeyValueMetric
+	(*User)(nil),               // 2: common.v1.User
+	(*Team)(nil),               // 3: common.v1.Team
+	(*KeyName)(nil),            // 4: common.v1.KeyName
+	(*TimeFilter)(nil),         // 5: common.v1.TimeFilter
+	(*PageFilter)(nil),         // 6: common.v1.PageFilter
+	(*PageInfo)(nil),           // 7: common.v1.PageInfo
 }
 var file_common_v1_common_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
@@ -410,13 +534,14 @@ func file_common_v1_common_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_common_v1_common_proto_rawDesc), len(file_common_v1_common_proto_rawDesc)),
-			NumEnums:      0,
-			NumMessages:   6,
+			NumEnums:      1,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_common_v1_common_proto_goTypes,
 		DependencyIndexes: file_common_v1_common_proto_depIdxs,
+		EnumInfos:         file_common_v1_common_proto_enumTypes,
 		MessageInfos:      file_common_v1_common_proto_msgTypes,
 	}.Build()
 	File_common_v1_common_proto = out.File
