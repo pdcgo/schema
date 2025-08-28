@@ -352,6 +352,7 @@ func (x *TimeFilter) GetEndDate() int64 {
 type PageFilter struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Page          int64                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
+	Limit         int64                  `protobuf:"varint,2,opt,name=limit,proto3" json:"limit,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -389,6 +390,13 @@ func (*PageFilter) Descriptor() ([]byte, []int) {
 func (x *PageFilter) GetPage() int64 {
 	if x != nil {
 		return x.Page
+	}
+	return 0
+}
+
+func (x *PageFilter) GetLimit() int64 {
+	if x != nil {
+		return x.Limit
 	}
 	return 0
 }
@@ -476,10 +484,11 @@ const file_common_v1_common_proto_rawDesc = "" +
 	"TimeFilter\x12\x1d\n" +
 	"\n" +
 	"start_date\x18\x01 \x01(\x03R\tstartDate\x12\x19\n" +
-	"\bend_date\x18\x02 \x01(\x03R\aendDate\" \n" +
+	"\bend_date\x18\x02 \x01(\x03R\aendDate\"6\n" +
 	"\n" +
 	"PageFilter\x12\x12\n" +
-	"\x04page\x18\x01 \x01(\x03R\x04page\"m\n" +
+	"\x04page\x18\x01 \x01(\x03R\x04page\x12\x14\n" +
+	"\x05limit\x18\x02 \x01(\x03R\x05limit\"m\n" +
 	"\bPageInfo\x12!\n" +
 	"\fcurrent_page\x18\x01 \x01(\x03R\vcurrentPage\x12\x1d\n" +
 	"\n" +

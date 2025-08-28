@@ -84,7 +84,6 @@ message ExpenseItem {
   double amount = 6;
   int64 expense_at = 7;
   int64 created_at = 8;
-  common.v1.User created_by = 9;
 }
 
 message ExpenseCreateRequest {
@@ -104,6 +103,7 @@ message ExpenseCreateResponse {
 message ExpenseListRequest {
   uint64 team_id = 1;
   uint64 by_user_id = 2;
+  ExpenseType expense_type = 5;
   common.v1.TimeFilter time_range = 3;
   common.v1.PageFilter page = 4;
 }

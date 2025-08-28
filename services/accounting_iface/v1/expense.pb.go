@@ -588,7 +588,6 @@ type ExpenseItem struct {
 	Amount        float64                `protobuf:"fixed64,6,opt,name=amount,proto3" json:"amount,omitempty"`
 	ExpenseAt     int64                  `protobuf:"varint,7,opt,name=expense_at,json=expenseAt,proto3" json:"expense_at,omitempty"`
 	CreatedAt     int64                  `protobuf:"varint,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	CreatedBy     *v1.User               `protobuf:"bytes,9,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -677,13 +676,6 @@ func (x *ExpenseItem) GetCreatedAt() int64 {
 		return x.CreatedAt
 	}
 	return 0
-}
-
-func (x *ExpenseItem) GetCreatedBy() *v1.User {
-	if x != nil {
-		return x.CreatedBy
-	}
-	return nil
 }
 
 type ExpenseCreateRequest struct {
@@ -826,6 +818,7 @@ type ExpenseListRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
 	ByUserId      uint64                 `protobuf:"varint,2,opt,name=by_user_id,json=byUserId,proto3" json:"by_user_id,omitempty"`
+	ExpenseType   ExpenseType            `protobuf:"varint,5,opt,name=expense_type,json=expenseType,proto3,enum=accounting_iface.v1.ExpenseType" json:"expense_type,omitempty"`
 	TimeRange     *v1.TimeFilter         `protobuf:"bytes,3,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
 	Page          *v1.PageFilter         `protobuf:"bytes,4,opt,name=page,proto3" json:"page,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -874,6 +867,13 @@ func (x *ExpenseListRequest) GetByUserId() uint64 {
 		return x.ByUserId
 	}
 	return 0
+}
+
+func (x *ExpenseListRequest) GetExpenseType() ExpenseType {
+	if x != nil {
+		return x.ExpenseType
+	}
+	return ExpenseType_EXPENSE_TYPE_UNSPECIFIED
 }
 
 func (x *ExpenseListRequest) GetTimeRange() *v1.TimeFilter {
@@ -991,7 +991,7 @@ const file_accounting_iface_v1_expense_proto_rawDesc = "" +
 	"\x04type\x18\x01 \x01(\x0e2 .accounting_iface.v1.ExpenseTypeR\x04type\"[\n" +
 	"\x17ExpenseTypeListResponse\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\x12&\n" +
-	"\x04data\x18\x02 \x03(\v2\x12.common.v1.KeyNameR\x04data\"\xb9\x02\n" +
+	"\x04data\x18\x02 \x03(\v2\x12.common.v1.KeyNameR\x04data\"\x89\x02\n" +
 	"\vExpenseItem\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x17\n" +
 	"\ateam_id\x18\x02 \x01(\x04R\x06teamId\x12\"\n" +
@@ -1002,9 +1002,7 @@ const file_accounting_iface_v1_expense_proto_rawDesc = "" +
 	"\n" +
 	"expense_at\x18\a \x01(\x03R\texpenseAt\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\b \x01(\x03R\tcreatedAt\x12.\n" +
-	"\n" +
-	"created_by\x18\t \x01(\v2\x0f.common.v1.UserR\tcreatedBy\"\xf7\x01\n" +
+	"created_at\x18\b \x01(\x03R\tcreatedAt\"\xf7\x01\n" +
 	"\x14ExpenseCreateRequest\x12\x17\n" +
 	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12\x15\n" +
 	"\x06ref_id\x18\a \x01(\tR\x05refId\x12\x12\n" +
@@ -1016,11 +1014,12 @@ const file_accounting_iface_v1_expense_proto_rawDesc = "" +
 	"\n" +
 	"expense_at\x18\x06 \x01(\x03R\texpenseAt\"1\n" +
 	"\x15ExpenseCreateResponse\x12\x18\n" +
-	"\amessage\x18\x01 \x01(\tR\amessage\"\xac\x01\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage\"\xf1\x01\n" +
 	"\x12ExpenseListRequest\x12\x17\n" +
 	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12\x1c\n" +
 	"\n" +
-	"by_user_id\x18\x02 \x01(\x04R\bbyUserId\x124\n" +
+	"by_user_id\x18\x02 \x01(\x04R\bbyUserId\x12C\n" +
+	"\fexpense_type\x18\x05 \x01(\x0e2 .accounting_iface.v1.ExpenseTypeR\vexpenseType\x124\n" +
 	"\n" +
 	"time_range\x18\x03 \x01(\v2\x15.common.v1.TimeFilterR\ttimeRange\x12)\n" +
 	"\x04page\x18\x04 \x01(\v2\x15.common.v1.PageFilterR\x04page\"\x97\x01\n" +
@@ -1077,9 +1076,8 @@ var file_accounting_iface_v1_expense_proto_goTypes = []any{
 	(v1.TimeType)(0),                      // 18: common.v1.TimeType
 	(*v1.TimeFilter)(nil),                 // 19: common.v1.TimeFilter
 	(*v1.KeyName)(nil),                    // 20: common.v1.KeyName
-	(*v1.User)(nil),                       // 21: common.v1.User
-	(*v1.PageFilter)(nil),                 // 22: common.v1.PageFilter
-	(*v1.PageInfo)(nil),                   // 23: common.v1.PageInfo
+	(*v1.PageFilter)(nil),                 // 21: common.v1.PageFilter
+	(*v1.PageInfo)(nil),                   // 22: common.v1.PageInfo
 }
 var file_accounting_iface_v1_expense_proto_depIdxs = []int32{
 	1,  // 0: accounting_iface.v1.KeyValueMetricList.data:type_name -> accounting_iface.v1.KeyValueMetric
@@ -1091,12 +1089,12 @@ var file_accounting_iface_v1_expense_proto_depIdxs = []int32{
 	0,  // 6: accounting_iface.v1.ExpenseTypeListRequest.type:type_name -> accounting_iface.v1.ExpenseType
 	20, // 7: accounting_iface.v1.ExpenseTypeListResponse.data:type_name -> common.v1.KeyName
 	0,  // 8: accounting_iface.v1.ExpenseItem.expense_type:type_name -> accounting_iface.v1.ExpenseType
-	21, // 9: accounting_iface.v1.ExpenseItem.created_by:type_name -> common.v1.User
-	0,  // 10: accounting_iface.v1.ExpenseCreateRequest.expense_type:type_name -> accounting_iface.v1.ExpenseType
+	0,  // 9: accounting_iface.v1.ExpenseCreateRequest.expense_type:type_name -> accounting_iface.v1.ExpenseType
+	0,  // 10: accounting_iface.v1.ExpenseListRequest.expense_type:type_name -> accounting_iface.v1.ExpenseType
 	19, // 11: accounting_iface.v1.ExpenseListRequest.time_range:type_name -> common.v1.TimeFilter
-	22, // 12: accounting_iface.v1.ExpenseListRequest.page:type_name -> common.v1.PageFilter
+	21, // 12: accounting_iface.v1.ExpenseListRequest.page:type_name -> common.v1.PageFilter
 	11, // 13: accounting_iface.v1.ExpenseListResponse.data:type_name -> accounting_iface.v1.ExpenseItem
-	23, // 14: accounting_iface.v1.ExpenseListResponse.page_info:type_name -> common.v1.PageInfo
+	22, // 14: accounting_iface.v1.ExpenseListResponse.page_info:type_name -> common.v1.PageInfo
 	2,  // 15: accounting_iface.v1.ExpenseTimeMetricResponse.DataEntry.value:type_name -> accounting_iface.v1.KeyValueMetricList
 	12, // 16: accounting_iface.v1.ExpenseService.ExpenseCreate:input_type -> accounting_iface.v1.ExpenseCreateRequest
 	14, // 17: accounting_iface.v1.ExpenseService.ExpenseList:input_type -> accounting_iface.v1.ExpenseListRequest

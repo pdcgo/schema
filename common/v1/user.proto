@@ -1,0 +1,21 @@
+syntax = "proto3";
+package common.v1;
+
+import "common/v1/common.proto";
+
+option go_package = "github.com/pdcgo/schema/services/common/v1;common";
+
+service UserService {
+  /*
+   #### Untuk Get Data User Public
+  */
+  rpc PublicUserIDs(PublicUserIDsRequest) returns (PublicUserIDsResponse);
+}
+
+message PublicUserIDsRequest {
+  repeated uint64 ids = 1;
+}
+
+message PublicUserIDsResponse {
+  map<uint64, User> data = 1;
+}
