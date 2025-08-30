@@ -1,6 +1,7 @@
 syntax = "proto3";
 package accounting_iface.v1;
 
+import "buf/validate/validate.proto";
 import "common/v1/common.proto";
 
 option go_package = "github.com/pdcgo/schema/services/accounting_iface/v1;accounting_iface";
@@ -12,6 +13,16 @@ service AccountService {
   rpc AccountDelete(AccountDeleteRequest) returns (AccountDeleteResponse);
   rpc AccountUpdate(AccountUpdateRequest) returns (AccountUpdateResponse);
   rpc LabelList(LabelListRequest) returns (LabelListResponse);
+  rpc AccountTypeList(AccountTypeListRequest) returns (AccountTypeListResponse);
+}
+
+message AccountTypeListRequest {}
+message AccountTypeItem {
+  string key = 1;
+  string name = 2;
+}
+message AccountTypeListResponse {
+  repeated AccountTypeItem data = 1;
 }
 
 message LabelListRequest {
@@ -28,17 +39,20 @@ message AccountUpdateRequest {
   repeated common.v1.KeyName labels = 4;
 }
 
-message AccountUpdateResponse {
-  string message = 1;
-}
+message AccountUpdateResponse {}
 
 message AccountDeleteRequest {
-  repeated uint64 account_ids = 1;
+  uint64 team_id = 1 [(buf.validate.field).required = true];
+  repeated uint64 account_ids = 2 [
+    (buf.validate.field).required = true,
+    (buf.validate.field).repeated.min_items = 1,
+    (buf.validate.field).repeated.unique = true,
+    (buf.validate.field).repeated.items.uint64.gt = 0,
+    (buf.validate.field).repeated.max_items = 10
+  ];
 }
 
-message AccountDeleteResponse {
-  string message = 1;
-}
+message AccountDeleteResponse {}
 
 message AccountItem {
   uint64 id = 1;
@@ -60,57 +74,17 @@ message AccountListResponse {
 }
 
 message AccountCreateRequest {
-  uint64 team_id = 1;
-  string name = 2;
-  string number_id = 3;
-  string account_type = 4;
-  repeated common.v1.KeyName labels = 5;
+  uint64 team_id = 1 [(buf.validate.field).required = true];
+  string name = 2 [
+    (buf.validate.field).required = true,
+    (buf.validate.field).string.max_len = 100
+  ];
+  string number_id = 3 [
+    (buf.validate.field).required = true,
+    (buf.validate.field).string.max_len = 100
+  ];
+  uint64 account_type_id = 4 [(buf.validate.field).required = true];
+  repeated common.v1.KeyName labels = 5 [(buf.validate.field).repeated.max_items = 5];
 }
 
-message AccountCreateResponse {
-  string message = 1;
-}
-
-service TransferService {
-  rpc TransferCreate(TransferCreateRequest) returns (TransferCreateResponse);
-  rpc TransferUpdate(TransferUpdateRequest) returns (TransferUpdateResponse);
-  rpc TransferList(TransferListRequest) returns (TransferListResponse);
-  rpc TransferTypeList(TransferTypeListRequest) returns (TransferTypeListResponse);
-}
-
-message TransferUpdateRequest {
-  uint64 transaction_id = 1;
-  double amount = 2;
-  int64 transfer_at = 3;
-}
-message TransferUpdateResponse {
-  string message = 1;
-}
-
-message TransferListRequest {
-  int64 start_date = 1;
-  int64 end_date = 2;
-}
-
-message TransferListResponse {
-  string message = 1;
-}
-
-message TransferTypeListRequest {}
-message TransferTypeListResponse {
-  string message = 1;
-  repeated common.v1.KeyName data = 2;
-}
-
-message TransferCreateResponse {
-  string message = 1;
-}
-
-message TransferCreateRequest {
-  uint64 from_team_id = 1;
-  uint64 to_team_id = 2;
-  string type = 3;
-  double amount = 4;
-  int64 transfer_at = 5;
-  string desc = 6;
-}
+message AccountCreateResponse {}

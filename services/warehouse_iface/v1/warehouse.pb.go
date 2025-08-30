@@ -1333,7 +1333,8 @@ const file_warehouse_iface_v1_warehouse_proto_rawDesc = "" +
 	"\amessage\x18\x01 \x01(\tR\amessage2\x12\n" +
 	"\x10WarehouseService2\x8b\x01\n" +
 	"\x17WarehouseFinanceService\x12p\n" +
-	"\x11ExpenseAccountGet\x12,.warehouse_iface.v1.ExpenseAccountGetRequest\x1a-.warehouse_iface.v1.ExpenseAccountGetResponseBEZCgithub.com/pdcgo/schema/services/warehouse_iface/v1;warehouse_ifaceb\x06proto3"
+	"\x11ExpenseAccountGet\x12,.warehouse_iface.v1.ExpenseAccountGetRequest\x1a-.warehouse_iface.v1.ExpenseAccountGetResponseB\xd2\x01\n" +
+	"\x16com.warehouse_iface.v1B\x0eWarehouseProtoP\x01ZCgithub.com/pdcgo/schema/services/warehouse_iface/v1;warehouse_iface\xa2\x02\x03WXX\xaa\x02\x11WarehouseIface.V1\xca\x02\x11WarehouseIface\\V1\xe2\x02\x1dWarehouseIface\\V1\\GPBMetadata\xea\x02\x12WarehouseIface::V1b\x06proto3"
 
 var (
 	file_warehouse_iface_v1_warehouse_proto_rawDescOnce sync.Once

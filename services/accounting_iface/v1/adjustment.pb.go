@@ -25,7 +25,8 @@ var File_accounting_iface_v1_adjustment_proto protoreflect.FileDescriptor
 const file_accounting_iface_v1_adjustment_proto_rawDesc = "" +
 	"\n" +
 	"$accounting_iface/v1/adjustment.proto\x12\x13accounting_iface.v12\x13\n" +
-	"\x11AdjustmentServiceBGZEgithub.com/pdcgo/schema/services/accounting_iface/v1;accounting_ifaceb\x06proto3"
+	"\x11AdjustmentServiceB\xda\x01\n" +
+	"\x17com.accounting_iface.v1B\x0fAdjustmentProtoP\x01ZEgithub.com/pdcgo/schema/services/accounting_iface/v1;accounting_iface\xa2\x02\x03AXX\xaa\x02\x12AccountingIface.V1\xca\x02\x12AccountingIface\\V1\xe2\x02\x1eAccountingIface\\V1\\GPBMetadata\xea\x02\x13AccountingIface::V1b\x06proto3"
 
 var file_accounting_iface_v1_adjustment_proto_goTypes = []any{}
 var file_accounting_iface_v1_adjustment_proto_depIdxs = []int32{

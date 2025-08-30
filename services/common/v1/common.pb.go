@@ -7,6 +7,7 @@
 package common
 
 import (
+	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -204,6 +205,7 @@ func (x *User) GetProfilePicture() string {
 type Team struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -243,6 +245,13 @@ func (x *Team) GetId() uint64 {
 		return x.Id
 	}
 	return 0
+}
+
+func (x *Team) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
 }
 
 type KeyName struct {
@@ -465,7 +474,7 @@ var File_common_v1_common_proto protoreflect.FileDescriptor
 
 const file_common_v1_common_proto_rawDesc = "" +
 	"\n" +
-	"\x16common/v1/common.proto\x12\tcommon.v1\"P\n" +
+	"\x16common/v1/common.proto\x12\tcommon.v1\x1a\x1bbuf/validate/validate.proto\"P\n" +
 	"\x12TimeKeyValueMetric\x12\x12\n" +
 	"\x04time\x18\x01 \x01(\x03R\x04time\x12\x10\n" +
 	"\x03key\x18\x02 \x01(\tR\x03key\x12\x14\n" +
@@ -474,12 +483,15 @@ const file_common_v1_common_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1a\n" +
 	"\busername\x18\x03 \x01(\tR\busername\x12'\n" +
-	"\x0fprofile_picture\x18\x04 \x01(\tR\x0eprofilePicture\"\x16\n" +
+	"\x0fprofile_picture\x18\x04 \x01(\tR\x0eprofilePicture\"*\n" +
 	"\x04Team\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x04R\x02id\"/\n" +
-	"\aKeyName\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\"F\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\"G\n" +
+	"\aKeyName\x12\x1c\n" +
+	"\x03key\x18\x01 \x01(\tB\n" +
+	"\xbaH\a\xc8\x01\x01r\x02\x18dR\x03key\x12\x1e\n" +
+	"\x04name\x18\x02 \x01(\tB\n" +
+	"\xbaH\a\xc8\x01\x01r\x02\x18dR\x04name\"F\n" +
 	"\n" +
 	"TimeFilter\x12\x1d\n" +
 	"\n" +
@@ -499,7 +511,9 @@ const file_common_v1_common_proto_rawDesc = "" +
 	"\x15TIME_TYPE_UNSPECIFIED\x10\x00\x12\x13\n" +
 	"\x0fTIME_TYPE_DAILY\x10\x01\x12\x15\n" +
 	"\x11TIME_TYPE_MONTHLY\x10\x02\x12\x14\n" +
-	"\x10TIME_TYPE_YEARLY\x10\x03B3Z1github.com/pdcgo/schema/services/common/v1;commonb\x06proto3"
+	"\x10TIME_TYPE_YEARLY\x10\x03B\x94\x01\n" +
+	"\rcom.common.v1B\vCommonProtoP\x01Z1github.com/pdcgo/schema/services/common/v1;common\xa2\x02\x03CXX\xaa\x02\tCommon.V1\xca\x02\tCommon\\V1\xe2\x02\x15Common\\V1\\GPBMetadata\xea\x02\n" +
+	"Common::V1b\x06proto3"
 
 var (
 	file_common_v1_common_proto_rawDescOnce sync.Once

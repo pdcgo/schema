@@ -23,8 +23,6 @@ const _ = connect.IsAtLeastVersion1_13_0
 const (
 	// AccountServiceName is the fully-qualified name of the AccountService service.
 	AccountServiceName = "accounting_iface.v1.AccountService"
-	// TransferServiceName is the fully-qualified name of the TransferService service.
-	TransferServiceName = "accounting_iface.v1.TransferService"
 )
 
 // These constants are the fully-qualified names of the RPCs defined in this package. They're
@@ -50,18 +48,9 @@ const (
 	// AccountServiceLabelListProcedure is the fully-qualified name of the AccountService's LabelList
 	// RPC.
 	AccountServiceLabelListProcedure = "/accounting_iface.v1.AccountService/LabelList"
-	// TransferServiceTransferCreateProcedure is the fully-qualified name of the TransferService's
-	// TransferCreate RPC.
-	TransferServiceTransferCreateProcedure = "/accounting_iface.v1.TransferService/TransferCreate"
-	// TransferServiceTransferUpdateProcedure is the fully-qualified name of the TransferService's
-	// TransferUpdate RPC.
-	TransferServiceTransferUpdateProcedure = "/accounting_iface.v1.TransferService/TransferUpdate"
-	// TransferServiceTransferListProcedure is the fully-qualified name of the TransferService's
-	// TransferList RPC.
-	TransferServiceTransferListProcedure = "/accounting_iface.v1.TransferService/TransferList"
-	// TransferServiceTransferTypeListProcedure is the fully-qualified name of the TransferService's
-	// TransferTypeList RPC.
-	TransferServiceTransferTypeListProcedure = "/accounting_iface.v1.TransferService/TransferTypeList"
+	// AccountServiceAccountTypeListProcedure is the fully-qualified name of the AccountService's
+	// AccountTypeList RPC.
+	AccountServiceAccountTypeListProcedure = "/accounting_iface.v1.AccountService/AccountTypeList"
 )
 
 // AccountServiceClient is a client for the accounting_iface.v1.AccountService service.
@@ -71,6 +60,7 @@ type AccountServiceClient interface {
 	AccountDelete(context.Context, *connect.Request[v1.AccountDeleteRequest]) (*connect.Response[v1.AccountDeleteResponse], error)
 	AccountUpdate(context.Context, *connect.Request[v1.AccountUpdateRequest]) (*connect.Response[v1.AccountUpdateResponse], error)
 	LabelList(context.Context, *connect.Request[v1.LabelListRequest]) (*connect.Response[v1.LabelListResponse], error)
+	AccountTypeList(context.Context, *connect.Request[v1.AccountTypeListRequest]) (*connect.Response[v1.AccountTypeListResponse], error)
 }
 
 // NewAccountServiceClient constructs a client for the accounting_iface.v1.AccountService service.
@@ -114,16 +104,23 @@ func NewAccountServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			connect.WithSchema(accountServiceMethods.ByName("LabelList")),
 			connect.WithClientOptions(opts...),
 		),
+		accountTypeList: connect.NewClient[v1.AccountTypeListRequest, v1.AccountTypeListResponse](
+			httpClient,
+			baseURL+AccountServiceAccountTypeListProcedure,
+			connect.WithSchema(accountServiceMethods.ByName("AccountTypeList")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // accountServiceClient implements AccountServiceClient.
 type accountServiceClient struct {
-	accountCreate *connect.Client[v1.AccountCreateRequest, v1.AccountCreateResponse]
-	accountList   *connect.Client[v1.AccountListRequest, v1.AccountListResponse]
-	accountDelete *connect.Client[v1.AccountDeleteRequest, v1.AccountDeleteResponse]
-	accountUpdate *connect.Client[v1.AccountUpdateRequest, v1.AccountUpdateResponse]
-	labelList     *connect.Client[v1.LabelListRequest, v1.LabelListResponse]
+	accountCreate   *connect.Client[v1.AccountCreateRequest, v1.AccountCreateResponse]
+	accountList     *connect.Client[v1.AccountListRequest, v1.AccountListResponse]
+	accountDelete   *connect.Client[v1.AccountDeleteRequest, v1.AccountDeleteResponse]
+	accountUpdate   *connect.Client[v1.AccountUpdateRequest, v1.AccountUpdateResponse]
+	labelList       *connect.Client[v1.LabelListRequest, v1.LabelListResponse]
+	accountTypeList *connect.Client[v1.AccountTypeListRequest, v1.AccountTypeListResponse]
 }
 
 // AccountCreate calls accounting_iface.v1.AccountService.AccountCreate.
@@ -151,6 +148,11 @@ func (c *accountServiceClient) LabelList(ctx context.Context, req *connect.Reque
 	return c.labelList.CallUnary(ctx, req)
 }
 
+// AccountTypeList calls accounting_iface.v1.AccountService.AccountTypeList.
+func (c *accountServiceClient) AccountTypeList(ctx context.Context, req *connect.Request[v1.AccountTypeListRequest]) (*connect.Response[v1.AccountTypeListResponse], error) {
+	return c.accountTypeList.CallUnary(ctx, req)
+}
+
 // AccountServiceHandler is an implementation of the accounting_iface.v1.AccountService service.
 type AccountServiceHandler interface {
 	AccountCreate(context.Context, *connect.Request[v1.AccountCreateRequest]) (*connect.Response[v1.AccountCreateResponse], error)
@@ -158,6 +160,7 @@ type AccountServiceHandler interface {
 	AccountDelete(context.Context, *connect.Request[v1.AccountDeleteRequest]) (*connect.Response[v1.AccountDeleteResponse], error)
 	AccountUpdate(context.Context, *connect.Request[v1.AccountUpdateRequest]) (*connect.Response[v1.AccountUpdateResponse], error)
 	LabelList(context.Context, *connect.Request[v1.LabelListRequest]) (*connect.Response[v1.LabelListResponse], error)
+	AccountTypeList(context.Context, *connect.Request[v1.AccountTypeListRequest]) (*connect.Response[v1.AccountTypeListResponse], error)
 }
 
 // NewAccountServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -197,6 +200,12 @@ func NewAccountServiceHandler(svc AccountServiceHandler, opts ...connect.Handler
 		connect.WithSchema(accountServiceMethods.ByName("LabelList")),
 		connect.WithHandlerOptions(opts...),
 	)
+	accountServiceAccountTypeListHandler := connect.NewUnaryHandler(
+		AccountServiceAccountTypeListProcedure,
+		svc.AccountTypeList,
+		connect.WithSchema(accountServiceMethods.ByName("AccountTypeList")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/accounting_iface.v1.AccountService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case AccountServiceAccountCreateProcedure:
@@ -209,6 +218,8 @@ func NewAccountServiceHandler(svc AccountServiceHandler, opts ...connect.Handler
 			accountServiceAccountUpdateHandler.ServeHTTP(w, r)
 		case AccountServiceLabelListProcedure:
 			accountServiceLabelListHandler.ServeHTTP(w, r)
+		case AccountServiceAccountTypeListProcedure:
+			accountServiceAccountTypeListHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -238,150 +249,6 @@ func (UnimplementedAccountServiceHandler) LabelList(context.Context, *connect.Re
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("accounting_iface.v1.AccountService.LabelList is not implemented"))
 }
 
-// TransferServiceClient is a client for the accounting_iface.v1.TransferService service.
-type TransferServiceClient interface {
-	TransferCreate(context.Context, *connect.Request[v1.TransferCreateRequest]) (*connect.Response[v1.TransferCreateResponse], error)
-	TransferUpdate(context.Context, *connect.Request[v1.TransferUpdateRequest]) (*connect.Response[v1.TransferUpdateResponse], error)
-	TransferList(context.Context, *connect.Request[v1.TransferListRequest]) (*connect.Response[v1.TransferListResponse], error)
-	TransferTypeList(context.Context, *connect.Request[v1.TransferTypeListRequest]) (*connect.Response[v1.TransferTypeListResponse], error)
-}
-
-// NewTransferServiceClient constructs a client for the accounting_iface.v1.TransferService service.
-// By default, it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped
-// responses, and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the
-// connect.WithGRPC() or connect.WithGRPCWeb() options.
-//
-// The URL supplied here should be the base URL for the Connect or gRPC server (for example,
-// http://api.acme.com or https://acme.com/grpc).
-func NewTransferServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) TransferServiceClient {
-	baseURL = strings.TrimRight(baseURL, "/")
-	transferServiceMethods := v1.File_accounting_iface_v1_accounting_proto.Services().ByName("TransferService").Methods()
-	return &transferServiceClient{
-		transferCreate: connect.NewClient[v1.TransferCreateRequest, v1.TransferCreateResponse](
-			httpClient,
-			baseURL+TransferServiceTransferCreateProcedure,
-			connect.WithSchema(transferServiceMethods.ByName("TransferCreate")),
-			connect.WithClientOptions(opts...),
-		),
-		transferUpdate: connect.NewClient[v1.TransferUpdateRequest, v1.TransferUpdateResponse](
-			httpClient,
-			baseURL+TransferServiceTransferUpdateProcedure,
-			connect.WithSchema(transferServiceMethods.ByName("TransferUpdate")),
-			connect.WithClientOptions(opts...),
-		),
-		transferList: connect.NewClient[v1.TransferListRequest, v1.TransferListResponse](
-			httpClient,
-			baseURL+TransferServiceTransferListProcedure,
-			connect.WithSchema(transferServiceMethods.ByName("TransferList")),
-			connect.WithClientOptions(opts...),
-		),
-		transferTypeList: connect.NewClient[v1.TransferTypeListRequest, v1.TransferTypeListResponse](
-			httpClient,
-			baseURL+TransferServiceTransferTypeListProcedure,
-			connect.WithSchema(transferServiceMethods.ByName("TransferTypeList")),
-			connect.WithClientOptions(opts...),
-		),
-	}
-}
-
-// transferServiceClient implements TransferServiceClient.
-type transferServiceClient struct {
-	transferCreate   *connect.Client[v1.TransferCreateRequest, v1.TransferCreateResponse]
-	transferUpdate   *connect.Client[v1.TransferUpdateRequest, v1.TransferUpdateResponse]
-	transferList     *connect.Client[v1.TransferListRequest, v1.TransferListResponse]
-	transferTypeList *connect.Client[v1.TransferTypeListRequest, v1.TransferTypeListResponse]
-}
-
-// TransferCreate calls accounting_iface.v1.TransferService.TransferCreate.
-func (c *transferServiceClient) TransferCreate(ctx context.Context, req *connect.Request[v1.TransferCreateRequest]) (*connect.Response[v1.TransferCreateResponse], error) {
-	return c.transferCreate.CallUnary(ctx, req)
-}
-
-// TransferUpdate calls accounting_iface.v1.TransferService.TransferUpdate.
-func (c *transferServiceClient) TransferUpdate(ctx context.Context, req *connect.Request[v1.TransferUpdateRequest]) (*connect.Response[v1.TransferUpdateResponse], error) {
-	return c.transferUpdate.CallUnary(ctx, req)
-}
-
-// TransferList calls accounting_iface.v1.TransferService.TransferList.
-func (c *transferServiceClient) TransferList(ctx context.Context, req *connect.Request[v1.TransferListRequest]) (*connect.Response[v1.TransferListResponse], error) {
-	return c.transferList.CallUnary(ctx, req)
-}
-
-// TransferTypeList calls accounting_iface.v1.TransferService.TransferTypeList.
-func (c *transferServiceClient) TransferTypeList(ctx context.Context, req *connect.Request[v1.TransferTypeListRequest]) (*connect.Response[v1.TransferTypeListResponse], error) {
-	return c.transferTypeList.CallUnary(ctx, req)
-}
-
-// TransferServiceHandler is an implementation of the accounting_iface.v1.TransferService service.
-type TransferServiceHandler interface {
-	TransferCreate(context.Context, *connect.Request[v1.TransferCreateRequest]) (*connect.Response[v1.TransferCreateResponse], error)
-	TransferUpdate(context.Context, *connect.Request[v1.TransferUpdateRequest]) (*connect.Response[v1.TransferUpdateResponse], error)
-	TransferList(context.Context, *connect.Request[v1.TransferListRequest]) (*connect.Response[v1.TransferListResponse], error)
-	TransferTypeList(context.Context, *connect.Request[v1.TransferTypeListRequest]) (*connect.Response[v1.TransferTypeListResponse], error)
-}
-
-// NewTransferServiceHandler builds an HTTP handler from the service implementation. It returns the
-// path on which to mount the handler and the handler itself.
-//
-// By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
-// and JSON codecs. They also support gzip compression.
-func NewTransferServiceHandler(svc TransferServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
-	transferServiceMethods := v1.File_accounting_iface_v1_accounting_proto.Services().ByName("TransferService").Methods()
-	transferServiceTransferCreateHandler := connect.NewUnaryHandler(
-		TransferServiceTransferCreateProcedure,
-		svc.TransferCreate,
-		connect.WithSchema(transferServiceMethods.ByName("TransferCreate")),
-		connect.WithHandlerOptions(opts...),
-	)
-	transferServiceTransferUpdateHandler := connect.NewUnaryHandler(
-		TransferServiceTransferUpdateProcedure,
-		svc.TransferUpdate,
-		connect.WithSchema(transferServiceMethods.ByName("TransferUpdate")),
-		connect.WithHandlerOptions(opts...),
-	)
-	transferServiceTransferListHandler := connect.NewUnaryHandler(
-		TransferServiceTransferListProcedure,
-		svc.TransferList,
-		connect.WithSchema(transferServiceMethods.ByName("TransferList")),
-		connect.WithHandlerOptions(opts...),
-	)
-	transferServiceTransferTypeListHandler := connect.NewUnaryHandler(
-		TransferServiceTransferTypeListProcedure,
-		svc.TransferTypeList,
-		connect.WithSchema(transferServiceMethods.ByName("TransferTypeList")),
-		connect.WithHandlerOptions(opts...),
-	)
-	return "/accounting_iface.v1.TransferService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		switch r.URL.Path {
-		case TransferServiceTransferCreateProcedure:
-			transferServiceTransferCreateHandler.ServeHTTP(w, r)
-		case TransferServiceTransferUpdateProcedure:
-			transferServiceTransferUpdateHandler.ServeHTTP(w, r)
-		case TransferServiceTransferListProcedure:
-			transferServiceTransferListHandler.ServeHTTP(w, r)
-		case TransferServiceTransferTypeListProcedure:
-			transferServiceTransferTypeListHandler.ServeHTTP(w, r)
-		default:
-			http.NotFound(w, r)
-		}
-	})
-}
-
-// UnimplementedTransferServiceHandler returns CodeUnimplemented from all methods.
-type UnimplementedTransferServiceHandler struct{}
-
-func (UnimplementedTransferServiceHandler) TransferCreate(context.Context, *connect.Request[v1.TransferCreateRequest]) (*connect.Response[v1.TransferCreateResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("accounting_iface.v1.TransferService.TransferCreate is not implemented"))
-}
-
-func (UnimplementedTransferServiceHandler) TransferUpdate(context.Context, *connect.Request[v1.TransferUpdateRequest]) (*connect.Response[v1.TransferUpdateResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("accounting_iface.v1.TransferService.TransferUpdate is not implemented"))
-}
-
-func (UnimplementedTransferServiceHandler) TransferList(context.Context, *connect.Request[v1.TransferListRequest]) (*connect.Response[v1.TransferListResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("accounting_iface.v1.TransferService.TransferList is not implemented"))
-}
-
-func (UnimplementedTransferServiceHandler) TransferTypeList(context.Context, *connect.Request[v1.TransferTypeListRequest]) (*connect.Response[v1.TransferTypeListResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("accounting_iface.v1.TransferService.TransferTypeList is not implemented"))
+func (UnimplementedAccountServiceHandler) AccountTypeList(context.Context, *connect.Request[v1.AccountTypeListRequest]) (*connect.Response[v1.AccountTypeListResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("accounting_iface.v1.AccountService.AccountTypeList is not implemented"))
 }

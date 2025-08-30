@@ -1038,7 +1038,8 @@ const file_accounting_iface_v1_expense_proto_rawDesc = "" +
 	"\x0fExpenseTypeList\x12+.accounting_iface.v1.ExpenseTypeListRequest\x1a,.accounting_iface.v1.ExpenseTypeListResponse\x12c\n" +
 	"\fExpenseSetup\x12(.accounting_iface.v1.ExpenseSetupRequest\x1a).accounting_iface.v1.ExpenseSetupResponse\x12~\n" +
 	"\x15ExpenseOverviewMetric\x121.accounting_iface.v1.ExpenseOverviewMetricRequest\x1a2.accounting_iface.v1.ExpenseOverviewMetricResponse\x12r\n" +
-	"\x11ExpenseTimeMetric\x12-.accounting_iface.v1.ExpenseTimeMetricRequest\x1a..accounting_iface.v1.ExpenseTimeMetricResponseBGZEgithub.com/pdcgo/schema/services/accounting_iface/v1;accounting_ifaceb\x06proto3"
+	"\x11ExpenseTimeMetric\x12-.accounting_iface.v1.ExpenseTimeMetricRequest\x1a..accounting_iface.v1.ExpenseTimeMetricResponseB\xd7\x01\n" +
+	"\x17com.accounting_iface.v1B\fExpenseProtoP\x01ZEgithub.com/pdcgo/schema/services/accounting_iface/v1;accounting_iface\xa2\x02\x03AXX\xaa\x02\x12AccountingIface.V1\xca\x02\x12AccountingIface\\V1\xe2\x02\x1eAccountingIface\\V1\\GPBMetadata\xea\x02\x13AccountingIface::V1b\x06proto3"
 
 var (
 	file_accounting_iface_v1_expense_proto_rawDescOnce sync.Once

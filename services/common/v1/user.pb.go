@@ -122,7 +122,9 @@ const file_common_v1_user_proto_rawDesc = "" +
 	"\x03key\x18\x01 \x01(\x04R\x03key\x12%\n" +
 	"\x05value\x18\x02 \x01(\v2\x0f.common.v1.UserR\x05value:\x028\x012a\n" +
 	"\vUserService\x12R\n" +
-	"\rPublicUserIDs\x12\x1f.common.v1.PublicUserIDsRequest\x1a .common.v1.PublicUserIDsResponseB3Z1github.com/pdcgo/schema/services/common/v1;commonb\x06proto3"
+	"\rPublicUserIDs\x12\x1f.common.v1.PublicUserIDsRequest\x1a .common.v1.PublicUserIDsResponseB\x92\x01\n" +
+	"\rcom.common.v1B\tUserProtoP\x01Z1github.com/pdcgo/schema/services/common/v1;common\xa2\x02\x03CXX\xaa\x02\tCommon.V1\xca\x02\tCommon\\V1\xe2\x02\x15Common\\V1\\GPBMetadata\xea\x02\n" +
+	"Common::V1b\x06proto3"
 
 var (
 	file_common_v1_user_proto_rawDescOnce sync.Once

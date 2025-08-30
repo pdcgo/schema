@@ -1,0 +1,47 @@
+syntax = "proto3";
+package accounting_iface.v1;
+
+// import "common/v1/common.proto";
+
+option go_package = "github.com/pdcgo/schema/services/accounting_iface/v1;accounting_iface";
+
+service TransferService {
+  rpc TransferAccountList(TransferAccountListRequest) returns (TransferAccountListResponse);
+  // masih belum fix data modelnya
+  rpc TransferCreate(TransferCreateRequest) returns (TransferCreateResponse);
+  rpc TransferList(TransferListRequest) returns (TransferListResponse);
+}
+
+message TransferAccount {
+  uint64 id = 1;
+  string name = 2;
+  string number_id = 3;
+}
+
+message TransferAccountListRequest {
+  uint64 team_id = 1;
+}
+
+message TransferAccountListResponse {
+  repeated TransferAccount data = 1;
+}
+
+message TransferListRequest {
+  int64 start_date = 1;
+  int64 end_date = 2;
+}
+
+message TransferListResponse {
+  string message = 1;
+}
+
+message TransferCreateResponse {}
+
+message TransferCreateRequest {
+  uint64 team_id = 1;
+  uint64 from_account_id = 2;
+  uint64 to_account_id = 3;
+  double amount = 5;
+  int64 transfer_at = 6;
+  string desc = 7;
+}

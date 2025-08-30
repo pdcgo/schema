@@ -40,6 +40,7 @@ const (
 
 // UserServiceClient is a client for the common.v1.UserService service.
 type UserServiceClient interface {
+	// #### Untuk Get Data User Public
 	PublicUserIDs(context.Context, *connect.Request[v1.PublicUserIDsRequest]) (*connect.Response[v1.PublicUserIDsResponse], error)
 }
 
@@ -75,6 +76,7 @@ func (c *userServiceClient) PublicUserIDs(ctx context.Context, req *connect.Requ
 
 // UserServiceHandler is an implementation of the common.v1.UserService service.
 type UserServiceHandler interface {
+	// #### Untuk Get Data User Public
 	PublicUserIDs(context.Context, *connect.Request[v1.PublicUserIDsRequest]) (*connect.Response[v1.PublicUserIDsResponse], error)
 }
 
