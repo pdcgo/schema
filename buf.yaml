@@ -3,7 +3,6 @@ version: v2
 
 deps:
   - buf.build/bufbuild/protovalidate
-  - buf.build/srikrsna/protoc-gen-gotag
   
 name: buf.build/pdcbuild/schema
 lint:

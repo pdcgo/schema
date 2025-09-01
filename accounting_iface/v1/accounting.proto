@@ -3,7 +3,6 @@ package accounting_iface.v1;
 
 import "buf/validate/validate.proto";
 import "common/v1/common.proto";
-import "tagger/tagger.proto";
 
 option go_package = "github.com/pdcgo/schema/services/accounting_iface/v1;accounting_iface";
 
@@ -35,9 +34,10 @@ message LabelListResponse {
 
 message AccountUpdateRequest {
   uint64 team_id = 1;
-  string name = 2;
-  string number_id = 3;
-  repeated common.v1.KeyName labels = 4;
+  uint64 id = 2;
+  string name = 3;
+  string number_id = 4;
+  repeated common.v1.KeyName labels = 5;
 }
 
 message AccountUpdateResponse {}
@@ -61,12 +61,14 @@ message AccountItem {
   string name = 3;
   string number_id = 4;
   string account_type = 5;
-  repeated common.v1.KeyName labels = 6 [(tagger.tags) = "graphql:\"withNewTags,optional\""];
+  // @gotags: gorm:"-"
+  repeated common.v1.KeyName labels = 6;
 }
 
 message AccountListRequest {
-  repeated string labels = 1;
-  string keyword = 2;
+  uint64 team_id = 1;
+  repeated string labels = 2;
+  string keyword = 3;
 }
 
 message AccountListResponse {

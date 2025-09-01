@@ -8,3 +8,5 @@ require (
 	github.com/srikrsna/protoc-gen-gotag v1.0.2
 	google.golang.org/protobuf v1.36.8
 )
+
+require github.com/favadi/protoc-go-inject-tag v1.4.0 // indirect

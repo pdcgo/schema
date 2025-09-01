@@ -19,11 +19,10 @@ plugins:
   #   out: services
   #   opt:
   #     - paths=source_relative
-  # - local: protoc-gen-gotag
+  # - local: protoc-go-inject-tag
   #   out: services
   #   opt:
   #     - paths=source_relative
-  #     - gotag_out=outdir="./pkg":./pkg
 
 managed:
   enabled: true

@@ -9,7 +9,6 @@ package accounting_iface
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	v1 "github.com/pdcgo/schema/services/common/v1"
-	_ "github.com/srikrsna/protoc-gen-gotag/tagger"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -247,9 +246,10 @@ func (x *LabelListResponse) GetData() []*v1.KeyName {
 type AccountUpdateRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
-	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	NumberId      string                 `protobuf:"bytes,3,opt,name=number_id,json=numberId,proto3" json:"number_id,omitempty"`
-	Labels        []*v1.KeyName          `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty"`
+	Id            uint64                 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
+	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	NumberId      string                 `protobuf:"bytes,4,opt,name=number_id,json=numberId,proto3" json:"number_id,omitempty"`
+	Labels        []*v1.KeyName          `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -287,6 +287,13 @@ func (*AccountUpdateRequest) Descriptor() ([]byte, []int) {
 func (x *AccountUpdateRequest) GetTeamId() uint64 {
 	if x != nil {
 		return x.TeamId
+	}
+	return 0
+}
+
+func (x *AccountUpdateRequest) GetId() uint64 {
+	if x != nil {
+		return x.Id
 	}
 	return 0
 }
@@ -437,13 +444,14 @@ func (*AccountDeleteResponse) Descriptor() ([]byte, []int) {
 }
 
 type AccountItem struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	TeamId        uint64                 `protobuf:"varint,2,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
-	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	NumberId      string                 `protobuf:"bytes,4,opt,name=number_id,json=numberId,proto3" json:"number_id,omitempty"`
-	AccountType   string                 `protobuf:"bytes,5,opt,name=account_type,json=accountType,proto3" json:"account_type,omitempty"`
-	Labels        []*v1.KeyName          `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty"`
+	state       protoimpl.MessageState `protogen:"open.v1"`
+	Id          uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	TeamId      uint64                 `protobuf:"varint,2,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	Name        string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	NumberId    string                 `protobuf:"bytes,4,opt,name=number_id,json=numberId,proto3" json:"number_id,omitempty"`
+	AccountType string                 `protobuf:"bytes,5,opt,name=account_type,json=accountType,proto3" json:"account_type,omitempty"`
+	// @gotags: gorm:"-"
+	Labels        []*v1.KeyName `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" gorm:"-"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -522,8 +530,9 @@ func (x *AccountItem) GetLabels() []*v1.KeyName {
 
 type AccountListRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Labels        []string               `protobuf:"bytes,1,rep,name=labels,proto3" json:"labels,omitempty"`
-	Keyword       string                 `protobuf:"bytes,2,opt,name=keyword,proto3" json:"keyword,omitempty"`
+	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	Labels        []string               `protobuf:"bytes,2,rep,name=labels,proto3" json:"labels,omitempty"`
+	Keyword       string                 `protobuf:"bytes,3,opt,name=keyword,proto3" json:"keyword,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -556,6 +565,13 @@ func (x *AccountListRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use AccountListRequest.ProtoReflect.Descriptor instead.
 func (*AccountListRequest) Descriptor() ([]byte, []int) {
 	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *AccountListRequest) GetTeamId() uint64 {
+	if x != nil {
+		return x.TeamId
+	}
+	return 0
 }
 
 func (x *AccountListRequest) GetLabels() []string {
@@ -732,7 +748,7 @@ var File_accounting_iface_v1_accounting_proto protoreflect.FileDescriptor
 
 const file_accounting_iface_v1_accounting_proto_rawDesc = "" +
 	"\n" +
-	"$accounting_iface/v1/accounting.proto\x12\x13accounting_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x13tagger/tagger.proto\"\x18\n" +
+	"$accounting_iface/v1/accounting.proto\x12\x13accounting_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\"\x18\n" +
 	"\x16AccountTypeListRequest\"7\n" +
 	"\x0fAccountTypeItem\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x12\n" +
@@ -742,29 +758,31 @@ const file_accounting_iface_v1_accounting_proto_rawDesc = "" +
 	"\x10LabelListRequest\x12\x18\n" +
 	"\akeyword\x18\x01 \x01(\tR\akeyword\";\n" +
 	"\x11LabelListResponse\x12&\n" +
-	"\x04data\x18\x01 \x03(\v2\x12.common.v1.KeyNameR\x04data\"\x8c\x01\n" +
+	"\x04data\x18\x01 \x03(\v2\x12.common.v1.KeyNameR\x04data\"\x9c\x01\n" +
 	"\x14AccountUpdateRequest\x12\x17\n" +
-	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1b\n" +
-	"\tnumber_id\x18\x03 \x01(\tR\bnumberId\x12*\n" +
-	"\x06labels\x18\x04 \x03(\v2\x12.common.v1.KeyNameR\x06labels\"\x17\n" +
+	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12\x0e\n" +
+	"\x02id\x18\x02 \x01(\x04R\x02id\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12\x1b\n" +
+	"\tnumber_id\x18\x04 \x01(\tR\bnumberId\x12*\n" +
+	"\x06labels\x18\x05 \x03(\v2\x12.common.v1.KeyNameR\x06labels\"\x17\n" +
 	"\x15AccountUpdateResponse\"o\n" +
 	"\x14AccountDeleteRequest\x12\x1f\n" +
 	"\ateam_id\x18\x01 \x01(\x04B\x06\xbaH\x03\xc8\x01\x01R\x06teamId\x126\n" +
 	"\vaccount_ids\x18\x02 \x03(\x04B\x15\xbaH\x12\xc8\x01\x01\x92\x01\f\b\x01\x10\n" +
 	"\x18\x01\"\x042\x02 \x00R\n" +
 	"accountIds\"\x17\n" +
-	"\x15AccountDeleteResponse\"\xdb\x01\n" +
+	"\x15AccountDeleteResponse\"\xb6\x01\n" +
 	"\vAccountItem\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x17\n" +
 	"\ateam_id\x18\x02 \x01(\x04R\x06teamId\x12\x12\n" +
 	"\x04name\x18\x03 \x01(\tR\x04name\x12\x1b\n" +
 	"\tnumber_id\x18\x04 \x01(\tR\bnumberId\x12!\n" +
-	"\faccount_type\x18\x05 \x01(\tR\vaccountType\x12O\n" +
-	"\x06labels\x18\x06 \x03(\v2\x12.common.v1.KeyNameB#\x9a\x84\x9e\x03\x1egraphql:\"withNewTags,optional\"R\x06labels\"F\n" +
-	"\x12AccountListRequest\x12\x16\n" +
-	"\x06labels\x18\x01 \x03(\tR\x06labels\x12\x18\n" +
-	"\akeyword\x18\x02 \x01(\tR\akeyword\"K\n" +
+	"\faccount_type\x18\x05 \x01(\tR\vaccountType\x12*\n" +
+	"\x06labels\x18\x06 \x03(\v2\x12.common.v1.KeyNameR\x06labels\"_\n" +
+	"\x12AccountListRequest\x12\x17\n" +
+	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12\x16\n" +
+	"\x06labels\x18\x02 \x03(\tR\x06labels\x12\x18\n" +
+	"\akeyword\x18\x03 \x01(\tR\akeyword\"K\n" +
 	"\x13AccountListResponse\x124\n" +
 	"\x04data\x18\x02 \x03(\v2 .accounting_iface.v1.AccountItemR\x04data\"\xe6\x01\n" +
 	"\x14AccountCreateRequest\x12\x1f\n" +
