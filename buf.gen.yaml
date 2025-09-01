@@ -9,11 +9,21 @@ plugins:
     out: services
     opt:
       - paths=source_relative
+
+  # - remote: buf.build/pepper-iot/protoc-gen-gotag
+  #   out: services
+  #   opt:
+  #     - paths=source_relative
       # - module=github.com/pdcgo/schema
   # - remote: buf.build/bufbuild/validate-go
   #   out: services
   #   opt:
   #     - paths=source_relative
+  # - local: protoc-gen-gotag
+  #   out: services
+  #   opt:
+  #     - paths=source_relative
+  #     - gotag_out=outdir="./pkg":./pkg
 
 managed:
   enabled: true

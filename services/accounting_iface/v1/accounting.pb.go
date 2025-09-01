@@ -9,6 +9,7 @@ package accounting_iface
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	v1 "github.com/pdcgo/schema/services/common/v1"
+	_ "github.com/srikrsna/protoc-gen-gotag/tagger"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -573,7 +574,6 @@ func (x *AccountListRequest) GetKeyword() string {
 
 type AccountListResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Message       string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
 	Data          []*AccountItem         `protobuf:"bytes,2,rep,name=data,proto3" json:"data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -607,13 +607,6 @@ func (x *AccountListResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use AccountListResponse.ProtoReflect.Descriptor instead.
 func (*AccountListResponse) Descriptor() ([]byte, []int) {
 	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{11}
-}
-
-func (x *AccountListResponse) GetMessage() string {
-	if x != nil {
-		return x.Message
-	}
-	return ""
 }
 
 func (x *AccountListResponse) GetData() []*AccountItem {
@@ -739,7 +732,7 @@ var File_accounting_iface_v1_accounting_proto protoreflect.FileDescriptor
 
 const file_accounting_iface_v1_accounting_proto_rawDesc = "" +
 	"\n" +
-	"$accounting_iface/v1/accounting.proto\x12\x13accounting_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\"\x18\n" +
+	"$accounting_iface/v1/accounting.proto\x12\x13accounting_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x13tagger/tagger.proto\"\x18\n" +
 	"\x16AccountTypeListRequest\"7\n" +
 	"\x0fAccountTypeItem\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x12\n" +
@@ -761,19 +754,18 @@ const file_accounting_iface_v1_accounting_proto_rawDesc = "" +
 	"\vaccount_ids\x18\x02 \x03(\x04B\x15\xbaH\x12\xc8\x01\x01\x92\x01\f\b\x01\x10\n" +
 	"\x18\x01\"\x042\x02 \x00R\n" +
 	"accountIds\"\x17\n" +
-	"\x15AccountDeleteResponse\"\xb6\x01\n" +
+	"\x15AccountDeleteResponse\"\xdb\x01\n" +
 	"\vAccountItem\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x17\n" +
 	"\ateam_id\x18\x02 \x01(\x04R\x06teamId\x12\x12\n" +
 	"\x04name\x18\x03 \x01(\tR\x04name\x12\x1b\n" +
 	"\tnumber_id\x18\x04 \x01(\tR\bnumberId\x12!\n" +
-	"\faccount_type\x18\x05 \x01(\tR\vaccountType\x12*\n" +
-	"\x06labels\x18\x06 \x03(\v2\x12.common.v1.KeyNameR\x06labels\"F\n" +
+	"\faccount_type\x18\x05 \x01(\tR\vaccountType\x12O\n" +
+	"\x06labels\x18\x06 \x03(\v2\x12.common.v1.KeyNameB#\x9a\x84\x9e\x03\x1egraphql:\"withNewTags,optional\"R\x06labels\"F\n" +
 	"\x12AccountListRequest\x12\x16\n" +
 	"\x06labels\x18\x01 \x03(\tR\x06labels\x12\x18\n" +
-	"\akeyword\x18\x02 \x01(\tR\akeyword\"e\n" +
-	"\x13AccountListResponse\x12\x18\n" +
-	"\amessage\x18\x01 \x01(\tR\amessage\x124\n" +
+	"\akeyword\x18\x02 \x01(\tR\akeyword\"K\n" +
+	"\x13AccountListResponse\x124\n" +
 	"\x04data\x18\x02 \x03(\v2 .accounting_iface.v1.AccountItemR\x04data\"\xe6\x01\n" +
 	"\x14AccountCreateRequest\x12\x1f\n" +
 	"\ateam_id\x18\x01 \x01(\x04B\x06\xbaH\x03\xc8\x01\x01R\x06teamId\x12\x1e\n" +
