@@ -3,6 +3,7 @@ REM ==============================================
 REM Step 1: Run buf generate
 REM ==============================================
 echo Running buf generate...
+buf lint
 buf generate
 if %ERRORLEVEL% neq 0 (
     echo buf generate failed!

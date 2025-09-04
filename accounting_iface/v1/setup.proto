@@ -1,0 +1,27 @@
+syntax = "proto3";
+package accounting_iface.v1;
+
+// import "common/v1/common.proto";
+import "buf/validate/validate.proto";
+
+option go_package = "github.com/pdcgo/schema/services/accounting_iface/v1;accounting_iface";
+
+service AccountingSetupService {
+  rpc Setup(SetupRequest) returns (stream SetupResponse);
+}
+
+message SetupRequest {
+  uint64 team_id = 1 [(buf.validate.field).required = true];
+}
+
+message SetupResponse {
+  string message = 1;
+}
+
+service StreamService {
+  rpc DummyStream(stream DummyStreamRequest) returns (stream DummyStreamResponse);
+}
+message DummyStreamRequest {}
+message DummyStreamResponse {
+  string message = 1;
+}
