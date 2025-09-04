@@ -57,9 +57,9 @@ const (
 	// AccountServiceTransferCreateProcedure is the fully-qualified name of the AccountService's
 	// TransferCreate RPC.
 	AccountServiceTransferCreateProcedure = "/accounting_iface.v1.AccountService/TransferCreate"
-	// AccountServiceTransferHistoryProcedure is the fully-qualified name of the AccountService's
-	// TransferHistory RPC.
-	AccountServiceTransferHistoryProcedure = "/accounting_iface.v1.AccountService/TransferHistory"
+	// AccountServiceAccountMutationListProcedure is the fully-qualified name of the AccountService's
+	// AccountMutationList RPC.
+	AccountServiceAccountMutationListProcedure = "/accounting_iface.v1.AccountService/AccountMutationList"
 )
 
 // AccountServiceClient is a client for the accounting_iface.v1.AccountService service.
@@ -74,7 +74,7 @@ type AccountServiceClient interface {
 	AccountBalanceInit(context.Context, *connect.Request[v1.AccountBalanceInitRequest]) (*connect.Response[v1.AccountBalanceInitResponse], error)
 	// untuk transfer ke account lain
 	TransferCreate(context.Context, *connect.Request[v1.TransferCreateRequest]) (*connect.Response[v1.TransferCreateResponse], error)
-	TransferHistory(context.Context, *connect.Request[v1.TransferHistoryRequest]) (*connect.Response[v1.TransferHistoryResponse], error)
+	AccountMutationList(context.Context, *connect.Request[v1.AccountMutationListRequest]) (*connect.Response[v1.AccountMutationListResponse], error)
 }
 
 // NewAccountServiceClient constructs a client for the accounting_iface.v1.AccountService service.
@@ -136,10 +136,10 @@ func NewAccountServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			connect.WithSchema(accountServiceMethods.ByName("TransferCreate")),
 			connect.WithClientOptions(opts...),
 		),
-		transferHistory: connect.NewClient[v1.TransferHistoryRequest, v1.TransferHistoryResponse](
+		accountMutationList: connect.NewClient[v1.AccountMutationListRequest, v1.AccountMutationListResponse](
 			httpClient,
-			baseURL+AccountServiceTransferHistoryProcedure,
-			connect.WithSchema(accountServiceMethods.ByName("TransferHistory")),
+			baseURL+AccountServiceAccountMutationListProcedure,
+			connect.WithSchema(accountServiceMethods.ByName("AccountMutationList")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -147,15 +147,15 @@ func NewAccountServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 
 // accountServiceClient implements AccountServiceClient.
 type accountServiceClient struct {
-	accountCreate      *connect.Client[v1.AccountCreateRequest, v1.AccountCreateResponse]
-	accountList        *connect.Client[v1.AccountListRequest, v1.AccountListResponse]
-	accountDelete      *connect.Client[v1.AccountDeleteRequest, v1.AccountDeleteResponse]
-	accountUpdate      *connect.Client[v1.AccountUpdateRequest, v1.AccountUpdateResponse]
-	labelList          *connect.Client[v1.LabelListRequest, v1.LabelListResponse]
-	accountTypeList    *connect.Client[v1.AccountTypeListRequest, v1.AccountTypeListResponse]
-	accountBalanceInit *connect.Client[v1.AccountBalanceInitRequest, v1.AccountBalanceInitResponse]
-	transferCreate     *connect.Client[v1.TransferCreateRequest, v1.TransferCreateResponse]
-	transferHistory    *connect.Client[v1.TransferHistoryRequest, v1.TransferHistoryResponse]
+	accountCreate       *connect.Client[v1.AccountCreateRequest, v1.AccountCreateResponse]
+	accountList         *connect.Client[v1.AccountListRequest, v1.AccountListResponse]
+	accountDelete       *connect.Client[v1.AccountDeleteRequest, v1.AccountDeleteResponse]
+	accountUpdate       *connect.Client[v1.AccountUpdateRequest, v1.AccountUpdateResponse]
+	labelList           *connect.Client[v1.LabelListRequest, v1.LabelListResponse]
+	accountTypeList     *connect.Client[v1.AccountTypeListRequest, v1.AccountTypeListResponse]
+	accountBalanceInit  *connect.Client[v1.AccountBalanceInitRequest, v1.AccountBalanceInitResponse]
+	transferCreate      *connect.Client[v1.TransferCreateRequest, v1.TransferCreateResponse]
+	accountMutationList *connect.Client[v1.AccountMutationListRequest, v1.AccountMutationListResponse]
 }
 
 // AccountCreate calls accounting_iface.v1.AccountService.AccountCreate.
@@ -198,9 +198,9 @@ func (c *accountServiceClient) TransferCreate(ctx context.Context, req *connect.
 	return c.transferCreate.CallUnary(ctx, req)
 }
 
-// TransferHistory calls accounting_iface.v1.AccountService.TransferHistory.
-func (c *accountServiceClient) TransferHistory(ctx context.Context, req *connect.Request[v1.TransferHistoryRequest]) (*connect.Response[v1.TransferHistoryResponse], error) {
-	return c.transferHistory.CallUnary(ctx, req)
+// AccountMutationList calls accounting_iface.v1.AccountService.AccountMutationList.
+func (c *accountServiceClient) AccountMutationList(ctx context.Context, req *connect.Request[v1.AccountMutationListRequest]) (*connect.Response[v1.AccountMutationListResponse], error) {
+	return c.accountMutationList.CallUnary(ctx, req)
 }
 
 // AccountServiceHandler is an implementation of the accounting_iface.v1.AccountService service.
@@ -215,7 +215,7 @@ type AccountServiceHandler interface {
 	AccountBalanceInit(context.Context, *connect.Request[v1.AccountBalanceInitRequest]) (*connect.Response[v1.AccountBalanceInitResponse], error)
 	// untuk transfer ke account lain
 	TransferCreate(context.Context, *connect.Request[v1.TransferCreateRequest]) (*connect.Response[v1.TransferCreateResponse], error)
-	TransferHistory(context.Context, *connect.Request[v1.TransferHistoryRequest]) (*connect.Response[v1.TransferHistoryResponse], error)
+	AccountMutationList(context.Context, *connect.Request[v1.AccountMutationListRequest]) (*connect.Response[v1.AccountMutationListResponse], error)
 }
 
 // NewAccountServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -273,10 +273,10 @@ func NewAccountServiceHandler(svc AccountServiceHandler, opts ...connect.Handler
 		connect.WithSchema(accountServiceMethods.ByName("TransferCreate")),
 		connect.WithHandlerOptions(opts...),
 	)
-	accountServiceTransferHistoryHandler := connect.NewUnaryHandler(
-		AccountServiceTransferHistoryProcedure,
-		svc.TransferHistory,
-		connect.WithSchema(accountServiceMethods.ByName("TransferHistory")),
+	accountServiceAccountMutationListHandler := connect.NewUnaryHandler(
+		AccountServiceAccountMutationListProcedure,
+		svc.AccountMutationList,
+		connect.WithSchema(accountServiceMethods.ByName("AccountMutationList")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/accounting_iface.v1.AccountService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -297,8 +297,8 @@ func NewAccountServiceHandler(svc AccountServiceHandler, opts ...connect.Handler
 			accountServiceAccountBalanceInitHandler.ServeHTTP(w, r)
 		case AccountServiceTransferCreateProcedure:
 			accountServiceTransferCreateHandler.ServeHTTP(w, r)
-		case AccountServiceTransferHistoryProcedure:
-			accountServiceTransferHistoryHandler.ServeHTTP(w, r)
+		case AccountServiceAccountMutationListProcedure:
+			accountServiceAccountMutationListHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -340,6 +340,6 @@ func (UnimplementedAccountServiceHandler) TransferCreate(context.Context, *conne
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("accounting_iface.v1.AccountService.TransferCreate is not implemented"))
 }
 
-func (UnimplementedAccountServiceHandler) TransferHistory(context.Context, *connect.Request[v1.TransferHistoryRequest]) (*connect.Response[v1.TransferHistoryResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("accounting_iface.v1.AccountService.TransferHistory is not implemented"))
+func (UnimplementedAccountServiceHandler) AccountMutationList(context.Context, *connect.Request[v1.AccountMutationListRequest]) (*connect.Response[v1.AccountMutationListResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("accounting_iface.v1.AccountService.AccountMutationList is not implemented"))
 }

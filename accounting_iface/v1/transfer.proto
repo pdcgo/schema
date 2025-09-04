@@ -1,6 +1,8 @@
 syntax = "proto3";
 package accounting_iface.v1;
 
+// import "buf/validate/validate.proto";
+
 option go_package = "github.com/pdcgo/schema/services/accounting_iface/v1;accounting_iface";
 
 // service TransferService {
@@ -19,10 +21,13 @@ option go_package = "github.com/pdcgo/schema/services/accounting_iface/v1;accoun
 // message TransferCreateResponse {}
 
 // message TransferCreateRequest {
-//   uint64 team_id = 1;
-//   uint64 from_account_id = 2;
-//   uint64 to_account_id = 3;
-//   double amount = 5;
-//   int64 transfer_at = 6;
-//   string desc = 7;
+//   uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0]; // required > 0
+//   uint64 from_account_id = 2 [(buf.validate.field).uint64.gt = 0]; // required > 0
+//   uint64 to_account_id = 3 [(buf.validate.field).uint64.gt = 0]; // required > 0
+
+//   double amount = 5 [(buf.validate.field).double.gt = 0 /* must be positive */];
+
+//   int64 transfer_at = 6 [(buf.validate.field).int64.gt = 0 /* required timestamp */];
+
+//   string desc = 7 [(buf.validate.field).string = {max_len: 1024}];
 // }
