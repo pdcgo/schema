@@ -1,6 +1,7 @@
 syntax = "proto3";
 package accounting_iface.v1;
 
+import "buf/validate/validate.proto";
 import "common/v1/common.proto";
 
 option go_package = "github.com/pdcgo/schema/services/accounting_iface/v1;accounting_iface";
@@ -12,20 +13,34 @@ service LedgerService {
 }
 
 message EntryListExportRequest {
-  uint64 team_id = 1;
-  string account_key = 2;
-  common.v1.TimeFilter time_range = 3;
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  string account_key = 2 [(buf.validate.field).string.min_len = 1];
+  common.v1.TimeFilter time_range = 3 [(buf.validate.field).required = true];
 }
 
 message EntryListExportResponse {
-  string download_path = 1;
-  double progress = 2;
+  string message = 1;
+  int64 offset = 2;
+  int64 total = 3;
+  bytes data = 4;
+}
+
+enum EntryFieldSort {
+  ENTRY_FIELD_SORT_UNSPECIFIED = 0;
+  ENTRY_FIELD_SORT_ENTRYTIME = 1;
+}
+
+message EntryListSort {
+  EntryFieldSort field = 1;
+  common.v1.SortType type = 2;
 }
 
 message EntryListRequest {
-  uint64 team_id = 1;
-  string account_key = 2;
-  common.v1.TimeFilter time_range = 3;
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  string account_key = 2 [(buf.validate.field).string.min_len = 1];
+  common.v1.TimeFilter time_range = 3 [(buf.validate.field).required = true];
+  common.v1.PageFilter page = 4 [(buf.validate.field).required = true];
+  EntryListSort sort = 5;
 }
 
 message EntryAccount {
@@ -38,10 +53,7 @@ message EntryAccount {
 message EntryItem {
   uint64 id = 1;
   uint64 account_id = 2;
-
-  int64 at = 3;
-  int64 created_at = 4;
-
+  int64 entry_time = 3;
   string desc = 5;
   double debit = 6;
   double credit = 7;
@@ -55,7 +67,9 @@ message EntryListResponse {
   common.v1.PageInfo page_info = 2;
 }
 
-message AccountKeyListRequest {}
+message AccountKeyListRequest {
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+}
 message AccountKeyListResponse {
   repeated string keys = 1;
 }

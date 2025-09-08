@@ -7,6 +7,7 @@
 package accounting_iface
 
 import (
+	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	v1 "github.com/pdcgo/schema/services/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -21,6 +22,52 @@ const (
 	// Verify that runtime/protoimpl is sufficiently up-to-date.
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
+
+type EntryFieldSort int32
+
+const (
+	EntryFieldSort_ENTRY_FIELD_SORT_UNSPECIFIED EntryFieldSort = 0
+	EntryFieldSort_ENTRY_FIELD_SORT_ENTRYTIME   EntryFieldSort = 1
+)
+
+// Enum value maps for EntryFieldSort.
+var (
+	EntryFieldSort_name = map[int32]string{
+		0: "ENTRY_FIELD_SORT_UNSPECIFIED",
+		1: "ENTRY_FIELD_SORT_ENTRYTIME",
+	}
+	EntryFieldSort_value = map[string]int32{
+		"ENTRY_FIELD_SORT_UNSPECIFIED": 0,
+		"ENTRY_FIELD_SORT_ENTRYTIME":   1,
+	}
+)
+
+func (x EntryFieldSort) Enum() *EntryFieldSort {
+	p := new(EntryFieldSort)
+	*p = x
+	return p
+}
+
+func (x EntryFieldSort) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (EntryFieldSort) Descriptor() protoreflect.EnumDescriptor {
+	return file_accounting_iface_v1_ledger_proto_enumTypes[0].Descriptor()
+}
+
+func (EntryFieldSort) Type() protoreflect.EnumType {
+	return &file_accounting_iface_v1_ledger_proto_enumTypes[0]
+}
+
+func (x EntryFieldSort) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use EntryFieldSort.Descriptor instead.
+func (EntryFieldSort) EnumDescriptor() ([]byte, []int) {
+	return file_accounting_iface_v1_ledger_proto_rawDescGZIP(), []int{0}
+}
 
 type EntryListExportRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -84,8 +131,10 @@ func (x *EntryListExportRequest) GetTimeRange() *v1.TimeFilter {
 
 type EntryListExportResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	DownloadPath  string                 `protobuf:"bytes,1,opt,name=download_path,json=downloadPath,proto3" json:"download_path,omitempty"`
-	Progress      float64                `protobuf:"fixed64,2,opt,name=progress,proto3" json:"progress,omitempty"`
+	Message       string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
+	Offset        int64                  `protobuf:"varint,2,opt,name=offset,proto3" json:"offset,omitempty"`
+	Total         int64                  `protobuf:"varint,3,opt,name=total,proto3" json:"total,omitempty"`
+	Data          []byte                 `protobuf:"bytes,4,opt,name=data,proto3" json:"data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -120,18 +169,84 @@ func (*EntryListExportResponse) Descriptor() ([]byte, []int) {
 	return file_accounting_iface_v1_ledger_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *EntryListExportResponse) GetDownloadPath() string {
+func (x *EntryListExportResponse) GetMessage() string {
 	if x != nil {
-		return x.DownloadPath
+		return x.Message
 	}
 	return ""
 }
 
-func (x *EntryListExportResponse) GetProgress() float64 {
+func (x *EntryListExportResponse) GetOffset() int64 {
 	if x != nil {
-		return x.Progress
+		return x.Offset
 	}
 	return 0
+}
+
+func (x *EntryListExportResponse) GetTotal() int64 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+func (x *EntryListExportResponse) GetData() []byte {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+type EntryListSort struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Field         EntryFieldSort         `protobuf:"varint,1,opt,name=field,proto3,enum=accounting_iface.v1.EntryFieldSort" json:"field,omitempty"`
+	Type          v1.SortType            `protobuf:"varint,2,opt,name=type,proto3,enum=common.v1.SortType" json:"type,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EntryListSort) Reset() {
+	*x = EntryListSort{}
+	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EntryListSort) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EntryListSort) ProtoMessage() {}
+
+func (x *EntryListSort) ProtoReflect() protoreflect.Message {
+	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EntryListSort.ProtoReflect.Descriptor instead.
+func (*EntryListSort) Descriptor() ([]byte, []int) {
+	return file_accounting_iface_v1_ledger_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *EntryListSort) GetField() EntryFieldSort {
+	if x != nil {
+		return x.Field
+	}
+	return EntryFieldSort_ENTRY_FIELD_SORT_UNSPECIFIED
+}
+
+func (x *EntryListSort) GetType() v1.SortType {
+	if x != nil {
+		return x.Type
+	}
+	return v1.SortType(0)
 }
 
 type EntryListRequest struct {
@@ -139,13 +254,15 @@ type EntryListRequest struct {
 	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
 	AccountKey    string                 `protobuf:"bytes,2,opt,name=account_key,json=accountKey,proto3" json:"account_key,omitempty"`
 	TimeRange     *v1.TimeFilter         `protobuf:"bytes,3,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
+	Page          *v1.PageFilter         `protobuf:"bytes,4,opt,name=page,proto3" json:"page,omitempty"`
+	Sort          *EntryListSort         `protobuf:"bytes,5,opt,name=sort,proto3" json:"sort,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *EntryListRequest) Reset() {
 	*x = EntryListRequest{}
-	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[2]
+	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -157,7 +274,7 @@ func (x *EntryListRequest) String() string {
 func (*EntryListRequest) ProtoMessage() {}
 
 func (x *EntryListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[2]
+	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -170,7 +287,7 @@ func (x *EntryListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EntryListRequest.ProtoReflect.Descriptor instead.
 func (*EntryListRequest) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_ledger_proto_rawDescGZIP(), []int{2}
+	return file_accounting_iface_v1_ledger_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *EntryListRequest) GetTeamId() uint64 {
@@ -194,6 +311,20 @@ func (x *EntryListRequest) GetTimeRange() *v1.TimeFilter {
 	return nil
 }
 
+func (x *EntryListRequest) GetPage() *v1.PageFilter {
+	if x != nil {
+		return x.Page
+	}
+	return nil
+}
+
+func (x *EntryListRequest) GetSort() *EntryListSort {
+	if x != nil {
+		return x.Sort
+	}
+	return nil
+}
+
 type EntryAccount struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -206,7 +337,7 @@ type EntryAccount struct {
 
 func (x *EntryAccount) Reset() {
 	*x = EntryAccount{}
-	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[3]
+	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -218,7 +349,7 @@ func (x *EntryAccount) String() string {
 func (*EntryAccount) ProtoMessage() {}
 
 func (x *EntryAccount) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[3]
+	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -231,7 +362,7 @@ func (x *EntryAccount) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EntryAccount.ProtoReflect.Descriptor instead.
 func (*EntryAccount) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_ledger_proto_rawDescGZIP(), []int{3}
+	return file_accounting_iface_v1_ledger_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *EntryAccount) GetId() uint64 {
@@ -266,8 +397,7 @@ type EntryItem struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	AccountId     uint64                 `protobuf:"varint,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	At            int64                  `protobuf:"varint,3,opt,name=at,proto3" json:"at,omitempty"`
-	CreatedAt     int64                  `protobuf:"varint,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	EntryTime     int64                  `protobuf:"varint,3,opt,name=entry_time,json=entryTime,proto3" json:"entry_time,omitempty"`
 	Desc          string                 `protobuf:"bytes,5,opt,name=desc,proto3" json:"desc,omitempty"`
 	Debit         float64                `protobuf:"fixed64,6,opt,name=debit,proto3" json:"debit,omitempty"`
 	Credit        float64                `protobuf:"fixed64,7,opt,name=credit,proto3" json:"credit,omitempty"`
@@ -279,7 +409,7 @@ type EntryItem struct {
 
 func (x *EntryItem) Reset() {
 	*x = EntryItem{}
-	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[4]
+	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -291,7 +421,7 @@ func (x *EntryItem) String() string {
 func (*EntryItem) ProtoMessage() {}
 
 func (x *EntryItem) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[4]
+	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -304,7 +434,7 @@ func (x *EntryItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EntryItem.ProtoReflect.Descriptor instead.
 func (*EntryItem) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_ledger_proto_rawDescGZIP(), []int{4}
+	return file_accounting_iface_v1_ledger_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *EntryItem) GetId() uint64 {
@@ -321,16 +451,9 @@ func (x *EntryItem) GetAccountId() uint64 {
 	return 0
 }
 
-func (x *EntryItem) GetAt() int64 {
+func (x *EntryItem) GetEntryTime() int64 {
 	if x != nil {
-		return x.At
-	}
-	return 0
-}
-
-func (x *EntryItem) GetCreatedAt() int64 {
-	if x != nil {
-		return x.CreatedAt
+		return x.EntryTime
 	}
 	return 0
 }
@@ -380,7 +503,7 @@ type EntryListResponse struct {
 
 func (x *EntryListResponse) Reset() {
 	*x = EntryListResponse{}
-	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[5]
+	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -392,7 +515,7 @@ func (x *EntryListResponse) String() string {
 func (*EntryListResponse) ProtoMessage() {}
 
 func (x *EntryListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[5]
+	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -405,7 +528,7 @@ func (x *EntryListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EntryListResponse.ProtoReflect.Descriptor instead.
 func (*EntryListResponse) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_ledger_proto_rawDescGZIP(), []int{5}
+	return file_accounting_iface_v1_ledger_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *EntryListResponse) GetData() []*EntryItem {
@@ -424,13 +547,14 @@ func (x *EntryListResponse) GetPageInfo() *v1.PageInfo {
 
 type AccountKeyListRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *AccountKeyListRequest) Reset() {
 	*x = AccountKeyListRequest{}
-	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[6]
+	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -442,7 +566,7 @@ func (x *AccountKeyListRequest) String() string {
 func (*AccountKeyListRequest) ProtoMessage() {}
 
 func (x *AccountKeyListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[6]
+	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -455,7 +579,14 @@ func (x *AccountKeyListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccountKeyListRequest.ProtoReflect.Descriptor instead.
 func (*AccountKeyListRequest) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_ledger_proto_rawDescGZIP(), []int{6}
+	return file_accounting_iface_v1_ledger_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *AccountKeyListRequest) GetTeamId() uint64 {
+	if x != nil {
+		return x.TeamId
+	}
+	return 0
 }
 
 type AccountKeyListResponse struct {
@@ -467,7 +598,7 @@ type AccountKeyListResponse struct {
 
 func (x *AccountKeyListResponse) Reset() {
 	*x = AccountKeyListResponse{}
-	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[7]
+	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -479,7 +610,7 @@ func (x *AccountKeyListResponse) String() string {
 func (*AccountKeyListResponse) ProtoMessage() {}
 
 func (x *AccountKeyListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[7]
+	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -492,7 +623,7 @@ func (x *AccountKeyListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccountKeyListResponse.ProtoReflect.Descriptor instead.
 func (*AccountKeyListResponse) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_ledger_proto_rawDescGZIP(), []int{7}
+	return file_accounting_iface_v1_ledger_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *AccountKeyListResponse) GetKeys() []string {
@@ -506,35 +637,41 @@ var File_accounting_iface_v1_ledger_proto protoreflect.FileDescriptor
 
 const file_accounting_iface_v1_ledger_proto_rawDesc = "" +
 	"\n" +
-	" accounting_iface/v1/ledger.proto\x12\x13accounting_iface.v1\x1a\x16common/v1/common.proto\"\x88\x01\n" +
-	"\x16EntryListExportRequest\x12\x17\n" +
-	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12\x1f\n" +
-	"\vaccount_key\x18\x02 \x01(\tR\n" +
-	"accountKey\x124\n" +
+	" accounting_iface/v1/ledger.proto\x12\x13accounting_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\"\xa2\x01\n" +
+	"\x16EntryListExportRequest\x12 \n" +
+	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12(\n" +
+	"\vaccount_key\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\n" +
+	"accountKey\x12<\n" +
 	"\n" +
-	"time_range\x18\x03 \x01(\v2\x15.common.v1.TimeFilterR\ttimeRange\"Z\n" +
-	"\x17EntryListExportResponse\x12#\n" +
-	"\rdownload_path\x18\x01 \x01(\tR\fdownloadPath\x12\x1a\n" +
-	"\bprogress\x18\x02 \x01(\x01R\bprogress\"\x82\x01\n" +
-	"\x10EntryListRequest\x12\x17\n" +
-	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12\x1f\n" +
-	"\vaccount_key\x18\x02 \x01(\tR\n" +
-	"accountKey\x124\n" +
+	"time_range\x18\x03 \x01(\v2\x15.common.v1.TimeFilterB\x06\xbaH\x03\xc8\x01\x01R\ttimeRange\"u\n" +
+	"\x17EntryListExportResponse\x12\x18\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage\x12\x16\n" +
+	"\x06offset\x18\x02 \x01(\x03R\x06offset\x12\x14\n" +
+	"\x05total\x18\x03 \x01(\x03R\x05total\x12\x12\n" +
+	"\x04data\x18\x04 \x01(\fR\x04data\"s\n" +
+	"\rEntryListSort\x129\n" +
+	"\x05field\x18\x01 \x01(\x0e2#.accounting_iface.v1.EntryFieldSortR\x05field\x12'\n" +
+	"\x04type\x18\x02 \x01(\x0e2\x13.common.v1.SortTypeR\x04type\"\x87\x02\n" +
+	"\x10EntryListRequest\x12 \n" +
+	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12(\n" +
+	"\vaccount_key\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\n" +
+	"accountKey\x12<\n" +
 	"\n" +
-	"time_range\x18\x03 \x01(\v2\x15.common.v1.TimeFilterR\ttimeRange\"l\n" +
+	"time_range\x18\x03 \x01(\v2\x15.common.v1.TimeFilterB\x06\xbaH\x03\xc8\x01\x01R\ttimeRange\x121\n" +
+	"\x04page\x18\x04 \x01(\v2\x15.common.v1.PageFilterB\x06\xbaH\x03\xc8\x01\x01R\x04page\x126\n" +
+	"\x04sort\x18\x05 \x01(\v2\".accounting_iface.v1.EntryListSortR\x04sort\"l\n" +
 	"\fEntryAccount\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x17\n" +
 	"\ateam_id\x18\x02 \x01(\x04R\x06teamId\x12\x1f\n" +
 	"\vaccount_key\x18\x03 \x01(\tR\n" +
 	"accountKey\x12\x12\n" +
-	"\x04name\x18\x04 \x01(\tR\x04name\"\x82\x02\n" +
+	"\x04name\x18\x04 \x01(\tR\x04name\"\xf2\x01\n" +
 	"\tEntryItem\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x1d\n" +
 	"\n" +
-	"account_id\x18\x02 \x01(\x04R\taccountId\x12\x0e\n" +
-	"\x02at\x18\x03 \x01(\x03R\x02at\x12\x1d\n" +
+	"account_id\x18\x02 \x01(\x04R\taccountId\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\x04 \x01(\x03R\tcreatedAt\x12\x12\n" +
+	"entry_time\x18\x03 \x01(\x03R\tentryTime\x12\x12\n" +
 	"\x04desc\x18\x05 \x01(\tR\x04desc\x12\x14\n" +
 	"\x05debit\x18\x06 \x01(\x01R\x05debit\x12\x16\n" +
 	"\x06credit\x18\a \x01(\x01R\x06credit\x12\x18\n" +
@@ -542,10 +679,14 @@ const file_accounting_iface_v1_ledger_proto_rawDesc = "" +
 	"\aaccount\x18\t \x01(\v2!.accounting_iface.v1.EntryAccountR\aaccount\"y\n" +
 	"\x11EntryListResponse\x122\n" +
 	"\x04data\x18\x01 \x03(\v2\x1e.accounting_iface.v1.EntryItemR\x04data\x120\n" +
-	"\tpage_info\x18\x02 \x01(\v2\x13.common.v1.PageInfoR\bpageInfo\"\x17\n" +
-	"\x15AccountKeyListRequest\",\n" +
+	"\tpage_info\x18\x02 \x01(\v2\x13.common.v1.PageInfoR\bpageInfo\"9\n" +
+	"\x15AccountKeyListRequest\x12 \n" +
+	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\",\n" +
 	"\x16AccountKeyListResponse\x12\x12\n" +
-	"\x04keys\x18\x01 \x03(\tR\x04keys2\xc6\x02\n" +
+	"\x04keys\x18\x01 \x03(\tR\x04keys*R\n" +
+	"\x0eEntryFieldSort\x12 \n" +
+	"\x1cENTRY_FIELD_SORT_UNSPECIFIED\x10\x00\x12\x1e\n" +
+	"\x1aENTRY_FIELD_SORT_ENTRYTIME\x10\x012\xc6\x02\n" +
 	"\rLedgerService\x12i\n" +
 	"\x0eAccountKeyList\x12*.accounting_iface.v1.AccountKeyListRequest\x1a+.accounting_iface.v1.AccountKeyListResponse\x12Z\n" +
 	"\tEntryList\x12%.accounting_iface.v1.EntryListRequest\x1a&.accounting_iface.v1.EntryListResponse\x12n\n" +
@@ -564,36 +705,45 @@ func file_accounting_iface_v1_ledger_proto_rawDescGZIP() []byte {
 	return file_accounting_iface_v1_ledger_proto_rawDescData
 }
 
-var file_accounting_iface_v1_ledger_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_accounting_iface_v1_ledger_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_accounting_iface_v1_ledger_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_accounting_iface_v1_ledger_proto_goTypes = []any{
-	(*EntryListExportRequest)(nil),  // 0: accounting_iface.v1.EntryListExportRequest
-	(*EntryListExportResponse)(nil), // 1: accounting_iface.v1.EntryListExportResponse
-	(*EntryListRequest)(nil),        // 2: accounting_iface.v1.EntryListRequest
-	(*EntryAccount)(nil),            // 3: accounting_iface.v1.EntryAccount
-	(*EntryItem)(nil),               // 4: accounting_iface.v1.EntryItem
-	(*EntryListResponse)(nil),       // 5: accounting_iface.v1.EntryListResponse
-	(*AccountKeyListRequest)(nil),   // 6: accounting_iface.v1.AccountKeyListRequest
-	(*AccountKeyListResponse)(nil),  // 7: accounting_iface.v1.AccountKeyListResponse
-	(*v1.TimeFilter)(nil),           // 8: common.v1.TimeFilter
-	(*v1.PageInfo)(nil),             // 9: common.v1.PageInfo
+	(EntryFieldSort)(0),             // 0: accounting_iface.v1.EntryFieldSort
+	(*EntryListExportRequest)(nil),  // 1: accounting_iface.v1.EntryListExportRequest
+	(*EntryListExportResponse)(nil), // 2: accounting_iface.v1.EntryListExportResponse
+	(*EntryListSort)(nil),           // 3: accounting_iface.v1.EntryListSort
+	(*EntryListRequest)(nil),        // 4: accounting_iface.v1.EntryListRequest
+	(*EntryAccount)(nil),            // 5: accounting_iface.v1.EntryAccount
+	(*EntryItem)(nil),               // 6: accounting_iface.v1.EntryItem
+	(*EntryListResponse)(nil),       // 7: accounting_iface.v1.EntryListResponse
+	(*AccountKeyListRequest)(nil),   // 8: accounting_iface.v1.AccountKeyListRequest
+	(*AccountKeyListResponse)(nil),  // 9: accounting_iface.v1.AccountKeyListResponse
+	(*v1.TimeFilter)(nil),           // 10: common.v1.TimeFilter
+	(v1.SortType)(0),                // 11: common.v1.SortType
+	(*v1.PageFilter)(nil),           // 12: common.v1.PageFilter
+	(*v1.PageInfo)(nil),             // 13: common.v1.PageInfo
 }
 var file_accounting_iface_v1_ledger_proto_depIdxs = []int32{
-	8, // 0: accounting_iface.v1.EntryListExportRequest.time_range:type_name -> common.v1.TimeFilter
-	8, // 1: accounting_iface.v1.EntryListRequest.time_range:type_name -> common.v1.TimeFilter
-	3, // 2: accounting_iface.v1.EntryItem.account:type_name -> accounting_iface.v1.EntryAccount
-	4, // 3: accounting_iface.v1.EntryListResponse.data:type_name -> accounting_iface.v1.EntryItem
-	9, // 4: accounting_iface.v1.EntryListResponse.page_info:type_name -> common.v1.PageInfo
-	6, // 5: accounting_iface.v1.LedgerService.AccountKeyList:input_type -> accounting_iface.v1.AccountKeyListRequest
-	2, // 6: accounting_iface.v1.LedgerService.EntryList:input_type -> accounting_iface.v1.EntryListRequest
-	0, // 7: accounting_iface.v1.LedgerService.EntryListExport:input_type -> accounting_iface.v1.EntryListExportRequest
-	7, // 8: accounting_iface.v1.LedgerService.AccountKeyList:output_type -> accounting_iface.v1.AccountKeyListResponse
-	5, // 9: accounting_iface.v1.LedgerService.EntryList:output_type -> accounting_iface.v1.EntryListResponse
-	1, // 10: accounting_iface.v1.LedgerService.EntryListExport:output_type -> accounting_iface.v1.EntryListExportResponse
-	8, // [8:11] is the sub-list for method output_type
-	5, // [5:8] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	10, // 0: accounting_iface.v1.EntryListExportRequest.time_range:type_name -> common.v1.TimeFilter
+	0,  // 1: accounting_iface.v1.EntryListSort.field:type_name -> accounting_iface.v1.EntryFieldSort
+	11, // 2: accounting_iface.v1.EntryListSort.type:type_name -> common.v1.SortType
+	10, // 3: accounting_iface.v1.EntryListRequest.time_range:type_name -> common.v1.TimeFilter
+	12, // 4: accounting_iface.v1.EntryListRequest.page:type_name -> common.v1.PageFilter
+	3,  // 5: accounting_iface.v1.EntryListRequest.sort:type_name -> accounting_iface.v1.EntryListSort
+	5,  // 6: accounting_iface.v1.EntryItem.account:type_name -> accounting_iface.v1.EntryAccount
+	6,  // 7: accounting_iface.v1.EntryListResponse.data:type_name -> accounting_iface.v1.EntryItem
+	13, // 8: accounting_iface.v1.EntryListResponse.page_info:type_name -> common.v1.PageInfo
+	8,  // 9: accounting_iface.v1.LedgerService.AccountKeyList:input_type -> accounting_iface.v1.AccountKeyListRequest
+	4,  // 10: accounting_iface.v1.LedgerService.EntryList:input_type -> accounting_iface.v1.EntryListRequest
+	1,  // 11: accounting_iface.v1.LedgerService.EntryListExport:input_type -> accounting_iface.v1.EntryListExportRequest
+	9,  // 12: accounting_iface.v1.LedgerService.AccountKeyList:output_type -> accounting_iface.v1.AccountKeyListResponse
+	7,  // 13: accounting_iface.v1.LedgerService.EntryList:output_type -> accounting_iface.v1.EntryListResponse
+	2,  // 14: accounting_iface.v1.LedgerService.EntryListExport:output_type -> accounting_iface.v1.EntryListExportResponse
+	12, // [12:15] is the sub-list for method output_type
+	9,  // [9:12] is the sub-list for method input_type
+	9,  // [9:9] is the sub-list for extension type_name
+	9,  // [9:9] is the sub-list for extension extendee
+	0,  // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_accounting_iface_v1_ledger_proto_init() }
@@ -606,13 +756,14 @@ func file_accounting_iface_v1_ledger_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_accounting_iface_v1_ledger_proto_rawDesc), len(file_accounting_iface_v1_ledger_proto_rawDesc)),
-			NumEnums:      0,
-			NumMessages:   8,
+			NumEnums:      1,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
 		GoTypes:           file_accounting_iface_v1_ledger_proto_goTypes,
 		DependencyIndexes: file_accounting_iface_v1_ledger_proto_depIdxs,
+		EnumInfos:         file_accounting_iface_v1_ledger_proto_enumTypes,
 		MessageInfos:      file_accounting_iface_v1_ledger_proto_msgTypes,
 	}.Build()
 	File_accounting_iface_v1_ledger_proto = out.File

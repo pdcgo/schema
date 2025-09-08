@@ -74,6 +74,55 @@ func (TimeType) EnumDescriptor() ([]byte, []int) {
 	return file_common_v1_common_proto_rawDescGZIP(), []int{0}
 }
 
+type SortType int32
+
+const (
+	SortType_SORT_TYPE_UNSPECIFIED SortType = 0
+	SortType_SORT_TYPE_DESC        SortType = 1
+	SortType_SORT_TYPE_ASC         SortType = 2
+)
+
+// Enum value maps for SortType.
+var (
+	SortType_name = map[int32]string{
+		0: "SORT_TYPE_UNSPECIFIED",
+		1: "SORT_TYPE_DESC",
+		2: "SORT_TYPE_ASC",
+	}
+	SortType_value = map[string]int32{
+		"SORT_TYPE_UNSPECIFIED": 0,
+		"SORT_TYPE_DESC":        1,
+		"SORT_TYPE_ASC":         2,
+	}
+)
+
+func (x SortType) Enum() *SortType {
+	p := new(SortType)
+	*p = x
+	return p
+}
+
+func (x SortType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (SortType) Descriptor() protoreflect.EnumDescriptor {
+	return file_common_v1_common_proto_enumTypes[1].Descriptor()
+}
+
+func (SortType) Type() protoreflect.EnumType {
+	return &file_common_v1_common_proto_enumTypes[1]
+}
+
+func (x SortType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use SortType.Descriptor instead.
+func (SortType) EnumDescriptor() ([]byte, []int) {
+	return file_common_v1_common_proto_rawDescGZIP(), []int{1}
+}
+
 type TimeKeyValueMetric struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Time          int64                  `protobuf:"varint,1,opt,name=time,proto3" json:"time,omitempty"`
@@ -491,16 +540,17 @@ const file_common_v1_common_proto_rawDesc = "" +
 	"\x03key\x18\x01 \x01(\tB\n" +
 	"\xbaH\a\xc8\x01\x01r\x02\x18dR\x03key\x12\x1e\n" +
 	"\x04name\x18\x02 \x01(\tB\n" +
-	"\xbaH\a\xc8\x01\x01r\x02\x18dR\x04name\"F\n" +
+	"\xbaH\a\xc8\x01\x01r\x02\x18dR\x04name\"O\n" +
 	"\n" +
-	"TimeFilter\x12\x1d\n" +
+	"TimeFilter\x12&\n" +
 	"\n" +
-	"start_date\x18\x01 \x01(\x03R\tstartDate\x12\x19\n" +
-	"\bend_date\x18\x02 \x01(\x03R\aendDate\"6\n" +
+	"start_date\x18\x01 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\tstartDate\x12\x19\n" +
+	"\bend_date\x18\x02 \x01(\x03R\aendDate\"K\n" +
 	"\n" +
-	"PageFilter\x12\x12\n" +
-	"\x04page\x18\x01 \x01(\x03R\x04page\x12\x14\n" +
-	"\x05limit\x18\x02 \x01(\x03R\x05limit\"m\n" +
+	"PageFilter\x12\x1b\n" +
+	"\x04page\x18\x01 \x01(\x03B\a\xbaH\x04\"\x02(\x01R\x04page\x12 \n" +
+	"\x05limit\x18\x02 \x01(\x03B\n" +
+	"\xbaH\a\"\x05\x18\xe8\a(\x01R\x05limit\"m\n" +
 	"\bPageInfo\x12!\n" +
 	"\fcurrent_page\x18\x01 \x01(\x03R\vcurrentPage\x12\x1d\n" +
 	"\n" +
@@ -511,7 +561,11 @@ const file_common_v1_common_proto_rawDesc = "" +
 	"\x15TIME_TYPE_UNSPECIFIED\x10\x00\x12\x13\n" +
 	"\x0fTIME_TYPE_DAILY\x10\x01\x12\x15\n" +
 	"\x11TIME_TYPE_MONTHLY\x10\x02\x12\x14\n" +
-	"\x10TIME_TYPE_YEARLY\x10\x03B\x94\x01\n" +
+	"\x10TIME_TYPE_YEARLY\x10\x03*L\n" +
+	"\bSortType\x12\x19\n" +
+	"\x15SORT_TYPE_UNSPECIFIED\x10\x00\x12\x12\n" +
+	"\x0eSORT_TYPE_DESC\x10\x01\x12\x11\n" +
+	"\rSORT_TYPE_ASC\x10\x02B\x94\x01\n" +
 	"\rcom.common.v1B\vCommonProtoP\x01Z1github.com/pdcgo/schema/services/common/v1;common\xa2\x02\x03CXX\xaa\x02\tCommon.V1\xca\x02\tCommon\\V1\xe2\x02\x15Common\\V1\\GPBMetadata\xea\x02\n" +
 	"Common::V1b\x06proto3"
 
@@ -527,17 +581,18 @@ func file_common_v1_common_proto_rawDescGZIP() []byte {
 	return file_common_v1_common_proto_rawDescData
 }
 
-var file_common_v1_common_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_common_v1_common_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
 var file_common_v1_common_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_common_v1_common_proto_goTypes = []any{
 	(TimeType)(0),              // 0: common.v1.TimeType
-	(*TimeKeyValueMetric)(nil), // 1: common.v1.TimeKeyValueMetric
-	(*User)(nil),               // 2: common.v1.User
-	(*Team)(nil),               // 3: common.v1.Team
-	(*KeyName)(nil),            // 4: common.v1.KeyName
-	(*TimeFilter)(nil),         // 5: common.v1.TimeFilter
-	(*PageFilter)(nil),         // 6: common.v1.PageFilter
-	(*PageInfo)(nil),           // 7: common.v1.PageInfo
+	(SortType)(0),              // 1: common.v1.SortType
+	(*TimeKeyValueMetric)(nil), // 2: common.v1.TimeKeyValueMetric
+	(*User)(nil),               // 3: common.v1.User
+	(*Team)(nil),               // 4: common.v1.Team
+	(*KeyName)(nil),            // 5: common.v1.KeyName
+	(*TimeFilter)(nil),         // 6: common.v1.TimeFilter
+	(*PageFilter)(nil),         // 7: common.v1.PageFilter
+	(*PageInfo)(nil),           // 8: common.v1.PageInfo
 }
 var file_common_v1_common_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
@@ -557,7 +612,7 @@ func file_common_v1_common_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_common_v1_common_proto_rawDesc), len(file_common_v1_common_proto_rawDesc)),
-			NumEnums:      1,
+			NumEnums:      2,
 			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   0,

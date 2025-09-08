@@ -42,17 +42,26 @@ message KeyName {
 }
 
 message TimeFilter {
-  int64 start_date = 1;
+  int64 start_date = 1 [(buf.validate.field).int64.gt = 0];
   int64 end_date = 2;
 }
 
 message PageFilter {
-  int64 page = 1;
-  int64 limit = 2;
+  int64 page = 1 [(buf.validate.field).int64.gte = 1];
+  int64 limit = 2 [
+    (buf.validate.field).int64.gte = 1,
+    (buf.validate.field).int64.lte = 1000
+  ];
 }
 
 message PageInfo {
   int64 current_page = 1;
   int64 total_page = 2;
   int64 total_items = 3;
+}
+
+enum SortType {
+  SORT_TYPE_UNSPECIFIED = 0;
+  SORT_TYPE_DESC = 1;
+  SORT_TYPE_ASC = 2;
 }
