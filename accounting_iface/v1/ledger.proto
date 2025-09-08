@@ -1,0 +1,61 @@
+syntax = "proto3";
+package accounting_iface.v1;
+
+import "common/v1/common.proto";
+
+option go_package = "github.com/pdcgo/schema/services/accounting_iface/v1;accounting_iface";
+
+service LedgerService {
+  rpc AccountKeyList(AccountKeyListRequest) returns (AccountKeyListResponse);
+  rpc EntryList(EntryListRequest) returns (EntryListResponse);
+  rpc EntryListExport(EntryListExportRequest) returns (stream EntryListExportResponse);
+}
+
+message EntryListExportRequest {
+  uint64 team_id = 1;
+  string account_key = 2;
+  common.v1.TimeFilter time_range = 3;
+}
+
+message EntryListExportResponse {
+  string download_path = 1;
+  double progress = 2;
+}
+
+message EntryListRequest {
+  uint64 team_id = 1;
+  string account_key = 2;
+  common.v1.TimeFilter time_range = 3;
+}
+
+message EntryAccount {
+  uint64 id = 1;
+  uint64 team_id = 2;
+  string account_key = 3;
+  string name = 4;
+}
+
+message EntryItem {
+  uint64 id = 1;
+  uint64 account_id = 2;
+
+  int64 at = 3;
+  int64 created_at = 4;
+
+  string desc = 5;
+  double debit = 6;
+  double credit = 7;
+  double balance = 8;
+
+  EntryAccount account = 9;
+}
+
+message EntryListResponse {
+  repeated EntryItem data = 1;
+  common.v1.PageInfo page_info = 2;
+}
+
+message AccountKeyListRequest {}
+message AccountKeyListResponse {
+  repeated string keys = 1;
+}

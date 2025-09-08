@@ -1,0 +1,13 @@
+syntax = "proto3";
+package stock_iface.v1;
+
+// import "common/v1/common.proto";
+// import "buf/validate/validate.proto";
+
+option go_package = "github.com/pdcgo/schema/services/stock_iface/v1;stock_iface";
+
+service StockService {
+  // Restock
+  // accept stock
+  // return
+}

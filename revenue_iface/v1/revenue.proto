@@ -1,0 +1,63 @@
+syntax = "proto3";
+package revenue_iface.v1;
+
+// import "common/v1/common.proto";
+import "buf/validate/validate.proto";
+
+option go_package = "github.com/pdcgo/schema/services/revenue_iface/v1;revenue_iface";
+
+service RevenueService {
+  rpc OnOrder(stream OnOrderRequest) returns (OnOrderResponse);
+  rpc OrderCancel(OrderCancelRequest) returns (OrderCancelResponse);
+  // rpc OrderReturn(OrderReturnRequest) returns (OrderReturnResponse);
+  rpc Withdrawal(WithdrawalRequest) returns (WithdrawalResponse);
+  // rpc OrderAdjustment(OrderAdjustmentRequest) returns (OrderAdjustmentResponse);
+}
+
+// message OrderAdjustmentRequest {}
+// message OrderAdjustmentResponse {}
+
+message WithdrawalRequest {
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0]; // must be > 0
+  uint64 shop_id = 2 [(buf.validate.field).uint64.gt = 0]; // must be > 0
+  // uint64 order_id = 3 [(buf.validate.field).uint64.gt = 0]; // must be > 0
+  int64 at = 4 [(buf.validate.field).int64.gt = 0]; // timestamp must be > 0
+  double amount = 5 [
+    (buf.validate.field).double.gt = 0, // must be > 0
+    (buf.validate.field).double.lte = 1e12 // optional: cap max value for safety
+  ];
+}
+
+message WithdrawalResponse {}
+
+message OrderCancelRequest {
+  string ref_id = 1;
+}
+message OrderCancelResponse {}
+
+message BorrowStock {
+  uint64 team_id = 1;
+  double amount = 2;
+  double sell_amount = 3;
+}
+
+enum OrderEvent {
+  ORDER_EVENT_UNSPECIFIED = 0;
+  ORDER_EVENT_CREATED = 1;
+  ORDER_EVENT_RETURN = 3;
+}
+
+message OnOrderRequest {
+  string token = 1 [(buf.validate.field).required = true];
+  uint64 team_id = 2 [(buf.validate.field).uint64 = {gt: 0}];
+  uint64 warehouse_id = 3 [(buf.validate.field).uint64 = {gt: 0}];
+  uint64 order_id = 4 [(buf.validate.field).required = true];
+  OrderEvent event = 5 [(buf.validate.field).enum = {defined_only: true}];
+  double order_amount = 6 [(buf.validate.field).double = {gt: 0}];
+  double warehouse_fee = 7 [(buf.validate.field).double = {gte: 0}];
+  string description = 8 [(buf.validate.field).string = {max_len: 1024}];
+  repeated BorrowStock borrow_stock = 9 [(buf.validate.field).repeated = {min_items: 0}];
+  double own_stock_amount = 10 [(buf.validate.field).double = {gt: 0}];
+}
+
+message OnOrderResponse {}
