@@ -2,12 +2,117 @@ syntax = "proto3";
 package stock_iface.v1;
 
 // import "common/v1/common.proto";
-// import "buf/validate/validate.proto";
+import "buf/validate/validate.proto";
 
 option go_package = "github.com/pdcgo/schema/services/stock_iface/v1;stock_iface";
 
 service StockService {
-  // Restock
+  // inbound
+  rpc InboundCreate(InboundCreateRequest) returns (InboundCreateResponse);
+  rpc InboundUpdate(InboundUpdateRequest) returns (InboundUpdateResponse);
+  rpc InboundAccept(InboundAcceptRequest) returns (InboundAcceptResponse);
+  rpc StockAdjustment(StockAdjustmentRequest) returns (StockAdjustmentResponse);
+  rpc TransferToWarehouse(TransferToWarehouseRequest) returns (TransferToWarehouseResponse);
+
   // accept stock
   // return
 }
+
+message InboundUpdateRequest {
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0]; // must be > 0
+  uint64 warehouse_id = 2 [(buf.validate.field).uint64.gt = 0]; // must be > 0
+  uint64 ext_tx_id = 3 [(buf.validate.field).uint64.gt = 0]; // external reference, must be > 0
+
+  InboundSource source = 4 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+  PaymentMethod payment_method = 5 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+  double shipping_fee = 6;
+  repeated VariantItem products = 7;
+
+  option (buf.validate.message).cel = {
+    id: "inbound_update_mutation_required"
+    expression: "has(this.payment_method) || has(this.shipping_fee) || size(this.products) > 0"
+    message: "At least one of payment_method, shipping_fee, or products must be provided"
+  };
+}
+message InboundUpdateResponse {}
+
+enum InboundSource {
+  INBOUND_SOURCE_UNSPECIFIED = 0;
+  INBOUND_SOURCE_RESTOCK = 1;
+  INBOUND_SOURCE_RETURN = 2;
+  INBOUND_SOURCE_TRANSFER = 3;
+}
+
+enum PaymentMethod {
+  PAYMENT_METHOD_UNSPECIFIED = 0;
+  PAYMENT_METHOD_CASH = 1;
+  PAYMENT_METHOD_SHOPEEPAY = 2;
+}
+
+message VariantItem {
+  uint64 variant_id = 1 [(buf.validate.field).uint64.gt = 0]; // must be > 0
+  int64 count = 2 [(buf.validate.field).int64.gt = 0]; // must be > 0
+  double item_price = 3 [(buf.validate.field).double.gte = 0]; // must be >= 0
+}
+
+message VariantProblemItem {
+  uint64 variant_id = 1;
+  int64 count = 2;
+  double item_price = 3;
+  string reason = 4;
+}
+
+message InboundCreateRequest {
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0]; // must be > 0
+  uint64 warehouse_id = 2 [(buf.validate.field).uint64.gt = 0]; // must be > 0
+  uint64 ext_tx_id = 3 [(buf.validate.field).uint64.gt = 0]; // external reference, must be > 0
+
+  InboundSource source = 4 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+  PaymentMethod payment_method = 5 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+
+  double shipping_fee = 6 [(buf.validate.field).double.gte = 0]; // must be >= 0
+
+  repeated VariantItem products = 7 [(buf.validate.field).repeated.min_items = 1]; // must contain at least one product
+}
+
+message InboundCreateResponse {}
+
+message InboundAcceptRequest {
+  uint64 team_id = 1;
+  uint64 warehouse_id = 2;
+  uint64 ext_tx_id = 3;
+  InboundSource source = 4;
+  double warehouse_cod_fee = 5;
+  repeated VariantItem accepts = 6;
+  repeated VariantProblemItem losts = 7;
+  repeated VariantProblemItem brokens = 8;
+}
+message InboundAcceptResponse {}
+
+message StockAdjustmentRequest {
+  uint64 team_id = 1;
+  uint64 warehouse_id = 2;
+  uint64 ext_tx_id = 3;
+}
+message StockAdjustmentResponse {}
+
+message TransferToWarehouseRequest {
+  uint64 team_id = 1;
+  uint64 from_warehouse_id = 2;
+  uint64 to_warehouse_id = 3;
+  uint64 ext_tx_id = 4;
+  repeated VariantItem products = 5;
+}
+message TransferToWarehouseResponse {}

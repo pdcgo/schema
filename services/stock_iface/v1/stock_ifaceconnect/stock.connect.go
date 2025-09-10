@@ -6,8 +6,11 @@ package stock_ifaceconnect
 
 import (
 	connect "connectrpc.com/connect"
-	_ "github.com/pdcgo/schema/services/stock_iface/v1"
+	context "context"
+	errors "errors"
+	v1 "github.com/pdcgo/schema/services/stock_iface/v1"
 	http "net/http"
+	strings "strings"
 )
 
 // This is a compile-time assertion to ensure that this generated file and the connect package are
@@ -22,8 +25,39 @@ const (
 	StockServiceName = "stock_iface.v1.StockService"
 )
 
+// These constants are the fully-qualified names of the RPCs defined in this package. They're
+// exposed at runtime as Spec.Procedure and as the final two segments of the HTTP route.
+//
+// Note that these are different from the fully-qualified method names used by
+// google.golang.org/protobuf/reflect/protoreflect. To convert from these constants to
+// reflection-formatted method names, remove the leading slash and convert the remaining slash to a
+// period.
+const (
+	// StockServiceInboundCreateProcedure is the fully-qualified name of the StockService's
+	// InboundCreate RPC.
+	StockServiceInboundCreateProcedure = "/stock_iface.v1.StockService/InboundCreate"
+	// StockServiceInboundUpdateProcedure is the fully-qualified name of the StockService's
+	// InboundUpdate RPC.
+	StockServiceInboundUpdateProcedure = "/stock_iface.v1.StockService/InboundUpdate"
+	// StockServiceInboundAcceptProcedure is the fully-qualified name of the StockService's
+	// InboundAccept RPC.
+	StockServiceInboundAcceptProcedure = "/stock_iface.v1.StockService/InboundAccept"
+	// StockServiceStockAdjustmentProcedure is the fully-qualified name of the StockService's
+	// StockAdjustment RPC.
+	StockServiceStockAdjustmentProcedure = "/stock_iface.v1.StockService/StockAdjustment"
+	// StockServiceTransferToWarehouseProcedure is the fully-qualified name of the StockService's
+	// TransferToWarehouse RPC.
+	StockServiceTransferToWarehouseProcedure = "/stock_iface.v1.StockService/TransferToWarehouse"
+)
+
 // StockServiceClient is a client for the stock_iface.v1.StockService service.
 type StockServiceClient interface {
+	// inbound
+	InboundCreate(context.Context, *connect.Request[v1.InboundCreateRequest]) (*connect.Response[v1.InboundCreateResponse], error)
+	InboundUpdate(context.Context, *connect.Request[v1.InboundUpdateRequest]) (*connect.Response[v1.InboundUpdateResponse], error)
+	InboundAccept(context.Context, *connect.Request[v1.InboundAcceptRequest]) (*connect.Response[v1.InboundAcceptResponse], error)
+	StockAdjustment(context.Context, *connect.Request[v1.StockAdjustmentRequest]) (*connect.Response[v1.StockAdjustmentResponse], error)
+	TransferToWarehouse(context.Context, *connect.Request[v1.TransferToWarehouseRequest]) (*connect.Response[v1.TransferToWarehouseResponse], error)
 }
 
 // NewStockServiceClient constructs a client for the stock_iface.v1.StockService service. By
@@ -34,15 +68,84 @@ type StockServiceClient interface {
 // The URL supplied here should be the base URL for the Connect or gRPC server (for example,
 // http://api.acme.com or https://acme.com/grpc).
 func NewStockServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) StockServiceClient {
-	return &stockServiceClient{}
+	baseURL = strings.TrimRight(baseURL, "/")
+	stockServiceMethods := v1.File_stock_iface_v1_stock_proto.Services().ByName("StockService").Methods()
+	return &stockServiceClient{
+		inboundCreate: connect.NewClient[v1.InboundCreateRequest, v1.InboundCreateResponse](
+			httpClient,
+			baseURL+StockServiceInboundCreateProcedure,
+			connect.WithSchema(stockServiceMethods.ByName("InboundCreate")),
+			connect.WithClientOptions(opts...),
+		),
+		inboundUpdate: connect.NewClient[v1.InboundUpdateRequest, v1.InboundUpdateResponse](
+			httpClient,
+			baseURL+StockServiceInboundUpdateProcedure,
+			connect.WithSchema(stockServiceMethods.ByName("InboundUpdate")),
+			connect.WithClientOptions(opts...),
+		),
+		inboundAccept: connect.NewClient[v1.InboundAcceptRequest, v1.InboundAcceptResponse](
+			httpClient,
+			baseURL+StockServiceInboundAcceptProcedure,
+			connect.WithSchema(stockServiceMethods.ByName("InboundAccept")),
+			connect.WithClientOptions(opts...),
+		),
+		stockAdjustment: connect.NewClient[v1.StockAdjustmentRequest, v1.StockAdjustmentResponse](
+			httpClient,
+			baseURL+StockServiceStockAdjustmentProcedure,
+			connect.WithSchema(stockServiceMethods.ByName("StockAdjustment")),
+			connect.WithClientOptions(opts...),
+		),
+		transferToWarehouse: connect.NewClient[v1.TransferToWarehouseRequest, v1.TransferToWarehouseResponse](
+			httpClient,
+			baseURL+StockServiceTransferToWarehouseProcedure,
+			connect.WithSchema(stockServiceMethods.ByName("TransferToWarehouse")),
+			connect.WithClientOptions(opts...),
+		),
+	}
 }
 
 // stockServiceClient implements StockServiceClient.
 type stockServiceClient struct {
+	inboundCreate       *connect.Client[v1.InboundCreateRequest, v1.InboundCreateResponse]
+	inboundUpdate       *connect.Client[v1.InboundUpdateRequest, v1.InboundUpdateResponse]
+	inboundAccept       *connect.Client[v1.InboundAcceptRequest, v1.InboundAcceptResponse]
+	stockAdjustment     *connect.Client[v1.StockAdjustmentRequest, v1.StockAdjustmentResponse]
+	transferToWarehouse *connect.Client[v1.TransferToWarehouseRequest, v1.TransferToWarehouseResponse]
+}
+
+// InboundCreate calls stock_iface.v1.StockService.InboundCreate.
+func (c *stockServiceClient) InboundCreate(ctx context.Context, req *connect.Request[v1.InboundCreateRequest]) (*connect.Response[v1.InboundCreateResponse], error) {
+	return c.inboundCreate.CallUnary(ctx, req)
+}
+
+// InboundUpdate calls stock_iface.v1.StockService.InboundUpdate.
+func (c *stockServiceClient) InboundUpdate(ctx context.Context, req *connect.Request[v1.InboundUpdateRequest]) (*connect.Response[v1.InboundUpdateResponse], error) {
+	return c.inboundUpdate.CallUnary(ctx, req)
+}
+
+// InboundAccept calls stock_iface.v1.StockService.InboundAccept.
+func (c *stockServiceClient) InboundAccept(ctx context.Context, req *connect.Request[v1.InboundAcceptRequest]) (*connect.Response[v1.InboundAcceptResponse], error) {
+	return c.inboundAccept.CallUnary(ctx, req)
+}
+
+// StockAdjustment calls stock_iface.v1.StockService.StockAdjustment.
+func (c *stockServiceClient) StockAdjustment(ctx context.Context, req *connect.Request[v1.StockAdjustmentRequest]) (*connect.Response[v1.StockAdjustmentResponse], error) {
+	return c.stockAdjustment.CallUnary(ctx, req)
+}
+
+// TransferToWarehouse calls stock_iface.v1.StockService.TransferToWarehouse.
+func (c *stockServiceClient) TransferToWarehouse(ctx context.Context, req *connect.Request[v1.TransferToWarehouseRequest]) (*connect.Response[v1.TransferToWarehouseResponse], error) {
+	return c.transferToWarehouse.CallUnary(ctx, req)
 }
 
 // StockServiceHandler is an implementation of the stock_iface.v1.StockService service.
 type StockServiceHandler interface {
+	// inbound
+	InboundCreate(context.Context, *connect.Request[v1.InboundCreateRequest]) (*connect.Response[v1.InboundCreateResponse], error)
+	InboundUpdate(context.Context, *connect.Request[v1.InboundUpdateRequest]) (*connect.Response[v1.InboundUpdateResponse], error)
+	InboundAccept(context.Context, *connect.Request[v1.InboundAcceptRequest]) (*connect.Response[v1.InboundAcceptResponse], error)
+	StockAdjustment(context.Context, *connect.Request[v1.StockAdjustmentRequest]) (*connect.Response[v1.StockAdjustmentResponse], error)
+	TransferToWarehouse(context.Context, *connect.Request[v1.TransferToWarehouseRequest]) (*connect.Response[v1.TransferToWarehouseResponse], error)
 }
 
 // NewStockServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -51,8 +154,49 @@ type StockServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewStockServiceHandler(svc StockServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	stockServiceMethods := v1.File_stock_iface_v1_stock_proto.Services().ByName("StockService").Methods()
+	stockServiceInboundCreateHandler := connect.NewUnaryHandler(
+		StockServiceInboundCreateProcedure,
+		svc.InboundCreate,
+		connect.WithSchema(stockServiceMethods.ByName("InboundCreate")),
+		connect.WithHandlerOptions(opts...),
+	)
+	stockServiceInboundUpdateHandler := connect.NewUnaryHandler(
+		StockServiceInboundUpdateProcedure,
+		svc.InboundUpdate,
+		connect.WithSchema(stockServiceMethods.ByName("InboundUpdate")),
+		connect.WithHandlerOptions(opts...),
+	)
+	stockServiceInboundAcceptHandler := connect.NewUnaryHandler(
+		StockServiceInboundAcceptProcedure,
+		svc.InboundAccept,
+		connect.WithSchema(stockServiceMethods.ByName("InboundAccept")),
+		connect.WithHandlerOptions(opts...),
+	)
+	stockServiceStockAdjustmentHandler := connect.NewUnaryHandler(
+		StockServiceStockAdjustmentProcedure,
+		svc.StockAdjustment,
+		connect.WithSchema(stockServiceMethods.ByName("StockAdjustment")),
+		connect.WithHandlerOptions(opts...),
+	)
+	stockServiceTransferToWarehouseHandler := connect.NewUnaryHandler(
+		StockServiceTransferToWarehouseProcedure,
+		svc.TransferToWarehouse,
+		connect.WithSchema(stockServiceMethods.ByName("TransferToWarehouse")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/stock_iface.v1.StockService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
+		case StockServiceInboundCreateProcedure:
+			stockServiceInboundCreateHandler.ServeHTTP(w, r)
+		case StockServiceInboundUpdateProcedure:
+			stockServiceInboundUpdateHandler.ServeHTTP(w, r)
+		case StockServiceInboundAcceptProcedure:
+			stockServiceInboundAcceptHandler.ServeHTTP(w, r)
+		case StockServiceStockAdjustmentProcedure:
+			stockServiceStockAdjustmentHandler.ServeHTTP(w, r)
+		case StockServiceTransferToWarehouseProcedure:
+			stockServiceTransferToWarehouseHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -61,3 +205,23 @@ func NewStockServiceHandler(svc StockServiceHandler, opts ...connect.HandlerOpti
 
 // UnimplementedStockServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedStockServiceHandler struct{}
+
+func (UnimplementedStockServiceHandler) InboundCreate(context.Context, *connect.Request[v1.InboundCreateRequest]) (*connect.Response[v1.InboundCreateResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("stock_iface.v1.StockService.InboundCreate is not implemented"))
+}
+
+func (UnimplementedStockServiceHandler) InboundUpdate(context.Context, *connect.Request[v1.InboundUpdateRequest]) (*connect.Response[v1.InboundUpdateResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("stock_iface.v1.StockService.InboundUpdate is not implemented"))
+}
+
+func (UnimplementedStockServiceHandler) InboundAccept(context.Context, *connect.Request[v1.InboundAcceptRequest]) (*connect.Response[v1.InboundAcceptResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("stock_iface.v1.StockService.InboundAccept is not implemented"))
+}
+
+func (UnimplementedStockServiceHandler) StockAdjustment(context.Context, *connect.Request[v1.StockAdjustmentRequest]) (*connect.Response[v1.StockAdjustmentResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("stock_iface.v1.StockService.StockAdjustment is not implemented"))
+}
+
+func (UnimplementedStockServiceHandler) TransferToWarehouse(context.Context, *connect.Request[v1.TransferToWarehouseRequest]) (*connect.Response[v1.TransferToWarehouseResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("stock_iface.v1.StockService.TransferToWarehouse is not implemented"))
+}
