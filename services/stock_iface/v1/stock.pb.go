@@ -312,11 +312,16 @@ func (x *VariantItem) GetItemPrice() float64 {
 }
 
 type VariantProblemItem struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	VariantId     uint64                 `protobuf:"varint,1,opt,name=variant_id,json=variantId,proto3" json:"variant_id,omitempty"`
-	Count         int64                  `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
-	ItemPrice     float64                `protobuf:"fixed64,3,opt,name=item_price,json=itemPrice,proto3" json:"item_price,omitempty"`
-	Reason        string                 `protobuf:"bytes,4,opt,name=reason,proto3" json:"reason,omitempty"`
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	VariantId       uint64                 `protobuf:"varint,1,opt,name=variant_id,json=variantId,proto3" json:"variant_id,omitempty"` // must be > 0
+	Count           int64                  `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`                          // must be > 0
+	ChargeWarehouse bool                   `protobuf:"varint,3,opt,name=charge_warehouse,json=chargeWarehouse,proto3" json:"charge_warehouse,omitempty"`
+	// ProblemType problem_type = 4 [(buf.validate.field).enum = {
+	//   defined_only: true
+	//   not_in: [0]
+	// }];
+	ItemPrice     float64 `protobuf:"fixed64,5,opt,name=item_price,json=itemPrice,proto3" json:"item_price,omitempty"` // non-negative
+	Reason        string  `protobuf:"bytes,6,opt,name=reason,proto3" json:"reason,omitempty"`                          // required, not empty
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -363,6 +368,13 @@ func (x *VariantProblemItem) GetCount() int64 {
 		return x.Count
 	}
 	return 0
+}
+
+func (x *VariantProblemItem) GetChargeWarehouse() bool {
+	if x != nil {
+		return x.ChargeWarehouse
+	}
+	return false
 }
 
 func (x *VariantProblemItem) GetItemPrice() float64 {
@@ -509,14 +521,15 @@ func (*InboundCreateResponse) Descriptor() ([]byte, []int) {
 
 type InboundAcceptRequest struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
-	TeamId          uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
-	WarehouseId     uint64                 `protobuf:"varint,2,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
-	ExtTxId         uint64                 `protobuf:"varint,3,opt,name=ext_tx_id,json=extTxId,proto3" json:"ext_tx_id,omitempty"`
-	Source          InboundSource          `protobuf:"varint,4,opt,name=source,proto3,enum=stock_iface.v1.InboundSource" json:"source,omitempty"`
-	WarehouseCodFee float64                `protobuf:"fixed64,5,opt,name=warehouse_cod_fee,json=warehouseCodFee,proto3" json:"warehouse_cod_fee,omitempty"`
-	Accepts         []*VariantItem         `protobuf:"bytes,6,rep,name=accepts,proto3" json:"accepts,omitempty"`
-	Losts           []*VariantProblemItem  `protobuf:"bytes,7,rep,name=losts,proto3" json:"losts,omitempty"`
-	Brokens         []*VariantProblemItem  `protobuf:"bytes,8,rep,name=brokens,proto3" json:"brokens,omitempty"`
+	TeamId          uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`                               // must be > 0
+	WarehouseId     uint64                 `protobuf:"varint,2,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`                // must be > 0
+	ExtTxId         uint64                 `protobuf:"varint,3,opt,name=ext_tx_id,json=extTxId,proto3" json:"ext_tx_id,omitempty"`                          // must be > 0
+	Source          InboundSource          `protobuf:"varint,4,opt,name=source,proto3,enum=stock_iface.v1.InboundSource" json:"source,omitempty"`           // must be valid enum
+	WarehouseCodFee float64                `protobuf:"fixed64,5,opt,name=warehouse_cod_fee,json=warehouseCodFee,proto3" json:"warehouse_cod_fee,omitempty"` // non-negative
+	ShippingFee     float64                `protobuf:"fixed64,6,opt,name=shipping_fee,json=shippingFee,proto3" json:"shipping_fee,omitempty"`               // non-negative
+	Accepts         []*VariantItem         `protobuf:"bytes,7,rep,name=accepts,proto3" json:"accepts,omitempty"`
+	Losts           []*VariantProblemItem  `protobuf:"bytes,8,rep,name=losts,proto3" json:"losts,omitempty"`
+	Brokens         []*VariantProblemItem  `protobuf:"bytes,9,rep,name=brokens,proto3" json:"brokens,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -586,6 +599,13 @@ func (x *InboundAcceptRequest) GetWarehouseCodFee() float64 {
 	return 0
 }
 
+func (x *InboundAcceptRequest) GetShippingFee() float64 {
+	if x != nil {
+		return x.ShippingFee
+	}
+	return 0
+}
+
 func (x *InboundAcceptRequest) GetAccepts() []*VariantItem {
 	if x != nil {
 		return x.Accepts
@@ -645,9 +665,11 @@ func (*InboundAcceptResponse) Descriptor() ([]byte, []int) {
 
 type StockAdjustmentRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
-	WarehouseId   uint64                 `protobuf:"varint,2,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
-	ExtTxId       uint64                 `protobuf:"varint,3,opt,name=ext_tx_id,json=extTxId,proto3" json:"ext_tx_id,omitempty"`
+	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`                // must be > 0
+	WarehouseId   uint64                 `protobuf:"varint,2,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"` // must be > 0
+	ExtTxId       uint64                 `protobuf:"varint,3,opt,name=ext_tx_id,json=extTxId,proto3" json:"ext_tx_id,omitempty"`           // must be > 0
+	Losts         []*VariantProblemItem  `protobuf:"bytes,4,rep,name=losts,proto3" json:"losts,omitempty"`
+	Brokens       []*VariantProblemItem  `protobuf:"bytes,5,rep,name=brokens,proto3" json:"brokens,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -703,6 +725,20 @@ func (x *StockAdjustmentRequest) GetExtTxId() uint64 {
 	return 0
 }
 
+func (x *StockAdjustmentRequest) GetLosts() []*VariantProblemItem {
+	if x != nil {
+		return x.Losts
+	}
+	return nil
+}
+
+func (x *StockAdjustmentRequest) GetBrokens() []*VariantProblemItem {
+	if x != nil {
+		return x.Brokens
+	}
+	return nil
+}
+
 type StockAdjustmentResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -739,20 +775,87 @@ func (*StockAdjustmentResponse) Descriptor() ([]byte, []int) {
 	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{9}
 }
 
+type TransferItem struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	VariantId     uint64                 `protobuf:"varint,2,opt,name=variant_id,json=variantId,proto3" json:"variant_id,omitempty"`  // must be > 0
+	Count         int64                  `protobuf:"varint,3,opt,name=count,proto3" json:"count,omitempty"`                           // must be > 0
+	ItemPrice     float64                `protobuf:"fixed64,4,opt,name=item_price,json=itemPrice,proto3" json:"item_price,omitempty"` // must be >= 0
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TransferItem) Reset() {
+	*x = TransferItem{}
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TransferItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TransferItem) ProtoMessage() {}
+
+func (x *TransferItem) ProtoReflect() protoreflect.Message {
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TransferItem.ProtoReflect.Descriptor instead.
+func (*TransferItem) Descriptor() ([]byte, []int) {
+	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *TransferItem) GetTeamId() uint64 {
+	if x != nil {
+		return x.TeamId
+	}
+	return 0
+}
+
+func (x *TransferItem) GetVariantId() uint64 {
+	if x != nil {
+		return x.VariantId
+	}
+	return 0
+}
+
+func (x *TransferItem) GetCount() int64 {
+	if x != nil {
+		return x.Count
+	}
+	return 0
+}
+
+func (x *TransferItem) GetItemPrice() float64 {
+	if x != nil {
+		return x.ItemPrice
+	}
+	return 0
+}
+
 type TransferToWarehouseRequest struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
-	TeamId          uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
 	FromWarehouseId uint64                 `protobuf:"varint,2,opt,name=from_warehouse_id,json=fromWarehouseId,proto3" json:"from_warehouse_id,omitempty"`
 	ToWarehouseId   uint64                 `protobuf:"varint,3,opt,name=to_warehouse_id,json=toWarehouseId,proto3" json:"to_warehouse_id,omitempty"`
 	ExtTxId         uint64                 `protobuf:"varint,4,opt,name=ext_tx_id,json=extTxId,proto3" json:"ext_tx_id,omitempty"`
-	Products        []*VariantItem         `protobuf:"bytes,5,rep,name=products,proto3" json:"products,omitempty"`
+	Products        []*TransferItem        `protobuf:"bytes,5,rep,name=products,proto3" json:"products,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
 
 func (x *TransferToWarehouseRequest) Reset() {
 	*x = TransferToWarehouseRequest{}
-	mi := &file_stock_iface_v1_stock_proto_msgTypes[10]
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -764,7 +867,7 @@ func (x *TransferToWarehouseRequest) String() string {
 func (*TransferToWarehouseRequest) ProtoMessage() {}
 
 func (x *TransferToWarehouseRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_stock_iface_v1_stock_proto_msgTypes[10]
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -777,14 +880,7 @@ func (x *TransferToWarehouseRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TransferToWarehouseRequest.ProtoReflect.Descriptor instead.
 func (*TransferToWarehouseRequest) Descriptor() ([]byte, []int) {
-	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{10}
-}
-
-func (x *TransferToWarehouseRequest) GetTeamId() uint64 {
-	if x != nil {
-		return x.TeamId
-	}
-	return 0
+	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *TransferToWarehouseRequest) GetFromWarehouseId() uint64 {
@@ -808,7 +904,7 @@ func (x *TransferToWarehouseRequest) GetExtTxId() uint64 {
 	return 0
 }
 
-func (x *TransferToWarehouseRequest) GetProducts() []*VariantItem {
+func (x *TransferToWarehouseRequest) GetProducts() []*TransferItem {
 	if x != nil {
 		return x.Products
 	}
@@ -823,7 +919,7 @@ type TransferToWarehouseResponse struct {
 
 func (x *TransferToWarehouseResponse) Reset() {
 	*x = TransferToWarehouseResponse{}
-	mi := &file_stock_iface_v1_stock_proto_msgTypes[11]
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -835,7 +931,7 @@ func (x *TransferToWarehouseResponse) String() string {
 func (*TransferToWarehouseResponse) ProtoMessage() {}
 
 func (x *TransferToWarehouseResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_stock_iface_v1_stock_proto_msgTypes[11]
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -848,7 +944,207 @@ func (x *TransferToWarehouseResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TransferToWarehouseResponse.ProtoReflect.Descriptor instead.
 func (*TransferToWarehouseResponse) Descriptor() ([]byte, []int) {
-	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{11}
+	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{12}
+}
+
+type TransferToWarehouseAcceptRequest struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	FromWarehouseId uint64                 `protobuf:"varint,1,opt,name=from_warehouse_id,json=fromWarehouseId,proto3" json:"from_warehouse_id,omitempty"`
+	ToWarehouseId   uint64                 `protobuf:"varint,2,opt,name=to_warehouse_id,json=toWarehouseId,proto3" json:"to_warehouse_id,omitempty"`
+	ExtTxId         uint64                 `protobuf:"varint,3,opt,name=ext_tx_id,json=extTxId,proto3" json:"ext_tx_id,omitempty"`
+	Products        []*TransferItem        `protobuf:"bytes,5,rep,name=products,proto3" json:"products,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *TransferToWarehouseAcceptRequest) Reset() {
+	*x = TransferToWarehouseAcceptRequest{}
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TransferToWarehouseAcceptRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TransferToWarehouseAcceptRequest) ProtoMessage() {}
+
+func (x *TransferToWarehouseAcceptRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TransferToWarehouseAcceptRequest.ProtoReflect.Descriptor instead.
+func (*TransferToWarehouseAcceptRequest) Descriptor() ([]byte, []int) {
+	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *TransferToWarehouseAcceptRequest) GetFromWarehouseId() uint64 {
+	if x != nil {
+		return x.FromWarehouseId
+	}
+	return 0
+}
+
+func (x *TransferToWarehouseAcceptRequest) GetToWarehouseId() uint64 {
+	if x != nil {
+		return x.ToWarehouseId
+	}
+	return 0
+}
+
+func (x *TransferToWarehouseAcceptRequest) GetExtTxId() uint64 {
+	if x != nil {
+		return x.ExtTxId
+	}
+	return 0
+}
+
+func (x *TransferToWarehouseAcceptRequest) GetProducts() []*TransferItem {
+	if x != nil {
+		return x.Products
+	}
+	return nil
+}
+
+type TransferToWarehouseAcceptResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TransferToWarehouseAcceptResponse) Reset() {
+	*x = TransferToWarehouseAcceptResponse{}
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TransferToWarehouseAcceptResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TransferToWarehouseAcceptResponse) ProtoMessage() {}
+
+func (x *TransferToWarehouseAcceptResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TransferToWarehouseAcceptResponse.ProtoReflect.Descriptor instead.
+func (*TransferToWarehouseAcceptResponse) Descriptor() ([]byte, []int) {
+	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{14}
+}
+
+type TransferToWarehouseCancelRequest struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	FromWarehouseId uint64                 `protobuf:"varint,1,opt,name=from_warehouse_id,json=fromWarehouseId,proto3" json:"from_warehouse_id,omitempty"`
+	ToWarehouseId   uint64                 `protobuf:"varint,2,opt,name=to_warehouse_id,json=toWarehouseId,proto3" json:"to_warehouse_id,omitempty"`
+	ExtTxId         uint64                 `protobuf:"varint,3,opt,name=ext_tx_id,json=extTxId,proto3" json:"ext_tx_id,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *TransferToWarehouseCancelRequest) Reset() {
+	*x = TransferToWarehouseCancelRequest{}
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TransferToWarehouseCancelRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TransferToWarehouseCancelRequest) ProtoMessage() {}
+
+func (x *TransferToWarehouseCancelRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TransferToWarehouseCancelRequest.ProtoReflect.Descriptor instead.
+func (*TransferToWarehouseCancelRequest) Descriptor() ([]byte, []int) {
+	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *TransferToWarehouseCancelRequest) GetFromWarehouseId() uint64 {
+	if x != nil {
+		return x.FromWarehouseId
+	}
+	return 0
+}
+
+func (x *TransferToWarehouseCancelRequest) GetToWarehouseId() uint64 {
+	if x != nil {
+		return x.ToWarehouseId
+	}
+	return 0
+}
+
+func (x *TransferToWarehouseCancelRequest) GetExtTxId() uint64 {
+	if x != nil {
+		return x.ExtTxId
+	}
+	return 0
+}
+
+type TransferToWarehouseCancelResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TransferToWarehouseCancelResponse) Reset() {
+	*x = TransferToWarehouseCancelResponse{}
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TransferToWarehouseCancelResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TransferToWarehouseCancelResponse) ProtoMessage() {}
+
+func (x *TransferToWarehouseCancelResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TransferToWarehouseCancelResponse.ProtoReflect.Descriptor instead.
+func (*TransferToWarehouseCancelResponse) Descriptor() ([]byte, []int) {
+	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{16}
 }
 
 var File_stock_iface_v1_stock_proto protoreflect.FileDescriptor
@@ -873,14 +1169,15 @@ const file_stock_iface_v1_stock_proto_rawDesc = "" +
 	"variant_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\tvariantId\x12\x1d\n" +
 	"\x05count\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x05count\x12-\n" +
 	"\n" +
-	"item_price\x18\x03 \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\titemPrice\"\x80\x01\n" +
-	"\x12VariantProblemItem\x12\x1d\n" +
+	"item_price\x18\x03 \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\titemPrice\"\xd6\x01\n" +
+	"\x12VariantProblemItem\x12&\n" +
 	"\n" +
-	"variant_id\x18\x01 \x01(\x04R\tvariantId\x12\x14\n" +
-	"\x05count\x18\x02 \x01(\x03R\x05count\x12\x1d\n" +
+	"variant_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\tvariantId\x12\x1d\n" +
+	"\x05count\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x05count\x12)\n" +
+	"\x10charge_warehouse\x18\x03 \x01(\bR\x0fchargeWarehouse\x12-\n" +
 	"\n" +
-	"item_price\x18\x03 \x01(\x01R\titemPrice\x12\x16\n" +
-	"\x06reason\x18\x04 \x01(\tR\x06reason\"\x94\x03\n" +
+	"item_price\x18\x05 \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\titemPrice\x12\x1f\n" +
+	"\x06reason\x18\x06 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x06reason\"\x94\x03\n" +
 	"\x14InboundCreateRequest\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12*\n" +
 	"\fwarehouse_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\vwarehouseId\x12#\n" +
@@ -891,29 +1188,51 @@ const file_stock_iface_v1_stock_proto_rawDesc = "" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\rpaymentMethod\x121\n" +
 	"\fshipping_fee\x18\x06 \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\vshippingFee\x12A\n" +
 	"\bproducts\x18\a \x03(\v2\x1b.stock_iface.v1.VariantItemB\b\xbaH\x05\x92\x01\x02\b\x01R\bproducts\"\x17\n" +
-	"\x15InboundCreateResponse\"\x80\x03\n" +
-	"\x14InboundAcceptRequest\x12\x17\n" +
-	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12!\n" +
-	"\fwarehouse_id\x18\x02 \x01(\x04R\vwarehouseId\x12\x1a\n" +
-	"\text_tx_id\x18\x03 \x01(\x04R\aextTxId\x125\n" +
-	"\x06source\x18\x04 \x01(\x0e2\x1d.stock_iface.v1.InboundSourceR\x06source\x12*\n" +
-	"\x11warehouse_cod_fee\x18\x05 \x01(\x01R\x0fwarehouseCodFee\x125\n" +
-	"\aaccepts\x18\x06 \x03(\v2\x1b.stock_iface.v1.VariantItemR\aaccepts\x128\n" +
-	"\x05losts\x18\a \x03(\v2\".stock_iface.v1.VariantProblemItemR\x05losts\x12<\n" +
-	"\abrokens\x18\b \x03(\v2\".stock_iface.v1.VariantProblemItemR\abrokens\"\x17\n" +
-	"\x15InboundAcceptResponse\"p\n" +
-	"\x16StockAdjustmentRequest\x12\x17\n" +
-	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12!\n" +
-	"\fwarehouse_id\x18\x02 \x01(\x04R\vwarehouseId\x12\x1a\n" +
-	"\text_tx_id\x18\x03 \x01(\x04R\aextTxId\"\x19\n" +
-	"\x17StockAdjustmentResponse\"\xde\x01\n" +
-	"\x1aTransferToWarehouseRequest\x12\x17\n" +
-	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12*\n" +
-	"\x11from_warehouse_id\x18\x02 \x01(\x04R\x0ffromWarehouseId\x12&\n" +
-	"\x0fto_warehouse_id\x18\x03 \x01(\x04R\rtoWarehouseId\x12\x1a\n" +
-	"\text_tx_id\x18\x04 \x01(\x04R\aextTxId\x127\n" +
-	"\bproducts\x18\x05 \x03(\v2\x1b.stock_iface.v1.VariantItemR\bproducts\"\x1d\n" +
-	"\x1bTransferToWarehouseResponse*\x83\x01\n" +
+	"\x15InboundCreateResponse\"\xf4\x03\n" +
+	"\x14InboundAcceptRequest\x12 \n" +
+	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12*\n" +
+	"\fwarehouse_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\vwarehouseId\x12#\n" +
+	"\text_tx_id\x18\x03 \x01(\x04B\a\xbaH\x042\x02 \x00R\aextTxId\x12A\n" +
+	"\x06source\x18\x04 \x01(\x0e2\x1d.stock_iface.v1.InboundSourceB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x06source\x12:\n" +
+	"\x11warehouse_cod_fee\x18\x05 \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\x0fwarehouseCodFee\x121\n" +
+	"\fshipping_fee\x18\x06 \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\vshippingFee\x12?\n" +
+	"\aaccepts\x18\a \x03(\v2\x1b.stock_iface.v1.VariantItemB\b\xbaH\x05\x92\x01\x02\b\x01R\aaccepts\x128\n" +
+	"\x05losts\x18\b \x03(\v2\".stock_iface.v1.VariantProblemItemR\x05losts\x12<\n" +
+	"\abrokens\x18\t \x03(\v2\".stock_iface.v1.VariantProblemItemR\abrokens\"\x17\n" +
+	"\x15InboundAcceptResponse\"\x90\x03\n" +
+	"\x16StockAdjustmentRequest\x12 \n" +
+	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12*\n" +
+	"\fwarehouse_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\vwarehouseId\x12#\n" +
+	"\text_tx_id\x18\x03 \x01(\x04B\a\xbaH\x042\x02 \x00R\aextTxId\x128\n" +
+	"\x05losts\x18\x04 \x03(\v2\".stock_iface.v1.VariantProblemItemR\x05losts\x12<\n" +
+	"\abrokens\x18\x05 \x03(\v2\".stock_iface.v1.VariantProblemItemR\abrokens:\x8a\x01\xbaH\x86\x01\x1a\x83\x01\n" +
+	" inbound_update_mutation_required\x12/At least one of losts, brokens must be provided\x1a.size(this.losts) > 0 || size(this.brokens) > 0\"\x19\n" +
+	"\x17StockAdjustmentResponse\"\xa6\x01\n" +
+	"\fTransferItem\x12 \n" +
+	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12&\n" +
+	"\n" +
+	"variant_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\tvariantId\x12\x1d\n" +
+	"\x05count\x18\x03 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x05count\x12-\n" +
+	"\n" +
+	"item_price\x18\x04 \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\titemPrice\"\xeb\x01\n" +
+	"\x1aTransferToWarehouseRequest\x123\n" +
+	"\x11from_warehouse_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x0ffromWarehouseId\x12/\n" +
+	"\x0fto_warehouse_id\x18\x03 \x01(\x04B\a\xbaH\x042\x02 \x00R\rtoWarehouseId\x12#\n" +
+	"\text_tx_id\x18\x04 \x01(\x04B\a\xbaH\x042\x02 \x00R\aextTxId\x12B\n" +
+	"\bproducts\x18\x05 \x03(\v2\x1c.stock_iface.v1.TransferItemB\b\xbaH\x05\x92\x01\x02\b\x01R\bproducts\"\x1d\n" +
+	"\x1bTransferToWarehouseResponse\"\xf1\x01\n" +
+	" TransferToWarehouseAcceptRequest\x123\n" +
+	"\x11from_warehouse_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x0ffromWarehouseId\x12/\n" +
+	"\x0fto_warehouse_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\rtoWarehouseId\x12#\n" +
+	"\text_tx_id\x18\x03 \x01(\x04B\a\xbaH\x042\x02 \x00R\aextTxId\x12B\n" +
+	"\bproducts\x18\x05 \x03(\v2\x1c.stock_iface.v1.TransferItemB\b\xbaH\x05\x92\x01\x02\b\x01R\bproducts\"#\n" +
+	"!TransferToWarehouseAcceptResponse\"\xad\x01\n" +
+	" TransferToWarehouseCancelRequest\x123\n" +
+	"\x11from_warehouse_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x0ffromWarehouseId\x12/\n" +
+	"\x0fto_warehouse_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\rtoWarehouseId\x12#\n" +
+	"\text_tx_id\x18\x03 \x01(\x04B\a\xbaH\x042\x02 \x00R\aextTxId\"#\n" +
+	"!TransferToWarehouseCancelResponse*\x83\x01\n" +
 	"\rInboundSource\x12\x1e\n" +
 	"\x1aINBOUND_SOURCE_UNSPECIFIED\x10\x00\x12\x1a\n" +
 	"\x16INBOUND_SOURCE_RESTOCK\x10\x01\x12\x19\n" +
@@ -922,13 +1241,15 @@ const file_stock_iface_v1_stock_proto_rawDesc = "" +
 	"\rPaymentMethod\x12\x1e\n" +
 	"\x1aPAYMENT_METHOD_UNSPECIFIED\x10\x00\x12\x17\n" +
 	"\x13PAYMENT_METHOD_CASH\x10\x01\x12\x1c\n" +
-	"\x18PAYMENT_METHOD_SHOPEEPAY\x10\x022\xfc\x03\n" +
+	"\x18PAYMENT_METHOD_SHOPEEPAY\x10\x022\x82\x06\n" +
 	"\fStockService\x12\\\n" +
 	"\rInboundCreate\x12$.stock_iface.v1.InboundCreateRequest\x1a%.stock_iface.v1.InboundCreateResponse\x12\\\n" +
 	"\rInboundUpdate\x12$.stock_iface.v1.InboundUpdateRequest\x1a%.stock_iface.v1.InboundUpdateResponse\x12\\\n" +
 	"\rInboundAccept\x12$.stock_iface.v1.InboundAcceptRequest\x1a%.stock_iface.v1.InboundAcceptResponse\x12b\n" +
 	"\x0fStockAdjustment\x12&.stock_iface.v1.StockAdjustmentRequest\x1a'.stock_iface.v1.StockAdjustmentResponse\x12n\n" +
-	"\x13TransferToWarehouse\x12*.stock_iface.v1.TransferToWarehouseRequest\x1a+.stock_iface.v1.TransferToWarehouseResponseB\xb2\x01\n" +
+	"\x13TransferToWarehouse\x12*.stock_iface.v1.TransferToWarehouseRequest\x1a+.stock_iface.v1.TransferToWarehouseResponse\x12\x80\x01\n" +
+	"\x19TransferToWarehouseAccept\x120.stock_iface.v1.TransferToWarehouseAcceptRequest\x1a1.stock_iface.v1.TransferToWarehouseAcceptResponse\x12\x80\x01\n" +
+	"\x19TransferToWarehouseCancel\x120.stock_iface.v1.TransferToWarehouseCancelRequest\x1a1.stock_iface.v1.TransferToWarehouseCancelResponseB\xb2\x01\n" +
 	"\x12com.stock_iface.v1B\n" +
 	"StockProtoP\x01Z;github.com/pdcgo/schema/services/stock_iface/v1;stock_iface\xa2\x02\x03SXX\xaa\x02\rStockIface.V1\xca\x02\rStockIface\\V1\xe2\x02\x19StockIface\\V1\\GPBMetadata\xea\x02\x0eStockIface::V1b\x06proto3"
 
@@ -945,22 +1266,27 @@ func file_stock_iface_v1_stock_proto_rawDescGZIP() []byte {
 }
 
 var file_stock_iface_v1_stock_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_stock_iface_v1_stock_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_stock_iface_v1_stock_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
 var file_stock_iface_v1_stock_proto_goTypes = []any{
-	(InboundSource)(0),                  // 0: stock_iface.v1.InboundSource
-	(PaymentMethod)(0),                  // 1: stock_iface.v1.PaymentMethod
-	(*InboundUpdateRequest)(nil),        // 2: stock_iface.v1.InboundUpdateRequest
-	(*InboundUpdateResponse)(nil),       // 3: stock_iface.v1.InboundUpdateResponse
-	(*VariantItem)(nil),                 // 4: stock_iface.v1.VariantItem
-	(*VariantProblemItem)(nil),          // 5: stock_iface.v1.VariantProblemItem
-	(*InboundCreateRequest)(nil),        // 6: stock_iface.v1.InboundCreateRequest
-	(*InboundCreateResponse)(nil),       // 7: stock_iface.v1.InboundCreateResponse
-	(*InboundAcceptRequest)(nil),        // 8: stock_iface.v1.InboundAcceptRequest
-	(*InboundAcceptResponse)(nil),       // 9: stock_iface.v1.InboundAcceptResponse
-	(*StockAdjustmentRequest)(nil),      // 10: stock_iface.v1.StockAdjustmentRequest
-	(*StockAdjustmentResponse)(nil),     // 11: stock_iface.v1.StockAdjustmentResponse
-	(*TransferToWarehouseRequest)(nil),  // 12: stock_iface.v1.TransferToWarehouseRequest
-	(*TransferToWarehouseResponse)(nil), // 13: stock_iface.v1.TransferToWarehouseResponse
+	(InboundSource)(0),                        // 0: stock_iface.v1.InboundSource
+	(PaymentMethod)(0),                        // 1: stock_iface.v1.PaymentMethod
+	(*InboundUpdateRequest)(nil),              // 2: stock_iface.v1.InboundUpdateRequest
+	(*InboundUpdateResponse)(nil),             // 3: stock_iface.v1.InboundUpdateResponse
+	(*VariantItem)(nil),                       // 4: stock_iface.v1.VariantItem
+	(*VariantProblemItem)(nil),                // 5: stock_iface.v1.VariantProblemItem
+	(*InboundCreateRequest)(nil),              // 6: stock_iface.v1.InboundCreateRequest
+	(*InboundCreateResponse)(nil),             // 7: stock_iface.v1.InboundCreateResponse
+	(*InboundAcceptRequest)(nil),              // 8: stock_iface.v1.InboundAcceptRequest
+	(*InboundAcceptResponse)(nil),             // 9: stock_iface.v1.InboundAcceptResponse
+	(*StockAdjustmentRequest)(nil),            // 10: stock_iface.v1.StockAdjustmentRequest
+	(*StockAdjustmentResponse)(nil),           // 11: stock_iface.v1.StockAdjustmentResponse
+	(*TransferItem)(nil),                      // 12: stock_iface.v1.TransferItem
+	(*TransferToWarehouseRequest)(nil),        // 13: stock_iface.v1.TransferToWarehouseRequest
+	(*TransferToWarehouseResponse)(nil),       // 14: stock_iface.v1.TransferToWarehouseResponse
+	(*TransferToWarehouseAcceptRequest)(nil),  // 15: stock_iface.v1.TransferToWarehouseAcceptRequest
+	(*TransferToWarehouseAcceptResponse)(nil), // 16: stock_iface.v1.TransferToWarehouseAcceptResponse
+	(*TransferToWarehouseCancelRequest)(nil),  // 17: stock_iface.v1.TransferToWarehouseCancelRequest
+	(*TransferToWarehouseCancelResponse)(nil), // 18: stock_iface.v1.TransferToWarehouseCancelResponse
 }
 var file_stock_iface_v1_stock_proto_depIdxs = []int32{
 	0,  // 0: stock_iface.v1.InboundUpdateRequest.source:type_name -> stock_iface.v1.InboundSource
@@ -973,22 +1299,29 @@ var file_stock_iface_v1_stock_proto_depIdxs = []int32{
 	4,  // 7: stock_iface.v1.InboundAcceptRequest.accepts:type_name -> stock_iface.v1.VariantItem
 	5,  // 8: stock_iface.v1.InboundAcceptRequest.losts:type_name -> stock_iface.v1.VariantProblemItem
 	5,  // 9: stock_iface.v1.InboundAcceptRequest.brokens:type_name -> stock_iface.v1.VariantProblemItem
-	4,  // 10: stock_iface.v1.TransferToWarehouseRequest.products:type_name -> stock_iface.v1.VariantItem
-	6,  // 11: stock_iface.v1.StockService.InboundCreate:input_type -> stock_iface.v1.InboundCreateRequest
-	2,  // 12: stock_iface.v1.StockService.InboundUpdate:input_type -> stock_iface.v1.InboundUpdateRequest
-	8,  // 13: stock_iface.v1.StockService.InboundAccept:input_type -> stock_iface.v1.InboundAcceptRequest
-	10, // 14: stock_iface.v1.StockService.StockAdjustment:input_type -> stock_iface.v1.StockAdjustmentRequest
-	12, // 15: stock_iface.v1.StockService.TransferToWarehouse:input_type -> stock_iface.v1.TransferToWarehouseRequest
-	7,  // 16: stock_iface.v1.StockService.InboundCreate:output_type -> stock_iface.v1.InboundCreateResponse
-	3,  // 17: stock_iface.v1.StockService.InboundUpdate:output_type -> stock_iface.v1.InboundUpdateResponse
-	9,  // 18: stock_iface.v1.StockService.InboundAccept:output_type -> stock_iface.v1.InboundAcceptResponse
-	11, // 19: stock_iface.v1.StockService.StockAdjustment:output_type -> stock_iface.v1.StockAdjustmentResponse
-	13, // 20: stock_iface.v1.StockService.TransferToWarehouse:output_type -> stock_iface.v1.TransferToWarehouseResponse
-	16, // [16:21] is the sub-list for method output_type
-	11, // [11:16] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	5,  // 10: stock_iface.v1.StockAdjustmentRequest.losts:type_name -> stock_iface.v1.VariantProblemItem
+	5,  // 11: stock_iface.v1.StockAdjustmentRequest.brokens:type_name -> stock_iface.v1.VariantProblemItem
+	12, // 12: stock_iface.v1.TransferToWarehouseRequest.products:type_name -> stock_iface.v1.TransferItem
+	12, // 13: stock_iface.v1.TransferToWarehouseAcceptRequest.products:type_name -> stock_iface.v1.TransferItem
+	6,  // 14: stock_iface.v1.StockService.InboundCreate:input_type -> stock_iface.v1.InboundCreateRequest
+	2,  // 15: stock_iface.v1.StockService.InboundUpdate:input_type -> stock_iface.v1.InboundUpdateRequest
+	8,  // 16: stock_iface.v1.StockService.InboundAccept:input_type -> stock_iface.v1.InboundAcceptRequest
+	10, // 17: stock_iface.v1.StockService.StockAdjustment:input_type -> stock_iface.v1.StockAdjustmentRequest
+	13, // 18: stock_iface.v1.StockService.TransferToWarehouse:input_type -> stock_iface.v1.TransferToWarehouseRequest
+	15, // 19: stock_iface.v1.StockService.TransferToWarehouseAccept:input_type -> stock_iface.v1.TransferToWarehouseAcceptRequest
+	17, // 20: stock_iface.v1.StockService.TransferToWarehouseCancel:input_type -> stock_iface.v1.TransferToWarehouseCancelRequest
+	7,  // 21: stock_iface.v1.StockService.InboundCreate:output_type -> stock_iface.v1.InboundCreateResponse
+	3,  // 22: stock_iface.v1.StockService.InboundUpdate:output_type -> stock_iface.v1.InboundUpdateResponse
+	9,  // 23: stock_iface.v1.StockService.InboundAccept:output_type -> stock_iface.v1.InboundAcceptResponse
+	11, // 24: stock_iface.v1.StockService.StockAdjustment:output_type -> stock_iface.v1.StockAdjustmentResponse
+	14, // 25: stock_iface.v1.StockService.TransferToWarehouse:output_type -> stock_iface.v1.TransferToWarehouseResponse
+	16, // 26: stock_iface.v1.StockService.TransferToWarehouseAccept:output_type -> stock_iface.v1.TransferToWarehouseAcceptResponse
+	18, // 27: stock_iface.v1.StockService.TransferToWarehouseCancel:output_type -> stock_iface.v1.TransferToWarehouseCancelResponse
+	21, // [21:28] is the sub-list for method output_type
+	14, // [14:21] is the sub-list for method input_type
+	14, // [14:14] is the sub-list for extension type_name
+	14, // [14:14] is the sub-list for extension extendee
+	0,  // [0:14] is the sub-list for field type_name
 }
 
 func init() { file_stock_iface_v1_stock_proto_init() }
@@ -1002,7 +1335,7 @@ func file_stock_iface_v1_stock_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_stock_iface_v1_stock_proto_rawDesc), len(file_stock_iface_v1_stock_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   12,
+			NumMessages:   17,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -13,6 +13,8 @@ service StockService {
   rpc InboundAccept(InboundAcceptRequest) returns (InboundAcceptResponse);
   rpc StockAdjustment(StockAdjustmentRequest) returns (StockAdjustmentResponse);
   rpc TransferToWarehouse(TransferToWarehouseRequest) returns (TransferToWarehouseResponse);
+  rpc TransferToWarehouseAccept(TransferToWarehouseAcceptRequest) returns (TransferToWarehouseAcceptResponse);
+  rpc TransferToWarehouseCancel(TransferToWarehouseCancelRequest) returns (TransferToWarehouseCancelResponse);
 
   // accept stock
   // return
@@ -61,11 +63,22 @@ message VariantItem {
   double item_price = 3 [(buf.validate.field).double.gte = 0]; // must be >= 0
 }
 
+// enum ProblemType {
+//   PROBLEM_TYPE_UNSPECIFIED = 0;
+//   PROBLEM_TYPE_LOST = 1;
+//   PROBLEM_TYPE_BROKEN = 2;
+// }
+
 message VariantProblemItem {
-  uint64 variant_id = 1;
-  int64 count = 2;
-  double item_price = 3;
-  string reason = 4;
+  uint64 variant_id = 1 [(buf.validate.field).uint64.gt = 0]; // must be > 0
+  int64 count = 2 [(buf.validate.field).int64.gt = 0]; // must be > 0
+  bool charge_warehouse = 3;
+  // ProblemType problem_type = 4 [(buf.validate.field).enum = {
+  //   defined_only: true
+  //   not_in: [0]
+  // }];
+  double item_price = 5 [(buf.validate.field).double.gte = 0]; // non-negative
+  string reason = 6 [(buf.validate.field).string.min_len = 1]; // required, not empty
 }
 
 message InboundCreateRequest {
@@ -90,29 +103,66 @@ message InboundCreateRequest {
 message InboundCreateResponse {}
 
 message InboundAcceptRequest {
-  uint64 team_id = 1;
-  uint64 warehouse_id = 2;
-  uint64 ext_tx_id = 3;
-  InboundSource source = 4;
-  double warehouse_cod_fee = 5;
-  repeated VariantItem accepts = 6;
-  repeated VariantProblemItem losts = 7;
-  repeated VariantProblemItem brokens = 8;
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0]; // must be > 0
+  uint64 warehouse_id = 2 [(buf.validate.field).uint64.gt = 0]; // must be > 0
+  uint64 ext_tx_id = 3 [(buf.validate.field).uint64.gt = 0]; // must be > 0
+
+  InboundSource source = 4 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }]; // must be valid enum
+
+  double warehouse_cod_fee = 5 [(buf.validate.field).double.gte = 0]; // non-negative
+  double shipping_fee = 6 [(buf.validate.field).double.gte = 0]; // non-negative
+
+  repeated VariantItem accepts = 7 [(buf.validate.field).repeated.min_items = 1];
+  repeated VariantProblemItem losts = 8;
+  repeated VariantProblemItem brokens = 9;
 }
 message InboundAcceptResponse {}
 
 message StockAdjustmentRequest {
-  uint64 team_id = 1;
-  uint64 warehouse_id = 2;
-  uint64 ext_tx_id = 3;
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0]; // must be > 0
+  uint64 warehouse_id = 2 [(buf.validate.field).uint64.gt = 0]; // must be > 0
+  uint64 ext_tx_id = 3 [(buf.validate.field).uint64.gt = 0]; // must be > 0
+  repeated VariantProblemItem losts = 4;
+  repeated VariantProblemItem brokens = 5;
+
+  option (buf.validate.message).cel = {
+    id: "inbound_update_mutation_required"
+    expression: "size(this.losts) > 0 || size(this.brokens) > 0"
+    message: "At least one of losts, brokens must be provided"
+  };
 }
 message StockAdjustmentResponse {}
 
+message TransferItem {
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 variant_id = 2 [(buf.validate.field).uint64.gt = 0]; // must be > 0
+  int64 count = 3 [(buf.validate.field).int64.gt = 0]; // must be > 0
+  double item_price = 4 [(buf.validate.field).double.gte = 0]; // must be >= 0
+}
+
 message TransferToWarehouseRequest {
-  uint64 team_id = 1;
-  uint64 from_warehouse_id = 2;
-  uint64 to_warehouse_id = 3;
-  uint64 ext_tx_id = 4;
-  repeated VariantItem products = 5;
+  uint64 from_warehouse_id = 2 [(buf.validate.field).uint64.gt = 0];
+  uint64 to_warehouse_id = 3 [(buf.validate.field).uint64.gt = 0];
+  uint64 ext_tx_id = 4 [(buf.validate.field).uint64.gt = 0];
+  repeated TransferItem products = 5 [(buf.validate.field).repeated.min_items = 1];
 }
 message TransferToWarehouseResponse {}
+
+message TransferToWarehouseAcceptRequest {
+  uint64 from_warehouse_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 to_warehouse_id = 2 [(buf.validate.field).uint64.gt = 0];
+  uint64 ext_tx_id = 3 [(buf.validate.field).uint64.gt = 0];
+  repeated TransferItem products = 5 [(buf.validate.field).repeated.min_items = 1];
+}
+message TransferToWarehouseAcceptResponse {}
+
+message TransferToWarehouseCancelRequest {
+  uint64 from_warehouse_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 to_warehouse_id = 2 [(buf.validate.field).uint64.gt = 0];
+  uint64 ext_tx_id = 3 [(buf.validate.field).uint64.gt = 0];
+}
+
+message TransferToWarehouseCancelResponse {}

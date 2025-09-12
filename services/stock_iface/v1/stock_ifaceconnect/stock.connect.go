@@ -48,6 +48,12 @@ const (
 	// StockServiceTransferToWarehouseProcedure is the fully-qualified name of the StockService's
 	// TransferToWarehouse RPC.
 	StockServiceTransferToWarehouseProcedure = "/stock_iface.v1.StockService/TransferToWarehouse"
+	// StockServiceTransferToWarehouseAcceptProcedure is the fully-qualified name of the StockService's
+	// TransferToWarehouseAccept RPC.
+	StockServiceTransferToWarehouseAcceptProcedure = "/stock_iface.v1.StockService/TransferToWarehouseAccept"
+	// StockServiceTransferToWarehouseCancelProcedure is the fully-qualified name of the StockService's
+	// TransferToWarehouseCancel RPC.
+	StockServiceTransferToWarehouseCancelProcedure = "/stock_iface.v1.StockService/TransferToWarehouseCancel"
 )
 
 // StockServiceClient is a client for the stock_iface.v1.StockService service.
@@ -58,6 +64,8 @@ type StockServiceClient interface {
 	InboundAccept(context.Context, *connect.Request[v1.InboundAcceptRequest]) (*connect.Response[v1.InboundAcceptResponse], error)
 	StockAdjustment(context.Context, *connect.Request[v1.StockAdjustmentRequest]) (*connect.Response[v1.StockAdjustmentResponse], error)
 	TransferToWarehouse(context.Context, *connect.Request[v1.TransferToWarehouseRequest]) (*connect.Response[v1.TransferToWarehouseResponse], error)
+	TransferToWarehouseAccept(context.Context, *connect.Request[v1.TransferToWarehouseAcceptRequest]) (*connect.Response[v1.TransferToWarehouseAcceptResponse], error)
+	TransferToWarehouseCancel(context.Context, *connect.Request[v1.TransferToWarehouseCancelRequest]) (*connect.Response[v1.TransferToWarehouseCancelResponse], error)
 }
 
 // NewStockServiceClient constructs a client for the stock_iface.v1.StockService service. By
@@ -101,16 +109,30 @@ func NewStockServiceClient(httpClient connect.HTTPClient, baseURL string, opts .
 			connect.WithSchema(stockServiceMethods.ByName("TransferToWarehouse")),
 			connect.WithClientOptions(opts...),
 		),
+		transferToWarehouseAccept: connect.NewClient[v1.TransferToWarehouseAcceptRequest, v1.TransferToWarehouseAcceptResponse](
+			httpClient,
+			baseURL+StockServiceTransferToWarehouseAcceptProcedure,
+			connect.WithSchema(stockServiceMethods.ByName("TransferToWarehouseAccept")),
+			connect.WithClientOptions(opts...),
+		),
+		transferToWarehouseCancel: connect.NewClient[v1.TransferToWarehouseCancelRequest, v1.TransferToWarehouseCancelResponse](
+			httpClient,
+			baseURL+StockServiceTransferToWarehouseCancelProcedure,
+			connect.WithSchema(stockServiceMethods.ByName("TransferToWarehouseCancel")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // stockServiceClient implements StockServiceClient.
 type stockServiceClient struct {
-	inboundCreate       *connect.Client[v1.InboundCreateRequest, v1.InboundCreateResponse]
-	inboundUpdate       *connect.Client[v1.InboundUpdateRequest, v1.InboundUpdateResponse]
-	inboundAccept       *connect.Client[v1.InboundAcceptRequest, v1.InboundAcceptResponse]
-	stockAdjustment     *connect.Client[v1.StockAdjustmentRequest, v1.StockAdjustmentResponse]
-	transferToWarehouse *connect.Client[v1.TransferToWarehouseRequest, v1.TransferToWarehouseResponse]
+	inboundCreate             *connect.Client[v1.InboundCreateRequest, v1.InboundCreateResponse]
+	inboundUpdate             *connect.Client[v1.InboundUpdateRequest, v1.InboundUpdateResponse]
+	inboundAccept             *connect.Client[v1.InboundAcceptRequest, v1.InboundAcceptResponse]
+	stockAdjustment           *connect.Client[v1.StockAdjustmentRequest, v1.StockAdjustmentResponse]
+	transferToWarehouse       *connect.Client[v1.TransferToWarehouseRequest, v1.TransferToWarehouseResponse]
+	transferToWarehouseAccept *connect.Client[v1.TransferToWarehouseAcceptRequest, v1.TransferToWarehouseAcceptResponse]
+	transferToWarehouseCancel *connect.Client[v1.TransferToWarehouseCancelRequest, v1.TransferToWarehouseCancelResponse]
 }
 
 // InboundCreate calls stock_iface.v1.StockService.InboundCreate.
@@ -138,6 +160,16 @@ func (c *stockServiceClient) TransferToWarehouse(ctx context.Context, req *conne
 	return c.transferToWarehouse.CallUnary(ctx, req)
 }
 
+// TransferToWarehouseAccept calls stock_iface.v1.StockService.TransferToWarehouseAccept.
+func (c *stockServiceClient) TransferToWarehouseAccept(ctx context.Context, req *connect.Request[v1.TransferToWarehouseAcceptRequest]) (*connect.Response[v1.TransferToWarehouseAcceptResponse], error) {
+	return c.transferToWarehouseAccept.CallUnary(ctx, req)
+}
+
+// TransferToWarehouseCancel calls stock_iface.v1.StockService.TransferToWarehouseCancel.
+func (c *stockServiceClient) TransferToWarehouseCancel(ctx context.Context, req *connect.Request[v1.TransferToWarehouseCancelRequest]) (*connect.Response[v1.TransferToWarehouseCancelResponse], error) {
+	return c.transferToWarehouseCancel.CallUnary(ctx, req)
+}
+
 // StockServiceHandler is an implementation of the stock_iface.v1.StockService service.
 type StockServiceHandler interface {
 	// inbound
@@ -146,6 +178,8 @@ type StockServiceHandler interface {
 	InboundAccept(context.Context, *connect.Request[v1.InboundAcceptRequest]) (*connect.Response[v1.InboundAcceptResponse], error)
 	StockAdjustment(context.Context, *connect.Request[v1.StockAdjustmentRequest]) (*connect.Response[v1.StockAdjustmentResponse], error)
 	TransferToWarehouse(context.Context, *connect.Request[v1.TransferToWarehouseRequest]) (*connect.Response[v1.TransferToWarehouseResponse], error)
+	TransferToWarehouseAccept(context.Context, *connect.Request[v1.TransferToWarehouseAcceptRequest]) (*connect.Response[v1.TransferToWarehouseAcceptResponse], error)
+	TransferToWarehouseCancel(context.Context, *connect.Request[v1.TransferToWarehouseCancelRequest]) (*connect.Response[v1.TransferToWarehouseCancelResponse], error)
 }
 
 // NewStockServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -185,6 +219,18 @@ func NewStockServiceHandler(svc StockServiceHandler, opts ...connect.HandlerOpti
 		connect.WithSchema(stockServiceMethods.ByName("TransferToWarehouse")),
 		connect.WithHandlerOptions(opts...),
 	)
+	stockServiceTransferToWarehouseAcceptHandler := connect.NewUnaryHandler(
+		StockServiceTransferToWarehouseAcceptProcedure,
+		svc.TransferToWarehouseAccept,
+		connect.WithSchema(stockServiceMethods.ByName("TransferToWarehouseAccept")),
+		connect.WithHandlerOptions(opts...),
+	)
+	stockServiceTransferToWarehouseCancelHandler := connect.NewUnaryHandler(
+		StockServiceTransferToWarehouseCancelProcedure,
+		svc.TransferToWarehouseCancel,
+		connect.WithSchema(stockServiceMethods.ByName("TransferToWarehouseCancel")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/stock_iface.v1.StockService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case StockServiceInboundCreateProcedure:
@@ -197,6 +243,10 @@ func NewStockServiceHandler(svc StockServiceHandler, opts ...connect.HandlerOpti
 			stockServiceStockAdjustmentHandler.ServeHTTP(w, r)
 		case StockServiceTransferToWarehouseProcedure:
 			stockServiceTransferToWarehouseHandler.ServeHTTP(w, r)
+		case StockServiceTransferToWarehouseAcceptProcedure:
+			stockServiceTransferToWarehouseAcceptHandler.ServeHTTP(w, r)
+		case StockServiceTransferToWarehouseCancelProcedure:
+			stockServiceTransferToWarehouseCancelHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -224,4 +274,12 @@ func (UnimplementedStockServiceHandler) StockAdjustment(context.Context, *connec
 
 func (UnimplementedStockServiceHandler) TransferToWarehouse(context.Context, *connect.Request[v1.TransferToWarehouseRequest]) (*connect.Response[v1.TransferToWarehouseResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("stock_iface.v1.StockService.TransferToWarehouse is not implemented"))
+}
+
+func (UnimplementedStockServiceHandler) TransferToWarehouseAccept(context.Context, *connect.Request[v1.TransferToWarehouseAcceptRequest]) (*connect.Response[v1.TransferToWarehouseAcceptResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("stock_iface.v1.StockService.TransferToWarehouseAccept is not implemented"))
+}
+
+func (UnimplementedStockServiceHandler) TransferToWarehouseCancel(context.Context, *connect.Request[v1.TransferToWarehouseCancelRequest]) (*connect.Response[v1.TransferToWarehouseCancelResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("stock_iface.v1.StockService.TransferToWarehouseCancel is not implemented"))
 }
