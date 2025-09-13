@@ -1,0 +1,54 @@
+syntax = "proto3";
+package report_iface.v1;
+
+import "buf/validate/validate.proto";
+import "common/v1/common.proto";
+
+option go_package = "github.com/pdcgo/schema/services/report_iface/v1;report_iface";
+
+service AccountReportService {
+  rpc Balance(BalanceRequest) returns (BalanceResponse);
+  rpc DailyBalance(DailyBalanceRequest) returns (DailyBalanceResponse);
+}
+
+message BalanceRequest {
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+
+  repeated string account_keys = 2;
+
+  common.v1.TimeFilter time_range = 3 [(buf.validate.field).required = true];
+  // common.v1.PageFilter page = 4 [(buf.validate.field).required = true];
+}
+
+message AccountBalanceItem {
+  // string coa = 1;
+  string account_key = 2;
+  double debit = 3;
+  double credit = 4;
+  double balance = 5;
+}
+
+message BalanceResponse {
+  repeated AccountBalanceItem data = 1;
+}
+
+message DailyBalanceRequest {
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  string account_key = 3 [(buf.validate.field).string.min_len = 1];
+
+  common.v1.TimeFilter time_range = 4 [(buf.validate.field).required = true];
+  common.v1.PageFilter page = 5 [(buf.validate.field).required = true];
+}
+
+message DailyAccountBalanceItem {
+  int64 day = 1;
+  string account_key = 2;
+  double debit = 3;
+  double credit = 4;
+  double balance = 5;
+}
+
+message DailyBalanceResponse {
+  repeated DailyAccountBalanceItem data = 1;
+  common.v1.PageInfo page_info = 2;
+}

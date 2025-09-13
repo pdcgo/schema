@@ -1,0 +1,11 @@
+syntax = "proto3";
+package payment_iface.v1;
+
+// import "common/v1/common.proto";
+// import "buf/validate/validate.proto";
+
+option go_package = "github.com/pdcgo/schema/services/payment_iface/v1;payment_iface";
+
+service PaymentService {
+  // rpc PaymentCreate
+}
