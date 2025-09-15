@@ -123,6 +123,67 @@ func (SortType) EnumDescriptor() ([]byte, []int) {
 	return file_common_v1_common_proto_rawDescGZIP(), []int{1}
 }
 
+type MarketplaceType int32
+
+const (
+	MarketplaceType_MARKETPLACE_TYPE_UNSPECIFIED MarketplaceType = 0
+	MarketplaceType_MARKETPLACE_TYPE_CUSTOM      MarketplaceType = 1
+	MarketplaceType_MARKETPLACE_TYPE_TOKOPEDIA   MarketplaceType = 2
+	MarketplaceType_MARKETPLACE_TYPE_SHOPEE      MarketplaceType = 3
+	MarketplaceType_MARKETPLACE_TYPE_TIKTOK      MarketplaceType = 4
+	MarketplaceType_MARKETPLACE_TYPE_LAZADA      MarketplaceType = 5
+	MarketplaceType_MARKETPLACE_TYPE_MENGANTAR   MarketplaceType = 6
+)
+
+// Enum value maps for MarketplaceType.
+var (
+	MarketplaceType_name = map[int32]string{
+		0: "MARKETPLACE_TYPE_UNSPECIFIED",
+		1: "MARKETPLACE_TYPE_CUSTOM",
+		2: "MARKETPLACE_TYPE_TOKOPEDIA",
+		3: "MARKETPLACE_TYPE_SHOPEE",
+		4: "MARKETPLACE_TYPE_TIKTOK",
+		5: "MARKETPLACE_TYPE_LAZADA",
+		6: "MARKETPLACE_TYPE_MENGANTAR",
+	}
+	MarketplaceType_value = map[string]int32{
+		"MARKETPLACE_TYPE_UNSPECIFIED": 0,
+		"MARKETPLACE_TYPE_CUSTOM":      1,
+		"MARKETPLACE_TYPE_TOKOPEDIA":   2,
+		"MARKETPLACE_TYPE_SHOPEE":      3,
+		"MARKETPLACE_TYPE_TIKTOK":      4,
+		"MARKETPLACE_TYPE_LAZADA":      5,
+		"MARKETPLACE_TYPE_MENGANTAR":   6,
+	}
+)
+
+func (x MarketplaceType) Enum() *MarketplaceType {
+	p := new(MarketplaceType)
+	*p = x
+	return p
+}
+
+func (x MarketplaceType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (MarketplaceType) Descriptor() protoreflect.EnumDescriptor {
+	return file_common_v1_common_proto_enumTypes[2].Descriptor()
+}
+
+func (MarketplaceType) Type() protoreflect.EnumType {
+	return &file_common_v1_common_proto_enumTypes[2]
+}
+
+func (x MarketplaceType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use MarketplaceType.Descriptor instead.
+func (MarketplaceType) EnumDescriptor() ([]byte, []int) {
+	return file_common_v1_common_proto_rawDescGZIP(), []int{2}
+}
+
 type TimeKeyValueMetric struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Time          int64                  `protobuf:"varint,1,opt,name=time,proto3" json:"time,omitempty"`
@@ -565,7 +626,15 @@ const file_common_v1_common_proto_rawDesc = "" +
 	"\bSortType\x12\x19\n" +
 	"\x15SORT_TYPE_UNSPECIFIED\x10\x00\x12\x12\n" +
 	"\x0eSORT_TYPE_DESC\x10\x01\x12\x11\n" +
-	"\rSORT_TYPE_ASC\x10\x02B\x94\x01\n" +
+	"\rSORT_TYPE_ASC\x10\x02*\xe7\x01\n" +
+	"\x0fMarketplaceType\x12 \n" +
+	"\x1cMARKETPLACE_TYPE_UNSPECIFIED\x10\x00\x12\x1b\n" +
+	"\x17MARKETPLACE_TYPE_CUSTOM\x10\x01\x12\x1e\n" +
+	"\x1aMARKETPLACE_TYPE_TOKOPEDIA\x10\x02\x12\x1b\n" +
+	"\x17MARKETPLACE_TYPE_SHOPEE\x10\x03\x12\x1b\n" +
+	"\x17MARKETPLACE_TYPE_TIKTOK\x10\x04\x12\x1b\n" +
+	"\x17MARKETPLACE_TYPE_LAZADA\x10\x05\x12\x1e\n" +
+	"\x1aMARKETPLACE_TYPE_MENGANTAR\x10\x06B\x94\x01\n" +
 	"\rcom.common.v1B\vCommonProtoP\x01Z1github.com/pdcgo/schema/services/common/v1;common\xa2\x02\x03CXX\xaa\x02\tCommon.V1\xca\x02\tCommon\\V1\xe2\x02\x15Common\\V1\\GPBMetadata\xea\x02\n" +
 	"Common::V1b\x06proto3"
 
@@ -581,18 +650,19 @@ func file_common_v1_common_proto_rawDescGZIP() []byte {
 	return file_common_v1_common_proto_rawDescData
 }
 
-var file_common_v1_common_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_common_v1_common_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
 var file_common_v1_common_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_common_v1_common_proto_goTypes = []any{
 	(TimeType)(0),              // 0: common.v1.TimeType
 	(SortType)(0),              // 1: common.v1.SortType
-	(*TimeKeyValueMetric)(nil), // 2: common.v1.TimeKeyValueMetric
-	(*User)(nil),               // 3: common.v1.User
-	(*Team)(nil),               // 4: common.v1.Team
-	(*KeyName)(nil),            // 5: common.v1.KeyName
-	(*TimeFilter)(nil),         // 6: common.v1.TimeFilter
-	(*PageFilter)(nil),         // 7: common.v1.PageFilter
-	(*PageInfo)(nil),           // 8: common.v1.PageInfo
+	(MarketplaceType)(0),       // 2: common.v1.MarketplaceType
+	(*TimeKeyValueMetric)(nil), // 3: common.v1.TimeKeyValueMetric
+	(*User)(nil),               // 4: common.v1.User
+	(*Team)(nil),               // 5: common.v1.Team
+	(*KeyName)(nil),            // 6: common.v1.KeyName
+	(*TimeFilter)(nil),         // 7: common.v1.TimeFilter
+	(*PageFilter)(nil),         // 8: common.v1.PageFilter
+	(*PageInfo)(nil),           // 9: common.v1.PageInfo
 }
 var file_common_v1_common_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
@@ -612,7 +682,7 @@ func file_common_v1_common_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_common_v1_common_proto_rawDesc), len(file_common_v1_common_proto_rawDesc)),
-			NumEnums:      2,
+			NumEnums:      3,
 			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   0,

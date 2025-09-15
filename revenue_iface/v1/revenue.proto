@@ -1,8 +1,8 @@
 syntax = "proto3";
 package revenue_iface.v1;
 
-// import "common/v1/common.proto";
 import "buf/validate/validate.proto";
+import "common/v1/common.proto";
 
 option go_package = "github.com/pdcgo/schema/services/revenue_iface/v1;revenue_iface";
 
@@ -53,9 +53,13 @@ message OnOrderRequest {
   uint64 warehouse_id = 3 [(buf.validate.field).uint64 = {gt: 0}];
   uint64 order_id = 4 [(buf.validate.field).required = true];
   OrderEvent event = 5 [(buf.validate.field).enum = {defined_only: true}];
+  common.v1.MarketplaceType marketplace_type = 11 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
   double order_amount = 6 [(buf.validate.field).double = {gt: 0}];
   double warehouse_fee = 7 [(buf.validate.field).double = {gte: 0}];
-  string description = 8 [(buf.validate.field).string = {max_len: 1024}];
+  // string description = 8 [(buf.validate.field).string = {max_len: 1024}];
   repeated BorrowStock borrow_stock = 9 [(buf.validate.field).repeated = {min_items: 0}];
   double own_stock_amount = 10 [(buf.validate.field).double = {gt: 0}];
 }

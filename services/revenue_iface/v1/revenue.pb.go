@@ -8,6 +8,7 @@ package revenue_iface
 
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
+	v1 "github.com/pdcgo/schema/services/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -317,17 +318,18 @@ func (x *BorrowStock) GetSellAmount() float64 {
 }
 
 type OnOrderRequest struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	Token          string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
-	TeamId         uint64                 `protobuf:"varint,2,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
-	WarehouseId    uint64                 `protobuf:"varint,3,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
-	OrderId        uint64                 `protobuf:"varint,4,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
-	Event          OrderEvent             `protobuf:"varint,5,opt,name=event,proto3,enum=revenue_iface.v1.OrderEvent" json:"event,omitempty"`
-	OrderAmount    float64                `protobuf:"fixed64,6,opt,name=order_amount,json=orderAmount,proto3" json:"order_amount,omitempty"`
-	WarehouseFee   float64                `protobuf:"fixed64,7,opt,name=warehouse_fee,json=warehouseFee,proto3" json:"warehouse_fee,omitempty"`
-	Description    string                 `protobuf:"bytes,8,opt,name=description,proto3" json:"description,omitempty"`
-	BorrowStock    []*BorrowStock         `protobuf:"bytes,9,rep,name=borrow_stock,json=borrowStock,proto3" json:"borrow_stock,omitempty"`
-	OwnStockAmount float64                `protobuf:"fixed64,10,opt,name=own_stock_amount,json=ownStockAmount,proto3" json:"own_stock_amount,omitempty"`
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	Token           string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
+	TeamId          uint64                 `protobuf:"varint,2,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	WarehouseId     uint64                 `protobuf:"varint,3,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
+	OrderId         uint64                 `protobuf:"varint,4,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	Event           OrderEvent             `protobuf:"varint,5,opt,name=event,proto3,enum=revenue_iface.v1.OrderEvent" json:"event,omitempty"`
+	MarketplaceType v1.MarketplaceType     `protobuf:"varint,11,opt,name=marketplace_type,json=marketplaceType,proto3,enum=common.v1.MarketplaceType" json:"marketplace_type,omitempty"`
+	OrderAmount     float64                `protobuf:"fixed64,6,opt,name=order_amount,json=orderAmount,proto3" json:"order_amount,omitempty"`
+	WarehouseFee    float64                `protobuf:"fixed64,7,opt,name=warehouse_fee,json=warehouseFee,proto3" json:"warehouse_fee,omitempty"`
+	// string description = 8 [(buf.validate.field).string = {max_len: 1024}];
+	BorrowStock    []*BorrowStock `protobuf:"bytes,9,rep,name=borrow_stock,json=borrowStock,proto3" json:"borrow_stock,omitempty"`
+	OwnStockAmount float64        `protobuf:"fixed64,10,opt,name=own_stock_amount,json=ownStockAmount,proto3" json:"own_stock_amount,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -397,6 +399,13 @@ func (x *OnOrderRequest) GetEvent() OrderEvent {
 	return OrderEvent_ORDER_EVENT_UNSPECIFIED
 }
 
+func (x *OnOrderRequest) GetMarketplaceType() v1.MarketplaceType {
+	if x != nil {
+		return x.MarketplaceType
+	}
+	return v1.MarketplaceType(0)
+}
+
 func (x *OnOrderRequest) GetOrderAmount() float64 {
 	if x != nil {
 		return x.OrderAmount
@@ -409,13 +418,6 @@ func (x *OnOrderRequest) GetWarehouseFee() float64 {
 		return x.WarehouseFee
 	}
 	return 0
-}
-
-func (x *OnOrderRequest) GetDescription() string {
-	if x != nil {
-		return x.Description
-	}
-	return ""
 }
 
 func (x *OnOrderRequest) GetBorrowStock() []*BorrowStock {
@@ -472,7 +474,7 @@ var File_revenue_iface_v1_revenue_proto protoreflect.FileDescriptor
 
 const file_revenue_iface_v1_revenue_proto_rawDesc = "" +
 	"\n" +
-	"\x1erevenue_iface/v1/revenue.proto\x12\x10revenue_iface.v1\x1a\x1bbuf/validate/validate.proto\"\xa1\x01\n" +
+	"\x1erevenue_iface/v1/revenue.proto\x12\x10revenue_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\"\xa1\x01\n" +
 	"\x11WithdrawalRequest\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12 \n" +
 	"\ashop_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06shopId\x12\x17\n" +
@@ -486,16 +488,17 @@ const file_revenue_iface_v1_revenue_proto_rawDesc = "" +
 	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12\x16\n" +
 	"\x06amount\x18\x02 \x01(\x01R\x06amount\x12\x1f\n" +
 	"\vsell_amount\x18\x03 \x01(\x01R\n" +
-	"sellAmount\"\xf7\x03\n" +
+	"sellAmount\"\x9e\x04\n" +
 	"\x0eOnOrderRequest\x12\x1c\n" +
 	"\x05token\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\x05token\x12 \n" +
 	"\ateam_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12*\n" +
 	"\fwarehouse_id\x18\x03 \x01(\x04B\a\xbaH\x042\x02 \x00R\vwarehouseId\x12!\n" +
 	"\border_id\x18\x04 \x01(\x04B\x06\xbaH\x03\xc8\x01\x01R\aorderId\x12<\n" +
-	"\x05event\x18\x05 \x01(\x0e2\x1c.revenue_iface.v1.OrderEventB\b\xbaH\x05\x82\x01\x02\x10\x01R\x05event\x121\n" +
+	"\x05event\x18\x05 \x01(\x0e2\x1c.revenue_iface.v1.OrderEventB\b\xbaH\x05\x82\x01\x02\x10\x01R\x05event\x12Q\n" +
+	"\x10marketplace_type\x18\v \x01(\x0e2\x1a.common.v1.MarketplaceTypeB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x0fmarketplaceType\x121\n" +
 	"\forder_amount\x18\x06 \x01(\x01B\x0e\xbaH\v\x12\t!\x00\x00\x00\x00\x00\x00\x00\x00R\vorderAmount\x123\n" +
-	"\rwarehouse_fee\x18\a \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\fwarehouseFee\x12*\n" +
-	"\vdescription\x18\b \x01(\tB\b\xbaH\x05r\x03\x18\x80\bR\vdescription\x12J\n" +
+	"\rwarehouse_fee\x18\a \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\fwarehouseFee\x12J\n" +
 	"\fborrow_stock\x18\t \x03(\v2\x1d.revenue_iface.v1.BorrowStockB\b\xbaH\x05\x92\x01\x02\b\x00R\vborrowStock\x128\n" +
 	"\x10own_stock_amount\x18\n" +
 	" \x01(\x01B\x0e\xbaH\v\x12\t!\x00\x00\x00\x00\x00\x00\x00\x00R\x0eownStockAmount\"\x11\n" +
@@ -535,21 +538,23 @@ var file_revenue_iface_v1_revenue_proto_goTypes = []any{
 	(*BorrowStock)(nil),         // 5: revenue_iface.v1.BorrowStock
 	(*OnOrderRequest)(nil),      // 6: revenue_iface.v1.OnOrderRequest
 	(*OnOrderResponse)(nil),     // 7: revenue_iface.v1.OnOrderResponse
+	(v1.MarketplaceType)(0),     // 8: common.v1.MarketplaceType
 }
 var file_revenue_iface_v1_revenue_proto_depIdxs = []int32{
 	0, // 0: revenue_iface.v1.OnOrderRequest.event:type_name -> revenue_iface.v1.OrderEvent
-	5, // 1: revenue_iface.v1.OnOrderRequest.borrow_stock:type_name -> revenue_iface.v1.BorrowStock
-	6, // 2: revenue_iface.v1.RevenueService.OnOrder:input_type -> revenue_iface.v1.OnOrderRequest
-	3, // 3: revenue_iface.v1.RevenueService.OrderCancel:input_type -> revenue_iface.v1.OrderCancelRequest
-	1, // 4: revenue_iface.v1.RevenueService.Withdrawal:input_type -> revenue_iface.v1.WithdrawalRequest
-	7, // 5: revenue_iface.v1.RevenueService.OnOrder:output_type -> revenue_iface.v1.OnOrderResponse
-	4, // 6: revenue_iface.v1.RevenueService.OrderCancel:output_type -> revenue_iface.v1.OrderCancelResponse
-	2, // 7: revenue_iface.v1.RevenueService.Withdrawal:output_type -> revenue_iface.v1.WithdrawalResponse
-	5, // [5:8] is the sub-list for method output_type
-	2, // [2:5] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	8, // 1: revenue_iface.v1.OnOrderRequest.marketplace_type:type_name -> common.v1.MarketplaceType
+	5, // 2: revenue_iface.v1.OnOrderRequest.borrow_stock:type_name -> revenue_iface.v1.BorrowStock
+	6, // 3: revenue_iface.v1.RevenueService.OnOrder:input_type -> revenue_iface.v1.OnOrderRequest
+	3, // 4: revenue_iface.v1.RevenueService.OrderCancel:input_type -> revenue_iface.v1.OrderCancelRequest
+	1, // 5: revenue_iface.v1.RevenueService.Withdrawal:input_type -> revenue_iface.v1.WithdrawalRequest
+	7, // 6: revenue_iface.v1.RevenueService.OnOrder:output_type -> revenue_iface.v1.OnOrderResponse
+	4, // 7: revenue_iface.v1.RevenueService.OrderCancel:output_type -> revenue_iface.v1.OrderCancelResponse
+	2, // 8: revenue_iface.v1.RevenueService.Withdrawal:output_type -> revenue_iface.v1.WithdrawalResponse
+	6, // [6:9] is the sub-list for method output_type
+	3, // [3:6] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_revenue_iface_v1_revenue_proto_init() }
