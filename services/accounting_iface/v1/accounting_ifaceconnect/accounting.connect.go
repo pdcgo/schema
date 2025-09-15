@@ -57,6 +57,9 @@ const (
 	// AccountServiceTransferCreateProcedure is the fully-qualified name of the AccountService's
 	// TransferCreate RPC.
 	AccountServiceTransferCreateProcedure = "/accounting_iface.v1.AccountService/TransferCreate"
+	// AccountServiceTransferCancelProcedure is the fully-qualified name of the AccountService's
+	// TransferCancel RPC.
+	AccountServiceTransferCancelProcedure = "/accounting_iface.v1.AccountService/TransferCancel"
 	// AccountServiceAccountMutationListProcedure is the fully-qualified name of the AccountService's
 	// AccountMutationList RPC.
 	AccountServiceAccountMutationListProcedure = "/accounting_iface.v1.AccountService/AccountMutationList"
@@ -74,6 +77,7 @@ type AccountServiceClient interface {
 	AccountBalanceInit(context.Context, *connect.Request[v1.AccountBalanceInitRequest]) (*connect.Response[v1.AccountBalanceInitResponse], error)
 	// untuk transfer ke account lain
 	TransferCreate(context.Context, *connect.Request[v1.TransferCreateRequest]) (*connect.Response[v1.TransferCreateResponse], error)
+	TransferCancel(context.Context, *connect.Request[v1.TransferCancelRequest]) (*connect.Response[v1.TransferCancelResponse], error)
 	AccountMutationList(context.Context, *connect.Request[v1.AccountMutationListRequest]) (*connect.Response[v1.AccountMutationListResponse], error)
 }
 
@@ -136,6 +140,12 @@ func NewAccountServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			connect.WithSchema(accountServiceMethods.ByName("TransferCreate")),
 			connect.WithClientOptions(opts...),
 		),
+		transferCancel: connect.NewClient[v1.TransferCancelRequest, v1.TransferCancelResponse](
+			httpClient,
+			baseURL+AccountServiceTransferCancelProcedure,
+			connect.WithSchema(accountServiceMethods.ByName("TransferCancel")),
+			connect.WithClientOptions(opts...),
+		),
 		accountMutationList: connect.NewClient[v1.AccountMutationListRequest, v1.AccountMutationListResponse](
 			httpClient,
 			baseURL+AccountServiceAccountMutationListProcedure,
@@ -155,6 +165,7 @@ type accountServiceClient struct {
 	accountTypeList     *connect.Client[v1.AccountTypeListRequest, v1.AccountTypeListResponse]
 	accountBalanceInit  *connect.Client[v1.AccountBalanceInitRequest, v1.AccountBalanceInitResponse]
 	transferCreate      *connect.Client[v1.TransferCreateRequest, v1.TransferCreateResponse]
+	transferCancel      *connect.Client[v1.TransferCancelRequest, v1.TransferCancelResponse]
 	accountMutationList *connect.Client[v1.AccountMutationListRequest, v1.AccountMutationListResponse]
 }
 
@@ -198,6 +209,11 @@ func (c *accountServiceClient) TransferCreate(ctx context.Context, req *connect.
 	return c.transferCreate.CallUnary(ctx, req)
 }
 
+// TransferCancel calls accounting_iface.v1.AccountService.TransferCancel.
+func (c *accountServiceClient) TransferCancel(ctx context.Context, req *connect.Request[v1.TransferCancelRequest]) (*connect.Response[v1.TransferCancelResponse], error) {
+	return c.transferCancel.CallUnary(ctx, req)
+}
+
 // AccountMutationList calls accounting_iface.v1.AccountService.AccountMutationList.
 func (c *accountServiceClient) AccountMutationList(ctx context.Context, req *connect.Request[v1.AccountMutationListRequest]) (*connect.Response[v1.AccountMutationListResponse], error) {
 	return c.accountMutationList.CallUnary(ctx, req)
@@ -215,6 +231,7 @@ type AccountServiceHandler interface {
 	AccountBalanceInit(context.Context, *connect.Request[v1.AccountBalanceInitRequest]) (*connect.Response[v1.AccountBalanceInitResponse], error)
 	// untuk transfer ke account lain
 	TransferCreate(context.Context, *connect.Request[v1.TransferCreateRequest]) (*connect.Response[v1.TransferCreateResponse], error)
+	TransferCancel(context.Context, *connect.Request[v1.TransferCancelRequest]) (*connect.Response[v1.TransferCancelResponse], error)
 	AccountMutationList(context.Context, *connect.Request[v1.AccountMutationListRequest]) (*connect.Response[v1.AccountMutationListResponse], error)
 }
 
@@ -273,6 +290,12 @@ func NewAccountServiceHandler(svc AccountServiceHandler, opts ...connect.Handler
 		connect.WithSchema(accountServiceMethods.ByName("TransferCreate")),
 		connect.WithHandlerOptions(opts...),
 	)
+	accountServiceTransferCancelHandler := connect.NewUnaryHandler(
+		AccountServiceTransferCancelProcedure,
+		svc.TransferCancel,
+		connect.WithSchema(accountServiceMethods.ByName("TransferCancel")),
+		connect.WithHandlerOptions(opts...),
+	)
 	accountServiceAccountMutationListHandler := connect.NewUnaryHandler(
 		AccountServiceAccountMutationListProcedure,
 		svc.AccountMutationList,
@@ -297,6 +320,8 @@ func NewAccountServiceHandler(svc AccountServiceHandler, opts ...connect.Handler
 			accountServiceAccountBalanceInitHandler.ServeHTTP(w, r)
 		case AccountServiceTransferCreateProcedure:
 			accountServiceTransferCreateHandler.ServeHTTP(w, r)
+		case AccountServiceTransferCancelProcedure:
+			accountServiceTransferCancelHandler.ServeHTTP(w, r)
 		case AccountServiceAccountMutationListProcedure:
 			accountServiceAccountMutationListHandler.ServeHTTP(w, r)
 		default:
@@ -338,6 +363,10 @@ func (UnimplementedAccountServiceHandler) AccountBalanceInit(context.Context, *c
 
 func (UnimplementedAccountServiceHandler) TransferCreate(context.Context, *connect.Request[v1.TransferCreateRequest]) (*connect.Response[v1.TransferCreateResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("accounting_iface.v1.AccountService.TransferCreate is not implemented"))
+}
+
+func (UnimplementedAccountServiceHandler) TransferCancel(context.Context, *connect.Request[v1.TransferCancelRequest]) (*connect.Response[v1.TransferCancelResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("accounting_iface.v1.AccountService.TransferCancel is not implemented"))
 }
 
 func (UnimplementedAccountServiceHandler) AccountMutationList(context.Context, *connect.Request[v1.AccountMutationListRequest]) (*connect.Response[v1.AccountMutationListResponse], error) {

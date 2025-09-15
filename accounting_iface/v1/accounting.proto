@@ -20,8 +20,12 @@ service AccountService {
 
   // untuk transfer ke account lain
   rpc TransferCreate(TransferCreateRequest) returns (TransferCreateResponse);
+  rpc TransferCancel(TransferCancelRequest) returns (TransferCancelResponse);
   rpc AccountMutationList(AccountMutationListRequest) returns (AccountMutationListResponse);
 }
+
+message TransferCancelRequest {}
+message TransferCancelResponse {}
 
 enum MutationType {
   MUTATION_TYPE_UNSPECIFIED = 0;
