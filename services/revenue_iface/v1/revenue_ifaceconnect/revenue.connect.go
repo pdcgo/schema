@@ -38,6 +38,15 @@ const (
 	// RevenueServiceOrderCancelProcedure is the fully-qualified name of the RevenueService's
 	// OrderCancel RPC.
 	RevenueServiceOrderCancelProcedure = "/revenue_iface.v1.RevenueService/OrderCancel"
+	// RevenueServiceOrderReturnProcedure is the fully-qualified name of the RevenueService's
+	// OrderReturn RPC.
+	RevenueServiceOrderReturnProcedure = "/revenue_iface.v1.RevenueService/OrderReturn"
+	// RevenueServiceOrderCompletedProcedure is the fully-qualified name of the RevenueService's
+	// OrderCompleted RPC.
+	RevenueServiceOrderCompletedProcedure = "/revenue_iface.v1.RevenueService/OrderCompleted"
+	// RevenueServiceRevenueAdjustmentProcedure is the fully-qualified name of the RevenueService's
+	// RevenueAdjustment RPC.
+	RevenueServiceRevenueAdjustmentProcedure = "/revenue_iface.v1.RevenueService/RevenueAdjustment"
 	// RevenueServiceWithdrawalProcedure is the fully-qualified name of the RevenueService's Withdrawal
 	// RPC.
 	RevenueServiceWithdrawalProcedure = "/revenue_iface.v1.RevenueService/Withdrawal"
@@ -47,7 +56,9 @@ const (
 type RevenueServiceClient interface {
 	OnOrder(context.Context) *connect.ClientStreamForClient[v1.OnOrderRequest, v1.OnOrderResponse]
 	OrderCancel(context.Context, *connect.Request[v1.OrderCancelRequest]) (*connect.Response[v1.OrderCancelResponse], error)
-	// rpc OrderReturn(OrderReturnRequest) returns (OrderReturnResponse);
+	OrderReturn(context.Context, *connect.Request[v1.OrderReturnRequest]) (*connect.Response[v1.OrderReturnResponse], error)
+	OrderCompleted(context.Context, *connect.Request[v1.OrderCompletedRequest]) (*connect.Response[v1.OrderCompletedResponse], error)
+	RevenueAdjustment(context.Context, *connect.Request[v1.RevenueAdjustmentRequest]) (*connect.Response[v1.RevenueAdjustmentResponse], error)
 	Withdrawal(context.Context, *connect.Request[v1.WithdrawalRequest]) (*connect.Response[v1.WithdrawalResponse], error)
 }
 
@@ -74,6 +85,24 @@ func NewRevenueServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			connect.WithSchema(revenueServiceMethods.ByName("OrderCancel")),
 			connect.WithClientOptions(opts...),
 		),
+		orderReturn: connect.NewClient[v1.OrderReturnRequest, v1.OrderReturnResponse](
+			httpClient,
+			baseURL+RevenueServiceOrderReturnProcedure,
+			connect.WithSchema(revenueServiceMethods.ByName("OrderReturn")),
+			connect.WithClientOptions(opts...),
+		),
+		orderCompleted: connect.NewClient[v1.OrderCompletedRequest, v1.OrderCompletedResponse](
+			httpClient,
+			baseURL+RevenueServiceOrderCompletedProcedure,
+			connect.WithSchema(revenueServiceMethods.ByName("OrderCompleted")),
+			connect.WithClientOptions(opts...),
+		),
+		revenueAdjustment: connect.NewClient[v1.RevenueAdjustmentRequest, v1.RevenueAdjustmentResponse](
+			httpClient,
+			baseURL+RevenueServiceRevenueAdjustmentProcedure,
+			connect.WithSchema(revenueServiceMethods.ByName("RevenueAdjustment")),
+			connect.WithClientOptions(opts...),
+		),
 		withdrawal: connect.NewClient[v1.WithdrawalRequest, v1.WithdrawalResponse](
 			httpClient,
 			baseURL+RevenueServiceWithdrawalProcedure,
@@ -85,9 +114,12 @@ func NewRevenueServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 
 // revenueServiceClient implements RevenueServiceClient.
 type revenueServiceClient struct {
-	onOrder     *connect.Client[v1.OnOrderRequest, v1.OnOrderResponse]
-	orderCancel *connect.Client[v1.OrderCancelRequest, v1.OrderCancelResponse]
-	withdrawal  *connect.Client[v1.WithdrawalRequest, v1.WithdrawalResponse]
+	onOrder           *connect.Client[v1.OnOrderRequest, v1.OnOrderResponse]
+	orderCancel       *connect.Client[v1.OrderCancelRequest, v1.OrderCancelResponse]
+	orderReturn       *connect.Client[v1.OrderReturnRequest, v1.OrderReturnResponse]
+	orderCompleted    *connect.Client[v1.OrderCompletedRequest, v1.OrderCompletedResponse]
+	revenueAdjustment *connect.Client[v1.RevenueAdjustmentRequest, v1.RevenueAdjustmentResponse]
+	withdrawal        *connect.Client[v1.WithdrawalRequest, v1.WithdrawalResponse]
 }
 
 // OnOrder calls revenue_iface.v1.RevenueService.OnOrder.
@@ -100,6 +132,21 @@ func (c *revenueServiceClient) OrderCancel(ctx context.Context, req *connect.Req
 	return c.orderCancel.CallUnary(ctx, req)
 }
 
+// OrderReturn calls revenue_iface.v1.RevenueService.OrderReturn.
+func (c *revenueServiceClient) OrderReturn(ctx context.Context, req *connect.Request[v1.OrderReturnRequest]) (*connect.Response[v1.OrderReturnResponse], error) {
+	return c.orderReturn.CallUnary(ctx, req)
+}
+
+// OrderCompleted calls revenue_iface.v1.RevenueService.OrderCompleted.
+func (c *revenueServiceClient) OrderCompleted(ctx context.Context, req *connect.Request[v1.OrderCompletedRequest]) (*connect.Response[v1.OrderCompletedResponse], error) {
+	return c.orderCompleted.CallUnary(ctx, req)
+}
+
+// RevenueAdjustment calls revenue_iface.v1.RevenueService.RevenueAdjustment.
+func (c *revenueServiceClient) RevenueAdjustment(ctx context.Context, req *connect.Request[v1.RevenueAdjustmentRequest]) (*connect.Response[v1.RevenueAdjustmentResponse], error) {
+	return c.revenueAdjustment.CallUnary(ctx, req)
+}
+
 // Withdrawal calls revenue_iface.v1.RevenueService.Withdrawal.
 func (c *revenueServiceClient) Withdrawal(ctx context.Context, req *connect.Request[v1.WithdrawalRequest]) (*connect.Response[v1.WithdrawalResponse], error) {
 	return c.withdrawal.CallUnary(ctx, req)
@@ -109,7 +156,9 @@ func (c *revenueServiceClient) Withdrawal(ctx context.Context, req *connect.Requ
 type RevenueServiceHandler interface {
 	OnOrder(context.Context, *connect.ClientStream[v1.OnOrderRequest]) (*connect.Response[v1.OnOrderResponse], error)
 	OrderCancel(context.Context, *connect.Request[v1.OrderCancelRequest]) (*connect.Response[v1.OrderCancelResponse], error)
-	// rpc OrderReturn(OrderReturnRequest) returns (OrderReturnResponse);
+	OrderReturn(context.Context, *connect.Request[v1.OrderReturnRequest]) (*connect.Response[v1.OrderReturnResponse], error)
+	OrderCompleted(context.Context, *connect.Request[v1.OrderCompletedRequest]) (*connect.Response[v1.OrderCompletedResponse], error)
+	RevenueAdjustment(context.Context, *connect.Request[v1.RevenueAdjustmentRequest]) (*connect.Response[v1.RevenueAdjustmentResponse], error)
 	Withdrawal(context.Context, *connect.Request[v1.WithdrawalRequest]) (*connect.Response[v1.WithdrawalResponse], error)
 }
 
@@ -132,6 +181,24 @@ func NewRevenueServiceHandler(svc RevenueServiceHandler, opts ...connect.Handler
 		connect.WithSchema(revenueServiceMethods.ByName("OrderCancel")),
 		connect.WithHandlerOptions(opts...),
 	)
+	revenueServiceOrderReturnHandler := connect.NewUnaryHandler(
+		RevenueServiceOrderReturnProcedure,
+		svc.OrderReturn,
+		connect.WithSchema(revenueServiceMethods.ByName("OrderReturn")),
+		connect.WithHandlerOptions(opts...),
+	)
+	revenueServiceOrderCompletedHandler := connect.NewUnaryHandler(
+		RevenueServiceOrderCompletedProcedure,
+		svc.OrderCompleted,
+		connect.WithSchema(revenueServiceMethods.ByName("OrderCompleted")),
+		connect.WithHandlerOptions(opts...),
+	)
+	revenueServiceRevenueAdjustmentHandler := connect.NewUnaryHandler(
+		RevenueServiceRevenueAdjustmentProcedure,
+		svc.RevenueAdjustment,
+		connect.WithSchema(revenueServiceMethods.ByName("RevenueAdjustment")),
+		connect.WithHandlerOptions(opts...),
+	)
 	revenueServiceWithdrawalHandler := connect.NewUnaryHandler(
 		RevenueServiceWithdrawalProcedure,
 		svc.Withdrawal,
@@ -144,6 +211,12 @@ func NewRevenueServiceHandler(svc RevenueServiceHandler, opts ...connect.Handler
 			revenueServiceOnOrderHandler.ServeHTTP(w, r)
 		case RevenueServiceOrderCancelProcedure:
 			revenueServiceOrderCancelHandler.ServeHTTP(w, r)
+		case RevenueServiceOrderReturnProcedure:
+			revenueServiceOrderReturnHandler.ServeHTTP(w, r)
+		case RevenueServiceOrderCompletedProcedure:
+			revenueServiceOrderCompletedHandler.ServeHTTP(w, r)
+		case RevenueServiceRevenueAdjustmentProcedure:
+			revenueServiceRevenueAdjustmentHandler.ServeHTTP(w, r)
 		case RevenueServiceWithdrawalProcedure:
 			revenueServiceWithdrawalHandler.ServeHTTP(w, r)
 		default:
@@ -161,6 +234,18 @@ func (UnimplementedRevenueServiceHandler) OnOrder(context.Context, *connect.Clie
 
 func (UnimplementedRevenueServiceHandler) OrderCancel(context.Context, *connect.Request[v1.OrderCancelRequest]) (*connect.Response[v1.OrderCancelResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("revenue_iface.v1.RevenueService.OrderCancel is not implemented"))
+}
+
+func (UnimplementedRevenueServiceHandler) OrderReturn(context.Context, *connect.Request[v1.OrderReturnRequest]) (*connect.Response[v1.OrderReturnResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("revenue_iface.v1.RevenueService.OrderReturn is not implemented"))
+}
+
+func (UnimplementedRevenueServiceHandler) OrderCompleted(context.Context, *connect.Request[v1.OrderCompletedRequest]) (*connect.Response[v1.OrderCompletedResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("revenue_iface.v1.RevenueService.OrderCompleted is not implemented"))
+}
+
+func (UnimplementedRevenueServiceHandler) RevenueAdjustment(context.Context, *connect.Request[v1.RevenueAdjustmentRequest]) (*connect.Response[v1.RevenueAdjustmentResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("revenue_iface.v1.RevenueService.RevenueAdjustment is not implemented"))
 }
 
 func (UnimplementedRevenueServiceHandler) Withdrawal(context.Context, *connect.Request[v1.WithdrawalRequest]) (*connect.Response[v1.WithdrawalResponse], error) {

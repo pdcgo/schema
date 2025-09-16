@@ -316,6 +316,8 @@ type Team struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	TeamCode      string                 `protobuf:"bytes,3,opt,name=team_code,json=teamCode,proto3" json:"team_code,omitempty"`
+	Type          string                 `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -360,6 +362,20 @@ func (x *Team) GetId() uint64 {
 func (x *Team) GetName() string {
 	if x != nil {
 		return x.Name
+	}
+	return ""
+}
+
+func (x *Team) GetTeamCode() string {
+	if x != nil {
+		return x.TeamCode
+	}
+	return ""
+}
+
+func (x *Team) GetType() string {
+	if x != nil {
+		return x.Type
 	}
 	return ""
 }
@@ -593,10 +609,12 @@ const file_common_v1_common_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1a\n" +
 	"\busername\x18\x03 \x01(\tR\busername\x12'\n" +
-	"\x0fprofile_picture\x18\x04 \x01(\tR\x0eprofilePicture\"*\n" +
+	"\x0fprofile_picture\x18\x04 \x01(\tR\x0eprofilePicture\"[\n" +
 	"\x04Team\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\"G\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1b\n" +
+	"\tteam_code\x18\x03 \x01(\tR\bteamCode\x12\x12\n" +
+	"\x04type\x18\x04 \x01(\tR\x04type\"G\n" +
 	"\aKeyName\x12\x1c\n" +
 	"\x03key\x18\x01 \x01(\tB\n" +
 	"\xbaH\a\xc8\x01\x01r\x02\x18dR\x03key\x12\x1e\n" +

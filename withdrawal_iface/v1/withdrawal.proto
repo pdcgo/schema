@@ -1,0 +1,80 @@
+syntax = "proto3";
+package withdrawal_iface.v1;
+
+import "buf/validate/validate.proto";
+import "common/v1/common.proto";
+
+option go_package = "github.com/pdcgo/schema/services/withdrawal_iface/v1;withdrawal_iface";
+
+service WithdrawalService {
+  rpc SubmitWithdrawal(SubmitWithdrawalRequest) returns (SubmitWithdrawalResponse);
+  rpc GetTaskList(GetTaskListRequest) returns (GetTaskListResponse);
+  rpc Run(RunRequest) returns (RunResponse);
+  rpc Stop(StopRequest) returns (StopResponse);
+  rpc HealthCheck(HealthCheckRequest) returns (HealthCheckResponse);
+}
+
+message RunRequest {
+  string id = 1 [(buf.validate.field).string.min_len = 1];
+}
+message RunResponse {}
+
+message StopRequest {
+  string id = 1 [(buf.validate.field).string.min_len = 1];
+}
+
+message StopResponse {}
+
+message HealthCheckRequest {}
+message HealthCheckResponse {}
+
+enum TaskStatus {
+  TASK_STATUS_UNSPECIFIED = 0;
+  TASK_STATUS_UNKNOWN = 1;
+  TASK_STATUS_ERROR = 2;
+  TASK_STATUS_WAITING = 3;
+  TASK_STATUS_PROCESS = 4;
+  TASK_STATUS_FINISH = 5;
+}
+
+message GetTaskListRequest {
+  uint64 team_id = 1;
+  TaskStatus status = 2;
+}
+
+message GetTaskListResponse {
+  repeated TaskItem items = 1 [json_name = "items"];
+}
+
+message TaskItem {
+  uint64 team_id = 1;
+  uint64 mp_id = 2;
+  TaskStatus status = 3;
+
+  ImporterSource source = 4;
+  common.v1.MarketplaceType mp_type = 5;
+  string resource_uri = 6;
+  string err_message = 7;
+  bool is_err = 8;
+}
+
+enum ImporterSource {
+  IMPORTER_SOURCE_UNSPECIFIED = 0;
+  IMPORTER_SOURCE_CSV = 1;
+  IMPORTER_SOURCE_XLS = 2;
+  IMPORTER_SOURCE_JSON = 3;
+}
+
+message SubmitWithdrawalRequest {
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 mp_id = 2 [(buf.validate.field).uint64.gt = 0];
+  ImporterSource source = 3 [(buf.validate.field).enum.defined_only = true];
+  common.v1.MarketplaceType mp_type = 4 [(buf.validate.field).enum.defined_only = true];
+  string resource_uri = 5 [(buf.validate.field).string.min_len = 1];
+}
+
+message SubmitWithdrawalResponse {}
+
+message EmptyRequest {
+  string id = 1;
+}

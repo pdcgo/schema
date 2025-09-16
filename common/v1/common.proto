@@ -28,6 +28,8 @@ message User {
 message Team {
   uint64 id = 1;
   string name = 2;
+  string team_code = 3;
+  string type = 4;
 }
 
 message KeyName {

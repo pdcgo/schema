@@ -7,6 +7,7 @@
 package common
 
 import (
+	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -113,9 +114,9 @@ var File_common_v1_team_proto protoreflect.FileDescriptor
 
 const file_common_v1_team_proto_rawDesc = "" +
 	"\n" +
-	"\x14common/v1/team.proto\x12\tcommon.v1\x1a\x16common/v1/common.proto\"(\n" +
-	"\x14PublicTeamIDsRequest\x12\x10\n" +
-	"\x03ids\x18\x01 \x03(\x04R\x03ids\"\xa1\x01\n" +
+	"\x14common/v1/team.proto\x12\tcommon.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\"=\n" +
+	"\x14PublicTeamIDsRequest\x12%\n" +
+	"\x03ids\x18\x01 \x03(\x04B\x13\xbaH\x10\x92\x01\r\b\x01\x10\xc8\x01\x18\x01\"\x042\x02 \x00R\x03ids\"\xa1\x01\n" +
 	"\x15PublicTeamIDsResponse\x12>\n" +
 	"\x04data\x18\x01 \x03(\v2*.common.v1.PublicTeamIDsResponse.DataEntryR\x04data\x1aH\n" +
 	"\tDataEntry\x12\x10\n" +

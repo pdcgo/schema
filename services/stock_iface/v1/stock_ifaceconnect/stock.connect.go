@@ -62,6 +62,7 @@ type StockServiceClient interface {
 	InboundCreate(context.Context, *connect.Request[v1.InboundCreateRequest]) (*connect.Response[v1.InboundCreateResponse], error)
 	InboundUpdate(context.Context, *connect.Request[v1.InboundUpdateRequest]) (*connect.Response[v1.InboundUpdateResponse], error)
 	InboundAccept(context.Context, *connect.Request[v1.InboundAcceptRequest]) (*connect.Response[v1.InboundAcceptResponse], error)
+	// rpc InboundLost
 	StockAdjustment(context.Context, *connect.Request[v1.StockAdjustmentRequest]) (*connect.Response[v1.StockAdjustmentResponse], error)
 	TransferToWarehouse(context.Context, *connect.Request[v1.TransferToWarehouseRequest]) (*connect.Response[v1.TransferToWarehouseResponse], error)
 	TransferToWarehouseAccept(context.Context, *connect.Request[v1.TransferToWarehouseAcceptRequest]) (*connect.Response[v1.TransferToWarehouseAcceptResponse], error)
@@ -176,6 +177,7 @@ type StockServiceHandler interface {
 	InboundCreate(context.Context, *connect.Request[v1.InboundCreateRequest]) (*connect.Response[v1.InboundCreateResponse], error)
 	InboundUpdate(context.Context, *connect.Request[v1.InboundUpdateRequest]) (*connect.Response[v1.InboundUpdateResponse], error)
 	InboundAccept(context.Context, *connect.Request[v1.InboundAcceptRequest]) (*connect.Response[v1.InboundAcceptResponse], error)
+	// rpc InboundLost
 	StockAdjustment(context.Context, *connect.Request[v1.StockAdjustmentRequest]) (*connect.Response[v1.StockAdjustmentResponse], error)
 	TransferToWarehouse(context.Context, *connect.Request[v1.TransferToWarehouseRequest]) (*connect.Response[v1.TransferToWarehouseResponse], error)
 	TransferToWarehouseAccept(context.Context, *connect.Request[v1.TransferToWarehouseAcceptRequest]) (*connect.Response[v1.TransferToWarehouseAcceptResponse], error)

@@ -9,10 +9,37 @@ option go_package = "github.com/pdcgo/schema/services/revenue_iface/v1;revenue_i
 service RevenueService {
   rpc OnOrder(stream OnOrderRequest) returns (OnOrderResponse);
   rpc OrderCancel(OrderCancelRequest) returns (OrderCancelResponse);
-  // rpc OrderReturn(OrderReturnRequest) returns (OrderReturnResponse);
+  rpc OrderReturn(OrderReturnRequest) returns (OrderReturnResponse);
+  rpc OrderCompleted(OrderCompletedRequest) returns (OrderCompletedResponse);
+  rpc RevenueAdjustment(RevenueAdjustmentRequest) returns (RevenueAdjustmentResponse);
   rpc Withdrawal(WithdrawalRequest) returns (WithdrawalResponse);
-  // rpc OrderAdjustment(OrderAdjustmentRequest) returns (OrderAdjustmentResponse);
 }
+
+message RevenueAdjustmentRequest {}
+message RevenueAdjustmentResponse {}
+
+message OrderCompletedRequest {}
+message OrderCompletedResponse {}
+
+enum ProblemType {
+  PROBLEM_TYPE_UNSPECIFIED = 0;
+  PROBLEM_TYPE_LOST = 1;
+}
+
+message OrderReturnRequest {
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 order_id = 2 [(buf.validate.field).uint64.gt = 0];
+  uint64 warehouse_id = 3 [(buf.validate.field).uint64.gt = 0];
+  double order_amount = 4 [
+    (buf.validate.field).double.gt = 0, // must be > 0
+    (buf.validate.field).double.lte = 1e12 // optional: cap max value for safety
+  ];
+  double stock_amount = 5 [
+    (buf.validate.field).double.gt = 0, // must be > 0
+    (buf.validate.field).double.lte = 1e12 // optional: cap max value for safety
+  ];
+}
+message OrderReturnResponse {}
 
 // message OrderAdjustmentRequest {}
 // message OrderAdjustmentResponse {}
@@ -31,7 +58,8 @@ message WithdrawalRequest {
 message WithdrawalResponse {}
 
 message OrderCancelRequest {
-  string ref_id = 1;
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 order_id = 2 [(buf.validate.field).uint64.gt = 0];
 }
 message OrderCancelResponse {}
 
