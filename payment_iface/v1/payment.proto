@@ -6,6 +6,87 @@ package payment_iface.v1;
 
 option go_package = "github.com/pdcgo/schema/services/payment_iface/v1;payment_iface";
 
+// Service
 service PaymentService {
-  // rpc PaymentCreate
+  rpc PaymentCreate(PaymentCreateRequest) returns (PaymentCreateResponse);
+  rpc PaymentCancel(PaymentCancelRequest) returns (PaymentCancelResponse);
+  rpc PaymentAccept(PaymentAcceptRequest) returns (PaymentAcceptResponse);
+  rpc PaymentReject(PaymentRejectRequest) returns (PaymentRejectResponse);
+  rpc PaymentList(PaymentListRequest) returns (PaymentListResponse);
+  rpc PaymentGet(PaymentGetRequest) returns (PaymentGetResponse);
+}
+
+enum PaymentType {
+  PAYMENT_TYPE_UNSPECIFIED = 0;
+  PAYMENT_TYPE_OTHER = 1;
+  PAYMENT_TYPE_PRODUCT_CROSS = 2;
+}
+
+enum PaymentStatus {
+  PAYMENT_STATUS_UNSPECIFIED = 0;
+  PAYMENT_STATUS_PENDING = 1;
+  PAYMENT_STATUS_REJECTED = 2;
+  PAYMENT_STATUS_ACCEPTED = 3;
+}
+
+message PaymentGetRequest {}
+message PaymentGetResponse {}
+
+message PaymentCreateRequest {
+  uint64 from_team_id = 1;
+  uint64 to_team_id = 2;
+  double amount = 3;
+}
+
+message PaymentCreateResponse {
+  uint64 payment_id = 1;
+  PaymentStatus status = 2;
+}
+
+message PaymentCancelRequest {
+  uint64 team_id = 1;
+  uint64 payment_id = 2;
+  string reason = 3;
+}
+
+message PaymentCancelResponse {
+  PaymentStatus status = 1; // e.g., "CANCELLED"
+}
+
+message PaymentAcceptRequest {
+  uint64 team_id = 1;
+  uint64 payment_id = 2;
+}
+
+message PaymentAcceptResponse {
+  PaymentStatus status = 1; // e.g., "ACCEPTED"
+}
+
+message PaymentRejectRequest {
+  uint64 team_id = 1;
+  uint64 payment_id = 2;
+  string reason = 3;
+}
+
+message PaymentRejectResponse {
+  PaymentStatus status = 1; // e.g., "REJECTED"
+}
+
+message PaymentListRequest {
+  uint64 team_id = 1;
+}
+
+message PaymentListResponse {
+  repeated Payment payments = 1;
+}
+
+// Entity
+message Payment {
+  uint64 id = 1;
+  uint64 from_team_id = 2;
+  uint64 to_team_id = 3;
+  double amount = 4;
+  PaymentStatus status = 5;
+  int64 created_at = 6;
+  int64 updated_at = 7;
 }
