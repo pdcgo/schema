@@ -6,8 +6,11 @@ package payment_ifaceconnect
 
 import (
 	connect "connectrpc.com/connect"
-	_ "github.com/pdcgo/schema/services/payment_iface/v1"
+	context "context"
+	errors "errors"
+	v1 "github.com/pdcgo/schema/services/payment_iface/v1"
 	http "net/http"
+	strings "strings"
 )
 
 // This is a compile-time assertion to ensure that this generated file and the connect package are
@@ -22,8 +25,42 @@ const (
 	PaymentServiceName = "payment_iface.v1.PaymentService"
 )
 
+// These constants are the fully-qualified names of the RPCs defined in this package. They're
+// exposed at runtime as Spec.Procedure and as the final two segments of the HTTP route.
+//
+// Note that these are different from the fully-qualified method names used by
+// google.golang.org/protobuf/reflect/protoreflect. To convert from these constants to
+// reflection-formatted method names, remove the leading slash and convert the remaining slash to a
+// period.
+const (
+	// PaymentServicePaymentCreateProcedure is the fully-qualified name of the PaymentService's
+	// PaymentCreate RPC.
+	PaymentServicePaymentCreateProcedure = "/payment_iface.v1.PaymentService/PaymentCreate"
+	// PaymentServicePaymentCancelProcedure is the fully-qualified name of the PaymentService's
+	// PaymentCancel RPC.
+	PaymentServicePaymentCancelProcedure = "/payment_iface.v1.PaymentService/PaymentCancel"
+	// PaymentServicePaymentAcceptProcedure is the fully-qualified name of the PaymentService's
+	// PaymentAccept RPC.
+	PaymentServicePaymentAcceptProcedure = "/payment_iface.v1.PaymentService/PaymentAccept"
+	// PaymentServicePaymentRejectProcedure is the fully-qualified name of the PaymentService's
+	// PaymentReject RPC.
+	PaymentServicePaymentRejectProcedure = "/payment_iface.v1.PaymentService/PaymentReject"
+	// PaymentServicePaymentListProcedure is the fully-qualified name of the PaymentService's
+	// PaymentList RPC.
+	PaymentServicePaymentListProcedure = "/payment_iface.v1.PaymentService/PaymentList"
+	// PaymentServicePaymentGetProcedure is the fully-qualified name of the PaymentService's PaymentGet
+	// RPC.
+	PaymentServicePaymentGetProcedure = "/payment_iface.v1.PaymentService/PaymentGet"
+)
+
 // PaymentServiceClient is a client for the payment_iface.v1.PaymentService service.
 type PaymentServiceClient interface {
+	PaymentCreate(context.Context, *connect.Request[v1.PaymentCreateRequest]) (*connect.Response[v1.PaymentCreateResponse], error)
+	PaymentCancel(context.Context, *connect.Request[v1.PaymentCancelRequest]) (*connect.Response[v1.PaymentCancelResponse], error)
+	PaymentAccept(context.Context, *connect.Request[v1.PaymentAcceptRequest]) (*connect.Response[v1.PaymentAcceptResponse], error)
+	PaymentReject(context.Context, *connect.Request[v1.PaymentRejectRequest]) (*connect.Response[v1.PaymentRejectResponse], error)
+	PaymentList(context.Context, *connect.Request[v1.PaymentListRequest]) (*connect.Response[v1.PaymentListResponse], error)
+	PaymentGet(context.Context, *connect.Request[v1.PaymentGetRequest]) (*connect.Response[v1.PaymentGetResponse], error)
 }
 
 // NewPaymentServiceClient constructs a client for the payment_iface.v1.PaymentService service. By
@@ -34,15 +71,96 @@ type PaymentServiceClient interface {
 // The URL supplied here should be the base URL for the Connect or gRPC server (for example,
 // http://api.acme.com or https://acme.com/grpc).
 func NewPaymentServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) PaymentServiceClient {
-	return &paymentServiceClient{}
+	baseURL = strings.TrimRight(baseURL, "/")
+	paymentServiceMethods := v1.File_payment_iface_v1_payment_proto.Services().ByName("PaymentService").Methods()
+	return &paymentServiceClient{
+		paymentCreate: connect.NewClient[v1.PaymentCreateRequest, v1.PaymentCreateResponse](
+			httpClient,
+			baseURL+PaymentServicePaymentCreateProcedure,
+			connect.WithSchema(paymentServiceMethods.ByName("PaymentCreate")),
+			connect.WithClientOptions(opts...),
+		),
+		paymentCancel: connect.NewClient[v1.PaymentCancelRequest, v1.PaymentCancelResponse](
+			httpClient,
+			baseURL+PaymentServicePaymentCancelProcedure,
+			connect.WithSchema(paymentServiceMethods.ByName("PaymentCancel")),
+			connect.WithClientOptions(opts...),
+		),
+		paymentAccept: connect.NewClient[v1.PaymentAcceptRequest, v1.PaymentAcceptResponse](
+			httpClient,
+			baseURL+PaymentServicePaymentAcceptProcedure,
+			connect.WithSchema(paymentServiceMethods.ByName("PaymentAccept")),
+			connect.WithClientOptions(opts...),
+		),
+		paymentReject: connect.NewClient[v1.PaymentRejectRequest, v1.PaymentRejectResponse](
+			httpClient,
+			baseURL+PaymentServicePaymentRejectProcedure,
+			connect.WithSchema(paymentServiceMethods.ByName("PaymentReject")),
+			connect.WithClientOptions(opts...),
+		),
+		paymentList: connect.NewClient[v1.PaymentListRequest, v1.PaymentListResponse](
+			httpClient,
+			baseURL+PaymentServicePaymentListProcedure,
+			connect.WithSchema(paymentServiceMethods.ByName("PaymentList")),
+			connect.WithClientOptions(opts...),
+		),
+		paymentGet: connect.NewClient[v1.PaymentGetRequest, v1.PaymentGetResponse](
+			httpClient,
+			baseURL+PaymentServicePaymentGetProcedure,
+			connect.WithSchema(paymentServiceMethods.ByName("PaymentGet")),
+			connect.WithClientOptions(opts...),
+		),
+	}
 }
 
 // paymentServiceClient implements PaymentServiceClient.
 type paymentServiceClient struct {
+	paymentCreate *connect.Client[v1.PaymentCreateRequest, v1.PaymentCreateResponse]
+	paymentCancel *connect.Client[v1.PaymentCancelRequest, v1.PaymentCancelResponse]
+	paymentAccept *connect.Client[v1.PaymentAcceptRequest, v1.PaymentAcceptResponse]
+	paymentReject *connect.Client[v1.PaymentRejectRequest, v1.PaymentRejectResponse]
+	paymentList   *connect.Client[v1.PaymentListRequest, v1.PaymentListResponse]
+	paymentGet    *connect.Client[v1.PaymentGetRequest, v1.PaymentGetResponse]
+}
+
+// PaymentCreate calls payment_iface.v1.PaymentService.PaymentCreate.
+func (c *paymentServiceClient) PaymentCreate(ctx context.Context, req *connect.Request[v1.PaymentCreateRequest]) (*connect.Response[v1.PaymentCreateResponse], error) {
+	return c.paymentCreate.CallUnary(ctx, req)
+}
+
+// PaymentCancel calls payment_iface.v1.PaymentService.PaymentCancel.
+func (c *paymentServiceClient) PaymentCancel(ctx context.Context, req *connect.Request[v1.PaymentCancelRequest]) (*connect.Response[v1.PaymentCancelResponse], error) {
+	return c.paymentCancel.CallUnary(ctx, req)
+}
+
+// PaymentAccept calls payment_iface.v1.PaymentService.PaymentAccept.
+func (c *paymentServiceClient) PaymentAccept(ctx context.Context, req *connect.Request[v1.PaymentAcceptRequest]) (*connect.Response[v1.PaymentAcceptResponse], error) {
+	return c.paymentAccept.CallUnary(ctx, req)
+}
+
+// PaymentReject calls payment_iface.v1.PaymentService.PaymentReject.
+func (c *paymentServiceClient) PaymentReject(ctx context.Context, req *connect.Request[v1.PaymentRejectRequest]) (*connect.Response[v1.PaymentRejectResponse], error) {
+	return c.paymentReject.CallUnary(ctx, req)
+}
+
+// PaymentList calls payment_iface.v1.PaymentService.PaymentList.
+func (c *paymentServiceClient) PaymentList(ctx context.Context, req *connect.Request[v1.PaymentListRequest]) (*connect.Response[v1.PaymentListResponse], error) {
+	return c.paymentList.CallUnary(ctx, req)
+}
+
+// PaymentGet calls payment_iface.v1.PaymentService.PaymentGet.
+func (c *paymentServiceClient) PaymentGet(ctx context.Context, req *connect.Request[v1.PaymentGetRequest]) (*connect.Response[v1.PaymentGetResponse], error) {
+	return c.paymentGet.CallUnary(ctx, req)
 }
 
 // PaymentServiceHandler is an implementation of the payment_iface.v1.PaymentService service.
 type PaymentServiceHandler interface {
+	PaymentCreate(context.Context, *connect.Request[v1.PaymentCreateRequest]) (*connect.Response[v1.PaymentCreateResponse], error)
+	PaymentCancel(context.Context, *connect.Request[v1.PaymentCancelRequest]) (*connect.Response[v1.PaymentCancelResponse], error)
+	PaymentAccept(context.Context, *connect.Request[v1.PaymentAcceptRequest]) (*connect.Response[v1.PaymentAcceptResponse], error)
+	PaymentReject(context.Context, *connect.Request[v1.PaymentRejectRequest]) (*connect.Response[v1.PaymentRejectResponse], error)
+	PaymentList(context.Context, *connect.Request[v1.PaymentListRequest]) (*connect.Response[v1.PaymentListResponse], error)
+	PaymentGet(context.Context, *connect.Request[v1.PaymentGetRequest]) (*connect.Response[v1.PaymentGetResponse], error)
 }
 
 // NewPaymentServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -51,8 +169,57 @@ type PaymentServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewPaymentServiceHandler(svc PaymentServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	paymentServiceMethods := v1.File_payment_iface_v1_payment_proto.Services().ByName("PaymentService").Methods()
+	paymentServicePaymentCreateHandler := connect.NewUnaryHandler(
+		PaymentServicePaymentCreateProcedure,
+		svc.PaymentCreate,
+		connect.WithSchema(paymentServiceMethods.ByName("PaymentCreate")),
+		connect.WithHandlerOptions(opts...),
+	)
+	paymentServicePaymentCancelHandler := connect.NewUnaryHandler(
+		PaymentServicePaymentCancelProcedure,
+		svc.PaymentCancel,
+		connect.WithSchema(paymentServiceMethods.ByName("PaymentCancel")),
+		connect.WithHandlerOptions(opts...),
+	)
+	paymentServicePaymentAcceptHandler := connect.NewUnaryHandler(
+		PaymentServicePaymentAcceptProcedure,
+		svc.PaymentAccept,
+		connect.WithSchema(paymentServiceMethods.ByName("PaymentAccept")),
+		connect.WithHandlerOptions(opts...),
+	)
+	paymentServicePaymentRejectHandler := connect.NewUnaryHandler(
+		PaymentServicePaymentRejectProcedure,
+		svc.PaymentReject,
+		connect.WithSchema(paymentServiceMethods.ByName("PaymentReject")),
+		connect.WithHandlerOptions(opts...),
+	)
+	paymentServicePaymentListHandler := connect.NewUnaryHandler(
+		PaymentServicePaymentListProcedure,
+		svc.PaymentList,
+		connect.WithSchema(paymentServiceMethods.ByName("PaymentList")),
+		connect.WithHandlerOptions(opts...),
+	)
+	paymentServicePaymentGetHandler := connect.NewUnaryHandler(
+		PaymentServicePaymentGetProcedure,
+		svc.PaymentGet,
+		connect.WithSchema(paymentServiceMethods.ByName("PaymentGet")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/payment_iface.v1.PaymentService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
+		case PaymentServicePaymentCreateProcedure:
+			paymentServicePaymentCreateHandler.ServeHTTP(w, r)
+		case PaymentServicePaymentCancelProcedure:
+			paymentServicePaymentCancelHandler.ServeHTTP(w, r)
+		case PaymentServicePaymentAcceptProcedure:
+			paymentServicePaymentAcceptHandler.ServeHTTP(w, r)
+		case PaymentServicePaymentRejectProcedure:
+			paymentServicePaymentRejectHandler.ServeHTTP(w, r)
+		case PaymentServicePaymentListProcedure:
+			paymentServicePaymentListHandler.ServeHTTP(w, r)
+		case PaymentServicePaymentGetProcedure:
+			paymentServicePaymentGetHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -61,3 +228,27 @@ func NewPaymentServiceHandler(svc PaymentServiceHandler, opts ...connect.Handler
 
 // UnimplementedPaymentServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedPaymentServiceHandler struct{}
+
+func (UnimplementedPaymentServiceHandler) PaymentCreate(context.Context, *connect.Request[v1.PaymentCreateRequest]) (*connect.Response[v1.PaymentCreateResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("payment_iface.v1.PaymentService.PaymentCreate is not implemented"))
+}
+
+func (UnimplementedPaymentServiceHandler) PaymentCancel(context.Context, *connect.Request[v1.PaymentCancelRequest]) (*connect.Response[v1.PaymentCancelResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("payment_iface.v1.PaymentService.PaymentCancel is not implemented"))
+}
+
+func (UnimplementedPaymentServiceHandler) PaymentAccept(context.Context, *connect.Request[v1.PaymentAcceptRequest]) (*connect.Response[v1.PaymentAcceptResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("payment_iface.v1.PaymentService.PaymentAccept is not implemented"))
+}
+
+func (UnimplementedPaymentServiceHandler) PaymentReject(context.Context, *connect.Request[v1.PaymentRejectRequest]) (*connect.Response[v1.PaymentRejectResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("payment_iface.v1.PaymentService.PaymentReject is not implemented"))
+}
+
+func (UnimplementedPaymentServiceHandler) PaymentList(context.Context, *connect.Request[v1.PaymentListRequest]) (*connect.Response[v1.PaymentListResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("payment_iface.v1.PaymentService.PaymentList is not implemented"))
+}
+
+func (UnimplementedPaymentServiceHandler) PaymentGet(context.Context, *connect.Request[v1.PaymentGetRequest]) (*connect.Response[v1.PaymentGetResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("payment_iface.v1.PaymentService.PaymentGet is not implemented"))
+}

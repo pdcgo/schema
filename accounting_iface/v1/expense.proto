@@ -81,6 +81,7 @@ message ExpenseItem {
   uint64 created_by_id = 3;
   string desc = 4;
   ExpenseType expense_type = 5;
+  string expense_key = 9;
   double amount = 6;
   int64 expense_at = 7;
   int64 created_at = 8;
