@@ -105,6 +105,7 @@ message ExpenseListRequest {
   uint64 team_id = 1;
   uint64 by_user_id = 2;
   ExpenseType expense_type = 5;
+  string expense_key = 6;
   common.v1.TimeFilter time_range = 3;
   common.v1.PageFilter page = 4;
 }
