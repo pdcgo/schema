@@ -827,6 +827,7 @@ type ExpenseListRequest struct {
 	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
 	ByUserId      uint64                 `protobuf:"varint,2,opt,name=by_user_id,json=byUserId,proto3" json:"by_user_id,omitempty"`
 	ExpenseType   ExpenseType            `protobuf:"varint,5,opt,name=expense_type,json=expenseType,proto3,enum=accounting_iface.v1.ExpenseType" json:"expense_type,omitempty"`
+	ExpenseKey    string                 `protobuf:"bytes,6,opt,name=expense_key,json=expenseKey,proto3" json:"expense_key,omitempty"`
 	TimeRange     *v1.TimeFilter         `protobuf:"bytes,3,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
 	Page          *v1.PageFilter         `protobuf:"bytes,4,opt,name=page,proto3" json:"page,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -882,6 +883,13 @@ func (x *ExpenseListRequest) GetExpenseType() ExpenseType {
 		return x.ExpenseType
 	}
 	return ExpenseType_EXPENSE_TYPE_UNSPECIFIED
+}
+
+func (x *ExpenseListRequest) GetExpenseKey() string {
+	if x != nil {
+		return x.ExpenseKey
+	}
+	return ""
 }
 
 func (x *ExpenseListRequest) GetTimeRange() *v1.TimeFilter {
@@ -1024,12 +1032,14 @@ const file_accounting_iface_v1_expense_proto_rawDesc = "" +
 	"\n" +
 	"expense_at\x18\x06 \x01(\x03R\texpenseAt\"1\n" +
 	"\x15ExpenseCreateResponse\x12\x18\n" +
-	"\amessage\x18\x01 \x01(\tR\amessage\"\xf1\x01\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage\"\x92\x02\n" +
 	"\x12ExpenseListRequest\x12\x17\n" +
 	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12\x1c\n" +
 	"\n" +
 	"by_user_id\x18\x02 \x01(\x04R\bbyUserId\x12C\n" +
-	"\fexpense_type\x18\x05 \x01(\x0e2 .accounting_iface.v1.ExpenseTypeR\vexpenseType\x124\n" +
+	"\fexpense_type\x18\x05 \x01(\x0e2 .accounting_iface.v1.ExpenseTypeR\vexpenseType\x12\x1f\n" +
+	"\vexpense_key\x18\x06 \x01(\tR\n" +
+	"expenseKey\x124\n" +
 	"\n" +
 	"time_range\x18\x03 \x01(\v2\x15.common.v1.TimeFilterR\ttimeRange\x12)\n" +
 	"\x04page\x18\x04 \x01(\v2\x15.common.v1.PageFilterR\x04page\"\x97\x01\n" +
