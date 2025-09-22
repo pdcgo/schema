@@ -15,12 +15,12 @@ service WithdrawalService {
 }
 
 message RunRequest {
-  string id = 1 [(buf.validate.field).string.min_len = 1];
+  // string id = 1 [(buf.validate.field).string.min_len = 1];
 }
 message RunResponse {}
 
 message StopRequest {
-  string id = 1 [(buf.validate.field).string.min_len = 1];
+  // string id = 1 [(buf.validate.field).string.min_len = 1];
 }
 
 message StopResponse {}

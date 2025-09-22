@@ -135,7 +135,6 @@ func (ImporterSource) EnumDescriptor() ([]byte, []int) {
 
 type RunRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -168,13 +167,6 @@ func (x *RunRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use RunRequest.ProtoReflect.Descriptor instead.
 func (*RunRequest) Descriptor() ([]byte, []int) {
 	return file_withdrawal_iface_v1_withdrawal_proto_rawDescGZIP(), []int{0}
-}
-
-func (x *RunRequest) GetId() string {
-	if x != nil {
-		return x.Id
-	}
-	return ""
 }
 
 type RunResponse struct {
@@ -215,7 +207,6 @@ func (*RunResponse) Descriptor() ([]byte, []int) {
 
 type StopRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -248,13 +239,6 @@ func (x *StopRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use StopRequest.ProtoReflect.Descriptor instead.
 func (*StopRequest) Descriptor() ([]byte, []int) {
 	return file_withdrawal_iface_v1_withdrawal_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *StopRequest) GetId() string {
-	if x != nil {
-		return x.Id
-	}
-	return ""
 }
 
 type StopResponse struct {
@@ -721,13 +705,11 @@ var File_withdrawal_iface_v1_withdrawal_proto protoreflect.FileDescriptor
 
 const file_withdrawal_iface_v1_withdrawal_proto_rawDesc = "" +
 	"\n" +
-	"$withdrawal_iface/v1/withdrawal.proto\x12\x13withdrawal_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\"%\n" +
+	"$withdrawal_iface/v1/withdrawal.proto\x12\x13withdrawal_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\"\f\n" +
 	"\n" +
-	"RunRequest\x12\x17\n" +
-	"\x02id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x02id\"\r\n" +
-	"\vRunResponse\"&\n" +
-	"\vStopRequest\x12\x17\n" +
-	"\x02id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x02id\"\x0e\n" +
+	"RunRequest\"\r\n" +
+	"\vRunResponse\"\r\n" +
+	"\vStopRequest\"\x0e\n" +
 	"\fStopResponse\"\x14\n" +
 	"\x12HealthCheckRequest\"\x15\n" +
 	"\x13HealthCheckResponse\"f\n" +
