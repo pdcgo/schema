@@ -1,0 +1,24 @@
+syntax = "proto3";
+package asset_iface.v1;
+
+// import "common/v1/common.proto";
+import "buf/validate/validate.proto";
+
+option go_package = "github.com/pdcgo/schema/services/asset_iface/v1;asset_iface";
+
+service WithdrawalDocumentService {
+  rpc Upload(UploadRequest) returns (UploadResponse);
+}
+
+message UploadRequest {
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 marketplace_id = 2 [(buf.validate.field).uint64.gt = 0];
+  bytes content = 3 [
+    (buf.validate.field).bytes.min_len = 1, // must not be empty
+    (buf.validate.field).bytes.max_len = 10485760000 // max 10 MB
+  ];
+}
+
+message UploadResponse {
+  string resource_uri = 1;
+}
