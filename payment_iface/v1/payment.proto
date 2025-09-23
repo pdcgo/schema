@@ -27,10 +27,17 @@ enum PaymentStatus {
   PAYMENT_STATUS_PENDING = 1;
   PAYMENT_STATUS_REJECTED = 2;
   PAYMENT_STATUS_ACCEPTED = 3;
+  PAYMENT_STATUS_CANCELED = 4;
 }
 
-message PaymentGetRequest {}
-message PaymentGetResponse {}
+message PaymentGetRequest {
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 payment_id = 2 [(buf.validate.field).uint64.gt = 0];
+}
+
+message PaymentGetResponse {
+  Payment data = 1;
+}
 
 message PaymentCreateRequest {
   uint64 from_team_id = 1 [(buf.validate.field).uint64.gt = 0];
@@ -49,36 +56,36 @@ message PaymentCreateResponse {
 }
 
 message PaymentCancelRequest {
-  uint64 team_id = 1;
-  uint64 payment_id = 2;
-  string reason = 3;
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 payment_id = 2 [(buf.validate.field).uint64.gt = 0];
+  string reason = 3 [
+    (buf.validate.field).string.min_len = 1, // must not be empty
+    (buf.validate.field).string.max_len = 1024 // limit length
+  ];
 }
 
-message PaymentCancelResponse {
-  PaymentStatus status = 1; // e.g., "CANCELLED"
-}
+message PaymentCancelResponse {}
 
 message PaymentAcceptRequest {
-  uint64 team_id = 1;
-  uint64 payment_id = 2;
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 payment_id = 2 [(buf.validate.field).uint64.gt = 0];
 }
 
-message PaymentAcceptResponse {
-  PaymentStatus status = 1; // e.g., "ACCEPTED"
-}
+message PaymentAcceptResponse {}
 
 message PaymentRejectRequest {
-  uint64 team_id = 1;
-  uint64 payment_id = 2;
-  string reason = 3;
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 payment_id = 2 [(buf.validate.field).uint64.gt = 0];
+  string reason = 3 [
+    (buf.validate.field).string.min_len = 1, // must not be empty
+    (buf.validate.field).string.max_len = 1024 // limit length
+  ];
 }
 
-message PaymentRejectResponse {
-  PaymentStatus status = 1; // e.g., "REJECTED"
-}
+message PaymentRejectResponse {}
 
 message PaymentListRequest {
-  uint64 team_id = 1;
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
 }
 
 message PaymentListResponse {
@@ -93,5 +100,4 @@ message Payment {
   double amount = 4;
   PaymentStatus status = 5;
   int64 created_at = 6;
-  int64 updated_at = 7;
 }
