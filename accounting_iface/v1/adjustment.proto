@@ -1,6 +1,8 @@
 syntax = "proto3";
 package accounting_iface.v1;
 
+import "buf/validate/validate.proto";
+
 option go_package = "github.com/pdcgo/schema/services/accounting_iface/v1;accounting_iface";
 
 service AdjustmentService {
@@ -8,14 +10,34 @@ service AdjustmentService {
 }
 
 message AdjEntry {
-  uint64 account_id = 1;
-  double debit = 2;
-  double credit = 3;
+  uint64 account_id = 1 [(buf.validate.field).uint64.gt = 0];
+  double debit = 2 [(buf.validate.field).double.gte = 0];
+  double credit = 3 [(buf.validate.field).double.gte = 0];
+  // Custom rule: one of debit/credit must be > 0, but not both.
+  // Protovalidate doesn’t support XOR directly, but you can enforce with "cel".
+  option (buf.validate.message).cel = {
+    id: "debit_or_credit"
+    message: "Exactly one of debit or credit must be positive"
+    expression: "((this.debit > 0) ? 1 : 0) + ((this.credit > 0) ? 1 : 0) == 1"
+  };
+}
+
+message Bookeeping {
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  repeated AdjEntry entries = 3 [
+    (buf.validate.field).repeated.min_items = 1,
+    (buf.validate.field).repeated.max_items = 50
+  ];
 }
 
 message AdjCreateRequest {
-  uint64 team_id = 1;
-  string description = 2;
-  repeated AdjEntry entries = 3;
+  string description = 1 [
+    (buf.validate.field).string.min_len = 1,
+    (buf.validate.field).string.max_len = 1024
+  ];
+  repeated Bookeeping books = 3 [
+    (buf.validate.field).repeated.min_items = 1,
+    (buf.validate.field).repeated.max_items = 10
+  ];
 }
 message AdjCreateResponse {}

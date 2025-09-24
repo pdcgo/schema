@@ -6,8 +6,11 @@ package accounting_ifaceconnect
 
 import (
 	connect "connectrpc.com/connect"
-	_ "github.com/pdcgo/schema/services/accounting_iface/v1"
+	context "context"
+	errors "errors"
+	v1 "github.com/pdcgo/schema/services/accounting_iface/v1"
 	http "net/http"
+	strings "strings"
 )
 
 // This is a compile-time assertion to ensure that this generated file and the connect package are
@@ -22,8 +25,22 @@ const (
 	AdjustmentServiceName = "accounting_iface.v1.AdjustmentService"
 )
 
+// These constants are the fully-qualified names of the RPCs defined in this package. They're
+// exposed at runtime as Spec.Procedure and as the final two segments of the HTTP route.
+//
+// Note that these are different from the fully-qualified method names used by
+// google.golang.org/protobuf/reflect/protoreflect. To convert from these constants to
+// reflection-formatted method names, remove the leading slash and convert the remaining slash to a
+// period.
+const (
+	// AdjustmentServiceAdjCreateProcedure is the fully-qualified name of the AdjustmentService's
+	// AdjCreate RPC.
+	AdjustmentServiceAdjCreateProcedure = "/accounting_iface.v1.AdjustmentService/AdjCreate"
+)
+
 // AdjustmentServiceClient is a client for the accounting_iface.v1.AdjustmentService service.
 type AdjustmentServiceClient interface {
+	AdjCreate(context.Context, *connect.Request[v1.AdjCreateRequest]) (*connect.Response[v1.AdjCreateResponse], error)
 }
 
 // NewAdjustmentServiceClient constructs a client for the accounting_iface.v1.AdjustmentService
@@ -34,16 +51,32 @@ type AdjustmentServiceClient interface {
 // The URL supplied here should be the base URL for the Connect or gRPC server (for example,
 // http://api.acme.com or https://acme.com/grpc).
 func NewAdjustmentServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) AdjustmentServiceClient {
-	return &adjustmentServiceClient{}
+	baseURL = strings.TrimRight(baseURL, "/")
+	adjustmentServiceMethods := v1.File_accounting_iface_v1_adjustment_proto.Services().ByName("AdjustmentService").Methods()
+	return &adjustmentServiceClient{
+		adjCreate: connect.NewClient[v1.AdjCreateRequest, v1.AdjCreateResponse](
+			httpClient,
+			baseURL+AdjustmentServiceAdjCreateProcedure,
+			connect.WithSchema(adjustmentServiceMethods.ByName("AdjCreate")),
+			connect.WithClientOptions(opts...),
+		),
+	}
 }
 
 // adjustmentServiceClient implements AdjustmentServiceClient.
 type adjustmentServiceClient struct {
+	adjCreate *connect.Client[v1.AdjCreateRequest, v1.AdjCreateResponse]
+}
+
+// AdjCreate calls accounting_iface.v1.AdjustmentService.AdjCreate.
+func (c *adjustmentServiceClient) AdjCreate(ctx context.Context, req *connect.Request[v1.AdjCreateRequest]) (*connect.Response[v1.AdjCreateResponse], error) {
+	return c.adjCreate.CallUnary(ctx, req)
 }
 
 // AdjustmentServiceHandler is an implementation of the accounting_iface.v1.AdjustmentService
 // service.
 type AdjustmentServiceHandler interface {
+	AdjCreate(context.Context, *connect.Request[v1.AdjCreateRequest]) (*connect.Response[v1.AdjCreateResponse], error)
 }
 
 // NewAdjustmentServiceHandler builds an HTTP handler from the service implementation. It returns
@@ -52,8 +85,17 @@ type AdjustmentServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewAdjustmentServiceHandler(svc AdjustmentServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	adjustmentServiceMethods := v1.File_accounting_iface_v1_adjustment_proto.Services().ByName("AdjustmentService").Methods()
+	adjustmentServiceAdjCreateHandler := connect.NewUnaryHandler(
+		AdjustmentServiceAdjCreateProcedure,
+		svc.AdjCreate,
+		connect.WithSchema(adjustmentServiceMethods.ByName("AdjCreate")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/accounting_iface.v1.AdjustmentService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
+		case AdjustmentServiceAdjCreateProcedure:
+			adjustmentServiceAdjCreateHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -62,3 +104,7 @@ func NewAdjustmentServiceHandler(svc AdjustmentServiceHandler, opts ...connect.H
 
 // UnimplementedAdjustmentServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedAdjustmentServiceHandler struct{}
+
+func (UnimplementedAdjustmentServiceHandler) AdjCreate(context.Context, *connect.Request[v1.AdjCreateRequest]) (*connect.Response[v1.AdjCreateResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("accounting_iface.v1.AdjustmentService.AdjCreate is not implemented"))
+}
