@@ -70,6 +70,28 @@ message EntryListResponse {
 message AccountKeyListRequest {
   uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
 }
+
+enum CoaCode {
+  COA_CODE_UNSPECIFIED = 0;
+  COA_CODE_ASSET = 10;
+  COA_CODE_LIABILITY = 20;
+  COA_CODE_EQUITY = 30;
+  COA_CODE_REVENUE = 40;
+  COA_CODE_EXPENSE = 50;
+}
+
+enum BalanceType {
+  BALANCE_TYPE_UNSPECIFIED = 0;
+  BALANCE_TYPE_DEBIT = 1;
+  BALANCE_TYPE_CREDIT = 2;
+}
+
+message AccountKeyItem {
+  string key = 1;
+  CoaCode coa = 2;
+  BalanceType balance_type = 3;
+}
+
 message AccountKeyListResponse {
-  repeated string keys = 1;
+  repeated AccountKeyItem keys = 1;
 }

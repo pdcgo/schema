@@ -3,4 +3,19 @@ package accounting_iface.v1;
 
 option go_package = "github.com/pdcgo/schema/services/accounting_iface/v1;accounting_iface";
 
-service AdjustmentService {}
+service AdjustmentService {
+  rpc AdjCreate(AdjCreateRequest) returns (AdjCreateResponse);
+}
+
+message AdjEntry {
+  uint64 account_id = 1;
+  double debit = 2;
+  double credit = 3;
+}
+
+message AdjCreateRequest {
+  uint64 team_id = 1;
+  string description = 2;
+  repeated AdjEntry entries = 3;
+}
+message AdjCreateResponse {}

@@ -69,6 +69,113 @@ func (EntryFieldSort) EnumDescriptor() ([]byte, []int) {
 	return file_accounting_iface_v1_ledger_proto_rawDescGZIP(), []int{0}
 }
 
+type CoaCode int32
+
+const (
+	CoaCode_COA_CODE_UNSPECIFIED CoaCode = 0
+	CoaCode_COA_CODE_ASSET       CoaCode = 10
+	CoaCode_COA_CODE_LIABILITY   CoaCode = 20
+	CoaCode_COA_CODE_EQUITY      CoaCode = 30
+	CoaCode_COA_CODE_REVENUE     CoaCode = 40
+	CoaCode_COA_CODE_EXPENSE     CoaCode = 50
+)
+
+// Enum value maps for CoaCode.
+var (
+	CoaCode_name = map[int32]string{
+		0:  "COA_CODE_UNSPECIFIED",
+		10: "COA_CODE_ASSET",
+		20: "COA_CODE_LIABILITY",
+		30: "COA_CODE_EQUITY",
+		40: "COA_CODE_REVENUE",
+		50: "COA_CODE_EXPENSE",
+	}
+	CoaCode_value = map[string]int32{
+		"COA_CODE_UNSPECIFIED": 0,
+		"COA_CODE_ASSET":       10,
+		"COA_CODE_LIABILITY":   20,
+		"COA_CODE_EQUITY":      30,
+		"COA_CODE_REVENUE":     40,
+		"COA_CODE_EXPENSE":     50,
+	}
+)
+
+func (x CoaCode) Enum() *CoaCode {
+	p := new(CoaCode)
+	*p = x
+	return p
+}
+
+func (x CoaCode) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (CoaCode) Descriptor() protoreflect.EnumDescriptor {
+	return file_accounting_iface_v1_ledger_proto_enumTypes[1].Descriptor()
+}
+
+func (CoaCode) Type() protoreflect.EnumType {
+	return &file_accounting_iface_v1_ledger_proto_enumTypes[1]
+}
+
+func (x CoaCode) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use CoaCode.Descriptor instead.
+func (CoaCode) EnumDescriptor() ([]byte, []int) {
+	return file_accounting_iface_v1_ledger_proto_rawDescGZIP(), []int{1}
+}
+
+type BalanceType int32
+
+const (
+	BalanceType_BALANCE_TYPE_UNSPECIFIED BalanceType = 0
+	BalanceType_BALANCE_TYPE_DEBIT       BalanceType = 1
+	BalanceType_BALANCE_TYPE_CREDIT      BalanceType = 2
+)
+
+// Enum value maps for BalanceType.
+var (
+	BalanceType_name = map[int32]string{
+		0: "BALANCE_TYPE_UNSPECIFIED",
+		1: "BALANCE_TYPE_DEBIT",
+		2: "BALANCE_TYPE_CREDIT",
+	}
+	BalanceType_value = map[string]int32{
+		"BALANCE_TYPE_UNSPECIFIED": 0,
+		"BALANCE_TYPE_DEBIT":       1,
+		"BALANCE_TYPE_CREDIT":      2,
+	}
+)
+
+func (x BalanceType) Enum() *BalanceType {
+	p := new(BalanceType)
+	*p = x
+	return p
+}
+
+func (x BalanceType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (BalanceType) Descriptor() protoreflect.EnumDescriptor {
+	return file_accounting_iface_v1_ledger_proto_enumTypes[2].Descriptor()
+}
+
+func (BalanceType) Type() protoreflect.EnumType {
+	return &file_accounting_iface_v1_ledger_proto_enumTypes[2]
+}
+
+func (x BalanceType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use BalanceType.Descriptor instead.
+func (BalanceType) EnumDescriptor() ([]byte, []int) {
+	return file_accounting_iface_v1_ledger_proto_rawDescGZIP(), []int{2}
+}
+
 type EntryListExportRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
@@ -589,16 +696,76 @@ func (x *AccountKeyListRequest) GetTeamId() uint64 {
 	return 0
 }
 
+type AccountKeyItem struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Key           string                 `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
+	Coa           CoaCode                `protobuf:"varint,2,opt,name=coa,proto3,enum=accounting_iface.v1.CoaCode" json:"coa,omitempty"`
+	BalanceType   BalanceType            `protobuf:"varint,3,opt,name=balance_type,json=balanceType,proto3,enum=accounting_iface.v1.BalanceType" json:"balance_type,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AccountKeyItem) Reset() {
+	*x = AccountKeyItem{}
+	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AccountKeyItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AccountKeyItem) ProtoMessage() {}
+
+func (x *AccountKeyItem) ProtoReflect() protoreflect.Message {
+	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AccountKeyItem.ProtoReflect.Descriptor instead.
+func (*AccountKeyItem) Descriptor() ([]byte, []int) {
+	return file_accounting_iface_v1_ledger_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *AccountKeyItem) GetKey() string {
+	if x != nil {
+		return x.Key
+	}
+	return ""
+}
+
+func (x *AccountKeyItem) GetCoa() CoaCode {
+	if x != nil {
+		return x.Coa
+	}
+	return CoaCode_COA_CODE_UNSPECIFIED
+}
+
+func (x *AccountKeyItem) GetBalanceType() BalanceType {
+	if x != nil {
+		return x.BalanceType
+	}
+	return BalanceType_BALANCE_TYPE_UNSPECIFIED
+}
+
 type AccountKeyListResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Keys          []string               `protobuf:"bytes,1,rep,name=keys,proto3" json:"keys,omitempty"`
+	Keys          []*AccountKeyItem      `protobuf:"bytes,1,rep,name=keys,proto3" json:"keys,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *AccountKeyListResponse) Reset() {
 	*x = AccountKeyListResponse{}
-	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[8]
+	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -610,7 +777,7 @@ func (x *AccountKeyListResponse) String() string {
 func (*AccountKeyListResponse) ProtoMessage() {}
 
 func (x *AccountKeyListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[8]
+	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -623,10 +790,10 @@ func (x *AccountKeyListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccountKeyListResponse.ProtoReflect.Descriptor instead.
 func (*AccountKeyListResponse) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_ledger_proto_rawDescGZIP(), []int{8}
+	return file_accounting_iface_v1_ledger_proto_rawDescGZIP(), []int{9}
 }
 
-func (x *AccountKeyListResponse) GetKeys() []string {
+func (x *AccountKeyListResponse) GetKeys() []*AccountKeyItem {
 	if x != nil {
 		return x.Keys
 	}
@@ -681,12 +848,28 @@ const file_accounting_iface_v1_ledger_proto_rawDesc = "" +
 	"\x04data\x18\x01 \x03(\v2\x1e.accounting_iface.v1.EntryItemR\x04data\x120\n" +
 	"\tpage_info\x18\x02 \x01(\v2\x13.common.v1.PageInfoR\bpageInfo\"9\n" +
 	"\x15AccountKeyListRequest\x12 \n" +
-	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\",\n" +
-	"\x16AccountKeyListResponse\x12\x12\n" +
-	"\x04keys\x18\x01 \x03(\tR\x04keys*R\n" +
+	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\"\x97\x01\n" +
+	"\x0eAccountKeyItem\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12.\n" +
+	"\x03coa\x18\x02 \x01(\x0e2\x1c.accounting_iface.v1.CoaCodeR\x03coa\x12C\n" +
+	"\fbalance_type\x18\x03 \x01(\x0e2 .accounting_iface.v1.BalanceTypeR\vbalanceType\"Q\n" +
+	"\x16AccountKeyListResponse\x127\n" +
+	"\x04keys\x18\x01 \x03(\v2#.accounting_iface.v1.AccountKeyItemR\x04keys*R\n" +
 	"\x0eEntryFieldSort\x12 \n" +
 	"\x1cENTRY_FIELD_SORT_UNSPECIFIED\x10\x00\x12\x1e\n" +
-	"\x1aENTRY_FIELD_SORT_ENTRYTIME\x10\x012\xc6\x02\n" +
+	"\x1aENTRY_FIELD_SORT_ENTRYTIME\x10\x01*\x90\x01\n" +
+	"\aCoaCode\x12\x18\n" +
+	"\x14COA_CODE_UNSPECIFIED\x10\x00\x12\x12\n" +
+	"\x0eCOA_CODE_ASSET\x10\n" +
+	"\x12\x16\n" +
+	"\x12COA_CODE_LIABILITY\x10\x14\x12\x13\n" +
+	"\x0fCOA_CODE_EQUITY\x10\x1e\x12\x14\n" +
+	"\x10COA_CODE_REVENUE\x10(\x12\x14\n" +
+	"\x10COA_CODE_EXPENSE\x102*\\\n" +
+	"\vBalanceType\x12\x1c\n" +
+	"\x18BALANCE_TYPE_UNSPECIFIED\x10\x00\x12\x16\n" +
+	"\x12BALANCE_TYPE_DEBIT\x10\x01\x12\x17\n" +
+	"\x13BALANCE_TYPE_CREDIT\x10\x022\xc6\x02\n" +
 	"\rLedgerService\x12i\n" +
 	"\x0eAccountKeyList\x12*.accounting_iface.v1.AccountKeyListRequest\x1a+.accounting_iface.v1.AccountKeyListResponse\x12Z\n" +
 	"\tEntryList\x12%.accounting_iface.v1.EntryListRequest\x1a&.accounting_iface.v1.EntryListResponse\x12n\n" +
@@ -705,45 +888,51 @@ func file_accounting_iface_v1_ledger_proto_rawDescGZIP() []byte {
 	return file_accounting_iface_v1_ledger_proto_rawDescData
 }
 
-var file_accounting_iface_v1_ledger_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_accounting_iface_v1_ledger_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_accounting_iface_v1_ledger_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
+var file_accounting_iface_v1_ledger_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_accounting_iface_v1_ledger_proto_goTypes = []any{
 	(EntryFieldSort)(0),             // 0: accounting_iface.v1.EntryFieldSort
-	(*EntryListExportRequest)(nil),  // 1: accounting_iface.v1.EntryListExportRequest
-	(*EntryListExportResponse)(nil), // 2: accounting_iface.v1.EntryListExportResponse
-	(*EntryListSort)(nil),           // 3: accounting_iface.v1.EntryListSort
-	(*EntryListRequest)(nil),        // 4: accounting_iface.v1.EntryListRequest
-	(*EntryAccount)(nil),            // 5: accounting_iface.v1.EntryAccount
-	(*EntryItem)(nil),               // 6: accounting_iface.v1.EntryItem
-	(*EntryListResponse)(nil),       // 7: accounting_iface.v1.EntryListResponse
-	(*AccountKeyListRequest)(nil),   // 8: accounting_iface.v1.AccountKeyListRequest
-	(*AccountKeyListResponse)(nil),  // 9: accounting_iface.v1.AccountKeyListResponse
-	(*v1.TimeFilter)(nil),           // 10: common.v1.TimeFilter
-	(v1.SortType)(0),                // 11: common.v1.SortType
-	(*v1.PageFilter)(nil),           // 12: common.v1.PageFilter
-	(*v1.PageInfo)(nil),             // 13: common.v1.PageInfo
+	(CoaCode)(0),                    // 1: accounting_iface.v1.CoaCode
+	(BalanceType)(0),                // 2: accounting_iface.v1.BalanceType
+	(*EntryListExportRequest)(nil),  // 3: accounting_iface.v1.EntryListExportRequest
+	(*EntryListExportResponse)(nil), // 4: accounting_iface.v1.EntryListExportResponse
+	(*EntryListSort)(nil),           // 5: accounting_iface.v1.EntryListSort
+	(*EntryListRequest)(nil),        // 6: accounting_iface.v1.EntryListRequest
+	(*EntryAccount)(nil),            // 7: accounting_iface.v1.EntryAccount
+	(*EntryItem)(nil),               // 8: accounting_iface.v1.EntryItem
+	(*EntryListResponse)(nil),       // 9: accounting_iface.v1.EntryListResponse
+	(*AccountKeyListRequest)(nil),   // 10: accounting_iface.v1.AccountKeyListRequest
+	(*AccountKeyItem)(nil),          // 11: accounting_iface.v1.AccountKeyItem
+	(*AccountKeyListResponse)(nil),  // 12: accounting_iface.v1.AccountKeyListResponse
+	(*v1.TimeFilter)(nil),           // 13: common.v1.TimeFilter
+	(v1.SortType)(0),                // 14: common.v1.SortType
+	(*v1.PageFilter)(nil),           // 15: common.v1.PageFilter
+	(*v1.PageInfo)(nil),             // 16: common.v1.PageInfo
 }
 var file_accounting_iface_v1_ledger_proto_depIdxs = []int32{
-	10, // 0: accounting_iface.v1.EntryListExportRequest.time_range:type_name -> common.v1.TimeFilter
+	13, // 0: accounting_iface.v1.EntryListExportRequest.time_range:type_name -> common.v1.TimeFilter
 	0,  // 1: accounting_iface.v1.EntryListSort.field:type_name -> accounting_iface.v1.EntryFieldSort
-	11, // 2: accounting_iface.v1.EntryListSort.type:type_name -> common.v1.SortType
-	10, // 3: accounting_iface.v1.EntryListRequest.time_range:type_name -> common.v1.TimeFilter
-	12, // 4: accounting_iface.v1.EntryListRequest.page:type_name -> common.v1.PageFilter
-	3,  // 5: accounting_iface.v1.EntryListRequest.sort:type_name -> accounting_iface.v1.EntryListSort
-	5,  // 6: accounting_iface.v1.EntryItem.account:type_name -> accounting_iface.v1.EntryAccount
-	6,  // 7: accounting_iface.v1.EntryListResponse.data:type_name -> accounting_iface.v1.EntryItem
-	13, // 8: accounting_iface.v1.EntryListResponse.page_info:type_name -> common.v1.PageInfo
-	8,  // 9: accounting_iface.v1.LedgerService.AccountKeyList:input_type -> accounting_iface.v1.AccountKeyListRequest
-	4,  // 10: accounting_iface.v1.LedgerService.EntryList:input_type -> accounting_iface.v1.EntryListRequest
-	1,  // 11: accounting_iface.v1.LedgerService.EntryListExport:input_type -> accounting_iface.v1.EntryListExportRequest
-	9,  // 12: accounting_iface.v1.LedgerService.AccountKeyList:output_type -> accounting_iface.v1.AccountKeyListResponse
-	7,  // 13: accounting_iface.v1.LedgerService.EntryList:output_type -> accounting_iface.v1.EntryListResponse
-	2,  // 14: accounting_iface.v1.LedgerService.EntryListExport:output_type -> accounting_iface.v1.EntryListExportResponse
-	12, // [12:15] is the sub-list for method output_type
-	9,  // [9:12] is the sub-list for method input_type
-	9,  // [9:9] is the sub-list for extension type_name
-	9,  // [9:9] is the sub-list for extension extendee
-	0,  // [0:9] is the sub-list for field type_name
+	14, // 2: accounting_iface.v1.EntryListSort.type:type_name -> common.v1.SortType
+	13, // 3: accounting_iface.v1.EntryListRequest.time_range:type_name -> common.v1.TimeFilter
+	15, // 4: accounting_iface.v1.EntryListRequest.page:type_name -> common.v1.PageFilter
+	5,  // 5: accounting_iface.v1.EntryListRequest.sort:type_name -> accounting_iface.v1.EntryListSort
+	7,  // 6: accounting_iface.v1.EntryItem.account:type_name -> accounting_iface.v1.EntryAccount
+	8,  // 7: accounting_iface.v1.EntryListResponse.data:type_name -> accounting_iface.v1.EntryItem
+	16, // 8: accounting_iface.v1.EntryListResponse.page_info:type_name -> common.v1.PageInfo
+	1,  // 9: accounting_iface.v1.AccountKeyItem.coa:type_name -> accounting_iface.v1.CoaCode
+	2,  // 10: accounting_iface.v1.AccountKeyItem.balance_type:type_name -> accounting_iface.v1.BalanceType
+	11, // 11: accounting_iface.v1.AccountKeyListResponse.keys:type_name -> accounting_iface.v1.AccountKeyItem
+	10, // 12: accounting_iface.v1.LedgerService.AccountKeyList:input_type -> accounting_iface.v1.AccountKeyListRequest
+	6,  // 13: accounting_iface.v1.LedgerService.EntryList:input_type -> accounting_iface.v1.EntryListRequest
+	3,  // 14: accounting_iface.v1.LedgerService.EntryListExport:input_type -> accounting_iface.v1.EntryListExportRequest
+	12, // 15: accounting_iface.v1.LedgerService.AccountKeyList:output_type -> accounting_iface.v1.AccountKeyListResponse
+	9,  // 16: accounting_iface.v1.LedgerService.EntryList:output_type -> accounting_iface.v1.EntryListResponse
+	4,  // 17: accounting_iface.v1.LedgerService.EntryListExport:output_type -> accounting_iface.v1.EntryListExportResponse
+	15, // [15:18] is the sub-list for method output_type
+	12, // [12:15] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_accounting_iface_v1_ledger_proto_init() }
@@ -756,8 +945,8 @@ func file_accounting_iface_v1_ledger_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_accounting_iface_v1_ledger_proto_rawDesc), len(file_accounting_iface_v1_ledger_proto_rawDesc)),
-			NumEnums:      1,
-			NumMessages:   9,
+			NumEnums:      3,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
