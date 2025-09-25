@@ -1,0 +1,35 @@
+syntax = "proto3";
+package access_iface.v1;
+
+import "buf/validate/validate.proto";
+// import "common/v1/common.proto";
+
+option go_package = "github.com/pdcgo/schema/services/access_iface/v1;access_iface";
+
+service FrontendAccessService {
+  rpc SetupAccess(SetupAccessRequest) returns (stream SetupAccessResponse);
+  rpc MenuAccess(MenuAccessRequest) returns (MenuAccessResponse);
+}
+
+message SetupAccessRequest {
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+}
+message SetupAccessResponse {}
+
+message MenuAccessRequest {
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+}
+
+enum Policy {
+  POLICY_UNSPECIFIED = 0;
+  POLICY_ALLOW = 1;
+  POLICY_DENIED = 2;
+}
+
+message AccessItem {
+  Policy policy = 1;
+}
+
+message MenuAccessResponse {
+  map<string, AccessItem> data = 1;
+}
