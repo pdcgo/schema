@@ -36,12 +36,16 @@ const (
 	// TeamServicePublicTeamIDsProcedure is the fully-qualified name of the TeamService's PublicTeamIDs
 	// RPC.
 	TeamServicePublicTeamIDsProcedure = "/common.v1.TeamService/PublicTeamIDs"
+	// TeamServicePublicTeamListProcedure is the fully-qualified name of the TeamService's
+	// PublicTeamList RPC.
+	TeamServicePublicTeamListProcedure = "/common.v1.TeamService/PublicTeamList"
 )
 
 // TeamServiceClient is a client for the common.v1.TeamService service.
 type TeamServiceClient interface {
 	// #### Untuk Get Data User Public
 	PublicTeamIDs(context.Context, *connect.Request[v1.PublicTeamIDsRequest]) (*connect.Response[v1.PublicTeamIDsResponse], error)
+	PublicTeamList(context.Context, *connect.Request[v1.PublicTeamListRequest]) (*connect.Response[v1.PublicTeamListResponse], error)
 }
 
 // NewTeamServiceClient constructs a client for the common.v1.TeamService service. By default, it
@@ -61,12 +65,19 @@ func NewTeamServiceClient(httpClient connect.HTTPClient, baseURL string, opts ..
 			connect.WithSchema(teamServiceMethods.ByName("PublicTeamIDs")),
 			connect.WithClientOptions(opts...),
 		),
+		publicTeamList: connect.NewClient[v1.PublicTeamListRequest, v1.PublicTeamListResponse](
+			httpClient,
+			baseURL+TeamServicePublicTeamListProcedure,
+			connect.WithSchema(teamServiceMethods.ByName("PublicTeamList")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // teamServiceClient implements TeamServiceClient.
 type teamServiceClient struct {
-	publicTeamIDs *connect.Client[v1.PublicTeamIDsRequest, v1.PublicTeamIDsResponse]
+	publicTeamIDs  *connect.Client[v1.PublicTeamIDsRequest, v1.PublicTeamIDsResponse]
+	publicTeamList *connect.Client[v1.PublicTeamListRequest, v1.PublicTeamListResponse]
 }
 
 // PublicTeamIDs calls common.v1.TeamService.PublicTeamIDs.
@@ -74,10 +85,16 @@ func (c *teamServiceClient) PublicTeamIDs(ctx context.Context, req *connect.Requ
 	return c.publicTeamIDs.CallUnary(ctx, req)
 }
 
+// PublicTeamList calls common.v1.TeamService.PublicTeamList.
+func (c *teamServiceClient) PublicTeamList(ctx context.Context, req *connect.Request[v1.PublicTeamListRequest]) (*connect.Response[v1.PublicTeamListResponse], error) {
+	return c.publicTeamList.CallUnary(ctx, req)
+}
+
 // TeamServiceHandler is an implementation of the common.v1.TeamService service.
 type TeamServiceHandler interface {
 	// #### Untuk Get Data User Public
 	PublicTeamIDs(context.Context, *connect.Request[v1.PublicTeamIDsRequest]) (*connect.Response[v1.PublicTeamIDsResponse], error)
+	PublicTeamList(context.Context, *connect.Request[v1.PublicTeamListRequest]) (*connect.Response[v1.PublicTeamListResponse], error)
 }
 
 // NewTeamServiceHandler builds an HTTP handler from the service implementation. It returns the path
@@ -93,10 +110,18 @@ func NewTeamServiceHandler(svc TeamServiceHandler, opts ...connect.HandlerOption
 		connect.WithSchema(teamServiceMethods.ByName("PublicTeamIDs")),
 		connect.WithHandlerOptions(opts...),
 	)
+	teamServicePublicTeamListHandler := connect.NewUnaryHandler(
+		TeamServicePublicTeamListProcedure,
+		svc.PublicTeamList,
+		connect.WithSchema(teamServiceMethods.ByName("PublicTeamList")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/common.v1.TeamService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case TeamServicePublicTeamIDsProcedure:
 			teamServicePublicTeamIDsHandler.ServeHTTP(w, r)
+		case TeamServicePublicTeamListProcedure:
+			teamServicePublicTeamListHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -108,4 +133,8 @@ type UnimplementedTeamServiceHandler struct{}
 
 func (UnimplementedTeamServiceHandler) PublicTeamIDs(context.Context, *connect.Request[v1.PublicTeamIDsRequest]) (*connect.Response[v1.PublicTeamIDsResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("common.v1.TeamService.PublicTeamIDs is not implemented"))
+}
+
+func (UnimplementedTeamServiceHandler) PublicTeamList(context.Context, *connect.Request[v1.PublicTeamListRequest]) (*connect.Response[v1.PublicTeamListResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("common.v1.TeamService.PublicTeamList is not implemented"))
 }

@@ -33,9 +33,6 @@ const (
 // reflection-formatted method names, remove the leading slash and convert the remaining slash to a
 // period.
 const (
-	// LedgerServiceAccountKeyListProcedure is the fully-qualified name of the LedgerService's
-	// AccountKeyList RPC.
-	LedgerServiceAccountKeyListProcedure = "/accounting_iface.v1.LedgerService/AccountKeyList"
 	// LedgerServiceEntryListProcedure is the fully-qualified name of the LedgerService's EntryList RPC.
 	LedgerServiceEntryListProcedure = "/accounting_iface.v1.LedgerService/EntryList"
 	// LedgerServiceEntryListExportProcedure is the fully-qualified name of the LedgerService's
@@ -45,7 +42,6 @@ const (
 
 // LedgerServiceClient is a client for the accounting_iface.v1.LedgerService service.
 type LedgerServiceClient interface {
-	AccountKeyList(context.Context, *connect.Request[v1.AccountKeyListRequest]) (*connect.Response[v1.AccountKeyListResponse], error)
 	EntryList(context.Context, *connect.Request[v1.EntryListRequest]) (*connect.Response[v1.EntryListResponse], error)
 	EntryListExport(context.Context, *connect.Request[v1.EntryListExportRequest]) (*connect.ServerStreamForClient[v1.EntryListExportResponse], error)
 }
@@ -61,12 +57,6 @@ func NewLedgerServiceClient(httpClient connect.HTTPClient, baseURL string, opts 
 	baseURL = strings.TrimRight(baseURL, "/")
 	ledgerServiceMethods := v1.File_accounting_iface_v1_ledger_proto.Services().ByName("LedgerService").Methods()
 	return &ledgerServiceClient{
-		accountKeyList: connect.NewClient[v1.AccountKeyListRequest, v1.AccountKeyListResponse](
-			httpClient,
-			baseURL+LedgerServiceAccountKeyListProcedure,
-			connect.WithSchema(ledgerServiceMethods.ByName("AccountKeyList")),
-			connect.WithClientOptions(opts...),
-		),
 		entryList: connect.NewClient[v1.EntryListRequest, v1.EntryListResponse](
 			httpClient,
 			baseURL+LedgerServiceEntryListProcedure,
@@ -84,14 +74,8 @@ func NewLedgerServiceClient(httpClient connect.HTTPClient, baseURL string, opts 
 
 // ledgerServiceClient implements LedgerServiceClient.
 type ledgerServiceClient struct {
-	accountKeyList  *connect.Client[v1.AccountKeyListRequest, v1.AccountKeyListResponse]
 	entryList       *connect.Client[v1.EntryListRequest, v1.EntryListResponse]
 	entryListExport *connect.Client[v1.EntryListExportRequest, v1.EntryListExportResponse]
-}
-
-// AccountKeyList calls accounting_iface.v1.LedgerService.AccountKeyList.
-func (c *ledgerServiceClient) AccountKeyList(ctx context.Context, req *connect.Request[v1.AccountKeyListRequest]) (*connect.Response[v1.AccountKeyListResponse], error) {
-	return c.accountKeyList.CallUnary(ctx, req)
 }
 
 // EntryList calls accounting_iface.v1.LedgerService.EntryList.
@@ -106,7 +90,6 @@ func (c *ledgerServiceClient) EntryListExport(ctx context.Context, req *connect.
 
 // LedgerServiceHandler is an implementation of the accounting_iface.v1.LedgerService service.
 type LedgerServiceHandler interface {
-	AccountKeyList(context.Context, *connect.Request[v1.AccountKeyListRequest]) (*connect.Response[v1.AccountKeyListResponse], error)
 	EntryList(context.Context, *connect.Request[v1.EntryListRequest]) (*connect.Response[v1.EntryListResponse], error)
 	EntryListExport(context.Context, *connect.Request[v1.EntryListExportRequest], *connect.ServerStream[v1.EntryListExportResponse]) error
 }
@@ -118,12 +101,6 @@ type LedgerServiceHandler interface {
 // and JSON codecs. They also support gzip compression.
 func NewLedgerServiceHandler(svc LedgerServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
 	ledgerServiceMethods := v1.File_accounting_iface_v1_ledger_proto.Services().ByName("LedgerService").Methods()
-	ledgerServiceAccountKeyListHandler := connect.NewUnaryHandler(
-		LedgerServiceAccountKeyListProcedure,
-		svc.AccountKeyList,
-		connect.WithSchema(ledgerServiceMethods.ByName("AccountKeyList")),
-		connect.WithHandlerOptions(opts...),
-	)
 	ledgerServiceEntryListHandler := connect.NewUnaryHandler(
 		LedgerServiceEntryListProcedure,
 		svc.EntryList,
@@ -138,8 +115,6 @@ func NewLedgerServiceHandler(svc LedgerServiceHandler, opts ...connect.HandlerOp
 	)
 	return "/accounting_iface.v1.LedgerService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
-		case LedgerServiceAccountKeyListProcedure:
-			ledgerServiceAccountKeyListHandler.ServeHTTP(w, r)
 		case LedgerServiceEntryListProcedure:
 			ledgerServiceEntryListHandler.ServeHTTP(w, r)
 		case LedgerServiceEntryListExportProcedure:
@@ -152,10 +127,6 @@ func NewLedgerServiceHandler(svc LedgerServiceHandler, opts ...connect.HandlerOp
 
 // UnimplementedLedgerServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedLedgerServiceHandler struct{}
-
-func (UnimplementedLedgerServiceHandler) AccountKeyList(context.Context, *connect.Request[v1.AccountKeyListRequest]) (*connect.Response[v1.AccountKeyListResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("accounting_iface.v1.LedgerService.AccountKeyList is not implemented"))
-}
 
 func (UnimplementedLedgerServiceHandler) EntryList(context.Context, *connect.Request[v1.EntryListRequest]) (*connect.Response[v1.EntryListResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("accounting_iface.v1.LedgerService.EntryList is not implemented"))

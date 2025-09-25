@@ -22,6 +22,110 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type PublicTeamListRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Q             string                 `protobuf:"bytes,1,opt,name=q,proto3" json:"q,omitempty"`
+	Page          *PageFilter            `protobuf:"bytes,2,opt,name=page,proto3" json:"page,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PublicTeamListRequest) Reset() {
+	*x = PublicTeamListRequest{}
+	mi := &file_common_v1_team_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PublicTeamListRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PublicTeamListRequest) ProtoMessage() {}
+
+func (x *PublicTeamListRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_common_v1_team_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PublicTeamListRequest.ProtoReflect.Descriptor instead.
+func (*PublicTeamListRequest) Descriptor() ([]byte, []int) {
+	return file_common_v1_team_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *PublicTeamListRequest) GetQ() string {
+	if x != nil {
+		return x.Q
+	}
+	return ""
+}
+
+func (x *PublicTeamListRequest) GetPage() *PageFilter {
+	if x != nil {
+		return x.Page
+	}
+	return nil
+}
+
+type PublicTeamListResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Datas         []*Team                `protobuf:"bytes,1,rep,name=datas,proto3" json:"datas,omitempty"`
+	PageInfo      *PageInfo              `protobuf:"bytes,2,opt,name=page_info,json=pageInfo,proto3" json:"page_info,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PublicTeamListResponse) Reset() {
+	*x = PublicTeamListResponse{}
+	mi := &file_common_v1_team_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PublicTeamListResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PublicTeamListResponse) ProtoMessage() {}
+
+func (x *PublicTeamListResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_common_v1_team_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PublicTeamListResponse.ProtoReflect.Descriptor instead.
+func (*PublicTeamListResponse) Descriptor() ([]byte, []int) {
+	return file_common_v1_team_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *PublicTeamListResponse) GetDatas() []*Team {
+	if x != nil {
+		return x.Datas
+	}
+	return nil
+}
+
+func (x *PublicTeamListResponse) GetPageInfo() *PageInfo {
+	if x != nil {
+		return x.PageInfo
+	}
+	return nil
+}
+
 type PublicTeamIDsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Ids           []uint64               `protobuf:"varint,1,rep,packed,name=ids,proto3" json:"ids,omitempty"`
@@ -31,7 +135,7 @@ type PublicTeamIDsRequest struct {
 
 func (x *PublicTeamIDsRequest) Reset() {
 	*x = PublicTeamIDsRequest{}
-	mi := &file_common_v1_team_proto_msgTypes[0]
+	mi := &file_common_v1_team_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -43,7 +147,7 @@ func (x *PublicTeamIDsRequest) String() string {
 func (*PublicTeamIDsRequest) ProtoMessage() {}
 
 func (x *PublicTeamIDsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_common_v1_team_proto_msgTypes[0]
+	mi := &file_common_v1_team_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -56,7 +160,7 @@ func (x *PublicTeamIDsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PublicTeamIDsRequest.ProtoReflect.Descriptor instead.
 func (*PublicTeamIDsRequest) Descriptor() ([]byte, []int) {
-	return file_common_v1_team_proto_rawDescGZIP(), []int{0}
+	return file_common_v1_team_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *PublicTeamIDsRequest) GetIds() []uint64 {
@@ -75,7 +179,7 @@ type PublicTeamIDsResponse struct {
 
 func (x *PublicTeamIDsResponse) Reset() {
 	*x = PublicTeamIDsResponse{}
-	mi := &file_common_v1_team_proto_msgTypes[1]
+	mi := &file_common_v1_team_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -87,7 +191,7 @@ func (x *PublicTeamIDsResponse) String() string {
 func (*PublicTeamIDsResponse) ProtoMessage() {}
 
 func (x *PublicTeamIDsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_common_v1_team_proto_msgTypes[1]
+	mi := &file_common_v1_team_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -100,7 +204,7 @@ func (x *PublicTeamIDsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PublicTeamIDsResponse.ProtoReflect.Descriptor instead.
 func (*PublicTeamIDsResponse) Descriptor() ([]byte, []int) {
-	return file_common_v1_team_proto_rawDescGZIP(), []int{1}
+	return file_common_v1_team_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *PublicTeamIDsResponse) GetData() map[uint64]*Team {
@@ -114,16 +218,23 @@ var File_common_v1_team_proto protoreflect.FileDescriptor
 
 const file_common_v1_team_proto_rawDesc = "" +
 	"\n" +
-	"\x14common/v1/team.proto\x12\tcommon.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\"=\n" +
+	"\x14common/v1/team.proto\x12\tcommon.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\"X\n" +
+	"\x15PublicTeamListRequest\x12\f\n" +
+	"\x01q\x18\x01 \x01(\tR\x01q\x121\n" +
+	"\x04page\x18\x02 \x01(\v2\x15.common.v1.PageFilterB\x06\xbaH\x03\xc8\x01\x01R\x04page\"q\n" +
+	"\x16PublicTeamListResponse\x12%\n" +
+	"\x05datas\x18\x01 \x03(\v2\x0f.common.v1.TeamR\x05datas\x120\n" +
+	"\tpage_info\x18\x02 \x01(\v2\x13.common.v1.PageInfoR\bpageInfo\"=\n" +
 	"\x14PublicTeamIDsRequest\x12%\n" +
 	"\x03ids\x18\x01 \x03(\x04B\x13\xbaH\x10\x92\x01\r\b\x01\x10\xc8\x01\x18\x01\"\x042\x02 \x00R\x03ids\"\xa1\x01\n" +
 	"\x15PublicTeamIDsResponse\x12>\n" +
 	"\x04data\x18\x01 \x03(\v2*.common.v1.PublicTeamIDsResponse.DataEntryR\x04data\x1aH\n" +
 	"\tDataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\x04R\x03key\x12%\n" +
-	"\x05value\x18\x02 \x01(\v2\x0f.common.v1.TeamR\x05value:\x028\x012a\n" +
+	"\x05value\x18\x02 \x01(\v2\x0f.common.v1.TeamR\x05value:\x028\x012\xb8\x01\n" +
 	"\vTeamService\x12R\n" +
-	"\rPublicTeamIDs\x12\x1f.common.v1.PublicTeamIDsRequest\x1a .common.v1.PublicTeamIDsResponseB\x92\x01\n" +
+	"\rPublicTeamIDs\x12\x1f.common.v1.PublicTeamIDsRequest\x1a .common.v1.PublicTeamIDsResponse\x12U\n" +
+	"\x0ePublicTeamList\x12 .common.v1.PublicTeamListRequest\x1a!.common.v1.PublicTeamListResponseB\x92\x01\n" +
 	"\rcom.common.v1B\tTeamProtoP\x01Z1github.com/pdcgo/schema/services/common/v1;common\xa2\x02\x03CXX\xaa\x02\tCommon.V1\xca\x02\tCommon\\V1\xe2\x02\x15Common\\V1\\GPBMetadata\xea\x02\n" +
 	"Common::V1b\x06proto3"
 
@@ -139,23 +250,32 @@ func file_common_v1_team_proto_rawDescGZIP() []byte {
 	return file_common_v1_team_proto_rawDescData
 }
 
-var file_common_v1_team_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_common_v1_team_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_common_v1_team_proto_goTypes = []any{
-	(*PublicTeamIDsRequest)(nil),  // 0: common.v1.PublicTeamIDsRequest
-	(*PublicTeamIDsResponse)(nil), // 1: common.v1.PublicTeamIDsResponse
-	nil,                           // 2: common.v1.PublicTeamIDsResponse.DataEntry
-	(*Team)(nil),                  // 3: common.v1.Team
+	(*PublicTeamListRequest)(nil),  // 0: common.v1.PublicTeamListRequest
+	(*PublicTeamListResponse)(nil), // 1: common.v1.PublicTeamListResponse
+	(*PublicTeamIDsRequest)(nil),   // 2: common.v1.PublicTeamIDsRequest
+	(*PublicTeamIDsResponse)(nil),  // 3: common.v1.PublicTeamIDsResponse
+	nil,                            // 4: common.v1.PublicTeamIDsResponse.DataEntry
+	(*PageFilter)(nil),             // 5: common.v1.PageFilter
+	(*Team)(nil),                   // 6: common.v1.Team
+	(*PageInfo)(nil),               // 7: common.v1.PageInfo
 }
 var file_common_v1_team_proto_depIdxs = []int32{
-	2, // 0: common.v1.PublicTeamIDsResponse.data:type_name -> common.v1.PublicTeamIDsResponse.DataEntry
-	3, // 1: common.v1.PublicTeamIDsResponse.DataEntry.value:type_name -> common.v1.Team
-	0, // 2: common.v1.TeamService.PublicTeamIDs:input_type -> common.v1.PublicTeamIDsRequest
-	1, // 3: common.v1.TeamService.PublicTeamIDs:output_type -> common.v1.PublicTeamIDsResponse
-	3, // [3:4] is the sub-list for method output_type
-	2, // [2:3] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	5, // 0: common.v1.PublicTeamListRequest.page:type_name -> common.v1.PageFilter
+	6, // 1: common.v1.PublicTeamListResponse.datas:type_name -> common.v1.Team
+	7, // 2: common.v1.PublicTeamListResponse.page_info:type_name -> common.v1.PageInfo
+	4, // 3: common.v1.PublicTeamIDsResponse.data:type_name -> common.v1.PublicTeamIDsResponse.DataEntry
+	6, // 4: common.v1.PublicTeamIDsResponse.DataEntry.value:type_name -> common.v1.Team
+	2, // 5: common.v1.TeamService.PublicTeamIDs:input_type -> common.v1.PublicTeamIDsRequest
+	0, // 6: common.v1.TeamService.PublicTeamList:input_type -> common.v1.PublicTeamListRequest
+	3, // 7: common.v1.TeamService.PublicTeamIDs:output_type -> common.v1.PublicTeamIDsResponse
+	1, // 8: common.v1.TeamService.PublicTeamList:output_type -> common.v1.PublicTeamListResponse
+	7, // [7:9] is the sub-list for method output_type
+	5, // [5:7] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_common_v1_team_proto_init() }
@@ -170,7 +290,7 @@ func file_common_v1_team_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_common_v1_team_proto_rawDesc), len(file_common_v1_team_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

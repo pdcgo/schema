@@ -1,8 +1,8 @@
 syntax = "proto3";
 package payment_iface.v1;
 
-// import "common/v1/common.proto";
 import "buf/validate/validate.proto";
+import "common/v1/common.proto";
 
 option go_package = "github.com/pdcgo/schema/services/payment_iface/v1;payment_iface";
 
@@ -84,12 +84,30 @@ message PaymentRejectRequest {
 
 message PaymentRejectResponse {}
 
+enum PaymentTimeType {
+  PAYMENT_TIME_TYPE_UNSPECIFIED = 0;
+  PAYMENT_TIME_TYPE_CREATED = 1;
+  PAYMENT_TIME_TYPE_ACCEPTED = 2;
+}
+
+enum PaymentSource {
+  PAYMENT_SOURCE_UNSPECIFIED = 0;
+  PAYMENT_SOURCE_FROM = 1;
+  PAYMENT_SOURCE_TO = 2;
+}
+
 message PaymentListRequest {
   uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  PaymentSource source = 2;
+  PaymentType payment_type = 3;
+  PaymentTimeType time_filter_type = 4;
+  common.v1.TimeFilter time_range = 5 [(buf.validate.field).required = true];
+  common.v1.PageFilter page = 6 [(buf.validate.field).required = true];
 }
 
 message PaymentListResponse {
   repeated Payment payments = 1;
+  common.v1.PageInfo page_info = 2;
 }
 
 // Entity
@@ -98,6 +116,8 @@ message Payment {
   uint64 from_team_id = 2;
   uint64 to_team_id = 3;
   double amount = 4;
-  PaymentStatus status = 5;
-  int64 created_at = 6;
+  PaymentType payment_type = 5;
+  PaymentStatus status = 6;
+  int64 created_at = 7;
+  int64 accepted_at = 8;
 }

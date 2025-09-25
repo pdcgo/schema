@@ -11,6 +11,17 @@ service TeamService {
    #### Untuk Get Data User Public
   */
   rpc PublicTeamIDs(PublicTeamIDsRequest) returns (PublicTeamIDsResponse);
+  rpc PublicTeamList(PublicTeamListRequest) returns (PublicTeamListResponse);
+}
+
+message PublicTeamListRequest {
+  string q = 1;
+  common.v1.PageFilter page = 2 [(buf.validate.field).required = true];
+}
+
+message PublicTeamListResponse {
+  repeated Team datas = 1;
+  common.v1.PageInfo page_info = 2;
 }
 
 message PublicTeamIDsRequest {

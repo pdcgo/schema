@@ -1,0 +1,40 @@
+syntax = "proto3";
+package accounting_iface.v1;
+
+import "buf/validate/validate.proto";
+
+option go_package = "github.com/pdcgo/schema/services/accounting_iface/v1;accounting_iface";
+
+service CoreService {
+  rpc AccountKeyList(AccountKeyListRequest) returns (AccountKeyListResponse);
+}
+
+enum CoaCode {
+  COA_CODE_UNSPECIFIED = 0;
+  COA_CODE_ASSET = 10;
+  COA_CODE_LIABILITY = 20;
+  COA_CODE_EQUITY = 30;
+  COA_CODE_REVENUE = 40;
+  COA_CODE_EXPENSE = 50;
+}
+
+enum BalanceType {
+  BALANCE_TYPE_UNSPECIFIED = 0;
+  BALANCE_TYPE_DEBIT = 1;
+  BALANCE_TYPE_CREDIT = 2;
+}
+
+message AccountKeyItem {
+  string key = 1;
+  CoaCode coa = 2;
+  BalanceType balance_type = 3;
+}
+
+message AccountKeyListRequest {
+  string q = 1;
+  uint64 team_id = 2 [(buf.validate.field).uint64.gt = 0];
+}
+
+message AccountKeyListResponse {
+  repeated AccountKeyItem keys = 1;
+}

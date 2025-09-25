@@ -7,7 +7,6 @@ import "common/v1/common.proto";
 option go_package = "github.com/pdcgo/schema/services/accounting_iface/v1;accounting_iface";
 
 service LedgerService {
-  rpc AccountKeyList(AccountKeyListRequest) returns (AccountKeyListResponse);
   rpc EntryList(EntryListRequest) returns (EntryListResponse);
   rpc EntryListExport(EntryListExportRequest) returns (stream EntryListExportResponse);
 }
@@ -65,33 +64,4 @@ message EntryItem {
 message EntryListResponse {
   repeated EntryItem data = 1;
   common.v1.PageInfo page_info = 2;
-}
-
-message AccountKeyListRequest {
-  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
-}
-
-enum CoaCode {
-  COA_CODE_UNSPECIFIED = 0;
-  COA_CODE_ASSET = 10;
-  COA_CODE_LIABILITY = 20;
-  COA_CODE_EQUITY = 30;
-  COA_CODE_REVENUE = 40;
-  COA_CODE_EXPENSE = 50;
-}
-
-enum BalanceType {
-  BALANCE_TYPE_UNSPECIFIED = 0;
-  BALANCE_TYPE_DEBIT = 1;
-  BALANCE_TYPE_CREDIT = 2;
-}
-
-message AccountKeyItem {
-  string key = 1;
-  CoaCode coa = 2;
-  BalanceType balance_type = 3;
-}
-
-message AccountKeyListResponse {
-  repeated AccountKeyItem keys = 1;
 }
