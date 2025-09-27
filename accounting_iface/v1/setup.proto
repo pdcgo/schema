@@ -8,6 +8,13 @@ option go_package = "github.com/pdcgo/schema/services/accounting_iface/v1;accoun
 
 service AccountingSetupService {
   rpc Setup(SetupRequest) returns (stream SetupResponse);
+  rpc RecalculateDaily(RecalculateDailyRequest) returns (stream RecalculateDailyResponse);
+}
+
+message RecalculateDailyRequest {}
+
+message RecalculateDailyResponse {
+  string message = 1;
 }
 
 message SetupRequest {

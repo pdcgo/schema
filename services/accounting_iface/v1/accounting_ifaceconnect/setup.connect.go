@@ -38,6 +38,9 @@ const (
 	// AccountingSetupServiceSetupProcedure is the fully-qualified name of the AccountingSetupService's
 	// Setup RPC.
 	AccountingSetupServiceSetupProcedure = "/accounting_iface.v1.AccountingSetupService/Setup"
+	// AccountingSetupServiceRecalculateDailyProcedure is the fully-qualified name of the
+	// AccountingSetupService's RecalculateDaily RPC.
+	AccountingSetupServiceRecalculateDailyProcedure = "/accounting_iface.v1.AccountingSetupService/RecalculateDaily"
 	// StreamServiceDummyStreamProcedure is the fully-qualified name of the StreamService's DummyStream
 	// RPC.
 	StreamServiceDummyStreamProcedure = "/accounting_iface.v1.StreamService/DummyStream"
@@ -47,6 +50,7 @@ const (
 // service.
 type AccountingSetupServiceClient interface {
 	Setup(context.Context, *connect.Request[v1.SetupRequest]) (*connect.ServerStreamForClient[v1.SetupResponse], error)
+	RecalculateDaily(context.Context, *connect.Request[v1.RecalculateDailyRequest]) (*connect.ServerStreamForClient[v1.RecalculateDailyResponse], error)
 }
 
 // NewAccountingSetupServiceClient constructs a client for the
@@ -66,12 +70,19 @@ func NewAccountingSetupServiceClient(httpClient connect.HTTPClient, baseURL stri
 			connect.WithSchema(accountingSetupServiceMethods.ByName("Setup")),
 			connect.WithClientOptions(opts...),
 		),
+		recalculateDaily: connect.NewClient[v1.RecalculateDailyRequest, v1.RecalculateDailyResponse](
+			httpClient,
+			baseURL+AccountingSetupServiceRecalculateDailyProcedure,
+			connect.WithSchema(accountingSetupServiceMethods.ByName("RecalculateDaily")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // accountingSetupServiceClient implements AccountingSetupServiceClient.
 type accountingSetupServiceClient struct {
-	setup *connect.Client[v1.SetupRequest, v1.SetupResponse]
+	setup            *connect.Client[v1.SetupRequest, v1.SetupResponse]
+	recalculateDaily *connect.Client[v1.RecalculateDailyRequest, v1.RecalculateDailyResponse]
 }
 
 // Setup calls accounting_iface.v1.AccountingSetupService.Setup.
@@ -79,10 +90,16 @@ func (c *accountingSetupServiceClient) Setup(ctx context.Context, req *connect.R
 	return c.setup.CallServerStream(ctx, req)
 }
 
+// RecalculateDaily calls accounting_iface.v1.AccountingSetupService.RecalculateDaily.
+func (c *accountingSetupServiceClient) RecalculateDaily(ctx context.Context, req *connect.Request[v1.RecalculateDailyRequest]) (*connect.ServerStreamForClient[v1.RecalculateDailyResponse], error) {
+	return c.recalculateDaily.CallServerStream(ctx, req)
+}
+
 // AccountingSetupServiceHandler is an implementation of the
 // accounting_iface.v1.AccountingSetupService service.
 type AccountingSetupServiceHandler interface {
 	Setup(context.Context, *connect.Request[v1.SetupRequest], *connect.ServerStream[v1.SetupResponse]) error
+	RecalculateDaily(context.Context, *connect.Request[v1.RecalculateDailyRequest], *connect.ServerStream[v1.RecalculateDailyResponse]) error
 }
 
 // NewAccountingSetupServiceHandler builds an HTTP handler from the service implementation. It
@@ -98,10 +115,18 @@ func NewAccountingSetupServiceHandler(svc AccountingSetupServiceHandler, opts ..
 		connect.WithSchema(accountingSetupServiceMethods.ByName("Setup")),
 		connect.WithHandlerOptions(opts...),
 	)
+	accountingSetupServiceRecalculateDailyHandler := connect.NewServerStreamHandler(
+		AccountingSetupServiceRecalculateDailyProcedure,
+		svc.RecalculateDaily,
+		connect.WithSchema(accountingSetupServiceMethods.ByName("RecalculateDaily")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/accounting_iface.v1.AccountingSetupService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case AccountingSetupServiceSetupProcedure:
 			accountingSetupServiceSetupHandler.ServeHTTP(w, r)
+		case AccountingSetupServiceRecalculateDailyProcedure:
+			accountingSetupServiceRecalculateDailyHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -113,6 +138,10 @@ type UnimplementedAccountingSetupServiceHandler struct{}
 
 func (UnimplementedAccountingSetupServiceHandler) Setup(context.Context, *connect.Request[v1.SetupRequest], *connect.ServerStream[v1.SetupResponse]) error {
 	return connect.NewError(connect.CodeUnimplemented, errors.New("accounting_iface.v1.AccountingSetupService.Setup is not implemented"))
+}
+
+func (UnimplementedAccountingSetupServiceHandler) RecalculateDaily(context.Context, *connect.Request[v1.RecalculateDailyRequest], *connect.ServerStream[v1.RecalculateDailyResponse]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("accounting_iface.v1.AccountingSetupService.RecalculateDaily is not implemented"))
 }
 
 // StreamServiceClient is a client for the accounting_iface.v1.StreamService service.

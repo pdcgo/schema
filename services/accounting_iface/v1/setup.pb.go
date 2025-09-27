@@ -22,6 +22,86 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type RecalculateDailyRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RecalculateDailyRequest) Reset() {
+	*x = RecalculateDailyRequest{}
+	mi := &file_accounting_iface_v1_setup_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RecalculateDailyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RecalculateDailyRequest) ProtoMessage() {}
+
+func (x *RecalculateDailyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_accounting_iface_v1_setup_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RecalculateDailyRequest.ProtoReflect.Descriptor instead.
+func (*RecalculateDailyRequest) Descriptor() ([]byte, []int) {
+	return file_accounting_iface_v1_setup_proto_rawDescGZIP(), []int{0}
+}
+
+type RecalculateDailyResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Message       string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RecalculateDailyResponse) Reset() {
+	*x = RecalculateDailyResponse{}
+	mi := &file_accounting_iface_v1_setup_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RecalculateDailyResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RecalculateDailyResponse) ProtoMessage() {}
+
+func (x *RecalculateDailyResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_accounting_iface_v1_setup_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RecalculateDailyResponse.ProtoReflect.Descriptor instead.
+func (*RecalculateDailyResponse) Descriptor() ([]byte, []int) {
+	return file_accounting_iface_v1_setup_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *RecalculateDailyResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
 type SetupRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
@@ -31,7 +111,7 @@ type SetupRequest struct {
 
 func (x *SetupRequest) Reset() {
 	*x = SetupRequest{}
-	mi := &file_accounting_iface_v1_setup_proto_msgTypes[0]
+	mi := &file_accounting_iface_v1_setup_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -43,7 +123,7 @@ func (x *SetupRequest) String() string {
 func (*SetupRequest) ProtoMessage() {}
 
 func (x *SetupRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_setup_proto_msgTypes[0]
+	mi := &file_accounting_iface_v1_setup_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -56,7 +136,7 @@ func (x *SetupRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetupRequest.ProtoReflect.Descriptor instead.
 func (*SetupRequest) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_setup_proto_rawDescGZIP(), []int{0}
+	return file_accounting_iface_v1_setup_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *SetupRequest) GetTeamId() uint64 {
@@ -75,7 +155,7 @@ type SetupResponse struct {
 
 func (x *SetupResponse) Reset() {
 	*x = SetupResponse{}
-	mi := &file_accounting_iface_v1_setup_proto_msgTypes[1]
+	mi := &file_accounting_iface_v1_setup_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -87,7 +167,7 @@ func (x *SetupResponse) String() string {
 func (*SetupResponse) ProtoMessage() {}
 
 func (x *SetupResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_setup_proto_msgTypes[1]
+	mi := &file_accounting_iface_v1_setup_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -100,7 +180,7 @@ func (x *SetupResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetupResponse.ProtoReflect.Descriptor instead.
 func (*SetupResponse) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_setup_proto_rawDescGZIP(), []int{1}
+	return file_accounting_iface_v1_setup_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *SetupResponse) GetMessage() string {
@@ -118,7 +198,7 @@ type DummyStreamRequest struct {
 
 func (x *DummyStreamRequest) Reset() {
 	*x = DummyStreamRequest{}
-	mi := &file_accounting_iface_v1_setup_proto_msgTypes[2]
+	mi := &file_accounting_iface_v1_setup_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -130,7 +210,7 @@ func (x *DummyStreamRequest) String() string {
 func (*DummyStreamRequest) ProtoMessage() {}
 
 func (x *DummyStreamRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_setup_proto_msgTypes[2]
+	mi := &file_accounting_iface_v1_setup_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -143,7 +223,7 @@ func (x *DummyStreamRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DummyStreamRequest.ProtoReflect.Descriptor instead.
 func (*DummyStreamRequest) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_setup_proto_rawDescGZIP(), []int{2}
+	return file_accounting_iface_v1_setup_proto_rawDescGZIP(), []int{4}
 }
 
 type DummyStreamResponse struct {
@@ -155,7 +235,7 @@ type DummyStreamResponse struct {
 
 func (x *DummyStreamResponse) Reset() {
 	*x = DummyStreamResponse{}
-	mi := &file_accounting_iface_v1_setup_proto_msgTypes[3]
+	mi := &file_accounting_iface_v1_setup_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -167,7 +247,7 @@ func (x *DummyStreamResponse) String() string {
 func (*DummyStreamResponse) ProtoMessage() {}
 
 func (x *DummyStreamResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_setup_proto_msgTypes[3]
+	mi := &file_accounting_iface_v1_setup_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -180,7 +260,7 @@ func (x *DummyStreamResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DummyStreamResponse.ProtoReflect.Descriptor instead.
 func (*DummyStreamResponse) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_setup_proto_rawDescGZIP(), []int{3}
+	return file_accounting_iface_v1_setup_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *DummyStreamResponse) GetMessage() string {
@@ -194,16 +274,20 @@ var File_accounting_iface_v1_setup_proto protoreflect.FileDescriptor
 
 const file_accounting_iface_v1_setup_proto_rawDesc = "" +
 	"\n" +
-	"\x1faccounting_iface/v1/setup.proto\x12\x13accounting_iface.v1\x1a\x1bbuf/validate/validate.proto\"/\n" +
+	"\x1faccounting_iface/v1/setup.proto\x12\x13accounting_iface.v1\x1a\x1bbuf/validate/validate.proto\"\x19\n" +
+	"\x17RecalculateDailyRequest\"4\n" +
+	"\x18RecalculateDailyResponse\x12\x18\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage\"/\n" +
 	"\fSetupRequest\x12\x1f\n" +
 	"\ateam_id\x18\x01 \x01(\x04B\x06\xbaH\x03\xc8\x01\x01R\x06teamId\")\n" +
 	"\rSetupResponse\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\"\x14\n" +
 	"\x12DummyStreamRequest\"/\n" +
 	"\x13DummyStreamResponse\x12\x18\n" +
-	"\amessage\x18\x01 \x01(\tR\amessage2j\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage2\xdd\x01\n" +
 	"\x16AccountingSetupService\x12P\n" +
-	"\x05Setup\x12!.accounting_iface.v1.SetupRequest\x1a\".accounting_iface.v1.SetupResponse0\x012u\n" +
+	"\x05Setup\x12!.accounting_iface.v1.SetupRequest\x1a\".accounting_iface.v1.SetupResponse0\x01\x12q\n" +
+	"\x10RecalculateDaily\x12,.accounting_iface.v1.RecalculateDailyRequest\x1a-.accounting_iface.v1.RecalculateDailyResponse0\x012u\n" +
 	"\rStreamService\x12d\n" +
 	"\vDummyStream\x12'.accounting_iface.v1.DummyStreamRequest\x1a(.accounting_iface.v1.DummyStreamResponse(\x010\x01B\xd5\x01\n" +
 	"\x17com.accounting_iface.v1B\n" +
@@ -221,20 +305,24 @@ func file_accounting_iface_v1_setup_proto_rawDescGZIP() []byte {
 	return file_accounting_iface_v1_setup_proto_rawDescData
 }
 
-var file_accounting_iface_v1_setup_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_accounting_iface_v1_setup_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_accounting_iface_v1_setup_proto_goTypes = []any{
-	(*SetupRequest)(nil),        // 0: accounting_iface.v1.SetupRequest
-	(*SetupResponse)(nil),       // 1: accounting_iface.v1.SetupResponse
-	(*DummyStreamRequest)(nil),  // 2: accounting_iface.v1.DummyStreamRequest
-	(*DummyStreamResponse)(nil), // 3: accounting_iface.v1.DummyStreamResponse
+	(*RecalculateDailyRequest)(nil),  // 0: accounting_iface.v1.RecalculateDailyRequest
+	(*RecalculateDailyResponse)(nil), // 1: accounting_iface.v1.RecalculateDailyResponse
+	(*SetupRequest)(nil),             // 2: accounting_iface.v1.SetupRequest
+	(*SetupResponse)(nil),            // 3: accounting_iface.v1.SetupResponse
+	(*DummyStreamRequest)(nil),       // 4: accounting_iface.v1.DummyStreamRequest
+	(*DummyStreamResponse)(nil),      // 5: accounting_iface.v1.DummyStreamResponse
 }
 var file_accounting_iface_v1_setup_proto_depIdxs = []int32{
-	0, // 0: accounting_iface.v1.AccountingSetupService.Setup:input_type -> accounting_iface.v1.SetupRequest
-	2, // 1: accounting_iface.v1.StreamService.DummyStream:input_type -> accounting_iface.v1.DummyStreamRequest
-	1, // 2: accounting_iface.v1.AccountingSetupService.Setup:output_type -> accounting_iface.v1.SetupResponse
-	3, // 3: accounting_iface.v1.StreamService.DummyStream:output_type -> accounting_iface.v1.DummyStreamResponse
-	2, // [2:4] is the sub-list for method output_type
-	0, // [0:2] is the sub-list for method input_type
+	2, // 0: accounting_iface.v1.AccountingSetupService.Setup:input_type -> accounting_iface.v1.SetupRequest
+	0, // 1: accounting_iface.v1.AccountingSetupService.RecalculateDaily:input_type -> accounting_iface.v1.RecalculateDailyRequest
+	4, // 2: accounting_iface.v1.StreamService.DummyStream:input_type -> accounting_iface.v1.DummyStreamRequest
+	3, // 3: accounting_iface.v1.AccountingSetupService.Setup:output_type -> accounting_iface.v1.SetupResponse
+	1, // 4: accounting_iface.v1.AccountingSetupService.RecalculateDaily:output_type -> accounting_iface.v1.RecalculateDailyResponse
+	5, // 5: accounting_iface.v1.StreamService.DummyStream:output_type -> accounting_iface.v1.DummyStreamResponse
+	3, // [3:6] is the sub-list for method output_type
+	0, // [0:3] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -251,7 +339,7 @@ func file_accounting_iface_v1_setup_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_accounting_iface_v1_setup_proto_rawDesc), len(file_accounting_iface_v1_setup_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   2,
 		},
