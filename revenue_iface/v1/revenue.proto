@@ -88,8 +88,15 @@ message OnOrderRequest {
   double order_amount = 6 [(buf.validate.field).double = {gt: 0}];
   double warehouse_fee = 7 [(buf.validate.field).double = {gte: 0}];
   // string description = 8 [(buf.validate.field).string = {max_len: 1024}];
-  repeated BorrowStock borrow_stock = 9 [(buf.validate.field).repeated = {min_items: 0}];
-  double own_stock_amount = 10 [(buf.validate.field).double = {gt: 0}];
+  repeated BorrowStock borrow_stock = 9;
+  double own_stock_amount = 10;
+
+  // 👇 cross-field validation: either borrow_stock > 0 OR own_stock_amount > 0
+  option (buf.validate.message).cel = {
+    id: "stock_source_required"
+    expression: "size(this.borrow_stock) > 0 || this.own_stock_amount > 0"
+    message: "Either borrow_stock must not be empty or own_stock_amount must be greater than 0."
+  };
 }
 
 message OnOrderResponse {}

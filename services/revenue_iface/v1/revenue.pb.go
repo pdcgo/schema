@@ -810,7 +810,7 @@ const file_revenue_iface_v1_revenue_proto_rawDesc = "" +
 	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12\x16\n" +
 	"\x06amount\x18\x02 \x01(\x01R\x06amount\x12\x1f\n" +
 	"\vsell_amount\x18\x03 \x01(\x01R\n" +
-	"sellAmount\"\x9e\x04\n" +
+	"sellAmount\"\xb2\x05\n" +
 	"\x0eOnOrderRequest\x12\x1c\n" +
 	"\x05token\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\x05token\x12 \n" +
 	"\ateam_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12*\n" +
@@ -820,10 +820,11 @@ const file_revenue_iface_v1_revenue_proto_rawDesc = "" +
 	"\x10marketplace_type\x18\v \x01(\x0e2\x1a.common.v1.MarketplaceTypeB\n" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x0fmarketplaceType\x121\n" +
 	"\forder_amount\x18\x06 \x01(\x01B\x0e\xbaH\v\x12\t!\x00\x00\x00\x00\x00\x00\x00\x00R\vorderAmount\x123\n" +
-	"\rwarehouse_fee\x18\a \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\fwarehouseFee\x12J\n" +
-	"\fborrow_stock\x18\t \x03(\v2\x1d.revenue_iface.v1.BorrowStockB\b\xbaH\x05\x92\x01\x02\b\x00R\vborrowStock\x128\n" +
+	"\rwarehouse_fee\x18\a \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\fwarehouseFee\x12@\n" +
+	"\fborrow_stock\x18\t \x03(\v2\x1d.revenue_iface.v1.BorrowStockR\vborrowStock\x12(\n" +
 	"\x10own_stock_amount\x18\n" +
-	" \x01(\x01B\x0e\xbaH\v\x12\t!\x00\x00\x00\x00\x00\x00\x00\x00R\x0eownStockAmount\"\x11\n" +
+	" \x01(\x01R\x0eownStockAmount:\xab\x01\xbaH\xa7\x01\x1a\xa4\x01\n" +
+	"\x15stock_source_required\x12QEither borrow_stock must not be empty or own_stock_amount must be greater than 0.\x1a8size(this.borrow_stock) > 0 || this.own_stock_amount > 0\"\x11\n" +
 	"\x0fOnOrderResponse*B\n" +
 	"\vProblemType\x12\x1c\n" +
 	"\x18PROBLEM_TYPE_UNSPECIFIED\x10\x00\x12\x15\n" +
