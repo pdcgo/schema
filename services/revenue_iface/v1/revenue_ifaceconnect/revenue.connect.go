@@ -54,7 +54,7 @@ const (
 
 // RevenueServiceClient is a client for the revenue_iface.v1.RevenueService service.
 type RevenueServiceClient interface {
-	OnOrder(context.Context) *connect.ClientStreamForClient[v1.OnOrderRequest, v1.OnOrderResponse]
+	OnOrder(context.Context, *connect.Request[v1.OnOrderRequest]) (*connect.Response[v1.OnOrderResponse], error)
 	OrderCancel(context.Context, *connect.Request[v1.OrderCancelRequest]) (*connect.Response[v1.OrderCancelResponse], error)
 	OrderReturn(context.Context, *connect.Request[v1.OrderReturnRequest]) (*connect.Response[v1.OrderReturnResponse], error)
 	OrderCompleted(context.Context, *connect.Request[v1.OrderCompletedRequest]) (*connect.Response[v1.OrderCompletedResponse], error)
@@ -123,8 +123,8 @@ type revenueServiceClient struct {
 }
 
 // OnOrder calls revenue_iface.v1.RevenueService.OnOrder.
-func (c *revenueServiceClient) OnOrder(ctx context.Context) *connect.ClientStreamForClient[v1.OnOrderRequest, v1.OnOrderResponse] {
-	return c.onOrder.CallClientStream(ctx)
+func (c *revenueServiceClient) OnOrder(ctx context.Context, req *connect.Request[v1.OnOrderRequest]) (*connect.Response[v1.OnOrderResponse], error) {
+	return c.onOrder.CallUnary(ctx, req)
 }
 
 // OrderCancel calls revenue_iface.v1.RevenueService.OrderCancel.
@@ -154,7 +154,7 @@ func (c *revenueServiceClient) Withdrawal(ctx context.Context, req *connect.Requ
 
 // RevenueServiceHandler is an implementation of the revenue_iface.v1.RevenueService service.
 type RevenueServiceHandler interface {
-	OnOrder(context.Context, *connect.ClientStream[v1.OnOrderRequest]) (*connect.Response[v1.OnOrderResponse], error)
+	OnOrder(context.Context, *connect.Request[v1.OnOrderRequest]) (*connect.Response[v1.OnOrderResponse], error)
 	OrderCancel(context.Context, *connect.Request[v1.OrderCancelRequest]) (*connect.Response[v1.OrderCancelResponse], error)
 	OrderReturn(context.Context, *connect.Request[v1.OrderReturnRequest]) (*connect.Response[v1.OrderReturnResponse], error)
 	OrderCompleted(context.Context, *connect.Request[v1.OrderCompletedRequest]) (*connect.Response[v1.OrderCompletedResponse], error)
@@ -169,7 +169,7 @@ type RevenueServiceHandler interface {
 // and JSON codecs. They also support gzip compression.
 func NewRevenueServiceHandler(svc RevenueServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
 	revenueServiceMethods := v1.File_revenue_iface_v1_revenue_proto.Services().ByName("RevenueService").Methods()
-	revenueServiceOnOrderHandler := connect.NewClientStreamHandler(
+	revenueServiceOnOrderHandler := connect.NewUnaryHandler(
 		RevenueServiceOnOrderProcedure,
 		svc.OnOrder,
 		connect.WithSchema(revenueServiceMethods.ByName("OnOrder")),
@@ -228,7 +228,7 @@ func NewRevenueServiceHandler(svc RevenueServiceHandler, opts ...connect.Handler
 // UnimplementedRevenueServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedRevenueServiceHandler struct{}
 
-func (UnimplementedRevenueServiceHandler) OnOrder(context.Context, *connect.ClientStream[v1.OnOrderRequest]) (*connect.Response[v1.OnOrderResponse], error) {
+func (UnimplementedRevenueServiceHandler) OnOrder(context.Context, *connect.Request[v1.OnOrderRequest]) (*connect.Response[v1.OnOrderResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("revenue_iface.v1.RevenueService.OnOrder is not implemented"))
 }
 

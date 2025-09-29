@@ -832,9 +832,9 @@ const file_revenue_iface_v1_revenue_proto_rawDesc = "" +
 	"OrderEvent\x12\x1b\n" +
 	"\x17ORDER_EVENT_UNSPECIFIED\x10\x00\x12\x17\n" +
 	"\x13ORDER_EVENT_CREATED\x10\x01\x12\x16\n" +
-	"\x12ORDER_EVENT_RETURN\x10\x032\xc6\x04\n" +
-	"\x0eRevenueService\x12P\n" +
-	"\aOnOrder\x12 .revenue_iface.v1.OnOrderRequest\x1a!.revenue_iface.v1.OnOrderResponse(\x01\x12Z\n" +
+	"\x12ORDER_EVENT_RETURN\x10\x032\xc4\x04\n" +
+	"\x0eRevenueService\x12N\n" +
+	"\aOnOrder\x12 .revenue_iface.v1.OnOrderRequest\x1a!.revenue_iface.v1.OnOrderResponse\x12Z\n" +
 	"\vOrderCancel\x12$.revenue_iface.v1.OrderCancelRequest\x1a%.revenue_iface.v1.OrderCancelResponse\x12Z\n" +
 	"\vOrderReturn\x12$.revenue_iface.v1.OrderReturnRequest\x1a%.revenue_iface.v1.OrderReturnResponse\x12c\n" +
 	"\x0eOrderCompleted\x12'.revenue_iface.v1.OrderCompletedRequest\x1a(.revenue_iface.v1.OrderCompletedResponse\x12l\n" +

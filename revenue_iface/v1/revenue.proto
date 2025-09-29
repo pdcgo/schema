@@ -7,7 +7,7 @@ import "common/v1/common.proto";
 option go_package = "github.com/pdcgo/schema/services/revenue_iface/v1;revenue_iface";
 
 service RevenueService {
-  rpc OnOrder(stream OnOrderRequest) returns (OnOrderResponse);
+  rpc OnOrder(OnOrderRequest) returns (OnOrderResponse);
   rpc OrderCancel(OrderCancelRequest) returns (OrderCancelResponse);
   rpc OrderReturn(OrderReturnRequest) returns (OrderReturnResponse);
   rpc OrderCompleted(OrderCompletedRequest) returns (OrderCompletedResponse);
