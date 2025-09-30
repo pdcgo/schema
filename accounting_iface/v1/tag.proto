@@ -1,0 +1,32 @@
+syntax = "proto3";
+package accounting_iface.v1;
+
+import "buf/validate/validate.proto";
+// import "common/v1/common.proto";
+
+option go_package = "github.com/pdcgo/schema/services/accounting_iface/v1;accounting_iface";
+
+service TagService {
+  rpc TagCreate(TagCreateRequest) returns (TagCreateResponse);
+  rpc TagList(TagListRequest) returns (TagListResponse);
+}
+
+message TagCreateRequest {
+  repeated string tags = 1 [
+    (buf.validate.field).repeated.min_items = 1,
+    (buf.validate.field).repeated.max_items = 20,
+    (buf.validate.field).repeated.items.string.max_len = 200
+  ];
+}
+message TagCreateResponse {}
+message TagListRequest {
+  string q = 1;
+  uint64 limit = 2 [
+    (buf.validate.field).uint64.gte = 10,
+    (buf.validate.field).uint64.lt = 300
+  ];
+  uint64 offset = 3 [(buf.validate.field).uint64.gte = 0];
+}
+message TagListResponse {
+  repeated string tags = 1;
+}

@@ -1,0 +1,114 @@
+syntax = "proto3";
+package accounting_iface.v1;
+
+import "buf/validate/validate.proto";
+import "common/v1/common.proto";
+
+option go_package = "github.com/pdcgo/schema/services/accounting_iface/v1;accounting_iface";
+
+service AdsExpenseService {
+  rpc AdsExCreate(AdsExCreateRequest) returns (AdsExCreateResponse);
+  rpc AdsExList(AdsExListRequest) returns (AdsExListResponse);
+  rpc AdsExEdit(AdsExEditRequest) returns (AdsExEditResponse);
+
+  rpc AdsExShopMetric(AdsExShopMetricRequest) returns (AdsExShopMetricResponse);
+  rpc AdsExOverviewMetric(AdsExOverviewMetricRequest) returns (AdsExOverviewMetricResponse);
+  rpc AdsExTimeMetric(AdsExTimeMetricRequest) returns (AdsExTimeMetricResponse);
+}
+
+message AdsExCreateRequest {
+  uint64 team_id = 1 [(buf.validate.field).uint64 = {gt: 0}];
+  uint64 shop_id = 2 [(buf.validate.field).uint64 = {gt: 0}];
+  common.v1.MarketplaceType mp_type = 3 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+  repeated string custom_tag = 6 [(buf.validate.field).repeated = {max_items: 20}];
+  double amount = 4 [(buf.validate.field).double = {gt: 0}];
+  string desc = 5 [(buf.validate.field).string = {
+    max_len: 1024
+    min_len: 5
+  }];
+}
+
+message AdsExCreateResponse {}
+
+message AdsExListRequest {
+  uint64 team_id = 1;
+  uint64 shop_id = 2;
+  string q = 3;
+  common.v1.PageFilter page = 4;
+  common.v1.TimeFilter time_range = 5;
+}
+
+message AdsExpenseItem {
+  uint64 team_id = 1;
+  uint64 shop_id = 2;
+  common.v1.MarketplaceType mp_type = 3;
+  double amount = 4;
+  string desc = 5;
+  int64 expense_at = 6;
+  int64 created_at = 7;
+}
+
+message AdsExListResponse {
+  repeated AdsExpenseItem data = 1;
+  common.v1.PageInfo page_info = 2;
+}
+
+message AdsExEditRequest {
+  uint64 team_id = 1;
+  uint64 expense_id = 2;
+  common.v1.MarketplaceType mp_type = 3;
+  double amount = 4;
+  string desc = 5;
+  int64 expense_at = 6;
+}
+message AdsExEditResponse {}
+
+message AdsExOverviewMetricRequest {
+  uint64 team_id = 1;
+  uint64 shop_id = 2;
+  common.v1.TimeFilter time_range = 3;
+}
+
+message AdsExKeyValueMetric {
+  common.v1.MarketplaceType mp_type = 3;
+  double value = 2;
+}
+
+message AdsExOverviewMetricResponse {
+  double expense_total = 1;
+  repeated AdsExKeyValueMetric data = 2;
+}
+
+message AdsExTimeMetricRequest {
+  uint64 team_id = 1;
+  uint64 shop_id = 2;
+  common.v1.TimeFilter time_range = 3;
+}
+
+message ValueMetric {
+  int64 day = 1;
+  double value = 2;
+}
+
+message AdsExTimeMetricResponse {
+  double expense_total = 1;
+  repeated ValueMetric data = 2;
+}
+
+message AdsExShopMetricRequest {
+  uint64 team_id = 1;
+  uint64 shop_id = 2;
+  common.v1.TimeFilter time_range = 3;
+}
+
+message ShopSpent {
+  uint64 shop_id = 1;
+  double spent = 2;
+}
+
+message AdsExShopMetricResponse {
+  repeated ShopSpent data = 1;
+}
