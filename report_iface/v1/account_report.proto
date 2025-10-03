@@ -9,8 +9,21 @@ option go_package = "github.com/pdcgo/schema/services/report_iface/v1;report_ifa
 service AccountReportService {
   rpc Balance(BalanceRequest) returns (BalanceResponse);
   rpc DailyBalance(DailyBalanceRequest) returns (DailyBalanceResponse);
+  rpc BalanceDetail(BalanceDetailRequest) returns (BalanceDetailResponse);
+  rpc DailyBalanceDetail(DailyBalanceDetailRequest) returns (DailyBalanceDetailResponse);
   // rpc AccountFlow(AccountFlowRequest) returns (AccountFlowResponse);
 }
+
+message BalanceDetailRequest {
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  string account_key = 2 [(buf.validate.field).string.min_len = 1];
+  common.v1.TimeFilter time_range = 3 [(buf.validate.field).required = true];
+  common.v1.PageFilter page = 5 [(buf.validate.field).required = true];
+}
+message BalanceDetailResponse {}
+
+message DailyBalanceDetailRequest {}
+message DailyBalanceDetailResponse {}
 
 // message AccountFlowRequest {
 //   uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
