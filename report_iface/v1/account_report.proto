@@ -14,16 +14,64 @@ service AccountReportService {
   // rpc AccountFlow(AccountFlowRequest) returns (AccountFlowResponse);
 }
 
+enum LabelFilterType {
+  LABEL_FILTER_TYPE_UNSPECIFIED = 0;
+  LABEL_FILTER_TYPE_CUSTOM = 1;
+  LABEL_FILTER_TYPE_CS = 2;
+  LABEL_FILTER_TYPE_TEAM = 3;
+  LABEL_FILTER_TYPE_SHOP = 4;
+  LABEL_FILTER_TYPE_SUPPLIER = 5;
+}
+
 message BalanceDetailRequest {
   uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
   string account_key = 2 [(buf.validate.field).string.min_len = 1];
-  common.v1.TimeFilter time_range = 3 [(buf.validate.field).required = true];
+  LabelFilterType label_filter_type = 3 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+  common.v1.TimeFilter time_range = 4 [(buf.validate.field).required = true];
   common.v1.PageFilter page = 5 [(buf.validate.field).required = true];
 }
-message BalanceDetailResponse {}
 
-message DailyBalanceDetailRequest {}
-message DailyBalanceDetailResponse {}
+message BalanceDetailItem {
+  string label_id = 1;
+  LabelFilterType label_filter_type = 2;
+  double debit = 3;
+  double credit = 4;
+  double balance = 5;
+}
+
+message BalanceDetailResponse {
+  repeated BalanceDetailItem data = 1;
+  common.v1.PageInfo page_info = 2;
+}
+
+message DailyBalanceDetailRequest {
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  string account_key = 2 [(buf.validate.field).string.min_len = 1];
+  LabelFilterType label_filter_type = 3 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+  uint64 label_id = 4 [(buf.validate.field).uint64.gt = 0];
+  common.v1.TimeFilter time_range = 5 [(buf.validate.field).required = true];
+  common.v1.PageFilter page = 6 [(buf.validate.field).required = true];
+}
+
+message DailyBalanceDetailItem {
+  int64 day = 1;
+  string label_id = 2;
+  LabelFilterType label_filter_type = 3;
+  double debit = 4;
+  double credit = 5;
+  double balance = 6;
+}
+
+message DailyBalanceDetailResponse {
+  repeated DailyBalanceDetailItem data = 1;
+  common.v1.PageInfo page_info = 2;
+}
 
 // message AccountFlowRequest {
 //   uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
