@@ -75,10 +75,10 @@ enum OrderEvent {
   ORDER_EVENT_RETURN = 3;
 }
 
-message ExtraEntityInfo {
-  uint64 cs_id = 1;
+message ExtraLabelInfo {
+  uint64 cs_id = 1 [(buf.validate.field).uint64 = {gt: 0}];
   uint64 supplier_id = 2;
-  uint64 shop_id = 3;
+  uint64 shop_id = 3 [(buf.validate.field).uint64 = {gt: 0}];
   repeated string tags = 4;
 }
 
@@ -92,7 +92,7 @@ message OnOrderRequest {
   uint64 team_id = 2 [(buf.validate.field).uint64 = {gt: 0}];
   uint64 warehouse_id = 3 [(buf.validate.field).uint64 = {gt: 0}];
   uint64 order_id = 4 [(buf.validate.field).required = true];
-  ExtraEntityInfo entity_info = 12;
+  ExtraLabelInfo label_info = 12 [(buf.validate.field).required = true];
   OrderInfo order_info = 13 [(buf.validate.field).required = true];
   OrderEvent event = 5 [(buf.validate.field).enum = {defined_only: true}];
   common.v1.MarketplaceType marketplace_type = 11 [(buf.validate.field).enum = {
