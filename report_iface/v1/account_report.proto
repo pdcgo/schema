@@ -57,7 +57,7 @@ message BalanceDetailRequest {
     defined_only: true
     not_in: [0]
   }];
-  common.v1.TimeFilter time_range = 4 [(buf.validate.field).required = true];
+  common.v1.TimeFilterRange time_range = 4 [(buf.validate.field).required = true];
   common.v1.PageFilter page = 5 [(buf.validate.field).required = true];
 }
 

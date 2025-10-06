@@ -10,6 +10,7 @@ import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -484,6 +485,58 @@ func (x *TimeFilter) GetEndDate() int64 {
 	return 0
 }
 
+type TimeFilterRange struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	StartDate     *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=start_date,json=startDate,proto3" json:"start_date,omitempty"`
+	EndDate       *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=end_date,json=endDate,proto3" json:"end_date,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TimeFilterRange) Reset() {
+	*x = TimeFilterRange{}
+	mi := &file_common_v1_common_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TimeFilterRange) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TimeFilterRange) ProtoMessage() {}
+
+func (x *TimeFilterRange) ProtoReflect() protoreflect.Message {
+	mi := &file_common_v1_common_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TimeFilterRange.ProtoReflect.Descriptor instead.
+func (*TimeFilterRange) Descriptor() ([]byte, []int) {
+	return file_common_v1_common_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *TimeFilterRange) GetStartDate() *timestamppb.Timestamp {
+	if x != nil {
+		return x.StartDate
+	}
+	return nil
+}
+
+func (x *TimeFilterRange) GetEndDate() *timestamppb.Timestamp {
+	if x != nil {
+		return x.EndDate
+	}
+	return nil
+}
+
 type PageFilter struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Page          int64                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
@@ -494,7 +547,7 @@ type PageFilter struct {
 
 func (x *PageFilter) Reset() {
 	*x = PageFilter{}
-	mi := &file_common_v1_common_proto_msgTypes[5]
+	mi := &file_common_v1_common_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -506,7 +559,7 @@ func (x *PageFilter) String() string {
 func (*PageFilter) ProtoMessage() {}
 
 func (x *PageFilter) ProtoReflect() protoreflect.Message {
-	mi := &file_common_v1_common_proto_msgTypes[5]
+	mi := &file_common_v1_common_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -519,7 +572,7 @@ func (x *PageFilter) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PageFilter.ProtoReflect.Descriptor instead.
 func (*PageFilter) Descriptor() ([]byte, []int) {
-	return file_common_v1_common_proto_rawDescGZIP(), []int{5}
+	return file_common_v1_common_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *PageFilter) GetPage() int64 {
@@ -547,7 +600,7 @@ type PageInfo struct {
 
 func (x *PageInfo) Reset() {
 	*x = PageInfo{}
-	mi := &file_common_v1_common_proto_msgTypes[6]
+	mi := &file_common_v1_common_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -559,7 +612,7 @@ func (x *PageInfo) String() string {
 func (*PageInfo) ProtoMessage() {}
 
 func (x *PageInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_common_v1_common_proto_msgTypes[6]
+	mi := &file_common_v1_common_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -572,7 +625,7 @@ func (x *PageInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PageInfo.ProtoReflect.Descriptor instead.
 func (*PageInfo) Descriptor() ([]byte, []int) {
-	return file_common_v1_common_proto_rawDescGZIP(), []int{6}
+	return file_common_v1_common_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *PageInfo) GetCurrentPage() int64 {
@@ -600,7 +653,7 @@ var File_common_v1_common_proto protoreflect.FileDescriptor
 
 const file_common_v1_common_proto_rawDesc = "" +
 	"\n" +
-	"\x16common/v1/common.proto\x12\tcommon.v1\x1a\x1bbuf/validate/validate.proto\"P\n" +
+	"\x16common/v1/common.proto\x12\tcommon.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"P\n" +
 	"\x12TimeKeyValueMetric\x12\x12\n" +
 	"\x04time\x18\x01 \x01(\x03R\x04time\x12\x10\n" +
 	"\x03key\x18\x02 \x01(\tR\x03key\x12\x14\n" +
@@ -624,7 +677,11 @@ const file_common_v1_common_proto_rawDesc = "" +
 	"TimeFilter\x12&\n" +
 	"\n" +
 	"start_date\x18\x01 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\tstartDate\x12\x19\n" +
-	"\bend_date\x18\x02 \x01(\x03R\aendDate\"K\n" +
+	"\bend_date\x18\x02 \x01(\x03R\aendDate\"\x90\x01\n" +
+	"\x0fTimeFilterRange\x12F\n" +
+	"\n" +
+	"start_date\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\v\xbaH\b\xc8\x01\x01\xb2\x01\x028\x01R\tstartDate\x125\n" +
+	"\bend_date\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\aendDate\"K\n" +
 	"\n" +
 	"PageFilter\x12\x1b\n" +
 	"\x04page\x18\x01 \x01(\x03B\a\xbaH\x04\"\x02(\x01R\x04page\x12 \n" +
@@ -669,25 +726,29 @@ func file_common_v1_common_proto_rawDescGZIP() []byte {
 }
 
 var file_common_v1_common_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_common_v1_common_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_common_v1_common_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_common_v1_common_proto_goTypes = []any{
-	(TimeType)(0),              // 0: common.v1.TimeType
-	(SortType)(0),              // 1: common.v1.SortType
-	(MarketplaceType)(0),       // 2: common.v1.MarketplaceType
-	(*TimeKeyValueMetric)(nil), // 3: common.v1.TimeKeyValueMetric
-	(*User)(nil),               // 4: common.v1.User
-	(*Team)(nil),               // 5: common.v1.Team
-	(*KeyName)(nil),            // 6: common.v1.KeyName
-	(*TimeFilter)(nil),         // 7: common.v1.TimeFilter
-	(*PageFilter)(nil),         // 8: common.v1.PageFilter
-	(*PageInfo)(nil),           // 9: common.v1.PageInfo
+	(TimeType)(0),                 // 0: common.v1.TimeType
+	(SortType)(0),                 // 1: common.v1.SortType
+	(MarketplaceType)(0),          // 2: common.v1.MarketplaceType
+	(*TimeKeyValueMetric)(nil),    // 3: common.v1.TimeKeyValueMetric
+	(*User)(nil),                  // 4: common.v1.User
+	(*Team)(nil),                  // 5: common.v1.Team
+	(*KeyName)(nil),               // 6: common.v1.KeyName
+	(*TimeFilter)(nil),            // 7: common.v1.TimeFilter
+	(*TimeFilterRange)(nil),       // 8: common.v1.TimeFilterRange
+	(*PageFilter)(nil),            // 9: common.v1.PageFilter
+	(*PageInfo)(nil),              // 10: common.v1.PageInfo
+	(*timestamppb.Timestamp)(nil), // 11: google.protobuf.Timestamp
 }
 var file_common_v1_common_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	11, // 0: common.v1.TimeFilterRange.start_date:type_name -> google.protobuf.Timestamp
+	11, // 1: common.v1.TimeFilterRange.end_date:type_name -> google.protobuf.Timestamp
+	2,  // [2:2] is the sub-list for method output_type
+	2,  // [2:2] is the sub-list for method input_type
+	2,  // [2:2] is the sub-list for extension type_name
+	2,  // [2:2] is the sub-list for extension extendee
+	0,  // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_common_v1_common_proto_init() }
@@ -701,7 +762,7 @@ func file_common_v1_common_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_common_v1_common_proto_rawDesc), len(file_common_v1_common_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   7,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

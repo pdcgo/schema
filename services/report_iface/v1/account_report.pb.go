@@ -351,7 +351,7 @@ type BalanceDetailRequest struct {
 	TeamId          uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
 	AccountKey      string                 `protobuf:"bytes,2,opt,name=account_key,json=accountKey,proto3" json:"account_key,omitempty"`
 	LabelFilterType LabelFilterType        `protobuf:"varint,3,opt,name=label_filter_type,json=labelFilterType,proto3,enum=report_iface.v1.LabelFilterType" json:"label_filter_type,omitempty"`
-	TimeRange       *v1.TimeFilter         `protobuf:"bytes,4,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
+	TimeRange       *v1.TimeFilterRange    `protobuf:"bytes,4,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
 	Page            *v1.PageFilter         `protobuf:"bytes,5,opt,name=page,proto3" json:"page,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
@@ -408,7 +408,7 @@ func (x *BalanceDetailRequest) GetLabelFilterType() LabelFilterType {
 	return LabelFilterType_LABEL_FILTER_TYPE_UNSPECIFIED
 }
 
-func (x *BalanceDetailRequest) GetTimeRange() *v1.TimeFilter {
+func (x *BalanceDetailRequest) GetTimeRange() *v1.TimeFilterRange {
 	if x != nil {
 		return x.TimeRange
 	}
@@ -1166,15 +1166,15 @@ const file_report_iface_v1_account_report_proto_rawDesc = "" +
 	"labelExtra\x12A\n" +
 	"\aentries\x18\x02 \x03(\v2\x1d.report_iface.v1.EntryPayloadB\b\xbaH\x05\x92\x01\x02\b\x01R\aentries\x12#\n" +
 	"\rdelete_before\x18\x03 \x01(\bR\fdeleteBefore\"\x1c\n" +
-	"\x1aDailyUpdateBalanceResponse\"\xad\x02\n" +
+	"\x1aDailyUpdateBalanceResponse\"\xb2\x02\n" +
 	"\x14BalanceDetailRequest\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12(\n" +
 	"\vaccount_key\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\n" +
 	"accountKey\x12X\n" +
 	"\x11label_filter_type\x18\x03 \x01(\x0e2 .report_iface.v1.LabelFilterTypeB\n" +
-	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x0flabelFilterType\x12<\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x0flabelFilterType\x12A\n" +
 	"\n" +
-	"time_range\x18\x04 \x01(\v2\x15.common.v1.TimeFilterB\x06\xbaH\x03\xc8\x01\x01R\ttimeRange\x121\n" +
+	"time_range\x18\x04 \x01(\v2\x1a.common.v1.TimeFilterRangeB\x06\xbaH\x03\xc8\x01\x01R\ttimeRange\x121\n" +
 	"\x04page\x18\x05 \x01(\v2\x15.common.v1.PageFilterB\x06\xbaH\x03\xc8\x01\x01R\x04page\"\xc4\x01\n" +
 	"\x11BalanceDetailItem\x12\x19\n" +
 	"\blabel_id\x18\x01 \x01(\tR\alabelId\x12L\n" +
@@ -1283,29 +1283,30 @@ var file_report_iface_v1_account_report_proto_goTypes = []any{
 	(*DailyAccountBalanceItem)(nil),    // 15: report_iface.v1.DailyAccountBalanceItem
 	(*DailyBalanceResponse)(nil),       // 16: report_iface.v1.DailyBalanceResponse
 	(*timestamppb.Timestamp)(nil),      // 17: google.protobuf.Timestamp
-	(*v1.TimeFilter)(nil),              // 18: common.v1.TimeFilter
+	(*v1.TimeFilterRange)(nil),         // 18: common.v1.TimeFilterRange
 	(*v1.PageFilter)(nil),              // 19: common.v1.PageFilter
 	(*v1.PageInfo)(nil),                // 20: common.v1.PageInfo
+	(*v1.TimeFilter)(nil),              // 21: common.v1.TimeFilter
 }
 var file_report_iface_v1_account_report_proto_depIdxs = []int32{
 	17, // 0: report_iface.v1.EntryPayload.entry_time:type_name -> google.protobuf.Timestamp
 	1,  // 1: report_iface.v1.DailyUpdateBalanceRequest.label_extra:type_name -> report_iface.v1.TxLabelExtra
 	2,  // 2: report_iface.v1.DailyUpdateBalanceRequest.entries:type_name -> report_iface.v1.EntryPayload
 	0,  // 3: report_iface.v1.BalanceDetailRequest.label_filter_type:type_name -> report_iface.v1.LabelFilterType
-	18, // 4: report_iface.v1.BalanceDetailRequest.time_range:type_name -> common.v1.TimeFilter
+	18, // 4: report_iface.v1.BalanceDetailRequest.time_range:type_name -> common.v1.TimeFilterRange
 	19, // 5: report_iface.v1.BalanceDetailRequest.page:type_name -> common.v1.PageFilter
 	0,  // 6: report_iface.v1.BalanceDetailItem.label_filter_type:type_name -> report_iface.v1.LabelFilterType
 	6,  // 7: report_iface.v1.BalanceDetailResponse.data:type_name -> report_iface.v1.BalanceDetailItem
 	20, // 8: report_iface.v1.BalanceDetailResponse.page_info:type_name -> common.v1.PageInfo
 	0,  // 9: report_iface.v1.DailyBalanceDetailRequest.label_filter_type:type_name -> report_iface.v1.LabelFilterType
-	18, // 10: report_iface.v1.DailyBalanceDetailRequest.time_range:type_name -> common.v1.TimeFilter
+	21, // 10: report_iface.v1.DailyBalanceDetailRequest.time_range:type_name -> common.v1.TimeFilter
 	19, // 11: report_iface.v1.DailyBalanceDetailRequest.page:type_name -> common.v1.PageFilter
 	0,  // 12: report_iface.v1.DailyBalanceDetailItem.label_filter_type:type_name -> report_iface.v1.LabelFilterType
 	9,  // 13: report_iface.v1.DailyBalanceDetailResponse.data:type_name -> report_iface.v1.DailyBalanceDetailItem
 	20, // 14: report_iface.v1.DailyBalanceDetailResponse.page_info:type_name -> common.v1.PageInfo
-	18, // 15: report_iface.v1.BalanceRequest.time_range:type_name -> common.v1.TimeFilter
+	21, // 15: report_iface.v1.BalanceRequest.time_range:type_name -> common.v1.TimeFilter
 	12, // 16: report_iface.v1.BalanceResponse.data:type_name -> report_iface.v1.AccountBalanceItem
-	18, // 17: report_iface.v1.DailyBalanceRequest.time_range:type_name -> common.v1.TimeFilter
+	21, // 17: report_iface.v1.DailyBalanceRequest.time_range:type_name -> common.v1.TimeFilter
 	19, // 18: report_iface.v1.DailyBalanceRequest.page:type_name -> common.v1.PageFilter
 	15, // 19: report_iface.v1.DailyBalanceResponse.data:type_name -> report_iface.v1.DailyAccountBalanceItem
 	20, // 20: report_iface.v1.DailyBalanceResponse.page_info:type_name -> common.v1.PageInfo
