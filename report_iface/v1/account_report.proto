@@ -3,6 +3,7 @@ package report_iface.v1;
 
 import "buf/validate/validate.proto";
 import "common/v1/common.proto";
+import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/pdcgo/schema/services/report_iface/v1;report_iface";
 
@@ -11,8 +12,34 @@ service AccountReportService {
   rpc DailyBalance(DailyBalanceRequest) returns (DailyBalanceResponse);
   rpc BalanceDetail(BalanceDetailRequest) returns (BalanceDetailResponse);
   rpc DailyBalanceDetail(DailyBalanceDetailRequest) returns (DailyBalanceDetailResponse);
+  rpc DailyUpdateBalance(DailyUpdateBalanceRequest) returns (DailyUpdateBalanceResponse);
   // rpc AccountFlow(AccountFlowRequest) returns (AccountFlowResponse);
 }
+
+message TxLabelExtra {
+  uint64 shop_id = 1;
+  uint64 cs_id = 2;
+  uint64 supplier_id = 3;
+  repeated uint64 tag_ids = 4;
+}
+
+message EntryPayload {
+  uint64 id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 account_id = 2 [(buf.validate.field).uint64.gt = 0];
+  uint64 team_id = 3 [(buf.validate.field).uint64.gt = 0];
+  uint64 transaction_id = 4 [(buf.validate.field).uint64.gt = 0];
+  google.protobuf.Timestamp entry_time = 5 [(buf.validate.field).required = true];
+  double debit = 6;
+  double credit = 7;
+  string desc = 8;
+}
+
+message DailyUpdateBalanceRequest {
+  TxLabelExtra label_extra = 1 [(buf.validate.field).required = true];
+  repeated EntryPayload entries = 2 [(buf.validate.field).repeated.min_items = 1];
+  bool delete_before = 3;
+}
+message DailyUpdateBalanceResponse {}
 
 enum LabelFilterType {
   LABEL_FILTER_TYPE_UNSPECIFIED = 0;
