@@ -82,7 +82,7 @@ message DailyBalanceDetailRequest {
     not_in: [0]
   }];
   uint64 label_id = 4 [(buf.validate.field).uint64.gt = 0];
-  common.v1.TimeFilter time_range = 5 [(buf.validate.field).required = true];
+  common.v1.TimeFilterRange time_range = 5 [(buf.validate.field).required = true];
   common.v1.PageFilter page = 6 [(buf.validate.field).required = true];
 }
 

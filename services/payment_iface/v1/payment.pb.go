@@ -549,6 +549,7 @@ type PaymentAcceptRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
 	PaymentId     uint64                 `protobuf:"varint,2,opt,name=payment_id,json=paymentId,proto3" json:"payment_id,omitempty"`
+	RequestFrom   v1.RequestFrom         `protobuf:"varint,3,opt,name=request_from,json=requestFrom,proto3,enum=common.v1.RequestFrom" json:"request_from,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -597,6 +598,13 @@ func (x *PaymentAcceptRequest) GetPaymentId() uint64 {
 	return 0
 }
 
+func (x *PaymentAcceptRequest) GetRequestFrom() v1.RequestFrom {
+	if x != nil {
+		return x.RequestFrom
+	}
+	return v1.RequestFrom(0)
+}
+
 type PaymentAcceptResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -638,6 +646,7 @@ type PaymentRejectRequest struct {
 	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
 	PaymentId     uint64                 `protobuf:"varint,2,opt,name=payment_id,json=paymentId,proto3" json:"payment_id,omitempty"`
 	Reason        string                 `protobuf:"bytes,3,opt,name=reason,proto3" json:"reason,omitempty"`
+	RequestFrom   v1.RequestFrom         `protobuf:"varint,4,opt,name=request_from,json=requestFrom,proto3,enum=common.v1.RequestFrom" json:"request_from,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -691,6 +700,13 @@ func (x *PaymentRejectRequest) GetReason() string {
 		return x.Reason
 	}
 	return ""
+}
+
+func (x *PaymentRejectRequest) GetRequestFrom() v1.RequestFrom {
+	if x != nil {
+		return x.RequestFrom
+	}
+	return v1.RequestFrom(0)
 }
 
 type PaymentRejectResponse struct {
@@ -996,18 +1012,20 @@ const file_payment_iface_v1_payment_proto_rawDesc = "" +
 	"payment_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\tpaymentId\x12\"\n" +
 	"\x06reason\x18\x03 \x01(\tB\n" +
 	"\xbaH\ar\x05\x10\x01\x18\x80\bR\x06reason\"\x17\n" +
-	"\x15PaymentCancelResponse\"`\n" +
+	"\x15PaymentCancelResponse\"\xa5\x01\n" +
 	"\x14PaymentAcceptRequest\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12&\n" +
 	"\n" +
-	"payment_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\tpaymentId\"\x17\n" +
-	"\x15PaymentAcceptResponse\"\x84\x01\n" +
+	"payment_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\tpaymentId\x12C\n" +
+	"\frequest_from\x18\x03 \x01(\x0e2\x16.common.v1.RequestFromB\b\xbaH\x05\x82\x01\x02\x10\x01R\vrequestFrom\"\x17\n" +
+	"\x15PaymentAcceptResponse\"\xc9\x01\n" +
 	"\x14PaymentRejectRequest\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12&\n" +
 	"\n" +
 	"payment_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\tpaymentId\x12\"\n" +
 	"\x06reason\x18\x03 \x01(\tB\n" +
-	"\xbaH\ar\x05\x10\x01\x18\x80\bR\x06reason\"\x17\n" +
+	"\xbaH\ar\x05\x10\x01\x18\x80\bR\x06reason\x12C\n" +
+	"\frequest_from\x18\x04 \x01(\x0e2\x16.common.v1.RequestFromB\b\xbaH\x05\x82\x01\x02\x10\x01R\vrequestFrom\"\x17\n" +
 	"\x15PaymentRejectResponse\"\xef\x02\n" +
 	"\x12PaymentListRequest\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x127\n" +
@@ -1093,40 +1111,43 @@ var file_payment_iface_v1_payment_proto_goTypes = []any{
 	(*PaymentListRequest)(nil),    // 14: payment_iface.v1.PaymentListRequest
 	(*PaymentListResponse)(nil),   // 15: payment_iface.v1.PaymentListResponse
 	(*Payment)(nil),               // 16: payment_iface.v1.Payment
-	(*v1.TimeFilter)(nil),         // 17: common.v1.TimeFilter
-	(*v1.PageFilter)(nil),         // 18: common.v1.PageFilter
-	(*v1.PageInfo)(nil),           // 19: common.v1.PageInfo
+	(v1.RequestFrom)(0),           // 17: common.v1.RequestFrom
+	(*v1.TimeFilter)(nil),         // 18: common.v1.TimeFilter
+	(*v1.PageFilter)(nil),         // 19: common.v1.PageFilter
+	(*v1.PageInfo)(nil),           // 20: common.v1.PageInfo
 }
 var file_payment_iface_v1_payment_proto_depIdxs = []int32{
 	16, // 0: payment_iface.v1.PaymentGetResponse.data:type_name -> payment_iface.v1.Payment
 	0,  // 1: payment_iface.v1.PaymentCreateRequest.payment_type:type_name -> payment_iface.v1.PaymentType
 	1,  // 2: payment_iface.v1.PaymentCreateResponse.status:type_name -> payment_iface.v1.PaymentStatus
-	3,  // 3: payment_iface.v1.PaymentListRequest.source:type_name -> payment_iface.v1.PaymentSource
-	0,  // 4: payment_iface.v1.PaymentListRequest.payment_type:type_name -> payment_iface.v1.PaymentType
-	2,  // 5: payment_iface.v1.PaymentListRequest.time_filter_type:type_name -> payment_iface.v1.PaymentTimeType
-	17, // 6: payment_iface.v1.PaymentListRequest.time_range:type_name -> common.v1.TimeFilter
-	18, // 7: payment_iface.v1.PaymentListRequest.page:type_name -> common.v1.PageFilter
-	16, // 8: payment_iface.v1.PaymentListResponse.payments:type_name -> payment_iface.v1.Payment
-	19, // 9: payment_iface.v1.PaymentListResponse.page_info:type_name -> common.v1.PageInfo
-	0,  // 10: payment_iface.v1.Payment.payment_type:type_name -> payment_iface.v1.PaymentType
-	1,  // 11: payment_iface.v1.Payment.status:type_name -> payment_iface.v1.PaymentStatus
-	6,  // 12: payment_iface.v1.PaymentService.PaymentCreate:input_type -> payment_iface.v1.PaymentCreateRequest
-	8,  // 13: payment_iface.v1.PaymentService.PaymentCancel:input_type -> payment_iface.v1.PaymentCancelRequest
-	10, // 14: payment_iface.v1.PaymentService.PaymentAccept:input_type -> payment_iface.v1.PaymentAcceptRequest
-	12, // 15: payment_iface.v1.PaymentService.PaymentReject:input_type -> payment_iface.v1.PaymentRejectRequest
-	14, // 16: payment_iface.v1.PaymentService.PaymentList:input_type -> payment_iface.v1.PaymentListRequest
-	4,  // 17: payment_iface.v1.PaymentService.PaymentGet:input_type -> payment_iface.v1.PaymentGetRequest
-	7,  // 18: payment_iface.v1.PaymentService.PaymentCreate:output_type -> payment_iface.v1.PaymentCreateResponse
-	9,  // 19: payment_iface.v1.PaymentService.PaymentCancel:output_type -> payment_iface.v1.PaymentCancelResponse
-	11, // 20: payment_iface.v1.PaymentService.PaymentAccept:output_type -> payment_iface.v1.PaymentAcceptResponse
-	13, // 21: payment_iface.v1.PaymentService.PaymentReject:output_type -> payment_iface.v1.PaymentRejectResponse
-	15, // 22: payment_iface.v1.PaymentService.PaymentList:output_type -> payment_iface.v1.PaymentListResponse
-	5,  // 23: payment_iface.v1.PaymentService.PaymentGet:output_type -> payment_iface.v1.PaymentGetResponse
-	18, // [18:24] is the sub-list for method output_type
-	12, // [12:18] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	17, // 3: payment_iface.v1.PaymentAcceptRequest.request_from:type_name -> common.v1.RequestFrom
+	17, // 4: payment_iface.v1.PaymentRejectRequest.request_from:type_name -> common.v1.RequestFrom
+	3,  // 5: payment_iface.v1.PaymentListRequest.source:type_name -> payment_iface.v1.PaymentSource
+	0,  // 6: payment_iface.v1.PaymentListRequest.payment_type:type_name -> payment_iface.v1.PaymentType
+	2,  // 7: payment_iface.v1.PaymentListRequest.time_filter_type:type_name -> payment_iface.v1.PaymentTimeType
+	18, // 8: payment_iface.v1.PaymentListRequest.time_range:type_name -> common.v1.TimeFilter
+	19, // 9: payment_iface.v1.PaymentListRequest.page:type_name -> common.v1.PageFilter
+	16, // 10: payment_iface.v1.PaymentListResponse.payments:type_name -> payment_iface.v1.Payment
+	20, // 11: payment_iface.v1.PaymentListResponse.page_info:type_name -> common.v1.PageInfo
+	0,  // 12: payment_iface.v1.Payment.payment_type:type_name -> payment_iface.v1.PaymentType
+	1,  // 13: payment_iface.v1.Payment.status:type_name -> payment_iface.v1.PaymentStatus
+	6,  // 14: payment_iface.v1.PaymentService.PaymentCreate:input_type -> payment_iface.v1.PaymentCreateRequest
+	8,  // 15: payment_iface.v1.PaymentService.PaymentCancel:input_type -> payment_iface.v1.PaymentCancelRequest
+	10, // 16: payment_iface.v1.PaymentService.PaymentAccept:input_type -> payment_iface.v1.PaymentAcceptRequest
+	12, // 17: payment_iface.v1.PaymentService.PaymentReject:input_type -> payment_iface.v1.PaymentRejectRequest
+	14, // 18: payment_iface.v1.PaymentService.PaymentList:input_type -> payment_iface.v1.PaymentListRequest
+	4,  // 19: payment_iface.v1.PaymentService.PaymentGet:input_type -> payment_iface.v1.PaymentGetRequest
+	7,  // 20: payment_iface.v1.PaymentService.PaymentCreate:output_type -> payment_iface.v1.PaymentCreateResponse
+	9,  // 21: payment_iface.v1.PaymentService.PaymentCancel:output_type -> payment_iface.v1.PaymentCancelResponse
+	11, // 22: payment_iface.v1.PaymentService.PaymentAccept:output_type -> payment_iface.v1.PaymentAcceptResponse
+	13, // 23: payment_iface.v1.PaymentService.PaymentReject:output_type -> payment_iface.v1.PaymentRejectResponse
+	15, // 24: payment_iface.v1.PaymentService.PaymentList:output_type -> payment_iface.v1.PaymentListResponse
+	5,  // 25: payment_iface.v1.PaymentService.PaymentGet:output_type -> payment_iface.v1.PaymentGetResponse
+	20, // [20:26] is the sub-list for method output_type
+	14, // [14:20] is the sub-list for method input_type
+	14, // [14:14] is the sub-list for extension type_name
+	14, // [14:14] is the sub-list for extension extendee
+	0,  // [0:14] is the sub-list for field type_name
 }
 
 func init() { file_payment_iface_v1_payment_proto_init() }

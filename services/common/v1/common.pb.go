@@ -185,6 +185,58 @@ func (MarketplaceType) EnumDescriptor() ([]byte, []int) {
 	return file_common_v1_common_proto_rawDescGZIP(), []int{2}
 }
 
+type RequestFrom int32
+
+const (
+	RequestFrom_REQUEST_FROM_UNSPECIFIED RequestFrom = 0
+	RequestFrom_REQUEST_FROM_SELLING     RequestFrom = 1
+	RequestFrom_REQUEST_FROM_ADMIN       RequestFrom = 2
+	RequestFrom_REQUEST_FROM_WAREHOUSE   RequestFrom = 3
+)
+
+// Enum value maps for RequestFrom.
+var (
+	RequestFrom_name = map[int32]string{
+		0: "REQUEST_FROM_UNSPECIFIED",
+		1: "REQUEST_FROM_SELLING",
+		2: "REQUEST_FROM_ADMIN",
+		3: "REQUEST_FROM_WAREHOUSE",
+	}
+	RequestFrom_value = map[string]int32{
+		"REQUEST_FROM_UNSPECIFIED": 0,
+		"REQUEST_FROM_SELLING":     1,
+		"REQUEST_FROM_ADMIN":       2,
+		"REQUEST_FROM_WAREHOUSE":   3,
+	}
+)
+
+func (x RequestFrom) Enum() *RequestFrom {
+	p := new(RequestFrom)
+	*p = x
+	return p
+}
+
+func (x RequestFrom) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (RequestFrom) Descriptor() protoreflect.EnumDescriptor {
+	return file_common_v1_common_proto_enumTypes[3].Descriptor()
+}
+
+func (RequestFrom) Type() protoreflect.EnumType {
+	return &file_common_v1_common_proto_enumTypes[3]
+}
+
+func (x RequestFrom) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use RequestFrom.Descriptor instead.
+func (RequestFrom) EnumDescriptor() ([]byte, []int) {
+	return file_common_v1_common_proto_rawDescGZIP(), []int{3}
+}
+
 type TimeKeyValueMetric struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Time          int64                  `protobuf:"varint,1,opt,name=time,proto3" json:"time,omitempty"`
@@ -709,7 +761,12 @@ const file_common_v1_common_proto_rawDesc = "" +
 	"\x17MARKETPLACE_TYPE_SHOPEE\x10\x03\x12\x1b\n" +
 	"\x17MARKETPLACE_TYPE_TIKTOK\x10\x04\x12\x1b\n" +
 	"\x17MARKETPLACE_TYPE_LAZADA\x10\x05\x12\x1e\n" +
-	"\x1aMARKETPLACE_TYPE_MENGANTAR\x10\x06B\x94\x01\n" +
+	"\x1aMARKETPLACE_TYPE_MENGANTAR\x10\x06*y\n" +
+	"\vRequestFrom\x12\x1c\n" +
+	"\x18REQUEST_FROM_UNSPECIFIED\x10\x00\x12\x18\n" +
+	"\x14REQUEST_FROM_SELLING\x10\x01\x12\x16\n" +
+	"\x12REQUEST_FROM_ADMIN\x10\x02\x12\x1a\n" +
+	"\x16REQUEST_FROM_WAREHOUSE\x10\x03B\x94\x01\n" +
 	"\rcom.common.v1B\vCommonProtoP\x01Z1github.com/pdcgo/schema/services/common/v1;common\xa2\x02\x03CXX\xaa\x02\tCommon.V1\xca\x02\tCommon\\V1\xe2\x02\x15Common\\V1\\GPBMetadata\xea\x02\n" +
 	"Common::V1b\x06proto3"
 
@@ -725,25 +782,26 @@ func file_common_v1_common_proto_rawDescGZIP() []byte {
 	return file_common_v1_common_proto_rawDescData
 }
 
-var file_common_v1_common_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
+var file_common_v1_common_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
 var file_common_v1_common_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_common_v1_common_proto_goTypes = []any{
 	(TimeType)(0),                 // 0: common.v1.TimeType
 	(SortType)(0),                 // 1: common.v1.SortType
 	(MarketplaceType)(0),          // 2: common.v1.MarketplaceType
-	(*TimeKeyValueMetric)(nil),    // 3: common.v1.TimeKeyValueMetric
-	(*User)(nil),                  // 4: common.v1.User
-	(*Team)(nil),                  // 5: common.v1.Team
-	(*KeyName)(nil),               // 6: common.v1.KeyName
-	(*TimeFilter)(nil),            // 7: common.v1.TimeFilter
-	(*TimeFilterRange)(nil),       // 8: common.v1.TimeFilterRange
-	(*PageFilter)(nil),            // 9: common.v1.PageFilter
-	(*PageInfo)(nil),              // 10: common.v1.PageInfo
-	(*timestamppb.Timestamp)(nil), // 11: google.protobuf.Timestamp
+	(RequestFrom)(0),              // 3: common.v1.RequestFrom
+	(*TimeKeyValueMetric)(nil),    // 4: common.v1.TimeKeyValueMetric
+	(*User)(nil),                  // 5: common.v1.User
+	(*Team)(nil),                  // 6: common.v1.Team
+	(*KeyName)(nil),               // 7: common.v1.KeyName
+	(*TimeFilter)(nil),            // 8: common.v1.TimeFilter
+	(*TimeFilterRange)(nil),       // 9: common.v1.TimeFilterRange
+	(*PageFilter)(nil),            // 10: common.v1.PageFilter
+	(*PageInfo)(nil),              // 11: common.v1.PageInfo
+	(*timestamppb.Timestamp)(nil), // 12: google.protobuf.Timestamp
 }
 var file_common_v1_common_proto_depIdxs = []int32{
-	11, // 0: common.v1.TimeFilterRange.start_date:type_name -> google.protobuf.Timestamp
-	11, // 1: common.v1.TimeFilterRange.end_date:type_name -> google.protobuf.Timestamp
+	12, // 0: common.v1.TimeFilterRange.start_date:type_name -> google.protobuf.Timestamp
+	12, // 1: common.v1.TimeFilterRange.end_date:type_name -> google.protobuf.Timestamp
 	2,  // [2:2] is the sub-list for method output_type
 	2,  // [2:2] is the sub-list for method input_type
 	2,  // [2:2] is the sub-list for extension type_name
@@ -761,7 +819,7 @@ func file_common_v1_common_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_common_v1_common_proto_rawDesc), len(file_common_v1_common_proto_rawDesc)),
-			NumEnums:      3,
+			NumEnums:      4,
 			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   0,

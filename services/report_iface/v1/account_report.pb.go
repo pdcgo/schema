@@ -556,7 +556,7 @@ type DailyBalanceDetailRequest struct {
 	AccountKey      string                 `protobuf:"bytes,2,opt,name=account_key,json=accountKey,proto3" json:"account_key,omitempty"`
 	LabelFilterType LabelFilterType        `protobuf:"varint,3,opt,name=label_filter_type,json=labelFilterType,proto3,enum=report_iface.v1.LabelFilterType" json:"label_filter_type,omitempty"`
 	LabelId         uint64                 `protobuf:"varint,4,opt,name=label_id,json=labelId,proto3" json:"label_id,omitempty"`
-	TimeRange       *v1.TimeFilter         `protobuf:"bytes,5,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
+	TimeRange       *v1.TimeFilterRange    `protobuf:"bytes,5,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
 	Page            *v1.PageFilter         `protobuf:"bytes,6,opt,name=page,proto3" json:"page,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
@@ -620,7 +620,7 @@ func (x *DailyBalanceDetailRequest) GetLabelId() uint64 {
 	return 0
 }
 
-func (x *DailyBalanceDetailRequest) GetTimeRange() *v1.TimeFilter {
+func (x *DailyBalanceDetailRequest) GetTimeRange() *v1.TimeFilterRange {
 	if x != nil {
 		return x.TimeRange
 	}
@@ -1184,16 +1184,16 @@ const file_report_iface_v1_account_report_proto_rawDesc = "" +
 	"\abalance\x18\x05 \x01(\x01R\abalance\"\x81\x01\n" +
 	"\x15BalanceDetailResponse\x126\n" +
 	"\x04data\x18\x01 \x03(\v2\".report_iface.v1.BalanceDetailItemR\x04data\x120\n" +
-	"\tpage_info\x18\x02 \x01(\v2\x13.common.v1.PageInfoR\bpageInfo\"\xd6\x02\n" +
+	"\tpage_info\x18\x02 \x01(\v2\x13.common.v1.PageInfoR\bpageInfo\"\xdb\x02\n" +
 	"\x19DailyBalanceDetailRequest\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12(\n" +
 	"\vaccount_key\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\n" +
 	"accountKey\x12X\n" +
 	"\x11label_filter_type\x18\x03 \x01(\x0e2 .report_iface.v1.LabelFilterTypeB\n" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x0flabelFilterType\x12\"\n" +
-	"\blabel_id\x18\x04 \x01(\x04B\a\xbaH\x042\x02 \x00R\alabelId\x12<\n" +
+	"\blabel_id\x18\x04 \x01(\x04B\a\xbaH\x042\x02 \x00R\alabelId\x12A\n" +
 	"\n" +
-	"time_range\x18\x05 \x01(\v2\x15.common.v1.TimeFilterB\x06\xbaH\x03\xc8\x01\x01R\ttimeRange\x121\n" +
+	"time_range\x18\x05 \x01(\v2\x1a.common.v1.TimeFilterRangeB\x06\xbaH\x03\xc8\x01\x01R\ttimeRange\x121\n" +
 	"\x04page\x18\x06 \x01(\v2\x15.common.v1.PageFilterB\x06\xbaH\x03\xc8\x01\x01R\x04page\"\xdb\x01\n" +
 	"\x16DailyBalanceDetailItem\x12\x10\n" +
 	"\x03day\x18\x01 \x01(\x03R\x03day\x12\x19\n" +
@@ -1299,7 +1299,7 @@ var file_report_iface_v1_account_report_proto_depIdxs = []int32{
 	6,  // 7: report_iface.v1.BalanceDetailResponse.data:type_name -> report_iface.v1.BalanceDetailItem
 	20, // 8: report_iface.v1.BalanceDetailResponse.page_info:type_name -> common.v1.PageInfo
 	0,  // 9: report_iface.v1.DailyBalanceDetailRequest.label_filter_type:type_name -> report_iface.v1.LabelFilterType
-	21, // 10: report_iface.v1.DailyBalanceDetailRequest.time_range:type_name -> common.v1.TimeFilter
+	18, // 10: report_iface.v1.DailyBalanceDetailRequest.time_range:type_name -> common.v1.TimeFilterRange
 	19, // 11: report_iface.v1.DailyBalanceDetailRequest.page:type_name -> common.v1.PageFilter
 	0,  // 12: report_iface.v1.DailyBalanceDetailItem.label_filter_type:type_name -> report_iface.v1.LabelFilterType
 	9,  // 13: report_iface.v1.DailyBalanceDetailResponse.data:type_name -> report_iface.v1.DailyBalanceDetailItem
