@@ -1,0 +1,36 @@
+syntax = "proto3";
+package common.v1;
+
+import "buf/validate/validate.proto";
+import "common/v1/common.proto";
+// import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/pdcgo/schema/services/common/v1;common";
+
+service ShopService {
+  rpc PublicShopIDs(PublicShopIDsRequest) returns (PublicShopIDsResponse);
+}
+
+message PublicShopIDsRequest {
+  repeated uint64 ids = 1 [(buf.validate.field).repeated = {
+    min_items: 1 // must have at least 1 id
+    max_items: 200
+    unique: true // no duplicate IDs allowed
+    items: {
+      uint64: {gt: 0}
+    }
+  }];
+}
+
+message Shop {
+  uint64 id = 1;
+  uint64 team_id = 2;
+  string shop_name = 3;
+  string shop_username = 4;
+  MarketplaceType marketplace_type = 5;
+  string uri = 6;
+}
+
+message PublicShopIDsResponse {
+  map<uint64, Shop> data = 1;
+}
