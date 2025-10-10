@@ -160,6 +160,7 @@ type EntryPayload struct {
 	Debit         float64                `protobuf:"fixed64,6,opt,name=debit,proto3" json:"debit,omitempty"`
 	Credit        float64                `protobuf:"fixed64,7,opt,name=credit,proto3" json:"credit,omitempty"`
 	Desc          string                 `protobuf:"bytes,8,opt,name=desc,proto3" json:"desc,omitempty"`
+	Rollback      bool                   `protobuf:"varint,9,opt,name=rollback,proto3" json:"rollback,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -248,6 +249,13 @@ func (x *EntryPayload) GetDesc() string {
 		return x.Desc
 	}
 	return ""
+}
+
+func (x *EntryPayload) GetRollback() bool {
+	if x != nil {
+		return x.Rollback
+	}
+	return false
 }
 
 type DailyUpdateBalanceRequest struct {
@@ -1149,7 +1157,7 @@ const file_report_iface_v1_account_report_proto_rawDesc = "" +
 	"\x05cs_id\x18\x02 \x01(\x04R\x04csId\x12\x1f\n" +
 	"\vsupplier_id\x18\x03 \x01(\x04R\n" +
 	"supplierId\x12\x17\n" +
-	"\atag_ids\x18\x04 \x03(\x04R\x06tagIds\"\xa6\x02\n" +
+	"\atag_ids\x18\x04 \x03(\x04R\x06tagIds\"\xc2\x02\n" +
 	"\fEntryPayload\x12\x17\n" +
 	"\x02id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12&\n" +
 	"\n" +
@@ -1160,7 +1168,8 @@ const file_report_iface_v1_account_report_proto_rawDesc = "" +
 	"entry_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\tentryTime\x12\x14\n" +
 	"\x05debit\x18\x06 \x01(\x01R\x05debit\x12\x16\n" +
 	"\x06credit\x18\a \x01(\x01R\x06credit\x12\x12\n" +
-	"\x04desc\x18\b \x01(\tR\x04desc\"\xcb\x01\n" +
+	"\x04desc\x18\b \x01(\tR\x04desc\x12\x1a\n" +
+	"\brollback\x18\t \x01(\bR\brollback\"\xcb\x01\n" +
 	"\x19DailyUpdateBalanceRequest\x12F\n" +
 	"\vlabel_extra\x18\x01 \x01(\v2\x1d.report_iface.v1.TxLabelExtraB\x06\xbaH\x03\xc8\x01\x01R\n" +
 	"labelExtra\x12A\n" +

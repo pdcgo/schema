@@ -32,6 +32,7 @@ message EntryPayload {
   double debit = 6;
   double credit = 7;
   string desc = 8;
+  bool rollback = 9;
 }
 
 message DailyUpdateBalanceRequest {

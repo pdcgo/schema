@@ -86,6 +86,7 @@ message InboundCreateRequest {
   uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0]; // must be > 0
   uint64 warehouse_id = 2 [(buf.validate.field).uint64.gt = 0]; // must be > 0
   uint64 ext_tx_id = 3 [(buf.validate.field).uint64.gt = 0]; // external reference, must be > 0
+  StockInfoExtra extras = 8;
 
   InboundSource source = 4 [(buf.validate.field).enum = {
     defined_only: true
@@ -167,3 +168,10 @@ message TransferToWarehouseCancelRequest {
 }
 
 message TransferToWarehouseCancelResponse {}
+
+message StockInfoExtra {
+  uint64 created_by_id = 1;
+  string receipt = 2;
+  string external_order_id = 3;
+  repeated string tags = 4;
+}
