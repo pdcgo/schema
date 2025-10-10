@@ -1,6 +1,7 @@
 syntax = "proto3";
 package common.v1;
 
+import "buf/validate/validate.proto";
 import "common/v1/common.proto";
 
 option go_package = "github.com/pdcgo/schema/services/common/v1;common";
@@ -13,7 +14,14 @@ service UserService {
 }
 
 message PublicUserIDsRequest {
-  repeated uint64 ids = 1;
+  repeated uint64 ids = 1 [(buf.validate.field).repeated = {
+    min_items: 1 // must have at least 1 id
+    max_items: 200
+    unique: true // no duplicate IDs allowed
+    items: {
+      uint64: {gt: 0}
+    }
+  }];
 }
 
 message PublicUserIDsResponse {

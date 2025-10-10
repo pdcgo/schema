@@ -129,18 +129,89 @@ func (BalanceType) EnumDescriptor() ([]byte, []int) {
 	return file_accounting_iface_v1_core_proto_rawDescGZIP(), []int{1}
 }
 
-type AccountKeyItem struct {
+// untuk custom filter data account entah spesifik cs, supplier atau custom tag
+type AccountFilterExtra struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Key           string                 `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
-	Coa           CoaCode                `protobuf:"varint,2,opt,name=coa,proto3,enum=accounting_iface.v1.CoaCode" json:"coa,omitempty"`
-	BalanceType   BalanceType            `protobuf:"varint,3,opt,name=balance_type,json=balanceType,proto3,enum=accounting_iface.v1.BalanceType" json:"balance_type,omitempty"`
+	Cs            bool                   `protobuf:"varint,1,opt,name=cs,proto3" json:"cs,omitempty"`
+	Supplier      bool                   `protobuf:"varint,2,opt,name=supplier,proto3" json:"supplier,omitempty"`
+	Shop          bool                   `protobuf:"varint,3,opt,name=shop,proto3" json:"shop,omitempty"`
+	CustomTag     bool                   `protobuf:"varint,4,opt,name=custom_tag,json=customTag,proto3" json:"custom_tag,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AccountFilterExtra) Reset() {
+	*x = AccountFilterExtra{}
+	mi := &file_accounting_iface_v1_core_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AccountFilterExtra) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AccountFilterExtra) ProtoMessage() {}
+
+func (x *AccountFilterExtra) ProtoReflect() protoreflect.Message {
+	mi := &file_accounting_iface_v1_core_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AccountFilterExtra.ProtoReflect.Descriptor instead.
+func (*AccountFilterExtra) Descriptor() ([]byte, []int) {
+	return file_accounting_iface_v1_core_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *AccountFilterExtra) GetCs() bool {
+	if x != nil {
+		return x.Cs
+	}
+	return false
+}
+
+func (x *AccountFilterExtra) GetSupplier() bool {
+	if x != nil {
+		return x.Supplier
+	}
+	return false
+}
+
+func (x *AccountFilterExtra) GetShop() bool {
+	if x != nil {
+		return x.Shop
+	}
+	return false
+}
+
+func (x *AccountFilterExtra) GetCustomTag() bool {
+	if x != nil {
+		return x.CustomTag
+	}
+	return false
+}
+
+type AccountKeyItem struct {
+	state       protoimpl.MessageState `protogen:"open.v1"`
+	Key         string                 `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
+	Coa         CoaCode                `protobuf:"varint,2,opt,name=coa,proto3,enum=accounting_iface.v1.CoaCode" json:"coa,omitempty"`
+	BalanceType BalanceType            `protobuf:"varint,3,opt,name=balance_type,json=balanceType,proto3,enum=accounting_iface.v1.BalanceType" json:"balance_type,omitempty"`
+	// @gotags: gorm:"-"
+	FilterExtra   *AccountFilterExtra `protobuf:"bytes,4,opt,name=filter_extra,json=filterExtra,proto3" json:"filter_extra,omitempty" gorm:"-"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *AccountKeyItem) Reset() {
 	*x = AccountKeyItem{}
-	mi := &file_accounting_iface_v1_core_proto_msgTypes[0]
+	mi := &file_accounting_iface_v1_core_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -152,7 +223,7 @@ func (x *AccountKeyItem) String() string {
 func (*AccountKeyItem) ProtoMessage() {}
 
 func (x *AccountKeyItem) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_core_proto_msgTypes[0]
+	mi := &file_accounting_iface_v1_core_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -165,7 +236,7 @@ func (x *AccountKeyItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccountKeyItem.ProtoReflect.Descriptor instead.
 func (*AccountKeyItem) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_core_proto_rawDescGZIP(), []int{0}
+	return file_accounting_iface_v1_core_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *AccountKeyItem) GetKey() string {
@@ -189,6 +260,13 @@ func (x *AccountKeyItem) GetBalanceType() BalanceType {
 	return BalanceType_BALANCE_TYPE_UNSPECIFIED
 }
 
+func (x *AccountKeyItem) GetFilterExtra() *AccountFilterExtra {
+	if x != nil {
+		return x.FilterExtra
+	}
+	return nil
+}
+
 type AccountKeyListRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Q             string                 `protobuf:"bytes,1,opt,name=q,proto3" json:"q,omitempty"`
@@ -199,7 +277,7 @@ type AccountKeyListRequest struct {
 
 func (x *AccountKeyListRequest) Reset() {
 	*x = AccountKeyListRequest{}
-	mi := &file_accounting_iface_v1_core_proto_msgTypes[1]
+	mi := &file_accounting_iface_v1_core_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -211,7 +289,7 @@ func (x *AccountKeyListRequest) String() string {
 func (*AccountKeyListRequest) ProtoMessage() {}
 
 func (x *AccountKeyListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_core_proto_msgTypes[1]
+	mi := &file_accounting_iface_v1_core_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -224,7 +302,7 @@ func (x *AccountKeyListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccountKeyListRequest.ProtoReflect.Descriptor instead.
 func (*AccountKeyListRequest) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_core_proto_rawDescGZIP(), []int{1}
+	return file_accounting_iface_v1_core_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *AccountKeyListRequest) GetQ() string {
@@ -250,7 +328,7 @@ type AccountKeyListResponse struct {
 
 func (x *AccountKeyListResponse) Reset() {
 	*x = AccountKeyListResponse{}
-	mi := &file_accounting_iface_v1_core_proto_msgTypes[2]
+	mi := &file_accounting_iface_v1_core_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -262,7 +340,7 @@ func (x *AccountKeyListResponse) String() string {
 func (*AccountKeyListResponse) ProtoMessage() {}
 
 func (x *AccountKeyListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_core_proto_msgTypes[2]
+	mi := &file_accounting_iface_v1_core_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -275,7 +353,7 @@ func (x *AccountKeyListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccountKeyListResponse.ProtoReflect.Descriptor instead.
 func (*AccountKeyListResponse) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_core_proto_rawDescGZIP(), []int{2}
+	return file_accounting_iface_v1_core_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *AccountKeyListResponse) GetKeys() []*AccountKeyItem {
@@ -289,11 +367,18 @@ var File_accounting_iface_v1_core_proto protoreflect.FileDescriptor
 
 const file_accounting_iface_v1_core_proto_rawDesc = "" +
 	"\n" +
-	"\x1eaccounting_iface/v1/core.proto\x12\x13accounting_iface.v1\x1a\x1bbuf/validate/validate.proto\"\x97\x01\n" +
+	"\x1eaccounting_iface/v1/core.proto\x12\x13accounting_iface.v1\x1a\x1bbuf/validate/validate.proto\"s\n" +
+	"\x12AccountFilterExtra\x12\x0e\n" +
+	"\x02cs\x18\x01 \x01(\bR\x02cs\x12\x1a\n" +
+	"\bsupplier\x18\x02 \x01(\bR\bsupplier\x12\x12\n" +
+	"\x04shop\x18\x03 \x01(\bR\x04shop\x12\x1d\n" +
+	"\n" +
+	"custom_tag\x18\x04 \x01(\bR\tcustomTag\"\xe3\x01\n" +
 	"\x0eAccountKeyItem\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12.\n" +
 	"\x03coa\x18\x02 \x01(\x0e2\x1c.accounting_iface.v1.CoaCodeR\x03coa\x12C\n" +
-	"\fbalance_type\x18\x03 \x01(\x0e2 .accounting_iface.v1.BalanceTypeR\vbalanceType\"G\n" +
+	"\fbalance_type\x18\x03 \x01(\x0e2 .accounting_iface.v1.BalanceTypeR\vbalanceType\x12J\n" +
+	"\ffilter_extra\x18\x04 \x01(\v2'.accounting_iface.v1.AccountFilterExtraR\vfilterExtra\"G\n" +
 	"\x15AccountKeyListRequest\x12\f\n" +
 	"\x01q\x18\x01 \x01(\tR\x01q\x12 \n" +
 	"\ateam_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\"Q\n" +
@@ -328,25 +413,27 @@ func file_accounting_iface_v1_core_proto_rawDescGZIP() []byte {
 }
 
 var file_accounting_iface_v1_core_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_accounting_iface_v1_core_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_accounting_iface_v1_core_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_accounting_iface_v1_core_proto_goTypes = []any{
 	(CoaCode)(0),                   // 0: accounting_iface.v1.CoaCode
 	(BalanceType)(0),               // 1: accounting_iface.v1.BalanceType
-	(*AccountKeyItem)(nil),         // 2: accounting_iface.v1.AccountKeyItem
-	(*AccountKeyListRequest)(nil),  // 3: accounting_iface.v1.AccountKeyListRequest
-	(*AccountKeyListResponse)(nil), // 4: accounting_iface.v1.AccountKeyListResponse
+	(*AccountFilterExtra)(nil),     // 2: accounting_iface.v1.AccountFilterExtra
+	(*AccountKeyItem)(nil),         // 3: accounting_iface.v1.AccountKeyItem
+	(*AccountKeyListRequest)(nil),  // 4: accounting_iface.v1.AccountKeyListRequest
+	(*AccountKeyListResponse)(nil), // 5: accounting_iface.v1.AccountKeyListResponse
 }
 var file_accounting_iface_v1_core_proto_depIdxs = []int32{
 	0, // 0: accounting_iface.v1.AccountKeyItem.coa:type_name -> accounting_iface.v1.CoaCode
 	1, // 1: accounting_iface.v1.AccountKeyItem.balance_type:type_name -> accounting_iface.v1.BalanceType
-	2, // 2: accounting_iface.v1.AccountKeyListResponse.keys:type_name -> accounting_iface.v1.AccountKeyItem
-	3, // 3: accounting_iface.v1.CoreService.AccountKeyList:input_type -> accounting_iface.v1.AccountKeyListRequest
-	4, // 4: accounting_iface.v1.CoreService.AccountKeyList:output_type -> accounting_iface.v1.AccountKeyListResponse
-	4, // [4:5] is the sub-list for method output_type
-	3, // [3:4] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	2, // 2: accounting_iface.v1.AccountKeyItem.filter_extra:type_name -> accounting_iface.v1.AccountFilterExtra
+	3, // 3: accounting_iface.v1.AccountKeyListResponse.keys:type_name -> accounting_iface.v1.AccountKeyItem
+	4, // 4: accounting_iface.v1.CoreService.AccountKeyList:input_type -> accounting_iface.v1.AccountKeyListRequest
+	5, // 5: accounting_iface.v1.CoreService.AccountKeyList:output_type -> accounting_iface.v1.AccountKeyListResponse
+	5, // [5:6] is the sub-list for method output_type
+	4, // [4:5] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_accounting_iface_v1_core_proto_init() }
@@ -360,7 +447,7 @@ func file_accounting_iface_v1_core_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_accounting_iface_v1_core_proto_rawDesc), len(file_accounting_iface_v1_core_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   3,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
