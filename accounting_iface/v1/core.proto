@@ -30,6 +30,7 @@ message AccountFilterExtra {
   bool supplier = 2;
   bool shop = 3;
   bool custom_tag = 4;
+  bool team = 5;
 }
 
 message AccountKeyItem {

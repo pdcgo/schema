@@ -136,6 +136,7 @@ type AccountFilterExtra struct {
 	Supplier      bool                   `protobuf:"varint,2,opt,name=supplier,proto3" json:"supplier,omitempty"`
 	Shop          bool                   `protobuf:"varint,3,opt,name=shop,proto3" json:"shop,omitempty"`
 	CustomTag     bool                   `protobuf:"varint,4,opt,name=custom_tag,json=customTag,proto3" json:"custom_tag,omitempty"`
+	Team          bool                   `protobuf:"varint,5,opt,name=team,proto3" json:"team,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -194,6 +195,13 @@ func (x *AccountFilterExtra) GetShop() bool {
 func (x *AccountFilterExtra) GetCustomTag() bool {
 	if x != nil {
 		return x.CustomTag
+	}
+	return false
+}
+
+func (x *AccountFilterExtra) GetTeam() bool {
+	if x != nil {
+		return x.Team
 	}
 	return false
 }
@@ -367,13 +375,14 @@ var File_accounting_iface_v1_core_proto protoreflect.FileDescriptor
 
 const file_accounting_iface_v1_core_proto_rawDesc = "" +
 	"\n" +
-	"\x1eaccounting_iface/v1/core.proto\x12\x13accounting_iface.v1\x1a\x1bbuf/validate/validate.proto\"s\n" +
+	"\x1eaccounting_iface/v1/core.proto\x12\x13accounting_iface.v1\x1a\x1bbuf/validate/validate.proto\"\x87\x01\n" +
 	"\x12AccountFilterExtra\x12\x0e\n" +
 	"\x02cs\x18\x01 \x01(\bR\x02cs\x12\x1a\n" +
 	"\bsupplier\x18\x02 \x01(\bR\bsupplier\x12\x12\n" +
 	"\x04shop\x18\x03 \x01(\bR\x04shop\x12\x1d\n" +
 	"\n" +
-	"custom_tag\x18\x04 \x01(\bR\tcustomTag\"\xe3\x01\n" +
+	"custom_tag\x18\x04 \x01(\bR\tcustomTag\x12\x12\n" +
+	"\x04team\x18\x05 \x01(\bR\x04team\"\xe3\x01\n" +
 	"\x0eAccountKeyItem\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12.\n" +
 	"\x03coa\x18\x02 \x01(\x0e2\x1c.accounting_iface.v1.CoaCodeR\x03coa\x12C\n" +
