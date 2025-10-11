@@ -115,7 +115,7 @@ message BalanceRequest {
 
   repeated string account_keys = 2;
 
-  common.v1.TimeFilter time_range = 3 [(buf.validate.field).required = true];
+  common.v1.TimeFilterRange time_range = 3 [(buf.validate.field).required = true];
   // common.v1.PageFilter page = 4 [(buf.validate.field).required = true];
 }
 
@@ -135,7 +135,7 @@ message DailyBalanceRequest {
   uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
   string account_key = 3 [(buf.validate.field).string.min_len = 1];
 
-  common.v1.TimeFilter time_range = 4 [(buf.validate.field).required = true];
+  common.v1.TimeFilterRange time_range = 4 [(buf.validate.field).required = true];
   common.v1.PageFilter page = 5 [(buf.validate.field).required = true];
 }
 

@@ -782,7 +782,7 @@ type BalanceRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
 	AccountKeys   []string               `protobuf:"bytes,2,rep,name=account_keys,json=accountKeys,proto3" json:"account_keys,omitempty"`
-	TimeRange     *v1.TimeFilter         `protobuf:"bytes,3,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"` // common.v1.PageFilter page = 4 [(buf.validate.field).required = true];
+	TimeRange     *v1.TimeFilterRange    `protobuf:"bytes,3,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"` // common.v1.PageFilter page = 4 [(buf.validate.field).required = true];
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -831,7 +831,7 @@ func (x *BalanceRequest) GetAccountKeys() []string {
 	return nil
 }
 
-func (x *BalanceRequest) GetTimeRange() *v1.TimeFilter {
+func (x *BalanceRequest) GetTimeRange() *v1.TimeFilterRange {
 	if x != nil {
 		return x.TimeRange
 	}
@@ -955,7 +955,7 @@ type DailyBalanceRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
 	AccountKey    string                 `protobuf:"bytes,3,opt,name=account_key,json=accountKey,proto3" json:"account_key,omitempty"`
-	TimeRange     *v1.TimeFilter         `protobuf:"bytes,4,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
+	TimeRange     *v1.TimeFilterRange    `protobuf:"bytes,4,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
 	Page          *v1.PageFilter         `protobuf:"bytes,5,opt,name=page,proto3" json:"page,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1005,7 +1005,7 @@ func (x *DailyBalanceRequest) GetAccountKey() string {
 	return ""
 }
 
-func (x *DailyBalanceRequest) GetTimeRange() *v1.TimeFilter {
+func (x *DailyBalanceRequest) GetTimeRange() *v1.TimeFilterRange {
 	if x != nil {
 		return x.TimeRange
 	}
@@ -1213,12 +1213,12 @@ const file_report_iface_v1_account_report_proto_rawDesc = "" +
 	"\abalance\x18\x06 \x01(\x01R\abalance\"\x8b\x01\n" +
 	"\x1aDailyBalanceDetailResponse\x12;\n" +
 	"\x04data\x18\x01 \x03(\v2'.report_iface.v1.DailyBalanceDetailItemR\x04data\x120\n" +
-	"\tpage_info\x18\x02 \x01(\v2\x13.common.v1.PageInfoR\bpageInfo\"\x93\x01\n" +
+	"\tpage_info\x18\x02 \x01(\v2\x13.common.v1.PageInfoR\bpageInfo\"\x98\x01\n" +
 	"\x0eBalanceRequest\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12!\n" +
-	"\faccount_keys\x18\x02 \x03(\tR\vaccountKeys\x12<\n" +
+	"\faccount_keys\x18\x02 \x03(\tR\vaccountKeys\x12A\n" +
 	"\n" +
-	"time_range\x18\x03 \x01(\v2\x15.common.v1.TimeFilterB\x06\xbaH\x03\xc8\x01\x01R\ttimeRange\"}\n" +
+	"time_range\x18\x03 \x01(\v2\x1a.common.v1.TimeFilterRangeB\x06\xbaH\x03\xc8\x01\x01R\ttimeRange\"}\n" +
 	"\x12AccountBalanceItem\x12\x1f\n" +
 	"\vaccount_key\x18\x02 \x01(\tR\n" +
 	"accountKey\x12\x14\n" +
@@ -1226,13 +1226,13 @@ const file_report_iface_v1_account_report_proto_rawDesc = "" +
 	"\x06credit\x18\x04 \x01(\x01R\x06credit\x12\x18\n" +
 	"\abalance\x18\x05 \x01(\x01R\abalance\"J\n" +
 	"\x0fBalanceResponse\x127\n" +
-	"\x04data\x18\x01 \x03(\v2#.report_iface.v1.AccountBalanceItemR\x04data\"\xd2\x01\n" +
+	"\x04data\x18\x01 \x03(\v2#.report_iface.v1.AccountBalanceItemR\x04data\"\xd7\x01\n" +
 	"\x13DailyBalanceRequest\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12(\n" +
 	"\vaccount_key\x18\x03 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\n" +
-	"accountKey\x12<\n" +
+	"accountKey\x12A\n" +
 	"\n" +
-	"time_range\x18\x04 \x01(\v2\x15.common.v1.TimeFilterB\x06\xbaH\x03\xc8\x01\x01R\ttimeRange\x121\n" +
+	"time_range\x18\x04 \x01(\v2\x1a.common.v1.TimeFilterRangeB\x06\xbaH\x03\xc8\x01\x01R\ttimeRange\x121\n" +
 	"\x04page\x18\x05 \x01(\v2\x15.common.v1.PageFilterB\x06\xbaH\x03\xc8\x01\x01R\x04page\"\x94\x01\n" +
 	"\x17DailyAccountBalanceItem\x12\x10\n" +
 	"\x03day\x18\x01 \x01(\x03R\x03day\x12\x1f\n" +
@@ -1295,7 +1295,6 @@ var file_report_iface_v1_account_report_proto_goTypes = []any{
 	(*v1.TimeFilterRange)(nil),         // 18: common.v1.TimeFilterRange
 	(*v1.PageFilter)(nil),              // 19: common.v1.PageFilter
 	(*v1.PageInfo)(nil),                // 20: common.v1.PageInfo
-	(*v1.TimeFilter)(nil),              // 21: common.v1.TimeFilter
 }
 var file_report_iface_v1_account_report_proto_depIdxs = []int32{
 	17, // 0: report_iface.v1.EntryPayload.entry_time:type_name -> google.protobuf.Timestamp
@@ -1313,9 +1312,9 @@ var file_report_iface_v1_account_report_proto_depIdxs = []int32{
 	0,  // 12: report_iface.v1.DailyBalanceDetailItem.label_filter_type:type_name -> report_iface.v1.LabelFilterType
 	9,  // 13: report_iface.v1.DailyBalanceDetailResponse.data:type_name -> report_iface.v1.DailyBalanceDetailItem
 	20, // 14: report_iface.v1.DailyBalanceDetailResponse.page_info:type_name -> common.v1.PageInfo
-	21, // 15: report_iface.v1.BalanceRequest.time_range:type_name -> common.v1.TimeFilter
+	18, // 15: report_iface.v1.BalanceRequest.time_range:type_name -> common.v1.TimeFilterRange
 	12, // 16: report_iface.v1.BalanceResponse.data:type_name -> report_iface.v1.AccountBalanceItem
-	21, // 17: report_iface.v1.DailyBalanceRequest.time_range:type_name -> common.v1.TimeFilter
+	18, // 17: report_iface.v1.DailyBalanceRequest.time_range:type_name -> common.v1.TimeFilterRange
 	19, // 18: report_iface.v1.DailyBalanceRequest.page:type_name -> common.v1.PageFilter
 	15, // 19: report_iface.v1.DailyBalanceResponse.data:type_name -> report_iface.v1.DailyAccountBalanceItem
 	20, // 20: report_iface.v1.DailyBalanceResponse.page_info:type_name -> common.v1.PageInfo
