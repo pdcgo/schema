@@ -38,7 +38,6 @@ message EntryPayload {
 message DailyUpdateBalanceRequest {
   TxLabelExtra label_extra = 1 [(buf.validate.field).required = true];
   repeated EntryPayload entries = 2 [(buf.validate.field).repeated.min_items = 1];
-  bool delete_before = 3;
 }
 message DailyUpdateBalanceResponse {}
 

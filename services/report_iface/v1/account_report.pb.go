@@ -262,7 +262,6 @@ type DailyUpdateBalanceRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	LabelExtra    *TxLabelExtra          `protobuf:"bytes,1,opt,name=label_extra,json=labelExtra,proto3" json:"label_extra,omitempty"`
 	Entries       []*EntryPayload        `protobuf:"bytes,2,rep,name=entries,proto3" json:"entries,omitempty"`
-	DeleteBefore  bool                   `protobuf:"varint,3,opt,name=delete_before,json=deleteBefore,proto3" json:"delete_before,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -309,13 +308,6 @@ func (x *DailyUpdateBalanceRequest) GetEntries() []*EntryPayload {
 		return x.Entries
 	}
 	return nil
-}
-
-func (x *DailyUpdateBalanceRequest) GetDeleteBefore() bool {
-	if x != nil {
-		return x.DeleteBefore
-	}
-	return false
 }
 
 type DailyUpdateBalanceResponse struct {
@@ -1169,12 +1161,11 @@ const file_report_iface_v1_account_report_proto_rawDesc = "" +
 	"\x05debit\x18\x06 \x01(\x01R\x05debit\x12\x16\n" +
 	"\x06credit\x18\a \x01(\x01R\x06credit\x12\x12\n" +
 	"\x04desc\x18\b \x01(\tR\x04desc\x12\x1a\n" +
-	"\brollback\x18\t \x01(\bR\brollback\"\xcb\x01\n" +
+	"\brollback\x18\t \x01(\bR\brollback\"\xa6\x01\n" +
 	"\x19DailyUpdateBalanceRequest\x12F\n" +
 	"\vlabel_extra\x18\x01 \x01(\v2\x1d.report_iface.v1.TxLabelExtraB\x06\xbaH\x03\xc8\x01\x01R\n" +
 	"labelExtra\x12A\n" +
-	"\aentries\x18\x02 \x03(\v2\x1d.report_iface.v1.EntryPayloadB\b\xbaH\x05\x92\x01\x02\b\x01R\aentries\x12#\n" +
-	"\rdelete_before\x18\x03 \x01(\bR\fdeleteBefore\"\x1c\n" +
+	"\aentries\x18\x02 \x03(\v2\x1d.report_iface.v1.EntryPayloadB\b\xbaH\x05\x92\x01\x02\b\x01R\aentries\"\x1c\n" +
 	"\x1aDailyUpdateBalanceResponse\"\xb2\x02\n" +
 	"\x14BalanceDetailRequest\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12(\n" +
