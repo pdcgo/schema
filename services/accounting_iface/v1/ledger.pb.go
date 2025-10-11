@@ -74,7 +74,7 @@ type EntryListExportRequest struct {
 	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
 	AccountKey    string                 `protobuf:"bytes,2,opt,name=account_key,json=accountKey,proto3" json:"account_key,omitempty"`
 	Extra         *FilterExtra           `protobuf:"bytes,6,opt,name=extra,proto3" json:"extra,omitempty"`
-	TimeRange     *v1.TimeFilter         `protobuf:"bytes,3,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
+	TimeRange     *v1.TimeFilterRange    `protobuf:"bytes,3,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -130,7 +130,7 @@ func (x *EntryListExportRequest) GetExtra() *FilterExtra {
 	return nil
 }
 
-func (x *EntryListExportRequest) GetTimeRange() *v1.TimeFilter {
+func (x *EntryListExportRequest) GetTimeRange() *v1.TimeFilterRange {
 	if x != nil {
 		return x.TimeRange
 	}
@@ -322,7 +322,7 @@ type EntryListRequest struct {
 	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
 	AccountKey    string                 `protobuf:"bytes,2,opt,name=account_key,json=accountKey,proto3" json:"account_key,omitempty"`
 	Extra         *FilterExtra           `protobuf:"bytes,6,opt,name=extra,proto3" json:"extra,omitempty"`
-	TimeRange     *v1.TimeFilter         `protobuf:"bytes,3,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
+	TimeRange     *v1.TimeFilterRange    `protobuf:"bytes,3,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
 	Page          *v1.PageFilter         `protobuf:"bytes,4,opt,name=page,proto3" json:"page,omitempty"`
 	Sort          *EntryListSort         `protobuf:"bytes,5,opt,name=sort,proto3" json:"sort,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -380,7 +380,7 @@ func (x *EntryListRequest) GetExtra() *FilterExtra {
 	return nil
 }
 
-func (x *EntryListRequest) GetTimeRange() *v1.TimeFilter {
+func (x *EntryListRequest) GetTimeRange() *v1.TimeFilterRange {
 	if x != nil {
 		return x.TimeRange
 	}
@@ -625,14 +625,14 @@ var File_accounting_iface_v1_ledger_proto protoreflect.FileDescriptor
 
 const file_accounting_iface_v1_ledger_proto_rawDesc = "" +
 	"\n" +
-	" accounting_iface/v1/ledger.proto\x12\x13accounting_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\"\xda\x01\n" +
+	" accounting_iface/v1/ledger.proto\x12\x13accounting_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\"\xdf\x01\n" +
 	"\x16EntryListExportRequest\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12(\n" +
 	"\vaccount_key\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\n" +
 	"accountKey\x126\n" +
-	"\x05extra\x18\x06 \x01(\v2 .accounting_iface.v1.FilterExtraR\x05extra\x12<\n" +
+	"\x05extra\x18\x06 \x01(\v2 .accounting_iface.v1.FilterExtraR\x05extra\x12A\n" +
 	"\n" +
-	"time_range\x18\x03 \x01(\v2\x15.common.v1.TimeFilterB\x06\xbaH\x03\xc8\x01\x01R\ttimeRange\"u\n" +
+	"time_range\x18\x03 \x01(\v2\x1a.common.v1.TimeFilterRangeB\x06\xbaH\x03\xc8\x01\x01R\ttimeRange\"u\n" +
 	"\x17EntryListExportResponse\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\x12\x16\n" +
 	"\x06offset\x18\x02 \x01(\x03R\x06offset\x12\x14\n" +
@@ -645,14 +645,14 @@ const file_accounting_iface_v1_ledger_proto_rawDesc = "" +
 	"\x13customer_service_id\x18\x01 \x01(\x04R\x11customerServiceId\x12\x17\n" +
 	"\ashop_id\x18\x02 \x01(\x04R\x06shopId\x12\x1f\n" +
 	"\vsupplier_id\x18\x03 \x01(\x04R\n" +
-	"supplierId\"\xbf\x02\n" +
+	"supplierId\"\xc4\x02\n" +
 	"\x10EntryListRequest\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12(\n" +
 	"\vaccount_key\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\n" +
 	"accountKey\x126\n" +
-	"\x05extra\x18\x06 \x01(\v2 .accounting_iface.v1.FilterExtraR\x05extra\x12<\n" +
+	"\x05extra\x18\x06 \x01(\v2 .accounting_iface.v1.FilterExtraR\x05extra\x12A\n" +
 	"\n" +
-	"time_range\x18\x03 \x01(\v2\x15.common.v1.TimeFilterB\x06\xbaH\x03\xc8\x01\x01R\ttimeRange\x121\n" +
+	"time_range\x18\x03 \x01(\v2\x1a.common.v1.TimeFilterRangeB\x06\xbaH\x03\xc8\x01\x01R\ttimeRange\x121\n" +
 	"\x04page\x18\x04 \x01(\v2\x15.common.v1.PageFilterB\x06\xbaH\x03\xc8\x01\x01R\x04page\x126\n" +
 	"\x04sort\x18\x05 \x01(\v2\".accounting_iface.v1.EntryListSortR\x04sort\"l\n" +
 	"\fEntryAccount\x12\x0e\n" +
@@ -707,18 +707,18 @@ var file_accounting_iface_v1_ledger_proto_goTypes = []any{
 	(*EntryAccount)(nil),            // 6: accounting_iface.v1.EntryAccount
 	(*EntryItem)(nil),               // 7: accounting_iface.v1.EntryItem
 	(*EntryListResponse)(nil),       // 8: accounting_iface.v1.EntryListResponse
-	(*v1.TimeFilter)(nil),           // 9: common.v1.TimeFilter
+	(*v1.TimeFilterRange)(nil),      // 9: common.v1.TimeFilterRange
 	(v1.SortType)(0),                // 10: common.v1.SortType
 	(*v1.PageFilter)(nil),           // 11: common.v1.PageFilter
 	(*v1.PageInfo)(nil),             // 12: common.v1.PageInfo
 }
 var file_accounting_iface_v1_ledger_proto_depIdxs = []int32{
 	4,  // 0: accounting_iface.v1.EntryListExportRequest.extra:type_name -> accounting_iface.v1.FilterExtra
-	9,  // 1: accounting_iface.v1.EntryListExportRequest.time_range:type_name -> common.v1.TimeFilter
+	9,  // 1: accounting_iface.v1.EntryListExportRequest.time_range:type_name -> common.v1.TimeFilterRange
 	0,  // 2: accounting_iface.v1.EntryListSort.field:type_name -> accounting_iface.v1.EntryFieldSort
 	10, // 3: accounting_iface.v1.EntryListSort.type:type_name -> common.v1.SortType
 	4,  // 4: accounting_iface.v1.EntryListRequest.extra:type_name -> accounting_iface.v1.FilterExtra
-	9,  // 5: accounting_iface.v1.EntryListRequest.time_range:type_name -> common.v1.TimeFilter
+	9,  // 5: accounting_iface.v1.EntryListRequest.time_range:type_name -> common.v1.TimeFilterRange
 	11, // 6: accounting_iface.v1.EntryListRequest.page:type_name -> common.v1.PageFilter
 	3,  // 7: accounting_iface.v1.EntryListRequest.sort:type_name -> accounting_iface.v1.EntryListSort
 	6,  // 8: accounting_iface.v1.EntryItem.account:type_name -> accounting_iface.v1.EntryAccount

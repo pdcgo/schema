@@ -15,7 +15,7 @@ message EntryListExportRequest {
   uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
   string account_key = 2 [(buf.validate.field).string.min_len = 1];
   FilterExtra extra = 6;
-  common.v1.TimeFilter time_range = 3 [(buf.validate.field).required = true];
+  common.v1.TimeFilterRange time_range = 3 [(buf.validate.field).required = true];
 }
 
 message EntryListExportResponse {
@@ -45,7 +45,7 @@ message EntryListRequest {
   uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
   string account_key = 2 [(buf.validate.field).string.min_len = 1];
   FilterExtra extra = 6;
-  common.v1.TimeFilter time_range = 3 [(buf.validate.field).required = true];
+  common.v1.TimeFilterRange time_range = 3 [(buf.validate.field).required = true];
   common.v1.PageFilter page = 4 [(buf.validate.field).required = true];
   EntryListSort sort = 5;
 }
