@@ -37,12 +37,15 @@ const (
 	TagServiceTagCreateProcedure = "/accounting_iface.v1.TagService/TagCreate"
 	// TagServiceTagListProcedure is the fully-qualified name of the TagService's TagList RPC.
 	TagServiceTagListProcedure = "/accounting_iface.v1.TagService/TagList"
+	// TagServiceTagIDsProcedure is the fully-qualified name of the TagService's TagIDs RPC.
+	TagServiceTagIDsProcedure = "/accounting_iface.v1.TagService/TagIDs"
 )
 
 // TagServiceClient is a client for the accounting_iface.v1.TagService service.
 type TagServiceClient interface {
 	TagCreate(context.Context, *connect.Request[v1.TagCreateRequest]) (*connect.Response[v1.TagCreateResponse], error)
 	TagList(context.Context, *connect.Request[v1.TagListRequest]) (*connect.Response[v1.TagListResponse], error)
+	TagIDs(context.Context, *connect.Request[v1.TagIDsRequest]) (*connect.Response[v1.TagIDsResponse], error)
 }
 
 // NewTagServiceClient constructs a client for the accounting_iface.v1.TagService service. By
@@ -68,6 +71,12 @@ func NewTagServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...
 			connect.WithSchema(tagServiceMethods.ByName("TagList")),
 			connect.WithClientOptions(opts...),
 		),
+		tagIDs: connect.NewClient[v1.TagIDsRequest, v1.TagIDsResponse](
+			httpClient,
+			baseURL+TagServiceTagIDsProcedure,
+			connect.WithSchema(tagServiceMethods.ByName("TagIDs")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -75,6 +84,7 @@ func NewTagServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...
 type tagServiceClient struct {
 	tagCreate *connect.Client[v1.TagCreateRequest, v1.TagCreateResponse]
 	tagList   *connect.Client[v1.TagListRequest, v1.TagListResponse]
+	tagIDs    *connect.Client[v1.TagIDsRequest, v1.TagIDsResponse]
 }
 
 // TagCreate calls accounting_iface.v1.TagService.TagCreate.
@@ -87,10 +97,16 @@ func (c *tagServiceClient) TagList(ctx context.Context, req *connect.Request[v1.
 	return c.tagList.CallUnary(ctx, req)
 }
 
+// TagIDs calls accounting_iface.v1.TagService.TagIDs.
+func (c *tagServiceClient) TagIDs(ctx context.Context, req *connect.Request[v1.TagIDsRequest]) (*connect.Response[v1.TagIDsResponse], error) {
+	return c.tagIDs.CallUnary(ctx, req)
+}
+
 // TagServiceHandler is an implementation of the accounting_iface.v1.TagService service.
 type TagServiceHandler interface {
 	TagCreate(context.Context, *connect.Request[v1.TagCreateRequest]) (*connect.Response[v1.TagCreateResponse], error)
 	TagList(context.Context, *connect.Request[v1.TagListRequest]) (*connect.Response[v1.TagListResponse], error)
+	TagIDs(context.Context, *connect.Request[v1.TagIDsRequest]) (*connect.Response[v1.TagIDsResponse], error)
 }
 
 // NewTagServiceHandler builds an HTTP handler from the service implementation. It returns the path
@@ -112,12 +128,20 @@ func NewTagServiceHandler(svc TagServiceHandler, opts ...connect.HandlerOption) 
 		connect.WithSchema(tagServiceMethods.ByName("TagList")),
 		connect.WithHandlerOptions(opts...),
 	)
+	tagServiceTagIDsHandler := connect.NewUnaryHandler(
+		TagServiceTagIDsProcedure,
+		svc.TagIDs,
+		connect.WithSchema(tagServiceMethods.ByName("TagIDs")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/accounting_iface.v1.TagService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case TagServiceTagCreateProcedure:
 			tagServiceTagCreateHandler.ServeHTTP(w, r)
 		case TagServiceTagListProcedure:
 			tagServiceTagListHandler.ServeHTTP(w, r)
+		case TagServiceTagIDsProcedure:
+			tagServiceTagIDsHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -133,4 +157,8 @@ func (UnimplementedTagServiceHandler) TagCreate(context.Context, *connect.Reques
 
 func (UnimplementedTagServiceHandler) TagList(context.Context, *connect.Request[v1.TagListRequest]) (*connect.Response[v1.TagListResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("accounting_iface.v1.TagService.TagList is not implemented"))
+}
+
+func (UnimplementedTagServiceHandler) TagIDs(context.Context, *connect.Request[v1.TagIDsRequest]) (*connect.Response[v1.TagIDsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("accounting_iface.v1.TagService.TagIDs is not implemented"))
 }

@@ -9,6 +9,21 @@ option go_package = "github.com/pdcgo/schema/services/accounting_iface/v1;accoun
 service TagService {
   rpc TagCreate(TagCreateRequest) returns (TagCreateResponse);
   rpc TagList(TagListRequest) returns (TagListResponse);
+  rpc TagIDs(TagIDsRequest) returns (TagIDsResponse);
+}
+
+message TagIDsRequest {
+  repeated uint64 ids = 1 [(buf.validate.field).repeated = {
+    min_items: 1 // must have at least 1 id
+    max_items: 200
+    unique: true // no duplicate IDs allowed
+    items: {
+      uint64: {gt: 0}
+    }
+  }];
+}
+message TagIDsResponse {
+  map<uint64, string> data = 1;
 }
 
 message TagCreateRequest {

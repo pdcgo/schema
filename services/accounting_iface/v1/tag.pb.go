@@ -22,6 +22,94 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type TagIDsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Ids           []uint64               `protobuf:"varint,1,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TagIDsRequest) Reset() {
+	*x = TagIDsRequest{}
+	mi := &file_accounting_iface_v1_tag_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TagIDsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TagIDsRequest) ProtoMessage() {}
+
+func (x *TagIDsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_accounting_iface_v1_tag_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TagIDsRequest.ProtoReflect.Descriptor instead.
+func (*TagIDsRequest) Descriptor() ([]byte, []int) {
+	return file_accounting_iface_v1_tag_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *TagIDsRequest) GetIds() []uint64 {
+	if x != nil {
+		return x.Ids
+	}
+	return nil
+}
+
+type TagIDsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Data          map[uint64]string      `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TagIDsResponse) Reset() {
+	*x = TagIDsResponse{}
+	mi := &file_accounting_iface_v1_tag_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TagIDsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TagIDsResponse) ProtoMessage() {}
+
+func (x *TagIDsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_accounting_iface_v1_tag_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TagIDsResponse.ProtoReflect.Descriptor instead.
+func (*TagIDsResponse) Descriptor() ([]byte, []int) {
+	return file_accounting_iface_v1_tag_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *TagIDsResponse) GetData() map[uint64]string {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
 type TagCreateRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Tags          []string               `protobuf:"bytes,1,rep,name=tags,proto3" json:"tags,omitempty"`
@@ -31,7 +119,7 @@ type TagCreateRequest struct {
 
 func (x *TagCreateRequest) Reset() {
 	*x = TagCreateRequest{}
-	mi := &file_accounting_iface_v1_tag_proto_msgTypes[0]
+	mi := &file_accounting_iface_v1_tag_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -43,7 +131,7 @@ func (x *TagCreateRequest) String() string {
 func (*TagCreateRequest) ProtoMessage() {}
 
 func (x *TagCreateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_tag_proto_msgTypes[0]
+	mi := &file_accounting_iface_v1_tag_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -56,7 +144,7 @@ func (x *TagCreateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TagCreateRequest.ProtoReflect.Descriptor instead.
 func (*TagCreateRequest) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_tag_proto_rawDescGZIP(), []int{0}
+	return file_accounting_iface_v1_tag_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *TagCreateRequest) GetTags() []string {
@@ -74,7 +162,7 @@ type TagCreateResponse struct {
 
 func (x *TagCreateResponse) Reset() {
 	*x = TagCreateResponse{}
-	mi := &file_accounting_iface_v1_tag_proto_msgTypes[1]
+	mi := &file_accounting_iface_v1_tag_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -86,7 +174,7 @@ func (x *TagCreateResponse) String() string {
 func (*TagCreateResponse) ProtoMessage() {}
 
 func (x *TagCreateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_tag_proto_msgTypes[1]
+	mi := &file_accounting_iface_v1_tag_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -99,7 +187,7 @@ func (x *TagCreateResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TagCreateResponse.ProtoReflect.Descriptor instead.
 func (*TagCreateResponse) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_tag_proto_rawDescGZIP(), []int{1}
+	return file_accounting_iface_v1_tag_proto_rawDescGZIP(), []int{3}
 }
 
 type TagListRequest struct {
@@ -113,7 +201,7 @@ type TagListRequest struct {
 
 func (x *TagListRequest) Reset() {
 	*x = TagListRequest{}
-	mi := &file_accounting_iface_v1_tag_proto_msgTypes[2]
+	mi := &file_accounting_iface_v1_tag_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -125,7 +213,7 @@ func (x *TagListRequest) String() string {
 func (*TagListRequest) ProtoMessage() {}
 
 func (x *TagListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_tag_proto_msgTypes[2]
+	mi := &file_accounting_iface_v1_tag_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -138,7 +226,7 @@ func (x *TagListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TagListRequest.ProtoReflect.Descriptor instead.
 func (*TagListRequest) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_tag_proto_rawDescGZIP(), []int{2}
+	return file_accounting_iface_v1_tag_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *TagListRequest) GetQ() string {
@@ -171,7 +259,7 @@ type TagListResponse struct {
 
 func (x *TagListResponse) Reset() {
 	*x = TagListResponse{}
-	mi := &file_accounting_iface_v1_tag_proto_msgTypes[3]
+	mi := &file_accounting_iface_v1_tag_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -183,7 +271,7 @@ func (x *TagListResponse) String() string {
 func (*TagListResponse) ProtoMessage() {}
 
 func (x *TagListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_tag_proto_msgTypes[3]
+	mi := &file_accounting_iface_v1_tag_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -196,7 +284,7 @@ func (x *TagListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TagListResponse.ProtoReflect.Descriptor instead.
 func (*TagListResponse) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_tag_proto_rawDescGZIP(), []int{3}
+	return file_accounting_iface_v1_tag_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *TagListResponse) GetTags() []string {
@@ -210,7 +298,14 @@ var File_accounting_iface_v1_tag_proto protoreflect.FileDescriptor
 
 const file_accounting_iface_v1_tag_proto_rawDesc = "" +
 	"\n" +
-	"\x1daccounting_iface/v1/tag.proto\x12\x13accounting_iface.v1\x1a\x1bbuf/validate/validate.proto\"9\n" +
+	"\x1daccounting_iface/v1/tag.proto\x12\x13accounting_iface.v1\x1a\x1bbuf/validate/validate.proto\"6\n" +
+	"\rTagIDsRequest\x12%\n" +
+	"\x03ids\x18\x01 \x03(\x04B\x13\xbaH\x10\x92\x01\r\b\x01\x10\xc8\x01\x18\x01\"\x042\x02 \x00R\x03ids\"\x8c\x01\n" +
+	"\x0eTagIDsResponse\x12A\n" +
+	"\x04data\x18\x01 \x03(\v2-.accounting_iface.v1.TagIDsResponse.DataEntryR\x04data\x1a7\n" +
+	"\tDataEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\x04R\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"9\n" +
 	"\x10TagCreateRequest\x12%\n" +
 	"\x04tags\x18\x01 \x03(\tB\x11\xbaH\x0e\x92\x01\v\b\x01\x10\x14\"\x05r\x03\x18\xc8\x01R\x04tags\"\x13\n" +
 	"\x11TagCreateResponse\"a\n" +
@@ -221,11 +316,12 @@ const file_accounting_iface_v1_tag_proto_rawDesc = "" +
 	"R\x05limit\x12\x1f\n" +
 	"\x06offset\x18\x03 \x01(\x04B\a\xbaH\x042\x02(\x00R\x06offset\"%\n" +
 	"\x0fTagListResponse\x12\x12\n" +
-	"\x04tags\x18\x01 \x03(\tR\x04tags2\xbe\x01\n" +
+	"\x04tags\x18\x01 \x03(\tR\x04tags2\x91\x02\n" +
 	"\n" +
 	"TagService\x12Z\n" +
 	"\tTagCreate\x12%.accounting_iface.v1.TagCreateRequest\x1a&.accounting_iface.v1.TagCreateResponse\x12T\n" +
-	"\aTagList\x12#.accounting_iface.v1.TagListRequest\x1a$.accounting_iface.v1.TagListResponseB\xd3\x01\n" +
+	"\aTagList\x12#.accounting_iface.v1.TagListRequest\x1a$.accounting_iface.v1.TagListResponse\x12Q\n" +
+	"\x06TagIDs\x12\".accounting_iface.v1.TagIDsRequest\x1a#.accounting_iface.v1.TagIDsResponseB\xd3\x01\n" +
 	"\x17com.accounting_iface.v1B\bTagProtoP\x01ZEgithub.com/pdcgo/schema/services/accounting_iface/v1;accounting_iface\xa2\x02\x03AXX\xaa\x02\x12AccountingIface.V1\xca\x02\x12AccountingIface\\V1\xe2\x02\x1eAccountingIface\\V1\\GPBMetadata\xea\x02\x13AccountingIface::V1b\x06proto3"
 
 var (
@@ -240,23 +336,29 @@ func file_accounting_iface_v1_tag_proto_rawDescGZIP() []byte {
 	return file_accounting_iface_v1_tag_proto_rawDescData
 }
 
-var file_accounting_iface_v1_tag_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_accounting_iface_v1_tag_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_accounting_iface_v1_tag_proto_goTypes = []any{
-	(*TagCreateRequest)(nil),  // 0: accounting_iface.v1.TagCreateRequest
-	(*TagCreateResponse)(nil), // 1: accounting_iface.v1.TagCreateResponse
-	(*TagListRequest)(nil),    // 2: accounting_iface.v1.TagListRequest
-	(*TagListResponse)(nil),   // 3: accounting_iface.v1.TagListResponse
+	(*TagIDsRequest)(nil),     // 0: accounting_iface.v1.TagIDsRequest
+	(*TagIDsResponse)(nil),    // 1: accounting_iface.v1.TagIDsResponse
+	(*TagCreateRequest)(nil),  // 2: accounting_iface.v1.TagCreateRequest
+	(*TagCreateResponse)(nil), // 3: accounting_iface.v1.TagCreateResponse
+	(*TagListRequest)(nil),    // 4: accounting_iface.v1.TagListRequest
+	(*TagListResponse)(nil),   // 5: accounting_iface.v1.TagListResponse
+	nil,                       // 6: accounting_iface.v1.TagIDsResponse.DataEntry
 }
 var file_accounting_iface_v1_tag_proto_depIdxs = []int32{
-	0, // 0: accounting_iface.v1.TagService.TagCreate:input_type -> accounting_iface.v1.TagCreateRequest
-	2, // 1: accounting_iface.v1.TagService.TagList:input_type -> accounting_iface.v1.TagListRequest
-	1, // 2: accounting_iface.v1.TagService.TagCreate:output_type -> accounting_iface.v1.TagCreateResponse
-	3, // 3: accounting_iface.v1.TagService.TagList:output_type -> accounting_iface.v1.TagListResponse
-	2, // [2:4] is the sub-list for method output_type
-	0, // [0:2] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	6, // 0: accounting_iface.v1.TagIDsResponse.data:type_name -> accounting_iface.v1.TagIDsResponse.DataEntry
+	2, // 1: accounting_iface.v1.TagService.TagCreate:input_type -> accounting_iface.v1.TagCreateRequest
+	4, // 2: accounting_iface.v1.TagService.TagList:input_type -> accounting_iface.v1.TagListRequest
+	0, // 3: accounting_iface.v1.TagService.TagIDs:input_type -> accounting_iface.v1.TagIDsRequest
+	3, // 4: accounting_iface.v1.TagService.TagCreate:output_type -> accounting_iface.v1.TagCreateResponse
+	5, // 5: accounting_iface.v1.TagService.TagList:output_type -> accounting_iface.v1.TagListResponse
+	1, // 6: accounting_iface.v1.TagService.TagIDs:output_type -> accounting_iface.v1.TagIDsResponse
+	4, // [4:7] is the sub-list for method output_type
+	1, // [1:4] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_accounting_iface_v1_tag_proto_init() }
@@ -270,7 +372,7 @@ func file_accounting_iface_v1_tag_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_accounting_iface_v1_tag_proto_rawDesc), len(file_accounting_iface_v1_tag_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
