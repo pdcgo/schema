@@ -446,17 +446,19 @@ func (x *GetTaskListResponse) GetItems() []*TaskItem {
 }
 
 type TaskItem struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
-	MpId          uint64                 `protobuf:"varint,2,opt,name=mp_id,json=mpId,proto3" json:"mp_id,omitempty"`
-	Status        TaskStatus             `protobuf:"varint,3,opt,name=status,proto3,enum=withdrawal_iface.v1.TaskStatus" json:"status,omitempty"`
-	Source        ImporterSource         `protobuf:"varint,4,opt,name=source,proto3,enum=withdrawal_iface.v1.ImporterSource" json:"source,omitempty"`
-	MpType        v1.MarketplaceType     `protobuf:"varint,5,opt,name=mp_type,json=mpType,proto3,enum=common.v1.MarketplaceType" json:"mp_type,omitempty"`
-	ResourceUri   string                 `protobuf:"bytes,6,opt,name=resource_uri,json=resourceUri,proto3" json:"resource_uri,omitempty"`
-	ErrMessage    string                 `protobuf:"bytes,7,opt,name=err_message,json=errMessage,proto3" json:"err_message,omitempty"`
-	IsErr         bool                   `protobuf:"varint,8,opt,name=is_err,json=isErr,proto3" json:"is_err,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	TeamId          uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	MpId            uint64                 `protobuf:"varint,2,opt,name=mp_id,json=mpId,proto3" json:"mp_id,omitempty"`
+	Status          TaskStatus             `protobuf:"varint,3,opt,name=status,proto3,enum=withdrawal_iface.v1.TaskStatus" json:"status,omitempty"`
+	Source          ImporterSource         `protobuf:"varint,4,opt,name=source,proto3,enum=withdrawal_iface.v1.ImporterSource" json:"source,omitempty"`
+	MpType          v1.MarketplaceType     `protobuf:"varint,5,opt,name=mp_type,json=mpType,proto3,enum=common.v1.MarketplaceType" json:"mp_type,omitempty"`
+	ResourceUri     string                 `protobuf:"bytes,6,opt,name=resource_uri,json=resourceUri,proto3" json:"resource_uri,omitempty"`
+	ErrMessage      string                 `protobuf:"bytes,7,opt,name=err_message,json=errMessage,proto3" json:"err_message,omitempty"`
+	IsErr           bool                   `protobuf:"varint,8,opt,name=is_err,json=isErr,proto3" json:"is_err,omitempty"`
+	CreatedAt       int64                  `protobuf:"varint,9,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	LastProcessedAt int64                  `protobuf:"varint,10,opt,name=last_processed_at,json=lastProcessedAt,proto3" json:"last_processed_at,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *TaskItem) Reset() {
@@ -543,6 +545,20 @@ func (x *TaskItem) GetIsErr() bool {
 		return x.IsErr
 	}
 	return false
+}
+
+func (x *TaskItem) GetCreatedAt() int64 {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return 0
+}
+
+func (x *TaskItem) GetLastProcessedAt() int64 {
+	if x != nil {
+		return x.LastProcessedAt
+	}
+	return 0
 }
 
 type SubmitWithdrawalRequest struct {
@@ -717,7 +733,7 @@ const file_withdrawal_iface_v1_withdrawal_proto_rawDesc = "" +
 	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x127\n" +
 	"\x06status\x18\x02 \x01(\x0e2\x1f.withdrawal_iface.v1.TaskStatusR\x06status\"J\n" +
 	"\x13GetTaskListResponse\x123\n" +
-	"\x05items\x18\x01 \x03(\v2\x1d.withdrawal_iface.v1.TaskItemR\x05items\"\xbe\x02\n" +
+	"\x05items\x18\x01 \x03(\v2\x1d.withdrawal_iface.v1.TaskItemR\x05items\"\x89\x03\n" +
 	"\bTaskItem\x12\x17\n" +
 	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12\x13\n" +
 	"\x05mp_id\x18\x02 \x01(\x04R\x04mpId\x127\n" +
@@ -727,7 +743,11 @@ const file_withdrawal_iface_v1_withdrawal_proto_rawDesc = "" +
 	"\fresource_uri\x18\x06 \x01(\tR\vresourceUri\x12\x1f\n" +
 	"\verr_message\x18\a \x01(\tR\n" +
 	"errMessage\x12\x15\n" +
-	"\x06is_err\x18\b \x01(\bR\x05isErr\"\x8b\x02\n" +
+	"\x06is_err\x18\b \x01(\bR\x05isErr\x12\x1d\n" +
+	"\n" +
+	"created_at\x18\t \x01(\x03R\tcreatedAt\x12*\n" +
+	"\x11last_processed_at\x18\n" +
+	" \x01(\x03R\x0flastProcessedAt\"\x8b\x02\n" +
 	"\x17SubmitWithdrawalRequest\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12\x1c\n" +
 	"\x05mp_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x04mpId\x12E\n" +

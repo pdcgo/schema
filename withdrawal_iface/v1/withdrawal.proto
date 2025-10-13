@@ -3,6 +3,7 @@ package withdrawal_iface.v1;
 
 import "buf/validate/validate.proto";
 import "common/v1/common.proto";
+// import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/pdcgo/schema/services/withdrawal_iface/v1;withdrawal_iface";
 
@@ -56,6 +57,8 @@ message TaskItem {
   string resource_uri = 6;
   string err_message = 7;
   bool is_err = 8;
+  int64 created_at = 9;
+  int64 last_processed_at = 10;
 }
 
 enum ImporterSource {
