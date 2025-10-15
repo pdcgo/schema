@@ -1,0 +1,44 @@
+syntax = "proto3";
+package cache_iface.v1;
+
+import "buf/validate/validate.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/pdcgo/schema/services/cache_iface/v1;cache_iface";
+
+service CacheService {
+  rpc Add(AddRequest) returns (AddResponse);
+  rpc Replace(ReplaceRequest) returns (ReplaceResponse);
+  rpc Get(GetRequest) returns (GetResponse);
+  rpc Delete(DeleteRequest) returns (DeleteResponse);
+  rpc Flush(FlushRequest) returns (FlushResponse);
+}
+
+message AddRequest {
+  string key = 1 [(buf.validate.field).required = true];
+  google.protobuf.Timestamp expire_at = 2;
+  bytes value = 3 [(buf.validate.field).required = true];
+}
+message AddResponse {}
+
+message ReplaceRequest {
+  string key = 1 [(buf.validate.field).required = true];
+  google.protobuf.Timestamp expire_at = 2;
+  bytes value = 3 [(buf.validate.field).required = true];
+}
+message ReplaceResponse {}
+
+message GetRequest {
+  string key = 1 [(buf.validate.field).required = true];
+}
+message GetResponse {}
+
+message DeleteRequest {
+  string key = 1 [(buf.validate.field).required = true];
+}
+message DeleteResponse {}
+
+message FlushRequest {
+  string namespace = 1;
+}
+message FlushResponse {}

@@ -65,6 +65,7 @@ message EntryItem {
   double debit = 6;
   double credit = 7;
   double balance = 8;
+  uint64 created_by_id = 10;
 
   EntryAccount account = 9;
 }

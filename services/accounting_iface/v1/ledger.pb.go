@@ -478,6 +478,7 @@ type EntryItem struct {
 	Debit         float64                `protobuf:"fixed64,6,opt,name=debit,proto3" json:"debit,omitempty"`
 	Credit        float64                `protobuf:"fixed64,7,opt,name=credit,proto3" json:"credit,omitempty"`
 	Balance       float64                `protobuf:"fixed64,8,opt,name=balance,proto3" json:"balance,omitempty"`
+	CreatedById   uint64                 `protobuf:"varint,10,opt,name=created_by_id,json=createdById,proto3" json:"created_by_id,omitempty"`
 	Account       *EntryAccount          `protobuf:"bytes,9,opt,name=account,proto3" json:"account,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -558,6 +559,13 @@ func (x *EntryItem) GetCredit() float64 {
 func (x *EntryItem) GetBalance() float64 {
 	if x != nil {
 		return x.Balance
+	}
+	return 0
+}
+
+func (x *EntryItem) GetCreatedById() uint64 {
+	if x != nil {
+		return x.CreatedById
 	}
 	return 0
 }
@@ -660,7 +668,7 @@ const file_accounting_iface_v1_ledger_proto_rawDesc = "" +
 	"\ateam_id\x18\x02 \x01(\x04R\x06teamId\x12\x1f\n" +
 	"\vaccount_key\x18\x03 \x01(\tR\n" +
 	"accountKey\x12\x12\n" +
-	"\x04name\x18\x04 \x01(\tR\x04name\"\xf2\x01\n" +
+	"\x04name\x18\x04 \x01(\tR\x04name\"\x96\x02\n" +
 	"\tEntryItem\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x1d\n" +
 	"\n" +
@@ -670,7 +678,9 @@ const file_accounting_iface_v1_ledger_proto_rawDesc = "" +
 	"\x04desc\x18\x05 \x01(\tR\x04desc\x12\x14\n" +
 	"\x05debit\x18\x06 \x01(\x01R\x05debit\x12\x16\n" +
 	"\x06credit\x18\a \x01(\x01R\x06credit\x12\x18\n" +
-	"\abalance\x18\b \x01(\x01R\abalance\x12;\n" +
+	"\abalance\x18\b \x01(\x01R\abalance\x12\"\n" +
+	"\rcreated_by_id\x18\n" +
+	" \x01(\x04R\vcreatedById\x12;\n" +
 	"\aaccount\x18\t \x01(\v2!.accounting_iface.v1.EntryAccountR\aaccount\"y\n" +
 	"\x11EntryListResponse\x122\n" +
 	"\x04data\x18\x01 \x03(\v2\x1e.accounting_iface.v1.EntryItemR\x04data\x120\n" +
