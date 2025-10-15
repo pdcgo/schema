@@ -31,7 +31,9 @@ message ReplaceResponse {}
 message GetRequest {
   string key = 1 [(buf.validate.field).required = true];
 }
-message GetResponse {}
+message GetResponse {
+  bytes value = 1;
+}
 
 message DeleteRequest {
   string key = 1 [(buf.validate.field).required = true];

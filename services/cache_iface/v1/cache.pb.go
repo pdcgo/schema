@@ -261,6 +261,7 @@ func (x *GetRequest) GetKey() string {
 
 type GetResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Value         []byte                 `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -293,6 +294,13 @@ func (x *GetResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use GetResponse.ProtoReflect.Descriptor instead.
 func (*GetResponse) Descriptor() ([]byte, []int) {
 	return file_cache_iface_v1_cache_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *GetResponse) GetValue() []byte {
+	if x != nil {
+		return x.Value
+	}
+	return nil
 }
 
 type DeleteRequest struct {
@@ -473,8 +481,9 @@ const file_cache_iface_v1_cache_proto_rawDesc = "" +
 	"\x0fReplaceResponse\"&\n" +
 	"\n" +
 	"GetRequest\x12\x18\n" +
-	"\x03key\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\x03key\"\r\n" +
-	"\vGetResponse\")\n" +
+	"\x03key\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\x03key\"#\n" +
+	"\vGetResponse\x12\x14\n" +
+	"\x05value\x18\x01 \x01(\fR\x05value\")\n" +
 	"\rDeleteRequest\x12\x18\n" +
 	"\x03key\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\x03key\"\x10\n" +
 	"\x0eDeleteResponse\",\n" +
