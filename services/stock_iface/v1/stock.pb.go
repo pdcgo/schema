@@ -529,9 +529,10 @@ func (*InboundCreateResponse) Descriptor() ([]byte, []int) {
 
 type InboundAcceptRequest struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
-	TeamId          uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`                               // must be > 0
-	WarehouseId     uint64                 `protobuf:"varint,2,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`                // must be > 0
-	ExtTxId         uint64                 `protobuf:"varint,3,opt,name=ext_tx_id,json=extTxId,proto3" json:"ext_tx_id,omitempty"`                          // must be > 0
+	TeamId          uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`                // must be > 0
+	WarehouseId     uint64                 `protobuf:"varint,2,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"` // must be > 0
+	ExtTxId         uint64                 `protobuf:"varint,3,opt,name=ext_tx_id,json=extTxId,proto3" json:"ext_tx_id,omitempty"`           // must be > 0
+	Extras          *StockInfoExtra        `protobuf:"bytes,10,opt,name=extras,proto3" json:"extras,omitempty"`
 	Source          InboundSource          `protobuf:"varint,4,opt,name=source,proto3,enum=stock_iface.v1.InboundSource" json:"source,omitempty"`           // must be valid enum
 	WarehouseCodFee float64                `protobuf:"fixed64,5,opt,name=warehouse_cod_fee,json=warehouseCodFee,proto3" json:"warehouse_cod_fee,omitempty"` // non-negative
 	ShippingFee     float64                `protobuf:"fixed64,6,opt,name=shipping_fee,json=shippingFee,proto3" json:"shipping_fee,omitempty"`               // non-negative
@@ -591,6 +592,13 @@ func (x *InboundAcceptRequest) GetExtTxId() uint64 {
 		return x.ExtTxId
 	}
 	return 0
+}
+
+func (x *InboundAcceptRequest) GetExtras() *StockInfoExtra {
+	if x != nil {
+		return x.Extras
+	}
+	return nil
 }
 
 func (x *InboundAcceptRequest) GetSource() InboundSource {
@@ -1265,11 +1273,13 @@ const file_stock_iface_v1_stock_proto_rawDesc = "" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\rpaymentMethod\x121\n" +
 	"\fshipping_fee\x18\x06 \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\vshippingFee\x12A\n" +
 	"\bproducts\x18\a \x03(\v2\x1b.stock_iface.v1.VariantItemB\b\xbaH\x05\x92\x01\x02\b\x01R\bproducts\"\x17\n" +
-	"\x15InboundCreateResponse\"\xf4\x03\n" +
+	"\x15InboundCreateResponse\"\xac\x04\n" +
 	"\x14InboundAcceptRequest\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12*\n" +
 	"\fwarehouse_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\vwarehouseId\x12#\n" +
-	"\text_tx_id\x18\x03 \x01(\x04B\a\xbaH\x042\x02 \x00R\aextTxId\x12A\n" +
+	"\text_tx_id\x18\x03 \x01(\x04B\a\xbaH\x042\x02 \x00R\aextTxId\x126\n" +
+	"\x06extras\x18\n" +
+	" \x01(\v2\x1e.stock_iface.v1.StockInfoExtraR\x06extras\x12A\n" +
 	"\x06source\x18\x04 \x01(\x0e2\x1d.stock_iface.v1.InboundSourceB\n" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x06source\x12:\n" +
 	"\x11warehouse_cod_fee\x18\x05 \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\x0fwarehouseCodFee\x121\n" +
@@ -1379,33 +1389,34 @@ var file_stock_iface_v1_stock_proto_depIdxs = []int32{
 	0,  // 4: stock_iface.v1.InboundCreateRequest.source:type_name -> stock_iface.v1.InboundSource
 	1,  // 5: stock_iface.v1.InboundCreateRequest.payment_method:type_name -> stock_iface.v1.PaymentMethod
 	4,  // 6: stock_iface.v1.InboundCreateRequest.products:type_name -> stock_iface.v1.VariantItem
-	0,  // 7: stock_iface.v1.InboundAcceptRequest.source:type_name -> stock_iface.v1.InboundSource
-	4,  // 8: stock_iface.v1.InboundAcceptRequest.accepts:type_name -> stock_iface.v1.VariantItem
-	5,  // 9: stock_iface.v1.InboundAcceptRequest.losts:type_name -> stock_iface.v1.VariantProblemItem
-	5,  // 10: stock_iface.v1.InboundAcceptRequest.brokens:type_name -> stock_iface.v1.VariantProblemItem
-	5,  // 11: stock_iface.v1.StockAdjustmentRequest.losts:type_name -> stock_iface.v1.VariantProblemItem
-	5,  // 12: stock_iface.v1.StockAdjustmentRequest.brokens:type_name -> stock_iface.v1.VariantProblemItem
-	12, // 13: stock_iface.v1.TransferToWarehouseRequest.products:type_name -> stock_iface.v1.TransferItem
-	12, // 14: stock_iface.v1.TransferToWarehouseAcceptRequest.products:type_name -> stock_iface.v1.TransferItem
-	6,  // 15: stock_iface.v1.StockService.InboundCreate:input_type -> stock_iface.v1.InboundCreateRequest
-	2,  // 16: stock_iface.v1.StockService.InboundUpdate:input_type -> stock_iface.v1.InboundUpdateRequest
-	8,  // 17: stock_iface.v1.StockService.InboundAccept:input_type -> stock_iface.v1.InboundAcceptRequest
-	10, // 18: stock_iface.v1.StockService.StockAdjustment:input_type -> stock_iface.v1.StockAdjustmentRequest
-	13, // 19: stock_iface.v1.StockService.TransferToWarehouse:input_type -> stock_iface.v1.TransferToWarehouseRequest
-	15, // 20: stock_iface.v1.StockService.TransferToWarehouseAccept:input_type -> stock_iface.v1.TransferToWarehouseAcceptRequest
-	17, // 21: stock_iface.v1.StockService.TransferToWarehouseCancel:input_type -> stock_iface.v1.TransferToWarehouseCancelRequest
-	7,  // 22: stock_iface.v1.StockService.InboundCreate:output_type -> stock_iface.v1.InboundCreateResponse
-	3,  // 23: stock_iface.v1.StockService.InboundUpdate:output_type -> stock_iface.v1.InboundUpdateResponse
-	9,  // 24: stock_iface.v1.StockService.InboundAccept:output_type -> stock_iface.v1.InboundAcceptResponse
-	11, // 25: stock_iface.v1.StockService.StockAdjustment:output_type -> stock_iface.v1.StockAdjustmentResponse
-	14, // 26: stock_iface.v1.StockService.TransferToWarehouse:output_type -> stock_iface.v1.TransferToWarehouseResponse
-	16, // 27: stock_iface.v1.StockService.TransferToWarehouseAccept:output_type -> stock_iface.v1.TransferToWarehouseAcceptResponse
-	18, // 28: stock_iface.v1.StockService.TransferToWarehouseCancel:output_type -> stock_iface.v1.TransferToWarehouseCancelResponse
-	22, // [22:29] is the sub-list for method output_type
-	15, // [15:22] is the sub-list for method input_type
-	15, // [15:15] is the sub-list for extension type_name
-	15, // [15:15] is the sub-list for extension extendee
-	0,  // [0:15] is the sub-list for field type_name
+	19, // 7: stock_iface.v1.InboundAcceptRequest.extras:type_name -> stock_iface.v1.StockInfoExtra
+	0,  // 8: stock_iface.v1.InboundAcceptRequest.source:type_name -> stock_iface.v1.InboundSource
+	4,  // 9: stock_iface.v1.InboundAcceptRequest.accepts:type_name -> stock_iface.v1.VariantItem
+	5,  // 10: stock_iface.v1.InboundAcceptRequest.losts:type_name -> stock_iface.v1.VariantProblemItem
+	5,  // 11: stock_iface.v1.InboundAcceptRequest.brokens:type_name -> stock_iface.v1.VariantProblemItem
+	5,  // 12: stock_iface.v1.StockAdjustmentRequest.losts:type_name -> stock_iface.v1.VariantProblemItem
+	5,  // 13: stock_iface.v1.StockAdjustmentRequest.brokens:type_name -> stock_iface.v1.VariantProblemItem
+	12, // 14: stock_iface.v1.TransferToWarehouseRequest.products:type_name -> stock_iface.v1.TransferItem
+	12, // 15: stock_iface.v1.TransferToWarehouseAcceptRequest.products:type_name -> stock_iface.v1.TransferItem
+	6,  // 16: stock_iface.v1.StockService.InboundCreate:input_type -> stock_iface.v1.InboundCreateRequest
+	2,  // 17: stock_iface.v1.StockService.InboundUpdate:input_type -> stock_iface.v1.InboundUpdateRequest
+	8,  // 18: stock_iface.v1.StockService.InboundAccept:input_type -> stock_iface.v1.InboundAcceptRequest
+	10, // 19: stock_iface.v1.StockService.StockAdjustment:input_type -> stock_iface.v1.StockAdjustmentRequest
+	13, // 20: stock_iface.v1.StockService.TransferToWarehouse:input_type -> stock_iface.v1.TransferToWarehouseRequest
+	15, // 21: stock_iface.v1.StockService.TransferToWarehouseAccept:input_type -> stock_iface.v1.TransferToWarehouseAcceptRequest
+	17, // 22: stock_iface.v1.StockService.TransferToWarehouseCancel:input_type -> stock_iface.v1.TransferToWarehouseCancelRequest
+	7,  // 23: stock_iface.v1.StockService.InboundCreate:output_type -> stock_iface.v1.InboundCreateResponse
+	3,  // 24: stock_iface.v1.StockService.InboundUpdate:output_type -> stock_iface.v1.InboundUpdateResponse
+	9,  // 25: stock_iface.v1.StockService.InboundAccept:output_type -> stock_iface.v1.InboundAcceptResponse
+	11, // 26: stock_iface.v1.StockService.StockAdjustment:output_type -> stock_iface.v1.StockAdjustmentResponse
+	14, // 27: stock_iface.v1.StockService.TransferToWarehouse:output_type -> stock_iface.v1.TransferToWarehouseResponse
+	16, // 28: stock_iface.v1.StockService.TransferToWarehouseAccept:output_type -> stock_iface.v1.TransferToWarehouseAcceptResponse
+	18, // 29: stock_iface.v1.StockService.TransferToWarehouseCancel:output_type -> stock_iface.v1.TransferToWarehouseCancelResponse
+	23, // [23:30] is the sub-list for method output_type
+	16, // [16:23] is the sub-list for method input_type
+	16, // [16:16] is the sub-list for extension type_name
+	16, // [16:16] is the sub-list for extension extendee
+	0,  // [0:16] is the sub-list for field type_name
 }
 
 func init() { file_stock_iface_v1_stock_proto_init() }

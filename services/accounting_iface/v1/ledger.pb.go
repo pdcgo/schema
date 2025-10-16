@@ -73,6 +73,7 @@ type EntryListExportRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
 	AccountKey    string                 `protobuf:"bytes,2,opt,name=account_key,json=accountKey,proto3" json:"account_key,omitempty"`
+	Keyword       string                 `protobuf:"bytes,4,opt,name=keyword,proto3" json:"keyword,omitempty"`
 	Extra         *FilterExtra           `protobuf:"bytes,6,opt,name=extra,proto3" json:"extra,omitempty"`
 	TimeRange     *v1.TimeFilterRange    `protobuf:"bytes,3,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -119,6 +120,13 @@ func (x *EntryListExportRequest) GetTeamId() uint64 {
 func (x *EntryListExportRequest) GetAccountKey() string {
 	if x != nil {
 		return x.AccountKey
+	}
+	return ""
+}
+
+func (x *EntryListExportRequest) GetKeyword() string {
+	if x != nil {
+		return x.Keyword
 	}
 	return ""
 }
@@ -321,6 +329,7 @@ type EntryListRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
 	AccountKey    string                 `protobuf:"bytes,2,opt,name=account_key,json=accountKey,proto3" json:"account_key,omitempty"`
+	Keyword       string                 `protobuf:"bytes,7,opt,name=keyword,proto3" json:"keyword,omitempty"`
 	Extra         *FilterExtra           `protobuf:"bytes,6,opt,name=extra,proto3" json:"extra,omitempty"`
 	TimeRange     *v1.TimeFilterRange    `protobuf:"bytes,3,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
 	Page          *v1.PageFilter         `protobuf:"bytes,4,opt,name=page,proto3" json:"page,omitempty"`
@@ -369,6 +378,13 @@ func (x *EntryListRequest) GetTeamId() uint64 {
 func (x *EntryListRequest) GetAccountKey() string {
 	if x != nil {
 		return x.AccountKey
+	}
+	return ""
+}
+
+func (x *EntryListRequest) GetKeyword() string {
+	if x != nil {
+		return x.Keyword
 	}
 	return ""
 }
@@ -633,11 +649,12 @@ var File_accounting_iface_v1_ledger_proto protoreflect.FileDescriptor
 
 const file_accounting_iface_v1_ledger_proto_rawDesc = "" +
 	"\n" +
-	" accounting_iface/v1/ledger.proto\x12\x13accounting_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\"\xdf\x01\n" +
+	" accounting_iface/v1/ledger.proto\x12\x13accounting_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\"\xf9\x01\n" +
 	"\x16EntryListExportRequest\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12(\n" +
 	"\vaccount_key\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\n" +
-	"accountKey\x126\n" +
+	"accountKey\x12\x18\n" +
+	"\akeyword\x18\x04 \x01(\tR\akeyword\x126\n" +
 	"\x05extra\x18\x06 \x01(\v2 .accounting_iface.v1.FilterExtraR\x05extra\x12A\n" +
 	"\n" +
 	"time_range\x18\x03 \x01(\v2\x1a.common.v1.TimeFilterRangeB\x06\xbaH\x03\xc8\x01\x01R\ttimeRange\"u\n" +
@@ -653,11 +670,12 @@ const file_accounting_iface_v1_ledger_proto_rawDesc = "" +
 	"\x13customer_service_id\x18\x01 \x01(\x04R\x11customerServiceId\x12\x17\n" +
 	"\ashop_id\x18\x02 \x01(\x04R\x06shopId\x12\x1f\n" +
 	"\vsupplier_id\x18\x03 \x01(\x04R\n" +
-	"supplierId\"\xc4\x02\n" +
+	"supplierId\"\xde\x02\n" +
 	"\x10EntryListRequest\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12(\n" +
 	"\vaccount_key\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\n" +
-	"accountKey\x126\n" +
+	"accountKey\x12\x18\n" +
+	"\akeyword\x18\a \x01(\tR\akeyword\x126\n" +
 	"\x05extra\x18\x06 \x01(\v2 .accounting_iface.v1.FilterExtraR\x05extra\x12A\n" +
 	"\n" +
 	"time_range\x18\x03 \x01(\v2\x1a.common.v1.TimeFilterRangeB\x06\xbaH\x03\xc8\x01\x01R\ttimeRange\x121\n" +

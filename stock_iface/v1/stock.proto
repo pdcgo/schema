@@ -109,6 +109,8 @@ message InboundAcceptRequest {
   uint64 warehouse_id = 2 [(buf.validate.field).uint64.gt = 0]; // must be > 0
   uint64 ext_tx_id = 3 [(buf.validate.field).uint64.gt = 0]; // must be > 0
 
+  StockInfoExtra extras = 10;
+
   InboundSource source = 4 [(buf.validate.field).enum = {
     defined_only: true
     not_in: [0]
