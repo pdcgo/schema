@@ -3,6 +3,7 @@ package revenue_iface.v1;
 
 import "buf/validate/validate.proto";
 import "common/v1/common.proto";
+import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/pdcgo/schema/services/revenue_iface/v1;revenue_iface";
 
@@ -13,7 +14,51 @@ service RevenueService {
   rpc OrderCompleted(OrderCompletedRequest) returns (OrderCompletedResponse);
   rpc RevenueAdjustment(RevenueAdjustmentRequest) returns (RevenueAdjustmentResponse);
   rpc Withdrawal(WithdrawalRequest) returns (WithdrawalResponse);
+  rpc RevenueStream(stream RevenueStreamRequest) returns (RevenueStreamResponse);
 }
+
+message RevenueStreamEventFund {
+  double est_amount = 1 [(buf.validate.field).double.gt = 0];
+  double amount = 2 [(buf.validate.field).double.gt = 0];
+  google.protobuf.Timestamp at = 3 [(buf.validate.field).required = true];
+  string desc = 4 [(buf.validate.field).required = true];
+  string order_id = 5 [(buf.validate.field).required = true];
+}
+
+message RevenueStreamEventAdjustment {
+  double amount = 1 [(buf.validate.field).double.gt = 0];
+  google.protobuf.Timestamp at = 2 [(buf.validate.field).required = true];
+  string desc = 3 [(buf.validate.field).required = true];
+  string order_id = 4;
+  repeated string tags = 5;
+}
+
+message RevenueStreamEventWithdrawal {
+  double amount = 1 [(buf.validate.field).double.gt = 0];
+  google.protobuf.Timestamp at = 2 [(buf.validate.field).required = true];
+  string desc = 3 [(buf.validate.field).required = true];
+}
+
+message RevenueStreamEventInit {
+  string token = 1 [(buf.validate.field).required = true];
+  uint64 team_id = 2 [(buf.validate.field).uint64.gt = 0];
+  uint64 shop_id = 3 [(buf.validate.field).uint64.gt = 0];
+  uint64 user_id = 4 [(buf.validate.field).uint64.gt = 0];
+}
+
+message RevenueStreamEvent {
+  oneof kind {
+    RevenueStreamEventInit init = 1;
+    RevenueStreamEventFund fund = 2;
+    RevenueStreamEventAdjustment adjustment = 3;
+    RevenueStreamEventWithdrawal withdrawal = 4;
+  }
+}
+
+message RevenueStreamRequest {
+  RevenueStreamEvent event = 2 [(buf.validate.field).required = true];
+}
+message RevenueStreamResponse {}
 
 message RevenueAdjustmentRequest {}
 message RevenueAdjustmentResponse {}

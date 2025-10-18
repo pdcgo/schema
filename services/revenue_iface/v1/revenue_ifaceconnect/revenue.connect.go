@@ -50,6 +50,9 @@ const (
 	// RevenueServiceWithdrawalProcedure is the fully-qualified name of the RevenueService's Withdrawal
 	// RPC.
 	RevenueServiceWithdrawalProcedure = "/revenue_iface.v1.RevenueService/Withdrawal"
+	// RevenueServiceRevenueStreamProcedure is the fully-qualified name of the RevenueService's
+	// RevenueStream RPC.
+	RevenueServiceRevenueStreamProcedure = "/revenue_iface.v1.RevenueService/RevenueStream"
 )
 
 // RevenueServiceClient is a client for the revenue_iface.v1.RevenueService service.
@@ -60,6 +63,7 @@ type RevenueServiceClient interface {
 	OrderCompleted(context.Context, *connect.Request[v1.OrderCompletedRequest]) (*connect.Response[v1.OrderCompletedResponse], error)
 	RevenueAdjustment(context.Context, *connect.Request[v1.RevenueAdjustmentRequest]) (*connect.Response[v1.RevenueAdjustmentResponse], error)
 	Withdrawal(context.Context, *connect.Request[v1.WithdrawalRequest]) (*connect.Response[v1.WithdrawalResponse], error)
+	RevenueStream(context.Context) *connect.ClientStreamForClient[v1.RevenueStreamRequest, v1.RevenueStreamResponse]
 }
 
 // NewRevenueServiceClient constructs a client for the revenue_iface.v1.RevenueService service. By
@@ -109,6 +113,12 @@ func NewRevenueServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			connect.WithSchema(revenueServiceMethods.ByName("Withdrawal")),
 			connect.WithClientOptions(opts...),
 		),
+		revenueStream: connect.NewClient[v1.RevenueStreamRequest, v1.RevenueStreamResponse](
+			httpClient,
+			baseURL+RevenueServiceRevenueStreamProcedure,
+			connect.WithSchema(revenueServiceMethods.ByName("RevenueStream")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -120,6 +130,7 @@ type revenueServiceClient struct {
 	orderCompleted    *connect.Client[v1.OrderCompletedRequest, v1.OrderCompletedResponse]
 	revenueAdjustment *connect.Client[v1.RevenueAdjustmentRequest, v1.RevenueAdjustmentResponse]
 	withdrawal        *connect.Client[v1.WithdrawalRequest, v1.WithdrawalResponse]
+	revenueStream     *connect.Client[v1.RevenueStreamRequest, v1.RevenueStreamResponse]
 }
 
 // OnOrder calls revenue_iface.v1.RevenueService.OnOrder.
@@ -152,6 +163,11 @@ func (c *revenueServiceClient) Withdrawal(ctx context.Context, req *connect.Requ
 	return c.withdrawal.CallUnary(ctx, req)
 }
 
+// RevenueStream calls revenue_iface.v1.RevenueService.RevenueStream.
+func (c *revenueServiceClient) RevenueStream(ctx context.Context) *connect.ClientStreamForClient[v1.RevenueStreamRequest, v1.RevenueStreamResponse] {
+	return c.revenueStream.CallClientStream(ctx)
+}
+
 // RevenueServiceHandler is an implementation of the revenue_iface.v1.RevenueService service.
 type RevenueServiceHandler interface {
 	OnOrder(context.Context, *connect.Request[v1.OnOrderRequest]) (*connect.Response[v1.OnOrderResponse], error)
@@ -160,6 +176,7 @@ type RevenueServiceHandler interface {
 	OrderCompleted(context.Context, *connect.Request[v1.OrderCompletedRequest]) (*connect.Response[v1.OrderCompletedResponse], error)
 	RevenueAdjustment(context.Context, *connect.Request[v1.RevenueAdjustmentRequest]) (*connect.Response[v1.RevenueAdjustmentResponse], error)
 	Withdrawal(context.Context, *connect.Request[v1.WithdrawalRequest]) (*connect.Response[v1.WithdrawalResponse], error)
+	RevenueStream(context.Context, *connect.ClientStream[v1.RevenueStreamRequest]) (*connect.Response[v1.RevenueStreamResponse], error)
 }
 
 // NewRevenueServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -205,6 +222,12 @@ func NewRevenueServiceHandler(svc RevenueServiceHandler, opts ...connect.Handler
 		connect.WithSchema(revenueServiceMethods.ByName("Withdrawal")),
 		connect.WithHandlerOptions(opts...),
 	)
+	revenueServiceRevenueStreamHandler := connect.NewClientStreamHandler(
+		RevenueServiceRevenueStreamProcedure,
+		svc.RevenueStream,
+		connect.WithSchema(revenueServiceMethods.ByName("RevenueStream")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/revenue_iface.v1.RevenueService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case RevenueServiceOnOrderProcedure:
@@ -219,6 +242,8 @@ func NewRevenueServiceHandler(svc RevenueServiceHandler, opts ...connect.Handler
 			revenueServiceRevenueAdjustmentHandler.ServeHTTP(w, r)
 		case RevenueServiceWithdrawalProcedure:
 			revenueServiceWithdrawalHandler.ServeHTTP(w, r)
+		case RevenueServiceRevenueStreamProcedure:
+			revenueServiceRevenueStreamHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -250,4 +275,8 @@ func (UnimplementedRevenueServiceHandler) RevenueAdjustment(context.Context, *co
 
 func (UnimplementedRevenueServiceHandler) Withdrawal(context.Context, *connect.Request[v1.WithdrawalRequest]) (*connect.Response[v1.WithdrawalResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("revenue_iface.v1.RevenueService.Withdrawal is not implemented"))
+}
+
+func (UnimplementedRevenueServiceHandler) RevenueStream(context.Context, *connect.ClientStream[v1.RevenueStreamRequest]) (*connect.Response[v1.RevenueStreamResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("revenue_iface.v1.RevenueService.RevenueStream is not implemented"))
 }
