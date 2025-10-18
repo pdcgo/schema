@@ -2,6 +2,7 @@ syntax = "proto3";
 package accounting_iface.v1;
 
 import "common/v1/common.proto";
+import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/pdcgo/schema/services/accounting_iface/v1;accounting_iface";
 
@@ -35,7 +36,7 @@ message ExpenseTimeMetricRequest {
   uint64 team_id = 1;
   string expense_key = 2;
   common.v1.TimeType time_type = 3;
-  common.v1.TimeFilter time_range = 4;
+  common.v1.TimeFilterRange time_range = 4;
 }
 
 message ExpenseTimeMetricResponse {
@@ -45,7 +46,7 @@ message ExpenseTimeMetricResponse {
 
 message ExpenseOverviewMetricRequest {
   uint64 team_id = 1;
-  common.v1.TimeFilter time_range = 2;
+  common.v1.TimeFilterRange time_range = 2;
 }
 
 message ExpenseOverviewMetricResponse {
@@ -94,7 +95,7 @@ message ExpenseCreateRequest {
   ExpenseType expense_type = 3;
   string expense_key = 4;
   double amount = 5;
-  int64 expense_at = 6;
+  google.protobuf.Timestamp expense_at = 6;
 }
 
 message ExpenseCreateResponse {
@@ -106,7 +107,7 @@ message ExpenseListRequest {
   uint64 by_user_id = 2;
   ExpenseType expense_type = 5;
   string expense_key = 6;
-  common.v1.TimeFilter time_range = 3;
+  common.v1.TimeFilterRange time_range = 3;
   common.v1.PageFilter page = 4;
 }
 

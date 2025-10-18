@@ -10,6 +10,7 @@ import (
 	v1 "github.com/pdcgo/schema/services/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -175,7 +176,7 @@ type ExpenseTimeMetricRequest struct {
 	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
 	ExpenseKey    string                 `protobuf:"bytes,2,opt,name=expense_key,json=expenseKey,proto3" json:"expense_key,omitempty"`
 	TimeType      v1.TimeType            `protobuf:"varint,3,opt,name=time_type,json=timeType,proto3,enum=common.v1.TimeType" json:"time_type,omitempty"`
-	TimeRange     *v1.TimeFilter         `protobuf:"bytes,4,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
+	TimeRange     *v1.TimeFilterRange    `protobuf:"bytes,4,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -231,7 +232,7 @@ func (x *ExpenseTimeMetricRequest) GetTimeType() v1.TimeType {
 	return v1.TimeType(0)
 }
 
-func (x *ExpenseTimeMetricRequest) GetTimeRange() *v1.TimeFilter {
+func (x *ExpenseTimeMetricRequest) GetTimeRange() *v1.TimeFilterRange {
 	if x != nil {
 		return x.TimeRange
 	}
@@ -293,7 +294,7 @@ func (x *ExpenseTimeMetricResponse) GetData() map[int64]*KeyValueMetricList {
 type ExpenseOverviewMetricRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
-	TimeRange     *v1.TimeFilter         `protobuf:"bytes,2,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
+	TimeRange     *v1.TimeFilterRange    `protobuf:"bytes,2,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -335,7 +336,7 @@ func (x *ExpenseOverviewMetricRequest) GetTeamId() uint64 {
 	return 0
 }
 
-func (x *ExpenseOverviewMetricRequest) GetTimeRange() *v1.TimeFilter {
+func (x *ExpenseOverviewMetricRequest) GetTimeRange() *v1.TimeFilterRange {
 	if x != nil {
 		return x.TimeRange
 	}
@@ -694,7 +695,7 @@ type ExpenseCreateRequest struct {
 	ExpenseType   ExpenseType            `protobuf:"varint,3,opt,name=expense_type,json=expenseType,proto3,enum=accounting_iface.v1.ExpenseType" json:"expense_type,omitempty"`
 	ExpenseKey    string                 `protobuf:"bytes,4,opt,name=expense_key,json=expenseKey,proto3" json:"expense_key,omitempty"`
 	Amount        float64                `protobuf:"fixed64,5,opt,name=amount,proto3" json:"amount,omitempty"`
-	ExpenseAt     int64                  `protobuf:"varint,6,opt,name=expense_at,json=expenseAt,proto3" json:"expense_at,omitempty"`
+	ExpenseAt     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=expense_at,json=expenseAt,proto3" json:"expense_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -771,11 +772,11 @@ func (x *ExpenseCreateRequest) GetAmount() float64 {
 	return 0
 }
 
-func (x *ExpenseCreateRequest) GetExpenseAt() int64 {
+func (x *ExpenseCreateRequest) GetExpenseAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.ExpenseAt
 	}
-	return 0
+	return nil
 }
 
 type ExpenseCreateResponse struct {
@@ -828,7 +829,7 @@ type ExpenseListRequest struct {
 	ByUserId      uint64                 `protobuf:"varint,2,opt,name=by_user_id,json=byUserId,proto3" json:"by_user_id,omitempty"`
 	ExpenseType   ExpenseType            `protobuf:"varint,5,opt,name=expense_type,json=expenseType,proto3,enum=accounting_iface.v1.ExpenseType" json:"expense_type,omitempty"`
 	ExpenseKey    string                 `protobuf:"bytes,6,opt,name=expense_key,json=expenseKey,proto3" json:"expense_key,omitempty"`
-	TimeRange     *v1.TimeFilter         `protobuf:"bytes,3,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
+	TimeRange     *v1.TimeFilterRange    `protobuf:"bytes,3,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
 	Page          *v1.PageFilter         `protobuf:"bytes,4,opt,name=page,proto3" json:"page,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -892,7 +893,7 @@ func (x *ExpenseListRequest) GetExpenseKey() string {
 	return ""
 }
 
-func (x *ExpenseListRequest) GetTimeRange() *v1.TimeFilter {
+func (x *ExpenseListRequest) GetTimeRange() *v1.TimeFilterRange {
 	if x != nil {
 		return x.TimeRange
 	}
@@ -970,29 +971,29 @@ var File_accounting_iface_v1_expense_proto protoreflect.FileDescriptor
 
 const file_accounting_iface_v1_expense_proto_rawDesc = "" +
 	"\n" +
-	"!accounting_iface/v1/expense.proto\x12\x13accounting_iface.v1\x1a\x16common/v1/common.proto\"8\n" +
+	"!accounting_iface/v1/expense.proto\x12\x13accounting_iface.v1\x1a\x16common/v1/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"8\n" +
 	"\x0eKeyValueMetric\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\x01R\x05value\"M\n" +
 	"\x12KeyValueMetricList\x127\n" +
-	"\x04data\x18\x01 \x03(\v2#.accounting_iface.v1.KeyValueMetricR\x04data\"\xbc\x01\n" +
+	"\x04data\x18\x01 \x03(\v2#.accounting_iface.v1.KeyValueMetricR\x04data\"\xc1\x01\n" +
 	"\x18ExpenseTimeMetricRequest\x12\x17\n" +
 	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12\x1f\n" +
 	"\vexpense_key\x18\x02 \x01(\tR\n" +
 	"expenseKey\x120\n" +
-	"\ttime_type\x18\x03 \x01(\x0e2\x13.common.v1.TimeTypeR\btimeType\x124\n" +
+	"\ttime_type\x18\x03 \x01(\x0e2\x13.common.v1.TimeTypeR\btimeType\x129\n" +
 	"\n" +
-	"time_range\x18\x04 \x01(\v2\x15.common.v1.TimeFilterR\ttimeRange\"\xf0\x01\n" +
+	"time_range\x18\x04 \x01(\v2\x1a.common.v1.TimeFilterRangeR\ttimeRange\"\xf0\x01\n" +
 	"\x19ExpenseTimeMetricResponse\x12#\n" +
 	"\rexpense_total\x18\x01 \x01(\x01R\fexpenseTotal\x12L\n" +
 	"\x04data\x18\x02 \x03(\v28.accounting_iface.v1.ExpenseTimeMetricResponse.DataEntryR\x04data\x1a`\n" +
 	"\tDataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\x03R\x03key\x12=\n" +
-	"\x05value\x18\x02 \x01(\v2'.accounting_iface.v1.KeyValueMetricListR\x05value:\x028\x01\"m\n" +
+	"\x05value\x18\x02 \x01(\v2'.accounting_iface.v1.KeyValueMetricListR\x05value:\x028\x01\"r\n" +
 	"\x1cExpenseOverviewMetricRequest\x12\x17\n" +
-	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x124\n" +
+	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x129\n" +
 	"\n" +
-	"time_range\x18\x02 \x01(\v2\x15.common.v1.TimeFilterR\ttimeRange\"\xf8\x01\n" +
+	"time_range\x18\x02 \x01(\v2\x1a.common.v1.TimeFilterRangeR\ttimeRange\"\xf8\x01\n" +
 	"\x1dExpenseOverviewMetricResponse\x12#\n" +
 	"\rexpense_total\x18\x01 \x01(\x01R\fexpenseTotal\x12o\n" +
 	"\x0fexpense_details\x18\x02 \x03(\v2F.accounting_iface.v1.ExpenseOverviewMetricResponse.ExpenseDetailsEntryR\x0eexpenseDetails\x1aA\n" +
@@ -1020,7 +1021,7 @@ const file_accounting_iface_v1_expense_proto_rawDesc = "" +
 	"\n" +
 	"expense_at\x18\a \x01(\x03R\texpenseAt\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\b \x01(\x03R\tcreatedAt\"\xf7\x01\n" +
+	"created_at\x18\b \x01(\x03R\tcreatedAt\"\x93\x02\n" +
 	"\x14ExpenseCreateRequest\x12\x17\n" +
 	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12\x15\n" +
 	"\x06ref_id\x18\a \x01(\tR\x05refId\x12\x12\n" +
@@ -1028,20 +1029,20 @@ const file_accounting_iface_v1_expense_proto_rawDesc = "" +
 	"\fexpense_type\x18\x03 \x01(\x0e2 .accounting_iface.v1.ExpenseTypeR\vexpenseType\x12\x1f\n" +
 	"\vexpense_key\x18\x04 \x01(\tR\n" +
 	"expenseKey\x12\x16\n" +
-	"\x06amount\x18\x05 \x01(\x01R\x06amount\x12\x1d\n" +
+	"\x06amount\x18\x05 \x01(\x01R\x06amount\x129\n" +
 	"\n" +
-	"expense_at\x18\x06 \x01(\x03R\texpenseAt\"1\n" +
+	"expense_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\texpenseAt\"1\n" +
 	"\x15ExpenseCreateResponse\x12\x18\n" +
-	"\amessage\x18\x01 \x01(\tR\amessage\"\x92\x02\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage\"\x97\x02\n" +
 	"\x12ExpenseListRequest\x12\x17\n" +
 	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12\x1c\n" +
 	"\n" +
 	"by_user_id\x18\x02 \x01(\x04R\bbyUserId\x12C\n" +
 	"\fexpense_type\x18\x05 \x01(\x0e2 .accounting_iface.v1.ExpenseTypeR\vexpenseType\x12\x1f\n" +
 	"\vexpense_key\x18\x06 \x01(\tR\n" +
-	"expenseKey\x124\n" +
+	"expenseKey\x129\n" +
 	"\n" +
-	"time_range\x18\x03 \x01(\v2\x15.common.v1.TimeFilterR\ttimeRange\x12)\n" +
+	"time_range\x18\x03 \x01(\v2\x1a.common.v1.TimeFilterRangeR\ttimeRange\x12)\n" +
 	"\x04page\x18\x04 \x01(\v2\x15.common.v1.PageFilterR\x04page\"\x97\x01\n" +
 	"\x13ExpenseListResponse\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\x124\n" +
@@ -1095,45 +1096,47 @@ var file_accounting_iface_v1_expense_proto_goTypes = []any{
 	nil,                                   // 16: accounting_iface.v1.ExpenseTimeMetricResponse.DataEntry
 	nil,                                   // 17: accounting_iface.v1.ExpenseOverviewMetricResponse.ExpenseDetailsEntry
 	(v1.TimeType)(0),                      // 18: common.v1.TimeType
-	(*v1.TimeFilter)(nil),                 // 19: common.v1.TimeFilter
+	(*v1.TimeFilterRange)(nil),            // 19: common.v1.TimeFilterRange
 	(*v1.KeyName)(nil),                    // 20: common.v1.KeyName
-	(*v1.PageFilter)(nil),                 // 21: common.v1.PageFilter
-	(*v1.PageInfo)(nil),                   // 22: common.v1.PageInfo
+	(*timestamppb.Timestamp)(nil),         // 21: google.protobuf.Timestamp
+	(*v1.PageFilter)(nil),                 // 22: common.v1.PageFilter
+	(*v1.PageInfo)(nil),                   // 23: common.v1.PageInfo
 }
 var file_accounting_iface_v1_expense_proto_depIdxs = []int32{
 	1,  // 0: accounting_iface.v1.KeyValueMetricList.data:type_name -> accounting_iface.v1.KeyValueMetric
 	18, // 1: accounting_iface.v1.ExpenseTimeMetricRequest.time_type:type_name -> common.v1.TimeType
-	19, // 2: accounting_iface.v1.ExpenseTimeMetricRequest.time_range:type_name -> common.v1.TimeFilter
+	19, // 2: accounting_iface.v1.ExpenseTimeMetricRequest.time_range:type_name -> common.v1.TimeFilterRange
 	16, // 3: accounting_iface.v1.ExpenseTimeMetricResponse.data:type_name -> accounting_iface.v1.ExpenseTimeMetricResponse.DataEntry
-	19, // 4: accounting_iface.v1.ExpenseOverviewMetricRequest.time_range:type_name -> common.v1.TimeFilter
+	19, // 4: accounting_iface.v1.ExpenseOverviewMetricRequest.time_range:type_name -> common.v1.TimeFilterRange
 	17, // 5: accounting_iface.v1.ExpenseOverviewMetricResponse.expense_details:type_name -> accounting_iface.v1.ExpenseOverviewMetricResponse.ExpenseDetailsEntry
 	0,  // 6: accounting_iface.v1.ExpenseTypeListRequest.type:type_name -> accounting_iface.v1.ExpenseType
 	20, // 7: accounting_iface.v1.ExpenseTypeListResponse.data:type_name -> common.v1.KeyName
 	0,  // 8: accounting_iface.v1.ExpenseItem.expense_type:type_name -> accounting_iface.v1.ExpenseType
 	0,  // 9: accounting_iface.v1.ExpenseCreateRequest.expense_type:type_name -> accounting_iface.v1.ExpenseType
-	0,  // 10: accounting_iface.v1.ExpenseListRequest.expense_type:type_name -> accounting_iface.v1.ExpenseType
-	19, // 11: accounting_iface.v1.ExpenseListRequest.time_range:type_name -> common.v1.TimeFilter
-	21, // 12: accounting_iface.v1.ExpenseListRequest.page:type_name -> common.v1.PageFilter
-	11, // 13: accounting_iface.v1.ExpenseListResponse.data:type_name -> accounting_iface.v1.ExpenseItem
-	22, // 14: accounting_iface.v1.ExpenseListResponse.page_info:type_name -> common.v1.PageInfo
-	2,  // 15: accounting_iface.v1.ExpenseTimeMetricResponse.DataEntry.value:type_name -> accounting_iface.v1.KeyValueMetricList
-	12, // 16: accounting_iface.v1.ExpenseService.ExpenseCreate:input_type -> accounting_iface.v1.ExpenseCreateRequest
-	14, // 17: accounting_iface.v1.ExpenseService.ExpenseList:input_type -> accounting_iface.v1.ExpenseListRequest
-	9,  // 18: accounting_iface.v1.ExpenseService.ExpenseTypeList:input_type -> accounting_iface.v1.ExpenseTypeListRequest
-	7,  // 19: accounting_iface.v1.ExpenseService.ExpenseSetup:input_type -> accounting_iface.v1.ExpenseSetupRequest
-	5,  // 20: accounting_iface.v1.ExpenseService.ExpenseOverviewMetric:input_type -> accounting_iface.v1.ExpenseOverviewMetricRequest
-	3,  // 21: accounting_iface.v1.ExpenseService.ExpenseTimeMetric:input_type -> accounting_iface.v1.ExpenseTimeMetricRequest
-	13, // 22: accounting_iface.v1.ExpenseService.ExpenseCreate:output_type -> accounting_iface.v1.ExpenseCreateResponse
-	15, // 23: accounting_iface.v1.ExpenseService.ExpenseList:output_type -> accounting_iface.v1.ExpenseListResponse
-	10, // 24: accounting_iface.v1.ExpenseService.ExpenseTypeList:output_type -> accounting_iface.v1.ExpenseTypeListResponse
-	8,  // 25: accounting_iface.v1.ExpenseService.ExpenseSetup:output_type -> accounting_iface.v1.ExpenseSetupResponse
-	6,  // 26: accounting_iface.v1.ExpenseService.ExpenseOverviewMetric:output_type -> accounting_iface.v1.ExpenseOverviewMetricResponse
-	4,  // 27: accounting_iface.v1.ExpenseService.ExpenseTimeMetric:output_type -> accounting_iface.v1.ExpenseTimeMetricResponse
-	22, // [22:28] is the sub-list for method output_type
-	16, // [16:22] is the sub-list for method input_type
-	16, // [16:16] is the sub-list for extension type_name
-	16, // [16:16] is the sub-list for extension extendee
-	0,  // [0:16] is the sub-list for field type_name
+	21, // 10: accounting_iface.v1.ExpenseCreateRequest.expense_at:type_name -> google.protobuf.Timestamp
+	0,  // 11: accounting_iface.v1.ExpenseListRequest.expense_type:type_name -> accounting_iface.v1.ExpenseType
+	19, // 12: accounting_iface.v1.ExpenseListRequest.time_range:type_name -> common.v1.TimeFilterRange
+	22, // 13: accounting_iface.v1.ExpenseListRequest.page:type_name -> common.v1.PageFilter
+	11, // 14: accounting_iface.v1.ExpenseListResponse.data:type_name -> accounting_iface.v1.ExpenseItem
+	23, // 15: accounting_iface.v1.ExpenseListResponse.page_info:type_name -> common.v1.PageInfo
+	2,  // 16: accounting_iface.v1.ExpenseTimeMetricResponse.DataEntry.value:type_name -> accounting_iface.v1.KeyValueMetricList
+	12, // 17: accounting_iface.v1.ExpenseService.ExpenseCreate:input_type -> accounting_iface.v1.ExpenseCreateRequest
+	14, // 18: accounting_iface.v1.ExpenseService.ExpenseList:input_type -> accounting_iface.v1.ExpenseListRequest
+	9,  // 19: accounting_iface.v1.ExpenseService.ExpenseTypeList:input_type -> accounting_iface.v1.ExpenseTypeListRequest
+	7,  // 20: accounting_iface.v1.ExpenseService.ExpenseSetup:input_type -> accounting_iface.v1.ExpenseSetupRequest
+	5,  // 21: accounting_iface.v1.ExpenseService.ExpenseOverviewMetric:input_type -> accounting_iface.v1.ExpenseOverviewMetricRequest
+	3,  // 22: accounting_iface.v1.ExpenseService.ExpenseTimeMetric:input_type -> accounting_iface.v1.ExpenseTimeMetricRequest
+	13, // 23: accounting_iface.v1.ExpenseService.ExpenseCreate:output_type -> accounting_iface.v1.ExpenseCreateResponse
+	15, // 24: accounting_iface.v1.ExpenseService.ExpenseList:output_type -> accounting_iface.v1.ExpenseListResponse
+	10, // 25: accounting_iface.v1.ExpenseService.ExpenseTypeList:output_type -> accounting_iface.v1.ExpenseTypeListResponse
+	8,  // 26: accounting_iface.v1.ExpenseService.ExpenseSetup:output_type -> accounting_iface.v1.ExpenseSetupResponse
+	6,  // 27: accounting_iface.v1.ExpenseService.ExpenseOverviewMetric:output_type -> accounting_iface.v1.ExpenseOverviewMetricResponse
+	4,  // 28: accounting_iface.v1.ExpenseService.ExpenseTimeMetric:output_type -> accounting_iface.v1.ExpenseTimeMetricResponse
+	23, // [23:29] is the sub-list for method output_type
+	17, // [17:23] is the sub-list for method input_type
+	17, // [17:17] is the sub-list for extension type_name
+	17, // [17:17] is the sub-list for extension extendee
+	0,  // [0:17] is the sub-list for field type_name
 }
 
 func init() { file_accounting_iface_v1_expense_proto_init() }
