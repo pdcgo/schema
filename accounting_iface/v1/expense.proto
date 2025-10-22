@@ -1,8 +1,9 @@
 syntax = "proto3";
 package accounting_iface.v1;
 
+import "buf/validate/validate.proto";
 import "common/v1/common.proto";
-import "google/protobuf/timestamp.proto";
+// import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/pdcgo/schema/services/accounting_iface/v1;accounting_iface";
 
@@ -20,7 +21,7 @@ service ExpenseService {
   rpc ExpenseCreate(ExpenseCreateRequest) returns (ExpenseCreateResponse);
   rpc ExpenseList(ExpenseListRequest) returns (ExpenseListResponse);
   rpc ExpenseTypeList(ExpenseTypeListRequest) returns (ExpenseTypeListResponse);
-  rpc ExpenseSetup(ExpenseSetupRequest) returns (ExpenseSetupResponse);
+
   /*
    #### Untuk Metric Overview
   */
@@ -52,13 +53,6 @@ message ExpenseOverviewMetricRequest {
 message ExpenseOverviewMetricResponse {
   double expense_total = 1;
   map<string, double> expense_details = 2;
-}
-
-message ExpenseSetupRequest {
-  uint64 team_id = 1;
-}
-message ExpenseSetupResponse {
-  string message = 1;
 }
 
 enum ExpenseType {
@@ -95,7 +89,11 @@ message ExpenseCreateRequest {
   ExpenseType expense_type = 3;
   string expense_key = 4;
   double amount = 5;
-  google.protobuf.Timestamp expense_at = 6;
+  common.v1.RequestFrom request_from = 8 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+  // google.protobuf.Timestamp expense_at = 6;
 }
 
 message ExpenseCreateResponse {
@@ -109,6 +107,10 @@ message ExpenseListRequest {
   string expense_key = 6;
   common.v1.TimeFilterRange time_range = 3;
   common.v1.PageFilter page = 4;
+  common.v1.RequestFrom request_from = 7 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
 }
 
 message ExpenseListResponse {
