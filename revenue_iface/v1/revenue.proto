@@ -26,7 +26,11 @@ message RevenueStreamEventFund {
 }
 
 message RevenueStreamEventAdjustment {
-  double amount = 1 [(buf.validate.field).double.gt = 0];
+  double amount = 1 [(buf.validate.field).cel = {
+    id: "non_zero_amount"
+    message: "amount cannot be zero"
+    expression: "this != 0.00"
+  }];
   google.protobuf.Timestamp at = 2 [(buf.validate.field).required = true];
   string desc = 3 [(buf.validate.field).required = true];
   string order_id = 4;
