@@ -8,6 +8,7 @@ package accounting_iface
 
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
+	v1 "github.com/pdcgo/schema/services/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -22,6 +23,214 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type AdjustmentItem struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	AccountKey    string                 `protobuf:"bytes,1,opt,name=account_key,json=accountKey,proto3" json:"account_key,omitempty"`
+	TeamId        uint64                 `protobuf:"varint,2,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	Amount        float64                `protobuf:"fixed64,3,opt,name=amount,proto3" json:"amount,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AdjustmentItem) Reset() {
+	*x = AdjustmentItem{}
+	mi := &file_accounting_iface_v1_adjustment_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AdjustmentItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AdjustmentItem) ProtoMessage() {}
+
+func (x *AdjustmentItem) ProtoReflect() protoreflect.Message {
+	mi := &file_accounting_iface_v1_adjustment_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AdjustmentItem.ProtoReflect.Descriptor instead.
+func (*AdjustmentItem) Descriptor() ([]byte, []int) {
+	return file_accounting_iface_v1_adjustment_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *AdjustmentItem) GetAccountKey() string {
+	if x != nil {
+		return x.AccountKey
+	}
+	return ""
+}
+
+func (x *AdjustmentItem) GetTeamId() uint64 {
+	if x != nil {
+		return x.TeamId
+	}
+	return 0
+}
+
+func (x *AdjustmentItem) GetAmount() float64 {
+	if x != nil {
+		return x.Amount
+	}
+	return 0
+}
+
+type AccountAdjustment struct {
+	state         protoimpl.MessageState     `protogen:"open.v1"`
+	Adjs          map[uint64]*AdjustmentItem `protobuf:"bytes,1,rep,name=adjs,proto3" json:"adjs,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Description   string                     `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AccountAdjustment) Reset() {
+	*x = AccountAdjustment{}
+	mi := &file_accounting_iface_v1_adjustment_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AccountAdjustment) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AccountAdjustment) ProtoMessage() {}
+
+func (x *AccountAdjustment) ProtoReflect() protoreflect.Message {
+	mi := &file_accounting_iface_v1_adjustment_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AccountAdjustment.ProtoReflect.Descriptor instead.
+func (*AccountAdjustment) Descriptor() ([]byte, []int) {
+	return file_accounting_iface_v1_adjustment_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *AccountAdjustment) GetAdjs() map[uint64]*AdjustmentItem {
+	if x != nil {
+		return x.Adjs
+	}
+	return nil
+}
+
+func (x *AccountAdjustment) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+type AccountAdjustmentRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	RequestFrom   v1.RequestFrom         `protobuf:"varint,3,opt,name=request_from,json=requestFrom,proto3,enum=common.v1.RequestFrom" json:"request_from,omitempty"`
+	Adjustments   []*AccountAdjustment   `protobuf:"bytes,2,rep,name=adjustments,proto3" json:"adjustments,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AccountAdjustmentRequest) Reset() {
+	*x = AccountAdjustmentRequest{}
+	mi := &file_accounting_iface_v1_adjustment_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AccountAdjustmentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AccountAdjustmentRequest) ProtoMessage() {}
+
+func (x *AccountAdjustmentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_accounting_iface_v1_adjustment_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AccountAdjustmentRequest.ProtoReflect.Descriptor instead.
+func (*AccountAdjustmentRequest) Descriptor() ([]byte, []int) {
+	return file_accounting_iface_v1_adjustment_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *AccountAdjustmentRequest) GetTeamId() uint64 {
+	if x != nil {
+		return x.TeamId
+	}
+	return 0
+}
+
+func (x *AccountAdjustmentRequest) GetRequestFrom() v1.RequestFrom {
+	if x != nil {
+		return x.RequestFrom
+	}
+	return v1.RequestFrom(0)
+}
+
+func (x *AccountAdjustmentRequest) GetAdjustments() []*AccountAdjustment {
+	if x != nil {
+		return x.Adjustments
+	}
+	return nil
+}
+
+type AccountAdjustmentResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AccountAdjustmentResponse) Reset() {
+	*x = AccountAdjustmentResponse{}
+	mi := &file_accounting_iface_v1_adjustment_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AccountAdjustmentResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AccountAdjustmentResponse) ProtoMessage() {}
+
+func (x *AccountAdjustmentResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_accounting_iface_v1_adjustment_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AccountAdjustmentResponse.ProtoReflect.Descriptor instead.
+func (*AccountAdjustmentResponse) Descriptor() ([]byte, []int) {
+	return file_accounting_iface_v1_adjustment_proto_rawDescGZIP(), []int{3}
+}
+
 type AdjEntry struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	AccountId     uint64                 `protobuf:"varint,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
@@ -33,7 +242,7 @@ type AdjEntry struct {
 
 func (x *AdjEntry) Reset() {
 	*x = AdjEntry{}
-	mi := &file_accounting_iface_v1_adjustment_proto_msgTypes[0]
+	mi := &file_accounting_iface_v1_adjustment_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -45,7 +254,7 @@ func (x *AdjEntry) String() string {
 func (*AdjEntry) ProtoMessage() {}
 
 func (x *AdjEntry) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_adjustment_proto_msgTypes[0]
+	mi := &file_accounting_iface_v1_adjustment_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -58,7 +267,7 @@ func (x *AdjEntry) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AdjEntry.ProtoReflect.Descriptor instead.
 func (*AdjEntry) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_adjustment_proto_rawDescGZIP(), []int{0}
+	return file_accounting_iface_v1_adjustment_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *AdjEntry) GetAccountId() uint64 {
@@ -92,7 +301,7 @@ type Bookeeping struct {
 
 func (x *Bookeeping) Reset() {
 	*x = Bookeeping{}
-	mi := &file_accounting_iface_v1_adjustment_proto_msgTypes[1]
+	mi := &file_accounting_iface_v1_adjustment_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -104,7 +313,7 @@ func (x *Bookeeping) String() string {
 func (*Bookeeping) ProtoMessage() {}
 
 func (x *Bookeeping) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_adjustment_proto_msgTypes[1]
+	mi := &file_accounting_iface_v1_adjustment_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -117,7 +326,7 @@ func (x *Bookeeping) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Bookeeping.ProtoReflect.Descriptor instead.
 func (*Bookeeping) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_adjustment_proto_rawDescGZIP(), []int{1}
+	return file_accounting_iface_v1_adjustment_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *Bookeeping) GetTeamId() uint64 {
@@ -144,7 +353,7 @@ type AdjCreateRequest struct {
 
 func (x *AdjCreateRequest) Reset() {
 	*x = AdjCreateRequest{}
-	mi := &file_accounting_iface_v1_adjustment_proto_msgTypes[2]
+	mi := &file_accounting_iface_v1_adjustment_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -156,7 +365,7 @@ func (x *AdjCreateRequest) String() string {
 func (*AdjCreateRequest) ProtoMessage() {}
 
 func (x *AdjCreateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_adjustment_proto_msgTypes[2]
+	mi := &file_accounting_iface_v1_adjustment_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -169,7 +378,7 @@ func (x *AdjCreateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AdjCreateRequest.ProtoReflect.Descriptor instead.
 func (*AdjCreateRequest) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_adjustment_proto_rawDescGZIP(), []int{2}
+	return file_accounting_iface_v1_adjustment_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *AdjCreateRequest) GetDescription() string {
@@ -194,7 +403,7 @@ type AdjCreateResponse struct {
 
 func (x *AdjCreateResponse) Reset() {
 	*x = AdjCreateResponse{}
-	mi := &file_accounting_iface_v1_adjustment_proto_msgTypes[3]
+	mi := &file_accounting_iface_v1_adjustment_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -206,7 +415,7 @@ func (x *AdjCreateResponse) String() string {
 func (*AdjCreateResponse) ProtoMessage() {}
 
 func (x *AdjCreateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_adjustment_proto_msgTypes[3]
+	mi := &file_accounting_iface_v1_adjustment_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -219,14 +428,33 @@ func (x *AdjCreateResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AdjCreateResponse.ProtoReflect.Descriptor instead.
 func (*AdjCreateResponse) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_adjustment_proto_rawDescGZIP(), []int{3}
+	return file_accounting_iface_v1_adjustment_proto_rawDescGZIP(), []int{7}
 }
 
 var File_accounting_iface_v1_adjustment_proto protoreflect.FileDescriptor
 
 const file_accounting_iface_v1_adjustment_proto_rawDesc = "" +
 	"\n" +
-	"$accounting_iface/v1/adjustment.proto\x12\x13accounting_iface.v1\x1a\x1bbuf/validate/validate.proto\"\x8b\x02\n" +
+	"$accounting_iface/v1/adjustment.proto\x12\x13accounting_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\"v\n" +
+	"\x0eAdjustmentItem\x12*\n" +
+	"\vaccount_key\x18\x01 \x01(\tB\t\xbaH\x06r\x04\x10\x01\x18dR\n" +
+	"accountKey\x12 \n" +
+	"\ateam_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12\x16\n" +
+	"\x06amount\x18\x03 \x01(\x01R\x06amount\"\xef\x01\n" +
+	"\x11AccountAdjustment\x12N\n" +
+	"\x04adjs\x18\x01 \x03(\v20.accounting_iface.v1.AccountAdjustment.AdjsEntryB\b\xbaH\x05\x9a\x01\x02\b\x01R\x04adjs\x12,\n" +
+	"\vdescription\x18\x02 \x01(\tB\n" +
+	"\xbaH\ar\x05\x10\x01\x18\x80\bR\vdescription\x1a\\\n" +
+	"\tAdjsEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\x04R\x03key\x129\n" +
+	"\x05value\x18\x02 \x01(\v2#.accounting_iface.v1.AdjustmentItemR\x05value:\x028\x01\"\xd9\x01\n" +
+	"\x18AccountAdjustmentRequest\x12 \n" +
+	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12E\n" +
+	"\frequest_from\x18\x03 \x01(\x0e2\x16.common.v1.RequestFromB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\vrequestFrom\x12T\n" +
+	"\vadjustments\x18\x02 \x03(\v2&.accounting_iface.v1.AccountAdjustmentB\n" +
+	"\xbaH\a\x92\x01\x04\b\x01\x10\x0fR\vadjustments\"\x1b\n" +
+	"\x19AccountAdjustmentResponse\"\x8b\x02\n" +
 	"\bAdjEntry\x12&\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\taccountId\x12$\n" +
@@ -244,8 +472,9 @@ const file_accounting_iface_v1_adjustment_proto_rawDesc = "" +
 	"\x05books\x18\x03 \x03(\v2\x1f.accounting_iface.v1.BookeepingB\n" +
 	"\xbaH\a\x92\x01\x04\b\x01\x10\n" +
 	"R\x05books\"\x13\n" +
-	"\x11AdjCreateResponse2o\n" +
-	"\x11AdjustmentService\x12Z\n" +
+	"\x11AdjCreateResponse2\xe3\x01\n" +
+	"\x11AdjustmentService\x12r\n" +
+	"\x11AccountAdjustment\x12-.accounting_iface.v1.AccountAdjustmentRequest\x1a..accounting_iface.v1.AccountAdjustmentResponse\x12Z\n" +
 	"\tAdjCreate\x12%.accounting_iface.v1.AdjCreateRequest\x1a&.accounting_iface.v1.AdjCreateResponseB\xda\x01\n" +
 	"\x17com.accounting_iface.v1B\x0fAdjustmentProtoP\x01ZEgithub.com/pdcgo/schema/services/accounting_iface/v1;accounting_iface\xa2\x02\x03AXX\xaa\x02\x12AccountingIface.V1\xca\x02\x12AccountingIface\\V1\xe2\x02\x1eAccountingIface\\V1\\GPBMetadata\xea\x02\x13AccountingIface::V1b\x06proto3"
 
@@ -261,23 +490,35 @@ func file_accounting_iface_v1_adjustment_proto_rawDescGZIP() []byte {
 	return file_accounting_iface_v1_adjustment_proto_rawDescData
 }
 
-var file_accounting_iface_v1_adjustment_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_accounting_iface_v1_adjustment_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_accounting_iface_v1_adjustment_proto_goTypes = []any{
-	(*AdjEntry)(nil),          // 0: accounting_iface.v1.AdjEntry
-	(*Bookeeping)(nil),        // 1: accounting_iface.v1.Bookeeping
-	(*AdjCreateRequest)(nil),  // 2: accounting_iface.v1.AdjCreateRequest
-	(*AdjCreateResponse)(nil), // 3: accounting_iface.v1.AdjCreateResponse
+	(*AdjustmentItem)(nil),            // 0: accounting_iface.v1.AdjustmentItem
+	(*AccountAdjustment)(nil),         // 1: accounting_iface.v1.AccountAdjustment
+	(*AccountAdjustmentRequest)(nil),  // 2: accounting_iface.v1.AccountAdjustmentRequest
+	(*AccountAdjustmentResponse)(nil), // 3: accounting_iface.v1.AccountAdjustmentResponse
+	(*AdjEntry)(nil),                  // 4: accounting_iface.v1.AdjEntry
+	(*Bookeeping)(nil),                // 5: accounting_iface.v1.Bookeeping
+	(*AdjCreateRequest)(nil),          // 6: accounting_iface.v1.AdjCreateRequest
+	(*AdjCreateResponse)(nil),         // 7: accounting_iface.v1.AdjCreateResponse
+	nil,                               // 8: accounting_iface.v1.AccountAdjustment.AdjsEntry
+	(v1.RequestFrom)(0),               // 9: common.v1.RequestFrom
 }
 var file_accounting_iface_v1_adjustment_proto_depIdxs = []int32{
-	0, // 0: accounting_iface.v1.Bookeeping.entries:type_name -> accounting_iface.v1.AdjEntry
-	1, // 1: accounting_iface.v1.AdjCreateRequest.books:type_name -> accounting_iface.v1.Bookeeping
-	2, // 2: accounting_iface.v1.AdjustmentService.AdjCreate:input_type -> accounting_iface.v1.AdjCreateRequest
-	3, // 3: accounting_iface.v1.AdjustmentService.AdjCreate:output_type -> accounting_iface.v1.AdjCreateResponse
-	3, // [3:4] is the sub-list for method output_type
-	2, // [2:3] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	8, // 0: accounting_iface.v1.AccountAdjustment.adjs:type_name -> accounting_iface.v1.AccountAdjustment.AdjsEntry
+	9, // 1: accounting_iface.v1.AccountAdjustmentRequest.request_from:type_name -> common.v1.RequestFrom
+	1, // 2: accounting_iface.v1.AccountAdjustmentRequest.adjustments:type_name -> accounting_iface.v1.AccountAdjustment
+	4, // 3: accounting_iface.v1.Bookeeping.entries:type_name -> accounting_iface.v1.AdjEntry
+	5, // 4: accounting_iface.v1.AdjCreateRequest.books:type_name -> accounting_iface.v1.Bookeeping
+	0, // 5: accounting_iface.v1.AccountAdjustment.AdjsEntry.value:type_name -> accounting_iface.v1.AdjustmentItem
+	2, // 6: accounting_iface.v1.AdjustmentService.AccountAdjustment:input_type -> accounting_iface.v1.AccountAdjustmentRequest
+	6, // 7: accounting_iface.v1.AdjustmentService.AdjCreate:input_type -> accounting_iface.v1.AdjCreateRequest
+	3, // 8: accounting_iface.v1.AdjustmentService.AccountAdjustment:output_type -> accounting_iface.v1.AccountAdjustmentResponse
+	7, // 9: accounting_iface.v1.AdjustmentService.AdjCreate:output_type -> accounting_iface.v1.AdjCreateResponse
+	8, // [8:10] is the sub-list for method output_type
+	6, // [6:8] is the sub-list for method input_type
+	6, // [6:6] is the sub-list for extension type_name
+	6, // [6:6] is the sub-list for extension extendee
+	0, // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_accounting_iface_v1_adjustment_proto_init() }
@@ -291,7 +532,7 @@ func file_accounting_iface_v1_adjustment_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_accounting_iface_v1_adjustment_proto_rawDesc), len(file_accounting_iface_v1_adjustment_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

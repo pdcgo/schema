@@ -2,12 +2,44 @@ syntax = "proto3";
 package accounting_iface.v1;
 
 import "buf/validate/validate.proto";
+import "common/v1/common.proto";
 
 option go_package = "github.com/pdcgo/schema/services/accounting_iface/v1;accounting_iface";
 
 service AdjustmentService {
+  rpc AccountAdjustment(AccountAdjustmentRequest) returns (AccountAdjustmentResponse);
   rpc AdjCreate(AdjCreateRequest) returns (AdjCreateResponse);
 }
+
+message AdjustmentItem {
+  string account_key = 1 [
+    (buf.validate.field).string.min_len = 1,
+    (buf.validate.field).string.max_len = 100
+  ];
+  uint64 team_id = 2 [(buf.validate.field).uint64.gt = 0];
+  double amount = 3;
+}
+
+message AccountAdjustment {
+  map<uint64, AdjustmentItem> adjs = 1 [(buf.validate.field).map.min_pairs = 1];
+  string description = 2 [
+    (buf.validate.field).string.min_len = 1,
+    (buf.validate.field).string.max_len = 1024
+  ];
+}
+
+message AccountAdjustmentRequest {
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  common.v1.RequestFrom request_from = 3 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+  repeated AccountAdjustment adjustments = 2 [
+    (buf.validate.field).repeated.min_items = 1,
+    (buf.validate.field).repeated.max_items = 15
+  ];
+}
+message AccountAdjustmentResponse {}
 
 message AdjEntry {
   uint64 account_id = 1 [(buf.validate.field).uint64.gt = 0];

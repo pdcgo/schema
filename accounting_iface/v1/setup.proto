@@ -7,9 +7,17 @@ import "buf/validate/validate.proto";
 option go_package = "github.com/pdcgo/schema/services/accounting_iface/v1;accounting_iface";
 
 service AccountingSetupService {
+  // rpc SystemSetup(SystemSetupRequest) returns (SystemSetupResponse);
   rpc Setup(SetupRequest) returns (stream SetupResponse);
   rpc RecalculateDaily(RecalculateDailyRequest) returns (stream RecalculateDailyResponse);
 }
+
+// message SystemSetupRequest {
+
+// }
+// message SystemSetupResponse {
+//   string message = 1;
+// }
 
 message RecalculateDailyRequest {}
 

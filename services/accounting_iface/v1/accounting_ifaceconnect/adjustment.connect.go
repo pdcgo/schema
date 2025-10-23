@@ -33,6 +33,9 @@ const (
 // reflection-formatted method names, remove the leading slash and convert the remaining slash to a
 // period.
 const (
+	// AdjustmentServiceAccountAdjustmentProcedure is the fully-qualified name of the
+	// AdjustmentService's AccountAdjustment RPC.
+	AdjustmentServiceAccountAdjustmentProcedure = "/accounting_iface.v1.AdjustmentService/AccountAdjustment"
 	// AdjustmentServiceAdjCreateProcedure is the fully-qualified name of the AdjustmentService's
 	// AdjCreate RPC.
 	AdjustmentServiceAdjCreateProcedure = "/accounting_iface.v1.AdjustmentService/AdjCreate"
@@ -40,6 +43,7 @@ const (
 
 // AdjustmentServiceClient is a client for the accounting_iface.v1.AdjustmentService service.
 type AdjustmentServiceClient interface {
+	AccountAdjustment(context.Context, *connect.Request[v1.AccountAdjustmentRequest]) (*connect.Response[v1.AccountAdjustmentResponse], error)
 	AdjCreate(context.Context, *connect.Request[v1.AdjCreateRequest]) (*connect.Response[v1.AdjCreateResponse], error)
 }
 
@@ -54,6 +58,12 @@ func NewAdjustmentServiceClient(httpClient connect.HTTPClient, baseURL string, o
 	baseURL = strings.TrimRight(baseURL, "/")
 	adjustmentServiceMethods := v1.File_accounting_iface_v1_adjustment_proto.Services().ByName("AdjustmentService").Methods()
 	return &adjustmentServiceClient{
+		accountAdjustment: connect.NewClient[v1.AccountAdjustmentRequest, v1.AccountAdjustmentResponse](
+			httpClient,
+			baseURL+AdjustmentServiceAccountAdjustmentProcedure,
+			connect.WithSchema(adjustmentServiceMethods.ByName("AccountAdjustment")),
+			connect.WithClientOptions(opts...),
+		),
 		adjCreate: connect.NewClient[v1.AdjCreateRequest, v1.AdjCreateResponse](
 			httpClient,
 			baseURL+AdjustmentServiceAdjCreateProcedure,
@@ -65,7 +75,13 @@ func NewAdjustmentServiceClient(httpClient connect.HTTPClient, baseURL string, o
 
 // adjustmentServiceClient implements AdjustmentServiceClient.
 type adjustmentServiceClient struct {
-	adjCreate *connect.Client[v1.AdjCreateRequest, v1.AdjCreateResponse]
+	accountAdjustment *connect.Client[v1.AccountAdjustmentRequest, v1.AccountAdjustmentResponse]
+	adjCreate         *connect.Client[v1.AdjCreateRequest, v1.AdjCreateResponse]
+}
+
+// AccountAdjustment calls accounting_iface.v1.AdjustmentService.AccountAdjustment.
+func (c *adjustmentServiceClient) AccountAdjustment(ctx context.Context, req *connect.Request[v1.AccountAdjustmentRequest]) (*connect.Response[v1.AccountAdjustmentResponse], error) {
+	return c.accountAdjustment.CallUnary(ctx, req)
 }
 
 // AdjCreate calls accounting_iface.v1.AdjustmentService.AdjCreate.
@@ -76,6 +92,7 @@ func (c *adjustmentServiceClient) AdjCreate(ctx context.Context, req *connect.Re
 // AdjustmentServiceHandler is an implementation of the accounting_iface.v1.AdjustmentService
 // service.
 type AdjustmentServiceHandler interface {
+	AccountAdjustment(context.Context, *connect.Request[v1.AccountAdjustmentRequest]) (*connect.Response[v1.AccountAdjustmentResponse], error)
 	AdjCreate(context.Context, *connect.Request[v1.AdjCreateRequest]) (*connect.Response[v1.AdjCreateResponse], error)
 }
 
@@ -86,6 +103,12 @@ type AdjustmentServiceHandler interface {
 // and JSON codecs. They also support gzip compression.
 func NewAdjustmentServiceHandler(svc AdjustmentServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
 	adjustmentServiceMethods := v1.File_accounting_iface_v1_adjustment_proto.Services().ByName("AdjustmentService").Methods()
+	adjustmentServiceAccountAdjustmentHandler := connect.NewUnaryHandler(
+		AdjustmentServiceAccountAdjustmentProcedure,
+		svc.AccountAdjustment,
+		connect.WithSchema(adjustmentServiceMethods.ByName("AccountAdjustment")),
+		connect.WithHandlerOptions(opts...),
+	)
 	adjustmentServiceAdjCreateHandler := connect.NewUnaryHandler(
 		AdjustmentServiceAdjCreateProcedure,
 		svc.AdjCreate,
@@ -94,6 +117,8 @@ func NewAdjustmentServiceHandler(svc AdjustmentServiceHandler, opts ...connect.H
 	)
 	return "/accounting_iface.v1.AdjustmentService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
+		case AdjustmentServiceAccountAdjustmentProcedure:
+			adjustmentServiceAccountAdjustmentHandler.ServeHTTP(w, r)
 		case AdjustmentServiceAdjCreateProcedure:
 			adjustmentServiceAdjCreateHandler.ServeHTTP(w, r)
 		default:
@@ -104,6 +129,10 @@ func NewAdjustmentServiceHandler(svc AdjustmentServiceHandler, opts ...connect.H
 
 // UnimplementedAdjustmentServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedAdjustmentServiceHandler struct{}
+
+func (UnimplementedAdjustmentServiceHandler) AccountAdjustment(context.Context, *connect.Request[v1.AccountAdjustmentRequest]) (*connect.Response[v1.AccountAdjustmentResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("accounting_iface.v1.AdjustmentService.AccountAdjustment is not implemented"))
+}
 
 func (UnimplementedAdjustmentServiceHandler) AdjCreate(context.Context, *connect.Request[v1.AdjCreateRequest]) (*connect.Response[v1.AdjCreateResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("accounting_iface.v1.AdjustmentService.AdjCreate is not implemented"))

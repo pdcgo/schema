@@ -49,6 +49,7 @@ const (
 // AccountingSetupServiceClient is a client for the accounting_iface.v1.AccountingSetupService
 // service.
 type AccountingSetupServiceClient interface {
+	// rpc SystemSetup(SystemSetupRequest) returns (SystemSetupResponse);
 	Setup(context.Context, *connect.Request[v1.SetupRequest]) (*connect.ServerStreamForClient[v1.SetupResponse], error)
 	RecalculateDaily(context.Context, *connect.Request[v1.RecalculateDailyRequest]) (*connect.ServerStreamForClient[v1.RecalculateDailyResponse], error)
 }
@@ -98,6 +99,7 @@ func (c *accountingSetupServiceClient) RecalculateDaily(ctx context.Context, req
 // AccountingSetupServiceHandler is an implementation of the
 // accounting_iface.v1.AccountingSetupService service.
 type AccountingSetupServiceHandler interface {
+	// rpc SystemSetup(SystemSetupRequest) returns (SystemSetupResponse);
 	Setup(context.Context, *connect.Request[v1.SetupRequest], *connect.ServerStream[v1.SetupResponse]) error
 	RecalculateDaily(context.Context, *connect.Request[v1.RecalculateDailyRequest], *connect.ServerStream[v1.RecalculateDailyResponse]) error
 }
