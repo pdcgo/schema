@@ -602,7 +602,6 @@ func (x *ExpenseItem) GetCreatedAt() int64 {
 type ExpenseCreateRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
-	RefId         string                 `protobuf:"bytes,7,opt,name=ref_id,json=refId,proto3" json:"ref_id,omitempty"`
 	Desc          string                 `protobuf:"bytes,2,opt,name=desc,proto3" json:"desc,omitempty"`
 	ExpenseType   ExpenseType            `protobuf:"varint,3,opt,name=expense_type,json=expenseType,proto3,enum=accounting_iface.v1.ExpenseType" json:"expense_type,omitempty"`
 	ExpenseKey    string                 `protobuf:"bytes,4,opt,name=expense_key,json=expenseKey,proto3" json:"expense_key,omitempty"`
@@ -647,13 +646,6 @@ func (x *ExpenseCreateRequest) GetTeamId() uint64 {
 		return x.TeamId
 	}
 	return 0
-}
-
-func (x *ExpenseCreateRequest) GetRefId() string {
-	if x != nil {
-		return x.RefId
-	}
-	return ""
 }
 
 func (x *ExpenseCreateRequest) GetDesc() string {
@@ -937,10 +929,9 @@ const file_accounting_iface_v1_expense_proto_rawDesc = "" +
 	"\n" +
 	"expense_at\x18\a \x01(\x03R\texpenseAt\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\b \x01(\x03R\tcreatedAt\"\x9f\x02\n" +
+	"created_at\x18\b \x01(\x03R\tcreatedAt\"\x88\x02\n" +
 	"\x14ExpenseCreateRequest\x12\x17\n" +
-	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12\x15\n" +
-	"\x06ref_id\x18\a \x01(\tR\x05refId\x12\x12\n" +
+	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12\x12\n" +
 	"\x04desc\x18\x02 \x01(\tR\x04desc\x12C\n" +
 	"\fexpense_type\x18\x03 \x01(\x0e2 .accounting_iface.v1.ExpenseTypeR\vexpenseType\x12\x1f\n" +
 	"\vexpense_key\x18\x04 \x01(\tR\n" +

@@ -84,7 +84,6 @@ message ExpenseItem {
 
 message ExpenseCreateRequest {
   uint64 team_id = 1;
-  string ref_id = 7;
   string desc = 2;
   ExpenseType expense_type = 3;
   string expense_key = 4;
