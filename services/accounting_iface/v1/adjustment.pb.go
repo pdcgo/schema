@@ -26,8 +26,9 @@ const (
 type AdjustmentItem struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	AccountKey    string                 `protobuf:"bytes,1,opt,name=account_key,json=accountKey,proto3" json:"account_key,omitempty"`
-	TeamId        uint64                 `protobuf:"varint,2,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
-	Amount        float64                `protobuf:"fixed64,3,opt,name=amount,proto3" json:"amount,omitempty"`
+	BookeepingId  uint64                 `protobuf:"varint,2,opt,name=bookeeping_id,json=bookeepingId,proto3" json:"bookeeping_id,omitempty"`
+	TeamId        uint64                 `protobuf:"varint,3,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	Amount        float64                `protobuf:"fixed64,4,opt,name=amount,proto3" json:"amount,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -69,6 +70,13 @@ func (x *AdjustmentItem) GetAccountKey() string {
 	return ""
 }
 
+func (x *AdjustmentItem) GetBookeepingId() uint64 {
+	if x != nil {
+		return x.BookeepingId
+	}
+	return 0
+}
+
 func (x *AdjustmentItem) GetTeamId() uint64 {
 	if x != nil {
 		return x.TeamId
@@ -84,9 +92,9 @@ func (x *AdjustmentItem) GetAmount() float64 {
 }
 
 type AccountAdjustment struct {
-	state         protoimpl.MessageState     `protogen:"open.v1"`
-	Adjs          map[uint64]*AdjustmentItem `protobuf:"bytes,1,rep,name=adjs,proto3" json:"adjs,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	Description   string                     `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Adjs          []*AdjustmentItem      `protobuf:"bytes,1,rep,name=adjs,proto3" json:"adjs,omitempty"`
+	Description   string                 `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -121,7 +129,7 @@ func (*AccountAdjustment) Descriptor() ([]byte, []int) {
 	return file_accounting_iface_v1_adjustment_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *AccountAdjustment) GetAdjs() map[uint64]*AdjustmentItem {
+func (x *AccountAdjustment) GetAdjs() []*AdjustmentItem {
 	if x != nil {
 		return x.Adjs
 	}
@@ -435,19 +443,18 @@ var File_accounting_iface_v1_adjustment_proto protoreflect.FileDescriptor
 
 const file_accounting_iface_v1_adjustment_proto_rawDesc = "" +
 	"\n" +
-	"$accounting_iface/v1/adjustment.proto\x12\x13accounting_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\"v\n" +
+	"$accounting_iface/v1/adjustment.proto\x12\x13accounting_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\"\xa4\x01\n" +
 	"\x0eAdjustmentItem\x12*\n" +
 	"\vaccount_key\x18\x01 \x01(\tB\t\xbaH\x06r\x04\x10\x01\x18dR\n" +
-	"accountKey\x12 \n" +
-	"\ateam_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12\x16\n" +
-	"\x06amount\x18\x03 \x01(\x01R\x06amount\"\xef\x01\n" +
-	"\x11AccountAdjustment\x12N\n" +
-	"\x04adjs\x18\x01 \x03(\v20.accounting_iface.v1.AccountAdjustment.AdjsEntryB\b\xbaH\x05\x9a\x01\x02\b\x01R\x04adjs\x12,\n" +
+	"accountKey\x12,\n" +
+	"\rbookeeping_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\fbookeepingId\x12 \n" +
+	"\ateam_id\x18\x03 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12\x16\n" +
+	"\x06amount\x18\x04 \x01(\x01R\x06amount\"\x86\x01\n" +
+	"\x11AccountAdjustment\x12C\n" +
+	"\x04adjs\x18\x01 \x03(\v2#.accounting_iface.v1.AdjustmentItemB\n" +
+	"\xbaH\a\x92\x01\x04\b\x01\x100R\x04adjs\x12,\n" +
 	"\vdescription\x18\x02 \x01(\tB\n" +
-	"\xbaH\ar\x05\x10\x01\x18\x80\bR\vdescription\x1a\\\n" +
-	"\tAdjsEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\x04R\x03key\x129\n" +
-	"\x05value\x18\x02 \x01(\v2#.accounting_iface.v1.AdjustmentItemR\x05value:\x028\x01\"\xd9\x01\n" +
+	"\xbaH\ar\x05\x10\x01\x18\x80\bR\vdescription\"\xd9\x01\n" +
 	"\x18AccountAdjustmentRequest\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12E\n" +
 	"\frequest_from\x18\x03 \x01(\x0e2\x16.common.v1.RequestFromB\n" +
@@ -490,7 +497,7 @@ func file_accounting_iface_v1_adjustment_proto_rawDescGZIP() []byte {
 	return file_accounting_iface_v1_adjustment_proto_rawDescData
 }
 
-var file_accounting_iface_v1_adjustment_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_accounting_iface_v1_adjustment_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_accounting_iface_v1_adjustment_proto_goTypes = []any{
 	(*AdjustmentItem)(nil),            // 0: accounting_iface.v1.AdjustmentItem
 	(*AccountAdjustment)(nil),         // 1: accounting_iface.v1.AccountAdjustment
@@ -500,25 +507,23 @@ var file_accounting_iface_v1_adjustment_proto_goTypes = []any{
 	(*Bookeeping)(nil),                // 5: accounting_iface.v1.Bookeeping
 	(*AdjCreateRequest)(nil),          // 6: accounting_iface.v1.AdjCreateRequest
 	(*AdjCreateResponse)(nil),         // 7: accounting_iface.v1.AdjCreateResponse
-	nil,                               // 8: accounting_iface.v1.AccountAdjustment.AdjsEntry
-	(v1.RequestFrom)(0),               // 9: common.v1.RequestFrom
+	(v1.RequestFrom)(0),               // 8: common.v1.RequestFrom
 }
 var file_accounting_iface_v1_adjustment_proto_depIdxs = []int32{
-	8, // 0: accounting_iface.v1.AccountAdjustment.adjs:type_name -> accounting_iface.v1.AccountAdjustment.AdjsEntry
-	9, // 1: accounting_iface.v1.AccountAdjustmentRequest.request_from:type_name -> common.v1.RequestFrom
+	0, // 0: accounting_iface.v1.AccountAdjustment.adjs:type_name -> accounting_iface.v1.AdjustmentItem
+	8, // 1: accounting_iface.v1.AccountAdjustmentRequest.request_from:type_name -> common.v1.RequestFrom
 	1, // 2: accounting_iface.v1.AccountAdjustmentRequest.adjustments:type_name -> accounting_iface.v1.AccountAdjustment
 	4, // 3: accounting_iface.v1.Bookeeping.entries:type_name -> accounting_iface.v1.AdjEntry
 	5, // 4: accounting_iface.v1.AdjCreateRequest.books:type_name -> accounting_iface.v1.Bookeeping
-	0, // 5: accounting_iface.v1.AccountAdjustment.AdjsEntry.value:type_name -> accounting_iface.v1.AdjustmentItem
-	2, // 6: accounting_iface.v1.AdjustmentService.AccountAdjustment:input_type -> accounting_iface.v1.AccountAdjustmentRequest
-	6, // 7: accounting_iface.v1.AdjustmentService.AdjCreate:input_type -> accounting_iface.v1.AdjCreateRequest
-	3, // 8: accounting_iface.v1.AdjustmentService.AccountAdjustment:output_type -> accounting_iface.v1.AccountAdjustmentResponse
-	7, // 9: accounting_iface.v1.AdjustmentService.AdjCreate:output_type -> accounting_iface.v1.AdjCreateResponse
-	8, // [8:10] is the sub-list for method output_type
-	6, // [6:8] is the sub-list for method input_type
-	6, // [6:6] is the sub-list for extension type_name
-	6, // [6:6] is the sub-list for extension extendee
-	0, // [0:6] is the sub-list for field type_name
+	2, // 5: accounting_iface.v1.AdjustmentService.AccountAdjustment:input_type -> accounting_iface.v1.AccountAdjustmentRequest
+	6, // 6: accounting_iface.v1.AdjustmentService.AdjCreate:input_type -> accounting_iface.v1.AdjCreateRequest
+	3, // 7: accounting_iface.v1.AdjustmentService.AccountAdjustment:output_type -> accounting_iface.v1.AccountAdjustmentResponse
+	7, // 8: accounting_iface.v1.AdjustmentService.AdjCreate:output_type -> accounting_iface.v1.AdjCreateResponse
+	7, // [7:9] is the sub-list for method output_type
+	5, // [5:7] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_accounting_iface_v1_adjustment_proto_init() }
@@ -532,7 +537,7 @@ func file_accounting_iface_v1_adjustment_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_accounting_iface_v1_adjustment_proto_rawDesc), len(file_accounting_iface_v1_adjustment_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
