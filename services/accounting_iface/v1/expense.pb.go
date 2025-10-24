@@ -492,16 +492,16 @@ func (x *ExpenseTypeListResponse) GetData() []*v1.KeyName {
 }
 
 type ExpenseItem struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	TeamId        uint64                 `protobuf:"varint,2,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
-	CreatedById   uint64                 `protobuf:"varint,3,opt,name=created_by_id,json=createdById,proto3" json:"created_by_id,omitempty"`
-	Desc          string                 `protobuf:"bytes,4,opt,name=desc,proto3" json:"desc,omitempty"`
-	ExpenseType   ExpenseType            `protobuf:"varint,5,opt,name=expense_type,json=expenseType,proto3,enum=accounting_iface.v1.ExpenseType" json:"expense_type,omitempty"`
-	ExpenseKey    string                 `protobuf:"bytes,9,opt,name=expense_key,json=expenseKey,proto3" json:"expense_key,omitempty"`
-	Amount        float64                `protobuf:"fixed64,6,opt,name=amount,proto3" json:"amount,omitempty"`
-	ExpenseAt     int64                  `protobuf:"varint,7,opt,name=expense_at,json=expenseAt,proto3" json:"expense_at,omitempty"`
-	CreatedAt     int64                  `protobuf:"varint,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	state       protoimpl.MessageState `protogen:"open.v1"`
+	Id          uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	TeamId      uint64                 `protobuf:"varint,2,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	CreatedById uint64                 `protobuf:"varint,3,opt,name=created_by_id,json=createdById,proto3" json:"created_by_id,omitempty"`
+	Desc        string                 `protobuf:"bytes,4,opt,name=desc,proto3" json:"desc,omitempty"`
+	ExpenseType ExpenseType            `protobuf:"varint,5,opt,name=expense_type,json=expenseType,proto3,enum=accounting_iface.v1.ExpenseType" json:"expense_type,omitempty"`
+	ExpenseKey  string                 `protobuf:"bytes,9,opt,name=expense_key,json=expenseKey,proto3" json:"expense_key,omitempty"`
+	Amount      float64                `protobuf:"fixed64,6,opt,name=amount,proto3" json:"amount,omitempty"`
+	// int64 expense_at = 7;
+	CreatedAt     int64 `protobuf:"varint,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -581,13 +581,6 @@ func (x *ExpenseItem) GetExpenseKey() string {
 func (x *ExpenseItem) GetAmount() float64 {
 	if x != nil {
 		return x.Amount
-	}
-	return 0
-}
-
-func (x *ExpenseItem) GetExpenseAt() int64 {
-	if x != nil {
-		return x.ExpenseAt
 	}
 	return 0
 }
@@ -916,7 +909,7 @@ const file_accounting_iface_v1_expense_proto_rawDesc = "" +
 	"\x04type\x18\x01 \x01(\x0e2 .accounting_iface.v1.ExpenseTypeR\x04type\"[\n" +
 	"\x17ExpenseTypeListResponse\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\x12&\n" +
-	"\x04data\x18\x02 \x03(\v2\x12.common.v1.KeyNameR\x04data\"\xaa\x02\n" +
+	"\x04data\x18\x02 \x03(\v2\x12.common.v1.KeyNameR\x04data\"\x8b\x02\n" +
 	"\vExpenseItem\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x17\n" +
 	"\ateam_id\x18\x02 \x01(\x04R\x06teamId\x12\"\n" +
@@ -926,8 +919,6 @@ const file_accounting_iface_v1_expense_proto_rawDesc = "" +
 	"\vexpense_key\x18\t \x01(\tR\n" +
 	"expenseKey\x12\x16\n" +
 	"\x06amount\x18\x06 \x01(\x01R\x06amount\x12\x1d\n" +
-	"\n" +
-	"expense_at\x18\a \x01(\x03R\texpenseAt\x12\x1d\n" +
 	"\n" +
 	"created_at\x18\b \x01(\x03R\tcreatedAt\"\x88\x02\n" +
 	"\x14ExpenseCreateRequest\x12\x17\n" +
