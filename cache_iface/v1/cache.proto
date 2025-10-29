@@ -33,6 +33,7 @@ message GetRequest {
 }
 message GetResponse {
   bytes value = 1;
+  bool missed = 2;
 }
 
 message DeleteRequest {

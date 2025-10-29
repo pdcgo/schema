@@ -262,6 +262,7 @@ func (x *GetRequest) GetKey() string {
 type GetResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Value         []byte                 `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
+	Missed        bool                   `protobuf:"varint,2,opt,name=missed,proto3" json:"missed,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -301,6 +302,13 @@ func (x *GetResponse) GetValue() []byte {
 		return x.Value
 	}
 	return nil
+}
+
+func (x *GetResponse) GetMissed() bool {
+	if x != nil {
+		return x.Missed
+	}
+	return false
 }
 
 type DeleteRequest struct {
@@ -481,9 +489,10 @@ const file_cache_iface_v1_cache_proto_rawDesc = "" +
 	"\x0fReplaceResponse\"&\n" +
 	"\n" +
 	"GetRequest\x12\x18\n" +
-	"\x03key\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\x03key\"#\n" +
+	"\x03key\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\x03key\";\n" +
 	"\vGetResponse\x12\x14\n" +
-	"\x05value\x18\x01 \x01(\fR\x05value\")\n" +
+	"\x05value\x18\x01 \x01(\fR\x05value\x12\x16\n" +
+	"\x06missed\x18\x02 \x01(\bR\x06missed\")\n" +
 	"\rDeleteRequest\x12\x18\n" +
 	"\x03key\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\x03key\"\x10\n" +
 	"\x0eDeleteResponse\",\n" +
