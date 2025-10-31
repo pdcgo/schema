@@ -1,0 +1,42 @@
+syntax = "proto3";
+package accounting_iface.v1;
+
+import "buf/validate/validate.proto";
+import "common/v1/common.proto";
+
+option go_package = "github.com/pdcgo/schema/services/accounting_iface/v1;accounting_iface";
+
+service TransferService {
+  rpc TransferTeam(TransferTeamRequest) returns (TransferTeamResponse);
+  rpc TransferList(TransferListRequest) returns (TransferListResponse);
+}
+
+message TransferTeamRequest {
+  uint64 from_team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 to_team_id = 2 [(buf.validate.field).uint64.gt = 0];
+  double fee_amount = 3;
+
+  double amount = 4 [(buf.validate.field).double = {
+    gt: 0
+    lt: 1000000000
+  }];
+  string desc = 5 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 200
+  }];
+}
+
+message TransferTeamResponse {}
+
+message TransferListRequest {
+  common.v1.TimeFilterRange time_range = 3;
+  common.v1.PageFilter page = 4;
+  common.v1.RequestFrom request_from = 7 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+}
+
+message TransferListResponse {
+  common.v1.PageInfo page_info = 3;
+}
