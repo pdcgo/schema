@@ -217,6 +217,7 @@ func (x *HelloRequest) GetName() string {
 type HelloResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Message       string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
+	Source        *RequestSource         `protobuf:"bytes,2,opt,name=source,proto3" json:"source,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -258,6 +259,13 @@ func (x *HelloResponse) GetMessage() string {
 	return ""
 }
 
+func (x *HelloResponse) GetSource() *RequestSource {
+	if x != nil {
+		return x.Source
+	}
+	return nil
+}
+
 var File_access_iface_v1_api_proto protoreflect.FileDescriptor
 
 const file_access_iface_v1_api_proto_rawDesc = "" +
@@ -270,9 +278,10 @@ const file_access_iface_v1_api_proto_rawDesc = "" +
 	"\x12RequestSourceError\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\"\"\n" +
 	"\fHelloRequest\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\")\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"a\n" +
 	"\rHelloResponse\x12\x18\n" +
-	"\amessage\x18\x01 \x01(\tR\amessage*y\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage\x126\n" +
+	"\x06source\x18\x02 \x01(\v2\x1e.access_iface.v1.RequestSourceR\x06source*y\n" +
 	"\vRequestFrom\x12\x1c\n" +
 	"\x18REQUEST_FROM_UNSPECIFIED\x10\x00\x12\x18\n" +
 	"\x14REQUEST_FROM_SELLING\x10\x01\x12\x16\n" +
@@ -305,13 +314,14 @@ var file_access_iface_v1_api_proto_goTypes = []any{
 }
 var file_access_iface_v1_api_proto_depIdxs = []int32{
 	0, // 0: access_iface.v1.RequestSource.request_from:type_name -> access_iface.v1.RequestFrom
-	3, // 1: access_iface.v1.HelloService.Hello:input_type -> access_iface.v1.HelloRequest
-	4, // 2: access_iface.v1.HelloService.Hello:output_type -> access_iface.v1.HelloResponse
-	2, // [2:3] is the sub-list for method output_type
-	1, // [1:2] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	1, // 1: access_iface.v1.HelloResponse.source:type_name -> access_iface.v1.RequestSource
+	3, // 2: access_iface.v1.HelloService.Hello:input_type -> access_iface.v1.HelloRequest
+	4, // 3: access_iface.v1.HelloService.Hello:output_type -> access_iface.v1.HelloResponse
+	3, // [3:4] is the sub-list for method output_type
+	2, // [2:3] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_access_iface_v1_api_proto_init() }
