@@ -29,6 +29,7 @@ const (
 	RequestFrom_REQUEST_FROM_SELLING     RequestFrom = 1
 	RequestFrom_REQUEST_FROM_ADMIN       RequestFrom = 2
 	RequestFrom_REQUEST_FROM_WAREHOUSE   RequestFrom = 3
+	RequestFrom_REQUEST_FROM_SYSTEM      RequestFrom = 4
 )
 
 // Enum value maps for RequestFrom.
@@ -38,12 +39,14 @@ var (
 		1: "REQUEST_FROM_SELLING",
 		2: "REQUEST_FROM_ADMIN",
 		3: "REQUEST_FROM_WAREHOUSE",
+		4: "REQUEST_FROM_SYSTEM",
 	}
 	RequestFrom_value = map[string]int32{
 		"REQUEST_FROM_UNSPECIFIED": 0,
 		"REQUEST_FROM_SELLING":     1,
 		"REQUEST_FROM_ADMIN":       2,
 		"REQUEST_FROM_WAREHOUSE":   3,
+		"REQUEST_FROM_SYSTEM":      4,
 	}
 )
 
@@ -281,12 +284,13 @@ const file_access_iface_v1_api_proto_rawDesc = "" +
 	"\x04name\x18\x01 \x01(\tR\x04name\"a\n" +
 	"\rHelloResponse\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\x126\n" +
-	"\x06source\x18\x02 \x01(\v2\x1e.access_iface.v1.RequestSourceR\x06source*y\n" +
+	"\x06source\x18\x02 \x01(\v2\x1e.access_iface.v1.RequestSourceR\x06source*\x92\x01\n" +
 	"\vRequestFrom\x12\x1c\n" +
 	"\x18REQUEST_FROM_UNSPECIFIED\x10\x00\x12\x18\n" +
 	"\x14REQUEST_FROM_SELLING\x10\x01\x12\x16\n" +
 	"\x12REQUEST_FROM_ADMIN\x10\x02\x12\x1a\n" +
-	"\x16REQUEST_FROM_WAREHOUSE\x10\x032V\n" +
+	"\x16REQUEST_FROM_WAREHOUSE\x10\x03\x12\x17\n" +
+	"\x13REQUEST_FROM_SYSTEM\x10\x042V\n" +
 	"\fHelloService\x12F\n" +
 	"\x05Hello\x12\x1d.access_iface.v1.HelloRequest\x1a\x1e.access_iface.v1.HelloResponseB\xb7\x01\n" +
 	"\x13com.access_iface.v1B\bApiProtoP\x01Z=github.com/pdcgo/schema/services/access_iface/v1;access_iface\xa2\x02\x03AXX\xaa\x02\x0eAccessIface.V1\xca\x02\x0eAccessIface\\V1\xe2\x02\x1aAccessIface\\V1\\GPBMetadata\xea\x02\x0fAccessIface::V1b\x06proto3"

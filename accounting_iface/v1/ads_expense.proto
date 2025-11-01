@@ -38,7 +38,7 @@ message AdsExListRequest {
   uint64 shop_id = 2;
   string q = 3;
   common.v1.PageFilter page = 4;
-  common.v1.TimeFilter time_range = 5;
+  common.v1.TimeFilterRange time_range = 5;
 }
 
 message AdsExpenseItem {
@@ -69,7 +69,7 @@ message AdsExEditResponse {}
 message AdsExOverviewMetricRequest {
   uint64 team_id = 1;
   uint64 shop_id = 2;
-  common.v1.TimeFilter time_range = 3;
+  common.v1.TimeFilterRange time_range = 3;
 }
 
 message AdsExKeyValueMetric {
@@ -85,7 +85,7 @@ message AdsExOverviewMetricResponse {
 message AdsExTimeMetricRequest {
   uint64 team_id = 1;
   uint64 shop_id = 2;
-  common.v1.TimeFilter time_range = 3;
+  common.v1.TimeFilterRange time_range = 3;
 }
 
 message ValueMetric {
@@ -101,7 +101,7 @@ message AdsExTimeMetricResponse {
 message AdsExShopMetricRequest {
   uint64 team_id = 1;
   uint64 shop_id = 2;
-  common.v1.TimeFilter time_range = 3;
+  common.v1.TimeFilterRange time_range = 3;
 }
 
 message ShopSpent {

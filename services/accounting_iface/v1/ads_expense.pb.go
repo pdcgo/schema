@@ -149,7 +149,7 @@ type AdsExListRequest struct {
 	ShopId        uint64                 `protobuf:"varint,2,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
 	Q             string                 `protobuf:"bytes,3,opt,name=q,proto3" json:"q,omitempty"`
 	Page          *v1.PageFilter         `protobuf:"bytes,4,opt,name=page,proto3" json:"page,omitempty"`
-	TimeRange     *v1.TimeFilter         `protobuf:"bytes,5,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
+	TimeRange     *v1.TimeFilterRange    `protobuf:"bytes,5,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -212,7 +212,7 @@ func (x *AdsExListRequest) GetPage() *v1.PageFilter {
 	return nil
 }
 
-func (x *AdsExListRequest) GetTimeRange() *v1.TimeFilter {
+func (x *AdsExListRequest) GetTimeRange() *v1.TimeFilterRange {
 	if x != nil {
 		return x.TimeRange
 	}
@@ -487,7 +487,7 @@ type AdsExOverviewMetricRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
 	ShopId        uint64                 `protobuf:"varint,2,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
-	TimeRange     *v1.TimeFilter         `protobuf:"bytes,3,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
+	TimeRange     *v1.TimeFilterRange    `protobuf:"bytes,3,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -536,7 +536,7 @@ func (x *AdsExOverviewMetricRequest) GetShopId() uint64 {
 	return 0
 }
 
-func (x *AdsExOverviewMetricRequest) GetTimeRange() *v1.TimeFilter {
+func (x *AdsExOverviewMetricRequest) GetTimeRange() *v1.TimeFilterRange {
 	if x != nil {
 		return x.TimeRange
 	}
@@ -651,7 +651,7 @@ type AdsExTimeMetricRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
 	ShopId        uint64                 `protobuf:"varint,2,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
-	TimeRange     *v1.TimeFilter         `protobuf:"bytes,3,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
+	TimeRange     *v1.TimeFilterRange    `protobuf:"bytes,3,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -700,7 +700,7 @@ func (x *AdsExTimeMetricRequest) GetShopId() uint64 {
 	return 0
 }
 
-func (x *AdsExTimeMetricRequest) GetTimeRange() *v1.TimeFilter {
+func (x *AdsExTimeMetricRequest) GetTimeRange() *v1.TimeFilterRange {
 	if x != nil {
 		return x.TimeRange
 	}
@@ -815,7 +815,7 @@ type AdsExShopMetricRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
 	ShopId        uint64                 `protobuf:"varint,2,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
-	TimeRange     *v1.TimeFilter         `protobuf:"bytes,3,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
+	TimeRange     *v1.TimeFilterRange    `protobuf:"bytes,3,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -864,7 +864,7 @@ func (x *AdsExShopMetricRequest) GetShopId() uint64 {
 	return 0
 }
 
-func (x *AdsExShopMetricRequest) GetTimeRange() *v1.TimeFilter {
+func (x *AdsExShopMetricRequest) GetTimeRange() *v1.TimeFilterRange {
 	if x != nil {
 		return x.TimeRange
 	}
@@ -982,14 +982,14 @@ const file_accounting_iface_v1_ads_expense_proto_rawDesc = "" +
 	"\x06amount\x18\x04 \x01(\x01B\x0e\xbaH\v\x12\t!\x00\x00\x00\x00\x00\x00\x00\x00R\x06amount\x12\x1e\n" +
 	"\x04desc\x18\x05 \x01(\tB\n" +
 	"\xbaH\ar\x05\x10\x05\x18\x80\bR\x04desc\"\x15\n" +
-	"\x13AdsExCreateResponse\"\xb3\x01\n" +
+	"\x13AdsExCreateResponse\"\xb8\x01\n" +
 	"\x10AdsExListRequest\x12\x17\n" +
 	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12\x17\n" +
 	"\ashop_id\x18\x02 \x01(\x04R\x06shopId\x12\f\n" +
 	"\x01q\x18\x03 \x01(\tR\x01q\x12)\n" +
-	"\x04page\x18\x04 \x01(\v2\x15.common.v1.PageFilterR\x04page\x124\n" +
+	"\x04page\x18\x04 \x01(\v2\x15.common.v1.PageFilterR\x04page\x129\n" +
 	"\n" +
-	"time_range\x18\x05 \x01(\v2\x15.common.v1.TimeFilterR\ttimeRange\"\xe1\x01\n" +
+	"time_range\x18\x05 \x01(\v2\x1a.common.v1.TimeFilterRangeR\ttimeRange\"\xe1\x01\n" +
 	"\x0eAdsExpenseItem\x12\x17\n" +
 	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12\x17\n" +
 	"\ashop_id\x18\x02 \x01(\x04R\x06shopId\x123\n" +
@@ -1012,34 +1012,34 @@ const file_accounting_iface_v1_ads_expense_proto_rawDesc = "" +
 	"\x04desc\x18\x05 \x01(\tR\x04desc\x12\x1d\n" +
 	"\n" +
 	"expense_at\x18\x06 \x01(\x03R\texpenseAt\"\x13\n" +
-	"\x11AdsExEditResponse\"\x84\x01\n" +
+	"\x11AdsExEditResponse\"\x89\x01\n" +
 	"\x1aAdsExOverviewMetricRequest\x12\x17\n" +
 	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12\x17\n" +
-	"\ashop_id\x18\x02 \x01(\x04R\x06shopId\x124\n" +
+	"\ashop_id\x18\x02 \x01(\x04R\x06shopId\x129\n" +
 	"\n" +
-	"time_range\x18\x03 \x01(\v2\x15.common.v1.TimeFilterR\ttimeRange\"`\n" +
+	"time_range\x18\x03 \x01(\v2\x1a.common.v1.TimeFilterRangeR\ttimeRange\"`\n" +
 	"\x13AdsExKeyValueMetric\x123\n" +
 	"\amp_type\x18\x03 \x01(\x0e2\x1a.common.v1.MarketplaceTypeR\x06mpType\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\x01R\x05value\"\x80\x01\n" +
 	"\x1bAdsExOverviewMetricResponse\x12#\n" +
 	"\rexpense_total\x18\x01 \x01(\x01R\fexpenseTotal\x12<\n" +
-	"\x04data\x18\x02 \x03(\v2(.accounting_iface.v1.AdsExKeyValueMetricR\x04data\"\x80\x01\n" +
+	"\x04data\x18\x02 \x03(\v2(.accounting_iface.v1.AdsExKeyValueMetricR\x04data\"\x85\x01\n" +
 	"\x16AdsExTimeMetricRequest\x12\x17\n" +
 	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12\x17\n" +
-	"\ashop_id\x18\x02 \x01(\x04R\x06shopId\x124\n" +
+	"\ashop_id\x18\x02 \x01(\x04R\x06shopId\x129\n" +
 	"\n" +
-	"time_range\x18\x03 \x01(\v2\x15.common.v1.TimeFilterR\ttimeRange\"5\n" +
+	"time_range\x18\x03 \x01(\v2\x1a.common.v1.TimeFilterRangeR\ttimeRange\"5\n" +
 	"\vValueMetric\x12\x10\n" +
 	"\x03day\x18\x01 \x01(\x03R\x03day\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\x01R\x05value\"t\n" +
 	"\x17AdsExTimeMetricResponse\x12#\n" +
 	"\rexpense_total\x18\x01 \x01(\x01R\fexpenseTotal\x124\n" +
-	"\x04data\x18\x02 \x03(\v2 .accounting_iface.v1.ValueMetricR\x04data\"\x80\x01\n" +
+	"\x04data\x18\x02 \x03(\v2 .accounting_iface.v1.ValueMetricR\x04data\"\x85\x01\n" +
 	"\x16AdsExShopMetricRequest\x12\x17\n" +
 	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12\x17\n" +
-	"\ashop_id\x18\x02 \x01(\x04R\x06shopId\x124\n" +
+	"\ashop_id\x18\x02 \x01(\x04R\x06shopId\x129\n" +
 	"\n" +
-	"time_range\x18\x03 \x01(\v2\x15.common.v1.TimeFilterR\ttimeRange\":\n" +
+	"time_range\x18\x03 \x01(\v2\x1a.common.v1.TimeFilterRangeR\ttimeRange\":\n" +
 	"\tShopSpent\x12\x17\n" +
 	"\ashop_id\x18\x01 \x01(\x04R\x06shopId\x12\x14\n" +
 	"\x05spent\x18\x02 \x01(\x01R\x05spent\"M\n" +
@@ -1086,23 +1086,23 @@ var file_accounting_iface_v1_ads_expense_proto_goTypes = []any{
 	(*AdsExShopMetricResponse)(nil),     // 15: accounting_iface.v1.AdsExShopMetricResponse
 	(v1.MarketplaceType)(0),             // 16: common.v1.MarketplaceType
 	(*v1.PageFilter)(nil),               // 17: common.v1.PageFilter
-	(*v1.TimeFilter)(nil),               // 18: common.v1.TimeFilter
+	(*v1.TimeFilterRange)(nil),          // 18: common.v1.TimeFilterRange
 	(*v1.PageInfo)(nil),                 // 19: common.v1.PageInfo
 }
 var file_accounting_iface_v1_ads_expense_proto_depIdxs = []int32{
 	16, // 0: accounting_iface.v1.AdsExCreateRequest.mp_type:type_name -> common.v1.MarketplaceType
 	17, // 1: accounting_iface.v1.AdsExListRequest.page:type_name -> common.v1.PageFilter
-	18, // 2: accounting_iface.v1.AdsExListRequest.time_range:type_name -> common.v1.TimeFilter
+	18, // 2: accounting_iface.v1.AdsExListRequest.time_range:type_name -> common.v1.TimeFilterRange
 	16, // 3: accounting_iface.v1.AdsExpenseItem.mp_type:type_name -> common.v1.MarketplaceType
 	3,  // 4: accounting_iface.v1.AdsExListResponse.data:type_name -> accounting_iface.v1.AdsExpenseItem
 	19, // 5: accounting_iface.v1.AdsExListResponse.page_info:type_name -> common.v1.PageInfo
 	16, // 6: accounting_iface.v1.AdsExEditRequest.mp_type:type_name -> common.v1.MarketplaceType
-	18, // 7: accounting_iface.v1.AdsExOverviewMetricRequest.time_range:type_name -> common.v1.TimeFilter
+	18, // 7: accounting_iface.v1.AdsExOverviewMetricRequest.time_range:type_name -> common.v1.TimeFilterRange
 	16, // 8: accounting_iface.v1.AdsExKeyValueMetric.mp_type:type_name -> common.v1.MarketplaceType
 	8,  // 9: accounting_iface.v1.AdsExOverviewMetricResponse.data:type_name -> accounting_iface.v1.AdsExKeyValueMetric
-	18, // 10: accounting_iface.v1.AdsExTimeMetricRequest.time_range:type_name -> common.v1.TimeFilter
+	18, // 10: accounting_iface.v1.AdsExTimeMetricRequest.time_range:type_name -> common.v1.TimeFilterRange
 	11, // 11: accounting_iface.v1.AdsExTimeMetricResponse.data:type_name -> accounting_iface.v1.ValueMetric
-	18, // 12: accounting_iface.v1.AdsExShopMetricRequest.time_range:type_name -> common.v1.TimeFilter
+	18, // 12: accounting_iface.v1.AdsExShopMetricRequest.time_range:type_name -> common.v1.TimeFilterRange
 	14, // 13: accounting_iface.v1.AdsExShopMetricResponse.data:type_name -> accounting_iface.v1.ShopSpent
 	0,  // 14: accounting_iface.v1.AdsExpenseService.AdsExCreate:input_type -> accounting_iface.v1.AdsExCreateRequest
 	2,  // 15: accounting_iface.v1.AdsExpenseService.AdsExList:input_type -> accounting_iface.v1.AdsExListRequest

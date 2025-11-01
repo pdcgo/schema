@@ -11,6 +11,7 @@ enum RequestFrom {
   REQUEST_FROM_SELLING = 1;
   REQUEST_FROM_ADMIN = 2;
   REQUEST_FROM_WAREHOUSE = 3;
+  REQUEST_FROM_SYSTEM = 4;
 }
 
 message RequestSource {
