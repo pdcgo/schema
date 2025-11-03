@@ -129,6 +129,50 @@ func (x *RequestSource) GetRequestFrom() RequestFrom {
 	return RequestFrom_REQUEST_FROM_UNSPECIFIED
 }
 
+type ResourceScope struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ResourceScope) Reset() {
+	*x = ResourceScope{}
+	mi := &file_access_iface_v1_api_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResourceScope) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResourceScope) ProtoMessage() {}
+
+func (x *ResourceScope) ProtoReflect() protoreflect.Message {
+	mi := &file_access_iface_v1_api_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ResourceScope.ProtoReflect.Descriptor instead.
+func (*ResourceScope) Descriptor() ([]byte, []int) {
+	return file_access_iface_v1_api_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *ResourceScope) GetTeamId() uint64 {
+	if x != nil {
+		return x.TeamId
+	}
+	return 0
+}
+
 type RequestSourceError struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Message       string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
@@ -138,7 +182,7 @@ type RequestSourceError struct {
 
 func (x *RequestSourceError) Reset() {
 	*x = RequestSourceError{}
-	mi := &file_access_iface_v1_api_proto_msgTypes[1]
+	mi := &file_access_iface_v1_api_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -150,7 +194,7 @@ func (x *RequestSourceError) String() string {
 func (*RequestSourceError) ProtoMessage() {}
 
 func (x *RequestSourceError) ProtoReflect() protoreflect.Message {
-	mi := &file_access_iface_v1_api_proto_msgTypes[1]
+	mi := &file_access_iface_v1_api_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -163,7 +207,7 @@ func (x *RequestSourceError) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RequestSourceError.ProtoReflect.Descriptor instead.
 func (*RequestSourceError) Descriptor() ([]byte, []int) {
-	return file_access_iface_v1_api_proto_rawDescGZIP(), []int{1}
+	return file_access_iface_v1_api_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *RequestSourceError) GetMessage() string {
@@ -182,7 +226,7 @@ type HelloRequest struct {
 
 func (x *HelloRequest) Reset() {
 	*x = HelloRequest{}
-	mi := &file_access_iface_v1_api_proto_msgTypes[2]
+	mi := &file_access_iface_v1_api_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -194,7 +238,7 @@ func (x *HelloRequest) String() string {
 func (*HelloRequest) ProtoMessage() {}
 
 func (x *HelloRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_access_iface_v1_api_proto_msgTypes[2]
+	mi := &file_access_iface_v1_api_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -207,7 +251,7 @@ func (x *HelloRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HelloRequest.ProtoReflect.Descriptor instead.
 func (*HelloRequest) Descriptor() ([]byte, []int) {
-	return file_access_iface_v1_api_proto_rawDescGZIP(), []int{2}
+	return file_access_iface_v1_api_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *HelloRequest) GetName() string {
@@ -227,7 +271,7 @@ type HelloResponse struct {
 
 func (x *HelloResponse) Reset() {
 	*x = HelloResponse{}
-	mi := &file_access_iface_v1_api_proto_msgTypes[3]
+	mi := &file_access_iface_v1_api_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -239,7 +283,7 @@ func (x *HelloResponse) String() string {
 func (*HelloResponse) ProtoMessage() {}
 
 func (x *HelloResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_access_iface_v1_api_proto_msgTypes[3]
+	mi := &file_access_iface_v1_api_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -252,7 +296,7 @@ func (x *HelloResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HelloResponse.ProtoReflect.Descriptor instead.
 func (*HelloResponse) Descriptor() ([]byte, []int) {
-	return file_access_iface_v1_api_proto_rawDescGZIP(), []int{3}
+	return file_access_iface_v1_api_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *HelloResponse) GetMessage() string {
@@ -277,7 +321,9 @@ const file_access_iface_v1_api_proto_rawDesc = "" +
 	"\rRequestSource\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12K\n" +
 	"\frequest_from\x18\x02 \x01(\x0e2\x1c.access_iface.v1.RequestFromB\n" +
-	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\vrequestFrom\".\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\vrequestFrom\"1\n" +
+	"\rResourceScope\x12 \n" +
+	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\".\n" +
 	"\x12RequestSourceError\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\"\"\n" +
 	"\fHelloRequest\x12\x12\n" +
@@ -308,19 +354,20 @@ func file_access_iface_v1_api_proto_rawDescGZIP() []byte {
 }
 
 var file_access_iface_v1_api_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_access_iface_v1_api_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_access_iface_v1_api_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_access_iface_v1_api_proto_goTypes = []any{
 	(RequestFrom)(0),           // 0: access_iface.v1.RequestFrom
 	(*RequestSource)(nil),      // 1: access_iface.v1.RequestSource
-	(*RequestSourceError)(nil), // 2: access_iface.v1.RequestSourceError
-	(*HelloRequest)(nil),       // 3: access_iface.v1.HelloRequest
-	(*HelloResponse)(nil),      // 4: access_iface.v1.HelloResponse
+	(*ResourceScope)(nil),      // 2: access_iface.v1.ResourceScope
+	(*RequestSourceError)(nil), // 3: access_iface.v1.RequestSourceError
+	(*HelloRequest)(nil),       // 4: access_iface.v1.HelloRequest
+	(*HelloResponse)(nil),      // 5: access_iface.v1.HelloResponse
 }
 var file_access_iface_v1_api_proto_depIdxs = []int32{
 	0, // 0: access_iface.v1.RequestSource.request_from:type_name -> access_iface.v1.RequestFrom
 	1, // 1: access_iface.v1.HelloResponse.source:type_name -> access_iface.v1.RequestSource
-	3, // 2: access_iface.v1.HelloService.Hello:input_type -> access_iface.v1.HelloRequest
-	4, // 3: access_iface.v1.HelloService.Hello:output_type -> access_iface.v1.HelloResponse
+	4, // 2: access_iface.v1.HelloService.Hello:input_type -> access_iface.v1.HelloRequest
+	5, // 3: access_iface.v1.HelloService.Hello:output_type -> access_iface.v1.HelloResponse
 	3, // [3:4] is the sub-list for method output_type
 	2, // [2:3] is the sub-list for method input_type
 	2, // [2:2] is the sub-list for extension type_name
@@ -339,7 +386,7 @@ func file_access_iface_v1_api_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_access_iface_v1_api_proto_rawDesc), len(file_access_iface_v1_api_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   4,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

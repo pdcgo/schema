@@ -22,6 +22,10 @@ message RequestSource {
   }];
 }
 
+message ResourceScope {
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+}
+
 message RequestSourceError {
   string message = 1;
 }
