@@ -12,8 +12,46 @@ service AccountReportService {
   rpc DailyBalance(DailyBalanceRequest) returns (DailyBalanceResponse);
   rpc BalanceDetail(BalanceDetailRequest) returns (BalanceDetailResponse);
   rpc DailyBalanceDetail(DailyBalanceDetailRequest) returns (DailyBalanceDetailResponse);
+  rpc MonthlyBalance(MonthlyBalanceRequest) returns (MonthlyBalanceResponse);
+  rpc MonthlyBalanceDetail(MonthlyBalanceDetailRequest) returns (MonthlyBalanceDetailResponse);
   rpc DailyUpdateBalance(DailyUpdateBalanceRequest) returns (DailyUpdateBalanceResponse);
   // rpc AccountFlow(AccountFlowRequest) returns (AccountFlowResponse);
+}
+
+message MonthlyAccountBalanceItem {
+  int64 day = 1;
+  string account_key = 2;
+  double debit = 3;
+  double credit = 4;
+  double balance = 5;
+}
+
+message MonthlyBalanceRequest {
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  string account_key = 2 [(buf.validate.field).string.min_len = 1];
+
+  common.v1.TimeFilterRange time_range = 3 [(buf.validate.field).required = true];
+  common.v1.PageFilter page = 4 [(buf.validate.field).required = true];
+}
+message MonthlyBalanceResponse {
+  repeated MonthlyAccountBalanceItem data = 1;
+  common.v1.PageInfo page_info = 2;
+}
+
+message MonthlyBalanceDetailRequest {
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  string account_key = 2 [(buf.validate.field).string.min_len = 1];
+  LabelFilterType label_filter_type = 3 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+  uint64 label_id = 4 [(buf.validate.field).uint64.gt = 0];
+  common.v1.TimeFilterRange time_range = 5 [(buf.validate.field).required = true];
+  common.v1.PageFilter page = 6 [(buf.validate.field).required = true];
+}
+message MonthlyBalanceDetailResponse {
+  repeated MonthlyAccountBalanceItem data = 1;
+  common.v1.PageInfo page_info = 2;
 }
 
 message TxLabelExtra {
@@ -99,15 +137,6 @@ message DailyBalanceDetailResponse {
   repeated DailyBalanceDetailItem data = 1;
   common.v1.PageInfo page_info = 2;
 }
-
-// message AccountFlowRequest {
-//   uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
-//   string account_key = 2 [(buf.validate.field).string.min_len = 1];
-//   common.v1.TimeFilter time_range = 3 [(buf.validate.field).required = true];
-// }
-// message AccountFlowResponse {
-//   repeated AccountBalanceItem data = 1;
-// }
 
 message BalanceRequest {
   uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];

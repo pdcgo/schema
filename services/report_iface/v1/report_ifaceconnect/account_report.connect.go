@@ -45,6 +45,12 @@ const (
 	// AccountReportServiceDailyBalanceDetailProcedure is the fully-qualified name of the
 	// AccountReportService's DailyBalanceDetail RPC.
 	AccountReportServiceDailyBalanceDetailProcedure = "/report_iface.v1.AccountReportService/DailyBalanceDetail"
+	// AccountReportServiceMonthlyBalanceProcedure is the fully-qualified name of the
+	// AccountReportService's MonthlyBalance RPC.
+	AccountReportServiceMonthlyBalanceProcedure = "/report_iface.v1.AccountReportService/MonthlyBalance"
+	// AccountReportServiceMonthlyBalanceDetailProcedure is the fully-qualified name of the
+	// AccountReportService's MonthlyBalanceDetail RPC.
+	AccountReportServiceMonthlyBalanceDetailProcedure = "/report_iface.v1.AccountReportService/MonthlyBalanceDetail"
 	// AccountReportServiceDailyUpdateBalanceProcedure is the fully-qualified name of the
 	// AccountReportService's DailyUpdateBalance RPC.
 	AccountReportServiceDailyUpdateBalanceProcedure = "/report_iface.v1.AccountReportService/DailyUpdateBalance"
@@ -56,6 +62,8 @@ type AccountReportServiceClient interface {
 	DailyBalance(context.Context, *connect.Request[v1.DailyBalanceRequest]) (*connect.Response[v1.DailyBalanceResponse], error)
 	BalanceDetail(context.Context, *connect.Request[v1.BalanceDetailRequest]) (*connect.Response[v1.BalanceDetailResponse], error)
 	DailyBalanceDetail(context.Context, *connect.Request[v1.DailyBalanceDetailRequest]) (*connect.Response[v1.DailyBalanceDetailResponse], error)
+	MonthlyBalance(context.Context, *connect.Request[v1.MonthlyBalanceRequest]) (*connect.Response[v1.MonthlyBalanceResponse], error)
+	MonthlyBalanceDetail(context.Context, *connect.Request[v1.MonthlyBalanceDetailRequest]) (*connect.Response[v1.MonthlyBalanceDetailResponse], error)
 	DailyUpdateBalance(context.Context, *connect.Request[v1.DailyUpdateBalanceRequest]) (*connect.Response[v1.DailyUpdateBalanceResponse], error)
 }
 
@@ -94,6 +102,18 @@ func NewAccountReportServiceClient(httpClient connect.HTTPClient, baseURL string
 			connect.WithSchema(accountReportServiceMethods.ByName("DailyBalanceDetail")),
 			connect.WithClientOptions(opts...),
 		),
+		monthlyBalance: connect.NewClient[v1.MonthlyBalanceRequest, v1.MonthlyBalanceResponse](
+			httpClient,
+			baseURL+AccountReportServiceMonthlyBalanceProcedure,
+			connect.WithSchema(accountReportServiceMethods.ByName("MonthlyBalance")),
+			connect.WithClientOptions(opts...),
+		),
+		monthlyBalanceDetail: connect.NewClient[v1.MonthlyBalanceDetailRequest, v1.MonthlyBalanceDetailResponse](
+			httpClient,
+			baseURL+AccountReportServiceMonthlyBalanceDetailProcedure,
+			connect.WithSchema(accountReportServiceMethods.ByName("MonthlyBalanceDetail")),
+			connect.WithClientOptions(opts...),
+		),
 		dailyUpdateBalance: connect.NewClient[v1.DailyUpdateBalanceRequest, v1.DailyUpdateBalanceResponse](
 			httpClient,
 			baseURL+AccountReportServiceDailyUpdateBalanceProcedure,
@@ -105,11 +125,13 @@ func NewAccountReportServiceClient(httpClient connect.HTTPClient, baseURL string
 
 // accountReportServiceClient implements AccountReportServiceClient.
 type accountReportServiceClient struct {
-	balance            *connect.Client[v1.BalanceRequest, v1.BalanceResponse]
-	dailyBalance       *connect.Client[v1.DailyBalanceRequest, v1.DailyBalanceResponse]
-	balanceDetail      *connect.Client[v1.BalanceDetailRequest, v1.BalanceDetailResponse]
-	dailyBalanceDetail *connect.Client[v1.DailyBalanceDetailRequest, v1.DailyBalanceDetailResponse]
-	dailyUpdateBalance *connect.Client[v1.DailyUpdateBalanceRequest, v1.DailyUpdateBalanceResponse]
+	balance              *connect.Client[v1.BalanceRequest, v1.BalanceResponse]
+	dailyBalance         *connect.Client[v1.DailyBalanceRequest, v1.DailyBalanceResponse]
+	balanceDetail        *connect.Client[v1.BalanceDetailRequest, v1.BalanceDetailResponse]
+	dailyBalanceDetail   *connect.Client[v1.DailyBalanceDetailRequest, v1.DailyBalanceDetailResponse]
+	monthlyBalance       *connect.Client[v1.MonthlyBalanceRequest, v1.MonthlyBalanceResponse]
+	monthlyBalanceDetail *connect.Client[v1.MonthlyBalanceDetailRequest, v1.MonthlyBalanceDetailResponse]
+	dailyUpdateBalance   *connect.Client[v1.DailyUpdateBalanceRequest, v1.DailyUpdateBalanceResponse]
 }
 
 // Balance calls report_iface.v1.AccountReportService.Balance.
@@ -132,6 +154,16 @@ func (c *accountReportServiceClient) DailyBalanceDetail(ctx context.Context, req
 	return c.dailyBalanceDetail.CallUnary(ctx, req)
 }
 
+// MonthlyBalance calls report_iface.v1.AccountReportService.MonthlyBalance.
+func (c *accountReportServiceClient) MonthlyBalance(ctx context.Context, req *connect.Request[v1.MonthlyBalanceRequest]) (*connect.Response[v1.MonthlyBalanceResponse], error) {
+	return c.monthlyBalance.CallUnary(ctx, req)
+}
+
+// MonthlyBalanceDetail calls report_iface.v1.AccountReportService.MonthlyBalanceDetail.
+func (c *accountReportServiceClient) MonthlyBalanceDetail(ctx context.Context, req *connect.Request[v1.MonthlyBalanceDetailRequest]) (*connect.Response[v1.MonthlyBalanceDetailResponse], error) {
+	return c.monthlyBalanceDetail.CallUnary(ctx, req)
+}
+
 // DailyUpdateBalance calls report_iface.v1.AccountReportService.DailyUpdateBalance.
 func (c *accountReportServiceClient) DailyUpdateBalance(ctx context.Context, req *connect.Request[v1.DailyUpdateBalanceRequest]) (*connect.Response[v1.DailyUpdateBalanceResponse], error) {
 	return c.dailyUpdateBalance.CallUnary(ctx, req)
@@ -144,6 +176,8 @@ type AccountReportServiceHandler interface {
 	DailyBalance(context.Context, *connect.Request[v1.DailyBalanceRequest]) (*connect.Response[v1.DailyBalanceResponse], error)
 	BalanceDetail(context.Context, *connect.Request[v1.BalanceDetailRequest]) (*connect.Response[v1.BalanceDetailResponse], error)
 	DailyBalanceDetail(context.Context, *connect.Request[v1.DailyBalanceDetailRequest]) (*connect.Response[v1.DailyBalanceDetailResponse], error)
+	MonthlyBalance(context.Context, *connect.Request[v1.MonthlyBalanceRequest]) (*connect.Response[v1.MonthlyBalanceResponse], error)
+	MonthlyBalanceDetail(context.Context, *connect.Request[v1.MonthlyBalanceDetailRequest]) (*connect.Response[v1.MonthlyBalanceDetailResponse], error)
 	DailyUpdateBalance(context.Context, *connect.Request[v1.DailyUpdateBalanceRequest]) (*connect.Response[v1.DailyUpdateBalanceResponse], error)
 }
 
@@ -178,6 +212,18 @@ func NewAccountReportServiceHandler(svc AccountReportServiceHandler, opts ...con
 		connect.WithSchema(accountReportServiceMethods.ByName("DailyBalanceDetail")),
 		connect.WithHandlerOptions(opts...),
 	)
+	accountReportServiceMonthlyBalanceHandler := connect.NewUnaryHandler(
+		AccountReportServiceMonthlyBalanceProcedure,
+		svc.MonthlyBalance,
+		connect.WithSchema(accountReportServiceMethods.ByName("MonthlyBalance")),
+		connect.WithHandlerOptions(opts...),
+	)
+	accountReportServiceMonthlyBalanceDetailHandler := connect.NewUnaryHandler(
+		AccountReportServiceMonthlyBalanceDetailProcedure,
+		svc.MonthlyBalanceDetail,
+		connect.WithSchema(accountReportServiceMethods.ByName("MonthlyBalanceDetail")),
+		connect.WithHandlerOptions(opts...),
+	)
 	accountReportServiceDailyUpdateBalanceHandler := connect.NewUnaryHandler(
 		AccountReportServiceDailyUpdateBalanceProcedure,
 		svc.DailyUpdateBalance,
@@ -194,6 +240,10 @@ func NewAccountReportServiceHandler(svc AccountReportServiceHandler, opts ...con
 			accountReportServiceBalanceDetailHandler.ServeHTTP(w, r)
 		case AccountReportServiceDailyBalanceDetailProcedure:
 			accountReportServiceDailyBalanceDetailHandler.ServeHTTP(w, r)
+		case AccountReportServiceMonthlyBalanceProcedure:
+			accountReportServiceMonthlyBalanceHandler.ServeHTTP(w, r)
+		case AccountReportServiceMonthlyBalanceDetailProcedure:
+			accountReportServiceMonthlyBalanceDetailHandler.ServeHTTP(w, r)
 		case AccountReportServiceDailyUpdateBalanceProcedure:
 			accountReportServiceDailyUpdateBalanceHandler.ServeHTTP(w, r)
 		default:
@@ -219,6 +269,14 @@ func (UnimplementedAccountReportServiceHandler) BalanceDetail(context.Context, *
 
 func (UnimplementedAccountReportServiceHandler) DailyBalanceDetail(context.Context, *connect.Request[v1.DailyBalanceDetailRequest]) (*connect.Response[v1.DailyBalanceDetailResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("report_iface.v1.AccountReportService.DailyBalanceDetail is not implemented"))
+}
+
+func (UnimplementedAccountReportServiceHandler) MonthlyBalance(context.Context, *connect.Request[v1.MonthlyBalanceRequest]) (*connect.Response[v1.MonthlyBalanceResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("report_iface.v1.AccountReportService.MonthlyBalance is not implemented"))
+}
+
+func (UnimplementedAccountReportServiceHandler) MonthlyBalanceDetail(context.Context, *connect.Request[v1.MonthlyBalanceDetailRequest]) (*connect.Response[v1.MonthlyBalanceDetailResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("report_iface.v1.AccountReportService.MonthlyBalanceDetail is not implemented"))
 }
 
 func (UnimplementedAccountReportServiceHandler) DailyUpdateBalance(context.Context, *connect.Request[v1.DailyUpdateBalanceRequest]) (*connect.Response[v1.DailyUpdateBalanceResponse], error) {
