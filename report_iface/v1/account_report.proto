@@ -19,7 +19,7 @@ service AccountReportService {
 }
 
 message MonthlyAccountBalanceItem {
-  int64 day = 1;
+  int64 month = 1;
   string account_key = 2;
   double debit = 3;
   double credit = 4;
@@ -49,8 +49,17 @@ message MonthlyBalanceDetailRequest {
   common.v1.TimeFilterRange time_range = 5 [(buf.validate.field).required = true];
   common.v1.PageFilter page = 6 [(buf.validate.field).required = true];
 }
+
+message MonthlyBalanceDetailItem {
+  int64 month = 1;
+  string label_id = 2;
+  LabelFilterType label_filter_type = 3;
+  double debit = 4;
+  double credit = 5;
+  double balance = 6;
+}
 message MonthlyBalanceDetailResponse {
-  repeated MonthlyAccountBalanceItem data = 1;
+  repeated MonthlyBalanceDetailItem data = 1;
   common.v1.PageInfo page_info = 2;
 }
 
