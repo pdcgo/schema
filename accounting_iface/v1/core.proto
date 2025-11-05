@@ -24,6 +24,11 @@ enum BalanceType {
   BALANCE_TYPE_CREDIT = 2;
 }
 
+message CoaDetail {
+  CoaCode code = 1;
+  bool true_account = 2;
+}
+
 // untuk custom filter data account entah spesifik cs, supplier atau custom tag
 message AccountFilterExtra {
   bool cs = 1;
@@ -39,6 +44,8 @@ message AccountKeyItem {
   BalanceType balance_type = 3;
   // @gotags: gorm:"-"
   AccountFilterExtra filter_extra = 4;
+  // @gotags: gorm:"-"
+  CoaDetail coa_detail = 5;
 }
 
 message AccountKeyListRequest {

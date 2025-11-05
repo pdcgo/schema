@@ -44,6 +44,7 @@ message FilterExtra {
 
 message EntryListRequest {
   uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 account_team_id = 8;
   string account_key = 2 [(buf.validate.field).string.min_len = 1];
   string keyword = 7;
   FilterExtra extra = 6;

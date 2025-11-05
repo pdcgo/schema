@@ -328,6 +328,7 @@ func (x *FilterExtra) GetSupplierId() uint64 {
 type EntryListRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	AccountTeamId uint64                 `protobuf:"varint,8,opt,name=account_team_id,json=accountTeamId,proto3" json:"account_team_id,omitempty"`
 	AccountKey    string                 `protobuf:"bytes,2,opt,name=account_key,json=accountKey,proto3" json:"account_key,omitempty"`
 	Keyword       string                 `protobuf:"bytes,7,opt,name=keyword,proto3" json:"keyword,omitempty"`
 	Extra         *FilterExtra           `protobuf:"bytes,6,opt,name=extra,proto3" json:"extra,omitempty"`
@@ -371,6 +372,13 @@ func (*EntryListRequest) Descriptor() ([]byte, []int) {
 func (x *EntryListRequest) GetTeamId() uint64 {
 	if x != nil {
 		return x.TeamId
+	}
+	return 0
+}
+
+func (x *EntryListRequest) GetAccountTeamId() uint64 {
+	if x != nil {
+		return x.AccountTeamId
 	}
 	return 0
 }
@@ -670,9 +678,10 @@ const file_accounting_iface_v1_ledger_proto_rawDesc = "" +
 	"\x13customer_service_id\x18\x01 \x01(\x04R\x11customerServiceId\x12\x17\n" +
 	"\ashop_id\x18\x02 \x01(\x04R\x06shopId\x12\x1f\n" +
 	"\vsupplier_id\x18\x03 \x01(\x04R\n" +
-	"supplierId\"\xde\x02\n" +
+	"supplierId\"\x86\x03\n" +
 	"\x10EntryListRequest\x12 \n" +
-	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12(\n" +
+	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12&\n" +
+	"\x0faccount_team_id\x18\b \x01(\x04R\raccountTeamId\x12(\n" +
 	"\vaccount_key\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\n" +
 	"accountKey\x12\x18\n" +
 	"\akeyword\x18\a \x01(\tR\akeyword\x126\n" +
