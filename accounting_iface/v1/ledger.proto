@@ -1,14 +1,38 @@
 syntax = "proto3";
 package accounting_iface.v1;
 
+import "accounting_iface/v1/core.proto";
 import "buf/validate/validate.proto";
 import "common/v1/common.proto";
+import "common/v1/shop.proto";
 
 option go_package = "github.com/pdcgo/schema/services/accounting_iface/v1;accounting_iface";
 
 service LedgerService {
   rpc EntryList(EntryListRequest) returns (EntryListResponse);
+  rpc EntryListExtra(EntryListExtraRequest) returns (EntryListExtraResponse);
   rpc EntryListExport(EntryListExportRequest) returns (stream EntryListExportResponse);
+}
+
+message EntryListExtraRequest {
+  repeated uint64 tx_ids = 1 [
+    (buf.validate.field).repeated.min_items = 1,
+    (buf.validate.field).repeated.max_items = 100,
+    (buf.validate.field).repeated.unique = true,
+    (buf.validate.field).repeated.items.uint64.gt = 0
+  ];
+}
+
+message TagList {
+  repeated string list = 1;
+}
+
+message EntryListExtraResponse {
+  map<uint64, string> map_cs = 1;
+  map<uint64, string> map_supplier = 2;
+  map<uint64, common.v1.ShopList> map_shop = 3;
+  map<uint64, TagList> map_tag = 4;
+  map<uint64, accounting_iface.v1.TypeLabelList> map_type_label = 5;
 }
 
 message EntryListExportResponse {

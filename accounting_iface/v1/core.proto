@@ -69,3 +69,7 @@ message TypeLabel {
   // @gotags: gorm:"index:keyval,unique"
   string label = 2;
 }
+
+message TypeLabelList {
+  repeated TypeLabel list = 1;
+}

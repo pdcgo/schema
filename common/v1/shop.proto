@@ -46,6 +46,10 @@ message Shop {
   string uri = 6;
 }
 
+message ShopList {
+  repeated Shop list = 1;
+}
+
 message PublicShopIDsResponse {
   map<uint64, Shop> data = 1;
 }
