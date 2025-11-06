@@ -9,6 +9,21 @@ option go_package = "github.com/pdcgo/schema/services/common/v1;common";
 
 service ShopService {
   rpc PublicShopIDs(PublicShopIDsRequest) returns (PublicShopIDsResponse);
+  rpc PublicShopList(PublicShopListRequest) returns (PublicShopListResponse);
+}
+
+message PublicShopListRequest {
+  int64 limit = 1 [(buf.validate.field).int64 = {
+    gt: 0
+    lt: 50
+  }];
+  uint64 team_id = 2;
+  MarketplaceType marketplace_type = 3;
+  string q = 4;
+}
+
+message PublicShopListResponse {
+  repeated Shop data = 1;
 }
 
 message PublicShopIDsRequest {

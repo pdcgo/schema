@@ -12,6 +12,7 @@ service StockService {
   rpc InboundUpdate(InboundUpdateRequest) returns (InboundUpdateResponse);
   rpc InboundAccept(InboundAcceptRequest) returns (InboundAcceptResponse);
   // rpc InboundLost
+  // rpc StockProblem
   rpc StockAdjustment(StockAdjustmentRequest) returns (StockAdjustmentResponse);
   rpc TransferToWarehouse(TransferToWarehouseRequest) returns (TransferToWarehouseResponse);
   rpc TransferToWarehouseAccept(TransferToWarehouseAcceptRequest) returns (TransferToWarehouseAcceptResponse);

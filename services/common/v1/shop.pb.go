@@ -22,6 +22,118 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type PublicShopListRequest struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	Limit           int64                  `protobuf:"varint,1,opt,name=limit,proto3" json:"limit,omitempty"`
+	TeamId          uint64                 `protobuf:"varint,2,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	MarketplaceType MarketplaceType        `protobuf:"varint,3,opt,name=marketplace_type,json=marketplaceType,proto3,enum=common.v1.MarketplaceType" json:"marketplace_type,omitempty"`
+	Q               string                 `protobuf:"bytes,4,opt,name=q,proto3" json:"q,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *PublicShopListRequest) Reset() {
+	*x = PublicShopListRequest{}
+	mi := &file_common_v1_shop_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PublicShopListRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PublicShopListRequest) ProtoMessage() {}
+
+func (x *PublicShopListRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_common_v1_shop_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PublicShopListRequest.ProtoReflect.Descriptor instead.
+func (*PublicShopListRequest) Descriptor() ([]byte, []int) {
+	return file_common_v1_shop_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *PublicShopListRequest) GetLimit() int64 {
+	if x != nil {
+		return x.Limit
+	}
+	return 0
+}
+
+func (x *PublicShopListRequest) GetTeamId() uint64 {
+	if x != nil {
+		return x.TeamId
+	}
+	return 0
+}
+
+func (x *PublicShopListRequest) GetMarketplaceType() MarketplaceType {
+	if x != nil {
+		return x.MarketplaceType
+	}
+	return MarketplaceType_MARKETPLACE_TYPE_UNSPECIFIED
+}
+
+func (x *PublicShopListRequest) GetQ() string {
+	if x != nil {
+		return x.Q
+	}
+	return ""
+}
+
+type PublicShopListResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Data          []*Shop                `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PublicShopListResponse) Reset() {
+	*x = PublicShopListResponse{}
+	mi := &file_common_v1_shop_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PublicShopListResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PublicShopListResponse) ProtoMessage() {}
+
+func (x *PublicShopListResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_common_v1_shop_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PublicShopListResponse.ProtoReflect.Descriptor instead.
+func (*PublicShopListResponse) Descriptor() ([]byte, []int) {
+	return file_common_v1_shop_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *PublicShopListResponse) GetData() []*Shop {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
 type PublicShopIDsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Ids           []uint64               `protobuf:"varint,1,rep,packed,name=ids,proto3" json:"ids,omitempty"`
@@ -31,7 +143,7 @@ type PublicShopIDsRequest struct {
 
 func (x *PublicShopIDsRequest) Reset() {
 	*x = PublicShopIDsRequest{}
-	mi := &file_common_v1_shop_proto_msgTypes[0]
+	mi := &file_common_v1_shop_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -43,7 +155,7 @@ func (x *PublicShopIDsRequest) String() string {
 func (*PublicShopIDsRequest) ProtoMessage() {}
 
 func (x *PublicShopIDsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_common_v1_shop_proto_msgTypes[0]
+	mi := &file_common_v1_shop_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -56,7 +168,7 @@ func (x *PublicShopIDsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PublicShopIDsRequest.ProtoReflect.Descriptor instead.
 func (*PublicShopIDsRequest) Descriptor() ([]byte, []int) {
-	return file_common_v1_shop_proto_rawDescGZIP(), []int{0}
+	return file_common_v1_shop_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *PublicShopIDsRequest) GetIds() []uint64 {
@@ -80,7 +192,7 @@ type Shop struct {
 
 func (x *Shop) Reset() {
 	*x = Shop{}
-	mi := &file_common_v1_shop_proto_msgTypes[1]
+	mi := &file_common_v1_shop_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -92,7 +204,7 @@ func (x *Shop) String() string {
 func (*Shop) ProtoMessage() {}
 
 func (x *Shop) ProtoReflect() protoreflect.Message {
-	mi := &file_common_v1_shop_proto_msgTypes[1]
+	mi := &file_common_v1_shop_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -105,7 +217,7 @@ func (x *Shop) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Shop.ProtoReflect.Descriptor instead.
 func (*Shop) Descriptor() ([]byte, []int) {
-	return file_common_v1_shop_proto_rawDescGZIP(), []int{1}
+	return file_common_v1_shop_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *Shop) GetId() uint64 {
@@ -159,7 +271,7 @@ type PublicShopIDsResponse struct {
 
 func (x *PublicShopIDsResponse) Reset() {
 	*x = PublicShopIDsResponse{}
-	mi := &file_common_v1_shop_proto_msgTypes[2]
+	mi := &file_common_v1_shop_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -171,7 +283,7 @@ func (x *PublicShopIDsResponse) String() string {
 func (*PublicShopIDsResponse) ProtoMessage() {}
 
 func (x *PublicShopIDsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_common_v1_shop_proto_msgTypes[2]
+	mi := &file_common_v1_shop_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -184,7 +296,7 @@ func (x *PublicShopIDsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PublicShopIDsResponse.ProtoReflect.Descriptor instead.
 func (*PublicShopIDsResponse) Descriptor() ([]byte, []int) {
-	return file_common_v1_shop_proto_rawDescGZIP(), []int{2}
+	return file_common_v1_shop_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *PublicShopIDsResponse) GetData() map[uint64]*Shop {
@@ -198,7 +310,14 @@ var File_common_v1_shop_proto protoreflect.FileDescriptor
 
 const file_common_v1_shop_proto_rawDesc = "" +
 	"\n" +
-	"\x14common/v1/shop.proto\x12\tcommon.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\"=\n" +
+	"\x14common/v1/shop.proto\x12\tcommon.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\"\xa6\x01\n" +
+	"\x15PublicShopListRequest\x12\x1f\n" +
+	"\x05limit\x18\x01 \x01(\x03B\t\xbaH\x06\"\x04\x102 \x00R\x05limit\x12\x17\n" +
+	"\ateam_id\x18\x02 \x01(\x04R\x06teamId\x12E\n" +
+	"\x10marketplace_type\x18\x03 \x01(\x0e2\x1a.common.v1.MarketplaceTypeR\x0fmarketplaceType\x12\f\n" +
+	"\x01q\x18\x04 \x01(\tR\x01q\"=\n" +
+	"\x16PublicShopListResponse\x12#\n" +
+	"\x04data\x18\x01 \x03(\v2\x0f.common.v1.ShopR\x04data\"=\n" +
 	"\x14PublicShopIDsRequest\x12%\n" +
 	"\x03ids\x18\x01 \x03(\x04B\x13\xbaH\x10\x92\x01\r\b\x01\x10\xc8\x01\x18\x01\"\x042\x02 \x00R\x03ids\"\xca\x01\n" +
 	"\x04Shop\x12\x0e\n" +
@@ -212,9 +331,10 @@ const file_common_v1_shop_proto_rawDesc = "" +
 	"\x04data\x18\x01 \x03(\v2*.common.v1.PublicShopIDsResponse.DataEntryR\x04data\x1aH\n" +
 	"\tDataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\x04R\x03key\x12%\n" +
-	"\x05value\x18\x02 \x01(\v2\x0f.common.v1.ShopR\x05value:\x028\x012a\n" +
+	"\x05value\x18\x02 \x01(\v2\x0f.common.v1.ShopR\x05value:\x028\x012\xb8\x01\n" +
 	"\vShopService\x12R\n" +
-	"\rPublicShopIDs\x12\x1f.common.v1.PublicShopIDsRequest\x1a .common.v1.PublicShopIDsResponseB\x92\x01\n" +
+	"\rPublicShopIDs\x12\x1f.common.v1.PublicShopIDsRequest\x1a .common.v1.PublicShopIDsResponse\x12U\n" +
+	"\x0ePublicShopList\x12 .common.v1.PublicShopListRequest\x1a!.common.v1.PublicShopListResponseB\x92\x01\n" +
 	"\rcom.common.v1B\tShopProtoP\x01Z1github.com/pdcgo/schema/services/common/v1;common\xa2\x02\x03CXX\xaa\x02\tCommon.V1\xca\x02\tCommon\\V1\xe2\x02\x15Common\\V1\\GPBMetadata\xea\x02\n" +
 	"Common::V1b\x06proto3"
 
@@ -230,25 +350,31 @@ func file_common_v1_shop_proto_rawDescGZIP() []byte {
 	return file_common_v1_shop_proto_rawDescData
 }
 
-var file_common_v1_shop_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_common_v1_shop_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_common_v1_shop_proto_goTypes = []any{
-	(*PublicShopIDsRequest)(nil),  // 0: common.v1.PublicShopIDsRequest
-	(*Shop)(nil),                  // 1: common.v1.Shop
-	(*PublicShopIDsResponse)(nil), // 2: common.v1.PublicShopIDsResponse
-	nil,                           // 3: common.v1.PublicShopIDsResponse.DataEntry
-	(MarketplaceType)(0),          // 4: common.v1.MarketplaceType
+	(*PublicShopListRequest)(nil),  // 0: common.v1.PublicShopListRequest
+	(*PublicShopListResponse)(nil), // 1: common.v1.PublicShopListResponse
+	(*PublicShopIDsRequest)(nil),   // 2: common.v1.PublicShopIDsRequest
+	(*Shop)(nil),                   // 3: common.v1.Shop
+	(*PublicShopIDsResponse)(nil),  // 4: common.v1.PublicShopIDsResponse
+	nil,                            // 5: common.v1.PublicShopIDsResponse.DataEntry
+	(MarketplaceType)(0),           // 6: common.v1.MarketplaceType
 }
 var file_common_v1_shop_proto_depIdxs = []int32{
-	4, // 0: common.v1.Shop.marketplace_type:type_name -> common.v1.MarketplaceType
-	3, // 1: common.v1.PublicShopIDsResponse.data:type_name -> common.v1.PublicShopIDsResponse.DataEntry
-	1, // 2: common.v1.PublicShopIDsResponse.DataEntry.value:type_name -> common.v1.Shop
-	0, // 3: common.v1.ShopService.PublicShopIDs:input_type -> common.v1.PublicShopIDsRequest
-	2, // 4: common.v1.ShopService.PublicShopIDs:output_type -> common.v1.PublicShopIDsResponse
-	4, // [4:5] is the sub-list for method output_type
-	3, // [3:4] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	6, // 0: common.v1.PublicShopListRequest.marketplace_type:type_name -> common.v1.MarketplaceType
+	3, // 1: common.v1.PublicShopListResponse.data:type_name -> common.v1.Shop
+	6, // 2: common.v1.Shop.marketplace_type:type_name -> common.v1.MarketplaceType
+	5, // 3: common.v1.PublicShopIDsResponse.data:type_name -> common.v1.PublicShopIDsResponse.DataEntry
+	3, // 4: common.v1.PublicShopIDsResponse.DataEntry.value:type_name -> common.v1.Shop
+	2, // 5: common.v1.ShopService.PublicShopIDs:input_type -> common.v1.PublicShopIDsRequest
+	0, // 6: common.v1.ShopService.PublicShopList:input_type -> common.v1.PublicShopListRequest
+	4, // 7: common.v1.ShopService.PublicShopIDs:output_type -> common.v1.PublicShopIDsResponse
+	1, // 8: common.v1.ShopService.PublicShopList:output_type -> common.v1.PublicShopListResponse
+	7, // [7:9] is the sub-list for method output_type
+	5, // [5:7] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_common_v1_shop_proto_init() }
@@ -263,7 +389,7 @@ func file_common_v1_shop_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_common_v1_shop_proto_rawDesc), len(file_common_v1_shop_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

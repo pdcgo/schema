@@ -8,6 +8,7 @@ package report_iface
 
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
+	v11 "github.com/pdcgo/schema/services/accounting_iface/v1"
 	v1 "github.com/pdcgo/schema/services/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -503,6 +504,7 @@ type TxLabelExtra struct {
 	ShopId        uint64                 `protobuf:"varint,1,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
 	CsId          uint64                 `protobuf:"varint,2,opt,name=cs_id,json=csId,proto3" json:"cs_id,omitempty"`
 	SupplierId    uint64                 `protobuf:"varint,3,opt,name=supplier_id,json=supplierId,proto3" json:"supplier_id,omitempty"`
+	TypeLabels    []*v11.TypeLabel       `protobuf:"bytes,5,rep,name=type_labels,json=typeLabels,proto3" json:"type_labels,omitempty"`
 	TagIds        []uint64               `protobuf:"varint,4,rep,packed,name=tag_ids,json=tagIds,proto3" json:"tag_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -557,6 +559,13 @@ func (x *TxLabelExtra) GetSupplierId() uint64 {
 		return x.SupplierId
 	}
 	return 0
+}
+
+func (x *TxLabelExtra) GetTypeLabels() []*v11.TypeLabel {
+	if x != nil {
+		return x.TypeLabels
+	}
+	return nil
 }
 
 func (x *TxLabelExtra) GetTagIds() []uint64 {
@@ -1559,7 +1568,7 @@ var File_report_iface_v1_account_report_proto protoreflect.FileDescriptor
 
 const file_report_iface_v1_account_report_proto_rawDesc = "" +
 	"\n" +
-	"$report_iface/v1/account_report.proto\x12\x0freport_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x9a\x01\n" +
+	"$report_iface/v1/account_report.proto\x12\x0freport_iface.v1\x1a\x1eaccounting_iface/v1/core.proto\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x9a\x01\n" +
 	"\x19MonthlyAccountBalanceItem\x12\x14\n" +
 	"\x05month\x18\x01 \x01(\x03R\x05month\x12\x1f\n" +
 	"\vaccount_key\x18\x02 \x01(\tR\n" +
@@ -1596,12 +1605,14 @@ const file_report_iface_v1_account_report_proto_rawDesc = "" +
 	"\abalance\x18\x06 \x01(\x01R\abalance\"\x8f\x01\n" +
 	"\x1cMonthlyBalanceDetailResponse\x12=\n" +
 	"\x04data\x18\x01 \x03(\v2).report_iface.v1.MonthlyBalanceDetailItemR\x04data\x120\n" +
-	"\tpage_info\x18\x02 \x01(\v2\x13.common.v1.PageInfoR\bpageInfo\"v\n" +
+	"\tpage_info\x18\x02 \x01(\v2\x13.common.v1.PageInfoR\bpageInfo\"\xb7\x01\n" +
 	"\fTxLabelExtra\x12\x17\n" +
 	"\ashop_id\x18\x01 \x01(\x04R\x06shopId\x12\x13\n" +
 	"\x05cs_id\x18\x02 \x01(\x04R\x04csId\x12\x1f\n" +
 	"\vsupplier_id\x18\x03 \x01(\x04R\n" +
-	"supplierId\x12\x17\n" +
+	"supplierId\x12?\n" +
+	"\vtype_labels\x18\x05 \x03(\v2\x1e.accounting_iface.v1.TypeLabelR\n" +
+	"typeLabels\x12\x17\n" +
 	"\atag_ids\x18\x04 \x03(\x04R\x06tagIds\"\xc2\x02\n" +
 	"\fEntryPayload\x12\x17\n" +
 	"\x02id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12&\n" +
@@ -1746,7 +1757,8 @@ var file_report_iface_v1_account_report_proto_goTypes = []any{
 	(*v1.TimeFilterRange)(nil),           // 23: common.v1.TimeFilterRange
 	(*v1.PageFilter)(nil),                // 24: common.v1.PageFilter
 	(*v1.PageInfo)(nil),                  // 25: common.v1.PageInfo
-	(*timestamppb.Timestamp)(nil),        // 26: google.protobuf.Timestamp
+	(*v11.TypeLabel)(nil),                // 26: accounting_iface.v1.TypeLabel
+	(*timestamppb.Timestamp)(nil),        // 27: google.protobuf.Timestamp
 }
 var file_report_iface_v1_account_report_proto_depIdxs = []int32{
 	23, // 0: report_iface.v1.MonthlyBalanceRequest.time_range:type_name -> common.v1.TimeFilterRange
@@ -1759,46 +1771,47 @@ var file_report_iface_v1_account_report_proto_depIdxs = []int32{
 	0,  // 7: report_iface.v1.MonthlyBalanceDetailItem.label_filter_type:type_name -> report_iface.v1.LabelFilterType
 	5,  // 8: report_iface.v1.MonthlyBalanceDetailResponse.data:type_name -> report_iface.v1.MonthlyBalanceDetailItem
 	25, // 9: report_iface.v1.MonthlyBalanceDetailResponse.page_info:type_name -> common.v1.PageInfo
-	26, // 10: report_iface.v1.EntryPayload.entry_time:type_name -> google.protobuf.Timestamp
-	7,  // 11: report_iface.v1.DailyUpdateBalanceRequest.label_extra:type_name -> report_iface.v1.TxLabelExtra
-	8,  // 12: report_iface.v1.DailyUpdateBalanceRequest.entries:type_name -> report_iface.v1.EntryPayload
-	0,  // 13: report_iface.v1.BalanceDetailRequest.label_filter_type:type_name -> report_iface.v1.LabelFilterType
-	23, // 14: report_iface.v1.BalanceDetailRequest.time_range:type_name -> common.v1.TimeFilterRange
-	24, // 15: report_iface.v1.BalanceDetailRequest.page:type_name -> common.v1.PageFilter
-	0,  // 16: report_iface.v1.BalanceDetailItem.label_filter_type:type_name -> report_iface.v1.LabelFilterType
-	12, // 17: report_iface.v1.BalanceDetailResponse.data:type_name -> report_iface.v1.BalanceDetailItem
-	25, // 18: report_iface.v1.BalanceDetailResponse.page_info:type_name -> common.v1.PageInfo
-	0,  // 19: report_iface.v1.DailyBalanceDetailRequest.label_filter_type:type_name -> report_iface.v1.LabelFilterType
-	23, // 20: report_iface.v1.DailyBalanceDetailRequest.time_range:type_name -> common.v1.TimeFilterRange
-	24, // 21: report_iface.v1.DailyBalanceDetailRequest.page:type_name -> common.v1.PageFilter
-	0,  // 22: report_iface.v1.DailyBalanceDetailItem.label_filter_type:type_name -> report_iface.v1.LabelFilterType
-	15, // 23: report_iface.v1.DailyBalanceDetailResponse.data:type_name -> report_iface.v1.DailyBalanceDetailItem
-	25, // 24: report_iface.v1.DailyBalanceDetailResponse.page_info:type_name -> common.v1.PageInfo
-	23, // 25: report_iface.v1.BalanceRequest.time_range:type_name -> common.v1.TimeFilterRange
-	18, // 26: report_iface.v1.BalanceResponse.data:type_name -> report_iface.v1.AccountBalanceItem
-	23, // 27: report_iface.v1.DailyBalanceRequest.time_range:type_name -> common.v1.TimeFilterRange
-	24, // 28: report_iface.v1.DailyBalanceRequest.page:type_name -> common.v1.PageFilter
-	21, // 29: report_iface.v1.DailyBalanceResponse.data:type_name -> report_iface.v1.DailyAccountBalanceItem
-	25, // 30: report_iface.v1.DailyBalanceResponse.page_info:type_name -> common.v1.PageInfo
-	17, // 31: report_iface.v1.AccountReportService.Balance:input_type -> report_iface.v1.BalanceRequest
-	20, // 32: report_iface.v1.AccountReportService.DailyBalance:input_type -> report_iface.v1.DailyBalanceRequest
-	11, // 33: report_iface.v1.AccountReportService.BalanceDetail:input_type -> report_iface.v1.BalanceDetailRequest
-	14, // 34: report_iface.v1.AccountReportService.DailyBalanceDetail:input_type -> report_iface.v1.DailyBalanceDetailRequest
-	2,  // 35: report_iface.v1.AccountReportService.MonthlyBalance:input_type -> report_iface.v1.MonthlyBalanceRequest
-	4,  // 36: report_iface.v1.AccountReportService.MonthlyBalanceDetail:input_type -> report_iface.v1.MonthlyBalanceDetailRequest
-	9,  // 37: report_iface.v1.AccountReportService.DailyUpdateBalance:input_type -> report_iface.v1.DailyUpdateBalanceRequest
-	19, // 38: report_iface.v1.AccountReportService.Balance:output_type -> report_iface.v1.BalanceResponse
-	22, // 39: report_iface.v1.AccountReportService.DailyBalance:output_type -> report_iface.v1.DailyBalanceResponse
-	13, // 40: report_iface.v1.AccountReportService.BalanceDetail:output_type -> report_iface.v1.BalanceDetailResponse
-	16, // 41: report_iface.v1.AccountReportService.DailyBalanceDetail:output_type -> report_iface.v1.DailyBalanceDetailResponse
-	3,  // 42: report_iface.v1.AccountReportService.MonthlyBalance:output_type -> report_iface.v1.MonthlyBalanceResponse
-	6,  // 43: report_iface.v1.AccountReportService.MonthlyBalanceDetail:output_type -> report_iface.v1.MonthlyBalanceDetailResponse
-	10, // 44: report_iface.v1.AccountReportService.DailyUpdateBalance:output_type -> report_iface.v1.DailyUpdateBalanceResponse
-	38, // [38:45] is the sub-list for method output_type
-	31, // [31:38] is the sub-list for method input_type
-	31, // [31:31] is the sub-list for extension type_name
-	31, // [31:31] is the sub-list for extension extendee
-	0,  // [0:31] is the sub-list for field type_name
+	26, // 10: report_iface.v1.TxLabelExtra.type_labels:type_name -> accounting_iface.v1.TypeLabel
+	27, // 11: report_iface.v1.EntryPayload.entry_time:type_name -> google.protobuf.Timestamp
+	7,  // 12: report_iface.v1.DailyUpdateBalanceRequest.label_extra:type_name -> report_iface.v1.TxLabelExtra
+	8,  // 13: report_iface.v1.DailyUpdateBalanceRequest.entries:type_name -> report_iface.v1.EntryPayload
+	0,  // 14: report_iface.v1.BalanceDetailRequest.label_filter_type:type_name -> report_iface.v1.LabelFilterType
+	23, // 15: report_iface.v1.BalanceDetailRequest.time_range:type_name -> common.v1.TimeFilterRange
+	24, // 16: report_iface.v1.BalanceDetailRequest.page:type_name -> common.v1.PageFilter
+	0,  // 17: report_iface.v1.BalanceDetailItem.label_filter_type:type_name -> report_iface.v1.LabelFilterType
+	12, // 18: report_iface.v1.BalanceDetailResponse.data:type_name -> report_iface.v1.BalanceDetailItem
+	25, // 19: report_iface.v1.BalanceDetailResponse.page_info:type_name -> common.v1.PageInfo
+	0,  // 20: report_iface.v1.DailyBalanceDetailRequest.label_filter_type:type_name -> report_iface.v1.LabelFilterType
+	23, // 21: report_iface.v1.DailyBalanceDetailRequest.time_range:type_name -> common.v1.TimeFilterRange
+	24, // 22: report_iface.v1.DailyBalanceDetailRequest.page:type_name -> common.v1.PageFilter
+	0,  // 23: report_iface.v1.DailyBalanceDetailItem.label_filter_type:type_name -> report_iface.v1.LabelFilterType
+	15, // 24: report_iface.v1.DailyBalanceDetailResponse.data:type_name -> report_iface.v1.DailyBalanceDetailItem
+	25, // 25: report_iface.v1.DailyBalanceDetailResponse.page_info:type_name -> common.v1.PageInfo
+	23, // 26: report_iface.v1.BalanceRequest.time_range:type_name -> common.v1.TimeFilterRange
+	18, // 27: report_iface.v1.BalanceResponse.data:type_name -> report_iface.v1.AccountBalanceItem
+	23, // 28: report_iface.v1.DailyBalanceRequest.time_range:type_name -> common.v1.TimeFilterRange
+	24, // 29: report_iface.v1.DailyBalanceRequest.page:type_name -> common.v1.PageFilter
+	21, // 30: report_iface.v1.DailyBalanceResponse.data:type_name -> report_iface.v1.DailyAccountBalanceItem
+	25, // 31: report_iface.v1.DailyBalanceResponse.page_info:type_name -> common.v1.PageInfo
+	17, // 32: report_iface.v1.AccountReportService.Balance:input_type -> report_iface.v1.BalanceRequest
+	20, // 33: report_iface.v1.AccountReportService.DailyBalance:input_type -> report_iface.v1.DailyBalanceRequest
+	11, // 34: report_iface.v1.AccountReportService.BalanceDetail:input_type -> report_iface.v1.BalanceDetailRequest
+	14, // 35: report_iface.v1.AccountReportService.DailyBalanceDetail:input_type -> report_iface.v1.DailyBalanceDetailRequest
+	2,  // 36: report_iface.v1.AccountReportService.MonthlyBalance:input_type -> report_iface.v1.MonthlyBalanceRequest
+	4,  // 37: report_iface.v1.AccountReportService.MonthlyBalanceDetail:input_type -> report_iface.v1.MonthlyBalanceDetailRequest
+	9,  // 38: report_iface.v1.AccountReportService.DailyUpdateBalance:input_type -> report_iface.v1.DailyUpdateBalanceRequest
+	19, // 39: report_iface.v1.AccountReportService.Balance:output_type -> report_iface.v1.BalanceResponse
+	22, // 40: report_iface.v1.AccountReportService.DailyBalance:output_type -> report_iface.v1.DailyBalanceResponse
+	13, // 41: report_iface.v1.AccountReportService.BalanceDetail:output_type -> report_iface.v1.BalanceDetailResponse
+	16, // 42: report_iface.v1.AccountReportService.DailyBalanceDetail:output_type -> report_iface.v1.DailyBalanceDetailResponse
+	3,  // 43: report_iface.v1.AccountReportService.MonthlyBalance:output_type -> report_iface.v1.MonthlyBalanceResponse
+	6,  // 44: report_iface.v1.AccountReportService.MonthlyBalanceDetail:output_type -> report_iface.v1.MonthlyBalanceDetailResponse
+	10, // 45: report_iface.v1.AccountReportService.DailyUpdateBalance:output_type -> report_iface.v1.DailyUpdateBalanceResponse
+	39, // [39:46] is the sub-list for method output_type
+	32, // [32:39] is the sub-list for method input_type
+	32, // [32:32] is the sub-list for extension type_name
+	32, // [32:32] is the sub-list for extension extendee
+	0,  // [0:32] is the sub-list for field type_name
 }
 
 func init() { file_report_iface_v1_account_report_proto_init() }

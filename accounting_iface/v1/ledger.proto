@@ -11,14 +11,6 @@ service LedgerService {
   rpc EntryListExport(EntryListExportRequest) returns (stream EntryListExportResponse);
 }
 
-message EntryListExportRequest {
-  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
-  string account_key = 2 [(buf.validate.field).string.min_len = 1];
-  string keyword = 4;
-  FilterExtra extra = 6;
-  common.v1.TimeFilterRange time_range = 3 [(buf.validate.field).required = true];
-}
-
 message EntryListExportResponse {
   string message = 1;
   int64 offset = 2;
@@ -42,9 +34,22 @@ message FilterExtra {
   uint64 supplier_id = 3;
 }
 
+message EntryListExportRequest {
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  string account_key = 2 [(buf.validate.field).string.min_len = 1];
+  uint64 account_team_id = 7;
+  common.v1.MarketplaceType marketplace = 8;
+  uint64 shop_id = 9;
+  string keyword = 4;
+  FilterExtra extra = 6;
+  common.v1.TimeFilterRange time_range = 3 [(buf.validate.field).required = true];
+}
+
 message EntryListRequest {
   uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
   uint64 account_team_id = 8;
+  common.v1.MarketplaceType marketplace = 9;
+  uint64 shop_id = 10;
   string account_key = 2 [(buf.validate.field).string.min_len = 1];
   string keyword = 7;
   FilterExtra extra = 6;

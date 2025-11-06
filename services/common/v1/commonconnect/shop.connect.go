@@ -36,11 +36,15 @@ const (
 	// ShopServicePublicShopIDsProcedure is the fully-qualified name of the ShopService's PublicShopIDs
 	// RPC.
 	ShopServicePublicShopIDsProcedure = "/common.v1.ShopService/PublicShopIDs"
+	// ShopServicePublicShopListProcedure is the fully-qualified name of the ShopService's
+	// PublicShopList RPC.
+	ShopServicePublicShopListProcedure = "/common.v1.ShopService/PublicShopList"
 )
 
 // ShopServiceClient is a client for the common.v1.ShopService service.
 type ShopServiceClient interface {
 	PublicShopIDs(context.Context, *connect.Request[v1.PublicShopIDsRequest]) (*connect.Response[v1.PublicShopIDsResponse], error)
+	PublicShopList(context.Context, *connect.Request[v1.PublicShopListRequest]) (*connect.Response[v1.PublicShopListResponse], error)
 }
 
 // NewShopServiceClient constructs a client for the common.v1.ShopService service. By default, it
@@ -60,12 +64,19 @@ func NewShopServiceClient(httpClient connect.HTTPClient, baseURL string, opts ..
 			connect.WithSchema(shopServiceMethods.ByName("PublicShopIDs")),
 			connect.WithClientOptions(opts...),
 		),
+		publicShopList: connect.NewClient[v1.PublicShopListRequest, v1.PublicShopListResponse](
+			httpClient,
+			baseURL+ShopServicePublicShopListProcedure,
+			connect.WithSchema(shopServiceMethods.ByName("PublicShopList")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // shopServiceClient implements ShopServiceClient.
 type shopServiceClient struct {
-	publicShopIDs *connect.Client[v1.PublicShopIDsRequest, v1.PublicShopIDsResponse]
+	publicShopIDs  *connect.Client[v1.PublicShopIDsRequest, v1.PublicShopIDsResponse]
+	publicShopList *connect.Client[v1.PublicShopListRequest, v1.PublicShopListResponse]
 }
 
 // PublicShopIDs calls common.v1.ShopService.PublicShopIDs.
@@ -73,9 +84,15 @@ func (c *shopServiceClient) PublicShopIDs(ctx context.Context, req *connect.Requ
 	return c.publicShopIDs.CallUnary(ctx, req)
 }
 
+// PublicShopList calls common.v1.ShopService.PublicShopList.
+func (c *shopServiceClient) PublicShopList(ctx context.Context, req *connect.Request[v1.PublicShopListRequest]) (*connect.Response[v1.PublicShopListResponse], error) {
+	return c.publicShopList.CallUnary(ctx, req)
+}
+
 // ShopServiceHandler is an implementation of the common.v1.ShopService service.
 type ShopServiceHandler interface {
 	PublicShopIDs(context.Context, *connect.Request[v1.PublicShopIDsRequest]) (*connect.Response[v1.PublicShopIDsResponse], error)
+	PublicShopList(context.Context, *connect.Request[v1.PublicShopListRequest]) (*connect.Response[v1.PublicShopListResponse], error)
 }
 
 // NewShopServiceHandler builds an HTTP handler from the service implementation. It returns the path
@@ -91,10 +108,18 @@ func NewShopServiceHandler(svc ShopServiceHandler, opts ...connect.HandlerOption
 		connect.WithSchema(shopServiceMethods.ByName("PublicShopIDs")),
 		connect.WithHandlerOptions(opts...),
 	)
+	shopServicePublicShopListHandler := connect.NewUnaryHandler(
+		ShopServicePublicShopListProcedure,
+		svc.PublicShopList,
+		connect.WithSchema(shopServiceMethods.ByName("PublicShopList")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/common.v1.ShopService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case ShopServicePublicShopIDsProcedure:
 			shopServicePublicShopIDsHandler.ServeHTTP(w, r)
+		case ShopServicePublicShopListProcedure:
+			shopServicePublicShopListHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -106,4 +131,8 @@ type UnimplementedShopServiceHandler struct{}
 
 func (UnimplementedShopServiceHandler) PublicShopIDs(context.Context, *connect.Request[v1.PublicShopIDsRequest]) (*connect.Response[v1.PublicShopIDsResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("common.v1.ShopService.PublicShopIDs is not implemented"))
+}
+
+func (UnimplementedShopServiceHandler) PublicShopList(context.Context, *connect.Request[v1.PublicShopListRequest]) (*connect.Response[v1.PublicShopListResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("common.v1.ShopService.PublicShopList is not implemented"))
 }

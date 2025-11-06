@@ -129,6 +129,53 @@ func (BalanceType) EnumDescriptor() ([]byte, []int) {
 	return file_accounting_iface_v1_core_proto_rawDescGZIP(), []int{1}
 }
 
+// untuk labeling
+type LabelKey int32
+
+const (
+	LabelKey_LABEL_KEY_UNSPECIFIED LabelKey = 0
+	LabelKey_LABEL_KEY_MARKETPLACE LabelKey = 1
+)
+
+// Enum value maps for LabelKey.
+var (
+	LabelKey_name = map[int32]string{
+		0: "LABEL_KEY_UNSPECIFIED",
+		1: "LABEL_KEY_MARKETPLACE",
+	}
+	LabelKey_value = map[string]int32{
+		"LABEL_KEY_UNSPECIFIED": 0,
+		"LABEL_KEY_MARKETPLACE": 1,
+	}
+)
+
+func (x LabelKey) Enum() *LabelKey {
+	p := new(LabelKey)
+	*p = x
+	return p
+}
+
+func (x LabelKey) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (LabelKey) Descriptor() protoreflect.EnumDescriptor {
+	return file_accounting_iface_v1_core_proto_enumTypes[2].Descriptor()
+}
+
+func (LabelKey) Type() protoreflect.EnumType {
+	return &file_accounting_iface_v1_core_proto_enumTypes[2]
+}
+
+func (x LabelKey) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use LabelKey.Descriptor instead.
+func (LabelKey) EnumDescriptor() ([]byte, []int) {
+	return file_accounting_iface_v1_core_proto_rawDescGZIP(), []int{2}
+}
+
 type CoaDetail struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Code          CoaCode                `protobuf:"varint,1,opt,name=code,proto3,enum=accounting_iface.v1.CoaCode" json:"code,omitempty"`
@@ -432,6 +479,60 @@ func (x *AccountKeyListResponse) GetKeys() []*AccountKeyItem {
 	return nil
 }
 
+type TypeLabel struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// @gotags: gorm:"index:keyval,unique"
+	Key LabelKey `protobuf:"varint,1,opt,name=key,proto3,enum=accounting_iface.v1.LabelKey" json:"key,omitempty" gorm:"index:keyval,unique"`
+	// @gotags: gorm:"index:keyval,unique"
+	Label         string `protobuf:"bytes,2,opt,name=label,proto3" json:"label,omitempty" gorm:"index:keyval,unique"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TypeLabel) Reset() {
+	*x = TypeLabel{}
+	mi := &file_accounting_iface_v1_core_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TypeLabel) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TypeLabel) ProtoMessage() {}
+
+func (x *TypeLabel) ProtoReflect() protoreflect.Message {
+	mi := &file_accounting_iface_v1_core_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TypeLabel.ProtoReflect.Descriptor instead.
+func (*TypeLabel) Descriptor() ([]byte, []int) {
+	return file_accounting_iface_v1_core_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *TypeLabel) GetKey() LabelKey {
+	if x != nil {
+		return x.Key
+	}
+	return LabelKey_LABEL_KEY_UNSPECIFIED
+}
+
+func (x *TypeLabel) GetLabel() string {
+	if x != nil {
+		return x.Label
+	}
+	return ""
+}
+
 var File_accounting_iface_v1_core_proto protoreflect.FileDescriptor
 
 const file_accounting_iface_v1_core_proto_rawDesc = "" +
@@ -458,7 +559,10 @@ const file_accounting_iface_v1_core_proto_rawDesc = "" +
 	"\x01q\x18\x01 \x01(\tR\x01q\x12 \n" +
 	"\ateam_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\"Q\n" +
 	"\x16AccountKeyListResponse\x127\n" +
-	"\x04keys\x18\x01 \x03(\v2#.accounting_iface.v1.AccountKeyItemR\x04keys*\x90\x01\n" +
+	"\x04keys\x18\x01 \x03(\v2#.accounting_iface.v1.AccountKeyItemR\x04keys\"R\n" +
+	"\tTypeLabel\x12/\n" +
+	"\x03key\x18\x01 \x01(\x0e2\x1d.accounting_iface.v1.LabelKeyR\x03key\x12\x14\n" +
+	"\x05label\x18\x02 \x01(\tR\x05label*\x90\x01\n" +
 	"\aCoaCode\x12\x18\n" +
 	"\x14COA_CODE_UNSPECIFIED\x10\x00\x12\x12\n" +
 	"\x0eCOA_CODE_ASSET\x10\n" +
@@ -470,7 +574,10 @@ const file_accounting_iface_v1_core_proto_rawDesc = "" +
 	"\vBalanceType\x12\x1c\n" +
 	"\x18BALANCE_TYPE_UNSPECIFIED\x10\x00\x12\x16\n" +
 	"\x12BALANCE_TYPE_DEBIT\x10\x01\x12\x17\n" +
-	"\x13BALANCE_TYPE_CREDIT\x10\x022x\n" +
+	"\x13BALANCE_TYPE_CREDIT\x10\x02*@\n" +
+	"\bLabelKey\x12\x19\n" +
+	"\x15LABEL_KEY_UNSPECIFIED\x10\x00\x12\x19\n" +
+	"\x15LABEL_KEY_MARKETPLACE\x10\x012x\n" +
 	"\vCoreService\x12i\n" +
 	"\x0eAccountKeyList\x12*.accounting_iface.v1.AccountKeyListRequest\x1a+.accounting_iface.v1.AccountKeyListResponseB\xd4\x01\n" +
 	"\x17com.accounting_iface.v1B\tCoreProtoP\x01ZEgithub.com/pdcgo/schema/services/accounting_iface/v1;accounting_iface\xa2\x02\x03AXX\xaa\x02\x12AccountingIface.V1\xca\x02\x12AccountingIface\\V1\xe2\x02\x1eAccountingIface\\V1\\GPBMetadata\xea\x02\x13AccountingIface::V1b\x06proto3"
@@ -487,31 +594,34 @@ func file_accounting_iface_v1_core_proto_rawDescGZIP() []byte {
 	return file_accounting_iface_v1_core_proto_rawDescData
 }
 
-var file_accounting_iface_v1_core_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_accounting_iface_v1_core_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_accounting_iface_v1_core_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
+var file_accounting_iface_v1_core_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_accounting_iface_v1_core_proto_goTypes = []any{
 	(CoaCode)(0),                   // 0: accounting_iface.v1.CoaCode
 	(BalanceType)(0),               // 1: accounting_iface.v1.BalanceType
-	(*CoaDetail)(nil),              // 2: accounting_iface.v1.CoaDetail
-	(*AccountFilterExtra)(nil),     // 3: accounting_iface.v1.AccountFilterExtra
-	(*AccountKeyItem)(nil),         // 4: accounting_iface.v1.AccountKeyItem
-	(*AccountKeyListRequest)(nil),  // 5: accounting_iface.v1.AccountKeyListRequest
-	(*AccountKeyListResponse)(nil), // 6: accounting_iface.v1.AccountKeyListResponse
+	(LabelKey)(0),                  // 2: accounting_iface.v1.LabelKey
+	(*CoaDetail)(nil),              // 3: accounting_iface.v1.CoaDetail
+	(*AccountFilterExtra)(nil),     // 4: accounting_iface.v1.AccountFilterExtra
+	(*AccountKeyItem)(nil),         // 5: accounting_iface.v1.AccountKeyItem
+	(*AccountKeyListRequest)(nil),  // 6: accounting_iface.v1.AccountKeyListRequest
+	(*AccountKeyListResponse)(nil), // 7: accounting_iface.v1.AccountKeyListResponse
+	(*TypeLabel)(nil),              // 8: accounting_iface.v1.TypeLabel
 }
 var file_accounting_iface_v1_core_proto_depIdxs = []int32{
 	0, // 0: accounting_iface.v1.CoaDetail.code:type_name -> accounting_iface.v1.CoaCode
 	0, // 1: accounting_iface.v1.AccountKeyItem.coa:type_name -> accounting_iface.v1.CoaCode
 	1, // 2: accounting_iface.v1.AccountKeyItem.balance_type:type_name -> accounting_iface.v1.BalanceType
-	3, // 3: accounting_iface.v1.AccountKeyItem.filter_extra:type_name -> accounting_iface.v1.AccountFilterExtra
-	2, // 4: accounting_iface.v1.AccountKeyItem.coa_detail:type_name -> accounting_iface.v1.CoaDetail
-	4, // 5: accounting_iface.v1.AccountKeyListResponse.keys:type_name -> accounting_iface.v1.AccountKeyItem
-	5, // 6: accounting_iface.v1.CoreService.AccountKeyList:input_type -> accounting_iface.v1.AccountKeyListRequest
-	6, // 7: accounting_iface.v1.CoreService.AccountKeyList:output_type -> accounting_iface.v1.AccountKeyListResponse
-	7, // [7:8] is the sub-list for method output_type
-	6, // [6:7] is the sub-list for method input_type
-	6, // [6:6] is the sub-list for extension type_name
-	6, // [6:6] is the sub-list for extension extendee
-	0, // [0:6] is the sub-list for field type_name
+	4, // 3: accounting_iface.v1.AccountKeyItem.filter_extra:type_name -> accounting_iface.v1.AccountFilterExtra
+	3, // 4: accounting_iface.v1.AccountKeyItem.coa_detail:type_name -> accounting_iface.v1.CoaDetail
+	5, // 5: accounting_iface.v1.AccountKeyListResponse.keys:type_name -> accounting_iface.v1.AccountKeyItem
+	2, // 6: accounting_iface.v1.TypeLabel.key:type_name -> accounting_iface.v1.LabelKey
+	6, // 7: accounting_iface.v1.CoreService.AccountKeyList:input_type -> accounting_iface.v1.AccountKeyListRequest
+	7, // 8: accounting_iface.v1.CoreService.AccountKeyList:output_type -> accounting_iface.v1.AccountKeyListResponse
+	8, // [8:9] is the sub-list for method output_type
+	7, // [7:8] is the sub-list for method input_type
+	7, // [7:7] is the sub-list for extension type_name
+	7, // [7:7] is the sub-list for extension extendee
+	0, // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_accounting_iface_v1_core_proto_init() }
@@ -524,8 +634,8 @@ func file_accounting_iface_v1_core_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_accounting_iface_v1_core_proto_rawDesc), len(file_accounting_iface_v1_core_proto_rawDesc)),
-			NumEnums:      2,
-			NumMessages:   5,
+			NumEnums:      3,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -56,3 +56,16 @@ message AccountKeyListRequest {
 message AccountKeyListResponse {
   repeated AccountKeyItem keys = 1;
 }
+
+// untuk labeling
+enum LabelKey {
+  LABEL_KEY_UNSPECIFIED = 0;
+  LABEL_KEY_MARKETPLACE = 1;
+}
+
+message TypeLabel {
+  // @gotags: gorm:"index:keyval,unique"
+  LabelKey key = 1;
+  // @gotags: gorm:"index:keyval,unique"
+  string label = 2;
+}
