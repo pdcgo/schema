@@ -7,6 +7,23 @@ option go_package = "github.com/pdcgo/schema/services/accounting_iface/v1;accoun
 
 service CoreService {
   rpc AccountKeyList(AccountKeyListRequest) returns (AccountKeyListResponse);
+  rpc TypeLabelList(TypeLabelListRequest) returns (TypeLabelListResponse);
+  // rpc TypeLabelValueList(TypeLabelValueListRequest) returns (TypeLabelValueListResponse);
+}
+
+message TypeLabelValueListRequest {
+  string q = 1;
+  LabelKey key = 2;
+}
+
+message TypeLabelValueListResponse {
+  repeated string list = 1;
+}
+
+message TypeLabelListRequest {}
+
+message TypeLabelListResponse {
+  repeated TypeLabel list = 1;
 }
 
 enum CoaCode {
@@ -35,6 +52,7 @@ message AccountFilterExtra {
   bool supplier = 2;
   bool shop = 3;
   bool custom_tag = 4;
+  repeated LabelKey allowed_label_key = 6;
   bool team = 5;
 }
 

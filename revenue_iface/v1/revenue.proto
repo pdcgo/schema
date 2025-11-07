@@ -1,6 +1,7 @@
 syntax = "proto3";
 package revenue_iface.v1;
 
+import "accounting_iface/v1/core.proto";
 import "buf/validate/validate.proto";
 import "common/v1/common.proto";
 import "google/protobuf/timestamp.proto";
@@ -129,6 +130,7 @@ message ExtraLabelInfo {
   uint64 supplier_id = 2;
   uint64 shop_id = 3 [(buf.validate.field).uint64 = {gt: 0}];
   repeated string tags = 4;
+  repeated accounting_iface.v1.TypeLabel type_labels = 5;
 }
 
 message OrderInfo {

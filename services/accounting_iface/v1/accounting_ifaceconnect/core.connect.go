@@ -36,11 +36,15 @@ const (
 	// CoreServiceAccountKeyListProcedure is the fully-qualified name of the CoreService's
 	// AccountKeyList RPC.
 	CoreServiceAccountKeyListProcedure = "/accounting_iface.v1.CoreService/AccountKeyList"
+	// CoreServiceTypeLabelListProcedure is the fully-qualified name of the CoreService's TypeLabelList
+	// RPC.
+	CoreServiceTypeLabelListProcedure = "/accounting_iface.v1.CoreService/TypeLabelList"
 )
 
 // CoreServiceClient is a client for the accounting_iface.v1.CoreService service.
 type CoreServiceClient interface {
 	AccountKeyList(context.Context, *connect.Request[v1.AccountKeyListRequest]) (*connect.Response[v1.AccountKeyListResponse], error)
+	TypeLabelList(context.Context, *connect.Request[v1.TypeLabelListRequest]) (*connect.Response[v1.TypeLabelListResponse], error)
 }
 
 // NewCoreServiceClient constructs a client for the accounting_iface.v1.CoreService service. By
@@ -60,12 +64,19 @@ func NewCoreServiceClient(httpClient connect.HTTPClient, baseURL string, opts ..
 			connect.WithSchema(coreServiceMethods.ByName("AccountKeyList")),
 			connect.WithClientOptions(opts...),
 		),
+		typeLabelList: connect.NewClient[v1.TypeLabelListRequest, v1.TypeLabelListResponse](
+			httpClient,
+			baseURL+CoreServiceTypeLabelListProcedure,
+			connect.WithSchema(coreServiceMethods.ByName("TypeLabelList")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // coreServiceClient implements CoreServiceClient.
 type coreServiceClient struct {
 	accountKeyList *connect.Client[v1.AccountKeyListRequest, v1.AccountKeyListResponse]
+	typeLabelList  *connect.Client[v1.TypeLabelListRequest, v1.TypeLabelListResponse]
 }
 
 // AccountKeyList calls accounting_iface.v1.CoreService.AccountKeyList.
@@ -73,9 +84,15 @@ func (c *coreServiceClient) AccountKeyList(ctx context.Context, req *connect.Req
 	return c.accountKeyList.CallUnary(ctx, req)
 }
 
+// TypeLabelList calls accounting_iface.v1.CoreService.TypeLabelList.
+func (c *coreServiceClient) TypeLabelList(ctx context.Context, req *connect.Request[v1.TypeLabelListRequest]) (*connect.Response[v1.TypeLabelListResponse], error) {
+	return c.typeLabelList.CallUnary(ctx, req)
+}
+
 // CoreServiceHandler is an implementation of the accounting_iface.v1.CoreService service.
 type CoreServiceHandler interface {
 	AccountKeyList(context.Context, *connect.Request[v1.AccountKeyListRequest]) (*connect.Response[v1.AccountKeyListResponse], error)
+	TypeLabelList(context.Context, *connect.Request[v1.TypeLabelListRequest]) (*connect.Response[v1.TypeLabelListResponse], error)
 }
 
 // NewCoreServiceHandler builds an HTTP handler from the service implementation. It returns the path
@@ -91,10 +108,18 @@ func NewCoreServiceHandler(svc CoreServiceHandler, opts ...connect.HandlerOption
 		connect.WithSchema(coreServiceMethods.ByName("AccountKeyList")),
 		connect.WithHandlerOptions(opts...),
 	)
+	coreServiceTypeLabelListHandler := connect.NewUnaryHandler(
+		CoreServiceTypeLabelListProcedure,
+		svc.TypeLabelList,
+		connect.WithSchema(coreServiceMethods.ByName("TypeLabelList")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/accounting_iface.v1.CoreService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case CoreServiceAccountKeyListProcedure:
 			coreServiceAccountKeyListHandler.ServeHTTP(w, r)
+		case CoreServiceTypeLabelListProcedure:
+			coreServiceTypeLabelListHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -106,4 +131,8 @@ type UnimplementedCoreServiceHandler struct{}
 
 func (UnimplementedCoreServiceHandler) AccountKeyList(context.Context, *connect.Request[v1.AccountKeyListRequest]) (*connect.Response[v1.AccountKeyListResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("accounting_iface.v1.CoreService.AccountKeyList is not implemented"))
+}
+
+func (UnimplementedCoreServiceHandler) TypeLabelList(context.Context, *connect.Request[v1.TypeLabelListRequest]) (*connect.Response[v1.TypeLabelListResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("accounting_iface.v1.CoreService.TypeLabelList is not implemented"))
 }
