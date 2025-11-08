@@ -133,8 +133,9 @@ func (BalanceType) EnumDescriptor() ([]byte, []int) {
 type LabelKey int32
 
 const (
-	LabelKey_LABEL_KEY_UNSPECIFIED LabelKey = 0
-	LabelKey_LABEL_KEY_MARKETPLACE LabelKey = 1
+	LabelKey_LABEL_KEY_UNSPECIFIED                LabelKey = 0
+	LabelKey_LABEL_KEY_MARKETPLACE                LabelKey = 1
+	LabelKey_LABEL_KEY_WAREHOUSE_TRANSACTION_TYPE LabelKey = 2
 )
 
 // Enum value maps for LabelKey.
@@ -142,10 +143,12 @@ var (
 	LabelKey_name = map[int32]string{
 		0: "LABEL_KEY_UNSPECIFIED",
 		1: "LABEL_KEY_MARKETPLACE",
+		2: "LABEL_KEY_WAREHOUSE_TRANSACTION_TYPE",
 	}
 	LabelKey_value = map[string]int32{
-		"LABEL_KEY_UNSPECIFIED": 0,
-		"LABEL_KEY_MARKETPLACE": 1,
+		"LABEL_KEY_UNSPECIFIED":                0,
+		"LABEL_KEY_MARKETPLACE":                1,
+		"LABEL_KEY_WAREHOUSE_TRANSACTION_TYPE": 2,
 	}
 )
 
@@ -813,10 +816,11 @@ const file_accounting_iface_v1_core_proto_rawDesc = "" +
 	"\vBalanceType\x12\x1c\n" +
 	"\x18BALANCE_TYPE_UNSPECIFIED\x10\x00\x12\x16\n" +
 	"\x12BALANCE_TYPE_DEBIT\x10\x01\x12\x17\n" +
-	"\x13BALANCE_TYPE_CREDIT\x10\x02*@\n" +
+	"\x13BALANCE_TYPE_CREDIT\x10\x02*j\n" +
 	"\bLabelKey\x12\x19\n" +
 	"\x15LABEL_KEY_UNSPECIFIED\x10\x00\x12\x19\n" +
-	"\x15LABEL_KEY_MARKETPLACE\x10\x012\xe0\x01\n" +
+	"\x15LABEL_KEY_MARKETPLACE\x10\x01\x12(\n" +
+	"$LABEL_KEY_WAREHOUSE_TRANSACTION_TYPE\x10\x022\xe0\x01\n" +
 	"\vCoreService\x12i\n" +
 	"\x0eAccountKeyList\x12*.accounting_iface.v1.AccountKeyListRequest\x1a+.accounting_iface.v1.AccountKeyListResponse\x12f\n" +
 	"\rTypeLabelList\x12).accounting_iface.v1.TypeLabelListRequest\x1a*.accounting_iface.v1.TypeLabelListResponseB\xd4\x01\n" +

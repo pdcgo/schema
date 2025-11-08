@@ -79,6 +79,7 @@ message AccountKeyListResponse {
 enum LabelKey {
   LABEL_KEY_UNSPECIFIED = 0;
   LABEL_KEY_MARKETPLACE = 1;
+  LABEL_KEY_WAREHOUSE_TRANSACTION_TYPE = 2;
 }
 
 message TypeLabel {
