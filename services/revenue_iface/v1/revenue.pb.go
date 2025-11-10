@@ -25,6 +25,64 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type RevenueSource int32
+
+const (
+	RevenueSource_REVENUE_SOURCE_UNSPECIFIED          RevenueSource = 0
+	RevenueSource_REVENUE_SOURCE_FUND                 RevenueSource = 1
+	RevenueSource_REVENUE_SOURCE_AFFILIATE_COMMISION  RevenueSource = 2
+	RevenueSource_REVENUE_SOURCE_LOST_COMPENSATION    RevenueSource = 3
+	RevenueSource_REVENUE_SOURCE_COMPENSATION         RevenueSource = 4
+	RevenueSource_REVENUE_SOURCE_UNKNOWN_COMPENSATION RevenueSource = 5
+)
+
+// Enum value maps for RevenueSource.
+var (
+	RevenueSource_name = map[int32]string{
+		0: "REVENUE_SOURCE_UNSPECIFIED",
+		1: "REVENUE_SOURCE_FUND",
+		2: "REVENUE_SOURCE_AFFILIATE_COMMISION",
+		3: "REVENUE_SOURCE_LOST_COMPENSATION",
+		4: "REVENUE_SOURCE_COMPENSATION",
+		5: "REVENUE_SOURCE_UNKNOWN_COMPENSATION",
+	}
+	RevenueSource_value = map[string]int32{
+		"REVENUE_SOURCE_UNSPECIFIED":          0,
+		"REVENUE_SOURCE_FUND":                 1,
+		"REVENUE_SOURCE_AFFILIATE_COMMISION":  2,
+		"REVENUE_SOURCE_LOST_COMPENSATION":    3,
+		"REVENUE_SOURCE_COMPENSATION":         4,
+		"REVENUE_SOURCE_UNKNOWN_COMPENSATION": 5,
+	}
+)
+
+func (x RevenueSource) Enum() *RevenueSource {
+	p := new(RevenueSource)
+	*p = x
+	return p
+}
+
+func (x RevenueSource) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (RevenueSource) Descriptor() protoreflect.EnumDescriptor {
+	return file_revenue_iface_v1_revenue_proto_enumTypes[0].Descriptor()
+}
+
+func (RevenueSource) Type() protoreflect.EnumType {
+	return &file_revenue_iface_v1_revenue_proto_enumTypes[0]
+}
+
+func (x RevenueSource) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use RevenueSource.Descriptor instead.
+func (RevenueSource) EnumDescriptor() ([]byte, []int) {
+	return file_revenue_iface_v1_revenue_proto_rawDescGZIP(), []int{0}
+}
+
 type ProblemType int32
 
 const (
@@ -55,11 +113,11 @@ func (x ProblemType) String() string {
 }
 
 func (ProblemType) Descriptor() protoreflect.EnumDescriptor {
-	return file_revenue_iface_v1_revenue_proto_enumTypes[0].Descriptor()
+	return file_revenue_iface_v1_revenue_proto_enumTypes[1].Descriptor()
 }
 
 func (ProblemType) Type() protoreflect.EnumType {
-	return &file_revenue_iface_v1_revenue_proto_enumTypes[0]
+	return &file_revenue_iface_v1_revenue_proto_enumTypes[1]
 }
 
 func (x ProblemType) Number() protoreflect.EnumNumber {
@@ -68,7 +126,7 @@ func (x ProblemType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ProblemType.Descriptor instead.
 func (ProblemType) EnumDescriptor() ([]byte, []int) {
-	return file_revenue_iface_v1_revenue_proto_rawDescGZIP(), []int{0}
+	return file_revenue_iface_v1_revenue_proto_rawDescGZIP(), []int{1}
 }
 
 type OrderEvent int32
@@ -104,11 +162,11 @@ func (x OrderEvent) String() string {
 }
 
 func (OrderEvent) Descriptor() protoreflect.EnumDescriptor {
-	return file_revenue_iface_v1_revenue_proto_enumTypes[1].Descriptor()
+	return file_revenue_iface_v1_revenue_proto_enumTypes[2].Descriptor()
 }
 
 func (OrderEvent) Type() protoreflect.EnumType {
-	return &file_revenue_iface_v1_revenue_proto_enumTypes[1]
+	return &file_revenue_iface_v1_revenue_proto_enumTypes[2]
 }
 
 func (x OrderEvent) Number() protoreflect.EnumNumber {
@@ -117,7 +175,7 @@ func (x OrderEvent) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use OrderEvent.Descriptor instead.
 func (OrderEvent) EnumDescriptor() ([]byte, []int) {
-	return file_revenue_iface_v1_revenue_proto_rawDescGZIP(), []int{1}
+	return file_revenue_iface_v1_revenue_proto_rawDescGZIP(), []int{2}
 }
 
 type RevenueStreamEventFund struct {
@@ -203,6 +261,7 @@ type RevenueStreamEventAdjustment struct {
 	Desc          string                 `protobuf:"bytes,3,opt,name=desc,proto3" json:"desc,omitempty"`
 	OrderId       string                 `protobuf:"bytes,4,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
 	Tags          []string               `protobuf:"bytes,5,rep,name=tags,proto3" json:"tags,omitempty"`
+	Source        RevenueSource          `protobuf:"varint,6,opt,name=source,proto3,enum=revenue_iface.v1.RevenueSource" json:"source,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -270,6 +329,13 @@ func (x *RevenueStreamEventAdjustment) GetTags() []string {
 		return x.Tags
 	}
 	return nil
+}
+
+func (x *RevenueStreamEventAdjustment) GetSource() RevenueSource {
+	if x != nil {
+		return x.Source
+	}
+	return RevenueSource_REVENUE_SOURCE_UNSPECIFIED
 }
 
 type RevenueStreamEventWithdrawal struct {
@@ -1411,14 +1477,15 @@ const file_revenue_iface_v1_revenue_proto_rawDesc = "" +
 	"\x06amount\x18\x02 \x01(\x01B\x0e\xbaH\v\x12\t!\x00\x00\x00\x00\x00\x00\x00\x00R\x06amount\x122\n" +
 	"\x02at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\x02at\x12\x1a\n" +
 	"\x04desc\x18\x04 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\x04desc\x12!\n" +
-	"\border_id\x18\x05 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\aorderId\"\xf3\x01\n" +
+	"\border_id\x18\x05 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\aorderId\"\xac\x02\n" +
 	"\x1cRevenueStreamEventAdjustment\x12T\n" +
 	"\x06amount\x18\x01 \x01(\x01B<\xbaH9\xba\x016\n" +
 	"\x0fnon_zero_amount\x12\x15amount cannot be zero\x1a\fthis != 0.00R\x06amount\x122\n" +
 	"\x02at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\x02at\x12\x1a\n" +
 	"\x04desc\x18\x03 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\x04desc\x12\x19\n" +
 	"\border_id\x18\x04 \x01(\tR\aorderId\x12\x12\n" +
-	"\x04tags\x18\x05 \x03(\tR\x04tags\"\x96\x01\n" +
+	"\x04tags\x18\x05 \x03(\tR\x04tags\x127\n" +
+	"\x06source\x18\x06 \x01(\x0e2\x1f.revenue_iface.v1.RevenueSourceR\x06source\"\x96\x01\n" +
 	"\x1cRevenueStreamEventWithdrawal\x12&\n" +
 	"\x06amount\x18\x01 \x01(\x01B\x0e\xbaH\v\x12\t!\x00\x00\x00\x00\x00\x00\x00\x00R\x06amount\x122\n" +
 	"\x02at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\x02at\x12\x1a\n" +
@@ -1496,7 +1563,14 @@ const file_revenue_iface_v1_revenue_proto_rawDesc = "" +
 	"\x10own_stock_amount\x18\n" +
 	" \x01(\x01R\x0eownStockAmount:\xab\x01\xbaH\xa7\x01\x1a\xa4\x01\n" +
 	"\x15stock_source_required\x12QEither borrow_stock must not be empty or own_stock_amount must be greater than 0.\x1a8size(this.borrow_stock) > 0 || this.own_stock_amount > 0\"\x11\n" +
-	"\x0fOnOrderResponse*B\n" +
+	"\x0fOnOrderResponse*\xe0\x01\n" +
+	"\rRevenueSource\x12\x1e\n" +
+	"\x1aREVENUE_SOURCE_UNSPECIFIED\x10\x00\x12\x17\n" +
+	"\x13REVENUE_SOURCE_FUND\x10\x01\x12&\n" +
+	"\"REVENUE_SOURCE_AFFILIATE_COMMISION\x10\x02\x12$\n" +
+	" REVENUE_SOURCE_LOST_COMPENSATION\x10\x03\x12\x1f\n" +
+	"\x1bREVENUE_SOURCE_COMPENSATION\x10\x04\x12'\n" +
+	"#REVENUE_SOURCE_UNKNOWN_COMPENSATION\x10\x05*B\n" +
 	"\vProblemType\x12\x1c\n" +
 	"\x18PROBLEM_TYPE_UNSPECIFIED\x10\x00\x12\x15\n" +
 	"\x11PROBLEM_TYPE_LOST\x10\x01*Z\n" +
@@ -1528,71 +1602,73 @@ func file_revenue_iface_v1_revenue_proto_rawDescGZIP() []byte {
 	return file_revenue_iface_v1_revenue_proto_rawDescData
 }
 
-var file_revenue_iface_v1_revenue_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_revenue_iface_v1_revenue_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
 var file_revenue_iface_v1_revenue_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
 var file_revenue_iface_v1_revenue_proto_goTypes = []any{
-	(ProblemType)(0),                     // 0: revenue_iface.v1.ProblemType
-	(OrderEvent)(0),                      // 1: revenue_iface.v1.OrderEvent
-	(*RevenueStreamEventFund)(nil),       // 2: revenue_iface.v1.RevenueStreamEventFund
-	(*RevenueStreamEventAdjustment)(nil), // 3: revenue_iface.v1.RevenueStreamEventAdjustment
-	(*RevenueStreamEventWithdrawal)(nil), // 4: revenue_iface.v1.RevenueStreamEventWithdrawal
-	(*RevenueStreamEventInit)(nil),       // 5: revenue_iface.v1.RevenueStreamEventInit
-	(*RevenueStreamEvent)(nil),           // 6: revenue_iface.v1.RevenueStreamEvent
-	(*RevenueStreamRequest)(nil),         // 7: revenue_iface.v1.RevenueStreamRequest
-	(*RevenueStreamResponse)(nil),        // 8: revenue_iface.v1.RevenueStreamResponse
-	(*RevenueAdjustmentRequest)(nil),     // 9: revenue_iface.v1.RevenueAdjustmentRequest
-	(*RevenueAdjustmentResponse)(nil),    // 10: revenue_iface.v1.RevenueAdjustmentResponse
-	(*OrderCompletedRequest)(nil),        // 11: revenue_iface.v1.OrderCompletedRequest
-	(*OrderCompletedResponse)(nil),       // 12: revenue_iface.v1.OrderCompletedResponse
-	(*OrderReturnRequest)(nil),           // 13: revenue_iface.v1.OrderReturnRequest
-	(*OrderReturnResponse)(nil),          // 14: revenue_iface.v1.OrderReturnResponse
-	(*WithdrawalRequest)(nil),            // 15: revenue_iface.v1.WithdrawalRequest
-	(*WithdrawalResponse)(nil),           // 16: revenue_iface.v1.WithdrawalResponse
-	(*OrderCancelRequest)(nil),           // 17: revenue_iface.v1.OrderCancelRequest
-	(*OrderCancelResponse)(nil),          // 18: revenue_iface.v1.OrderCancelResponse
-	(*BorrowStock)(nil),                  // 19: revenue_iface.v1.BorrowStock
-	(*ExtraLabelInfo)(nil),               // 20: revenue_iface.v1.ExtraLabelInfo
-	(*OrderInfo)(nil),                    // 21: revenue_iface.v1.OrderInfo
-	(*OnOrderRequest)(nil),               // 22: revenue_iface.v1.OnOrderRequest
-	(*OnOrderResponse)(nil),              // 23: revenue_iface.v1.OnOrderResponse
-	(*timestamppb.Timestamp)(nil),        // 24: google.protobuf.Timestamp
-	(*v1.TypeLabel)(nil),                 // 25: accounting_iface.v1.TypeLabel
-	(v11.MarketplaceType)(0),             // 26: common.v1.MarketplaceType
+	(RevenueSource)(0),                   // 0: revenue_iface.v1.RevenueSource
+	(ProblemType)(0),                     // 1: revenue_iface.v1.ProblemType
+	(OrderEvent)(0),                      // 2: revenue_iface.v1.OrderEvent
+	(*RevenueStreamEventFund)(nil),       // 3: revenue_iface.v1.RevenueStreamEventFund
+	(*RevenueStreamEventAdjustment)(nil), // 4: revenue_iface.v1.RevenueStreamEventAdjustment
+	(*RevenueStreamEventWithdrawal)(nil), // 5: revenue_iface.v1.RevenueStreamEventWithdrawal
+	(*RevenueStreamEventInit)(nil),       // 6: revenue_iface.v1.RevenueStreamEventInit
+	(*RevenueStreamEvent)(nil),           // 7: revenue_iface.v1.RevenueStreamEvent
+	(*RevenueStreamRequest)(nil),         // 8: revenue_iface.v1.RevenueStreamRequest
+	(*RevenueStreamResponse)(nil),        // 9: revenue_iface.v1.RevenueStreamResponse
+	(*RevenueAdjustmentRequest)(nil),     // 10: revenue_iface.v1.RevenueAdjustmentRequest
+	(*RevenueAdjustmentResponse)(nil),    // 11: revenue_iface.v1.RevenueAdjustmentResponse
+	(*OrderCompletedRequest)(nil),        // 12: revenue_iface.v1.OrderCompletedRequest
+	(*OrderCompletedResponse)(nil),       // 13: revenue_iface.v1.OrderCompletedResponse
+	(*OrderReturnRequest)(nil),           // 14: revenue_iface.v1.OrderReturnRequest
+	(*OrderReturnResponse)(nil),          // 15: revenue_iface.v1.OrderReturnResponse
+	(*WithdrawalRequest)(nil),            // 16: revenue_iface.v1.WithdrawalRequest
+	(*WithdrawalResponse)(nil),           // 17: revenue_iface.v1.WithdrawalResponse
+	(*OrderCancelRequest)(nil),           // 18: revenue_iface.v1.OrderCancelRequest
+	(*OrderCancelResponse)(nil),          // 19: revenue_iface.v1.OrderCancelResponse
+	(*BorrowStock)(nil),                  // 20: revenue_iface.v1.BorrowStock
+	(*ExtraLabelInfo)(nil),               // 21: revenue_iface.v1.ExtraLabelInfo
+	(*OrderInfo)(nil),                    // 22: revenue_iface.v1.OrderInfo
+	(*OnOrderRequest)(nil),               // 23: revenue_iface.v1.OnOrderRequest
+	(*OnOrderResponse)(nil),              // 24: revenue_iface.v1.OnOrderResponse
+	(*timestamppb.Timestamp)(nil),        // 25: google.protobuf.Timestamp
+	(*v1.TypeLabel)(nil),                 // 26: accounting_iface.v1.TypeLabel
+	(v11.MarketplaceType)(0),             // 27: common.v1.MarketplaceType
 }
 var file_revenue_iface_v1_revenue_proto_depIdxs = []int32{
-	24, // 0: revenue_iface.v1.RevenueStreamEventFund.at:type_name -> google.protobuf.Timestamp
-	24, // 1: revenue_iface.v1.RevenueStreamEventAdjustment.at:type_name -> google.protobuf.Timestamp
-	24, // 2: revenue_iface.v1.RevenueStreamEventWithdrawal.at:type_name -> google.protobuf.Timestamp
-	5,  // 3: revenue_iface.v1.RevenueStreamEvent.init:type_name -> revenue_iface.v1.RevenueStreamEventInit
-	2,  // 4: revenue_iface.v1.RevenueStreamEvent.fund:type_name -> revenue_iface.v1.RevenueStreamEventFund
-	3,  // 5: revenue_iface.v1.RevenueStreamEvent.adjustment:type_name -> revenue_iface.v1.RevenueStreamEventAdjustment
-	4,  // 6: revenue_iface.v1.RevenueStreamEvent.withdrawal:type_name -> revenue_iface.v1.RevenueStreamEventWithdrawal
-	6,  // 7: revenue_iface.v1.RevenueStreamRequest.event:type_name -> revenue_iface.v1.RevenueStreamEvent
-	25, // 8: revenue_iface.v1.ExtraLabelInfo.type_labels:type_name -> accounting_iface.v1.TypeLabel
-	20, // 9: revenue_iface.v1.OnOrderRequest.label_info:type_name -> revenue_iface.v1.ExtraLabelInfo
-	21, // 10: revenue_iface.v1.OnOrderRequest.order_info:type_name -> revenue_iface.v1.OrderInfo
-	1,  // 11: revenue_iface.v1.OnOrderRequest.event:type_name -> revenue_iface.v1.OrderEvent
-	26, // 12: revenue_iface.v1.OnOrderRequest.marketplace_type:type_name -> common.v1.MarketplaceType
-	19, // 13: revenue_iface.v1.OnOrderRequest.borrow_stock:type_name -> revenue_iface.v1.BorrowStock
-	22, // 14: revenue_iface.v1.RevenueService.OnOrder:input_type -> revenue_iface.v1.OnOrderRequest
-	17, // 15: revenue_iface.v1.RevenueService.OrderCancel:input_type -> revenue_iface.v1.OrderCancelRequest
-	13, // 16: revenue_iface.v1.RevenueService.OrderReturn:input_type -> revenue_iface.v1.OrderReturnRequest
-	11, // 17: revenue_iface.v1.RevenueService.OrderCompleted:input_type -> revenue_iface.v1.OrderCompletedRequest
-	9,  // 18: revenue_iface.v1.RevenueService.RevenueAdjustment:input_type -> revenue_iface.v1.RevenueAdjustmentRequest
-	15, // 19: revenue_iface.v1.RevenueService.Withdrawal:input_type -> revenue_iface.v1.WithdrawalRequest
-	7,  // 20: revenue_iface.v1.RevenueService.RevenueStream:input_type -> revenue_iface.v1.RevenueStreamRequest
-	23, // 21: revenue_iface.v1.RevenueService.OnOrder:output_type -> revenue_iface.v1.OnOrderResponse
-	18, // 22: revenue_iface.v1.RevenueService.OrderCancel:output_type -> revenue_iface.v1.OrderCancelResponse
-	14, // 23: revenue_iface.v1.RevenueService.OrderReturn:output_type -> revenue_iface.v1.OrderReturnResponse
-	12, // 24: revenue_iface.v1.RevenueService.OrderCompleted:output_type -> revenue_iface.v1.OrderCompletedResponse
-	10, // 25: revenue_iface.v1.RevenueService.RevenueAdjustment:output_type -> revenue_iface.v1.RevenueAdjustmentResponse
-	16, // 26: revenue_iface.v1.RevenueService.Withdrawal:output_type -> revenue_iface.v1.WithdrawalResponse
-	8,  // 27: revenue_iface.v1.RevenueService.RevenueStream:output_type -> revenue_iface.v1.RevenueStreamResponse
-	21, // [21:28] is the sub-list for method output_type
-	14, // [14:21] is the sub-list for method input_type
-	14, // [14:14] is the sub-list for extension type_name
-	14, // [14:14] is the sub-list for extension extendee
-	0,  // [0:14] is the sub-list for field type_name
+	25, // 0: revenue_iface.v1.RevenueStreamEventFund.at:type_name -> google.protobuf.Timestamp
+	25, // 1: revenue_iface.v1.RevenueStreamEventAdjustment.at:type_name -> google.protobuf.Timestamp
+	0,  // 2: revenue_iface.v1.RevenueStreamEventAdjustment.source:type_name -> revenue_iface.v1.RevenueSource
+	25, // 3: revenue_iface.v1.RevenueStreamEventWithdrawal.at:type_name -> google.protobuf.Timestamp
+	6,  // 4: revenue_iface.v1.RevenueStreamEvent.init:type_name -> revenue_iface.v1.RevenueStreamEventInit
+	3,  // 5: revenue_iface.v1.RevenueStreamEvent.fund:type_name -> revenue_iface.v1.RevenueStreamEventFund
+	4,  // 6: revenue_iface.v1.RevenueStreamEvent.adjustment:type_name -> revenue_iface.v1.RevenueStreamEventAdjustment
+	5,  // 7: revenue_iface.v1.RevenueStreamEvent.withdrawal:type_name -> revenue_iface.v1.RevenueStreamEventWithdrawal
+	7,  // 8: revenue_iface.v1.RevenueStreamRequest.event:type_name -> revenue_iface.v1.RevenueStreamEvent
+	26, // 9: revenue_iface.v1.ExtraLabelInfo.type_labels:type_name -> accounting_iface.v1.TypeLabel
+	21, // 10: revenue_iface.v1.OnOrderRequest.label_info:type_name -> revenue_iface.v1.ExtraLabelInfo
+	22, // 11: revenue_iface.v1.OnOrderRequest.order_info:type_name -> revenue_iface.v1.OrderInfo
+	2,  // 12: revenue_iface.v1.OnOrderRequest.event:type_name -> revenue_iface.v1.OrderEvent
+	27, // 13: revenue_iface.v1.OnOrderRequest.marketplace_type:type_name -> common.v1.MarketplaceType
+	20, // 14: revenue_iface.v1.OnOrderRequest.borrow_stock:type_name -> revenue_iface.v1.BorrowStock
+	23, // 15: revenue_iface.v1.RevenueService.OnOrder:input_type -> revenue_iface.v1.OnOrderRequest
+	18, // 16: revenue_iface.v1.RevenueService.OrderCancel:input_type -> revenue_iface.v1.OrderCancelRequest
+	14, // 17: revenue_iface.v1.RevenueService.OrderReturn:input_type -> revenue_iface.v1.OrderReturnRequest
+	12, // 18: revenue_iface.v1.RevenueService.OrderCompleted:input_type -> revenue_iface.v1.OrderCompletedRequest
+	10, // 19: revenue_iface.v1.RevenueService.RevenueAdjustment:input_type -> revenue_iface.v1.RevenueAdjustmentRequest
+	16, // 20: revenue_iface.v1.RevenueService.Withdrawal:input_type -> revenue_iface.v1.WithdrawalRequest
+	8,  // 21: revenue_iface.v1.RevenueService.RevenueStream:input_type -> revenue_iface.v1.RevenueStreamRequest
+	24, // 22: revenue_iface.v1.RevenueService.OnOrder:output_type -> revenue_iface.v1.OnOrderResponse
+	19, // 23: revenue_iface.v1.RevenueService.OrderCancel:output_type -> revenue_iface.v1.OrderCancelResponse
+	15, // 24: revenue_iface.v1.RevenueService.OrderReturn:output_type -> revenue_iface.v1.OrderReturnResponse
+	13, // 25: revenue_iface.v1.RevenueService.OrderCompleted:output_type -> revenue_iface.v1.OrderCompletedResponse
+	11, // 26: revenue_iface.v1.RevenueService.RevenueAdjustment:output_type -> revenue_iface.v1.RevenueAdjustmentResponse
+	17, // 27: revenue_iface.v1.RevenueService.Withdrawal:output_type -> revenue_iface.v1.WithdrawalResponse
+	9,  // 28: revenue_iface.v1.RevenueService.RevenueStream:output_type -> revenue_iface.v1.RevenueStreamResponse
+	22, // [22:29] is the sub-list for method output_type
+	15, // [15:22] is the sub-list for method input_type
+	15, // [15:15] is the sub-list for extension type_name
+	15, // [15:15] is the sub-list for extension extendee
+	0,  // [0:15] is the sub-list for field type_name
 }
 
 func init() { file_revenue_iface_v1_revenue_proto_init() }
@@ -1611,7 +1687,7 @@ func file_revenue_iface_v1_revenue_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_revenue_iface_v1_revenue_proto_rawDesc), len(file_revenue_iface_v1_revenue_proto_rawDesc)),
-			NumEnums:      2,
+			NumEnums:      3,
 			NumMessages:   22,
 			NumExtensions: 0,
 			NumServices:   1,

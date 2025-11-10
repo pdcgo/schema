@@ -18,6 +18,15 @@ service RevenueService {
   rpc RevenueStream(stream RevenueStreamRequest) returns (RevenueStreamResponse);
 }
 
+enum RevenueSource {
+  REVENUE_SOURCE_UNSPECIFIED = 0;
+  REVENUE_SOURCE_FUND = 1;
+  REVENUE_SOURCE_AFFILIATE_COMMISION = 2;
+  REVENUE_SOURCE_LOST_COMPENSATION = 3;
+  REVENUE_SOURCE_COMPENSATION = 4;
+  REVENUE_SOURCE_UNKNOWN_COMPENSATION = 5;
+}
+
 message RevenueStreamEventFund {
   double est_amount = 1 [(buf.validate.field).double.gt = 0];
   double amount = 2 [(buf.validate.field).double.gt = 0];
@@ -36,6 +45,7 @@ message RevenueStreamEventAdjustment {
   string desc = 3 [(buf.validate.field).required = true];
   string order_id = 4;
   repeated string tags = 5;
+  RevenueSource source = 6;
 }
 
 message RevenueStreamEventWithdrawal {
