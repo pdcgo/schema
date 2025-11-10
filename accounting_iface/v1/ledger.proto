@@ -92,6 +92,7 @@ message EntryAccount {
 message EntryItem {
   uint64 id = 1;
   uint64 account_id = 2;
+  uint64 transaction_id = 11;
   int64 entry_time = 3;
   string desc = 5;
   double debit = 6;

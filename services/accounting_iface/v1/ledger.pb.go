@@ -701,6 +701,7 @@ type EntryItem struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	AccountId     uint64                 `protobuf:"varint,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	TransactionId uint64                 `protobuf:"varint,11,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
 	EntryTime     int64                  `protobuf:"varint,3,opt,name=entry_time,json=entryTime,proto3" json:"entry_time,omitempty"`
 	Desc          string                 `protobuf:"bytes,5,opt,name=desc,proto3" json:"desc,omitempty"`
 	Debit         float64                `protobuf:"fixed64,6,opt,name=debit,proto3" json:"debit,omitempty"`
@@ -752,6 +753,13 @@ func (x *EntryItem) GetId() uint64 {
 func (x *EntryItem) GetAccountId() uint64 {
 	if x != nil {
 		return x.AccountId
+	}
+	return 0
+}
+
+func (x *EntryItem) GetTransactionId() uint64 {
+	if x != nil {
+		return x.TransactionId
 	}
 	return 0
 }
@@ -931,11 +939,12 @@ const file_accounting_iface_v1_ledger_proto_rawDesc = "" +
 	"\ateam_id\x18\x02 \x01(\x04R\x06teamId\x12\x1f\n" +
 	"\vaccount_key\x18\x03 \x01(\tR\n" +
 	"accountKey\x12\x12\n" +
-	"\x04name\x18\x04 \x01(\tR\x04name\"\x96\x02\n" +
+	"\x04name\x18\x04 \x01(\tR\x04name\"\xbd\x02\n" +
 	"\tEntryItem\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x1d\n" +
 	"\n" +
-	"account_id\x18\x02 \x01(\x04R\taccountId\x12\x1d\n" +
+	"account_id\x18\x02 \x01(\x04R\taccountId\x12%\n" +
+	"\x0etransaction_id\x18\v \x01(\x04R\rtransactionId\x12\x1d\n" +
 	"\n" +
 	"entry_time\x18\x03 \x01(\x03R\tentryTime\x12\x12\n" +
 	"\x04desc\x18\x05 \x01(\tR\x04desc\x12\x14\n" +
