@@ -112,10 +112,7 @@ message InboundAcceptRequest {
 
   StockInfoExtra extras = 10;
 
-  InboundSource source = 4 [(buf.validate.field).enum = {
-    defined_only: true
-    not_in: [0]
-  }]; // must be valid enum
+  InboundSource source = 4 [(buf.validate.field).enum = {defined_only: true}]; // must be valid enum
 
   double warehouse_cod_fee = 5 [(buf.validate.field).double.gte = 0]; // non-negative
   double shipping_fee = 6 [(buf.validate.field).double.gte = 0]; // non-negative
