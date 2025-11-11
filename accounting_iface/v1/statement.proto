@@ -1,0 +1,53 @@
+syntax = "proto3";
+package accounting_iface.v1;
+
+import "buf/validate/validate.proto";
+import "common/v1/common.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/pdcgo/schema/services/accounting_iface/v1;accounting_iface";
+
+service StatementService {
+  rpc StatementBalance(StatementBalanceRequest) returns (stream StatementBalanceResponse);
+  rpc StatementIncome(StatementIncomeRequest) returns (stream StatementIncomeResponse);
+  rpc StatementCashFlow(StatementCashFlowRequest) returns (StatementCashFlowResponse);
+}
+
+message StatementCashFlowRequest {}
+message StatementCashFlowResponse {}
+
+message StatementBalanceRequest {}
+message StatementBalanceResponse {}
+
+message StatementIncomeRequest {
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  common.v1.TimeFilterRangeType time_range = 4 [(buf.validate.field).required = true];
+}
+
+message ItemDetail {
+  string account_key = 1;
+  double balance = 2;
+}
+
+message Revenue {
+  google.protobuf.Timestamp t = 1;
+  repeated ItemDetail data = 2;
+}
+
+message Expense {
+  google.protobuf.Timestamp t = 1;
+  repeated ItemDetail data = 2;
+}
+
+message NetIncome {
+  google.protobuf.Timestamp t = 1;
+  repeated ItemDetail data = 2;
+}
+
+message StatementIncomeResponse {
+  oneof data {
+    Revenue revenue = 1;
+    Expense expense = 2;
+    NetIncome net_income = 3;
+  }
+}

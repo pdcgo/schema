@@ -164,6 +164,7 @@ message AccountBalanceItem {
   double debit = 3;
   double credit = 4;
   double balance = 5;
+  double start_balance = 6;
 }
 
 message BalanceResponse {

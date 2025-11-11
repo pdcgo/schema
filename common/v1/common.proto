@@ -57,6 +57,11 @@ message TimeFilterRange {
   google.protobuf.Timestamp end_date = 2;
 }
 
+message TimeFilterRangeType {
+  TimeFilterRange range = 1;
+  TimeType type = 2;
+}
+
 message PageFilter {
   int64 page = 1 [(buf.validate.field).int64.gte = 1];
   int64 limit = 2 [
