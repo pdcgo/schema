@@ -133,6 +133,7 @@ message DailyBalanceDetailRequest {
   uint64 label_id = 4 [(buf.validate.field).uint64.gt = 0];
   common.v1.TimeFilterRange time_range = 5 [(buf.validate.field).required = true];
   common.v1.PageFilter page = 6 [(buf.validate.field).required = true];
+  DailyListSort sort = 7;
 }
 
 message DailyBalanceDetailItem {
@@ -171,12 +172,23 @@ message BalanceResponse {
   repeated AccountBalanceItem data = 1;
 }
 
+enum DailyFieldSort {
+  DAILY_FIELD_SORT_UNSPECIFIED = 0;
+  DAILY_FIELD_SORT_ENTRYTIME = 1;
+}
+
+message DailyListSort {
+  DailyFieldSort field = 1;
+  common.v1.SortType type = 2;
+}
+
 message DailyBalanceRequest {
   uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
   string account_key = 3 [(buf.validate.field).string.min_len = 1];
 
   common.v1.TimeFilterRange time_range = 4 [(buf.validate.field).required = true];
   common.v1.PageFilter page = 5 [(buf.validate.field).required = true];
+  DailyListSort sort = 6;
 }
 
 message DailyAccountBalanceItem {
