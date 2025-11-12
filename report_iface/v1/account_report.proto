@@ -19,6 +19,26 @@ service AccountReportService {
   // rpc AccountFlow(AccountFlowRequest) returns (AccountFlowResponse);
 }
 
+enum DailyFieldSort {
+  DAILY_FIELD_SORT_UNSPECIFIED = 0;
+  DAILY_FIELD_SORT_ENTRYTIME = 1;
+}
+
+message DailyListSort {
+  DailyFieldSort field = 1;
+  common.v1.SortType type = 2;
+}
+
+enum BalanceFieldSort {
+  BALANCE_FIELD_SORT_UNSPECIFIED = 0;
+  BALANCE_FIELD_SORT_AMOUNT = 1;
+}
+
+message BalanceListSort {
+  BalanceFieldSort field = 1;
+  common.v1.SortType type = 2;
+}
+
 message MonthlyAccountBalanceItem {
   int64 month = 1;
   string account_key = 2;
@@ -170,16 +190,6 @@ message AccountBalanceItem {
 
 message BalanceResponse {
   repeated AccountBalanceItem data = 1;
-}
-
-enum DailyFieldSort {
-  DAILY_FIELD_SORT_UNSPECIFIED = 0;
-  DAILY_FIELD_SORT_ENTRYTIME = 1;
-}
-
-message DailyListSort {
-  DailyFieldSort field = 1;
-  common.v1.SortType type = 2;
 }
 
 message DailyBalanceRequest {
