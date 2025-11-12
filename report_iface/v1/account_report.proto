@@ -29,6 +29,16 @@ message DailyListSort {
   common.v1.SortType type = 2;
 }
 
+enum MonthlyFieldSort {
+  MONTHLY_FIELD_SORT_UNSPECIFIED = 0;
+  MONTHLY_FIELD_SORT_ENTRYTIME = 1;
+}
+
+message MonthlyListSort {
+  MonthlyFieldSort field = 1;
+  common.v1.SortType type = 2;
+}
+
 enum BalanceFieldSort {
   BALANCE_FIELD_SORT_UNSPECIFIED = 0;
   BALANCE_FIELD_SORT_AMOUNT = 1;
@@ -53,6 +63,7 @@ message MonthlyBalanceRequest {
 
   common.v1.TimeFilterRange time_range = 3 [(buf.validate.field).required = true];
   common.v1.PageFilter page = 4 [(buf.validate.field).required = true];
+  MonthlyListSort sort = 5;
 }
 message MonthlyBalanceResponse {
   repeated MonthlyAccountBalanceItem data = 1;
@@ -69,6 +80,7 @@ message MonthlyBalanceDetailRequest {
   uint64 label_id = 4 [(buf.validate.field).uint64.gt = 0];
   common.v1.TimeFilterRange time_range = 5 [(buf.validate.field).required = true];
   common.v1.PageFilter page = 6 [(buf.validate.field).required = true];
+  MonthlyListSort sort = 7;
 }
 
 message MonthlyBalanceDetailItem {

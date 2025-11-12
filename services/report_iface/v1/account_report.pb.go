@@ -71,6 +71,52 @@ func (DailyFieldSort) EnumDescriptor() ([]byte, []int) {
 	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{0}
 }
 
+type MonthlyFieldSort int32
+
+const (
+	MonthlyFieldSort_MONTHLY_FIELD_SORT_UNSPECIFIED MonthlyFieldSort = 0
+	MonthlyFieldSort_MONTHLY_FIELD_SORT_ENTRYTIME   MonthlyFieldSort = 1
+)
+
+// Enum value maps for MonthlyFieldSort.
+var (
+	MonthlyFieldSort_name = map[int32]string{
+		0: "MONTHLY_FIELD_SORT_UNSPECIFIED",
+		1: "MONTHLY_FIELD_SORT_ENTRYTIME",
+	}
+	MonthlyFieldSort_value = map[string]int32{
+		"MONTHLY_FIELD_SORT_UNSPECIFIED": 0,
+		"MONTHLY_FIELD_SORT_ENTRYTIME":   1,
+	}
+)
+
+func (x MonthlyFieldSort) Enum() *MonthlyFieldSort {
+	p := new(MonthlyFieldSort)
+	*p = x
+	return p
+}
+
+func (x MonthlyFieldSort) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (MonthlyFieldSort) Descriptor() protoreflect.EnumDescriptor {
+	return file_report_iface_v1_account_report_proto_enumTypes[1].Descriptor()
+}
+
+func (MonthlyFieldSort) Type() protoreflect.EnumType {
+	return &file_report_iface_v1_account_report_proto_enumTypes[1]
+}
+
+func (x MonthlyFieldSort) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use MonthlyFieldSort.Descriptor instead.
+func (MonthlyFieldSort) EnumDescriptor() ([]byte, []int) {
+	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{1}
+}
+
 type BalanceFieldSort int32
 
 const (
@@ -101,11 +147,11 @@ func (x BalanceFieldSort) String() string {
 }
 
 func (BalanceFieldSort) Descriptor() protoreflect.EnumDescriptor {
-	return file_report_iface_v1_account_report_proto_enumTypes[1].Descriptor()
+	return file_report_iface_v1_account_report_proto_enumTypes[2].Descriptor()
 }
 
 func (BalanceFieldSort) Type() protoreflect.EnumType {
-	return &file_report_iface_v1_account_report_proto_enumTypes[1]
+	return &file_report_iface_v1_account_report_proto_enumTypes[2]
 }
 
 func (x BalanceFieldSort) Number() protoreflect.EnumNumber {
@@ -114,7 +160,7 @@ func (x BalanceFieldSort) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use BalanceFieldSort.Descriptor instead.
 func (BalanceFieldSort) EnumDescriptor() ([]byte, []int) {
-	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{1}
+	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{2}
 }
 
 type LabelFilterType int32
@@ -159,11 +205,11 @@ func (x LabelFilterType) String() string {
 }
 
 func (LabelFilterType) Descriptor() protoreflect.EnumDescriptor {
-	return file_report_iface_v1_account_report_proto_enumTypes[2].Descriptor()
+	return file_report_iface_v1_account_report_proto_enumTypes[3].Descriptor()
 }
 
 func (LabelFilterType) Type() protoreflect.EnumType {
-	return &file_report_iface_v1_account_report_proto_enumTypes[2]
+	return &file_report_iface_v1_account_report_proto_enumTypes[3]
 }
 
 func (x LabelFilterType) Number() protoreflect.EnumNumber {
@@ -172,7 +218,7 @@ func (x LabelFilterType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use LabelFilterType.Descriptor instead.
 func (LabelFilterType) EnumDescriptor() ([]byte, []int) {
-	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{2}
+	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{3}
 }
 
 type DailyListSort struct {
@@ -227,6 +273,58 @@ func (x *DailyListSort) GetType() v1.SortType {
 	return v1.SortType(0)
 }
 
+type MonthlyListSort struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Field         MonthlyFieldSort       `protobuf:"varint,1,opt,name=field,proto3,enum=report_iface.v1.MonthlyFieldSort" json:"field,omitempty"`
+	Type          v1.SortType            `protobuf:"varint,2,opt,name=type,proto3,enum=common.v1.SortType" json:"type,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *MonthlyListSort) Reset() {
+	*x = MonthlyListSort{}
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MonthlyListSort) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MonthlyListSort) ProtoMessage() {}
+
+func (x *MonthlyListSort) ProtoReflect() protoreflect.Message {
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MonthlyListSort.ProtoReflect.Descriptor instead.
+func (*MonthlyListSort) Descriptor() ([]byte, []int) {
+	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *MonthlyListSort) GetField() MonthlyFieldSort {
+	if x != nil {
+		return x.Field
+	}
+	return MonthlyFieldSort_MONTHLY_FIELD_SORT_UNSPECIFIED
+}
+
+func (x *MonthlyListSort) GetType() v1.SortType {
+	if x != nil {
+		return x.Type
+	}
+	return v1.SortType(0)
+}
+
 type BalanceListSort struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Field         BalanceFieldSort       `protobuf:"varint,1,opt,name=field,proto3,enum=report_iface.v1.BalanceFieldSort" json:"field,omitempty"`
@@ -237,7 +335,7 @@ type BalanceListSort struct {
 
 func (x *BalanceListSort) Reset() {
 	*x = BalanceListSort{}
-	mi := &file_report_iface_v1_account_report_proto_msgTypes[1]
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -249,7 +347,7 @@ func (x *BalanceListSort) String() string {
 func (*BalanceListSort) ProtoMessage() {}
 
 func (x *BalanceListSort) ProtoReflect() protoreflect.Message {
-	mi := &file_report_iface_v1_account_report_proto_msgTypes[1]
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -262,7 +360,7 @@ func (x *BalanceListSort) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BalanceListSort.ProtoReflect.Descriptor instead.
 func (*BalanceListSort) Descriptor() ([]byte, []int) {
-	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{1}
+	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *BalanceListSort) GetField() BalanceFieldSort {
@@ -292,7 +390,7 @@ type MonthlyAccountBalanceItem struct {
 
 func (x *MonthlyAccountBalanceItem) Reset() {
 	*x = MonthlyAccountBalanceItem{}
-	mi := &file_report_iface_v1_account_report_proto_msgTypes[2]
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -304,7 +402,7 @@ func (x *MonthlyAccountBalanceItem) String() string {
 func (*MonthlyAccountBalanceItem) ProtoMessage() {}
 
 func (x *MonthlyAccountBalanceItem) ProtoReflect() protoreflect.Message {
-	mi := &file_report_iface_v1_account_report_proto_msgTypes[2]
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -317,7 +415,7 @@ func (x *MonthlyAccountBalanceItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MonthlyAccountBalanceItem.ProtoReflect.Descriptor instead.
 func (*MonthlyAccountBalanceItem) Descriptor() ([]byte, []int) {
-	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{2}
+	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *MonthlyAccountBalanceItem) GetMonth() int64 {
@@ -361,13 +459,14 @@ type MonthlyBalanceRequest struct {
 	AccountKey    string                 `protobuf:"bytes,2,opt,name=account_key,json=accountKey,proto3" json:"account_key,omitempty"`
 	TimeRange     *v1.TimeFilterRange    `protobuf:"bytes,3,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
 	Page          *v1.PageFilter         `protobuf:"bytes,4,opt,name=page,proto3" json:"page,omitempty"`
+	Sort          *MonthlyListSort       `protobuf:"bytes,5,opt,name=sort,proto3" json:"sort,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *MonthlyBalanceRequest) Reset() {
 	*x = MonthlyBalanceRequest{}
-	mi := &file_report_iface_v1_account_report_proto_msgTypes[3]
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -379,7 +478,7 @@ func (x *MonthlyBalanceRequest) String() string {
 func (*MonthlyBalanceRequest) ProtoMessage() {}
 
 func (x *MonthlyBalanceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_report_iface_v1_account_report_proto_msgTypes[3]
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -392,7 +491,7 @@ func (x *MonthlyBalanceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MonthlyBalanceRequest.ProtoReflect.Descriptor instead.
 func (*MonthlyBalanceRequest) Descriptor() ([]byte, []int) {
-	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{3}
+	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *MonthlyBalanceRequest) GetTeamId() uint64 {
@@ -423,6 +522,13 @@ func (x *MonthlyBalanceRequest) GetPage() *v1.PageFilter {
 	return nil
 }
 
+func (x *MonthlyBalanceRequest) GetSort() *MonthlyListSort {
+	if x != nil {
+		return x.Sort
+	}
+	return nil
+}
+
 type MonthlyBalanceResponse struct {
 	state         protoimpl.MessageState       `protogen:"open.v1"`
 	Data          []*MonthlyAccountBalanceItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
@@ -433,7 +539,7 @@ type MonthlyBalanceResponse struct {
 
 func (x *MonthlyBalanceResponse) Reset() {
 	*x = MonthlyBalanceResponse{}
-	mi := &file_report_iface_v1_account_report_proto_msgTypes[4]
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -445,7 +551,7 @@ func (x *MonthlyBalanceResponse) String() string {
 func (*MonthlyBalanceResponse) ProtoMessage() {}
 
 func (x *MonthlyBalanceResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_report_iface_v1_account_report_proto_msgTypes[4]
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -458,7 +564,7 @@ func (x *MonthlyBalanceResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MonthlyBalanceResponse.ProtoReflect.Descriptor instead.
 func (*MonthlyBalanceResponse) Descriptor() ([]byte, []int) {
-	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{4}
+	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *MonthlyBalanceResponse) GetData() []*MonthlyAccountBalanceItem {
@@ -483,13 +589,14 @@ type MonthlyBalanceDetailRequest struct {
 	LabelId         uint64                 `protobuf:"varint,4,opt,name=label_id,json=labelId,proto3" json:"label_id,omitempty"`
 	TimeRange       *v1.TimeFilterRange    `protobuf:"bytes,5,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
 	Page            *v1.PageFilter         `protobuf:"bytes,6,opt,name=page,proto3" json:"page,omitempty"`
+	Sort            *MonthlyListSort       `protobuf:"bytes,7,opt,name=sort,proto3" json:"sort,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
 
 func (x *MonthlyBalanceDetailRequest) Reset() {
 	*x = MonthlyBalanceDetailRequest{}
-	mi := &file_report_iface_v1_account_report_proto_msgTypes[5]
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -501,7 +608,7 @@ func (x *MonthlyBalanceDetailRequest) String() string {
 func (*MonthlyBalanceDetailRequest) ProtoMessage() {}
 
 func (x *MonthlyBalanceDetailRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_report_iface_v1_account_report_proto_msgTypes[5]
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -514,7 +621,7 @@ func (x *MonthlyBalanceDetailRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MonthlyBalanceDetailRequest.ProtoReflect.Descriptor instead.
 func (*MonthlyBalanceDetailRequest) Descriptor() ([]byte, []int) {
-	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{5}
+	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *MonthlyBalanceDetailRequest) GetTeamId() uint64 {
@@ -559,6 +666,13 @@ func (x *MonthlyBalanceDetailRequest) GetPage() *v1.PageFilter {
 	return nil
 }
 
+func (x *MonthlyBalanceDetailRequest) GetSort() *MonthlyListSort {
+	if x != nil {
+		return x.Sort
+	}
+	return nil
+}
+
 type MonthlyBalanceDetailItem struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
 	Month           int64                  `protobuf:"varint,1,opt,name=month,proto3" json:"month,omitempty"`
@@ -573,7 +687,7 @@ type MonthlyBalanceDetailItem struct {
 
 func (x *MonthlyBalanceDetailItem) Reset() {
 	*x = MonthlyBalanceDetailItem{}
-	mi := &file_report_iface_v1_account_report_proto_msgTypes[6]
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -585,7 +699,7 @@ func (x *MonthlyBalanceDetailItem) String() string {
 func (*MonthlyBalanceDetailItem) ProtoMessage() {}
 
 func (x *MonthlyBalanceDetailItem) ProtoReflect() protoreflect.Message {
-	mi := &file_report_iface_v1_account_report_proto_msgTypes[6]
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -598,7 +712,7 @@ func (x *MonthlyBalanceDetailItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MonthlyBalanceDetailItem.ProtoReflect.Descriptor instead.
 func (*MonthlyBalanceDetailItem) Descriptor() ([]byte, []int) {
-	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{6}
+	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *MonthlyBalanceDetailItem) GetMonth() int64 {
@@ -653,7 +767,7 @@ type MonthlyBalanceDetailResponse struct {
 
 func (x *MonthlyBalanceDetailResponse) Reset() {
 	*x = MonthlyBalanceDetailResponse{}
-	mi := &file_report_iface_v1_account_report_proto_msgTypes[7]
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -665,7 +779,7 @@ func (x *MonthlyBalanceDetailResponse) String() string {
 func (*MonthlyBalanceDetailResponse) ProtoMessage() {}
 
 func (x *MonthlyBalanceDetailResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_report_iface_v1_account_report_proto_msgTypes[7]
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -678,7 +792,7 @@ func (x *MonthlyBalanceDetailResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MonthlyBalanceDetailResponse.ProtoReflect.Descriptor instead.
 func (*MonthlyBalanceDetailResponse) Descriptor() ([]byte, []int) {
-	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{7}
+	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *MonthlyBalanceDetailResponse) GetData() []*MonthlyBalanceDetailItem {
@@ -708,7 +822,7 @@ type TxLabelExtra struct {
 
 func (x *TxLabelExtra) Reset() {
 	*x = TxLabelExtra{}
-	mi := &file_report_iface_v1_account_report_proto_msgTypes[8]
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -720,7 +834,7 @@ func (x *TxLabelExtra) String() string {
 func (*TxLabelExtra) ProtoMessage() {}
 
 func (x *TxLabelExtra) ProtoReflect() protoreflect.Message {
-	mi := &file_report_iface_v1_account_report_proto_msgTypes[8]
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -733,7 +847,7 @@ func (x *TxLabelExtra) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TxLabelExtra.ProtoReflect.Descriptor instead.
 func (*TxLabelExtra) Descriptor() ([]byte, []int) {
-	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{8}
+	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *TxLabelExtra) GetShopId() uint64 {
@@ -788,7 +902,7 @@ type EntryPayload struct {
 
 func (x *EntryPayload) Reset() {
 	*x = EntryPayload{}
-	mi := &file_report_iface_v1_account_report_proto_msgTypes[9]
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -800,7 +914,7 @@ func (x *EntryPayload) String() string {
 func (*EntryPayload) ProtoMessage() {}
 
 func (x *EntryPayload) ProtoReflect() protoreflect.Message {
-	mi := &file_report_iface_v1_account_report_proto_msgTypes[9]
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -813,7 +927,7 @@ func (x *EntryPayload) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EntryPayload.ProtoReflect.Descriptor instead.
 func (*EntryPayload) Descriptor() ([]byte, []int) {
-	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{9}
+	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *EntryPayload) GetId() uint64 {
@@ -889,7 +1003,7 @@ type DailyUpdateBalanceRequest struct {
 
 func (x *DailyUpdateBalanceRequest) Reset() {
 	*x = DailyUpdateBalanceRequest{}
-	mi := &file_report_iface_v1_account_report_proto_msgTypes[10]
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -901,7 +1015,7 @@ func (x *DailyUpdateBalanceRequest) String() string {
 func (*DailyUpdateBalanceRequest) ProtoMessage() {}
 
 func (x *DailyUpdateBalanceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_report_iface_v1_account_report_proto_msgTypes[10]
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -914,7 +1028,7 @@ func (x *DailyUpdateBalanceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DailyUpdateBalanceRequest.ProtoReflect.Descriptor instead.
 func (*DailyUpdateBalanceRequest) Descriptor() ([]byte, []int) {
-	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{10}
+	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *DailyUpdateBalanceRequest) GetLabelExtra() *TxLabelExtra {
@@ -939,7 +1053,7 @@ type DailyUpdateBalanceResponse struct {
 
 func (x *DailyUpdateBalanceResponse) Reset() {
 	*x = DailyUpdateBalanceResponse{}
-	mi := &file_report_iface_v1_account_report_proto_msgTypes[11]
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -951,7 +1065,7 @@ func (x *DailyUpdateBalanceResponse) String() string {
 func (*DailyUpdateBalanceResponse) ProtoMessage() {}
 
 func (x *DailyUpdateBalanceResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_report_iface_v1_account_report_proto_msgTypes[11]
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -964,7 +1078,7 @@ func (x *DailyUpdateBalanceResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DailyUpdateBalanceResponse.ProtoReflect.Descriptor instead.
 func (*DailyUpdateBalanceResponse) Descriptor() ([]byte, []int) {
-	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{11}
+	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{12}
 }
 
 type BalanceDetailRequest struct {
@@ -980,7 +1094,7 @@ type BalanceDetailRequest struct {
 
 func (x *BalanceDetailRequest) Reset() {
 	*x = BalanceDetailRequest{}
-	mi := &file_report_iface_v1_account_report_proto_msgTypes[12]
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -992,7 +1106,7 @@ func (x *BalanceDetailRequest) String() string {
 func (*BalanceDetailRequest) ProtoMessage() {}
 
 func (x *BalanceDetailRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_report_iface_v1_account_report_proto_msgTypes[12]
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1005,7 +1119,7 @@ func (x *BalanceDetailRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BalanceDetailRequest.ProtoReflect.Descriptor instead.
 func (*BalanceDetailRequest) Descriptor() ([]byte, []int) {
-	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{12}
+	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *BalanceDetailRequest) GetTeamId() uint64 {
@@ -1056,7 +1170,7 @@ type BalanceDetailItem struct {
 
 func (x *BalanceDetailItem) Reset() {
 	*x = BalanceDetailItem{}
-	mi := &file_report_iface_v1_account_report_proto_msgTypes[13]
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1068,7 +1182,7 @@ func (x *BalanceDetailItem) String() string {
 func (*BalanceDetailItem) ProtoMessage() {}
 
 func (x *BalanceDetailItem) ProtoReflect() protoreflect.Message {
-	mi := &file_report_iface_v1_account_report_proto_msgTypes[13]
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1081,7 +1195,7 @@ func (x *BalanceDetailItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BalanceDetailItem.ProtoReflect.Descriptor instead.
 func (*BalanceDetailItem) Descriptor() ([]byte, []int) {
-	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{13}
+	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *BalanceDetailItem) GetLabelId() string {
@@ -1129,7 +1243,7 @@ type BalanceDetailResponse struct {
 
 func (x *BalanceDetailResponse) Reset() {
 	*x = BalanceDetailResponse{}
-	mi := &file_report_iface_v1_account_report_proto_msgTypes[14]
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1141,7 +1255,7 @@ func (x *BalanceDetailResponse) String() string {
 func (*BalanceDetailResponse) ProtoMessage() {}
 
 func (x *BalanceDetailResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_report_iface_v1_account_report_proto_msgTypes[14]
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1154,7 +1268,7 @@ func (x *BalanceDetailResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BalanceDetailResponse.ProtoReflect.Descriptor instead.
 func (*BalanceDetailResponse) Descriptor() ([]byte, []int) {
-	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{14}
+	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *BalanceDetailResponse) GetData() []*BalanceDetailItem {
@@ -1186,7 +1300,7 @@ type DailyBalanceDetailRequest struct {
 
 func (x *DailyBalanceDetailRequest) Reset() {
 	*x = DailyBalanceDetailRequest{}
-	mi := &file_report_iface_v1_account_report_proto_msgTypes[15]
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1198,7 +1312,7 @@ func (x *DailyBalanceDetailRequest) String() string {
 func (*DailyBalanceDetailRequest) ProtoMessage() {}
 
 func (x *DailyBalanceDetailRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_report_iface_v1_account_report_proto_msgTypes[15]
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1211,7 +1325,7 @@ func (x *DailyBalanceDetailRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DailyBalanceDetailRequest.ProtoReflect.Descriptor instead.
 func (*DailyBalanceDetailRequest) Descriptor() ([]byte, []int) {
-	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{15}
+	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *DailyBalanceDetailRequest) GetTeamId() uint64 {
@@ -1277,7 +1391,7 @@ type DailyBalanceDetailItem struct {
 
 func (x *DailyBalanceDetailItem) Reset() {
 	*x = DailyBalanceDetailItem{}
-	mi := &file_report_iface_v1_account_report_proto_msgTypes[16]
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1289,7 +1403,7 @@ func (x *DailyBalanceDetailItem) String() string {
 func (*DailyBalanceDetailItem) ProtoMessage() {}
 
 func (x *DailyBalanceDetailItem) ProtoReflect() protoreflect.Message {
-	mi := &file_report_iface_v1_account_report_proto_msgTypes[16]
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1302,7 +1416,7 @@ func (x *DailyBalanceDetailItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DailyBalanceDetailItem.ProtoReflect.Descriptor instead.
 func (*DailyBalanceDetailItem) Descriptor() ([]byte, []int) {
-	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{16}
+	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *DailyBalanceDetailItem) GetDay() int64 {
@@ -1357,7 +1471,7 @@ type DailyBalanceDetailResponse struct {
 
 func (x *DailyBalanceDetailResponse) Reset() {
 	*x = DailyBalanceDetailResponse{}
-	mi := &file_report_iface_v1_account_report_proto_msgTypes[17]
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1369,7 +1483,7 @@ func (x *DailyBalanceDetailResponse) String() string {
 func (*DailyBalanceDetailResponse) ProtoMessage() {}
 
 func (x *DailyBalanceDetailResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_report_iface_v1_account_report_proto_msgTypes[17]
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1382,7 +1496,7 @@ func (x *DailyBalanceDetailResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DailyBalanceDetailResponse.ProtoReflect.Descriptor instead.
 func (*DailyBalanceDetailResponse) Descriptor() ([]byte, []int) {
-	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{17}
+	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *DailyBalanceDetailResponse) GetData() []*DailyBalanceDetailItem {
@@ -1410,7 +1524,7 @@ type BalanceRequest struct {
 
 func (x *BalanceRequest) Reset() {
 	*x = BalanceRequest{}
-	mi := &file_report_iface_v1_account_report_proto_msgTypes[18]
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1422,7 +1536,7 @@ func (x *BalanceRequest) String() string {
 func (*BalanceRequest) ProtoMessage() {}
 
 func (x *BalanceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_report_iface_v1_account_report_proto_msgTypes[18]
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1435,7 +1549,7 @@ func (x *BalanceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BalanceRequest.ProtoReflect.Descriptor instead.
 func (*BalanceRequest) Descriptor() ([]byte, []int) {
-	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{18}
+	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *BalanceRequest) GetTeamId() uint64 {
@@ -1473,7 +1587,7 @@ type AccountBalanceItem struct {
 
 func (x *AccountBalanceItem) Reset() {
 	*x = AccountBalanceItem{}
-	mi := &file_report_iface_v1_account_report_proto_msgTypes[19]
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1485,7 +1599,7 @@ func (x *AccountBalanceItem) String() string {
 func (*AccountBalanceItem) ProtoMessage() {}
 
 func (x *AccountBalanceItem) ProtoReflect() protoreflect.Message {
-	mi := &file_report_iface_v1_account_report_proto_msgTypes[19]
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1498,7 +1612,7 @@ func (x *AccountBalanceItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccountBalanceItem.ProtoReflect.Descriptor instead.
 func (*AccountBalanceItem) Descriptor() ([]byte, []int) {
-	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{19}
+	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *AccountBalanceItem) GetAccountKey() string {
@@ -1545,7 +1659,7 @@ type BalanceResponse struct {
 
 func (x *BalanceResponse) Reset() {
 	*x = BalanceResponse{}
-	mi := &file_report_iface_v1_account_report_proto_msgTypes[20]
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1557,7 +1671,7 @@ func (x *BalanceResponse) String() string {
 func (*BalanceResponse) ProtoMessage() {}
 
 func (x *BalanceResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_report_iface_v1_account_report_proto_msgTypes[20]
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1570,7 +1684,7 @@ func (x *BalanceResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BalanceResponse.ProtoReflect.Descriptor instead.
 func (*BalanceResponse) Descriptor() ([]byte, []int) {
-	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{20}
+	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *BalanceResponse) GetData() []*AccountBalanceItem {
@@ -1593,7 +1707,7 @@ type DailyBalanceRequest struct {
 
 func (x *DailyBalanceRequest) Reset() {
 	*x = DailyBalanceRequest{}
-	mi := &file_report_iface_v1_account_report_proto_msgTypes[21]
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1605,7 +1719,7 @@ func (x *DailyBalanceRequest) String() string {
 func (*DailyBalanceRequest) ProtoMessage() {}
 
 func (x *DailyBalanceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_report_iface_v1_account_report_proto_msgTypes[21]
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1618,7 +1732,7 @@ func (x *DailyBalanceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DailyBalanceRequest.ProtoReflect.Descriptor instead.
 func (*DailyBalanceRequest) Descriptor() ([]byte, []int) {
-	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{21}
+	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *DailyBalanceRequest) GetTeamId() uint64 {
@@ -1669,7 +1783,7 @@ type DailyAccountBalanceItem struct {
 
 func (x *DailyAccountBalanceItem) Reset() {
 	*x = DailyAccountBalanceItem{}
-	mi := &file_report_iface_v1_account_report_proto_msgTypes[22]
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1681,7 +1795,7 @@ func (x *DailyAccountBalanceItem) String() string {
 func (*DailyAccountBalanceItem) ProtoMessage() {}
 
 func (x *DailyAccountBalanceItem) ProtoReflect() protoreflect.Message {
-	mi := &file_report_iface_v1_account_report_proto_msgTypes[22]
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1694,7 +1808,7 @@ func (x *DailyAccountBalanceItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DailyAccountBalanceItem.ProtoReflect.Descriptor instead.
 func (*DailyAccountBalanceItem) Descriptor() ([]byte, []int) {
-	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{22}
+	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *DailyAccountBalanceItem) GetDay() int64 {
@@ -1742,7 +1856,7 @@ type DailyBalanceResponse struct {
 
 func (x *DailyBalanceResponse) Reset() {
 	*x = DailyBalanceResponse{}
-	mi := &file_report_iface_v1_account_report_proto_msgTypes[23]
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1754,7 +1868,7 @@ func (x *DailyBalanceResponse) String() string {
 func (*DailyBalanceResponse) ProtoMessage() {}
 
 func (x *DailyBalanceResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_report_iface_v1_account_report_proto_msgTypes[23]
+	mi := &file_report_iface_v1_account_report_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1767,7 +1881,7 @@ func (x *DailyBalanceResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DailyBalanceResponse.ProtoReflect.Descriptor instead.
 func (*DailyBalanceResponse) Descriptor() ([]byte, []int) {
-	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{23}
+	return file_report_iface_v1_account_report_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *DailyBalanceResponse) GetData() []*DailyAccountBalanceItem {
@@ -1792,6 +1906,9 @@ const file_report_iface_v1_account_report_proto_rawDesc = "" +
 	"\rDailyListSort\x125\n" +
 	"\x05field\x18\x01 \x01(\x0e2\x1f.report_iface.v1.DailyFieldSortR\x05field\x12'\n" +
 	"\x04type\x18\x02 \x01(\x0e2\x13.common.v1.SortTypeR\x04type\"s\n" +
+	"\x0fMonthlyListSort\x127\n" +
+	"\x05field\x18\x01 \x01(\x0e2!.report_iface.v1.MonthlyFieldSortR\x05field\x12'\n" +
+	"\x04type\x18\x02 \x01(\x0e2\x13.common.v1.SortTypeR\x04type\"s\n" +
 	"\x0fBalanceListSort\x127\n" +
 	"\x05field\x18\x01 \x01(\x0e2!.report_iface.v1.BalanceFieldSortR\x05field\x12'\n" +
 	"\x04type\x18\x02 \x01(\x0e2\x13.common.v1.SortTypeR\x04type\"\x9a\x01\n" +
@@ -1801,17 +1918,18 @@ const file_report_iface_v1_account_report_proto_rawDesc = "" +
 	"accountKey\x12\x14\n" +
 	"\x05debit\x18\x03 \x01(\x01R\x05debit\x12\x16\n" +
 	"\x06credit\x18\x04 \x01(\x01R\x06credit\x12\x18\n" +
-	"\abalance\x18\x05 \x01(\x01R\abalance\"\xd9\x01\n" +
+	"\abalance\x18\x05 \x01(\x01R\abalance\"\x8f\x02\n" +
 	"\x15MonthlyBalanceRequest\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12(\n" +
 	"\vaccount_key\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\n" +
 	"accountKey\x12A\n" +
 	"\n" +
 	"time_range\x18\x03 \x01(\v2\x1a.common.v1.TimeFilterRangeB\x06\xbaH\x03\xc8\x01\x01R\ttimeRange\x121\n" +
-	"\x04page\x18\x04 \x01(\v2\x15.common.v1.PageFilterB\x06\xbaH\x03\xc8\x01\x01R\x04page\"\x8a\x01\n" +
+	"\x04page\x18\x04 \x01(\v2\x15.common.v1.PageFilterB\x06\xbaH\x03\xc8\x01\x01R\x04page\x124\n" +
+	"\x04sort\x18\x05 \x01(\v2 .report_iface.v1.MonthlyListSortR\x04sort\"\x8a\x01\n" +
 	"\x16MonthlyBalanceResponse\x12>\n" +
 	"\x04data\x18\x01 \x03(\v2*.report_iface.v1.MonthlyAccountBalanceItemR\x04data\x120\n" +
-	"\tpage_info\x18\x02 \x01(\v2\x13.common.v1.PageInfoR\bpageInfo\"\xdd\x02\n" +
+	"\tpage_info\x18\x02 \x01(\v2\x13.common.v1.PageInfoR\bpageInfo\"\x93\x03\n" +
 	"\x1bMonthlyBalanceDetailRequest\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12(\n" +
 	"\vaccount_key\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\n" +
@@ -1821,7 +1939,8 @@ const file_report_iface_v1_account_report_proto_rawDesc = "" +
 	"\blabel_id\x18\x04 \x01(\x04B\a\xbaH\x042\x02 \x00R\alabelId\x12A\n" +
 	"\n" +
 	"time_range\x18\x05 \x01(\v2\x1a.common.v1.TimeFilterRangeB\x06\xbaH\x03\xc8\x01\x01R\ttimeRange\x121\n" +
-	"\x04page\x18\x06 \x01(\v2\x15.common.v1.PageFilterB\x06\xbaH\x03\xc8\x01\x01R\x04page\"\xe1\x01\n" +
+	"\x04page\x18\x06 \x01(\v2\x15.common.v1.PageFilterB\x06\xbaH\x03\xc8\x01\x01R\x04page\x124\n" +
+	"\x04sort\x18\a \x01(\v2 .report_iface.v1.MonthlyListSortR\x04sort\"\xe1\x01\n" +
 	"\x18MonthlyBalanceDetailItem\x12\x14\n" +
 	"\x05month\x18\x01 \x01(\x03R\x05month\x12\x19\n" +
 	"\blabel_id\x18\x02 \x01(\tR\alabelId\x12L\n" +
@@ -1930,7 +2049,10 @@ const file_report_iface_v1_account_report_proto_rawDesc = "" +
 	"\tpage_info\x18\x02 \x01(\v2\x13.common.v1.PageInfoR\bpageInfo*R\n" +
 	"\x0eDailyFieldSort\x12 \n" +
 	"\x1cDAILY_FIELD_SORT_UNSPECIFIED\x10\x00\x12\x1e\n" +
-	"\x1aDAILY_FIELD_SORT_ENTRYTIME\x10\x01*U\n" +
+	"\x1aDAILY_FIELD_SORT_ENTRYTIME\x10\x01*X\n" +
+	"\x10MonthlyFieldSort\x12\"\n" +
+	"\x1eMONTHLY_FIELD_SORT_UNSPECIFIED\x10\x00\x12 \n" +
+	"\x1cMONTHLY_FIELD_SORT_ENTRYTIME\x10\x01*U\n" +
 	"\x10BalanceFieldSort\x12\"\n" +
 	"\x1eBALANCE_FIELD_SORT_UNSPECIFIED\x10\x00\x12\x1d\n" +
 	"\x19BALANCE_FIELD_SORT_AMOUNT\x10\x01*\xc4\x01\n" +
@@ -1963,101 +2085,107 @@ func file_report_iface_v1_account_report_proto_rawDescGZIP() []byte {
 	return file_report_iface_v1_account_report_proto_rawDescData
 }
 
-var file_report_iface_v1_account_report_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_report_iface_v1_account_report_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
+var file_report_iface_v1_account_report_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
+var file_report_iface_v1_account_report_proto_msgTypes = make([]protoimpl.MessageInfo, 25)
 var file_report_iface_v1_account_report_proto_goTypes = []any{
 	(DailyFieldSort)(0),                  // 0: report_iface.v1.DailyFieldSort
-	(BalanceFieldSort)(0),                // 1: report_iface.v1.BalanceFieldSort
-	(LabelFilterType)(0),                 // 2: report_iface.v1.LabelFilterType
-	(*DailyListSort)(nil),                // 3: report_iface.v1.DailyListSort
-	(*BalanceListSort)(nil),              // 4: report_iface.v1.BalanceListSort
-	(*MonthlyAccountBalanceItem)(nil),    // 5: report_iface.v1.MonthlyAccountBalanceItem
-	(*MonthlyBalanceRequest)(nil),        // 6: report_iface.v1.MonthlyBalanceRequest
-	(*MonthlyBalanceResponse)(nil),       // 7: report_iface.v1.MonthlyBalanceResponse
-	(*MonthlyBalanceDetailRequest)(nil),  // 8: report_iface.v1.MonthlyBalanceDetailRequest
-	(*MonthlyBalanceDetailItem)(nil),     // 9: report_iface.v1.MonthlyBalanceDetailItem
-	(*MonthlyBalanceDetailResponse)(nil), // 10: report_iface.v1.MonthlyBalanceDetailResponse
-	(*TxLabelExtra)(nil),                 // 11: report_iface.v1.TxLabelExtra
-	(*EntryPayload)(nil),                 // 12: report_iface.v1.EntryPayload
-	(*DailyUpdateBalanceRequest)(nil),    // 13: report_iface.v1.DailyUpdateBalanceRequest
-	(*DailyUpdateBalanceResponse)(nil),   // 14: report_iface.v1.DailyUpdateBalanceResponse
-	(*BalanceDetailRequest)(nil),         // 15: report_iface.v1.BalanceDetailRequest
-	(*BalanceDetailItem)(nil),            // 16: report_iface.v1.BalanceDetailItem
-	(*BalanceDetailResponse)(nil),        // 17: report_iface.v1.BalanceDetailResponse
-	(*DailyBalanceDetailRequest)(nil),    // 18: report_iface.v1.DailyBalanceDetailRequest
-	(*DailyBalanceDetailItem)(nil),       // 19: report_iface.v1.DailyBalanceDetailItem
-	(*DailyBalanceDetailResponse)(nil),   // 20: report_iface.v1.DailyBalanceDetailResponse
-	(*BalanceRequest)(nil),               // 21: report_iface.v1.BalanceRequest
-	(*AccountBalanceItem)(nil),           // 22: report_iface.v1.AccountBalanceItem
-	(*BalanceResponse)(nil),              // 23: report_iface.v1.BalanceResponse
-	(*DailyBalanceRequest)(nil),          // 24: report_iface.v1.DailyBalanceRequest
-	(*DailyAccountBalanceItem)(nil),      // 25: report_iface.v1.DailyAccountBalanceItem
-	(*DailyBalanceResponse)(nil),         // 26: report_iface.v1.DailyBalanceResponse
-	(v1.SortType)(0),                     // 27: common.v1.SortType
-	(*v1.TimeFilterRange)(nil),           // 28: common.v1.TimeFilterRange
-	(*v1.PageFilter)(nil),                // 29: common.v1.PageFilter
-	(*v1.PageInfo)(nil),                  // 30: common.v1.PageInfo
-	(*v11.TypeLabel)(nil),                // 31: accounting_iface.v1.TypeLabel
-	(*timestamppb.Timestamp)(nil),        // 32: google.protobuf.Timestamp
+	(MonthlyFieldSort)(0),                // 1: report_iface.v1.MonthlyFieldSort
+	(BalanceFieldSort)(0),                // 2: report_iface.v1.BalanceFieldSort
+	(LabelFilterType)(0),                 // 3: report_iface.v1.LabelFilterType
+	(*DailyListSort)(nil),                // 4: report_iface.v1.DailyListSort
+	(*MonthlyListSort)(nil),              // 5: report_iface.v1.MonthlyListSort
+	(*BalanceListSort)(nil),              // 6: report_iface.v1.BalanceListSort
+	(*MonthlyAccountBalanceItem)(nil),    // 7: report_iface.v1.MonthlyAccountBalanceItem
+	(*MonthlyBalanceRequest)(nil),        // 8: report_iface.v1.MonthlyBalanceRequest
+	(*MonthlyBalanceResponse)(nil),       // 9: report_iface.v1.MonthlyBalanceResponse
+	(*MonthlyBalanceDetailRequest)(nil),  // 10: report_iface.v1.MonthlyBalanceDetailRequest
+	(*MonthlyBalanceDetailItem)(nil),     // 11: report_iface.v1.MonthlyBalanceDetailItem
+	(*MonthlyBalanceDetailResponse)(nil), // 12: report_iface.v1.MonthlyBalanceDetailResponse
+	(*TxLabelExtra)(nil),                 // 13: report_iface.v1.TxLabelExtra
+	(*EntryPayload)(nil),                 // 14: report_iface.v1.EntryPayload
+	(*DailyUpdateBalanceRequest)(nil),    // 15: report_iface.v1.DailyUpdateBalanceRequest
+	(*DailyUpdateBalanceResponse)(nil),   // 16: report_iface.v1.DailyUpdateBalanceResponse
+	(*BalanceDetailRequest)(nil),         // 17: report_iface.v1.BalanceDetailRequest
+	(*BalanceDetailItem)(nil),            // 18: report_iface.v1.BalanceDetailItem
+	(*BalanceDetailResponse)(nil),        // 19: report_iface.v1.BalanceDetailResponse
+	(*DailyBalanceDetailRequest)(nil),    // 20: report_iface.v1.DailyBalanceDetailRequest
+	(*DailyBalanceDetailItem)(nil),       // 21: report_iface.v1.DailyBalanceDetailItem
+	(*DailyBalanceDetailResponse)(nil),   // 22: report_iface.v1.DailyBalanceDetailResponse
+	(*BalanceRequest)(nil),               // 23: report_iface.v1.BalanceRequest
+	(*AccountBalanceItem)(nil),           // 24: report_iface.v1.AccountBalanceItem
+	(*BalanceResponse)(nil),              // 25: report_iface.v1.BalanceResponse
+	(*DailyBalanceRequest)(nil),          // 26: report_iface.v1.DailyBalanceRequest
+	(*DailyAccountBalanceItem)(nil),      // 27: report_iface.v1.DailyAccountBalanceItem
+	(*DailyBalanceResponse)(nil),         // 28: report_iface.v1.DailyBalanceResponse
+	(v1.SortType)(0),                     // 29: common.v1.SortType
+	(*v1.TimeFilterRange)(nil),           // 30: common.v1.TimeFilterRange
+	(*v1.PageFilter)(nil),                // 31: common.v1.PageFilter
+	(*v1.PageInfo)(nil),                  // 32: common.v1.PageInfo
+	(*v11.TypeLabel)(nil),                // 33: accounting_iface.v1.TypeLabel
+	(*timestamppb.Timestamp)(nil),        // 34: google.protobuf.Timestamp
 }
 var file_report_iface_v1_account_report_proto_depIdxs = []int32{
 	0,  // 0: report_iface.v1.DailyListSort.field:type_name -> report_iface.v1.DailyFieldSort
-	27, // 1: report_iface.v1.DailyListSort.type:type_name -> common.v1.SortType
-	1,  // 2: report_iface.v1.BalanceListSort.field:type_name -> report_iface.v1.BalanceFieldSort
-	27, // 3: report_iface.v1.BalanceListSort.type:type_name -> common.v1.SortType
-	28, // 4: report_iface.v1.MonthlyBalanceRequest.time_range:type_name -> common.v1.TimeFilterRange
-	29, // 5: report_iface.v1.MonthlyBalanceRequest.page:type_name -> common.v1.PageFilter
-	5,  // 6: report_iface.v1.MonthlyBalanceResponse.data:type_name -> report_iface.v1.MonthlyAccountBalanceItem
-	30, // 7: report_iface.v1.MonthlyBalanceResponse.page_info:type_name -> common.v1.PageInfo
-	2,  // 8: report_iface.v1.MonthlyBalanceDetailRequest.label_filter_type:type_name -> report_iface.v1.LabelFilterType
-	28, // 9: report_iface.v1.MonthlyBalanceDetailRequest.time_range:type_name -> common.v1.TimeFilterRange
-	29, // 10: report_iface.v1.MonthlyBalanceDetailRequest.page:type_name -> common.v1.PageFilter
-	2,  // 11: report_iface.v1.MonthlyBalanceDetailItem.label_filter_type:type_name -> report_iface.v1.LabelFilterType
-	9,  // 12: report_iface.v1.MonthlyBalanceDetailResponse.data:type_name -> report_iface.v1.MonthlyBalanceDetailItem
-	30, // 13: report_iface.v1.MonthlyBalanceDetailResponse.page_info:type_name -> common.v1.PageInfo
-	31, // 14: report_iface.v1.TxLabelExtra.type_labels:type_name -> accounting_iface.v1.TypeLabel
-	32, // 15: report_iface.v1.EntryPayload.entry_time:type_name -> google.protobuf.Timestamp
-	11, // 16: report_iface.v1.DailyUpdateBalanceRequest.label_extra:type_name -> report_iface.v1.TxLabelExtra
-	12, // 17: report_iface.v1.DailyUpdateBalanceRequest.entries:type_name -> report_iface.v1.EntryPayload
-	2,  // 18: report_iface.v1.BalanceDetailRequest.label_filter_type:type_name -> report_iface.v1.LabelFilterType
-	28, // 19: report_iface.v1.BalanceDetailRequest.time_range:type_name -> common.v1.TimeFilterRange
-	29, // 20: report_iface.v1.BalanceDetailRequest.page:type_name -> common.v1.PageFilter
-	2,  // 21: report_iface.v1.BalanceDetailItem.label_filter_type:type_name -> report_iface.v1.LabelFilterType
-	16, // 22: report_iface.v1.BalanceDetailResponse.data:type_name -> report_iface.v1.BalanceDetailItem
-	30, // 23: report_iface.v1.BalanceDetailResponse.page_info:type_name -> common.v1.PageInfo
-	2,  // 24: report_iface.v1.DailyBalanceDetailRequest.label_filter_type:type_name -> report_iface.v1.LabelFilterType
-	28, // 25: report_iface.v1.DailyBalanceDetailRequest.time_range:type_name -> common.v1.TimeFilterRange
-	29, // 26: report_iface.v1.DailyBalanceDetailRequest.page:type_name -> common.v1.PageFilter
-	3,  // 27: report_iface.v1.DailyBalanceDetailRequest.sort:type_name -> report_iface.v1.DailyListSort
-	2,  // 28: report_iface.v1.DailyBalanceDetailItem.label_filter_type:type_name -> report_iface.v1.LabelFilterType
-	19, // 29: report_iface.v1.DailyBalanceDetailResponse.data:type_name -> report_iface.v1.DailyBalanceDetailItem
-	30, // 30: report_iface.v1.DailyBalanceDetailResponse.page_info:type_name -> common.v1.PageInfo
-	28, // 31: report_iface.v1.BalanceRequest.time_range:type_name -> common.v1.TimeFilterRange
-	22, // 32: report_iface.v1.BalanceResponse.data:type_name -> report_iface.v1.AccountBalanceItem
-	28, // 33: report_iface.v1.DailyBalanceRequest.time_range:type_name -> common.v1.TimeFilterRange
-	29, // 34: report_iface.v1.DailyBalanceRequest.page:type_name -> common.v1.PageFilter
-	3,  // 35: report_iface.v1.DailyBalanceRequest.sort:type_name -> report_iface.v1.DailyListSort
-	25, // 36: report_iface.v1.DailyBalanceResponse.data:type_name -> report_iface.v1.DailyAccountBalanceItem
-	30, // 37: report_iface.v1.DailyBalanceResponse.page_info:type_name -> common.v1.PageInfo
-	21, // 38: report_iface.v1.AccountReportService.Balance:input_type -> report_iface.v1.BalanceRequest
-	24, // 39: report_iface.v1.AccountReportService.DailyBalance:input_type -> report_iface.v1.DailyBalanceRequest
-	15, // 40: report_iface.v1.AccountReportService.BalanceDetail:input_type -> report_iface.v1.BalanceDetailRequest
-	18, // 41: report_iface.v1.AccountReportService.DailyBalanceDetail:input_type -> report_iface.v1.DailyBalanceDetailRequest
-	6,  // 42: report_iface.v1.AccountReportService.MonthlyBalance:input_type -> report_iface.v1.MonthlyBalanceRequest
-	8,  // 43: report_iface.v1.AccountReportService.MonthlyBalanceDetail:input_type -> report_iface.v1.MonthlyBalanceDetailRequest
-	13, // 44: report_iface.v1.AccountReportService.DailyUpdateBalance:input_type -> report_iface.v1.DailyUpdateBalanceRequest
-	23, // 45: report_iface.v1.AccountReportService.Balance:output_type -> report_iface.v1.BalanceResponse
-	26, // 46: report_iface.v1.AccountReportService.DailyBalance:output_type -> report_iface.v1.DailyBalanceResponse
-	17, // 47: report_iface.v1.AccountReportService.BalanceDetail:output_type -> report_iface.v1.BalanceDetailResponse
-	20, // 48: report_iface.v1.AccountReportService.DailyBalanceDetail:output_type -> report_iface.v1.DailyBalanceDetailResponse
-	7,  // 49: report_iface.v1.AccountReportService.MonthlyBalance:output_type -> report_iface.v1.MonthlyBalanceResponse
-	10, // 50: report_iface.v1.AccountReportService.MonthlyBalanceDetail:output_type -> report_iface.v1.MonthlyBalanceDetailResponse
-	14, // 51: report_iface.v1.AccountReportService.DailyUpdateBalance:output_type -> report_iface.v1.DailyUpdateBalanceResponse
-	45, // [45:52] is the sub-list for method output_type
-	38, // [38:45] is the sub-list for method input_type
-	38, // [38:38] is the sub-list for extension type_name
-	38, // [38:38] is the sub-list for extension extendee
-	0,  // [0:38] is the sub-list for field type_name
+	29, // 1: report_iface.v1.DailyListSort.type:type_name -> common.v1.SortType
+	1,  // 2: report_iface.v1.MonthlyListSort.field:type_name -> report_iface.v1.MonthlyFieldSort
+	29, // 3: report_iface.v1.MonthlyListSort.type:type_name -> common.v1.SortType
+	2,  // 4: report_iface.v1.BalanceListSort.field:type_name -> report_iface.v1.BalanceFieldSort
+	29, // 5: report_iface.v1.BalanceListSort.type:type_name -> common.v1.SortType
+	30, // 6: report_iface.v1.MonthlyBalanceRequest.time_range:type_name -> common.v1.TimeFilterRange
+	31, // 7: report_iface.v1.MonthlyBalanceRequest.page:type_name -> common.v1.PageFilter
+	5,  // 8: report_iface.v1.MonthlyBalanceRequest.sort:type_name -> report_iface.v1.MonthlyListSort
+	7,  // 9: report_iface.v1.MonthlyBalanceResponse.data:type_name -> report_iface.v1.MonthlyAccountBalanceItem
+	32, // 10: report_iface.v1.MonthlyBalanceResponse.page_info:type_name -> common.v1.PageInfo
+	3,  // 11: report_iface.v1.MonthlyBalanceDetailRequest.label_filter_type:type_name -> report_iface.v1.LabelFilterType
+	30, // 12: report_iface.v1.MonthlyBalanceDetailRequest.time_range:type_name -> common.v1.TimeFilterRange
+	31, // 13: report_iface.v1.MonthlyBalanceDetailRequest.page:type_name -> common.v1.PageFilter
+	5,  // 14: report_iface.v1.MonthlyBalanceDetailRequest.sort:type_name -> report_iface.v1.MonthlyListSort
+	3,  // 15: report_iface.v1.MonthlyBalanceDetailItem.label_filter_type:type_name -> report_iface.v1.LabelFilterType
+	11, // 16: report_iface.v1.MonthlyBalanceDetailResponse.data:type_name -> report_iface.v1.MonthlyBalanceDetailItem
+	32, // 17: report_iface.v1.MonthlyBalanceDetailResponse.page_info:type_name -> common.v1.PageInfo
+	33, // 18: report_iface.v1.TxLabelExtra.type_labels:type_name -> accounting_iface.v1.TypeLabel
+	34, // 19: report_iface.v1.EntryPayload.entry_time:type_name -> google.protobuf.Timestamp
+	13, // 20: report_iface.v1.DailyUpdateBalanceRequest.label_extra:type_name -> report_iface.v1.TxLabelExtra
+	14, // 21: report_iface.v1.DailyUpdateBalanceRequest.entries:type_name -> report_iface.v1.EntryPayload
+	3,  // 22: report_iface.v1.BalanceDetailRequest.label_filter_type:type_name -> report_iface.v1.LabelFilterType
+	30, // 23: report_iface.v1.BalanceDetailRequest.time_range:type_name -> common.v1.TimeFilterRange
+	31, // 24: report_iface.v1.BalanceDetailRequest.page:type_name -> common.v1.PageFilter
+	3,  // 25: report_iface.v1.BalanceDetailItem.label_filter_type:type_name -> report_iface.v1.LabelFilterType
+	18, // 26: report_iface.v1.BalanceDetailResponse.data:type_name -> report_iface.v1.BalanceDetailItem
+	32, // 27: report_iface.v1.BalanceDetailResponse.page_info:type_name -> common.v1.PageInfo
+	3,  // 28: report_iface.v1.DailyBalanceDetailRequest.label_filter_type:type_name -> report_iface.v1.LabelFilterType
+	30, // 29: report_iface.v1.DailyBalanceDetailRequest.time_range:type_name -> common.v1.TimeFilterRange
+	31, // 30: report_iface.v1.DailyBalanceDetailRequest.page:type_name -> common.v1.PageFilter
+	4,  // 31: report_iface.v1.DailyBalanceDetailRequest.sort:type_name -> report_iface.v1.DailyListSort
+	3,  // 32: report_iface.v1.DailyBalanceDetailItem.label_filter_type:type_name -> report_iface.v1.LabelFilterType
+	21, // 33: report_iface.v1.DailyBalanceDetailResponse.data:type_name -> report_iface.v1.DailyBalanceDetailItem
+	32, // 34: report_iface.v1.DailyBalanceDetailResponse.page_info:type_name -> common.v1.PageInfo
+	30, // 35: report_iface.v1.BalanceRequest.time_range:type_name -> common.v1.TimeFilterRange
+	24, // 36: report_iface.v1.BalanceResponse.data:type_name -> report_iface.v1.AccountBalanceItem
+	30, // 37: report_iface.v1.DailyBalanceRequest.time_range:type_name -> common.v1.TimeFilterRange
+	31, // 38: report_iface.v1.DailyBalanceRequest.page:type_name -> common.v1.PageFilter
+	4,  // 39: report_iface.v1.DailyBalanceRequest.sort:type_name -> report_iface.v1.DailyListSort
+	27, // 40: report_iface.v1.DailyBalanceResponse.data:type_name -> report_iface.v1.DailyAccountBalanceItem
+	32, // 41: report_iface.v1.DailyBalanceResponse.page_info:type_name -> common.v1.PageInfo
+	23, // 42: report_iface.v1.AccountReportService.Balance:input_type -> report_iface.v1.BalanceRequest
+	26, // 43: report_iface.v1.AccountReportService.DailyBalance:input_type -> report_iface.v1.DailyBalanceRequest
+	17, // 44: report_iface.v1.AccountReportService.BalanceDetail:input_type -> report_iface.v1.BalanceDetailRequest
+	20, // 45: report_iface.v1.AccountReportService.DailyBalanceDetail:input_type -> report_iface.v1.DailyBalanceDetailRequest
+	8,  // 46: report_iface.v1.AccountReportService.MonthlyBalance:input_type -> report_iface.v1.MonthlyBalanceRequest
+	10, // 47: report_iface.v1.AccountReportService.MonthlyBalanceDetail:input_type -> report_iface.v1.MonthlyBalanceDetailRequest
+	15, // 48: report_iface.v1.AccountReportService.DailyUpdateBalance:input_type -> report_iface.v1.DailyUpdateBalanceRequest
+	25, // 49: report_iface.v1.AccountReportService.Balance:output_type -> report_iface.v1.BalanceResponse
+	28, // 50: report_iface.v1.AccountReportService.DailyBalance:output_type -> report_iface.v1.DailyBalanceResponse
+	19, // 51: report_iface.v1.AccountReportService.BalanceDetail:output_type -> report_iface.v1.BalanceDetailResponse
+	22, // 52: report_iface.v1.AccountReportService.DailyBalanceDetail:output_type -> report_iface.v1.DailyBalanceDetailResponse
+	9,  // 53: report_iface.v1.AccountReportService.MonthlyBalance:output_type -> report_iface.v1.MonthlyBalanceResponse
+	12, // 54: report_iface.v1.AccountReportService.MonthlyBalanceDetail:output_type -> report_iface.v1.MonthlyBalanceDetailResponse
+	16, // 55: report_iface.v1.AccountReportService.DailyUpdateBalance:output_type -> report_iface.v1.DailyUpdateBalanceResponse
+	49, // [49:56] is the sub-list for method output_type
+	42, // [42:49] is the sub-list for method input_type
+	42, // [42:42] is the sub-list for extension type_name
+	42, // [42:42] is the sub-list for extension extendee
+	0,  // [0:42] is the sub-list for field type_name
 }
 
 func init() { file_report_iface_v1_account_report_proto_init() }
@@ -2070,8 +2198,8 @@ func file_report_iface_v1_account_report_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_report_iface_v1_account_report_proto_rawDesc), len(file_report_iface_v1_account_report_proto_rawDesc)),
-			NumEnums:      3,
-			NumMessages:   24,
+			NumEnums:      4,
+			NumMessages:   25,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
