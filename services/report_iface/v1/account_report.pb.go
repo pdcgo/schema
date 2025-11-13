@@ -387,6 +387,7 @@ type MonthlyAccountBalanceItem struct {
 	Debit         float64                `protobuf:"fixed64,3,opt,name=debit,proto3" json:"debit,omitempty"`
 	Credit        float64                `protobuf:"fixed64,4,opt,name=credit,proto3" json:"credit,omitempty"`
 	Balance       float64                `protobuf:"fixed64,5,opt,name=balance,proto3" json:"balance,omitempty"`
+	StartBalance  float64                `protobuf:"fixed64,6,opt,name=start_balance,json=startBalance,proto3" json:"start_balance,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -452,6 +453,13 @@ func (x *MonthlyAccountBalanceItem) GetCredit() float64 {
 func (x *MonthlyAccountBalanceItem) GetBalance() float64 {
 	if x != nil {
 		return x.Balance
+	}
+	return 0
+}
+
+func (x *MonthlyAccountBalanceItem) GetStartBalance() float64 {
+	if x != nil {
+		return x.StartBalance
 	}
 	return 0
 }
@@ -1930,14 +1938,15 @@ const file_report_iface_v1_account_report_proto_rawDesc = "" +
 	"\x04type\x18\x02 \x01(\x0e2\x13.common.v1.SortTypeR\x04type\"s\n" +
 	"\x0fBalanceListSort\x127\n" +
 	"\x05field\x18\x01 \x01(\x0e2!.report_iface.v1.BalanceFieldSortR\x05field\x12'\n" +
-	"\x04type\x18\x02 \x01(\x0e2\x13.common.v1.SortTypeR\x04type\"\x9a\x01\n" +
+	"\x04type\x18\x02 \x01(\x0e2\x13.common.v1.SortTypeR\x04type\"\xbf\x01\n" +
 	"\x19MonthlyAccountBalanceItem\x12\x14\n" +
 	"\x05month\x18\x01 \x01(\x03R\x05month\x12\x1f\n" +
 	"\vaccount_key\x18\x02 \x01(\tR\n" +
 	"accountKey\x12\x14\n" +
 	"\x05debit\x18\x03 \x01(\x01R\x05debit\x12\x16\n" +
 	"\x06credit\x18\x04 \x01(\x01R\x06credit\x12\x18\n" +
-	"\abalance\x18\x05 \x01(\x01R\abalance\"\x8f\x02\n" +
+	"\abalance\x18\x05 \x01(\x01R\abalance\x12#\n" +
+	"\rstart_balance\x18\x06 \x01(\x01R\fstartBalance\"\x8f\x02\n" +
 	"\x15MonthlyBalanceRequest\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12(\n" +
 	"\vaccount_key\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\n" +
