@@ -1,0 +1,24 @@
+syntax = "proto3";
+package report_iface.v1;
+
+// import "accounting_iface/v1/core.proto";
+import "buf/validate/validate.proto";
+import "common/v1/common.proto";
+// import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/pdcgo/schema/services/report_iface/v1;report_iface";
+
+service BalanceService {
+  rpc BalanceResync(BalanceResyncRequest) returns (stream BalanceResyncResponse);
+}
+
+message BalanceResyncRequest {
+  bool force = 1;
+  uint64 team_id = 2 [(buf.validate.field).uint64.gt = 0];
+  repeated string account_keys = 3;
+  common.v1.TimeFilterRange time_range = 4 [(buf.validate.field).required = true];
+}
+
+message BalanceResyncResponse {
+  string msg = 1;
+}

@@ -121,18 +121,21 @@ type BalanceFieldSort int32
 
 const (
 	BalanceFieldSort_BALANCE_FIELD_SORT_UNSPECIFIED BalanceFieldSort = 0
-	BalanceFieldSort_BALANCE_FIELD_SORT_AMOUNT      BalanceFieldSort = 1
+	BalanceFieldSort_BALANCE_FIELD_SORT_BALANCE     BalanceFieldSort = 1
+	BalanceFieldSort_BALANCE_FIELD_SORT_ACCOUNT     BalanceFieldSort = 2
 )
 
 // Enum value maps for BalanceFieldSort.
 var (
 	BalanceFieldSort_name = map[int32]string{
 		0: "BALANCE_FIELD_SORT_UNSPECIFIED",
-		1: "BALANCE_FIELD_SORT_AMOUNT",
+		1: "BALANCE_FIELD_SORT_BALANCE",
+		2: "BALANCE_FIELD_SORT_ACCOUNT",
 	}
 	BalanceFieldSort_value = map[string]int32{
 		"BALANCE_FIELD_SORT_UNSPECIFIED": 0,
-		"BALANCE_FIELD_SORT_AMOUNT":      1,
+		"BALANCE_FIELD_SORT_BALANCE":     1,
+		"BALANCE_FIELD_SORT_ACCOUNT":     2,
 	}
 )
 
@@ -1088,6 +1091,7 @@ type BalanceDetailRequest struct {
 	LabelFilterType LabelFilterType        `protobuf:"varint,3,opt,name=label_filter_type,json=labelFilterType,proto3,enum=report_iface.v1.LabelFilterType" json:"label_filter_type,omitempty"`
 	TimeRange       *v1.TimeFilterRange    `protobuf:"bytes,4,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
 	Page            *v1.PageFilter         `protobuf:"bytes,5,opt,name=page,proto3" json:"page,omitempty"`
+	Sort            *BalanceListSort       `protobuf:"bytes,6,opt,name=sort,proto3" json:"sort,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -1153,6 +1157,13 @@ func (x *BalanceDetailRequest) GetTimeRange() *v1.TimeFilterRange {
 func (x *BalanceDetailRequest) GetPage() *v1.PageFilter {
 	if x != nil {
 		return x.Page
+	}
+	return nil
+}
+
+func (x *BalanceDetailRequest) GetSort() *BalanceListSort {
+	if x != nil {
+		return x.Sort
 	}
 	return nil
 }
@@ -1517,7 +1528,8 @@ type BalanceRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
 	AccountKeys   []string               `protobuf:"bytes,2,rep,name=account_keys,json=accountKeys,proto3" json:"account_keys,omitempty"`
-	TimeRange     *v1.TimeFilterRange    `protobuf:"bytes,3,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"` // common.v1.PageFilter page = 4 [(buf.validate.field).required = true];
+	TimeRange     *v1.TimeFilterRange    `protobuf:"bytes,3,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
+	Sort          *BalanceListSort       `protobuf:"bytes,4,opt,name=sort,proto3" json:"sort,omitempty"` // common.v1.PageFilter page = 4 [(buf.validate.field).required = true];
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1569,6 +1581,13 @@ func (x *BalanceRequest) GetAccountKeys() []string {
 func (x *BalanceRequest) GetTimeRange() *v1.TimeFilterRange {
 	if x != nil {
 		return x.TimeRange
+	}
+	return nil
+}
+
+func (x *BalanceRequest) GetSort() *BalanceListSort {
+	if x != nil {
+		return x.Sort
 	}
 	return nil
 }
@@ -1975,7 +1994,7 @@ const file_report_iface_v1_account_report_proto_rawDesc = "" +
 	"\vlabel_extra\x18\x01 \x01(\v2\x1d.report_iface.v1.TxLabelExtraB\x06\xbaH\x03\xc8\x01\x01R\n" +
 	"labelExtra\x12A\n" +
 	"\aentries\x18\x02 \x03(\v2\x1d.report_iface.v1.EntryPayloadB\b\xbaH\x05\x92\x01\x02\b\x01R\aentries\"\x1c\n" +
-	"\x1aDailyUpdateBalanceResponse\"\xb2\x02\n" +
+	"\x1aDailyUpdateBalanceResponse\"\xe8\x02\n" +
 	"\x14BalanceDetailRequest\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12(\n" +
 	"\vaccount_key\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\n" +
@@ -1984,7 +2003,8 @@ const file_report_iface_v1_account_report_proto_rawDesc = "" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x0flabelFilterType\x12A\n" +
 	"\n" +
 	"time_range\x18\x04 \x01(\v2\x1a.common.v1.TimeFilterRangeB\x06\xbaH\x03\xc8\x01\x01R\ttimeRange\x121\n" +
-	"\x04page\x18\x05 \x01(\v2\x15.common.v1.PageFilterB\x06\xbaH\x03\xc8\x01\x01R\x04page\"\xc4\x01\n" +
+	"\x04page\x18\x05 \x01(\v2\x15.common.v1.PageFilterB\x06\xbaH\x03\xc8\x01\x01R\x04page\x124\n" +
+	"\x04sort\x18\x06 \x01(\v2 .report_iface.v1.BalanceListSortR\x04sort\"\xc4\x01\n" +
 	"\x11BalanceDetailItem\x12\x19\n" +
 	"\blabel_id\x18\x01 \x01(\tR\alabelId\x12L\n" +
 	"\x11label_filter_type\x18\x02 \x01(\x0e2 .report_iface.v1.LabelFilterTypeR\x0flabelFilterType\x12\x14\n" +
@@ -2014,12 +2034,13 @@ const file_report_iface_v1_account_report_proto_rawDesc = "" +
 	"\abalance\x18\x06 \x01(\x01R\abalance\"\x8b\x01\n" +
 	"\x1aDailyBalanceDetailResponse\x12;\n" +
 	"\x04data\x18\x01 \x03(\v2'.report_iface.v1.DailyBalanceDetailItemR\x04data\x120\n" +
-	"\tpage_info\x18\x02 \x01(\v2\x13.common.v1.PageInfoR\bpageInfo\"\x98\x01\n" +
+	"\tpage_info\x18\x02 \x01(\v2\x13.common.v1.PageInfoR\bpageInfo\"\xce\x01\n" +
 	"\x0eBalanceRequest\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12!\n" +
 	"\faccount_keys\x18\x02 \x03(\tR\vaccountKeys\x12A\n" +
 	"\n" +
-	"time_range\x18\x03 \x01(\v2\x1a.common.v1.TimeFilterRangeB\x06\xbaH\x03\xc8\x01\x01R\ttimeRange\"\xa2\x01\n" +
+	"time_range\x18\x03 \x01(\v2\x1a.common.v1.TimeFilterRangeB\x06\xbaH\x03\xc8\x01\x01R\ttimeRange\x124\n" +
+	"\x04sort\x18\x04 \x01(\v2 .report_iface.v1.BalanceListSortR\x04sort\"\xa2\x01\n" +
 	"\x12AccountBalanceItem\x12\x1f\n" +
 	"\vaccount_key\x18\x02 \x01(\tR\n" +
 	"accountKey\x12\x14\n" +
@@ -2052,10 +2073,11 @@ const file_report_iface_v1_account_report_proto_rawDesc = "" +
 	"\x1aDAILY_FIELD_SORT_ENTRYTIME\x10\x01*X\n" +
 	"\x10MonthlyFieldSort\x12\"\n" +
 	"\x1eMONTHLY_FIELD_SORT_UNSPECIFIED\x10\x00\x12 \n" +
-	"\x1cMONTHLY_FIELD_SORT_ENTRYTIME\x10\x01*U\n" +
+	"\x1cMONTHLY_FIELD_SORT_ENTRYTIME\x10\x01*v\n" +
 	"\x10BalanceFieldSort\x12\"\n" +
-	"\x1eBALANCE_FIELD_SORT_UNSPECIFIED\x10\x00\x12\x1d\n" +
-	"\x19BALANCE_FIELD_SORT_AMOUNT\x10\x01*\xc4\x01\n" +
+	"\x1eBALANCE_FIELD_SORT_UNSPECIFIED\x10\x00\x12\x1e\n" +
+	"\x1aBALANCE_FIELD_SORT_BALANCE\x10\x01\x12\x1e\n" +
+	"\x1aBALANCE_FIELD_SORT_ACCOUNT\x10\x02*\xc4\x01\n" +
 	"\x0fLabelFilterType\x12!\n" +
 	"\x1dLABEL_FILTER_TYPE_UNSPECIFIED\x10\x00\x12\x1c\n" +
 	"\x18LABEL_FILTER_TYPE_CUSTOM\x10\x01\x12\x18\n" +
@@ -2150,42 +2172,44 @@ var file_report_iface_v1_account_report_proto_depIdxs = []int32{
 	3,  // 22: report_iface.v1.BalanceDetailRequest.label_filter_type:type_name -> report_iface.v1.LabelFilterType
 	30, // 23: report_iface.v1.BalanceDetailRequest.time_range:type_name -> common.v1.TimeFilterRange
 	31, // 24: report_iface.v1.BalanceDetailRequest.page:type_name -> common.v1.PageFilter
-	3,  // 25: report_iface.v1.BalanceDetailItem.label_filter_type:type_name -> report_iface.v1.LabelFilterType
-	18, // 26: report_iface.v1.BalanceDetailResponse.data:type_name -> report_iface.v1.BalanceDetailItem
-	32, // 27: report_iface.v1.BalanceDetailResponse.page_info:type_name -> common.v1.PageInfo
-	3,  // 28: report_iface.v1.DailyBalanceDetailRequest.label_filter_type:type_name -> report_iface.v1.LabelFilterType
-	30, // 29: report_iface.v1.DailyBalanceDetailRequest.time_range:type_name -> common.v1.TimeFilterRange
-	31, // 30: report_iface.v1.DailyBalanceDetailRequest.page:type_name -> common.v1.PageFilter
-	4,  // 31: report_iface.v1.DailyBalanceDetailRequest.sort:type_name -> report_iface.v1.DailyListSort
-	3,  // 32: report_iface.v1.DailyBalanceDetailItem.label_filter_type:type_name -> report_iface.v1.LabelFilterType
-	21, // 33: report_iface.v1.DailyBalanceDetailResponse.data:type_name -> report_iface.v1.DailyBalanceDetailItem
-	32, // 34: report_iface.v1.DailyBalanceDetailResponse.page_info:type_name -> common.v1.PageInfo
-	30, // 35: report_iface.v1.BalanceRequest.time_range:type_name -> common.v1.TimeFilterRange
-	24, // 36: report_iface.v1.BalanceResponse.data:type_name -> report_iface.v1.AccountBalanceItem
-	30, // 37: report_iface.v1.DailyBalanceRequest.time_range:type_name -> common.v1.TimeFilterRange
-	31, // 38: report_iface.v1.DailyBalanceRequest.page:type_name -> common.v1.PageFilter
-	4,  // 39: report_iface.v1.DailyBalanceRequest.sort:type_name -> report_iface.v1.DailyListSort
-	27, // 40: report_iface.v1.DailyBalanceResponse.data:type_name -> report_iface.v1.DailyAccountBalanceItem
-	32, // 41: report_iface.v1.DailyBalanceResponse.page_info:type_name -> common.v1.PageInfo
-	23, // 42: report_iface.v1.AccountReportService.Balance:input_type -> report_iface.v1.BalanceRequest
-	26, // 43: report_iface.v1.AccountReportService.DailyBalance:input_type -> report_iface.v1.DailyBalanceRequest
-	17, // 44: report_iface.v1.AccountReportService.BalanceDetail:input_type -> report_iface.v1.BalanceDetailRequest
-	20, // 45: report_iface.v1.AccountReportService.DailyBalanceDetail:input_type -> report_iface.v1.DailyBalanceDetailRequest
-	8,  // 46: report_iface.v1.AccountReportService.MonthlyBalance:input_type -> report_iface.v1.MonthlyBalanceRequest
-	10, // 47: report_iface.v1.AccountReportService.MonthlyBalanceDetail:input_type -> report_iface.v1.MonthlyBalanceDetailRequest
-	15, // 48: report_iface.v1.AccountReportService.DailyUpdateBalance:input_type -> report_iface.v1.DailyUpdateBalanceRequest
-	25, // 49: report_iface.v1.AccountReportService.Balance:output_type -> report_iface.v1.BalanceResponse
-	28, // 50: report_iface.v1.AccountReportService.DailyBalance:output_type -> report_iface.v1.DailyBalanceResponse
-	19, // 51: report_iface.v1.AccountReportService.BalanceDetail:output_type -> report_iface.v1.BalanceDetailResponse
-	22, // 52: report_iface.v1.AccountReportService.DailyBalanceDetail:output_type -> report_iface.v1.DailyBalanceDetailResponse
-	9,  // 53: report_iface.v1.AccountReportService.MonthlyBalance:output_type -> report_iface.v1.MonthlyBalanceResponse
-	12, // 54: report_iface.v1.AccountReportService.MonthlyBalanceDetail:output_type -> report_iface.v1.MonthlyBalanceDetailResponse
-	16, // 55: report_iface.v1.AccountReportService.DailyUpdateBalance:output_type -> report_iface.v1.DailyUpdateBalanceResponse
-	49, // [49:56] is the sub-list for method output_type
-	42, // [42:49] is the sub-list for method input_type
-	42, // [42:42] is the sub-list for extension type_name
-	42, // [42:42] is the sub-list for extension extendee
-	0,  // [0:42] is the sub-list for field type_name
+	6,  // 25: report_iface.v1.BalanceDetailRequest.sort:type_name -> report_iface.v1.BalanceListSort
+	3,  // 26: report_iface.v1.BalanceDetailItem.label_filter_type:type_name -> report_iface.v1.LabelFilterType
+	18, // 27: report_iface.v1.BalanceDetailResponse.data:type_name -> report_iface.v1.BalanceDetailItem
+	32, // 28: report_iface.v1.BalanceDetailResponse.page_info:type_name -> common.v1.PageInfo
+	3,  // 29: report_iface.v1.DailyBalanceDetailRequest.label_filter_type:type_name -> report_iface.v1.LabelFilterType
+	30, // 30: report_iface.v1.DailyBalanceDetailRequest.time_range:type_name -> common.v1.TimeFilterRange
+	31, // 31: report_iface.v1.DailyBalanceDetailRequest.page:type_name -> common.v1.PageFilter
+	4,  // 32: report_iface.v1.DailyBalanceDetailRequest.sort:type_name -> report_iface.v1.DailyListSort
+	3,  // 33: report_iface.v1.DailyBalanceDetailItem.label_filter_type:type_name -> report_iface.v1.LabelFilterType
+	21, // 34: report_iface.v1.DailyBalanceDetailResponse.data:type_name -> report_iface.v1.DailyBalanceDetailItem
+	32, // 35: report_iface.v1.DailyBalanceDetailResponse.page_info:type_name -> common.v1.PageInfo
+	30, // 36: report_iface.v1.BalanceRequest.time_range:type_name -> common.v1.TimeFilterRange
+	6,  // 37: report_iface.v1.BalanceRequest.sort:type_name -> report_iface.v1.BalanceListSort
+	24, // 38: report_iface.v1.BalanceResponse.data:type_name -> report_iface.v1.AccountBalanceItem
+	30, // 39: report_iface.v1.DailyBalanceRequest.time_range:type_name -> common.v1.TimeFilterRange
+	31, // 40: report_iface.v1.DailyBalanceRequest.page:type_name -> common.v1.PageFilter
+	4,  // 41: report_iface.v1.DailyBalanceRequest.sort:type_name -> report_iface.v1.DailyListSort
+	27, // 42: report_iface.v1.DailyBalanceResponse.data:type_name -> report_iface.v1.DailyAccountBalanceItem
+	32, // 43: report_iface.v1.DailyBalanceResponse.page_info:type_name -> common.v1.PageInfo
+	23, // 44: report_iface.v1.AccountReportService.Balance:input_type -> report_iface.v1.BalanceRequest
+	26, // 45: report_iface.v1.AccountReportService.DailyBalance:input_type -> report_iface.v1.DailyBalanceRequest
+	17, // 46: report_iface.v1.AccountReportService.BalanceDetail:input_type -> report_iface.v1.BalanceDetailRequest
+	20, // 47: report_iface.v1.AccountReportService.DailyBalanceDetail:input_type -> report_iface.v1.DailyBalanceDetailRequest
+	8,  // 48: report_iface.v1.AccountReportService.MonthlyBalance:input_type -> report_iface.v1.MonthlyBalanceRequest
+	10, // 49: report_iface.v1.AccountReportService.MonthlyBalanceDetail:input_type -> report_iface.v1.MonthlyBalanceDetailRequest
+	15, // 50: report_iface.v1.AccountReportService.DailyUpdateBalance:input_type -> report_iface.v1.DailyUpdateBalanceRequest
+	25, // 51: report_iface.v1.AccountReportService.Balance:output_type -> report_iface.v1.BalanceResponse
+	28, // 52: report_iface.v1.AccountReportService.DailyBalance:output_type -> report_iface.v1.DailyBalanceResponse
+	19, // 53: report_iface.v1.AccountReportService.BalanceDetail:output_type -> report_iface.v1.BalanceDetailResponse
+	22, // 54: report_iface.v1.AccountReportService.DailyBalanceDetail:output_type -> report_iface.v1.DailyBalanceDetailResponse
+	9,  // 55: report_iface.v1.AccountReportService.MonthlyBalance:output_type -> report_iface.v1.MonthlyBalanceResponse
+	12, // 56: report_iface.v1.AccountReportService.MonthlyBalanceDetail:output_type -> report_iface.v1.MonthlyBalanceDetailResponse
+	16, // 57: report_iface.v1.AccountReportService.DailyUpdateBalance:output_type -> report_iface.v1.DailyUpdateBalanceResponse
+	51, // [51:58] is the sub-list for method output_type
+	44, // [44:51] is the sub-list for method input_type
+	44, // [44:44] is the sub-list for extension type_name
+	44, // [44:44] is the sub-list for extension extendee
+	0,  // [0:44] is the sub-list for field type_name
 }
 
 func init() { file_report_iface_v1_account_report_proto_init() }

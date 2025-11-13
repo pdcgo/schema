@@ -41,7 +41,8 @@ message MonthlyListSort {
 
 enum BalanceFieldSort {
   BALANCE_FIELD_SORT_UNSPECIFIED = 0;
-  BALANCE_FIELD_SORT_AMOUNT = 1;
+  BALANCE_FIELD_SORT_BALANCE = 1;
+  BALANCE_FIELD_SORT_ACCOUNT = 2;
 }
 
 message BalanceListSort {
@@ -140,6 +141,7 @@ message BalanceDetailRequest {
   }];
   common.v1.TimeFilterRange time_range = 4 [(buf.validate.field).required = true];
   common.v1.PageFilter page = 5 [(buf.validate.field).required = true];
+  BalanceListSort sort = 6;
 }
 
 message BalanceDetailItem {
@@ -188,6 +190,7 @@ message BalanceRequest {
   repeated string account_keys = 2;
 
   common.v1.TimeFilterRange time_range = 3 [(buf.validate.field).required = true];
+  BalanceListSort sort = 4;
   // common.v1.PageFilter page = 4 [(buf.validate.field).required = true];
 }
 
