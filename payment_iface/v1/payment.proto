@@ -75,7 +75,8 @@ message PaymentCancelResponse {}
 
 message PaymentAcceptRequest {
   uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
-  uint64 payment_id = 2 [(buf.validate.field).uint64.gt = 0];
+  // uint64 payment_id = 2 [(buf.validate.field).uint64.gt = 0];
+  uint64 payment_id = 2;
   common.v1.RequestFrom request_from = 3 [(buf.validate.field).enum.defined_only = true];
 }
 
