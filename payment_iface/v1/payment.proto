@@ -8,10 +8,17 @@ option go_package = "github.com/pdcgo/schema/services/payment_iface/v1;payment_i
 
 // Service
 service PaymentService {
-  rpc PaymentCreate(PaymentCreateRequest) returns (PaymentCreateResponse);
-  rpc PaymentCancel(PaymentCancelRequest) returns (PaymentCancelResponse);
+  // deprecated gara gara luxy
+  rpc PaymentCreate(PaymentCreateRequest) returns (PaymentCreateResponse) {
+    option deprecated = true;
+  }
+  rpc PaymentCancel(PaymentCancelRequest) returns (PaymentCancelResponse) {
+    option deprecated = true;
+  }
   rpc PaymentAccept(PaymentAcceptRequest) returns (PaymentAcceptResponse);
-  rpc PaymentReject(PaymentRejectRequest) returns (PaymentRejectResponse);
+  rpc PaymentReject(PaymentRejectRequest) returns (PaymentRejectResponse) {
+    option deprecated = true;
+  }
   rpc PaymentList(PaymentListRequest) returns (PaymentListResponse);
   rpc PaymentGet(PaymentGetRequest) returns (PaymentGetResponse);
 }

@@ -1068,12 +1068,12 @@ const file_payment_iface_v1_payment_proto_rawDesc = "" +
 	"\rPaymentSource\x12\x1e\n" +
 	"\x1aPAYMENT_SOURCE_UNSPECIFIED\x10\x00\x12\x17\n" +
 	"\x13PAYMENT_SOURCE_FROM\x10\x01\x12\x15\n" +
-	"\x11PAYMENT_SOURCE_TO\x10\x022\xcd\x04\n" +
-	"\x0ePaymentService\x12`\n" +
-	"\rPaymentCreate\x12&.payment_iface.v1.PaymentCreateRequest\x1a'.payment_iface.v1.PaymentCreateResponse\x12`\n" +
-	"\rPaymentCancel\x12&.payment_iface.v1.PaymentCancelRequest\x1a'.payment_iface.v1.PaymentCancelResponse\x12`\n" +
-	"\rPaymentAccept\x12&.payment_iface.v1.PaymentAcceptRequest\x1a'.payment_iface.v1.PaymentAcceptResponse\x12`\n" +
-	"\rPaymentReject\x12&.payment_iface.v1.PaymentRejectRequest\x1a'.payment_iface.v1.PaymentRejectResponse\x12Z\n" +
+	"\x11PAYMENT_SOURCE_TO\x10\x022\xdc\x04\n" +
+	"\x0ePaymentService\x12e\n" +
+	"\rPaymentCreate\x12&.payment_iface.v1.PaymentCreateRequest\x1a'.payment_iface.v1.PaymentCreateResponse\"\x03\x88\x02\x01\x12e\n" +
+	"\rPaymentCancel\x12&.payment_iface.v1.PaymentCancelRequest\x1a'.payment_iface.v1.PaymentCancelResponse\"\x03\x88\x02\x01\x12`\n" +
+	"\rPaymentAccept\x12&.payment_iface.v1.PaymentAcceptRequest\x1a'.payment_iface.v1.PaymentAcceptResponse\x12e\n" +
+	"\rPaymentReject\x12&.payment_iface.v1.PaymentRejectRequest\x1a'.payment_iface.v1.PaymentRejectResponse\"\x03\x88\x02\x01\x12Z\n" +
 	"\vPaymentList\x12$.payment_iface.v1.PaymentListRequest\x1a%.payment_iface.v1.PaymentListResponse\x12W\n" +
 	"\n" +
 	"PaymentGet\x12#.payment_iface.v1.PaymentGetRequest\x1a$.payment_iface.v1.PaymentGetResponseB\xc2\x01\n" +

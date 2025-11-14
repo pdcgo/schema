@@ -55,9 +55,14 @@ const (
 
 // PaymentServiceClient is a client for the payment_iface.v1.PaymentService service.
 type PaymentServiceClient interface {
+	// deprecated gara gara luxy
+	//
+	// Deprecated: do not use.
 	PaymentCreate(context.Context, *connect.Request[v1.PaymentCreateRequest]) (*connect.Response[v1.PaymentCreateResponse], error)
+	// Deprecated: do not use.
 	PaymentCancel(context.Context, *connect.Request[v1.PaymentCancelRequest]) (*connect.Response[v1.PaymentCancelResponse], error)
 	PaymentAccept(context.Context, *connect.Request[v1.PaymentAcceptRequest]) (*connect.Response[v1.PaymentAcceptResponse], error)
+	// Deprecated: do not use.
 	PaymentReject(context.Context, *connect.Request[v1.PaymentRejectRequest]) (*connect.Response[v1.PaymentRejectResponse], error)
 	PaymentList(context.Context, *connect.Request[v1.PaymentListRequest]) (*connect.Response[v1.PaymentListResponse], error)
 	PaymentGet(context.Context, *connect.Request[v1.PaymentGetRequest]) (*connect.Response[v1.PaymentGetResponse], error)
@@ -124,11 +129,15 @@ type paymentServiceClient struct {
 }
 
 // PaymentCreate calls payment_iface.v1.PaymentService.PaymentCreate.
+//
+// Deprecated: do not use.
 func (c *paymentServiceClient) PaymentCreate(ctx context.Context, req *connect.Request[v1.PaymentCreateRequest]) (*connect.Response[v1.PaymentCreateResponse], error) {
 	return c.paymentCreate.CallUnary(ctx, req)
 }
 
 // PaymentCancel calls payment_iface.v1.PaymentService.PaymentCancel.
+//
+// Deprecated: do not use.
 func (c *paymentServiceClient) PaymentCancel(ctx context.Context, req *connect.Request[v1.PaymentCancelRequest]) (*connect.Response[v1.PaymentCancelResponse], error) {
 	return c.paymentCancel.CallUnary(ctx, req)
 }
@@ -139,6 +148,8 @@ func (c *paymentServiceClient) PaymentAccept(ctx context.Context, req *connect.R
 }
 
 // PaymentReject calls payment_iface.v1.PaymentService.PaymentReject.
+//
+// Deprecated: do not use.
 func (c *paymentServiceClient) PaymentReject(ctx context.Context, req *connect.Request[v1.PaymentRejectRequest]) (*connect.Response[v1.PaymentRejectResponse], error) {
 	return c.paymentReject.CallUnary(ctx, req)
 }
@@ -155,9 +166,14 @@ func (c *paymentServiceClient) PaymentGet(ctx context.Context, req *connect.Requ
 
 // PaymentServiceHandler is an implementation of the payment_iface.v1.PaymentService service.
 type PaymentServiceHandler interface {
+	// deprecated gara gara luxy
+	//
+	// Deprecated: do not use.
 	PaymentCreate(context.Context, *connect.Request[v1.PaymentCreateRequest]) (*connect.Response[v1.PaymentCreateResponse], error)
+	// Deprecated: do not use.
 	PaymentCancel(context.Context, *connect.Request[v1.PaymentCancelRequest]) (*connect.Response[v1.PaymentCancelResponse], error)
 	PaymentAccept(context.Context, *connect.Request[v1.PaymentAcceptRequest]) (*connect.Response[v1.PaymentAcceptResponse], error)
+	// Deprecated: do not use.
 	PaymentReject(context.Context, *connect.Request[v1.PaymentRejectRequest]) (*connect.Response[v1.PaymentRejectResponse], error)
 	PaymentList(context.Context, *connect.Request[v1.PaymentListRequest]) (*connect.Response[v1.PaymentListResponse], error)
 	PaymentGet(context.Context, *connect.Request[v1.PaymentGetRequest]) (*connect.Response[v1.PaymentGetResponse], error)
