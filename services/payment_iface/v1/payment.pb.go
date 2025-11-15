@@ -546,11 +546,10 @@ func (*PaymentCancelResponse) Descriptor() ([]byte, []int) {
 }
 
 type PaymentAcceptRequest struct {
-	state  protoimpl.MessageState `protogen:"open.v1"`
-	TeamId uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
-	// uint64 payment_id = 2 [(buf.validate.field).uint64.gt = 0];
-	PaymentId     uint64         `protobuf:"varint,2,opt,name=payment_id,json=paymentId,proto3" json:"payment_id,omitempty"`
-	RequestFrom   v1.RequestFrom `protobuf:"varint,3,opt,name=request_from,json=requestFrom,proto3,enum=common.v1.RequestFrom" json:"request_from,omitempty"`
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	PaymentId     uint64                 `protobuf:"varint,2,opt,name=payment_id,json=paymentId,proto3" json:"payment_id,omitempty"`
+	RequestFrom   v1.RequestFrom         `protobuf:"varint,3,opt,name=request_from,json=requestFrom,proto3,enum=common.v1.RequestFrom" json:"request_from,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1013,11 +1012,11 @@ const file_payment_iface_v1_payment_proto_rawDesc = "" +
 	"payment_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\tpaymentId\x12\"\n" +
 	"\x06reason\x18\x03 \x01(\tB\n" +
 	"\xbaH\ar\x05\x10\x01\x18\x80\bR\x06reason\"\x17\n" +
-	"\x15PaymentCancelResponse\"\x9c\x01\n" +
+	"\x15PaymentCancelResponse\"\xa5\x01\n" +
 	"\x14PaymentAcceptRequest\x12 \n" +
-	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12\x1d\n" +
+	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12&\n" +
 	"\n" +
-	"payment_id\x18\x02 \x01(\x04R\tpaymentId\x12C\n" +
+	"payment_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\tpaymentId\x12C\n" +
 	"\frequest_from\x18\x03 \x01(\x0e2\x16.common.v1.RequestFromB\b\xbaH\x05\x82\x01\x02\x10\x01R\vrequestFrom\"\x17\n" +
 	"\x15PaymentAcceptResponse\"\xc9\x01\n" +
 	"\x14PaymentRejectRequest\x12 \n" +

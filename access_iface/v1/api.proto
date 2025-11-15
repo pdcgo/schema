@@ -14,6 +14,15 @@ enum RequestFrom {
   REQUEST_FROM_SYSTEM = 4;
 }
 
+message Stack {
+  string path = 1;
+  string service_name = 2;
+}
+
+message StackSource {
+  repeated Stack stacks = 1;
+}
+
 message RequestSource {
   uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
   RequestFrom request_from = 2 [(buf.validate.field).enum = {
