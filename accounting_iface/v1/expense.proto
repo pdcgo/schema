@@ -87,7 +87,9 @@ message ExpenseCreateRequest {
   string desc = 2;
   ExpenseType expense_type = 3;
   string expense_key = 4;
-  double amount = 5;
+  double amount = 5 [(buf.validate.field).double = {
+    gt: 0
+  }];
   common.v1.RequestFrom request_from = 8 [(buf.validate.field).enum = {
     defined_only: true
     not_in: [0]

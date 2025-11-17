@@ -920,14 +920,14 @@ const file_accounting_iface_v1_expense_proto_rawDesc = "" +
 	"expenseKey\x12\x16\n" +
 	"\x06amount\x18\x06 \x01(\x01R\x06amount\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\b \x01(\x03R\tcreatedAt\"\x88\x02\n" +
+	"created_at\x18\b \x01(\x03R\tcreatedAt\"\x98\x02\n" +
 	"\x14ExpenseCreateRequest\x12\x17\n" +
 	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12\x12\n" +
 	"\x04desc\x18\x02 \x01(\tR\x04desc\x12C\n" +
 	"\fexpense_type\x18\x03 \x01(\x0e2 .accounting_iface.v1.ExpenseTypeR\vexpenseType\x12\x1f\n" +
 	"\vexpense_key\x18\x04 \x01(\tR\n" +
-	"expenseKey\x12\x16\n" +
-	"\x06amount\x18\x05 \x01(\x01R\x06amount\x12E\n" +
+	"expenseKey\x12&\n" +
+	"\x06amount\x18\x05 \x01(\x01B\x0e\xbaH\v\x12\t!\x00\x00\x00\x00\x00\x00\x00\x00R\x06amount\x12E\n" +
 	"\frequest_from\x18\b \x01(\x0e2\x16.common.v1.RequestFromB\n" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\vrequestFrom\"1\n" +
 	"\x15ExpenseCreateResponse\x12\x18\n" +

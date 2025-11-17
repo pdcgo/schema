@@ -16,6 +16,7 @@ service AccountReportService {
   rpc MonthlyBalance(MonthlyBalanceRequest) returns (MonthlyBalanceResponse);
   rpc MonthlyBalanceDetail(MonthlyBalanceDetailRequest) returns (MonthlyBalanceDetailResponse);
   rpc DailyUpdateBalance(DailyUpdateBalanceRequest) returns (DailyUpdateBalanceResponse);
+  rpc DailyUpdateBalanceAsync(DailyUpdateBalanceAsyncRequest) returns (DailyUpdateBalanceAsyncResponse);
   // rpc AccountFlow(AccountFlowRequest) returns (AccountFlowResponse);
 }
 
@@ -123,6 +124,11 @@ message DailyUpdateBalanceRequest {
   repeated EntryPayload entries = 2 [(buf.validate.field).repeated.min_items = 1];
 }
 message DailyUpdateBalanceResponse {}
+
+message DailyUpdateBalanceAsyncRequest {
+  DailyUpdateBalanceRequest req = 1 [(buf.validate.field).required = true];
+}
+message DailyUpdateBalanceAsyncResponse {}
 
 enum LabelFilterType {
   LABEL_FILTER_TYPE_UNSPECIFIED = 0;
