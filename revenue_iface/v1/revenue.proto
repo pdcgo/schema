@@ -9,6 +9,7 @@ import "google/protobuf/timestamp.proto";
 option go_package = "github.com/pdcgo/schema/services/revenue_iface/v1;revenue_iface";
 
 service RevenueService {
+  // rpc OnOrderAsync(OnOrderAsyncRequest) returns (OnOrderAsyncResponse);
   rpc OnOrder(OnOrderRequest) returns (OnOrderResponse);
   rpc OrderCancel(OrderCancelRequest) returns (OrderCancelResponse);
   rpc OrderReturn(OrderReturnRequest) returns (OrderReturnResponse);
@@ -29,10 +30,22 @@ enum RevenueSource {
 
 message RevenueStreamEventFund {
   double est_amount = 1 [(buf.validate.field).double.gt = 0];
-  double amount = 2 [(buf.validate.field).double.gt = 0];
+  double amount = 2 [
+    (buf.validate.field).required = true,
+    (buf.validate.field).cel = {
+      id: "amount_not_zero"
+      message: "amount must not be zero"
+      expression: "this != 0.00"
+    }
+  ];
   google.protobuf.Timestamp at = 3 [(buf.validate.field).required = true];
   string desc = 4 [(buf.validate.field).required = true];
   string order_id = 5 [(buf.validate.field).required = true];
+}
+
+enum RevenueAdjustmentType {
+  REVENUE_ADJUSTMENT_TYPE_UNSPECIFIED = 0;
+  REVENUE_ADJUSTMENT_TYPE_RETURN = 1;
 }
 
 message RevenueStreamEventAdjustment {
@@ -46,6 +59,7 @@ message RevenueStreamEventAdjustment {
   string order_id = 4;
   repeated string tags = 5;
   RevenueSource source = 6;
+  // RevenueAdjustmentType type = 7;
 }
 
 message RevenueStreamEventWithdrawal {
@@ -147,6 +161,12 @@ message OrderInfo {
   string receipt = 1;
   string external_order_id = 2;
 }
+
+message OnOrderAsyncRequest {
+  OnOrderRequest data = 1 [(buf.validate.field).required = true];
+}
+
+message OnOrderAsyncResponse {}
 
 message OnOrderRequest {
   string token = 1 [(buf.validate.field).required = true];

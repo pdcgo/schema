@@ -57,6 +57,7 @@ const (
 
 // RevenueServiceClient is a client for the revenue_iface.v1.RevenueService service.
 type RevenueServiceClient interface {
+	// rpc OnOrderAsync(OnOrderAsyncRequest) returns (OnOrderAsyncResponse);
 	OnOrder(context.Context, *connect.Request[v1.OnOrderRequest]) (*connect.Response[v1.OnOrderResponse], error)
 	OrderCancel(context.Context, *connect.Request[v1.OrderCancelRequest]) (*connect.Response[v1.OrderCancelResponse], error)
 	OrderReturn(context.Context, *connect.Request[v1.OrderReturnRequest]) (*connect.Response[v1.OrderReturnResponse], error)
@@ -170,6 +171,7 @@ func (c *revenueServiceClient) RevenueStream(ctx context.Context) *connect.Clien
 
 // RevenueServiceHandler is an implementation of the revenue_iface.v1.RevenueService service.
 type RevenueServiceHandler interface {
+	// rpc OnOrderAsync(OnOrderAsyncRequest) returns (OnOrderAsyncResponse);
 	OnOrder(context.Context, *connect.Request[v1.OnOrderRequest]) (*connect.Response[v1.OnOrderResponse], error)
 	OrderCancel(context.Context, *connect.Request[v1.OrderCancelRequest]) (*connect.Response[v1.OrderCancelResponse], error)
 	OrderReturn(context.Context, *connect.Request[v1.OrderReturnRequest]) (*connect.Response[v1.OrderReturnResponse], error)
