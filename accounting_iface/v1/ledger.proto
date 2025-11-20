@@ -29,8 +29,13 @@ message Transaction {
   google.protobuf.Timestamp created = 6;
 }
 
+message BookEntryGroupItem {
+  uint64 team_id = 1;
+  repeated EntryItem entries = 2;
+}
+
 message TransactionDetailResponse {
-  repeated EntryItem entries = 1;
+  repeated BookEntryGroupItem books = 1;
   Transaction transaction = 2;
 }
 
@@ -112,6 +117,7 @@ message EntryAccount {
 message EntryItem {
   uint64 id = 1;
   uint64 account_id = 2;
+  uint64 team_id = 4;
   uint64 transaction_id = 11;
   int64 entry_time = 3;
   string desc = 5;
