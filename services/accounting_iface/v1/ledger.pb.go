@@ -11,6 +11,7 @@ import (
 	v1 "github.com/pdcgo/schema/services/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -69,6 +70,186 @@ func (EntryFieldSort) EnumDescriptor() ([]byte, []int) {
 	return file_accounting_iface_v1_ledger_proto_rawDescGZIP(), []int{0}
 }
 
+type TransactionDetailRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TransactionDetailRequest) Reset() {
+	*x = TransactionDetailRequest{}
+	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TransactionDetailRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TransactionDetailRequest) ProtoMessage() {}
+
+func (x *TransactionDetailRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TransactionDetailRequest.ProtoReflect.Descriptor instead.
+func (*TransactionDetailRequest) Descriptor() ([]byte, []int) {
+	return file_accounting_iface_v1_ledger_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *TransactionDetailRequest) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type Transaction struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	RefId         string                 `protobuf:"bytes,2,opt,name=ref_id,json=refId,proto3" json:"ref_id,omitempty"`
+	TeamId        uint64                 `protobuf:"varint,3,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	CreatedById   uint64                 `protobuf:"varint,4,opt,name=created_by_id,json=createdById,proto3" json:"created_by_id,omitempty"`
+	Desc          string                 `protobuf:"bytes,5,opt,name=desc,proto3" json:"desc,omitempty"`
+	Created       *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=created,proto3" json:"created,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Transaction) Reset() {
+	*x = Transaction{}
+	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Transaction) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Transaction) ProtoMessage() {}
+
+func (x *Transaction) ProtoReflect() protoreflect.Message {
+	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Transaction.ProtoReflect.Descriptor instead.
+func (*Transaction) Descriptor() ([]byte, []int) {
+	return file_accounting_iface_v1_ledger_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *Transaction) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *Transaction) GetRefId() string {
+	if x != nil {
+		return x.RefId
+	}
+	return ""
+}
+
+func (x *Transaction) GetTeamId() uint64 {
+	if x != nil {
+		return x.TeamId
+	}
+	return 0
+}
+
+func (x *Transaction) GetCreatedById() uint64 {
+	if x != nil {
+		return x.CreatedById
+	}
+	return 0
+}
+
+func (x *Transaction) GetDesc() string {
+	if x != nil {
+		return x.Desc
+	}
+	return ""
+}
+
+func (x *Transaction) GetCreated() *timestamppb.Timestamp {
+	if x != nil {
+		return x.Created
+	}
+	return nil
+}
+
+type TransactionDetailResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Entries       []*EntryItem           `protobuf:"bytes,1,rep,name=entries,proto3" json:"entries,omitempty"`
+	Transaction   *Transaction           `protobuf:"bytes,2,opt,name=transaction,proto3" json:"transaction,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TransactionDetailResponse) Reset() {
+	*x = TransactionDetailResponse{}
+	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TransactionDetailResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TransactionDetailResponse) ProtoMessage() {}
+
+func (x *TransactionDetailResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TransactionDetailResponse.ProtoReflect.Descriptor instead.
+func (*TransactionDetailResponse) Descriptor() ([]byte, []int) {
+	return file_accounting_iface_v1_ledger_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *TransactionDetailResponse) GetEntries() []*EntryItem {
+	if x != nil {
+		return x.Entries
+	}
+	return nil
+}
+
+func (x *TransactionDetailResponse) GetTransaction() *Transaction {
+	if x != nil {
+		return x.Transaction
+	}
+	return nil
+}
+
 type EntryListExtraRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TxIds         []uint64               `protobuf:"varint,1,rep,packed,name=tx_ids,json=txIds,proto3" json:"tx_ids,omitempty"`
@@ -78,7 +259,7 @@ type EntryListExtraRequest struct {
 
 func (x *EntryListExtraRequest) Reset() {
 	*x = EntryListExtraRequest{}
-	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[0]
+	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -90,7 +271,7 @@ func (x *EntryListExtraRequest) String() string {
 func (*EntryListExtraRequest) ProtoMessage() {}
 
 func (x *EntryListExtraRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[0]
+	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -103,7 +284,7 @@ func (x *EntryListExtraRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EntryListExtraRequest.ProtoReflect.Descriptor instead.
 func (*EntryListExtraRequest) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_ledger_proto_rawDescGZIP(), []int{0}
+	return file_accounting_iface_v1_ledger_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *EntryListExtraRequest) GetTxIds() []uint64 {
@@ -122,7 +303,7 @@ type TagList struct {
 
 func (x *TagList) Reset() {
 	*x = TagList{}
-	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[1]
+	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -134,7 +315,7 @@ func (x *TagList) String() string {
 func (*TagList) ProtoMessage() {}
 
 func (x *TagList) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[1]
+	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -147,7 +328,7 @@ func (x *TagList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TagList.ProtoReflect.Descriptor instead.
 func (*TagList) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_ledger_proto_rawDescGZIP(), []int{1}
+	return file_accounting_iface_v1_ledger_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *TagList) GetList() []string {
@@ -170,7 +351,7 @@ type EntryListExtraResponse struct {
 
 func (x *EntryListExtraResponse) Reset() {
 	*x = EntryListExtraResponse{}
-	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[2]
+	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -182,7 +363,7 @@ func (x *EntryListExtraResponse) String() string {
 func (*EntryListExtraResponse) ProtoMessage() {}
 
 func (x *EntryListExtraResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[2]
+	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -195,7 +376,7 @@ func (x *EntryListExtraResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EntryListExtraResponse.ProtoReflect.Descriptor instead.
 func (*EntryListExtraResponse) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_ledger_proto_rawDescGZIP(), []int{2}
+	return file_accounting_iface_v1_ledger_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *EntryListExtraResponse) GetMapCs() map[uint64]string {
@@ -245,7 +426,7 @@ type EntryListExportResponse struct {
 
 func (x *EntryListExportResponse) Reset() {
 	*x = EntryListExportResponse{}
-	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[3]
+	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -257,7 +438,7 @@ func (x *EntryListExportResponse) String() string {
 func (*EntryListExportResponse) ProtoMessage() {}
 
 func (x *EntryListExportResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[3]
+	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -270,7 +451,7 @@ func (x *EntryListExportResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EntryListExportResponse.ProtoReflect.Descriptor instead.
 func (*EntryListExportResponse) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_ledger_proto_rawDescGZIP(), []int{3}
+	return file_accounting_iface_v1_ledger_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *EntryListExportResponse) GetMessage() string {
@@ -311,7 +492,7 @@ type EntryListSort struct {
 
 func (x *EntryListSort) Reset() {
 	*x = EntryListSort{}
-	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[4]
+	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -323,7 +504,7 @@ func (x *EntryListSort) String() string {
 func (*EntryListSort) ProtoMessage() {}
 
 func (x *EntryListSort) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[4]
+	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -336,7 +517,7 @@ func (x *EntryListSort) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EntryListSort.ProtoReflect.Descriptor instead.
 func (*EntryListSort) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_ledger_proto_rawDescGZIP(), []int{4}
+	return file_accounting_iface_v1_ledger_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *EntryListSort) GetField() EntryFieldSort {
@@ -364,7 +545,7 @@ type FilterExtra struct {
 
 func (x *FilterExtra) Reset() {
 	*x = FilterExtra{}
-	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[5]
+	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -376,7 +557,7 @@ func (x *FilterExtra) String() string {
 func (*FilterExtra) ProtoMessage() {}
 
 func (x *FilterExtra) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[5]
+	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -389,7 +570,7 @@ func (x *FilterExtra) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FilterExtra.ProtoReflect.Descriptor instead.
 func (*FilterExtra) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_ledger_proto_rawDescGZIP(), []int{5}
+	return file_accounting_iface_v1_ledger_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *FilterExtra) GetCustomerServiceId() uint64 {
@@ -429,7 +610,7 @@ type EntryListExportRequest struct {
 
 func (x *EntryListExportRequest) Reset() {
 	*x = EntryListExportRequest{}
-	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[6]
+	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -441,7 +622,7 @@ func (x *EntryListExportRequest) String() string {
 func (*EntryListExportRequest) ProtoMessage() {}
 
 func (x *EntryListExportRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[6]
+	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -454,7 +635,7 @@ func (x *EntryListExportRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EntryListExportRequest.ProtoReflect.Descriptor instead.
 func (*EntryListExportRequest) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_ledger_proto_rawDescGZIP(), []int{6}
+	return file_accounting_iface_v1_ledger_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *EntryListExportRequest) GetTeamId() uint64 {
@@ -531,7 +712,7 @@ type EntryListRequest struct {
 
 func (x *EntryListRequest) Reset() {
 	*x = EntryListRequest{}
-	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[7]
+	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -543,7 +724,7 @@ func (x *EntryListRequest) String() string {
 func (*EntryListRequest) ProtoMessage() {}
 
 func (x *EntryListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[7]
+	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -556,7 +737,7 @@ func (x *EntryListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EntryListRequest.ProtoReflect.Descriptor instead.
 func (*EntryListRequest) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_ledger_proto_rawDescGZIP(), []int{7}
+	return file_accounting_iface_v1_ledger_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *EntryListRequest) GetTeamId() uint64 {
@@ -641,7 +822,7 @@ type EntryAccount struct {
 
 func (x *EntryAccount) Reset() {
 	*x = EntryAccount{}
-	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[8]
+	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -653,7 +834,7 @@ func (x *EntryAccount) String() string {
 func (*EntryAccount) ProtoMessage() {}
 
 func (x *EntryAccount) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[8]
+	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -666,7 +847,7 @@ func (x *EntryAccount) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EntryAccount.ProtoReflect.Descriptor instead.
 func (*EntryAccount) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_ledger_proto_rawDescGZIP(), []int{8}
+	return file_accounting_iface_v1_ledger_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *EntryAccount) GetId() uint64 {
@@ -715,7 +896,7 @@ type EntryItem struct {
 
 func (x *EntryItem) Reset() {
 	*x = EntryItem{}
-	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[9]
+	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -727,7 +908,7 @@ func (x *EntryItem) String() string {
 func (*EntryItem) ProtoMessage() {}
 
 func (x *EntryItem) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[9]
+	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -740,7 +921,7 @@ func (x *EntryItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EntryItem.ProtoReflect.Descriptor instead.
 func (*EntryItem) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_ledger_proto_rawDescGZIP(), []int{9}
+	return file_accounting_iface_v1_ledger_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *EntryItem) GetId() uint64 {
@@ -823,7 +1004,7 @@ type EntryListResponse struct {
 
 func (x *EntryListResponse) Reset() {
 	*x = EntryListResponse{}
-	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[10]
+	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -835,7 +1016,7 @@ func (x *EntryListResponse) String() string {
 func (*EntryListResponse) ProtoMessage() {}
 
 func (x *EntryListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[10]
+	mi := &file_accounting_iface_v1_ledger_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -848,7 +1029,7 @@ func (x *EntryListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EntryListResponse.ProtoReflect.Descriptor instead.
 func (*EntryListResponse) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_ledger_proto_rawDescGZIP(), []int{10}
+	return file_accounting_iface_v1_ledger_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *EntryListResponse) GetData() []*EntryItem {
@@ -869,7 +1050,19 @@ var File_accounting_iface_v1_ledger_proto protoreflect.FileDescriptor
 
 const file_accounting_iface_v1_ledger_proto_rawDesc = "" +
 	"\n" +
-	" accounting_iface/v1/ledger.proto\x12\x13accounting_iface.v1\x1a\x1eaccounting_iface/v1/core.proto\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x14common/v1/shop.proto\"B\n" +
+	" accounting_iface/v1/ledger.proto\x12\x13accounting_iface.v1\x1a\x1eaccounting_iface/v1/core.proto\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x14common/v1/shop.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"3\n" +
+	"\x18TransactionDetailRequest\x12\x17\n" +
+	"\x02id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\"\xbb\x01\n" +
+	"\vTransaction\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x15\n" +
+	"\x06ref_id\x18\x02 \x01(\tR\x05refId\x12\x17\n" +
+	"\ateam_id\x18\x03 \x01(\x04R\x06teamId\x12\"\n" +
+	"\rcreated_by_id\x18\x04 \x01(\x04R\vcreatedById\x12\x12\n" +
+	"\x04desc\x18\x05 \x01(\tR\x04desc\x124\n" +
+	"\acreated\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\acreated\"\x99\x01\n" +
+	"\x19TransactionDetailResponse\x128\n" +
+	"\aentries\x18\x01 \x03(\v2\x1e.accounting_iface.v1.EntryItemR\aentries\x12B\n" +
+	"\vtransaction\x18\x02 \x01(\v2 .accounting_iface.v1.TransactionR\vtransaction\"B\n" +
 	"\x15EntryListExtraRequest\x12)\n" +
 	"\x06tx_ids\x18\x01 \x03(\x04B\x12\xbaH\x0f\x92\x01\f\b\x01\x10d\x18\x01\"\x042\x02 \x00R\x05txIds\"\x1d\n" +
 	"\aTagList\x12\x12\n" +
@@ -959,11 +1152,12 @@ const file_accounting_iface_v1_ledger_proto_rawDesc = "" +
 	"\tpage_info\x18\x02 \x01(\v2\x13.common.v1.PageInfoR\bpageInfo*R\n" +
 	"\x0eEntryFieldSort\x12 \n" +
 	"\x1cENTRY_FIELD_SORT_UNSPECIFIED\x10\x00\x12\x1e\n" +
-	"\x1aENTRY_FIELD_SORT_ENTRYTIME\x10\x012\xc6\x02\n" +
+	"\x1aENTRY_FIELD_SORT_ENTRYTIME\x10\x012\xba\x03\n" +
 	"\rLedgerService\x12Z\n" +
 	"\tEntryList\x12%.accounting_iface.v1.EntryListRequest\x1a&.accounting_iface.v1.EntryListResponse\x12i\n" +
 	"\x0eEntryListExtra\x12*.accounting_iface.v1.EntryListExtraRequest\x1a+.accounting_iface.v1.EntryListExtraResponse\x12n\n" +
-	"\x0fEntryListExport\x12+.accounting_iface.v1.EntryListExportRequest\x1a,.accounting_iface.v1.EntryListExportResponse0\x01B\xd6\x01\n" +
+	"\x0fEntryListExport\x12+.accounting_iface.v1.EntryListExportRequest\x1a,.accounting_iface.v1.EntryListExportResponse0\x01\x12r\n" +
+	"\x11TransactionDetail\x12-.accounting_iface.v1.TransactionDetailRequest\x1a..accounting_iface.v1.TransactionDetailResponseB\xd6\x01\n" +
 	"\x17com.accounting_iface.v1B\vLedgerProtoP\x01ZEgithub.com/pdcgo/schema/services/accounting_iface/v1;accounting_iface\xa2\x02\x03AXX\xaa\x02\x12AccountingIface.V1\xca\x02\x12AccountingIface\\V1\xe2\x02\x1eAccountingIface\\V1\\GPBMetadata\xea\x02\x13AccountingIface::V1b\x06proto3"
 
 var (
@@ -979,66 +1173,75 @@ func file_accounting_iface_v1_ledger_proto_rawDescGZIP() []byte {
 }
 
 var file_accounting_iface_v1_ledger_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_accounting_iface_v1_ledger_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
+var file_accounting_iface_v1_ledger_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
 var file_accounting_iface_v1_ledger_proto_goTypes = []any{
-	(EntryFieldSort)(0),             // 0: accounting_iface.v1.EntryFieldSort
-	(*EntryListExtraRequest)(nil),   // 1: accounting_iface.v1.EntryListExtraRequest
-	(*TagList)(nil),                 // 2: accounting_iface.v1.TagList
-	(*EntryListExtraResponse)(nil),  // 3: accounting_iface.v1.EntryListExtraResponse
-	(*EntryListExportResponse)(nil), // 4: accounting_iface.v1.EntryListExportResponse
-	(*EntryListSort)(nil),           // 5: accounting_iface.v1.EntryListSort
-	(*FilterExtra)(nil),             // 6: accounting_iface.v1.FilterExtra
-	(*EntryListExportRequest)(nil),  // 7: accounting_iface.v1.EntryListExportRequest
-	(*EntryListRequest)(nil),        // 8: accounting_iface.v1.EntryListRequest
-	(*EntryAccount)(nil),            // 9: accounting_iface.v1.EntryAccount
-	(*EntryItem)(nil),               // 10: accounting_iface.v1.EntryItem
-	(*EntryListResponse)(nil),       // 11: accounting_iface.v1.EntryListResponse
-	nil,                             // 12: accounting_iface.v1.EntryListExtraResponse.MapCsEntry
-	nil,                             // 13: accounting_iface.v1.EntryListExtraResponse.MapSupplierEntry
-	nil,                             // 14: accounting_iface.v1.EntryListExtraResponse.MapShopEntry
-	nil,                             // 15: accounting_iface.v1.EntryListExtraResponse.MapTagEntry
-	nil,                             // 16: accounting_iface.v1.EntryListExtraResponse.MapTypeLabelEntry
-	(v1.SortType)(0),                // 17: common.v1.SortType
-	(v1.MarketplaceType)(0),         // 18: common.v1.MarketplaceType
-	(*v1.TimeFilterRange)(nil),      // 19: common.v1.TimeFilterRange
-	(*v1.PageFilter)(nil),           // 20: common.v1.PageFilter
-	(*v1.PageInfo)(nil),             // 21: common.v1.PageInfo
-	(*v1.ShopList)(nil),             // 22: common.v1.ShopList
-	(*TypeLabelList)(nil),           // 23: accounting_iface.v1.TypeLabelList
+	(EntryFieldSort)(0),               // 0: accounting_iface.v1.EntryFieldSort
+	(*TransactionDetailRequest)(nil),  // 1: accounting_iface.v1.TransactionDetailRequest
+	(*Transaction)(nil),               // 2: accounting_iface.v1.Transaction
+	(*TransactionDetailResponse)(nil), // 3: accounting_iface.v1.TransactionDetailResponse
+	(*EntryListExtraRequest)(nil),     // 4: accounting_iface.v1.EntryListExtraRequest
+	(*TagList)(nil),                   // 5: accounting_iface.v1.TagList
+	(*EntryListExtraResponse)(nil),    // 6: accounting_iface.v1.EntryListExtraResponse
+	(*EntryListExportResponse)(nil),   // 7: accounting_iface.v1.EntryListExportResponse
+	(*EntryListSort)(nil),             // 8: accounting_iface.v1.EntryListSort
+	(*FilterExtra)(nil),               // 9: accounting_iface.v1.FilterExtra
+	(*EntryListExportRequest)(nil),    // 10: accounting_iface.v1.EntryListExportRequest
+	(*EntryListRequest)(nil),          // 11: accounting_iface.v1.EntryListRequest
+	(*EntryAccount)(nil),              // 12: accounting_iface.v1.EntryAccount
+	(*EntryItem)(nil),                 // 13: accounting_iface.v1.EntryItem
+	(*EntryListResponse)(nil),         // 14: accounting_iface.v1.EntryListResponse
+	nil,                               // 15: accounting_iface.v1.EntryListExtraResponse.MapCsEntry
+	nil,                               // 16: accounting_iface.v1.EntryListExtraResponse.MapSupplierEntry
+	nil,                               // 17: accounting_iface.v1.EntryListExtraResponse.MapShopEntry
+	nil,                               // 18: accounting_iface.v1.EntryListExtraResponse.MapTagEntry
+	nil,                               // 19: accounting_iface.v1.EntryListExtraResponse.MapTypeLabelEntry
+	(*timestamppb.Timestamp)(nil),     // 20: google.protobuf.Timestamp
+	(v1.SortType)(0),                  // 21: common.v1.SortType
+	(v1.MarketplaceType)(0),           // 22: common.v1.MarketplaceType
+	(*v1.TimeFilterRange)(nil),        // 23: common.v1.TimeFilterRange
+	(*v1.PageFilter)(nil),             // 24: common.v1.PageFilter
+	(*v1.PageInfo)(nil),               // 25: common.v1.PageInfo
+	(*v1.ShopList)(nil),               // 26: common.v1.ShopList
+	(*TypeLabelList)(nil),             // 27: accounting_iface.v1.TypeLabelList
 }
 var file_accounting_iface_v1_ledger_proto_depIdxs = []int32{
-	12, // 0: accounting_iface.v1.EntryListExtraResponse.map_cs:type_name -> accounting_iface.v1.EntryListExtraResponse.MapCsEntry
-	13, // 1: accounting_iface.v1.EntryListExtraResponse.map_supplier:type_name -> accounting_iface.v1.EntryListExtraResponse.MapSupplierEntry
-	14, // 2: accounting_iface.v1.EntryListExtraResponse.map_shop:type_name -> accounting_iface.v1.EntryListExtraResponse.MapShopEntry
-	15, // 3: accounting_iface.v1.EntryListExtraResponse.map_tag:type_name -> accounting_iface.v1.EntryListExtraResponse.MapTagEntry
-	16, // 4: accounting_iface.v1.EntryListExtraResponse.map_type_label:type_name -> accounting_iface.v1.EntryListExtraResponse.MapTypeLabelEntry
-	0,  // 5: accounting_iface.v1.EntryListSort.field:type_name -> accounting_iface.v1.EntryFieldSort
-	17, // 6: accounting_iface.v1.EntryListSort.type:type_name -> common.v1.SortType
-	18, // 7: accounting_iface.v1.EntryListExportRequest.marketplace:type_name -> common.v1.MarketplaceType
-	6,  // 8: accounting_iface.v1.EntryListExportRequest.extra:type_name -> accounting_iface.v1.FilterExtra
-	19, // 9: accounting_iface.v1.EntryListExportRequest.time_range:type_name -> common.v1.TimeFilterRange
-	18, // 10: accounting_iface.v1.EntryListRequest.marketplace:type_name -> common.v1.MarketplaceType
-	6,  // 11: accounting_iface.v1.EntryListRequest.extra:type_name -> accounting_iface.v1.FilterExtra
-	19, // 12: accounting_iface.v1.EntryListRequest.time_range:type_name -> common.v1.TimeFilterRange
-	20, // 13: accounting_iface.v1.EntryListRequest.page:type_name -> common.v1.PageFilter
-	5,  // 14: accounting_iface.v1.EntryListRequest.sort:type_name -> accounting_iface.v1.EntryListSort
-	9,  // 15: accounting_iface.v1.EntryItem.account:type_name -> accounting_iface.v1.EntryAccount
-	10, // 16: accounting_iface.v1.EntryListResponse.data:type_name -> accounting_iface.v1.EntryItem
-	21, // 17: accounting_iface.v1.EntryListResponse.page_info:type_name -> common.v1.PageInfo
-	22, // 18: accounting_iface.v1.EntryListExtraResponse.MapShopEntry.value:type_name -> common.v1.ShopList
-	2,  // 19: accounting_iface.v1.EntryListExtraResponse.MapTagEntry.value:type_name -> accounting_iface.v1.TagList
-	23, // 20: accounting_iface.v1.EntryListExtraResponse.MapTypeLabelEntry.value:type_name -> accounting_iface.v1.TypeLabelList
-	8,  // 21: accounting_iface.v1.LedgerService.EntryList:input_type -> accounting_iface.v1.EntryListRequest
-	1,  // 22: accounting_iface.v1.LedgerService.EntryListExtra:input_type -> accounting_iface.v1.EntryListExtraRequest
-	7,  // 23: accounting_iface.v1.LedgerService.EntryListExport:input_type -> accounting_iface.v1.EntryListExportRequest
-	11, // 24: accounting_iface.v1.LedgerService.EntryList:output_type -> accounting_iface.v1.EntryListResponse
-	3,  // 25: accounting_iface.v1.LedgerService.EntryListExtra:output_type -> accounting_iface.v1.EntryListExtraResponse
-	4,  // 26: accounting_iface.v1.LedgerService.EntryListExport:output_type -> accounting_iface.v1.EntryListExportResponse
-	24, // [24:27] is the sub-list for method output_type
-	21, // [21:24] is the sub-list for method input_type
-	21, // [21:21] is the sub-list for extension type_name
-	21, // [21:21] is the sub-list for extension extendee
-	0,  // [0:21] is the sub-list for field type_name
+	20, // 0: accounting_iface.v1.Transaction.created:type_name -> google.protobuf.Timestamp
+	13, // 1: accounting_iface.v1.TransactionDetailResponse.entries:type_name -> accounting_iface.v1.EntryItem
+	2,  // 2: accounting_iface.v1.TransactionDetailResponse.transaction:type_name -> accounting_iface.v1.Transaction
+	15, // 3: accounting_iface.v1.EntryListExtraResponse.map_cs:type_name -> accounting_iface.v1.EntryListExtraResponse.MapCsEntry
+	16, // 4: accounting_iface.v1.EntryListExtraResponse.map_supplier:type_name -> accounting_iface.v1.EntryListExtraResponse.MapSupplierEntry
+	17, // 5: accounting_iface.v1.EntryListExtraResponse.map_shop:type_name -> accounting_iface.v1.EntryListExtraResponse.MapShopEntry
+	18, // 6: accounting_iface.v1.EntryListExtraResponse.map_tag:type_name -> accounting_iface.v1.EntryListExtraResponse.MapTagEntry
+	19, // 7: accounting_iface.v1.EntryListExtraResponse.map_type_label:type_name -> accounting_iface.v1.EntryListExtraResponse.MapTypeLabelEntry
+	0,  // 8: accounting_iface.v1.EntryListSort.field:type_name -> accounting_iface.v1.EntryFieldSort
+	21, // 9: accounting_iface.v1.EntryListSort.type:type_name -> common.v1.SortType
+	22, // 10: accounting_iface.v1.EntryListExportRequest.marketplace:type_name -> common.v1.MarketplaceType
+	9,  // 11: accounting_iface.v1.EntryListExportRequest.extra:type_name -> accounting_iface.v1.FilterExtra
+	23, // 12: accounting_iface.v1.EntryListExportRequest.time_range:type_name -> common.v1.TimeFilterRange
+	22, // 13: accounting_iface.v1.EntryListRequest.marketplace:type_name -> common.v1.MarketplaceType
+	9,  // 14: accounting_iface.v1.EntryListRequest.extra:type_name -> accounting_iface.v1.FilterExtra
+	23, // 15: accounting_iface.v1.EntryListRequest.time_range:type_name -> common.v1.TimeFilterRange
+	24, // 16: accounting_iface.v1.EntryListRequest.page:type_name -> common.v1.PageFilter
+	8,  // 17: accounting_iface.v1.EntryListRequest.sort:type_name -> accounting_iface.v1.EntryListSort
+	12, // 18: accounting_iface.v1.EntryItem.account:type_name -> accounting_iface.v1.EntryAccount
+	13, // 19: accounting_iface.v1.EntryListResponse.data:type_name -> accounting_iface.v1.EntryItem
+	25, // 20: accounting_iface.v1.EntryListResponse.page_info:type_name -> common.v1.PageInfo
+	26, // 21: accounting_iface.v1.EntryListExtraResponse.MapShopEntry.value:type_name -> common.v1.ShopList
+	5,  // 22: accounting_iface.v1.EntryListExtraResponse.MapTagEntry.value:type_name -> accounting_iface.v1.TagList
+	27, // 23: accounting_iface.v1.EntryListExtraResponse.MapTypeLabelEntry.value:type_name -> accounting_iface.v1.TypeLabelList
+	11, // 24: accounting_iface.v1.LedgerService.EntryList:input_type -> accounting_iface.v1.EntryListRequest
+	4,  // 25: accounting_iface.v1.LedgerService.EntryListExtra:input_type -> accounting_iface.v1.EntryListExtraRequest
+	10, // 26: accounting_iface.v1.LedgerService.EntryListExport:input_type -> accounting_iface.v1.EntryListExportRequest
+	1,  // 27: accounting_iface.v1.LedgerService.TransactionDetail:input_type -> accounting_iface.v1.TransactionDetailRequest
+	14, // 28: accounting_iface.v1.LedgerService.EntryList:output_type -> accounting_iface.v1.EntryListResponse
+	6,  // 29: accounting_iface.v1.LedgerService.EntryListExtra:output_type -> accounting_iface.v1.EntryListExtraResponse
+	7,  // 30: accounting_iface.v1.LedgerService.EntryListExport:output_type -> accounting_iface.v1.EntryListExportResponse
+	3,  // 31: accounting_iface.v1.LedgerService.TransactionDetail:output_type -> accounting_iface.v1.TransactionDetailResponse
+	28, // [28:32] is the sub-list for method output_type
+	24, // [24:28] is the sub-list for method input_type
+	24, // [24:24] is the sub-list for extension type_name
+	24, // [24:24] is the sub-list for extension extendee
+	0,  // [0:24] is the sub-list for field type_name
 }
 
 func init() { file_accounting_iface_v1_ledger_proto_init() }
@@ -1053,7 +1256,7 @@ func file_accounting_iface_v1_ledger_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_accounting_iface_v1_ledger_proto_rawDesc), len(file_accounting_iface_v1_ledger_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   16,
+			NumMessages:   19,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

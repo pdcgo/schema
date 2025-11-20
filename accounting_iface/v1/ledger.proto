@@ -5,6 +5,7 @@ import "accounting_iface/v1/core.proto";
 import "buf/validate/validate.proto";
 import "common/v1/common.proto";
 import "common/v1/shop.proto";
+import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/pdcgo/schema/services/accounting_iface/v1;accounting_iface";
 
@@ -12,6 +13,25 @@ service LedgerService {
   rpc EntryList(EntryListRequest) returns (EntryListResponse);
   rpc EntryListExtra(EntryListExtraRequest) returns (EntryListExtraResponse);
   rpc EntryListExport(EntryListExportRequest) returns (stream EntryListExportResponse);
+  rpc TransactionDetail(TransactionDetailRequest) returns (TransactionDetailResponse);
+}
+
+message TransactionDetailRequest {
+  uint64 id = 1 [(buf.validate.field).uint64.gt = 0];
+}
+
+message Transaction {
+  uint64 id = 1;
+  string ref_id = 2;
+  uint64 team_id = 3;
+  uint64 created_by_id = 4;
+  string desc = 5;
+  google.protobuf.Timestamp created = 6;
+}
+
+message TransactionDetailResponse {
+  repeated EntryItem entries = 1;
+  Transaction transaction = 2;
 }
 
 message EntryListExtraRequest {

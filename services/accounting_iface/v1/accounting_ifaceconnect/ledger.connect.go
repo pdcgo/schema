@@ -41,6 +41,9 @@ const (
 	// LedgerServiceEntryListExportProcedure is the fully-qualified name of the LedgerService's
 	// EntryListExport RPC.
 	LedgerServiceEntryListExportProcedure = "/accounting_iface.v1.LedgerService/EntryListExport"
+	// LedgerServiceTransactionDetailProcedure is the fully-qualified name of the LedgerService's
+	// TransactionDetail RPC.
+	LedgerServiceTransactionDetailProcedure = "/accounting_iface.v1.LedgerService/TransactionDetail"
 )
 
 // LedgerServiceClient is a client for the accounting_iface.v1.LedgerService service.
@@ -48,6 +51,7 @@ type LedgerServiceClient interface {
 	EntryList(context.Context, *connect.Request[v1.EntryListRequest]) (*connect.Response[v1.EntryListResponse], error)
 	EntryListExtra(context.Context, *connect.Request[v1.EntryListExtraRequest]) (*connect.Response[v1.EntryListExtraResponse], error)
 	EntryListExport(context.Context, *connect.Request[v1.EntryListExportRequest]) (*connect.ServerStreamForClient[v1.EntryListExportResponse], error)
+	TransactionDetail(context.Context, *connect.Request[v1.TransactionDetailRequest]) (*connect.Response[v1.TransactionDetailResponse], error)
 }
 
 // NewLedgerServiceClient constructs a client for the accounting_iface.v1.LedgerService service. By
@@ -79,14 +83,21 @@ func NewLedgerServiceClient(httpClient connect.HTTPClient, baseURL string, opts 
 			connect.WithSchema(ledgerServiceMethods.ByName("EntryListExport")),
 			connect.WithClientOptions(opts...),
 		),
+		transactionDetail: connect.NewClient[v1.TransactionDetailRequest, v1.TransactionDetailResponse](
+			httpClient,
+			baseURL+LedgerServiceTransactionDetailProcedure,
+			connect.WithSchema(ledgerServiceMethods.ByName("TransactionDetail")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // ledgerServiceClient implements LedgerServiceClient.
 type ledgerServiceClient struct {
-	entryList       *connect.Client[v1.EntryListRequest, v1.EntryListResponse]
-	entryListExtra  *connect.Client[v1.EntryListExtraRequest, v1.EntryListExtraResponse]
-	entryListExport *connect.Client[v1.EntryListExportRequest, v1.EntryListExportResponse]
+	entryList         *connect.Client[v1.EntryListRequest, v1.EntryListResponse]
+	entryListExtra    *connect.Client[v1.EntryListExtraRequest, v1.EntryListExtraResponse]
+	entryListExport   *connect.Client[v1.EntryListExportRequest, v1.EntryListExportResponse]
+	transactionDetail *connect.Client[v1.TransactionDetailRequest, v1.TransactionDetailResponse]
 }
 
 // EntryList calls accounting_iface.v1.LedgerService.EntryList.
@@ -104,11 +115,17 @@ func (c *ledgerServiceClient) EntryListExport(ctx context.Context, req *connect.
 	return c.entryListExport.CallServerStream(ctx, req)
 }
 
+// TransactionDetail calls accounting_iface.v1.LedgerService.TransactionDetail.
+func (c *ledgerServiceClient) TransactionDetail(ctx context.Context, req *connect.Request[v1.TransactionDetailRequest]) (*connect.Response[v1.TransactionDetailResponse], error) {
+	return c.transactionDetail.CallUnary(ctx, req)
+}
+
 // LedgerServiceHandler is an implementation of the accounting_iface.v1.LedgerService service.
 type LedgerServiceHandler interface {
 	EntryList(context.Context, *connect.Request[v1.EntryListRequest]) (*connect.Response[v1.EntryListResponse], error)
 	EntryListExtra(context.Context, *connect.Request[v1.EntryListExtraRequest]) (*connect.Response[v1.EntryListExtraResponse], error)
 	EntryListExport(context.Context, *connect.Request[v1.EntryListExportRequest], *connect.ServerStream[v1.EntryListExportResponse]) error
+	TransactionDetail(context.Context, *connect.Request[v1.TransactionDetailRequest]) (*connect.Response[v1.TransactionDetailResponse], error)
 }
 
 // NewLedgerServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -136,6 +153,12 @@ func NewLedgerServiceHandler(svc LedgerServiceHandler, opts ...connect.HandlerOp
 		connect.WithSchema(ledgerServiceMethods.ByName("EntryListExport")),
 		connect.WithHandlerOptions(opts...),
 	)
+	ledgerServiceTransactionDetailHandler := connect.NewUnaryHandler(
+		LedgerServiceTransactionDetailProcedure,
+		svc.TransactionDetail,
+		connect.WithSchema(ledgerServiceMethods.ByName("TransactionDetail")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/accounting_iface.v1.LedgerService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case LedgerServiceEntryListProcedure:
@@ -144,6 +167,8 @@ func NewLedgerServiceHandler(svc LedgerServiceHandler, opts ...connect.HandlerOp
 			ledgerServiceEntryListExtraHandler.ServeHTTP(w, r)
 		case LedgerServiceEntryListExportProcedure:
 			ledgerServiceEntryListExportHandler.ServeHTTP(w, r)
+		case LedgerServiceTransactionDetailProcedure:
+			ledgerServiceTransactionDetailHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -163,4 +188,8 @@ func (UnimplementedLedgerServiceHandler) EntryListExtra(context.Context, *connec
 
 func (UnimplementedLedgerServiceHandler) EntryListExport(context.Context, *connect.Request[v1.EntryListExportRequest], *connect.ServerStream[v1.EntryListExportResponse]) error {
 	return connect.NewError(connect.CodeUnimplemented, errors.New("accounting_iface.v1.LedgerService.EntryListExport is not implemented"))
+}
+
+func (UnimplementedLedgerServiceHandler) TransactionDetail(context.Context, *connect.Request[v1.TransactionDetailRequest]) (*connect.Response[v1.TransactionDetailResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("accounting_iface.v1.LedgerService.TransactionDetail is not implemented"))
 }
