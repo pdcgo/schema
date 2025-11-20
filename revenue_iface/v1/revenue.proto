@@ -112,6 +112,8 @@ message OrderReturnRequest {
     (buf.validate.field).double.gt = 0, // must be > 0
     (buf.validate.field).double.lte = 1e12 // optional: cap max value for safety
   ];
+  ExtraLabelInfo label_info = 6 [(buf.validate.field).required = true];
+  OrderInfo order_info = 7 [(buf.validate.field).required = true];
 }
 message OrderReturnResponse {}
 

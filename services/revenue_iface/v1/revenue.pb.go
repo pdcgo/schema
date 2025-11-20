@@ -857,6 +857,8 @@ type OrderReturnRequest struct {
 	WarehouseId   uint64                 `protobuf:"varint,3,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
 	OrderAmount   float64                `protobuf:"fixed64,4,opt,name=order_amount,json=orderAmount,proto3" json:"order_amount,omitempty"`
 	StockAmount   float64                `protobuf:"fixed64,5,opt,name=stock_amount,json=stockAmount,proto3" json:"stock_amount,omitempty"`
+	LabelInfo     *ExtraLabelInfo        `protobuf:"bytes,6,opt,name=label_info,json=labelInfo,proto3" json:"label_info,omitempty"`
+	OrderInfo     *OrderInfo             `protobuf:"bytes,7,opt,name=order_info,json=orderInfo,proto3" json:"order_info,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -924,6 +926,20 @@ func (x *OrderReturnRequest) GetStockAmount() float64 {
 		return x.StockAmount
 	}
 	return 0
+}
+
+func (x *OrderReturnRequest) GetLabelInfo() *ExtraLabelInfo {
+	if x != nil {
+		return x.LabelInfo
+	}
+	return nil
+}
+
+func (x *OrderReturnRequest) GetOrderInfo() *OrderInfo {
+	if x != nil {
+		return x.OrderInfo
+	}
+	return nil
 }
 
 type OrderReturnResponse struct {
@@ -1646,13 +1662,17 @@ const file_revenue_iface_v1_revenue_proto_rawDesc = "" +
 	"\x18RevenueAdjustmentRequest\"\x1b\n" +
 	"\x19RevenueAdjustmentResponse\"\x17\n" +
 	"\x15OrderCompletedRequest\"\x18\n" +
-	"\x16OrderCompletedResponse\"\xfe\x01\n" +
+	"\x16OrderCompletedResponse\"\x8b\x03\n" +
 	"\x12OrderReturnRequest\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12\"\n" +
 	"\border_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\aorderId\x12*\n" +
 	"\fwarehouse_id\x18\x03 \x01(\x04B\a\xbaH\x042\x02 \x00R\vwarehouseId\x12:\n" +
 	"\forder_amount\x18\x04 \x01(\x01B\x17\xbaH\x14\x12\x12\x19\x00\x00\x00\xa2\x94\x1amB!\x00\x00\x00\x00\x00\x00\x00\x00R\vorderAmount\x12:\n" +
-	"\fstock_amount\x18\x05 \x01(\x01B\x17\xbaH\x14\x12\x12\x19\x00\x00\x00\xa2\x94\x1amB!\x00\x00\x00\x00\x00\x00\x00\x00R\vstockAmount\"\x15\n" +
+	"\fstock_amount\x18\x05 \x01(\x01B\x17\xbaH\x14\x12\x12\x19\x00\x00\x00\xa2\x94\x1amB!\x00\x00\x00\x00\x00\x00\x00\x00R\vstockAmount\x12G\n" +
+	"\n" +
+	"label_info\x18\x06 \x01(\v2 .revenue_iface.v1.ExtraLabelInfoB\x06\xbaH\x03\xc8\x01\x01R\tlabelInfo\x12B\n" +
+	"\n" +
+	"order_info\x18\a \x01(\v2\x1b.revenue_iface.v1.OrderInfoB\x06\xbaH\x03\xc8\x01\x01R\torderInfo\"\x15\n" +
 	"\x13OrderReturnResponse\"\xa1\x01\n" +
 	"\x11WithdrawalRequest\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12 \n" +
@@ -1790,33 +1810,35 @@ var file_revenue_iface_v1_revenue_proto_depIdxs = []int32{
 	5,  // 6: revenue_iface.v1.RevenueStreamEvent.adjustment:type_name -> revenue_iface.v1.RevenueStreamEventAdjustment
 	6,  // 7: revenue_iface.v1.RevenueStreamEvent.withdrawal:type_name -> revenue_iface.v1.RevenueStreamEventWithdrawal
 	8,  // 8: revenue_iface.v1.RevenueStreamRequest.event:type_name -> revenue_iface.v1.RevenueStreamEvent
-	22, // 9: revenue_iface.v1.OrderCancelRequest.label_info:type_name -> revenue_iface.v1.ExtraLabelInfo
-	29, // 10: revenue_iface.v1.ExtraLabelInfo.type_labels:type_name -> accounting_iface.v1.TypeLabel
-	26, // 11: revenue_iface.v1.OnOrderAsyncRequest.data:type_name -> revenue_iface.v1.OnOrderRequest
-	22, // 12: revenue_iface.v1.OnOrderRequest.label_info:type_name -> revenue_iface.v1.ExtraLabelInfo
-	23, // 13: revenue_iface.v1.OnOrderRequest.order_info:type_name -> revenue_iface.v1.OrderInfo
-	3,  // 14: revenue_iface.v1.OnOrderRequest.event:type_name -> revenue_iface.v1.OrderEvent
-	30, // 15: revenue_iface.v1.OnOrderRequest.marketplace_type:type_name -> common.v1.MarketplaceType
-	21, // 16: revenue_iface.v1.OnOrderRequest.borrow_stock:type_name -> revenue_iface.v1.BorrowStock
-	26, // 17: revenue_iface.v1.RevenueService.OnOrder:input_type -> revenue_iface.v1.OnOrderRequest
-	19, // 18: revenue_iface.v1.RevenueService.OrderCancel:input_type -> revenue_iface.v1.OrderCancelRequest
-	15, // 19: revenue_iface.v1.RevenueService.OrderReturn:input_type -> revenue_iface.v1.OrderReturnRequest
-	13, // 20: revenue_iface.v1.RevenueService.OrderCompleted:input_type -> revenue_iface.v1.OrderCompletedRequest
-	11, // 21: revenue_iface.v1.RevenueService.RevenueAdjustment:input_type -> revenue_iface.v1.RevenueAdjustmentRequest
-	17, // 22: revenue_iface.v1.RevenueService.Withdrawal:input_type -> revenue_iface.v1.WithdrawalRequest
-	9,  // 23: revenue_iface.v1.RevenueService.RevenueStream:input_type -> revenue_iface.v1.RevenueStreamRequest
-	27, // 24: revenue_iface.v1.RevenueService.OnOrder:output_type -> revenue_iface.v1.OnOrderResponse
-	20, // 25: revenue_iface.v1.RevenueService.OrderCancel:output_type -> revenue_iface.v1.OrderCancelResponse
-	16, // 26: revenue_iface.v1.RevenueService.OrderReturn:output_type -> revenue_iface.v1.OrderReturnResponse
-	14, // 27: revenue_iface.v1.RevenueService.OrderCompleted:output_type -> revenue_iface.v1.OrderCompletedResponse
-	12, // 28: revenue_iface.v1.RevenueService.RevenueAdjustment:output_type -> revenue_iface.v1.RevenueAdjustmentResponse
-	18, // 29: revenue_iface.v1.RevenueService.Withdrawal:output_type -> revenue_iface.v1.WithdrawalResponse
-	10, // 30: revenue_iface.v1.RevenueService.RevenueStream:output_type -> revenue_iface.v1.RevenueStreamResponse
-	24, // [24:31] is the sub-list for method output_type
-	17, // [17:24] is the sub-list for method input_type
-	17, // [17:17] is the sub-list for extension type_name
-	17, // [17:17] is the sub-list for extension extendee
-	0,  // [0:17] is the sub-list for field type_name
+	22, // 9: revenue_iface.v1.OrderReturnRequest.label_info:type_name -> revenue_iface.v1.ExtraLabelInfo
+	23, // 10: revenue_iface.v1.OrderReturnRequest.order_info:type_name -> revenue_iface.v1.OrderInfo
+	22, // 11: revenue_iface.v1.OrderCancelRequest.label_info:type_name -> revenue_iface.v1.ExtraLabelInfo
+	29, // 12: revenue_iface.v1.ExtraLabelInfo.type_labels:type_name -> accounting_iface.v1.TypeLabel
+	26, // 13: revenue_iface.v1.OnOrderAsyncRequest.data:type_name -> revenue_iface.v1.OnOrderRequest
+	22, // 14: revenue_iface.v1.OnOrderRequest.label_info:type_name -> revenue_iface.v1.ExtraLabelInfo
+	23, // 15: revenue_iface.v1.OnOrderRequest.order_info:type_name -> revenue_iface.v1.OrderInfo
+	3,  // 16: revenue_iface.v1.OnOrderRequest.event:type_name -> revenue_iface.v1.OrderEvent
+	30, // 17: revenue_iface.v1.OnOrderRequest.marketplace_type:type_name -> common.v1.MarketplaceType
+	21, // 18: revenue_iface.v1.OnOrderRequest.borrow_stock:type_name -> revenue_iface.v1.BorrowStock
+	26, // 19: revenue_iface.v1.RevenueService.OnOrder:input_type -> revenue_iface.v1.OnOrderRequest
+	19, // 20: revenue_iface.v1.RevenueService.OrderCancel:input_type -> revenue_iface.v1.OrderCancelRequest
+	15, // 21: revenue_iface.v1.RevenueService.OrderReturn:input_type -> revenue_iface.v1.OrderReturnRequest
+	13, // 22: revenue_iface.v1.RevenueService.OrderCompleted:input_type -> revenue_iface.v1.OrderCompletedRequest
+	11, // 23: revenue_iface.v1.RevenueService.RevenueAdjustment:input_type -> revenue_iface.v1.RevenueAdjustmentRequest
+	17, // 24: revenue_iface.v1.RevenueService.Withdrawal:input_type -> revenue_iface.v1.WithdrawalRequest
+	9,  // 25: revenue_iface.v1.RevenueService.RevenueStream:input_type -> revenue_iface.v1.RevenueStreamRequest
+	27, // 26: revenue_iface.v1.RevenueService.OnOrder:output_type -> revenue_iface.v1.OnOrderResponse
+	20, // 27: revenue_iface.v1.RevenueService.OrderCancel:output_type -> revenue_iface.v1.OrderCancelResponse
+	16, // 28: revenue_iface.v1.RevenueService.OrderReturn:output_type -> revenue_iface.v1.OrderReturnResponse
+	14, // 29: revenue_iface.v1.RevenueService.OrderCompleted:output_type -> revenue_iface.v1.OrderCompletedResponse
+	12, // 30: revenue_iface.v1.RevenueService.RevenueAdjustment:output_type -> revenue_iface.v1.RevenueAdjustmentResponse
+	18, // 31: revenue_iface.v1.RevenueService.Withdrawal:output_type -> revenue_iface.v1.WithdrawalResponse
+	10, // 32: revenue_iface.v1.RevenueService.RevenueStream:output_type -> revenue_iface.v1.RevenueStreamResponse
+	26, // [26:33] is the sub-list for method output_type
+	19, // [19:26] is the sub-list for method input_type
+	19, // [19:19] is the sub-list for extension type_name
+	19, // [19:19] is the sub-list for extension extendee
+	0,  // [0:19] is the sub-list for field type_name
 }
 
 func init() { file_revenue_iface_v1_revenue_proto_init() }
