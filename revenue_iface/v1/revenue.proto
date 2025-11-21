@@ -114,6 +114,7 @@ message OrderReturnRequest {
   ];
   ExtraLabelInfo label_info = 6 [(buf.validate.field).required = true];
   OrderInfo order_info = 7 [(buf.validate.field).required = true];
+  common.v1.RequestFrom request_from = 8 [(buf.validate.field).enum = {defined_only: true}];
 }
 message OrderReturnResponse {}
 
