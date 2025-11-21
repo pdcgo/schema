@@ -99,8 +99,10 @@ message TransferCreateResponse {}
 
 message AccountTypeListRequest {}
 message AccountTypeItem {
-  string key = 1;
-  string name = 2;
+  uint64 id = 1;
+  string key = 2;
+  string name = 3;
+  string type = 4;
 }
 message AccountTypeListResponse {
   repeated AccountTypeItem data = 1;

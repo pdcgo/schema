@@ -660,8 +660,10 @@ func (*AccountTypeListRequest) Descriptor() ([]byte, []int) {
 
 type AccountTypeItem struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Key           string                 `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
-	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Key           string                 `protobuf:"bytes,2,opt,name=key,proto3" json:"key,omitempty"`
+	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	Type          string                 `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -696,6 +698,13 @@ func (*AccountTypeItem) Descriptor() ([]byte, []int) {
 	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{10}
 }
 
+func (x *AccountTypeItem) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
 func (x *AccountTypeItem) GetKey() string {
 	if x != nil {
 		return x.Key
@@ -706,6 +715,13 @@ func (x *AccountTypeItem) GetKey() string {
 func (x *AccountTypeItem) GetName() string {
 	if x != nil {
 		return x.Name
+	}
+	return ""
+}
+
+func (x *AccountTypeItem) GetType() string {
+	if x != nil {
+		return x.Type
 	}
 	return ""
 }
@@ -1475,10 +1491,12 @@ const file_accounting_iface_v1_accounting_proto_rawDesc = "" +
 	"fee_amount\x18\b \x01(\x01R\tfeeAmount\x12\x1c\n" +
 	"\x04desc\x18\a \x01(\tB\b\xbaH\x05r\x03\x18\x80\bR\x04desc\"\x18\n" +
 	"\x16TransferCreateResponse\"\x18\n" +
-	"\x16AccountTypeListRequest\"7\n" +
-	"\x0fAccountTypeItem\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\"S\n" +
+	"\x16AccountTypeListRequest\"[\n" +
+	"\x0fAccountTypeItem\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x10\n" +
+	"\x03key\x18\x02 \x01(\tR\x03key\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12\x12\n" +
+	"\x04type\x18\x04 \x01(\tR\x04type\"S\n" +
 	"\x17AccountTypeListResponse\x128\n" +
 	"\x04data\x18\x01 \x03(\v2$.accounting_iface.v1.AccountTypeItemR\x04data\",\n" +
 	"\x10LabelListRequest\x12\x18\n" +
