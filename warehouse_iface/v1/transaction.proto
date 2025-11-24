@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package warehouse_iface.v1;
+
+option go_package = "github.com/pdcgo/schema/services/warehouse_iface/v1;warehouse_iface";
+
+service TransactionService {
+  rpc TransactionItemSearch(TransactionItemSearchRequest) returns (TransactionItemSearchResponse);
+}
+
+enum SearchType {
+  SEARCH_TYPE_UNSPECIFIED = 0;
+  SEARCH_TYPE_RECEIPT = 1;
+  SEARCH_TYPE_EXTERN_ORD_ID = 2;
+}
+
+message Transaction {
+  uint64 id = 1;
+}
+
+message TransactionItemSearchRequest {
+  SearchType search_type = 1;
+  string q = 2;
+}
+message TransactionItemSearchResponse {}

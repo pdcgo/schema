@@ -72,6 +72,190 @@ func (MutationType) EnumDescriptor() ([]byte, []int) {
 	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{0}
 }
 
+type AccountByIDsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Ids           []uint64               `protobuf:"varint,1,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AccountByIDsRequest) Reset() {
+	*x = AccountByIDsRequest{}
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AccountByIDsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AccountByIDsRequest) ProtoMessage() {}
+
+func (x *AccountByIDsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AccountByIDsRequest.ProtoReflect.Descriptor instead.
+func (*AccountByIDsRequest) Descriptor() ([]byte, []int) {
+	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *AccountByIDsRequest) GetIds() []uint64 {
+	if x != nil {
+		return x.Ids
+	}
+	return nil
+}
+
+type AccountByIDsResponse struct {
+	state         protoimpl.MessageState        `protogen:"open.v1"`
+	Data          map[uint64]*PublicAccountItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AccountByIDsResponse) Reset() {
+	*x = AccountByIDsResponse{}
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AccountByIDsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AccountByIDsResponse) ProtoMessage() {}
+
+func (x *AccountByIDsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AccountByIDsResponse.ProtoReflect.Descriptor instead.
+func (*AccountByIDsResponse) Descriptor() ([]byte, []int) {
+	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *AccountByIDsResponse) GetData() map[uint64]*PublicAccountItem {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+type AccountPublicSearchRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	Keyword       string                 `protobuf:"bytes,2,opt,name=keyword,proto3" json:"keyword,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AccountPublicSearchRequest) Reset() {
+	*x = AccountPublicSearchRequest{}
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AccountPublicSearchRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AccountPublicSearchRequest) ProtoMessage() {}
+
+func (x *AccountPublicSearchRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AccountPublicSearchRequest.ProtoReflect.Descriptor instead.
+func (*AccountPublicSearchRequest) Descriptor() ([]byte, []int) {
+	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *AccountPublicSearchRequest) GetTeamId() uint64 {
+	if x != nil {
+		return x.TeamId
+	}
+	return 0
+}
+
+func (x *AccountPublicSearchRequest) GetKeyword() string {
+	if x != nil {
+		return x.Keyword
+	}
+	return ""
+}
+
+type AccountPublicSearchResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Data          []*PublicAccountItem   `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AccountPublicSearchResponse) Reset() {
+	*x = AccountPublicSearchResponse{}
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AccountPublicSearchResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AccountPublicSearchResponse) ProtoMessage() {}
+
+func (x *AccountPublicSearchResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AccountPublicSearchResponse.ProtoReflect.Descriptor instead.
+func (*AccountPublicSearchResponse) Descriptor() ([]byte, []int) {
+	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *AccountPublicSearchResponse) GetData() []*PublicAccountItem {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
 type TransferCancelRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -80,7 +264,7 @@ type TransferCancelRequest struct {
 
 func (x *TransferCancelRequest) Reset() {
 	*x = TransferCancelRequest{}
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[0]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -92,7 +276,7 @@ func (x *TransferCancelRequest) String() string {
 func (*TransferCancelRequest) ProtoMessage() {}
 
 func (x *TransferCancelRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[0]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -105,7 +289,7 @@ func (x *TransferCancelRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TransferCancelRequest.ProtoReflect.Descriptor instead.
 func (*TransferCancelRequest) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{0}
+	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{4}
 }
 
 type TransferCancelResponse struct {
@@ -116,7 +300,7 @@ type TransferCancelResponse struct {
 
 func (x *TransferCancelResponse) Reset() {
 	*x = TransferCancelResponse{}
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[1]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -128,7 +312,7 @@ func (x *TransferCancelResponse) String() string {
 func (*TransferCancelResponse) ProtoMessage() {}
 
 func (x *TransferCancelResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[1]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -141,7 +325,7 @@ func (x *TransferCancelResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TransferCancelResponse.ProtoReflect.Descriptor instead.
 func (*TransferCancelResponse) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{1}
+	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{5}
 }
 
 type MutationItem struct {
@@ -154,8 +338,8 @@ type MutationItem struct {
 	FeeAmount     float64                `protobuf:"fixed64,3,opt,name=fee_amount,json=feeAmount,proto3" json:"fee_amount,omitempty"`
 	Amount        float64                `protobuf:"fixed64,4,opt,name=amount,proto3" json:"amount,omitempty"`
 	Desc          string                 `protobuf:"bytes,5,opt,name=desc,proto3" json:"desc,omitempty"`
-	TransferAt    int64                  `protobuf:"varint,6,opt,name=transfer_at,json=transferAt,proto3" json:"transfer_at,omitempty"`
-	Created       int64                  `protobuf:"varint,7,opt,name=created,proto3" json:"created,omitempty"`
+	// int64 transfer_at = 6;
+	Created int64 `protobuf:"varint,7,opt,name=created,proto3" json:"created,omitempty"`
 	// @gotags: gorm:"-"
 	FromAccount *PublicAccountItem `protobuf:"bytes,8,opt,name=from_account,json=fromAccount,proto3" json:"from_account,omitempty" gorm:"-"`
 	// @gotags: gorm:"-"
@@ -166,7 +350,7 @@ type MutationItem struct {
 
 func (x *MutationItem) Reset() {
 	*x = MutationItem{}
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[2]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -178,7 +362,7 @@ func (x *MutationItem) String() string {
 func (*MutationItem) ProtoMessage() {}
 
 func (x *MutationItem) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[2]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -191,7 +375,7 @@ func (x *MutationItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MutationItem.ProtoReflect.Descriptor instead.
 func (*MutationItem) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{2}
+	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *MutationItem) GetId() uint64 {
@@ -250,13 +434,6 @@ func (x *MutationItem) GetDesc() string {
 	return ""
 }
 
-func (x *MutationItem) GetTransferAt() int64 {
-	if x != nil {
-		return x.TransferAt
-	}
-	return 0
-}
-
 func (x *MutationItem) GetCreated() int64 {
 	if x != nil {
 		return x.Created
@@ -290,7 +467,7 @@ type AccountMutationListRequest struct {
 
 func (x *AccountMutationListRequest) Reset() {
 	*x = AccountMutationListRequest{}
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[3]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -302,7 +479,7 @@ func (x *AccountMutationListRequest) String() string {
 func (*AccountMutationListRequest) ProtoMessage() {}
 
 func (x *AccountMutationListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[3]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -315,7 +492,7 @@ func (x *AccountMutationListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccountMutationListRequest.ProtoReflect.Descriptor instead.
 func (*AccountMutationListRequest) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{3}
+	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *AccountMutationListRequest) GetTeamId() uint64 {
@@ -356,7 +533,7 @@ type AccountMutationListResponse struct {
 
 func (x *AccountMutationListResponse) Reset() {
 	*x = AccountMutationListResponse{}
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[4]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -368,7 +545,7 @@ func (x *AccountMutationListResponse) String() string {
 func (*AccountMutationListResponse) ProtoMessage() {}
 
 func (x *AccountMutationListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[4]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -381,7 +558,7 @@ func (x *AccountMutationListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccountMutationListResponse.ProtoReflect.Descriptor instead.
 func (*AccountMutationListResponse) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{4}
+	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *AccountMutationListResponse) GetData() []*MutationItem {
@@ -409,7 +586,7 @@ type AccountBalanceInitRequest struct {
 
 func (x *AccountBalanceInitRequest) Reset() {
 	*x = AccountBalanceInitRequest{}
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[5]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -421,7 +598,7 @@ func (x *AccountBalanceInitRequest) String() string {
 func (*AccountBalanceInitRequest) ProtoMessage() {}
 
 func (x *AccountBalanceInitRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[5]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -434,7 +611,7 @@ func (x *AccountBalanceInitRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccountBalanceInitRequest.ProtoReflect.Descriptor instead.
 func (*AccountBalanceInitRequest) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{5}
+	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *AccountBalanceInitRequest) GetAccountId() uint64 {
@@ -466,7 +643,7 @@ type AccountBalanceInitResponse struct {
 
 func (x *AccountBalanceInitResponse) Reset() {
 	*x = AccountBalanceInitResponse{}
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[6]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -478,7 +655,7 @@ func (x *AccountBalanceInitResponse) String() string {
 func (*AccountBalanceInitResponse) ProtoMessage() {}
 
 func (x *AccountBalanceInitResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[6]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -491,7 +668,7 @@ func (x *AccountBalanceInitResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccountBalanceInitResponse.ProtoReflect.Descriptor instead.
 func (*AccountBalanceInitResponse) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{6}
+	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{10}
 }
 
 type TransferCreateRequest struct {
@@ -509,7 +686,7 @@ type TransferCreateRequest struct {
 
 func (x *TransferCreateRequest) Reset() {
 	*x = TransferCreateRequest{}
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[7]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -521,7 +698,7 @@ func (x *TransferCreateRequest) String() string {
 func (*TransferCreateRequest) ProtoMessage() {}
 
 func (x *TransferCreateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[7]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -534,7 +711,7 @@ func (x *TransferCreateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TransferCreateRequest.ProtoReflect.Descriptor instead.
 func (*TransferCreateRequest) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{7}
+	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *TransferCreateRequest) GetTeamId() uint64 {
@@ -594,7 +771,7 @@ type TransferCreateResponse struct {
 
 func (x *TransferCreateResponse) Reset() {
 	*x = TransferCreateResponse{}
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[8]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -606,7 +783,7 @@ func (x *TransferCreateResponse) String() string {
 func (*TransferCreateResponse) ProtoMessage() {}
 
 func (x *TransferCreateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[8]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -619,7 +796,7 @@ func (x *TransferCreateResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TransferCreateResponse.ProtoReflect.Descriptor instead.
 func (*TransferCreateResponse) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{8}
+	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{12}
 }
 
 type AccountTypeListRequest struct {
@@ -630,7 +807,7 @@ type AccountTypeListRequest struct {
 
 func (x *AccountTypeListRequest) Reset() {
 	*x = AccountTypeListRequest{}
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[9]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -642,7 +819,7 @@ func (x *AccountTypeListRequest) String() string {
 func (*AccountTypeListRequest) ProtoMessage() {}
 
 func (x *AccountTypeListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[9]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -655,7 +832,7 @@ func (x *AccountTypeListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccountTypeListRequest.ProtoReflect.Descriptor instead.
 func (*AccountTypeListRequest) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{9}
+	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{13}
 }
 
 type AccountTypeItem struct {
@@ -670,7 +847,7 @@ type AccountTypeItem struct {
 
 func (x *AccountTypeItem) Reset() {
 	*x = AccountTypeItem{}
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[10]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -682,7 +859,7 @@ func (x *AccountTypeItem) String() string {
 func (*AccountTypeItem) ProtoMessage() {}
 
 func (x *AccountTypeItem) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[10]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -695,7 +872,7 @@ func (x *AccountTypeItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccountTypeItem.ProtoReflect.Descriptor instead.
 func (*AccountTypeItem) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{10}
+	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *AccountTypeItem) GetId() uint64 {
@@ -735,7 +912,7 @@ type AccountTypeListResponse struct {
 
 func (x *AccountTypeListResponse) Reset() {
 	*x = AccountTypeListResponse{}
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[11]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -747,7 +924,7 @@ func (x *AccountTypeListResponse) String() string {
 func (*AccountTypeListResponse) ProtoMessage() {}
 
 func (x *AccountTypeListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[11]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -760,7 +937,7 @@ func (x *AccountTypeListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccountTypeListResponse.ProtoReflect.Descriptor instead.
 func (*AccountTypeListResponse) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{11}
+	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *AccountTypeListResponse) GetData() []*AccountTypeItem {
@@ -779,7 +956,7 @@ type LabelListRequest struct {
 
 func (x *LabelListRequest) Reset() {
 	*x = LabelListRequest{}
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[12]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -791,7 +968,7 @@ func (x *LabelListRequest) String() string {
 func (*LabelListRequest) ProtoMessage() {}
 
 func (x *LabelListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[12]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -804,7 +981,7 @@ func (x *LabelListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LabelListRequest.ProtoReflect.Descriptor instead.
 func (*LabelListRequest) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{12}
+	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *LabelListRequest) GetKeyword() string {
@@ -823,7 +1000,7 @@ type LabelListResponse struct {
 
 func (x *LabelListResponse) Reset() {
 	*x = LabelListResponse{}
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[13]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -835,7 +1012,7 @@ func (x *LabelListResponse) String() string {
 func (*LabelListResponse) ProtoMessage() {}
 
 func (x *LabelListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[13]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -848,7 +1025,7 @@ func (x *LabelListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LabelListResponse.ProtoReflect.Descriptor instead.
 func (*LabelListResponse) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{13}
+	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *LabelListResponse) GetData() []*v1.KeyName {
@@ -871,7 +1048,7 @@ type AccountUpdateRequest struct {
 
 func (x *AccountUpdateRequest) Reset() {
 	*x = AccountUpdateRequest{}
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[14]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -883,7 +1060,7 @@ func (x *AccountUpdateRequest) String() string {
 func (*AccountUpdateRequest) ProtoMessage() {}
 
 func (x *AccountUpdateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[14]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -896,7 +1073,7 @@ func (x *AccountUpdateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccountUpdateRequest.ProtoReflect.Descriptor instead.
 func (*AccountUpdateRequest) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{14}
+	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *AccountUpdateRequest) GetTeamId() uint64 {
@@ -942,7 +1119,7 @@ type AccountUpdateResponse struct {
 
 func (x *AccountUpdateResponse) Reset() {
 	*x = AccountUpdateResponse{}
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[15]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -954,7 +1131,7 @@ func (x *AccountUpdateResponse) String() string {
 func (*AccountUpdateResponse) ProtoMessage() {}
 
 func (x *AccountUpdateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[15]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -967,7 +1144,7 @@ func (x *AccountUpdateResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccountUpdateResponse.ProtoReflect.Descriptor instead.
 func (*AccountUpdateResponse) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{15}
+	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{19}
 }
 
 type AccountDeleteRequest struct {
@@ -980,7 +1157,7 @@ type AccountDeleteRequest struct {
 
 func (x *AccountDeleteRequest) Reset() {
 	*x = AccountDeleteRequest{}
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[16]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -992,7 +1169,7 @@ func (x *AccountDeleteRequest) String() string {
 func (*AccountDeleteRequest) ProtoMessage() {}
 
 func (x *AccountDeleteRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[16]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1005,7 +1182,7 @@ func (x *AccountDeleteRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccountDeleteRequest.ProtoReflect.Descriptor instead.
 func (*AccountDeleteRequest) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{16}
+	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *AccountDeleteRequest) GetTeamId() uint64 {
@@ -1030,7 +1207,7 @@ type AccountDeleteResponse struct {
 
 func (x *AccountDeleteResponse) Reset() {
 	*x = AccountDeleteResponse{}
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[17]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1042,7 +1219,7 @@ func (x *AccountDeleteResponse) String() string {
 func (*AccountDeleteResponse) ProtoMessage() {}
 
 func (x *AccountDeleteResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[17]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1055,7 +1232,7 @@ func (x *AccountDeleteResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccountDeleteResponse.ProtoReflect.Descriptor instead.
 func (*AccountDeleteResponse) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{17}
+	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{21}
 }
 
 type PublicAccountItem struct {
@@ -1071,7 +1248,7 @@ type PublicAccountItem struct {
 
 func (x *PublicAccountItem) Reset() {
 	*x = PublicAccountItem{}
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[18]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1083,7 +1260,7 @@ func (x *PublicAccountItem) String() string {
 func (*PublicAccountItem) ProtoMessage() {}
 
 func (x *PublicAccountItem) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[18]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1096,7 +1273,7 @@ func (x *PublicAccountItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PublicAccountItem.ProtoReflect.Descriptor instead.
 func (*PublicAccountItem) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{18}
+	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *PublicAccountItem) GetId() uint64 {
@@ -1149,7 +1326,7 @@ type AccountItem struct {
 
 func (x *AccountItem) Reset() {
 	*x = AccountItem{}
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[19]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1161,7 +1338,7 @@ func (x *AccountItem) String() string {
 func (*AccountItem) ProtoMessage() {}
 
 func (x *AccountItem) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[19]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1174,7 +1351,7 @@ func (x *AccountItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccountItem.ProtoReflect.Descriptor instead.
 func (*AccountItem) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{19}
+	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *AccountItem) GetId() uint64 {
@@ -1230,7 +1407,7 @@ type AccountListRequest struct {
 
 func (x *AccountListRequest) Reset() {
 	*x = AccountListRequest{}
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[20]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1242,7 +1419,7 @@ func (x *AccountListRequest) String() string {
 func (*AccountListRequest) ProtoMessage() {}
 
 func (x *AccountListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[20]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1255,7 +1432,7 @@ func (x *AccountListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccountListRequest.ProtoReflect.Descriptor instead.
 func (*AccountListRequest) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{20}
+	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *AccountListRequest) GetTeamId() uint64 {
@@ -1288,7 +1465,7 @@ type AccountListResponse struct {
 
 func (x *AccountListResponse) Reset() {
 	*x = AccountListResponse{}
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[21]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1300,7 +1477,7 @@ func (x *AccountListResponse) String() string {
 func (*AccountListResponse) ProtoMessage() {}
 
 func (x *AccountListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[21]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1313,7 +1490,7 @@ func (x *AccountListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccountListResponse.ProtoReflect.Descriptor instead.
 func (*AccountListResponse) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{21}
+	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *AccountListResponse) GetData() []*AccountItem {
@@ -1336,7 +1513,7 @@ type AccountCreateRequest struct {
 
 func (x *AccountCreateRequest) Reset() {
 	*x = AccountCreateRequest{}
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[22]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1348,7 +1525,7 @@ func (x *AccountCreateRequest) String() string {
 func (*AccountCreateRequest) ProtoMessage() {}
 
 func (x *AccountCreateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[22]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1361,7 +1538,7 @@ func (x *AccountCreateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccountCreateRequest.ProtoReflect.Descriptor instead.
 func (*AccountCreateRequest) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{22}
+	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *AccountCreateRequest) GetTeamId() uint64 {
@@ -1407,7 +1584,7 @@ type AccountCreateResponse struct {
 
 func (x *AccountCreateResponse) Reset() {
 	*x = AccountCreateResponse{}
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[23]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1419,7 +1596,7 @@ func (x *AccountCreateResponse) String() string {
 func (*AccountCreateResponse) ProtoMessage() {}
 
 func (x *AccountCreateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[23]
+	mi := &file_accounting_iface_v1_accounting_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1432,16 +1609,28 @@ func (x *AccountCreateResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccountCreateResponse.ProtoReflect.Descriptor instead.
 func (*AccountCreateResponse) Descriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{23}
+	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{27}
 }
 
 var File_accounting_iface_v1_accounting_proto protoreflect.FileDescriptor
 
 const file_accounting_iface_v1_accounting_proto_rawDesc = "" +
 	"\n" +
-	"$accounting_iface/v1/accounting.proto\x12\x13accounting_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\"\x17\n" +
+	"$accounting_iface/v1/accounting.proto\x12\x13accounting_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\"'\n" +
+	"\x13AccountByIDsRequest\x12\x10\n" +
+	"\x03ids\x18\x01 \x03(\x04R\x03ids\"\xc0\x01\n" +
+	"\x14AccountByIDsResponse\x12G\n" +
+	"\x04data\x18\x01 \x03(\v23.accounting_iface.v1.AccountByIDsResponse.DataEntryR\x04data\x1a_\n" +
+	"\tDataEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\x04R\x03key\x12<\n" +
+	"\x05value\x18\x02 \x01(\v2&.accounting_iface.v1.PublicAccountItemR\x05value:\x028\x01\"O\n" +
+	"\x1aAccountPublicSearchRequest\x12\x17\n" +
+	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12\x18\n" +
+	"\akeyword\x18\x02 \x01(\tR\akeyword\"Y\n" +
+	"\x1bAccountPublicSearchResponse\x12:\n" +
+	"\x04data\x18\x01 \x03(\v2&.accounting_iface.v1.PublicAccountItemR\x04data\"\x17\n" +
 	"\x15TransferCancelRequest\"\x18\n" +
-	"\x16TransferCancelResponse\"\xd2\x03\n" +
+	"\x16TransferCancelResponse\"\xb1\x03\n" +
 	"\fMutationItem\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x17\n" +
 	"\ateam_id\x18\n" +
@@ -1452,9 +1641,7 @@ const file_accounting_iface_v1_accounting_proto_rawDesc = "" +
 	"\n" +
 	"fee_amount\x18\x03 \x01(\x01R\tfeeAmount\x12\x16\n" +
 	"\x06amount\x18\x04 \x01(\x01R\x06amount\x12\x12\n" +
-	"\x04desc\x18\x05 \x01(\tR\x04desc\x12\x1f\n" +
-	"\vtransfer_at\x18\x06 \x01(\x03R\n" +
-	"transferAt\x12\x18\n" +
+	"\x04desc\x18\x05 \x01(\tR\x04desc\x12\x18\n" +
 	"\acreated\x18\a \x01(\x03R\acreated\x12I\n" +
 	"\ffrom_account\x18\b \x01(\v2&.accounting_iface.v1.PublicAccountItemR\vfromAccount\x12E\n" +
 	"\n" +
@@ -1547,14 +1734,17 @@ const file_accounting_iface_v1_accounting_proto_rawDesc = "" +
 	"\fMutationType\x12\x1d\n" +
 	"\x19MUTATION_TYPE_UNSPECIFIED\x10\x00\x12\x16\n" +
 	"\x12MUTATION_TYPE_SEND\x10\x01\x12\x19\n" +
-	"\x15MUTATION_TYPE_RECEIVE\x10\x022\xbb\b\n" +
+	"\x15MUTATION_TYPE_RECEIVE\x10\x022\x9a\n" +
+	"\n" +
 	"\x0eAccountService\x12f\n" +
 	"\rAccountCreate\x12).accounting_iface.v1.AccountCreateRequest\x1a*.accounting_iface.v1.AccountCreateResponse\x12`\n" +
 	"\vAccountList\x12'.accounting_iface.v1.AccountListRequest\x1a(.accounting_iface.v1.AccountListResponse\x12f\n" +
 	"\rAccountDelete\x12).accounting_iface.v1.AccountDeleteRequest\x1a*.accounting_iface.v1.AccountDeleteResponse\x12f\n" +
 	"\rAccountUpdate\x12).accounting_iface.v1.AccountUpdateRequest\x1a*.accounting_iface.v1.AccountUpdateResponse\x12Z\n" +
 	"\tLabelList\x12%.accounting_iface.v1.LabelListRequest\x1a&.accounting_iface.v1.LabelListResponse\x12l\n" +
-	"\x0fAccountTypeList\x12+.accounting_iface.v1.AccountTypeListRequest\x1a,.accounting_iface.v1.AccountTypeListResponse\x12u\n" +
+	"\x0fAccountTypeList\x12+.accounting_iface.v1.AccountTypeListRequest\x1a,.accounting_iface.v1.AccountTypeListResponse\x12c\n" +
+	"\fAccountByIDs\x12(.accounting_iface.v1.AccountByIDsRequest\x1a).accounting_iface.v1.AccountByIDsResponse\x12x\n" +
+	"\x13AccountPublicSearch\x12/.accounting_iface.v1.AccountPublicSearchRequest\x1a0.accounting_iface.v1.AccountPublicSearchResponse\x12u\n" +
 	"\x12AccountBalanceInit\x12..accounting_iface.v1.AccountBalanceInitRequest\x1a/.accounting_iface.v1.AccountBalanceInitResponse\x12i\n" +
 	"\x0eTransferCreate\x12*.accounting_iface.v1.TransferCreateRequest\x1a+.accounting_iface.v1.TransferCreateResponse\x12i\n" +
 	"\x0eTransferCancel\x12*.accounting_iface.v1.TransferCancelRequest\x1a+.accounting_iface.v1.TransferCancelResponse\x12x\n" +
@@ -1574,77 +1764,89 @@ func file_accounting_iface_v1_accounting_proto_rawDescGZIP() []byte {
 }
 
 var file_accounting_iface_v1_accounting_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_accounting_iface_v1_accounting_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
+var file_accounting_iface_v1_accounting_proto_msgTypes = make([]protoimpl.MessageInfo, 29)
 var file_accounting_iface_v1_accounting_proto_goTypes = []any{
 	(MutationType)(0),                   // 0: accounting_iface.v1.MutationType
-	(*TransferCancelRequest)(nil),       // 1: accounting_iface.v1.TransferCancelRequest
-	(*TransferCancelResponse)(nil),      // 2: accounting_iface.v1.TransferCancelResponse
-	(*MutationItem)(nil),                // 3: accounting_iface.v1.MutationItem
-	(*AccountMutationListRequest)(nil),  // 4: accounting_iface.v1.AccountMutationListRequest
-	(*AccountMutationListResponse)(nil), // 5: accounting_iface.v1.AccountMutationListResponse
-	(*AccountBalanceInitRequest)(nil),   // 6: accounting_iface.v1.AccountBalanceInitRequest
-	(*AccountBalanceInitResponse)(nil),  // 7: accounting_iface.v1.AccountBalanceInitResponse
-	(*TransferCreateRequest)(nil),       // 8: accounting_iface.v1.TransferCreateRequest
-	(*TransferCreateResponse)(nil),      // 9: accounting_iface.v1.TransferCreateResponse
-	(*AccountTypeListRequest)(nil),      // 10: accounting_iface.v1.AccountTypeListRequest
-	(*AccountTypeItem)(nil),             // 11: accounting_iface.v1.AccountTypeItem
-	(*AccountTypeListResponse)(nil),     // 12: accounting_iface.v1.AccountTypeListResponse
-	(*LabelListRequest)(nil),            // 13: accounting_iface.v1.LabelListRequest
-	(*LabelListResponse)(nil),           // 14: accounting_iface.v1.LabelListResponse
-	(*AccountUpdateRequest)(nil),        // 15: accounting_iface.v1.AccountUpdateRequest
-	(*AccountUpdateResponse)(nil),       // 16: accounting_iface.v1.AccountUpdateResponse
-	(*AccountDeleteRequest)(nil),        // 17: accounting_iface.v1.AccountDeleteRequest
-	(*AccountDeleteResponse)(nil),       // 18: accounting_iface.v1.AccountDeleteResponse
-	(*PublicAccountItem)(nil),           // 19: accounting_iface.v1.PublicAccountItem
-	(*AccountItem)(nil),                 // 20: accounting_iface.v1.AccountItem
-	(*AccountListRequest)(nil),          // 21: accounting_iface.v1.AccountListRequest
-	(*AccountListResponse)(nil),         // 22: accounting_iface.v1.AccountListResponse
-	(*AccountCreateRequest)(nil),        // 23: accounting_iface.v1.AccountCreateRequest
-	(*AccountCreateResponse)(nil),       // 24: accounting_iface.v1.AccountCreateResponse
-	(*v1.TimeFilter)(nil),               // 25: common.v1.TimeFilter
-	(*v1.PageFilter)(nil),               // 26: common.v1.PageFilter
-	(*v1.PageInfo)(nil),                 // 27: common.v1.PageInfo
-	(*v1.KeyName)(nil),                  // 28: common.v1.KeyName
+	(*AccountByIDsRequest)(nil),         // 1: accounting_iface.v1.AccountByIDsRequest
+	(*AccountByIDsResponse)(nil),        // 2: accounting_iface.v1.AccountByIDsResponse
+	(*AccountPublicSearchRequest)(nil),  // 3: accounting_iface.v1.AccountPublicSearchRequest
+	(*AccountPublicSearchResponse)(nil), // 4: accounting_iface.v1.AccountPublicSearchResponse
+	(*TransferCancelRequest)(nil),       // 5: accounting_iface.v1.TransferCancelRequest
+	(*TransferCancelResponse)(nil),      // 6: accounting_iface.v1.TransferCancelResponse
+	(*MutationItem)(nil),                // 7: accounting_iface.v1.MutationItem
+	(*AccountMutationListRequest)(nil),  // 8: accounting_iface.v1.AccountMutationListRequest
+	(*AccountMutationListResponse)(nil), // 9: accounting_iface.v1.AccountMutationListResponse
+	(*AccountBalanceInitRequest)(nil),   // 10: accounting_iface.v1.AccountBalanceInitRequest
+	(*AccountBalanceInitResponse)(nil),  // 11: accounting_iface.v1.AccountBalanceInitResponse
+	(*TransferCreateRequest)(nil),       // 12: accounting_iface.v1.TransferCreateRequest
+	(*TransferCreateResponse)(nil),      // 13: accounting_iface.v1.TransferCreateResponse
+	(*AccountTypeListRequest)(nil),      // 14: accounting_iface.v1.AccountTypeListRequest
+	(*AccountTypeItem)(nil),             // 15: accounting_iface.v1.AccountTypeItem
+	(*AccountTypeListResponse)(nil),     // 16: accounting_iface.v1.AccountTypeListResponse
+	(*LabelListRequest)(nil),            // 17: accounting_iface.v1.LabelListRequest
+	(*LabelListResponse)(nil),           // 18: accounting_iface.v1.LabelListResponse
+	(*AccountUpdateRequest)(nil),        // 19: accounting_iface.v1.AccountUpdateRequest
+	(*AccountUpdateResponse)(nil),       // 20: accounting_iface.v1.AccountUpdateResponse
+	(*AccountDeleteRequest)(nil),        // 21: accounting_iface.v1.AccountDeleteRequest
+	(*AccountDeleteResponse)(nil),       // 22: accounting_iface.v1.AccountDeleteResponse
+	(*PublicAccountItem)(nil),           // 23: accounting_iface.v1.PublicAccountItem
+	(*AccountItem)(nil),                 // 24: accounting_iface.v1.AccountItem
+	(*AccountListRequest)(nil),          // 25: accounting_iface.v1.AccountListRequest
+	(*AccountListResponse)(nil),         // 26: accounting_iface.v1.AccountListResponse
+	(*AccountCreateRequest)(nil),        // 27: accounting_iface.v1.AccountCreateRequest
+	(*AccountCreateResponse)(nil),       // 28: accounting_iface.v1.AccountCreateResponse
+	nil,                                 // 29: accounting_iface.v1.AccountByIDsResponse.DataEntry
+	(*v1.TimeFilter)(nil),               // 30: common.v1.TimeFilter
+	(*v1.PageFilter)(nil),               // 31: common.v1.PageFilter
+	(*v1.PageInfo)(nil),                 // 32: common.v1.PageInfo
+	(*v1.KeyName)(nil),                  // 33: common.v1.KeyName
 }
 var file_accounting_iface_v1_accounting_proto_depIdxs = []int32{
-	0,  // 0: accounting_iface.v1.MutationItem.type:type_name -> accounting_iface.v1.MutationType
-	19, // 1: accounting_iface.v1.MutationItem.from_account:type_name -> accounting_iface.v1.PublicAccountItem
-	19, // 2: accounting_iface.v1.MutationItem.to_account:type_name -> accounting_iface.v1.PublicAccountItem
-	25, // 3: accounting_iface.v1.AccountMutationListRequest.time_range:type_name -> common.v1.TimeFilter
-	26, // 4: accounting_iface.v1.AccountMutationListRequest.page:type_name -> common.v1.PageFilter
-	3,  // 5: accounting_iface.v1.AccountMutationListResponse.data:type_name -> accounting_iface.v1.MutationItem
-	27, // 6: accounting_iface.v1.AccountMutationListResponse.page_info:type_name -> common.v1.PageInfo
-	11, // 7: accounting_iface.v1.AccountTypeListResponse.data:type_name -> accounting_iface.v1.AccountTypeItem
-	28, // 8: accounting_iface.v1.LabelListResponse.data:type_name -> common.v1.KeyName
-	28, // 9: accounting_iface.v1.AccountUpdateRequest.labels:type_name -> common.v1.KeyName
-	28, // 10: accounting_iface.v1.AccountItem.labels:type_name -> common.v1.KeyName
-	20, // 11: accounting_iface.v1.AccountListResponse.data:type_name -> accounting_iface.v1.AccountItem
-	28, // 12: accounting_iface.v1.AccountCreateRequest.labels:type_name -> common.v1.KeyName
-	23, // 13: accounting_iface.v1.AccountService.AccountCreate:input_type -> accounting_iface.v1.AccountCreateRequest
-	21, // 14: accounting_iface.v1.AccountService.AccountList:input_type -> accounting_iface.v1.AccountListRequest
-	17, // 15: accounting_iface.v1.AccountService.AccountDelete:input_type -> accounting_iface.v1.AccountDeleteRequest
-	15, // 16: accounting_iface.v1.AccountService.AccountUpdate:input_type -> accounting_iface.v1.AccountUpdateRequest
-	13, // 17: accounting_iface.v1.AccountService.LabelList:input_type -> accounting_iface.v1.LabelListRequest
-	10, // 18: accounting_iface.v1.AccountService.AccountTypeList:input_type -> accounting_iface.v1.AccountTypeListRequest
-	6,  // 19: accounting_iface.v1.AccountService.AccountBalanceInit:input_type -> accounting_iface.v1.AccountBalanceInitRequest
-	8,  // 20: accounting_iface.v1.AccountService.TransferCreate:input_type -> accounting_iface.v1.TransferCreateRequest
-	1,  // 21: accounting_iface.v1.AccountService.TransferCancel:input_type -> accounting_iface.v1.TransferCancelRequest
-	4,  // 22: accounting_iface.v1.AccountService.AccountMutationList:input_type -> accounting_iface.v1.AccountMutationListRequest
-	24, // 23: accounting_iface.v1.AccountService.AccountCreate:output_type -> accounting_iface.v1.AccountCreateResponse
-	22, // 24: accounting_iface.v1.AccountService.AccountList:output_type -> accounting_iface.v1.AccountListResponse
-	18, // 25: accounting_iface.v1.AccountService.AccountDelete:output_type -> accounting_iface.v1.AccountDeleteResponse
-	16, // 26: accounting_iface.v1.AccountService.AccountUpdate:output_type -> accounting_iface.v1.AccountUpdateResponse
-	14, // 27: accounting_iface.v1.AccountService.LabelList:output_type -> accounting_iface.v1.LabelListResponse
-	12, // 28: accounting_iface.v1.AccountService.AccountTypeList:output_type -> accounting_iface.v1.AccountTypeListResponse
-	7,  // 29: accounting_iface.v1.AccountService.AccountBalanceInit:output_type -> accounting_iface.v1.AccountBalanceInitResponse
-	9,  // 30: accounting_iface.v1.AccountService.TransferCreate:output_type -> accounting_iface.v1.TransferCreateResponse
-	2,  // 31: accounting_iface.v1.AccountService.TransferCancel:output_type -> accounting_iface.v1.TransferCancelResponse
-	5,  // 32: accounting_iface.v1.AccountService.AccountMutationList:output_type -> accounting_iface.v1.AccountMutationListResponse
-	23, // [23:33] is the sub-list for method output_type
-	13, // [13:23] is the sub-list for method input_type
-	13, // [13:13] is the sub-list for extension type_name
-	13, // [13:13] is the sub-list for extension extendee
-	0,  // [0:13] is the sub-list for field type_name
+	29, // 0: accounting_iface.v1.AccountByIDsResponse.data:type_name -> accounting_iface.v1.AccountByIDsResponse.DataEntry
+	23, // 1: accounting_iface.v1.AccountPublicSearchResponse.data:type_name -> accounting_iface.v1.PublicAccountItem
+	0,  // 2: accounting_iface.v1.MutationItem.type:type_name -> accounting_iface.v1.MutationType
+	23, // 3: accounting_iface.v1.MutationItem.from_account:type_name -> accounting_iface.v1.PublicAccountItem
+	23, // 4: accounting_iface.v1.MutationItem.to_account:type_name -> accounting_iface.v1.PublicAccountItem
+	30, // 5: accounting_iface.v1.AccountMutationListRequest.time_range:type_name -> common.v1.TimeFilter
+	31, // 6: accounting_iface.v1.AccountMutationListRequest.page:type_name -> common.v1.PageFilter
+	7,  // 7: accounting_iface.v1.AccountMutationListResponse.data:type_name -> accounting_iface.v1.MutationItem
+	32, // 8: accounting_iface.v1.AccountMutationListResponse.page_info:type_name -> common.v1.PageInfo
+	15, // 9: accounting_iface.v1.AccountTypeListResponse.data:type_name -> accounting_iface.v1.AccountTypeItem
+	33, // 10: accounting_iface.v1.LabelListResponse.data:type_name -> common.v1.KeyName
+	33, // 11: accounting_iface.v1.AccountUpdateRequest.labels:type_name -> common.v1.KeyName
+	33, // 12: accounting_iface.v1.AccountItem.labels:type_name -> common.v1.KeyName
+	24, // 13: accounting_iface.v1.AccountListResponse.data:type_name -> accounting_iface.v1.AccountItem
+	33, // 14: accounting_iface.v1.AccountCreateRequest.labels:type_name -> common.v1.KeyName
+	23, // 15: accounting_iface.v1.AccountByIDsResponse.DataEntry.value:type_name -> accounting_iface.v1.PublicAccountItem
+	27, // 16: accounting_iface.v1.AccountService.AccountCreate:input_type -> accounting_iface.v1.AccountCreateRequest
+	25, // 17: accounting_iface.v1.AccountService.AccountList:input_type -> accounting_iface.v1.AccountListRequest
+	21, // 18: accounting_iface.v1.AccountService.AccountDelete:input_type -> accounting_iface.v1.AccountDeleteRequest
+	19, // 19: accounting_iface.v1.AccountService.AccountUpdate:input_type -> accounting_iface.v1.AccountUpdateRequest
+	17, // 20: accounting_iface.v1.AccountService.LabelList:input_type -> accounting_iface.v1.LabelListRequest
+	14, // 21: accounting_iface.v1.AccountService.AccountTypeList:input_type -> accounting_iface.v1.AccountTypeListRequest
+	1,  // 22: accounting_iface.v1.AccountService.AccountByIDs:input_type -> accounting_iface.v1.AccountByIDsRequest
+	3,  // 23: accounting_iface.v1.AccountService.AccountPublicSearch:input_type -> accounting_iface.v1.AccountPublicSearchRequest
+	10, // 24: accounting_iface.v1.AccountService.AccountBalanceInit:input_type -> accounting_iface.v1.AccountBalanceInitRequest
+	12, // 25: accounting_iface.v1.AccountService.TransferCreate:input_type -> accounting_iface.v1.TransferCreateRequest
+	5,  // 26: accounting_iface.v1.AccountService.TransferCancel:input_type -> accounting_iface.v1.TransferCancelRequest
+	8,  // 27: accounting_iface.v1.AccountService.AccountMutationList:input_type -> accounting_iface.v1.AccountMutationListRequest
+	28, // 28: accounting_iface.v1.AccountService.AccountCreate:output_type -> accounting_iface.v1.AccountCreateResponse
+	26, // 29: accounting_iface.v1.AccountService.AccountList:output_type -> accounting_iface.v1.AccountListResponse
+	22, // 30: accounting_iface.v1.AccountService.AccountDelete:output_type -> accounting_iface.v1.AccountDeleteResponse
+	20, // 31: accounting_iface.v1.AccountService.AccountUpdate:output_type -> accounting_iface.v1.AccountUpdateResponse
+	18, // 32: accounting_iface.v1.AccountService.LabelList:output_type -> accounting_iface.v1.LabelListResponse
+	16, // 33: accounting_iface.v1.AccountService.AccountTypeList:output_type -> accounting_iface.v1.AccountTypeListResponse
+	2,  // 34: accounting_iface.v1.AccountService.AccountByIDs:output_type -> accounting_iface.v1.AccountByIDsResponse
+	4,  // 35: accounting_iface.v1.AccountService.AccountPublicSearch:output_type -> accounting_iface.v1.AccountPublicSearchResponse
+	11, // 36: accounting_iface.v1.AccountService.AccountBalanceInit:output_type -> accounting_iface.v1.AccountBalanceInitResponse
+	13, // 37: accounting_iface.v1.AccountService.TransferCreate:output_type -> accounting_iface.v1.TransferCreateResponse
+	6,  // 38: accounting_iface.v1.AccountService.TransferCancel:output_type -> accounting_iface.v1.TransferCancelResponse
+	9,  // 39: accounting_iface.v1.AccountService.AccountMutationList:output_type -> accounting_iface.v1.AccountMutationListResponse
+	28, // [28:40] is the sub-list for method output_type
+	16, // [16:28] is the sub-list for method input_type
+	16, // [16:16] is the sub-list for extension type_name
+	16, // [16:16] is the sub-list for extension extendee
+	0,  // [0:16] is the sub-list for field type_name
 }
 
 func init() { file_accounting_iface_v1_accounting_proto_init() }
@@ -1658,7 +1860,7 @@ func file_accounting_iface_v1_accounting_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_accounting_iface_v1_accounting_proto_rawDesc), len(file_accounting_iface_v1_accounting_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   24,
+			NumMessages:   29,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

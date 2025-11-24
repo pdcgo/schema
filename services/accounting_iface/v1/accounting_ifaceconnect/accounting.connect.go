@@ -51,6 +51,12 @@ const (
 	// AccountServiceAccountTypeListProcedure is the fully-qualified name of the AccountService's
 	// AccountTypeList RPC.
 	AccountServiceAccountTypeListProcedure = "/accounting_iface.v1.AccountService/AccountTypeList"
+	// AccountServiceAccountByIDsProcedure is the fully-qualified name of the AccountService's
+	// AccountByIDs RPC.
+	AccountServiceAccountByIDsProcedure = "/accounting_iface.v1.AccountService/AccountByIDs"
+	// AccountServiceAccountPublicSearchProcedure is the fully-qualified name of the AccountService's
+	// AccountPublicSearch RPC.
+	AccountServiceAccountPublicSearchProcedure = "/accounting_iface.v1.AccountService/AccountPublicSearch"
 	// AccountServiceAccountBalanceInitProcedure is the fully-qualified name of the AccountService's
 	// AccountBalanceInit RPC.
 	AccountServiceAccountBalanceInitProcedure = "/accounting_iface.v1.AccountService/AccountBalanceInit"
@@ -73,6 +79,8 @@ type AccountServiceClient interface {
 	AccountUpdate(context.Context, *connect.Request[v1.AccountUpdateRequest]) (*connect.Response[v1.AccountUpdateResponse], error)
 	LabelList(context.Context, *connect.Request[v1.LabelListRequest]) (*connect.Response[v1.LabelListResponse], error)
 	AccountTypeList(context.Context, *connect.Request[v1.AccountTypeListRequest]) (*connect.Response[v1.AccountTypeListResponse], error)
+	AccountByIDs(context.Context, *connect.Request[v1.AccountByIDsRequest]) (*connect.Response[v1.AccountByIDsResponse], error)
+	AccountPublicSearch(context.Context, *connect.Request[v1.AccountPublicSearchRequest]) (*connect.Response[v1.AccountPublicSearchResponse], error)
 	// balance
 	AccountBalanceInit(context.Context, *connect.Request[v1.AccountBalanceInitRequest]) (*connect.Response[v1.AccountBalanceInitResponse], error)
 	// untuk transfer ke account lain
@@ -128,6 +136,18 @@ func NewAccountServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			connect.WithSchema(accountServiceMethods.ByName("AccountTypeList")),
 			connect.WithClientOptions(opts...),
 		),
+		accountByIDs: connect.NewClient[v1.AccountByIDsRequest, v1.AccountByIDsResponse](
+			httpClient,
+			baseURL+AccountServiceAccountByIDsProcedure,
+			connect.WithSchema(accountServiceMethods.ByName("AccountByIDs")),
+			connect.WithClientOptions(opts...),
+		),
+		accountPublicSearch: connect.NewClient[v1.AccountPublicSearchRequest, v1.AccountPublicSearchResponse](
+			httpClient,
+			baseURL+AccountServiceAccountPublicSearchProcedure,
+			connect.WithSchema(accountServiceMethods.ByName("AccountPublicSearch")),
+			connect.WithClientOptions(opts...),
+		),
 		accountBalanceInit: connect.NewClient[v1.AccountBalanceInitRequest, v1.AccountBalanceInitResponse](
 			httpClient,
 			baseURL+AccountServiceAccountBalanceInitProcedure,
@@ -163,6 +183,8 @@ type accountServiceClient struct {
 	accountUpdate       *connect.Client[v1.AccountUpdateRequest, v1.AccountUpdateResponse]
 	labelList           *connect.Client[v1.LabelListRequest, v1.LabelListResponse]
 	accountTypeList     *connect.Client[v1.AccountTypeListRequest, v1.AccountTypeListResponse]
+	accountByIDs        *connect.Client[v1.AccountByIDsRequest, v1.AccountByIDsResponse]
+	accountPublicSearch *connect.Client[v1.AccountPublicSearchRequest, v1.AccountPublicSearchResponse]
 	accountBalanceInit  *connect.Client[v1.AccountBalanceInitRequest, v1.AccountBalanceInitResponse]
 	transferCreate      *connect.Client[v1.TransferCreateRequest, v1.TransferCreateResponse]
 	transferCancel      *connect.Client[v1.TransferCancelRequest, v1.TransferCancelResponse]
@@ -199,6 +221,16 @@ func (c *accountServiceClient) AccountTypeList(ctx context.Context, req *connect
 	return c.accountTypeList.CallUnary(ctx, req)
 }
 
+// AccountByIDs calls accounting_iface.v1.AccountService.AccountByIDs.
+func (c *accountServiceClient) AccountByIDs(ctx context.Context, req *connect.Request[v1.AccountByIDsRequest]) (*connect.Response[v1.AccountByIDsResponse], error) {
+	return c.accountByIDs.CallUnary(ctx, req)
+}
+
+// AccountPublicSearch calls accounting_iface.v1.AccountService.AccountPublicSearch.
+func (c *accountServiceClient) AccountPublicSearch(ctx context.Context, req *connect.Request[v1.AccountPublicSearchRequest]) (*connect.Response[v1.AccountPublicSearchResponse], error) {
+	return c.accountPublicSearch.CallUnary(ctx, req)
+}
+
 // AccountBalanceInit calls accounting_iface.v1.AccountService.AccountBalanceInit.
 func (c *accountServiceClient) AccountBalanceInit(ctx context.Context, req *connect.Request[v1.AccountBalanceInitRequest]) (*connect.Response[v1.AccountBalanceInitResponse], error) {
 	return c.accountBalanceInit.CallUnary(ctx, req)
@@ -227,6 +259,8 @@ type AccountServiceHandler interface {
 	AccountUpdate(context.Context, *connect.Request[v1.AccountUpdateRequest]) (*connect.Response[v1.AccountUpdateResponse], error)
 	LabelList(context.Context, *connect.Request[v1.LabelListRequest]) (*connect.Response[v1.LabelListResponse], error)
 	AccountTypeList(context.Context, *connect.Request[v1.AccountTypeListRequest]) (*connect.Response[v1.AccountTypeListResponse], error)
+	AccountByIDs(context.Context, *connect.Request[v1.AccountByIDsRequest]) (*connect.Response[v1.AccountByIDsResponse], error)
+	AccountPublicSearch(context.Context, *connect.Request[v1.AccountPublicSearchRequest]) (*connect.Response[v1.AccountPublicSearchResponse], error)
 	// balance
 	AccountBalanceInit(context.Context, *connect.Request[v1.AccountBalanceInitRequest]) (*connect.Response[v1.AccountBalanceInitResponse], error)
 	// untuk transfer ke account lain
@@ -278,6 +312,18 @@ func NewAccountServiceHandler(svc AccountServiceHandler, opts ...connect.Handler
 		connect.WithSchema(accountServiceMethods.ByName("AccountTypeList")),
 		connect.WithHandlerOptions(opts...),
 	)
+	accountServiceAccountByIDsHandler := connect.NewUnaryHandler(
+		AccountServiceAccountByIDsProcedure,
+		svc.AccountByIDs,
+		connect.WithSchema(accountServiceMethods.ByName("AccountByIDs")),
+		connect.WithHandlerOptions(opts...),
+	)
+	accountServiceAccountPublicSearchHandler := connect.NewUnaryHandler(
+		AccountServiceAccountPublicSearchProcedure,
+		svc.AccountPublicSearch,
+		connect.WithSchema(accountServiceMethods.ByName("AccountPublicSearch")),
+		connect.WithHandlerOptions(opts...),
+	)
 	accountServiceAccountBalanceInitHandler := connect.NewUnaryHandler(
 		AccountServiceAccountBalanceInitProcedure,
 		svc.AccountBalanceInit,
@@ -316,6 +362,10 @@ func NewAccountServiceHandler(svc AccountServiceHandler, opts ...connect.Handler
 			accountServiceLabelListHandler.ServeHTTP(w, r)
 		case AccountServiceAccountTypeListProcedure:
 			accountServiceAccountTypeListHandler.ServeHTTP(w, r)
+		case AccountServiceAccountByIDsProcedure:
+			accountServiceAccountByIDsHandler.ServeHTTP(w, r)
+		case AccountServiceAccountPublicSearchProcedure:
+			accountServiceAccountPublicSearchHandler.ServeHTTP(w, r)
 		case AccountServiceAccountBalanceInitProcedure:
 			accountServiceAccountBalanceInitHandler.ServeHTTP(w, r)
 		case AccountServiceTransferCreateProcedure:
@@ -355,6 +405,14 @@ func (UnimplementedAccountServiceHandler) LabelList(context.Context, *connect.Re
 
 func (UnimplementedAccountServiceHandler) AccountTypeList(context.Context, *connect.Request[v1.AccountTypeListRequest]) (*connect.Response[v1.AccountTypeListResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("accounting_iface.v1.AccountService.AccountTypeList is not implemented"))
+}
+
+func (UnimplementedAccountServiceHandler) AccountByIDs(context.Context, *connect.Request[v1.AccountByIDsRequest]) (*connect.Response[v1.AccountByIDsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("accounting_iface.v1.AccountService.AccountByIDs is not implemented"))
+}
+
+func (UnimplementedAccountServiceHandler) AccountPublicSearch(context.Context, *connect.Request[v1.AccountPublicSearchRequest]) (*connect.Response[v1.AccountPublicSearchResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("accounting_iface.v1.AccountService.AccountPublicSearch is not implemented"))
 }
 
 func (UnimplementedAccountServiceHandler) AccountBalanceInit(context.Context, *connect.Request[v1.AccountBalanceInitRequest]) (*connect.Response[v1.AccountBalanceInitResponse], error) {

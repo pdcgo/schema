@@ -15,6 +15,10 @@ service AccountService {
   rpc LabelList(LabelListRequest) returns (LabelListResponse);
   rpc AccountTypeList(AccountTypeListRequest) returns (AccountTypeListResponse);
 
+  rpc AccountByIDs(AccountByIDsRequest) returns (AccountByIDsResponse);
+  rpc AccountPublicSearch(AccountPublicSearchRequest) returns (AccountPublicSearchResponse);
+  // permission kosiong admin list
+
   // balance
   rpc AccountBalanceInit(AccountBalanceInitRequest) returns (AccountBalanceInitResponse);
 
@@ -22,6 +26,32 @@ service AccountService {
   rpc TransferCreate(TransferCreateRequest) returns (TransferCreateResponse);
   rpc TransferCancel(TransferCancelRequest) returns (TransferCancelResponse);
   rpc AccountMutationList(AccountMutationListRequest) returns (AccountMutationListResponse);
+}
+
+message AccountByIDsRequest {
+  repeated uint64 ids = 1 [(buf.validate.field).repeated = {
+    min_items: 1 // must have at least 1 id
+    max_items: 200
+    unique: true // no duplicate IDs allowed
+    items: {
+      uint64: {gt: 0}
+    }
+  }];
+}
+message AccountByIDsResponse {
+  map<uint64, PublicAccountItem> data = 1;
+}
+
+message AccountPublicSearchRequest {
+  uint64 team_id = 1 [
+    (buf.validate.field).required = true,
+    (buf.validate.field).uint64.gt = 0
+  ];
+  string keyword = 2;
+}
+
+message AccountPublicSearchResponse {
+  repeated PublicAccountItem data = 1;
 }
 
 message TransferCancelRequest {}
@@ -42,7 +72,7 @@ message MutationItem {
   double fee_amount = 3;
   double amount = 4;
   string desc = 5;
-  int64 transfer_at = 6;
+  // int64 transfer_at = 6;
   int64 created = 7;
   // @gotags: gorm:"-"
   PublicAccountItem from_account = 8;
