@@ -676,10 +676,10 @@ type TransferCreateRequest struct {
 	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
 	FromAccountId uint64                 `protobuf:"varint,2,opt,name=from_account_id,json=fromAccountId,proto3" json:"from_account_id,omitempty"`
 	ToAccountId   uint64                 `protobuf:"varint,3,opt,name=to_account_id,json=toAccountId,proto3" json:"to_account_id,omitempty"`
-	TransferAt    int64                  `protobuf:"varint,5,opt,name=transfer_at,json=transferAt,proto3" json:"transfer_at,omitempty"`
-	Amount        float64                `protobuf:"fixed64,6,opt,name=amount,proto3" json:"amount,omitempty"`
-	FeeAmount     float64                `protobuf:"fixed64,8,opt,name=fee_amount,json=feeAmount,proto3" json:"fee_amount,omitempty"`
-	Desc          string                 `protobuf:"bytes,7,opt,name=desc,proto3" json:"desc,omitempty"`
+	// int64 transfer_at = 5 [(buf.validate.field).int64.gt = 0 /* unix epoch, must be > 0 */];
+	Amount        float64 `protobuf:"fixed64,6,opt,name=amount,proto3" json:"amount,omitempty"`
+	FeeAmount     float64 `protobuf:"fixed64,8,opt,name=fee_amount,json=feeAmount,proto3" json:"fee_amount,omitempty"`
+	Desc          string  `protobuf:"bytes,7,opt,name=desc,proto3" json:"desc,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -731,13 +731,6 @@ func (x *TransferCreateRequest) GetFromAccountId() uint64 {
 func (x *TransferCreateRequest) GetToAccountId() uint64 {
 	if x != nil {
 		return x.ToAccountId
-	}
-	return 0
-}
-
-func (x *TransferCreateRequest) GetTransferAt() int64 {
-	if x != nil {
-		return x.TransferAt
 	}
 	return 0
 }
@@ -1616,16 +1609,17 @@ var File_accounting_iface_v1_accounting_proto protoreflect.FileDescriptor
 
 const file_accounting_iface_v1_accounting_proto_rawDesc = "" +
 	"\n" +
-	"$accounting_iface/v1/accounting.proto\x12\x13accounting_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\"'\n" +
-	"\x13AccountByIDsRequest\x12\x10\n" +
-	"\x03ids\x18\x01 \x03(\x04R\x03ids\"\xc0\x01\n" +
+	"$accounting_iface/v1/accounting.proto\x12\x13accounting_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\"<\n" +
+	"\x13AccountByIDsRequest\x12%\n" +
+	"\x03ids\x18\x01 \x03(\x04B\x13\xbaH\x10\x92\x01\r\b\x01\x10\xc8\x01\x18\x01\"\x042\x02 \x00R\x03ids\"\xc0\x01\n" +
 	"\x14AccountByIDsResponse\x12G\n" +
 	"\x04data\x18\x01 \x03(\v23.accounting_iface.v1.AccountByIDsResponse.DataEntryR\x04data\x1a_\n" +
 	"\tDataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\x04R\x03key\x12<\n" +
-	"\x05value\x18\x02 \x01(\v2&.accounting_iface.v1.PublicAccountItemR\x05value:\x028\x01\"O\n" +
-	"\x1aAccountPublicSearchRequest\x12\x17\n" +
-	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12\x18\n" +
+	"\x05value\x18\x02 \x01(\v2&.accounting_iface.v1.PublicAccountItemR\x05value:\x028\x01\"[\n" +
+	"\x1aAccountPublicSearchRequest\x12#\n" +
+	"\ateam_id\x18\x01 \x01(\x04B\n" +
+	"\xbaH\a\xc8\x01\x012\x02 \x00R\x06teamId\x12\x18\n" +
 	"\akeyword\x18\x02 \x01(\tR\akeyword\"Y\n" +
 	"\x1bAccountPublicSearchResponse\x12:\n" +
 	"\x04data\x18\x01 \x03(\v2&.accounting_iface.v1.PublicAccountItemR\x04data\"\x17\n" +
@@ -1663,16 +1657,14 @@ const file_accounting_iface_v1_accounting_proto_rawDesc = "" +
 	"\xbaH\a\xc8\x01\x012\x02 \x00R\taccountId\x12&\n" +
 	"\x06amount\x18\x02 \x01(\x01B\x0e\xbaH\v\x12\t!\x00\x00\x00\x00\x00\x00\x00\x00R\x06amount\x12\x1c\n" +
 	"\x04desc\x18\x03 \x01(\tB\b\xbaH\x05r\x03\x18\xff\x01R\x04desc\"\x1c\n" +
-	"\x1aAccountBalanceInitResponse\"\xaf\x02\n" +
+	"\x1aAccountBalanceInitResponse\"\x85\x02\n" +
 	"\x15TransferCreateRequest\x12#\n" +
 	"\ateam_id\x18\x01 \x01(\x04B\n" +
 	"\xbaH\a\xc8\x01\x012\x02 \x00R\x06teamId\x122\n" +
 	"\x0ffrom_account_id\x18\x02 \x01(\x04B\n" +
 	"\xbaH\a\xc8\x01\x012\x02 \x00R\rfromAccountId\x12.\n" +
 	"\rto_account_id\x18\x03 \x01(\x04B\n" +
-	"\xbaH\a\xc8\x01\x012\x02 \x00R\vtoAccountId\x12(\n" +
-	"\vtransfer_at\x18\x05 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\n" +
-	"transferAt\x12&\n" +
+	"\xbaH\a\xc8\x01\x012\x02 \x00R\vtoAccountId\x12&\n" +
 	"\x06amount\x18\x06 \x01(\x01B\x0e\xbaH\v\x12\t!\x00\x00\x00\x00\x00\x00\x00\x00R\x06amount\x12\x1d\n" +
 	"\n" +
 	"fee_amount\x18\b \x01(\x01R\tfeeAmount\x12\x1c\n" +
