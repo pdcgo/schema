@@ -1,0 +1,43 @@
+syntax = "proto3";
+package product_iface.v1;
+
+// import "accounting_iface/v1/core.proto";
+import "buf/validate/validate.proto";
+// import "common/v1/common.proto";
+// import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/pdcgo/schema/services/product_iface/v1;product_iface";
+
+service ProductService {
+  rpc ProductDuplicate(ProductDuplicateRequest) returns (ProductDuplicateResponse);
+  rpc ProductMapGet(ProductMapGetRequest) returns (ProductMapGetResponse);
+  rpc ProductMapConnect(ProductMapConnectRequest) returns (ProductMapConnectResponse);
+}
+
+message ProductDuplicateRequest {
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 variation_id = 2 [(buf.validate.field).uint64.gt = 0];
+}
+message ProductDuplicateResponse {
+  uint64 new_product_id = 1;
+  uint64 new_variation_id = 2;
+}
+
+message ProductMapGetRequest {
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 variation_id = 2 [(buf.validate.field).uint64.gt = 0];
+}
+
+message ProductMapGetResponse {
+  uint64 product_id = 1;
+  uint64 variation_id = 2;
+  uint64 team_id = 3;
+}
+
+message ProductMapConnectRequest {
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 variation_id = 2 [(buf.validate.field).uint64.gt = 0];
+  uint64 to_variation_id = 3 [(buf.validate.field).uint64.gt = 0];
+}
+
+message ProductMapConnectResponse {}
