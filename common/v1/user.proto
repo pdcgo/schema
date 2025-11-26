@@ -6,6 +6,20 @@ import "common/v1/common.proto";
 
 option go_package = "github.com/pdcgo/schema/services/common/v1;common";
 
+service LoginService {
+  rpc Login(LoginRequest) returns (LoginResponse);
+}
+
+message LoginRequest {
+  string username = 1;
+  string password = 2;
+}
+
+message LoginResponse {
+  User user = 1;
+  string token = 2;
+}
+
 service UserService {
   /*
    #### Untuk Get Data User Public

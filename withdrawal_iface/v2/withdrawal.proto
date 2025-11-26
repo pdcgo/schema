@@ -9,6 +9,7 @@ option go_package = "github.com/pdcgo/schema/services/withdrawal_iface/v2;withdr
 
 service WithdrawalService {
   rpc SubmitWithdrawal(SubmitWithdrawalRequest) returns (stream SubmitWithdrawalResponse);
+  rpc SubmitWithdrawalTiktok(SubmitWithdrawalTiktokRequest) returns (stream SubmitWithdrawalTiktokResponse);
 }
 
 message SubmitWithdrawalRequest {
@@ -20,5 +21,17 @@ message SubmitWithdrawalRequest {
 }
 
 message SubmitWithdrawalResponse {
+  string message = 1;
+}
+
+message SubmitWithdrawalTiktokRequest {
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 mp_id = 2 [(buf.validate.field).uint64.gt = 0];
+  withdrawal_iface.v1.ImporterSource source = 3 [(buf.validate.field).enum.defined_only = true];
+  common.v1.MarketplaceType mp_type = 4 [(buf.validate.field).enum.defined_only = true];
+  string resource_uri = 5 [(buf.validate.field).string.min_len = 1];
+}
+
+message SubmitWithdrawalTiktokResponse {
   string message = 1;
 }

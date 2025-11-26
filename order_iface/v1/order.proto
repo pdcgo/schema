@@ -1,0 +1,65 @@
+syntax = "proto3";
+package order_iface.v1;
+
+// import "accounting_iface/v1/core.proto";
+import "buf/validate/validate.proto";
+// import "common/v1/common.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/pdcgo/schema/services/order_iface/v1;order_iface";
+
+service OrderService {
+  rpc OrderFundSet(stream OrderFundSetRequest) returns (OrderFundSetResponse);
+  rpc OrderTagRemove(OrderTagRemoveRequest) returns (OrderTagRemoveResponse);
+}
+
+enum TagType {
+  TAG_TYPE_UNSPECIFIED = 0;
+  TAG_TYPE_TRACKING = 1;
+}
+
+message OrderTagRemoveRequest {
+  uint64 team_id = 1;
+  uint64 order_id = 2;
+  TagType tag_type = 3;
+}
+
+message OrderTagRemoveResponse {}
+
+message OrderFundSet {
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  oneof order_identifier {
+    uint64 order_id = 2;
+    string order_ref_id = 3;
+  }
+  double amount = 5 [(buf.validate.field).cel = {
+    id: "not_zero"
+    expression: "this != 0.00"
+    message: "amount cannot be zero"
+  }];
+  google.protobuf.Timestamp at = 6 [(buf.validate.field).required = true];
+  string desc = 7;
+}
+
+message OrderCompletedSet {
+  uint64 team_id = 1;
+  oneof order_identifier {
+    uint64 order_id = 2;
+    string order_ref_id = 3;
+  }
+  google.protobuf.Timestamp wd_at = 6 [(buf.validate.field).required = true];
+}
+
+message OrderFundRollback {
+  string message = 1;
+}
+
+message OrderFundSetRequest {
+  oneof kind {
+    OrderFundSet order_fund_set = 1;
+    OrderCompletedSet order_completed_set = 2;
+    OrderFundRollback order_fund_rollback = 3;
+  }
+}
+
+message OrderFundSetResponse {}

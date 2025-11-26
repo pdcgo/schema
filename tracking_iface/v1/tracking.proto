@@ -1,0 +1,20 @@
+syntax = "proto3";
+package tracking_iface.v1;
+
+// import "accounting_iface/v1/core.proto";
+// import "buf/validate/validate.proto";
+// import "common/v1/common.proto";
+// import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/pdcgo/schema/services/tracking_iface/v1;tracking_iface";
+
+service TrackingService {
+  rpc TagOrderRemove(TagOrderRemoveRequest) returns (TagOrderRemoveResponse);
+}
+
+message TagOrderRemoveRequest {
+  uint64 team_id = 1;
+  uint64 order_id = 2;
+}
+
+message TagOrderRemoveResponse {}

@@ -21,6 +21,8 @@ import (
 const _ = connect.IsAtLeastVersion1_13_0
 
 const (
+	// LoginServiceName is the fully-qualified name of the LoginService service.
+	LoginServiceName = "common.v1.LoginService"
 	// UserServiceName is the fully-qualified name of the UserService service.
 	UserServiceName = "common.v1.UserService"
 )
@@ -33,10 +35,82 @@ const (
 // reflection-formatted method names, remove the leading slash and convert the remaining slash to a
 // period.
 const (
+	// LoginServiceLoginProcedure is the fully-qualified name of the LoginService's Login RPC.
+	LoginServiceLoginProcedure = "/common.v1.LoginService/Login"
 	// UserServicePublicUserIDsProcedure is the fully-qualified name of the UserService's PublicUserIDs
 	// RPC.
 	UserServicePublicUserIDsProcedure = "/common.v1.UserService/PublicUserIDs"
 )
+
+// LoginServiceClient is a client for the common.v1.LoginService service.
+type LoginServiceClient interface {
+	Login(context.Context, *connect.Request[v1.LoginRequest]) (*connect.Response[v1.LoginResponse], error)
+}
+
+// NewLoginServiceClient constructs a client for the common.v1.LoginService service. By default, it
+// uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses, and sends
+// uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the connect.WithGRPC() or
+// connect.WithGRPCWeb() options.
+//
+// The URL supplied here should be the base URL for the Connect or gRPC server (for example,
+// http://api.acme.com or https://acme.com/grpc).
+func NewLoginServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) LoginServiceClient {
+	baseURL = strings.TrimRight(baseURL, "/")
+	loginServiceMethods := v1.File_common_v1_user_proto.Services().ByName("LoginService").Methods()
+	return &loginServiceClient{
+		login: connect.NewClient[v1.LoginRequest, v1.LoginResponse](
+			httpClient,
+			baseURL+LoginServiceLoginProcedure,
+			connect.WithSchema(loginServiceMethods.ByName("Login")),
+			connect.WithClientOptions(opts...),
+		),
+	}
+}
+
+// loginServiceClient implements LoginServiceClient.
+type loginServiceClient struct {
+	login *connect.Client[v1.LoginRequest, v1.LoginResponse]
+}
+
+// Login calls common.v1.LoginService.Login.
+func (c *loginServiceClient) Login(ctx context.Context, req *connect.Request[v1.LoginRequest]) (*connect.Response[v1.LoginResponse], error) {
+	return c.login.CallUnary(ctx, req)
+}
+
+// LoginServiceHandler is an implementation of the common.v1.LoginService service.
+type LoginServiceHandler interface {
+	Login(context.Context, *connect.Request[v1.LoginRequest]) (*connect.Response[v1.LoginResponse], error)
+}
+
+// NewLoginServiceHandler builds an HTTP handler from the service implementation. It returns the
+// path on which to mount the handler and the handler itself.
+//
+// By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
+// and JSON codecs. They also support gzip compression.
+func NewLoginServiceHandler(svc LoginServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	loginServiceMethods := v1.File_common_v1_user_proto.Services().ByName("LoginService").Methods()
+	loginServiceLoginHandler := connect.NewUnaryHandler(
+		LoginServiceLoginProcedure,
+		svc.Login,
+		connect.WithSchema(loginServiceMethods.ByName("Login")),
+		connect.WithHandlerOptions(opts...),
+	)
+	return "/common.v1.LoginService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		switch r.URL.Path {
+		case LoginServiceLoginProcedure:
+			loginServiceLoginHandler.ServeHTTP(w, r)
+		default:
+			http.NotFound(w, r)
+		}
+	})
+}
+
+// UnimplementedLoginServiceHandler returns CodeUnimplemented from all methods.
+type UnimplementedLoginServiceHandler struct{}
+
+func (UnimplementedLoginServiceHandler) Login(context.Context, *connect.Request[v1.LoginRequest]) (*connect.Response[v1.LoginResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("common.v1.LoginService.Login is not implemented"))
+}
 
 // UserServiceClient is a client for the common.v1.UserService service.
 type UserServiceClient interface {

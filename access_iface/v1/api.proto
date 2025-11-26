@@ -12,6 +12,7 @@ enum RequestFrom {
   REQUEST_FROM_ADMIN = 2;
   REQUEST_FROM_WAREHOUSE = 3;
   REQUEST_FROM_SYSTEM = 4;
+  REQUEST_FROM_EXTENSION = 5;
 }
 
 message Stack {
