@@ -8,8 +8,8 @@ package withdrawal_iface
 
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
-	v11 "github.com/pdcgo/schema/services/common/v1"
-	v1 "github.com/pdcgo/schema/services/withdrawal_iface/v1"
+	v1 "github.com/pdcgo/schema/services/common/v1"
+	v11 "github.com/pdcgo/schema/services/withdrawal_iface/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -24,20 +24,71 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type MpSubmit struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	MpId          uint64                 `protobuf:"varint,2,opt,name=mp_id,json=mpId,proto3" json:"mp_id,omitempty"`
+	MpType        v1.MarketplaceType     `protobuf:"varint,4,opt,name=mp_type,json=mpType,proto3,enum=common.v1.MarketplaceType" json:"mp_type,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *MpSubmit) Reset() {
+	*x = MpSubmit{}
+	mi := &file_withdrawal_iface_v2_withdrawal_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MpSubmit) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MpSubmit) ProtoMessage() {}
+
+func (x *MpSubmit) ProtoReflect() protoreflect.Message {
+	mi := &file_withdrawal_iface_v2_withdrawal_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MpSubmit.ProtoReflect.Descriptor instead.
+func (*MpSubmit) Descriptor() ([]byte, []int) {
+	return file_withdrawal_iface_v2_withdrawal_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *MpSubmit) GetMpId() uint64 {
+	if x != nil {
+		return x.MpId
+	}
+	return 0
+}
+
+func (x *MpSubmit) GetMpType() v1.MarketplaceType {
+	if x != nil {
+		return x.MpType
+	}
+	return v1.MarketplaceType(0)
+}
+
 type SubmitWithdrawalRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
-	MpId          uint64                 `protobuf:"varint,2,opt,name=mp_id,json=mpId,proto3" json:"mp_id,omitempty"`
-	Source        v1.ImporterSource      `protobuf:"varint,3,opt,name=source,proto3,enum=withdrawal_iface.v1.ImporterSource" json:"source,omitempty"`
-	MpType        v11.MarketplaceType    `protobuf:"varint,4,opt,name=mp_type,json=mpType,proto3,enum=common.v1.MarketplaceType" json:"mp_type,omitempty"`
+	Source        v11.ImporterSource     `protobuf:"varint,3,opt,name=source,proto3,enum=withdrawal_iface.v1.ImporterSource" json:"source,omitempty"`
 	ResourceUri   string                 `protobuf:"bytes,5,opt,name=resource_uri,json=resourceUri,proto3" json:"resource_uri,omitempty"`
+	MpSubmit      *MpSubmit              `protobuf:"bytes,6,opt,name=mp_submit,json=mpSubmit,proto3" json:"mp_submit,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *SubmitWithdrawalRequest) Reset() {
 	*x = SubmitWithdrawalRequest{}
-	mi := &file_withdrawal_iface_v2_withdrawal_proto_msgTypes[0]
+	mi := &file_withdrawal_iface_v2_withdrawal_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -49,7 +100,7 @@ func (x *SubmitWithdrawalRequest) String() string {
 func (*SubmitWithdrawalRequest) ProtoMessage() {}
 
 func (x *SubmitWithdrawalRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_withdrawal_iface_v2_withdrawal_proto_msgTypes[0]
+	mi := &file_withdrawal_iface_v2_withdrawal_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -62,7 +113,7 @@ func (x *SubmitWithdrawalRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SubmitWithdrawalRequest.ProtoReflect.Descriptor instead.
 func (*SubmitWithdrawalRequest) Descriptor() ([]byte, []int) {
-	return file_withdrawal_iface_v2_withdrawal_proto_rawDescGZIP(), []int{0}
+	return file_withdrawal_iface_v2_withdrawal_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *SubmitWithdrawalRequest) GetTeamId() uint64 {
@@ -72,25 +123,11 @@ func (x *SubmitWithdrawalRequest) GetTeamId() uint64 {
 	return 0
 }
 
-func (x *SubmitWithdrawalRequest) GetMpId() uint64 {
-	if x != nil {
-		return x.MpId
-	}
-	return 0
-}
-
-func (x *SubmitWithdrawalRequest) GetSource() v1.ImporterSource {
+func (x *SubmitWithdrawalRequest) GetSource() v11.ImporterSource {
 	if x != nil {
 		return x.Source
 	}
-	return v1.ImporterSource(0)
-}
-
-func (x *SubmitWithdrawalRequest) GetMpType() v11.MarketplaceType {
-	if x != nil {
-		return x.MpType
-	}
-	return v11.MarketplaceType(0)
+	return v11.ImporterSource(0)
 }
 
 func (x *SubmitWithdrawalRequest) GetResourceUri() string {
@@ -98,6 +135,13 @@ func (x *SubmitWithdrawalRequest) GetResourceUri() string {
 		return x.ResourceUri
 	}
 	return ""
+}
+
+func (x *SubmitWithdrawalRequest) GetMpSubmit() *MpSubmit {
+	if x != nil {
+		return x.MpSubmit
+	}
+	return nil
 }
 
 type SubmitWithdrawalResponse struct {
@@ -109,7 +153,7 @@ type SubmitWithdrawalResponse struct {
 
 func (x *SubmitWithdrawalResponse) Reset() {
 	*x = SubmitWithdrawalResponse{}
-	mi := &file_withdrawal_iface_v2_withdrawal_proto_msgTypes[1]
+	mi := &file_withdrawal_iface_v2_withdrawal_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -121,7 +165,7 @@ func (x *SubmitWithdrawalResponse) String() string {
 func (*SubmitWithdrawalResponse) ProtoMessage() {}
 
 func (x *SubmitWithdrawalResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_withdrawal_iface_v2_withdrawal_proto_msgTypes[1]
+	mi := &file_withdrawal_iface_v2_withdrawal_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -134,7 +178,7 @@ func (x *SubmitWithdrawalResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SubmitWithdrawalResponse.ProtoReflect.Descriptor instead.
 func (*SubmitWithdrawalResponse) Descriptor() ([]byte, []int) {
-	return file_withdrawal_iface_v2_withdrawal_proto_rawDescGZIP(), []int{1}
+	return file_withdrawal_iface_v2_withdrawal_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *SubmitWithdrawalResponse) GetMessage() string {
@@ -147,17 +191,16 @@ func (x *SubmitWithdrawalResponse) GetMessage() string {
 type SubmitWithdrawalTiktokRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
-	MpId          uint64                 `protobuf:"varint,2,opt,name=mp_id,json=mpId,proto3" json:"mp_id,omitempty"`
-	Source        v1.ImporterSource      `protobuf:"varint,3,opt,name=source,proto3,enum=withdrawal_iface.v1.ImporterSource" json:"source,omitempty"`
-	MpType        v11.MarketplaceType    `protobuf:"varint,4,opt,name=mp_type,json=mpType,proto3,enum=common.v1.MarketplaceType" json:"mp_type,omitempty"`
+	Source        v11.ImporterSource     `protobuf:"varint,3,opt,name=source,proto3,enum=withdrawal_iface.v1.ImporterSource" json:"source,omitempty"`
 	ResourceUri   string                 `protobuf:"bytes,5,opt,name=resource_uri,json=resourceUri,proto3" json:"resource_uri,omitempty"`
+	MpSubmit      *MpSubmit              `protobuf:"bytes,6,opt,name=mp_submit,json=mpSubmit,proto3" json:"mp_submit,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *SubmitWithdrawalTiktokRequest) Reset() {
 	*x = SubmitWithdrawalTiktokRequest{}
-	mi := &file_withdrawal_iface_v2_withdrawal_proto_msgTypes[2]
+	mi := &file_withdrawal_iface_v2_withdrawal_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -169,7 +212,7 @@ func (x *SubmitWithdrawalTiktokRequest) String() string {
 func (*SubmitWithdrawalTiktokRequest) ProtoMessage() {}
 
 func (x *SubmitWithdrawalTiktokRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_withdrawal_iface_v2_withdrawal_proto_msgTypes[2]
+	mi := &file_withdrawal_iface_v2_withdrawal_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -182,7 +225,7 @@ func (x *SubmitWithdrawalTiktokRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SubmitWithdrawalTiktokRequest.ProtoReflect.Descriptor instead.
 func (*SubmitWithdrawalTiktokRequest) Descriptor() ([]byte, []int) {
-	return file_withdrawal_iface_v2_withdrawal_proto_rawDescGZIP(), []int{2}
+	return file_withdrawal_iface_v2_withdrawal_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *SubmitWithdrawalTiktokRequest) GetTeamId() uint64 {
@@ -192,25 +235,11 @@ func (x *SubmitWithdrawalTiktokRequest) GetTeamId() uint64 {
 	return 0
 }
 
-func (x *SubmitWithdrawalTiktokRequest) GetMpId() uint64 {
-	if x != nil {
-		return x.MpId
-	}
-	return 0
-}
-
-func (x *SubmitWithdrawalTiktokRequest) GetSource() v1.ImporterSource {
+func (x *SubmitWithdrawalTiktokRequest) GetSource() v11.ImporterSource {
 	if x != nil {
 		return x.Source
 	}
-	return v1.ImporterSource(0)
-}
-
-func (x *SubmitWithdrawalTiktokRequest) GetMpType() v11.MarketplaceType {
-	if x != nil {
-		return x.MpType
-	}
-	return v11.MarketplaceType(0)
+	return v11.ImporterSource(0)
 }
 
 func (x *SubmitWithdrawalTiktokRequest) GetResourceUri() string {
@@ -218,6 +247,13 @@ func (x *SubmitWithdrawalTiktokRequest) GetResourceUri() string {
 		return x.ResourceUri
 	}
 	return ""
+}
+
+func (x *SubmitWithdrawalTiktokRequest) GetMpSubmit() *MpSubmit {
+	if x != nil {
+		return x.MpSubmit
+	}
+	return nil
 }
 
 type SubmitWithdrawalTiktokResponse struct {
@@ -229,7 +265,7 @@ type SubmitWithdrawalTiktokResponse struct {
 
 func (x *SubmitWithdrawalTiktokResponse) Reset() {
 	*x = SubmitWithdrawalTiktokResponse{}
-	mi := &file_withdrawal_iface_v2_withdrawal_proto_msgTypes[3]
+	mi := &file_withdrawal_iface_v2_withdrawal_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -241,7 +277,7 @@ func (x *SubmitWithdrawalTiktokResponse) String() string {
 func (*SubmitWithdrawalTiktokResponse) ProtoMessage() {}
 
 func (x *SubmitWithdrawalTiktokResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_withdrawal_iface_v2_withdrawal_proto_msgTypes[3]
+	mi := &file_withdrawal_iface_v2_withdrawal_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -254,7 +290,7 @@ func (x *SubmitWithdrawalTiktokResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SubmitWithdrawalTiktokResponse.ProtoReflect.Descriptor instead.
 func (*SubmitWithdrawalTiktokResponse) Descriptor() ([]byte, []int) {
-	return file_withdrawal_iface_v2_withdrawal_proto_rawDescGZIP(), []int{3}
+	return file_withdrawal_iface_v2_withdrawal_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *SubmitWithdrawalTiktokResponse) GetMessage() string {
@@ -268,21 +304,22 @@ var File_withdrawal_iface_v2_withdrawal_proto protoreflect.FileDescriptor
 
 const file_withdrawal_iface_v2_withdrawal_proto_rawDesc = "" +
 	"\n" +
-	"$withdrawal_iface/v2/withdrawal.proto\x12\x13withdrawal_iface.v2\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a$withdrawal_iface/v1/withdrawal.proto\"\x8b\x02\n" +
+	"$withdrawal_iface/v2/withdrawal.proto\x12\x13withdrawal_iface.v2\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a$withdrawal_iface/v1/withdrawal.proto\"g\n" +
+	"\bMpSubmit\x12\x1c\n" +
+	"\x05mp_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x04mpId\x12=\n" +
+	"\amp_type\x18\x04 \x01(\x0e2\x1a.common.v1.MarketplaceTypeB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06mpType\"\xf2\x01\n" +
 	"\x17SubmitWithdrawalRequest\x12 \n" +
-	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12\x1c\n" +
-	"\x05mp_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x04mpId\x12E\n" +
-	"\x06source\x18\x03 \x01(\x0e2#.withdrawal_iface.v1.ImporterSourceB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06source\x12=\n" +
-	"\amp_type\x18\x04 \x01(\x0e2\x1a.common.v1.MarketplaceTypeB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06mpType\x12*\n" +
-	"\fresource_uri\x18\x05 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\vresourceUri\"4\n" +
+	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12E\n" +
+	"\x06source\x18\x03 \x01(\x0e2#.withdrawal_iface.v1.ImporterSourceB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06source\x12*\n" +
+	"\fresource_uri\x18\x05 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\vresourceUri\x12B\n" +
+	"\tmp_submit\x18\x06 \x01(\v2\x1d.withdrawal_iface.v2.MpSubmitB\x06\xbaH\x03\xc8\x01\x01R\bmpSubmit\"4\n" +
 	"\x18SubmitWithdrawalResponse\x12\x18\n" +
-	"\amessage\x18\x01 \x01(\tR\amessage\"\x91\x02\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage\"\xf8\x01\n" +
 	"\x1dSubmitWithdrawalTiktokRequest\x12 \n" +
-	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12\x1c\n" +
-	"\x05mp_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x04mpId\x12E\n" +
-	"\x06source\x18\x03 \x01(\x0e2#.withdrawal_iface.v1.ImporterSourceB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06source\x12=\n" +
-	"\amp_type\x18\x04 \x01(\x0e2\x1a.common.v1.MarketplaceTypeB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06mpType\x12*\n" +
-	"\fresource_uri\x18\x05 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\vresourceUri\":\n" +
+	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12E\n" +
+	"\x06source\x18\x03 \x01(\x0e2#.withdrawal_iface.v1.ImporterSourceB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06source\x12*\n" +
+	"\fresource_uri\x18\x05 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\vresourceUri\x12B\n" +
+	"\tmp_submit\x18\x06 \x01(\v2\x1d.withdrawal_iface.v2.MpSubmitB\x06\xbaH\x03\xc8\x01\x01R\bmpSubmit\":\n" +
 	"\x1eSubmitWithdrawalTiktokResponse\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage2\x8c\x02\n" +
 	"\x11WithdrawalService\x12q\n" +
@@ -302,29 +339,31 @@ func file_withdrawal_iface_v2_withdrawal_proto_rawDescGZIP() []byte {
 	return file_withdrawal_iface_v2_withdrawal_proto_rawDescData
 }
 
-var file_withdrawal_iface_v2_withdrawal_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_withdrawal_iface_v2_withdrawal_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_withdrawal_iface_v2_withdrawal_proto_goTypes = []any{
-	(*SubmitWithdrawalRequest)(nil),        // 0: withdrawal_iface.v2.SubmitWithdrawalRequest
-	(*SubmitWithdrawalResponse)(nil),       // 1: withdrawal_iface.v2.SubmitWithdrawalResponse
-	(*SubmitWithdrawalTiktokRequest)(nil),  // 2: withdrawal_iface.v2.SubmitWithdrawalTiktokRequest
-	(*SubmitWithdrawalTiktokResponse)(nil), // 3: withdrawal_iface.v2.SubmitWithdrawalTiktokResponse
-	(v1.ImporterSource)(0),                 // 4: withdrawal_iface.v1.ImporterSource
-	(v11.MarketplaceType)(0),               // 5: common.v1.MarketplaceType
+	(*MpSubmit)(nil),                       // 0: withdrawal_iface.v2.MpSubmit
+	(*SubmitWithdrawalRequest)(nil),        // 1: withdrawal_iface.v2.SubmitWithdrawalRequest
+	(*SubmitWithdrawalResponse)(nil),       // 2: withdrawal_iface.v2.SubmitWithdrawalResponse
+	(*SubmitWithdrawalTiktokRequest)(nil),  // 3: withdrawal_iface.v2.SubmitWithdrawalTiktokRequest
+	(*SubmitWithdrawalTiktokResponse)(nil), // 4: withdrawal_iface.v2.SubmitWithdrawalTiktokResponse
+	(v1.MarketplaceType)(0),                // 5: common.v1.MarketplaceType
+	(v11.ImporterSource)(0),                // 6: withdrawal_iface.v1.ImporterSource
 }
 var file_withdrawal_iface_v2_withdrawal_proto_depIdxs = []int32{
-	4, // 0: withdrawal_iface.v2.SubmitWithdrawalRequest.source:type_name -> withdrawal_iface.v1.ImporterSource
-	5, // 1: withdrawal_iface.v2.SubmitWithdrawalRequest.mp_type:type_name -> common.v1.MarketplaceType
-	4, // 2: withdrawal_iface.v2.SubmitWithdrawalTiktokRequest.source:type_name -> withdrawal_iface.v1.ImporterSource
-	5, // 3: withdrawal_iface.v2.SubmitWithdrawalTiktokRequest.mp_type:type_name -> common.v1.MarketplaceType
-	0, // 4: withdrawal_iface.v2.WithdrawalService.SubmitWithdrawal:input_type -> withdrawal_iface.v2.SubmitWithdrawalRequest
-	2, // 5: withdrawal_iface.v2.WithdrawalService.SubmitWithdrawalTiktok:input_type -> withdrawal_iface.v2.SubmitWithdrawalTiktokRequest
-	1, // 6: withdrawal_iface.v2.WithdrawalService.SubmitWithdrawal:output_type -> withdrawal_iface.v2.SubmitWithdrawalResponse
-	3, // 7: withdrawal_iface.v2.WithdrawalService.SubmitWithdrawalTiktok:output_type -> withdrawal_iface.v2.SubmitWithdrawalTiktokResponse
-	6, // [6:8] is the sub-list for method output_type
-	4, // [4:6] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	5, // 0: withdrawal_iface.v2.MpSubmit.mp_type:type_name -> common.v1.MarketplaceType
+	6, // 1: withdrawal_iface.v2.SubmitWithdrawalRequest.source:type_name -> withdrawal_iface.v1.ImporterSource
+	0, // 2: withdrawal_iface.v2.SubmitWithdrawalRequest.mp_submit:type_name -> withdrawal_iface.v2.MpSubmit
+	6, // 3: withdrawal_iface.v2.SubmitWithdrawalTiktokRequest.source:type_name -> withdrawal_iface.v1.ImporterSource
+	0, // 4: withdrawal_iface.v2.SubmitWithdrawalTiktokRequest.mp_submit:type_name -> withdrawal_iface.v2.MpSubmit
+	1, // 5: withdrawal_iface.v2.WithdrawalService.SubmitWithdrawal:input_type -> withdrawal_iface.v2.SubmitWithdrawalRequest
+	3, // 6: withdrawal_iface.v2.WithdrawalService.SubmitWithdrawalTiktok:input_type -> withdrawal_iface.v2.SubmitWithdrawalTiktokRequest
+	2, // 7: withdrawal_iface.v2.WithdrawalService.SubmitWithdrawal:output_type -> withdrawal_iface.v2.SubmitWithdrawalResponse
+	4, // 8: withdrawal_iface.v2.WithdrawalService.SubmitWithdrawalTiktok:output_type -> withdrawal_iface.v2.SubmitWithdrawalTiktokResponse
+	7, // [7:9] is the sub-list for method output_type
+	5, // [5:7] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_withdrawal_iface_v2_withdrawal_proto_init() }
@@ -338,7 +377,7 @@ func file_withdrawal_iface_v2_withdrawal_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_withdrawal_iface_v2_withdrawal_proto_rawDesc), len(file_withdrawal_iface_v2_withdrawal_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
