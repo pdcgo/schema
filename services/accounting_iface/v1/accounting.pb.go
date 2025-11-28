@@ -1571,6 +1571,7 @@ func (x *AccountCreateRequest) GetLabels() []*v1.KeyName {
 
 type AccountCreateResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id        uint64                 `protobuf:"varint,1,opt,name=id,json=teamId,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
