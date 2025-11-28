@@ -287,6 +287,7 @@ type OrderCompletedSet struct {
 	//	*OrderCompletedSet_OrderId
 	//	*OrderCompletedSet_OrderRefId
 	OrderIdentifier isOrderCompletedSet_OrderIdentifier `protobuf_oneof:"order_identifier"`
+	Amount          float64                             `protobuf:"fixed64,5,opt,name=amount,proto3" json:"amount,omitempty"`
 	WdAt            *timestamppb.Timestamp              `protobuf:"bytes,6,opt,name=wd_at,json=wdAt,proto3" json:"wd_at,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
@@ -352,6 +353,13 @@ func (x *OrderCompletedSet) GetOrderRefId() string {
 		}
 	}
 	return ""
+}
+
+func (x *OrderCompletedSet) GetAmount() float64 {
+	if x != nil {
+		return x.Amount
+	}
+	return 0
 }
 
 func (x *OrderCompletedSet) GetWdAt() *timestamppb.Timestamp {
@@ -574,12 +582,14 @@ const file_order_iface_v1_order_proto_rawDesc = "" +
 	"\bnot_zero\x12\x15amount cannot be zero\x1a\fthis != 0.00R\x06amount\x122\n" +
 	"\x02at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\x02at\x12\x12\n" +
 	"\x04desc\x18\a \x01(\tR\x04descB\x12\n" +
-	"\x10order_identifier\"\xba\x01\n" +
+	"\x10order_identifier\"\x89\x02\n" +
 	"\x11OrderCompletedSet\x12\x17\n" +
 	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12\x1b\n" +
 	"\border_id\x18\x02 \x01(\x04H\x00R\aorderId\x12\"\n" +
 	"\forder_ref_id\x18\x03 \x01(\tH\x00R\n" +
-	"orderRefId\x127\n" +
+	"orderRefId\x12M\n" +
+	"\x06amount\x18\x05 \x01(\x01B5\xbaH2\xba\x01/\n" +
+	"\bnot_zero\x12\x15amount cannot be zero\x1a\fthis != 0.00R\x06amount\x127\n" +
 	"\x05wd_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\x04wdAtB\x12\n" +
 	"\x10order_identifier\"-\n" +
 	"\x11OrderFundRollback\x12\x18\n" +

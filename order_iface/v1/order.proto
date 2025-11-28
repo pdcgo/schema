@@ -47,6 +47,11 @@ message OrderCompletedSet {
     uint64 order_id = 2;
     string order_ref_id = 3;
   }
+  double amount = 5 [(buf.validate.field).cel = {
+    id: "not_zero"
+    expression: "this != 0.00"
+    message: "amount cannot be zero"
+  }];
   google.protobuf.Timestamp wd_at = 6 [(buf.validate.field).required = true];
 }
 

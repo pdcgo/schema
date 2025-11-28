@@ -20,7 +20,20 @@ service StockService {
 
   // accept stock
   // return
+
+  rpc StockProblemCreate(StockProblemCreateRequest) returns (StockProblemCreateResponse);
+
+  // product stock data
+  // rpc ProductStockHistory(ProductStockHistoryRequest) returns (ProductStockHistoryResponse);
+  // rpc ProductStock(ProductStockRequest) returns (ProductStockResponse);
+  // rpc ProductStockDetail(ProductStockDetailRequest) returns (ProductStockDetailResponse);
 }
+
+message StockProblemCreateRequest {
+  uint64 warehouse_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 restock_id = 2 [(buf.validate.field).uint64.gt = 0];
+}
+message StockProblemCreateResponse {}
 
 message InboundUpdateRequest {
   uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0]; // must be > 0

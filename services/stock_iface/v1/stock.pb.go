@@ -123,6 +123,94 @@ func (PaymentMethod) EnumDescriptor() ([]byte, []int) {
 	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{1}
 }
 
+type StockProblemCreateRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	WarehouseId   uint64                 `protobuf:"varint,1,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
+	RestockId     uint64                 `protobuf:"varint,2,opt,name=restock_id,json=restockId,proto3" json:"restock_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StockProblemCreateRequest) Reset() {
+	*x = StockProblemCreateRequest{}
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StockProblemCreateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StockProblemCreateRequest) ProtoMessage() {}
+
+func (x *StockProblemCreateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StockProblemCreateRequest.ProtoReflect.Descriptor instead.
+func (*StockProblemCreateRequest) Descriptor() ([]byte, []int) {
+	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *StockProblemCreateRequest) GetWarehouseId() uint64 {
+	if x != nil {
+		return x.WarehouseId
+	}
+	return 0
+}
+
+func (x *StockProblemCreateRequest) GetRestockId() uint64 {
+	if x != nil {
+		return x.RestockId
+	}
+	return 0
+}
+
+type StockProblemCreateResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StockProblemCreateResponse) Reset() {
+	*x = StockProblemCreateResponse{}
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StockProblemCreateResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StockProblemCreateResponse) ProtoMessage() {}
+
+func (x *StockProblemCreateResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StockProblemCreateResponse.ProtoReflect.Descriptor instead.
+func (*StockProblemCreateResponse) Descriptor() ([]byte, []int) {
+	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{1}
+}
+
 type InboundUpdateRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`                // must be > 0
@@ -138,7 +226,7 @@ type InboundUpdateRequest struct {
 
 func (x *InboundUpdateRequest) Reset() {
 	*x = InboundUpdateRequest{}
-	mi := &file_stock_iface_v1_stock_proto_msgTypes[0]
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -150,7 +238,7 @@ func (x *InboundUpdateRequest) String() string {
 func (*InboundUpdateRequest) ProtoMessage() {}
 
 func (x *InboundUpdateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_stock_iface_v1_stock_proto_msgTypes[0]
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -163,7 +251,7 @@ func (x *InboundUpdateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InboundUpdateRequest.ProtoReflect.Descriptor instead.
 func (*InboundUpdateRequest) Descriptor() ([]byte, []int) {
-	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{0}
+	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *InboundUpdateRequest) GetTeamId() uint64 {
@@ -223,7 +311,7 @@ type InboundUpdateResponse struct {
 
 func (x *InboundUpdateResponse) Reset() {
 	*x = InboundUpdateResponse{}
-	mi := &file_stock_iface_v1_stock_proto_msgTypes[1]
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -235,7 +323,7 @@ func (x *InboundUpdateResponse) String() string {
 func (*InboundUpdateResponse) ProtoMessage() {}
 
 func (x *InboundUpdateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_stock_iface_v1_stock_proto_msgTypes[1]
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -248,7 +336,7 @@ func (x *InboundUpdateResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InboundUpdateResponse.ProtoReflect.Descriptor instead.
 func (*InboundUpdateResponse) Descriptor() ([]byte, []int) {
-	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{1}
+	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{3}
 }
 
 type VariantItem struct {
@@ -262,7 +350,7 @@ type VariantItem struct {
 
 func (x *VariantItem) Reset() {
 	*x = VariantItem{}
-	mi := &file_stock_iface_v1_stock_proto_msgTypes[2]
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -274,7 +362,7 @@ func (x *VariantItem) String() string {
 func (*VariantItem) ProtoMessage() {}
 
 func (x *VariantItem) ProtoReflect() protoreflect.Message {
-	mi := &file_stock_iface_v1_stock_proto_msgTypes[2]
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -287,7 +375,7 @@ func (x *VariantItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VariantItem.ProtoReflect.Descriptor instead.
 func (*VariantItem) Descriptor() ([]byte, []int) {
-	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{2}
+	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *VariantItem) GetVariantId() uint64 {
@@ -328,7 +416,7 @@ type VariantProblemItem struct {
 
 func (x *VariantProblemItem) Reset() {
 	*x = VariantProblemItem{}
-	mi := &file_stock_iface_v1_stock_proto_msgTypes[3]
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -340,7 +428,7 @@ func (x *VariantProblemItem) String() string {
 func (*VariantProblemItem) ProtoMessage() {}
 
 func (x *VariantProblemItem) ProtoReflect() protoreflect.Message {
-	mi := &file_stock_iface_v1_stock_proto_msgTypes[3]
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -353,7 +441,7 @@ func (x *VariantProblemItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VariantProblemItem.ProtoReflect.Descriptor instead.
 func (*VariantProblemItem) Descriptor() ([]byte, []int) {
-	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{3}
+	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *VariantProblemItem) GetVariantId() uint64 {
@@ -407,7 +495,7 @@ type InboundCreateRequest struct {
 
 func (x *InboundCreateRequest) Reset() {
 	*x = InboundCreateRequest{}
-	mi := &file_stock_iface_v1_stock_proto_msgTypes[4]
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -419,7 +507,7 @@ func (x *InboundCreateRequest) String() string {
 func (*InboundCreateRequest) ProtoMessage() {}
 
 func (x *InboundCreateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_stock_iface_v1_stock_proto_msgTypes[4]
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -432,7 +520,7 @@ func (x *InboundCreateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InboundCreateRequest.ProtoReflect.Descriptor instead.
 func (*InboundCreateRequest) Descriptor() ([]byte, []int) {
-	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{4}
+	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *InboundCreateRequest) GetTeamId() uint64 {
@@ -499,7 +587,7 @@ type InboundCreateResponse struct {
 
 func (x *InboundCreateResponse) Reset() {
 	*x = InboundCreateResponse{}
-	mi := &file_stock_iface_v1_stock_proto_msgTypes[5]
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -511,7 +599,7 @@ func (x *InboundCreateResponse) String() string {
 func (*InboundCreateResponse) ProtoMessage() {}
 
 func (x *InboundCreateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_stock_iface_v1_stock_proto_msgTypes[5]
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -524,7 +612,7 @@ func (x *InboundCreateResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InboundCreateResponse.ProtoReflect.Descriptor instead.
 func (*InboundCreateResponse) Descriptor() ([]byte, []int) {
-	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{5}
+	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{7}
 }
 
 type InboundAcceptRequest struct {
@@ -545,7 +633,7 @@ type InboundAcceptRequest struct {
 
 func (x *InboundAcceptRequest) Reset() {
 	*x = InboundAcceptRequest{}
-	mi := &file_stock_iface_v1_stock_proto_msgTypes[6]
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -557,7 +645,7 @@ func (x *InboundAcceptRequest) String() string {
 func (*InboundAcceptRequest) ProtoMessage() {}
 
 func (x *InboundAcceptRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_stock_iface_v1_stock_proto_msgTypes[6]
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -570,7 +658,7 @@ func (x *InboundAcceptRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InboundAcceptRequest.ProtoReflect.Descriptor instead.
 func (*InboundAcceptRequest) Descriptor() ([]byte, []int) {
-	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{6}
+	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *InboundAcceptRequest) GetTeamId() uint64 {
@@ -651,7 +739,7 @@ type InboundAcceptResponse struct {
 
 func (x *InboundAcceptResponse) Reset() {
 	*x = InboundAcceptResponse{}
-	mi := &file_stock_iface_v1_stock_proto_msgTypes[7]
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -663,7 +751,7 @@ func (x *InboundAcceptResponse) String() string {
 func (*InboundAcceptResponse) ProtoMessage() {}
 
 func (x *InboundAcceptResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_stock_iface_v1_stock_proto_msgTypes[7]
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -676,7 +764,7 @@ func (x *InboundAcceptResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InboundAcceptResponse.ProtoReflect.Descriptor instead.
 func (*InboundAcceptResponse) Descriptor() ([]byte, []int) {
-	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{7}
+	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{9}
 }
 
 type StockAdjustmentRequest struct {
@@ -692,7 +780,7 @@ type StockAdjustmentRequest struct {
 
 func (x *StockAdjustmentRequest) Reset() {
 	*x = StockAdjustmentRequest{}
-	mi := &file_stock_iface_v1_stock_proto_msgTypes[8]
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -704,7 +792,7 @@ func (x *StockAdjustmentRequest) String() string {
 func (*StockAdjustmentRequest) ProtoMessage() {}
 
 func (x *StockAdjustmentRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_stock_iface_v1_stock_proto_msgTypes[8]
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -717,7 +805,7 @@ func (x *StockAdjustmentRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StockAdjustmentRequest.ProtoReflect.Descriptor instead.
 func (*StockAdjustmentRequest) Descriptor() ([]byte, []int) {
-	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{8}
+	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *StockAdjustmentRequest) GetTeamId() uint64 {
@@ -763,7 +851,7 @@ type StockAdjustmentResponse struct {
 
 func (x *StockAdjustmentResponse) Reset() {
 	*x = StockAdjustmentResponse{}
-	mi := &file_stock_iface_v1_stock_proto_msgTypes[9]
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -775,7 +863,7 @@ func (x *StockAdjustmentResponse) String() string {
 func (*StockAdjustmentResponse) ProtoMessage() {}
 
 func (x *StockAdjustmentResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_stock_iface_v1_stock_proto_msgTypes[9]
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -788,7 +876,7 @@ func (x *StockAdjustmentResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StockAdjustmentResponse.ProtoReflect.Descriptor instead.
 func (*StockAdjustmentResponse) Descriptor() ([]byte, []int) {
-	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{9}
+	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{11}
 }
 
 type TransferItem struct {
@@ -803,7 +891,7 @@ type TransferItem struct {
 
 func (x *TransferItem) Reset() {
 	*x = TransferItem{}
-	mi := &file_stock_iface_v1_stock_proto_msgTypes[10]
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -815,7 +903,7 @@ func (x *TransferItem) String() string {
 func (*TransferItem) ProtoMessage() {}
 
 func (x *TransferItem) ProtoReflect() protoreflect.Message {
-	mi := &file_stock_iface_v1_stock_proto_msgTypes[10]
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -828,7 +916,7 @@ func (x *TransferItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TransferItem.ProtoReflect.Descriptor instead.
 func (*TransferItem) Descriptor() ([]byte, []int) {
-	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{10}
+	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *TransferItem) GetTeamId() uint64 {
@@ -871,7 +959,7 @@ type TransferToWarehouseRequest struct {
 
 func (x *TransferToWarehouseRequest) Reset() {
 	*x = TransferToWarehouseRequest{}
-	mi := &file_stock_iface_v1_stock_proto_msgTypes[11]
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -883,7 +971,7 @@ func (x *TransferToWarehouseRequest) String() string {
 func (*TransferToWarehouseRequest) ProtoMessage() {}
 
 func (x *TransferToWarehouseRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_stock_iface_v1_stock_proto_msgTypes[11]
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -896,7 +984,7 @@ func (x *TransferToWarehouseRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TransferToWarehouseRequest.ProtoReflect.Descriptor instead.
 func (*TransferToWarehouseRequest) Descriptor() ([]byte, []int) {
-	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{11}
+	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *TransferToWarehouseRequest) GetFromWarehouseId() uint64 {
@@ -935,7 +1023,7 @@ type TransferToWarehouseResponse struct {
 
 func (x *TransferToWarehouseResponse) Reset() {
 	*x = TransferToWarehouseResponse{}
-	mi := &file_stock_iface_v1_stock_proto_msgTypes[12]
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -947,7 +1035,7 @@ func (x *TransferToWarehouseResponse) String() string {
 func (*TransferToWarehouseResponse) ProtoMessage() {}
 
 func (x *TransferToWarehouseResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_stock_iface_v1_stock_proto_msgTypes[12]
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -960,7 +1048,7 @@ func (x *TransferToWarehouseResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TransferToWarehouseResponse.ProtoReflect.Descriptor instead.
 func (*TransferToWarehouseResponse) Descriptor() ([]byte, []int) {
-	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{12}
+	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{14}
 }
 
 type TransferToWarehouseAcceptRequest struct {
@@ -975,7 +1063,7 @@ type TransferToWarehouseAcceptRequest struct {
 
 func (x *TransferToWarehouseAcceptRequest) Reset() {
 	*x = TransferToWarehouseAcceptRequest{}
-	mi := &file_stock_iface_v1_stock_proto_msgTypes[13]
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -987,7 +1075,7 @@ func (x *TransferToWarehouseAcceptRequest) String() string {
 func (*TransferToWarehouseAcceptRequest) ProtoMessage() {}
 
 func (x *TransferToWarehouseAcceptRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_stock_iface_v1_stock_proto_msgTypes[13]
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1000,7 +1088,7 @@ func (x *TransferToWarehouseAcceptRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TransferToWarehouseAcceptRequest.ProtoReflect.Descriptor instead.
 func (*TransferToWarehouseAcceptRequest) Descriptor() ([]byte, []int) {
-	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{13}
+	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *TransferToWarehouseAcceptRequest) GetFromWarehouseId() uint64 {
@@ -1039,7 +1127,7 @@ type TransferToWarehouseAcceptResponse struct {
 
 func (x *TransferToWarehouseAcceptResponse) Reset() {
 	*x = TransferToWarehouseAcceptResponse{}
-	mi := &file_stock_iface_v1_stock_proto_msgTypes[14]
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1051,7 +1139,7 @@ func (x *TransferToWarehouseAcceptResponse) String() string {
 func (*TransferToWarehouseAcceptResponse) ProtoMessage() {}
 
 func (x *TransferToWarehouseAcceptResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_stock_iface_v1_stock_proto_msgTypes[14]
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1064,7 +1152,7 @@ func (x *TransferToWarehouseAcceptResponse) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use TransferToWarehouseAcceptResponse.ProtoReflect.Descriptor instead.
 func (*TransferToWarehouseAcceptResponse) Descriptor() ([]byte, []int) {
-	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{14}
+	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{16}
 }
 
 type TransferToWarehouseCancelRequest struct {
@@ -1078,7 +1166,7 @@ type TransferToWarehouseCancelRequest struct {
 
 func (x *TransferToWarehouseCancelRequest) Reset() {
 	*x = TransferToWarehouseCancelRequest{}
-	mi := &file_stock_iface_v1_stock_proto_msgTypes[15]
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1090,7 +1178,7 @@ func (x *TransferToWarehouseCancelRequest) String() string {
 func (*TransferToWarehouseCancelRequest) ProtoMessage() {}
 
 func (x *TransferToWarehouseCancelRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_stock_iface_v1_stock_proto_msgTypes[15]
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1103,7 +1191,7 @@ func (x *TransferToWarehouseCancelRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TransferToWarehouseCancelRequest.ProtoReflect.Descriptor instead.
 func (*TransferToWarehouseCancelRequest) Descriptor() ([]byte, []int) {
-	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{15}
+	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *TransferToWarehouseCancelRequest) GetFromWarehouseId() uint64 {
@@ -1135,7 +1223,7 @@ type TransferToWarehouseCancelResponse struct {
 
 func (x *TransferToWarehouseCancelResponse) Reset() {
 	*x = TransferToWarehouseCancelResponse{}
-	mi := &file_stock_iface_v1_stock_proto_msgTypes[16]
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1147,7 +1235,7 @@ func (x *TransferToWarehouseCancelResponse) String() string {
 func (*TransferToWarehouseCancelResponse) ProtoMessage() {}
 
 func (x *TransferToWarehouseCancelResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_stock_iface_v1_stock_proto_msgTypes[16]
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1160,7 +1248,7 @@ func (x *TransferToWarehouseCancelResponse) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use TransferToWarehouseCancelResponse.ProtoReflect.Descriptor instead.
 func (*TransferToWarehouseCancelResponse) Descriptor() ([]byte, []int) {
-	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{16}
+	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{18}
 }
 
 type StockInfoExtra struct {
@@ -1175,7 +1263,7 @@ type StockInfoExtra struct {
 
 func (x *StockInfoExtra) Reset() {
 	*x = StockInfoExtra{}
-	mi := &file_stock_iface_v1_stock_proto_msgTypes[17]
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1187,7 +1275,7 @@ func (x *StockInfoExtra) String() string {
 func (*StockInfoExtra) ProtoMessage() {}
 
 func (x *StockInfoExtra) ProtoReflect() protoreflect.Message {
-	mi := &file_stock_iface_v1_stock_proto_msgTypes[17]
+	mi := &file_stock_iface_v1_stock_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1200,7 +1288,7 @@ func (x *StockInfoExtra) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StockInfoExtra.ProtoReflect.Descriptor instead.
 func (*StockInfoExtra) Descriptor() ([]byte, []int) {
-	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{17}
+	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *StockInfoExtra) GetCreatedById() uint64 {
@@ -1235,7 +1323,12 @@ var File_stock_iface_v1_stock_proto protoreflect.FileDescriptor
 
 const file_stock_iface_v1_stock_proto_rawDesc = "" +
 	"\n" +
-	"\x1astock_iface/v1/stock.proto\x12\x0estock_iface.v1\x1a\x1bbuf/validate/validate.proto\"\xc1\x04\n" +
+	"\x1astock_iface/v1/stock.proto\x12\x0estock_iface.v1\x1a\x1bbuf/validate/validate.proto\"o\n" +
+	"\x19StockProblemCreateRequest\x12*\n" +
+	"\fwarehouse_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\vwarehouseId\x12&\n" +
+	"\n" +
+	"restock_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\trestockId\"\x1c\n" +
+	"\x1aStockProblemCreateResponse\"\xc1\x04\n" +
 	"\x14InboundUpdateRequest\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12*\n" +
 	"\fwarehouse_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\vwarehouseId\x12#\n" +
@@ -1332,7 +1425,7 @@ const file_stock_iface_v1_stock_proto_rawDesc = "" +
 	"\rPaymentMethod\x12\x1e\n" +
 	"\x1aPAYMENT_METHOD_UNSPECIFIED\x10\x00\x12\x17\n" +
 	"\x13PAYMENT_METHOD_CASH\x10\x01\x12\x1c\n" +
-	"\x18PAYMENT_METHOD_SHOPEEPAY\x10\x022\x82\x06\n" +
+	"\x18PAYMENT_METHOD_SHOPEEPAY\x10\x022\xef\x06\n" +
 	"\fStockService\x12\\\n" +
 	"\rInboundCreate\x12$.stock_iface.v1.InboundCreateRequest\x1a%.stock_iface.v1.InboundCreateResponse\x12\\\n" +
 	"\rInboundUpdate\x12$.stock_iface.v1.InboundUpdateRequest\x1a%.stock_iface.v1.InboundUpdateResponse\x12\\\n" +
@@ -1340,7 +1433,8 @@ const file_stock_iface_v1_stock_proto_rawDesc = "" +
 	"\x0fStockAdjustment\x12&.stock_iface.v1.StockAdjustmentRequest\x1a'.stock_iface.v1.StockAdjustmentResponse\x12n\n" +
 	"\x13TransferToWarehouse\x12*.stock_iface.v1.TransferToWarehouseRequest\x1a+.stock_iface.v1.TransferToWarehouseResponse\x12\x80\x01\n" +
 	"\x19TransferToWarehouseAccept\x120.stock_iface.v1.TransferToWarehouseAcceptRequest\x1a1.stock_iface.v1.TransferToWarehouseAcceptResponse\x12\x80\x01\n" +
-	"\x19TransferToWarehouseCancel\x120.stock_iface.v1.TransferToWarehouseCancelRequest\x1a1.stock_iface.v1.TransferToWarehouseCancelResponseB\xb2\x01\n" +
+	"\x19TransferToWarehouseCancel\x120.stock_iface.v1.TransferToWarehouseCancelRequest\x1a1.stock_iface.v1.TransferToWarehouseCancelResponse\x12k\n" +
+	"\x12StockProblemCreate\x12).stock_iface.v1.StockProblemCreateRequest\x1a*.stock_iface.v1.StockProblemCreateResponseB\xb2\x01\n" +
 	"\x12com.stock_iface.v1B\n" +
 	"StockProtoP\x01Z;github.com/pdcgo/schema/services/stock_iface/v1;stock_iface\xa2\x02\x03SXX\xaa\x02\rStockIface.V1\xca\x02\rStockIface\\V1\xe2\x02\x19StockIface\\V1\\GPBMetadata\xea\x02\x0eStockIface::V1b\x06proto3"
 
@@ -1357,62 +1451,66 @@ func file_stock_iface_v1_stock_proto_rawDescGZIP() []byte {
 }
 
 var file_stock_iface_v1_stock_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_stock_iface_v1_stock_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
+var file_stock_iface_v1_stock_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
 var file_stock_iface_v1_stock_proto_goTypes = []any{
 	(InboundSource)(0),                        // 0: stock_iface.v1.InboundSource
 	(PaymentMethod)(0),                        // 1: stock_iface.v1.PaymentMethod
-	(*InboundUpdateRequest)(nil),              // 2: stock_iface.v1.InboundUpdateRequest
-	(*InboundUpdateResponse)(nil),             // 3: stock_iface.v1.InboundUpdateResponse
-	(*VariantItem)(nil),                       // 4: stock_iface.v1.VariantItem
-	(*VariantProblemItem)(nil),                // 5: stock_iface.v1.VariantProblemItem
-	(*InboundCreateRequest)(nil),              // 6: stock_iface.v1.InboundCreateRequest
-	(*InboundCreateResponse)(nil),             // 7: stock_iface.v1.InboundCreateResponse
-	(*InboundAcceptRequest)(nil),              // 8: stock_iface.v1.InboundAcceptRequest
-	(*InboundAcceptResponse)(nil),             // 9: stock_iface.v1.InboundAcceptResponse
-	(*StockAdjustmentRequest)(nil),            // 10: stock_iface.v1.StockAdjustmentRequest
-	(*StockAdjustmentResponse)(nil),           // 11: stock_iface.v1.StockAdjustmentResponse
-	(*TransferItem)(nil),                      // 12: stock_iface.v1.TransferItem
-	(*TransferToWarehouseRequest)(nil),        // 13: stock_iface.v1.TransferToWarehouseRequest
-	(*TransferToWarehouseResponse)(nil),       // 14: stock_iface.v1.TransferToWarehouseResponse
-	(*TransferToWarehouseAcceptRequest)(nil),  // 15: stock_iface.v1.TransferToWarehouseAcceptRequest
-	(*TransferToWarehouseAcceptResponse)(nil), // 16: stock_iface.v1.TransferToWarehouseAcceptResponse
-	(*TransferToWarehouseCancelRequest)(nil),  // 17: stock_iface.v1.TransferToWarehouseCancelRequest
-	(*TransferToWarehouseCancelResponse)(nil), // 18: stock_iface.v1.TransferToWarehouseCancelResponse
-	(*StockInfoExtra)(nil),                    // 19: stock_iface.v1.StockInfoExtra
+	(*StockProblemCreateRequest)(nil),         // 2: stock_iface.v1.StockProblemCreateRequest
+	(*StockProblemCreateResponse)(nil),        // 3: stock_iface.v1.StockProblemCreateResponse
+	(*InboundUpdateRequest)(nil),              // 4: stock_iface.v1.InboundUpdateRequest
+	(*InboundUpdateResponse)(nil),             // 5: stock_iface.v1.InboundUpdateResponse
+	(*VariantItem)(nil),                       // 6: stock_iface.v1.VariantItem
+	(*VariantProblemItem)(nil),                // 7: stock_iface.v1.VariantProblemItem
+	(*InboundCreateRequest)(nil),              // 8: stock_iface.v1.InboundCreateRequest
+	(*InboundCreateResponse)(nil),             // 9: stock_iface.v1.InboundCreateResponse
+	(*InboundAcceptRequest)(nil),              // 10: stock_iface.v1.InboundAcceptRequest
+	(*InboundAcceptResponse)(nil),             // 11: stock_iface.v1.InboundAcceptResponse
+	(*StockAdjustmentRequest)(nil),            // 12: stock_iface.v1.StockAdjustmentRequest
+	(*StockAdjustmentResponse)(nil),           // 13: stock_iface.v1.StockAdjustmentResponse
+	(*TransferItem)(nil),                      // 14: stock_iface.v1.TransferItem
+	(*TransferToWarehouseRequest)(nil),        // 15: stock_iface.v1.TransferToWarehouseRequest
+	(*TransferToWarehouseResponse)(nil),       // 16: stock_iface.v1.TransferToWarehouseResponse
+	(*TransferToWarehouseAcceptRequest)(nil),  // 17: stock_iface.v1.TransferToWarehouseAcceptRequest
+	(*TransferToWarehouseAcceptResponse)(nil), // 18: stock_iface.v1.TransferToWarehouseAcceptResponse
+	(*TransferToWarehouseCancelRequest)(nil),  // 19: stock_iface.v1.TransferToWarehouseCancelRequest
+	(*TransferToWarehouseCancelResponse)(nil), // 20: stock_iface.v1.TransferToWarehouseCancelResponse
+	(*StockInfoExtra)(nil),                    // 21: stock_iface.v1.StockInfoExtra
 }
 var file_stock_iface_v1_stock_proto_depIdxs = []int32{
 	0,  // 0: stock_iface.v1.InboundUpdateRequest.source:type_name -> stock_iface.v1.InboundSource
 	1,  // 1: stock_iface.v1.InboundUpdateRequest.payment_method:type_name -> stock_iface.v1.PaymentMethod
-	4,  // 2: stock_iface.v1.InboundUpdateRequest.products:type_name -> stock_iface.v1.VariantItem
-	19, // 3: stock_iface.v1.InboundCreateRequest.extras:type_name -> stock_iface.v1.StockInfoExtra
+	6,  // 2: stock_iface.v1.InboundUpdateRequest.products:type_name -> stock_iface.v1.VariantItem
+	21, // 3: stock_iface.v1.InboundCreateRequest.extras:type_name -> stock_iface.v1.StockInfoExtra
 	0,  // 4: stock_iface.v1.InboundCreateRequest.source:type_name -> stock_iface.v1.InboundSource
 	1,  // 5: stock_iface.v1.InboundCreateRequest.payment_method:type_name -> stock_iface.v1.PaymentMethod
-	4,  // 6: stock_iface.v1.InboundCreateRequest.products:type_name -> stock_iface.v1.VariantItem
-	19, // 7: stock_iface.v1.InboundAcceptRequest.extras:type_name -> stock_iface.v1.StockInfoExtra
+	6,  // 6: stock_iface.v1.InboundCreateRequest.products:type_name -> stock_iface.v1.VariantItem
+	21, // 7: stock_iface.v1.InboundAcceptRequest.extras:type_name -> stock_iface.v1.StockInfoExtra
 	0,  // 8: stock_iface.v1.InboundAcceptRequest.source:type_name -> stock_iface.v1.InboundSource
-	4,  // 9: stock_iface.v1.InboundAcceptRequest.accepts:type_name -> stock_iface.v1.VariantItem
-	5,  // 10: stock_iface.v1.InboundAcceptRequest.losts:type_name -> stock_iface.v1.VariantProblemItem
-	5,  // 11: stock_iface.v1.InboundAcceptRequest.brokens:type_name -> stock_iface.v1.VariantProblemItem
-	5,  // 12: stock_iface.v1.StockAdjustmentRequest.losts:type_name -> stock_iface.v1.VariantProblemItem
-	5,  // 13: stock_iface.v1.StockAdjustmentRequest.brokens:type_name -> stock_iface.v1.VariantProblemItem
-	12, // 14: stock_iface.v1.TransferToWarehouseRequest.products:type_name -> stock_iface.v1.TransferItem
-	12, // 15: stock_iface.v1.TransferToWarehouseAcceptRequest.products:type_name -> stock_iface.v1.TransferItem
-	6,  // 16: stock_iface.v1.StockService.InboundCreate:input_type -> stock_iface.v1.InboundCreateRequest
-	2,  // 17: stock_iface.v1.StockService.InboundUpdate:input_type -> stock_iface.v1.InboundUpdateRequest
-	8,  // 18: stock_iface.v1.StockService.InboundAccept:input_type -> stock_iface.v1.InboundAcceptRequest
-	10, // 19: stock_iface.v1.StockService.StockAdjustment:input_type -> stock_iface.v1.StockAdjustmentRequest
-	13, // 20: stock_iface.v1.StockService.TransferToWarehouse:input_type -> stock_iface.v1.TransferToWarehouseRequest
-	15, // 21: stock_iface.v1.StockService.TransferToWarehouseAccept:input_type -> stock_iface.v1.TransferToWarehouseAcceptRequest
-	17, // 22: stock_iface.v1.StockService.TransferToWarehouseCancel:input_type -> stock_iface.v1.TransferToWarehouseCancelRequest
-	7,  // 23: stock_iface.v1.StockService.InboundCreate:output_type -> stock_iface.v1.InboundCreateResponse
-	3,  // 24: stock_iface.v1.StockService.InboundUpdate:output_type -> stock_iface.v1.InboundUpdateResponse
-	9,  // 25: stock_iface.v1.StockService.InboundAccept:output_type -> stock_iface.v1.InboundAcceptResponse
-	11, // 26: stock_iface.v1.StockService.StockAdjustment:output_type -> stock_iface.v1.StockAdjustmentResponse
-	14, // 27: stock_iface.v1.StockService.TransferToWarehouse:output_type -> stock_iface.v1.TransferToWarehouseResponse
-	16, // 28: stock_iface.v1.StockService.TransferToWarehouseAccept:output_type -> stock_iface.v1.TransferToWarehouseAcceptResponse
-	18, // 29: stock_iface.v1.StockService.TransferToWarehouseCancel:output_type -> stock_iface.v1.TransferToWarehouseCancelResponse
-	23, // [23:30] is the sub-list for method output_type
-	16, // [16:23] is the sub-list for method input_type
+	6,  // 9: stock_iface.v1.InboundAcceptRequest.accepts:type_name -> stock_iface.v1.VariantItem
+	7,  // 10: stock_iface.v1.InboundAcceptRequest.losts:type_name -> stock_iface.v1.VariantProblemItem
+	7,  // 11: stock_iface.v1.InboundAcceptRequest.brokens:type_name -> stock_iface.v1.VariantProblemItem
+	7,  // 12: stock_iface.v1.StockAdjustmentRequest.losts:type_name -> stock_iface.v1.VariantProblemItem
+	7,  // 13: stock_iface.v1.StockAdjustmentRequest.brokens:type_name -> stock_iface.v1.VariantProblemItem
+	14, // 14: stock_iface.v1.TransferToWarehouseRequest.products:type_name -> stock_iface.v1.TransferItem
+	14, // 15: stock_iface.v1.TransferToWarehouseAcceptRequest.products:type_name -> stock_iface.v1.TransferItem
+	8,  // 16: stock_iface.v1.StockService.InboundCreate:input_type -> stock_iface.v1.InboundCreateRequest
+	4,  // 17: stock_iface.v1.StockService.InboundUpdate:input_type -> stock_iface.v1.InboundUpdateRequest
+	10, // 18: stock_iface.v1.StockService.InboundAccept:input_type -> stock_iface.v1.InboundAcceptRequest
+	12, // 19: stock_iface.v1.StockService.StockAdjustment:input_type -> stock_iface.v1.StockAdjustmentRequest
+	15, // 20: stock_iface.v1.StockService.TransferToWarehouse:input_type -> stock_iface.v1.TransferToWarehouseRequest
+	17, // 21: stock_iface.v1.StockService.TransferToWarehouseAccept:input_type -> stock_iface.v1.TransferToWarehouseAcceptRequest
+	19, // 22: stock_iface.v1.StockService.TransferToWarehouseCancel:input_type -> stock_iface.v1.TransferToWarehouseCancelRequest
+	2,  // 23: stock_iface.v1.StockService.StockProblemCreate:input_type -> stock_iface.v1.StockProblemCreateRequest
+	9,  // 24: stock_iface.v1.StockService.InboundCreate:output_type -> stock_iface.v1.InboundCreateResponse
+	5,  // 25: stock_iface.v1.StockService.InboundUpdate:output_type -> stock_iface.v1.InboundUpdateResponse
+	11, // 26: stock_iface.v1.StockService.InboundAccept:output_type -> stock_iface.v1.InboundAcceptResponse
+	13, // 27: stock_iface.v1.StockService.StockAdjustment:output_type -> stock_iface.v1.StockAdjustmentResponse
+	16, // 28: stock_iface.v1.StockService.TransferToWarehouse:output_type -> stock_iface.v1.TransferToWarehouseResponse
+	18, // 29: stock_iface.v1.StockService.TransferToWarehouseAccept:output_type -> stock_iface.v1.TransferToWarehouseAcceptResponse
+	20, // 30: stock_iface.v1.StockService.TransferToWarehouseCancel:output_type -> stock_iface.v1.TransferToWarehouseCancelResponse
+	3,  // 31: stock_iface.v1.StockService.StockProblemCreate:output_type -> stock_iface.v1.StockProblemCreateResponse
+	24, // [24:32] is the sub-list for method output_type
+	16, // [16:24] is the sub-list for method input_type
 	16, // [16:16] is the sub-list for extension type_name
 	16, // [16:16] is the sub-list for extension extendee
 	0,  // [0:16] is the sub-list for field type_name
@@ -1429,7 +1527,7 @@ func file_stock_iface_v1_stock_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_stock_iface_v1_stock_proto_rawDesc), len(file_stock_iface_v1_stock_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   18,
+			NumMessages:   20,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
