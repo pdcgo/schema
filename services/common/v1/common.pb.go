@@ -237,6 +237,55 @@ func (RequestFrom) EnumDescriptor() ([]byte, []int) {
 	return file_common_v1_common_proto_rawDescGZIP(), []int{3}
 }
 
+type PaymentMethod int32
+
+const (
+	PaymentMethod_PAYMENT_METHOD_UNSPECIFIED PaymentMethod = 0
+	PaymentMethod_PAYMENT_METHOD_CASH        PaymentMethod = 1
+	PaymentMethod_PAYMENT_METHOD_SHOPEEPAY   PaymentMethod = 2
+)
+
+// Enum value maps for PaymentMethod.
+var (
+	PaymentMethod_name = map[int32]string{
+		0: "PAYMENT_METHOD_UNSPECIFIED",
+		1: "PAYMENT_METHOD_CASH",
+		2: "PAYMENT_METHOD_SHOPEEPAY",
+	}
+	PaymentMethod_value = map[string]int32{
+		"PAYMENT_METHOD_UNSPECIFIED": 0,
+		"PAYMENT_METHOD_CASH":        1,
+		"PAYMENT_METHOD_SHOPEEPAY":   2,
+	}
+)
+
+func (x PaymentMethod) Enum() *PaymentMethod {
+	p := new(PaymentMethod)
+	*p = x
+	return p
+}
+
+func (x PaymentMethod) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (PaymentMethod) Descriptor() protoreflect.EnumDescriptor {
+	return file_common_v1_common_proto_enumTypes[4].Descriptor()
+}
+
+func (PaymentMethod) Type() protoreflect.EnumType {
+	return &file_common_v1_common_proto_enumTypes[4]
+}
+
+func (x PaymentMethod) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use PaymentMethod.Descriptor instead.
+func (PaymentMethod) EnumDescriptor() ([]byte, []int) {
+	return file_common_v1_common_proto_rawDescGZIP(), []int{4}
+}
+
 type TimeKeyValueMetric struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Time          int64                  `protobuf:"varint,1,opt,name=time,proto3" json:"time,omitempty"`
@@ -821,7 +870,11 @@ const file_common_v1_common_proto_rawDesc = "" +
 	"\x18REQUEST_FROM_UNSPECIFIED\x10\x00\x12\x18\n" +
 	"\x14REQUEST_FROM_SELLING\x10\x01\x12\x16\n" +
 	"\x12REQUEST_FROM_ADMIN\x10\x02\x12\x1a\n" +
-	"\x16REQUEST_FROM_WAREHOUSE\x10\x03B\x94\x01\n" +
+	"\x16REQUEST_FROM_WAREHOUSE\x10\x03*f\n" +
+	"\rPaymentMethod\x12\x1e\n" +
+	"\x1aPAYMENT_METHOD_UNSPECIFIED\x10\x00\x12\x17\n" +
+	"\x13PAYMENT_METHOD_CASH\x10\x01\x12\x1c\n" +
+	"\x18PAYMENT_METHOD_SHOPEEPAY\x10\x02B\x94\x01\n" +
 	"\rcom.common.v1B\vCommonProtoP\x01Z1github.com/pdcgo/schema/services/common/v1;common\xa2\x02\x03CXX\xaa\x02\tCommon.V1\xca\x02\tCommon\\V1\xe2\x02\x15Common\\V1\\GPBMetadata\xea\x02\n" +
 	"Common::V1b\x06proto3"
 
@@ -837,28 +890,29 @@ func file_common_v1_common_proto_rawDescGZIP() []byte {
 	return file_common_v1_common_proto_rawDescData
 }
 
-var file_common_v1_common_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
+var file_common_v1_common_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
 var file_common_v1_common_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_common_v1_common_proto_goTypes = []any{
 	(TimeType)(0),                 // 0: common.v1.TimeType
 	(SortType)(0),                 // 1: common.v1.SortType
 	(MarketplaceType)(0),          // 2: common.v1.MarketplaceType
 	(RequestFrom)(0),              // 3: common.v1.RequestFrom
-	(*TimeKeyValueMetric)(nil),    // 4: common.v1.TimeKeyValueMetric
-	(*User)(nil),                  // 5: common.v1.User
-	(*Team)(nil),                  // 6: common.v1.Team
-	(*KeyName)(nil),               // 7: common.v1.KeyName
-	(*TimeFilter)(nil),            // 8: common.v1.TimeFilter
-	(*TimeFilterRange)(nil),       // 9: common.v1.TimeFilterRange
-	(*TimeFilterRangeType)(nil),   // 10: common.v1.TimeFilterRangeType
-	(*PageFilter)(nil),            // 11: common.v1.PageFilter
-	(*PageInfo)(nil),              // 12: common.v1.PageInfo
-	(*timestamppb.Timestamp)(nil), // 13: google.protobuf.Timestamp
+	(PaymentMethod)(0),            // 4: common.v1.PaymentMethod
+	(*TimeKeyValueMetric)(nil),    // 5: common.v1.TimeKeyValueMetric
+	(*User)(nil),                  // 6: common.v1.User
+	(*Team)(nil),                  // 7: common.v1.Team
+	(*KeyName)(nil),               // 8: common.v1.KeyName
+	(*TimeFilter)(nil),            // 9: common.v1.TimeFilter
+	(*TimeFilterRange)(nil),       // 10: common.v1.TimeFilterRange
+	(*TimeFilterRangeType)(nil),   // 11: common.v1.TimeFilterRangeType
+	(*PageFilter)(nil),            // 12: common.v1.PageFilter
+	(*PageInfo)(nil),              // 13: common.v1.PageInfo
+	(*timestamppb.Timestamp)(nil), // 14: google.protobuf.Timestamp
 }
 var file_common_v1_common_proto_depIdxs = []int32{
-	13, // 0: common.v1.TimeFilterRange.start_date:type_name -> google.protobuf.Timestamp
-	13, // 1: common.v1.TimeFilterRange.end_date:type_name -> google.protobuf.Timestamp
-	9,  // 2: common.v1.TimeFilterRangeType.range:type_name -> common.v1.TimeFilterRange
+	14, // 0: common.v1.TimeFilterRange.start_date:type_name -> google.protobuf.Timestamp
+	14, // 1: common.v1.TimeFilterRange.end_date:type_name -> google.protobuf.Timestamp
+	10, // 2: common.v1.TimeFilterRangeType.range:type_name -> common.v1.TimeFilterRange
 	0,  // 3: common.v1.TimeFilterRangeType.type:type_name -> common.v1.TimeType
 	4,  // [4:4] is the sub-list for method output_type
 	4,  // [4:4] is the sub-list for method input_type
@@ -877,7 +931,7 @@ func file_common_v1_common_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_common_v1_common_proto_rawDesc), len(file_common_v1_common_proto_rawDesc)),
-			NumEnums:      4,
+			NumEnums:      5,
 			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   0,

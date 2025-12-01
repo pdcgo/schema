@@ -169,6 +169,13 @@ message ExtraLabelInfo {
   repeated accounting_iface.v1.TypeLabel type_labels = 5;
 }
 
+enum ProductSource {
+  PRODUCT_SOURCE_UNSPECIFIED = 0;
+  PRODUCT_SOURCE_DUMMY = 1;
+  PRODUCT_SOURCE_WAREHOUSE = 2;
+  PRODUCT_SOURCE_SUPPLIER = 3;
+}
+
 message OrderInfo {
   string receipt = 1;
   string external_order_id = 2;
@@ -179,6 +186,22 @@ message OnOrderAsyncRequest {
 }
 
 message OnOrderAsyncResponse {}
+
+message FakeOrderAmount {
+  common.v1.PaymentMethod payment_method = 1 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+  double amount = 2 [(buf.validate.field).double = {gt: 0}];
+}
+
+message SupplierAmount {
+  common.v1.PaymentMethod payment_method = 1 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+  double amount = 2 [(buf.validate.field).double = {gt: 0}];
+}
 
 message OnOrderRequest {
   string token = 1 [(buf.validate.field).required = true];
@@ -197,6 +220,12 @@ message OnOrderRequest {
   // string description = 8 [(buf.validate.field).string = {max_len: 1024}];
   repeated BorrowStock borrow_stock = 9;
   double own_stock_amount = 10;
+  ProductSource product_source = 14;
+
+  oneof additional_amount {
+    FakeOrderAmount fake_order_amount = 15;
+    SupplierAmount supplier_amount = 16;
+  }
 
   // 👇 cross-field validation: either borrow_stock > 0 OR own_stock_amount > 0
   option (buf.validate.message).cel = {
