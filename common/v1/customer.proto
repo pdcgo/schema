@@ -1,0 +1,38 @@
+syntax = "proto3";
+package common.v1;
+
+import "buf/validate/validate.proto";
+// import "common/v1/common.proto";
+// import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/pdcgo/schema/services/common/v1;common";
+
+service CustomerDataService {
+  rpc CustomerIDs(CustomerIDsRequest) returns (CustomerIDsResponse);
+}
+
+message CustomerIDsRequest {
+  repeated uint64 ids = 1 [(buf.validate.field).repeated = {
+    min_items: 1 // must have at least 1 id
+    max_items: 200
+    unique: true // no duplicate IDs allowed
+    items: {
+      uint64: {gt: 0}
+    }
+  }];
+}
+
+message CustomerIDsResponse {
+  map<uint64, Customer> data = 1;
+}
+
+message Customer {
+  uint64 id = 1;
+  string name = 2;
+  string phone = 3;
+  string province = 4;
+  string city = 5;
+  string district = 6;
+  string postal_code = 7;
+  string address = 8;
+}
