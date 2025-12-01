@@ -1,0 +1,84 @@
+syntax = "proto3";
+
+package warehouse_iface.v1;
+
+import "buf/validate/validate.proto";
+import "common/v1/common.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/pdcgo/schema/services/warehouse_iface/v1;warehouse_iface";
+
+service OutboundService {
+  rpc OutboundList(OutboundListRequest) returns (OutboundListResponse);
+}
+
+enum ShipmentStatus {
+  SHIPMENT_STATUS_UNSPECIFIED = 0;
+  SHIPMENT_STATUS_UNSEND = 1;
+  SHIPMENT_STATUS_SEND = 2;
+}
+
+enum OutboundSortField {
+  OUTBOUND_SORT_FIELD_UNSPECIFIED = 0;
+  OUTBOUND_SORT_FIELD_CREATED = 1;
+  OUTBOUND_SORT_FIELD_MP_CREATED = 2;
+}
+
+enum OutboundType {
+  OUTBOUND_TYPE_UNSPECIFIED = 0;
+  OUTBOUND_TYPE_ORDER = 1;
+  OUTBOUND_TYPE_TRANSFER_OUT = 2;
+}
+
+message OutboundSort {
+  OutboundSortField field = 1;
+  common.v1.SortType type = 2;
+}
+
+message OutboundListFilter {
+  uint64 team_id = 1;
+  uint64 user_id = 2;
+  string receipt = 3;
+  uint64 shop_id = 7;
+  bool include_deleted = 10;
+  ShipmentStatus shipment = 11;
+  repeated string status = 4;
+  repeated uint64 shipping_ids = 5;
+  repeated common.v1.MarketplaceType marketplaces = 6;
+  OutboundType outbound_type = 8;
+  common.v1.TimeFilterRange time_range = 9 [(buf.validate.field).required = true];
+}
+
+message OutboundListRequest {
+  OutboundListFilter filter = 1 [(buf.validate.field).required = true];
+  OutboundSort sort = 2 [(buf.validate.field).required = true];
+  common.v1.PageFilter page = 3 [(buf.validate.field).required = true];
+}
+
+message OutboundItem {
+  uint64 id = 1;
+  string sku_id = 2;
+  bool owned = 3;
+  int64 count = 4;
+  double price = 5;
+  double total = 6;
+}
+
+message Outbound {
+  uint64 id = 1;
+  uint64 team_id = 2;
+  uint64 warehouse_id = 3;
+  uint64 create_by_id = 4;
+  repeated OutboundItem items = 5;
+  string status = 7;
+  string receipt = 8;
+  string receipt_file = 9;
+  bool is_deleted = 11;
+
+  google.protobuf.Timestamp created = 10;
+}
+
+message OutboundListResponse {
+  repeated Outbound data = 1;
+  common.v1.PageInfo page_info = 2;
+}
