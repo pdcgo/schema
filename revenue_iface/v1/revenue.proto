@@ -15,7 +15,11 @@ service RevenueService {
   rpc OrderReturn(OrderReturnRequest) returns (OrderReturnResponse);
   rpc OrderCompleted(OrderCompletedRequest) returns (OrderCompletedResponse);
   rpc RevenueAdjustment(RevenueAdjustmentRequest) returns (RevenueAdjustmentResponse);
+
+  // bagian withdrawal
   rpc Withdrawal(WithdrawalRequest) returns (WithdrawalResponse);
+  // rpc WithdrawalGet(WithdrawalGetRequest) returns (WithdrawalGetResponse);
+
   rpc RevenueStream(stream RevenueStreamRequest) returns (RevenueStreamResponse);
 }
 
@@ -27,6 +31,10 @@ enum RevenueSource {
   REVENUE_SOURCE_COMPENSATION = 4;
   REVENUE_SOURCE_UNKNOWN_COMPENSATION = 5;
 }
+
+message WithdrawalGetRequest {}
+
+message WithdrawalGetResponse {}
 
 message RevenueStreamEventFund {
   double est_amount = 1 [(buf.validate.field).double.gt = 0];

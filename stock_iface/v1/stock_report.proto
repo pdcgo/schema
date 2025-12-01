@@ -1,0 +1,20 @@
+syntax = "proto3";
+package stock_iface.v1;
+
+// import "common/v1/common.proto";
+import "buf/validate/validate.proto";
+
+option go_package = "github.com/pdcgo/schema/services/stock_iface/v1;stock_iface";
+
+service StockReportService {
+  rpc StockTeam(StockTeamRequest) returns (StockTeamResponse);
+  // rpc TeamStock
+}
+
+message StockTeamRequest {
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+}
+
+message StockTeamResponse {
+  string message = 1;
+}

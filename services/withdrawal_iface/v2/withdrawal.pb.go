@@ -24,6 +24,55 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type LogLevel int32
+
+const (
+	LogLevel_LOG_LEVEL_UNSPECIFIED LogLevel = 0
+	LogLevel_LOG_LEVEL_WARN        LogLevel = 1
+	LogLevel_LOG_LEVEL_ERROR       LogLevel = 2
+)
+
+// Enum value maps for LogLevel.
+var (
+	LogLevel_name = map[int32]string{
+		0: "LOG_LEVEL_UNSPECIFIED",
+		1: "LOG_LEVEL_WARN",
+		2: "LOG_LEVEL_ERROR",
+	}
+	LogLevel_value = map[string]int32{
+		"LOG_LEVEL_UNSPECIFIED": 0,
+		"LOG_LEVEL_WARN":        1,
+		"LOG_LEVEL_ERROR":       2,
+	}
+)
+
+func (x LogLevel) Enum() *LogLevel {
+	p := new(LogLevel)
+	*p = x
+	return p
+}
+
+func (x LogLevel) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (LogLevel) Descriptor() protoreflect.EnumDescriptor {
+	return file_withdrawal_iface_v2_withdrawal_proto_enumTypes[0].Descriptor()
+}
+
+func (LogLevel) Type() protoreflect.EnumType {
+	return &file_withdrawal_iface_v2_withdrawal_proto_enumTypes[0]
+}
+
+func (x LogLevel) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use LogLevel.Descriptor instead.
+func (LogLevel) EnumDescriptor() ([]byte, []int) {
+	return file_withdrawal_iface_v2_withdrawal_proto_rawDescGZIP(), []int{0}
+}
+
 type MpSubmit struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	MpId          uint64                 `protobuf:"varint,2,opt,name=mp_id,json=mpId,proto3" json:"mp_id,omitempty"`
@@ -147,6 +196,7 @@ func (x *SubmitWithdrawalRequest) GetMpSubmit() *MpSubmit {
 type SubmitWithdrawalResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Message       string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
+	Level         LogLevel               `protobuf:"varint,2,opt,name=level,proto3,enum=withdrawal_iface.v2.LogLevel" json:"level,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -186,6 +236,13 @@ func (x *SubmitWithdrawalResponse) GetMessage() string {
 		return x.Message
 	}
 	return ""
+}
+
+func (x *SubmitWithdrawalResponse) GetLevel() LogLevel {
+	if x != nil {
+		return x.Level
+	}
+	return LogLevel_LOG_LEVEL_UNSPECIFIED
 }
 
 type SubmitWithdrawalTiktokRequest struct {
@@ -259,6 +316,7 @@ func (x *SubmitWithdrawalTiktokRequest) GetMpSubmit() *MpSubmit {
 type SubmitWithdrawalTiktokResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Message       string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
+	Level         LogLevel               `protobuf:"varint,2,opt,name=level,proto3,enum=withdrawal_iface.v2.LogLevel" json:"level,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -300,6 +358,13 @@ func (x *SubmitWithdrawalTiktokResponse) GetMessage() string {
 	return ""
 }
 
+func (x *SubmitWithdrawalTiktokResponse) GetLevel() LogLevel {
+	if x != nil {
+		return x.Level
+	}
+	return LogLevel_LOG_LEVEL_UNSPECIFIED
+}
+
 var File_withdrawal_iface_v2_withdrawal_proto protoreflect.FileDescriptor
 
 const file_withdrawal_iface_v2_withdrawal_proto_rawDesc = "" +
@@ -312,16 +377,22 @@ const file_withdrawal_iface_v2_withdrawal_proto_rawDesc = "" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12E\n" +
 	"\x06source\x18\x03 \x01(\x0e2#.withdrawal_iface.v1.ImporterSourceB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06source\x12*\n" +
 	"\fresource_uri\x18\x05 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\vresourceUri\x12B\n" +
-	"\tmp_submit\x18\x06 \x01(\v2\x1d.withdrawal_iface.v2.MpSubmitB\x06\xbaH\x03\xc8\x01\x01R\bmpSubmit\"4\n" +
+	"\tmp_submit\x18\x06 \x01(\v2\x1d.withdrawal_iface.v2.MpSubmitB\x06\xbaH\x03\xc8\x01\x01R\bmpSubmit\"i\n" +
 	"\x18SubmitWithdrawalResponse\x12\x18\n" +
-	"\amessage\x18\x01 \x01(\tR\amessage\"\xf8\x01\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage\x123\n" +
+	"\x05level\x18\x02 \x01(\x0e2\x1d.withdrawal_iface.v2.LogLevelR\x05level\"\xf8\x01\n" +
 	"\x1dSubmitWithdrawalTiktokRequest\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12E\n" +
 	"\x06source\x18\x03 \x01(\x0e2#.withdrawal_iface.v1.ImporterSourceB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06source\x12*\n" +
 	"\fresource_uri\x18\x05 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\vresourceUri\x12B\n" +
-	"\tmp_submit\x18\x06 \x01(\v2\x1d.withdrawal_iface.v2.MpSubmitB\x06\xbaH\x03\xc8\x01\x01R\bmpSubmit\":\n" +
+	"\tmp_submit\x18\x06 \x01(\v2\x1d.withdrawal_iface.v2.MpSubmitB\x06\xbaH\x03\xc8\x01\x01R\bmpSubmit\"o\n" +
 	"\x1eSubmitWithdrawalTiktokResponse\x12\x18\n" +
-	"\amessage\x18\x01 \x01(\tR\amessage2\x8c\x02\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage\x123\n" +
+	"\x05level\x18\x02 \x01(\x0e2\x1d.withdrawal_iface.v2.LogLevelR\x05level*N\n" +
+	"\bLogLevel\x12\x19\n" +
+	"\x15LOG_LEVEL_UNSPECIFIED\x10\x00\x12\x12\n" +
+	"\x0eLOG_LEVEL_WARN\x10\x01\x12\x13\n" +
+	"\x0fLOG_LEVEL_ERROR\x10\x022\x8c\x02\n" +
 	"\x11WithdrawalService\x12q\n" +
 	"\x10SubmitWithdrawal\x12,.withdrawal_iface.v2.SubmitWithdrawalRequest\x1a-.withdrawal_iface.v2.SubmitWithdrawalResponse0\x01\x12\x83\x01\n" +
 	"\x16SubmitWithdrawalTiktok\x122.withdrawal_iface.v2.SubmitWithdrawalTiktokRequest\x1a3.withdrawal_iface.v2.SubmitWithdrawalTiktokResponse0\x01B\xda\x01\n" +
@@ -339,31 +410,35 @@ func file_withdrawal_iface_v2_withdrawal_proto_rawDescGZIP() []byte {
 	return file_withdrawal_iface_v2_withdrawal_proto_rawDescData
 }
 
+var file_withdrawal_iface_v2_withdrawal_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_withdrawal_iface_v2_withdrawal_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_withdrawal_iface_v2_withdrawal_proto_goTypes = []any{
-	(*MpSubmit)(nil),                       // 0: withdrawal_iface.v2.MpSubmit
-	(*SubmitWithdrawalRequest)(nil),        // 1: withdrawal_iface.v2.SubmitWithdrawalRequest
-	(*SubmitWithdrawalResponse)(nil),       // 2: withdrawal_iface.v2.SubmitWithdrawalResponse
-	(*SubmitWithdrawalTiktokRequest)(nil),  // 3: withdrawal_iface.v2.SubmitWithdrawalTiktokRequest
-	(*SubmitWithdrawalTiktokResponse)(nil), // 4: withdrawal_iface.v2.SubmitWithdrawalTiktokResponse
-	(v1.MarketplaceType)(0),                // 5: common.v1.MarketplaceType
-	(v11.ImporterSource)(0),                // 6: withdrawal_iface.v1.ImporterSource
+	(LogLevel)(0),                          // 0: withdrawal_iface.v2.LogLevel
+	(*MpSubmit)(nil),                       // 1: withdrawal_iface.v2.MpSubmit
+	(*SubmitWithdrawalRequest)(nil),        // 2: withdrawal_iface.v2.SubmitWithdrawalRequest
+	(*SubmitWithdrawalResponse)(nil),       // 3: withdrawal_iface.v2.SubmitWithdrawalResponse
+	(*SubmitWithdrawalTiktokRequest)(nil),  // 4: withdrawal_iface.v2.SubmitWithdrawalTiktokRequest
+	(*SubmitWithdrawalTiktokResponse)(nil), // 5: withdrawal_iface.v2.SubmitWithdrawalTiktokResponse
+	(v1.MarketplaceType)(0),                // 6: common.v1.MarketplaceType
+	(v11.ImporterSource)(0),                // 7: withdrawal_iface.v1.ImporterSource
 }
 var file_withdrawal_iface_v2_withdrawal_proto_depIdxs = []int32{
-	5, // 0: withdrawal_iface.v2.MpSubmit.mp_type:type_name -> common.v1.MarketplaceType
-	6, // 1: withdrawal_iface.v2.SubmitWithdrawalRequest.source:type_name -> withdrawal_iface.v1.ImporterSource
-	0, // 2: withdrawal_iface.v2.SubmitWithdrawalRequest.mp_submit:type_name -> withdrawal_iface.v2.MpSubmit
-	6, // 3: withdrawal_iface.v2.SubmitWithdrawalTiktokRequest.source:type_name -> withdrawal_iface.v1.ImporterSource
-	0, // 4: withdrawal_iface.v2.SubmitWithdrawalTiktokRequest.mp_submit:type_name -> withdrawal_iface.v2.MpSubmit
-	1, // 5: withdrawal_iface.v2.WithdrawalService.SubmitWithdrawal:input_type -> withdrawal_iface.v2.SubmitWithdrawalRequest
-	3, // 6: withdrawal_iface.v2.WithdrawalService.SubmitWithdrawalTiktok:input_type -> withdrawal_iface.v2.SubmitWithdrawalTiktokRequest
-	2, // 7: withdrawal_iface.v2.WithdrawalService.SubmitWithdrawal:output_type -> withdrawal_iface.v2.SubmitWithdrawalResponse
-	4, // 8: withdrawal_iface.v2.WithdrawalService.SubmitWithdrawalTiktok:output_type -> withdrawal_iface.v2.SubmitWithdrawalTiktokResponse
-	7, // [7:9] is the sub-list for method output_type
-	5, // [5:7] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	6, // 0: withdrawal_iface.v2.MpSubmit.mp_type:type_name -> common.v1.MarketplaceType
+	7, // 1: withdrawal_iface.v2.SubmitWithdrawalRequest.source:type_name -> withdrawal_iface.v1.ImporterSource
+	1, // 2: withdrawal_iface.v2.SubmitWithdrawalRequest.mp_submit:type_name -> withdrawal_iface.v2.MpSubmit
+	0, // 3: withdrawal_iface.v2.SubmitWithdrawalResponse.level:type_name -> withdrawal_iface.v2.LogLevel
+	7, // 4: withdrawal_iface.v2.SubmitWithdrawalTiktokRequest.source:type_name -> withdrawal_iface.v1.ImporterSource
+	1, // 5: withdrawal_iface.v2.SubmitWithdrawalTiktokRequest.mp_submit:type_name -> withdrawal_iface.v2.MpSubmit
+	0, // 6: withdrawal_iface.v2.SubmitWithdrawalTiktokResponse.level:type_name -> withdrawal_iface.v2.LogLevel
+	2, // 7: withdrawal_iface.v2.WithdrawalService.SubmitWithdrawal:input_type -> withdrawal_iface.v2.SubmitWithdrawalRequest
+	4, // 8: withdrawal_iface.v2.WithdrawalService.SubmitWithdrawalTiktok:input_type -> withdrawal_iface.v2.SubmitWithdrawalTiktokRequest
+	3, // 9: withdrawal_iface.v2.WithdrawalService.SubmitWithdrawal:output_type -> withdrawal_iface.v2.SubmitWithdrawalResponse
+	5, // 10: withdrawal_iface.v2.WithdrawalService.SubmitWithdrawalTiktok:output_type -> withdrawal_iface.v2.SubmitWithdrawalTiktokResponse
+	9, // [9:11] is the sub-list for method output_type
+	7, // [7:9] is the sub-list for method input_type
+	7, // [7:7] is the sub-list for extension type_name
+	7, // [7:7] is the sub-list for extension extendee
+	0, // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_withdrawal_iface_v2_withdrawal_proto_init() }
@@ -376,13 +451,14 @@ func file_withdrawal_iface_v2_withdrawal_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_withdrawal_iface_v2_withdrawal_proto_rawDesc), len(file_withdrawal_iface_v2_withdrawal_proto_rawDesc)),
-			NumEnums:      0,
+			NumEnums:      1,
 			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
 		GoTypes:           file_withdrawal_iface_v2_withdrawal_proto_goTypes,
 		DependencyIndexes: file_withdrawal_iface_v2_withdrawal_proto_depIdxs,
+		EnumInfos:         file_withdrawal_iface_v2_withdrawal_proto_enumTypes,
 		MessageInfos:      file_withdrawal_iface_v2_withdrawal_proto_msgTypes,
 	}.Build()
 	File_withdrawal_iface_v2_withdrawal_proto = out.File

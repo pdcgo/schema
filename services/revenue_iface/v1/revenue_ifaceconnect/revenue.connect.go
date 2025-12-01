@@ -63,6 +63,7 @@ type RevenueServiceClient interface {
 	OrderReturn(context.Context, *connect.Request[v1.OrderReturnRequest]) (*connect.Response[v1.OrderReturnResponse], error)
 	OrderCompleted(context.Context, *connect.Request[v1.OrderCompletedRequest]) (*connect.Response[v1.OrderCompletedResponse], error)
 	RevenueAdjustment(context.Context, *connect.Request[v1.RevenueAdjustmentRequest]) (*connect.Response[v1.RevenueAdjustmentResponse], error)
+	// bagian withdrawal
 	Withdrawal(context.Context, *connect.Request[v1.WithdrawalRequest]) (*connect.Response[v1.WithdrawalResponse], error)
 	RevenueStream(context.Context) *connect.ClientStreamForClient[v1.RevenueStreamRequest, v1.RevenueStreamResponse]
 }
@@ -177,6 +178,7 @@ type RevenueServiceHandler interface {
 	OrderReturn(context.Context, *connect.Request[v1.OrderReturnRequest]) (*connect.Response[v1.OrderReturnResponse], error)
 	OrderCompleted(context.Context, *connect.Request[v1.OrderCompletedRequest]) (*connect.Response[v1.OrderCompletedResponse], error)
 	RevenueAdjustment(context.Context, *connect.Request[v1.RevenueAdjustmentRequest]) (*connect.Response[v1.RevenueAdjustmentResponse], error)
+	// bagian withdrawal
 	Withdrawal(context.Context, *connect.Request[v1.WithdrawalRequest]) (*connect.Response[v1.WithdrawalResponse], error)
 	RevenueStream(context.Context, *connect.ClientStream[v1.RevenueStreamRequest]) (*connect.Response[v1.RevenueStreamResponse], error)
 }

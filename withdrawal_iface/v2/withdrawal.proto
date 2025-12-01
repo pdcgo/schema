@@ -7,6 +7,12 @@ import "withdrawal_iface/v1/withdrawal.proto";
 
 option go_package = "github.com/pdcgo/schema/services/withdrawal_iface/v2;withdrawal_iface";
 
+enum LogLevel {
+  LOG_LEVEL_UNSPECIFIED = 0;
+  LOG_LEVEL_WARN = 1;
+  LOG_LEVEL_ERROR = 2;
+}
+
 service WithdrawalService {
   rpc SubmitWithdrawal(SubmitWithdrawalRequest) returns (stream SubmitWithdrawalResponse);
   rpc SubmitWithdrawalTiktok(SubmitWithdrawalTiktokRequest) returns (stream SubmitWithdrawalTiktokResponse);
@@ -26,6 +32,7 @@ message SubmitWithdrawalRequest {
 
 message SubmitWithdrawalResponse {
   string message = 1;
+  LogLevel level = 2;
 }
 
 message SubmitWithdrawalTiktokRequest {
@@ -37,4 +44,5 @@ message SubmitWithdrawalTiktokRequest {
 
 message SubmitWithdrawalTiktokResponse {
   string message = 1;
+  LogLevel level = 2;
 }

@@ -1,0 +1,19 @@
+syntax = "proto3";
+package stock_iface.v1;
+
+// import "common/v1/common.proto";
+import "buf/validate/validate.proto";
+
+option go_package = "github.com/pdcgo/schema/services/stock_iface/v1;stock_iface";
+
+service StockProvisionService {
+  rpc StockProvision(StockProvisionRequest) returns (StockProvisionResponse);
+}
+
+message StockProvisionRequest {
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 warehouse_id = 2 [(buf.validate.field).uint64.gt = 0];
+  uint64 ext_tx_id = 3 [(buf.validate.field).uint64.gt = 0];
+}
+
+message StockProvisionResponse {}

@@ -1571,7 +1571,7 @@ func (x *AccountCreateRequest) GetLabels() []*v1.KeyName {
 
 type AccountCreateResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id        uint64                 `protobuf:"varint,1,opt,name=id,json=teamId,proto3" json:"id,omitempty"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1604,6 +1604,13 @@ func (x *AccountCreateResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use AccountCreateResponse.ProtoReflect.Descriptor instead.
 func (*AccountCreateResponse) Descriptor() ([]byte, []int) {
 	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{27}
+}
+
+func (x *AccountCreateResponse) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
 }
 
 var File_accounting_iface_v1_accounting_proto protoreflect.FileDescriptor
@@ -1722,8 +1729,9 @@ const file_accounting_iface_v1_accounting_proto_rawDesc = "" +
 	"\tnumber_id\x18\x03 \x01(\tB\n" +
 	"\xbaH\a\xc8\x01\x01r\x02\x18dR\bnumberId\x12.\n" +
 	"\x0faccount_type_id\x18\x04 \x01(\x04B\x06\xbaH\x03\xc8\x01\x01R\raccountTypeId\x124\n" +
-	"\x06labels\x18\x05 \x03(\v2\x12.common.v1.KeyNameB\b\xbaH\x05\x92\x01\x02\x10\x05R\x06labels\"\x17\n" +
-	"\x15AccountCreateResponse*`\n" +
+	"\x06labels\x18\x05 \x03(\v2\x12.common.v1.KeyNameB\b\xbaH\x05\x92\x01\x02\x10\x05R\x06labels\"'\n" +
+	"\x15AccountCreateResponse\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id*`\n" +
 	"\fMutationType\x12\x1d\n" +
 	"\x19MUTATION_TYPE_UNSPECIFIED\x10\x00\x12\x16\n" +
 	"\x12MUTATION_TYPE_SEND\x10\x01\x12\x19\n" +

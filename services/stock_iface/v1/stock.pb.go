@@ -581,6 +581,7 @@ func (x *InboundCreateRequest) GetProducts() []*VariantItem {
 
 type InboundCreateResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	TransactionId uint64                 `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -613,6 +614,13 @@ func (x *InboundCreateResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use InboundCreateResponse.ProtoReflect.Descriptor instead.
 func (*InboundCreateResponse) Descriptor() ([]byte, []int) {
 	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *InboundCreateResponse) GetTransactionId() uint64 {
+	if x != nil {
+		return x.TransactionId
+	}
+	return 0
 }
 
 type InboundAcceptRequest struct {
@@ -1365,8 +1373,9 @@ const file_stock_iface_v1_stock_proto_rawDesc = "" +
 	"\x0epayment_method\x18\x05 \x01(\x0e2\x1d.stock_iface.v1.PaymentMethodB\n" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\rpaymentMethod\x121\n" +
 	"\fshipping_fee\x18\x06 \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\vshippingFee\x12A\n" +
-	"\bproducts\x18\a \x03(\v2\x1b.stock_iface.v1.VariantItemB\b\xbaH\x05\x92\x01\x02\b\x01R\bproducts\"\x17\n" +
-	"\x15InboundCreateResponse\"\xaa\x04\n" +
+	"\bproducts\x18\a \x03(\v2\x1b.stock_iface.v1.VariantItemB\b\xbaH\x05\x92\x01\x02\b\x01R\bproducts\">\n" +
+	"\x15InboundCreateResponse\x12%\n" +
+	"\x0etransaction_id\x18\x01 \x01(\x04R\rtransactionId\"\xaa\x04\n" +
 	"\x14InboundAcceptRequest\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12*\n" +
 	"\fwarehouse_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\vwarehouseId\x12#\n" +

@@ -116,7 +116,9 @@ message InboundCreateRequest {
   repeated VariantItem products = 7 [(buf.validate.field).repeated.min_items = 1]; // must contain at least one product
 }
 
-message InboundCreateResponse {}
+message InboundCreateResponse {
+  uint64 transaction_id = 1;
+}
 
 message InboundAcceptRequest {
   uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0]; // must be > 0
