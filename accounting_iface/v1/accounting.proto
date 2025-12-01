@@ -210,4 +210,6 @@ message AccountCreateRequest {
   repeated common.v1.KeyName labels = 5 [(buf.validate.field).repeated.max_items = 5];
 }
 
-message AccountCreateResponse {}
+message AccountCreateResponse {
+  uint64 id = 1;
+}
