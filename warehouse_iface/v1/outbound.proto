@@ -64,6 +64,12 @@ message OutboundItem {
   double total = 6;
 }
 
+message Order {
+  uint64 id = 1;
+  uint64 shop_id = 2;
+  google.protobuf.Timestamp order_time = 3;
+}
+
 message Outbound {
   uint64 id = 1;
   uint64 team_id = 2;
@@ -76,6 +82,10 @@ message Outbound {
   bool is_deleted = 11;
 
   google.protobuf.Timestamp created = 10;
+
+  oneof extra {
+    Order order = 12;
+  }
 }
 
 message OutboundListResponse {

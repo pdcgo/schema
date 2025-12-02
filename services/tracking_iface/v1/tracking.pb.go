@@ -7,8 +7,10 @@
 package tracking_iface
 
 import (
+	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -21,28 +23,27 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type TagOrderRemoveRequest struct {
+type TrackingGetRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
-	OrderId       uint64                 `protobuf:"varint,2,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	Receipt       string                 `protobuf:"bytes,2,opt,name=receipt,proto3" json:"receipt,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *TagOrderRemoveRequest) Reset() {
-	*x = TagOrderRemoveRequest{}
+func (x *TrackingGetRequest) Reset() {
+	*x = TrackingGetRequest{}
 	mi := &file_tracking_iface_v1_tracking_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *TagOrderRemoveRequest) String() string {
+func (x *TrackingGetRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*TagOrderRemoveRequest) ProtoMessage() {}
+func (*TrackingGetRequest) ProtoMessage() {}
 
-func (x *TagOrderRemoveRequest) ProtoReflect() protoreflect.Message {
+func (x *TrackingGetRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_tracking_iface_v1_tracking_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -54,45 +55,41 @@ func (x *TagOrderRemoveRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use TagOrderRemoveRequest.ProtoReflect.Descriptor instead.
-func (*TagOrderRemoveRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use TrackingGetRequest.ProtoReflect.Descriptor instead.
+func (*TrackingGetRequest) Descriptor() ([]byte, []int) {
 	return file_tracking_iface_v1_tracking_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *TagOrderRemoveRequest) GetTeamId() uint64 {
+func (x *TrackingGetRequest) GetReceipt() string {
 	if x != nil {
-		return x.TeamId
+		return x.Receipt
 	}
-	return 0
+	return ""
 }
 
-func (x *TagOrderRemoveRequest) GetOrderId() uint64 {
-	if x != nil {
-		return x.OrderId
-	}
-	return 0
-}
-
-type TagOrderRemoveResponse struct {
+type HistoryItem struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Desc          string                 `protobuf:"bytes,2,opt,name=desc,proto3" json:"desc,omitempty"`
+	At            *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=at,proto3" json:"at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *TagOrderRemoveResponse) Reset() {
-	*x = TagOrderRemoveResponse{}
+func (x *HistoryItem) Reset() {
+	*x = HistoryItem{}
 	mi := &file_tracking_iface_v1_tracking_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *TagOrderRemoveResponse) String() string {
+func (x *HistoryItem) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*TagOrderRemoveResponse) ProtoMessage() {}
+func (*HistoryItem) ProtoMessage() {}
 
-func (x *TagOrderRemoveResponse) ProtoReflect() protoreflect.Message {
+func (x *HistoryItem) ProtoReflect() protoreflect.Message {
 	mi := &file_tracking_iface_v1_tracking_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -104,22 +101,91 @@ func (x *TagOrderRemoveResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use TagOrderRemoveResponse.ProtoReflect.Descriptor instead.
-func (*TagOrderRemoveResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use HistoryItem.ProtoReflect.Descriptor instead.
+func (*HistoryItem) Descriptor() ([]byte, []int) {
 	return file_tracking_iface_v1_tracking_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *HistoryItem) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *HistoryItem) GetDesc() string {
+	if x != nil {
+		return x.Desc
+	}
+	return ""
+}
+
+func (x *HistoryItem) GetAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.At
+	}
+	return nil
+}
+
+type TrackingGetResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	History       []*HistoryItem         `protobuf:"bytes,1,rep,name=history,proto3" json:"history,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TrackingGetResponse) Reset() {
+	*x = TrackingGetResponse{}
+	mi := &file_tracking_iface_v1_tracking_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TrackingGetResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TrackingGetResponse) ProtoMessage() {}
+
+func (x *TrackingGetResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_tracking_iface_v1_tracking_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TrackingGetResponse.ProtoReflect.Descriptor instead.
+func (*TrackingGetResponse) Descriptor() ([]byte, []int) {
+	return file_tracking_iface_v1_tracking_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *TrackingGetResponse) GetHistory() []*HistoryItem {
+	if x != nil {
+		return x.History
+	}
+	return nil
 }
 
 var File_tracking_iface_v1_tracking_proto protoreflect.FileDescriptor
 
 const file_tracking_iface_v1_tracking_proto_rawDesc = "" +
 	"\n" +
-	" tracking_iface/v1/tracking.proto\x12\x11tracking_iface.v1\"K\n" +
-	"\x15TagOrderRemoveRequest\x12\x17\n" +
-	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12\x19\n" +
-	"\border_id\x18\x02 \x01(\x04R\aorderId\"\x18\n" +
-	"\x16TagOrderRemoveResponse2x\n" +
-	"\x0fTrackingService\x12e\n" +
-	"\x0eTagOrderRemove\x12(.tracking_iface.v1.TagOrderRemoveRequest\x1a).tracking_iface.v1.TagOrderRemoveResponseB\xca\x01\n" +
+	" tracking_iface/v1/tracking.proto\x12\x11tracking_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"6\n" +
+	"\x12TrackingGetRequest\x12 \n" +
+	"\areceipt\x18\x02 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\areceipt\"a\n" +
+	"\vHistoryItem\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12\x12\n" +
+	"\x04desc\x18\x02 \x01(\tR\x04desc\x12*\n" +
+	"\x02at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\x02at\"O\n" +
+	"\x13TrackingGetResponse\x128\n" +
+	"\ahistory\x18\x01 \x03(\v2\x1e.tracking_iface.v1.HistoryItemR\ahistory2o\n" +
+	"\x0fTrackingService\x12\\\n" +
+	"\vTrackingGet\x12%.tracking_iface.v1.TrackingGetRequest\x1a&.tracking_iface.v1.TrackingGetResponseB\xca\x01\n" +
 	"\x15com.tracking_iface.v1B\rTrackingProtoP\x01ZAgithub.com/pdcgo/schema/services/tracking_iface/v1;tracking_iface\xa2\x02\x03TXX\xaa\x02\x10TrackingIface.V1\xca\x02\x10TrackingIface\\V1\xe2\x02\x1cTrackingIface\\V1\\GPBMetadata\xea\x02\x11TrackingIface::V1b\x06proto3"
 
 var (
@@ -134,19 +200,23 @@ func file_tracking_iface_v1_tracking_proto_rawDescGZIP() []byte {
 	return file_tracking_iface_v1_tracking_proto_rawDescData
 }
 
-var file_tracking_iface_v1_tracking_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_tracking_iface_v1_tracking_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_tracking_iface_v1_tracking_proto_goTypes = []any{
-	(*TagOrderRemoveRequest)(nil),  // 0: tracking_iface.v1.TagOrderRemoveRequest
-	(*TagOrderRemoveResponse)(nil), // 1: tracking_iface.v1.TagOrderRemoveResponse
+	(*TrackingGetRequest)(nil),    // 0: tracking_iface.v1.TrackingGetRequest
+	(*HistoryItem)(nil),           // 1: tracking_iface.v1.HistoryItem
+	(*TrackingGetResponse)(nil),   // 2: tracking_iface.v1.TrackingGetResponse
+	(*timestamppb.Timestamp)(nil), // 3: google.protobuf.Timestamp
 }
 var file_tracking_iface_v1_tracking_proto_depIdxs = []int32{
-	0, // 0: tracking_iface.v1.TrackingService.TagOrderRemove:input_type -> tracking_iface.v1.TagOrderRemoveRequest
-	1, // 1: tracking_iface.v1.TrackingService.TagOrderRemove:output_type -> tracking_iface.v1.TagOrderRemoveResponse
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	3, // 0: tracking_iface.v1.HistoryItem.at:type_name -> google.protobuf.Timestamp
+	1, // 1: tracking_iface.v1.TrackingGetResponse.history:type_name -> tracking_iface.v1.HistoryItem
+	0, // 2: tracking_iface.v1.TrackingService.TrackingGet:input_type -> tracking_iface.v1.TrackingGetRequest
+	2, // 3: tracking_iface.v1.TrackingService.TrackingGet:output_type -> tracking_iface.v1.TrackingGetResponse
+	3, // [3:4] is the sub-list for method output_type
+	2, // [2:3] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_tracking_iface_v1_tracking_proto_init() }
@@ -160,7 +230,7 @@ func file_tracking_iface_v1_tracking_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_tracking_iface_v1_tracking_proto_rawDesc), len(file_tracking_iface_v1_tracking_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

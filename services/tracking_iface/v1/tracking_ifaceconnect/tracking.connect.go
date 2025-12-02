@@ -33,14 +33,14 @@ const (
 // reflection-formatted method names, remove the leading slash and convert the remaining slash to a
 // period.
 const (
-	// TrackingServiceTagOrderRemoveProcedure is the fully-qualified name of the TrackingService's
-	// TagOrderRemove RPC.
-	TrackingServiceTagOrderRemoveProcedure = "/tracking_iface.v1.TrackingService/TagOrderRemove"
+	// TrackingServiceTrackingGetProcedure is the fully-qualified name of the TrackingService's
+	// TrackingGet RPC.
+	TrackingServiceTrackingGetProcedure = "/tracking_iface.v1.TrackingService/TrackingGet"
 )
 
 // TrackingServiceClient is a client for the tracking_iface.v1.TrackingService service.
 type TrackingServiceClient interface {
-	TagOrderRemove(context.Context, *connect.Request[v1.TagOrderRemoveRequest]) (*connect.Response[v1.TagOrderRemoveResponse], error)
+	TrackingGet(context.Context, *connect.Request[v1.TrackingGetRequest]) (*connect.Response[v1.TrackingGetResponse], error)
 }
 
 // NewTrackingServiceClient constructs a client for the tracking_iface.v1.TrackingService service.
@@ -54,10 +54,10 @@ func NewTrackingServiceClient(httpClient connect.HTTPClient, baseURL string, opt
 	baseURL = strings.TrimRight(baseURL, "/")
 	trackingServiceMethods := v1.File_tracking_iface_v1_tracking_proto.Services().ByName("TrackingService").Methods()
 	return &trackingServiceClient{
-		tagOrderRemove: connect.NewClient[v1.TagOrderRemoveRequest, v1.TagOrderRemoveResponse](
+		trackingGet: connect.NewClient[v1.TrackingGetRequest, v1.TrackingGetResponse](
 			httpClient,
-			baseURL+TrackingServiceTagOrderRemoveProcedure,
-			connect.WithSchema(trackingServiceMethods.ByName("TagOrderRemove")),
+			baseURL+TrackingServiceTrackingGetProcedure,
+			connect.WithSchema(trackingServiceMethods.ByName("TrackingGet")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -65,17 +65,17 @@ func NewTrackingServiceClient(httpClient connect.HTTPClient, baseURL string, opt
 
 // trackingServiceClient implements TrackingServiceClient.
 type trackingServiceClient struct {
-	tagOrderRemove *connect.Client[v1.TagOrderRemoveRequest, v1.TagOrderRemoveResponse]
+	trackingGet *connect.Client[v1.TrackingGetRequest, v1.TrackingGetResponse]
 }
 
-// TagOrderRemove calls tracking_iface.v1.TrackingService.TagOrderRemove.
-func (c *trackingServiceClient) TagOrderRemove(ctx context.Context, req *connect.Request[v1.TagOrderRemoveRequest]) (*connect.Response[v1.TagOrderRemoveResponse], error) {
-	return c.tagOrderRemove.CallUnary(ctx, req)
+// TrackingGet calls tracking_iface.v1.TrackingService.TrackingGet.
+func (c *trackingServiceClient) TrackingGet(ctx context.Context, req *connect.Request[v1.TrackingGetRequest]) (*connect.Response[v1.TrackingGetResponse], error) {
+	return c.trackingGet.CallUnary(ctx, req)
 }
 
 // TrackingServiceHandler is an implementation of the tracking_iface.v1.TrackingService service.
 type TrackingServiceHandler interface {
-	TagOrderRemove(context.Context, *connect.Request[v1.TagOrderRemoveRequest]) (*connect.Response[v1.TagOrderRemoveResponse], error)
+	TrackingGet(context.Context, *connect.Request[v1.TrackingGetRequest]) (*connect.Response[v1.TrackingGetResponse], error)
 }
 
 // NewTrackingServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -85,16 +85,16 @@ type TrackingServiceHandler interface {
 // and JSON codecs. They also support gzip compression.
 func NewTrackingServiceHandler(svc TrackingServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
 	trackingServiceMethods := v1.File_tracking_iface_v1_tracking_proto.Services().ByName("TrackingService").Methods()
-	trackingServiceTagOrderRemoveHandler := connect.NewUnaryHandler(
-		TrackingServiceTagOrderRemoveProcedure,
-		svc.TagOrderRemove,
-		connect.WithSchema(trackingServiceMethods.ByName("TagOrderRemove")),
+	trackingServiceTrackingGetHandler := connect.NewUnaryHandler(
+		TrackingServiceTrackingGetProcedure,
+		svc.TrackingGet,
+		connect.WithSchema(trackingServiceMethods.ByName("TrackingGet")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/tracking_iface.v1.TrackingService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
-		case TrackingServiceTagOrderRemoveProcedure:
-			trackingServiceTagOrderRemoveHandler.ServeHTTP(w, r)
+		case TrackingServiceTrackingGetProcedure:
+			trackingServiceTrackingGetHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -104,6 +104,6 @@ func NewTrackingServiceHandler(svc TrackingServiceHandler, opts ...connect.Handl
 // UnimplementedTrackingServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedTrackingServiceHandler struct{}
 
-func (UnimplementedTrackingServiceHandler) TagOrderRemove(context.Context, *connect.Request[v1.TagOrderRemoveRequest]) (*connect.Response[v1.TagOrderRemoveResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tracking_iface.v1.TrackingService.TagOrderRemove is not implemented"))
+func (UnimplementedTrackingServiceHandler) TrackingGet(context.Context, *connect.Request[v1.TrackingGetRequest]) (*connect.Response[v1.TrackingGetResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tracking_iface.v1.TrackingService.TrackingGet is not implemented"))
 }

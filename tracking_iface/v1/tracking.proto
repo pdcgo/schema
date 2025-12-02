@@ -2,19 +2,26 @@ syntax = "proto3";
 package tracking_iface.v1;
 
 // import "accounting_iface/v1/core.proto";
-// import "buf/validate/validate.proto";
+import "buf/validate/validate.proto";
 // import "common/v1/common.proto";
-// import "google/protobuf/timestamp.proto";
+import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/pdcgo/schema/services/tracking_iface/v1;tracking_iface";
 
 service TrackingService {
-  rpc TagOrderRemove(TagOrderRemoveRequest) returns (TagOrderRemoveResponse);
+  rpc TrackingGet(TrackingGetRequest) returns (TrackingGetResponse);
 }
 
-message TagOrderRemoveRequest {
-  uint64 team_id = 1;
-  uint64 order_id = 2;
+message TrackingGetRequest {
+  string receipt = 2 [(buf.validate.field).required = true];
 }
 
-message TagOrderRemoveResponse {}
+message HistoryItem {
+  string name = 1;
+  string desc = 2;
+  google.protobuf.Timestamp at = 3;
+}
+
+message TrackingGetResponse {
+  repeated HistoryItem history = 1;
+}
