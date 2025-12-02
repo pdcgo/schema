@@ -70,6 +70,11 @@ message Order {
   google.protobuf.Timestamp order_time = 3;
 }
 
+message TransferFrom {
+  uint64 id = 1;
+  uint64 warehouse_id = 2;
+}
+
 message Outbound {
   uint64 id = 1;
   uint64 team_id = 2;
@@ -85,6 +90,7 @@ message Outbound {
 
   oneof extra {
     Order order = 12;
+    TransferFrom transfer_from = 13;
   }
 }
 
