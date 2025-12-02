@@ -1448,11 +1448,12 @@ func (x *ExtraLabelInfo) GetTypeLabels() []*v11.TypeLabel {
 }
 
 type OrderInfo struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	Receipt         string                 `protobuf:"bytes,1,opt,name=receipt,proto3" json:"receipt,omitempty"`
-	ExternalOrderId string                 `protobuf:"bytes,2,opt,name=external_order_id,json=externalOrderId,proto3" json:"external_order_id,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	Receipt               string                 `protobuf:"bytes,1,opt,name=receipt,proto3" json:"receipt,omitempty"`
+	ExternalOrderId       string                 `protobuf:"bytes,2,opt,name=external_order_id,json=externalOrderId,proto3" json:"external_order_id,omitempty"`
+	ParentExternalOrderId uint64                 `protobuf:"varint,3,opt,name=parent_external_order_id,json=parentExternalOrderId,proto3" json:"parent_external_order_id,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *OrderInfo) Reset() {
@@ -1497,6 +1498,13 @@ func (x *OrderInfo) GetExternalOrderId() string {
 		return x.ExternalOrderId
 	}
 	return ""
+}
+
+func (x *OrderInfo) GetParentExternalOrderId() uint64 {
+	if x != nil {
+		return x.ParentExternalOrderId
+	}
+	return 0
 }
 
 type OnOrderAsyncRequest struct {
@@ -1579,7 +1587,7 @@ func (*OnOrderAsyncResponse) Descriptor() ([]byte, []int) {
 	return file_revenue_iface_v1_revenue_proto_rawDescGZIP(), []int{23}
 }
 
-type FakeOrderAmount struct {
+type FakeOrderPayment struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	PaymentMethod v1.PaymentMethod       `protobuf:"varint,1,opt,name=payment_method,json=paymentMethod,proto3,enum=common.v1.PaymentMethod" json:"payment_method,omitempty"`
 	Amount        float64                `protobuf:"fixed64,2,opt,name=amount,proto3" json:"amount,omitempty"`
@@ -1587,20 +1595,20 @@ type FakeOrderAmount struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *FakeOrderAmount) Reset() {
-	*x = FakeOrderAmount{}
+func (x *FakeOrderPayment) Reset() {
+	*x = FakeOrderPayment{}
 	mi := &file_revenue_iface_v1_revenue_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *FakeOrderAmount) String() string {
+func (x *FakeOrderPayment) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*FakeOrderAmount) ProtoMessage() {}
+func (*FakeOrderPayment) ProtoMessage() {}
 
-func (x *FakeOrderAmount) ProtoReflect() protoreflect.Message {
+func (x *FakeOrderPayment) ProtoReflect() protoreflect.Message {
 	mi := &file_revenue_iface_v1_revenue_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1612,26 +1620,26 @@ func (x *FakeOrderAmount) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use FakeOrderAmount.ProtoReflect.Descriptor instead.
-func (*FakeOrderAmount) Descriptor() ([]byte, []int) {
+// Deprecated: Use FakeOrderPayment.ProtoReflect.Descriptor instead.
+func (*FakeOrderPayment) Descriptor() ([]byte, []int) {
 	return file_revenue_iface_v1_revenue_proto_rawDescGZIP(), []int{24}
 }
 
-func (x *FakeOrderAmount) GetPaymentMethod() v1.PaymentMethod {
+func (x *FakeOrderPayment) GetPaymentMethod() v1.PaymentMethod {
 	if x != nil {
 		return x.PaymentMethod
 	}
 	return v1.PaymentMethod(0)
 }
 
-func (x *FakeOrderAmount) GetAmount() float64 {
+func (x *FakeOrderPayment) GetAmount() float64 {
 	if x != nil {
 		return x.Amount
 	}
 	return 0
 }
 
-type SupplierAmount struct {
+type SupplierPayment struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	PaymentMethod v1.PaymentMethod       `protobuf:"varint,1,opt,name=payment_method,json=paymentMethod,proto3,enum=common.v1.PaymentMethod" json:"payment_method,omitempty"`
 	Amount        float64                `protobuf:"fixed64,2,opt,name=amount,proto3" json:"amount,omitempty"`
@@ -1639,20 +1647,20 @@ type SupplierAmount struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SupplierAmount) Reset() {
-	*x = SupplierAmount{}
+func (x *SupplierPayment) Reset() {
+	*x = SupplierPayment{}
 	mi := &file_revenue_iface_v1_revenue_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SupplierAmount) String() string {
+func (x *SupplierPayment) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SupplierAmount) ProtoMessage() {}
+func (*SupplierPayment) ProtoMessage() {}
 
-func (x *SupplierAmount) ProtoReflect() protoreflect.Message {
+func (x *SupplierPayment) ProtoReflect() protoreflect.Message {
 	mi := &file_revenue_iface_v1_revenue_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1664,19 +1672,19 @@ func (x *SupplierAmount) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SupplierAmount.ProtoReflect.Descriptor instead.
-func (*SupplierAmount) Descriptor() ([]byte, []int) {
+// Deprecated: Use SupplierPayment.ProtoReflect.Descriptor instead.
+func (*SupplierPayment) Descriptor() ([]byte, []int) {
 	return file_revenue_iface_v1_revenue_proto_rawDescGZIP(), []int{25}
 }
 
-func (x *SupplierAmount) GetPaymentMethod() v1.PaymentMethod {
+func (x *SupplierPayment) GetPaymentMethod() v1.PaymentMethod {
 	if x != nil {
 		return x.PaymentMethod
 	}
 	return v1.PaymentMethod(0)
 }
 
-func (x *SupplierAmount) GetAmount() float64 {
+func (x *SupplierPayment) GetAmount() float64 {
 	if x != nil {
 		return x.Amount
 	}
@@ -1687,8 +1695,9 @@ type OnOrderRequest struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
 	Token           string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
 	TeamId          uint64                 `protobuf:"varint,2,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
-	WarehouseId     uint64                 `protobuf:"varint,3,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
+	WarehouseId     uint64                 `protobuf:"varint,3,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"` // validate manual
 	OrderId         uint64                 `protobuf:"varint,4,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	IsCustomOrder   bool                   `protobuf:"varint,17,opt,name=is_custom_order,json=isCustomOrder,proto3" json:"is_custom_order,omitempty"`
 	LabelInfo       *ExtraLabelInfo        `protobuf:"bytes,12,opt,name=label_info,json=labelInfo,proto3" json:"label_info,omitempty"`
 	OrderInfo       *OrderInfo             `protobuf:"bytes,13,opt,name=order_info,json=orderInfo,proto3" json:"order_info,omitempty"`
 	Event           OrderEvent             `protobuf:"varint,5,opt,name=event,proto3,enum=revenue_iface.v1.OrderEvent" json:"event,omitempty"`
@@ -1699,13 +1708,13 @@ type OnOrderRequest struct {
 	BorrowStock    []*BorrowStock `protobuf:"bytes,9,rep,name=borrow_stock,json=borrowStock,proto3" json:"borrow_stock,omitempty"`
 	OwnStockAmount float64        `protobuf:"fixed64,10,opt,name=own_stock_amount,json=ownStockAmount,proto3" json:"own_stock_amount,omitempty"`
 	ProductSource  ProductSource  `protobuf:"varint,14,opt,name=product_source,json=productSource,proto3,enum=revenue_iface.v1.ProductSource" json:"product_source,omitempty"`
-	// Types that are valid to be assigned to AdditionalAmount:
+	// Types that are valid to be assigned to AdditionalPayment:
 	//
-	//	*OnOrderRequest_FakeOrderAmount
-	//	*OnOrderRequest_SupplierAmount
-	AdditionalAmount isOnOrderRequest_AdditionalAmount `protobuf_oneof:"additional_amount"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	//	*OnOrderRequest_FakeOrderPayment
+	//	*OnOrderRequest_SupplierPayment
+	AdditionalPayment isOnOrderRequest_AdditionalPayment `protobuf_oneof:"additional_payment"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *OnOrderRequest) Reset() {
@@ -1764,6 +1773,13 @@ func (x *OnOrderRequest) GetOrderId() uint64 {
 		return x.OrderId
 	}
 	return 0
+}
+
+func (x *OnOrderRequest) GetIsCustomOrder() bool {
+	if x != nil {
+		return x.IsCustomOrder
+	}
+	return false
 }
 
 func (x *OnOrderRequest) GetLabelInfo() *ExtraLabelInfo {
@@ -1829,46 +1845,46 @@ func (x *OnOrderRequest) GetProductSource() ProductSource {
 	return ProductSource_PRODUCT_SOURCE_UNSPECIFIED
 }
 
-func (x *OnOrderRequest) GetAdditionalAmount() isOnOrderRequest_AdditionalAmount {
+func (x *OnOrderRequest) GetAdditionalPayment() isOnOrderRequest_AdditionalPayment {
 	if x != nil {
-		return x.AdditionalAmount
+		return x.AdditionalPayment
 	}
 	return nil
 }
 
-func (x *OnOrderRequest) GetFakeOrderAmount() *FakeOrderAmount {
+func (x *OnOrderRequest) GetFakeOrderPayment() *FakeOrderPayment {
 	if x != nil {
-		if x, ok := x.AdditionalAmount.(*OnOrderRequest_FakeOrderAmount); ok {
-			return x.FakeOrderAmount
+		if x, ok := x.AdditionalPayment.(*OnOrderRequest_FakeOrderPayment); ok {
+			return x.FakeOrderPayment
 		}
 	}
 	return nil
 }
 
-func (x *OnOrderRequest) GetSupplierAmount() *SupplierAmount {
+func (x *OnOrderRequest) GetSupplierPayment() *SupplierPayment {
 	if x != nil {
-		if x, ok := x.AdditionalAmount.(*OnOrderRequest_SupplierAmount); ok {
-			return x.SupplierAmount
+		if x, ok := x.AdditionalPayment.(*OnOrderRequest_SupplierPayment); ok {
+			return x.SupplierPayment
 		}
 	}
 	return nil
 }
 
-type isOnOrderRequest_AdditionalAmount interface {
-	isOnOrderRequest_AdditionalAmount()
+type isOnOrderRequest_AdditionalPayment interface {
+	isOnOrderRequest_AdditionalPayment()
 }
 
-type OnOrderRequest_FakeOrderAmount struct {
-	FakeOrderAmount *FakeOrderAmount `protobuf:"bytes,15,opt,name=fake_order_amount,json=fakeOrderAmount,proto3,oneof"`
+type OnOrderRequest_FakeOrderPayment struct {
+	FakeOrderPayment *FakeOrderPayment `protobuf:"bytes,15,opt,name=fake_order_payment,json=fakeOrderPayment,proto3,oneof"`
 }
 
-type OnOrderRequest_SupplierAmount struct {
-	SupplierAmount *SupplierAmount `protobuf:"bytes,16,opt,name=supplier_amount,json=supplierAmount,proto3,oneof"`
+type OnOrderRequest_SupplierPayment struct {
+	SupplierPayment *SupplierPayment `protobuf:"bytes,16,opt,name=supplier_payment,json=supplierPayment,proto3,oneof"`
 }
 
-func (*OnOrderRequest_FakeOrderAmount) isOnOrderRequest_AdditionalAmount() {}
+func (*OnOrderRequest_FakeOrderPayment) isOnOrderRequest_AdditionalPayment() {}
 
-func (*OnOrderRequest_SupplierAmount) isOnOrderRequest_AdditionalAmount() {}
+func (*OnOrderRequest_SupplierPayment) isOnOrderRequest_AdditionalPayment() {}
 
 type OnOrderResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -1991,43 +2007,46 @@ const file_revenue_iface_v1_revenue_proto_rawDesc = "" +
 	"\ashop_id\x18\x03 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06shopId\x12\x12\n" +
 	"\x04tags\x18\x04 \x03(\tR\x04tags\x12?\n" +
 	"\vtype_labels\x18\x05 \x03(\v2\x1e.accounting_iface.v1.TypeLabelR\n" +
-	"typeLabels\"Q\n" +
+	"typeLabels\"\x8a\x01\n" +
 	"\tOrderInfo\x12\x18\n" +
 	"\areceipt\x18\x01 \x01(\tR\areceipt\x12*\n" +
-	"\x11external_order_id\x18\x02 \x01(\tR\x0fexternalOrderId\"S\n" +
+	"\x11external_order_id\x18\x02 \x01(\tR\x0fexternalOrderId\x127\n" +
+	"\x18parent_external_order_id\x18\x03 \x01(\x04R\x15parentExternalOrderId\"S\n" +
 	"\x13OnOrderAsyncRequest\x12<\n" +
 	"\x04data\x18\x01 \x01(\v2 .revenue_iface.v1.OnOrderRequestB\x06\xbaH\x03\xc8\x01\x01R\x04data\"\x16\n" +
-	"\x14OnOrderAsyncResponse\"\x86\x01\n" +
-	"\x0fFakeOrderAmount\x12K\n" +
+	"\x14OnOrderAsyncResponse\"\x85\x01\n" +
+	"\x10FakeOrderPayment\x12I\n" +
+	"\x0epayment_method\x18\x01 \x01(\x0e2\x18.common.v1.PaymentMethodB\b\xbaH\x05\x82\x01\x02\x10\x01R\rpaymentMethod\x12&\n" +
+	"\x06amount\x18\x02 \x01(\x01B\x0e\xbaH\v\x12\t!\x00\x00\x00\x00\x00\x00\x00\x00R\x06amount\"\x86\x01\n" +
+	"\x0fSupplierPayment\x12K\n" +
 	"\x0epayment_method\x18\x01 \x01(\x0e2\x18.common.v1.PaymentMethodB\n" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\rpaymentMethod\x12&\n" +
-	"\x06amount\x18\x02 \x01(\x01B\x0e\xbaH\v\x12\t!\x00\x00\x00\x00\x00\x00\x00\x00R\x06amount\"\x85\x01\n" +
-	"\x0eSupplierAmount\x12K\n" +
-	"\x0epayment_method\x18\x01 \x01(\x0e2\x18.common.v1.PaymentMethodB\n" +
-	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\rpaymentMethod\x12&\n" +
-	"\x06amount\x18\x02 \x01(\x01B\x0e\xbaH\v\x12\t!\x00\x00\x00\x00\x00\x00\x00\x00R\x06amount\"\xba\b\n" +
+	"\x06amount\x18\x02 \x01(\x01B\x0e\xbaH\v\x12\t!\x00\x00\x00\x00\x00\x00\x00\x00R\x06amount\"\x84\v\n" +
 	"\x0eOnOrderRequest\x12\x1c\n" +
 	"\x05token\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\x05token\x12 \n" +
-	"\ateam_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12*\n" +
-	"\fwarehouse_id\x18\x03 \x01(\x04B\a\xbaH\x042\x02 \x00R\vwarehouseId\x12!\n" +
-	"\border_id\x18\x04 \x01(\x04B\x06\xbaH\x03\xc8\x01\x01R\aorderId\x12G\n" +
+	"\ateam_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12!\n" +
+	"\fwarehouse_id\x18\x03 \x01(\x04R\vwarehouseId\x12!\n" +
+	"\border_id\x18\x04 \x01(\x04B\x06\xbaH\x03\xc8\x01\x01R\aorderId\x12&\n" +
+	"\x0fis_custom_order\x18\x11 \x01(\bR\risCustomOrder\x12G\n" +
 	"\n" +
 	"label_info\x18\f \x01(\v2 .revenue_iface.v1.ExtraLabelInfoB\x06\xbaH\x03\xc8\x01\x01R\tlabelInfo\x12B\n" +
 	"\n" +
 	"order_info\x18\r \x01(\v2\x1b.revenue_iface.v1.OrderInfoB\x06\xbaH\x03\xc8\x01\x01R\torderInfo\x12<\n" +
 	"\x05event\x18\x05 \x01(\x0e2\x1c.revenue_iface.v1.OrderEventB\b\xbaH\x05\x82\x01\x02\x10\x01R\x05event\x12Q\n" +
 	"\x10marketplace_type\x18\v \x01(\x0e2\x1a.common.v1.MarketplaceTypeB\n" +
-	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x0fmarketplaceType\x121\n" +
-	"\forder_amount\x18\x06 \x01(\x01B\x0e\xbaH\v\x12\t!\x00\x00\x00\x00\x00\x00\x00\x00R\vorderAmount\x123\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x0fmarketplaceType\x12!\n" +
+	"\forder_amount\x18\x06 \x01(\x01R\vorderAmount\x123\n" +
 	"\rwarehouse_fee\x18\a \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\fwarehouseFee\x12@\n" +
 	"\fborrow_stock\x18\t \x03(\v2\x1d.revenue_iface.v1.BorrowStockR\vborrowStock\x12(\n" +
 	"\x10own_stock_amount\x18\n" +
 	" \x01(\x01R\x0eownStockAmount\x12F\n" +
-	"\x0eproduct_source\x18\x0e \x01(\x0e2\x1f.revenue_iface.v1.ProductSourceR\rproductSource\x12O\n" +
-	"\x11fake_order_amount\x18\x0f \x01(\v2!.revenue_iface.v1.FakeOrderAmountH\x00R\x0ffakeOrderAmount\x12K\n" +
-	"\x0fsupplier_amount\x18\x10 \x01(\v2 .revenue_iface.v1.SupplierAmountH\x00R\x0esupplierAmount:\xab\x01\xbaH\xa7\x01\x1a\xa4\x01\n" +
-	"\x15stock_source_required\x12QEither borrow_stock must not be empty or own_stock_amount must be greater than 0.\x1a8size(this.borrow_stock) > 0 || this.own_stock_amount > 0B\x13\n" +
-	"\x11additional_amount\"\x11\n" +
+	"\x0eproduct_source\x18\x0e \x01(\x0e2\x1f.revenue_iface.v1.ProductSourceR\rproductSource\x12R\n" +
+	"\x12fake_order_payment\x18\x0f \x01(\v2\".revenue_iface.v1.FakeOrderPaymentH\x00R\x10fakeOrderPayment\x12N\n" +
+	"\x10supplier_payment\x18\x10 \x01(\v2!.revenue_iface.v1.SupplierPaymentH\x00R\x0fsupplierPayment:\xdf\x03\xbaH\xdb\x03\x1a\xbe\x01\n" +
+	"\x15stock_source_required\x12QEither borrow_stock must not be empty or own_stock_amount must be greater than 0.\x1aR(size(this.borrow_stock) > 0 || this.own_stock_amount > 0) || this.is_custom_order\x1a\x8c\x01\n" +
+	"\"warehouse_required_when_not_custom\x127warehouse_id is required when is_custom_order is false.\x1a-this.is_custom_order || this.warehouse_id > 0\x1a\x88\x01\n" +
+	"\x1eorder_amount_greater_than_zero\x127order_amount is required when is_custom_order is false.\x1a-this.is_custom_order || this.order_amount > 0B\x14\n" +
+	"\x12additional_payment\"\x11\n" +
 	"\x0fOnOrderResponse*\xe0\x01\n" +
 	"\rRevenueSource\x12\x1e\n" +
 	"\x1aREVENUE_SOURCE_UNSPECIFIED\x10\x00\x12\x17\n" +
@@ -2107,8 +2126,8 @@ var file_revenue_iface_v1_revenue_proto_goTypes = []any{
 	(*OrderInfo)(nil),                    // 26: revenue_iface.v1.OrderInfo
 	(*OnOrderAsyncRequest)(nil),          // 27: revenue_iface.v1.OnOrderAsyncRequest
 	(*OnOrderAsyncResponse)(nil),         // 28: revenue_iface.v1.OnOrderAsyncResponse
-	(*FakeOrderAmount)(nil),              // 29: revenue_iface.v1.FakeOrderAmount
-	(*SupplierAmount)(nil),               // 30: revenue_iface.v1.SupplierAmount
+	(*FakeOrderPayment)(nil),             // 29: revenue_iface.v1.FakeOrderPayment
+	(*SupplierPayment)(nil),              // 30: revenue_iface.v1.SupplierPayment
 	(*OnOrderRequest)(nil),               // 31: revenue_iface.v1.OnOrderRequest
 	(*OnOrderResponse)(nil),              // 32: revenue_iface.v1.OnOrderResponse
 	(*timestamppb.Timestamp)(nil),        // 33: google.protobuf.Timestamp
@@ -2133,16 +2152,16 @@ var file_revenue_iface_v1_revenue_proto_depIdxs = []int32{
 	25, // 12: revenue_iface.v1.OrderCancelRequest.label_info:type_name -> revenue_iface.v1.ExtraLabelInfo
 	35, // 13: revenue_iface.v1.ExtraLabelInfo.type_labels:type_name -> accounting_iface.v1.TypeLabel
 	31, // 14: revenue_iface.v1.OnOrderAsyncRequest.data:type_name -> revenue_iface.v1.OnOrderRequest
-	36, // 15: revenue_iface.v1.FakeOrderAmount.payment_method:type_name -> common.v1.PaymentMethod
-	36, // 16: revenue_iface.v1.SupplierAmount.payment_method:type_name -> common.v1.PaymentMethod
+	36, // 15: revenue_iface.v1.FakeOrderPayment.payment_method:type_name -> common.v1.PaymentMethod
+	36, // 16: revenue_iface.v1.SupplierPayment.payment_method:type_name -> common.v1.PaymentMethod
 	25, // 17: revenue_iface.v1.OnOrderRequest.label_info:type_name -> revenue_iface.v1.ExtraLabelInfo
 	26, // 18: revenue_iface.v1.OnOrderRequest.order_info:type_name -> revenue_iface.v1.OrderInfo
 	3,  // 19: revenue_iface.v1.OnOrderRequest.event:type_name -> revenue_iface.v1.OrderEvent
 	37, // 20: revenue_iface.v1.OnOrderRequest.marketplace_type:type_name -> common.v1.MarketplaceType
 	24, // 21: revenue_iface.v1.OnOrderRequest.borrow_stock:type_name -> revenue_iface.v1.BorrowStock
 	4,  // 22: revenue_iface.v1.OnOrderRequest.product_source:type_name -> revenue_iface.v1.ProductSource
-	29, // 23: revenue_iface.v1.OnOrderRequest.fake_order_amount:type_name -> revenue_iface.v1.FakeOrderAmount
-	30, // 24: revenue_iface.v1.OnOrderRequest.supplier_amount:type_name -> revenue_iface.v1.SupplierAmount
+	29, // 23: revenue_iface.v1.OnOrderRequest.fake_order_payment:type_name -> revenue_iface.v1.FakeOrderPayment
+	30, // 24: revenue_iface.v1.OnOrderRequest.supplier_payment:type_name -> revenue_iface.v1.SupplierPayment
 	31, // 25: revenue_iface.v1.RevenueService.OnOrder:input_type -> revenue_iface.v1.OnOrderRequest
 	22, // 26: revenue_iface.v1.RevenueService.OrderCancel:input_type -> revenue_iface.v1.OrderCancelRequest
 	18, // 27: revenue_iface.v1.RevenueService.OrderReturn:input_type -> revenue_iface.v1.OrderReturnRequest
@@ -2176,8 +2195,8 @@ func file_revenue_iface_v1_revenue_proto_init() {
 		(*RevenueStreamEvent_Withdrawal)(nil),
 	}
 	file_revenue_iface_v1_revenue_proto_msgTypes[26].OneofWrappers = []any{
-		(*OnOrderRequest_FakeOrderAmount)(nil),
-		(*OnOrderRequest_SupplierAmount)(nil),
+		(*OnOrderRequest_FakeOrderPayment)(nil),
+		(*OnOrderRequest_SupplierPayment)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

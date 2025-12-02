@@ -179,6 +179,7 @@ enum ProductSource {
 message OrderInfo {
   string receipt = 1;
   string external_order_id = 2;
+  uint64 parent_external_order_id = 3;
 }
 
 message OnOrderAsyncRequest {
@@ -187,15 +188,12 @@ message OnOrderAsyncRequest {
 
 message OnOrderAsyncResponse {}
 
-message FakeOrderAmount {
-  common.v1.PaymentMethod payment_method = 1 [(buf.validate.field).enum = {
-    defined_only: true
-    not_in: [0]
-  }];
+message FakeOrderPayment {
+  common.v1.PaymentMethod payment_method = 1 [(buf.validate.field).enum = {defined_only: true}];
   double amount = 2 [(buf.validate.field).double = {gt: 0}];
 }
 
-message SupplierAmount {
+message SupplierPayment {
   common.v1.PaymentMethod payment_method = 1 [(buf.validate.field).enum = {
     defined_only: true
     not_in: [0]
@@ -206,8 +204,10 @@ message SupplierAmount {
 message OnOrderRequest {
   string token = 1 [(buf.validate.field).required = true];
   uint64 team_id = 2 [(buf.validate.field).uint64 = {gt: 0}];
-  uint64 warehouse_id = 3 [(buf.validate.field).uint64 = {gt: 0}];
+  uint64 warehouse_id = 3; // validate manual
   uint64 order_id = 4 [(buf.validate.field).required = true];
+  bool is_custom_order = 17;
+
   ExtraLabelInfo label_info = 12 [(buf.validate.field).required = true];
   OrderInfo order_info = 13 [(buf.validate.field).required = true];
   OrderEvent event = 5 [(buf.validate.field).enum = {defined_only: true}];
@@ -215,23 +215,35 @@ message OnOrderRequest {
     defined_only: true
     not_in: [0]
   }];
-  double order_amount = 6 [(buf.validate.field).double = {gt: 0}];
+  double order_amount = 6;
   double warehouse_fee = 7 [(buf.validate.field).double = {gte: 0}];
   // string description = 8 [(buf.validate.field).string = {max_len: 1024}];
   repeated BorrowStock borrow_stock = 9;
   double own_stock_amount = 10;
   ProductSource product_source = 14;
 
-  oneof additional_amount {
-    FakeOrderAmount fake_order_amount = 15;
-    SupplierAmount supplier_amount = 16;
+  oneof additional_payment {
+    FakeOrderPayment fake_order_payment = 15;
+    SupplierPayment supplier_payment = 16;
   }
 
   // 👇 cross-field validation: either borrow_stock > 0 OR own_stock_amount > 0
   option (buf.validate.message).cel = {
     id: "stock_source_required"
-    expression: "size(this.borrow_stock) > 0 || this.own_stock_amount > 0"
+    expression: "(size(this.borrow_stock) > 0 || this.own_stock_amount > 0) || this.is_custom_order"
     message: "Either borrow_stock must not be empty or own_stock_amount must be greater than 0."
+  };
+
+  option (buf.validate.message).cel = {
+    id: "warehouse_required_when_not_custom"
+    expression: "this.is_custom_order || this.warehouse_id > 0"
+    message: "warehouse_id is required when is_custom_order is false."
+  };
+
+  option (buf.validate.message).cel = {
+    id: "order_amount_greater_than_zero"
+    expression: "this.is_custom_order || this.order_amount > 0"
+    message: "order_amount is required when is_custom_order is false."
   };
 }
 
