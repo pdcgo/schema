@@ -495,7 +495,8 @@ type Order struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	ShopId        uint64                 `protobuf:"varint,2,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
-	OrderTime     *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=order_time,json=orderTime,proto3" json:"order_time,omitempty"`
+	CustomerId    uint64                 `protobuf:"varint,3,opt,name=customer_id,json=customerId,proto3" json:"customer_id,omitempty"`
+	OrderTime     *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=order_time,json=orderTime,proto3" json:"order_time,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -540,6 +541,13 @@ func (x *Order) GetId() uint64 {
 func (x *Order) GetShopId() uint64 {
 	if x != nil {
 		return x.ShopId
+	}
+	return 0
+}
+
+func (x *Order) GetCustomerId() uint64 {
+	if x != nil {
+		return x.CustomerId
 	}
 	return 0
 }
@@ -849,12 +857,14 @@ const file_warehouse_iface_v1_outbound_proto_rawDesc = "" +
 	"\x05owned\x18\x03 \x01(\bR\x05owned\x12\x14\n" +
 	"\x05count\x18\x04 \x01(\x03R\x05count\x12\x14\n" +
 	"\x05price\x18\x05 \x01(\x01R\x05price\x12\x14\n" +
-	"\x05total\x18\x06 \x01(\x01R\x05total\"k\n" +
+	"\x05total\x18\x06 \x01(\x01R\x05total\"\x8c\x01\n" +
 	"\x05Order\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x17\n" +
-	"\ashop_id\x18\x02 \x01(\x04R\x06shopId\x129\n" +
+	"\ashop_id\x18\x02 \x01(\x04R\x06shopId\x12\x1f\n" +
+	"\vcustomer_id\x18\x03 \x01(\x04R\n" +
+	"customerId\x129\n" +
 	"\n" +
-	"order_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\torderTime\"A\n" +
+	"order_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\torderTime\"A\n" +
 	"\fTransferFrom\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12!\n" +
 	"\fwarehouse_id\x18\x02 \x01(\x04R\vwarehouseId\"\xdf\x03\n" +
