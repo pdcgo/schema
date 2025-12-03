@@ -78,7 +78,7 @@ message MutationItem {
   MutationType type = 2;
   double fee_amount = 3;
   double amount = 4;
-  uint64 purpose = 13;
+  MutationPurpose purpose = 13;
   string desc = 5;
   // int64 transfer_at = 6;
   int64 created = 7;
