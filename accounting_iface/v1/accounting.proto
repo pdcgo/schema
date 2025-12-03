@@ -28,6 +28,13 @@ service AccountService {
   rpc AccountMutationList(AccountMutationListRequest) returns (AccountMutationListResponse);
 }
 
+enum MutationPurpose {
+  MUTATION_PURPOSE_UNSPECIFIED = 0;
+  MUTATION_PURPOSE_OTHER = 1;
+  MUTATION_PURPOSE_TOPUP = 2;
+  MUTATION_PURPOSE_BUSSINESS_PAYABLE = 3;
+}
+
 message AccountByIDsRequest {
   repeated uint64 ids = 1 [(buf.validate.field).repeated = {
     min_items: 1 // must have at least 1 id
@@ -119,6 +126,10 @@ message TransferCreateRequest {
     (buf.validate.field).required = true,
     (buf.validate.field).uint64.gt = 0
   ];
+  MutationPurpose purpose = 4 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
   // int64 transfer_at = 5 [(buf.validate.field).int64.gt = 0 /* unix epoch, must be > 0 */];
   double amount = 6 [(buf.validate.field).double.gt = 0 /* must be positive */];
   double fee_amount = 8;
