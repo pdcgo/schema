@@ -1,0 +1,33 @@
+syntax = "proto3";
+package common.v1;
+
+import "buf/validate/validate.proto";
+// import "common/v1/common.proto";
+// import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/pdcgo/schema/services/common/v1;common";
+
+service ShipmentService {
+  rpc PublicShipmentIDs(PublicShipmentIDsRequest) returns (PublicShipmentIDsResponse);
+}
+
+message Shipment {
+  uint64 id = 1;
+  string key = 2;
+  string display_name = 3;
+}
+
+message PublicShipmentIDsRequest {
+  repeated uint64 ids = 1 [(buf.validate.field).repeated = {
+    min_items: 1 // must have at least 1 id
+    max_items: 200
+    unique: true // no duplicate IDs allowed
+    items: {
+      uint64: {gt: 0}
+    }
+  }];
+}
+
+message PublicShipmentIDsResponse {
+  map<uint64, Shipment> data = 1;
+}
