@@ -38,8 +38,8 @@ message OutboundSort {
 message OutboundListFilter {
   uint64 team_id = 1;
   uint64 user_id = 2;
-  string receipt = 3;
   uint64 shop_id = 7;
+  string q = 3;
   bool include_deleted = 10;
   ShipmentStatus shipment = 11;
   repeated string status = 4;

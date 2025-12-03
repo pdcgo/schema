@@ -227,8 +227,8 @@ type OutboundListFilter struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	TeamId         uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
 	UserId         uint64                 `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Receipt        string                 `protobuf:"bytes,3,opt,name=receipt,proto3" json:"receipt,omitempty"`
 	ShopId         uint64                 `protobuf:"varint,7,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
+	Q              string                 `protobuf:"bytes,3,opt,name=q,proto3" json:"q,omitempty"`
 	IncludeDeleted bool                   `protobuf:"varint,10,opt,name=include_deleted,json=includeDeleted,proto3" json:"include_deleted,omitempty"`
 	Shipment       ShipmentStatus         `protobuf:"varint,11,opt,name=shipment,proto3,enum=warehouse_iface.v1.ShipmentStatus" json:"shipment,omitempty"`
 	Status         []string               `protobuf:"bytes,4,rep,name=status,proto3" json:"status,omitempty"`
@@ -284,18 +284,18 @@ func (x *OutboundListFilter) GetUserId() uint64 {
 	return 0
 }
 
-func (x *OutboundListFilter) GetReceipt() string {
-	if x != nil {
-		return x.Receipt
-	}
-	return ""
-}
-
 func (x *OutboundListFilter) GetShopId() uint64 {
 	if x != nil {
 		return x.ShopId
 	}
 	return 0
+}
+
+func (x *OutboundListFilter) GetQ() string {
+	if x != nil {
+		return x.Q
+	}
+	return ""
 }
 
 func (x *OutboundListFilter) GetIncludeDeleted() bool {
@@ -848,12 +848,12 @@ const file_warehouse_iface_v1_outbound_proto_rawDesc = "" +
 	"!warehouse_iface/v1/outbound.proto\x12\x12warehouse_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"t\n" +
 	"\fOutboundSort\x12;\n" +
 	"\x05field\x18\x01 \x01(\x0e2%.warehouse_iface.v1.OutboundSortFieldR\x05field\x12'\n" +
-	"\x04type\x18\x02 \x01(\x0e2\x13.common.v1.SortTypeR\x04type\"\xe7\x03\n" +
+	"\x04type\x18\x02 \x01(\x0e2\x13.common.v1.SortTypeR\x04type\"\xdb\x03\n" +
 	"\x12OutboundListFilter\x12\x17\n" +
 	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12\x17\n" +
-	"\auser_id\x18\x02 \x01(\x04R\x06userId\x12\x18\n" +
-	"\areceipt\x18\x03 \x01(\tR\areceipt\x12\x17\n" +
-	"\ashop_id\x18\a \x01(\x04R\x06shopId\x12'\n" +
+	"\auser_id\x18\x02 \x01(\x04R\x06userId\x12\x17\n" +
+	"\ashop_id\x18\a \x01(\x04R\x06shopId\x12\f\n" +
+	"\x01q\x18\x03 \x01(\tR\x01q\x12'\n" +
 	"\x0finclude_deleted\x18\n" +
 	" \x01(\bR\x0eincludeDeleted\x12>\n" +
 	"\bshipment\x18\v \x01(\x0e2\".warehouse_iface.v1.ShipmentStatusR\bshipment\x12\x16\n" +
