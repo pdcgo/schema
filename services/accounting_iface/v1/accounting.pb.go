@@ -389,6 +389,7 @@ type MutationItem struct {
 	Type          MutationType           `protobuf:"varint,2,opt,name=type,proto3,enum=accounting_iface.v1.MutationType" json:"type,omitempty"`
 	FeeAmount     float64                `protobuf:"fixed64,3,opt,name=fee_amount,json=feeAmount,proto3" json:"fee_amount,omitempty"`
 	Amount        float64                `protobuf:"fixed64,4,opt,name=amount,proto3" json:"amount,omitempty"`
+	Purpose       uint64                 `protobuf:"varint,13,opt,name=purpose,proto3" json:"purpose,omitempty"`
 	Desc          string                 `protobuf:"bytes,5,opt,name=desc,proto3" json:"desc,omitempty"`
 	// int64 transfer_at = 6;
 	Created int64 `protobuf:"varint,7,opt,name=created,proto3" json:"created,omitempty"`
@@ -475,6 +476,13 @@ func (x *MutationItem) GetFeeAmount() float64 {
 func (x *MutationItem) GetAmount() float64 {
 	if x != nil {
 		return x.Amount
+	}
+	return 0
+}
+
+func (x *MutationItem) GetPurpose() uint64 {
+	if x != nil {
+		return x.Purpose
 	}
 	return 0
 }
@@ -1692,7 +1700,7 @@ const file_accounting_iface_v1_accounting_proto_rawDesc = "" +
 	"\x1bAccountPublicSearchResponse\x12:\n" +
 	"\x04data\x18\x01 \x03(\v2&.accounting_iface.v1.PublicAccountItemR\x04data\"\x17\n" +
 	"\x15TransferCancelRequest\"\x18\n" +
-	"\x16TransferCancelResponse\"\xb1\x03\n" +
+	"\x16TransferCancelResponse\"\xcb\x03\n" +
 	"\fMutationItem\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x17\n" +
 	"\ateam_id\x18\n" +
@@ -1702,7 +1710,8 @@ const file_accounting_iface_v1_accounting_proto_rawDesc = "" +
 	"\x04type\x18\x02 \x01(\x0e2!.accounting_iface.v1.MutationTypeR\x04type\x12\x1d\n" +
 	"\n" +
 	"fee_amount\x18\x03 \x01(\x01R\tfeeAmount\x12\x16\n" +
-	"\x06amount\x18\x04 \x01(\x01R\x06amount\x12\x12\n" +
+	"\x06amount\x18\x04 \x01(\x01R\x06amount\x12\x18\n" +
+	"\apurpose\x18\r \x01(\x04R\apurpose\x12\x12\n" +
 	"\x04desc\x18\x05 \x01(\tR\x04desc\x12\x18\n" +
 	"\acreated\x18\a \x01(\x03R\acreated\x12I\n" +
 	"\ffrom_account\x18\b \x01(\v2&.accounting_iface.v1.PublicAccountItemR\vfromAccount\x12E\n" +

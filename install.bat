@@ -1,0 +1,1 @@
+go install github.com/favadi/protoc-go-inject-tag@latest
