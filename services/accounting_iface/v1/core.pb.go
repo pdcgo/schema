@@ -138,6 +138,7 @@ const (
 	LabelKey_LABEL_KEY_WAREHOUSE_TRANSACTION_TYPE LabelKey = 2
 	LabelKey_LABEL_KEY_REVENUE_SOURCE             LabelKey = 3
 	LabelKey_LABEL_KEY_ORDER_TYPE                 LabelKey = 4
+	LabelKey_LABEL_KEY_TRANSFER_PURPOSE           LabelKey = 5
 )
 
 // Enum value maps for LabelKey.
@@ -148,6 +149,7 @@ var (
 		2: "LABEL_KEY_WAREHOUSE_TRANSACTION_TYPE",
 		3: "LABEL_KEY_REVENUE_SOURCE",
 		4: "LABEL_KEY_ORDER_TYPE",
+		5: "LABEL_KEY_TRANSFER_PURPOSE",
 	}
 	LabelKey_value = map[string]int32{
 		"LABEL_KEY_UNSPECIFIED":                0,
@@ -155,6 +157,7 @@ var (
 		"LABEL_KEY_WAREHOUSE_TRANSACTION_TYPE": 2,
 		"LABEL_KEY_REVENUE_SOURCE":             3,
 		"LABEL_KEY_ORDER_TYPE":                 4,
+		"LABEL_KEY_TRANSFER_PURPOSE":           5,
 	}
 )
 
@@ -822,13 +825,14 @@ const file_accounting_iface_v1_core_proto_rawDesc = "" +
 	"\vBalanceType\x12\x1c\n" +
 	"\x18BALANCE_TYPE_UNSPECIFIED\x10\x00\x12\x16\n" +
 	"\x12BALANCE_TYPE_DEBIT\x10\x01\x12\x17\n" +
-	"\x13BALANCE_TYPE_CREDIT\x10\x02*\xa2\x01\n" +
+	"\x13BALANCE_TYPE_CREDIT\x10\x02*\xc2\x01\n" +
 	"\bLabelKey\x12\x19\n" +
 	"\x15LABEL_KEY_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15LABEL_KEY_MARKETPLACE\x10\x01\x12(\n" +
 	"$LABEL_KEY_WAREHOUSE_TRANSACTION_TYPE\x10\x02\x12\x1c\n" +
 	"\x18LABEL_KEY_REVENUE_SOURCE\x10\x03\x12\x18\n" +
-	"\x14LABEL_KEY_ORDER_TYPE\x10\x042\xe0\x01\n" +
+	"\x14LABEL_KEY_ORDER_TYPE\x10\x04\x12\x1e\n" +
+	"\x1aLABEL_KEY_TRANSFER_PURPOSE\x10\x052\xe0\x01\n" +
 	"\vCoreService\x12i\n" +
 	"\x0eAccountKeyList\x12*.accounting_iface.v1.AccountKeyListRequest\x1a+.accounting_iface.v1.AccountKeyListResponse\x12f\n" +
 	"\rTypeLabelList\x12).accounting_iface.v1.TypeLabelListRequest\x1a*.accounting_iface.v1.TypeLabelListResponseB\xd4\x01\n" +
