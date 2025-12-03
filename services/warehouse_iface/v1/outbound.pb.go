@@ -622,6 +622,8 @@ type Outbound struct {
 	Receipt     string                 `protobuf:"bytes,8,opt,name=receipt,proto3" json:"receipt,omitempty"`
 	ReceiptFile string                 `protobuf:"bytes,9,opt,name=receipt_file,json=receiptFile,proto3" json:"receipt_file,omitempty"`
 	IsDeleted   bool                   `protobuf:"varint,11,opt,name=is_deleted,json=isDeleted,proto3" json:"is_deleted,omitempty"`
+	IsShipped   bool                   `protobuf:"varint,6,opt,name=is_shipped,json=isShipped,proto3" json:"is_shipped,omitempty"`
+	ShippingId  uint64                 `protobuf:"varint,14,opt,name=shipping_id,json=shippingId,proto3" json:"shipping_id,omitempty"`
 	Created     *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=created,proto3" json:"created,omitempty"`
 	// Types that are valid to be assigned to Extra:
 	//
@@ -723,6 +725,20 @@ func (x *Outbound) GetIsDeleted() bool {
 		return x.IsDeleted
 	}
 	return false
+}
+
+func (x *Outbound) GetIsShipped() bool {
+	if x != nil {
+		return x.IsShipped
+	}
+	return false
+}
+
+func (x *Outbound) GetShippingId() uint64 {
+	if x != nil {
+		return x.ShippingId
+	}
+	return 0
 }
 
 func (x *Outbound) GetCreated() *timestamppb.Timestamp {
@@ -867,7 +883,7 @@ const file_warehouse_iface_v1_outbound_proto_rawDesc = "" +
 	"order_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\torderTime\"A\n" +
 	"\fTransferFrom\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12!\n" +
-	"\fwarehouse_id\x18\x02 \x01(\x04R\vwarehouseId\"\xdf\x03\n" +
+	"\fwarehouse_id\x18\x02 \x01(\x04R\vwarehouseId\"\x9f\x04\n" +
 	"\bOutbound\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x17\n" +
 	"\ateam_id\x18\x02 \x01(\x04R\x06teamId\x12!\n" +
@@ -879,7 +895,11 @@ const file_warehouse_iface_v1_outbound_proto_rawDesc = "" +
 	"\areceipt\x18\b \x01(\tR\areceipt\x12!\n" +
 	"\freceipt_file\x18\t \x01(\tR\vreceiptFile\x12\x1d\n" +
 	"\n" +
-	"is_deleted\x18\v \x01(\bR\tisDeleted\x124\n" +
+	"is_deleted\x18\v \x01(\bR\tisDeleted\x12\x1d\n" +
+	"\n" +
+	"is_shipped\x18\x06 \x01(\bR\tisShipped\x12\x1f\n" +
+	"\vshipping_id\x18\x0e \x01(\x04R\n" +
+	"shippingId\x124\n" +
 	"\acreated\x18\n" +
 	" \x01(\v2\x1a.google.protobuf.TimestampR\acreated\x121\n" +
 	"\x05order\x18\f \x01(\v2\x19.warehouse_iface.v1.OrderH\x00R\x05order\x12G\n" +

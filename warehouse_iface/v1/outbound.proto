@@ -86,6 +86,8 @@ message Outbound {
   string receipt = 8;
   string receipt_file = 9;
   bool is_deleted = 11;
+  bool is_shipped = 6;
+  uint64 shipping_id = 14;
 
   google.protobuf.Timestamp created = 10;
 
