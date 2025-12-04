@@ -620,6 +620,7 @@ type Outbound struct {
 	Items       []*OutboundItem        `protobuf:"bytes,5,rep,name=items,proto3" json:"items,omitempty"`
 	Status      string                 `protobuf:"bytes,7,opt,name=status,proto3" json:"status,omitempty"`
 	Receipt     string                 `protobuf:"bytes,8,opt,name=receipt,proto3" json:"receipt,omitempty"`
+	ExternOrdId string                 `protobuf:"bytes,15,opt,name=extern_ord_id,json=externOrdId,proto3" json:"extern_ord_id,omitempty"`
 	ReceiptFile string                 `protobuf:"bytes,9,opt,name=receipt_file,json=receiptFile,proto3" json:"receipt_file,omitempty"`
 	IsDeleted   bool                   `protobuf:"varint,11,opt,name=is_deleted,json=isDeleted,proto3" json:"is_deleted,omitempty"`
 	IsShipped   bool                   `protobuf:"varint,6,opt,name=is_shipped,json=isShipped,proto3" json:"is_shipped,omitempty"`
@@ -709,6 +710,13 @@ func (x *Outbound) GetStatus() string {
 func (x *Outbound) GetReceipt() string {
 	if x != nil {
 		return x.Receipt
+	}
+	return ""
+}
+
+func (x *Outbound) GetExternOrdId() string {
+	if x != nil {
+		return x.ExternOrdId
 	}
 	return ""
 }
@@ -883,7 +891,7 @@ const file_warehouse_iface_v1_outbound_proto_rawDesc = "" +
 	"order_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\torderTime\"A\n" +
 	"\fTransferFrom\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12!\n" +
-	"\fwarehouse_id\x18\x02 \x01(\x04R\vwarehouseId\"\x9f\x04\n" +
+	"\fwarehouse_id\x18\x02 \x01(\x04R\vwarehouseId\"\xc3\x04\n" +
 	"\bOutbound\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x17\n" +
 	"\ateam_id\x18\x02 \x01(\x04R\x06teamId\x12!\n" +
@@ -892,7 +900,8 @@ const file_warehouse_iface_v1_outbound_proto_rawDesc = "" +
 	"createById\x126\n" +
 	"\x05items\x18\x05 \x03(\v2 .warehouse_iface.v1.OutboundItemR\x05items\x12\x16\n" +
 	"\x06status\x18\a \x01(\tR\x06status\x12\x18\n" +
-	"\areceipt\x18\b \x01(\tR\areceipt\x12!\n" +
+	"\areceipt\x18\b \x01(\tR\areceipt\x12\"\n" +
+	"\rextern_ord_id\x18\x0f \x01(\tR\vexternOrdId\x12!\n" +
 	"\freceipt_file\x18\t \x01(\tR\vreceiptFile\x12\x1d\n" +
 	"\n" +
 	"is_deleted\x18\v \x01(\bR\tisDeleted\x12\x1d\n" +

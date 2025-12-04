@@ -84,6 +84,7 @@ message Outbound {
   repeated OutboundItem items = 5;
   string status = 7;
   string receipt = 8;
+  string extern_ord_id = 15;
   string receipt_file = 9;
   bool is_deleted = 11;
   bool is_shipped = 6;
