@@ -38,6 +38,9 @@ const (
 	// RevenueServiceOrderCancelProcedure is the fully-qualified name of the RevenueService's
 	// OrderCancel RPC.
 	RevenueServiceOrderCancelProcedure = "/revenue_iface.v1.RevenueService/OrderCancel"
+	// RevenueServiceOrderReturnAsyncProcedure is the fully-qualified name of the RevenueService's
+	// OrderReturnAsync RPC.
+	RevenueServiceOrderReturnAsyncProcedure = "/revenue_iface.v1.RevenueService/OrderReturnAsync"
 	// RevenueServiceOrderReturnProcedure is the fully-qualified name of the RevenueService's
 	// OrderReturn RPC.
 	RevenueServiceOrderReturnProcedure = "/revenue_iface.v1.RevenueService/OrderReturn"
@@ -60,6 +63,7 @@ type RevenueServiceClient interface {
 	// rpc OnOrderAsync(OnOrderAsyncRequest) returns (OnOrderAsyncResponse);
 	OnOrder(context.Context, *connect.Request[v1.OnOrderRequest]) (*connect.Response[v1.OnOrderResponse], error)
 	OrderCancel(context.Context, *connect.Request[v1.OrderCancelRequest]) (*connect.Response[v1.OrderCancelResponse], error)
+	OrderReturnAsync(context.Context, *connect.Request[v1.OrderReturnAsyncRequest]) (*connect.Response[v1.OrderReturnAsyncResponse], error)
 	OrderReturn(context.Context, *connect.Request[v1.OrderReturnRequest]) (*connect.Response[v1.OrderReturnResponse], error)
 	OrderCompleted(context.Context, *connect.Request[v1.OrderCompletedRequest]) (*connect.Response[v1.OrderCompletedResponse], error)
 	RevenueAdjustment(context.Context, *connect.Request[v1.RevenueAdjustmentRequest]) (*connect.Response[v1.RevenueAdjustmentResponse], error)
@@ -89,6 +93,12 @@ func NewRevenueServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			httpClient,
 			baseURL+RevenueServiceOrderCancelProcedure,
 			connect.WithSchema(revenueServiceMethods.ByName("OrderCancel")),
+			connect.WithClientOptions(opts...),
+		),
+		orderReturnAsync: connect.NewClient[v1.OrderReturnAsyncRequest, v1.OrderReturnAsyncResponse](
+			httpClient,
+			baseURL+RevenueServiceOrderReturnAsyncProcedure,
+			connect.WithSchema(revenueServiceMethods.ByName("OrderReturnAsync")),
 			connect.WithClientOptions(opts...),
 		),
 		orderReturn: connect.NewClient[v1.OrderReturnRequest, v1.OrderReturnResponse](
@@ -128,6 +138,7 @@ func NewRevenueServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 type revenueServiceClient struct {
 	onOrder           *connect.Client[v1.OnOrderRequest, v1.OnOrderResponse]
 	orderCancel       *connect.Client[v1.OrderCancelRequest, v1.OrderCancelResponse]
+	orderReturnAsync  *connect.Client[v1.OrderReturnAsyncRequest, v1.OrderReturnAsyncResponse]
 	orderReturn       *connect.Client[v1.OrderReturnRequest, v1.OrderReturnResponse]
 	orderCompleted    *connect.Client[v1.OrderCompletedRequest, v1.OrderCompletedResponse]
 	revenueAdjustment *connect.Client[v1.RevenueAdjustmentRequest, v1.RevenueAdjustmentResponse]
@@ -143,6 +154,11 @@ func (c *revenueServiceClient) OnOrder(ctx context.Context, req *connect.Request
 // OrderCancel calls revenue_iface.v1.RevenueService.OrderCancel.
 func (c *revenueServiceClient) OrderCancel(ctx context.Context, req *connect.Request[v1.OrderCancelRequest]) (*connect.Response[v1.OrderCancelResponse], error) {
 	return c.orderCancel.CallUnary(ctx, req)
+}
+
+// OrderReturnAsync calls revenue_iface.v1.RevenueService.OrderReturnAsync.
+func (c *revenueServiceClient) OrderReturnAsync(ctx context.Context, req *connect.Request[v1.OrderReturnAsyncRequest]) (*connect.Response[v1.OrderReturnAsyncResponse], error) {
+	return c.orderReturnAsync.CallUnary(ctx, req)
 }
 
 // OrderReturn calls revenue_iface.v1.RevenueService.OrderReturn.
@@ -175,6 +191,7 @@ type RevenueServiceHandler interface {
 	// rpc OnOrderAsync(OnOrderAsyncRequest) returns (OnOrderAsyncResponse);
 	OnOrder(context.Context, *connect.Request[v1.OnOrderRequest]) (*connect.Response[v1.OnOrderResponse], error)
 	OrderCancel(context.Context, *connect.Request[v1.OrderCancelRequest]) (*connect.Response[v1.OrderCancelResponse], error)
+	OrderReturnAsync(context.Context, *connect.Request[v1.OrderReturnAsyncRequest]) (*connect.Response[v1.OrderReturnAsyncResponse], error)
 	OrderReturn(context.Context, *connect.Request[v1.OrderReturnRequest]) (*connect.Response[v1.OrderReturnResponse], error)
 	OrderCompleted(context.Context, *connect.Request[v1.OrderCompletedRequest]) (*connect.Response[v1.OrderCompletedResponse], error)
 	RevenueAdjustment(context.Context, *connect.Request[v1.RevenueAdjustmentRequest]) (*connect.Response[v1.RevenueAdjustmentResponse], error)
@@ -200,6 +217,12 @@ func NewRevenueServiceHandler(svc RevenueServiceHandler, opts ...connect.Handler
 		RevenueServiceOrderCancelProcedure,
 		svc.OrderCancel,
 		connect.WithSchema(revenueServiceMethods.ByName("OrderCancel")),
+		connect.WithHandlerOptions(opts...),
+	)
+	revenueServiceOrderReturnAsyncHandler := connect.NewUnaryHandler(
+		RevenueServiceOrderReturnAsyncProcedure,
+		svc.OrderReturnAsync,
+		connect.WithSchema(revenueServiceMethods.ByName("OrderReturnAsync")),
 		connect.WithHandlerOptions(opts...),
 	)
 	revenueServiceOrderReturnHandler := connect.NewUnaryHandler(
@@ -238,6 +261,8 @@ func NewRevenueServiceHandler(svc RevenueServiceHandler, opts ...connect.Handler
 			revenueServiceOnOrderHandler.ServeHTTP(w, r)
 		case RevenueServiceOrderCancelProcedure:
 			revenueServiceOrderCancelHandler.ServeHTTP(w, r)
+		case RevenueServiceOrderReturnAsyncProcedure:
+			revenueServiceOrderReturnAsyncHandler.ServeHTTP(w, r)
 		case RevenueServiceOrderReturnProcedure:
 			revenueServiceOrderReturnHandler.ServeHTTP(w, r)
 		case RevenueServiceOrderCompletedProcedure:
@@ -263,6 +288,10 @@ func (UnimplementedRevenueServiceHandler) OnOrder(context.Context, *connect.Requ
 
 func (UnimplementedRevenueServiceHandler) OrderCancel(context.Context, *connect.Request[v1.OrderCancelRequest]) (*connect.Response[v1.OrderCancelResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("revenue_iface.v1.RevenueService.OrderCancel is not implemented"))
+}
+
+func (UnimplementedRevenueServiceHandler) OrderReturnAsync(context.Context, *connect.Request[v1.OrderReturnAsyncRequest]) (*connect.Response[v1.OrderReturnAsyncResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("revenue_iface.v1.RevenueService.OrderReturnAsync is not implemented"))
 }
 
 func (UnimplementedRevenueServiceHandler) OrderReturn(context.Context, *connect.Request[v1.OrderReturnRequest]) (*connect.Response[v1.OrderReturnResponse], error) {

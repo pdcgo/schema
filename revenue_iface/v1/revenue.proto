@@ -13,6 +13,8 @@ service RevenueService {
   // rpc OnOrderAsync(OnOrderAsyncRequest) returns (OnOrderAsyncResponse);
   rpc OnOrder(OnOrderRequest) returns (OnOrderResponse);
   rpc OrderCancel(OrderCancelRequest) returns (OrderCancelResponse);
+
+  rpc OrderReturnAsync(OrderReturnAsyncRequest) returns (OrderReturnAsyncResponse);
   rpc OrderReturn(OrderReturnRequest) returns (OrderReturnResponse);
   rpc OrderCompleted(OrderCompletedRequest) returns (OrderCompletedResponse);
   rpc RevenueAdjustment(RevenueAdjustmentRequest) returns (RevenueAdjustmentResponse);
@@ -117,6 +119,11 @@ message OrderReturnRequest {
   common.v1.RequestFrom request_from = 8 [(buf.validate.field).enum = {defined_only: true}];
 }
 message OrderReturnResponse {}
+
+message OrderReturnAsyncRequest {
+  OrderReturnRequest data = 1 [(buf.validate.field).required = true];
+}
+message OrderReturnAsyncResponse {}
 
 // message OrderAdjustmentRequest {}
 // message OrderAdjustmentResponse {}
