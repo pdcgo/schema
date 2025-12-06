@@ -106,14 +106,12 @@ message OrderReturnRequest {
   uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
   uint64 order_id = 2 [(buf.validate.field).uint64.gt = 0];
   uint64 warehouse_id = 3 [(buf.validate.field).uint64.gt = 0];
-  double order_amount = 4 [
-    (buf.validate.field).double.gt = 0, // must be > 0
-    (buf.validate.field).double.lte = 1e12 // optional: cap max value for safety
-  ];
-  double stock_amount = 5 [
-    (buf.validate.field).double.gt = 0, // must be > 0
-    (buf.validate.field).double.lte = 1e12 // optional: cap max value for safety
-  ];
+  double order_amount = 4 [(buf.validate.field).double = {
+    gt: 0 // must be > 0
+  }];
+  double stock_amount = 5 [(buf.validate.field).double = {
+    gt: 0 // must be > 0
+  }];
   ExtraLabelInfo label_info = 6 [(buf.validate.field).required = true];
   OrderInfo order_info = 7 [(buf.validate.field).required = true];
   common.v1.RequestFrom request_from = 8 [(buf.validate.field).enum = {defined_only: true}];

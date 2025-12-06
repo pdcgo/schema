@@ -316,8 +316,45 @@ func (x *RequestSourceError) GetMessage() string {
 	return ""
 }
 
+type EmptyDispatch struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EmptyDispatch) Reset() {
+	*x = EmptyDispatch{}
+	mi := &file_access_iface_v1_api_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EmptyDispatch) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EmptyDispatch) ProtoMessage() {}
+
+func (x *EmptyDispatch) ProtoReflect() protoreflect.Message {
+	mi := &file_access_iface_v1_api_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EmptyDispatch.ProtoReflect.Descriptor instead.
+func (*EmptyDispatch) Descriptor() ([]byte, []int) {
+	return file_access_iface_v1_api_proto_rawDescGZIP(), []int{5}
+}
+
 type HelloRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Dispatch      bool                   `protobuf:"varint,2,opt,name=dispatch,proto3" json:"dispatch,omitempty"`
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -325,7 +362,7 @@ type HelloRequest struct {
 
 func (x *HelloRequest) Reset() {
 	*x = HelloRequest{}
-	mi := &file_access_iface_v1_api_proto_msgTypes[5]
+	mi := &file_access_iface_v1_api_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -337,7 +374,7 @@ func (x *HelloRequest) String() string {
 func (*HelloRequest) ProtoMessage() {}
 
 func (x *HelloRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_access_iface_v1_api_proto_msgTypes[5]
+	mi := &file_access_iface_v1_api_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -350,7 +387,14 @@ func (x *HelloRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HelloRequest.ProtoReflect.Descriptor instead.
 func (*HelloRequest) Descriptor() ([]byte, []int) {
-	return file_access_iface_v1_api_proto_rawDescGZIP(), []int{5}
+	return file_access_iface_v1_api_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *HelloRequest) GetDispatch() bool {
+	if x != nil {
+		return x.Dispatch
+	}
+	return false
 }
 
 func (x *HelloRequest) GetName() string {
@@ -370,7 +414,7 @@ type HelloResponse struct {
 
 func (x *HelloResponse) Reset() {
 	*x = HelloResponse{}
-	mi := &file_access_iface_v1_api_proto_msgTypes[6]
+	mi := &file_access_iface_v1_api_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -382,7 +426,7 @@ func (x *HelloResponse) String() string {
 func (*HelloResponse) ProtoMessage() {}
 
 func (x *HelloResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_access_iface_v1_api_proto_msgTypes[6]
+	mi := &file_access_iface_v1_api_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -395,7 +439,7 @@ func (x *HelloResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HelloResponse.ProtoReflect.Descriptor instead.
 func (*HelloResponse) Descriptor() ([]byte, []int) {
-	return file_access_iface_v1_api_proto_rawDescGZIP(), []int{6}
+	return file_access_iface_v1_api_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *HelloResponse) GetMessage() string {
@@ -429,8 +473,10 @@ const file_access_iface_v1_api_proto_rawDesc = "" +
 	"\rResourceScope\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\".\n" +
 	"\x12RequestSourceError\x12\x18\n" +
-	"\amessage\x18\x01 \x01(\tR\amessage\"\"\n" +
-	"\fHelloRequest\x12\x12\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage\"\x0f\n" +
+	"\rEmptyDispatch\">\n" +
+	"\fHelloRequest\x12\x1a\n" +
+	"\bdispatch\x18\x02 \x01(\bR\bdispatch\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\"a\n" +
 	"\rHelloResponse\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\x126\n" +
@@ -459,7 +505,7 @@ func file_access_iface_v1_api_proto_rawDescGZIP() []byte {
 }
 
 var file_access_iface_v1_api_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_access_iface_v1_api_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_access_iface_v1_api_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_access_iface_v1_api_proto_goTypes = []any{
 	(RequestFrom)(0),           // 0: access_iface.v1.RequestFrom
 	(*Stack)(nil),              // 1: access_iface.v1.Stack
@@ -467,15 +513,16 @@ var file_access_iface_v1_api_proto_goTypes = []any{
 	(*RequestSource)(nil),      // 3: access_iface.v1.RequestSource
 	(*ResourceScope)(nil),      // 4: access_iface.v1.ResourceScope
 	(*RequestSourceError)(nil), // 5: access_iface.v1.RequestSourceError
-	(*HelloRequest)(nil),       // 6: access_iface.v1.HelloRequest
-	(*HelloResponse)(nil),      // 7: access_iface.v1.HelloResponse
+	(*EmptyDispatch)(nil),      // 6: access_iface.v1.EmptyDispatch
+	(*HelloRequest)(nil),       // 7: access_iface.v1.HelloRequest
+	(*HelloResponse)(nil),      // 8: access_iface.v1.HelloResponse
 }
 var file_access_iface_v1_api_proto_depIdxs = []int32{
 	1, // 0: access_iface.v1.StackSource.stacks:type_name -> access_iface.v1.Stack
 	0, // 1: access_iface.v1.RequestSource.request_from:type_name -> access_iface.v1.RequestFrom
 	3, // 2: access_iface.v1.HelloResponse.source:type_name -> access_iface.v1.RequestSource
-	6, // 3: access_iface.v1.HelloService.Hello:input_type -> access_iface.v1.HelloRequest
-	7, // 4: access_iface.v1.HelloService.Hello:output_type -> access_iface.v1.HelloResponse
+	7, // 3: access_iface.v1.HelloService.Hello:input_type -> access_iface.v1.HelloRequest
+	8, // 4: access_iface.v1.HelloService.Hello:output_type -> access_iface.v1.HelloResponse
 	4, // [4:5] is the sub-list for method output_type
 	3, // [3:4] is the sub-list for method input_type
 	3, // [3:3] is the sub-list for extension type_name
@@ -494,7 +541,7 @@ func file_access_iface_v1_api_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_access_iface_v1_api_proto_rawDesc), len(file_access_iface_v1_api_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   7,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
