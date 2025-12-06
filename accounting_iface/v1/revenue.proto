@@ -1,0 +1,17 @@
+syntax = "proto3";
+package accounting_iface.v1;
+
+// import "buf/validate/validate.proto";
+// import "common/v1/common.proto";
+// import "common/v1/stock.proto";
+
+option go_package = "github.com/pdcgo/schema/services/accounting_iface/v1;accounting_iface";
+
+enum RevenueSource {
+  REVENUE_SOURCE_UNSPECIFIED = 0;
+  REVENUE_SOURCE_FUND = 1;
+  REVENUE_SOURCE_AFFILIATE_COMMISION = 2;
+  REVENUE_SOURCE_LOST_COMPENSATION = 3;
+  REVENUE_SOURCE_COMPENSATION = 4;
+  REVENUE_SOURCE_UNKNOWN_COMPENSATION = 5;
+}

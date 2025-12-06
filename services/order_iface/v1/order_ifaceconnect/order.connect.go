@@ -39,12 +39,21 @@ const (
 	// OrderServiceOrderTagRemoveProcedure is the fully-qualified name of the OrderService's
 	// OrderTagRemove RPC.
 	OrderServiceOrderTagRemoveProcedure = "/order_iface.v1.OrderService/OrderTagRemove"
+	// OrderServiceOrderListProcedure is the fully-qualified name of the OrderService's OrderList RPC.
+	OrderServiceOrderListProcedure = "/order_iface.v1.OrderService/OrderList"
+	// OrderServiceOrderOverviewProcedure is the fully-qualified name of the OrderService's
+	// OrderOverview RPC.
+	OrderServiceOrderOverviewProcedure = "/order_iface.v1.OrderService/OrderOverview"
 )
 
 // OrderServiceClient is a client for the order_iface.v1.OrderService service.
 type OrderServiceClient interface {
 	OrderFundSet(context.Context) *connect.ClientStreamForClient[v1.OrderFundSetRequest, v1.OrderFundSetResponse]
 	OrderTagRemove(context.Context, *connect.Request[v1.OrderTagRemoveRequest]) (*connect.Response[v1.OrderTagRemoveResponse], error)
+	// bagian view
+	OrderList(context.Context, *connect.Request[v1.OrderListRequest]) (*connect.ServerStreamForClient[v1.OrderListResponse], error)
+	// bagian overview
+	OrderOverview(context.Context, *connect.Request[v1.OrderOverviewRequest]) (*connect.Response[v1.OrderOverviewResponse], error)
 }
 
 // NewOrderServiceClient constructs a client for the order_iface.v1.OrderService service. By
@@ -70,6 +79,18 @@ func NewOrderServiceClient(httpClient connect.HTTPClient, baseURL string, opts .
 			connect.WithSchema(orderServiceMethods.ByName("OrderTagRemove")),
 			connect.WithClientOptions(opts...),
 		),
+		orderList: connect.NewClient[v1.OrderListRequest, v1.OrderListResponse](
+			httpClient,
+			baseURL+OrderServiceOrderListProcedure,
+			connect.WithSchema(orderServiceMethods.ByName("OrderList")),
+			connect.WithClientOptions(opts...),
+		),
+		orderOverview: connect.NewClient[v1.OrderOverviewRequest, v1.OrderOverviewResponse](
+			httpClient,
+			baseURL+OrderServiceOrderOverviewProcedure,
+			connect.WithSchema(orderServiceMethods.ByName("OrderOverview")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -77,6 +98,8 @@ func NewOrderServiceClient(httpClient connect.HTTPClient, baseURL string, opts .
 type orderServiceClient struct {
 	orderFundSet   *connect.Client[v1.OrderFundSetRequest, v1.OrderFundSetResponse]
 	orderTagRemove *connect.Client[v1.OrderTagRemoveRequest, v1.OrderTagRemoveResponse]
+	orderList      *connect.Client[v1.OrderListRequest, v1.OrderListResponse]
+	orderOverview  *connect.Client[v1.OrderOverviewRequest, v1.OrderOverviewResponse]
 }
 
 // OrderFundSet calls order_iface.v1.OrderService.OrderFundSet.
@@ -89,10 +112,24 @@ func (c *orderServiceClient) OrderTagRemove(ctx context.Context, req *connect.Re
 	return c.orderTagRemove.CallUnary(ctx, req)
 }
 
+// OrderList calls order_iface.v1.OrderService.OrderList.
+func (c *orderServiceClient) OrderList(ctx context.Context, req *connect.Request[v1.OrderListRequest]) (*connect.ServerStreamForClient[v1.OrderListResponse], error) {
+	return c.orderList.CallServerStream(ctx, req)
+}
+
+// OrderOverview calls order_iface.v1.OrderService.OrderOverview.
+func (c *orderServiceClient) OrderOverview(ctx context.Context, req *connect.Request[v1.OrderOverviewRequest]) (*connect.Response[v1.OrderOverviewResponse], error) {
+	return c.orderOverview.CallUnary(ctx, req)
+}
+
 // OrderServiceHandler is an implementation of the order_iface.v1.OrderService service.
 type OrderServiceHandler interface {
 	OrderFundSet(context.Context, *connect.ClientStream[v1.OrderFundSetRequest]) (*connect.Response[v1.OrderFundSetResponse], error)
 	OrderTagRemove(context.Context, *connect.Request[v1.OrderTagRemoveRequest]) (*connect.Response[v1.OrderTagRemoveResponse], error)
+	// bagian view
+	OrderList(context.Context, *connect.Request[v1.OrderListRequest], *connect.ServerStream[v1.OrderListResponse]) error
+	// bagian overview
+	OrderOverview(context.Context, *connect.Request[v1.OrderOverviewRequest]) (*connect.Response[v1.OrderOverviewResponse], error)
 }
 
 // NewOrderServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -114,12 +151,28 @@ func NewOrderServiceHandler(svc OrderServiceHandler, opts ...connect.HandlerOpti
 		connect.WithSchema(orderServiceMethods.ByName("OrderTagRemove")),
 		connect.WithHandlerOptions(opts...),
 	)
+	orderServiceOrderListHandler := connect.NewServerStreamHandler(
+		OrderServiceOrderListProcedure,
+		svc.OrderList,
+		connect.WithSchema(orderServiceMethods.ByName("OrderList")),
+		connect.WithHandlerOptions(opts...),
+	)
+	orderServiceOrderOverviewHandler := connect.NewUnaryHandler(
+		OrderServiceOrderOverviewProcedure,
+		svc.OrderOverview,
+		connect.WithSchema(orderServiceMethods.ByName("OrderOverview")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/order_iface.v1.OrderService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case OrderServiceOrderFundSetProcedure:
 			orderServiceOrderFundSetHandler.ServeHTTP(w, r)
 		case OrderServiceOrderTagRemoveProcedure:
 			orderServiceOrderTagRemoveHandler.ServeHTTP(w, r)
+		case OrderServiceOrderListProcedure:
+			orderServiceOrderListHandler.ServeHTTP(w, r)
+		case OrderServiceOrderOverviewProcedure:
+			orderServiceOrderOverviewHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -135,4 +188,12 @@ func (UnimplementedOrderServiceHandler) OrderFundSet(context.Context, *connect.C
 
 func (UnimplementedOrderServiceHandler) OrderTagRemove(context.Context, *connect.Request[v1.OrderTagRemoveRequest]) (*connect.Response[v1.OrderTagRemoveResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("order_iface.v1.OrderService.OrderTagRemove is not implemented"))
+}
+
+func (UnimplementedOrderServiceHandler) OrderList(context.Context, *connect.Request[v1.OrderListRequest], *connect.ServerStream[v1.OrderListResponse]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("order_iface.v1.OrderService.OrderList is not implemented"))
+}
+
+func (UnimplementedOrderServiceHandler) OrderOverview(context.Context, *connect.Request[v1.OrderOverviewRequest]) (*connect.Response[v1.OrderOverviewResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("order_iface.v1.OrderService.OrderOverview is not implemented"))
 }

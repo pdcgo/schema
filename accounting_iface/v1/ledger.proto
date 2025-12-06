@@ -102,6 +102,9 @@ message EntryListRequest {
   string account_key = 2 [(buf.validate.field).string.min_len = 1];
   string keyword = 7;
   FilterExtra extra = 6;
+  repeated TypeLabelFilter label = 11 [(buf.validate.field).repeated = {
+    max_items: 10 // the limit
+  }];
   common.v1.TimeFilterRange time_range = 3 [(buf.validate.field).required = true];
   common.v1.PageFilter page = 4 [(buf.validate.field).required = true];
   EntryListSort sort = 5;

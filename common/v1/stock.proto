@@ -1,0 +1,14 @@
+syntax = "proto3";
+package common.v1;
+
+// import "buf/validate/validate.proto";
+// import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/pdcgo/schema/services/common/v1;common";
+
+enum InboundSource {
+  INBOUND_SOURCE_UNSPECIFIED = 0;
+  INBOUND_SOURCE_RESTOCK = 1;
+  INBOUND_SOURCE_RETURN = 2;
+  INBOUND_SOURCE_TRANSFER = 3;
+}

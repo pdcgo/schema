@@ -1,7 +1,10 @@
 syntax = "proto3";
 package accounting_iface.v1;
 
+import "accounting_iface/v1/revenue.proto";
 import "buf/validate/validate.proto";
+import "common/v1/common.proto";
+import "common/v1/stock.proto";
 
 option go_package = "github.com/pdcgo/schema/services/accounting_iface/v1;accounting_iface";
 
@@ -94,4 +97,26 @@ message TypeLabel {
 
 message TypeLabelList {
   repeated TypeLabel list = 1;
+}
+
+enum OrderType {
+  ORDER_TYPE_UNSPECIFIED = 0;
+  ORDER_TYPE_FAKE = 1;
+}
+
+enum MutationPurpose {
+  MUTATION_PURPOSE_UNSPECIFIED = 0;
+  MUTATION_PURPOSE_OTHER = 1;
+  MUTATION_PURPOSE_TOPUP = 2;
+  MUTATION_PURPOSE_BUSSINESS_PAYABLE = 3;
+}
+
+message TypeLabelFilter {
+  oneof label {
+    common.v1.MarketplaceType marketplace = 1;
+    common.v1.InboundSource warehouse_transaction_type = 2;
+    RevenueSource revenue_source = 3;
+    OrderType order_type = 4;
+    MutationPurpose transfer_purpose = 5;
+  }
 }

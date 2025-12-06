@@ -8,6 +8,7 @@ package accounting_iface
 
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
+	v1 "github.com/pdcgo/schema/services/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -186,6 +187,104 @@ func (x LabelKey) Number() protoreflect.EnumNumber {
 // Deprecated: Use LabelKey.Descriptor instead.
 func (LabelKey) EnumDescriptor() ([]byte, []int) {
 	return file_accounting_iface_v1_core_proto_rawDescGZIP(), []int{2}
+}
+
+type OrderType int32
+
+const (
+	OrderType_ORDER_TYPE_UNSPECIFIED OrderType = 0
+	OrderType_ORDER_TYPE_FAKE        OrderType = 1
+)
+
+// Enum value maps for OrderType.
+var (
+	OrderType_name = map[int32]string{
+		0: "ORDER_TYPE_UNSPECIFIED",
+		1: "ORDER_TYPE_FAKE",
+	}
+	OrderType_value = map[string]int32{
+		"ORDER_TYPE_UNSPECIFIED": 0,
+		"ORDER_TYPE_FAKE":        1,
+	}
+)
+
+func (x OrderType) Enum() *OrderType {
+	p := new(OrderType)
+	*p = x
+	return p
+}
+
+func (x OrderType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (OrderType) Descriptor() protoreflect.EnumDescriptor {
+	return file_accounting_iface_v1_core_proto_enumTypes[3].Descriptor()
+}
+
+func (OrderType) Type() protoreflect.EnumType {
+	return &file_accounting_iface_v1_core_proto_enumTypes[3]
+}
+
+func (x OrderType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use OrderType.Descriptor instead.
+func (OrderType) EnumDescriptor() ([]byte, []int) {
+	return file_accounting_iface_v1_core_proto_rawDescGZIP(), []int{3}
+}
+
+type MutationPurpose int32
+
+const (
+	MutationPurpose_MUTATION_PURPOSE_UNSPECIFIED       MutationPurpose = 0
+	MutationPurpose_MUTATION_PURPOSE_OTHER             MutationPurpose = 1
+	MutationPurpose_MUTATION_PURPOSE_TOPUP             MutationPurpose = 2
+	MutationPurpose_MUTATION_PURPOSE_BUSSINESS_PAYABLE MutationPurpose = 3
+)
+
+// Enum value maps for MutationPurpose.
+var (
+	MutationPurpose_name = map[int32]string{
+		0: "MUTATION_PURPOSE_UNSPECIFIED",
+		1: "MUTATION_PURPOSE_OTHER",
+		2: "MUTATION_PURPOSE_TOPUP",
+		3: "MUTATION_PURPOSE_BUSSINESS_PAYABLE",
+	}
+	MutationPurpose_value = map[string]int32{
+		"MUTATION_PURPOSE_UNSPECIFIED":       0,
+		"MUTATION_PURPOSE_OTHER":             1,
+		"MUTATION_PURPOSE_TOPUP":             2,
+		"MUTATION_PURPOSE_BUSSINESS_PAYABLE": 3,
+	}
+)
+
+func (x MutationPurpose) Enum() *MutationPurpose {
+	p := new(MutationPurpose)
+	*p = x
+	return p
+}
+
+func (x MutationPurpose) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (MutationPurpose) Descriptor() protoreflect.EnumDescriptor {
+	return file_accounting_iface_v1_core_proto_enumTypes[4].Descriptor()
+}
+
+func (MutationPurpose) Type() protoreflect.EnumType {
+	return &file_accounting_iface_v1_core_proto_enumTypes[4]
+}
+
+func (x MutationPurpose) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use MutationPurpose.Descriptor instead.
+func (MutationPurpose) EnumDescriptor() ([]byte, []int) {
+	return file_accounting_iface_v1_core_proto_rawDescGZIP(), []int{4}
 }
 
 type TypeLabelValueListRequest struct {
@@ -773,11 +872,141 @@ func (x *TypeLabelList) GetList() []*TypeLabel {
 	return nil
 }
 
+type TypeLabelFilter struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to Label:
+	//
+	//	*TypeLabelFilter_Marketplace
+	//	*TypeLabelFilter_WarehouseTransactionType
+	//	*TypeLabelFilter_RevenueSource
+	//	*TypeLabelFilter_OrderType
+	//	*TypeLabelFilter_TransferPurpose
+	Label         isTypeLabelFilter_Label `protobuf_oneof:"label"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TypeLabelFilter) Reset() {
+	*x = TypeLabelFilter{}
+	mi := &file_accounting_iface_v1_core_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TypeLabelFilter) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TypeLabelFilter) ProtoMessage() {}
+
+func (x *TypeLabelFilter) ProtoReflect() protoreflect.Message {
+	mi := &file_accounting_iface_v1_core_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TypeLabelFilter.ProtoReflect.Descriptor instead.
+func (*TypeLabelFilter) Descriptor() ([]byte, []int) {
+	return file_accounting_iface_v1_core_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *TypeLabelFilter) GetLabel() isTypeLabelFilter_Label {
+	if x != nil {
+		return x.Label
+	}
+	return nil
+}
+
+func (x *TypeLabelFilter) GetMarketplace() v1.MarketplaceType {
+	if x != nil {
+		if x, ok := x.Label.(*TypeLabelFilter_Marketplace); ok {
+			return x.Marketplace
+		}
+	}
+	return v1.MarketplaceType(0)
+}
+
+func (x *TypeLabelFilter) GetWarehouseTransactionType() v1.InboundSource {
+	if x != nil {
+		if x, ok := x.Label.(*TypeLabelFilter_WarehouseTransactionType); ok {
+			return x.WarehouseTransactionType
+		}
+	}
+	return v1.InboundSource(0)
+}
+
+func (x *TypeLabelFilter) GetRevenueSource() RevenueSource {
+	if x != nil {
+		if x, ok := x.Label.(*TypeLabelFilter_RevenueSource); ok {
+			return x.RevenueSource
+		}
+	}
+	return RevenueSource_REVENUE_SOURCE_UNSPECIFIED
+}
+
+func (x *TypeLabelFilter) GetOrderType() OrderType {
+	if x != nil {
+		if x, ok := x.Label.(*TypeLabelFilter_OrderType); ok {
+			return x.OrderType
+		}
+	}
+	return OrderType_ORDER_TYPE_UNSPECIFIED
+}
+
+func (x *TypeLabelFilter) GetTransferPurpose() MutationPurpose {
+	if x != nil {
+		if x, ok := x.Label.(*TypeLabelFilter_TransferPurpose); ok {
+			return x.TransferPurpose
+		}
+	}
+	return MutationPurpose_MUTATION_PURPOSE_UNSPECIFIED
+}
+
+type isTypeLabelFilter_Label interface {
+	isTypeLabelFilter_Label()
+}
+
+type TypeLabelFilter_Marketplace struct {
+	Marketplace v1.MarketplaceType `protobuf:"varint,1,opt,name=marketplace,proto3,enum=common.v1.MarketplaceType,oneof"`
+}
+
+type TypeLabelFilter_WarehouseTransactionType struct {
+	WarehouseTransactionType v1.InboundSource `protobuf:"varint,2,opt,name=warehouse_transaction_type,json=warehouseTransactionType,proto3,enum=common.v1.InboundSource,oneof"`
+}
+
+type TypeLabelFilter_RevenueSource struct {
+	RevenueSource RevenueSource `protobuf:"varint,3,opt,name=revenue_source,json=revenueSource,proto3,enum=accounting_iface.v1.RevenueSource,oneof"`
+}
+
+type TypeLabelFilter_OrderType struct {
+	OrderType OrderType `protobuf:"varint,4,opt,name=order_type,json=orderType,proto3,enum=accounting_iface.v1.OrderType,oneof"`
+}
+
+type TypeLabelFilter_TransferPurpose struct {
+	TransferPurpose MutationPurpose `protobuf:"varint,5,opt,name=transfer_purpose,json=transferPurpose,proto3,enum=accounting_iface.v1.MutationPurpose,oneof"`
+}
+
+func (*TypeLabelFilter_Marketplace) isTypeLabelFilter_Label() {}
+
+func (*TypeLabelFilter_WarehouseTransactionType) isTypeLabelFilter_Label() {}
+
+func (*TypeLabelFilter_RevenueSource) isTypeLabelFilter_Label() {}
+
+func (*TypeLabelFilter_OrderType) isTypeLabelFilter_Label() {}
+
+func (*TypeLabelFilter_TransferPurpose) isTypeLabelFilter_Label() {}
+
 var File_accounting_iface_v1_core_proto protoreflect.FileDescriptor
 
 const file_accounting_iface_v1_core_proto_rawDesc = "" +
 	"\n" +
-	"\x1eaccounting_iface/v1/core.proto\x12\x13accounting_iface.v1\x1a\x1bbuf/validate/validate.proto\"Z\n" +
+	"\x1eaccounting_iface/v1/core.proto\x12\x13accounting_iface.v1\x1a!accounting_iface/v1/revenue.proto\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x15common/v1/stock.proto\"Z\n" +
 	"\x19TypeLabelValueListRequest\x12\f\n" +
 	"\x01q\x18\x01 \x01(\tR\x01q\x12/\n" +
 	"\x03key\x18\x02 \x01(\x0e2\x1d.accounting_iface.v1.LabelKeyR\x03key\"0\n" +
@@ -813,7 +1042,15 @@ const file_accounting_iface_v1_core_proto_rawDesc = "" +
 	"\x03key\x18\x01 \x01(\x0e2\x1d.accounting_iface.v1.LabelKeyR\x03key\x12\x14\n" +
 	"\x05label\x18\x02 \x01(\tR\x05label\"C\n" +
 	"\rTypeLabelList\x122\n" +
-	"\x04list\x18\x01 \x03(\v2\x1e.accounting_iface.v1.TypeLabelR\x04list*\x90\x01\n" +
+	"\x04list\x18\x01 \x03(\v2\x1e.accounting_iface.v1.TypeLabelR\x04list\"\x95\x03\n" +
+	"\x0fTypeLabelFilter\x12>\n" +
+	"\vmarketplace\x18\x01 \x01(\x0e2\x1a.common.v1.MarketplaceTypeH\x00R\vmarketplace\x12X\n" +
+	"\x1awarehouse_transaction_type\x18\x02 \x01(\x0e2\x18.common.v1.InboundSourceH\x00R\x18warehouseTransactionType\x12K\n" +
+	"\x0erevenue_source\x18\x03 \x01(\x0e2\".accounting_iface.v1.RevenueSourceH\x00R\rrevenueSource\x12?\n" +
+	"\n" +
+	"order_type\x18\x04 \x01(\x0e2\x1e.accounting_iface.v1.OrderTypeH\x00R\torderType\x12Q\n" +
+	"\x10transfer_purpose\x18\x05 \x01(\x0e2$.accounting_iface.v1.MutationPurposeH\x00R\x0ftransferPurposeB\a\n" +
+	"\x05label*\x90\x01\n" +
 	"\aCoaCode\x12\x18\n" +
 	"\x14COA_CODE_UNSPECIFIED\x10\x00\x12\x12\n" +
 	"\x0eCOA_CODE_ASSET\x10\n" +
@@ -832,7 +1069,15 @@ const file_accounting_iface_v1_core_proto_rawDesc = "" +
 	"$LABEL_KEY_WAREHOUSE_TRANSACTION_TYPE\x10\x02\x12\x1c\n" +
 	"\x18LABEL_KEY_REVENUE_SOURCE\x10\x03\x12\x18\n" +
 	"\x14LABEL_KEY_ORDER_TYPE\x10\x04\x12\x1e\n" +
-	"\x1aLABEL_KEY_TRANSFER_PURPOSE\x10\x052\xe0\x01\n" +
+	"\x1aLABEL_KEY_TRANSFER_PURPOSE\x10\x05*<\n" +
+	"\tOrderType\x12\x1a\n" +
+	"\x16ORDER_TYPE_UNSPECIFIED\x10\x00\x12\x13\n" +
+	"\x0fORDER_TYPE_FAKE\x10\x01*\x93\x01\n" +
+	"\x0fMutationPurpose\x12 \n" +
+	"\x1cMUTATION_PURPOSE_UNSPECIFIED\x10\x00\x12\x1a\n" +
+	"\x16MUTATION_PURPOSE_OTHER\x10\x01\x12\x1a\n" +
+	"\x16MUTATION_PURPOSE_TOPUP\x10\x02\x12&\n" +
+	"\"MUTATION_PURPOSE_BUSSINESS_PAYABLE\x10\x032\xe0\x01\n" +
 	"\vCoreService\x12i\n" +
 	"\x0eAccountKeyList\x12*.accounting_iface.v1.AccountKeyListRequest\x1a+.accounting_iface.v1.AccountKeyListResponse\x12f\n" +
 	"\rTypeLabelList\x12).accounting_iface.v1.TypeLabelListRequest\x1a*.accounting_iface.v1.TypeLabelListResponseB\xd4\x01\n" +
@@ -850,45 +1095,56 @@ func file_accounting_iface_v1_core_proto_rawDescGZIP() []byte {
 	return file_accounting_iface_v1_core_proto_rawDescData
 }
 
-var file_accounting_iface_v1_core_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_accounting_iface_v1_core_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_accounting_iface_v1_core_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
+var file_accounting_iface_v1_core_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_accounting_iface_v1_core_proto_goTypes = []any{
 	(CoaCode)(0),                       // 0: accounting_iface.v1.CoaCode
 	(BalanceType)(0),                   // 1: accounting_iface.v1.BalanceType
 	(LabelKey)(0),                      // 2: accounting_iface.v1.LabelKey
-	(*TypeLabelValueListRequest)(nil),  // 3: accounting_iface.v1.TypeLabelValueListRequest
-	(*TypeLabelValueListResponse)(nil), // 4: accounting_iface.v1.TypeLabelValueListResponse
-	(*TypeLabelListRequest)(nil),       // 5: accounting_iface.v1.TypeLabelListRequest
-	(*TypeLabelListResponse)(nil),      // 6: accounting_iface.v1.TypeLabelListResponse
-	(*CoaDetail)(nil),                  // 7: accounting_iface.v1.CoaDetail
-	(*AccountFilterExtra)(nil),         // 8: accounting_iface.v1.AccountFilterExtra
-	(*AccountKeyItem)(nil),             // 9: accounting_iface.v1.AccountKeyItem
-	(*AccountKeyListRequest)(nil),      // 10: accounting_iface.v1.AccountKeyListRequest
-	(*AccountKeyListResponse)(nil),     // 11: accounting_iface.v1.AccountKeyListResponse
-	(*TypeLabel)(nil),                  // 12: accounting_iface.v1.TypeLabel
-	(*TypeLabelList)(nil),              // 13: accounting_iface.v1.TypeLabelList
+	(OrderType)(0),                     // 3: accounting_iface.v1.OrderType
+	(MutationPurpose)(0),               // 4: accounting_iface.v1.MutationPurpose
+	(*TypeLabelValueListRequest)(nil),  // 5: accounting_iface.v1.TypeLabelValueListRequest
+	(*TypeLabelValueListResponse)(nil), // 6: accounting_iface.v1.TypeLabelValueListResponse
+	(*TypeLabelListRequest)(nil),       // 7: accounting_iface.v1.TypeLabelListRequest
+	(*TypeLabelListResponse)(nil),      // 8: accounting_iface.v1.TypeLabelListResponse
+	(*CoaDetail)(nil),                  // 9: accounting_iface.v1.CoaDetail
+	(*AccountFilterExtra)(nil),         // 10: accounting_iface.v1.AccountFilterExtra
+	(*AccountKeyItem)(nil),             // 11: accounting_iface.v1.AccountKeyItem
+	(*AccountKeyListRequest)(nil),      // 12: accounting_iface.v1.AccountKeyListRequest
+	(*AccountKeyListResponse)(nil),     // 13: accounting_iface.v1.AccountKeyListResponse
+	(*TypeLabel)(nil),                  // 14: accounting_iface.v1.TypeLabel
+	(*TypeLabelList)(nil),              // 15: accounting_iface.v1.TypeLabelList
+	(*TypeLabelFilter)(nil),            // 16: accounting_iface.v1.TypeLabelFilter
+	(v1.MarketplaceType)(0),            // 17: common.v1.MarketplaceType
+	(v1.InboundSource)(0),              // 18: common.v1.InboundSource
+	(RevenueSource)(0),                 // 19: accounting_iface.v1.RevenueSource
 }
 var file_accounting_iface_v1_core_proto_depIdxs = []int32{
 	2,  // 0: accounting_iface.v1.TypeLabelValueListRequest.key:type_name -> accounting_iface.v1.LabelKey
-	12, // 1: accounting_iface.v1.TypeLabelListResponse.list:type_name -> accounting_iface.v1.TypeLabel
+	14, // 1: accounting_iface.v1.TypeLabelListResponse.list:type_name -> accounting_iface.v1.TypeLabel
 	0,  // 2: accounting_iface.v1.CoaDetail.code:type_name -> accounting_iface.v1.CoaCode
 	2,  // 3: accounting_iface.v1.AccountFilterExtra.allowed_label_key:type_name -> accounting_iface.v1.LabelKey
 	0,  // 4: accounting_iface.v1.AccountKeyItem.coa:type_name -> accounting_iface.v1.CoaCode
 	1,  // 5: accounting_iface.v1.AccountKeyItem.balance_type:type_name -> accounting_iface.v1.BalanceType
-	8,  // 6: accounting_iface.v1.AccountKeyItem.filter_extra:type_name -> accounting_iface.v1.AccountFilterExtra
-	7,  // 7: accounting_iface.v1.AccountKeyItem.coa_detail:type_name -> accounting_iface.v1.CoaDetail
-	9,  // 8: accounting_iface.v1.AccountKeyListResponse.keys:type_name -> accounting_iface.v1.AccountKeyItem
+	10, // 6: accounting_iface.v1.AccountKeyItem.filter_extra:type_name -> accounting_iface.v1.AccountFilterExtra
+	9,  // 7: accounting_iface.v1.AccountKeyItem.coa_detail:type_name -> accounting_iface.v1.CoaDetail
+	11, // 8: accounting_iface.v1.AccountKeyListResponse.keys:type_name -> accounting_iface.v1.AccountKeyItem
 	2,  // 9: accounting_iface.v1.TypeLabel.key:type_name -> accounting_iface.v1.LabelKey
-	12, // 10: accounting_iface.v1.TypeLabelList.list:type_name -> accounting_iface.v1.TypeLabel
-	10, // 11: accounting_iface.v1.CoreService.AccountKeyList:input_type -> accounting_iface.v1.AccountKeyListRequest
-	5,  // 12: accounting_iface.v1.CoreService.TypeLabelList:input_type -> accounting_iface.v1.TypeLabelListRequest
-	11, // 13: accounting_iface.v1.CoreService.AccountKeyList:output_type -> accounting_iface.v1.AccountKeyListResponse
-	6,  // 14: accounting_iface.v1.CoreService.TypeLabelList:output_type -> accounting_iface.v1.TypeLabelListResponse
-	13, // [13:15] is the sub-list for method output_type
-	11, // [11:13] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	14, // 10: accounting_iface.v1.TypeLabelList.list:type_name -> accounting_iface.v1.TypeLabel
+	17, // 11: accounting_iface.v1.TypeLabelFilter.marketplace:type_name -> common.v1.MarketplaceType
+	18, // 12: accounting_iface.v1.TypeLabelFilter.warehouse_transaction_type:type_name -> common.v1.InboundSource
+	19, // 13: accounting_iface.v1.TypeLabelFilter.revenue_source:type_name -> accounting_iface.v1.RevenueSource
+	3,  // 14: accounting_iface.v1.TypeLabelFilter.order_type:type_name -> accounting_iface.v1.OrderType
+	4,  // 15: accounting_iface.v1.TypeLabelFilter.transfer_purpose:type_name -> accounting_iface.v1.MutationPurpose
+	12, // 16: accounting_iface.v1.CoreService.AccountKeyList:input_type -> accounting_iface.v1.AccountKeyListRequest
+	7,  // 17: accounting_iface.v1.CoreService.TypeLabelList:input_type -> accounting_iface.v1.TypeLabelListRequest
+	13, // 18: accounting_iface.v1.CoreService.AccountKeyList:output_type -> accounting_iface.v1.AccountKeyListResponse
+	8,  // 19: accounting_iface.v1.CoreService.TypeLabelList:output_type -> accounting_iface.v1.TypeLabelListResponse
+	18, // [18:20] is the sub-list for method output_type
+	16, // [16:18] is the sub-list for method input_type
+	16, // [16:16] is the sub-list for extension type_name
+	16, // [16:16] is the sub-list for extension extendee
+	0,  // [0:16] is the sub-list for field type_name
 }
 
 func init() { file_accounting_iface_v1_core_proto_init() }
@@ -896,13 +1152,21 @@ func file_accounting_iface_v1_core_proto_init() {
 	if File_accounting_iface_v1_core_proto != nil {
 		return
 	}
+	file_accounting_iface_v1_revenue_proto_init()
+	file_accounting_iface_v1_core_proto_msgTypes[11].OneofWrappers = []any{
+		(*TypeLabelFilter_Marketplace)(nil),
+		(*TypeLabelFilter_WarehouseTransactionType)(nil),
+		(*TypeLabelFilter_RevenueSource)(nil),
+		(*TypeLabelFilter_OrderType)(nil),
+		(*TypeLabelFilter_TransferPurpose)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_accounting_iface_v1_core_proto_rawDesc), len(file_accounting_iface_v1_core_proto_rawDesc)),
-			NumEnums:      3,
-			NumMessages:   11,
+			NumEnums:      5,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

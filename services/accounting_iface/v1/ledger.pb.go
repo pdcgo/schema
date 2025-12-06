@@ -755,6 +755,7 @@ type EntryListRequest struct {
 	AccountKey    string                 `protobuf:"bytes,2,opt,name=account_key,json=accountKey,proto3" json:"account_key,omitempty"`
 	Keyword       string                 `protobuf:"bytes,7,opt,name=keyword,proto3" json:"keyword,omitempty"`
 	Extra         *FilterExtra           `protobuf:"bytes,6,opt,name=extra,proto3" json:"extra,omitempty"`
+	Label         []*TypeLabelFilter     `protobuf:"bytes,11,rep,name=label,proto3" json:"label,omitempty"`
 	TimeRange     *v1.TimeFilterRange    `protobuf:"bytes,3,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
 	Page          *v1.PageFilter         `protobuf:"bytes,4,opt,name=page,proto3" json:"page,omitempty"`
 	Sort          *EntryListSort         `protobuf:"bytes,5,opt,name=sort,proto3" json:"sort,omitempty"`
@@ -837,6 +838,13 @@ func (x *EntryListRequest) GetKeyword() string {
 func (x *EntryListRequest) GetExtra() *FilterExtra {
 	if x != nil {
 		return x.Extra
+	}
+	return nil
+}
+
+func (x *EntryListRequest) GetLabel() []*TypeLabelFilter {
+	if x != nil {
+		return x.Label
 	}
 	return nil
 }
@@ -1175,7 +1183,7 @@ const file_accounting_iface_v1_ledger_proto_rawDesc = "" +
 	"\akeyword\x18\x04 \x01(\tR\akeyword\x126\n" +
 	"\x05extra\x18\x06 \x01(\v2 .accounting_iface.v1.FilterExtraR\x05extra\x12A\n" +
 	"\n" +
-	"time_range\x18\x03 \x01(\v2\x1a.common.v1.TimeFilterRangeB\x06\xbaH\x03\xc8\x01\x01R\ttimeRange\"\xdd\x03\n" +
+	"time_range\x18\x03 \x01(\v2\x1a.common.v1.TimeFilterRangeB\x06\xbaH\x03\xc8\x01\x01R\ttimeRange\"\xa3\x04\n" +
 	"\x10EntryListRequest\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12&\n" +
 	"\x0faccount_team_id\x18\b \x01(\x04R\raccountTeamId\x12<\n" +
@@ -1185,7 +1193,9 @@ const file_accounting_iface_v1_ledger_proto_rawDesc = "" +
 	"\vaccount_key\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\n" +
 	"accountKey\x12\x18\n" +
 	"\akeyword\x18\a \x01(\tR\akeyword\x126\n" +
-	"\x05extra\x18\x06 \x01(\v2 .accounting_iface.v1.FilterExtraR\x05extra\x12A\n" +
+	"\x05extra\x18\x06 \x01(\v2 .accounting_iface.v1.FilterExtraR\x05extra\x12D\n" +
+	"\x05label\x18\v \x03(\v2$.accounting_iface.v1.TypeLabelFilterB\b\xbaH\x05\x92\x01\x02\x10\n" +
+	"R\x05label\x12A\n" +
 	"\n" +
 	"time_range\x18\x03 \x01(\v2\x1a.common.v1.TimeFilterRangeB\x06\xbaH\x03\xc8\x01\x01R\ttimeRange\x121\n" +
 	"\x04page\x18\x04 \x01(\v2\x15.common.v1.PageFilterB\x06\xbaH\x03\xc8\x01\x01R\x04page\x126\n" +
@@ -1264,10 +1274,11 @@ var file_accounting_iface_v1_ledger_proto_goTypes = []any{
 	(v1.SortType)(0),                  // 22: common.v1.SortType
 	(v1.MarketplaceType)(0),           // 23: common.v1.MarketplaceType
 	(*v1.TimeFilterRange)(nil),        // 24: common.v1.TimeFilterRange
-	(*v1.PageFilter)(nil),             // 25: common.v1.PageFilter
-	(*v1.PageInfo)(nil),               // 26: common.v1.PageInfo
-	(*v1.ShopList)(nil),               // 27: common.v1.ShopList
-	(*TypeLabelList)(nil),             // 28: accounting_iface.v1.TypeLabelList
+	(*TypeLabelFilter)(nil),           // 25: accounting_iface.v1.TypeLabelFilter
+	(*v1.PageFilter)(nil),             // 26: common.v1.PageFilter
+	(*v1.PageInfo)(nil),               // 27: common.v1.PageInfo
+	(*v1.ShopList)(nil),               // 28: common.v1.ShopList
+	(*TypeLabelList)(nil),             // 29: accounting_iface.v1.TypeLabelList
 }
 var file_accounting_iface_v1_ledger_proto_depIdxs = []int32{
 	21, // 0: accounting_iface.v1.Transaction.created:type_name -> google.protobuf.Timestamp
@@ -1286,28 +1297,29 @@ var file_accounting_iface_v1_ledger_proto_depIdxs = []int32{
 	24, // 13: accounting_iface.v1.EntryListExportRequest.time_range:type_name -> common.v1.TimeFilterRange
 	23, // 14: accounting_iface.v1.EntryListRequest.marketplace:type_name -> common.v1.MarketplaceType
 	10, // 15: accounting_iface.v1.EntryListRequest.extra:type_name -> accounting_iface.v1.FilterExtra
-	24, // 16: accounting_iface.v1.EntryListRequest.time_range:type_name -> common.v1.TimeFilterRange
-	25, // 17: accounting_iface.v1.EntryListRequest.page:type_name -> common.v1.PageFilter
-	9,  // 18: accounting_iface.v1.EntryListRequest.sort:type_name -> accounting_iface.v1.EntryListSort
-	13, // 19: accounting_iface.v1.EntryItem.account:type_name -> accounting_iface.v1.EntryAccount
-	14, // 20: accounting_iface.v1.EntryListResponse.data:type_name -> accounting_iface.v1.EntryItem
-	26, // 21: accounting_iface.v1.EntryListResponse.page_info:type_name -> common.v1.PageInfo
-	27, // 22: accounting_iface.v1.EntryListExtraResponse.MapShopEntry.value:type_name -> common.v1.ShopList
-	6,  // 23: accounting_iface.v1.EntryListExtraResponse.MapTagEntry.value:type_name -> accounting_iface.v1.TagList
-	28, // 24: accounting_iface.v1.EntryListExtraResponse.MapTypeLabelEntry.value:type_name -> accounting_iface.v1.TypeLabelList
-	12, // 25: accounting_iface.v1.LedgerService.EntryList:input_type -> accounting_iface.v1.EntryListRequest
-	5,  // 26: accounting_iface.v1.LedgerService.EntryListExtra:input_type -> accounting_iface.v1.EntryListExtraRequest
-	11, // 27: accounting_iface.v1.LedgerService.EntryListExport:input_type -> accounting_iface.v1.EntryListExportRequest
-	1,  // 28: accounting_iface.v1.LedgerService.TransactionDetail:input_type -> accounting_iface.v1.TransactionDetailRequest
-	15, // 29: accounting_iface.v1.LedgerService.EntryList:output_type -> accounting_iface.v1.EntryListResponse
-	7,  // 30: accounting_iface.v1.LedgerService.EntryListExtra:output_type -> accounting_iface.v1.EntryListExtraResponse
-	8,  // 31: accounting_iface.v1.LedgerService.EntryListExport:output_type -> accounting_iface.v1.EntryListExportResponse
-	4,  // 32: accounting_iface.v1.LedgerService.TransactionDetail:output_type -> accounting_iface.v1.TransactionDetailResponse
-	29, // [29:33] is the sub-list for method output_type
-	25, // [25:29] is the sub-list for method input_type
-	25, // [25:25] is the sub-list for extension type_name
-	25, // [25:25] is the sub-list for extension extendee
-	0,  // [0:25] is the sub-list for field type_name
+	25, // 16: accounting_iface.v1.EntryListRequest.label:type_name -> accounting_iface.v1.TypeLabelFilter
+	24, // 17: accounting_iface.v1.EntryListRequest.time_range:type_name -> common.v1.TimeFilterRange
+	26, // 18: accounting_iface.v1.EntryListRequest.page:type_name -> common.v1.PageFilter
+	9,  // 19: accounting_iface.v1.EntryListRequest.sort:type_name -> accounting_iface.v1.EntryListSort
+	13, // 20: accounting_iface.v1.EntryItem.account:type_name -> accounting_iface.v1.EntryAccount
+	14, // 21: accounting_iface.v1.EntryListResponse.data:type_name -> accounting_iface.v1.EntryItem
+	27, // 22: accounting_iface.v1.EntryListResponse.page_info:type_name -> common.v1.PageInfo
+	28, // 23: accounting_iface.v1.EntryListExtraResponse.MapShopEntry.value:type_name -> common.v1.ShopList
+	6,  // 24: accounting_iface.v1.EntryListExtraResponse.MapTagEntry.value:type_name -> accounting_iface.v1.TagList
+	29, // 25: accounting_iface.v1.EntryListExtraResponse.MapTypeLabelEntry.value:type_name -> accounting_iface.v1.TypeLabelList
+	12, // 26: accounting_iface.v1.LedgerService.EntryList:input_type -> accounting_iface.v1.EntryListRequest
+	5,  // 27: accounting_iface.v1.LedgerService.EntryListExtra:input_type -> accounting_iface.v1.EntryListExtraRequest
+	11, // 28: accounting_iface.v1.LedgerService.EntryListExport:input_type -> accounting_iface.v1.EntryListExportRequest
+	1,  // 29: accounting_iface.v1.LedgerService.TransactionDetail:input_type -> accounting_iface.v1.TransactionDetailRequest
+	15, // 30: accounting_iface.v1.LedgerService.EntryList:output_type -> accounting_iface.v1.EntryListResponse
+	7,  // 31: accounting_iface.v1.LedgerService.EntryListExtra:output_type -> accounting_iface.v1.EntryListExtraResponse
+	8,  // 32: accounting_iface.v1.LedgerService.EntryListExport:output_type -> accounting_iface.v1.EntryListExportResponse
+	4,  // 33: accounting_iface.v1.LedgerService.TransactionDetail:output_type -> accounting_iface.v1.TransactionDetailResponse
+	30, // [30:34] is the sub-list for method output_type
+	26, // [26:30] is the sub-list for method input_type
+	26, // [26:26] is the sub-list for extension type_name
+	26, // [26:26] is the sub-list for extension extendee
+	0,  // [0:26] is the sub-list for field type_name
 }
 
 func init() { file_accounting_iface_v1_ledger_proto_init() }

@@ -1,6 +1,7 @@
 syntax = "proto3";
 package accounting_iface.v1;
 
+import "accounting_iface/v1/core.proto";
 import "buf/validate/validate.proto";
 import "common/v1/common.proto";
 
@@ -26,13 +27,6 @@ service AccountService {
   rpc TransferCreate(TransferCreateRequest) returns (TransferCreateResponse);
   rpc TransferCancel(TransferCancelRequest) returns (TransferCancelResponse);
   rpc AccountMutationList(AccountMutationListRequest) returns (AccountMutationListResponse);
-}
-
-enum MutationPurpose {
-  MUTATION_PURPOSE_UNSPECIFIED = 0;
-  MUTATION_PURPOSE_OTHER = 1;
-  MUTATION_PURPOSE_TOPUP = 2;
-  MUTATION_PURPOSE_BUSSINESS_PAYABLE = 3;
 }
 
 message AccountByIDsRequest {

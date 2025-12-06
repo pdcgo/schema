@@ -23,58 +23,6 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type MutationPurpose int32
-
-const (
-	MutationPurpose_MUTATION_PURPOSE_UNSPECIFIED       MutationPurpose = 0
-	MutationPurpose_MUTATION_PURPOSE_OTHER             MutationPurpose = 1
-	MutationPurpose_MUTATION_PURPOSE_TOPUP             MutationPurpose = 2
-	MutationPurpose_MUTATION_PURPOSE_BUSSINESS_PAYABLE MutationPurpose = 3
-)
-
-// Enum value maps for MutationPurpose.
-var (
-	MutationPurpose_name = map[int32]string{
-		0: "MUTATION_PURPOSE_UNSPECIFIED",
-		1: "MUTATION_PURPOSE_OTHER",
-		2: "MUTATION_PURPOSE_TOPUP",
-		3: "MUTATION_PURPOSE_BUSSINESS_PAYABLE",
-	}
-	MutationPurpose_value = map[string]int32{
-		"MUTATION_PURPOSE_UNSPECIFIED":       0,
-		"MUTATION_PURPOSE_OTHER":             1,
-		"MUTATION_PURPOSE_TOPUP":             2,
-		"MUTATION_PURPOSE_BUSSINESS_PAYABLE": 3,
-	}
-)
-
-func (x MutationPurpose) Enum() *MutationPurpose {
-	p := new(MutationPurpose)
-	*p = x
-	return p
-}
-
-func (x MutationPurpose) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (MutationPurpose) Descriptor() protoreflect.EnumDescriptor {
-	return file_accounting_iface_v1_accounting_proto_enumTypes[0].Descriptor()
-}
-
-func (MutationPurpose) Type() protoreflect.EnumType {
-	return &file_accounting_iface_v1_accounting_proto_enumTypes[0]
-}
-
-func (x MutationPurpose) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use MutationPurpose.Descriptor instead.
-func (MutationPurpose) EnumDescriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{0}
-}
-
 type MutationType int32
 
 const (
@@ -108,11 +56,11 @@ func (x MutationType) String() string {
 }
 
 func (MutationType) Descriptor() protoreflect.EnumDescriptor {
-	return file_accounting_iface_v1_accounting_proto_enumTypes[1].Descriptor()
+	return file_accounting_iface_v1_accounting_proto_enumTypes[0].Descriptor()
 }
 
 func (MutationType) Type() protoreflect.EnumType {
-	return &file_accounting_iface_v1_accounting_proto_enumTypes[1]
+	return &file_accounting_iface_v1_accounting_proto_enumTypes[0]
 }
 
 func (x MutationType) Number() protoreflect.EnumNumber {
@@ -121,7 +69,7 @@ func (x MutationType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use MutationType.Descriptor instead.
 func (MutationType) EnumDescriptor() ([]byte, []int) {
-	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{1}
+	return file_accounting_iface_v1_accounting_proto_rawDescGZIP(), []int{0}
 }
 
 type AccountByIDsRequest struct {
@@ -1685,7 +1633,7 @@ var File_accounting_iface_v1_accounting_proto protoreflect.FileDescriptor
 
 const file_accounting_iface_v1_accounting_proto_rawDesc = "" +
 	"\n" +
-	"$accounting_iface/v1/accounting.proto\x12\x13accounting_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\"<\n" +
+	"$accounting_iface/v1/accounting.proto\x12\x13accounting_iface.v1\x1a\x1eaccounting_iface/v1/core.proto\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\"<\n" +
 	"\x13AccountByIDsRequest\x12%\n" +
 	"\x03ids\x18\x01 \x03(\x04B\x13\xbaH\x10\x92\x01\r\b\x01\x10\xc8\x01\x18\x01\"\x042\x02 \x00R\x03ids\"\xc0\x01\n" +
 	"\x14AccountByIDsResponse\x12G\n" +
@@ -1802,12 +1750,7 @@ const file_accounting_iface_v1_accounting_proto_rawDesc = "" +
 	"\x0faccount_type_id\x18\x04 \x01(\x04B\x06\xbaH\x03\xc8\x01\x01R\raccountTypeId\x124\n" +
 	"\x06labels\x18\x05 \x03(\v2\x12.common.v1.KeyNameB\b\xbaH\x05\x92\x01\x02\x10\x05R\x06labels\"'\n" +
 	"\x15AccountCreateResponse\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x04R\x02id*\x93\x01\n" +
-	"\x0fMutationPurpose\x12 \n" +
-	"\x1cMUTATION_PURPOSE_UNSPECIFIED\x10\x00\x12\x1a\n" +
-	"\x16MUTATION_PURPOSE_OTHER\x10\x01\x12\x1a\n" +
-	"\x16MUTATION_PURPOSE_TOPUP\x10\x02\x12&\n" +
-	"\"MUTATION_PURPOSE_BUSSINESS_PAYABLE\x10\x03*`\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id*`\n" +
 	"\fMutationType\x12\x1d\n" +
 	"\x19MUTATION_TYPE_UNSPECIFIED\x10\x00\x12\x16\n" +
 	"\x12MUTATION_TYPE_SEND\x10\x01\x12\x19\n" +
@@ -1840,88 +1783,88 @@ func file_accounting_iface_v1_accounting_proto_rawDescGZIP() []byte {
 	return file_accounting_iface_v1_accounting_proto_rawDescData
 }
 
-var file_accounting_iface_v1_accounting_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_accounting_iface_v1_accounting_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_accounting_iface_v1_accounting_proto_msgTypes = make([]protoimpl.MessageInfo, 29)
 var file_accounting_iface_v1_accounting_proto_goTypes = []any{
-	(MutationPurpose)(0),                // 0: accounting_iface.v1.MutationPurpose
-	(MutationType)(0),                   // 1: accounting_iface.v1.MutationType
-	(*AccountByIDsRequest)(nil),         // 2: accounting_iface.v1.AccountByIDsRequest
-	(*AccountByIDsResponse)(nil),        // 3: accounting_iface.v1.AccountByIDsResponse
-	(*AccountPublicSearchRequest)(nil),  // 4: accounting_iface.v1.AccountPublicSearchRequest
-	(*AccountPublicSearchResponse)(nil), // 5: accounting_iface.v1.AccountPublicSearchResponse
-	(*TransferCancelRequest)(nil),       // 6: accounting_iface.v1.TransferCancelRequest
-	(*TransferCancelResponse)(nil),      // 7: accounting_iface.v1.TransferCancelResponse
-	(*MutationItem)(nil),                // 8: accounting_iface.v1.MutationItem
-	(*AccountMutationListRequest)(nil),  // 9: accounting_iface.v1.AccountMutationListRequest
-	(*AccountMutationListResponse)(nil), // 10: accounting_iface.v1.AccountMutationListResponse
-	(*AccountBalanceInitRequest)(nil),   // 11: accounting_iface.v1.AccountBalanceInitRequest
-	(*AccountBalanceInitResponse)(nil),  // 12: accounting_iface.v1.AccountBalanceInitResponse
-	(*TransferCreateRequest)(nil),       // 13: accounting_iface.v1.TransferCreateRequest
-	(*TransferCreateResponse)(nil),      // 14: accounting_iface.v1.TransferCreateResponse
-	(*AccountTypeListRequest)(nil),      // 15: accounting_iface.v1.AccountTypeListRequest
-	(*AccountTypeItem)(nil),             // 16: accounting_iface.v1.AccountTypeItem
-	(*AccountTypeListResponse)(nil),     // 17: accounting_iface.v1.AccountTypeListResponse
-	(*LabelListRequest)(nil),            // 18: accounting_iface.v1.LabelListRequest
-	(*LabelListResponse)(nil),           // 19: accounting_iface.v1.LabelListResponse
-	(*AccountUpdateRequest)(nil),        // 20: accounting_iface.v1.AccountUpdateRequest
-	(*AccountUpdateResponse)(nil),       // 21: accounting_iface.v1.AccountUpdateResponse
-	(*AccountDeleteRequest)(nil),        // 22: accounting_iface.v1.AccountDeleteRequest
-	(*AccountDeleteResponse)(nil),       // 23: accounting_iface.v1.AccountDeleteResponse
-	(*PublicAccountItem)(nil),           // 24: accounting_iface.v1.PublicAccountItem
-	(*AccountItem)(nil),                 // 25: accounting_iface.v1.AccountItem
-	(*AccountListRequest)(nil),          // 26: accounting_iface.v1.AccountListRequest
-	(*AccountListResponse)(nil),         // 27: accounting_iface.v1.AccountListResponse
-	(*AccountCreateRequest)(nil),        // 28: accounting_iface.v1.AccountCreateRequest
-	(*AccountCreateResponse)(nil),       // 29: accounting_iface.v1.AccountCreateResponse
-	nil,                                 // 30: accounting_iface.v1.AccountByIDsResponse.DataEntry
+	(MutationType)(0),                   // 0: accounting_iface.v1.MutationType
+	(*AccountByIDsRequest)(nil),         // 1: accounting_iface.v1.AccountByIDsRequest
+	(*AccountByIDsResponse)(nil),        // 2: accounting_iface.v1.AccountByIDsResponse
+	(*AccountPublicSearchRequest)(nil),  // 3: accounting_iface.v1.AccountPublicSearchRequest
+	(*AccountPublicSearchResponse)(nil), // 4: accounting_iface.v1.AccountPublicSearchResponse
+	(*TransferCancelRequest)(nil),       // 5: accounting_iface.v1.TransferCancelRequest
+	(*TransferCancelResponse)(nil),      // 6: accounting_iface.v1.TransferCancelResponse
+	(*MutationItem)(nil),                // 7: accounting_iface.v1.MutationItem
+	(*AccountMutationListRequest)(nil),  // 8: accounting_iface.v1.AccountMutationListRequest
+	(*AccountMutationListResponse)(nil), // 9: accounting_iface.v1.AccountMutationListResponse
+	(*AccountBalanceInitRequest)(nil),   // 10: accounting_iface.v1.AccountBalanceInitRequest
+	(*AccountBalanceInitResponse)(nil),  // 11: accounting_iface.v1.AccountBalanceInitResponse
+	(*TransferCreateRequest)(nil),       // 12: accounting_iface.v1.TransferCreateRequest
+	(*TransferCreateResponse)(nil),      // 13: accounting_iface.v1.TransferCreateResponse
+	(*AccountTypeListRequest)(nil),      // 14: accounting_iface.v1.AccountTypeListRequest
+	(*AccountTypeItem)(nil),             // 15: accounting_iface.v1.AccountTypeItem
+	(*AccountTypeListResponse)(nil),     // 16: accounting_iface.v1.AccountTypeListResponse
+	(*LabelListRequest)(nil),            // 17: accounting_iface.v1.LabelListRequest
+	(*LabelListResponse)(nil),           // 18: accounting_iface.v1.LabelListResponse
+	(*AccountUpdateRequest)(nil),        // 19: accounting_iface.v1.AccountUpdateRequest
+	(*AccountUpdateResponse)(nil),       // 20: accounting_iface.v1.AccountUpdateResponse
+	(*AccountDeleteRequest)(nil),        // 21: accounting_iface.v1.AccountDeleteRequest
+	(*AccountDeleteResponse)(nil),       // 22: accounting_iface.v1.AccountDeleteResponse
+	(*PublicAccountItem)(nil),           // 23: accounting_iface.v1.PublicAccountItem
+	(*AccountItem)(nil),                 // 24: accounting_iface.v1.AccountItem
+	(*AccountListRequest)(nil),          // 25: accounting_iface.v1.AccountListRequest
+	(*AccountListResponse)(nil),         // 26: accounting_iface.v1.AccountListResponse
+	(*AccountCreateRequest)(nil),        // 27: accounting_iface.v1.AccountCreateRequest
+	(*AccountCreateResponse)(nil),       // 28: accounting_iface.v1.AccountCreateResponse
+	nil,                                 // 29: accounting_iface.v1.AccountByIDsResponse.DataEntry
+	(MutationPurpose)(0),                // 30: accounting_iface.v1.MutationPurpose
 	(*v1.TimeFilter)(nil),               // 31: common.v1.TimeFilter
 	(*v1.PageFilter)(nil),               // 32: common.v1.PageFilter
 	(*v1.PageInfo)(nil),                 // 33: common.v1.PageInfo
 	(*v1.KeyName)(nil),                  // 34: common.v1.KeyName
 }
 var file_accounting_iface_v1_accounting_proto_depIdxs = []int32{
-	30, // 0: accounting_iface.v1.AccountByIDsResponse.data:type_name -> accounting_iface.v1.AccountByIDsResponse.DataEntry
-	24, // 1: accounting_iface.v1.AccountPublicSearchResponse.data:type_name -> accounting_iface.v1.PublicAccountItem
-	1,  // 2: accounting_iface.v1.MutationItem.type:type_name -> accounting_iface.v1.MutationType
-	0,  // 3: accounting_iface.v1.MutationItem.purpose:type_name -> accounting_iface.v1.MutationPurpose
-	24, // 4: accounting_iface.v1.MutationItem.from_account:type_name -> accounting_iface.v1.PublicAccountItem
-	24, // 5: accounting_iface.v1.MutationItem.to_account:type_name -> accounting_iface.v1.PublicAccountItem
+	29, // 0: accounting_iface.v1.AccountByIDsResponse.data:type_name -> accounting_iface.v1.AccountByIDsResponse.DataEntry
+	23, // 1: accounting_iface.v1.AccountPublicSearchResponse.data:type_name -> accounting_iface.v1.PublicAccountItem
+	0,  // 2: accounting_iface.v1.MutationItem.type:type_name -> accounting_iface.v1.MutationType
+	30, // 3: accounting_iface.v1.MutationItem.purpose:type_name -> accounting_iface.v1.MutationPurpose
+	23, // 4: accounting_iface.v1.MutationItem.from_account:type_name -> accounting_iface.v1.PublicAccountItem
+	23, // 5: accounting_iface.v1.MutationItem.to_account:type_name -> accounting_iface.v1.PublicAccountItem
 	31, // 6: accounting_iface.v1.AccountMutationListRequest.time_range:type_name -> common.v1.TimeFilter
 	32, // 7: accounting_iface.v1.AccountMutationListRequest.page:type_name -> common.v1.PageFilter
-	8,  // 8: accounting_iface.v1.AccountMutationListResponse.data:type_name -> accounting_iface.v1.MutationItem
+	7,  // 8: accounting_iface.v1.AccountMutationListResponse.data:type_name -> accounting_iface.v1.MutationItem
 	33, // 9: accounting_iface.v1.AccountMutationListResponse.page_info:type_name -> common.v1.PageInfo
-	0,  // 10: accounting_iface.v1.TransferCreateRequest.purpose:type_name -> accounting_iface.v1.MutationPurpose
-	16, // 11: accounting_iface.v1.AccountTypeListResponse.data:type_name -> accounting_iface.v1.AccountTypeItem
+	30, // 10: accounting_iface.v1.TransferCreateRequest.purpose:type_name -> accounting_iface.v1.MutationPurpose
+	15, // 11: accounting_iface.v1.AccountTypeListResponse.data:type_name -> accounting_iface.v1.AccountTypeItem
 	34, // 12: accounting_iface.v1.LabelListResponse.data:type_name -> common.v1.KeyName
 	34, // 13: accounting_iface.v1.AccountUpdateRequest.labels:type_name -> common.v1.KeyName
 	34, // 14: accounting_iface.v1.AccountItem.labels:type_name -> common.v1.KeyName
-	25, // 15: accounting_iface.v1.AccountListResponse.data:type_name -> accounting_iface.v1.AccountItem
+	24, // 15: accounting_iface.v1.AccountListResponse.data:type_name -> accounting_iface.v1.AccountItem
 	34, // 16: accounting_iface.v1.AccountCreateRequest.labels:type_name -> common.v1.KeyName
-	24, // 17: accounting_iface.v1.AccountByIDsResponse.DataEntry.value:type_name -> accounting_iface.v1.PublicAccountItem
-	28, // 18: accounting_iface.v1.AccountService.AccountCreate:input_type -> accounting_iface.v1.AccountCreateRequest
-	26, // 19: accounting_iface.v1.AccountService.AccountList:input_type -> accounting_iface.v1.AccountListRequest
-	22, // 20: accounting_iface.v1.AccountService.AccountDelete:input_type -> accounting_iface.v1.AccountDeleteRequest
-	20, // 21: accounting_iface.v1.AccountService.AccountUpdate:input_type -> accounting_iface.v1.AccountUpdateRequest
-	18, // 22: accounting_iface.v1.AccountService.LabelList:input_type -> accounting_iface.v1.LabelListRequest
-	15, // 23: accounting_iface.v1.AccountService.AccountTypeList:input_type -> accounting_iface.v1.AccountTypeListRequest
-	2,  // 24: accounting_iface.v1.AccountService.AccountByIDs:input_type -> accounting_iface.v1.AccountByIDsRequest
-	4,  // 25: accounting_iface.v1.AccountService.AccountPublicSearch:input_type -> accounting_iface.v1.AccountPublicSearchRequest
-	11, // 26: accounting_iface.v1.AccountService.AccountBalanceInit:input_type -> accounting_iface.v1.AccountBalanceInitRequest
-	13, // 27: accounting_iface.v1.AccountService.TransferCreate:input_type -> accounting_iface.v1.TransferCreateRequest
-	6,  // 28: accounting_iface.v1.AccountService.TransferCancel:input_type -> accounting_iface.v1.TransferCancelRequest
-	9,  // 29: accounting_iface.v1.AccountService.AccountMutationList:input_type -> accounting_iface.v1.AccountMutationListRequest
-	29, // 30: accounting_iface.v1.AccountService.AccountCreate:output_type -> accounting_iface.v1.AccountCreateResponse
-	27, // 31: accounting_iface.v1.AccountService.AccountList:output_type -> accounting_iface.v1.AccountListResponse
-	23, // 32: accounting_iface.v1.AccountService.AccountDelete:output_type -> accounting_iface.v1.AccountDeleteResponse
-	21, // 33: accounting_iface.v1.AccountService.AccountUpdate:output_type -> accounting_iface.v1.AccountUpdateResponse
-	19, // 34: accounting_iface.v1.AccountService.LabelList:output_type -> accounting_iface.v1.LabelListResponse
-	17, // 35: accounting_iface.v1.AccountService.AccountTypeList:output_type -> accounting_iface.v1.AccountTypeListResponse
-	3,  // 36: accounting_iface.v1.AccountService.AccountByIDs:output_type -> accounting_iface.v1.AccountByIDsResponse
-	5,  // 37: accounting_iface.v1.AccountService.AccountPublicSearch:output_type -> accounting_iface.v1.AccountPublicSearchResponse
-	12, // 38: accounting_iface.v1.AccountService.AccountBalanceInit:output_type -> accounting_iface.v1.AccountBalanceInitResponse
-	14, // 39: accounting_iface.v1.AccountService.TransferCreate:output_type -> accounting_iface.v1.TransferCreateResponse
-	7,  // 40: accounting_iface.v1.AccountService.TransferCancel:output_type -> accounting_iface.v1.TransferCancelResponse
-	10, // 41: accounting_iface.v1.AccountService.AccountMutationList:output_type -> accounting_iface.v1.AccountMutationListResponse
+	23, // 17: accounting_iface.v1.AccountByIDsResponse.DataEntry.value:type_name -> accounting_iface.v1.PublicAccountItem
+	27, // 18: accounting_iface.v1.AccountService.AccountCreate:input_type -> accounting_iface.v1.AccountCreateRequest
+	25, // 19: accounting_iface.v1.AccountService.AccountList:input_type -> accounting_iface.v1.AccountListRequest
+	21, // 20: accounting_iface.v1.AccountService.AccountDelete:input_type -> accounting_iface.v1.AccountDeleteRequest
+	19, // 21: accounting_iface.v1.AccountService.AccountUpdate:input_type -> accounting_iface.v1.AccountUpdateRequest
+	17, // 22: accounting_iface.v1.AccountService.LabelList:input_type -> accounting_iface.v1.LabelListRequest
+	14, // 23: accounting_iface.v1.AccountService.AccountTypeList:input_type -> accounting_iface.v1.AccountTypeListRequest
+	1,  // 24: accounting_iface.v1.AccountService.AccountByIDs:input_type -> accounting_iface.v1.AccountByIDsRequest
+	3,  // 25: accounting_iface.v1.AccountService.AccountPublicSearch:input_type -> accounting_iface.v1.AccountPublicSearchRequest
+	10, // 26: accounting_iface.v1.AccountService.AccountBalanceInit:input_type -> accounting_iface.v1.AccountBalanceInitRequest
+	12, // 27: accounting_iface.v1.AccountService.TransferCreate:input_type -> accounting_iface.v1.TransferCreateRequest
+	5,  // 28: accounting_iface.v1.AccountService.TransferCancel:input_type -> accounting_iface.v1.TransferCancelRequest
+	8,  // 29: accounting_iface.v1.AccountService.AccountMutationList:input_type -> accounting_iface.v1.AccountMutationListRequest
+	28, // 30: accounting_iface.v1.AccountService.AccountCreate:output_type -> accounting_iface.v1.AccountCreateResponse
+	26, // 31: accounting_iface.v1.AccountService.AccountList:output_type -> accounting_iface.v1.AccountListResponse
+	22, // 32: accounting_iface.v1.AccountService.AccountDelete:output_type -> accounting_iface.v1.AccountDeleteResponse
+	20, // 33: accounting_iface.v1.AccountService.AccountUpdate:output_type -> accounting_iface.v1.AccountUpdateResponse
+	18, // 34: accounting_iface.v1.AccountService.LabelList:output_type -> accounting_iface.v1.LabelListResponse
+	16, // 35: accounting_iface.v1.AccountService.AccountTypeList:output_type -> accounting_iface.v1.AccountTypeListResponse
+	2,  // 36: accounting_iface.v1.AccountService.AccountByIDs:output_type -> accounting_iface.v1.AccountByIDsResponse
+	4,  // 37: accounting_iface.v1.AccountService.AccountPublicSearch:output_type -> accounting_iface.v1.AccountPublicSearchResponse
+	11, // 38: accounting_iface.v1.AccountService.AccountBalanceInit:output_type -> accounting_iface.v1.AccountBalanceInitResponse
+	13, // 39: accounting_iface.v1.AccountService.TransferCreate:output_type -> accounting_iface.v1.TransferCreateResponse
+	6,  // 40: accounting_iface.v1.AccountService.TransferCancel:output_type -> accounting_iface.v1.TransferCancelResponse
+	9,  // 41: accounting_iface.v1.AccountService.AccountMutationList:output_type -> accounting_iface.v1.AccountMutationListResponse
 	30, // [30:42] is the sub-list for method output_type
 	18, // [18:30] is the sub-list for method input_type
 	18, // [18:18] is the sub-list for extension type_name
@@ -1934,12 +1877,13 @@ func file_accounting_iface_v1_accounting_proto_init() {
 	if File_accounting_iface_v1_accounting_proto != nil {
 		return
 	}
+	file_accounting_iface_v1_core_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_accounting_iface_v1_accounting_proto_rawDesc), len(file_accounting_iface_v1_accounting_proto_rawDesc)),
-			NumEnums:      2,
+			NumEnums:      1,
 			NumMessages:   29,
 			NumExtensions: 0,
 			NumServices:   1,

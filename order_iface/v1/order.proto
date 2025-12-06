@@ -3,7 +3,7 @@ package order_iface.v1;
 
 // import "accounting_iface/v1/core.proto";
 import "buf/validate/validate.proto";
-// import "common/v1/common.proto";
+import "common/v1/common.proto";
 import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/pdcgo/schema/services/order_iface/v1;order_iface";
@@ -11,12 +11,105 @@ option go_package = "github.com/pdcgo/schema/services/order_iface/v1;order_iface
 service OrderService {
   rpc OrderFundSet(stream OrderFundSetRequest) returns (OrderFundSetResponse);
   rpc OrderTagRemove(OrderTagRemoveRequest) returns (OrderTagRemoveResponse);
+
+  // bagian view
+  rpc OrderList(OrderListRequest) returns (stream OrderListResponse);
+
+  // bagian overview
+  rpc OrderOverview(OrderOverviewRequest) returns (OrderOverviewResponse);
 }
 
 enum TagType {
   TAG_TYPE_UNSPECIFIED = 0;
   TAG_TYPE_TRACKING = 1;
 }
+
+enum OrderTimeFilterType {
+  ORDER_TIME_FILTER_TYPE_UNSPECIFIED = 0;
+  ORDER_TIME_FILTER_TYPE_MP_CREATED = 1;
+  ORDER_TIME_FILTER_TYPE_CREATED = 2;
+  ORDER_TIME_FILTER_TYPE_WITHDRAWAL = 3;
+  ORDER_TIME_FILTER_TYPE_CANCEL = 4;
+  ORDER_TIME_FILTER_TYPE_RETURN_PROCESSED = 5;
+  ORDER_TIME_FILTER_TYPE_RETURN_ARRIVED = 6;
+  ORDER_TIME_FILTER_TYPE_PROBLEM = 7;
+  ORDER_TIME_FILTER_TYPE_LOST = 8;
+}
+
+enum KeywordFilterType {
+  KEYWORD_FILTER_TYPE_UNSPECIFIED = 0;
+  KEYWORD_FILTER_TYPE_REFID = 1;
+  KEYWORD_FILTER_TYPE_BUNDLE_SKU = 2;
+  KEYWORD_FILTER_TYPE_SKU = 3;
+  KEYWORD_FILTER_TYPE_RECEIPT = 4;
+  KEYWORD_FILTER_TYPE_RETURN_RECEIPT = 5;
+  KEYWORD_FILTER_TYPE_PRODUCT_NAME = 6;
+  KEYWORD_FILTER_TYPE_CUSTOMER = 7;
+}
+
+enum ProductSourceType {
+  PRODUCT_SOURCE_TYPE_UNSPECIFIED = 0;
+  PRODUCT_SOURCE_TYPE_SUPPLIER = 1;
+  PRODUCT_SOURCE_TYPE_WAREHOUSE = 2;
+  PRODUCT_SOURCE_TYPE_DUMMY = 3;
+}
+
+enum OrderStatus {
+  ORDER_STATUS_UNSPECIFIED = 0;
+  ORDER_STATUS_PROCESSED = 1;
+  ORDER_STATUS_COURIER_SHIPPED = 2;
+  ORDER_STATUS_COMPLETED = 3;
+  ORDER_STATUS_CANCEL = 4;
+  ORDER_STATUS_RETURN_PROCESSED = 5;
+  ORDER_STATUS_RETURN_ARRIVED = 6;
+}
+
+enum WarehouseStatus {
+  WAREHOUSE_STATUS_UNSPECIFIED = 0;
+  WAREHOUSE_STATUS_CREATED = 1;
+  WAREHOUSE_STATUS_PACKING = 2;
+  WAREHOUSE_STATUS_PACKING_COMPLETED = 3;
+  WAREHOUSE_STATUS_SHIPPED = 4;
+}
+
+message OrderKeywordFilter {
+  KeywordFilterType type = 1;
+  string q = 2;
+}
+
+message OrderTimeFilter {
+  OrderTimeFilterType type = 1;
+  common.v1.TimeFilterRange time_range = 2 [(buf.validate.field).required = true];
+}
+
+message StatusFilter {
+  OrderStatus status = 1;
+  WarehouseStatus warehouse_status = 2;
+}
+
+message OrderOverviewFilter {
+  uint64 team_id = 1;
+  uint64 user_id = 2;
+  uint64 shop_id = 3;
+  ProductSourceType product_source = 4;
+  bool is_fake = 5;
+  repeated common.v1.MarketplaceType marketplaces = 6;
+  OrderKeywordFilter keyword_filter = 7;
+  bool include_deleted = 8;
+  common.v1.PaymentMethod payment_method = 9;
+  WarehouseStatus warehouse_status = 10;
+  OrderTimeFilter time_filter = 11;
+}
+
+message OrderOverviewRequest {
+  OrderOverviewFilter filter = 1 [(buf.validate.field).required = true];
+  common.v1.PageFilter page = 3 [(buf.validate.field).required = true];
+}
+
+message OrderOverviewResponse {}
+
+message OrderListRequest {}
+message OrderListResponse {}
 
 message OrderTagRemoveRequest {
   uint64 team_id = 1;

@@ -1,8 +1,8 @@
 syntax = "proto3";
 package stock_iface.v1;
 
-// import "common/v1/common.proto";
 import "buf/validate/validate.proto";
+import "common/v1/stock.proto";
 
 option go_package = "github.com/pdcgo/schema/services/stock_iface/v1;stock_iface";
 
@@ -40,7 +40,7 @@ message InboundUpdateRequest {
   uint64 warehouse_id = 2 [(buf.validate.field).uint64.gt = 0]; // must be > 0
   uint64 ext_tx_id = 3 [(buf.validate.field).uint64.gt = 0]; // external reference, must be > 0
 
-  InboundSource source = 4 [(buf.validate.field).enum = {
+  common.v1.InboundSource source = 4 [(buf.validate.field).enum = {
     defined_only: true
     not_in: [0]
   }];
@@ -58,13 +58,6 @@ message InboundUpdateRequest {
   };
 }
 message InboundUpdateResponse {}
-
-enum InboundSource {
-  INBOUND_SOURCE_UNSPECIFIED = 0;
-  INBOUND_SOURCE_RESTOCK = 1;
-  INBOUND_SOURCE_RETURN = 2;
-  INBOUND_SOURCE_TRANSFER = 3;
-}
 
 enum PaymentMethod {
   PAYMENT_METHOD_UNSPECIFIED = 0;
@@ -102,7 +95,7 @@ message InboundCreateRequest {
   uint64 ext_tx_id = 3 [(buf.validate.field).uint64.gt = 0]; // external reference, must be > 0
   StockInfoExtra extras = 8;
 
-  InboundSource source = 4 [(buf.validate.field).enum = {
+  common.v1.InboundSource source = 4 [(buf.validate.field).enum = {
     defined_only: true
     not_in: [0]
   }];
@@ -127,7 +120,7 @@ message InboundAcceptRequest {
 
   StockInfoExtra extras = 10;
 
-  InboundSource source = 4 [(buf.validate.field).enum = {defined_only: true}]; // must be valid enum
+  common.v1.InboundSource source = 4 [(buf.validate.field).enum = {defined_only: true}]; // must be valid enum
 
   double warehouse_cod_fee = 5 [(buf.validate.field).double.gte = 0]; // non-negative
   double shipping_fee = 6 [(buf.validate.field).double.gte = 0]; // non-negative

@@ -8,6 +8,7 @@ package stock_iface
 
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
+	v1 "github.com/pdcgo/schema/services/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -21,58 +22,6 @@ const (
 	// Verify that runtime/protoimpl is sufficiently up-to-date.
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
-
-type InboundSource int32
-
-const (
-	InboundSource_INBOUND_SOURCE_UNSPECIFIED InboundSource = 0
-	InboundSource_INBOUND_SOURCE_RESTOCK     InboundSource = 1
-	InboundSource_INBOUND_SOURCE_RETURN      InboundSource = 2
-	InboundSource_INBOUND_SOURCE_TRANSFER    InboundSource = 3
-)
-
-// Enum value maps for InboundSource.
-var (
-	InboundSource_name = map[int32]string{
-		0: "INBOUND_SOURCE_UNSPECIFIED",
-		1: "INBOUND_SOURCE_RESTOCK",
-		2: "INBOUND_SOURCE_RETURN",
-		3: "INBOUND_SOURCE_TRANSFER",
-	}
-	InboundSource_value = map[string]int32{
-		"INBOUND_SOURCE_UNSPECIFIED": 0,
-		"INBOUND_SOURCE_RESTOCK":     1,
-		"INBOUND_SOURCE_RETURN":      2,
-		"INBOUND_SOURCE_TRANSFER":    3,
-	}
-)
-
-func (x InboundSource) Enum() *InboundSource {
-	p := new(InboundSource)
-	*p = x
-	return p
-}
-
-func (x InboundSource) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (InboundSource) Descriptor() protoreflect.EnumDescriptor {
-	return file_stock_iface_v1_stock_proto_enumTypes[0].Descriptor()
-}
-
-func (InboundSource) Type() protoreflect.EnumType {
-	return &file_stock_iface_v1_stock_proto_enumTypes[0]
-}
-
-func (x InboundSource) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use InboundSource.Descriptor instead.
-func (InboundSource) EnumDescriptor() ([]byte, []int) {
-	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{0}
-}
 
 type PaymentMethod int32
 
@@ -107,11 +56,11 @@ func (x PaymentMethod) String() string {
 }
 
 func (PaymentMethod) Descriptor() protoreflect.EnumDescriptor {
-	return file_stock_iface_v1_stock_proto_enumTypes[1].Descriptor()
+	return file_stock_iface_v1_stock_proto_enumTypes[0].Descriptor()
 }
 
 func (PaymentMethod) Type() protoreflect.EnumType {
-	return &file_stock_iface_v1_stock_proto_enumTypes[1]
+	return &file_stock_iface_v1_stock_proto_enumTypes[0]
 }
 
 func (x PaymentMethod) Number() protoreflect.EnumNumber {
@@ -120,7 +69,7 @@ func (x PaymentMethod) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use PaymentMethod.Descriptor instead.
 func (PaymentMethod) EnumDescriptor() ([]byte, []int) {
-	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{1}
+	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{0}
 }
 
 type StockProblemCreateRequest struct {
@@ -216,7 +165,7 @@ type InboundUpdateRequest struct {
 	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`                // must be > 0
 	WarehouseId   uint64                 `protobuf:"varint,2,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"` // must be > 0
 	ExtTxId       uint64                 `protobuf:"varint,3,opt,name=ext_tx_id,json=extTxId,proto3" json:"ext_tx_id,omitempty"`           // external reference, must be > 0
-	Source        InboundSource          `protobuf:"varint,4,opt,name=source,proto3,enum=stock_iface.v1.InboundSource" json:"source,omitempty"`
+	Source        v1.InboundSource       `protobuf:"varint,4,opt,name=source,proto3,enum=common.v1.InboundSource" json:"source,omitempty"`
 	PaymentMethod PaymentMethod          `protobuf:"varint,5,opt,name=payment_method,json=paymentMethod,proto3,enum=stock_iface.v1.PaymentMethod" json:"payment_method,omitempty"`
 	ShippingFee   float64                `protobuf:"fixed64,6,opt,name=shipping_fee,json=shippingFee,proto3" json:"shipping_fee,omitempty"`
 	Products      []*VariantItem         `protobuf:"bytes,7,rep,name=products,proto3" json:"products,omitempty"`
@@ -275,11 +224,11 @@ func (x *InboundUpdateRequest) GetExtTxId() uint64 {
 	return 0
 }
 
-func (x *InboundUpdateRequest) GetSource() InboundSource {
+func (x *InboundUpdateRequest) GetSource() v1.InboundSource {
 	if x != nil {
 		return x.Source
 	}
-	return InboundSource_INBOUND_SOURCE_UNSPECIFIED
+	return v1.InboundSource(0)
 }
 
 func (x *InboundUpdateRequest) GetPaymentMethod() PaymentMethod {
@@ -485,7 +434,7 @@ type InboundCreateRequest struct {
 	WarehouseId   uint64                 `protobuf:"varint,2,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"` // must be > 0
 	ExtTxId       uint64                 `protobuf:"varint,3,opt,name=ext_tx_id,json=extTxId,proto3" json:"ext_tx_id,omitempty"`           // external reference, must be > 0
 	Extras        *StockInfoExtra        `protobuf:"bytes,8,opt,name=extras,proto3" json:"extras,omitempty"`
-	Source        InboundSource          `protobuf:"varint,4,opt,name=source,proto3,enum=stock_iface.v1.InboundSource" json:"source,omitempty"`
+	Source        v1.InboundSource       `protobuf:"varint,4,opt,name=source,proto3,enum=common.v1.InboundSource" json:"source,omitempty"`
 	PaymentMethod PaymentMethod          `protobuf:"varint,5,opt,name=payment_method,json=paymentMethod,proto3,enum=stock_iface.v1.PaymentMethod" json:"payment_method,omitempty"`
 	ShippingFee   float64                `protobuf:"fixed64,6,opt,name=shipping_fee,json=shippingFee,proto3" json:"shipping_fee,omitempty"` // must be >= 0
 	Products      []*VariantItem         `protobuf:"bytes,7,rep,name=products,proto3" json:"products,omitempty"`                            // must contain at least one product
@@ -551,11 +500,11 @@ func (x *InboundCreateRequest) GetExtras() *StockInfoExtra {
 	return nil
 }
 
-func (x *InboundCreateRequest) GetSource() InboundSource {
+func (x *InboundCreateRequest) GetSource() v1.InboundSource {
 	if x != nil {
 		return x.Source
 	}
-	return InboundSource_INBOUND_SOURCE_UNSPECIFIED
+	return v1.InboundSource(0)
 }
 
 func (x *InboundCreateRequest) GetPaymentMethod() PaymentMethod {
@@ -629,7 +578,7 @@ type InboundAcceptRequest struct {
 	WarehouseId     uint64                 `protobuf:"varint,2,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"` // must be > 0
 	ExtTxId         uint64                 `protobuf:"varint,3,opt,name=ext_tx_id,json=extTxId,proto3" json:"ext_tx_id,omitempty"`           // must be > 0
 	Extras          *StockInfoExtra        `protobuf:"bytes,10,opt,name=extras,proto3" json:"extras,omitempty"`
-	Source          InboundSource          `protobuf:"varint,4,opt,name=source,proto3,enum=stock_iface.v1.InboundSource" json:"source,omitempty"`           // must be valid enum
+	Source          v1.InboundSource       `protobuf:"varint,4,opt,name=source,proto3,enum=common.v1.InboundSource" json:"source,omitempty"`                // must be valid enum
 	WarehouseCodFee float64                `protobuf:"fixed64,5,opt,name=warehouse_cod_fee,json=warehouseCodFee,proto3" json:"warehouse_cod_fee,omitempty"` // non-negative
 	ShippingFee     float64                `protobuf:"fixed64,6,opt,name=shipping_fee,json=shippingFee,proto3" json:"shipping_fee,omitempty"`               // non-negative
 	Accepts         []*VariantItem         `protobuf:"bytes,7,rep,name=accepts,proto3" json:"accepts,omitempty"`
@@ -697,11 +646,11 @@ func (x *InboundAcceptRequest) GetExtras() *StockInfoExtra {
 	return nil
 }
 
-func (x *InboundAcceptRequest) GetSource() InboundSource {
+func (x *InboundAcceptRequest) GetSource() v1.InboundSource {
 	if x != nil {
 		return x.Source
 	}
-	return InboundSource_INBOUND_SOURCE_UNSPECIFIED
+	return v1.InboundSource(0)
 }
 
 func (x *InboundAcceptRequest) GetWarehouseCodFee() float64 {
@@ -1331,17 +1280,17 @@ var File_stock_iface_v1_stock_proto protoreflect.FileDescriptor
 
 const file_stock_iface_v1_stock_proto_rawDesc = "" +
 	"\n" +
-	"\x1astock_iface/v1/stock.proto\x12\x0estock_iface.v1\x1a\x1bbuf/validate/validate.proto\"o\n" +
+	"\x1astock_iface/v1/stock.proto\x12\x0estock_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x15common/v1/stock.proto\"o\n" +
 	"\x19StockProblemCreateRequest\x12*\n" +
 	"\fwarehouse_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\vwarehouseId\x12&\n" +
 	"\n" +
 	"restock_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\trestockId\"\x1c\n" +
-	"\x1aStockProblemCreateResponse\"\xc1\x04\n" +
+	"\x1aStockProblemCreateResponse\"\xbc\x04\n" +
 	"\x14InboundUpdateRequest\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12*\n" +
 	"\fwarehouse_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\vwarehouseId\x12#\n" +
-	"\text_tx_id\x18\x03 \x01(\x04B\a\xbaH\x042\x02 \x00R\aextTxId\x12A\n" +
-	"\x06source\x18\x04 \x01(\x0e2\x1d.stock_iface.v1.InboundSourceB\n" +
+	"\text_tx_id\x18\x03 \x01(\x04B\a\xbaH\x042\x02 \x00R\aextTxId\x12<\n" +
+	"\x06source\x18\x04 \x01(\x0e2\x18.common.v1.InboundSourceB\n" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x06source\x12P\n" +
 	"\x0epayment_method\x18\x05 \x01(\x0e2\x1d.stock_iface.v1.PaymentMethodB\n" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\rpaymentMethod\x12!\n" +
@@ -1362,27 +1311,27 @@ const file_stock_iface_v1_stock_proto_rawDesc = "" +
 	"\x10charge_warehouse\x18\x03 \x01(\bR\x0fchargeWarehouse\x12-\n" +
 	"\n" +
 	"item_price\x18\x05 \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\titemPrice\x12\x1f\n" +
-	"\x06reason\x18\x06 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x06reason\"\xcc\x03\n" +
+	"\x06reason\x18\x06 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x06reason\"\xc7\x03\n" +
 	"\x14InboundCreateRequest\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12*\n" +
 	"\fwarehouse_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\vwarehouseId\x12#\n" +
 	"\text_tx_id\x18\x03 \x01(\x04B\a\xbaH\x042\x02 \x00R\aextTxId\x126\n" +
-	"\x06extras\x18\b \x01(\v2\x1e.stock_iface.v1.StockInfoExtraR\x06extras\x12A\n" +
-	"\x06source\x18\x04 \x01(\x0e2\x1d.stock_iface.v1.InboundSourceB\n" +
+	"\x06extras\x18\b \x01(\v2\x1e.stock_iface.v1.StockInfoExtraR\x06extras\x12<\n" +
+	"\x06source\x18\x04 \x01(\x0e2\x18.common.v1.InboundSourceB\n" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x06source\x12P\n" +
 	"\x0epayment_method\x18\x05 \x01(\x0e2\x1d.stock_iface.v1.PaymentMethodB\n" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\rpaymentMethod\x121\n" +
 	"\fshipping_fee\x18\x06 \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\vshippingFee\x12A\n" +
 	"\bproducts\x18\a \x03(\v2\x1b.stock_iface.v1.VariantItemB\b\xbaH\x05\x92\x01\x02\b\x01R\bproducts\">\n" +
 	"\x15InboundCreateResponse\x12%\n" +
-	"\x0etransaction_id\x18\x01 \x01(\x04R\rtransactionId\"\xaa\x04\n" +
+	"\x0etransaction_id\x18\x01 \x01(\x04R\rtransactionId\"\xa5\x04\n" +
 	"\x14InboundAcceptRequest\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12*\n" +
 	"\fwarehouse_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\vwarehouseId\x12#\n" +
 	"\text_tx_id\x18\x03 \x01(\x04B\a\xbaH\x042\x02 \x00R\aextTxId\x126\n" +
 	"\x06extras\x18\n" +
-	" \x01(\v2\x1e.stock_iface.v1.StockInfoExtraR\x06extras\x12?\n" +
-	"\x06source\x18\x04 \x01(\x0e2\x1d.stock_iface.v1.InboundSourceB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06source\x12:\n" +
+	" \x01(\v2\x1e.stock_iface.v1.StockInfoExtraR\x06extras\x12:\n" +
+	"\x06source\x18\x04 \x01(\x0e2\x18.common.v1.InboundSourceB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06source\x12:\n" +
 	"\x11warehouse_cod_fee\x18\x05 \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\x0fwarehouseCodFee\x121\n" +
 	"\fshipping_fee\x18\x06 \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\vshippingFee\x12?\n" +
 	"\aaccepts\x18\a \x03(\v2\x1b.stock_iface.v1.VariantItemB\b\xbaH\x05\x92\x01\x02\b\x01R\aaccepts\x128\n" +
@@ -1425,12 +1374,7 @@ const file_stock_iface_v1_stock_proto_rawDesc = "" +
 	"\rcreated_by_id\x18\x01 \x01(\x04R\vcreatedById\x12\x18\n" +
 	"\areceipt\x18\x02 \x01(\tR\areceipt\x12*\n" +
 	"\x11external_order_id\x18\x03 \x01(\tR\x0fexternalOrderId\x12\x12\n" +
-	"\x04tags\x18\x04 \x03(\tR\x04tags*\x83\x01\n" +
-	"\rInboundSource\x12\x1e\n" +
-	"\x1aINBOUND_SOURCE_UNSPECIFIED\x10\x00\x12\x1a\n" +
-	"\x16INBOUND_SOURCE_RESTOCK\x10\x01\x12\x19\n" +
-	"\x15INBOUND_SOURCE_RETURN\x10\x02\x12\x1b\n" +
-	"\x17INBOUND_SOURCE_TRANSFER\x10\x03*f\n" +
+	"\x04tags\x18\x04 \x03(\tR\x04tags*f\n" +
 	"\rPaymentMethod\x12\x1e\n" +
 	"\x1aPAYMENT_METHOD_UNSPECIFIED\x10\x00\x12\x17\n" +
 	"\x13PAYMENT_METHOD_CASH\x10\x01\x12\x1c\n" +
@@ -1459,65 +1403,65 @@ func file_stock_iface_v1_stock_proto_rawDescGZIP() []byte {
 	return file_stock_iface_v1_stock_proto_rawDescData
 }
 
-var file_stock_iface_v1_stock_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_stock_iface_v1_stock_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_stock_iface_v1_stock_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
 var file_stock_iface_v1_stock_proto_goTypes = []any{
-	(InboundSource)(0),                        // 0: stock_iface.v1.InboundSource
-	(PaymentMethod)(0),                        // 1: stock_iface.v1.PaymentMethod
-	(*StockProblemCreateRequest)(nil),         // 2: stock_iface.v1.StockProblemCreateRequest
-	(*StockProblemCreateResponse)(nil),        // 3: stock_iface.v1.StockProblemCreateResponse
-	(*InboundUpdateRequest)(nil),              // 4: stock_iface.v1.InboundUpdateRequest
-	(*InboundUpdateResponse)(nil),             // 5: stock_iface.v1.InboundUpdateResponse
-	(*VariantItem)(nil),                       // 6: stock_iface.v1.VariantItem
-	(*VariantProblemItem)(nil),                // 7: stock_iface.v1.VariantProblemItem
-	(*InboundCreateRequest)(nil),              // 8: stock_iface.v1.InboundCreateRequest
-	(*InboundCreateResponse)(nil),             // 9: stock_iface.v1.InboundCreateResponse
-	(*InboundAcceptRequest)(nil),              // 10: stock_iface.v1.InboundAcceptRequest
-	(*InboundAcceptResponse)(nil),             // 11: stock_iface.v1.InboundAcceptResponse
-	(*StockAdjustmentRequest)(nil),            // 12: stock_iface.v1.StockAdjustmentRequest
-	(*StockAdjustmentResponse)(nil),           // 13: stock_iface.v1.StockAdjustmentResponse
-	(*TransferItem)(nil),                      // 14: stock_iface.v1.TransferItem
-	(*TransferToWarehouseRequest)(nil),        // 15: stock_iface.v1.TransferToWarehouseRequest
-	(*TransferToWarehouseResponse)(nil),       // 16: stock_iface.v1.TransferToWarehouseResponse
-	(*TransferToWarehouseAcceptRequest)(nil),  // 17: stock_iface.v1.TransferToWarehouseAcceptRequest
-	(*TransferToWarehouseAcceptResponse)(nil), // 18: stock_iface.v1.TransferToWarehouseAcceptResponse
-	(*TransferToWarehouseCancelRequest)(nil),  // 19: stock_iface.v1.TransferToWarehouseCancelRequest
-	(*TransferToWarehouseCancelResponse)(nil), // 20: stock_iface.v1.TransferToWarehouseCancelResponse
-	(*StockInfoExtra)(nil),                    // 21: stock_iface.v1.StockInfoExtra
+	(PaymentMethod)(0),                        // 0: stock_iface.v1.PaymentMethod
+	(*StockProblemCreateRequest)(nil),         // 1: stock_iface.v1.StockProblemCreateRequest
+	(*StockProblemCreateResponse)(nil),        // 2: stock_iface.v1.StockProblemCreateResponse
+	(*InboundUpdateRequest)(nil),              // 3: stock_iface.v1.InboundUpdateRequest
+	(*InboundUpdateResponse)(nil),             // 4: stock_iface.v1.InboundUpdateResponse
+	(*VariantItem)(nil),                       // 5: stock_iface.v1.VariantItem
+	(*VariantProblemItem)(nil),                // 6: stock_iface.v1.VariantProblemItem
+	(*InboundCreateRequest)(nil),              // 7: stock_iface.v1.InboundCreateRequest
+	(*InboundCreateResponse)(nil),             // 8: stock_iface.v1.InboundCreateResponse
+	(*InboundAcceptRequest)(nil),              // 9: stock_iface.v1.InboundAcceptRequest
+	(*InboundAcceptResponse)(nil),             // 10: stock_iface.v1.InboundAcceptResponse
+	(*StockAdjustmentRequest)(nil),            // 11: stock_iface.v1.StockAdjustmentRequest
+	(*StockAdjustmentResponse)(nil),           // 12: stock_iface.v1.StockAdjustmentResponse
+	(*TransferItem)(nil),                      // 13: stock_iface.v1.TransferItem
+	(*TransferToWarehouseRequest)(nil),        // 14: stock_iface.v1.TransferToWarehouseRequest
+	(*TransferToWarehouseResponse)(nil),       // 15: stock_iface.v1.TransferToWarehouseResponse
+	(*TransferToWarehouseAcceptRequest)(nil),  // 16: stock_iface.v1.TransferToWarehouseAcceptRequest
+	(*TransferToWarehouseAcceptResponse)(nil), // 17: stock_iface.v1.TransferToWarehouseAcceptResponse
+	(*TransferToWarehouseCancelRequest)(nil),  // 18: stock_iface.v1.TransferToWarehouseCancelRequest
+	(*TransferToWarehouseCancelResponse)(nil), // 19: stock_iface.v1.TransferToWarehouseCancelResponse
+	(*StockInfoExtra)(nil),                    // 20: stock_iface.v1.StockInfoExtra
+	(v1.InboundSource)(0),                     // 21: common.v1.InboundSource
 }
 var file_stock_iface_v1_stock_proto_depIdxs = []int32{
-	0,  // 0: stock_iface.v1.InboundUpdateRequest.source:type_name -> stock_iface.v1.InboundSource
-	1,  // 1: stock_iface.v1.InboundUpdateRequest.payment_method:type_name -> stock_iface.v1.PaymentMethod
-	6,  // 2: stock_iface.v1.InboundUpdateRequest.products:type_name -> stock_iface.v1.VariantItem
-	21, // 3: stock_iface.v1.InboundCreateRequest.extras:type_name -> stock_iface.v1.StockInfoExtra
-	0,  // 4: stock_iface.v1.InboundCreateRequest.source:type_name -> stock_iface.v1.InboundSource
-	1,  // 5: stock_iface.v1.InboundCreateRequest.payment_method:type_name -> stock_iface.v1.PaymentMethod
-	6,  // 6: stock_iface.v1.InboundCreateRequest.products:type_name -> stock_iface.v1.VariantItem
-	21, // 7: stock_iface.v1.InboundAcceptRequest.extras:type_name -> stock_iface.v1.StockInfoExtra
-	0,  // 8: stock_iface.v1.InboundAcceptRequest.source:type_name -> stock_iface.v1.InboundSource
-	6,  // 9: stock_iface.v1.InboundAcceptRequest.accepts:type_name -> stock_iface.v1.VariantItem
-	7,  // 10: stock_iface.v1.InboundAcceptRequest.losts:type_name -> stock_iface.v1.VariantProblemItem
-	7,  // 11: stock_iface.v1.InboundAcceptRequest.brokens:type_name -> stock_iface.v1.VariantProblemItem
-	7,  // 12: stock_iface.v1.StockAdjustmentRequest.losts:type_name -> stock_iface.v1.VariantProblemItem
-	7,  // 13: stock_iface.v1.StockAdjustmentRequest.brokens:type_name -> stock_iface.v1.VariantProblemItem
-	14, // 14: stock_iface.v1.TransferToWarehouseRequest.products:type_name -> stock_iface.v1.TransferItem
-	14, // 15: stock_iface.v1.TransferToWarehouseAcceptRequest.products:type_name -> stock_iface.v1.TransferItem
-	8,  // 16: stock_iface.v1.StockService.InboundCreate:input_type -> stock_iface.v1.InboundCreateRequest
-	4,  // 17: stock_iface.v1.StockService.InboundUpdate:input_type -> stock_iface.v1.InboundUpdateRequest
-	10, // 18: stock_iface.v1.StockService.InboundAccept:input_type -> stock_iface.v1.InboundAcceptRequest
-	12, // 19: stock_iface.v1.StockService.StockAdjustment:input_type -> stock_iface.v1.StockAdjustmentRequest
-	15, // 20: stock_iface.v1.StockService.TransferToWarehouse:input_type -> stock_iface.v1.TransferToWarehouseRequest
-	17, // 21: stock_iface.v1.StockService.TransferToWarehouseAccept:input_type -> stock_iface.v1.TransferToWarehouseAcceptRequest
-	19, // 22: stock_iface.v1.StockService.TransferToWarehouseCancel:input_type -> stock_iface.v1.TransferToWarehouseCancelRequest
-	2,  // 23: stock_iface.v1.StockService.StockProblemCreate:input_type -> stock_iface.v1.StockProblemCreateRequest
-	9,  // 24: stock_iface.v1.StockService.InboundCreate:output_type -> stock_iface.v1.InboundCreateResponse
-	5,  // 25: stock_iface.v1.StockService.InboundUpdate:output_type -> stock_iface.v1.InboundUpdateResponse
-	11, // 26: stock_iface.v1.StockService.InboundAccept:output_type -> stock_iface.v1.InboundAcceptResponse
-	13, // 27: stock_iface.v1.StockService.StockAdjustment:output_type -> stock_iface.v1.StockAdjustmentResponse
-	16, // 28: stock_iface.v1.StockService.TransferToWarehouse:output_type -> stock_iface.v1.TransferToWarehouseResponse
-	18, // 29: stock_iface.v1.StockService.TransferToWarehouseAccept:output_type -> stock_iface.v1.TransferToWarehouseAcceptResponse
-	20, // 30: stock_iface.v1.StockService.TransferToWarehouseCancel:output_type -> stock_iface.v1.TransferToWarehouseCancelResponse
-	3,  // 31: stock_iface.v1.StockService.StockProblemCreate:output_type -> stock_iface.v1.StockProblemCreateResponse
+	21, // 0: stock_iface.v1.InboundUpdateRequest.source:type_name -> common.v1.InboundSource
+	0,  // 1: stock_iface.v1.InboundUpdateRequest.payment_method:type_name -> stock_iface.v1.PaymentMethod
+	5,  // 2: stock_iface.v1.InboundUpdateRequest.products:type_name -> stock_iface.v1.VariantItem
+	20, // 3: stock_iface.v1.InboundCreateRequest.extras:type_name -> stock_iface.v1.StockInfoExtra
+	21, // 4: stock_iface.v1.InboundCreateRequest.source:type_name -> common.v1.InboundSource
+	0,  // 5: stock_iface.v1.InboundCreateRequest.payment_method:type_name -> stock_iface.v1.PaymentMethod
+	5,  // 6: stock_iface.v1.InboundCreateRequest.products:type_name -> stock_iface.v1.VariantItem
+	20, // 7: stock_iface.v1.InboundAcceptRequest.extras:type_name -> stock_iface.v1.StockInfoExtra
+	21, // 8: stock_iface.v1.InboundAcceptRequest.source:type_name -> common.v1.InboundSource
+	5,  // 9: stock_iface.v1.InboundAcceptRequest.accepts:type_name -> stock_iface.v1.VariantItem
+	6,  // 10: stock_iface.v1.InboundAcceptRequest.losts:type_name -> stock_iface.v1.VariantProblemItem
+	6,  // 11: stock_iface.v1.InboundAcceptRequest.brokens:type_name -> stock_iface.v1.VariantProblemItem
+	6,  // 12: stock_iface.v1.StockAdjustmentRequest.losts:type_name -> stock_iface.v1.VariantProblemItem
+	6,  // 13: stock_iface.v1.StockAdjustmentRequest.brokens:type_name -> stock_iface.v1.VariantProblemItem
+	13, // 14: stock_iface.v1.TransferToWarehouseRequest.products:type_name -> stock_iface.v1.TransferItem
+	13, // 15: stock_iface.v1.TransferToWarehouseAcceptRequest.products:type_name -> stock_iface.v1.TransferItem
+	7,  // 16: stock_iface.v1.StockService.InboundCreate:input_type -> stock_iface.v1.InboundCreateRequest
+	3,  // 17: stock_iface.v1.StockService.InboundUpdate:input_type -> stock_iface.v1.InboundUpdateRequest
+	9,  // 18: stock_iface.v1.StockService.InboundAccept:input_type -> stock_iface.v1.InboundAcceptRequest
+	11, // 19: stock_iface.v1.StockService.StockAdjustment:input_type -> stock_iface.v1.StockAdjustmentRequest
+	14, // 20: stock_iface.v1.StockService.TransferToWarehouse:input_type -> stock_iface.v1.TransferToWarehouseRequest
+	16, // 21: stock_iface.v1.StockService.TransferToWarehouseAccept:input_type -> stock_iface.v1.TransferToWarehouseAcceptRequest
+	18, // 22: stock_iface.v1.StockService.TransferToWarehouseCancel:input_type -> stock_iface.v1.TransferToWarehouseCancelRequest
+	1,  // 23: stock_iface.v1.StockService.StockProblemCreate:input_type -> stock_iface.v1.StockProblemCreateRequest
+	8,  // 24: stock_iface.v1.StockService.InboundCreate:output_type -> stock_iface.v1.InboundCreateResponse
+	4,  // 25: stock_iface.v1.StockService.InboundUpdate:output_type -> stock_iface.v1.InboundUpdateResponse
+	10, // 26: stock_iface.v1.StockService.InboundAccept:output_type -> stock_iface.v1.InboundAcceptResponse
+	12, // 27: stock_iface.v1.StockService.StockAdjustment:output_type -> stock_iface.v1.StockAdjustmentResponse
+	15, // 28: stock_iface.v1.StockService.TransferToWarehouse:output_type -> stock_iface.v1.TransferToWarehouseResponse
+	17, // 29: stock_iface.v1.StockService.TransferToWarehouseAccept:output_type -> stock_iface.v1.TransferToWarehouseAcceptResponse
+	19, // 30: stock_iface.v1.StockService.TransferToWarehouseCancel:output_type -> stock_iface.v1.TransferToWarehouseCancelResponse
+	2,  // 31: stock_iface.v1.StockService.StockProblemCreate:output_type -> stock_iface.v1.StockProblemCreateResponse
 	24, // [24:32] is the sub-list for method output_type
 	16, // [16:24] is the sub-list for method input_type
 	16, // [16:16] is the sub-list for extension type_name
@@ -1535,7 +1479,7 @@ func file_stock_iface_v1_stock_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_stock_iface_v1_stock_proto_rawDesc), len(file_stock_iface_v1_stock_proto_rawDesc)),
-			NumEnums:      2,
+			NumEnums:      1,
 			NumMessages:   20,
 			NumExtensions: 0,
 			NumServices:   1,
