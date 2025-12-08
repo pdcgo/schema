@@ -39,6 +39,9 @@ const (
 	// OrderServiceOrderTagRemoveProcedure is the fully-qualified name of the OrderService's
 	// OrderTagRemove RPC.
 	OrderServiceOrderTagRemoveProcedure = "/order_iface.v1.OrderService/OrderTagRemove"
+	// OrderServiceOrderTagAddProcedure is the fully-qualified name of the OrderService's OrderTagAdd
+	// RPC.
+	OrderServiceOrderTagAddProcedure = "/order_iface.v1.OrderService/OrderTagAdd"
 	// OrderServiceOrderListProcedure is the fully-qualified name of the OrderService's OrderList RPC.
 	OrderServiceOrderListProcedure = "/order_iface.v1.OrderService/OrderList"
 	// OrderServiceOrderOverviewProcedure is the fully-qualified name of the OrderService's
@@ -50,6 +53,7 @@ const (
 type OrderServiceClient interface {
 	OrderFundSet(context.Context) *connect.ClientStreamForClient[v1.OrderFundSetRequest, v1.OrderFundSetResponse]
 	OrderTagRemove(context.Context, *connect.Request[v1.OrderTagRemoveRequest]) (*connect.Response[v1.OrderTagRemoveResponse], error)
+	OrderTagAdd(context.Context, *connect.Request[v1.OrderTagAddRequest]) (*connect.Response[v1.OrderTagAddResponse], error)
 	// bagian view
 	OrderList(context.Context, *connect.Request[v1.OrderListRequest]) (*connect.ServerStreamForClient[v1.OrderListResponse], error)
 	// bagian overview
@@ -79,6 +83,12 @@ func NewOrderServiceClient(httpClient connect.HTTPClient, baseURL string, opts .
 			connect.WithSchema(orderServiceMethods.ByName("OrderTagRemove")),
 			connect.WithClientOptions(opts...),
 		),
+		orderTagAdd: connect.NewClient[v1.OrderTagAddRequest, v1.OrderTagAddResponse](
+			httpClient,
+			baseURL+OrderServiceOrderTagAddProcedure,
+			connect.WithSchema(orderServiceMethods.ByName("OrderTagAdd")),
+			connect.WithClientOptions(opts...),
+		),
 		orderList: connect.NewClient[v1.OrderListRequest, v1.OrderListResponse](
 			httpClient,
 			baseURL+OrderServiceOrderListProcedure,
@@ -98,6 +108,7 @@ func NewOrderServiceClient(httpClient connect.HTTPClient, baseURL string, opts .
 type orderServiceClient struct {
 	orderFundSet   *connect.Client[v1.OrderFundSetRequest, v1.OrderFundSetResponse]
 	orderTagRemove *connect.Client[v1.OrderTagRemoveRequest, v1.OrderTagRemoveResponse]
+	orderTagAdd    *connect.Client[v1.OrderTagAddRequest, v1.OrderTagAddResponse]
 	orderList      *connect.Client[v1.OrderListRequest, v1.OrderListResponse]
 	orderOverview  *connect.Client[v1.OrderOverviewRequest, v1.OrderOverviewResponse]
 }
@@ -110,6 +121,11 @@ func (c *orderServiceClient) OrderFundSet(ctx context.Context) *connect.ClientSt
 // OrderTagRemove calls order_iface.v1.OrderService.OrderTagRemove.
 func (c *orderServiceClient) OrderTagRemove(ctx context.Context, req *connect.Request[v1.OrderTagRemoveRequest]) (*connect.Response[v1.OrderTagRemoveResponse], error) {
 	return c.orderTagRemove.CallUnary(ctx, req)
+}
+
+// OrderTagAdd calls order_iface.v1.OrderService.OrderTagAdd.
+func (c *orderServiceClient) OrderTagAdd(ctx context.Context, req *connect.Request[v1.OrderTagAddRequest]) (*connect.Response[v1.OrderTagAddResponse], error) {
+	return c.orderTagAdd.CallUnary(ctx, req)
 }
 
 // OrderList calls order_iface.v1.OrderService.OrderList.
@@ -126,6 +142,7 @@ func (c *orderServiceClient) OrderOverview(ctx context.Context, req *connect.Req
 type OrderServiceHandler interface {
 	OrderFundSet(context.Context, *connect.ClientStream[v1.OrderFundSetRequest]) (*connect.Response[v1.OrderFundSetResponse], error)
 	OrderTagRemove(context.Context, *connect.Request[v1.OrderTagRemoveRequest]) (*connect.Response[v1.OrderTagRemoveResponse], error)
+	OrderTagAdd(context.Context, *connect.Request[v1.OrderTagAddRequest]) (*connect.Response[v1.OrderTagAddResponse], error)
 	// bagian view
 	OrderList(context.Context, *connect.Request[v1.OrderListRequest], *connect.ServerStream[v1.OrderListResponse]) error
 	// bagian overview
@@ -151,6 +168,12 @@ func NewOrderServiceHandler(svc OrderServiceHandler, opts ...connect.HandlerOpti
 		connect.WithSchema(orderServiceMethods.ByName("OrderTagRemove")),
 		connect.WithHandlerOptions(opts...),
 	)
+	orderServiceOrderTagAddHandler := connect.NewUnaryHandler(
+		OrderServiceOrderTagAddProcedure,
+		svc.OrderTagAdd,
+		connect.WithSchema(orderServiceMethods.ByName("OrderTagAdd")),
+		connect.WithHandlerOptions(opts...),
+	)
 	orderServiceOrderListHandler := connect.NewServerStreamHandler(
 		OrderServiceOrderListProcedure,
 		svc.OrderList,
@@ -169,6 +192,8 @@ func NewOrderServiceHandler(svc OrderServiceHandler, opts ...connect.HandlerOpti
 			orderServiceOrderFundSetHandler.ServeHTTP(w, r)
 		case OrderServiceOrderTagRemoveProcedure:
 			orderServiceOrderTagRemoveHandler.ServeHTTP(w, r)
+		case OrderServiceOrderTagAddProcedure:
+			orderServiceOrderTagAddHandler.ServeHTTP(w, r)
 		case OrderServiceOrderListProcedure:
 			orderServiceOrderListHandler.ServeHTTP(w, r)
 		case OrderServiceOrderOverviewProcedure:
@@ -188,6 +213,10 @@ func (UnimplementedOrderServiceHandler) OrderFundSet(context.Context, *connect.C
 
 func (UnimplementedOrderServiceHandler) OrderTagRemove(context.Context, *connect.Request[v1.OrderTagRemoveRequest]) (*connect.Response[v1.OrderTagRemoveResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("order_iface.v1.OrderService.OrderTagRemove is not implemented"))
+}
+
+func (UnimplementedOrderServiceHandler) OrderTagAdd(context.Context, *connect.Request[v1.OrderTagAddRequest]) (*connect.Response[v1.OrderTagAddResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("order_iface.v1.OrderService.OrderTagAdd is not implemented"))
 }
 
 func (UnimplementedOrderServiceHandler) OrderList(context.Context, *connect.Request[v1.OrderListRequest], *connect.ServerStream[v1.OrderListResponse]) error {

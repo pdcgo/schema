@@ -16,6 +16,7 @@ enum LogLevel {
 service WithdrawalService {
   rpc SubmitWithdrawal(SubmitWithdrawalRequest) returns (stream SubmitWithdrawalResponse);
   rpc SubmitWithdrawalTiktok(SubmitWithdrawalTiktokRequest) returns (stream SubmitWithdrawalTiktokResponse);
+  rpc SubmitWithdrawalShopee(SubmitWithdrawalShopeeRequest) returns (stream SubmitWithdrawalShopeeResponse);
 }
 
 message MpSubmit {
@@ -31,6 +32,18 @@ message SubmitWithdrawalRequest {
 }
 
 message SubmitWithdrawalResponse {
+  string message = 1;
+  LogLevel level = 2;
+}
+
+message SubmitWithdrawalShopeeRequest {
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  withdrawal_iface.v1.ImporterSource source = 3 [(buf.validate.field).enum.defined_only = true];
+  string resource_uri = 5 [(buf.validate.field).string.min_len = 1];
+  MpSubmit mp_submit = 6 [(buf.validate.field).required = true];
+}
+
+message SubmitWithdrawalShopeeResponse {
   string message = 1;
   LogLevel level = 2;
 }

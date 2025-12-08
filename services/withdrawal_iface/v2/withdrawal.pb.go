@@ -245,6 +245,126 @@ func (x *SubmitWithdrawalResponse) GetLevel() LogLevel {
 	return LogLevel_LOG_LEVEL_UNSPECIFIED
 }
 
+type SubmitWithdrawalShopeeRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	Source        v11.ImporterSource     `protobuf:"varint,3,opt,name=source,proto3,enum=withdrawal_iface.v1.ImporterSource" json:"source,omitempty"`
+	ResourceUri   string                 `protobuf:"bytes,5,opt,name=resource_uri,json=resourceUri,proto3" json:"resource_uri,omitempty"`
+	MpSubmit      *MpSubmit              `protobuf:"bytes,6,opt,name=mp_submit,json=mpSubmit,proto3" json:"mp_submit,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SubmitWithdrawalShopeeRequest) Reset() {
+	*x = SubmitWithdrawalShopeeRequest{}
+	mi := &file_withdrawal_iface_v2_withdrawal_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SubmitWithdrawalShopeeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SubmitWithdrawalShopeeRequest) ProtoMessage() {}
+
+func (x *SubmitWithdrawalShopeeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_withdrawal_iface_v2_withdrawal_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SubmitWithdrawalShopeeRequest.ProtoReflect.Descriptor instead.
+func (*SubmitWithdrawalShopeeRequest) Descriptor() ([]byte, []int) {
+	return file_withdrawal_iface_v2_withdrawal_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *SubmitWithdrawalShopeeRequest) GetTeamId() uint64 {
+	if x != nil {
+		return x.TeamId
+	}
+	return 0
+}
+
+func (x *SubmitWithdrawalShopeeRequest) GetSource() v11.ImporterSource {
+	if x != nil {
+		return x.Source
+	}
+	return v11.ImporterSource(0)
+}
+
+func (x *SubmitWithdrawalShopeeRequest) GetResourceUri() string {
+	if x != nil {
+		return x.ResourceUri
+	}
+	return ""
+}
+
+func (x *SubmitWithdrawalShopeeRequest) GetMpSubmit() *MpSubmit {
+	if x != nil {
+		return x.MpSubmit
+	}
+	return nil
+}
+
+type SubmitWithdrawalShopeeResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Message       string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
+	Level         LogLevel               `protobuf:"varint,2,opt,name=level,proto3,enum=withdrawal_iface.v2.LogLevel" json:"level,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SubmitWithdrawalShopeeResponse) Reset() {
+	*x = SubmitWithdrawalShopeeResponse{}
+	mi := &file_withdrawal_iface_v2_withdrawal_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SubmitWithdrawalShopeeResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SubmitWithdrawalShopeeResponse) ProtoMessage() {}
+
+func (x *SubmitWithdrawalShopeeResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_withdrawal_iface_v2_withdrawal_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SubmitWithdrawalShopeeResponse.ProtoReflect.Descriptor instead.
+func (*SubmitWithdrawalShopeeResponse) Descriptor() ([]byte, []int) {
+	return file_withdrawal_iface_v2_withdrawal_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *SubmitWithdrawalShopeeResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *SubmitWithdrawalShopeeResponse) GetLevel() LogLevel {
+	if x != nil {
+		return x.Level
+	}
+	return LogLevel_LOG_LEVEL_UNSPECIFIED
+}
+
 type SubmitWithdrawalTiktokRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
@@ -257,7 +377,7 @@ type SubmitWithdrawalTiktokRequest struct {
 
 func (x *SubmitWithdrawalTiktokRequest) Reset() {
 	*x = SubmitWithdrawalTiktokRequest{}
-	mi := &file_withdrawal_iface_v2_withdrawal_proto_msgTypes[3]
+	mi := &file_withdrawal_iface_v2_withdrawal_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -269,7 +389,7 @@ func (x *SubmitWithdrawalTiktokRequest) String() string {
 func (*SubmitWithdrawalTiktokRequest) ProtoMessage() {}
 
 func (x *SubmitWithdrawalTiktokRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_withdrawal_iface_v2_withdrawal_proto_msgTypes[3]
+	mi := &file_withdrawal_iface_v2_withdrawal_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -282,7 +402,7 @@ func (x *SubmitWithdrawalTiktokRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SubmitWithdrawalTiktokRequest.ProtoReflect.Descriptor instead.
 func (*SubmitWithdrawalTiktokRequest) Descriptor() ([]byte, []int) {
-	return file_withdrawal_iface_v2_withdrawal_proto_rawDescGZIP(), []int{3}
+	return file_withdrawal_iface_v2_withdrawal_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *SubmitWithdrawalTiktokRequest) GetTeamId() uint64 {
@@ -323,7 +443,7 @@ type SubmitWithdrawalTiktokResponse struct {
 
 func (x *SubmitWithdrawalTiktokResponse) Reset() {
 	*x = SubmitWithdrawalTiktokResponse{}
-	mi := &file_withdrawal_iface_v2_withdrawal_proto_msgTypes[4]
+	mi := &file_withdrawal_iface_v2_withdrawal_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -335,7 +455,7 @@ func (x *SubmitWithdrawalTiktokResponse) String() string {
 func (*SubmitWithdrawalTiktokResponse) ProtoMessage() {}
 
 func (x *SubmitWithdrawalTiktokResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_withdrawal_iface_v2_withdrawal_proto_msgTypes[4]
+	mi := &file_withdrawal_iface_v2_withdrawal_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -348,7 +468,7 @@ func (x *SubmitWithdrawalTiktokResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SubmitWithdrawalTiktokResponse.ProtoReflect.Descriptor instead.
 func (*SubmitWithdrawalTiktokResponse) Descriptor() ([]byte, []int) {
-	return file_withdrawal_iface_v2_withdrawal_proto_rawDescGZIP(), []int{4}
+	return file_withdrawal_iface_v2_withdrawal_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *SubmitWithdrawalTiktokResponse) GetMessage() string {
@@ -381,6 +501,14 @@ const file_withdrawal_iface_v2_withdrawal_proto_rawDesc = "" +
 	"\x18SubmitWithdrawalResponse\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\x123\n" +
 	"\x05level\x18\x02 \x01(\x0e2\x1d.withdrawal_iface.v2.LogLevelR\x05level\"\xf8\x01\n" +
+	"\x1dSubmitWithdrawalShopeeRequest\x12 \n" +
+	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12E\n" +
+	"\x06source\x18\x03 \x01(\x0e2#.withdrawal_iface.v1.ImporterSourceB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06source\x12*\n" +
+	"\fresource_uri\x18\x05 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\vresourceUri\x12B\n" +
+	"\tmp_submit\x18\x06 \x01(\v2\x1d.withdrawal_iface.v2.MpSubmitB\x06\xbaH\x03\xc8\x01\x01R\bmpSubmit\"o\n" +
+	"\x1eSubmitWithdrawalShopeeResponse\x12\x18\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage\x123\n" +
+	"\x05level\x18\x02 \x01(\x0e2\x1d.withdrawal_iface.v2.LogLevelR\x05level\"\xf8\x01\n" +
 	"\x1dSubmitWithdrawalTiktokRequest\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12E\n" +
 	"\x06source\x18\x03 \x01(\x0e2#.withdrawal_iface.v1.ImporterSourceB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06source\x12*\n" +
@@ -392,10 +520,11 @@ const file_withdrawal_iface_v2_withdrawal_proto_rawDesc = "" +
 	"\bLogLevel\x12\x19\n" +
 	"\x15LOG_LEVEL_UNSPECIFIED\x10\x00\x12\x12\n" +
 	"\x0eLOG_LEVEL_WARN\x10\x01\x12\x13\n" +
-	"\x0fLOG_LEVEL_ERROR\x10\x022\x8c\x02\n" +
+	"\x0fLOG_LEVEL_ERROR\x10\x022\x92\x03\n" +
 	"\x11WithdrawalService\x12q\n" +
 	"\x10SubmitWithdrawal\x12,.withdrawal_iface.v2.SubmitWithdrawalRequest\x1a-.withdrawal_iface.v2.SubmitWithdrawalResponse0\x01\x12\x83\x01\n" +
-	"\x16SubmitWithdrawalTiktok\x122.withdrawal_iface.v2.SubmitWithdrawalTiktokRequest\x1a3.withdrawal_iface.v2.SubmitWithdrawalTiktokResponse0\x01B\xda\x01\n" +
+	"\x16SubmitWithdrawalTiktok\x122.withdrawal_iface.v2.SubmitWithdrawalTiktokRequest\x1a3.withdrawal_iface.v2.SubmitWithdrawalTiktokResponse0\x01\x12\x83\x01\n" +
+	"\x16SubmitWithdrawalShopee\x122.withdrawal_iface.v2.SubmitWithdrawalShopeeRequest\x1a3.withdrawal_iface.v2.SubmitWithdrawalShopeeResponse0\x01B\xda\x01\n" +
 	"\x17com.withdrawal_iface.v2B\x0fWithdrawalProtoP\x01ZEgithub.com/pdcgo/schema/services/withdrawal_iface/v2;withdrawal_iface\xa2\x02\x03WXX\xaa\x02\x12WithdrawalIface.V2\xca\x02\x12WithdrawalIface\\V2\xe2\x02\x1eWithdrawalIface\\V2\\GPBMetadata\xea\x02\x13WithdrawalIface::V2b\x06proto3"
 
 var (
@@ -411,34 +540,41 @@ func file_withdrawal_iface_v2_withdrawal_proto_rawDescGZIP() []byte {
 }
 
 var file_withdrawal_iface_v2_withdrawal_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_withdrawal_iface_v2_withdrawal_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_withdrawal_iface_v2_withdrawal_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_withdrawal_iface_v2_withdrawal_proto_goTypes = []any{
 	(LogLevel)(0),                          // 0: withdrawal_iface.v2.LogLevel
 	(*MpSubmit)(nil),                       // 1: withdrawal_iface.v2.MpSubmit
 	(*SubmitWithdrawalRequest)(nil),        // 2: withdrawal_iface.v2.SubmitWithdrawalRequest
 	(*SubmitWithdrawalResponse)(nil),       // 3: withdrawal_iface.v2.SubmitWithdrawalResponse
-	(*SubmitWithdrawalTiktokRequest)(nil),  // 4: withdrawal_iface.v2.SubmitWithdrawalTiktokRequest
-	(*SubmitWithdrawalTiktokResponse)(nil), // 5: withdrawal_iface.v2.SubmitWithdrawalTiktokResponse
-	(v1.MarketplaceType)(0),                // 6: common.v1.MarketplaceType
-	(v11.ImporterSource)(0),                // 7: withdrawal_iface.v1.ImporterSource
+	(*SubmitWithdrawalShopeeRequest)(nil),  // 4: withdrawal_iface.v2.SubmitWithdrawalShopeeRequest
+	(*SubmitWithdrawalShopeeResponse)(nil), // 5: withdrawal_iface.v2.SubmitWithdrawalShopeeResponse
+	(*SubmitWithdrawalTiktokRequest)(nil),  // 6: withdrawal_iface.v2.SubmitWithdrawalTiktokRequest
+	(*SubmitWithdrawalTiktokResponse)(nil), // 7: withdrawal_iface.v2.SubmitWithdrawalTiktokResponse
+	(v1.MarketplaceType)(0),                // 8: common.v1.MarketplaceType
+	(v11.ImporterSource)(0),                // 9: withdrawal_iface.v1.ImporterSource
 }
 var file_withdrawal_iface_v2_withdrawal_proto_depIdxs = []int32{
-	6, // 0: withdrawal_iface.v2.MpSubmit.mp_type:type_name -> common.v1.MarketplaceType
-	7, // 1: withdrawal_iface.v2.SubmitWithdrawalRequest.source:type_name -> withdrawal_iface.v1.ImporterSource
-	1, // 2: withdrawal_iface.v2.SubmitWithdrawalRequest.mp_submit:type_name -> withdrawal_iface.v2.MpSubmit
-	0, // 3: withdrawal_iface.v2.SubmitWithdrawalResponse.level:type_name -> withdrawal_iface.v2.LogLevel
-	7, // 4: withdrawal_iface.v2.SubmitWithdrawalTiktokRequest.source:type_name -> withdrawal_iface.v1.ImporterSource
-	1, // 5: withdrawal_iface.v2.SubmitWithdrawalTiktokRequest.mp_submit:type_name -> withdrawal_iface.v2.MpSubmit
-	0, // 6: withdrawal_iface.v2.SubmitWithdrawalTiktokResponse.level:type_name -> withdrawal_iface.v2.LogLevel
-	2, // 7: withdrawal_iface.v2.WithdrawalService.SubmitWithdrawal:input_type -> withdrawal_iface.v2.SubmitWithdrawalRequest
-	4, // 8: withdrawal_iface.v2.WithdrawalService.SubmitWithdrawalTiktok:input_type -> withdrawal_iface.v2.SubmitWithdrawalTiktokRequest
-	3, // 9: withdrawal_iface.v2.WithdrawalService.SubmitWithdrawal:output_type -> withdrawal_iface.v2.SubmitWithdrawalResponse
-	5, // 10: withdrawal_iface.v2.WithdrawalService.SubmitWithdrawalTiktok:output_type -> withdrawal_iface.v2.SubmitWithdrawalTiktokResponse
-	9, // [9:11] is the sub-list for method output_type
-	7, // [7:9] is the sub-list for method input_type
-	7, // [7:7] is the sub-list for extension type_name
-	7, // [7:7] is the sub-list for extension extendee
-	0, // [0:7] is the sub-list for field type_name
+	8,  // 0: withdrawal_iface.v2.MpSubmit.mp_type:type_name -> common.v1.MarketplaceType
+	9,  // 1: withdrawal_iface.v2.SubmitWithdrawalRequest.source:type_name -> withdrawal_iface.v1.ImporterSource
+	1,  // 2: withdrawal_iface.v2.SubmitWithdrawalRequest.mp_submit:type_name -> withdrawal_iface.v2.MpSubmit
+	0,  // 3: withdrawal_iface.v2.SubmitWithdrawalResponse.level:type_name -> withdrawal_iface.v2.LogLevel
+	9,  // 4: withdrawal_iface.v2.SubmitWithdrawalShopeeRequest.source:type_name -> withdrawal_iface.v1.ImporterSource
+	1,  // 5: withdrawal_iface.v2.SubmitWithdrawalShopeeRequest.mp_submit:type_name -> withdrawal_iface.v2.MpSubmit
+	0,  // 6: withdrawal_iface.v2.SubmitWithdrawalShopeeResponse.level:type_name -> withdrawal_iface.v2.LogLevel
+	9,  // 7: withdrawal_iface.v2.SubmitWithdrawalTiktokRequest.source:type_name -> withdrawal_iface.v1.ImporterSource
+	1,  // 8: withdrawal_iface.v2.SubmitWithdrawalTiktokRequest.mp_submit:type_name -> withdrawal_iface.v2.MpSubmit
+	0,  // 9: withdrawal_iface.v2.SubmitWithdrawalTiktokResponse.level:type_name -> withdrawal_iface.v2.LogLevel
+	2,  // 10: withdrawal_iface.v2.WithdrawalService.SubmitWithdrawal:input_type -> withdrawal_iface.v2.SubmitWithdrawalRequest
+	6,  // 11: withdrawal_iface.v2.WithdrawalService.SubmitWithdrawalTiktok:input_type -> withdrawal_iface.v2.SubmitWithdrawalTiktokRequest
+	4,  // 12: withdrawal_iface.v2.WithdrawalService.SubmitWithdrawalShopee:input_type -> withdrawal_iface.v2.SubmitWithdrawalShopeeRequest
+	3,  // 13: withdrawal_iface.v2.WithdrawalService.SubmitWithdrawal:output_type -> withdrawal_iface.v2.SubmitWithdrawalResponse
+	7,  // 14: withdrawal_iface.v2.WithdrawalService.SubmitWithdrawalTiktok:output_type -> withdrawal_iface.v2.SubmitWithdrawalTiktokResponse
+	5,  // 15: withdrawal_iface.v2.WithdrawalService.SubmitWithdrawalShopee:output_type -> withdrawal_iface.v2.SubmitWithdrawalShopeeResponse
+	13, // [13:16] is the sub-list for method output_type
+	10, // [10:13] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_withdrawal_iface_v2_withdrawal_proto_init() }
@@ -452,7 +588,7 @@ func file_withdrawal_iface_v2_withdrawal_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_withdrawal_iface_v2_withdrawal_proto_rawDesc), len(file_withdrawal_iface_v2_withdrawal_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   5,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

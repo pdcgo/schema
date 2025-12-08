@@ -39,12 +39,16 @@ const (
 	// WithdrawalServiceSubmitWithdrawalTiktokProcedure is the fully-qualified name of the
 	// WithdrawalService's SubmitWithdrawalTiktok RPC.
 	WithdrawalServiceSubmitWithdrawalTiktokProcedure = "/withdrawal_iface.v2.WithdrawalService/SubmitWithdrawalTiktok"
+	// WithdrawalServiceSubmitWithdrawalShopeeProcedure is the fully-qualified name of the
+	// WithdrawalService's SubmitWithdrawalShopee RPC.
+	WithdrawalServiceSubmitWithdrawalShopeeProcedure = "/withdrawal_iface.v2.WithdrawalService/SubmitWithdrawalShopee"
 )
 
 // WithdrawalServiceClient is a client for the withdrawal_iface.v2.WithdrawalService service.
 type WithdrawalServiceClient interface {
 	SubmitWithdrawal(context.Context, *connect.Request[v2.SubmitWithdrawalRequest]) (*connect.ServerStreamForClient[v2.SubmitWithdrawalResponse], error)
 	SubmitWithdrawalTiktok(context.Context, *connect.Request[v2.SubmitWithdrawalTiktokRequest]) (*connect.ServerStreamForClient[v2.SubmitWithdrawalTiktokResponse], error)
+	SubmitWithdrawalShopee(context.Context, *connect.Request[v2.SubmitWithdrawalShopeeRequest]) (*connect.ServerStreamForClient[v2.SubmitWithdrawalShopeeResponse], error)
 }
 
 // NewWithdrawalServiceClient constructs a client for the withdrawal_iface.v2.WithdrawalService
@@ -70,6 +74,12 @@ func NewWithdrawalServiceClient(httpClient connect.HTTPClient, baseURL string, o
 			connect.WithSchema(withdrawalServiceMethods.ByName("SubmitWithdrawalTiktok")),
 			connect.WithClientOptions(opts...),
 		),
+		submitWithdrawalShopee: connect.NewClient[v2.SubmitWithdrawalShopeeRequest, v2.SubmitWithdrawalShopeeResponse](
+			httpClient,
+			baseURL+WithdrawalServiceSubmitWithdrawalShopeeProcedure,
+			connect.WithSchema(withdrawalServiceMethods.ByName("SubmitWithdrawalShopee")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -77,6 +87,7 @@ func NewWithdrawalServiceClient(httpClient connect.HTTPClient, baseURL string, o
 type withdrawalServiceClient struct {
 	submitWithdrawal       *connect.Client[v2.SubmitWithdrawalRequest, v2.SubmitWithdrawalResponse]
 	submitWithdrawalTiktok *connect.Client[v2.SubmitWithdrawalTiktokRequest, v2.SubmitWithdrawalTiktokResponse]
+	submitWithdrawalShopee *connect.Client[v2.SubmitWithdrawalShopeeRequest, v2.SubmitWithdrawalShopeeResponse]
 }
 
 // SubmitWithdrawal calls withdrawal_iface.v2.WithdrawalService.SubmitWithdrawal.
@@ -89,11 +100,17 @@ func (c *withdrawalServiceClient) SubmitWithdrawalTiktok(ctx context.Context, re
 	return c.submitWithdrawalTiktok.CallServerStream(ctx, req)
 }
 
+// SubmitWithdrawalShopee calls withdrawal_iface.v2.WithdrawalService.SubmitWithdrawalShopee.
+func (c *withdrawalServiceClient) SubmitWithdrawalShopee(ctx context.Context, req *connect.Request[v2.SubmitWithdrawalShopeeRequest]) (*connect.ServerStreamForClient[v2.SubmitWithdrawalShopeeResponse], error) {
+	return c.submitWithdrawalShopee.CallServerStream(ctx, req)
+}
+
 // WithdrawalServiceHandler is an implementation of the withdrawal_iface.v2.WithdrawalService
 // service.
 type WithdrawalServiceHandler interface {
 	SubmitWithdrawal(context.Context, *connect.Request[v2.SubmitWithdrawalRequest], *connect.ServerStream[v2.SubmitWithdrawalResponse]) error
 	SubmitWithdrawalTiktok(context.Context, *connect.Request[v2.SubmitWithdrawalTiktokRequest], *connect.ServerStream[v2.SubmitWithdrawalTiktokResponse]) error
+	SubmitWithdrawalShopee(context.Context, *connect.Request[v2.SubmitWithdrawalShopeeRequest], *connect.ServerStream[v2.SubmitWithdrawalShopeeResponse]) error
 }
 
 // NewWithdrawalServiceHandler builds an HTTP handler from the service implementation. It returns
@@ -115,12 +132,20 @@ func NewWithdrawalServiceHandler(svc WithdrawalServiceHandler, opts ...connect.H
 		connect.WithSchema(withdrawalServiceMethods.ByName("SubmitWithdrawalTiktok")),
 		connect.WithHandlerOptions(opts...),
 	)
+	withdrawalServiceSubmitWithdrawalShopeeHandler := connect.NewServerStreamHandler(
+		WithdrawalServiceSubmitWithdrawalShopeeProcedure,
+		svc.SubmitWithdrawalShopee,
+		connect.WithSchema(withdrawalServiceMethods.ByName("SubmitWithdrawalShopee")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/withdrawal_iface.v2.WithdrawalService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case WithdrawalServiceSubmitWithdrawalProcedure:
 			withdrawalServiceSubmitWithdrawalHandler.ServeHTTP(w, r)
 		case WithdrawalServiceSubmitWithdrawalTiktokProcedure:
 			withdrawalServiceSubmitWithdrawalTiktokHandler.ServeHTTP(w, r)
+		case WithdrawalServiceSubmitWithdrawalShopeeProcedure:
+			withdrawalServiceSubmitWithdrawalShopeeHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -136,4 +161,8 @@ func (UnimplementedWithdrawalServiceHandler) SubmitWithdrawal(context.Context, *
 
 func (UnimplementedWithdrawalServiceHandler) SubmitWithdrawalTiktok(context.Context, *connect.Request[v2.SubmitWithdrawalTiktokRequest], *connect.ServerStream[v2.SubmitWithdrawalTiktokResponse]) error {
 	return connect.NewError(connect.CodeUnimplemented, errors.New("withdrawal_iface.v2.WithdrawalService.SubmitWithdrawalTiktok is not implemented"))
+}
+
+func (UnimplementedWithdrawalServiceHandler) SubmitWithdrawalShopee(context.Context, *connect.Request[v2.SubmitWithdrawalShopeeRequest], *connect.ServerStream[v2.SubmitWithdrawalShopeeResponse]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("withdrawal_iface.v2.WithdrawalService.SubmitWithdrawalShopee is not implemented"))
 }

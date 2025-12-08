@@ -11,6 +11,7 @@ option go_package = "github.com/pdcgo/schema/services/order_iface/v1;order_iface
 service OrderService {
   rpc OrderFundSet(stream OrderFundSetRequest) returns (OrderFundSetResponse);
   rpc OrderTagRemove(OrderTagRemoveRequest) returns (OrderTagRemoveResponse);
+  rpc OrderTagAdd(OrderTagAddRequest) returns (OrderTagAddResponse);
 
   // bagian view
   rpc OrderList(OrderListRequest) returns (stream OrderListResponse);
@@ -22,6 +23,7 @@ service OrderService {
 enum TagType {
   TAG_TYPE_UNSPECIFIED = 0;
   TAG_TYPE_TRACKING = 1;
+  TAG_TYPE_WAREHOUSE = 2;
 }
 
 enum OrderTimeFilterType {
@@ -110,6 +112,22 @@ message OrderOverviewResponse {}
 
 message OrderListRequest {}
 message OrderListResponse {}
+
+message OrderTagItem {
+  TagType type = 1;
+  string value = 2;
+}
+
+message OrderTagAddRequest {
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 order_id = 2 [(buf.validate.field).uint64.gt = 0];
+  repeated OrderTagItem tags = 3 [(buf.validate.field).repeated = {
+    min_items: 1
+    max_items: 20
+  }];
+}
+
+message OrderTagAddResponse {}
 
 message OrderTagRemoveRequest {
   uint64 team_id = 1;
