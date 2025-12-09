@@ -1,0 +1,34 @@
+syntax = "proto3";
+package selling_iface.v1;
+
+// import "accounting_iface/v1/core.proto";
+// import "accounting_iface/v1/revenue.proto";
+import "buf/validate/validate.proto";
+// import "common/v1/common.proto";
+// import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/pdcgo/schema/services/selling_iface/v1;selling_iface";
+
+service ConfigurationLimitService {
+  rpc LimitInvoice(LimitInvoiceRequest) returns (LimitInvoiceResponse);
+}
+
+message LimitInvoiceItemReq {
+  uint64 from_team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 to_team_id = 2 [(buf.validate.field).uint64.gt = 0];
+}
+
+message LimitInvoiceRequest {
+  repeated LimitInvoiceItemReq limit = 1 [(buf.validate.field).repeated = {min_items: 1}];
+}
+
+message LimitInvoiceItem {
+  uint64 id = 1;
+  uint64 from_team_id = 2;
+  uint64 to_team_id = 3;
+  double threeshold = 4;
+}
+
+message LimitInvoiceResponse {
+  repeated LimitInvoiceItem data = 1;
+}
