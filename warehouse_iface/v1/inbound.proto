@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package warehouse_iface.v1;
+
+// import "buf/validate/validate.proto";
+// import "common/v1/common.proto";
+// import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/pdcgo/schema/services/warehouse_iface/v1;warehouse_iface";
+
+service InboundService {
+  rpc InboundAccept(InboundAcceptRequest) returns (InboundAcceptResponse) {}
+}
+
+enum ProblemType {
+  PROBLEM_TYPE_UNSPECIFIED = 0;
+  PROBLEM_TYPE_BROKEN_S = 1;
+  PROBLEM_TYPE_LOST_S = 2;
+  PROBLEM_TYPE_BROKEN_W = 3;
+  PROBLEM_TYPE_LOST_W = 4;
+  PROBLEM_TYPE_DISASTER = 5;
+  PROBLEM_TYPE_SAMPLE = 6;
+}
+
+message PlacementItem {
+  uint64 rack_id = 1;
+  int64 count = 2;
+  ProblemType problem_type = 3;
+  string note = 4;
+}
+
+message PlacementList {
+  repeated PlacementItem list = 1;
+}
+
+message InboundAcceptRequest {
+  uint64 inv_transaction_id = 1;
+  double warehouse_fee = 2;
+  string tx_type = 3;
+}
+
+message InboundAcceptResponse {
+  uint64 tx_id = 1;
+}
