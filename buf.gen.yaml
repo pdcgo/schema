@@ -10,6 +10,11 @@ plugins:
     opt:
       - paths=source_relative
 
+  - local: protoc-gen-mockservice
+    out: services
+    opt:
+      - paths=source_relative
+
   # - remote: buf.build/pepper-iot/protoc-gen-gotag
   #   out: services
   #   opt:

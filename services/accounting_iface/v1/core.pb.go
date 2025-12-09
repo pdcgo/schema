@@ -606,9 +606,9 @@ type AccountKeyItem struct {
 	Coa         CoaCode                `protobuf:"varint,2,opt,name=coa,proto3,enum=accounting_iface.v1.CoaCode" json:"coa,omitempty"`
 	BalanceType BalanceType            `protobuf:"varint,3,opt,name=balance_type,json=balanceType,proto3,enum=accounting_iface.v1.BalanceType" json:"balance_type,omitempty"`
 	// @gotags: gorm:"-"
-	FilterExtra *AccountFilterExtra `protobuf:"bytes,4,opt,name=filter_extra,json=filterExtra,proto3" json:"filter_extra,omitempty" gorm:"-"`
+	FilterExtra *AccountFilterExtra `protobuf:"bytes,4,opt,name=filter_extra,json=filterExtra,proto3" json:"filter_extra,omitempty"`
 	// @gotags: gorm:"-"
-	CoaDetail     *CoaDetail `protobuf:"bytes,5,opt,name=coa_detail,json=coaDetail,proto3" json:"coa_detail,omitempty" gorm:"-"`
+	CoaDetail     *CoaDetail `protobuf:"bytes,5,opt,name=coa_detail,json=coaDetail,proto3" json:"coa_detail,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -777,9 +777,9 @@ func (x *AccountKeyListResponse) GetKeys() []*AccountKeyItem {
 type TypeLabel struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @gotags: gorm:"index:keyval,unique"
-	Key LabelKey `protobuf:"varint,1,opt,name=key,proto3,enum=accounting_iface.v1.LabelKey" json:"key,omitempty" gorm:"index:keyval,unique"`
+	Key LabelKey `protobuf:"varint,1,opt,name=key,proto3,enum=accounting_iface.v1.LabelKey" json:"key,omitempty"`
 	// @gotags: gorm:"index:keyval,unique"
-	Label         string `protobuf:"bytes,2,opt,name=label,proto3" json:"label,omitempty" gorm:"index:keyval,unique"`
+	Label         string `protobuf:"bytes,2,opt,name=label,proto3" json:"label,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
