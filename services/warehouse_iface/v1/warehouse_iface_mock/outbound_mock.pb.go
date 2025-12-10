@@ -2,17 +2,41 @@ package warehouse_iface_mock
 
 import (
     "context"
-    "github.com/stretchr/testify/mock"
+    "reflect"
+    gomock "github.com/golang/mock/gomock"
     connect "connectrpc.com/connect"
     v1 "github.com/pdcgo/schema/services/warehouse_iface/v1"
 )
 
 type MockOutboundService struct {
-    mock.Mock
+    ctrl     *gomock.Controller
+    recorder *MockOutboundServiceMockRecorder
+}
+
+type MockOutboundServiceMockRecorder struct {
+    mock *MockOutboundService
+}
+
+func NewMockOutboundService(ctrl *gomock.Controller) *MockOutboundService {
+    mock := &MockOutboundService{ctrl: ctrl}
+    mock.recorder = &MockOutboundServiceMockRecorder{mock}
+    return mock
+}
+
+func (m *MockOutboundService) EXPECT() *MockOutboundServiceMockRecorder {
+    return m.recorder
 }
 
 func (m *MockOutboundService) OutboundList(ctx context.Context, req *connect.Request[v1.OutboundListRequest]) (*connect.Response[v1.OutboundListResponse], error) {
-    args := m.Called(ctx, req)
-    return args.Get(0).(*connect.Response[v1.OutboundListResponse]), args.Error(1)
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "OutboundList", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.OutboundListResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockOutboundServiceMockRecorder) OutboundList(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OutboundList", reflect.TypeOf((*MockOutboundService)(nil).OutboundList), ctx, req)
 }
 

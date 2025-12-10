@@ -342,9 +342,9 @@ type MutationItem struct {
 	// int64 transfer_at = 6;
 	Created int64 `protobuf:"varint,7,opt,name=created,proto3" json:"created,omitempty"`
 	// @gotags: gorm:"-"
-	FromAccount *PublicAccountItem `protobuf:"bytes,8,opt,name=from_account,json=fromAccount,proto3" json:"from_account,omitempty"`
+	FromAccount *PublicAccountItem `protobuf:"bytes,8,opt,name=from_account,json=fromAccount,proto3" json:"from_account,omitempty" gorm:"-"`
 	// @gotags: gorm:"-"
-	ToAccount     *PublicAccountItem `protobuf:"bytes,9,opt,name=to_account,json=toAccount,proto3" json:"to_account,omitempty"`
+	ToAccount     *PublicAccountItem `protobuf:"bytes,9,opt,name=to_account,json=toAccount,proto3" json:"to_account,omitempty" gorm:"-"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1328,7 +1328,7 @@ type AccountItem struct {
 	NumberId    string                 `protobuf:"bytes,4,opt,name=number_id,json=numberId,proto3" json:"number_id,omitempty"`
 	AccountType string                 `protobuf:"bytes,5,opt,name=account_type,json=accountType,proto3" json:"account_type,omitempty"`
 	// @gotags: gorm:"-"
-	Labels        []*v1.KeyName `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty"`
+	Labels        []*v1.KeyName `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" gorm:"-"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }

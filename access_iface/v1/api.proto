@@ -44,6 +44,30 @@ message EmptyDispatch {}
 
 service HelloService {
   rpc Hello(HelloRequest) returns (HelloResponse);
+  rpc HelloClientStream(stream HelloClientStreamRequest) returns (HelloClientStreamResponse);
+  rpc HelloServerStream(HelloServerStreamRequest) returns (stream HelloServerStreamResponse);
+  rpc HelloBidiStream(stream HelloBidiStreamRequest) returns (stream HelloBidiStreamResponse);
+}
+message HelloBidiStreamRequest {
+  string name = 1;
+}
+
+message HelloBidiStreamResponse {
+  string message = 1;
+}
+message HelloServerStreamRequest {
+  string name = 1;
+}
+
+message HelloServerStreamResponse {
+  string message = 1;
+}
+
+message HelloClientStreamRequest {
+  string name = 1;
+}
+message HelloClientStreamResponse {
+  string message = 1;
 }
 
 message HelloRequest {
