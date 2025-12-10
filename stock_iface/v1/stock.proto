@@ -129,7 +129,9 @@ message InboundAcceptRequest {
   repeated VariantProblemItem losts = 8;
   repeated VariantProblemItem brokens = 9;
 }
-message InboundAcceptResponse {}
+message InboundAcceptResponse {
+  uint64 transaction_id = 1;
+}
 
 message StockAdjustmentRequest {
   uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0]; // must be > 0

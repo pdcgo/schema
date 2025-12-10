@@ -690,6 +690,7 @@ func (x *InboundAcceptRequest) GetBrokens() []*VariantProblemItem {
 
 type InboundAcceptResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	TransactionId uint64                 `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -722,6 +723,13 @@ func (x *InboundAcceptResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use InboundAcceptResponse.ProtoReflect.Descriptor instead.
 func (*InboundAcceptResponse) Descriptor() ([]byte, []int) {
 	return file_stock_iface_v1_stock_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *InboundAcceptResponse) GetTransactionId() uint64 {
+	if x != nil {
+		return x.TransactionId
+	}
+	return 0
 }
 
 type StockAdjustmentRequest struct {
@@ -1336,8 +1344,9 @@ const file_stock_iface_v1_stock_proto_rawDesc = "" +
 	"\fshipping_fee\x18\x06 \x01(\x01B\x0e\xbaH\v\x12\t)\x00\x00\x00\x00\x00\x00\x00\x00R\vshippingFee\x12?\n" +
 	"\aaccepts\x18\a \x03(\v2\x1b.stock_iface.v1.VariantItemB\b\xbaH\x05\x92\x01\x02\b\x01R\aaccepts\x128\n" +
 	"\x05losts\x18\b \x03(\v2\".stock_iface.v1.VariantProblemItemR\x05losts\x12<\n" +
-	"\abrokens\x18\t \x03(\v2\".stock_iface.v1.VariantProblemItemR\abrokens\"\x17\n" +
-	"\x15InboundAcceptResponse\"\x90\x03\n" +
+	"\abrokens\x18\t \x03(\v2\".stock_iface.v1.VariantProblemItemR\abrokens\">\n" +
+	"\x15InboundAcceptResponse\x12%\n" +
+	"\x0etransaction_id\x18\x01 \x01(\x04R\rtransactionId\"\x90\x03\n" +
 	"\x16StockAdjustmentRequest\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12*\n" +
 	"\fwarehouse_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\vwarehouseId\x12#\n" +

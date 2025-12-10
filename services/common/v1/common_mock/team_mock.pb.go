@@ -27,6 +27,25 @@ func (m *MockTeamService) EXPECT() *MockTeamServiceMockRecorder {
     return m.recorder
 }
 
+type MockTeamServiceClient struct {
+    ctrl     *gomock.Controller
+    recorder *MockTeamServiceClientMockRecorder
+}
+
+type MockTeamServiceClientMockRecorder struct {
+    mock *MockTeamServiceClient
+}
+
+func NewMockTeamServiceClient(ctrl *gomock.Controller) *MockTeamServiceClient {
+    mock := &MockTeamServiceClient{ctrl: ctrl}
+    mock.recorder = &MockTeamServiceClientMockRecorder{mock}
+    return mock
+}
+
+func (m *MockTeamServiceClient) EXPECT() *MockTeamServiceClientMockRecorder {
+    return m.recorder
+}
+
 func (m *MockTeamService) PublicTeamIDs(ctx context.Context, req *connect.Request[v1.PublicTeamIDsRequest]) (*connect.Response[v1.PublicTeamIDsResponse], error) {
     m.ctrl.T.Helper()
     ret := m.ctrl.Call(m, "PublicTeamIDs", ctx, req)
@@ -40,6 +59,19 @@ func (mr *MockTeamServiceMockRecorder) PublicTeamIDs(ctx, req interface{}) *gomo
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PublicTeamIDs", reflect.TypeOf((*MockTeamService)(nil).PublicTeamIDs), ctx, req)
 }
 
+func (m *MockTeamServiceClient) PublicTeamIDs(ctx context.Context, req *connect.Request[v1.PublicTeamIDsRequest]) (*connect.Response[v1.PublicTeamIDsResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "PublicTeamIDs", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.PublicTeamIDsResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockTeamServiceClientMockRecorder) PublicTeamIDs(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PublicTeamIDs", reflect.TypeOf((*MockTeamService)(nil).PublicTeamIDs), ctx, req)
+}
+
 func (m *MockTeamService) PublicTeamList(ctx context.Context, req *connect.Request[v1.PublicTeamListRequest]) (*connect.Response[v1.PublicTeamListResponse], error) {
     m.ctrl.T.Helper()
     ret := m.ctrl.Call(m, "PublicTeamList", ctx, req)
@@ -49,6 +81,19 @@ func (m *MockTeamService) PublicTeamList(ctx context.Context, req *connect.Reque
 }
 
 func (mr *MockTeamServiceMockRecorder) PublicTeamList(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PublicTeamList", reflect.TypeOf((*MockTeamService)(nil).PublicTeamList), ctx, req)
+}
+
+func (m *MockTeamServiceClient) PublicTeamList(ctx context.Context, req *connect.Request[v1.PublicTeamListRequest]) (*connect.Response[v1.PublicTeamListResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "PublicTeamList", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.PublicTeamListResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockTeamServiceClientMockRecorder) PublicTeamList(ctx, req interface{}) *gomock.Call {
     mr.mock.ctrl.T.Helper()
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PublicTeamList", reflect.TypeOf((*MockTeamService)(nil).PublicTeamList), ctx, req)
 }

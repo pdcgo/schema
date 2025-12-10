@@ -27,6 +27,25 @@ func (m *MockTransferService) EXPECT() *MockTransferServiceMockRecorder {
     return m.recorder
 }
 
+type MockTransferServiceClient struct {
+    ctrl     *gomock.Controller
+    recorder *MockTransferServiceClientMockRecorder
+}
+
+type MockTransferServiceClientMockRecorder struct {
+    mock *MockTransferServiceClient
+}
+
+func NewMockTransferServiceClient(ctrl *gomock.Controller) *MockTransferServiceClient {
+    mock := &MockTransferServiceClient{ctrl: ctrl}
+    mock.recorder = &MockTransferServiceClientMockRecorder{mock}
+    return mock
+}
+
+func (m *MockTransferServiceClient) EXPECT() *MockTransferServiceClientMockRecorder {
+    return m.recorder
+}
+
 func (m *MockTransferService) TransferTeam(ctx context.Context, req *connect.Request[v1.TransferTeamRequest]) (*connect.Response[v1.TransferTeamResponse], error) {
     m.ctrl.T.Helper()
     ret := m.ctrl.Call(m, "TransferTeam", ctx, req)
@@ -40,6 +59,19 @@ func (mr *MockTransferServiceMockRecorder) TransferTeam(ctx, req interface{}) *g
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "TransferTeam", reflect.TypeOf((*MockTransferService)(nil).TransferTeam), ctx, req)
 }
 
+func (m *MockTransferServiceClient) TransferTeam(ctx context.Context, req *connect.Request[v1.TransferTeamRequest]) (*connect.Response[v1.TransferTeamResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "TransferTeam", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.TransferTeamResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockTransferServiceClientMockRecorder) TransferTeam(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "TransferTeam", reflect.TypeOf((*MockTransferService)(nil).TransferTeam), ctx, req)
+}
+
 func (m *MockTransferService) TransferList(ctx context.Context, req *connect.Request[v1.TransferListRequest]) (*connect.Response[v1.TransferListResponse], error) {
     m.ctrl.T.Helper()
     ret := m.ctrl.Call(m, "TransferList", ctx, req)
@@ -49,6 +81,19 @@ func (m *MockTransferService) TransferList(ctx context.Context, req *connect.Req
 }
 
 func (mr *MockTransferServiceMockRecorder) TransferList(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "TransferList", reflect.TypeOf((*MockTransferService)(nil).TransferList), ctx, req)
+}
+
+func (m *MockTransferServiceClient) TransferList(ctx context.Context, req *connect.Request[v1.TransferListRequest]) (*connect.Response[v1.TransferListResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "TransferList", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.TransferListResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockTransferServiceClientMockRecorder) TransferList(ctx, req interface{}) *gomock.Call {
     mr.mock.ctrl.T.Helper()
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "TransferList", reflect.TypeOf((*MockTransferService)(nil).TransferList), ctx, req)
 }

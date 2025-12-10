@@ -27,6 +27,25 @@ func (m *MockFrontendAccessService) EXPECT() *MockFrontendAccessServiceMockRecor
     return m.recorder
 }
 
+type MockFrontendAccessServiceClient struct {
+    ctrl     *gomock.Controller
+    recorder *MockFrontendAccessServiceClientMockRecorder
+}
+
+type MockFrontendAccessServiceClientMockRecorder struct {
+    mock *MockFrontendAccessServiceClient
+}
+
+func NewMockFrontendAccessServiceClient(ctrl *gomock.Controller) *MockFrontendAccessServiceClient {
+    mock := &MockFrontendAccessServiceClient{ctrl: ctrl}
+    mock.recorder = &MockFrontendAccessServiceClientMockRecorder{mock}
+    return mock
+}
+
+func (m *MockFrontendAccessServiceClient) EXPECT() *MockFrontendAccessServiceClientMockRecorder {
+    return m.recorder
+}
+
 func (m *MockFrontendAccessService) SetupAccess(ctx context.Context, req *connect.Request[v1.SetupAccessRequest], stream *connect.ServerStream[v1.SetupAccessResponse]) error {
     m.ctrl.T.Helper()
     ret := m.ctrl.Call(m, "SetupAccess", ctx, req, stream)
@@ -39,6 +58,19 @@ func (mr *MockFrontendAccessServiceMockRecorder) SetupAccess(ctx, req, stream in
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetupAccess", reflect.TypeOf((*MockFrontendAccessService)(nil).SetupAccess), ctx, req, stream)
 }
 
+func (m *MockFrontendAccessServiceClient) SetupAccess(ctx context.Context, req *connect.Request[v1.SetupAccessRequest]) (*connect.ServerStreamForClient[v1.SetupAccessResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "SetupAccess", ctx, req)
+    ret0, _ := ret[0].(*connect.ServerStreamForClient[v1.SetupAccessResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockFrontendAccessServiceClientMockRecorder) SetupAccess(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetupAccess", reflect.TypeOf((*MockFrontendAccessService)(nil).SetupAccess), ctx, req)
+}
+
 func (m *MockFrontendAccessService) MenuAccess(ctx context.Context, req *connect.Request[v1.MenuAccessRequest]) (*connect.Response[v1.MenuAccessResponse], error) {
     m.ctrl.T.Helper()
     ret := m.ctrl.Call(m, "MenuAccess", ctx, req)
@@ -48,6 +80,19 @@ func (m *MockFrontendAccessService) MenuAccess(ctx context.Context, req *connect
 }
 
 func (mr *MockFrontendAccessServiceMockRecorder) MenuAccess(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "MenuAccess", reflect.TypeOf((*MockFrontendAccessService)(nil).MenuAccess), ctx, req)
+}
+
+func (m *MockFrontendAccessServiceClient) MenuAccess(ctx context.Context, req *connect.Request[v1.MenuAccessRequest]) (*connect.Response[v1.MenuAccessResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "MenuAccess", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.MenuAccessResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockFrontendAccessServiceClientMockRecorder) MenuAccess(ctx, req interface{}) *gomock.Call {
     mr.mock.ctrl.T.Helper()
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "MenuAccess", reflect.TypeOf((*MockFrontendAccessService)(nil).MenuAccess), ctx, req)
 }

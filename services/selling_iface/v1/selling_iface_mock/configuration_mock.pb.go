@@ -27,6 +27,25 @@ func (m *MockConfigurationLimitService) EXPECT() *MockConfigurationLimitServiceM
     return m.recorder
 }
 
+type MockConfigurationLimitServiceClient struct {
+    ctrl     *gomock.Controller
+    recorder *MockConfigurationLimitServiceClientMockRecorder
+}
+
+type MockConfigurationLimitServiceClientMockRecorder struct {
+    mock *MockConfigurationLimitServiceClient
+}
+
+func NewMockConfigurationLimitServiceClient(ctrl *gomock.Controller) *MockConfigurationLimitServiceClient {
+    mock := &MockConfigurationLimitServiceClient{ctrl: ctrl}
+    mock.recorder = &MockConfigurationLimitServiceClientMockRecorder{mock}
+    return mock
+}
+
+func (m *MockConfigurationLimitServiceClient) EXPECT() *MockConfigurationLimitServiceClientMockRecorder {
+    return m.recorder
+}
+
 func (m *MockConfigurationLimitService) LimitInvoice(ctx context.Context, req *connect.Request[v1.LimitInvoiceRequest]) (*connect.Response[v1.LimitInvoiceResponse], error) {
     m.ctrl.T.Helper()
     ret := m.ctrl.Call(m, "LimitInvoice", ctx, req)
@@ -36,6 +55,19 @@ func (m *MockConfigurationLimitService) LimitInvoice(ctx context.Context, req *c
 }
 
 func (mr *MockConfigurationLimitServiceMockRecorder) LimitInvoice(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "LimitInvoice", reflect.TypeOf((*MockConfigurationLimitService)(nil).LimitInvoice), ctx, req)
+}
+
+func (m *MockConfigurationLimitServiceClient) LimitInvoice(ctx context.Context, req *connect.Request[v1.LimitInvoiceRequest]) (*connect.Response[v1.LimitInvoiceResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "LimitInvoice", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.LimitInvoiceResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockConfigurationLimitServiceClientMockRecorder) LimitInvoice(ctx, req interface{}) *gomock.Call {
     mr.mock.ctrl.T.Helper()
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "LimitInvoice", reflect.TypeOf((*MockConfigurationLimitService)(nil).LimitInvoice), ctx, req)
 }

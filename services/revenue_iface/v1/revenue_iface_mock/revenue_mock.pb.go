@@ -27,6 +27,25 @@ func (m *MockRevenueService) EXPECT() *MockRevenueServiceMockRecorder {
     return m.recorder
 }
 
+type MockRevenueServiceClient struct {
+    ctrl     *gomock.Controller
+    recorder *MockRevenueServiceClientMockRecorder
+}
+
+type MockRevenueServiceClientMockRecorder struct {
+    mock *MockRevenueServiceClient
+}
+
+func NewMockRevenueServiceClient(ctrl *gomock.Controller) *MockRevenueServiceClient {
+    mock := &MockRevenueServiceClient{ctrl: ctrl}
+    mock.recorder = &MockRevenueServiceClientMockRecorder{mock}
+    return mock
+}
+
+func (m *MockRevenueServiceClient) EXPECT() *MockRevenueServiceClientMockRecorder {
+    return m.recorder
+}
+
 func (m *MockRevenueService) OnOrder(ctx context.Context, req *connect.Request[v1.OnOrderRequest]) (*connect.Response[v1.OnOrderResponse], error) {
     m.ctrl.T.Helper()
     ret := m.ctrl.Call(m, "OnOrder", ctx, req)
@@ -36,6 +55,19 @@ func (m *MockRevenueService) OnOrder(ctx context.Context, req *connect.Request[v
 }
 
 func (mr *MockRevenueServiceMockRecorder) OnOrder(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OnOrder", reflect.TypeOf((*MockRevenueService)(nil).OnOrder), ctx, req)
+}
+
+func (m *MockRevenueServiceClient) OnOrder(ctx context.Context, req *connect.Request[v1.OnOrderRequest]) (*connect.Response[v1.OnOrderResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "OnOrder", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.OnOrderResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockRevenueServiceClientMockRecorder) OnOrder(ctx, req interface{}) *gomock.Call {
     mr.mock.ctrl.T.Helper()
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OnOrder", reflect.TypeOf((*MockRevenueService)(nil).OnOrder), ctx, req)
 }
@@ -53,6 +85,19 @@ func (mr *MockRevenueServiceMockRecorder) OrderCancel(ctx, req interface{}) *gom
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OrderCancel", reflect.TypeOf((*MockRevenueService)(nil).OrderCancel), ctx, req)
 }
 
+func (m *MockRevenueServiceClient) OrderCancel(ctx context.Context, req *connect.Request[v1.OrderCancelRequest]) (*connect.Response[v1.OrderCancelResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "OrderCancel", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.OrderCancelResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockRevenueServiceClientMockRecorder) OrderCancel(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OrderCancel", reflect.TypeOf((*MockRevenueService)(nil).OrderCancel), ctx, req)
+}
+
 func (m *MockRevenueService) OrderReturnAsync(ctx context.Context, req *connect.Request[v1.OrderReturnAsyncRequest]) (*connect.Response[v1.OrderReturnAsyncResponse], error) {
     m.ctrl.T.Helper()
     ret := m.ctrl.Call(m, "OrderReturnAsync", ctx, req)
@@ -62,6 +107,19 @@ func (m *MockRevenueService) OrderReturnAsync(ctx context.Context, req *connect.
 }
 
 func (mr *MockRevenueServiceMockRecorder) OrderReturnAsync(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OrderReturnAsync", reflect.TypeOf((*MockRevenueService)(nil).OrderReturnAsync), ctx, req)
+}
+
+func (m *MockRevenueServiceClient) OrderReturnAsync(ctx context.Context, req *connect.Request[v1.OrderReturnAsyncRequest]) (*connect.Response[v1.OrderReturnAsyncResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "OrderReturnAsync", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.OrderReturnAsyncResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockRevenueServiceClientMockRecorder) OrderReturnAsync(ctx, req interface{}) *gomock.Call {
     mr.mock.ctrl.T.Helper()
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OrderReturnAsync", reflect.TypeOf((*MockRevenueService)(nil).OrderReturnAsync), ctx, req)
 }
@@ -79,6 +137,19 @@ func (mr *MockRevenueServiceMockRecorder) OrderReturn(ctx, req interface{}) *gom
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OrderReturn", reflect.TypeOf((*MockRevenueService)(nil).OrderReturn), ctx, req)
 }
 
+func (m *MockRevenueServiceClient) OrderReturn(ctx context.Context, req *connect.Request[v1.OrderReturnRequest]) (*connect.Response[v1.OrderReturnResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "OrderReturn", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.OrderReturnResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockRevenueServiceClientMockRecorder) OrderReturn(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OrderReturn", reflect.TypeOf((*MockRevenueService)(nil).OrderReturn), ctx, req)
+}
+
 func (m *MockRevenueService) OrderCompleted(ctx context.Context, req *connect.Request[v1.OrderCompletedRequest]) (*connect.Response[v1.OrderCompletedResponse], error) {
     m.ctrl.T.Helper()
     ret := m.ctrl.Call(m, "OrderCompleted", ctx, req)
@@ -88,6 +159,19 @@ func (m *MockRevenueService) OrderCompleted(ctx context.Context, req *connect.Re
 }
 
 func (mr *MockRevenueServiceMockRecorder) OrderCompleted(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OrderCompleted", reflect.TypeOf((*MockRevenueService)(nil).OrderCompleted), ctx, req)
+}
+
+func (m *MockRevenueServiceClient) OrderCompleted(ctx context.Context, req *connect.Request[v1.OrderCompletedRequest]) (*connect.Response[v1.OrderCompletedResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "OrderCompleted", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.OrderCompletedResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockRevenueServiceClientMockRecorder) OrderCompleted(ctx, req interface{}) *gomock.Call {
     mr.mock.ctrl.T.Helper()
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OrderCompleted", reflect.TypeOf((*MockRevenueService)(nil).OrderCompleted), ctx, req)
 }
@@ -105,6 +189,19 @@ func (mr *MockRevenueServiceMockRecorder) RevenueAdjustment(ctx, req interface{}
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RevenueAdjustment", reflect.TypeOf((*MockRevenueService)(nil).RevenueAdjustment), ctx, req)
 }
 
+func (m *MockRevenueServiceClient) RevenueAdjustment(ctx context.Context, req *connect.Request[v1.RevenueAdjustmentRequest]) (*connect.Response[v1.RevenueAdjustmentResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "RevenueAdjustment", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.RevenueAdjustmentResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockRevenueServiceClientMockRecorder) RevenueAdjustment(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RevenueAdjustment", reflect.TypeOf((*MockRevenueService)(nil).RevenueAdjustment), ctx, req)
+}
+
 func (m *MockRevenueService) Withdrawal(ctx context.Context, req *connect.Request[v1.WithdrawalRequest]) (*connect.Response[v1.WithdrawalResponse], error) {
     m.ctrl.T.Helper()
     ret := m.ctrl.Call(m, "Withdrawal", ctx, req)
@@ -114,6 +211,19 @@ func (m *MockRevenueService) Withdrawal(ctx context.Context, req *connect.Reques
 }
 
 func (mr *MockRevenueServiceMockRecorder) Withdrawal(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Withdrawal", reflect.TypeOf((*MockRevenueService)(nil).Withdrawal), ctx, req)
+}
+
+func (m *MockRevenueServiceClient) Withdrawal(ctx context.Context, req *connect.Request[v1.WithdrawalRequest]) (*connect.Response[v1.WithdrawalResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "Withdrawal", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.WithdrawalResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockRevenueServiceClientMockRecorder) Withdrawal(ctx, req interface{}) *gomock.Call {
     mr.mock.ctrl.T.Helper()
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Withdrawal", reflect.TypeOf((*MockRevenueService)(nil).Withdrawal), ctx, req)
 }
@@ -129,5 +239,17 @@ func (m *MockRevenueService) RevenueStream(ctx context.Context, stream *connect.
 func (mr *MockRevenueServiceMockRecorder) RevenueStream(ctx, stream interface{}) *gomock.Call {
     mr.mock.ctrl.T.Helper()
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RevenueStream", reflect.TypeOf((*MockRevenueService)(nil).RevenueStream), ctx, stream)
+}
+
+func (m *MockRevenueServiceClient) RevenueStream(ctx context.Context) *connect.ClientStreamForClient[v1.RevenueStreamRequest, v1.RevenueStreamResponse] {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "RevenueStream", ctx)
+    ret0, _ := ret[0].(*connect.ClientStreamForClient[v1.RevenueStreamRequest, v1.RevenueStreamResponse])
+    return ret0
+}
+
+func (mr *MockRevenueServiceClientMockRecorder) RevenueStream(ctx context.Context) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RevenueStream", reflect.TypeOf((*MockRevenueService)(nil).RevenueStream), ctx)
 }
 

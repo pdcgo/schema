@@ -27,6 +27,25 @@ func (m *MockCoreService) EXPECT() *MockCoreServiceMockRecorder {
     return m.recorder
 }
 
+type MockCoreServiceClient struct {
+    ctrl     *gomock.Controller
+    recorder *MockCoreServiceClientMockRecorder
+}
+
+type MockCoreServiceClientMockRecorder struct {
+    mock *MockCoreServiceClient
+}
+
+func NewMockCoreServiceClient(ctrl *gomock.Controller) *MockCoreServiceClient {
+    mock := &MockCoreServiceClient{ctrl: ctrl}
+    mock.recorder = &MockCoreServiceClientMockRecorder{mock}
+    return mock
+}
+
+func (m *MockCoreServiceClient) EXPECT() *MockCoreServiceClientMockRecorder {
+    return m.recorder
+}
+
 func (m *MockCoreService) AccountKeyList(ctx context.Context, req *connect.Request[v1.AccountKeyListRequest]) (*connect.Response[v1.AccountKeyListResponse], error) {
     m.ctrl.T.Helper()
     ret := m.ctrl.Call(m, "AccountKeyList", ctx, req)
@@ -40,6 +59,19 @@ func (mr *MockCoreServiceMockRecorder) AccountKeyList(ctx, req interface{}) *gom
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AccountKeyList", reflect.TypeOf((*MockCoreService)(nil).AccountKeyList), ctx, req)
 }
 
+func (m *MockCoreServiceClient) AccountKeyList(ctx context.Context, req *connect.Request[v1.AccountKeyListRequest]) (*connect.Response[v1.AccountKeyListResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "AccountKeyList", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.AccountKeyListResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockCoreServiceClientMockRecorder) AccountKeyList(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AccountKeyList", reflect.TypeOf((*MockCoreService)(nil).AccountKeyList), ctx, req)
+}
+
 func (m *MockCoreService) TypeLabelList(ctx context.Context, req *connect.Request[v1.TypeLabelListRequest]) (*connect.Response[v1.TypeLabelListResponse], error) {
     m.ctrl.T.Helper()
     ret := m.ctrl.Call(m, "TypeLabelList", ctx, req)
@@ -49,6 +81,19 @@ func (m *MockCoreService) TypeLabelList(ctx context.Context, req *connect.Reques
 }
 
 func (mr *MockCoreServiceMockRecorder) TypeLabelList(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "TypeLabelList", reflect.TypeOf((*MockCoreService)(nil).TypeLabelList), ctx, req)
+}
+
+func (m *MockCoreServiceClient) TypeLabelList(ctx context.Context, req *connect.Request[v1.TypeLabelListRequest]) (*connect.Response[v1.TypeLabelListResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "TypeLabelList", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.TypeLabelListResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockCoreServiceClientMockRecorder) TypeLabelList(ctx, req interface{}) *gomock.Call {
     mr.mock.ctrl.T.Helper()
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "TypeLabelList", reflect.TypeOf((*MockCoreService)(nil).TypeLabelList), ctx, req)
 }

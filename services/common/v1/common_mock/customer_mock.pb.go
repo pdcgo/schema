@@ -27,6 +27,25 @@ func (m *MockCustomerDataService) EXPECT() *MockCustomerDataServiceMockRecorder 
     return m.recorder
 }
 
+type MockCustomerDataServiceClient struct {
+    ctrl     *gomock.Controller
+    recorder *MockCustomerDataServiceClientMockRecorder
+}
+
+type MockCustomerDataServiceClientMockRecorder struct {
+    mock *MockCustomerDataServiceClient
+}
+
+func NewMockCustomerDataServiceClient(ctrl *gomock.Controller) *MockCustomerDataServiceClient {
+    mock := &MockCustomerDataServiceClient{ctrl: ctrl}
+    mock.recorder = &MockCustomerDataServiceClientMockRecorder{mock}
+    return mock
+}
+
+func (m *MockCustomerDataServiceClient) EXPECT() *MockCustomerDataServiceClientMockRecorder {
+    return m.recorder
+}
+
 func (m *MockCustomerDataService) CustomerIDs(ctx context.Context, req *connect.Request[v1.CustomerIDsRequest]) (*connect.Response[v1.CustomerIDsResponse], error) {
     m.ctrl.T.Helper()
     ret := m.ctrl.Call(m, "CustomerIDs", ctx, req)
@@ -36,6 +55,19 @@ func (m *MockCustomerDataService) CustomerIDs(ctx context.Context, req *connect.
 }
 
 func (mr *MockCustomerDataServiceMockRecorder) CustomerIDs(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CustomerIDs", reflect.TypeOf((*MockCustomerDataService)(nil).CustomerIDs), ctx, req)
+}
+
+func (m *MockCustomerDataServiceClient) CustomerIDs(ctx context.Context, req *connect.Request[v1.CustomerIDsRequest]) (*connect.Response[v1.CustomerIDsResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "CustomerIDs", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.CustomerIDsResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockCustomerDataServiceClientMockRecorder) CustomerIDs(ctx, req interface{}) *gomock.Call {
     mr.mock.ctrl.T.Helper()
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CustomerIDs", reflect.TypeOf((*MockCustomerDataService)(nil).CustomerIDs), ctx, req)
 }

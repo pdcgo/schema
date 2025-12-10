@@ -27,6 +27,25 @@ func (m *MockStockProvisionService) EXPECT() *MockStockProvisionServiceMockRecor
     return m.recorder
 }
 
+type MockStockProvisionServiceClient struct {
+    ctrl     *gomock.Controller
+    recorder *MockStockProvisionServiceClientMockRecorder
+}
+
+type MockStockProvisionServiceClientMockRecorder struct {
+    mock *MockStockProvisionServiceClient
+}
+
+func NewMockStockProvisionServiceClient(ctrl *gomock.Controller) *MockStockProvisionServiceClient {
+    mock := &MockStockProvisionServiceClient{ctrl: ctrl}
+    mock.recorder = &MockStockProvisionServiceClientMockRecorder{mock}
+    return mock
+}
+
+func (m *MockStockProvisionServiceClient) EXPECT() *MockStockProvisionServiceClientMockRecorder {
+    return m.recorder
+}
+
 func (m *MockStockProvisionService) StockProvision(ctx context.Context, req *connect.Request[v1.StockProvisionRequest]) (*connect.Response[v1.StockProvisionResponse], error) {
     m.ctrl.T.Helper()
     ret := m.ctrl.Call(m, "StockProvision", ctx, req)
@@ -36,6 +55,19 @@ func (m *MockStockProvisionService) StockProvision(ctx context.Context, req *con
 }
 
 func (mr *MockStockProvisionServiceMockRecorder) StockProvision(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StockProvision", reflect.TypeOf((*MockStockProvisionService)(nil).StockProvision), ctx, req)
+}
+
+func (m *MockStockProvisionServiceClient) StockProvision(ctx context.Context, req *connect.Request[v1.StockProvisionRequest]) (*connect.Response[v1.StockProvisionResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "StockProvision", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.StockProvisionResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockStockProvisionServiceClientMockRecorder) StockProvision(ctx, req interface{}) *gomock.Call {
     mr.mock.ctrl.T.Helper()
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StockProvision", reflect.TypeOf((*MockStockProvisionService)(nil).StockProvision), ctx, req)
 }

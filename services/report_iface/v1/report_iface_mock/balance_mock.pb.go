@@ -27,6 +27,25 @@ func (m *MockBalanceService) EXPECT() *MockBalanceServiceMockRecorder {
     return m.recorder
 }
 
+type MockBalanceServiceClient struct {
+    ctrl     *gomock.Controller
+    recorder *MockBalanceServiceClientMockRecorder
+}
+
+type MockBalanceServiceClientMockRecorder struct {
+    mock *MockBalanceServiceClient
+}
+
+func NewMockBalanceServiceClient(ctrl *gomock.Controller) *MockBalanceServiceClient {
+    mock := &MockBalanceServiceClient{ctrl: ctrl}
+    mock.recorder = &MockBalanceServiceClientMockRecorder{mock}
+    return mock
+}
+
+func (m *MockBalanceServiceClient) EXPECT() *MockBalanceServiceClientMockRecorder {
+    return m.recorder
+}
+
 func (m *MockBalanceService) BalanceResync(ctx context.Context, req *connect.Request[v1.BalanceResyncRequest], stream *connect.ServerStream[v1.BalanceResyncResponse]) error {
     m.ctrl.T.Helper()
     ret := m.ctrl.Call(m, "BalanceResync", ctx, req, stream)
@@ -37,5 +56,18 @@ func (m *MockBalanceService) BalanceResync(ctx context.Context, req *connect.Req
 func (mr *MockBalanceServiceMockRecorder) BalanceResync(ctx, req, stream interface{}) *gomock.Call {
     mr.mock.ctrl.T.Helper()
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "BalanceResync", reflect.TypeOf((*MockBalanceService)(nil).BalanceResync), ctx, req, stream)
+}
+
+func (m *MockBalanceServiceClient) BalanceResync(ctx context.Context, req *connect.Request[v1.BalanceResyncRequest]) (*connect.ServerStreamForClient[v1.BalanceResyncResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "BalanceResync", ctx, req)
+    ret0, _ := ret[0].(*connect.ServerStreamForClient[v1.BalanceResyncResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockBalanceServiceClientMockRecorder) BalanceResync(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "BalanceResync", reflect.TypeOf((*MockBalanceService)(nil).BalanceResync), ctx, req)
 }
 

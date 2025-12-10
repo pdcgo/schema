@@ -27,6 +27,25 @@ func (m *MockStockReportService) EXPECT() *MockStockReportServiceMockRecorder {
     return m.recorder
 }
 
+type MockStockReportServiceClient struct {
+    ctrl     *gomock.Controller
+    recorder *MockStockReportServiceClientMockRecorder
+}
+
+type MockStockReportServiceClientMockRecorder struct {
+    mock *MockStockReportServiceClient
+}
+
+func NewMockStockReportServiceClient(ctrl *gomock.Controller) *MockStockReportServiceClient {
+    mock := &MockStockReportServiceClient{ctrl: ctrl}
+    mock.recorder = &MockStockReportServiceClientMockRecorder{mock}
+    return mock
+}
+
+func (m *MockStockReportServiceClient) EXPECT() *MockStockReportServiceClientMockRecorder {
+    return m.recorder
+}
+
 func (m *MockStockReportService) StockTeam(ctx context.Context, req *connect.Request[v1.StockTeamRequest]) (*connect.Response[v1.StockTeamResponse], error) {
     m.ctrl.T.Helper()
     ret := m.ctrl.Call(m, "StockTeam", ctx, req)
@@ -36,6 +55,19 @@ func (m *MockStockReportService) StockTeam(ctx context.Context, req *connect.Req
 }
 
 func (mr *MockStockReportServiceMockRecorder) StockTeam(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StockTeam", reflect.TypeOf((*MockStockReportService)(nil).StockTeam), ctx, req)
+}
+
+func (m *MockStockReportServiceClient) StockTeam(ctx context.Context, req *connect.Request[v1.StockTeamRequest]) (*connect.Response[v1.StockTeamResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "StockTeam", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.StockTeamResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockStockReportServiceClientMockRecorder) StockTeam(ctx, req interface{}) *gomock.Call {
     mr.mock.ctrl.T.Helper()
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StockTeam", reflect.TypeOf((*MockStockReportService)(nil).StockTeam), ctx, req)
 }
