@@ -30,6 +30,12 @@ enum OutboundType {
   OUTBOUND_TYPE_TRANSFER_OUT = 2;
 }
 
+enum OutboundSearchType {
+  OUTBOUND_SEARCH_TYPE_UNSPECIFIED = 0;
+  OUTBOUND_SEARCH_TYPE_SHOPNAME = 1;
+  OUTBOUND_SEARCH_TYPE_ORDER_RECEIPT = 2;
+}
+
 message OutboundSort {
   OutboundSortField field = 1;
   common.v1.SortType type = 2;
@@ -40,6 +46,7 @@ message OutboundListFilter {
   uint64 user_id = 2;
   uint64 shop_id = 7;
   string q = 3;
+  OutboundSearchType search_type = 12;
   bool include_deleted = 10;
   ShipmentStatus shipment = 11;
   repeated string status = 4;
