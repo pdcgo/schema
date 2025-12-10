@@ -35,11 +35,23 @@ const (
 const (
 	// HelloServiceHelloProcedure is the fully-qualified name of the HelloService's Hello RPC.
 	HelloServiceHelloProcedure = "/access_iface.v1.HelloService/Hello"
+	// HelloServiceHelloClientStreamProcedure is the fully-qualified name of the HelloService's
+	// HelloClientStream RPC.
+	HelloServiceHelloClientStreamProcedure = "/access_iface.v1.HelloService/HelloClientStream"
+	// HelloServiceHelloServerStreamProcedure is the fully-qualified name of the HelloService's
+	// HelloServerStream RPC.
+	HelloServiceHelloServerStreamProcedure = "/access_iface.v1.HelloService/HelloServerStream"
+	// HelloServiceHelloBidiStreamProcedure is the fully-qualified name of the HelloService's
+	// HelloBidiStream RPC.
+	HelloServiceHelloBidiStreamProcedure = "/access_iface.v1.HelloService/HelloBidiStream"
 )
 
 // HelloServiceClient is a client for the access_iface.v1.HelloService service.
 type HelloServiceClient interface {
 	Hello(context.Context, *connect.Request[v1.HelloRequest]) (*connect.Response[v1.HelloResponse], error)
+	HelloClientStream(context.Context) *connect.ClientStreamForClient[v1.HelloClientStreamRequest, v1.HelloClientStreamResponse]
+	HelloServerStream(context.Context, *connect.Request[v1.HelloServerStreamRequest]) (*connect.ServerStreamForClient[v1.HelloServerStreamResponse], error)
+	HelloBidiStream(context.Context) *connect.BidiStreamForClient[v1.HelloBidiStreamRequest, v1.HelloBidiStreamResponse]
 }
 
 // NewHelloServiceClient constructs a client for the access_iface.v1.HelloService service. By
@@ -59,12 +71,33 @@ func NewHelloServiceClient(httpClient connect.HTTPClient, baseURL string, opts .
 			connect.WithSchema(helloServiceMethods.ByName("Hello")),
 			connect.WithClientOptions(opts...),
 		),
+		helloClientStream: connect.NewClient[v1.HelloClientStreamRequest, v1.HelloClientStreamResponse](
+			httpClient,
+			baseURL+HelloServiceHelloClientStreamProcedure,
+			connect.WithSchema(helloServiceMethods.ByName("HelloClientStream")),
+			connect.WithClientOptions(opts...),
+		),
+		helloServerStream: connect.NewClient[v1.HelloServerStreamRequest, v1.HelloServerStreamResponse](
+			httpClient,
+			baseURL+HelloServiceHelloServerStreamProcedure,
+			connect.WithSchema(helloServiceMethods.ByName("HelloServerStream")),
+			connect.WithClientOptions(opts...),
+		),
+		helloBidiStream: connect.NewClient[v1.HelloBidiStreamRequest, v1.HelloBidiStreamResponse](
+			httpClient,
+			baseURL+HelloServiceHelloBidiStreamProcedure,
+			connect.WithSchema(helloServiceMethods.ByName("HelloBidiStream")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // helloServiceClient implements HelloServiceClient.
 type helloServiceClient struct {
-	hello *connect.Client[v1.HelloRequest, v1.HelloResponse]
+	hello             *connect.Client[v1.HelloRequest, v1.HelloResponse]
+	helloClientStream *connect.Client[v1.HelloClientStreamRequest, v1.HelloClientStreamResponse]
+	helloServerStream *connect.Client[v1.HelloServerStreamRequest, v1.HelloServerStreamResponse]
+	helloBidiStream   *connect.Client[v1.HelloBidiStreamRequest, v1.HelloBidiStreamResponse]
 }
 
 // Hello calls access_iface.v1.HelloService.Hello.
@@ -72,9 +105,27 @@ func (c *helloServiceClient) Hello(ctx context.Context, req *connect.Request[v1.
 	return c.hello.CallUnary(ctx, req)
 }
 
+// HelloClientStream calls access_iface.v1.HelloService.HelloClientStream.
+func (c *helloServiceClient) HelloClientStream(ctx context.Context) *connect.ClientStreamForClient[v1.HelloClientStreamRequest, v1.HelloClientStreamResponse] {
+	return c.helloClientStream.CallClientStream(ctx)
+}
+
+// HelloServerStream calls access_iface.v1.HelloService.HelloServerStream.
+func (c *helloServiceClient) HelloServerStream(ctx context.Context, req *connect.Request[v1.HelloServerStreamRequest]) (*connect.ServerStreamForClient[v1.HelloServerStreamResponse], error) {
+	return c.helloServerStream.CallServerStream(ctx, req)
+}
+
+// HelloBidiStream calls access_iface.v1.HelloService.HelloBidiStream.
+func (c *helloServiceClient) HelloBidiStream(ctx context.Context) *connect.BidiStreamForClient[v1.HelloBidiStreamRequest, v1.HelloBidiStreamResponse] {
+	return c.helloBidiStream.CallBidiStream(ctx)
+}
+
 // HelloServiceHandler is an implementation of the access_iface.v1.HelloService service.
 type HelloServiceHandler interface {
 	Hello(context.Context, *connect.Request[v1.HelloRequest]) (*connect.Response[v1.HelloResponse], error)
+	HelloClientStream(context.Context, *connect.ClientStream[v1.HelloClientStreamRequest]) (*connect.Response[v1.HelloClientStreamResponse], error)
+	HelloServerStream(context.Context, *connect.Request[v1.HelloServerStreamRequest], *connect.ServerStream[v1.HelloServerStreamResponse]) error
+	HelloBidiStream(context.Context, *connect.BidiStream[v1.HelloBidiStreamRequest, v1.HelloBidiStreamResponse]) error
 }
 
 // NewHelloServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -90,10 +141,34 @@ func NewHelloServiceHandler(svc HelloServiceHandler, opts ...connect.HandlerOpti
 		connect.WithSchema(helloServiceMethods.ByName("Hello")),
 		connect.WithHandlerOptions(opts...),
 	)
+	helloServiceHelloClientStreamHandler := connect.NewClientStreamHandler(
+		HelloServiceHelloClientStreamProcedure,
+		svc.HelloClientStream,
+		connect.WithSchema(helloServiceMethods.ByName("HelloClientStream")),
+		connect.WithHandlerOptions(opts...),
+	)
+	helloServiceHelloServerStreamHandler := connect.NewServerStreamHandler(
+		HelloServiceHelloServerStreamProcedure,
+		svc.HelloServerStream,
+		connect.WithSchema(helloServiceMethods.ByName("HelloServerStream")),
+		connect.WithHandlerOptions(opts...),
+	)
+	helloServiceHelloBidiStreamHandler := connect.NewBidiStreamHandler(
+		HelloServiceHelloBidiStreamProcedure,
+		svc.HelloBidiStream,
+		connect.WithSchema(helloServiceMethods.ByName("HelloBidiStream")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/access_iface.v1.HelloService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case HelloServiceHelloProcedure:
 			helloServiceHelloHandler.ServeHTTP(w, r)
+		case HelloServiceHelloClientStreamProcedure:
+			helloServiceHelloClientStreamHandler.ServeHTTP(w, r)
+		case HelloServiceHelloServerStreamProcedure:
+			helloServiceHelloServerStreamHandler.ServeHTTP(w, r)
+		case HelloServiceHelloBidiStreamProcedure:
+			helloServiceHelloBidiStreamHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -105,4 +180,16 @@ type UnimplementedHelloServiceHandler struct{}
 
 func (UnimplementedHelloServiceHandler) Hello(context.Context, *connect.Request[v1.HelloRequest]) (*connect.Response[v1.HelloResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("access_iface.v1.HelloService.Hello is not implemented"))
+}
+
+func (UnimplementedHelloServiceHandler) HelloClientStream(context.Context, *connect.ClientStream[v1.HelloClientStreamRequest]) (*connect.Response[v1.HelloClientStreamResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("access_iface.v1.HelloService.HelloClientStream is not implemented"))
+}
+
+func (UnimplementedHelloServiceHandler) HelloServerStream(context.Context, *connect.Request[v1.HelloServerStreamRequest], *connect.ServerStream[v1.HelloServerStreamResponse]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("access_iface.v1.HelloService.HelloServerStream is not implemented"))
+}
+
+func (UnimplementedHelloServiceHandler) HelloBidiStream(context.Context, *connect.BidiStream[v1.HelloBidiStreamRequest, v1.HelloBidiStreamResponse]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("access_iface.v1.HelloService.HelloBidiStream is not implemented"))
 }

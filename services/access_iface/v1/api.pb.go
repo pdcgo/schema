@@ -352,6 +352,270 @@ func (*EmptyDispatch) Descriptor() ([]byte, []int) {
 	return file_access_iface_v1_api_proto_rawDescGZIP(), []int{5}
 }
 
+type HelloBidiStreamRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *HelloBidiStreamRequest) Reset() {
+	*x = HelloBidiStreamRequest{}
+	mi := &file_access_iface_v1_api_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HelloBidiStreamRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HelloBidiStreamRequest) ProtoMessage() {}
+
+func (x *HelloBidiStreamRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_access_iface_v1_api_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HelloBidiStreamRequest.ProtoReflect.Descriptor instead.
+func (*HelloBidiStreamRequest) Descriptor() ([]byte, []int) {
+	return file_access_iface_v1_api_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *HelloBidiStreamRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+type HelloBidiStreamResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Message       string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *HelloBidiStreamResponse) Reset() {
+	*x = HelloBidiStreamResponse{}
+	mi := &file_access_iface_v1_api_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HelloBidiStreamResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HelloBidiStreamResponse) ProtoMessage() {}
+
+func (x *HelloBidiStreamResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_access_iface_v1_api_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HelloBidiStreamResponse.ProtoReflect.Descriptor instead.
+func (*HelloBidiStreamResponse) Descriptor() ([]byte, []int) {
+	return file_access_iface_v1_api_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *HelloBidiStreamResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+type HelloServerStreamRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *HelloServerStreamRequest) Reset() {
+	*x = HelloServerStreamRequest{}
+	mi := &file_access_iface_v1_api_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HelloServerStreamRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HelloServerStreamRequest) ProtoMessage() {}
+
+func (x *HelloServerStreamRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_access_iface_v1_api_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HelloServerStreamRequest.ProtoReflect.Descriptor instead.
+func (*HelloServerStreamRequest) Descriptor() ([]byte, []int) {
+	return file_access_iface_v1_api_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *HelloServerStreamRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+type HelloServerStreamResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Message       string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *HelloServerStreamResponse) Reset() {
+	*x = HelloServerStreamResponse{}
+	mi := &file_access_iface_v1_api_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HelloServerStreamResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HelloServerStreamResponse) ProtoMessage() {}
+
+func (x *HelloServerStreamResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_access_iface_v1_api_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HelloServerStreamResponse.ProtoReflect.Descriptor instead.
+func (*HelloServerStreamResponse) Descriptor() ([]byte, []int) {
+	return file_access_iface_v1_api_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *HelloServerStreamResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+type HelloClientStreamRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *HelloClientStreamRequest) Reset() {
+	*x = HelloClientStreamRequest{}
+	mi := &file_access_iface_v1_api_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HelloClientStreamRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HelloClientStreamRequest) ProtoMessage() {}
+
+func (x *HelloClientStreamRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_access_iface_v1_api_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HelloClientStreamRequest.ProtoReflect.Descriptor instead.
+func (*HelloClientStreamRequest) Descriptor() ([]byte, []int) {
+	return file_access_iface_v1_api_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *HelloClientStreamRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+type HelloClientStreamResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Message       string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *HelloClientStreamResponse) Reset() {
+	*x = HelloClientStreamResponse{}
+	mi := &file_access_iface_v1_api_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HelloClientStreamResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HelloClientStreamResponse) ProtoMessage() {}
+
+func (x *HelloClientStreamResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_access_iface_v1_api_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HelloClientStreamResponse.ProtoReflect.Descriptor instead.
+func (*HelloClientStreamResponse) Descriptor() ([]byte, []int) {
+	return file_access_iface_v1_api_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *HelloClientStreamResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
 type HelloRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Dispatch      bool                   `protobuf:"varint,2,opt,name=dispatch,proto3" json:"dispatch,omitempty"`
@@ -362,7 +626,7 @@ type HelloRequest struct {
 
 func (x *HelloRequest) Reset() {
 	*x = HelloRequest{}
-	mi := &file_access_iface_v1_api_proto_msgTypes[6]
+	mi := &file_access_iface_v1_api_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -374,7 +638,7 @@ func (x *HelloRequest) String() string {
 func (*HelloRequest) ProtoMessage() {}
 
 func (x *HelloRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_access_iface_v1_api_proto_msgTypes[6]
+	mi := &file_access_iface_v1_api_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -387,7 +651,7 @@ func (x *HelloRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HelloRequest.ProtoReflect.Descriptor instead.
 func (*HelloRequest) Descriptor() ([]byte, []int) {
-	return file_access_iface_v1_api_proto_rawDescGZIP(), []int{6}
+	return file_access_iface_v1_api_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *HelloRequest) GetDispatch() bool {
@@ -414,7 +678,7 @@ type HelloResponse struct {
 
 func (x *HelloResponse) Reset() {
 	*x = HelloResponse{}
-	mi := &file_access_iface_v1_api_proto_msgTypes[7]
+	mi := &file_access_iface_v1_api_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -426,7 +690,7 @@ func (x *HelloResponse) String() string {
 func (*HelloResponse) ProtoMessage() {}
 
 func (x *HelloResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_access_iface_v1_api_proto_msgTypes[7]
+	mi := &file_access_iface_v1_api_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -439,7 +703,7 @@ func (x *HelloResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HelloResponse.ProtoReflect.Descriptor instead.
 func (*HelloResponse) Descriptor() ([]byte, []int) {
-	return file_access_iface_v1_api_proto_rawDescGZIP(), []int{7}
+	return file_access_iface_v1_api_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *HelloResponse) GetMessage() string {
@@ -474,7 +738,19 @@ const file_access_iface_v1_api_proto_rawDesc = "" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\".\n" +
 	"\x12RequestSourceError\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\"\x0f\n" +
-	"\rEmptyDispatch\">\n" +
+	"\rEmptyDispatch\",\n" +
+	"\x16HelloBidiStreamRequest\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"3\n" +
+	"\x17HelloBidiStreamResponse\x12\x18\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage\".\n" +
+	"\x18HelloServerStreamRequest\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"5\n" +
+	"\x19HelloServerStreamResponse\x12\x18\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage\".\n" +
+	"\x18HelloClientStreamRequest\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"5\n" +
+	"\x19HelloClientStreamResponse\x12\x18\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage\">\n" +
 	"\fHelloRequest\x12\x1a\n" +
 	"\bdispatch\x18\x02 \x01(\bR\bdispatch\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\"a\n" +
@@ -487,9 +763,12 @@ const file_access_iface_v1_api_proto_rawDesc = "" +
 	"\x12REQUEST_FROM_ADMIN\x10\x02\x12\x1a\n" +
 	"\x16REQUEST_FROM_WAREHOUSE\x10\x03\x12\x17\n" +
 	"\x13REQUEST_FROM_SYSTEM\x10\x04\x12\x1a\n" +
-	"\x16REQUEST_FROM_EXTENSION\x10\x052V\n" +
+	"\x16REQUEST_FROM_EXTENSION\x10\x052\x9c\x03\n" +
 	"\fHelloService\x12F\n" +
-	"\x05Hello\x12\x1d.access_iface.v1.HelloRequest\x1a\x1e.access_iface.v1.HelloResponseB\xb7\x01\n" +
+	"\x05Hello\x12\x1d.access_iface.v1.HelloRequest\x1a\x1e.access_iface.v1.HelloResponse\x12l\n" +
+	"\x11HelloClientStream\x12).access_iface.v1.HelloClientStreamRequest\x1a*.access_iface.v1.HelloClientStreamResponse(\x01\x12l\n" +
+	"\x11HelloServerStream\x12).access_iface.v1.HelloServerStreamRequest\x1a*.access_iface.v1.HelloServerStreamResponse0\x01\x12h\n" +
+	"\x0fHelloBidiStream\x12'.access_iface.v1.HelloBidiStreamRequest\x1a(.access_iface.v1.HelloBidiStreamResponse(\x010\x01B\xb7\x01\n" +
 	"\x13com.access_iface.v1B\bApiProtoP\x01Z=github.com/pdcgo/schema/services/access_iface/v1;access_iface\xa2\x02\x03AXX\xaa\x02\x0eAccessIface.V1\xca\x02\x0eAccessIface\\V1\xe2\x02\x1aAccessIface\\V1\\GPBMetadata\xea\x02\x0fAccessIface::V1b\x06proto3"
 
 var (
@@ -505,29 +784,41 @@ func file_access_iface_v1_api_proto_rawDescGZIP() []byte {
 }
 
 var file_access_iface_v1_api_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_access_iface_v1_api_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_access_iface_v1_api_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_access_iface_v1_api_proto_goTypes = []any{
-	(RequestFrom)(0),           // 0: access_iface.v1.RequestFrom
-	(*Stack)(nil),              // 1: access_iface.v1.Stack
-	(*StackSource)(nil),        // 2: access_iface.v1.StackSource
-	(*RequestSource)(nil),      // 3: access_iface.v1.RequestSource
-	(*ResourceScope)(nil),      // 4: access_iface.v1.ResourceScope
-	(*RequestSourceError)(nil), // 5: access_iface.v1.RequestSourceError
-	(*EmptyDispatch)(nil),      // 6: access_iface.v1.EmptyDispatch
-	(*HelloRequest)(nil),       // 7: access_iface.v1.HelloRequest
-	(*HelloResponse)(nil),      // 8: access_iface.v1.HelloResponse
+	(RequestFrom)(0),                  // 0: access_iface.v1.RequestFrom
+	(*Stack)(nil),                     // 1: access_iface.v1.Stack
+	(*StackSource)(nil),               // 2: access_iface.v1.StackSource
+	(*RequestSource)(nil),             // 3: access_iface.v1.RequestSource
+	(*ResourceScope)(nil),             // 4: access_iface.v1.ResourceScope
+	(*RequestSourceError)(nil),        // 5: access_iface.v1.RequestSourceError
+	(*EmptyDispatch)(nil),             // 6: access_iface.v1.EmptyDispatch
+	(*HelloBidiStreamRequest)(nil),    // 7: access_iface.v1.HelloBidiStreamRequest
+	(*HelloBidiStreamResponse)(nil),   // 8: access_iface.v1.HelloBidiStreamResponse
+	(*HelloServerStreamRequest)(nil),  // 9: access_iface.v1.HelloServerStreamRequest
+	(*HelloServerStreamResponse)(nil), // 10: access_iface.v1.HelloServerStreamResponse
+	(*HelloClientStreamRequest)(nil),  // 11: access_iface.v1.HelloClientStreamRequest
+	(*HelloClientStreamResponse)(nil), // 12: access_iface.v1.HelloClientStreamResponse
+	(*HelloRequest)(nil),              // 13: access_iface.v1.HelloRequest
+	(*HelloResponse)(nil),             // 14: access_iface.v1.HelloResponse
 }
 var file_access_iface_v1_api_proto_depIdxs = []int32{
-	1, // 0: access_iface.v1.StackSource.stacks:type_name -> access_iface.v1.Stack
-	0, // 1: access_iface.v1.RequestSource.request_from:type_name -> access_iface.v1.RequestFrom
-	3, // 2: access_iface.v1.HelloResponse.source:type_name -> access_iface.v1.RequestSource
-	7, // 3: access_iface.v1.HelloService.Hello:input_type -> access_iface.v1.HelloRequest
-	8, // 4: access_iface.v1.HelloService.Hello:output_type -> access_iface.v1.HelloResponse
-	4, // [4:5] is the sub-list for method output_type
-	3, // [3:4] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	1,  // 0: access_iface.v1.StackSource.stacks:type_name -> access_iface.v1.Stack
+	0,  // 1: access_iface.v1.RequestSource.request_from:type_name -> access_iface.v1.RequestFrom
+	3,  // 2: access_iface.v1.HelloResponse.source:type_name -> access_iface.v1.RequestSource
+	13, // 3: access_iface.v1.HelloService.Hello:input_type -> access_iface.v1.HelloRequest
+	11, // 4: access_iface.v1.HelloService.HelloClientStream:input_type -> access_iface.v1.HelloClientStreamRequest
+	9,  // 5: access_iface.v1.HelloService.HelloServerStream:input_type -> access_iface.v1.HelloServerStreamRequest
+	7,  // 6: access_iface.v1.HelloService.HelloBidiStream:input_type -> access_iface.v1.HelloBidiStreamRequest
+	14, // 7: access_iface.v1.HelloService.Hello:output_type -> access_iface.v1.HelloResponse
+	12, // 8: access_iface.v1.HelloService.HelloClientStream:output_type -> access_iface.v1.HelloClientStreamResponse
+	10, // 9: access_iface.v1.HelloService.HelloServerStream:output_type -> access_iface.v1.HelloServerStreamResponse
+	8,  // 10: access_iface.v1.HelloService.HelloBidiStream:output_type -> access_iface.v1.HelloBidiStreamResponse
+	7,  // [7:11] is the sub-list for method output_type
+	3,  // [3:7] is the sub-list for method input_type
+	3,  // [3:3] is the sub-list for extension type_name
+	3,  // [3:3] is the sub-list for extension extendee
+	0,  // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_access_iface_v1_api_proto_init() }
@@ -541,7 +832,7 @@ func file_access_iface_v1_api_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_access_iface_v1_api_proto_rawDesc), len(file_access_iface_v1_api_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   8,
+			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
