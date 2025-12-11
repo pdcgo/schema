@@ -30,6 +30,7 @@ const (
 	RevenueSource_REVENUE_SOURCE_LOST_COMPENSATION    RevenueSource = 3
 	RevenueSource_REVENUE_SOURCE_COMPENSATION         RevenueSource = 4
 	RevenueSource_REVENUE_SOURCE_UNKNOWN_COMPENSATION RevenueSource = 5
+	RevenueSource_REVENUE_SOURCE_OTHER                RevenueSource = 6
 )
 
 // Enum value maps for RevenueSource.
@@ -41,6 +42,7 @@ var (
 		3: "REVENUE_SOURCE_LOST_COMPENSATION",
 		4: "REVENUE_SOURCE_COMPENSATION",
 		5: "REVENUE_SOURCE_UNKNOWN_COMPENSATION",
+		6: "REVENUE_SOURCE_OTHER",
 	}
 	RevenueSource_value = map[string]int32{
 		"REVENUE_SOURCE_UNSPECIFIED":          0,
@@ -49,6 +51,7 @@ var (
 		"REVENUE_SOURCE_LOST_COMPENSATION":    3,
 		"REVENUE_SOURCE_COMPENSATION":         4,
 		"REVENUE_SOURCE_UNKNOWN_COMPENSATION": 5,
+		"REVENUE_SOURCE_OTHER":                6,
 	}
 )
 
@@ -83,14 +86,15 @@ var File_accounting_iface_v1_revenue_proto protoreflect.FileDescriptor
 
 const file_accounting_iface_v1_revenue_proto_rawDesc = "" +
 	"\n" +
-	"!accounting_iface/v1/revenue.proto\x12\x13accounting_iface.v1*\xe0\x01\n" +
+	"!accounting_iface/v1/revenue.proto\x12\x13accounting_iface.v1*\xfa\x01\n" +
 	"\rRevenueSource\x12\x1e\n" +
 	"\x1aREVENUE_SOURCE_UNSPECIFIED\x10\x00\x12\x17\n" +
 	"\x13REVENUE_SOURCE_FUND\x10\x01\x12&\n" +
 	"\"REVENUE_SOURCE_AFFILIATE_COMMISION\x10\x02\x12$\n" +
 	" REVENUE_SOURCE_LOST_COMPENSATION\x10\x03\x12\x1f\n" +
 	"\x1bREVENUE_SOURCE_COMPENSATION\x10\x04\x12'\n" +
-	"#REVENUE_SOURCE_UNKNOWN_COMPENSATION\x10\x05B\xd7\x01\n" +
+	"#REVENUE_SOURCE_UNKNOWN_COMPENSATION\x10\x05\x12\x18\n" +
+	"\x14REVENUE_SOURCE_OTHER\x10\x06B\xd7\x01\n" +
 	"\x17com.accounting_iface.v1B\fRevenueProtoP\x01ZEgithub.com/pdcgo/schema/services/accounting_iface/v1;accounting_iface\xa2\x02\x03AXX\xaa\x02\x12AccountingIface.V1\xca\x02\x12AccountingIface\\V1\xe2\x02\x1eAccountingIface\\V1\\GPBMetadata\xea\x02\x13AccountingIface::V1b\x06proto3"
 
 var (

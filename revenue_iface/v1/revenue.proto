@@ -24,6 +24,35 @@ service RevenueService {
   // rpc WithdrawalGet(WithdrawalGetRequest) returns (WithdrawalGetResponse);
 
   rpc RevenueStream(stream RevenueStreamRequest) returns (RevenueStreamResponse);
+
+  // penghasilan lain
+  rpc RevenueOther(RevenueOtherRequest) returns (RevenueOtherResponse);
+}
+
+enum RevenueAdjustmentType {
+  REVENUE_ADJUSTMENT_TYPE_UNSPECIFIED = 0;
+  REVENUE_ADJUSTMENT_TYPE_RETURN = 1;
+}
+
+message RevenueOtherRequest {
+  uint64 team_id = 1 [(buf.validate.field).uint64 = {gt: 0}];
+
+  string external_revenue_id = 2 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 100
+  }];
+
+  ExtraLabelInfo label_info = 3 [(buf.validate.field).required = true];
+  double amount = 4 [(buf.validate.field).double = {gt: 0}];
+  string desc = 5 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 300
+  }];
+  google.protobuf.Timestamp at = 6 [(buf.validate.field).required = true];
+}
+
+message RevenueOtherResponse {
+  uint64 transaction_id = 1;
 }
 
 message WithdrawalGetRequest {}
@@ -43,11 +72,6 @@ message RevenueStreamEventFund {
   google.protobuf.Timestamp at = 3 [(buf.validate.field).required = true];
   string desc = 4 [(buf.validate.field).required = true];
   string order_id = 5 [(buf.validate.field).required = true];
-}
-
-enum RevenueAdjustmentType {
-  REVENUE_ADJUSTMENT_TYPE_UNSPECIFIED = 0;
-  REVENUE_ADJUSTMENT_TYPE_RETURN = 1;
 }
 
 message RevenueStreamEventAdjustment {

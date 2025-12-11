@@ -9,7 +9,8 @@ package warehouse_iface.v1;
 option go_package = "github.com/pdcgo/schema/services/warehouse_iface/v1;warehouse_iface";
 
 service InboundService {
-  rpc InboundAccept(InboundAcceptRequest) returns (InboundAcceptResponse) {}
+  rpc InboundAccept(InboundAcceptRequest) returns (InboundAcceptResponse);
+  rpc InboundDetailSearch(InboundDetailSearchRequest) returns (InboundDetailSearchResponse);
 }
 
 enum ProblemType {
@@ -20,6 +21,32 @@ enum ProblemType {
   PROBLEM_TYPE_LOST_W = 4;
   PROBLEM_TYPE_DISASTER = 5;
   PROBLEM_TYPE_SAMPLE = 6;
+}
+
+enum SearchBy {
+  SEARCH_BY_UNSPECIFIED = 0;
+  SEARCH_BY_ID = 1;
+  SEARCH_BY_RECEIPT = 2;
+  SEARCH_BY_ORDERID = 3;
+}
+
+message InboundDetailSearchRequest {
+  SearchBy search_by = 1;
+  string q = 2;
+  uint64 inv_transaction_id = 3;
+}
+
+message InboundDetail {
+  uint64 id = 1;
+  uint64 team_id = 2;
+  uint64 warehouse_id = 3;
+  string receipt = 4;
+  string type = 5;
+  string status = 6;
+}
+
+message InboundDetailSearchResponse {
+  InboundDetail inbound = 1;
 }
 
 message PlacementItem {

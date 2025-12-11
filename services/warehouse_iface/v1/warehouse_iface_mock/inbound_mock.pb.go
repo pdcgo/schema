@@ -72,3 +72,29 @@ func (mr *MockInboundServiceClientMockRecorder) InboundAccept(ctx, req interface
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "InboundAccept", reflect.TypeOf((*MockInboundService)(nil).InboundAccept), ctx, req)
 }
 
+func (m *MockInboundService) InboundDetailSearch(ctx context.Context, req *connect.Request[v1.InboundDetailSearchRequest]) (*connect.Response[v1.InboundDetailSearchResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "InboundDetailSearch", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.InboundDetailSearchResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInboundServiceMockRecorder) InboundDetailSearch(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "InboundDetailSearch", reflect.TypeOf((*MockInboundService)(nil).InboundDetailSearch), ctx, req)
+}
+
+func (m *MockInboundServiceClient) InboundDetailSearch(ctx context.Context, req *connect.Request[v1.InboundDetailSearchRequest]) (*connect.Response[v1.InboundDetailSearchResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "InboundDetailSearch", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.InboundDetailSearchResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInboundServiceClientMockRecorder) InboundDetailSearch(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "InboundDetailSearch", reflect.TypeOf((*MockInboundService)(nil).InboundDetailSearch), ctx, req)
+}
+

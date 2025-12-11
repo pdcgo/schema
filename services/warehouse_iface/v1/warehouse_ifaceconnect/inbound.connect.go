@@ -36,11 +36,15 @@ const (
 	// InboundServiceInboundAcceptProcedure is the fully-qualified name of the InboundService's
 	// InboundAccept RPC.
 	InboundServiceInboundAcceptProcedure = "/warehouse_iface.v1.InboundService/InboundAccept"
+	// InboundServiceInboundDetailSearchProcedure is the fully-qualified name of the InboundService's
+	// InboundDetailSearch RPC.
+	InboundServiceInboundDetailSearchProcedure = "/warehouse_iface.v1.InboundService/InboundDetailSearch"
 )
 
 // InboundServiceClient is a client for the warehouse_iface.v1.InboundService service.
 type InboundServiceClient interface {
 	InboundAccept(context.Context, *connect.Request[v1.InboundAcceptRequest]) (*connect.Response[v1.InboundAcceptResponse], error)
+	InboundDetailSearch(context.Context, *connect.Request[v1.InboundDetailSearchRequest]) (*connect.Response[v1.InboundDetailSearchResponse], error)
 }
 
 // NewInboundServiceClient constructs a client for the warehouse_iface.v1.InboundService service. By
@@ -60,12 +64,19 @@ func NewInboundServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			connect.WithSchema(inboundServiceMethods.ByName("InboundAccept")),
 			connect.WithClientOptions(opts...),
 		),
+		inboundDetailSearch: connect.NewClient[v1.InboundDetailSearchRequest, v1.InboundDetailSearchResponse](
+			httpClient,
+			baseURL+InboundServiceInboundDetailSearchProcedure,
+			connect.WithSchema(inboundServiceMethods.ByName("InboundDetailSearch")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // inboundServiceClient implements InboundServiceClient.
 type inboundServiceClient struct {
-	inboundAccept *connect.Client[v1.InboundAcceptRequest, v1.InboundAcceptResponse]
+	inboundAccept       *connect.Client[v1.InboundAcceptRequest, v1.InboundAcceptResponse]
+	inboundDetailSearch *connect.Client[v1.InboundDetailSearchRequest, v1.InboundDetailSearchResponse]
 }
 
 // InboundAccept calls warehouse_iface.v1.InboundService.InboundAccept.
@@ -73,9 +84,15 @@ func (c *inboundServiceClient) InboundAccept(ctx context.Context, req *connect.R
 	return c.inboundAccept.CallUnary(ctx, req)
 }
 
+// InboundDetailSearch calls warehouse_iface.v1.InboundService.InboundDetailSearch.
+func (c *inboundServiceClient) InboundDetailSearch(ctx context.Context, req *connect.Request[v1.InboundDetailSearchRequest]) (*connect.Response[v1.InboundDetailSearchResponse], error) {
+	return c.inboundDetailSearch.CallUnary(ctx, req)
+}
+
 // InboundServiceHandler is an implementation of the warehouse_iface.v1.InboundService service.
 type InboundServiceHandler interface {
 	InboundAccept(context.Context, *connect.Request[v1.InboundAcceptRequest]) (*connect.Response[v1.InboundAcceptResponse], error)
+	InboundDetailSearch(context.Context, *connect.Request[v1.InboundDetailSearchRequest]) (*connect.Response[v1.InboundDetailSearchResponse], error)
 }
 
 // NewInboundServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -91,10 +108,18 @@ func NewInboundServiceHandler(svc InboundServiceHandler, opts ...connect.Handler
 		connect.WithSchema(inboundServiceMethods.ByName("InboundAccept")),
 		connect.WithHandlerOptions(opts...),
 	)
+	inboundServiceInboundDetailSearchHandler := connect.NewUnaryHandler(
+		InboundServiceInboundDetailSearchProcedure,
+		svc.InboundDetailSearch,
+		connect.WithSchema(inboundServiceMethods.ByName("InboundDetailSearch")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/warehouse_iface.v1.InboundService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case InboundServiceInboundAcceptProcedure:
 			inboundServiceInboundAcceptHandler.ServeHTTP(w, r)
+		case InboundServiceInboundDetailSearchProcedure:
+			inboundServiceInboundDetailSearchHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -106,4 +131,8 @@ type UnimplementedInboundServiceHandler struct{}
 
 func (UnimplementedInboundServiceHandler) InboundAccept(context.Context, *connect.Request[v1.InboundAcceptRequest]) (*connect.Response[v1.InboundAcceptResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("warehouse_iface.v1.InboundService.InboundAccept is not implemented"))
+}
+
+func (UnimplementedInboundServiceHandler) InboundDetailSearch(context.Context, *connect.Request[v1.InboundDetailSearchRequest]) (*connect.Response[v1.InboundDetailSearchResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("warehouse_iface.v1.InboundService.InboundDetailSearch is not implemented"))
 }
