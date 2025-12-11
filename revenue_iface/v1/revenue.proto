@@ -155,10 +155,7 @@ message WithdrawalRequest {
   uint64 shop_id = 2 [(buf.validate.field).uint64.gt = 0]; // must be > 0
   // uint64 order_id = 3 [(buf.validate.field).uint64.gt = 0]; // must be > 0
   int64 at = 4 [(buf.validate.field).int64.gt = 0]; // timestamp must be > 0
-  double amount = 5 [
-    (buf.validate.field).double.gt = 0, // must be > 0
-    (buf.validate.field).double.lte = 1e12 // optional: cap max value for safety
-  ];
+  double amount = 5 [(buf.validate.field).double.gt = 0/* must be > 0 */ /* (buf.validate.field).double.lte = 1e12 // optional: cap max value for safety */];
 }
 
 message WithdrawalResponse {}

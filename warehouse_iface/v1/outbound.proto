@@ -10,6 +10,58 @@ option go_package = "github.com/pdcgo/schema/services/warehouse_iface/v1;warehou
 
 service OutboundService {
   rpc OutboundList(OutboundListRequest) returns (OutboundListResponse);
+  rpc OrderDetailSearch(OrderDetailSearchRequest) returns (OrderDetailSearchResponse);
+}
+
+enum OrderDetailSearchType {
+  ORDER_DETAIL_SEARCH_TYPE_UNSPECIFIED = 0;
+  ORDER_DETAIL_SEARCH_TYPE_RECEIPT = 1;
+}
+
+message OrderDetailSearchRequest {
+  OrderDetailSearchType search_type = 1 [
+    (buf.validate.field).required = true,
+    (buf.validate.field).enum = {
+      not_in: [0]
+    }
+  ];
+  string q = 2 [(buf.validate.field).string = {min_len: 1}];
+}
+
+message TransactionDetail {
+  uint64 id = 1;
+  uint64 team_id = 2;
+  uint64 warehouse_id = 3;
+  uint64 create_by_id = 4;
+  uint64 verify_by_id = 5;
+  uint64 shipping_id = 6;
+  string extern_ord_id = 7;
+  string receipt = 8;
+  string receipt_file = 9;
+  string type = 10;
+  string status = 11;
+  bool is_shipped = 12;
+  double total = 13;
+  google.protobuf.Timestamp created = 14;
+  google.protobuf.Timestamp send_at = 15;
+  google.protobuf.Timestamp arrived = 16;
+}
+
+message OrderDetail {
+  uint64 id = 1;
+  uint64 team_id = 2;
+  uint64 create_by_id = 3;
+  uint64 invertory_tx_id = 4;
+  uint64 invertory_return_tx_id = 5;
+  bool double_order = 6;
+  string order_ref_id = 7;
+  string order_from = 8;
+}
+
+message OrderDetailSearchResponse {
+  OrderDetail order = 1;
+  TransactionDetail outbound = 2;
+  TransactionDetail inbound = 3;
 }
 
 enum ShipmentStatus {
