@@ -18,7 +18,23 @@ service OrderService {
 
   // bagian overview
   rpc OrderOverview(OrderOverviewRequest) returns (OrderOverviewResponse);
+
+  // Marketplace Payment
+  rpc MpPaymentCreate(MpPaymentCreateRequest) returns (MpPaymentCreateResponse);
+  rpc MpPaymentOrderList(MpPaymentOrderListRequest) returns (MpPaymentOrderListResponse);
+  rpc MpPaymentDelete(MpPaymentDeleteRequest) returns (MpPaymentDeleteResponse);
+
+  // bagian ops frequently
 }
+
+message MpPaymentCreateRequest {}
+message MpPaymentCreateResponse {}
+
+message MpPaymentOrderListRequest {}
+message MpPaymentOrderListResponse {}
+
+message MpPaymentDeleteRequest {}
+message MpPaymentDeleteResponse {}
 
 enum TagType {
   TAG_TYPE_UNSPECIFIED = 0;
