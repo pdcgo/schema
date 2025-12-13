@@ -4,13 +4,83 @@ package selling_iface.v1;
 // import "accounting_iface/v1/core.proto";
 // import "accounting_iface/v1/revenue.proto";
 import "buf/validate/validate.proto";
-// import "common/v1/common.proto";
+import "common/v1/common.proto";
 // import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/pdcgo/schema/services/selling_iface/v1;selling_iface";
 
 service ConfigurationLimitService {
   rpc LimitInvoice(LimitInvoiceRequest) returns (LimitInvoiceResponse);
+  // owe terbaru
+  rpc OweDefaultLimit(OweDefaultLimitRequest) returns (OweDefaultLimitResponse);
+  rpc OweLimitCustomCreate(OweLimitCustomCreateRequest) returns (OweLimitCustomCreateResponse);
+  rpc OweLimitCustomList(OweLimitCustomListRequest) returns (OweLimitCustomListResponse);
+  rpc OweLimitCustomByIDs(OweLimitCustomByIDsRequest) returns (OweLimitCustomByIDsResponse);
+  rpc CheckOweLimit(CheckOweLimitRequest) returns (CheckOweLimitResponse);
+}
+
+message OweDefaultLimitRequest {
+  double threeshold = 2;
+}
+
+message OweDefaultLimitResponse {}
+
+message OweLimitCustomCreateRequest {
+  uint64 team_id = 1;
+  uint64 from_team_id = 2;
+  uint64 to_team_id = 3;
+  double threeshold = 4;
+}
+message OweLimitCustomCreateResponse {
+  uint64 id = 1;
+}
+
+message OweLimitItem {
+  uint64 id = 1;
+  uint64 team_id = 2;
+  uint64 for_team_id = 3;
+  double threeshold = 4;
+}
+
+message OweLimitCustomListRequest {
+  string q = 1;
+  common.v1.PageFilter page = 2 [(buf.validate.field).required = true];
+}
+message OweLimitCustomListResponse {
+  repeated OweLimitItem data = 1;
+  common.v1.PageInfo page_info = 2;
+}
+
+message CheckOweLimitRequest {
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  repeated uint64 to_team_ids = 2 [
+    (buf.validate.field).repeated.min_items = 1,
+    (buf.validate.field).repeated.max_items = 100,
+    (buf.validate.field).repeated.unique = true,
+    (buf.validate.field).repeated.items.uint64.gt = 0
+  ];
+}
+
+message OweLimitAllow {
+  bool allow = 1;
+}
+
+message CheckOweLimitResponse {
+  map<uint64, OweLimitAllow> can_owe = 1;
+}
+
+message OweLimitCustomByIDsRequest {
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  repeated uint64 to_team_ids = 2 [
+    (buf.validate.field).repeated.min_items = 1,
+    (buf.validate.field).repeated.max_items = 100,
+    (buf.validate.field).repeated.unique = true,
+    (buf.validate.field).repeated.items.uint64.gt = 0
+  ];
+}
+
+message OweLimitCustomByIDsResponse {
+  repeated OweLimitItem data = 1;
 }
 
 message LimitInvoiceItemReq {

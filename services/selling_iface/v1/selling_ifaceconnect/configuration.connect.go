@@ -37,12 +37,33 @@ const (
 	// ConfigurationLimitServiceLimitInvoiceProcedure is the fully-qualified name of the
 	// ConfigurationLimitService's LimitInvoice RPC.
 	ConfigurationLimitServiceLimitInvoiceProcedure = "/selling_iface.v1.ConfigurationLimitService/LimitInvoice"
+	// ConfigurationLimitServiceOweDefaultLimitProcedure is the fully-qualified name of the
+	// ConfigurationLimitService's OweDefaultLimit RPC.
+	ConfigurationLimitServiceOweDefaultLimitProcedure = "/selling_iface.v1.ConfigurationLimitService/OweDefaultLimit"
+	// ConfigurationLimitServiceOweLimitCustomCreateProcedure is the fully-qualified name of the
+	// ConfigurationLimitService's OweLimitCustomCreate RPC.
+	ConfigurationLimitServiceOweLimitCustomCreateProcedure = "/selling_iface.v1.ConfigurationLimitService/OweLimitCustomCreate"
+	// ConfigurationLimitServiceOweLimitCustomListProcedure is the fully-qualified name of the
+	// ConfigurationLimitService's OweLimitCustomList RPC.
+	ConfigurationLimitServiceOweLimitCustomListProcedure = "/selling_iface.v1.ConfigurationLimitService/OweLimitCustomList"
+	// ConfigurationLimitServiceOweLimitCustomByIDsProcedure is the fully-qualified name of the
+	// ConfigurationLimitService's OweLimitCustomByIDs RPC.
+	ConfigurationLimitServiceOweLimitCustomByIDsProcedure = "/selling_iface.v1.ConfigurationLimitService/OweLimitCustomByIDs"
+	// ConfigurationLimitServiceCheckOweLimitProcedure is the fully-qualified name of the
+	// ConfigurationLimitService's CheckOweLimit RPC.
+	ConfigurationLimitServiceCheckOweLimitProcedure = "/selling_iface.v1.ConfigurationLimitService/CheckOweLimit"
 )
 
 // ConfigurationLimitServiceClient is a client for the selling_iface.v1.ConfigurationLimitService
 // service.
 type ConfigurationLimitServiceClient interface {
 	LimitInvoice(context.Context, *connect.Request[v1.LimitInvoiceRequest]) (*connect.Response[v1.LimitInvoiceResponse], error)
+	// owe terbaru
+	OweDefaultLimit(context.Context, *connect.Request[v1.OweDefaultLimitRequest]) (*connect.Response[v1.OweDefaultLimitResponse], error)
+	OweLimitCustomCreate(context.Context, *connect.Request[v1.OweLimitCustomCreateRequest]) (*connect.Response[v1.OweLimitCustomCreateResponse], error)
+	OweLimitCustomList(context.Context, *connect.Request[v1.OweLimitCustomListRequest]) (*connect.Response[v1.OweLimitCustomListResponse], error)
+	OweLimitCustomByIDs(context.Context, *connect.Request[v1.OweLimitCustomByIDsRequest]) (*connect.Response[v1.OweLimitCustomByIDsResponse], error)
+	CheckOweLimit(context.Context, *connect.Request[v1.CheckOweLimitRequest]) (*connect.Response[v1.CheckOweLimitResponse], error)
 }
 
 // NewConfigurationLimitServiceClient constructs a client for the
@@ -62,12 +83,47 @@ func NewConfigurationLimitServiceClient(httpClient connect.HTTPClient, baseURL s
 			connect.WithSchema(configurationLimitServiceMethods.ByName("LimitInvoice")),
 			connect.WithClientOptions(opts...),
 		),
+		oweDefaultLimit: connect.NewClient[v1.OweDefaultLimitRequest, v1.OweDefaultLimitResponse](
+			httpClient,
+			baseURL+ConfigurationLimitServiceOweDefaultLimitProcedure,
+			connect.WithSchema(configurationLimitServiceMethods.ByName("OweDefaultLimit")),
+			connect.WithClientOptions(opts...),
+		),
+		oweLimitCustomCreate: connect.NewClient[v1.OweLimitCustomCreateRequest, v1.OweLimitCustomCreateResponse](
+			httpClient,
+			baseURL+ConfigurationLimitServiceOweLimitCustomCreateProcedure,
+			connect.WithSchema(configurationLimitServiceMethods.ByName("OweLimitCustomCreate")),
+			connect.WithClientOptions(opts...),
+		),
+		oweLimitCustomList: connect.NewClient[v1.OweLimitCustomListRequest, v1.OweLimitCustomListResponse](
+			httpClient,
+			baseURL+ConfigurationLimitServiceOweLimitCustomListProcedure,
+			connect.WithSchema(configurationLimitServiceMethods.ByName("OweLimitCustomList")),
+			connect.WithClientOptions(opts...),
+		),
+		oweLimitCustomByIDs: connect.NewClient[v1.OweLimitCustomByIDsRequest, v1.OweLimitCustomByIDsResponse](
+			httpClient,
+			baseURL+ConfigurationLimitServiceOweLimitCustomByIDsProcedure,
+			connect.WithSchema(configurationLimitServiceMethods.ByName("OweLimitCustomByIDs")),
+			connect.WithClientOptions(opts...),
+		),
+		checkOweLimit: connect.NewClient[v1.CheckOweLimitRequest, v1.CheckOweLimitResponse](
+			httpClient,
+			baseURL+ConfigurationLimitServiceCheckOweLimitProcedure,
+			connect.WithSchema(configurationLimitServiceMethods.ByName("CheckOweLimit")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // configurationLimitServiceClient implements ConfigurationLimitServiceClient.
 type configurationLimitServiceClient struct {
-	limitInvoice *connect.Client[v1.LimitInvoiceRequest, v1.LimitInvoiceResponse]
+	limitInvoice         *connect.Client[v1.LimitInvoiceRequest, v1.LimitInvoiceResponse]
+	oweDefaultLimit      *connect.Client[v1.OweDefaultLimitRequest, v1.OweDefaultLimitResponse]
+	oweLimitCustomCreate *connect.Client[v1.OweLimitCustomCreateRequest, v1.OweLimitCustomCreateResponse]
+	oweLimitCustomList   *connect.Client[v1.OweLimitCustomListRequest, v1.OweLimitCustomListResponse]
+	oweLimitCustomByIDs  *connect.Client[v1.OweLimitCustomByIDsRequest, v1.OweLimitCustomByIDsResponse]
+	checkOweLimit        *connect.Client[v1.CheckOweLimitRequest, v1.CheckOweLimitResponse]
 }
 
 // LimitInvoice calls selling_iface.v1.ConfigurationLimitService.LimitInvoice.
@@ -75,10 +131,41 @@ func (c *configurationLimitServiceClient) LimitInvoice(ctx context.Context, req 
 	return c.limitInvoice.CallUnary(ctx, req)
 }
 
+// OweDefaultLimit calls selling_iface.v1.ConfigurationLimitService.OweDefaultLimit.
+func (c *configurationLimitServiceClient) OweDefaultLimit(ctx context.Context, req *connect.Request[v1.OweDefaultLimitRequest]) (*connect.Response[v1.OweDefaultLimitResponse], error) {
+	return c.oweDefaultLimit.CallUnary(ctx, req)
+}
+
+// OweLimitCustomCreate calls selling_iface.v1.ConfigurationLimitService.OweLimitCustomCreate.
+func (c *configurationLimitServiceClient) OweLimitCustomCreate(ctx context.Context, req *connect.Request[v1.OweLimitCustomCreateRequest]) (*connect.Response[v1.OweLimitCustomCreateResponse], error) {
+	return c.oweLimitCustomCreate.CallUnary(ctx, req)
+}
+
+// OweLimitCustomList calls selling_iface.v1.ConfigurationLimitService.OweLimitCustomList.
+func (c *configurationLimitServiceClient) OweLimitCustomList(ctx context.Context, req *connect.Request[v1.OweLimitCustomListRequest]) (*connect.Response[v1.OweLimitCustomListResponse], error) {
+	return c.oweLimitCustomList.CallUnary(ctx, req)
+}
+
+// OweLimitCustomByIDs calls selling_iface.v1.ConfigurationLimitService.OweLimitCustomByIDs.
+func (c *configurationLimitServiceClient) OweLimitCustomByIDs(ctx context.Context, req *connect.Request[v1.OweLimitCustomByIDsRequest]) (*connect.Response[v1.OweLimitCustomByIDsResponse], error) {
+	return c.oweLimitCustomByIDs.CallUnary(ctx, req)
+}
+
+// CheckOweLimit calls selling_iface.v1.ConfigurationLimitService.CheckOweLimit.
+func (c *configurationLimitServiceClient) CheckOweLimit(ctx context.Context, req *connect.Request[v1.CheckOweLimitRequest]) (*connect.Response[v1.CheckOweLimitResponse], error) {
+	return c.checkOweLimit.CallUnary(ctx, req)
+}
+
 // ConfigurationLimitServiceHandler is an implementation of the
 // selling_iface.v1.ConfigurationLimitService service.
 type ConfigurationLimitServiceHandler interface {
 	LimitInvoice(context.Context, *connect.Request[v1.LimitInvoiceRequest]) (*connect.Response[v1.LimitInvoiceResponse], error)
+	// owe terbaru
+	OweDefaultLimit(context.Context, *connect.Request[v1.OweDefaultLimitRequest]) (*connect.Response[v1.OweDefaultLimitResponse], error)
+	OweLimitCustomCreate(context.Context, *connect.Request[v1.OweLimitCustomCreateRequest]) (*connect.Response[v1.OweLimitCustomCreateResponse], error)
+	OweLimitCustomList(context.Context, *connect.Request[v1.OweLimitCustomListRequest]) (*connect.Response[v1.OweLimitCustomListResponse], error)
+	OweLimitCustomByIDs(context.Context, *connect.Request[v1.OweLimitCustomByIDsRequest]) (*connect.Response[v1.OweLimitCustomByIDsResponse], error)
+	CheckOweLimit(context.Context, *connect.Request[v1.CheckOweLimitRequest]) (*connect.Response[v1.CheckOweLimitResponse], error)
 }
 
 // NewConfigurationLimitServiceHandler builds an HTTP handler from the service implementation. It
@@ -94,10 +181,50 @@ func NewConfigurationLimitServiceHandler(svc ConfigurationLimitServiceHandler, o
 		connect.WithSchema(configurationLimitServiceMethods.ByName("LimitInvoice")),
 		connect.WithHandlerOptions(opts...),
 	)
+	configurationLimitServiceOweDefaultLimitHandler := connect.NewUnaryHandler(
+		ConfigurationLimitServiceOweDefaultLimitProcedure,
+		svc.OweDefaultLimit,
+		connect.WithSchema(configurationLimitServiceMethods.ByName("OweDefaultLimit")),
+		connect.WithHandlerOptions(opts...),
+	)
+	configurationLimitServiceOweLimitCustomCreateHandler := connect.NewUnaryHandler(
+		ConfigurationLimitServiceOweLimitCustomCreateProcedure,
+		svc.OweLimitCustomCreate,
+		connect.WithSchema(configurationLimitServiceMethods.ByName("OweLimitCustomCreate")),
+		connect.WithHandlerOptions(opts...),
+	)
+	configurationLimitServiceOweLimitCustomListHandler := connect.NewUnaryHandler(
+		ConfigurationLimitServiceOweLimitCustomListProcedure,
+		svc.OweLimitCustomList,
+		connect.WithSchema(configurationLimitServiceMethods.ByName("OweLimitCustomList")),
+		connect.WithHandlerOptions(opts...),
+	)
+	configurationLimitServiceOweLimitCustomByIDsHandler := connect.NewUnaryHandler(
+		ConfigurationLimitServiceOweLimitCustomByIDsProcedure,
+		svc.OweLimitCustomByIDs,
+		connect.WithSchema(configurationLimitServiceMethods.ByName("OweLimitCustomByIDs")),
+		connect.WithHandlerOptions(opts...),
+	)
+	configurationLimitServiceCheckOweLimitHandler := connect.NewUnaryHandler(
+		ConfigurationLimitServiceCheckOweLimitProcedure,
+		svc.CheckOweLimit,
+		connect.WithSchema(configurationLimitServiceMethods.ByName("CheckOweLimit")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/selling_iface.v1.ConfigurationLimitService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case ConfigurationLimitServiceLimitInvoiceProcedure:
 			configurationLimitServiceLimitInvoiceHandler.ServeHTTP(w, r)
+		case ConfigurationLimitServiceOweDefaultLimitProcedure:
+			configurationLimitServiceOweDefaultLimitHandler.ServeHTTP(w, r)
+		case ConfigurationLimitServiceOweLimitCustomCreateProcedure:
+			configurationLimitServiceOweLimitCustomCreateHandler.ServeHTTP(w, r)
+		case ConfigurationLimitServiceOweLimitCustomListProcedure:
+			configurationLimitServiceOweLimitCustomListHandler.ServeHTTP(w, r)
+		case ConfigurationLimitServiceOweLimitCustomByIDsProcedure:
+			configurationLimitServiceOweLimitCustomByIDsHandler.ServeHTTP(w, r)
+		case ConfigurationLimitServiceCheckOweLimitProcedure:
+			configurationLimitServiceCheckOweLimitHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -109,4 +236,24 @@ type UnimplementedConfigurationLimitServiceHandler struct{}
 
 func (UnimplementedConfigurationLimitServiceHandler) LimitInvoice(context.Context, *connect.Request[v1.LimitInvoiceRequest]) (*connect.Response[v1.LimitInvoiceResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("selling_iface.v1.ConfigurationLimitService.LimitInvoice is not implemented"))
+}
+
+func (UnimplementedConfigurationLimitServiceHandler) OweDefaultLimit(context.Context, *connect.Request[v1.OweDefaultLimitRequest]) (*connect.Response[v1.OweDefaultLimitResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("selling_iface.v1.ConfigurationLimitService.OweDefaultLimit is not implemented"))
+}
+
+func (UnimplementedConfigurationLimitServiceHandler) OweLimitCustomCreate(context.Context, *connect.Request[v1.OweLimitCustomCreateRequest]) (*connect.Response[v1.OweLimitCustomCreateResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("selling_iface.v1.ConfigurationLimitService.OweLimitCustomCreate is not implemented"))
+}
+
+func (UnimplementedConfigurationLimitServiceHandler) OweLimitCustomList(context.Context, *connect.Request[v1.OweLimitCustomListRequest]) (*connect.Response[v1.OweLimitCustomListResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("selling_iface.v1.ConfigurationLimitService.OweLimitCustomList is not implemented"))
+}
+
+func (UnimplementedConfigurationLimitServiceHandler) OweLimitCustomByIDs(context.Context, *connect.Request[v1.OweLimitCustomByIDsRequest]) (*connect.Response[v1.OweLimitCustomByIDsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("selling_iface.v1.ConfigurationLimitService.OweLimitCustomByIDs is not implemented"))
+}
+
+func (UnimplementedConfigurationLimitServiceHandler) CheckOweLimit(context.Context, *connect.Request[v1.CheckOweLimitRequest]) (*connect.Response[v1.CheckOweLimitResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("selling_iface.v1.ConfigurationLimitService.CheckOweLimit is not implemented"))
 }
