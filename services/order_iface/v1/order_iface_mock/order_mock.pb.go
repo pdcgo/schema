@@ -174,3 +174,81 @@ func (mr *MockOrderServiceClientMockRecorder) OrderOverview(ctx, req interface{}
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OrderOverview", reflect.TypeOf((*MockOrderService)(nil).OrderOverview), ctx, req)
 }
 
+func (m *MockOrderService) MpPaymentCreate(ctx context.Context, req *connect.Request[v1.MpPaymentCreateRequest]) (*connect.Response[v1.MpPaymentCreateResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "MpPaymentCreate", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.MpPaymentCreateResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockOrderServiceMockRecorder) MpPaymentCreate(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "MpPaymentCreate", reflect.TypeOf((*MockOrderService)(nil).MpPaymentCreate), ctx, req)
+}
+
+func (m *MockOrderServiceClient) MpPaymentCreate(ctx context.Context, req *connect.Request[v1.MpPaymentCreateRequest]) (*connect.Response[v1.MpPaymentCreateResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "MpPaymentCreate", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.MpPaymentCreateResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockOrderServiceClientMockRecorder) MpPaymentCreate(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "MpPaymentCreate", reflect.TypeOf((*MockOrderService)(nil).MpPaymentCreate), ctx, req)
+}
+
+func (m *MockOrderService) MpPaymentOrderList(ctx context.Context, req *connect.Request[v1.MpPaymentOrderListRequest]) (*connect.Response[v1.MpPaymentOrderListResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "MpPaymentOrderList", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.MpPaymentOrderListResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockOrderServiceMockRecorder) MpPaymentOrderList(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "MpPaymentOrderList", reflect.TypeOf((*MockOrderService)(nil).MpPaymentOrderList), ctx, req)
+}
+
+func (m *MockOrderServiceClient) MpPaymentOrderList(ctx context.Context, req *connect.Request[v1.MpPaymentOrderListRequest]) (*connect.Response[v1.MpPaymentOrderListResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "MpPaymentOrderList", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.MpPaymentOrderListResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockOrderServiceClientMockRecorder) MpPaymentOrderList(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "MpPaymentOrderList", reflect.TypeOf((*MockOrderService)(nil).MpPaymentOrderList), ctx, req)
+}
+
+func (m *MockOrderService) MpPaymentDelete(ctx context.Context, req *connect.Request[v1.MpPaymentDeleteRequest]) (*connect.Response[v1.MpPaymentDeleteResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "MpPaymentDelete", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.MpPaymentDeleteResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockOrderServiceMockRecorder) MpPaymentDelete(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "MpPaymentDelete", reflect.TypeOf((*MockOrderService)(nil).MpPaymentDelete), ctx, req)
+}
+
+func (m *MockOrderServiceClient) MpPaymentDelete(ctx context.Context, req *connect.Request[v1.MpPaymentDeleteRequest]) (*connect.Response[v1.MpPaymentDeleteResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "MpPaymentDelete", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.MpPaymentDeleteResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockOrderServiceClientMockRecorder) MpPaymentDelete(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "MpPaymentDelete", reflect.TypeOf((*MockOrderService)(nil).MpPaymentDelete), ctx, req)
+}
+

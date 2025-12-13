@@ -36,15 +36,23 @@ const (
 	// InboundServiceInboundAcceptProcedure is the fully-qualified name of the InboundService's
 	// InboundAccept RPC.
 	InboundServiceInboundAcceptProcedure = "/warehouse_iface.v1.InboundService/InboundAccept"
+	// InboundServiceInboundRejectProcedure is the fully-qualified name of the InboundService's
+	// InboundReject RPC.
+	InboundServiceInboundRejectProcedure = "/warehouse_iface.v1.InboundService/InboundReject"
 	// InboundServiceInboundDetailSearchProcedure is the fully-qualified name of the InboundService's
 	// InboundDetailSearch RPC.
 	InboundServiceInboundDetailSearchProcedure = "/warehouse_iface.v1.InboundService/InboundDetailSearch"
+	// InboundServiceInboundCancelProcedure is the fully-qualified name of the InboundService's
+	// InboundCancel RPC.
+	InboundServiceInboundCancelProcedure = "/warehouse_iface.v1.InboundService/InboundCancel"
 )
 
 // InboundServiceClient is a client for the warehouse_iface.v1.InboundService service.
 type InboundServiceClient interface {
 	InboundAccept(context.Context, *connect.Request[v1.InboundAcceptRequest]) (*connect.Response[v1.InboundAcceptResponse], error)
+	InboundReject(context.Context, *connect.Request[v1.InboundRejectRequest]) (*connect.Response[v1.InboundRejectResponse], error)
 	InboundDetailSearch(context.Context, *connect.Request[v1.InboundDetailSearchRequest]) (*connect.Response[v1.InboundDetailSearchResponse], error)
+	InboundCancel(context.Context, *connect.Request[v1.InboundCancelRequest]) (*connect.Response[v1.InboundCancelResponse], error)
 }
 
 // NewInboundServiceClient constructs a client for the warehouse_iface.v1.InboundService service. By
@@ -64,10 +72,22 @@ func NewInboundServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			connect.WithSchema(inboundServiceMethods.ByName("InboundAccept")),
 			connect.WithClientOptions(opts...),
 		),
+		inboundReject: connect.NewClient[v1.InboundRejectRequest, v1.InboundRejectResponse](
+			httpClient,
+			baseURL+InboundServiceInboundRejectProcedure,
+			connect.WithSchema(inboundServiceMethods.ByName("InboundReject")),
+			connect.WithClientOptions(opts...),
+		),
 		inboundDetailSearch: connect.NewClient[v1.InboundDetailSearchRequest, v1.InboundDetailSearchResponse](
 			httpClient,
 			baseURL+InboundServiceInboundDetailSearchProcedure,
 			connect.WithSchema(inboundServiceMethods.ByName("InboundDetailSearch")),
+			connect.WithClientOptions(opts...),
+		),
+		inboundCancel: connect.NewClient[v1.InboundCancelRequest, v1.InboundCancelResponse](
+			httpClient,
+			baseURL+InboundServiceInboundCancelProcedure,
+			connect.WithSchema(inboundServiceMethods.ByName("InboundCancel")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -76,7 +96,9 @@ func NewInboundServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 // inboundServiceClient implements InboundServiceClient.
 type inboundServiceClient struct {
 	inboundAccept       *connect.Client[v1.InboundAcceptRequest, v1.InboundAcceptResponse]
+	inboundReject       *connect.Client[v1.InboundRejectRequest, v1.InboundRejectResponse]
 	inboundDetailSearch *connect.Client[v1.InboundDetailSearchRequest, v1.InboundDetailSearchResponse]
+	inboundCancel       *connect.Client[v1.InboundCancelRequest, v1.InboundCancelResponse]
 }
 
 // InboundAccept calls warehouse_iface.v1.InboundService.InboundAccept.
@@ -84,15 +106,27 @@ func (c *inboundServiceClient) InboundAccept(ctx context.Context, req *connect.R
 	return c.inboundAccept.CallUnary(ctx, req)
 }
 
+// InboundReject calls warehouse_iface.v1.InboundService.InboundReject.
+func (c *inboundServiceClient) InboundReject(ctx context.Context, req *connect.Request[v1.InboundRejectRequest]) (*connect.Response[v1.InboundRejectResponse], error) {
+	return c.inboundReject.CallUnary(ctx, req)
+}
+
 // InboundDetailSearch calls warehouse_iface.v1.InboundService.InboundDetailSearch.
 func (c *inboundServiceClient) InboundDetailSearch(ctx context.Context, req *connect.Request[v1.InboundDetailSearchRequest]) (*connect.Response[v1.InboundDetailSearchResponse], error) {
 	return c.inboundDetailSearch.CallUnary(ctx, req)
 }
 
+// InboundCancel calls warehouse_iface.v1.InboundService.InboundCancel.
+func (c *inboundServiceClient) InboundCancel(ctx context.Context, req *connect.Request[v1.InboundCancelRequest]) (*connect.Response[v1.InboundCancelResponse], error) {
+	return c.inboundCancel.CallUnary(ctx, req)
+}
+
 // InboundServiceHandler is an implementation of the warehouse_iface.v1.InboundService service.
 type InboundServiceHandler interface {
 	InboundAccept(context.Context, *connect.Request[v1.InboundAcceptRequest]) (*connect.Response[v1.InboundAcceptResponse], error)
+	InboundReject(context.Context, *connect.Request[v1.InboundRejectRequest]) (*connect.Response[v1.InboundRejectResponse], error)
 	InboundDetailSearch(context.Context, *connect.Request[v1.InboundDetailSearchRequest]) (*connect.Response[v1.InboundDetailSearchResponse], error)
+	InboundCancel(context.Context, *connect.Request[v1.InboundCancelRequest]) (*connect.Response[v1.InboundCancelResponse], error)
 }
 
 // NewInboundServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -108,18 +142,34 @@ func NewInboundServiceHandler(svc InboundServiceHandler, opts ...connect.Handler
 		connect.WithSchema(inboundServiceMethods.ByName("InboundAccept")),
 		connect.WithHandlerOptions(opts...),
 	)
+	inboundServiceInboundRejectHandler := connect.NewUnaryHandler(
+		InboundServiceInboundRejectProcedure,
+		svc.InboundReject,
+		connect.WithSchema(inboundServiceMethods.ByName("InboundReject")),
+		connect.WithHandlerOptions(opts...),
+	)
 	inboundServiceInboundDetailSearchHandler := connect.NewUnaryHandler(
 		InboundServiceInboundDetailSearchProcedure,
 		svc.InboundDetailSearch,
 		connect.WithSchema(inboundServiceMethods.ByName("InboundDetailSearch")),
 		connect.WithHandlerOptions(opts...),
 	)
+	inboundServiceInboundCancelHandler := connect.NewUnaryHandler(
+		InboundServiceInboundCancelProcedure,
+		svc.InboundCancel,
+		connect.WithSchema(inboundServiceMethods.ByName("InboundCancel")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/warehouse_iface.v1.InboundService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case InboundServiceInboundAcceptProcedure:
 			inboundServiceInboundAcceptHandler.ServeHTTP(w, r)
+		case InboundServiceInboundRejectProcedure:
+			inboundServiceInboundRejectHandler.ServeHTTP(w, r)
 		case InboundServiceInboundDetailSearchProcedure:
 			inboundServiceInboundDetailSearchHandler.ServeHTTP(w, r)
+		case InboundServiceInboundCancelProcedure:
+			inboundServiceInboundCancelHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -133,6 +183,14 @@ func (UnimplementedInboundServiceHandler) InboundAccept(context.Context, *connec
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("warehouse_iface.v1.InboundService.InboundAccept is not implemented"))
 }
 
+func (UnimplementedInboundServiceHandler) InboundReject(context.Context, *connect.Request[v1.InboundRejectRequest]) (*connect.Response[v1.InboundRejectResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("warehouse_iface.v1.InboundService.InboundReject is not implemented"))
+}
+
 func (UnimplementedInboundServiceHandler) InboundDetailSearch(context.Context, *connect.Request[v1.InboundDetailSearchRequest]) (*connect.Response[v1.InboundDetailSearchResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("warehouse_iface.v1.InboundService.InboundDetailSearch is not implemented"))
+}
+
+func (UnimplementedInboundServiceHandler) InboundCancel(context.Context, *connect.Request[v1.InboundCancelRequest]) (*connect.Response[v1.InboundCancelResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("warehouse_iface.v1.InboundService.InboundCancel is not implemented"))
 }

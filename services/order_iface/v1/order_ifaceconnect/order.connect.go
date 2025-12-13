@@ -47,6 +47,15 @@ const (
 	// OrderServiceOrderOverviewProcedure is the fully-qualified name of the OrderService's
 	// OrderOverview RPC.
 	OrderServiceOrderOverviewProcedure = "/order_iface.v1.OrderService/OrderOverview"
+	// OrderServiceMpPaymentCreateProcedure is the fully-qualified name of the OrderService's
+	// MpPaymentCreate RPC.
+	OrderServiceMpPaymentCreateProcedure = "/order_iface.v1.OrderService/MpPaymentCreate"
+	// OrderServiceMpPaymentOrderListProcedure is the fully-qualified name of the OrderService's
+	// MpPaymentOrderList RPC.
+	OrderServiceMpPaymentOrderListProcedure = "/order_iface.v1.OrderService/MpPaymentOrderList"
+	// OrderServiceMpPaymentDeleteProcedure is the fully-qualified name of the OrderService's
+	// MpPaymentDelete RPC.
+	OrderServiceMpPaymentDeleteProcedure = "/order_iface.v1.OrderService/MpPaymentDelete"
 )
 
 // OrderServiceClient is a client for the order_iface.v1.OrderService service.
@@ -58,6 +67,10 @@ type OrderServiceClient interface {
 	OrderList(context.Context, *connect.Request[v1.OrderListRequest]) (*connect.ServerStreamForClient[v1.OrderListResponse], error)
 	// bagian overview
 	OrderOverview(context.Context, *connect.Request[v1.OrderOverviewRequest]) (*connect.Response[v1.OrderOverviewResponse], error)
+	// Marketplace Payment
+	MpPaymentCreate(context.Context, *connect.Request[v1.MpPaymentCreateRequest]) (*connect.Response[v1.MpPaymentCreateResponse], error)
+	MpPaymentOrderList(context.Context, *connect.Request[v1.MpPaymentOrderListRequest]) (*connect.Response[v1.MpPaymentOrderListResponse], error)
+	MpPaymentDelete(context.Context, *connect.Request[v1.MpPaymentDeleteRequest]) (*connect.Response[v1.MpPaymentDeleteResponse], error)
 }
 
 // NewOrderServiceClient constructs a client for the order_iface.v1.OrderService service. By
@@ -101,16 +114,37 @@ func NewOrderServiceClient(httpClient connect.HTTPClient, baseURL string, opts .
 			connect.WithSchema(orderServiceMethods.ByName("OrderOverview")),
 			connect.WithClientOptions(opts...),
 		),
+		mpPaymentCreate: connect.NewClient[v1.MpPaymentCreateRequest, v1.MpPaymentCreateResponse](
+			httpClient,
+			baseURL+OrderServiceMpPaymentCreateProcedure,
+			connect.WithSchema(orderServiceMethods.ByName("MpPaymentCreate")),
+			connect.WithClientOptions(opts...),
+		),
+		mpPaymentOrderList: connect.NewClient[v1.MpPaymentOrderListRequest, v1.MpPaymentOrderListResponse](
+			httpClient,
+			baseURL+OrderServiceMpPaymentOrderListProcedure,
+			connect.WithSchema(orderServiceMethods.ByName("MpPaymentOrderList")),
+			connect.WithClientOptions(opts...),
+		),
+		mpPaymentDelete: connect.NewClient[v1.MpPaymentDeleteRequest, v1.MpPaymentDeleteResponse](
+			httpClient,
+			baseURL+OrderServiceMpPaymentDeleteProcedure,
+			connect.WithSchema(orderServiceMethods.ByName("MpPaymentDelete")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // orderServiceClient implements OrderServiceClient.
 type orderServiceClient struct {
-	orderFundSet   *connect.Client[v1.OrderFundSetRequest, v1.OrderFundSetResponse]
-	orderTagRemove *connect.Client[v1.OrderTagRemoveRequest, v1.OrderTagRemoveResponse]
-	orderTagAdd    *connect.Client[v1.OrderTagAddRequest, v1.OrderTagAddResponse]
-	orderList      *connect.Client[v1.OrderListRequest, v1.OrderListResponse]
-	orderOverview  *connect.Client[v1.OrderOverviewRequest, v1.OrderOverviewResponse]
+	orderFundSet       *connect.Client[v1.OrderFundSetRequest, v1.OrderFundSetResponse]
+	orderTagRemove     *connect.Client[v1.OrderTagRemoveRequest, v1.OrderTagRemoveResponse]
+	orderTagAdd        *connect.Client[v1.OrderTagAddRequest, v1.OrderTagAddResponse]
+	orderList          *connect.Client[v1.OrderListRequest, v1.OrderListResponse]
+	orderOverview      *connect.Client[v1.OrderOverviewRequest, v1.OrderOverviewResponse]
+	mpPaymentCreate    *connect.Client[v1.MpPaymentCreateRequest, v1.MpPaymentCreateResponse]
+	mpPaymentOrderList *connect.Client[v1.MpPaymentOrderListRequest, v1.MpPaymentOrderListResponse]
+	mpPaymentDelete    *connect.Client[v1.MpPaymentDeleteRequest, v1.MpPaymentDeleteResponse]
 }
 
 // OrderFundSet calls order_iface.v1.OrderService.OrderFundSet.
@@ -138,6 +172,21 @@ func (c *orderServiceClient) OrderOverview(ctx context.Context, req *connect.Req
 	return c.orderOverview.CallUnary(ctx, req)
 }
 
+// MpPaymentCreate calls order_iface.v1.OrderService.MpPaymentCreate.
+func (c *orderServiceClient) MpPaymentCreate(ctx context.Context, req *connect.Request[v1.MpPaymentCreateRequest]) (*connect.Response[v1.MpPaymentCreateResponse], error) {
+	return c.mpPaymentCreate.CallUnary(ctx, req)
+}
+
+// MpPaymentOrderList calls order_iface.v1.OrderService.MpPaymentOrderList.
+func (c *orderServiceClient) MpPaymentOrderList(ctx context.Context, req *connect.Request[v1.MpPaymentOrderListRequest]) (*connect.Response[v1.MpPaymentOrderListResponse], error) {
+	return c.mpPaymentOrderList.CallUnary(ctx, req)
+}
+
+// MpPaymentDelete calls order_iface.v1.OrderService.MpPaymentDelete.
+func (c *orderServiceClient) MpPaymentDelete(ctx context.Context, req *connect.Request[v1.MpPaymentDeleteRequest]) (*connect.Response[v1.MpPaymentDeleteResponse], error) {
+	return c.mpPaymentDelete.CallUnary(ctx, req)
+}
+
 // OrderServiceHandler is an implementation of the order_iface.v1.OrderService service.
 type OrderServiceHandler interface {
 	OrderFundSet(context.Context, *connect.ClientStream[v1.OrderFundSetRequest]) (*connect.Response[v1.OrderFundSetResponse], error)
@@ -147,6 +196,10 @@ type OrderServiceHandler interface {
 	OrderList(context.Context, *connect.Request[v1.OrderListRequest], *connect.ServerStream[v1.OrderListResponse]) error
 	// bagian overview
 	OrderOverview(context.Context, *connect.Request[v1.OrderOverviewRequest]) (*connect.Response[v1.OrderOverviewResponse], error)
+	// Marketplace Payment
+	MpPaymentCreate(context.Context, *connect.Request[v1.MpPaymentCreateRequest]) (*connect.Response[v1.MpPaymentCreateResponse], error)
+	MpPaymentOrderList(context.Context, *connect.Request[v1.MpPaymentOrderListRequest]) (*connect.Response[v1.MpPaymentOrderListResponse], error)
+	MpPaymentDelete(context.Context, *connect.Request[v1.MpPaymentDeleteRequest]) (*connect.Response[v1.MpPaymentDeleteResponse], error)
 }
 
 // NewOrderServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -186,6 +239,24 @@ func NewOrderServiceHandler(svc OrderServiceHandler, opts ...connect.HandlerOpti
 		connect.WithSchema(orderServiceMethods.ByName("OrderOverview")),
 		connect.WithHandlerOptions(opts...),
 	)
+	orderServiceMpPaymentCreateHandler := connect.NewUnaryHandler(
+		OrderServiceMpPaymentCreateProcedure,
+		svc.MpPaymentCreate,
+		connect.WithSchema(orderServiceMethods.ByName("MpPaymentCreate")),
+		connect.WithHandlerOptions(opts...),
+	)
+	orderServiceMpPaymentOrderListHandler := connect.NewUnaryHandler(
+		OrderServiceMpPaymentOrderListProcedure,
+		svc.MpPaymentOrderList,
+		connect.WithSchema(orderServiceMethods.ByName("MpPaymentOrderList")),
+		connect.WithHandlerOptions(opts...),
+	)
+	orderServiceMpPaymentDeleteHandler := connect.NewUnaryHandler(
+		OrderServiceMpPaymentDeleteProcedure,
+		svc.MpPaymentDelete,
+		connect.WithSchema(orderServiceMethods.ByName("MpPaymentDelete")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/order_iface.v1.OrderService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case OrderServiceOrderFundSetProcedure:
@@ -198,6 +269,12 @@ func NewOrderServiceHandler(svc OrderServiceHandler, opts ...connect.HandlerOpti
 			orderServiceOrderListHandler.ServeHTTP(w, r)
 		case OrderServiceOrderOverviewProcedure:
 			orderServiceOrderOverviewHandler.ServeHTTP(w, r)
+		case OrderServiceMpPaymentCreateProcedure:
+			orderServiceMpPaymentCreateHandler.ServeHTTP(w, r)
+		case OrderServiceMpPaymentOrderListProcedure:
+			orderServiceMpPaymentOrderListHandler.ServeHTTP(w, r)
+		case OrderServiceMpPaymentDeleteProcedure:
+			orderServiceMpPaymentDeleteHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -225,4 +302,16 @@ func (UnimplementedOrderServiceHandler) OrderList(context.Context, *connect.Requ
 
 func (UnimplementedOrderServiceHandler) OrderOverview(context.Context, *connect.Request[v1.OrderOverviewRequest]) (*connect.Response[v1.OrderOverviewResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("order_iface.v1.OrderService.OrderOverview is not implemented"))
+}
+
+func (UnimplementedOrderServiceHandler) MpPaymentCreate(context.Context, *connect.Request[v1.MpPaymentCreateRequest]) (*connect.Response[v1.MpPaymentCreateResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("order_iface.v1.OrderService.MpPaymentCreate is not implemented"))
+}
+
+func (UnimplementedOrderServiceHandler) MpPaymentOrderList(context.Context, *connect.Request[v1.MpPaymentOrderListRequest]) (*connect.Response[v1.MpPaymentOrderListResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("order_iface.v1.OrderService.MpPaymentOrderList is not implemented"))
+}
+
+func (UnimplementedOrderServiceHandler) MpPaymentDelete(context.Context, *connect.Request[v1.MpPaymentDeleteRequest]) (*connect.Response[v1.MpPaymentDeleteResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("order_iface.v1.OrderService.MpPaymentDelete is not implemented"))
 }

@@ -10,7 +10,9 @@ option go_package = "github.com/pdcgo/schema/services/warehouse_iface/v1;warehou
 
 service InboundService {
   rpc InboundAccept(InboundAcceptRequest) returns (InboundAcceptResponse);
+  rpc InboundReject(InboundRejectRequest) returns (InboundRejectResponse);
   rpc InboundDetailSearch(InboundDetailSearchRequest) returns (InboundDetailSearchResponse);
+  rpc InboundCancel(InboundCancelRequest) returns (InboundCancelResponse);
 }
 
 enum ProblemType {
@@ -29,6 +31,13 @@ enum SearchBy {
   SEARCH_BY_RECEIPT = 2;
   SEARCH_BY_ORDERID = 3;
 }
+
+message InboundCancelRequest {
+  uint64 inv_transaction_id = 1;
+  uint64 warehouse_id = 2;
+  string reason = 3;
+}
+message InboundCancelResponse {}
 
 message InboundDetailSearchRequest {
   SearchBy search_by = 1;
@@ -62,10 +71,21 @@ message PlacementList {
 
 message InboundAcceptRequest {
   uint64 inv_transaction_id = 1;
-  double warehouse_fee = 2;
-  string tx_type = 3;
+  uint64 warehouse_id = 2;
+
+  double warehouse_fee = 3;
+  string tx_type = 4;
+  map<string, PlacementList> placement = 5;
 }
 
 message InboundAcceptResponse {
   uint64 tx_id = 1;
 }
+
+message InboundRejectRequest {
+  uint64 inv_transaction_id = 1;
+  uint64 warehouse_id = 2;
+  string reason = 3;
+}
+
+message InboundRejectResponse {}
