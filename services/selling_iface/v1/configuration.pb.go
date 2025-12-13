@@ -25,7 +25,8 @@ const (
 
 type OweDefaultLimitRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Threeshold    float64                `protobuf:"fixed64,2,opt,name=threeshold,proto3" json:"threeshold,omitempty"`
+	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	Threshold     float64                `protobuf:"fixed64,2,opt,name=threshold,proto3" json:"threshold,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -60,9 +61,16 @@ func (*OweDefaultLimitRequest) Descriptor() ([]byte, []int) {
 	return file_selling_iface_v1_configuration_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *OweDefaultLimitRequest) GetThreeshold() float64 {
+func (x *OweDefaultLimitRequest) GetTeamId() uint64 {
 	if x != nil {
-		return x.Threeshold
+		return x.TeamId
+	}
+	return 0
+}
+
+func (x *OweDefaultLimitRequest) GetThreshold() float64 {
+	if x != nil {
+		return x.Threshold
 	}
 	return 0
 }
@@ -106,9 +114,8 @@ func (*OweDefaultLimitResponse) Descriptor() ([]byte, []int) {
 type OweLimitCustomCreateRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
-	FromTeamId    uint64                 `protobuf:"varint,2,opt,name=from_team_id,json=fromTeamId,proto3" json:"from_team_id,omitempty"`
-	ToTeamId      uint64                 `protobuf:"varint,3,opt,name=to_team_id,json=toTeamId,proto3" json:"to_team_id,omitempty"`
-	Threeshold    float64                `protobuf:"fixed64,4,opt,name=threeshold,proto3" json:"threeshold,omitempty"`
+	ForTeamId     uint64                 `protobuf:"varint,3,opt,name=for_team_id,json=forTeamId,proto3" json:"for_team_id,omitempty"`
+	Threshold     float64                `protobuf:"fixed64,4,opt,name=threshold,proto3" json:"threshold,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -150,23 +157,16 @@ func (x *OweLimitCustomCreateRequest) GetTeamId() uint64 {
 	return 0
 }
 
-func (x *OweLimitCustomCreateRequest) GetFromTeamId() uint64 {
+func (x *OweLimitCustomCreateRequest) GetForTeamId() uint64 {
 	if x != nil {
-		return x.FromTeamId
+		return x.ForTeamId
 	}
 	return 0
 }
 
-func (x *OweLimitCustomCreateRequest) GetToTeamId() uint64 {
+func (x *OweLimitCustomCreateRequest) GetThreshold() float64 {
 	if x != nil {
-		return x.ToTeamId
-	}
-	return 0
-}
-
-func (x *OweLimitCustomCreateRequest) GetThreeshold() float64 {
-	if x != nil {
-		return x.Threeshold
+		return x.Threshold
 	}
 	return 0
 }
@@ -220,7 +220,8 @@ type OweLimitItem struct {
 	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	TeamId        uint64                 `protobuf:"varint,2,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
 	ForTeamId     uint64                 `protobuf:"varint,3,opt,name=for_team_id,json=forTeamId,proto3" json:"for_team_id,omitempty"`
-	Threeshold    float64                `protobuf:"fixed64,4,opt,name=threeshold,proto3" json:"threeshold,omitempty"`
+	IsDefault     bool                   `protobuf:"varint,4,opt,name=is_default,json=isDefault,proto3" json:"is_default,omitempty"`
+	Threshold     float64                `protobuf:"fixed64,5,opt,name=threshold,proto3" json:"threshold,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -276,9 +277,16 @@ func (x *OweLimitItem) GetForTeamId() uint64 {
 	return 0
 }
 
-func (x *OweLimitItem) GetThreeshold() float64 {
+func (x *OweLimitItem) GetIsDefault() bool {
 	if x != nil {
-		return x.Threeshold
+		return x.IsDefault
+	}
+	return false
+}
+
+func (x *OweLimitItem) GetThreshold() float64 {
+	if x != nil {
+		return x.Threshold
 	}
 	return 0
 }
@@ -286,7 +294,8 @@ func (x *OweLimitItem) GetThreeshold() float64 {
 type OweLimitCustomListRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Q             string                 `protobuf:"bytes,1,opt,name=q,proto3" json:"q,omitempty"`
-	Page          *v1.PageFilter         `protobuf:"bytes,2,opt,name=page,proto3" json:"page,omitempty"`
+	TeamId        uint64                 `protobuf:"varint,2,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	Page          *v1.PageFilter         `protobuf:"bytes,3,opt,name=page,proto3" json:"page,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -326,6 +335,13 @@ func (x *OweLimitCustomListRequest) GetQ() string {
 		return x.Q
 	}
 	return ""
+}
+
+func (x *OweLimitCustomListRequest) GetTeamId() uint64 {
+	if x != nil {
+		return x.TeamId
+	}
+	return 0
 }
 
 func (x *OweLimitCustomListRequest) GetPage() *v1.PageFilter {
@@ -724,7 +740,7 @@ type LimitInvoiceItem struct {
 	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	FromTeamId    uint64                 `protobuf:"varint,2,opt,name=from_team_id,json=fromTeamId,proto3" json:"from_team_id,omitempty"`
 	ToTeamId      uint64                 `protobuf:"varint,3,opt,name=to_team_id,json=toTeamId,proto3" json:"to_team_id,omitempty"`
-	Threeshold    float64                `protobuf:"fixed64,4,opt,name=threeshold,proto3" json:"threeshold,omitempty"`
+	Threshold     float64                `protobuf:"fixed64,4,opt,name=threshold,proto3" json:"threshold,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -780,9 +796,9 @@ func (x *LimitInvoiceItem) GetToTeamId() uint64 {
 	return 0
 }
 
-func (x *LimitInvoiceItem) GetThreeshold() float64 {
+func (x *LimitInvoiceItem) GetThreshold() float64 {
 	if x != nil {
-		return x.Threeshold
+		return x.Threshold
 	}
 	return 0
 }
@@ -835,33 +851,28 @@ var File_selling_iface_v1_configuration_proto protoreflect.FileDescriptor
 
 const file_selling_iface_v1_configuration_proto_rawDesc = "" +
 	"\n" +
-	"$selling_iface/v1/configuration.proto\x12\x10selling_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\"8\n" +
-	"\x16OweDefaultLimitRequest\x12\x1e\n" +
-	"\n" +
-	"threeshold\x18\x02 \x01(\x01R\n" +
-	"threeshold\"\x19\n" +
+	"$selling_iface/v1/configuration.proto\x12\x10selling_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\"X\n" +
+	"\x16OweDefaultLimitRequest\x12 \n" +
+	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12\x1c\n" +
+	"\tthreshold\x18\x02 \x01(\x01R\tthreshold\"\x19\n" +
 	"\x17OweDefaultLimitResponse\"\x96\x01\n" +
-	"\x1bOweLimitCustomCreateRequest\x12\x17\n" +
-	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12 \n" +
-	"\ffrom_team_id\x18\x02 \x01(\x04R\n" +
-	"fromTeamId\x12\x1c\n" +
-	"\n" +
-	"to_team_id\x18\x03 \x01(\x04R\btoTeamId\x12\x1e\n" +
-	"\n" +
-	"threeshold\x18\x04 \x01(\x01R\n" +
-	"threeshold\".\n" +
+	"\x1bOweLimitCustomCreateRequest\x12 \n" +
+	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12'\n" +
+	"\vfor_team_id\x18\x03 \x01(\x04B\a\xbaH\x042\x02 \x00R\tforTeamId\x12,\n" +
+	"\tthreshold\x18\x04 \x01(\x01B\x0e\xbaH\v\x12\t!\x00\x00\x00\x00\x00\x00\x00\x00R\tthreshold\".\n" +
 	"\x1cOweLimitCustomCreateResponse\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x04R\x02id\"w\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\"\x94\x01\n" +
 	"\fOweLimitItem\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x17\n" +
 	"\ateam_id\x18\x02 \x01(\x04R\x06teamId\x12\x1e\n" +
-	"\vfor_team_id\x18\x03 \x01(\x04R\tforTeamId\x12\x1e\n" +
+	"\vfor_team_id\x18\x03 \x01(\x04R\tforTeamId\x12\x1d\n" +
 	"\n" +
-	"threeshold\x18\x04 \x01(\x01R\n" +
-	"threeshold\"\\\n" +
+	"is_default\x18\x04 \x01(\bR\tisDefault\x12\x1c\n" +
+	"\tthreshold\x18\x05 \x01(\x01R\tthreshold\"~\n" +
 	"\x19OweLimitCustomListRequest\x12\f\n" +
-	"\x01q\x18\x01 \x01(\tR\x01q\x121\n" +
-	"\x04page\x18\x02 \x01(\v2\x15.common.v1.PageFilterB\x06\xbaH\x03\xc8\x01\x01R\x04page\"\x82\x01\n" +
+	"\x01q\x18\x01 \x01(\tR\x01q\x12 \n" +
+	"\ateam_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x121\n" +
+	"\x04page\x18\x03 \x01(\v2\x15.common.v1.PageFilterB\x06\xbaH\x03\xc8\x01\x01R\x04page\"\x82\x01\n" +
 	"\x1aOweLimitCustomListResponse\x122\n" +
 	"\x04data\x18\x01 \x03(\v2\x1e.selling_iface.v1.OweLimitItemR\x04data\x120\n" +
 	"\tpage_info\x18\x02 \x01(\v2\x13.common.v1.PageInfoR\bpageInfo\"l\n" +
@@ -886,16 +897,14 @@ const file_selling_iface_v1_configuration_proto_rawDesc = "" +
 	"\n" +
 	"to_team_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\btoTeamId\"\\\n" +
 	"\x13LimitInvoiceRequest\x12E\n" +
-	"\x05limit\x18\x01 \x03(\v2%.selling_iface.v1.LimitInvoiceItemReqB\b\xbaH\x05\x92\x01\x02\b\x01R\x05limit\"\x82\x01\n" +
+	"\x05limit\x18\x01 \x03(\v2%.selling_iface.v1.LimitInvoiceItemReqB\b\xbaH\x05\x92\x01\x02\b\x01R\x05limit\"\x80\x01\n" +
 	"\x10LimitInvoiceItem\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12 \n" +
 	"\ffrom_team_id\x18\x02 \x01(\x04R\n" +
 	"fromTeamId\x12\x1c\n" +
 	"\n" +
-	"to_team_id\x18\x03 \x01(\x04R\btoTeamId\x12\x1e\n" +
-	"\n" +
-	"threeshold\x18\x04 \x01(\x01R\n" +
-	"threeshold\"N\n" +
+	"to_team_id\x18\x03 \x01(\x04R\btoTeamId\x12\x1c\n" +
+	"\tthreshold\x18\x04 \x01(\x01R\tthreshold\"N\n" +
 	"\x14LimitInvoiceResponse\x126\n" +
 	"\x04data\x18\x01 \x03(\v2\".selling_iface.v1.LimitInvoiceItemR\x04data2\xa0\x05\n" +
 	"\x19ConfigurationLimitService\x12]\n" +
