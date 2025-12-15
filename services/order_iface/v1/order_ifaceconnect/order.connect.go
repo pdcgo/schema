@@ -42,6 +42,9 @@ const (
 	// OrderServiceOrderTagAddProcedure is the fully-qualified name of the OrderService's OrderTagAdd
 	// RPC.
 	OrderServiceOrderTagAddProcedure = "/order_iface.v1.OrderService/OrderTagAdd"
+	// OrderServiceChangeOrderRefIDProcedure is the fully-qualified name of the OrderService's
+	// ChangeOrderRefID RPC.
+	OrderServiceChangeOrderRefIDProcedure = "/order_iface.v1.OrderService/ChangeOrderRefID"
 	// OrderServiceOrderListProcedure is the fully-qualified name of the OrderService's OrderList RPC.
 	OrderServiceOrderListProcedure = "/order_iface.v1.OrderService/OrderList"
 	// OrderServiceOrderOverviewProcedure is the fully-qualified name of the OrderService's
@@ -63,6 +66,8 @@ type OrderServiceClient interface {
 	OrderFundSet(context.Context) *connect.ClientStreamForClient[v1.OrderFundSetRequest, v1.OrderFundSetResponse]
 	OrderTagRemove(context.Context, *connect.Request[v1.OrderTagRemoveRequest]) (*connect.Response[v1.OrderTagRemoveResponse], error)
 	OrderTagAdd(context.Context, *connect.Request[v1.OrderTagAddRequest]) (*connect.Response[v1.OrderTagAddResponse], error)
+	// bagian update
+	ChangeOrderRefID(context.Context, *connect.Request[v1.ChangeOrderRefIDRequest]) (*connect.Response[v1.ChangeOrderRefIDResponse], error)
 	// bagian view
 	OrderList(context.Context, *connect.Request[v1.OrderListRequest]) (*connect.ServerStreamForClient[v1.OrderListResponse], error)
 	// bagian overview
@@ -100,6 +105,12 @@ func NewOrderServiceClient(httpClient connect.HTTPClient, baseURL string, opts .
 			httpClient,
 			baseURL+OrderServiceOrderTagAddProcedure,
 			connect.WithSchema(orderServiceMethods.ByName("OrderTagAdd")),
+			connect.WithClientOptions(opts...),
+		),
+		changeOrderRefID: connect.NewClient[v1.ChangeOrderRefIDRequest, v1.ChangeOrderRefIDResponse](
+			httpClient,
+			baseURL+OrderServiceChangeOrderRefIDProcedure,
+			connect.WithSchema(orderServiceMethods.ByName("ChangeOrderRefID")),
 			connect.WithClientOptions(opts...),
 		),
 		orderList: connect.NewClient[v1.OrderListRequest, v1.OrderListResponse](
@@ -140,6 +151,7 @@ type orderServiceClient struct {
 	orderFundSet       *connect.Client[v1.OrderFundSetRequest, v1.OrderFundSetResponse]
 	orderTagRemove     *connect.Client[v1.OrderTagRemoveRequest, v1.OrderTagRemoveResponse]
 	orderTagAdd        *connect.Client[v1.OrderTagAddRequest, v1.OrderTagAddResponse]
+	changeOrderRefID   *connect.Client[v1.ChangeOrderRefIDRequest, v1.ChangeOrderRefIDResponse]
 	orderList          *connect.Client[v1.OrderListRequest, v1.OrderListResponse]
 	orderOverview      *connect.Client[v1.OrderOverviewRequest, v1.OrderOverviewResponse]
 	mpPaymentCreate    *connect.Client[v1.MpPaymentCreateRequest, v1.MpPaymentCreateResponse]
@@ -160,6 +172,11 @@ func (c *orderServiceClient) OrderTagRemove(ctx context.Context, req *connect.Re
 // OrderTagAdd calls order_iface.v1.OrderService.OrderTagAdd.
 func (c *orderServiceClient) OrderTagAdd(ctx context.Context, req *connect.Request[v1.OrderTagAddRequest]) (*connect.Response[v1.OrderTagAddResponse], error) {
 	return c.orderTagAdd.CallUnary(ctx, req)
+}
+
+// ChangeOrderRefID calls order_iface.v1.OrderService.ChangeOrderRefID.
+func (c *orderServiceClient) ChangeOrderRefID(ctx context.Context, req *connect.Request[v1.ChangeOrderRefIDRequest]) (*connect.Response[v1.ChangeOrderRefIDResponse], error) {
+	return c.changeOrderRefID.CallUnary(ctx, req)
 }
 
 // OrderList calls order_iface.v1.OrderService.OrderList.
@@ -192,6 +209,8 @@ type OrderServiceHandler interface {
 	OrderFundSet(context.Context, *connect.ClientStream[v1.OrderFundSetRequest]) (*connect.Response[v1.OrderFundSetResponse], error)
 	OrderTagRemove(context.Context, *connect.Request[v1.OrderTagRemoveRequest]) (*connect.Response[v1.OrderTagRemoveResponse], error)
 	OrderTagAdd(context.Context, *connect.Request[v1.OrderTagAddRequest]) (*connect.Response[v1.OrderTagAddResponse], error)
+	// bagian update
+	ChangeOrderRefID(context.Context, *connect.Request[v1.ChangeOrderRefIDRequest]) (*connect.Response[v1.ChangeOrderRefIDResponse], error)
 	// bagian view
 	OrderList(context.Context, *connect.Request[v1.OrderListRequest], *connect.ServerStream[v1.OrderListResponse]) error
 	// bagian overview
@@ -225,6 +244,12 @@ func NewOrderServiceHandler(svc OrderServiceHandler, opts ...connect.HandlerOpti
 		OrderServiceOrderTagAddProcedure,
 		svc.OrderTagAdd,
 		connect.WithSchema(orderServiceMethods.ByName("OrderTagAdd")),
+		connect.WithHandlerOptions(opts...),
+	)
+	orderServiceChangeOrderRefIDHandler := connect.NewUnaryHandler(
+		OrderServiceChangeOrderRefIDProcedure,
+		svc.ChangeOrderRefID,
+		connect.WithSchema(orderServiceMethods.ByName("ChangeOrderRefID")),
 		connect.WithHandlerOptions(opts...),
 	)
 	orderServiceOrderListHandler := connect.NewServerStreamHandler(
@@ -265,6 +290,8 @@ func NewOrderServiceHandler(svc OrderServiceHandler, opts ...connect.HandlerOpti
 			orderServiceOrderTagRemoveHandler.ServeHTTP(w, r)
 		case OrderServiceOrderTagAddProcedure:
 			orderServiceOrderTagAddHandler.ServeHTTP(w, r)
+		case OrderServiceChangeOrderRefIDProcedure:
+			orderServiceChangeOrderRefIDHandler.ServeHTTP(w, r)
 		case OrderServiceOrderListProcedure:
 			orderServiceOrderListHandler.ServeHTTP(w, r)
 		case OrderServiceOrderOverviewProcedure:
@@ -294,6 +321,10 @@ func (UnimplementedOrderServiceHandler) OrderTagRemove(context.Context, *connect
 
 func (UnimplementedOrderServiceHandler) OrderTagAdd(context.Context, *connect.Request[v1.OrderTagAddRequest]) (*connect.Response[v1.OrderTagAddResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("order_iface.v1.OrderService.OrderTagAdd is not implemented"))
+}
+
+func (UnimplementedOrderServiceHandler) ChangeOrderRefID(context.Context, *connect.Request[v1.ChangeOrderRefIDRequest]) (*connect.Response[v1.ChangeOrderRefIDResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("order_iface.v1.OrderService.ChangeOrderRefID is not implemented"))
 }
 
 func (UnimplementedOrderServiceHandler) OrderList(context.Context, *connect.Request[v1.OrderListRequest], *connect.ServerStream[v1.OrderListResponse]) error {

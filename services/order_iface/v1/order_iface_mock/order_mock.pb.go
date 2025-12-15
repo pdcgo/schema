@@ -123,6 +123,32 @@ func (mr *MockOrderServiceClientMockRecorder) OrderTagAdd(ctx, req interface{}) 
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OrderTagAdd", reflect.TypeOf((*MockOrderService)(nil).OrderTagAdd), ctx, req)
 }
 
+func (m *MockOrderService) ChangeOrderRefID(ctx context.Context, req *connect.Request[v1.ChangeOrderRefIDRequest]) (*connect.Response[v1.ChangeOrderRefIDResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "ChangeOrderRefID", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.ChangeOrderRefIDResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockOrderServiceMockRecorder) ChangeOrderRefID(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ChangeOrderRefID", reflect.TypeOf((*MockOrderService)(nil).ChangeOrderRefID), ctx, req)
+}
+
+func (m *MockOrderServiceClient) ChangeOrderRefID(ctx context.Context, req *connect.Request[v1.ChangeOrderRefIDRequest]) (*connect.Response[v1.ChangeOrderRefIDResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "ChangeOrderRefID", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.ChangeOrderRefIDResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockOrderServiceClientMockRecorder) ChangeOrderRefID(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ChangeOrderRefID", reflect.TypeOf((*MockOrderService)(nil).ChangeOrderRefID), ctx, req)
+}
+
 func (m *MockOrderService) OrderList(ctx context.Context, req *connect.Request[v1.OrderListRequest], stream *connect.ServerStream[v1.OrderListResponse]) error {
     m.ctrl.T.Helper()
     ret := m.ctrl.Call(m, "OrderList", ctx, req, stream)

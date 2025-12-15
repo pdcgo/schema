@@ -13,6 +13,9 @@ service OrderService {
   rpc OrderTagRemove(OrderTagRemoveRequest) returns (OrderTagRemoveResponse);
   rpc OrderTagAdd(OrderTagAddRequest) returns (OrderTagAddResponse);
 
+  // bagian update
+  rpc ChangeOrderRefID(ChangeOrderRefIDRequest) returns (ChangeOrderRefIDResponse);
+
   // bagian view
   rpc OrderList(OrderListRequest) returns (stream OrderListResponse);
 
@@ -26,15 +29,6 @@ service OrderService {
 
   // bagian ops frequently
 }
-
-message MpPaymentCreateRequest {}
-message MpPaymentCreateResponse {}
-
-message MpPaymentOrderListRequest {}
-message MpPaymentOrderListResponse {}
-
-message MpPaymentDeleteRequest {}
-message MpPaymentDeleteResponse {}
 
 enum TagType {
   TAG_TYPE_UNSPECIFIED = 0;
@@ -89,6 +83,26 @@ enum WarehouseStatus {
   WAREHOUSE_STATUS_PACKING_COMPLETED = 3;
   WAREHOUSE_STATUS_SHIPPED = 4;
 }
+
+message ChangeOrderRefIDRequest {
+  uint64 order_id = 1 [(buf.validate.field).uint64.gt = 0];
+  string order_ref_id = 2 [
+    (buf.validate.field).string.min_len = 1,
+    (buf.validate.field).string.max_len = 64
+  ];
+  uint64 parent_partial_id = 3;
+}
+
+message ChangeOrderRefIDResponse {}
+
+message MpPaymentCreateRequest {}
+message MpPaymentCreateResponse {}
+
+message MpPaymentOrderListRequest {}
+message MpPaymentOrderListResponse {}
+
+message MpPaymentDeleteRequest {}
+message MpPaymentDeleteResponse {}
 
 message OrderKeywordFilter {
   KeywordFilterType type = 1;
