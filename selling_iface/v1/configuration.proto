@@ -55,7 +55,7 @@ message OweLimitCustomListResponse {
 
 message CheckOweLimitRequest {
   uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
-  repeated uint64 to_team_ids = 2 [
+  repeated uint64 cfg_team_ids = 2 [
     (buf.validate.field).repeated.min_items = 1,
     (buf.validate.field).repeated.max_items = 100,
     (buf.validate.field).repeated.unique = true,
@@ -65,24 +65,31 @@ message CheckOweLimitRequest {
 
 message OweLimitAllow {
   bool allow = 1;
+  double active_amount = 2;
+  double threshold = 3;
 }
 
 message CheckOweLimitResponse {
   map<uint64, OweLimitAllow> can_owe = 1;
 }
 
-message OweLimitCustomByIDsRequest {
+message OweLimitCustomByIDsItem {
   uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
-  repeated uint64 to_team_ids = 2 [
-    (buf.validate.field).repeated.min_items = 1,
-    (buf.validate.field).repeated.max_items = 100,
-    (buf.validate.field).repeated.unique = true,
-    (buf.validate.field).repeated.items.uint64.gt = 0
-  ];
+  uint64 cfg_team_id = 2 [(buf.validate.field).uint64.gt = 0];
+}
+
+message OweLimitCustomByIDsRequest {
+  bool include_active = 1;
+  repeated OweLimitCustomByIDsItem items = 2 [(buf.validate.field).repeated = {min_items: 1}];
+}
+
+message OweLimitDetailItem {
+  OweLimitItem limit = 1;
+  double active_amount = 2;
 }
 
 message OweLimitCustomByIDsResponse {
-  repeated OweLimitItem data = 1;
+  repeated OweLimitDetailItem data = 1;
 }
 
 message LimitInvoiceItemReq {
