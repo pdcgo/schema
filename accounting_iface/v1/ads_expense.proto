@@ -16,9 +16,16 @@ service AdsExpenseService {
   rpc AdsExTimeMetric(AdsExTimeMetricRequest) returns (AdsExTimeMetricResponse);
 }
 
+enum AccountSource {
+  ACCOUNT_SOURCE_UNSPECIFIED = 0;
+  ACCOUNT_SOURCE_SHOP = 1;
+}
+
 message AdsExCreateRequest {
   uint64 team_id = 1 [(buf.validate.field).uint64 = {gt: 0}];
   uint64 shop_id = 2 [(buf.validate.field).uint64 = {gt: 0}];
+  string external_ref_id = 8;
+  AccountSource source = 7 [(buf.validate.field).enum = {defined_only: true}];
   common.v1.MarketplaceType mp_type = 3 [(buf.validate.field).enum = {
     defined_only: true
     not_in: [0]
@@ -31,7 +38,9 @@ message AdsExCreateRequest {
   }];
 }
 
-message AdsExCreateResponse {}
+message AdsExCreateResponse {
+  uint64 transaction_id = 1;
+}
 
 message AdsExListRequest {
   uint64 team_id = 1;

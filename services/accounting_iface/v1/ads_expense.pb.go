@@ -23,10 +23,58 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type AccountSource int32
+
+const (
+	AccountSource_ACCOUNT_SOURCE_UNSPECIFIED AccountSource = 0
+	AccountSource_ACCOUNT_SOURCE_SHOP        AccountSource = 1
+)
+
+// Enum value maps for AccountSource.
+var (
+	AccountSource_name = map[int32]string{
+		0: "ACCOUNT_SOURCE_UNSPECIFIED",
+		1: "ACCOUNT_SOURCE_SHOP",
+	}
+	AccountSource_value = map[string]int32{
+		"ACCOUNT_SOURCE_UNSPECIFIED": 0,
+		"ACCOUNT_SOURCE_SHOP":        1,
+	}
+)
+
+func (x AccountSource) Enum() *AccountSource {
+	p := new(AccountSource)
+	*p = x
+	return p
+}
+
+func (x AccountSource) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (AccountSource) Descriptor() protoreflect.EnumDescriptor {
+	return file_accounting_iface_v1_ads_expense_proto_enumTypes[0].Descriptor()
+}
+
+func (AccountSource) Type() protoreflect.EnumType {
+	return &file_accounting_iface_v1_ads_expense_proto_enumTypes[0]
+}
+
+func (x AccountSource) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use AccountSource.Descriptor instead.
+func (AccountSource) EnumDescriptor() ([]byte, []int) {
+	return file_accounting_iface_v1_ads_expense_proto_rawDescGZIP(), []int{0}
+}
+
 type AdsExCreateRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
 	ShopId        uint64                 `protobuf:"varint,2,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
+	ExternalRefId string                 `protobuf:"bytes,8,opt,name=external_ref_id,json=externalRefId,proto3" json:"external_ref_id,omitempty"`
+	Source        AccountSource          `protobuf:"varint,7,opt,name=source,proto3,enum=accounting_iface.v1.AccountSource" json:"source,omitempty"`
 	MpType        v1.MarketplaceType     `protobuf:"varint,3,opt,name=mp_type,json=mpType,proto3,enum=common.v1.MarketplaceType" json:"mp_type,omitempty"`
 	CustomTag     []string               `protobuf:"bytes,6,rep,name=custom_tag,json=customTag,proto3" json:"custom_tag,omitempty"`
 	Amount        float64                `protobuf:"fixed64,4,opt,name=amount,proto3" json:"amount,omitempty"`
@@ -79,6 +127,20 @@ func (x *AdsExCreateRequest) GetShopId() uint64 {
 	return 0
 }
 
+func (x *AdsExCreateRequest) GetExternalRefId() string {
+	if x != nil {
+		return x.ExternalRefId
+	}
+	return ""
+}
+
+func (x *AdsExCreateRequest) GetSource() AccountSource {
+	if x != nil {
+		return x.Source
+	}
+	return AccountSource_ACCOUNT_SOURCE_UNSPECIFIED
+}
+
 func (x *AdsExCreateRequest) GetMpType() v1.MarketplaceType {
 	if x != nil {
 		return x.MpType
@@ -109,6 +171,7 @@ func (x *AdsExCreateRequest) GetDesc() string {
 
 type AdsExCreateResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	TransactionId uint64                 `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -141,6 +204,13 @@ func (x *AdsExCreateResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use AdsExCreateResponse.ProtoReflect.Descriptor instead.
 func (*AdsExCreateResponse) Descriptor() ([]byte, []int) {
 	return file_accounting_iface_v1_ads_expense_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *AdsExCreateResponse) GetTransactionId() uint64 {
+	if x != nil {
+		return x.TransactionId
+	}
+	return 0
 }
 
 type AdsExListRequest struct {
@@ -971,18 +1041,21 @@ var File_accounting_iface_v1_ads_expense_proto protoreflect.FileDescriptor
 
 const file_accounting_iface_v1_ads_expense_proto_rawDesc = "" +
 	"\n" +
-	"%accounting_iface/v1/ads_expense.proto\x12\x13accounting_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\"\x8a\x02\n" +
+	"%accounting_iface/v1/ads_expense.proto\x12\x13accounting_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\"\xf8\x02\n" +
 	"\x12AdsExCreateRequest\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12 \n" +
-	"\ashop_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06shopId\x12?\n" +
+	"\ashop_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06shopId\x12&\n" +
+	"\x0fexternal_ref_id\x18\b \x01(\tR\rexternalRefId\x12D\n" +
+	"\x06source\x18\a \x01(\x0e2\".accounting_iface.v1.AccountSourceB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06source\x12?\n" +
 	"\amp_type\x18\x03 \x01(\x0e2\x1a.common.v1.MarketplaceTypeB\n" +
 	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x06mpType\x12'\n" +
 	"\n" +
 	"custom_tag\x18\x06 \x03(\tB\b\xbaH\x05\x92\x01\x02\x10\x14R\tcustomTag\x12&\n" +
 	"\x06amount\x18\x04 \x01(\x01B\x0e\xbaH\v\x12\t!\x00\x00\x00\x00\x00\x00\x00\x00R\x06amount\x12\x1e\n" +
 	"\x04desc\x18\x05 \x01(\tB\n" +
-	"\xbaH\ar\x05\x10\x05\x18\x80\bR\x04desc\"\x15\n" +
-	"\x13AdsExCreateResponse\"\xb8\x01\n" +
+	"\xbaH\ar\x05\x10\x05\x18\x80\bR\x04desc\"<\n" +
+	"\x13AdsExCreateResponse\x12%\n" +
+	"\x0etransaction_id\x18\x01 \x01(\x04R\rtransactionId\"\xb8\x01\n" +
 	"\x10AdsExListRequest\x12\x17\n" +
 	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12\x17\n" +
 	"\ashop_id\x18\x02 \x01(\x04R\x06shopId\x12\f\n" +
@@ -1044,7 +1117,10 @@ const file_accounting_iface_v1_ads_expense_proto_rawDesc = "" +
 	"\ashop_id\x18\x01 \x01(\x04R\x06shopId\x12\x14\n" +
 	"\x05spent\x18\x02 \x01(\x01R\x05spent\"M\n" +
 	"\x17AdsExShopMetricResponse\x122\n" +
-	"\x04data\x18\x01 \x03(\v2\x1e.accounting_iface.v1.ShopSpentR\x04data2\x83\x05\n" +
+	"\x04data\x18\x01 \x03(\v2\x1e.accounting_iface.v1.ShopSpentR\x04data*H\n" +
+	"\rAccountSource\x12\x1e\n" +
+	"\x1aACCOUNT_SOURCE_UNSPECIFIED\x10\x00\x12\x17\n" +
+	"\x13ACCOUNT_SOURCE_SHOP\x10\x012\x83\x05\n" +
 	"\x11AdsExpenseService\x12`\n" +
 	"\vAdsExCreate\x12'.accounting_iface.v1.AdsExCreateRequest\x1a(.accounting_iface.v1.AdsExCreateResponse\x12Z\n" +
 	"\tAdsExList\x12%.accounting_iface.v1.AdsExListRequest\x1a&.accounting_iface.v1.AdsExListResponse\x12Z\n" +
@@ -1066,61 +1142,64 @@ func file_accounting_iface_v1_ads_expense_proto_rawDescGZIP() []byte {
 	return file_accounting_iface_v1_ads_expense_proto_rawDescData
 }
 
+var file_accounting_iface_v1_ads_expense_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_accounting_iface_v1_ads_expense_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_accounting_iface_v1_ads_expense_proto_goTypes = []any{
-	(*AdsExCreateRequest)(nil),          // 0: accounting_iface.v1.AdsExCreateRequest
-	(*AdsExCreateResponse)(nil),         // 1: accounting_iface.v1.AdsExCreateResponse
-	(*AdsExListRequest)(nil),            // 2: accounting_iface.v1.AdsExListRequest
-	(*AdsExpenseItem)(nil),              // 3: accounting_iface.v1.AdsExpenseItem
-	(*AdsExListResponse)(nil),           // 4: accounting_iface.v1.AdsExListResponse
-	(*AdsExEditRequest)(nil),            // 5: accounting_iface.v1.AdsExEditRequest
-	(*AdsExEditResponse)(nil),           // 6: accounting_iface.v1.AdsExEditResponse
-	(*AdsExOverviewMetricRequest)(nil),  // 7: accounting_iface.v1.AdsExOverviewMetricRequest
-	(*AdsExKeyValueMetric)(nil),         // 8: accounting_iface.v1.AdsExKeyValueMetric
-	(*AdsExOverviewMetricResponse)(nil), // 9: accounting_iface.v1.AdsExOverviewMetricResponse
-	(*AdsExTimeMetricRequest)(nil),      // 10: accounting_iface.v1.AdsExTimeMetricRequest
-	(*ValueMetric)(nil),                 // 11: accounting_iface.v1.ValueMetric
-	(*AdsExTimeMetricResponse)(nil),     // 12: accounting_iface.v1.AdsExTimeMetricResponse
-	(*AdsExShopMetricRequest)(nil),      // 13: accounting_iface.v1.AdsExShopMetricRequest
-	(*ShopSpent)(nil),                   // 14: accounting_iface.v1.ShopSpent
-	(*AdsExShopMetricResponse)(nil),     // 15: accounting_iface.v1.AdsExShopMetricResponse
-	(v1.MarketplaceType)(0),             // 16: common.v1.MarketplaceType
-	(*v1.PageFilter)(nil),               // 17: common.v1.PageFilter
-	(*v1.TimeFilterRange)(nil),          // 18: common.v1.TimeFilterRange
-	(*v1.PageInfo)(nil),                 // 19: common.v1.PageInfo
+	(AccountSource)(0),                  // 0: accounting_iface.v1.AccountSource
+	(*AdsExCreateRequest)(nil),          // 1: accounting_iface.v1.AdsExCreateRequest
+	(*AdsExCreateResponse)(nil),         // 2: accounting_iface.v1.AdsExCreateResponse
+	(*AdsExListRequest)(nil),            // 3: accounting_iface.v1.AdsExListRequest
+	(*AdsExpenseItem)(nil),              // 4: accounting_iface.v1.AdsExpenseItem
+	(*AdsExListResponse)(nil),           // 5: accounting_iface.v1.AdsExListResponse
+	(*AdsExEditRequest)(nil),            // 6: accounting_iface.v1.AdsExEditRequest
+	(*AdsExEditResponse)(nil),           // 7: accounting_iface.v1.AdsExEditResponse
+	(*AdsExOverviewMetricRequest)(nil),  // 8: accounting_iface.v1.AdsExOverviewMetricRequest
+	(*AdsExKeyValueMetric)(nil),         // 9: accounting_iface.v1.AdsExKeyValueMetric
+	(*AdsExOverviewMetricResponse)(nil), // 10: accounting_iface.v1.AdsExOverviewMetricResponse
+	(*AdsExTimeMetricRequest)(nil),      // 11: accounting_iface.v1.AdsExTimeMetricRequest
+	(*ValueMetric)(nil),                 // 12: accounting_iface.v1.ValueMetric
+	(*AdsExTimeMetricResponse)(nil),     // 13: accounting_iface.v1.AdsExTimeMetricResponse
+	(*AdsExShopMetricRequest)(nil),      // 14: accounting_iface.v1.AdsExShopMetricRequest
+	(*ShopSpent)(nil),                   // 15: accounting_iface.v1.ShopSpent
+	(*AdsExShopMetricResponse)(nil),     // 16: accounting_iface.v1.AdsExShopMetricResponse
+	(v1.MarketplaceType)(0),             // 17: common.v1.MarketplaceType
+	(*v1.PageFilter)(nil),               // 18: common.v1.PageFilter
+	(*v1.TimeFilterRange)(nil),          // 19: common.v1.TimeFilterRange
+	(*v1.PageInfo)(nil),                 // 20: common.v1.PageInfo
 }
 var file_accounting_iface_v1_ads_expense_proto_depIdxs = []int32{
-	16, // 0: accounting_iface.v1.AdsExCreateRequest.mp_type:type_name -> common.v1.MarketplaceType
-	17, // 1: accounting_iface.v1.AdsExListRequest.page:type_name -> common.v1.PageFilter
-	18, // 2: accounting_iface.v1.AdsExListRequest.time_range:type_name -> common.v1.TimeFilterRange
-	16, // 3: accounting_iface.v1.AdsExpenseItem.mp_type:type_name -> common.v1.MarketplaceType
-	3,  // 4: accounting_iface.v1.AdsExListResponse.data:type_name -> accounting_iface.v1.AdsExpenseItem
-	19, // 5: accounting_iface.v1.AdsExListResponse.page_info:type_name -> common.v1.PageInfo
-	16, // 6: accounting_iface.v1.AdsExEditRequest.mp_type:type_name -> common.v1.MarketplaceType
-	18, // 7: accounting_iface.v1.AdsExOverviewMetricRequest.time_range:type_name -> common.v1.TimeFilterRange
-	16, // 8: accounting_iface.v1.AdsExKeyValueMetric.mp_type:type_name -> common.v1.MarketplaceType
-	8,  // 9: accounting_iface.v1.AdsExOverviewMetricResponse.data:type_name -> accounting_iface.v1.AdsExKeyValueMetric
-	18, // 10: accounting_iface.v1.AdsExTimeMetricRequest.time_range:type_name -> common.v1.TimeFilterRange
-	11, // 11: accounting_iface.v1.AdsExTimeMetricResponse.data:type_name -> accounting_iface.v1.ValueMetric
-	18, // 12: accounting_iface.v1.AdsExShopMetricRequest.time_range:type_name -> common.v1.TimeFilterRange
-	14, // 13: accounting_iface.v1.AdsExShopMetricResponse.data:type_name -> accounting_iface.v1.ShopSpent
-	0,  // 14: accounting_iface.v1.AdsExpenseService.AdsExCreate:input_type -> accounting_iface.v1.AdsExCreateRequest
-	2,  // 15: accounting_iface.v1.AdsExpenseService.AdsExList:input_type -> accounting_iface.v1.AdsExListRequest
-	5,  // 16: accounting_iface.v1.AdsExpenseService.AdsExEdit:input_type -> accounting_iface.v1.AdsExEditRequest
-	13, // 17: accounting_iface.v1.AdsExpenseService.AdsExShopMetric:input_type -> accounting_iface.v1.AdsExShopMetricRequest
-	7,  // 18: accounting_iface.v1.AdsExpenseService.AdsExOverviewMetric:input_type -> accounting_iface.v1.AdsExOverviewMetricRequest
-	10, // 19: accounting_iface.v1.AdsExpenseService.AdsExTimeMetric:input_type -> accounting_iface.v1.AdsExTimeMetricRequest
-	1,  // 20: accounting_iface.v1.AdsExpenseService.AdsExCreate:output_type -> accounting_iface.v1.AdsExCreateResponse
-	4,  // 21: accounting_iface.v1.AdsExpenseService.AdsExList:output_type -> accounting_iface.v1.AdsExListResponse
-	6,  // 22: accounting_iface.v1.AdsExpenseService.AdsExEdit:output_type -> accounting_iface.v1.AdsExEditResponse
-	15, // 23: accounting_iface.v1.AdsExpenseService.AdsExShopMetric:output_type -> accounting_iface.v1.AdsExShopMetricResponse
-	9,  // 24: accounting_iface.v1.AdsExpenseService.AdsExOverviewMetric:output_type -> accounting_iface.v1.AdsExOverviewMetricResponse
-	12, // 25: accounting_iface.v1.AdsExpenseService.AdsExTimeMetric:output_type -> accounting_iface.v1.AdsExTimeMetricResponse
-	20, // [20:26] is the sub-list for method output_type
-	14, // [14:20] is the sub-list for method input_type
-	14, // [14:14] is the sub-list for extension type_name
-	14, // [14:14] is the sub-list for extension extendee
-	0,  // [0:14] is the sub-list for field type_name
+	0,  // 0: accounting_iface.v1.AdsExCreateRequest.source:type_name -> accounting_iface.v1.AccountSource
+	17, // 1: accounting_iface.v1.AdsExCreateRequest.mp_type:type_name -> common.v1.MarketplaceType
+	18, // 2: accounting_iface.v1.AdsExListRequest.page:type_name -> common.v1.PageFilter
+	19, // 3: accounting_iface.v1.AdsExListRequest.time_range:type_name -> common.v1.TimeFilterRange
+	17, // 4: accounting_iface.v1.AdsExpenseItem.mp_type:type_name -> common.v1.MarketplaceType
+	4,  // 5: accounting_iface.v1.AdsExListResponse.data:type_name -> accounting_iface.v1.AdsExpenseItem
+	20, // 6: accounting_iface.v1.AdsExListResponse.page_info:type_name -> common.v1.PageInfo
+	17, // 7: accounting_iface.v1.AdsExEditRequest.mp_type:type_name -> common.v1.MarketplaceType
+	19, // 8: accounting_iface.v1.AdsExOverviewMetricRequest.time_range:type_name -> common.v1.TimeFilterRange
+	17, // 9: accounting_iface.v1.AdsExKeyValueMetric.mp_type:type_name -> common.v1.MarketplaceType
+	9,  // 10: accounting_iface.v1.AdsExOverviewMetricResponse.data:type_name -> accounting_iface.v1.AdsExKeyValueMetric
+	19, // 11: accounting_iface.v1.AdsExTimeMetricRequest.time_range:type_name -> common.v1.TimeFilterRange
+	12, // 12: accounting_iface.v1.AdsExTimeMetricResponse.data:type_name -> accounting_iface.v1.ValueMetric
+	19, // 13: accounting_iface.v1.AdsExShopMetricRequest.time_range:type_name -> common.v1.TimeFilterRange
+	15, // 14: accounting_iface.v1.AdsExShopMetricResponse.data:type_name -> accounting_iface.v1.ShopSpent
+	1,  // 15: accounting_iface.v1.AdsExpenseService.AdsExCreate:input_type -> accounting_iface.v1.AdsExCreateRequest
+	3,  // 16: accounting_iface.v1.AdsExpenseService.AdsExList:input_type -> accounting_iface.v1.AdsExListRequest
+	6,  // 17: accounting_iface.v1.AdsExpenseService.AdsExEdit:input_type -> accounting_iface.v1.AdsExEditRequest
+	14, // 18: accounting_iface.v1.AdsExpenseService.AdsExShopMetric:input_type -> accounting_iface.v1.AdsExShopMetricRequest
+	8,  // 19: accounting_iface.v1.AdsExpenseService.AdsExOverviewMetric:input_type -> accounting_iface.v1.AdsExOverviewMetricRequest
+	11, // 20: accounting_iface.v1.AdsExpenseService.AdsExTimeMetric:input_type -> accounting_iface.v1.AdsExTimeMetricRequest
+	2,  // 21: accounting_iface.v1.AdsExpenseService.AdsExCreate:output_type -> accounting_iface.v1.AdsExCreateResponse
+	5,  // 22: accounting_iface.v1.AdsExpenseService.AdsExList:output_type -> accounting_iface.v1.AdsExListResponse
+	7,  // 23: accounting_iface.v1.AdsExpenseService.AdsExEdit:output_type -> accounting_iface.v1.AdsExEditResponse
+	16, // 24: accounting_iface.v1.AdsExpenseService.AdsExShopMetric:output_type -> accounting_iface.v1.AdsExShopMetricResponse
+	10, // 25: accounting_iface.v1.AdsExpenseService.AdsExOverviewMetric:output_type -> accounting_iface.v1.AdsExOverviewMetricResponse
+	13, // 26: accounting_iface.v1.AdsExpenseService.AdsExTimeMetric:output_type -> accounting_iface.v1.AdsExTimeMetricResponse
+	21, // [21:27] is the sub-list for method output_type
+	15, // [15:21] is the sub-list for method input_type
+	15, // [15:15] is the sub-list for extension type_name
+	15, // [15:15] is the sub-list for extension extendee
+	0,  // [0:15] is the sub-list for field type_name
 }
 
 func init() { file_accounting_iface_v1_ads_expense_proto_init() }
@@ -1133,13 +1212,14 @@ func file_accounting_iface_v1_ads_expense_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_accounting_iface_v1_ads_expense_proto_rawDesc), len(file_accounting_iface_v1_ads_expense_proto_rawDesc)),
-			NumEnums:      0,
+			NumEnums:      1,
 			NumMessages:   16,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
 		GoTypes:           file_accounting_iface_v1_ads_expense_proto_goTypes,
 		DependencyIndexes: file_accounting_iface_v1_ads_expense_proto_depIdxs,
+		EnumInfos:         file_accounting_iface_v1_ads_expense_proto_enumTypes,
 		MessageInfos:      file_accounting_iface_v1_ads_expense_proto_msgTypes,
 	}.Build()
 	File_accounting_iface_v1_ads_expense_proto = out.File
