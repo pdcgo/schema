@@ -15,9 +15,16 @@ service ConfigurationLimitService {
   rpc OweDefaultLimit(OweDefaultLimitRequest) returns (OweDefaultLimitResponse);
   rpc OweLimitCustomCreate(OweLimitCustomCreateRequest) returns (OweLimitCustomCreateResponse);
   rpc OweLimitCustomList(OweLimitCustomListRequest) returns (OweLimitCustomListResponse);
+  rpc OweLimitDelete(OweLimitDeleteRequest) returns (OweLimitDeleteResponse);
   rpc OweLimitCustomByIDs(OweLimitCustomByIDsRequest) returns (OweLimitCustomByIDsResponse);
   rpc CheckOweLimit(CheckOweLimitRequest) returns (CheckOweLimitResponse);
 }
+
+message OweLimitDeleteRequest {
+  uint64 for_team_id = 2 [(buf.validate.field).uint64.gt = 0];
+}
+
+message OweLimitDeleteResponse {}
 
 message OweDefaultLimitRequest {
   uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];

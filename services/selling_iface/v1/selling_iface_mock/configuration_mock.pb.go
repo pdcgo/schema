@@ -150,6 +150,32 @@ func (mr *MockConfigurationLimitServiceClientMockRecorder) OweLimitCustomList(ct
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OweLimitCustomList", reflect.TypeOf((*MockConfigurationLimitService)(nil).OweLimitCustomList), ctx, req)
 }
 
+func (m *MockConfigurationLimitService) OweLimitDelete(ctx context.Context, req *connect.Request[v1.OweLimitDeleteRequest]) (*connect.Response[v1.OweLimitDeleteResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "OweLimitDelete", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.OweLimitDeleteResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockConfigurationLimitServiceMockRecorder) OweLimitDelete(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OweLimitDelete", reflect.TypeOf((*MockConfigurationLimitService)(nil).OweLimitDelete), ctx, req)
+}
+
+func (m *MockConfigurationLimitServiceClient) OweLimitDelete(ctx context.Context, req *connect.Request[v1.OweLimitDeleteRequest]) (*connect.Response[v1.OweLimitDeleteResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "OweLimitDelete", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.OweLimitDeleteResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockConfigurationLimitServiceClientMockRecorder) OweLimitDelete(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OweLimitDelete", reflect.TypeOf((*MockConfigurationLimitService)(nil).OweLimitDelete), ctx, req)
+}
+
 func (m *MockConfigurationLimitService) OweLimitCustomByIDs(ctx context.Context, req *connect.Request[v1.OweLimitCustomByIDsRequest]) (*connect.Response[v1.OweLimitCustomByIDsResponse], error) {
     m.ctrl.T.Helper()
     ret := m.ctrl.Call(m, "OweLimitCustomByIDs", ctx, req)

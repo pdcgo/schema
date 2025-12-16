@@ -23,6 +23,86 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type OweLimitDeleteRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ForTeamId     uint64                 `protobuf:"varint,2,opt,name=for_team_id,json=forTeamId,proto3" json:"for_team_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *OweLimitDeleteRequest) Reset() {
+	*x = OweLimitDeleteRequest{}
+	mi := &file_selling_iface_v1_configuration_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *OweLimitDeleteRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*OweLimitDeleteRequest) ProtoMessage() {}
+
+func (x *OweLimitDeleteRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_configuration_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use OweLimitDeleteRequest.ProtoReflect.Descriptor instead.
+func (*OweLimitDeleteRequest) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_configuration_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *OweLimitDeleteRequest) GetForTeamId() uint64 {
+	if x != nil {
+		return x.ForTeamId
+	}
+	return 0
+}
+
+type OweLimitDeleteResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *OweLimitDeleteResponse) Reset() {
+	*x = OweLimitDeleteResponse{}
+	mi := &file_selling_iface_v1_configuration_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *OweLimitDeleteResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*OweLimitDeleteResponse) ProtoMessage() {}
+
+func (x *OweLimitDeleteResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_configuration_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use OweLimitDeleteResponse.ProtoReflect.Descriptor instead.
+func (*OweLimitDeleteResponse) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_configuration_proto_rawDescGZIP(), []int{1}
+}
+
 type OweDefaultLimitRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
@@ -33,7 +113,7 @@ type OweDefaultLimitRequest struct {
 
 func (x *OweDefaultLimitRequest) Reset() {
 	*x = OweDefaultLimitRequest{}
-	mi := &file_selling_iface_v1_configuration_proto_msgTypes[0]
+	mi := &file_selling_iface_v1_configuration_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -45,7 +125,7 @@ func (x *OweDefaultLimitRequest) String() string {
 func (*OweDefaultLimitRequest) ProtoMessage() {}
 
 func (x *OweDefaultLimitRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_configuration_proto_msgTypes[0]
+	mi := &file_selling_iface_v1_configuration_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -58,7 +138,7 @@ func (x *OweDefaultLimitRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OweDefaultLimitRequest.ProtoReflect.Descriptor instead.
 func (*OweDefaultLimitRequest) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_configuration_proto_rawDescGZIP(), []int{0}
+	return file_selling_iface_v1_configuration_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *OweDefaultLimitRequest) GetTeamId() uint64 {
@@ -83,7 +163,7 @@ type OweDefaultLimitResponse struct {
 
 func (x *OweDefaultLimitResponse) Reset() {
 	*x = OweDefaultLimitResponse{}
-	mi := &file_selling_iface_v1_configuration_proto_msgTypes[1]
+	mi := &file_selling_iface_v1_configuration_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -95,7 +175,7 @@ func (x *OweDefaultLimitResponse) String() string {
 func (*OweDefaultLimitResponse) ProtoMessage() {}
 
 func (x *OweDefaultLimitResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_configuration_proto_msgTypes[1]
+	mi := &file_selling_iface_v1_configuration_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -108,7 +188,7 @@ func (x *OweDefaultLimitResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OweDefaultLimitResponse.ProtoReflect.Descriptor instead.
 func (*OweDefaultLimitResponse) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_configuration_proto_rawDescGZIP(), []int{1}
+	return file_selling_iface_v1_configuration_proto_rawDescGZIP(), []int{3}
 }
 
 type OweLimitCustomCreateRequest struct {
@@ -122,7 +202,7 @@ type OweLimitCustomCreateRequest struct {
 
 func (x *OweLimitCustomCreateRequest) Reset() {
 	*x = OweLimitCustomCreateRequest{}
-	mi := &file_selling_iface_v1_configuration_proto_msgTypes[2]
+	mi := &file_selling_iface_v1_configuration_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -134,7 +214,7 @@ func (x *OweLimitCustomCreateRequest) String() string {
 func (*OweLimitCustomCreateRequest) ProtoMessage() {}
 
 func (x *OweLimitCustomCreateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_configuration_proto_msgTypes[2]
+	mi := &file_selling_iface_v1_configuration_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -147,7 +227,7 @@ func (x *OweLimitCustomCreateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OweLimitCustomCreateRequest.ProtoReflect.Descriptor instead.
 func (*OweLimitCustomCreateRequest) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_configuration_proto_rawDescGZIP(), []int{2}
+	return file_selling_iface_v1_configuration_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *OweLimitCustomCreateRequest) GetTeamId() uint64 {
@@ -180,7 +260,7 @@ type OweLimitCustomCreateResponse struct {
 
 func (x *OweLimitCustomCreateResponse) Reset() {
 	*x = OweLimitCustomCreateResponse{}
-	mi := &file_selling_iface_v1_configuration_proto_msgTypes[3]
+	mi := &file_selling_iface_v1_configuration_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -192,7 +272,7 @@ func (x *OweLimitCustomCreateResponse) String() string {
 func (*OweLimitCustomCreateResponse) ProtoMessage() {}
 
 func (x *OweLimitCustomCreateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_configuration_proto_msgTypes[3]
+	mi := &file_selling_iface_v1_configuration_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -205,7 +285,7 @@ func (x *OweLimitCustomCreateResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OweLimitCustomCreateResponse.ProtoReflect.Descriptor instead.
 func (*OweLimitCustomCreateResponse) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_configuration_proto_rawDescGZIP(), []int{3}
+	return file_selling_iface_v1_configuration_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *OweLimitCustomCreateResponse) GetId() uint64 {
@@ -228,7 +308,7 @@ type OweLimitItem struct {
 
 func (x *OweLimitItem) Reset() {
 	*x = OweLimitItem{}
-	mi := &file_selling_iface_v1_configuration_proto_msgTypes[4]
+	mi := &file_selling_iface_v1_configuration_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -240,7 +320,7 @@ func (x *OweLimitItem) String() string {
 func (*OweLimitItem) ProtoMessage() {}
 
 func (x *OweLimitItem) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_configuration_proto_msgTypes[4]
+	mi := &file_selling_iface_v1_configuration_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -253,7 +333,7 @@ func (x *OweLimitItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OweLimitItem.ProtoReflect.Descriptor instead.
 func (*OweLimitItem) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_configuration_proto_rawDescGZIP(), []int{4}
+	return file_selling_iface_v1_configuration_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *OweLimitItem) GetId() uint64 {
@@ -302,7 +382,7 @@ type OweLimitCustomListRequest struct {
 
 func (x *OweLimitCustomListRequest) Reset() {
 	*x = OweLimitCustomListRequest{}
-	mi := &file_selling_iface_v1_configuration_proto_msgTypes[5]
+	mi := &file_selling_iface_v1_configuration_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -314,7 +394,7 @@ func (x *OweLimitCustomListRequest) String() string {
 func (*OweLimitCustomListRequest) ProtoMessage() {}
 
 func (x *OweLimitCustomListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_configuration_proto_msgTypes[5]
+	mi := &file_selling_iface_v1_configuration_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -327,7 +407,7 @@ func (x *OweLimitCustomListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OweLimitCustomListRequest.ProtoReflect.Descriptor instead.
 func (*OweLimitCustomListRequest) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_configuration_proto_rawDescGZIP(), []int{5}
+	return file_selling_iface_v1_configuration_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *OweLimitCustomListRequest) GetQ() string {
@@ -361,7 +441,7 @@ type OweLimitCustomListResponse struct {
 
 func (x *OweLimitCustomListResponse) Reset() {
 	*x = OweLimitCustomListResponse{}
-	mi := &file_selling_iface_v1_configuration_proto_msgTypes[6]
+	mi := &file_selling_iface_v1_configuration_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -373,7 +453,7 @@ func (x *OweLimitCustomListResponse) String() string {
 func (*OweLimitCustomListResponse) ProtoMessage() {}
 
 func (x *OweLimitCustomListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_configuration_proto_msgTypes[6]
+	mi := &file_selling_iface_v1_configuration_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -386,7 +466,7 @@ func (x *OweLimitCustomListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OweLimitCustomListResponse.ProtoReflect.Descriptor instead.
 func (*OweLimitCustomListResponse) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_configuration_proto_rawDescGZIP(), []int{6}
+	return file_selling_iface_v1_configuration_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *OweLimitCustomListResponse) GetData() []*OweLimitItem {
@@ -413,7 +493,7 @@ type CheckOweLimitRequest struct {
 
 func (x *CheckOweLimitRequest) Reset() {
 	*x = CheckOweLimitRequest{}
-	mi := &file_selling_iface_v1_configuration_proto_msgTypes[7]
+	mi := &file_selling_iface_v1_configuration_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -425,7 +505,7 @@ func (x *CheckOweLimitRequest) String() string {
 func (*CheckOweLimitRequest) ProtoMessage() {}
 
 func (x *CheckOweLimitRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_configuration_proto_msgTypes[7]
+	mi := &file_selling_iface_v1_configuration_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -438,7 +518,7 @@ func (x *CheckOweLimitRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckOweLimitRequest.ProtoReflect.Descriptor instead.
 func (*CheckOweLimitRequest) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_configuration_proto_rawDescGZIP(), []int{7}
+	return file_selling_iface_v1_configuration_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *CheckOweLimitRequest) GetTeamId() uint64 {
@@ -466,7 +546,7 @@ type OweLimitAllow struct {
 
 func (x *OweLimitAllow) Reset() {
 	*x = OweLimitAllow{}
-	mi := &file_selling_iface_v1_configuration_proto_msgTypes[8]
+	mi := &file_selling_iface_v1_configuration_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -478,7 +558,7 @@ func (x *OweLimitAllow) String() string {
 func (*OweLimitAllow) ProtoMessage() {}
 
 func (x *OweLimitAllow) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_configuration_proto_msgTypes[8]
+	mi := &file_selling_iface_v1_configuration_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -491,7 +571,7 @@ func (x *OweLimitAllow) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OweLimitAllow.ProtoReflect.Descriptor instead.
 func (*OweLimitAllow) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_configuration_proto_rawDescGZIP(), []int{8}
+	return file_selling_iface_v1_configuration_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *OweLimitAllow) GetAllow() bool {
@@ -524,7 +604,7 @@ type CheckOweLimitResponse struct {
 
 func (x *CheckOweLimitResponse) Reset() {
 	*x = CheckOweLimitResponse{}
-	mi := &file_selling_iface_v1_configuration_proto_msgTypes[9]
+	mi := &file_selling_iface_v1_configuration_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -536,7 +616,7 @@ func (x *CheckOweLimitResponse) String() string {
 func (*CheckOweLimitResponse) ProtoMessage() {}
 
 func (x *CheckOweLimitResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_configuration_proto_msgTypes[9]
+	mi := &file_selling_iface_v1_configuration_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -549,7 +629,7 @@ func (x *CheckOweLimitResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckOweLimitResponse.ProtoReflect.Descriptor instead.
 func (*CheckOweLimitResponse) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_configuration_proto_rawDescGZIP(), []int{9}
+	return file_selling_iface_v1_configuration_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *CheckOweLimitResponse) GetCanOwe() map[uint64]*OweLimitAllow {
@@ -569,7 +649,7 @@ type OweLimitCustomByIDsItem struct {
 
 func (x *OweLimitCustomByIDsItem) Reset() {
 	*x = OweLimitCustomByIDsItem{}
-	mi := &file_selling_iface_v1_configuration_proto_msgTypes[10]
+	mi := &file_selling_iface_v1_configuration_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -581,7 +661,7 @@ func (x *OweLimitCustomByIDsItem) String() string {
 func (*OweLimitCustomByIDsItem) ProtoMessage() {}
 
 func (x *OweLimitCustomByIDsItem) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_configuration_proto_msgTypes[10]
+	mi := &file_selling_iface_v1_configuration_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -594,7 +674,7 @@ func (x *OweLimitCustomByIDsItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OweLimitCustomByIDsItem.ProtoReflect.Descriptor instead.
 func (*OweLimitCustomByIDsItem) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_configuration_proto_rawDescGZIP(), []int{10}
+	return file_selling_iface_v1_configuration_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *OweLimitCustomByIDsItem) GetTeamId() uint64 {
@@ -621,7 +701,7 @@ type OweLimitCustomByIDsRequest struct {
 
 func (x *OweLimitCustomByIDsRequest) Reset() {
 	*x = OweLimitCustomByIDsRequest{}
-	mi := &file_selling_iface_v1_configuration_proto_msgTypes[11]
+	mi := &file_selling_iface_v1_configuration_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -633,7 +713,7 @@ func (x *OweLimitCustomByIDsRequest) String() string {
 func (*OweLimitCustomByIDsRequest) ProtoMessage() {}
 
 func (x *OweLimitCustomByIDsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_configuration_proto_msgTypes[11]
+	mi := &file_selling_iface_v1_configuration_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -646,7 +726,7 @@ func (x *OweLimitCustomByIDsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OweLimitCustomByIDsRequest.ProtoReflect.Descriptor instead.
 func (*OweLimitCustomByIDsRequest) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_configuration_proto_rawDescGZIP(), []int{11}
+	return file_selling_iface_v1_configuration_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *OweLimitCustomByIDsRequest) GetIncludeActive() bool {
@@ -673,7 +753,7 @@ type OweLimitDetailItem struct {
 
 func (x *OweLimitDetailItem) Reset() {
 	*x = OweLimitDetailItem{}
-	mi := &file_selling_iface_v1_configuration_proto_msgTypes[12]
+	mi := &file_selling_iface_v1_configuration_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -685,7 +765,7 @@ func (x *OweLimitDetailItem) String() string {
 func (*OweLimitDetailItem) ProtoMessage() {}
 
 func (x *OweLimitDetailItem) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_configuration_proto_msgTypes[12]
+	mi := &file_selling_iface_v1_configuration_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -698,7 +778,7 @@ func (x *OweLimitDetailItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OweLimitDetailItem.ProtoReflect.Descriptor instead.
 func (*OweLimitDetailItem) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_configuration_proto_rawDescGZIP(), []int{12}
+	return file_selling_iface_v1_configuration_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *OweLimitDetailItem) GetLimit() *OweLimitItem {
@@ -724,7 +804,7 @@ type OweLimitCustomByIDsResponse struct {
 
 func (x *OweLimitCustomByIDsResponse) Reset() {
 	*x = OweLimitCustomByIDsResponse{}
-	mi := &file_selling_iface_v1_configuration_proto_msgTypes[13]
+	mi := &file_selling_iface_v1_configuration_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -736,7 +816,7 @@ func (x *OweLimitCustomByIDsResponse) String() string {
 func (*OweLimitCustomByIDsResponse) ProtoMessage() {}
 
 func (x *OweLimitCustomByIDsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_configuration_proto_msgTypes[13]
+	mi := &file_selling_iface_v1_configuration_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -749,7 +829,7 @@ func (x *OweLimitCustomByIDsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OweLimitCustomByIDsResponse.ProtoReflect.Descriptor instead.
 func (*OweLimitCustomByIDsResponse) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_configuration_proto_rawDescGZIP(), []int{13}
+	return file_selling_iface_v1_configuration_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *OweLimitCustomByIDsResponse) GetData() []*OweLimitDetailItem {
@@ -769,7 +849,7 @@ type LimitInvoiceItemReq struct {
 
 func (x *LimitInvoiceItemReq) Reset() {
 	*x = LimitInvoiceItemReq{}
-	mi := &file_selling_iface_v1_configuration_proto_msgTypes[14]
+	mi := &file_selling_iface_v1_configuration_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -781,7 +861,7 @@ func (x *LimitInvoiceItemReq) String() string {
 func (*LimitInvoiceItemReq) ProtoMessage() {}
 
 func (x *LimitInvoiceItemReq) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_configuration_proto_msgTypes[14]
+	mi := &file_selling_iface_v1_configuration_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -794,7 +874,7 @@ func (x *LimitInvoiceItemReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LimitInvoiceItemReq.ProtoReflect.Descriptor instead.
 func (*LimitInvoiceItemReq) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_configuration_proto_rawDescGZIP(), []int{14}
+	return file_selling_iface_v1_configuration_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *LimitInvoiceItemReq) GetFromTeamId() uint64 {
@@ -820,7 +900,7 @@ type LimitInvoiceRequest struct {
 
 func (x *LimitInvoiceRequest) Reset() {
 	*x = LimitInvoiceRequest{}
-	mi := &file_selling_iface_v1_configuration_proto_msgTypes[15]
+	mi := &file_selling_iface_v1_configuration_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -832,7 +912,7 @@ func (x *LimitInvoiceRequest) String() string {
 func (*LimitInvoiceRequest) ProtoMessage() {}
 
 func (x *LimitInvoiceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_configuration_proto_msgTypes[15]
+	mi := &file_selling_iface_v1_configuration_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -845,7 +925,7 @@ func (x *LimitInvoiceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LimitInvoiceRequest.ProtoReflect.Descriptor instead.
 func (*LimitInvoiceRequest) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_configuration_proto_rawDescGZIP(), []int{15}
+	return file_selling_iface_v1_configuration_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *LimitInvoiceRequest) GetLimit() []*LimitInvoiceItemReq {
@@ -867,7 +947,7 @@ type LimitInvoiceItem struct {
 
 func (x *LimitInvoiceItem) Reset() {
 	*x = LimitInvoiceItem{}
-	mi := &file_selling_iface_v1_configuration_proto_msgTypes[16]
+	mi := &file_selling_iface_v1_configuration_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -879,7 +959,7 @@ func (x *LimitInvoiceItem) String() string {
 func (*LimitInvoiceItem) ProtoMessage() {}
 
 func (x *LimitInvoiceItem) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_configuration_proto_msgTypes[16]
+	mi := &file_selling_iface_v1_configuration_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -892,7 +972,7 @@ func (x *LimitInvoiceItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LimitInvoiceItem.ProtoReflect.Descriptor instead.
 func (*LimitInvoiceItem) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_configuration_proto_rawDescGZIP(), []int{16}
+	return file_selling_iface_v1_configuration_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *LimitInvoiceItem) GetId() uint64 {
@@ -932,7 +1012,7 @@ type LimitInvoiceResponse struct {
 
 func (x *LimitInvoiceResponse) Reset() {
 	*x = LimitInvoiceResponse{}
-	mi := &file_selling_iface_v1_configuration_proto_msgTypes[17]
+	mi := &file_selling_iface_v1_configuration_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -944,7 +1024,7 @@ func (x *LimitInvoiceResponse) String() string {
 func (*LimitInvoiceResponse) ProtoMessage() {}
 
 func (x *LimitInvoiceResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_configuration_proto_msgTypes[17]
+	mi := &file_selling_iface_v1_configuration_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -957,7 +1037,7 @@ func (x *LimitInvoiceResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LimitInvoiceResponse.ProtoReflect.Descriptor instead.
 func (*LimitInvoiceResponse) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_configuration_proto_rawDescGZIP(), []int{17}
+	return file_selling_iface_v1_configuration_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *LimitInvoiceResponse) GetData() []*LimitInvoiceItem {
@@ -971,7 +1051,10 @@ var File_selling_iface_v1_configuration_proto protoreflect.FileDescriptor
 
 const file_selling_iface_v1_configuration_proto_rawDesc = "" +
 	"\n" +
-	"$selling_iface/v1/configuration.proto\x12\x10selling_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\"X\n" +
+	"$selling_iface/v1/configuration.proto\x12\x10selling_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\"@\n" +
+	"\x15OweLimitDeleteRequest\x12'\n" +
+	"\vfor_team_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\tforTeamId\"\x18\n" +
+	"\x16OweLimitDeleteResponse\"X\n" +
 	"\x16OweDefaultLimitRequest\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12\x1c\n" +
 	"\tthreshold\x18\x02 \x01(\x01R\tthreshold\"\x19\n" +
@@ -1035,12 +1118,13 @@ const file_selling_iface_v1_configuration_proto_rawDesc = "" +
 	"to_team_id\x18\x03 \x01(\x04R\btoTeamId\x12\x1c\n" +
 	"\tthreshold\x18\x04 \x01(\x01R\tthreshold\"N\n" +
 	"\x14LimitInvoiceResponse\x126\n" +
-	"\x04data\x18\x01 \x03(\v2\".selling_iface.v1.LimitInvoiceItemR\x04data2\xa0\x05\n" +
+	"\x04data\x18\x01 \x03(\v2\".selling_iface.v1.LimitInvoiceItemR\x04data2\x85\x06\n" +
 	"\x19ConfigurationLimitService\x12]\n" +
 	"\fLimitInvoice\x12%.selling_iface.v1.LimitInvoiceRequest\x1a&.selling_iface.v1.LimitInvoiceResponse\x12f\n" +
 	"\x0fOweDefaultLimit\x12(.selling_iface.v1.OweDefaultLimitRequest\x1a).selling_iface.v1.OweDefaultLimitResponse\x12u\n" +
 	"\x14OweLimitCustomCreate\x12-.selling_iface.v1.OweLimitCustomCreateRequest\x1a..selling_iface.v1.OweLimitCustomCreateResponse\x12o\n" +
-	"\x12OweLimitCustomList\x12+.selling_iface.v1.OweLimitCustomListRequest\x1a,.selling_iface.v1.OweLimitCustomListResponse\x12r\n" +
+	"\x12OweLimitCustomList\x12+.selling_iface.v1.OweLimitCustomListRequest\x1a,.selling_iface.v1.OweLimitCustomListResponse\x12c\n" +
+	"\x0eOweLimitDelete\x12'.selling_iface.v1.OweLimitDeleteRequest\x1a(.selling_iface.v1.OweLimitDeleteResponse\x12r\n" +
 	"\x13OweLimitCustomByIDs\x12,.selling_iface.v1.OweLimitCustomByIDsRequest\x1a-.selling_iface.v1.OweLimitCustomByIDsResponse\x12`\n" +
 	"\rCheckOweLimit\x12&.selling_iface.v1.CheckOweLimitRequest\x1a'.selling_iface.v1.CheckOweLimitResponseB\xc8\x01\n" +
 	"\x14com.selling_iface.v1B\x12ConfigurationProtoP\x01Z?github.com/pdcgo/schema/services/selling_iface/v1;selling_iface\xa2\x02\x03SXX\xaa\x02\x0fSellingIface.V1\xca\x02\x0fSellingIface\\V1\xe2\x02\x1bSellingIface\\V1\\GPBMetadata\xea\x02\x10SellingIface::V1b\x06proto3"
@@ -1057,55 +1141,59 @@ func file_selling_iface_v1_configuration_proto_rawDescGZIP() []byte {
 	return file_selling_iface_v1_configuration_proto_rawDescData
 }
 
-var file_selling_iface_v1_configuration_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
+var file_selling_iface_v1_configuration_proto_msgTypes = make([]protoimpl.MessageInfo, 21)
 var file_selling_iface_v1_configuration_proto_goTypes = []any{
-	(*OweDefaultLimitRequest)(nil),       // 0: selling_iface.v1.OweDefaultLimitRequest
-	(*OweDefaultLimitResponse)(nil),      // 1: selling_iface.v1.OweDefaultLimitResponse
-	(*OweLimitCustomCreateRequest)(nil),  // 2: selling_iface.v1.OweLimitCustomCreateRequest
-	(*OweLimitCustomCreateResponse)(nil), // 3: selling_iface.v1.OweLimitCustomCreateResponse
-	(*OweLimitItem)(nil),                 // 4: selling_iface.v1.OweLimitItem
-	(*OweLimitCustomListRequest)(nil),    // 5: selling_iface.v1.OweLimitCustomListRequest
-	(*OweLimitCustomListResponse)(nil),   // 6: selling_iface.v1.OweLimitCustomListResponse
-	(*CheckOweLimitRequest)(nil),         // 7: selling_iface.v1.CheckOweLimitRequest
-	(*OweLimitAllow)(nil),                // 8: selling_iface.v1.OweLimitAllow
-	(*CheckOweLimitResponse)(nil),        // 9: selling_iface.v1.CheckOweLimitResponse
-	(*OweLimitCustomByIDsItem)(nil),      // 10: selling_iface.v1.OweLimitCustomByIDsItem
-	(*OweLimitCustomByIDsRequest)(nil),   // 11: selling_iface.v1.OweLimitCustomByIDsRequest
-	(*OweLimitDetailItem)(nil),           // 12: selling_iface.v1.OweLimitDetailItem
-	(*OweLimitCustomByIDsResponse)(nil),  // 13: selling_iface.v1.OweLimitCustomByIDsResponse
-	(*LimitInvoiceItemReq)(nil),          // 14: selling_iface.v1.LimitInvoiceItemReq
-	(*LimitInvoiceRequest)(nil),          // 15: selling_iface.v1.LimitInvoiceRequest
-	(*LimitInvoiceItem)(nil),             // 16: selling_iface.v1.LimitInvoiceItem
-	(*LimitInvoiceResponse)(nil),         // 17: selling_iface.v1.LimitInvoiceResponse
-	nil,                                  // 18: selling_iface.v1.CheckOweLimitResponse.CanOweEntry
-	(*v1.PageFilter)(nil),                // 19: common.v1.PageFilter
-	(*v1.PageInfo)(nil),                  // 20: common.v1.PageInfo
+	(*OweLimitDeleteRequest)(nil),        // 0: selling_iface.v1.OweLimitDeleteRequest
+	(*OweLimitDeleteResponse)(nil),       // 1: selling_iface.v1.OweLimitDeleteResponse
+	(*OweDefaultLimitRequest)(nil),       // 2: selling_iface.v1.OweDefaultLimitRequest
+	(*OweDefaultLimitResponse)(nil),      // 3: selling_iface.v1.OweDefaultLimitResponse
+	(*OweLimitCustomCreateRequest)(nil),  // 4: selling_iface.v1.OweLimitCustomCreateRequest
+	(*OweLimitCustomCreateResponse)(nil), // 5: selling_iface.v1.OweLimitCustomCreateResponse
+	(*OweLimitItem)(nil),                 // 6: selling_iface.v1.OweLimitItem
+	(*OweLimitCustomListRequest)(nil),    // 7: selling_iface.v1.OweLimitCustomListRequest
+	(*OweLimitCustomListResponse)(nil),   // 8: selling_iface.v1.OweLimitCustomListResponse
+	(*CheckOweLimitRequest)(nil),         // 9: selling_iface.v1.CheckOweLimitRequest
+	(*OweLimitAllow)(nil),                // 10: selling_iface.v1.OweLimitAllow
+	(*CheckOweLimitResponse)(nil),        // 11: selling_iface.v1.CheckOweLimitResponse
+	(*OweLimitCustomByIDsItem)(nil),      // 12: selling_iface.v1.OweLimitCustomByIDsItem
+	(*OweLimitCustomByIDsRequest)(nil),   // 13: selling_iface.v1.OweLimitCustomByIDsRequest
+	(*OweLimitDetailItem)(nil),           // 14: selling_iface.v1.OweLimitDetailItem
+	(*OweLimitCustomByIDsResponse)(nil),  // 15: selling_iface.v1.OweLimitCustomByIDsResponse
+	(*LimitInvoiceItemReq)(nil),          // 16: selling_iface.v1.LimitInvoiceItemReq
+	(*LimitInvoiceRequest)(nil),          // 17: selling_iface.v1.LimitInvoiceRequest
+	(*LimitInvoiceItem)(nil),             // 18: selling_iface.v1.LimitInvoiceItem
+	(*LimitInvoiceResponse)(nil),         // 19: selling_iface.v1.LimitInvoiceResponse
+	nil,                                  // 20: selling_iface.v1.CheckOweLimitResponse.CanOweEntry
+	(*v1.PageFilter)(nil),                // 21: common.v1.PageFilter
+	(*v1.PageInfo)(nil),                  // 22: common.v1.PageInfo
 }
 var file_selling_iface_v1_configuration_proto_depIdxs = []int32{
-	19, // 0: selling_iface.v1.OweLimitCustomListRequest.page:type_name -> common.v1.PageFilter
-	4,  // 1: selling_iface.v1.OweLimitCustomListResponse.data:type_name -> selling_iface.v1.OweLimitItem
-	20, // 2: selling_iface.v1.OweLimitCustomListResponse.page_info:type_name -> common.v1.PageInfo
-	18, // 3: selling_iface.v1.CheckOweLimitResponse.can_owe:type_name -> selling_iface.v1.CheckOweLimitResponse.CanOweEntry
-	10, // 4: selling_iface.v1.OweLimitCustomByIDsRequest.items:type_name -> selling_iface.v1.OweLimitCustomByIDsItem
-	4,  // 5: selling_iface.v1.OweLimitDetailItem.limit:type_name -> selling_iface.v1.OweLimitItem
-	12, // 6: selling_iface.v1.OweLimitCustomByIDsResponse.data:type_name -> selling_iface.v1.OweLimitDetailItem
-	14, // 7: selling_iface.v1.LimitInvoiceRequest.limit:type_name -> selling_iface.v1.LimitInvoiceItemReq
-	16, // 8: selling_iface.v1.LimitInvoiceResponse.data:type_name -> selling_iface.v1.LimitInvoiceItem
-	8,  // 9: selling_iface.v1.CheckOweLimitResponse.CanOweEntry.value:type_name -> selling_iface.v1.OweLimitAllow
-	15, // 10: selling_iface.v1.ConfigurationLimitService.LimitInvoice:input_type -> selling_iface.v1.LimitInvoiceRequest
-	0,  // 11: selling_iface.v1.ConfigurationLimitService.OweDefaultLimit:input_type -> selling_iface.v1.OweDefaultLimitRequest
-	2,  // 12: selling_iface.v1.ConfigurationLimitService.OweLimitCustomCreate:input_type -> selling_iface.v1.OweLimitCustomCreateRequest
-	5,  // 13: selling_iface.v1.ConfigurationLimitService.OweLimitCustomList:input_type -> selling_iface.v1.OweLimitCustomListRequest
-	11, // 14: selling_iface.v1.ConfigurationLimitService.OweLimitCustomByIDs:input_type -> selling_iface.v1.OweLimitCustomByIDsRequest
-	7,  // 15: selling_iface.v1.ConfigurationLimitService.CheckOweLimit:input_type -> selling_iface.v1.CheckOweLimitRequest
-	17, // 16: selling_iface.v1.ConfigurationLimitService.LimitInvoice:output_type -> selling_iface.v1.LimitInvoiceResponse
-	1,  // 17: selling_iface.v1.ConfigurationLimitService.OweDefaultLimit:output_type -> selling_iface.v1.OweDefaultLimitResponse
-	3,  // 18: selling_iface.v1.ConfigurationLimitService.OweLimitCustomCreate:output_type -> selling_iface.v1.OweLimitCustomCreateResponse
-	6,  // 19: selling_iface.v1.ConfigurationLimitService.OweLimitCustomList:output_type -> selling_iface.v1.OweLimitCustomListResponse
-	13, // 20: selling_iface.v1.ConfigurationLimitService.OweLimitCustomByIDs:output_type -> selling_iface.v1.OweLimitCustomByIDsResponse
-	9,  // 21: selling_iface.v1.ConfigurationLimitService.CheckOweLimit:output_type -> selling_iface.v1.CheckOweLimitResponse
-	16, // [16:22] is the sub-list for method output_type
-	10, // [10:16] is the sub-list for method input_type
+	21, // 0: selling_iface.v1.OweLimitCustomListRequest.page:type_name -> common.v1.PageFilter
+	6,  // 1: selling_iface.v1.OweLimitCustomListResponse.data:type_name -> selling_iface.v1.OweLimitItem
+	22, // 2: selling_iface.v1.OweLimitCustomListResponse.page_info:type_name -> common.v1.PageInfo
+	20, // 3: selling_iface.v1.CheckOweLimitResponse.can_owe:type_name -> selling_iface.v1.CheckOweLimitResponse.CanOweEntry
+	12, // 4: selling_iface.v1.OweLimitCustomByIDsRequest.items:type_name -> selling_iface.v1.OweLimitCustomByIDsItem
+	6,  // 5: selling_iface.v1.OweLimitDetailItem.limit:type_name -> selling_iface.v1.OweLimitItem
+	14, // 6: selling_iface.v1.OweLimitCustomByIDsResponse.data:type_name -> selling_iface.v1.OweLimitDetailItem
+	16, // 7: selling_iface.v1.LimitInvoiceRequest.limit:type_name -> selling_iface.v1.LimitInvoiceItemReq
+	18, // 8: selling_iface.v1.LimitInvoiceResponse.data:type_name -> selling_iface.v1.LimitInvoiceItem
+	10, // 9: selling_iface.v1.CheckOweLimitResponse.CanOweEntry.value:type_name -> selling_iface.v1.OweLimitAllow
+	17, // 10: selling_iface.v1.ConfigurationLimitService.LimitInvoice:input_type -> selling_iface.v1.LimitInvoiceRequest
+	2,  // 11: selling_iface.v1.ConfigurationLimitService.OweDefaultLimit:input_type -> selling_iface.v1.OweDefaultLimitRequest
+	4,  // 12: selling_iface.v1.ConfigurationLimitService.OweLimitCustomCreate:input_type -> selling_iface.v1.OweLimitCustomCreateRequest
+	7,  // 13: selling_iface.v1.ConfigurationLimitService.OweLimitCustomList:input_type -> selling_iface.v1.OweLimitCustomListRequest
+	0,  // 14: selling_iface.v1.ConfigurationLimitService.OweLimitDelete:input_type -> selling_iface.v1.OweLimitDeleteRequest
+	13, // 15: selling_iface.v1.ConfigurationLimitService.OweLimitCustomByIDs:input_type -> selling_iface.v1.OweLimitCustomByIDsRequest
+	9,  // 16: selling_iface.v1.ConfigurationLimitService.CheckOweLimit:input_type -> selling_iface.v1.CheckOweLimitRequest
+	19, // 17: selling_iface.v1.ConfigurationLimitService.LimitInvoice:output_type -> selling_iface.v1.LimitInvoiceResponse
+	3,  // 18: selling_iface.v1.ConfigurationLimitService.OweDefaultLimit:output_type -> selling_iface.v1.OweDefaultLimitResponse
+	5,  // 19: selling_iface.v1.ConfigurationLimitService.OweLimitCustomCreate:output_type -> selling_iface.v1.OweLimitCustomCreateResponse
+	8,  // 20: selling_iface.v1.ConfigurationLimitService.OweLimitCustomList:output_type -> selling_iface.v1.OweLimitCustomListResponse
+	1,  // 21: selling_iface.v1.ConfigurationLimitService.OweLimitDelete:output_type -> selling_iface.v1.OweLimitDeleteResponse
+	15, // 22: selling_iface.v1.ConfigurationLimitService.OweLimitCustomByIDs:output_type -> selling_iface.v1.OweLimitCustomByIDsResponse
+	11, // 23: selling_iface.v1.ConfigurationLimitService.CheckOweLimit:output_type -> selling_iface.v1.CheckOweLimitResponse
+	17, // [17:24] is the sub-list for method output_type
+	10, // [10:17] is the sub-list for method input_type
 	10, // [10:10] is the sub-list for extension type_name
 	10, // [10:10] is the sub-list for extension extendee
 	0,  // [0:10] is the sub-list for field type_name
@@ -1122,7 +1210,7 @@ func file_selling_iface_v1_configuration_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_selling_iface_v1_configuration_proto_rawDesc), len(file_selling_iface_v1_configuration_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   19,
+			NumMessages:   21,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

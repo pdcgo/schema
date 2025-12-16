@@ -46,6 +46,9 @@ const (
 	// ConfigurationLimitServiceOweLimitCustomListProcedure is the fully-qualified name of the
 	// ConfigurationLimitService's OweLimitCustomList RPC.
 	ConfigurationLimitServiceOweLimitCustomListProcedure = "/selling_iface.v1.ConfigurationLimitService/OweLimitCustomList"
+	// ConfigurationLimitServiceOweLimitDeleteProcedure is the fully-qualified name of the
+	// ConfigurationLimitService's OweLimitDelete RPC.
+	ConfigurationLimitServiceOweLimitDeleteProcedure = "/selling_iface.v1.ConfigurationLimitService/OweLimitDelete"
 	// ConfigurationLimitServiceOweLimitCustomByIDsProcedure is the fully-qualified name of the
 	// ConfigurationLimitService's OweLimitCustomByIDs RPC.
 	ConfigurationLimitServiceOweLimitCustomByIDsProcedure = "/selling_iface.v1.ConfigurationLimitService/OweLimitCustomByIDs"
@@ -62,6 +65,7 @@ type ConfigurationLimitServiceClient interface {
 	OweDefaultLimit(context.Context, *connect.Request[v1.OweDefaultLimitRequest]) (*connect.Response[v1.OweDefaultLimitResponse], error)
 	OweLimitCustomCreate(context.Context, *connect.Request[v1.OweLimitCustomCreateRequest]) (*connect.Response[v1.OweLimitCustomCreateResponse], error)
 	OweLimitCustomList(context.Context, *connect.Request[v1.OweLimitCustomListRequest]) (*connect.Response[v1.OweLimitCustomListResponse], error)
+	OweLimitDelete(context.Context, *connect.Request[v1.OweLimitDeleteRequest]) (*connect.Response[v1.OweLimitDeleteResponse], error)
 	OweLimitCustomByIDs(context.Context, *connect.Request[v1.OweLimitCustomByIDsRequest]) (*connect.Response[v1.OweLimitCustomByIDsResponse], error)
 	CheckOweLimit(context.Context, *connect.Request[v1.CheckOweLimitRequest]) (*connect.Response[v1.CheckOweLimitResponse], error)
 }
@@ -101,6 +105,12 @@ func NewConfigurationLimitServiceClient(httpClient connect.HTTPClient, baseURL s
 			connect.WithSchema(configurationLimitServiceMethods.ByName("OweLimitCustomList")),
 			connect.WithClientOptions(opts...),
 		),
+		oweLimitDelete: connect.NewClient[v1.OweLimitDeleteRequest, v1.OweLimitDeleteResponse](
+			httpClient,
+			baseURL+ConfigurationLimitServiceOweLimitDeleteProcedure,
+			connect.WithSchema(configurationLimitServiceMethods.ByName("OweLimitDelete")),
+			connect.WithClientOptions(opts...),
+		),
 		oweLimitCustomByIDs: connect.NewClient[v1.OweLimitCustomByIDsRequest, v1.OweLimitCustomByIDsResponse](
 			httpClient,
 			baseURL+ConfigurationLimitServiceOweLimitCustomByIDsProcedure,
@@ -122,6 +132,7 @@ type configurationLimitServiceClient struct {
 	oweDefaultLimit      *connect.Client[v1.OweDefaultLimitRequest, v1.OweDefaultLimitResponse]
 	oweLimitCustomCreate *connect.Client[v1.OweLimitCustomCreateRequest, v1.OweLimitCustomCreateResponse]
 	oweLimitCustomList   *connect.Client[v1.OweLimitCustomListRequest, v1.OweLimitCustomListResponse]
+	oweLimitDelete       *connect.Client[v1.OweLimitDeleteRequest, v1.OweLimitDeleteResponse]
 	oweLimitCustomByIDs  *connect.Client[v1.OweLimitCustomByIDsRequest, v1.OweLimitCustomByIDsResponse]
 	checkOweLimit        *connect.Client[v1.CheckOweLimitRequest, v1.CheckOweLimitResponse]
 }
@@ -146,6 +157,11 @@ func (c *configurationLimitServiceClient) OweLimitCustomList(ctx context.Context
 	return c.oweLimitCustomList.CallUnary(ctx, req)
 }
 
+// OweLimitDelete calls selling_iface.v1.ConfigurationLimitService.OweLimitDelete.
+func (c *configurationLimitServiceClient) OweLimitDelete(ctx context.Context, req *connect.Request[v1.OweLimitDeleteRequest]) (*connect.Response[v1.OweLimitDeleteResponse], error) {
+	return c.oweLimitDelete.CallUnary(ctx, req)
+}
+
 // OweLimitCustomByIDs calls selling_iface.v1.ConfigurationLimitService.OweLimitCustomByIDs.
 func (c *configurationLimitServiceClient) OweLimitCustomByIDs(ctx context.Context, req *connect.Request[v1.OweLimitCustomByIDsRequest]) (*connect.Response[v1.OweLimitCustomByIDsResponse], error) {
 	return c.oweLimitCustomByIDs.CallUnary(ctx, req)
@@ -164,6 +180,7 @@ type ConfigurationLimitServiceHandler interface {
 	OweDefaultLimit(context.Context, *connect.Request[v1.OweDefaultLimitRequest]) (*connect.Response[v1.OweDefaultLimitResponse], error)
 	OweLimitCustomCreate(context.Context, *connect.Request[v1.OweLimitCustomCreateRequest]) (*connect.Response[v1.OweLimitCustomCreateResponse], error)
 	OweLimitCustomList(context.Context, *connect.Request[v1.OweLimitCustomListRequest]) (*connect.Response[v1.OweLimitCustomListResponse], error)
+	OweLimitDelete(context.Context, *connect.Request[v1.OweLimitDeleteRequest]) (*connect.Response[v1.OweLimitDeleteResponse], error)
 	OweLimitCustomByIDs(context.Context, *connect.Request[v1.OweLimitCustomByIDsRequest]) (*connect.Response[v1.OweLimitCustomByIDsResponse], error)
 	CheckOweLimit(context.Context, *connect.Request[v1.CheckOweLimitRequest]) (*connect.Response[v1.CheckOweLimitResponse], error)
 }
@@ -199,6 +216,12 @@ func NewConfigurationLimitServiceHandler(svc ConfigurationLimitServiceHandler, o
 		connect.WithSchema(configurationLimitServiceMethods.ByName("OweLimitCustomList")),
 		connect.WithHandlerOptions(opts...),
 	)
+	configurationLimitServiceOweLimitDeleteHandler := connect.NewUnaryHandler(
+		ConfigurationLimitServiceOweLimitDeleteProcedure,
+		svc.OweLimitDelete,
+		connect.WithSchema(configurationLimitServiceMethods.ByName("OweLimitDelete")),
+		connect.WithHandlerOptions(opts...),
+	)
 	configurationLimitServiceOweLimitCustomByIDsHandler := connect.NewUnaryHandler(
 		ConfigurationLimitServiceOweLimitCustomByIDsProcedure,
 		svc.OweLimitCustomByIDs,
@@ -221,6 +244,8 @@ func NewConfigurationLimitServiceHandler(svc ConfigurationLimitServiceHandler, o
 			configurationLimitServiceOweLimitCustomCreateHandler.ServeHTTP(w, r)
 		case ConfigurationLimitServiceOweLimitCustomListProcedure:
 			configurationLimitServiceOweLimitCustomListHandler.ServeHTTP(w, r)
+		case ConfigurationLimitServiceOweLimitDeleteProcedure:
+			configurationLimitServiceOweLimitDeleteHandler.ServeHTTP(w, r)
 		case ConfigurationLimitServiceOweLimitCustomByIDsProcedure:
 			configurationLimitServiceOweLimitCustomByIDsHandler.ServeHTTP(w, r)
 		case ConfigurationLimitServiceCheckOweLimitProcedure:
@@ -248,6 +273,10 @@ func (UnimplementedConfigurationLimitServiceHandler) OweLimitCustomCreate(contex
 
 func (UnimplementedConfigurationLimitServiceHandler) OweLimitCustomList(context.Context, *connect.Request[v1.OweLimitCustomListRequest]) (*connect.Response[v1.OweLimitCustomListResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("selling_iface.v1.ConfigurationLimitService.OweLimitCustomList is not implemented"))
+}
+
+func (UnimplementedConfigurationLimitServiceHandler) OweLimitDelete(context.Context, *connect.Request[v1.OweLimitDeleteRequest]) (*connect.Response[v1.OweLimitDeleteResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("selling_iface.v1.ConfigurationLimitService.OweLimitDelete is not implemented"))
 }
 
 func (UnimplementedConfigurationLimitServiceHandler) OweLimitCustomByIDs(context.Context, *connect.Request[v1.OweLimitCustomByIDsRequest]) (*connect.Response[v1.OweLimitCustomByIDsResponse], error) {
