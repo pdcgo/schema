@@ -5,6 +5,7 @@ package selling_iface.v1;
 // import "accounting_iface/v1/revenue.proto";
 import "buf/validate/validate.proto";
 import "common/v1/common.proto";
+import "common/v1/team.proto";
 // import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/pdcgo/schema/services/selling_iface/v1;selling_iface";
@@ -64,6 +65,7 @@ message OweLimitItem {
 
 message OweLimitCustomListRequest {
   string q = 1;
+  common.v1.TeamType type = 4;
   uint64 team_id = 2 [(buf.validate.field).uint64.gt = 0];
   common.v1.PageFilter page = 3 [(buf.validate.field).required = true];
 }

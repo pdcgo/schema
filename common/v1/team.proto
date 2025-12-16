@@ -14,6 +14,13 @@ service TeamService {
   rpc PublicTeamList(PublicTeamListRequest) returns (PublicTeamListResponse);
 }
 
+enum TeamType {
+  TEAM_TYPE_UNSPECIFIED = 0;
+  TEAM_TYPE_WAREHOUSE = 1;
+  TEAM_TYPE_SELLING = 2;
+  TEAM_TYPE_ADMIN = 3;
+}
+
 message PublicTeamListRequest {
   string q = 1;
   common.v1.PageFilter page = 2 [(buf.validate.field).required = true];

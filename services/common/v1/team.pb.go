@@ -22,6 +22,58 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type TeamType int32
+
+const (
+	TeamType_TEAM_TYPE_UNSPECIFIED TeamType = 0
+	TeamType_TEAM_TYPE_WAREHOUSE   TeamType = 1
+	TeamType_TEAM_TYPE_SELLING     TeamType = 2
+	TeamType_TEAM_TYPE_ADMIN       TeamType = 3
+)
+
+// Enum value maps for TeamType.
+var (
+	TeamType_name = map[int32]string{
+		0: "TEAM_TYPE_UNSPECIFIED",
+		1: "TEAM_TYPE_WAREHOUSE",
+		2: "TEAM_TYPE_SELLING",
+		3: "TEAM_TYPE_ADMIN",
+	}
+	TeamType_value = map[string]int32{
+		"TEAM_TYPE_UNSPECIFIED": 0,
+		"TEAM_TYPE_WAREHOUSE":   1,
+		"TEAM_TYPE_SELLING":     2,
+		"TEAM_TYPE_ADMIN":       3,
+	}
+)
+
+func (x TeamType) Enum() *TeamType {
+	p := new(TeamType)
+	*p = x
+	return p
+}
+
+func (x TeamType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (TeamType) Descriptor() protoreflect.EnumDescriptor {
+	return file_common_v1_team_proto_enumTypes[0].Descriptor()
+}
+
+func (TeamType) Type() protoreflect.EnumType {
+	return &file_common_v1_team_proto_enumTypes[0]
+}
+
+func (x TeamType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use TeamType.Descriptor instead.
+func (TeamType) EnumDescriptor() ([]byte, []int) {
+	return file_common_v1_team_proto_rawDescGZIP(), []int{0}
+}
+
 type PublicTeamListRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Q             string                 `protobuf:"bytes,1,opt,name=q,proto3" json:"q,omitempty"`
@@ -231,7 +283,12 @@ const file_common_v1_team_proto_rawDesc = "" +
 	"\x04data\x18\x01 \x03(\v2*.common.v1.PublicTeamIDsResponse.DataEntryR\x04data\x1aH\n" +
 	"\tDataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\x04R\x03key\x12%\n" +
-	"\x05value\x18\x02 \x01(\v2\x0f.common.v1.TeamR\x05value:\x028\x012\xb8\x01\n" +
+	"\x05value\x18\x02 \x01(\v2\x0f.common.v1.TeamR\x05value:\x028\x01*j\n" +
+	"\bTeamType\x12\x19\n" +
+	"\x15TEAM_TYPE_UNSPECIFIED\x10\x00\x12\x17\n" +
+	"\x13TEAM_TYPE_WAREHOUSE\x10\x01\x12\x15\n" +
+	"\x11TEAM_TYPE_SELLING\x10\x02\x12\x13\n" +
+	"\x0fTEAM_TYPE_ADMIN\x10\x032\xb8\x01\n" +
 	"\vTeamService\x12R\n" +
 	"\rPublicTeamIDs\x12\x1f.common.v1.PublicTeamIDsRequest\x1a .common.v1.PublicTeamIDsResponse\x12U\n" +
 	"\x0ePublicTeamList\x12 .common.v1.PublicTeamListRequest\x1a!.common.v1.PublicTeamListResponseB\x92\x01\n" +
@@ -250,27 +307,29 @@ func file_common_v1_team_proto_rawDescGZIP() []byte {
 	return file_common_v1_team_proto_rawDescData
 }
 
+var file_common_v1_team_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_common_v1_team_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_common_v1_team_proto_goTypes = []any{
-	(*PublicTeamListRequest)(nil),  // 0: common.v1.PublicTeamListRequest
-	(*PublicTeamListResponse)(nil), // 1: common.v1.PublicTeamListResponse
-	(*PublicTeamIDsRequest)(nil),   // 2: common.v1.PublicTeamIDsRequest
-	(*PublicTeamIDsResponse)(nil),  // 3: common.v1.PublicTeamIDsResponse
-	nil,                            // 4: common.v1.PublicTeamIDsResponse.DataEntry
-	(*PageFilter)(nil),             // 5: common.v1.PageFilter
-	(*Team)(nil),                   // 6: common.v1.Team
-	(*PageInfo)(nil),               // 7: common.v1.PageInfo
+	(TeamType)(0),                  // 0: common.v1.TeamType
+	(*PublicTeamListRequest)(nil),  // 1: common.v1.PublicTeamListRequest
+	(*PublicTeamListResponse)(nil), // 2: common.v1.PublicTeamListResponse
+	(*PublicTeamIDsRequest)(nil),   // 3: common.v1.PublicTeamIDsRequest
+	(*PublicTeamIDsResponse)(nil),  // 4: common.v1.PublicTeamIDsResponse
+	nil,                            // 5: common.v1.PublicTeamIDsResponse.DataEntry
+	(*PageFilter)(nil),             // 6: common.v1.PageFilter
+	(*Team)(nil),                   // 7: common.v1.Team
+	(*PageInfo)(nil),               // 8: common.v1.PageInfo
 }
 var file_common_v1_team_proto_depIdxs = []int32{
-	5, // 0: common.v1.PublicTeamListRequest.page:type_name -> common.v1.PageFilter
-	6, // 1: common.v1.PublicTeamListResponse.datas:type_name -> common.v1.Team
-	7, // 2: common.v1.PublicTeamListResponse.page_info:type_name -> common.v1.PageInfo
-	4, // 3: common.v1.PublicTeamIDsResponse.data:type_name -> common.v1.PublicTeamIDsResponse.DataEntry
-	6, // 4: common.v1.PublicTeamIDsResponse.DataEntry.value:type_name -> common.v1.Team
-	2, // 5: common.v1.TeamService.PublicTeamIDs:input_type -> common.v1.PublicTeamIDsRequest
-	0, // 6: common.v1.TeamService.PublicTeamList:input_type -> common.v1.PublicTeamListRequest
-	3, // 7: common.v1.TeamService.PublicTeamIDs:output_type -> common.v1.PublicTeamIDsResponse
-	1, // 8: common.v1.TeamService.PublicTeamList:output_type -> common.v1.PublicTeamListResponse
+	6, // 0: common.v1.PublicTeamListRequest.page:type_name -> common.v1.PageFilter
+	7, // 1: common.v1.PublicTeamListResponse.datas:type_name -> common.v1.Team
+	8, // 2: common.v1.PublicTeamListResponse.page_info:type_name -> common.v1.PageInfo
+	5, // 3: common.v1.PublicTeamIDsResponse.data:type_name -> common.v1.PublicTeamIDsResponse.DataEntry
+	7, // 4: common.v1.PublicTeamIDsResponse.DataEntry.value:type_name -> common.v1.Team
+	3, // 5: common.v1.TeamService.PublicTeamIDs:input_type -> common.v1.PublicTeamIDsRequest
+	1, // 6: common.v1.TeamService.PublicTeamList:input_type -> common.v1.PublicTeamListRequest
+	4, // 7: common.v1.TeamService.PublicTeamIDs:output_type -> common.v1.PublicTeamIDsResponse
+	2, // 8: common.v1.TeamService.PublicTeamList:output_type -> common.v1.PublicTeamListResponse
 	7, // [7:9] is the sub-list for method output_type
 	5, // [5:7] is the sub-list for method input_type
 	5, // [5:5] is the sub-list for extension type_name
@@ -289,13 +348,14 @@ func file_common_v1_team_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_common_v1_team_proto_rawDesc), len(file_common_v1_team_proto_rawDesc)),
-			NumEnums:      0,
+			NumEnums:      1,
 			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
 		GoTypes:           file_common_v1_team_proto_goTypes,
 		DependencyIndexes: file_common_v1_team_proto_depIdxs,
+		EnumInfos:         file_common_v1_team_proto_enumTypes,
 		MessageInfos:      file_common_v1_team_proto_msgTypes,
 	}.Build()
 	File_common_v1_team_proto = out.File

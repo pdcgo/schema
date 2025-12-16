@@ -494,6 +494,7 @@ func (x *OweLimitItem) GetThreshold() float64 {
 type OweLimitCustomListRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Q             string                 `protobuf:"bytes,1,opt,name=q,proto3" json:"q,omitempty"`
+	Type          v1.TeamType            `protobuf:"varint,4,opt,name=type,proto3,enum=common.v1.TeamType" json:"type,omitempty"`
 	TeamId        uint64                 `protobuf:"varint,2,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
 	Page          *v1.PageFilter         `protobuf:"bytes,3,opt,name=page,proto3" json:"page,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -535,6 +536,13 @@ func (x *OweLimitCustomListRequest) GetQ() string {
 		return x.Q
 	}
 	return ""
+}
+
+func (x *OweLimitCustomListRequest) GetType() v1.TeamType {
+	if x != nil {
+		return x.Type
+	}
+	return v1.TeamType(0)
 }
 
 func (x *OweLimitCustomListRequest) GetTeamId() uint64 {
@@ -1171,7 +1179,7 @@ var File_selling_iface_v1_configuration_proto protoreflect.FileDescriptor
 
 const file_selling_iface_v1_configuration_proto_rawDesc = "" +
 	"\n" +
-	"$selling_iface/v1/configuration.proto\x12\x10selling_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\"=\n" +
+	"$selling_iface/v1/configuration.proto\x12\x10selling_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x14common/v1/team.proto\"=\n" +
 	"\x19OweDefaultLimitGetRequest\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\"\x82\x01\n" +
 	"\x1aOweDefaultLimitGetResponse\x12\x0e\n" +
@@ -1200,9 +1208,10 @@ const file_selling_iface_v1_configuration_proto_rawDesc = "" +
 	"\vfor_team_id\x18\x03 \x01(\x04R\tforTeamId\x12\x1d\n" +
 	"\n" +
 	"is_default\x18\x04 \x01(\bR\tisDefault\x12\x1c\n" +
-	"\tthreshold\x18\x05 \x01(\x01R\tthreshold\"~\n" +
+	"\tthreshold\x18\x05 \x01(\x01R\tthreshold\"\xa7\x01\n" +
 	"\x19OweLimitCustomListRequest\x12\f\n" +
-	"\x01q\x18\x01 \x01(\tR\x01q\x12 \n" +
+	"\x01q\x18\x01 \x01(\tR\x01q\x12'\n" +
+	"\x04type\x18\x04 \x01(\x0e2\x13.common.v1.TeamTypeR\x04type\x12 \n" +
 	"\ateam_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x121\n" +
 	"\x04page\x18\x03 \x01(\v2\x15.common.v1.PageFilterB\x06\xbaH\x03\xc8\x01\x01R\x04page\"\x82\x01\n" +
 	"\x1aOweLimitCustomListResponse\x122\n" +
@@ -1296,41 +1305,43 @@ var file_selling_iface_v1_configuration_proto_goTypes = []any{
 	(*LimitInvoiceItem)(nil),             // 20: selling_iface.v1.LimitInvoiceItem
 	(*LimitInvoiceResponse)(nil),         // 21: selling_iface.v1.LimitInvoiceResponse
 	nil,                                  // 22: selling_iface.v1.CheckOweLimitResponse.CanOweEntry
-	(*v1.PageFilter)(nil),                // 23: common.v1.PageFilter
-	(*v1.PageInfo)(nil),                  // 24: common.v1.PageInfo
+	(v1.TeamType)(0),                     // 23: common.v1.TeamType
+	(*v1.PageFilter)(nil),                // 24: common.v1.PageFilter
+	(*v1.PageInfo)(nil),                  // 25: common.v1.PageInfo
 }
 var file_selling_iface_v1_configuration_proto_depIdxs = []int32{
-	23, // 0: selling_iface.v1.OweLimitCustomListRequest.page:type_name -> common.v1.PageFilter
-	8,  // 1: selling_iface.v1.OweLimitCustomListResponse.data:type_name -> selling_iface.v1.OweLimitItem
-	24, // 2: selling_iface.v1.OweLimitCustomListResponse.page_info:type_name -> common.v1.PageInfo
-	22, // 3: selling_iface.v1.CheckOweLimitResponse.can_owe:type_name -> selling_iface.v1.CheckOweLimitResponse.CanOweEntry
-	14, // 4: selling_iface.v1.OweLimitCustomByIDsRequest.items:type_name -> selling_iface.v1.OweLimitCustomByIDsItem
-	8,  // 5: selling_iface.v1.OweLimitDetailItem.limit:type_name -> selling_iface.v1.OweLimitItem
-	16, // 6: selling_iface.v1.OweLimitCustomByIDsResponse.data:type_name -> selling_iface.v1.OweLimitDetailItem
-	18, // 7: selling_iface.v1.LimitInvoiceRequest.limit:type_name -> selling_iface.v1.LimitInvoiceItemReq
-	20, // 8: selling_iface.v1.LimitInvoiceResponse.data:type_name -> selling_iface.v1.LimitInvoiceItem
-	12, // 9: selling_iface.v1.CheckOweLimitResponse.CanOweEntry.value:type_name -> selling_iface.v1.OweLimitAllow
-	19, // 10: selling_iface.v1.ConfigurationLimitService.LimitInvoice:input_type -> selling_iface.v1.LimitInvoiceRequest
-	0,  // 11: selling_iface.v1.ConfigurationLimitService.OweDefaultLimitGet:input_type -> selling_iface.v1.OweDefaultLimitGetRequest
-	4,  // 12: selling_iface.v1.ConfigurationLimitService.OweDefaultLimitEdit:input_type -> selling_iface.v1.OweDefaultLimitEditRequest
-	6,  // 13: selling_iface.v1.ConfigurationLimitService.OweLimitCustomCreate:input_type -> selling_iface.v1.OweLimitCustomCreateRequest
-	9,  // 14: selling_iface.v1.ConfigurationLimitService.OweLimitCustomList:input_type -> selling_iface.v1.OweLimitCustomListRequest
-	2,  // 15: selling_iface.v1.ConfigurationLimitService.OweLimitCustomDelete:input_type -> selling_iface.v1.OweLimitCustomDeleteRequest
-	15, // 16: selling_iface.v1.ConfigurationLimitService.OweLimitCustomByIDs:input_type -> selling_iface.v1.OweLimitCustomByIDsRequest
-	11, // 17: selling_iface.v1.ConfigurationLimitService.CheckOweLimit:input_type -> selling_iface.v1.CheckOweLimitRequest
-	21, // 18: selling_iface.v1.ConfigurationLimitService.LimitInvoice:output_type -> selling_iface.v1.LimitInvoiceResponse
-	1,  // 19: selling_iface.v1.ConfigurationLimitService.OweDefaultLimitGet:output_type -> selling_iface.v1.OweDefaultLimitGetResponse
-	5,  // 20: selling_iface.v1.ConfigurationLimitService.OweDefaultLimitEdit:output_type -> selling_iface.v1.OweDefaultLimitEditResponse
-	7,  // 21: selling_iface.v1.ConfigurationLimitService.OweLimitCustomCreate:output_type -> selling_iface.v1.OweLimitCustomCreateResponse
-	10, // 22: selling_iface.v1.ConfigurationLimitService.OweLimitCustomList:output_type -> selling_iface.v1.OweLimitCustomListResponse
-	3,  // 23: selling_iface.v1.ConfigurationLimitService.OweLimitCustomDelete:output_type -> selling_iface.v1.OweLimitCustomDeleteResponse
-	17, // 24: selling_iface.v1.ConfigurationLimitService.OweLimitCustomByIDs:output_type -> selling_iface.v1.OweLimitCustomByIDsResponse
-	13, // 25: selling_iface.v1.ConfigurationLimitService.CheckOweLimit:output_type -> selling_iface.v1.CheckOweLimitResponse
-	18, // [18:26] is the sub-list for method output_type
-	10, // [10:18] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	23, // 0: selling_iface.v1.OweLimitCustomListRequest.type:type_name -> common.v1.TeamType
+	24, // 1: selling_iface.v1.OweLimitCustomListRequest.page:type_name -> common.v1.PageFilter
+	8,  // 2: selling_iface.v1.OweLimitCustomListResponse.data:type_name -> selling_iface.v1.OweLimitItem
+	25, // 3: selling_iface.v1.OweLimitCustomListResponse.page_info:type_name -> common.v1.PageInfo
+	22, // 4: selling_iface.v1.CheckOweLimitResponse.can_owe:type_name -> selling_iface.v1.CheckOweLimitResponse.CanOweEntry
+	14, // 5: selling_iface.v1.OweLimitCustomByIDsRequest.items:type_name -> selling_iface.v1.OweLimitCustomByIDsItem
+	8,  // 6: selling_iface.v1.OweLimitDetailItem.limit:type_name -> selling_iface.v1.OweLimitItem
+	16, // 7: selling_iface.v1.OweLimitCustomByIDsResponse.data:type_name -> selling_iface.v1.OweLimitDetailItem
+	18, // 8: selling_iface.v1.LimitInvoiceRequest.limit:type_name -> selling_iface.v1.LimitInvoiceItemReq
+	20, // 9: selling_iface.v1.LimitInvoiceResponse.data:type_name -> selling_iface.v1.LimitInvoiceItem
+	12, // 10: selling_iface.v1.CheckOweLimitResponse.CanOweEntry.value:type_name -> selling_iface.v1.OweLimitAllow
+	19, // 11: selling_iface.v1.ConfigurationLimitService.LimitInvoice:input_type -> selling_iface.v1.LimitInvoiceRequest
+	0,  // 12: selling_iface.v1.ConfigurationLimitService.OweDefaultLimitGet:input_type -> selling_iface.v1.OweDefaultLimitGetRequest
+	4,  // 13: selling_iface.v1.ConfigurationLimitService.OweDefaultLimitEdit:input_type -> selling_iface.v1.OweDefaultLimitEditRequest
+	6,  // 14: selling_iface.v1.ConfigurationLimitService.OweLimitCustomCreate:input_type -> selling_iface.v1.OweLimitCustomCreateRequest
+	9,  // 15: selling_iface.v1.ConfigurationLimitService.OweLimitCustomList:input_type -> selling_iface.v1.OweLimitCustomListRequest
+	2,  // 16: selling_iface.v1.ConfigurationLimitService.OweLimitCustomDelete:input_type -> selling_iface.v1.OweLimitCustomDeleteRequest
+	15, // 17: selling_iface.v1.ConfigurationLimitService.OweLimitCustomByIDs:input_type -> selling_iface.v1.OweLimitCustomByIDsRequest
+	11, // 18: selling_iface.v1.ConfigurationLimitService.CheckOweLimit:input_type -> selling_iface.v1.CheckOweLimitRequest
+	21, // 19: selling_iface.v1.ConfigurationLimitService.LimitInvoice:output_type -> selling_iface.v1.LimitInvoiceResponse
+	1,  // 20: selling_iface.v1.ConfigurationLimitService.OweDefaultLimitGet:output_type -> selling_iface.v1.OweDefaultLimitGetResponse
+	5,  // 21: selling_iface.v1.ConfigurationLimitService.OweDefaultLimitEdit:output_type -> selling_iface.v1.OweDefaultLimitEditResponse
+	7,  // 22: selling_iface.v1.ConfigurationLimitService.OweLimitCustomCreate:output_type -> selling_iface.v1.OweLimitCustomCreateResponse
+	10, // 23: selling_iface.v1.ConfigurationLimitService.OweLimitCustomList:output_type -> selling_iface.v1.OweLimitCustomListResponse
+	3,  // 24: selling_iface.v1.ConfigurationLimitService.OweLimitCustomDelete:output_type -> selling_iface.v1.OweLimitCustomDeleteResponse
+	17, // 25: selling_iface.v1.ConfigurationLimitService.OweLimitCustomByIDs:output_type -> selling_iface.v1.OweLimitCustomByIDsResponse
+	13, // 26: selling_iface.v1.ConfigurationLimitService.CheckOweLimit:output_type -> selling_iface.v1.CheckOweLimitResponse
+	19, // [19:27] is the sub-list for method output_type
+	11, // [11:19] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_selling_iface_v1_configuration_proto_init() }
