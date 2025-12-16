@@ -12,6 +12,7 @@ option go_package = "github.com/pdcgo/schema/services/selling_iface/v1;selling_i
 service ConfigurationLimitService {
   rpc LimitInvoice(LimitInvoiceRequest) returns (LimitInvoiceResponse);
   // owe terbaru
+  rpc OweDefaultLimitGet(OweDefaultLimitGetRequest) returns (OweDefaultLimitGetResponse);
   rpc OweDefaultLimit(OweDefaultLimitRequest) returns (OweDefaultLimitResponse);
   rpc OweLimitCustomCreate(OweLimitCustomCreateRequest) returns (OweLimitCustomCreateResponse);
   rpc OweLimitCustomList(OweLimitCustomListRequest) returns (OweLimitCustomListResponse);
@@ -19,6 +20,15 @@ service ConfigurationLimitService {
   rpc OweLimitCustomByIDs(OweLimitCustomByIDsRequest) returns (OweLimitCustomByIDsResponse);
   rpc CheckOweLimit(CheckOweLimitRequest) returns (CheckOweLimitResponse);
 }
+
+message OweDefaultLimitGetRequest {}
+message OweDefaultLimitGetResponse {
+   uint64 id = 1;
+  uint64 team_id = 2;
+  bool is_default = 4;
+  double threshold = 5;
+}
+
 
 message OweLimitDeleteRequest {
   uint64 for_team_id = 2 [(buf.validate.field).uint64.gt = 0];
