@@ -98,6 +98,32 @@ func (mr *MockRevenueServiceClientMockRecorder) OrderCancel(ctx, req interface{}
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OrderCancel", reflect.TypeOf((*MockRevenueService)(nil).OrderCancel), ctx, req)
 }
 
+func (m *MockRevenueService) SellingReceivableAdjustment(ctx context.Context, req *connect.Request[v1.SellingReceivableAdjustmentRequest]) (*connect.Response[v1.SellingReceivableAdjustmentResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "SellingReceivableAdjustment", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.SellingReceivableAdjustmentResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockRevenueServiceMockRecorder) SellingReceivableAdjustment(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SellingReceivableAdjustment", reflect.TypeOf((*MockRevenueService)(nil).SellingReceivableAdjustment), ctx, req)
+}
+
+func (m *MockRevenueServiceClient) SellingReceivableAdjustment(ctx context.Context, req *connect.Request[v1.SellingReceivableAdjustmentRequest]) (*connect.Response[v1.SellingReceivableAdjustmentResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "SellingReceivableAdjustment", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.SellingReceivableAdjustmentResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockRevenueServiceClientMockRecorder) SellingReceivableAdjustment(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SellingReceivableAdjustment", reflect.TypeOf((*MockRevenueService)(nil).SellingReceivableAdjustment), ctx, req)
+}
+
 func (m *MockRevenueService) OrderReturnAsync(ctx context.Context, req *connect.Request[v1.OrderReturnAsyncRequest]) (*connect.Response[v1.OrderReturnAsyncResponse], error) {
     m.ctrl.T.Helper()
     ret := m.ctrl.Call(m, "OrderReturnAsync", ctx, req)

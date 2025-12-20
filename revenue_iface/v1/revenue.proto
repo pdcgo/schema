@@ -14,6 +14,9 @@ service RevenueService {
   rpc OnOrder(OnOrderRequest) returns (OnOrderResponse);
   rpc OrderCancel(OrderCancelRequest) returns (OrderCancelResponse);
 
+  // bagian receivable order
+  rpc SellingReceivableAdjustment(SellingReceivableAdjustmentRequest) returns (SellingReceivableAdjustmentResponse);
+
   rpc OrderReturnAsync(OrderReturnAsyncRequest) returns (OrderReturnAsyncResponse);
   rpc OrderReturn(OrderReturnRequest) returns (OrderReturnResponse);
   rpc OrderCompleted(OrderCompletedRequest) returns (OrderCompletedResponse);
@@ -27,6 +30,31 @@ service RevenueService {
 
   // penghasilan lain
   rpc RevenueOther(RevenueOtherRequest) returns (RevenueOtherResponse);
+}
+
+enum ReceivableAdjustmentType {
+  RECEIVABLE_ADJUSTMENT_TYPE_UNSPECIFIED = 0;
+  RECEIVABLE_ADJUSTMENT_TYPE_RETURN = 1;
+  RECEIVABLE_ADJUSTMENT_TYPE_FUND = 2;
+}
+
+message SellingReceivableAdjustmentRequest {
+  uint64 order_id = 1 [(buf.validate.field).uint64.gt = 0];
+  string adj_ref_id = 2 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 64
+  }];
+  uint64 team_id = 3 [(buf.validate.field).uint64.gt = 0];
+  uint64 shop_id = 4 [(buf.validate.field).uint64.gt = 0];
+  double amount = 5;
+  bool only_rollback = 6;
+  string desc = 7 [(buf.validate.field).string.min_len = 1];
+  ReceivableAdjustmentType type = 8;
+  google.protobuf.Timestamp at = 9 [(buf.validate.field).required = true];
+  google.protobuf.Timestamp wd_at = 10 [(buf.validate.field).required = true];
+}
+message SellingReceivableAdjustmentResponse {
+  uint64 transaction_id = 1;
 }
 
 enum RevenueAdjustmentType {

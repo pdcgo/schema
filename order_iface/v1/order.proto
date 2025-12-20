@@ -95,8 +95,27 @@ message ChangeOrderRefIDRequest {
 
 message ChangeOrderRefIDResponse {}
 
-message MpPaymentCreateRequest {}
-message MpPaymentCreateResponse {}
+enum MpPaymentSource {
+  MP_PAYMENT_SOURCE_UNSPECIFIED = 0;
+  MP_PAYMENT_SOURCE_MANUAL = 1;
+  MP_PAYMENT_SOURCE_IMPORTER = 2;
+}
+
+message MpPaymentCreateRequest {
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 order_id = 2 [(buf.validate.field).uint64.gt = 0];
+  uint64 shop_id = 3 [(buf.validate.field).uint64.gt = 0];
+  string type = 4 [(buf.validate.field).required = true];
+  double amount = 5;
+  string desc = 6;
+  google.protobuf.Timestamp at = 7 [(buf.validate.field).required = true];
+  google.protobuf.Timestamp wd_at = 8 [(buf.validate.field).required = true];
+  MpPaymentSource source = 9;
+}
+
+message MpPaymentCreateResponse {
+  uint64 id = 1;
+}
 
 message MpPaymentOrderListRequest {}
 message MpPaymentOrderListResponse {}
