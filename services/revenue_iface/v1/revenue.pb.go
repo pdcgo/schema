@@ -28,22 +28,31 @@ const (
 type ReceivableAdjustmentType int32
 
 const (
-	ReceivableAdjustmentType_RECEIVABLE_ADJUSTMENT_TYPE_UNSPECIFIED ReceivableAdjustmentType = 0
-	ReceivableAdjustmentType_RECEIVABLE_ADJUSTMENT_TYPE_RETURN      ReceivableAdjustmentType = 1
-	ReceivableAdjustmentType_RECEIVABLE_ADJUSTMENT_TYPE_FUND        ReceivableAdjustmentType = 2
+	ReceivableAdjustmentType_RECEIVABLE_ADJUSTMENT_TYPE_UNSPECIFIED   ReceivableAdjustmentType = 0
+	ReceivableAdjustmentType_RECEIVABLE_ADJUSTMENT_TYPE_RETURN_COST   ReceivableAdjustmentType = 1
+	ReceivableAdjustmentType_RECEIVABLE_ADJUSTMENT_TYPE_FUND          ReceivableAdjustmentType = 2
+	ReceivableAdjustmentType_RECEIVABLE_ADJUSTMENT_TYPE_REFUND_LOST   ReceivableAdjustmentType = 3
+	ReceivableAdjustmentType_RECEIVABLE_ADJUSTMENT_TYPE_OTHER_COST    ReceivableAdjustmentType = 4
+	ReceivableAdjustmentType_RECEIVABLE_ADJUSTMENT_TYPE_OTHER_REVENUE ReceivableAdjustmentType = 5
 )
 
 // Enum value maps for ReceivableAdjustmentType.
 var (
 	ReceivableAdjustmentType_name = map[int32]string{
 		0: "RECEIVABLE_ADJUSTMENT_TYPE_UNSPECIFIED",
-		1: "RECEIVABLE_ADJUSTMENT_TYPE_RETURN",
+		1: "RECEIVABLE_ADJUSTMENT_TYPE_RETURN_COST",
 		2: "RECEIVABLE_ADJUSTMENT_TYPE_FUND",
+		3: "RECEIVABLE_ADJUSTMENT_TYPE_REFUND_LOST",
+		4: "RECEIVABLE_ADJUSTMENT_TYPE_OTHER_COST",
+		5: "RECEIVABLE_ADJUSTMENT_TYPE_OTHER_REVENUE",
 	}
 	ReceivableAdjustmentType_value = map[string]int32{
-		"RECEIVABLE_ADJUSTMENT_TYPE_UNSPECIFIED": 0,
-		"RECEIVABLE_ADJUSTMENT_TYPE_RETURN":      1,
-		"RECEIVABLE_ADJUSTMENT_TYPE_FUND":        2,
+		"RECEIVABLE_ADJUSTMENT_TYPE_UNSPECIFIED":   0,
+		"RECEIVABLE_ADJUSTMENT_TYPE_RETURN_COST":   1,
+		"RECEIVABLE_ADJUSTMENT_TYPE_FUND":          2,
+		"RECEIVABLE_ADJUSTMENT_TYPE_REFUND_LOST":   3,
+		"RECEIVABLE_ADJUSTMENT_TYPE_OTHER_COST":    4,
+		"RECEIVABLE_ADJUSTMENT_TYPE_OTHER_REVENUE": 5,
 	}
 )
 
@@ -2435,11 +2444,14 @@ const file_revenue_iface_v1_revenue_proto_rawDesc = "" +
 	"\"warehouse_required_when_not_custom\x127warehouse_id is required when is_custom_order is false.\x1a-this.is_custom_order || this.warehouse_id > 0\x1a\x88\x01\n" +
 	"\x1eorder_amount_greater_than_zero\x127order_amount is required when is_custom_order is false.\x1a-this.is_custom_order || this.order_amount > 0B\x14\n" +
 	"\x12additional_payment\"\x11\n" +
-	"\x0fOnOrderResponse*\x92\x01\n" +
+	"\x0fOnOrderResponse*\x9c\x02\n" +
 	"\x18ReceivableAdjustmentType\x12*\n" +
-	"&RECEIVABLE_ADJUSTMENT_TYPE_UNSPECIFIED\x10\x00\x12%\n" +
-	"!RECEIVABLE_ADJUSTMENT_TYPE_RETURN\x10\x01\x12#\n" +
-	"\x1fRECEIVABLE_ADJUSTMENT_TYPE_FUND\x10\x02*d\n" +
+	"&RECEIVABLE_ADJUSTMENT_TYPE_UNSPECIFIED\x10\x00\x12*\n" +
+	"&RECEIVABLE_ADJUSTMENT_TYPE_RETURN_COST\x10\x01\x12#\n" +
+	"\x1fRECEIVABLE_ADJUSTMENT_TYPE_FUND\x10\x02\x12*\n" +
+	"&RECEIVABLE_ADJUSTMENT_TYPE_REFUND_LOST\x10\x03\x12)\n" +
+	"%RECEIVABLE_ADJUSTMENT_TYPE_OTHER_COST\x10\x04\x12,\n" +
+	"(RECEIVABLE_ADJUSTMENT_TYPE_OTHER_REVENUE\x10\x05*d\n" +
 	"\x15RevenueAdjustmentType\x12'\n" +
 	"#REVENUE_ADJUSTMENT_TYPE_UNSPECIFIED\x10\x00\x12\"\n" +
 	"\x1eREVENUE_ADJUSTMENT_TYPE_RETURN\x10\x01*B\n" +
