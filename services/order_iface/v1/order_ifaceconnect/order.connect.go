@@ -73,6 +73,7 @@ type OrderServiceClient interface {
 	// bagian overview
 	OrderOverview(context.Context, *connect.Request[v1.OrderOverviewRequest]) (*connect.Response[v1.OrderOverviewResponse], error)
 	// Marketplace Payment
+	// rpc MpPayment
 	MpPaymentCreate(context.Context, *connect.Request[v1.MpPaymentCreateRequest]) (*connect.Response[v1.MpPaymentCreateResponse], error)
 	MpPaymentOrderList(context.Context, *connect.Request[v1.MpPaymentOrderListRequest]) (*connect.Response[v1.MpPaymentOrderListResponse], error)
 	MpPaymentDelete(context.Context, *connect.Request[v1.MpPaymentDeleteRequest]) (*connect.Response[v1.MpPaymentDeleteResponse], error)
@@ -216,6 +217,7 @@ type OrderServiceHandler interface {
 	// bagian overview
 	OrderOverview(context.Context, *connect.Request[v1.OrderOverviewRequest]) (*connect.Response[v1.OrderOverviewResponse], error)
 	// Marketplace Payment
+	// rpc MpPayment
 	MpPaymentCreate(context.Context, *connect.Request[v1.MpPaymentCreateRequest]) (*connect.Response[v1.MpPaymentCreateResponse], error)
 	MpPaymentOrderList(context.Context, *connect.Request[v1.MpPaymentOrderListRequest]) (*connect.Response[v1.MpPaymentOrderListResponse], error)
 	MpPaymentDelete(context.Context, *connect.Request[v1.MpPaymentDeleteRequest]) (*connect.Response[v1.MpPaymentDeleteResponse], error)

@@ -305,3 +305,29 @@ func (mr *MockRevenueServiceClientMockRecorder) RevenueOther(ctx, req interface{
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RevenueOther", reflect.TypeOf((*MockRevenueService)(nil).RevenueOther), ctx, req)
 }
 
+func (m *MockRevenueService) SellingExpenseOther(ctx context.Context, req *connect.Request[v1.SellingExpenseOtherRequest]) (*connect.Response[v1.SellingExpenseOtherResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "SellingExpenseOther", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.SellingExpenseOtherResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockRevenueServiceMockRecorder) SellingExpenseOther(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SellingExpenseOther", reflect.TypeOf((*MockRevenueService)(nil).SellingExpenseOther), ctx, req)
+}
+
+func (m *MockRevenueServiceClient) SellingExpenseOther(ctx context.Context, req *connect.Request[v1.SellingExpenseOtherRequest]) (*connect.Response[v1.SellingExpenseOtherResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "SellingExpenseOther", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.SellingExpenseOtherResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockRevenueServiceClientMockRecorder) SellingExpenseOther(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SellingExpenseOther", reflect.TypeOf((*MockRevenueService)(nil).SellingExpenseOther), ctx, req)
+}
+

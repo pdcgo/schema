@@ -62,6 +62,9 @@ const (
 	// RevenueServiceRevenueOtherProcedure is the fully-qualified name of the RevenueService's
 	// RevenueOther RPC.
 	RevenueServiceRevenueOtherProcedure = "/revenue_iface.v1.RevenueService/RevenueOther"
+	// RevenueServiceSellingExpenseOtherProcedure is the fully-qualified name of the RevenueService's
+	// SellingExpenseOther RPC.
+	RevenueServiceSellingExpenseOtherProcedure = "/revenue_iface.v1.RevenueService/SellingExpenseOther"
 )
 
 // RevenueServiceClient is a client for the revenue_iface.v1.RevenueService service.
@@ -80,6 +83,7 @@ type RevenueServiceClient interface {
 	RevenueStream(context.Context) *connect.ClientStreamForClient[v1.RevenueStreamRequest, v1.RevenueStreamResponse]
 	// penghasilan lain
 	RevenueOther(context.Context, *connect.Request[v1.RevenueOtherRequest]) (*connect.Response[v1.RevenueOtherResponse], error)
+	SellingExpenseOther(context.Context, *connect.Request[v1.SellingExpenseOtherRequest]) (*connect.Response[v1.SellingExpenseOtherResponse], error)
 }
 
 // NewRevenueServiceClient constructs a client for the revenue_iface.v1.RevenueService service. By
@@ -153,6 +157,12 @@ func NewRevenueServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			connect.WithSchema(revenueServiceMethods.ByName("RevenueOther")),
 			connect.WithClientOptions(opts...),
 		),
+		sellingExpenseOther: connect.NewClient[v1.SellingExpenseOtherRequest, v1.SellingExpenseOtherResponse](
+			httpClient,
+			baseURL+RevenueServiceSellingExpenseOtherProcedure,
+			connect.WithSchema(revenueServiceMethods.ByName("SellingExpenseOther")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -168,6 +178,7 @@ type revenueServiceClient struct {
 	withdrawal                  *connect.Client[v1.WithdrawalRequest, v1.WithdrawalResponse]
 	revenueStream               *connect.Client[v1.RevenueStreamRequest, v1.RevenueStreamResponse]
 	revenueOther                *connect.Client[v1.RevenueOtherRequest, v1.RevenueOtherResponse]
+	sellingExpenseOther         *connect.Client[v1.SellingExpenseOtherRequest, v1.SellingExpenseOtherResponse]
 }
 
 // OnOrder calls revenue_iface.v1.RevenueService.OnOrder.
@@ -220,6 +231,11 @@ func (c *revenueServiceClient) RevenueOther(ctx context.Context, req *connect.Re
 	return c.revenueOther.CallUnary(ctx, req)
 }
 
+// SellingExpenseOther calls revenue_iface.v1.RevenueService.SellingExpenseOther.
+func (c *revenueServiceClient) SellingExpenseOther(ctx context.Context, req *connect.Request[v1.SellingExpenseOtherRequest]) (*connect.Response[v1.SellingExpenseOtherResponse], error) {
+	return c.sellingExpenseOther.CallUnary(ctx, req)
+}
+
 // RevenueServiceHandler is an implementation of the revenue_iface.v1.RevenueService service.
 type RevenueServiceHandler interface {
 	// rpc OnOrderAsync(OnOrderAsyncRequest) returns (OnOrderAsyncResponse);
@@ -236,6 +252,7 @@ type RevenueServiceHandler interface {
 	RevenueStream(context.Context, *connect.ClientStream[v1.RevenueStreamRequest]) (*connect.Response[v1.RevenueStreamResponse], error)
 	// penghasilan lain
 	RevenueOther(context.Context, *connect.Request[v1.RevenueOtherRequest]) (*connect.Response[v1.RevenueOtherResponse], error)
+	SellingExpenseOther(context.Context, *connect.Request[v1.SellingExpenseOtherRequest]) (*connect.Response[v1.SellingExpenseOtherResponse], error)
 }
 
 // NewRevenueServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -305,6 +322,12 @@ func NewRevenueServiceHandler(svc RevenueServiceHandler, opts ...connect.Handler
 		connect.WithSchema(revenueServiceMethods.ByName("RevenueOther")),
 		connect.WithHandlerOptions(opts...),
 	)
+	revenueServiceSellingExpenseOtherHandler := connect.NewUnaryHandler(
+		RevenueServiceSellingExpenseOtherProcedure,
+		svc.SellingExpenseOther,
+		connect.WithSchema(revenueServiceMethods.ByName("SellingExpenseOther")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/revenue_iface.v1.RevenueService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case RevenueServiceOnOrderProcedure:
@@ -327,6 +350,8 @@ func NewRevenueServiceHandler(svc RevenueServiceHandler, opts ...connect.Handler
 			revenueServiceRevenueStreamHandler.ServeHTTP(w, r)
 		case RevenueServiceRevenueOtherProcedure:
 			revenueServiceRevenueOtherHandler.ServeHTTP(w, r)
+		case RevenueServiceSellingExpenseOtherProcedure:
+			revenueServiceSellingExpenseOtherHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -374,4 +399,8 @@ func (UnimplementedRevenueServiceHandler) RevenueStream(context.Context, *connec
 
 func (UnimplementedRevenueServiceHandler) RevenueOther(context.Context, *connect.Request[v1.RevenueOtherRequest]) (*connect.Response[v1.RevenueOtherResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("revenue_iface.v1.RevenueService.RevenueOther is not implemented"))
+}
+
+func (UnimplementedRevenueServiceHandler) SellingExpenseOther(context.Context, *connect.Request[v1.SellingExpenseOtherRequest]) (*connect.Response[v1.SellingExpenseOtherResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("revenue_iface.v1.RevenueService.SellingExpenseOther is not implemented"))
 }

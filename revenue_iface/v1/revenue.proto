@@ -30,6 +30,7 @@ service RevenueService {
 
   // penghasilan lain
   rpc RevenueOther(RevenueOtherRequest) returns (RevenueOtherResponse);
+  rpc SellingExpenseOther(SellingExpenseOtherRequest) returns (SellingExpenseOtherResponse);
 }
 
 enum ReceivableAdjustmentType {
@@ -39,6 +40,27 @@ enum ReceivableAdjustmentType {
   RECEIVABLE_ADJUSTMENT_TYPE_REFUND_LOST = 3;
   RECEIVABLE_ADJUSTMENT_TYPE_OTHER_COST = 4;
   RECEIVABLE_ADJUSTMENT_TYPE_OTHER_REVENUE = 5;
+}
+
+message SellingExpenseOtherRequest {
+  uint64 team_id = 1 [(buf.validate.field).uint64 = {gt: 0}];
+
+  string external_expense_id = 2 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 100
+  }];
+
+  ExtraLabelInfo label_info = 3 [(buf.validate.field).required = true];
+  double amount = 4 [(buf.validate.field).double = {gt: 0}];
+  string desc = 5 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 300
+  }];
+  google.protobuf.Timestamp at = 6 [(buf.validate.field).required = true];
+}
+
+message SellingExpenseOtherResponse {
+  uint64 transaction_id = 1;
 }
 
 message SellingReceivableAdjustmentRequest {

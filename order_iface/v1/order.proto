@@ -23,6 +23,7 @@ service OrderService {
   rpc OrderOverview(OrderOverviewRequest) returns (OrderOverviewResponse);
 
   // Marketplace Payment
+  // rpc MpPayment
   rpc MpPaymentCreate(MpPaymentCreateRequest) returns (MpPaymentCreateResponse);
   rpc MpPaymentOrderList(MpPaymentOrderListRequest) returns (MpPaymentOrderListResponse);
   rpc MpPaymentDelete(MpPaymentDeleteRequest) returns (MpPaymentDeleteResponse);
@@ -117,8 +118,25 @@ message MpPaymentCreateResponse {
   uint64 id = 1;
 }
 
-message MpPaymentOrderListRequest {}
-message MpPaymentOrderListResponse {}
+message MpPaymentOrderListRequest {
+  uint64 order_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 team_id = 2 [(buf.validate.field).uint64.gt = 0];
+}
+
+message PaymentOrderItem {
+  uint64 id = 1;
+  uint64 order_id = 2;
+  uint64 shop_id = 3;
+  string type = 4;
+  double amount = 5;
+  string desc = 6;
+  google.protobuf.Timestamp at = 7;
+  google.protobuf.Timestamp fund_at = 8;
+}
+
+message MpPaymentOrderListResponse {
+  repeated PaymentOrderItem items = 1;
+}
 
 message MpPaymentDeleteRequest {}
 message MpPaymentDeleteResponse {}
