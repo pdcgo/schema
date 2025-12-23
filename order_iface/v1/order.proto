@@ -142,6 +142,7 @@ message PaymentOrderItem {
   string type = 4;
   double amount = 5;
   string desc = 6;
+  MpPaymentSource source = 10;
   google.protobuf.Timestamp at = 7;
   google.protobuf.Timestamp fund_at = 8;
 }
