@@ -26,7 +26,10 @@ service RevenueService {
   rpc Withdrawal(WithdrawalRequest) returns (WithdrawalResponse);
   // rpc WithdrawalGet(WithdrawalGetRequest) returns (WithdrawalGetResponse);
 
-  rpc RevenueStream(stream RevenueStreamRequest) returns (RevenueStreamResponse);
+  // Deprecated: true
+  rpc RevenueStream(stream RevenueStreamRequest) returns (RevenueStreamResponse) {
+    option deprecated = true;
+  }
 
   // penghasilan lain
   rpc RevenueOther(RevenueOtherRequest) returns (RevenueOtherResponse);
@@ -36,10 +39,11 @@ service RevenueService {
 enum ReceivableAdjustmentType {
   RECEIVABLE_ADJUSTMENT_TYPE_UNSPECIFIED = 0;
   RECEIVABLE_ADJUSTMENT_TYPE_RETURN_COST = 1;
-  RECEIVABLE_ADJUSTMENT_TYPE_FUND = 2;
+  RECEIVABLE_ADJUSTMENT_TYPE_ORDER_FUND = 2;
   RECEIVABLE_ADJUSTMENT_TYPE_REFUND_LOST = 3;
   RECEIVABLE_ADJUSTMENT_TYPE_OTHER_COST = 4;
   RECEIVABLE_ADJUSTMENT_TYPE_OTHER_REVENUE = 5;
+  RECEIVABLE_ADJUSTMENT_TYPE_CREATED_REVENUE = 6;
 }
 
 message SellingExpenseOtherRequest {
@@ -204,11 +208,14 @@ message OrderReturnAsyncResponse {}
 // message OrderAdjustmentResponse {}
 
 message WithdrawalRequest {
-  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0]; // must be > 0
-  uint64 shop_id = 2 [(buf.validate.field).uint64.gt = 0]; // must be > 0
-  // uint64 order_id = 3 [(buf.validate.field).uint64.gt = 0]; // must be > 0
-  int64 at = 4 [(buf.validate.field).int64.gt = 0]; // timestamp must be > 0
-  double amount = 5 [(buf.validate.field).double.gt = 0/* must be > 0 */ /* (buf.validate.field).double.lte = 1e12 // optional: cap max value for safety */];
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 shop_id = 2 [(buf.validate.field).uint64.gt = 0];
+  google.protobuf.Timestamp at = 6 [(buf.validate.field).required = true];
+  double amount = 5 [(buf.validate.field).double.gt = 0];
+  string desc = 7 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 300
+  }];
 }
 
 message WithdrawalResponse {}

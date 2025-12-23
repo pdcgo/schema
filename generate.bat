@@ -23,4 +23,4 @@ for /R services %%f in (*.pb.go) do (
 
 echo ----------------------------------------------
 echo All files processed!
-pause
+@REM pause

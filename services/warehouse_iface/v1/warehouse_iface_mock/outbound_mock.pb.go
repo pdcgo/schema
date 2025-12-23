@@ -72,6 +72,32 @@ func (mr *MockOutboundServiceClientMockRecorder) OutboundList(ctx, req interface
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OutboundList", reflect.TypeOf((*MockOutboundService)(nil).OutboundList), ctx, req)
 }
 
+func (m *MockOutboundService) OutboundDetail(ctx context.Context, req *connect.Request[v1.OutboundDetailRequest]) (*connect.Response[v1.OutboundDetailResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "OutboundDetail", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.OutboundDetailResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockOutboundServiceMockRecorder) OutboundDetail(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OutboundDetail", reflect.TypeOf((*MockOutboundService)(nil).OutboundDetail), ctx, req)
+}
+
+func (m *MockOutboundServiceClient) OutboundDetail(ctx context.Context, req *connect.Request[v1.OutboundDetailRequest]) (*connect.Response[v1.OutboundDetailResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "OutboundDetail", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.OutboundDetailResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockOutboundServiceClientMockRecorder) OutboundDetail(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OutboundDetail", reflect.TypeOf((*MockOutboundService)(nil).OutboundDetail), ctx, req)
+}
+
 func (m *MockOutboundService) OrderDetailSearch(ctx context.Context, req *connect.Request[v1.OrderDetailSearchRequest]) (*connect.Response[v1.OrderDetailSearchResponse], error) {
     m.ctrl.T.Helper()
     ret := m.ctrl.Call(m, "OrderDetailSearch", ctx, req)

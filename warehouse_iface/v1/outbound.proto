@@ -10,12 +10,31 @@ option go_package = "github.com/pdcgo/schema/services/warehouse_iface/v1;warehou
 
 service OutboundService {
   rpc OutboundList(OutboundListRequest) returns (OutboundListResponse);
+  rpc OutboundDetail(OutboundDetailRequest) returns (OutboundDetailResponse);
   rpc OrderDetailSearch(OrderDetailSearchRequest) returns (OrderDetailSearchResponse);
 }
 
 enum OrderDetailSearchType {
   ORDER_DETAIL_SEARCH_TYPE_UNSPECIFIED = 0;
   ORDER_DETAIL_SEARCH_TYPE_RECEIPT = 1;
+}
+
+enum OutboundDetailSearchType {
+  OUTBOUND_DETAIL_SEARCH_TYPE_UNSPECIFIED = 0;
+  OUTBOUND_DETAIL_SEARCH_TYPE_TXID = 1;
+  OUTBOUND_DETAIL_SEARCH_TYPE_RECEIPT_ORDREF = 2;
+}
+
+message OutboundDetailRequest {
+  OutboundDetailSearchType search_type = 1;
+  string q = 2;
+  uint64 tx_id = 3;
+}
+
+
+message OutboundDetailResponse {
+  Order order = 1;
+  Outbound outbound = 2;
 }
 
 message OrderDetailSearchRequest {

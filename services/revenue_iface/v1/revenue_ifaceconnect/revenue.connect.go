@@ -80,6 +80,9 @@ type RevenueServiceClient interface {
 	RevenueAdjustment(context.Context, *connect.Request[v1.RevenueAdjustmentRequest]) (*connect.Response[v1.RevenueAdjustmentResponse], error)
 	// bagian withdrawal
 	Withdrawal(context.Context, *connect.Request[v1.WithdrawalRequest]) (*connect.Response[v1.WithdrawalResponse], error)
+	// Deprecated: true
+	//
+	// Deprecated: do not use.
 	RevenueStream(context.Context) *connect.ClientStreamForClient[v1.RevenueStreamRequest, v1.RevenueStreamResponse]
 	// penghasilan lain
 	RevenueOther(context.Context, *connect.Request[v1.RevenueOtherRequest]) (*connect.Response[v1.RevenueOtherResponse], error)
@@ -222,6 +225,8 @@ func (c *revenueServiceClient) Withdrawal(ctx context.Context, req *connect.Requ
 }
 
 // RevenueStream calls revenue_iface.v1.RevenueService.RevenueStream.
+//
+// Deprecated: do not use.
 func (c *revenueServiceClient) RevenueStream(ctx context.Context) *connect.ClientStreamForClient[v1.RevenueStreamRequest, v1.RevenueStreamResponse] {
 	return c.revenueStream.CallClientStream(ctx)
 }
@@ -249,6 +254,9 @@ type RevenueServiceHandler interface {
 	RevenueAdjustment(context.Context, *connect.Request[v1.RevenueAdjustmentRequest]) (*connect.Response[v1.RevenueAdjustmentResponse], error)
 	// bagian withdrawal
 	Withdrawal(context.Context, *connect.Request[v1.WithdrawalRequest]) (*connect.Response[v1.WithdrawalResponse], error)
+	// Deprecated: true
+	//
+	// Deprecated: do not use.
 	RevenueStream(context.Context, *connect.ClientStream[v1.RevenueStreamRequest]) (*connect.Response[v1.RevenueStreamResponse], error)
 	// penghasilan lain
 	RevenueOther(context.Context, *connect.Request[v1.RevenueOtherRequest]) (*connect.Response[v1.RevenueOtherResponse], error)

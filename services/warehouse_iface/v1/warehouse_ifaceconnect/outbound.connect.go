@@ -36,6 +36,9 @@ const (
 	// OutboundServiceOutboundListProcedure is the fully-qualified name of the OutboundService's
 	// OutboundList RPC.
 	OutboundServiceOutboundListProcedure = "/warehouse_iface.v1.OutboundService/OutboundList"
+	// OutboundServiceOutboundDetailProcedure is the fully-qualified name of the OutboundService's
+	// OutboundDetail RPC.
+	OutboundServiceOutboundDetailProcedure = "/warehouse_iface.v1.OutboundService/OutboundDetail"
 	// OutboundServiceOrderDetailSearchProcedure is the fully-qualified name of the OutboundService's
 	// OrderDetailSearch RPC.
 	OutboundServiceOrderDetailSearchProcedure = "/warehouse_iface.v1.OutboundService/OrderDetailSearch"
@@ -44,6 +47,7 @@ const (
 // OutboundServiceClient is a client for the warehouse_iface.v1.OutboundService service.
 type OutboundServiceClient interface {
 	OutboundList(context.Context, *connect.Request[v1.OutboundListRequest]) (*connect.Response[v1.OutboundListResponse], error)
+	OutboundDetail(context.Context, *connect.Request[v1.OutboundDetailRequest]) (*connect.Response[v1.OutboundDetailResponse], error)
 	OrderDetailSearch(context.Context, *connect.Request[v1.OrderDetailSearchRequest]) (*connect.Response[v1.OrderDetailSearchResponse], error)
 }
 
@@ -64,6 +68,12 @@ func NewOutboundServiceClient(httpClient connect.HTTPClient, baseURL string, opt
 			connect.WithSchema(outboundServiceMethods.ByName("OutboundList")),
 			connect.WithClientOptions(opts...),
 		),
+		outboundDetail: connect.NewClient[v1.OutboundDetailRequest, v1.OutboundDetailResponse](
+			httpClient,
+			baseURL+OutboundServiceOutboundDetailProcedure,
+			connect.WithSchema(outboundServiceMethods.ByName("OutboundDetail")),
+			connect.WithClientOptions(opts...),
+		),
 		orderDetailSearch: connect.NewClient[v1.OrderDetailSearchRequest, v1.OrderDetailSearchResponse](
 			httpClient,
 			baseURL+OutboundServiceOrderDetailSearchProcedure,
@@ -76,12 +86,18 @@ func NewOutboundServiceClient(httpClient connect.HTTPClient, baseURL string, opt
 // outboundServiceClient implements OutboundServiceClient.
 type outboundServiceClient struct {
 	outboundList      *connect.Client[v1.OutboundListRequest, v1.OutboundListResponse]
+	outboundDetail    *connect.Client[v1.OutboundDetailRequest, v1.OutboundDetailResponse]
 	orderDetailSearch *connect.Client[v1.OrderDetailSearchRequest, v1.OrderDetailSearchResponse]
 }
 
 // OutboundList calls warehouse_iface.v1.OutboundService.OutboundList.
 func (c *outboundServiceClient) OutboundList(ctx context.Context, req *connect.Request[v1.OutboundListRequest]) (*connect.Response[v1.OutboundListResponse], error) {
 	return c.outboundList.CallUnary(ctx, req)
+}
+
+// OutboundDetail calls warehouse_iface.v1.OutboundService.OutboundDetail.
+func (c *outboundServiceClient) OutboundDetail(ctx context.Context, req *connect.Request[v1.OutboundDetailRequest]) (*connect.Response[v1.OutboundDetailResponse], error) {
+	return c.outboundDetail.CallUnary(ctx, req)
 }
 
 // OrderDetailSearch calls warehouse_iface.v1.OutboundService.OrderDetailSearch.
@@ -92,6 +108,7 @@ func (c *outboundServiceClient) OrderDetailSearch(ctx context.Context, req *conn
 // OutboundServiceHandler is an implementation of the warehouse_iface.v1.OutboundService service.
 type OutboundServiceHandler interface {
 	OutboundList(context.Context, *connect.Request[v1.OutboundListRequest]) (*connect.Response[v1.OutboundListResponse], error)
+	OutboundDetail(context.Context, *connect.Request[v1.OutboundDetailRequest]) (*connect.Response[v1.OutboundDetailResponse], error)
 	OrderDetailSearch(context.Context, *connect.Request[v1.OrderDetailSearchRequest]) (*connect.Response[v1.OrderDetailSearchResponse], error)
 }
 
@@ -108,6 +125,12 @@ func NewOutboundServiceHandler(svc OutboundServiceHandler, opts ...connect.Handl
 		connect.WithSchema(outboundServiceMethods.ByName("OutboundList")),
 		connect.WithHandlerOptions(opts...),
 	)
+	outboundServiceOutboundDetailHandler := connect.NewUnaryHandler(
+		OutboundServiceOutboundDetailProcedure,
+		svc.OutboundDetail,
+		connect.WithSchema(outboundServiceMethods.ByName("OutboundDetail")),
+		connect.WithHandlerOptions(opts...),
+	)
 	outboundServiceOrderDetailSearchHandler := connect.NewUnaryHandler(
 		OutboundServiceOrderDetailSearchProcedure,
 		svc.OrderDetailSearch,
@@ -118,6 +141,8 @@ func NewOutboundServiceHandler(svc OutboundServiceHandler, opts ...connect.Handl
 		switch r.URL.Path {
 		case OutboundServiceOutboundListProcedure:
 			outboundServiceOutboundListHandler.ServeHTTP(w, r)
+		case OutboundServiceOutboundDetailProcedure:
+			outboundServiceOutboundDetailHandler.ServeHTTP(w, r)
 		case OutboundServiceOrderDetailSearchProcedure:
 			outboundServiceOrderDetailSearchHandler.ServeHTTP(w, r)
 		default:
@@ -131,6 +156,10 @@ type UnimplementedOutboundServiceHandler struct{}
 
 func (UnimplementedOutboundServiceHandler) OutboundList(context.Context, *connect.Request[v1.OutboundListRequest]) (*connect.Response[v1.OutboundListResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("warehouse_iface.v1.OutboundService.OutboundList is not implemented"))
+}
+
+func (UnimplementedOutboundServiceHandler) OutboundDetail(context.Context, *connect.Request[v1.OutboundDetailRequest]) (*connect.Response[v1.OutboundDetailResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("warehouse_iface.v1.OutboundService.OutboundDetail is not implemented"))
 }
 
 func (UnimplementedOutboundServiceHandler) OrderDetailSearch(context.Context, *connect.Request[v1.OrderDetailSearchRequest]) (*connect.Response[v1.OrderDetailSearchResponse], error) {

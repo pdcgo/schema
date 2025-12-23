@@ -15,6 +15,7 @@ service OrderService {
 
   // bagian update
   rpc ChangeOrderRefID(ChangeOrderRefIDRequest) returns (ChangeOrderRefIDResponse);
+  rpc OrderCompleted(OrderCompletedRequest) returns (OrderCompletedResponse);
 
   // bagian view
   rpc OrderList(OrderListRequest) returns (stream OrderListResponse);
@@ -85,6 +86,13 @@ enum WarehouseStatus {
   WAREHOUSE_STATUS_SHIPPED = 4;
 }
 
+message OrderCompletedRequest {
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 order_id = 2 [(buf.validate.field).uint64.gt = 0];
+  bool force = 3;
+}
+message OrderCompletedResponse {}
+
 message ChangeOrderRefIDRequest {
   uint64 order_id = 1 [(buf.validate.field).uint64.gt = 0];
   string order_ref_id = 2 [
@@ -116,6 +124,9 @@ message MpPaymentCreateRequest {
 
 message MpPaymentCreateResponse {
   uint64 id = 1;
+  bool is_receivable_created_adjustment = 2;
+  bool is_edited = 3;
+  bool is_send_receivable_adjustment = 4;
 }
 
 message MpPaymentOrderListRequest {

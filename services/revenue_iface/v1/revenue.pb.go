@@ -28,12 +28,13 @@ const (
 type ReceivableAdjustmentType int32
 
 const (
-	ReceivableAdjustmentType_RECEIVABLE_ADJUSTMENT_TYPE_UNSPECIFIED   ReceivableAdjustmentType = 0
-	ReceivableAdjustmentType_RECEIVABLE_ADJUSTMENT_TYPE_RETURN_COST   ReceivableAdjustmentType = 1
-	ReceivableAdjustmentType_RECEIVABLE_ADJUSTMENT_TYPE_FUND          ReceivableAdjustmentType = 2
-	ReceivableAdjustmentType_RECEIVABLE_ADJUSTMENT_TYPE_REFUND_LOST   ReceivableAdjustmentType = 3
-	ReceivableAdjustmentType_RECEIVABLE_ADJUSTMENT_TYPE_OTHER_COST    ReceivableAdjustmentType = 4
-	ReceivableAdjustmentType_RECEIVABLE_ADJUSTMENT_TYPE_OTHER_REVENUE ReceivableAdjustmentType = 5
+	ReceivableAdjustmentType_RECEIVABLE_ADJUSTMENT_TYPE_UNSPECIFIED     ReceivableAdjustmentType = 0
+	ReceivableAdjustmentType_RECEIVABLE_ADJUSTMENT_TYPE_RETURN_COST     ReceivableAdjustmentType = 1
+	ReceivableAdjustmentType_RECEIVABLE_ADJUSTMENT_TYPE_ORDER_FUND      ReceivableAdjustmentType = 2
+	ReceivableAdjustmentType_RECEIVABLE_ADJUSTMENT_TYPE_REFUND_LOST     ReceivableAdjustmentType = 3
+	ReceivableAdjustmentType_RECEIVABLE_ADJUSTMENT_TYPE_OTHER_COST      ReceivableAdjustmentType = 4
+	ReceivableAdjustmentType_RECEIVABLE_ADJUSTMENT_TYPE_OTHER_REVENUE   ReceivableAdjustmentType = 5
+	ReceivableAdjustmentType_RECEIVABLE_ADJUSTMENT_TYPE_CREATED_REVENUE ReceivableAdjustmentType = 6
 )
 
 // Enum value maps for ReceivableAdjustmentType.
@@ -41,18 +42,20 @@ var (
 	ReceivableAdjustmentType_name = map[int32]string{
 		0: "RECEIVABLE_ADJUSTMENT_TYPE_UNSPECIFIED",
 		1: "RECEIVABLE_ADJUSTMENT_TYPE_RETURN_COST",
-		2: "RECEIVABLE_ADJUSTMENT_TYPE_FUND",
+		2: "RECEIVABLE_ADJUSTMENT_TYPE_ORDER_FUND",
 		3: "RECEIVABLE_ADJUSTMENT_TYPE_REFUND_LOST",
 		4: "RECEIVABLE_ADJUSTMENT_TYPE_OTHER_COST",
 		5: "RECEIVABLE_ADJUSTMENT_TYPE_OTHER_REVENUE",
+		6: "RECEIVABLE_ADJUSTMENT_TYPE_CREATED_REVENUE",
 	}
 	ReceivableAdjustmentType_value = map[string]int32{
-		"RECEIVABLE_ADJUSTMENT_TYPE_UNSPECIFIED":   0,
-		"RECEIVABLE_ADJUSTMENT_TYPE_RETURN_COST":   1,
-		"RECEIVABLE_ADJUSTMENT_TYPE_FUND":          2,
-		"RECEIVABLE_ADJUSTMENT_TYPE_REFUND_LOST":   3,
-		"RECEIVABLE_ADJUSTMENT_TYPE_OTHER_COST":    4,
-		"RECEIVABLE_ADJUSTMENT_TYPE_OTHER_REVENUE": 5,
+		"RECEIVABLE_ADJUSTMENT_TYPE_UNSPECIFIED":     0,
+		"RECEIVABLE_ADJUSTMENT_TYPE_RETURN_COST":     1,
+		"RECEIVABLE_ADJUSTMENT_TYPE_ORDER_FUND":      2,
+		"RECEIVABLE_ADJUSTMENT_TYPE_REFUND_LOST":     3,
+		"RECEIVABLE_ADJUSTMENT_TYPE_OTHER_COST":      4,
+		"RECEIVABLE_ADJUSTMENT_TYPE_OTHER_REVENUE":   5,
+		"RECEIVABLE_ADJUSTMENT_TYPE_CREATED_REVENUE": 6,
 	}
 )
 
@@ -1607,12 +1610,12 @@ func (*OrderReturnAsyncResponse) Descriptor() ([]byte, []int) {
 }
 
 type WithdrawalRequest struct {
-	state  protoimpl.MessageState `protogen:"open.v1"`
-	TeamId uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"` // must be > 0
-	ShopId uint64                 `protobuf:"varint,2,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"` // must be > 0
-	// uint64 order_id = 3 [(buf.validate.field).uint64.gt = 0]; // must be > 0
-	At            int64   `protobuf:"varint,4,opt,name=at,proto3" json:"at,omitempty"` // timestamp must be > 0
-	Amount        float64 `protobuf:"fixed64,5,opt,name=amount,proto3" json:"amount,omitempty"`
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	ShopId        uint64                 `protobuf:"varint,2,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
+	At            *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=at,proto3" json:"at,omitempty"`
+	Amount        float64                `protobuf:"fixed64,5,opt,name=amount,proto3" json:"amount,omitempty"`
+	Desc          string                 `protobuf:"bytes,7,opt,name=desc,proto3" json:"desc,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1661,11 +1664,11 @@ func (x *WithdrawalRequest) GetShopId() uint64 {
 	return 0
 }
 
-func (x *WithdrawalRequest) GetAt() int64 {
+func (x *WithdrawalRequest) GetAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.At
 	}
-	return 0
+	return nil
 }
 
 func (x *WithdrawalRequest) GetAmount() float64 {
@@ -1673,6 +1676,13 @@ func (x *WithdrawalRequest) GetAmount() float64 {
 		return x.Amount
 	}
 	return 0
+}
+
+func (x *WithdrawalRequest) GetDesc() string {
+	if x != nil {
+		return x.Desc
+	}
+	return ""
 }
 
 type WithdrawalResponse struct {
@@ -2518,12 +2528,14 @@ const file_revenue_iface_v1_revenue_proto_rawDesc = "" +
 	"\x13OrderReturnResponse\"[\n" +
 	"\x17OrderReturnAsyncRequest\x12@\n" +
 	"\x04data\x18\x01 \x01(\v2$.revenue_iface.v1.OrderReturnRequestB\x06\xbaH\x03\xc8\x01\x01R\x04data\"\x1a\n" +
-	"\x18OrderReturnAsyncResponse\"\x98\x01\n" +
+	"\x18OrderReturnAsyncResponse\"\xd3\x01\n" +
 	"\x11WithdrawalRequest\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12 \n" +
-	"\ashop_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06shopId\x12\x17\n" +
-	"\x02at\x18\x04 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x02at\x12&\n" +
-	"\x06amount\x18\x05 \x01(\x01B\x0e\xbaH\v\x12\t!\x00\x00\x00\x00\x00\x00\x00\x00R\x06amount\"\x14\n" +
+	"\ashop_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06shopId\x122\n" +
+	"\x02at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\x02at\x12&\n" +
+	"\x06amount\x18\x05 \x01(\x01B\x0e\xbaH\v\x12\t!\x00\x00\x00\x00\x00\x00\x00\x00R\x06amount\x12\x1e\n" +
+	"\x04desc\x18\a \x01(\tB\n" +
+	"\xbaH\ar\x05\x10\x01\x18\xac\x02R\x04desc\"\x14\n" +
 	"\x12WithdrawalResponse\"\xa3\x01\n" +
 	"\x12OrderCancelRequest\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12\"\n" +
@@ -2583,14 +2595,15 @@ const file_revenue_iface_v1_revenue_proto_rawDesc = "" +
 	"\"warehouse_required_when_not_custom\x127warehouse_id is required when is_custom_order is false.\x1a-this.is_custom_order || this.warehouse_id > 0\x1a\x88\x01\n" +
 	"\x1eorder_amount_greater_than_zero\x127order_amount is required when is_custom_order is false.\x1a-this.is_custom_order || this.order_amount > 0B\x14\n" +
 	"\x12additional_payment\"\x11\n" +
-	"\x0fOnOrderResponse*\x9c\x02\n" +
+	"\x0fOnOrderResponse*\xd2\x02\n" +
 	"\x18ReceivableAdjustmentType\x12*\n" +
 	"&RECEIVABLE_ADJUSTMENT_TYPE_UNSPECIFIED\x10\x00\x12*\n" +
-	"&RECEIVABLE_ADJUSTMENT_TYPE_RETURN_COST\x10\x01\x12#\n" +
-	"\x1fRECEIVABLE_ADJUSTMENT_TYPE_FUND\x10\x02\x12*\n" +
+	"&RECEIVABLE_ADJUSTMENT_TYPE_RETURN_COST\x10\x01\x12)\n" +
+	"%RECEIVABLE_ADJUSTMENT_TYPE_ORDER_FUND\x10\x02\x12*\n" +
 	"&RECEIVABLE_ADJUSTMENT_TYPE_REFUND_LOST\x10\x03\x12)\n" +
 	"%RECEIVABLE_ADJUSTMENT_TYPE_OTHER_COST\x10\x04\x12,\n" +
-	"(RECEIVABLE_ADJUSTMENT_TYPE_OTHER_REVENUE\x10\x05*d\n" +
+	"(RECEIVABLE_ADJUSTMENT_TYPE_OTHER_REVENUE\x10\x05\x12.\n" +
+	"*RECEIVABLE_ADJUSTMENT_TYPE_CREATED_REVENUE\x10\x06*d\n" +
 	"\x15RevenueAdjustmentType\x12'\n" +
 	"#REVENUE_ADJUSTMENT_TYPE_UNSPECIFIED\x10\x00\x12\"\n" +
 	"\x1eREVENUE_ADJUSTMENT_TYPE_RETURN\x10\x01*B\n" +
@@ -2606,7 +2619,7 @@ const file_revenue_iface_v1_revenue_proto_rawDesc = "" +
 	"\x1aPRODUCT_SOURCE_UNSPECIFIED\x10\x00\x12\x18\n" +
 	"\x14PRODUCT_SOURCE_DUMMY\x10\x01\x12\x1c\n" +
 	"\x18PRODUCT_SOURCE_WAREHOUSE\x10\x02\x12\x1b\n" +
-	"\x17PRODUCT_SOURCE_SUPPLIER\x10\x032\xf3\b\n" +
+	"\x17PRODUCT_SOURCE_SUPPLIER\x10\x032\xf8\b\n" +
 	"\x0eRevenueService\x12N\n" +
 	"\aOnOrder\x12 .revenue_iface.v1.OnOrderRequest\x1a!.revenue_iface.v1.OnOrderResponse\x12Z\n" +
 	"\vOrderCancel\x12$.revenue_iface.v1.OrderCancelRequest\x1a%.revenue_iface.v1.OrderCancelResponse\x12\x8a\x01\n" +
@@ -2616,8 +2629,8 @@ const file_revenue_iface_v1_revenue_proto_rawDesc = "" +
 	"\x0eOrderCompleted\x12'.revenue_iface.v1.OrderCompletedRequest\x1a(.revenue_iface.v1.OrderCompletedResponse\x12l\n" +
 	"\x11RevenueAdjustment\x12*.revenue_iface.v1.RevenueAdjustmentRequest\x1a+.revenue_iface.v1.RevenueAdjustmentResponse\x12W\n" +
 	"\n" +
-	"Withdrawal\x12#.revenue_iface.v1.WithdrawalRequest\x1a$.revenue_iface.v1.WithdrawalResponse\x12b\n" +
-	"\rRevenueStream\x12&.revenue_iface.v1.RevenueStreamRequest\x1a'.revenue_iface.v1.RevenueStreamResponse(\x01\x12]\n" +
+	"Withdrawal\x12#.revenue_iface.v1.WithdrawalRequest\x1a$.revenue_iface.v1.WithdrawalResponse\x12g\n" +
+	"\rRevenueStream\x12&.revenue_iface.v1.RevenueStreamRequest\x1a'.revenue_iface.v1.RevenueStreamResponse\"\x03\x88\x02\x01(\x01\x12]\n" +
 	"\fRevenueOther\x12%.revenue_iface.v1.RevenueOtherRequest\x1a&.revenue_iface.v1.RevenueOtherResponse\x12r\n" +
 	"\x13SellingExpenseOther\x12,.revenue_iface.v1.SellingExpenseOtherRequest\x1a-.revenue_iface.v1.SellingExpenseOtherResponseB\xc2\x01\n" +
 	"\x14com.revenue_iface.v1B\fRevenueProtoP\x01Z?github.com/pdcgo/schema/services/revenue_iface/v1;revenue_iface\xa2\x02\x03RXX\xaa\x02\x0fRevenueIface.V1\xca\x02\x0fRevenueIface\\V1\xe2\x02\x1bRevenueIface\\V1\\GPBMetadata\xea\x02\x10RevenueIface::V1b\x06proto3"
@@ -2706,46 +2719,47 @@ var file_revenue_iface_v1_revenue_proto_depIdxs = []int32{
 	34, // 17: revenue_iface.v1.OrderReturnRequest.order_info:type_name -> revenue_iface.v1.OrderInfo
 	43, // 18: revenue_iface.v1.OrderReturnRequest.request_from:type_name -> common.v1.RequestFrom
 	24, // 19: revenue_iface.v1.OrderReturnAsyncRequest.data:type_name -> revenue_iface.v1.OrderReturnRequest
-	33, // 20: revenue_iface.v1.OrderCancelRequest.label_info:type_name -> revenue_iface.v1.ExtraLabelInfo
-	44, // 21: revenue_iface.v1.ExtraLabelInfo.type_labels:type_name -> accounting_iface.v1.TypeLabel
-	39, // 22: revenue_iface.v1.OnOrderAsyncRequest.data:type_name -> revenue_iface.v1.OnOrderRequest
-	45, // 23: revenue_iface.v1.FakeOrderPayment.payment_method:type_name -> common.v1.PaymentMethod
-	45, // 24: revenue_iface.v1.SupplierPayment.payment_method:type_name -> common.v1.PaymentMethod
-	33, // 25: revenue_iface.v1.OnOrderRequest.label_info:type_name -> revenue_iface.v1.ExtraLabelInfo
-	34, // 26: revenue_iface.v1.OnOrderRequest.order_info:type_name -> revenue_iface.v1.OrderInfo
-	3,  // 27: revenue_iface.v1.OnOrderRequest.event:type_name -> revenue_iface.v1.OrderEvent
-	46, // 28: revenue_iface.v1.OnOrderRequest.marketplace_type:type_name -> common.v1.MarketplaceType
-	32, // 29: revenue_iface.v1.OnOrderRequest.borrow_stock:type_name -> revenue_iface.v1.BorrowStock
-	4,  // 30: revenue_iface.v1.OnOrderRequest.product_source:type_name -> revenue_iface.v1.ProductSource
-	37, // 31: revenue_iface.v1.OnOrderRequest.fake_order_payment:type_name -> revenue_iface.v1.FakeOrderPayment
-	38, // 32: revenue_iface.v1.OnOrderRequest.supplier_payment:type_name -> revenue_iface.v1.SupplierPayment
-	39, // 33: revenue_iface.v1.RevenueService.OnOrder:input_type -> revenue_iface.v1.OnOrderRequest
-	30, // 34: revenue_iface.v1.RevenueService.OrderCancel:input_type -> revenue_iface.v1.OrderCancelRequest
-	7,  // 35: revenue_iface.v1.RevenueService.SellingReceivableAdjustment:input_type -> revenue_iface.v1.SellingReceivableAdjustmentRequest
-	26, // 36: revenue_iface.v1.RevenueService.OrderReturnAsync:input_type -> revenue_iface.v1.OrderReturnAsyncRequest
-	24, // 37: revenue_iface.v1.RevenueService.OrderReturn:input_type -> revenue_iface.v1.OrderReturnRequest
-	22, // 38: revenue_iface.v1.RevenueService.OrderCompleted:input_type -> revenue_iface.v1.OrderCompletedRequest
-	20, // 39: revenue_iface.v1.RevenueService.RevenueAdjustment:input_type -> revenue_iface.v1.RevenueAdjustmentRequest
-	28, // 40: revenue_iface.v1.RevenueService.Withdrawal:input_type -> revenue_iface.v1.WithdrawalRequest
-	18, // 41: revenue_iface.v1.RevenueService.RevenueStream:input_type -> revenue_iface.v1.RevenueStreamRequest
-	9,  // 42: revenue_iface.v1.RevenueService.RevenueOther:input_type -> revenue_iface.v1.RevenueOtherRequest
-	5,  // 43: revenue_iface.v1.RevenueService.SellingExpenseOther:input_type -> revenue_iface.v1.SellingExpenseOtherRequest
-	40, // 44: revenue_iface.v1.RevenueService.OnOrder:output_type -> revenue_iface.v1.OnOrderResponse
-	31, // 45: revenue_iface.v1.RevenueService.OrderCancel:output_type -> revenue_iface.v1.OrderCancelResponse
-	8,  // 46: revenue_iface.v1.RevenueService.SellingReceivableAdjustment:output_type -> revenue_iface.v1.SellingReceivableAdjustmentResponse
-	27, // 47: revenue_iface.v1.RevenueService.OrderReturnAsync:output_type -> revenue_iface.v1.OrderReturnAsyncResponse
-	25, // 48: revenue_iface.v1.RevenueService.OrderReturn:output_type -> revenue_iface.v1.OrderReturnResponse
-	23, // 49: revenue_iface.v1.RevenueService.OrderCompleted:output_type -> revenue_iface.v1.OrderCompletedResponse
-	21, // 50: revenue_iface.v1.RevenueService.RevenueAdjustment:output_type -> revenue_iface.v1.RevenueAdjustmentResponse
-	29, // 51: revenue_iface.v1.RevenueService.Withdrawal:output_type -> revenue_iface.v1.WithdrawalResponse
-	19, // 52: revenue_iface.v1.RevenueService.RevenueStream:output_type -> revenue_iface.v1.RevenueStreamResponse
-	10, // 53: revenue_iface.v1.RevenueService.RevenueOther:output_type -> revenue_iface.v1.RevenueOtherResponse
-	6,  // 54: revenue_iface.v1.RevenueService.SellingExpenseOther:output_type -> revenue_iface.v1.SellingExpenseOtherResponse
-	44, // [44:55] is the sub-list for method output_type
-	33, // [33:44] is the sub-list for method input_type
-	33, // [33:33] is the sub-list for extension type_name
-	33, // [33:33] is the sub-list for extension extendee
-	0,  // [0:33] is the sub-list for field type_name
+	41, // 20: revenue_iface.v1.WithdrawalRequest.at:type_name -> google.protobuf.Timestamp
+	33, // 21: revenue_iface.v1.OrderCancelRequest.label_info:type_name -> revenue_iface.v1.ExtraLabelInfo
+	44, // 22: revenue_iface.v1.ExtraLabelInfo.type_labels:type_name -> accounting_iface.v1.TypeLabel
+	39, // 23: revenue_iface.v1.OnOrderAsyncRequest.data:type_name -> revenue_iface.v1.OnOrderRequest
+	45, // 24: revenue_iface.v1.FakeOrderPayment.payment_method:type_name -> common.v1.PaymentMethod
+	45, // 25: revenue_iface.v1.SupplierPayment.payment_method:type_name -> common.v1.PaymentMethod
+	33, // 26: revenue_iface.v1.OnOrderRequest.label_info:type_name -> revenue_iface.v1.ExtraLabelInfo
+	34, // 27: revenue_iface.v1.OnOrderRequest.order_info:type_name -> revenue_iface.v1.OrderInfo
+	3,  // 28: revenue_iface.v1.OnOrderRequest.event:type_name -> revenue_iface.v1.OrderEvent
+	46, // 29: revenue_iface.v1.OnOrderRequest.marketplace_type:type_name -> common.v1.MarketplaceType
+	32, // 30: revenue_iface.v1.OnOrderRequest.borrow_stock:type_name -> revenue_iface.v1.BorrowStock
+	4,  // 31: revenue_iface.v1.OnOrderRequest.product_source:type_name -> revenue_iface.v1.ProductSource
+	37, // 32: revenue_iface.v1.OnOrderRequest.fake_order_payment:type_name -> revenue_iface.v1.FakeOrderPayment
+	38, // 33: revenue_iface.v1.OnOrderRequest.supplier_payment:type_name -> revenue_iface.v1.SupplierPayment
+	39, // 34: revenue_iface.v1.RevenueService.OnOrder:input_type -> revenue_iface.v1.OnOrderRequest
+	30, // 35: revenue_iface.v1.RevenueService.OrderCancel:input_type -> revenue_iface.v1.OrderCancelRequest
+	7,  // 36: revenue_iface.v1.RevenueService.SellingReceivableAdjustment:input_type -> revenue_iface.v1.SellingReceivableAdjustmentRequest
+	26, // 37: revenue_iface.v1.RevenueService.OrderReturnAsync:input_type -> revenue_iface.v1.OrderReturnAsyncRequest
+	24, // 38: revenue_iface.v1.RevenueService.OrderReturn:input_type -> revenue_iface.v1.OrderReturnRequest
+	22, // 39: revenue_iface.v1.RevenueService.OrderCompleted:input_type -> revenue_iface.v1.OrderCompletedRequest
+	20, // 40: revenue_iface.v1.RevenueService.RevenueAdjustment:input_type -> revenue_iface.v1.RevenueAdjustmentRequest
+	28, // 41: revenue_iface.v1.RevenueService.Withdrawal:input_type -> revenue_iface.v1.WithdrawalRequest
+	18, // 42: revenue_iface.v1.RevenueService.RevenueStream:input_type -> revenue_iface.v1.RevenueStreamRequest
+	9,  // 43: revenue_iface.v1.RevenueService.RevenueOther:input_type -> revenue_iface.v1.RevenueOtherRequest
+	5,  // 44: revenue_iface.v1.RevenueService.SellingExpenseOther:input_type -> revenue_iface.v1.SellingExpenseOtherRequest
+	40, // 45: revenue_iface.v1.RevenueService.OnOrder:output_type -> revenue_iface.v1.OnOrderResponse
+	31, // 46: revenue_iface.v1.RevenueService.OrderCancel:output_type -> revenue_iface.v1.OrderCancelResponse
+	8,  // 47: revenue_iface.v1.RevenueService.SellingReceivableAdjustment:output_type -> revenue_iface.v1.SellingReceivableAdjustmentResponse
+	27, // 48: revenue_iface.v1.RevenueService.OrderReturnAsync:output_type -> revenue_iface.v1.OrderReturnAsyncResponse
+	25, // 49: revenue_iface.v1.RevenueService.OrderReturn:output_type -> revenue_iface.v1.OrderReturnResponse
+	23, // 50: revenue_iface.v1.RevenueService.OrderCompleted:output_type -> revenue_iface.v1.OrderCompletedResponse
+	21, // 51: revenue_iface.v1.RevenueService.RevenueAdjustment:output_type -> revenue_iface.v1.RevenueAdjustmentResponse
+	29, // 52: revenue_iface.v1.RevenueService.Withdrawal:output_type -> revenue_iface.v1.WithdrawalResponse
+	19, // 53: revenue_iface.v1.RevenueService.RevenueStream:output_type -> revenue_iface.v1.RevenueStreamResponse
+	10, // 54: revenue_iface.v1.RevenueService.RevenueOther:output_type -> revenue_iface.v1.RevenueOtherResponse
+	6,  // 55: revenue_iface.v1.RevenueService.SellingExpenseOther:output_type -> revenue_iface.v1.SellingExpenseOtherResponse
+	45, // [45:56] is the sub-list for method output_type
+	34, // [34:45] is the sub-list for method input_type
+	34, // [34:34] is the sub-list for extension type_name
+	34, // [34:34] is the sub-list for extension extendee
+	0,  // [0:34] is the sub-list for field type_name
 }
 
 func init() { file_revenue_iface_v1_revenue_proto_init() }
