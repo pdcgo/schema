@@ -115,6 +115,7 @@ message MpPaymentCreateRequest {
   uint64 order_id = 2 [(buf.validate.field).uint64.gt = 0];
   uint64 shop_id = 3 [(buf.validate.field).uint64.gt = 0];
   string type = 4 [(buf.validate.field).required = true];
+  bool is_multi_region = 10;
   double amount = 5;
   string desc = 6;
   google.protobuf.Timestamp at = 7 [(buf.validate.field).required = true];
@@ -131,13 +132,13 @@ message MpPaymentCreateResponse {
 
 message MpPaymentOrderListRequest {
   uint64 order_id = 1 [(buf.validate.field).uint64.gt = 0];
-  uint64 team_id = 2 [(buf.validate.field).uint64.gt = 0];
 }
 
 message PaymentOrderItem {
   uint64 id = 1;
   uint64 order_id = 2;
   uint64 shop_id = 3;
+  bool is_multi_region = 9;
   string type = 4;
   double amount = 5;
   string desc = 6;
@@ -149,7 +150,10 @@ message MpPaymentOrderListResponse {
   repeated PaymentOrderItem items = 1;
 }
 
-message MpPaymentDeleteRequest {}
+message MpPaymentDeleteRequest {
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 adj_id = 2 [(buf.validate.field).uint64.gt = 0];
+}
 message MpPaymentDeleteResponse {}
 
 message OrderKeywordFilter {

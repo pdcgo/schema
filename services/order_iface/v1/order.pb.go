@@ -619,6 +619,7 @@ type MpPaymentCreateRequest struct {
 	OrderId       uint64                 `protobuf:"varint,2,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
 	ShopId        uint64                 `protobuf:"varint,3,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
 	Type          string                 `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`
+	IsMultiRegion bool                   `protobuf:"varint,10,opt,name=is_multi_region,json=isMultiRegion,proto3" json:"is_multi_region,omitempty"`
 	Amount        float64                `protobuf:"fixed64,5,opt,name=amount,proto3" json:"amount,omitempty"`
 	Desc          string                 `protobuf:"bytes,6,opt,name=desc,proto3" json:"desc,omitempty"`
 	At            *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=at,proto3" json:"at,omitempty"`
@@ -684,6 +685,13 @@ func (x *MpPaymentCreateRequest) GetType() string {
 		return x.Type
 	}
 	return ""
+}
+
+func (x *MpPaymentCreateRequest) GetIsMultiRegion() bool {
+	if x != nil {
+		return x.IsMultiRegion
+	}
+	return false
 }
 
 func (x *MpPaymentCreateRequest) GetAmount() float64 {
@@ -792,7 +800,6 @@ func (x *MpPaymentCreateResponse) GetIsSendReceivableAdjustment() bool {
 type MpPaymentOrderListRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	OrderId       uint64                 `protobuf:"varint,1,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
-	TeamId        uint64                 `protobuf:"varint,2,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -834,18 +841,12 @@ func (x *MpPaymentOrderListRequest) GetOrderId() uint64 {
 	return 0
 }
 
-func (x *MpPaymentOrderListRequest) GetTeamId() uint64 {
-	if x != nil {
-		return x.TeamId
-	}
-	return 0
-}
-
 type PaymentOrderItem struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	OrderId       uint64                 `protobuf:"varint,2,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
 	ShopId        uint64                 `protobuf:"varint,3,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
+	IsMultiRegion bool                   `protobuf:"varint,9,opt,name=is_multi_region,json=isMultiRegion,proto3" json:"is_multi_region,omitempty"`
 	Type          string                 `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`
 	Amount        float64                `protobuf:"fixed64,5,opt,name=amount,proto3" json:"amount,omitempty"`
 	Desc          string                 `protobuf:"bytes,6,opt,name=desc,proto3" json:"desc,omitempty"`
@@ -904,6 +905,13 @@ func (x *PaymentOrderItem) GetShopId() uint64 {
 		return x.ShopId
 	}
 	return 0
+}
+
+func (x *PaymentOrderItem) GetIsMultiRegion() bool {
+	if x != nil {
+		return x.IsMultiRegion
+	}
+	return false
 }
 
 func (x *PaymentOrderItem) GetType() string {
@@ -987,6 +995,8 @@ func (x *MpPaymentOrderListResponse) GetItems() []*PaymentOrderItem {
 
 type MpPaymentDeleteRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	AdjId         uint64                 `protobuf:"varint,2,opt,name=adj_id,json=adjId,proto3" json:"adj_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1019,6 +1029,20 @@ func (x *MpPaymentDeleteRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use MpPaymentDeleteRequest.ProtoReflect.Descriptor instead.
 func (*MpPaymentDeleteRequest) Descriptor() ([]byte, []int) {
 	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *MpPaymentDeleteRequest) GetTeamId() uint64 {
+	if x != nil {
+		return x.TeamId
+	}
+	return 0
+}
+
+func (x *MpPaymentDeleteRequest) GetAdjId() uint64 {
+	if x != nil {
+		return x.AdjId
+	}
+	return 0
 }
 
 type MpPaymentDeleteResponse struct {
@@ -2154,12 +2178,14 @@ const file_order_iface_v1_order_proto_rawDesc = "" +
 	"\forder_ref_id\x18\x02 \x01(\tB\t\xbaH\x06r\x04\x10\x01\x18@R\n" +
 	"orderRefId\x12*\n" +
 	"\x11parent_partial_id\x18\x03 \x01(\x04R\x0fparentPartialId\"\x1a\n" +
-	"\x18ChangeOrderRefIDResponse\"\xee\x02\n" +
+	"\x18ChangeOrderRefIDResponse\"\x96\x03\n" +
 	"\x16MpPaymentCreateRequest\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12\"\n" +
 	"\border_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\aorderId\x12 \n" +
 	"\ashop_id\x18\x03 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06shopId\x12\x1a\n" +
-	"\x04type\x18\x04 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\x04type\x12\x16\n" +
+	"\x04type\x18\x04 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\x04type\x12&\n" +
+	"\x0fis_multi_region\x18\n" +
+	" \x01(\bR\risMultiRegion\x12\x16\n" +
 	"\x06amount\x18\x05 \x01(\x01R\x06amount\x12\x12\n" +
 	"\x04desc\x18\x06 \x01(\tR\x04desc\x122\n" +
 	"\x02at\x18\a \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\x02at\x127\n" +
@@ -2169,22 +2195,24 @@ const file_order_iface_v1_order_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12G\n" +
 	" is_receivable_created_adjustment\x18\x02 \x01(\bR\x1disReceivableCreatedAdjustment\x12\x1b\n" +
 	"\tis_edited\x18\x03 \x01(\bR\bisEdited\x12A\n" +
-	"\x1dis_send_receivable_adjustment\x18\x04 \x01(\bR\x1aisSendReceivableAdjustment\"a\n" +
+	"\x1dis_send_receivable_adjustment\x18\x04 \x01(\bR\x1aisSendReceivableAdjustment\"?\n" +
 	"\x19MpPaymentOrderListRequest\x12\"\n" +
-	"\border_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\aorderId\x12 \n" +
-	"\ateam_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\"\xf7\x01\n" +
+	"\border_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\aorderId\"\x9f\x02\n" +
 	"\x10PaymentOrderItem\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x19\n" +
 	"\border_id\x18\x02 \x01(\x04R\aorderId\x12\x17\n" +
-	"\ashop_id\x18\x03 \x01(\x04R\x06shopId\x12\x12\n" +
+	"\ashop_id\x18\x03 \x01(\x04R\x06shopId\x12&\n" +
+	"\x0fis_multi_region\x18\t \x01(\bR\risMultiRegion\x12\x12\n" +
 	"\x04type\x18\x04 \x01(\tR\x04type\x12\x16\n" +
 	"\x06amount\x18\x05 \x01(\x01R\x06amount\x12\x12\n" +
 	"\x04desc\x18\x06 \x01(\tR\x04desc\x12*\n" +
 	"\x02at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\x02at\x123\n" +
 	"\afund_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\x06fundAt\"T\n" +
 	"\x1aMpPaymentOrderListResponse\x126\n" +
-	"\x05items\x18\x01 \x03(\v2 .order_iface.v1.PaymentOrderItemR\x05items\"\x18\n" +
-	"\x16MpPaymentDeleteRequest\"\x19\n" +
+	"\x05items\x18\x01 \x03(\v2 .order_iface.v1.PaymentOrderItemR\x05items\"Z\n" +
+	"\x16MpPaymentDeleteRequest\x12 \n" +
+	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12\x1e\n" +
+	"\x06adj_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x05adjId\"\x19\n" +
 	"\x17MpPaymentDeleteResponse\"Y\n" +
 	"\x12OrderKeywordFilter\x125\n" +
 	"\x04type\x18\x01 \x01(\x0e2!.order_iface.v1.KeywordFilterTypeR\x04type\x12\f\n" +
