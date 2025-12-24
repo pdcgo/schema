@@ -14,11 +14,17 @@ service RevenueService {
   rpc OnOrder(OnOrderRequest) returns (OnOrderResponse);
   rpc OrderCancel(OrderCancelRequest) returns (OrderCancelResponse);
 
+  // bagian stock
+  rpc StockReturnAsync(StockReturnAsyncRequest) returns (StockReturnAsyncResponse);
+  rpc StockReturn(StockReturnRequest) returns (StockReturnResponse);
+
   // bagian receivable order
   rpc SellingReceivableAdjustment(SellingReceivableAdjustmentRequest) returns (SellingReceivableAdjustmentResponse);
 
   rpc OrderReturnAsync(OrderReturnAsyncRequest) returns (OrderReturnAsyncResponse);
-  rpc OrderReturn(OrderReturnRequest) returns (OrderReturnResponse);
+  rpc OrderReturn(OrderReturnRequest) returns (OrderReturnResponse) {
+    option deprecated = true;
+  }
   rpc OrderCompleted(OrderCompletedRequest) returns (OrderCompletedResponse);
   rpc RevenueAdjustment(RevenueAdjustmentRequest) returns (RevenueAdjustmentResponse);
 
@@ -181,6 +187,27 @@ message OrderCompletedResponse {}
 enum ProblemType {
   PROBLEM_TYPE_UNSPECIFIED = 0;
   PROBLEM_TYPE_LOST = 1;
+}
+
+message StockReturnAsyncRequest {
+  StockReturnRequest data = 1 [(buf.validate.field).required = true];
+}
+message StockReturnAsyncResponse {}
+
+message StockReturnRequest {
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 order_id = 2 [(buf.validate.field).uint64.gt = 0];
+  uint64 warehouse_id = 3 [(buf.validate.field).uint64.gt = 0];
+  double stock_amount = 4 [(buf.validate.field).double = {
+    gt: 0 // must be > 0
+  }];
+  ExtraLabelInfo label_info = 5 [(buf.validate.field).required = true];
+  OrderInfo order_info = 6 [(buf.validate.field).required = true];
+  common.v1.RequestFrom request_from = 7 [(buf.validate.field).enum = {defined_only: true}];
+}
+
+message StockReturnResponse {
+  // uint64 transaction_id = 1;
 }
 
 message OrderReturnRequest {
