@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package warehouse_iface.v1;
+
+// import "buf/validate/validate.proto";
+// import "common/v1/common.proto";
+// import "google/protobuf/timestamp.proto";
+import "warehouse_iface/v1/outbound.proto";
+
+option go_package = "github.com/pdcgo/schema/services/warehouse_iface/v1;warehouse_iface";
+
+service InventoryService {
+  rpc Placements(PlacementsRequest) returns (PlacementsResponse);
+}
+
+message PlacementsRequest {
+  //   uint64 warehouse_id = 1;
+  uint64 tx_id = 2;
+}
+
+message RackPlacement {
+  uint64 rack_id = 1;
+  string rack_name = 2;
+  int64 item_count = 3;
+}
+
+message PlacementDetail {
+  SkuDataDetail sku_detail = 1;
+  repeated RackPlacement racks = 2;
+}
+
+message PlacementsResponse {
+  map<string, PlacementDetail> data = 1;
+}
