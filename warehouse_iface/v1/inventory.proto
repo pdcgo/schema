@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package warehouse_iface.v1;
 
-// import "buf/validate/validate.proto";
+import "buf/validate/validate.proto";
 // import "common/v1/common.proto";
 // import "google/protobuf/timestamp.proto";
 import "warehouse_iface/v1/outbound.proto";
@@ -11,6 +11,44 @@ option go_package = "github.com/pdcgo/schema/services/warehouse_iface/v1;warehou
 
 service InventoryService {
   rpc Placements(PlacementsRequest) returns (PlacementsResponse);
+  rpc BlacklistedSku(BlacklistedSkuRequest) returns (BlacklistedSkuResponse);
+  rpc BlacklistedSkuAdd(BlacklistedSkuAddRequest) returns (BlacklistedSkuAddResponse);
+  rpc BlacklistedSkuRemove(BlacklistedSkuRemoveRequest) returns (BlacklistedSkuRemoveResponse);
+}
+
+message BlacklistedSkuAddRequest {
+  repeated string skus = 1 [(buf.validate.field).repeated = {
+    min_items: 1 // must have at least 1 id
+    max_items: 200
+  }];
+}
+
+message BlacklistedSkuAddResponse {}
+
+message BlacklistedSkuRemoveRequest {
+  repeated string skus = 1 [(buf.validate.field).repeated = {
+    min_items: 1 // must have at least 1 id
+    max_items: 200
+  }];
+}
+
+message BlacklistedSkuRemoveResponse {}
+
+message BlacklistedSkuRequest {
+  repeated string skus = 1 [(buf.validate.field).repeated = {
+    min_items: 1 // must have at least 1 id
+    max_items: 200
+  }];
+}
+
+message SkuBlacklistDetail {
+  string sku_id = 1;
+  string ref_id = 2;
+  bool is_blacklisted = 3;
+}
+
+message BlacklistedSkuResponse {
+  map<string, SkuBlacklistDetail> data = 1;
 }
 
 message PlacementsRequest {
