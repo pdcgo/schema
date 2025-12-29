@@ -9,6 +9,7 @@ package warehouse_iface.v1;
 option go_package = "github.com/pdcgo/schema/services/warehouse_iface/v1;warehouse_iface";
 
 service InboundService {
+  // rpc ResyncStockPending(ResyncStockPendingRequest) returns (ResyncStockPendingResponse);
   rpc InboundAccept(InboundAcceptRequest) returns (InboundAcceptResponse);
   rpc InboundReject(InboundRejectRequest) returns (InboundRejectResponse);
   rpc InboundDetailSearch(InboundDetailSearchRequest) returns (InboundDetailSearchResponse);
@@ -31,6 +32,12 @@ enum SearchBy {
   SEARCH_BY_RECEIPT = 2;
   SEARCH_BY_ORDERID = 3;
 }
+
+// message ResyncStockPendingRequest {
+//   uint64 warehouse_id = 1;
+// }
+
+// message ResyncStockPendingResponse {}
 
 message InboundCancelRequest {
   uint64 inv_transaction_id = 1;
