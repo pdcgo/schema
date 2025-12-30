@@ -3,8 +3,8 @@ syntax = "proto3";
 package warehouse_iface.v1;
 
 import "buf/validate/validate.proto";
-// import "common/v1/common.proto";
-// import "google/protobuf/timestamp.proto";
+import "common/v1/common.proto";
+import "google/protobuf/timestamp.proto";
 import "warehouse_iface/v1/outbound.proto";
 
 option go_package = "github.com/pdcgo/schema/services/warehouse_iface/v1;warehouse_iface";
@@ -14,7 +14,94 @@ service InventoryService {
   rpc BlacklistedSku(BlacklistedSkuRequest) returns (BlacklistedSkuResponse);
   rpc BlacklistedSkuAdd(BlacklistedSkuAddRequest) returns (BlacklistedSkuAddResponse);
   rpc BlacklistedSkuRemove(BlacklistedSkuRemoveRequest) returns (BlacklistedSkuRemoveResponse);
+
+  // bagian rack
+  // rpc RackIDs(RackIDsRequest) returns (RackIDsResponse);
+
+  // bagian product untuk warehouse
+  rpc ProductList(ProductListRequest) returns (ProductListResponse);
+  rpc ProductDetail(ProductDetailRequest) returns (ProductDetailResponse);
+  rpc ProductHistory(ProductHistoryRequest) returns (ProductHistoryResponse);
 }
+
+message ProductHistoryRequestFilter {
+  string sku_id = 1;
+  string status = 2;
+}
+
+message ProductHistoryRequest {
+  ProductHistoryRequestFilter filter = 1 [(buf.validate.field).required = true];
+  common.v1.PageFilter page = 2;
+}
+
+message HistoryItem {
+  uint64 id = 1;
+  uint64 user_id = 2;
+  uint64 team_id = 3;
+  uint64 rack_id = 4;
+  string status = 5;
+  string type = 6;
+  string receipt = 7;
+
+  int64 quantity = 8;
+  int64 stock_total = 9;
+
+  google.protobuf.Timestamp order_created_time = 10;
+  google.protobuf.Timestamp arrived_time = 11;
+  google.protobuf.Timestamp tx_created_time = 12;
+}
+
+message ProductHistoryResponse {
+  repeated HistoryItem data = 1;
+  common.v1.PageInfo page_info = 2;
+}
+
+enum ProductSearchType {
+  PRODUCT_SEARCH_TYPE_UNSPECIFIED = 0;
+  PRODUCT_SEARCH_TYPE_SKU = 1;
+  PRODUCT_SEARCH_TYPE_NAME = 2;
+}
+
+message ProductListRequestFilter {
+  ProductSearchType search_type = 1;
+  string q = 2;
+  bool empty_stock = 3;
+  uint64 rack_id = 4;
+  uint64 warehouse_id = 5;
+  uint64 user_id = 6;
+}
+
+message ProductListRequest {
+  ProductListRequestFilter filter = 1 [(buf.validate.field).required = true];
+  common.v1.PageFilter page = 2 [(buf.validate.field).required = true];
+}
+
+message WarehouseProduct {
+  uint64 id = 1;
+  string sku_id = 2;
+  uint64 product_id = 3;
+  uint64 variant_id = 4;
+  uint64 warehouse_id = 5;
+  string variant_ref_id = 6;
+  string product_ref_id = 7;
+
+  double price_min = 8;
+  double price_max = 9;
+  string image = 10;
+  string name = 11;
+  uint64 stock_ready = 12;
+  uint64 stock_pending = 13;
+  google.protobuf.Timestamp created = 14;
+}
+
+message ProductListResponse {
+  repeated WarehouseProduct data = 1;
+  common.v1.PageInfo page_info = 2;
+}
+
+message ProductDetailRequest {}
+
+message ProductDetailResponse {}
 
 message BlacklistedSkuAddRequest {
   repeated string skus = 1 [(buf.validate.field).repeated = {
