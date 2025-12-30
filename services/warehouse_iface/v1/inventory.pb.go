@@ -368,7 +368,8 @@ type ProductListRequestFilter struct {
 	EmptyStock    bool                   `protobuf:"varint,3,opt,name=empty_stock,json=emptyStock,proto3" json:"empty_stock,omitempty"`
 	RackId        uint64                 `protobuf:"varint,4,opt,name=rack_id,json=rackId,proto3" json:"rack_id,omitempty"`
 	WarehouseId   uint64                 `protobuf:"varint,5,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
-	UserId        uint64                 `protobuf:"varint,6,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	TeamId        uint64                 `protobuf:"varint,6,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	UserId        uint64                 `protobuf:"varint,7,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -434,6 +435,13 @@ func (x *ProductListRequestFilter) GetRackId() uint64 {
 func (x *ProductListRequestFilter) GetWarehouseId() uint64 {
 	if x != nil {
 		return x.WarehouseId
+	}
+	return 0
+}
+
+func (x *ProductListRequestFilter) GetTeamId() uint64 {
+	if x != nil {
+		return x.TeamId
 	}
 	return 0
 }
@@ -1306,7 +1314,7 @@ const file_warehouse_iface_v1_inventory_proto_rawDesc = "" +
 	"\x0ftx_created_time\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\rtxCreatedTime\"\x7f\n" +
 	"\x16ProductHistoryResponse\x123\n" +
 	"\x04data\x18\x01 \x03(\v2\x1f.warehouse_iface.v1.HistoryItemR\x04data\x120\n" +
-	"\tpage_info\x18\x02 \x01(\v2\x13.common.v1.PageInfoR\bpageInfo\"\xe6\x01\n" +
+	"\tpage_info\x18\x02 \x01(\v2\x13.common.v1.PageInfoR\bpageInfo\"\xff\x01\n" +
 	"\x18ProductListRequestFilter\x12F\n" +
 	"\vsearch_type\x18\x01 \x01(\x0e2%.warehouse_iface.v1.ProductSearchTypeR\n" +
 	"searchType\x12\f\n" +
@@ -1315,7 +1323,8 @@ const file_warehouse_iface_v1_inventory_proto_rawDesc = "" +
 	"emptyStock\x12\x17\n" +
 	"\arack_id\x18\x04 \x01(\x04R\x06rackId\x12!\n" +
 	"\fwarehouse_id\x18\x05 \x01(\x04R\vwarehouseId\x12\x17\n" +
-	"\auser_id\x18\x06 \x01(\x04R\x06userId\"\x95\x01\n" +
+	"\ateam_id\x18\x06 \x01(\x04R\x06teamId\x12\x17\n" +
+	"\auser_id\x18\a \x01(\x04R\x06userId\"\x95\x01\n" +
 	"\x12ProductListRequest\x12L\n" +
 	"\x06filter\x18\x01 \x01(\v2,.warehouse_iface.v1.ProductListRequestFilterB\x06\xbaH\x03\xc8\x01\x01R\x06filter\x121\n" +
 	"\x04page\x18\x02 \x01(\v2\x15.common.v1.PageFilterB\x06\xbaH\x03\xc8\x01\x01R\x04page\"\xc6\x03\n" +

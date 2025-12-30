@@ -68,7 +68,8 @@ message ProductListRequestFilter {
   bool empty_stock = 3;
   uint64 rack_id = 4;
   uint64 warehouse_id = 5;
-  uint64 user_id = 6;
+  uint64 team_id = 6;
+  uint64 user_id = 7;
 }
 
 message ProductListRequest {
