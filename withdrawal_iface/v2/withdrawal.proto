@@ -39,7 +39,19 @@ message SubmitWithdrawalResponse {
 message SubmitWithdrawalShopeeRequest {
   uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
   withdrawal_iface.v1.ImporterSource source = 3 [(buf.validate.field).enum.defined_only = true];
-  string resource_uri = 5 [(buf.validate.field).string.min_len = 1];
+  string resource_uri = 5 [
+    (buf.validate.field).string.min_len = 1,
+    deprecated = true
+  ];
+  repeated string resource_uris = 7;
+  // repeated string resource_uris = 7 [(buf.validate.field).repeated = {
+  //   min_items: 1
+  //   max_items: 5
+  //   unique: true
+  //   items: {
+  //     string: {min_len: 1}
+  //   }
+  // }];
   MpSubmit mp_submit = 6 [(buf.validate.field).required = true];
 }
 

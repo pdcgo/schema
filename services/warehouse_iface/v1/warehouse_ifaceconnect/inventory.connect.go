@@ -36,11 +36,23 @@ const (
 	// InventoryServicePlacementsProcedure is the fully-qualified name of the InventoryService's
 	// Placements RPC.
 	InventoryServicePlacementsProcedure = "/warehouse_iface.v1.InventoryService/Placements"
+	// InventoryServiceBlacklistedSkuProcedure is the fully-qualified name of the InventoryService's
+	// BlacklistedSku RPC.
+	InventoryServiceBlacklistedSkuProcedure = "/warehouse_iface.v1.InventoryService/BlacklistedSku"
+	// InventoryServiceBlacklistedSkuAddProcedure is the fully-qualified name of the InventoryService's
+	// BlacklistedSkuAdd RPC.
+	InventoryServiceBlacklistedSkuAddProcedure = "/warehouse_iface.v1.InventoryService/BlacklistedSkuAdd"
+	// InventoryServiceBlacklistedSkuRemoveProcedure is the fully-qualified name of the
+	// InventoryService's BlacklistedSkuRemove RPC.
+	InventoryServiceBlacklistedSkuRemoveProcedure = "/warehouse_iface.v1.InventoryService/BlacklistedSkuRemove"
 )
 
 // InventoryServiceClient is a client for the warehouse_iface.v1.InventoryService service.
 type InventoryServiceClient interface {
 	Placements(context.Context, *connect.Request[v1.PlacementsRequest]) (*connect.Response[v1.PlacementsResponse], error)
+	BlacklistedSku(context.Context, *connect.Request[v1.BlacklistedSkuRequest]) (*connect.Response[v1.BlacklistedSkuResponse], error)
+	BlacklistedSkuAdd(context.Context, *connect.Request[v1.BlacklistedSkuAddRequest]) (*connect.Response[v1.BlacklistedSkuAddResponse], error)
+	BlacklistedSkuRemove(context.Context, *connect.Request[v1.BlacklistedSkuRemoveRequest]) (*connect.Response[v1.BlacklistedSkuRemoveResponse], error)
 }
 
 // NewInventoryServiceClient constructs a client for the warehouse_iface.v1.InventoryService
@@ -60,12 +72,33 @@ func NewInventoryServiceClient(httpClient connect.HTTPClient, baseURL string, op
 			connect.WithSchema(inventoryServiceMethods.ByName("Placements")),
 			connect.WithClientOptions(opts...),
 		),
+		blacklistedSku: connect.NewClient[v1.BlacklistedSkuRequest, v1.BlacklistedSkuResponse](
+			httpClient,
+			baseURL+InventoryServiceBlacklistedSkuProcedure,
+			connect.WithSchema(inventoryServiceMethods.ByName("BlacklistedSku")),
+			connect.WithClientOptions(opts...),
+		),
+		blacklistedSkuAdd: connect.NewClient[v1.BlacklistedSkuAddRequest, v1.BlacklistedSkuAddResponse](
+			httpClient,
+			baseURL+InventoryServiceBlacklistedSkuAddProcedure,
+			connect.WithSchema(inventoryServiceMethods.ByName("BlacklistedSkuAdd")),
+			connect.WithClientOptions(opts...),
+		),
+		blacklistedSkuRemove: connect.NewClient[v1.BlacklistedSkuRemoveRequest, v1.BlacklistedSkuRemoveResponse](
+			httpClient,
+			baseURL+InventoryServiceBlacklistedSkuRemoveProcedure,
+			connect.WithSchema(inventoryServiceMethods.ByName("BlacklistedSkuRemove")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // inventoryServiceClient implements InventoryServiceClient.
 type inventoryServiceClient struct {
-	placements *connect.Client[v1.PlacementsRequest, v1.PlacementsResponse]
+	placements           *connect.Client[v1.PlacementsRequest, v1.PlacementsResponse]
+	blacklistedSku       *connect.Client[v1.BlacklistedSkuRequest, v1.BlacklistedSkuResponse]
+	blacklistedSkuAdd    *connect.Client[v1.BlacklistedSkuAddRequest, v1.BlacklistedSkuAddResponse]
+	blacklistedSkuRemove *connect.Client[v1.BlacklistedSkuRemoveRequest, v1.BlacklistedSkuRemoveResponse]
 }
 
 // Placements calls warehouse_iface.v1.InventoryService.Placements.
@@ -73,9 +106,27 @@ func (c *inventoryServiceClient) Placements(ctx context.Context, req *connect.Re
 	return c.placements.CallUnary(ctx, req)
 }
 
+// BlacklistedSku calls warehouse_iface.v1.InventoryService.BlacklistedSku.
+func (c *inventoryServiceClient) BlacklistedSku(ctx context.Context, req *connect.Request[v1.BlacklistedSkuRequest]) (*connect.Response[v1.BlacklistedSkuResponse], error) {
+	return c.blacklistedSku.CallUnary(ctx, req)
+}
+
+// BlacklistedSkuAdd calls warehouse_iface.v1.InventoryService.BlacklistedSkuAdd.
+func (c *inventoryServiceClient) BlacklistedSkuAdd(ctx context.Context, req *connect.Request[v1.BlacklistedSkuAddRequest]) (*connect.Response[v1.BlacklistedSkuAddResponse], error) {
+	return c.blacklistedSkuAdd.CallUnary(ctx, req)
+}
+
+// BlacklistedSkuRemove calls warehouse_iface.v1.InventoryService.BlacklistedSkuRemove.
+func (c *inventoryServiceClient) BlacklistedSkuRemove(ctx context.Context, req *connect.Request[v1.BlacklistedSkuRemoveRequest]) (*connect.Response[v1.BlacklistedSkuRemoveResponse], error) {
+	return c.blacklistedSkuRemove.CallUnary(ctx, req)
+}
+
 // InventoryServiceHandler is an implementation of the warehouse_iface.v1.InventoryService service.
 type InventoryServiceHandler interface {
 	Placements(context.Context, *connect.Request[v1.PlacementsRequest]) (*connect.Response[v1.PlacementsResponse], error)
+	BlacklistedSku(context.Context, *connect.Request[v1.BlacklistedSkuRequest]) (*connect.Response[v1.BlacklistedSkuResponse], error)
+	BlacklistedSkuAdd(context.Context, *connect.Request[v1.BlacklistedSkuAddRequest]) (*connect.Response[v1.BlacklistedSkuAddResponse], error)
+	BlacklistedSkuRemove(context.Context, *connect.Request[v1.BlacklistedSkuRemoveRequest]) (*connect.Response[v1.BlacklistedSkuRemoveResponse], error)
 }
 
 // NewInventoryServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -91,10 +142,34 @@ func NewInventoryServiceHandler(svc InventoryServiceHandler, opts ...connect.Han
 		connect.WithSchema(inventoryServiceMethods.ByName("Placements")),
 		connect.WithHandlerOptions(opts...),
 	)
+	inventoryServiceBlacklistedSkuHandler := connect.NewUnaryHandler(
+		InventoryServiceBlacklistedSkuProcedure,
+		svc.BlacklistedSku,
+		connect.WithSchema(inventoryServiceMethods.ByName("BlacklistedSku")),
+		connect.WithHandlerOptions(opts...),
+	)
+	inventoryServiceBlacklistedSkuAddHandler := connect.NewUnaryHandler(
+		InventoryServiceBlacklistedSkuAddProcedure,
+		svc.BlacklistedSkuAdd,
+		connect.WithSchema(inventoryServiceMethods.ByName("BlacklistedSkuAdd")),
+		connect.WithHandlerOptions(opts...),
+	)
+	inventoryServiceBlacklistedSkuRemoveHandler := connect.NewUnaryHandler(
+		InventoryServiceBlacklistedSkuRemoveProcedure,
+		svc.BlacklistedSkuRemove,
+		connect.WithSchema(inventoryServiceMethods.ByName("BlacklistedSkuRemove")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/warehouse_iface.v1.InventoryService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case InventoryServicePlacementsProcedure:
 			inventoryServicePlacementsHandler.ServeHTTP(w, r)
+		case InventoryServiceBlacklistedSkuProcedure:
+			inventoryServiceBlacklistedSkuHandler.ServeHTTP(w, r)
+		case InventoryServiceBlacklistedSkuAddProcedure:
+			inventoryServiceBlacklistedSkuAddHandler.ServeHTTP(w, r)
+		case InventoryServiceBlacklistedSkuRemoveProcedure:
+			inventoryServiceBlacklistedSkuRemoveHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -106,4 +181,16 @@ type UnimplementedInventoryServiceHandler struct{}
 
 func (UnimplementedInventoryServiceHandler) Placements(context.Context, *connect.Request[v1.PlacementsRequest]) (*connect.Response[v1.PlacementsResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("warehouse_iface.v1.InventoryService.Placements is not implemented"))
+}
+
+func (UnimplementedInventoryServiceHandler) BlacklistedSku(context.Context, *connect.Request[v1.BlacklistedSkuRequest]) (*connect.Response[v1.BlacklistedSkuResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("warehouse_iface.v1.InventoryService.BlacklistedSku is not implemented"))
+}
+
+func (UnimplementedInventoryServiceHandler) BlacklistedSkuAdd(context.Context, *connect.Request[v1.BlacklistedSkuAddRequest]) (*connect.Response[v1.BlacklistedSkuAddResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("warehouse_iface.v1.InventoryService.BlacklistedSkuAdd is not implemented"))
+}
+
+func (UnimplementedInventoryServiceHandler) BlacklistedSkuRemove(context.Context, *connect.Request[v1.BlacklistedSkuRemoveRequest]) (*connect.Response[v1.BlacklistedSkuRemoveResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("warehouse_iface.v1.InventoryService.BlacklistedSkuRemove is not implemented"))
 }

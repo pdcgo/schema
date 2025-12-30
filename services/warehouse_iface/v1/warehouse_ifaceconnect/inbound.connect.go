@@ -49,6 +49,7 @@ const (
 
 // InboundServiceClient is a client for the warehouse_iface.v1.InboundService service.
 type InboundServiceClient interface {
+	// rpc ResyncStockPending(ResyncStockPendingRequest) returns (ResyncStockPendingResponse);
 	InboundAccept(context.Context, *connect.Request[v1.InboundAcceptRequest]) (*connect.Response[v1.InboundAcceptResponse], error)
 	InboundReject(context.Context, *connect.Request[v1.InboundRejectRequest]) (*connect.Response[v1.InboundRejectResponse], error)
 	InboundDetailSearch(context.Context, *connect.Request[v1.InboundDetailSearchRequest]) (*connect.Response[v1.InboundDetailSearchResponse], error)
@@ -123,6 +124,7 @@ func (c *inboundServiceClient) InboundCancel(ctx context.Context, req *connect.R
 
 // InboundServiceHandler is an implementation of the warehouse_iface.v1.InboundService service.
 type InboundServiceHandler interface {
+	// rpc ResyncStockPending(ResyncStockPendingRequest) returns (ResyncStockPendingResponse);
 	InboundAccept(context.Context, *connect.Request[v1.InboundAcceptRequest]) (*connect.Response[v1.InboundAcceptResponse], error)
 	InboundReject(context.Context, *connect.Request[v1.InboundRejectRequest]) (*connect.Response[v1.InboundRejectResponse], error)
 	InboundDetailSearch(context.Context, *connect.Request[v1.InboundDetailSearchRequest]) (*connect.Response[v1.InboundDetailSearchResponse], error)

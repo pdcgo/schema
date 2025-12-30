@@ -246,11 +246,21 @@ func (x *SubmitWithdrawalResponse) GetLevel() LogLevel {
 }
 
 type SubmitWithdrawalShopeeRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
-	Source        v11.ImporterSource     `protobuf:"varint,3,opt,name=source,proto3,enum=withdrawal_iface.v1.ImporterSource" json:"source,omitempty"`
-	ResourceUri   string                 `protobuf:"bytes,5,opt,name=resource_uri,json=resourceUri,proto3" json:"resource_uri,omitempty"`
-	MpSubmit      *MpSubmit              `protobuf:"bytes,6,opt,name=mp_submit,json=mpSubmit,proto3" json:"mp_submit,omitempty"`
+	state  protoimpl.MessageState `protogen:"open.v1"`
+	TeamId uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	Source v11.ImporterSource     `protobuf:"varint,3,opt,name=source,proto3,enum=withdrawal_iface.v1.ImporterSource" json:"source,omitempty"`
+	// Deprecated: Marked as deprecated in withdrawal_iface/v2/withdrawal.proto.
+	ResourceUri  string   `protobuf:"bytes,5,opt,name=resource_uri,json=resourceUri,proto3" json:"resource_uri,omitempty"`
+	ResourceUris []string `protobuf:"bytes,7,rep,name=resource_uris,json=resourceUris,proto3" json:"resource_uris,omitempty"`
+	// repeated string resource_uris = 7 [(buf.validate.field).repeated = {
+	//   min_items: 1
+	//   max_items: 5
+	//   unique: true
+	//   items: {
+	//     string: {min_len: 1}
+	//   }
+	// }];
+	MpSubmit      *MpSubmit `protobuf:"bytes,6,opt,name=mp_submit,json=mpSubmit,proto3" json:"mp_submit,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -299,11 +309,19 @@ func (x *SubmitWithdrawalShopeeRequest) GetSource() v11.ImporterSource {
 	return v11.ImporterSource(0)
 }
 
+// Deprecated: Marked as deprecated in withdrawal_iface/v2/withdrawal.proto.
 func (x *SubmitWithdrawalShopeeRequest) GetResourceUri() string {
 	if x != nil {
 		return x.ResourceUri
 	}
 	return ""
+}
+
+func (x *SubmitWithdrawalShopeeRequest) GetResourceUris() []string {
+	if x != nil {
+		return x.ResourceUris
+	}
+	return nil
 }
 
 func (x *SubmitWithdrawalShopeeRequest) GetMpSubmit() *MpSubmit {
@@ -500,11 +518,12 @@ const file_withdrawal_iface_v2_withdrawal_proto_rawDesc = "" +
 	"\tmp_submit\x18\x06 \x01(\v2\x1d.withdrawal_iface.v2.MpSubmitB\x06\xbaH\x03\xc8\x01\x01R\bmpSubmit\"i\n" +
 	"\x18SubmitWithdrawalResponse\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\x123\n" +
-	"\x05level\x18\x02 \x01(\x0e2\x1d.withdrawal_iface.v2.LogLevelR\x05level\"\xf8\x01\n" +
+	"\x05level\x18\x02 \x01(\x0e2\x1d.withdrawal_iface.v2.LogLevelR\x05level\"\x9f\x02\n" +
 	"\x1dSubmitWithdrawalShopeeRequest\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12E\n" +
-	"\x06source\x18\x03 \x01(\x0e2#.withdrawal_iface.v1.ImporterSourceB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06source\x12*\n" +
-	"\fresource_uri\x18\x05 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\vresourceUri\x12B\n" +
+	"\x06source\x18\x03 \x01(\x0e2#.withdrawal_iface.v1.ImporterSourceB\b\xbaH\x05\x82\x01\x02\x10\x01R\x06source\x12,\n" +
+	"\fresource_uri\x18\x05 \x01(\tB\t\xbaH\x04r\x02\x10\x01\x18\x01R\vresourceUri\x12#\n" +
+	"\rresource_uris\x18\a \x03(\tR\fresourceUris\x12B\n" +
 	"\tmp_submit\x18\x06 \x01(\v2\x1d.withdrawal_iface.v2.MpSubmitB\x06\xbaH\x03\xc8\x01\x01R\bmpSubmit\"o\n" +
 	"\x1eSubmitWithdrawalShopeeResponse\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\x123\n" +

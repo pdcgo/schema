@@ -7,6 +7,7 @@
 package warehouse_iface
 
 import (
+	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -21,6 +22,314 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type BlacklistedSkuAddRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Skus          []string               `protobuf:"bytes,1,rep,name=skus,proto3" json:"skus,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BlacklistedSkuAddRequest) Reset() {
+	*x = BlacklistedSkuAddRequest{}
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BlacklistedSkuAddRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BlacklistedSkuAddRequest) ProtoMessage() {}
+
+func (x *BlacklistedSkuAddRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BlacklistedSkuAddRequest.ProtoReflect.Descriptor instead.
+func (*BlacklistedSkuAddRequest) Descriptor() ([]byte, []int) {
+	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *BlacklistedSkuAddRequest) GetSkus() []string {
+	if x != nil {
+		return x.Skus
+	}
+	return nil
+}
+
+type BlacklistedSkuAddResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BlacklistedSkuAddResponse) Reset() {
+	*x = BlacklistedSkuAddResponse{}
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BlacklistedSkuAddResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BlacklistedSkuAddResponse) ProtoMessage() {}
+
+func (x *BlacklistedSkuAddResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BlacklistedSkuAddResponse.ProtoReflect.Descriptor instead.
+func (*BlacklistedSkuAddResponse) Descriptor() ([]byte, []int) {
+	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{1}
+}
+
+type BlacklistedSkuRemoveRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Skus          []string               `protobuf:"bytes,1,rep,name=skus,proto3" json:"skus,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BlacklistedSkuRemoveRequest) Reset() {
+	*x = BlacklistedSkuRemoveRequest{}
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BlacklistedSkuRemoveRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BlacklistedSkuRemoveRequest) ProtoMessage() {}
+
+func (x *BlacklistedSkuRemoveRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BlacklistedSkuRemoveRequest.ProtoReflect.Descriptor instead.
+func (*BlacklistedSkuRemoveRequest) Descriptor() ([]byte, []int) {
+	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *BlacklistedSkuRemoveRequest) GetSkus() []string {
+	if x != nil {
+		return x.Skus
+	}
+	return nil
+}
+
+type BlacklistedSkuRemoveResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BlacklistedSkuRemoveResponse) Reset() {
+	*x = BlacklistedSkuRemoveResponse{}
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BlacklistedSkuRemoveResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BlacklistedSkuRemoveResponse) ProtoMessage() {}
+
+func (x *BlacklistedSkuRemoveResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BlacklistedSkuRemoveResponse.ProtoReflect.Descriptor instead.
+func (*BlacklistedSkuRemoveResponse) Descriptor() ([]byte, []int) {
+	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{3}
+}
+
+type BlacklistedSkuRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Skus          []string               `protobuf:"bytes,1,rep,name=skus,proto3" json:"skus,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BlacklistedSkuRequest) Reset() {
+	*x = BlacklistedSkuRequest{}
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BlacklistedSkuRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BlacklistedSkuRequest) ProtoMessage() {}
+
+func (x *BlacklistedSkuRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BlacklistedSkuRequest.ProtoReflect.Descriptor instead.
+func (*BlacklistedSkuRequest) Descriptor() ([]byte, []int) {
+	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *BlacklistedSkuRequest) GetSkus() []string {
+	if x != nil {
+		return x.Skus
+	}
+	return nil
+}
+
+type SkuBlacklistDetail struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	SkuId         string                 `protobuf:"bytes,1,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
+	RefId         string                 `protobuf:"bytes,2,opt,name=ref_id,json=refId,proto3" json:"ref_id,omitempty"`
+	IsBlacklisted bool                   `protobuf:"varint,3,opt,name=is_blacklisted,json=isBlacklisted,proto3" json:"is_blacklisted,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SkuBlacklistDetail) Reset() {
+	*x = SkuBlacklistDetail{}
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SkuBlacklistDetail) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SkuBlacklistDetail) ProtoMessage() {}
+
+func (x *SkuBlacklistDetail) ProtoReflect() protoreflect.Message {
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SkuBlacklistDetail.ProtoReflect.Descriptor instead.
+func (*SkuBlacklistDetail) Descriptor() ([]byte, []int) {
+	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *SkuBlacklistDetail) GetSkuId() string {
+	if x != nil {
+		return x.SkuId
+	}
+	return ""
+}
+
+func (x *SkuBlacklistDetail) GetRefId() string {
+	if x != nil {
+		return x.RefId
+	}
+	return ""
+}
+
+func (x *SkuBlacklistDetail) GetIsBlacklisted() bool {
+	if x != nil {
+		return x.IsBlacklisted
+	}
+	return false
+}
+
+type BlacklistedSkuResponse struct {
+	state         protoimpl.MessageState         `protogen:"open.v1"`
+	Data          map[string]*SkuBlacklistDetail `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BlacklistedSkuResponse) Reset() {
+	*x = BlacklistedSkuResponse{}
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BlacklistedSkuResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BlacklistedSkuResponse) ProtoMessage() {}
+
+func (x *BlacklistedSkuResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BlacklistedSkuResponse.ProtoReflect.Descriptor instead.
+func (*BlacklistedSkuResponse) Descriptor() ([]byte, []int) {
+	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *BlacklistedSkuResponse) GetData() map[string]*SkuBlacklistDetail {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
 type PlacementsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	//   uint64 warehouse_id = 1;
@@ -31,7 +340,7 @@ type PlacementsRequest struct {
 
 func (x *PlacementsRequest) Reset() {
 	*x = PlacementsRequest{}
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[0]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -43,7 +352,7 @@ func (x *PlacementsRequest) String() string {
 func (*PlacementsRequest) ProtoMessage() {}
 
 func (x *PlacementsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[0]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -56,7 +365,7 @@ func (x *PlacementsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PlacementsRequest.ProtoReflect.Descriptor instead.
 func (*PlacementsRequest) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{0}
+	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *PlacementsRequest) GetTxId() uint64 {
@@ -77,7 +386,7 @@ type RackPlacement struct {
 
 func (x *RackPlacement) Reset() {
 	*x = RackPlacement{}
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[1]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -89,7 +398,7 @@ func (x *RackPlacement) String() string {
 func (*RackPlacement) ProtoMessage() {}
 
 func (x *RackPlacement) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[1]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -102,7 +411,7 @@ func (x *RackPlacement) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RackPlacement.ProtoReflect.Descriptor instead.
 func (*RackPlacement) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{1}
+	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *RackPlacement) GetRackId() uint64 {
@@ -136,7 +445,7 @@ type PlacementDetail struct {
 
 func (x *PlacementDetail) Reset() {
 	*x = PlacementDetail{}
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[2]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -148,7 +457,7 @@ func (x *PlacementDetail) String() string {
 func (*PlacementDetail) ProtoMessage() {}
 
 func (x *PlacementDetail) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[2]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -161,7 +470,7 @@ func (x *PlacementDetail) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PlacementDetail.ProtoReflect.Descriptor instead.
 func (*PlacementDetail) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{2}
+	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *PlacementDetail) GetSkuDetail() *SkuDataDetail {
@@ -187,7 +496,7 @@ type PlacementsResponse struct {
 
 func (x *PlacementsResponse) Reset() {
 	*x = PlacementsResponse{}
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[3]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -199,7 +508,7 @@ func (x *PlacementsResponse) String() string {
 func (*PlacementsResponse) ProtoMessage() {}
 
 func (x *PlacementsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[3]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -212,7 +521,7 @@ func (x *PlacementsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PlacementsResponse.ProtoReflect.Descriptor instead.
 func (*PlacementsResponse) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{3}
+	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *PlacementsResponse) GetData() map[string]*PlacementDetail {
@@ -226,7 +535,24 @@ var File_warehouse_iface_v1_inventory_proto protoreflect.FileDescriptor
 
 const file_warehouse_iface_v1_inventory_proto_rawDesc = "" +
 	"\n" +
-	"\"warehouse_iface/v1/inventory.proto\x12\x12warehouse_iface.v1\x1a!warehouse_iface/v1/outbound.proto\"(\n" +
+	"\"warehouse_iface/v1/inventory.proto\x12\x12warehouse_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a!warehouse_iface/v1/outbound.proto\";\n" +
+	"\x18BlacklistedSkuAddRequest\x12\x1f\n" +
+	"\x04skus\x18\x01 \x03(\tB\v\xbaH\b\x92\x01\x05\b\x01\x10\xc8\x01R\x04skus\"\x1b\n" +
+	"\x19BlacklistedSkuAddResponse\">\n" +
+	"\x1bBlacklistedSkuRemoveRequest\x12\x1f\n" +
+	"\x04skus\x18\x01 \x03(\tB\v\xbaH\b\x92\x01\x05\b\x01\x10\xc8\x01R\x04skus\"\x1e\n" +
+	"\x1cBlacklistedSkuRemoveResponse\"8\n" +
+	"\x15BlacklistedSkuRequest\x12\x1f\n" +
+	"\x04skus\x18\x01 \x03(\tB\v\xbaH\b\x92\x01\x05\b\x01\x10\xc8\x01R\x04skus\"i\n" +
+	"\x12SkuBlacklistDetail\x12\x15\n" +
+	"\x06sku_id\x18\x01 \x01(\tR\x05skuId\x12\x15\n" +
+	"\x06ref_id\x18\x02 \x01(\tR\x05refId\x12%\n" +
+	"\x0eis_blacklisted\x18\x03 \x01(\bR\risBlacklisted\"\xc3\x01\n" +
+	"\x16BlacklistedSkuResponse\x12H\n" +
+	"\x04data\x18\x01 \x03(\v24.warehouse_iface.v1.BlacklistedSkuResponse.DataEntryR\x04data\x1a_\n" +
+	"\tDataEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12<\n" +
+	"\x05value\x18\x02 \x01(\v2&.warehouse_iface.v1.SkuBlacklistDetailR\x05value:\x028\x01\"(\n" +
 	"\x11PlacementsRequest\x12\x13\n" +
 	"\x05tx_id\x18\x02 \x01(\x04R\x04txId\"d\n" +
 	"\rRackPlacement\x12\x17\n" +
@@ -242,10 +568,13 @@ const file_warehouse_iface_v1_inventory_proto_rawDesc = "" +
 	"\x04data\x18\x01 \x03(\v20.warehouse_iface.v1.PlacementsResponse.DataEntryR\x04data\x1a\\\n" +
 	"\tDataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x129\n" +
-	"\x05value\x18\x02 \x01(\v2#.warehouse_iface.v1.PlacementDetailR\x05value:\x028\x012o\n" +
+	"\x05value\x18\x02 \x01(\v2#.warehouse_iface.v1.PlacementDetailR\x05value:\x028\x012\xc5\x03\n" +
 	"\x10InventoryService\x12[\n" +
 	"\n" +
-	"Placements\x12%.warehouse_iface.v1.PlacementsRequest\x1a&.warehouse_iface.v1.PlacementsResponseB\xd2\x01\n" +
+	"Placements\x12%.warehouse_iface.v1.PlacementsRequest\x1a&.warehouse_iface.v1.PlacementsResponse\x12g\n" +
+	"\x0eBlacklistedSku\x12).warehouse_iface.v1.BlacklistedSkuRequest\x1a*.warehouse_iface.v1.BlacklistedSkuResponse\x12p\n" +
+	"\x11BlacklistedSkuAdd\x12,.warehouse_iface.v1.BlacklistedSkuAddRequest\x1a-.warehouse_iface.v1.BlacklistedSkuAddResponse\x12y\n" +
+	"\x14BlacklistedSkuRemove\x12/.warehouse_iface.v1.BlacklistedSkuRemoveRequest\x1a0.warehouse_iface.v1.BlacklistedSkuRemoveResponseB\xd2\x01\n" +
 	"\x16com.warehouse_iface.v1B\x0eInventoryProtoP\x01ZCgithub.com/pdcgo/schema/services/warehouse_iface/v1;warehouse_iface\xa2\x02\x03WXX\xaa\x02\x11WarehouseIface.V1\xca\x02\x11WarehouseIface\\V1\xe2\x02\x1dWarehouseIface\\V1\\GPBMetadata\xea\x02\x12WarehouseIface::V1b\x06proto3"
 
 var (
@@ -260,27 +589,43 @@ func file_warehouse_iface_v1_inventory_proto_rawDescGZIP() []byte {
 	return file_warehouse_iface_v1_inventory_proto_rawDescData
 }
 
-var file_warehouse_iface_v1_inventory_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_warehouse_iface_v1_inventory_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_warehouse_iface_v1_inventory_proto_goTypes = []any{
-	(*PlacementsRequest)(nil),  // 0: warehouse_iface.v1.PlacementsRequest
-	(*RackPlacement)(nil),      // 1: warehouse_iface.v1.RackPlacement
-	(*PlacementDetail)(nil),    // 2: warehouse_iface.v1.PlacementDetail
-	(*PlacementsResponse)(nil), // 3: warehouse_iface.v1.PlacementsResponse
-	nil,                        // 4: warehouse_iface.v1.PlacementsResponse.DataEntry
-	(*SkuDataDetail)(nil),      // 5: warehouse_iface.v1.SkuDataDetail
+	(*BlacklistedSkuAddRequest)(nil),     // 0: warehouse_iface.v1.BlacklistedSkuAddRequest
+	(*BlacklistedSkuAddResponse)(nil),    // 1: warehouse_iface.v1.BlacklistedSkuAddResponse
+	(*BlacklistedSkuRemoveRequest)(nil),  // 2: warehouse_iface.v1.BlacklistedSkuRemoveRequest
+	(*BlacklistedSkuRemoveResponse)(nil), // 3: warehouse_iface.v1.BlacklistedSkuRemoveResponse
+	(*BlacklistedSkuRequest)(nil),        // 4: warehouse_iface.v1.BlacklistedSkuRequest
+	(*SkuBlacklistDetail)(nil),           // 5: warehouse_iface.v1.SkuBlacklistDetail
+	(*BlacklistedSkuResponse)(nil),       // 6: warehouse_iface.v1.BlacklistedSkuResponse
+	(*PlacementsRequest)(nil),            // 7: warehouse_iface.v1.PlacementsRequest
+	(*RackPlacement)(nil),                // 8: warehouse_iface.v1.RackPlacement
+	(*PlacementDetail)(nil),              // 9: warehouse_iface.v1.PlacementDetail
+	(*PlacementsResponse)(nil),           // 10: warehouse_iface.v1.PlacementsResponse
+	nil,                                  // 11: warehouse_iface.v1.BlacklistedSkuResponse.DataEntry
+	nil,                                  // 12: warehouse_iface.v1.PlacementsResponse.DataEntry
+	(*SkuDataDetail)(nil),                // 13: warehouse_iface.v1.SkuDataDetail
 }
 var file_warehouse_iface_v1_inventory_proto_depIdxs = []int32{
-	5, // 0: warehouse_iface.v1.PlacementDetail.sku_detail:type_name -> warehouse_iface.v1.SkuDataDetail
-	1, // 1: warehouse_iface.v1.PlacementDetail.racks:type_name -> warehouse_iface.v1.RackPlacement
-	4, // 2: warehouse_iface.v1.PlacementsResponse.data:type_name -> warehouse_iface.v1.PlacementsResponse.DataEntry
-	2, // 3: warehouse_iface.v1.PlacementsResponse.DataEntry.value:type_name -> warehouse_iface.v1.PlacementDetail
-	0, // 4: warehouse_iface.v1.InventoryService.Placements:input_type -> warehouse_iface.v1.PlacementsRequest
-	3, // 5: warehouse_iface.v1.InventoryService.Placements:output_type -> warehouse_iface.v1.PlacementsResponse
-	5, // [5:6] is the sub-list for method output_type
-	4, // [4:5] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	11, // 0: warehouse_iface.v1.BlacklistedSkuResponse.data:type_name -> warehouse_iface.v1.BlacklistedSkuResponse.DataEntry
+	13, // 1: warehouse_iface.v1.PlacementDetail.sku_detail:type_name -> warehouse_iface.v1.SkuDataDetail
+	8,  // 2: warehouse_iface.v1.PlacementDetail.racks:type_name -> warehouse_iface.v1.RackPlacement
+	12, // 3: warehouse_iface.v1.PlacementsResponse.data:type_name -> warehouse_iface.v1.PlacementsResponse.DataEntry
+	5,  // 4: warehouse_iface.v1.BlacklistedSkuResponse.DataEntry.value:type_name -> warehouse_iface.v1.SkuBlacklistDetail
+	9,  // 5: warehouse_iface.v1.PlacementsResponse.DataEntry.value:type_name -> warehouse_iface.v1.PlacementDetail
+	7,  // 6: warehouse_iface.v1.InventoryService.Placements:input_type -> warehouse_iface.v1.PlacementsRequest
+	4,  // 7: warehouse_iface.v1.InventoryService.BlacklistedSku:input_type -> warehouse_iface.v1.BlacklistedSkuRequest
+	0,  // 8: warehouse_iface.v1.InventoryService.BlacklistedSkuAdd:input_type -> warehouse_iface.v1.BlacklistedSkuAddRequest
+	2,  // 9: warehouse_iface.v1.InventoryService.BlacklistedSkuRemove:input_type -> warehouse_iface.v1.BlacklistedSkuRemoveRequest
+	10, // 10: warehouse_iface.v1.InventoryService.Placements:output_type -> warehouse_iface.v1.PlacementsResponse
+	6,  // 11: warehouse_iface.v1.InventoryService.BlacklistedSku:output_type -> warehouse_iface.v1.BlacklistedSkuResponse
+	1,  // 12: warehouse_iface.v1.InventoryService.BlacklistedSkuAdd:output_type -> warehouse_iface.v1.BlacklistedSkuAddResponse
+	3,  // 13: warehouse_iface.v1.InventoryService.BlacklistedSkuRemove:output_type -> warehouse_iface.v1.BlacklistedSkuRemoveResponse
+	10, // [10:14] is the sub-list for method output_type
+	6,  // [6:10] is the sub-list for method input_type
+	6,  // [6:6] is the sub-list for extension type_name
+	6,  // [6:6] is the sub-list for extension extendee
+	0,  // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_warehouse_iface_v1_inventory_proto_init() }
@@ -295,7 +640,7 @@ func file_warehouse_iface_v1_inventory_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_warehouse_iface_v1_inventory_proto_rawDesc), len(file_warehouse_iface_v1_inventory_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   13,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
