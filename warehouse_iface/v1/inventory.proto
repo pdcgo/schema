@@ -72,13 +72,23 @@ message ProductListRequestFilter {
   uint64 user_id = 7;
 }
 
+enum ProductListSort {
+  PRODUCT_LIST_SORT_UNSPECIFIED = 0;
+  PRODUCT_LIST_SORT_STOCK_READY = 1;
+  PRODUCT_LIST_SORT_STOCK_PENDING = 2;
+}
+message ProductListRequestSort {
+  ProductListSort sort = 1;
+  bool desc = 2;
+}
+
 message ProductListRequest {
   ProductListRequestFilter filter = 1 [(buf.validate.field).required = true];
-  common.v1.PageFilter page = 2 [(buf.validate.field).required = true];
+  ProductListRequestSort sort = 2 [(buf.validate.field).required = true];
+  common.v1.PageFilter page = 3 [(buf.validate.field).required = true];
 }
 
 message WarehouseProduct {
-  uint64 id = 1;
   string sku_id = 2;
   uint64 product_id = 3;
   uint64 variant_id = 4;
@@ -86,13 +96,14 @@ message WarehouseProduct {
   string variant_ref_id = 6;
   string product_ref_id = 7;
 
-  double price_min = 8;
-  double price_max = 9;
+  double price = 8;
   string image = 10;
   string name = 11;
   uint64 stock_ready = 12;
   uint64 stock_pending = 13;
   google.protobuf.Timestamp created = 14;
+  google.protobuf.Timestamp last_inbound = 15;
+  google.protobuf.Timestamp last_outbound = 16;
 }
 
 message ProductListResponse {
