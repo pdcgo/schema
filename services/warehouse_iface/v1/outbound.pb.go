@@ -320,6 +320,7 @@ type OutboundDetailRequest struct {
 	SearchType    OutboundDetailSearchType `protobuf:"varint,1,opt,name=search_type,json=searchType,proto3,enum=warehouse_iface.v1.OutboundDetailSearchType" json:"search_type,omitempty"`
 	Q             string                   `protobuf:"bytes,2,opt,name=q,proto3" json:"q,omitempty"`
 	TxId          uint64                   `protobuf:"varint,3,opt,name=tx_id,json=txId,proto3" json:"tx_id,omitempty"`
+	LoadAll       bool                     `protobuf:"varint,4,opt,name=load_all,json=loadAll,proto3" json:"load_all,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -373,6 +374,13 @@ func (x *OutboundDetailRequest) GetTxId() uint64 {
 		return x.TxId
 	}
 	return 0
+}
+
+func (x *OutboundDetailRequest) GetLoadAll() bool {
+	if x != nil {
+		return x.LoadAll
+	}
+	return false
 }
 
 type OrderDetail struct {
@@ -1591,12 +1599,13 @@ var File_warehouse_iface_v1_outbound_proto protoreflect.FileDescriptor
 
 const file_warehouse_iface_v1_outbound_proto_rawDesc = "" +
 	"\n" +
-	"!warehouse_iface/v1/outbound.proto\x12\x12warehouse_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x93\x01\n" +
+	"!warehouse_iface/v1/outbound.proto\x12\x12warehouse_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xae\x01\n" +
 	"\x15OutboundDetailRequest\x12W\n" +
 	"\vsearch_type\x18\x01 \x01(\x0e2,.warehouse_iface.v1.OutboundDetailSearchTypeB\b\xbaH\x05\x82\x01\x02 \x00R\n" +
 	"searchType\x12\f\n" +
 	"\x01q\x18\x02 \x01(\tR\x01q\x12\x13\n" +
-	"\x05tx_id\x18\x03 \x01(\x04R\x04txId\"\x99\x02\n" +
+	"\x05tx_id\x18\x03 \x01(\x04R\x04txId\x12\x19\n" +
+	"\bload_all\x18\x04 \x01(\bR\aloadAll\"\x99\x02\n" +
 	"\vOrderDetail\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x17\n" +
 	"\ateam_id\x18\x02 \x01(\x04R\x06teamId\x12 \n" +

@@ -149,6 +149,32 @@ func (mr *MockOrderServiceClientMockRecorder) ChangeOrderRefID(ctx, req interfac
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ChangeOrderRefID", reflect.TypeOf((*MockOrderService)(nil).ChangeOrderRefID), ctx, req)
 }
 
+func (m *MockOrderService) ChangeEstRevenue(ctx context.Context, req *connect.Request[v1.ChangeEstRevenueRequest]) (*connect.Response[v1.ChangeEstRevenueResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "ChangeEstRevenue", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.ChangeEstRevenueResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockOrderServiceMockRecorder) ChangeEstRevenue(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ChangeEstRevenue", reflect.TypeOf((*MockOrderService)(nil).ChangeEstRevenue), ctx, req)
+}
+
+func (m *MockOrderServiceClient) ChangeEstRevenue(ctx context.Context, req *connect.Request[v1.ChangeEstRevenueRequest]) (*connect.Response[v1.ChangeEstRevenueResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "ChangeEstRevenue", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.ChangeEstRevenueResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockOrderServiceClientMockRecorder) ChangeEstRevenue(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ChangeEstRevenue", reflect.TypeOf((*MockOrderService)(nil).ChangeEstRevenue), ctx, req)
+}
+
 func (m *MockOrderService) OrderCompleted(ctx context.Context, req *connect.Request[v1.OrderCompletedRequest]) (*connect.Response[v1.OrderCompletedResponse], error) {
     m.ctrl.T.Helper()
     ret := m.ctrl.Call(m, "OrderCompleted", ctx, req)

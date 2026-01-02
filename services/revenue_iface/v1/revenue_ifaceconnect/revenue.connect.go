@@ -47,6 +47,9 @@ const (
 	// RevenueServiceSellingReceivableAdjustmentProcedure is the fully-qualified name of the
 	// RevenueService's SellingReceivableAdjustment RPC.
 	RevenueServiceSellingReceivableAdjustmentProcedure = "/revenue_iface.v1.RevenueService/SellingReceivableAdjustment"
+	// RevenueServiceOrderEditSellingReceivableProcedure is the fully-qualified name of the
+	// RevenueService's OrderEditSellingReceivable RPC.
+	RevenueServiceOrderEditSellingReceivableProcedure = "/revenue_iface.v1.RevenueService/OrderEditSellingReceivable"
 	// RevenueServiceOrderReturnAsyncProcedure is the fully-qualified name of the RevenueService's
 	// OrderReturnAsync RPC.
 	RevenueServiceOrderReturnAsyncProcedure = "/revenue_iface.v1.RevenueService/OrderReturnAsync"
@@ -83,6 +86,7 @@ type RevenueServiceClient interface {
 	StockReturn(context.Context, *connect.Request[v1.StockReturnRequest]) (*connect.Response[v1.StockReturnResponse], error)
 	// bagian receivable order
 	SellingReceivableAdjustment(context.Context, *connect.Request[v1.SellingReceivableAdjustmentRequest]) (*connect.Response[v1.SellingReceivableAdjustmentResponse], error)
+	OrderEditSellingReceivable(context.Context, *connect.Request[v1.OrderEditSellingReceivableRequest]) (*connect.Response[v1.OrderEditSellingReceivableResponse], error)
 	OrderReturnAsync(context.Context, *connect.Request[v1.OrderReturnAsyncRequest]) (*connect.Response[v1.OrderReturnAsyncResponse], error)
 	// Deprecated: do not use.
 	OrderReturn(context.Context, *connect.Request[v1.OrderReturnRequest]) (*connect.Response[v1.OrderReturnResponse], error)
@@ -138,6 +142,12 @@ func NewRevenueServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			httpClient,
 			baseURL+RevenueServiceSellingReceivableAdjustmentProcedure,
 			connect.WithSchema(revenueServiceMethods.ByName("SellingReceivableAdjustment")),
+			connect.WithClientOptions(opts...),
+		),
+		orderEditSellingReceivable: connect.NewClient[v1.OrderEditSellingReceivableRequest, v1.OrderEditSellingReceivableResponse](
+			httpClient,
+			baseURL+RevenueServiceOrderEditSellingReceivableProcedure,
+			connect.WithSchema(revenueServiceMethods.ByName("OrderEditSellingReceivable")),
 			connect.WithClientOptions(opts...),
 		),
 		orderReturnAsync: connect.NewClient[v1.OrderReturnAsyncRequest, v1.OrderReturnAsyncResponse](
@@ -198,6 +208,7 @@ type revenueServiceClient struct {
 	stockReturnAsync            *connect.Client[v1.StockReturnAsyncRequest, v1.StockReturnAsyncResponse]
 	stockReturn                 *connect.Client[v1.StockReturnRequest, v1.StockReturnResponse]
 	sellingReceivableAdjustment *connect.Client[v1.SellingReceivableAdjustmentRequest, v1.SellingReceivableAdjustmentResponse]
+	orderEditSellingReceivable  *connect.Client[v1.OrderEditSellingReceivableRequest, v1.OrderEditSellingReceivableResponse]
 	orderReturnAsync            *connect.Client[v1.OrderReturnAsyncRequest, v1.OrderReturnAsyncResponse]
 	orderReturn                 *connect.Client[v1.OrderReturnRequest, v1.OrderReturnResponse]
 	orderCompleted              *connect.Client[v1.OrderCompletedRequest, v1.OrderCompletedResponse]
@@ -231,6 +242,11 @@ func (c *revenueServiceClient) StockReturn(ctx context.Context, req *connect.Req
 // SellingReceivableAdjustment calls revenue_iface.v1.RevenueService.SellingReceivableAdjustment.
 func (c *revenueServiceClient) SellingReceivableAdjustment(ctx context.Context, req *connect.Request[v1.SellingReceivableAdjustmentRequest]) (*connect.Response[v1.SellingReceivableAdjustmentResponse], error) {
 	return c.sellingReceivableAdjustment.CallUnary(ctx, req)
+}
+
+// OrderEditSellingReceivable calls revenue_iface.v1.RevenueService.OrderEditSellingReceivable.
+func (c *revenueServiceClient) OrderEditSellingReceivable(ctx context.Context, req *connect.Request[v1.OrderEditSellingReceivableRequest]) (*connect.Response[v1.OrderEditSellingReceivableResponse], error) {
+	return c.orderEditSellingReceivable.CallUnary(ctx, req)
 }
 
 // OrderReturnAsync calls revenue_iface.v1.RevenueService.OrderReturnAsync.
@@ -287,6 +303,7 @@ type RevenueServiceHandler interface {
 	StockReturn(context.Context, *connect.Request[v1.StockReturnRequest]) (*connect.Response[v1.StockReturnResponse], error)
 	// bagian receivable order
 	SellingReceivableAdjustment(context.Context, *connect.Request[v1.SellingReceivableAdjustmentRequest]) (*connect.Response[v1.SellingReceivableAdjustmentResponse], error)
+	OrderEditSellingReceivable(context.Context, *connect.Request[v1.OrderEditSellingReceivableRequest]) (*connect.Response[v1.OrderEditSellingReceivableResponse], error)
 	OrderReturnAsync(context.Context, *connect.Request[v1.OrderReturnAsyncRequest]) (*connect.Response[v1.OrderReturnAsyncResponse], error)
 	// Deprecated: do not use.
 	OrderReturn(context.Context, *connect.Request[v1.OrderReturnRequest]) (*connect.Response[v1.OrderReturnResponse], error)
@@ -338,6 +355,12 @@ func NewRevenueServiceHandler(svc RevenueServiceHandler, opts ...connect.Handler
 		RevenueServiceSellingReceivableAdjustmentProcedure,
 		svc.SellingReceivableAdjustment,
 		connect.WithSchema(revenueServiceMethods.ByName("SellingReceivableAdjustment")),
+		connect.WithHandlerOptions(opts...),
+	)
+	revenueServiceOrderEditSellingReceivableHandler := connect.NewUnaryHandler(
+		RevenueServiceOrderEditSellingReceivableProcedure,
+		svc.OrderEditSellingReceivable,
+		connect.WithSchema(revenueServiceMethods.ByName("OrderEditSellingReceivable")),
 		connect.WithHandlerOptions(opts...),
 	)
 	revenueServiceOrderReturnAsyncHandler := connect.NewUnaryHandler(
@@ -400,6 +423,8 @@ func NewRevenueServiceHandler(svc RevenueServiceHandler, opts ...connect.Handler
 			revenueServiceStockReturnHandler.ServeHTTP(w, r)
 		case RevenueServiceSellingReceivableAdjustmentProcedure:
 			revenueServiceSellingReceivableAdjustmentHandler.ServeHTTP(w, r)
+		case RevenueServiceOrderEditSellingReceivableProcedure:
+			revenueServiceOrderEditSellingReceivableHandler.ServeHTTP(w, r)
 		case RevenueServiceOrderReturnAsyncProcedure:
 			revenueServiceOrderReturnAsyncHandler.ServeHTTP(w, r)
 		case RevenueServiceOrderReturnProcedure:
@@ -443,6 +468,10 @@ func (UnimplementedRevenueServiceHandler) StockReturn(context.Context, *connect.
 
 func (UnimplementedRevenueServiceHandler) SellingReceivableAdjustment(context.Context, *connect.Request[v1.SellingReceivableAdjustmentRequest]) (*connect.Response[v1.SellingReceivableAdjustmentResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("revenue_iface.v1.RevenueService.SellingReceivableAdjustment is not implemented"))
+}
+
+func (UnimplementedRevenueServiceHandler) OrderEditSellingReceivable(context.Context, *connect.Request[v1.OrderEditSellingReceivableRequest]) (*connect.Response[v1.OrderEditSellingReceivableResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("revenue_iface.v1.RevenueService.OrderEditSellingReceivable is not implemented"))
 }
 
 func (UnimplementedRevenueServiceHandler) OrderReturnAsync(context.Context, *connect.Request[v1.OrderReturnAsyncRequest]) (*connect.Response[v1.OrderReturnAsyncResponse], error) {

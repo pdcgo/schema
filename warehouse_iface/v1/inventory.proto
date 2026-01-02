@@ -26,7 +26,7 @@ service InventoryService {
 
 message ProductHistoryRequestFilter {
   string sku_id = 1;
-  string status = 2;
+  string type = 2;
 }
 
 message ProductHistoryRequest {

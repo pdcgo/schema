@@ -20,6 +20,7 @@ service RevenueService {
 
   // bagian receivable order
   rpc SellingReceivableAdjustment(SellingReceivableAdjustmentRequest) returns (SellingReceivableAdjustmentResponse);
+  rpc OrderEditSellingReceivable(OrderEditSellingReceivableRequest) returns (OrderEditSellingReceivableResponse);
 
   rpc OrderReturnAsync(OrderReturnAsyncRequest) returns (OrderReturnAsyncResponse);
   rpc OrderReturn(OrderReturnRequest) returns (OrderReturnResponse) {
@@ -41,6 +42,13 @@ service RevenueService {
   rpc RevenueOther(RevenueOtherRequest) returns (RevenueOtherResponse);
   rpc SellingExpenseOther(SellingExpenseOtherRequest) returns (SellingExpenseOtherResponse);
 }
+
+message OrderEditSellingReceivableRequest {
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 order_id = 2 [(buf.validate.field).uint64.gt = 0];
+  uint64 est_revenue_amount = 3 [(buf.validate.field).uint64.gt = 0];
+}
+message OrderEditSellingReceivableResponse {}
 
 enum ReceivableAdjustmentType {
   RECEIVABLE_ADJUSTMENT_TYPE_UNSPECIFIED = 0;

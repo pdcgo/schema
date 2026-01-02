@@ -125,7 +125,7 @@ func (ProductListSort) EnumDescriptor() ([]byte, []int) {
 type ProductHistoryRequestFilter struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	SkuId         string                 `protobuf:"bytes,1,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
-	Status        string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
+	Type          string                 `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -167,9 +167,9 @@ func (x *ProductHistoryRequestFilter) GetSkuId() string {
 	return ""
 }
 
-func (x *ProductHistoryRequestFilter) GetStatus() string {
+func (x *ProductHistoryRequestFilter) GetType() string {
 	if x != nil {
-		return x.Status
+		return x.Type
 	}
 	return ""
 }
@@ -1399,10 +1399,10 @@ var File_warehouse_iface_v1_inventory_proto protoreflect.FileDescriptor
 
 const file_warehouse_iface_v1_inventory_proto_rawDesc = "" +
 	"\n" +
-	"\"warehouse_iface/v1/inventory.proto\x12\x12warehouse_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!warehouse_iface/v1/outbound.proto\"L\n" +
+	"\"warehouse_iface/v1/inventory.proto\x12\x12warehouse_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!warehouse_iface/v1/outbound.proto\"H\n" +
 	"\x1bProductHistoryRequestFilter\x12\x15\n" +
-	"\x06sku_id\x18\x01 \x01(\tR\x05skuId\x12\x16\n" +
-	"\x06status\x18\x02 \x01(\tR\x06status\"\x93\x01\n" +
+	"\x06sku_id\x18\x01 \x01(\tR\x05skuId\x12\x12\n" +
+	"\x04type\x18\x02 \x01(\tR\x04type\"\x93\x01\n" +
 	"\x15ProductHistoryRequest\x12O\n" +
 	"\x06filter\x18\x01 \x01(\v2/.warehouse_iface.v1.ProductHistoryRequestFilterB\x06\xbaH\x03\xc8\x01\x01R\x06filter\x12)\n" +
 	"\x04page\x18\x02 \x01(\v2\x15.common.v1.PageFilterR\x04page\"\xb8\x03\n" +

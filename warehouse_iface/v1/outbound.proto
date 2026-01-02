@@ -31,6 +31,7 @@ message OutboundDetailRequest {
   }];
   string q = 2;
   uint64 tx_id = 3;
+  bool load_all = 4;
 }
 
 message OrderDetail {
