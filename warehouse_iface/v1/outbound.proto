@@ -43,6 +43,7 @@ message OrderDetail {
   bool double_order = 6;
   string order_ref_id = 7;
   string order_from = 8;
+  google.protobuf.Timestamp order_time = 9;
 }
 
 message OutboundDetailResponse {

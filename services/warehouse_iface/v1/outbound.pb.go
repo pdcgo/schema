@@ -393,6 +393,7 @@ type OrderDetail struct {
 	DoubleOrder         bool                   `protobuf:"varint,6,opt,name=double_order,json=doubleOrder,proto3" json:"double_order,omitempty"`
 	OrderRefId          string                 `protobuf:"bytes,7,opt,name=order_ref_id,json=orderRefId,proto3" json:"order_ref_id,omitempty"`
 	OrderFrom           string                 `protobuf:"bytes,8,opt,name=order_from,json=orderFrom,proto3" json:"order_from,omitempty"`
+	OrderTime           *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=order_time,json=orderTime,proto3" json:"order_time,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -481,6 +482,13 @@ func (x *OrderDetail) GetOrderFrom() string {
 		return x.OrderFrom
 	}
 	return ""
+}
+
+func (x *OrderDetail) GetOrderTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.OrderTime
+	}
+	return nil
 }
 
 type OutboundDetailResponse struct {
@@ -1605,7 +1613,7 @@ const file_warehouse_iface_v1_outbound_proto_rawDesc = "" +
 	"searchType\x12\f\n" +
 	"\x01q\x18\x02 \x01(\tR\x01q\x12\x13\n" +
 	"\x05tx_id\x18\x03 \x01(\x04R\x04txId\x12\x19\n" +
-	"\bload_all\x18\x04 \x01(\bR\aloadAll\"\x99\x02\n" +
+	"\bload_all\x18\x04 \x01(\bR\aloadAll\"\xd4\x02\n" +
 	"\vOrderDetail\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x17\n" +
 	"\ateam_id\x18\x02 \x01(\x04R\x06teamId\x12 \n" +
@@ -1617,7 +1625,9 @@ const file_warehouse_iface_v1_outbound_proto_rawDesc = "" +
 	"\forder_ref_id\x18\a \x01(\tR\n" +
 	"orderRefId\x12\x1d\n" +
 	"\n" +
-	"order_from\x18\b \x01(\tR\torderFrom\"\xa1\x01\n" +
+	"order_from\x18\b \x01(\tR\torderFrom\x129\n" +
+	"\n" +
+	"order_time\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\torderTime\"\xa1\x01\n" +
 	"\x16OutboundDetailResponse\x128\n" +
 	"\boutbound\x18\x02 \x01(\v2\x1c.warehouse_iface.v1.OutboundR\boutbound\x12D\n" +
 	"\forder_detail\x18\x01 \x01(\v2\x1f.warehouse_iface.v1.OrderDetailH\x00R\vorderDetailB\a\n" +
@@ -1800,44 +1810,45 @@ var file_warehouse_iface_v1_outbound_proto_goTypes = []any{
 }
 var file_warehouse_iface_v1_outbound_proto_depIdxs = []int32{
 	1,  // 0: warehouse_iface.v1.OutboundDetailRequest.search_type:type_name -> warehouse_iface.v1.OutboundDetailSearchType
-	19, // 1: warehouse_iface.v1.OutboundDetailResponse.outbound:type_name -> warehouse_iface.v1.Outbound
-	7,  // 2: warehouse_iface.v1.OutboundDetailResponse.order_detail:type_name -> warehouse_iface.v1.OrderDetail
-	0,  // 3: warehouse_iface.v1.OrderDetailSearchRequest.search_type:type_name -> warehouse_iface.v1.OrderDetailSearchType
-	21, // 4: warehouse_iface.v1.TransactionDetail.created:type_name -> google.protobuf.Timestamp
-	21, // 5: warehouse_iface.v1.TransactionDetail.send_at:type_name -> google.protobuf.Timestamp
-	21, // 6: warehouse_iface.v1.TransactionDetail.arrived:type_name -> google.protobuf.Timestamp
-	7,  // 7: warehouse_iface.v1.OrderDetailSearchResponse.order:type_name -> warehouse_iface.v1.OrderDetail
-	10, // 8: warehouse_iface.v1.OrderDetailSearchResponse.outbound:type_name -> warehouse_iface.v1.TransactionDetail
-	10, // 9: warehouse_iface.v1.OrderDetailSearchResponse.inbound:type_name -> warehouse_iface.v1.TransactionDetail
-	3,  // 10: warehouse_iface.v1.OutboundSort.field:type_name -> warehouse_iface.v1.OutboundSortField
-	22, // 11: warehouse_iface.v1.OutboundSort.type:type_name -> common.v1.SortType
-	5,  // 12: warehouse_iface.v1.OutboundListFilter.search_type:type_name -> warehouse_iface.v1.OutboundSearchType
-	2,  // 13: warehouse_iface.v1.OutboundListFilter.shipment:type_name -> warehouse_iface.v1.ShipmentStatus
-	23, // 14: warehouse_iface.v1.OutboundListFilter.marketplaces:type_name -> common.v1.MarketplaceType
-	4,  // 15: warehouse_iface.v1.OutboundListFilter.outbound_type:type_name -> warehouse_iface.v1.OutboundType
-	24, // 16: warehouse_iface.v1.OutboundListFilter.time_range:type_name -> common.v1.TimeFilterRange
-	13, // 17: warehouse_iface.v1.OutboundListRequest.filter:type_name -> warehouse_iface.v1.OutboundListFilter
-	12, // 18: warehouse_iface.v1.OutboundListRequest.sort:type_name -> warehouse_iface.v1.OutboundSort
-	25, // 19: warehouse_iface.v1.OutboundListRequest.page:type_name -> common.v1.PageFilter
-	15, // 20: warehouse_iface.v1.OutboundItem.sku_detail:type_name -> warehouse_iface.v1.SkuDataDetail
-	21, // 21: warehouse_iface.v1.Order.order_time:type_name -> google.protobuf.Timestamp
-	16, // 22: warehouse_iface.v1.Outbound.items:type_name -> warehouse_iface.v1.OutboundItem
-	21, // 23: warehouse_iface.v1.Outbound.created:type_name -> google.protobuf.Timestamp
-	17, // 24: warehouse_iface.v1.Outbound.order:type_name -> warehouse_iface.v1.Order
-	18, // 25: warehouse_iface.v1.Outbound.transfer_from:type_name -> warehouse_iface.v1.TransferFrom
-	19, // 26: warehouse_iface.v1.OutboundListResponse.data:type_name -> warehouse_iface.v1.Outbound
-	26, // 27: warehouse_iface.v1.OutboundListResponse.page_info:type_name -> common.v1.PageInfo
-	14, // 28: warehouse_iface.v1.OutboundService.OutboundList:input_type -> warehouse_iface.v1.OutboundListRequest
-	6,  // 29: warehouse_iface.v1.OutboundService.OutboundDetail:input_type -> warehouse_iface.v1.OutboundDetailRequest
-	9,  // 30: warehouse_iface.v1.OutboundService.OrderDetailSearch:input_type -> warehouse_iface.v1.OrderDetailSearchRequest
-	20, // 31: warehouse_iface.v1.OutboundService.OutboundList:output_type -> warehouse_iface.v1.OutboundListResponse
-	8,  // 32: warehouse_iface.v1.OutboundService.OutboundDetail:output_type -> warehouse_iface.v1.OutboundDetailResponse
-	11, // 33: warehouse_iface.v1.OutboundService.OrderDetailSearch:output_type -> warehouse_iface.v1.OrderDetailSearchResponse
-	31, // [31:34] is the sub-list for method output_type
-	28, // [28:31] is the sub-list for method input_type
-	28, // [28:28] is the sub-list for extension type_name
-	28, // [28:28] is the sub-list for extension extendee
-	0,  // [0:28] is the sub-list for field type_name
+	21, // 1: warehouse_iface.v1.OrderDetail.order_time:type_name -> google.protobuf.Timestamp
+	19, // 2: warehouse_iface.v1.OutboundDetailResponse.outbound:type_name -> warehouse_iface.v1.Outbound
+	7,  // 3: warehouse_iface.v1.OutboundDetailResponse.order_detail:type_name -> warehouse_iface.v1.OrderDetail
+	0,  // 4: warehouse_iface.v1.OrderDetailSearchRequest.search_type:type_name -> warehouse_iface.v1.OrderDetailSearchType
+	21, // 5: warehouse_iface.v1.TransactionDetail.created:type_name -> google.protobuf.Timestamp
+	21, // 6: warehouse_iface.v1.TransactionDetail.send_at:type_name -> google.protobuf.Timestamp
+	21, // 7: warehouse_iface.v1.TransactionDetail.arrived:type_name -> google.protobuf.Timestamp
+	7,  // 8: warehouse_iface.v1.OrderDetailSearchResponse.order:type_name -> warehouse_iface.v1.OrderDetail
+	10, // 9: warehouse_iface.v1.OrderDetailSearchResponse.outbound:type_name -> warehouse_iface.v1.TransactionDetail
+	10, // 10: warehouse_iface.v1.OrderDetailSearchResponse.inbound:type_name -> warehouse_iface.v1.TransactionDetail
+	3,  // 11: warehouse_iface.v1.OutboundSort.field:type_name -> warehouse_iface.v1.OutboundSortField
+	22, // 12: warehouse_iface.v1.OutboundSort.type:type_name -> common.v1.SortType
+	5,  // 13: warehouse_iface.v1.OutboundListFilter.search_type:type_name -> warehouse_iface.v1.OutboundSearchType
+	2,  // 14: warehouse_iface.v1.OutboundListFilter.shipment:type_name -> warehouse_iface.v1.ShipmentStatus
+	23, // 15: warehouse_iface.v1.OutboundListFilter.marketplaces:type_name -> common.v1.MarketplaceType
+	4,  // 16: warehouse_iface.v1.OutboundListFilter.outbound_type:type_name -> warehouse_iface.v1.OutboundType
+	24, // 17: warehouse_iface.v1.OutboundListFilter.time_range:type_name -> common.v1.TimeFilterRange
+	13, // 18: warehouse_iface.v1.OutboundListRequest.filter:type_name -> warehouse_iface.v1.OutboundListFilter
+	12, // 19: warehouse_iface.v1.OutboundListRequest.sort:type_name -> warehouse_iface.v1.OutboundSort
+	25, // 20: warehouse_iface.v1.OutboundListRequest.page:type_name -> common.v1.PageFilter
+	15, // 21: warehouse_iface.v1.OutboundItem.sku_detail:type_name -> warehouse_iface.v1.SkuDataDetail
+	21, // 22: warehouse_iface.v1.Order.order_time:type_name -> google.protobuf.Timestamp
+	16, // 23: warehouse_iface.v1.Outbound.items:type_name -> warehouse_iface.v1.OutboundItem
+	21, // 24: warehouse_iface.v1.Outbound.created:type_name -> google.protobuf.Timestamp
+	17, // 25: warehouse_iface.v1.Outbound.order:type_name -> warehouse_iface.v1.Order
+	18, // 26: warehouse_iface.v1.Outbound.transfer_from:type_name -> warehouse_iface.v1.TransferFrom
+	19, // 27: warehouse_iface.v1.OutboundListResponse.data:type_name -> warehouse_iface.v1.Outbound
+	26, // 28: warehouse_iface.v1.OutboundListResponse.page_info:type_name -> common.v1.PageInfo
+	14, // 29: warehouse_iface.v1.OutboundService.OutboundList:input_type -> warehouse_iface.v1.OutboundListRequest
+	6,  // 30: warehouse_iface.v1.OutboundService.OutboundDetail:input_type -> warehouse_iface.v1.OutboundDetailRequest
+	9,  // 31: warehouse_iface.v1.OutboundService.OrderDetailSearch:input_type -> warehouse_iface.v1.OrderDetailSearchRequest
+	20, // 32: warehouse_iface.v1.OutboundService.OutboundList:output_type -> warehouse_iface.v1.OutboundListResponse
+	8,  // 33: warehouse_iface.v1.OutboundService.OutboundDetail:output_type -> warehouse_iface.v1.OutboundDetailResponse
+	11, // 34: warehouse_iface.v1.OutboundService.OrderDetailSearch:output_type -> warehouse_iface.v1.OrderDetailSearchResponse
+	32, // [32:35] is the sub-list for method output_type
+	29, // [29:32] is the sub-list for method input_type
+	29, // [29:29] is the sub-list for extension type_name
+	29, // [29:29] is the sub-list for extension extendee
+	0,  // [0:29] is the sub-list for field type_name
 }
 
 func init() { file_warehouse_iface_v1_outbound_proto_init() }
