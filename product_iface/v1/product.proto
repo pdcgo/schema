@@ -12,6 +12,31 @@ service ProductService {
   rpc ProductDuplicate(ProductDuplicateRequest) returns (ProductDuplicateResponse);
   rpc ProductMapGet(ProductMapGetRequest) returns (ProductMapGetResponse);
   rpc ProductMapConnect(ProductMapConnectRequest) returns (ProductMapConnectResponse);
+
+  // info Product
+  rpc ProductByIDs(ProductByIDsRequest) returns (ProductByIDsResponse);
+}
+
+message ProductByIDsRequest {
+  repeated uint64 ids = 1 [(buf.validate.field).repeated = {
+    min_items: 1
+    max_items: 100
+    items: {
+      uint64: {gt: 0}
+    }
+  }];
+
+  bool include_variant = 2;
+}
+
+message ProductIDsData {
+  uint64 id = 1;
+  string name = 2;
+  repeated string images = 3;
+}
+
+message ProductByIDsResponse {
+  map<uint64, ProductIDsData> products = 1;
 }
 
 message ProductDuplicateRequest {

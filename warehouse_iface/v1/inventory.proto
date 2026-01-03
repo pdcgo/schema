@@ -161,9 +161,17 @@ message RackPlacement {
   int64 item_count = 3;
 }
 
+message PlacementVariantDetail {
+  uint64 id = 1;
+  string name = 2;
+  string image = 3;
+  string variant_ref_id = 4;
+}
+
 message PlacementDetail {
   SkuDataDetail sku_detail = 1;
   repeated RackPlacement racks = 2;
+  PlacementVariantDetail variant_detail = 3;
 }
 
 message PlacementsResponse {

@@ -42,6 +42,9 @@ const (
 	// ProductServiceProductMapConnectProcedure is the fully-qualified name of the ProductService's
 	// ProductMapConnect RPC.
 	ProductServiceProductMapConnectProcedure = "/product_iface.v1.ProductService/ProductMapConnect"
+	// ProductServiceProductByIDsProcedure is the fully-qualified name of the ProductService's
+	// ProductByIDs RPC.
+	ProductServiceProductByIDsProcedure = "/product_iface.v1.ProductService/ProductByIDs"
 )
 
 // ProductServiceClient is a client for the product_iface.v1.ProductService service.
@@ -49,6 +52,8 @@ type ProductServiceClient interface {
 	ProductDuplicate(context.Context, *connect.Request[v1.ProductDuplicateRequest]) (*connect.Response[v1.ProductDuplicateResponse], error)
 	ProductMapGet(context.Context, *connect.Request[v1.ProductMapGetRequest]) (*connect.Response[v1.ProductMapGetResponse], error)
 	ProductMapConnect(context.Context, *connect.Request[v1.ProductMapConnectRequest]) (*connect.Response[v1.ProductMapConnectResponse], error)
+	// info Product
+	ProductByIDs(context.Context, *connect.Request[v1.ProductByIDsRequest]) (*connect.Response[v1.ProductByIDsResponse], error)
 }
 
 // NewProductServiceClient constructs a client for the product_iface.v1.ProductService service. By
@@ -80,6 +85,12 @@ func NewProductServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			connect.WithSchema(productServiceMethods.ByName("ProductMapConnect")),
 			connect.WithClientOptions(opts...),
 		),
+		productByIDs: connect.NewClient[v1.ProductByIDsRequest, v1.ProductByIDsResponse](
+			httpClient,
+			baseURL+ProductServiceProductByIDsProcedure,
+			connect.WithSchema(productServiceMethods.ByName("ProductByIDs")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -88,6 +99,7 @@ type productServiceClient struct {
 	productDuplicate  *connect.Client[v1.ProductDuplicateRequest, v1.ProductDuplicateResponse]
 	productMapGet     *connect.Client[v1.ProductMapGetRequest, v1.ProductMapGetResponse]
 	productMapConnect *connect.Client[v1.ProductMapConnectRequest, v1.ProductMapConnectResponse]
+	productByIDs      *connect.Client[v1.ProductByIDsRequest, v1.ProductByIDsResponse]
 }
 
 // ProductDuplicate calls product_iface.v1.ProductService.ProductDuplicate.
@@ -105,11 +117,18 @@ func (c *productServiceClient) ProductMapConnect(ctx context.Context, req *conne
 	return c.productMapConnect.CallUnary(ctx, req)
 }
 
+// ProductByIDs calls product_iface.v1.ProductService.ProductByIDs.
+func (c *productServiceClient) ProductByIDs(ctx context.Context, req *connect.Request[v1.ProductByIDsRequest]) (*connect.Response[v1.ProductByIDsResponse], error) {
+	return c.productByIDs.CallUnary(ctx, req)
+}
+
 // ProductServiceHandler is an implementation of the product_iface.v1.ProductService service.
 type ProductServiceHandler interface {
 	ProductDuplicate(context.Context, *connect.Request[v1.ProductDuplicateRequest]) (*connect.Response[v1.ProductDuplicateResponse], error)
 	ProductMapGet(context.Context, *connect.Request[v1.ProductMapGetRequest]) (*connect.Response[v1.ProductMapGetResponse], error)
 	ProductMapConnect(context.Context, *connect.Request[v1.ProductMapConnectRequest]) (*connect.Response[v1.ProductMapConnectResponse], error)
+	// info Product
+	ProductByIDs(context.Context, *connect.Request[v1.ProductByIDsRequest]) (*connect.Response[v1.ProductByIDsResponse], error)
 }
 
 // NewProductServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -137,6 +156,12 @@ func NewProductServiceHandler(svc ProductServiceHandler, opts ...connect.Handler
 		connect.WithSchema(productServiceMethods.ByName("ProductMapConnect")),
 		connect.WithHandlerOptions(opts...),
 	)
+	productServiceProductByIDsHandler := connect.NewUnaryHandler(
+		ProductServiceProductByIDsProcedure,
+		svc.ProductByIDs,
+		connect.WithSchema(productServiceMethods.ByName("ProductByIDs")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/product_iface.v1.ProductService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case ProductServiceProductDuplicateProcedure:
@@ -145,6 +170,8 @@ func NewProductServiceHandler(svc ProductServiceHandler, opts ...connect.Handler
 			productServiceProductMapGetHandler.ServeHTTP(w, r)
 		case ProductServiceProductMapConnectProcedure:
 			productServiceProductMapConnectHandler.ServeHTTP(w, r)
+		case ProductServiceProductByIDsProcedure:
+			productServiceProductByIDsHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -164,4 +191,8 @@ func (UnimplementedProductServiceHandler) ProductMapGet(context.Context, *connec
 
 func (UnimplementedProductServiceHandler) ProductMapConnect(context.Context, *connect.Request[v1.ProductMapConnectRequest]) (*connect.Response[v1.ProductMapConnectResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("product_iface.v1.ProductService.ProductMapConnect is not implemented"))
+}
+
+func (UnimplementedProductServiceHandler) ProductByIDs(context.Context, *connect.Request[v1.ProductByIDsRequest]) (*connect.Response[v1.ProductByIDsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("product_iface.v1.ProductService.ProductByIDs is not implemented"))
 }

@@ -1299,17 +1299,86 @@ func (x *RackPlacement) GetItemCount() int64 {
 	return 0
 }
 
-type PlacementDetail struct {
+type PlacementVariantDetail struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	SkuDetail     *SkuDataDetail         `protobuf:"bytes,1,opt,name=sku_detail,json=skuDetail,proto3" json:"sku_detail,omitempty"`
-	Racks         []*RackPlacement       `protobuf:"bytes,2,rep,name=racks,proto3" json:"racks,omitempty"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Image         string                 `protobuf:"bytes,3,opt,name=image,proto3" json:"image,omitempty"`
+	VariantRefId  string                 `protobuf:"bytes,4,opt,name=variant_ref_id,json=variantRefId,proto3" json:"variant_ref_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PlacementVariantDetail) Reset() {
+	*x = PlacementVariantDetail{}
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PlacementVariantDetail) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PlacementVariantDetail) ProtoMessage() {}
+
+func (x *PlacementVariantDetail) ProtoReflect() protoreflect.Message {
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PlacementVariantDetail.ProtoReflect.Descriptor instead.
+func (*PlacementVariantDetail) Descriptor() ([]byte, []int) {
+	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *PlacementVariantDetail) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *PlacementVariantDetail) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *PlacementVariantDetail) GetImage() string {
+	if x != nil {
+		return x.Image
+	}
+	return ""
+}
+
+func (x *PlacementVariantDetail) GetVariantRefId() string {
+	if x != nil {
+		return x.VariantRefId
+	}
+	return ""
+}
+
+type PlacementDetail struct {
+	state         protoimpl.MessageState  `protogen:"open.v1"`
+	SkuDetail     *SkuDataDetail          `protobuf:"bytes,1,opt,name=sku_detail,json=skuDetail,proto3" json:"sku_detail,omitempty"`
+	Racks         []*RackPlacement        `protobuf:"bytes,2,rep,name=racks,proto3" json:"racks,omitempty"`
+	VariantDetail *PlacementVariantDetail `protobuf:"bytes,3,opt,name=variant_detail,json=variantDetail,proto3" json:"variant_detail,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *PlacementDetail) Reset() {
 	*x = PlacementDetail{}
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[20]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1321,7 +1390,7 @@ func (x *PlacementDetail) String() string {
 func (*PlacementDetail) ProtoMessage() {}
 
 func (x *PlacementDetail) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[20]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1334,7 +1403,7 @@ func (x *PlacementDetail) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PlacementDetail.ProtoReflect.Descriptor instead.
 func (*PlacementDetail) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{20}
+	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *PlacementDetail) GetSkuDetail() *SkuDataDetail {
@@ -1351,6 +1420,13 @@ func (x *PlacementDetail) GetRacks() []*RackPlacement {
 	return nil
 }
 
+func (x *PlacementDetail) GetVariantDetail() *PlacementVariantDetail {
+	if x != nil {
+		return x.VariantDetail
+	}
+	return nil
+}
+
 type PlacementsResponse struct {
 	state         protoimpl.MessageState      `protogen:"open.v1"`
 	Data          map[string]*PlacementDetail `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
@@ -1360,7 +1436,7 @@ type PlacementsResponse struct {
 
 func (x *PlacementsResponse) Reset() {
 	*x = PlacementsResponse{}
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[21]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1372,7 +1448,7 @@ func (x *PlacementsResponse) String() string {
 func (*PlacementsResponse) ProtoMessage() {}
 
 func (x *PlacementsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[21]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1385,7 +1461,7 @@ func (x *PlacementsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PlacementsResponse.ProtoReflect.Descriptor instead.
 func (*PlacementsResponse) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{21}
+	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *PlacementsResponse) GetData() map[string]*PlacementDetail {
@@ -1488,11 +1564,17 @@ const file_warehouse_iface_v1_inventory_proto_rawDesc = "" +
 	"\arack_id\x18\x01 \x01(\x04R\x06rackId\x12\x1b\n" +
 	"\track_name\x18\x02 \x01(\tR\brackName\x12\x1d\n" +
 	"\n" +
-	"item_count\x18\x03 \x01(\x03R\titemCount\"\x8c\x01\n" +
+	"item_count\x18\x03 \x01(\x03R\titemCount\"x\n" +
+	"\x16PlacementVariantDetail\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x14\n" +
+	"\x05image\x18\x03 \x01(\tR\x05image\x12$\n" +
+	"\x0evariant_ref_id\x18\x04 \x01(\tR\fvariantRefId\"\xdf\x01\n" +
 	"\x0fPlacementDetail\x12@\n" +
 	"\n" +
 	"sku_detail\x18\x01 \x01(\v2!.warehouse_iface.v1.SkuDataDetailR\tskuDetail\x127\n" +
-	"\x05racks\x18\x02 \x03(\v2!.warehouse_iface.v1.RackPlacementR\x05racks\"\xb8\x01\n" +
+	"\x05racks\x18\x02 \x03(\v2!.warehouse_iface.v1.RackPlacementR\x05racks\x12Q\n" +
+	"\x0evariant_detail\x18\x03 \x01(\v2*.warehouse_iface.v1.PlacementVariantDetailR\rvariantDetail\"\xb8\x01\n" +
 	"\x12PlacementsResponse\x12D\n" +
 	"\x04data\x18\x01 \x03(\v20.warehouse_iface.v1.PlacementsResponse.DataEntryR\x04data\x1a\\\n" +
 	"\tDataEntry\x12\x10\n" +
@@ -1530,7 +1612,7 @@ func file_warehouse_iface_v1_inventory_proto_rawDescGZIP() []byte {
 }
 
 var file_warehouse_iface_v1_inventory_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_warehouse_iface_v1_inventory_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
+var file_warehouse_iface_v1_inventory_proto_msgTypes = make([]protoimpl.MessageInfo, 25)
 var file_warehouse_iface_v1_inventory_proto_goTypes = []any{
 	(ProductSearchType)(0),               // 0: warehouse_iface.v1.ProductSearchType
 	(ProductListSort)(0),                 // 1: warehouse_iface.v1.ProductListSort
@@ -1554,58 +1636,60 @@ var file_warehouse_iface_v1_inventory_proto_goTypes = []any{
 	(*BlacklistedSkuResponse)(nil),       // 19: warehouse_iface.v1.BlacklistedSkuResponse
 	(*PlacementsRequest)(nil),            // 20: warehouse_iface.v1.PlacementsRequest
 	(*RackPlacement)(nil),                // 21: warehouse_iface.v1.RackPlacement
-	(*PlacementDetail)(nil),              // 22: warehouse_iface.v1.PlacementDetail
-	(*PlacementsResponse)(nil),           // 23: warehouse_iface.v1.PlacementsResponse
-	nil,                                  // 24: warehouse_iface.v1.BlacklistedSkuResponse.DataEntry
-	nil,                                  // 25: warehouse_iface.v1.PlacementsResponse.DataEntry
-	(*v1.PageFilter)(nil),                // 26: common.v1.PageFilter
-	(*timestamppb.Timestamp)(nil),        // 27: google.protobuf.Timestamp
-	(*v1.PageInfo)(nil),                  // 28: common.v1.PageInfo
-	(*SkuDataDetail)(nil),                // 29: warehouse_iface.v1.SkuDataDetail
+	(*PlacementVariantDetail)(nil),       // 22: warehouse_iface.v1.PlacementVariantDetail
+	(*PlacementDetail)(nil),              // 23: warehouse_iface.v1.PlacementDetail
+	(*PlacementsResponse)(nil),           // 24: warehouse_iface.v1.PlacementsResponse
+	nil,                                  // 25: warehouse_iface.v1.BlacklistedSkuResponse.DataEntry
+	nil,                                  // 26: warehouse_iface.v1.PlacementsResponse.DataEntry
+	(*v1.PageFilter)(nil),                // 27: common.v1.PageFilter
+	(*timestamppb.Timestamp)(nil),        // 28: google.protobuf.Timestamp
+	(*v1.PageInfo)(nil),                  // 29: common.v1.PageInfo
+	(*SkuDataDetail)(nil),                // 30: warehouse_iface.v1.SkuDataDetail
 }
 var file_warehouse_iface_v1_inventory_proto_depIdxs = []int32{
 	2,  // 0: warehouse_iface.v1.ProductHistoryRequest.filter:type_name -> warehouse_iface.v1.ProductHistoryRequestFilter
-	26, // 1: warehouse_iface.v1.ProductHistoryRequest.page:type_name -> common.v1.PageFilter
-	27, // 2: warehouse_iface.v1.HistoryItem.order_created_time:type_name -> google.protobuf.Timestamp
-	27, // 3: warehouse_iface.v1.HistoryItem.arrived_time:type_name -> google.protobuf.Timestamp
-	27, // 4: warehouse_iface.v1.HistoryItem.tx_created_time:type_name -> google.protobuf.Timestamp
+	27, // 1: warehouse_iface.v1.ProductHistoryRequest.page:type_name -> common.v1.PageFilter
+	28, // 2: warehouse_iface.v1.HistoryItem.order_created_time:type_name -> google.protobuf.Timestamp
+	28, // 3: warehouse_iface.v1.HistoryItem.arrived_time:type_name -> google.protobuf.Timestamp
+	28, // 4: warehouse_iface.v1.HistoryItem.tx_created_time:type_name -> google.protobuf.Timestamp
 	4,  // 5: warehouse_iface.v1.ProductHistoryResponse.data:type_name -> warehouse_iface.v1.HistoryItem
-	28, // 6: warehouse_iface.v1.ProductHistoryResponse.page_info:type_name -> common.v1.PageInfo
+	29, // 6: warehouse_iface.v1.ProductHistoryResponse.page_info:type_name -> common.v1.PageInfo
 	0,  // 7: warehouse_iface.v1.ProductListRequestFilter.search_type:type_name -> warehouse_iface.v1.ProductSearchType
 	1,  // 8: warehouse_iface.v1.ProductListRequestSort.sort:type_name -> warehouse_iface.v1.ProductListSort
 	6,  // 9: warehouse_iface.v1.ProductListRequest.filter:type_name -> warehouse_iface.v1.ProductListRequestFilter
 	7,  // 10: warehouse_iface.v1.ProductListRequest.sort:type_name -> warehouse_iface.v1.ProductListRequestSort
-	26, // 11: warehouse_iface.v1.ProductListRequest.page:type_name -> common.v1.PageFilter
-	27, // 12: warehouse_iface.v1.WarehouseProduct.created:type_name -> google.protobuf.Timestamp
-	27, // 13: warehouse_iface.v1.WarehouseProduct.last_inbound:type_name -> google.protobuf.Timestamp
-	27, // 14: warehouse_iface.v1.WarehouseProduct.last_outbound:type_name -> google.protobuf.Timestamp
+	27, // 11: warehouse_iface.v1.ProductListRequest.page:type_name -> common.v1.PageFilter
+	28, // 12: warehouse_iface.v1.WarehouseProduct.created:type_name -> google.protobuf.Timestamp
+	28, // 13: warehouse_iface.v1.WarehouseProduct.last_inbound:type_name -> google.protobuf.Timestamp
+	28, // 14: warehouse_iface.v1.WarehouseProduct.last_outbound:type_name -> google.protobuf.Timestamp
 	9,  // 15: warehouse_iface.v1.ProductListResponse.data:type_name -> warehouse_iface.v1.WarehouseProduct
-	28, // 16: warehouse_iface.v1.ProductListResponse.page_info:type_name -> common.v1.PageInfo
-	24, // 17: warehouse_iface.v1.BlacklistedSkuResponse.data:type_name -> warehouse_iface.v1.BlacklistedSkuResponse.DataEntry
-	29, // 18: warehouse_iface.v1.PlacementDetail.sku_detail:type_name -> warehouse_iface.v1.SkuDataDetail
+	29, // 16: warehouse_iface.v1.ProductListResponse.page_info:type_name -> common.v1.PageInfo
+	25, // 17: warehouse_iface.v1.BlacklistedSkuResponse.data:type_name -> warehouse_iface.v1.BlacklistedSkuResponse.DataEntry
+	30, // 18: warehouse_iface.v1.PlacementDetail.sku_detail:type_name -> warehouse_iface.v1.SkuDataDetail
 	21, // 19: warehouse_iface.v1.PlacementDetail.racks:type_name -> warehouse_iface.v1.RackPlacement
-	25, // 20: warehouse_iface.v1.PlacementsResponse.data:type_name -> warehouse_iface.v1.PlacementsResponse.DataEntry
-	18, // 21: warehouse_iface.v1.BlacklistedSkuResponse.DataEntry.value:type_name -> warehouse_iface.v1.SkuBlacklistDetail
-	22, // 22: warehouse_iface.v1.PlacementsResponse.DataEntry.value:type_name -> warehouse_iface.v1.PlacementDetail
-	20, // 23: warehouse_iface.v1.InventoryService.Placements:input_type -> warehouse_iface.v1.PlacementsRequest
-	17, // 24: warehouse_iface.v1.InventoryService.BlacklistedSku:input_type -> warehouse_iface.v1.BlacklistedSkuRequest
-	13, // 25: warehouse_iface.v1.InventoryService.BlacklistedSkuAdd:input_type -> warehouse_iface.v1.BlacklistedSkuAddRequest
-	15, // 26: warehouse_iface.v1.InventoryService.BlacklistedSkuRemove:input_type -> warehouse_iface.v1.BlacklistedSkuRemoveRequest
-	8,  // 27: warehouse_iface.v1.InventoryService.ProductList:input_type -> warehouse_iface.v1.ProductListRequest
-	11, // 28: warehouse_iface.v1.InventoryService.ProductDetail:input_type -> warehouse_iface.v1.ProductDetailRequest
-	3,  // 29: warehouse_iface.v1.InventoryService.ProductHistory:input_type -> warehouse_iface.v1.ProductHistoryRequest
-	23, // 30: warehouse_iface.v1.InventoryService.Placements:output_type -> warehouse_iface.v1.PlacementsResponse
-	19, // 31: warehouse_iface.v1.InventoryService.BlacklistedSku:output_type -> warehouse_iface.v1.BlacklistedSkuResponse
-	14, // 32: warehouse_iface.v1.InventoryService.BlacklistedSkuAdd:output_type -> warehouse_iface.v1.BlacklistedSkuAddResponse
-	16, // 33: warehouse_iface.v1.InventoryService.BlacklistedSkuRemove:output_type -> warehouse_iface.v1.BlacklistedSkuRemoveResponse
-	10, // 34: warehouse_iface.v1.InventoryService.ProductList:output_type -> warehouse_iface.v1.ProductListResponse
-	12, // 35: warehouse_iface.v1.InventoryService.ProductDetail:output_type -> warehouse_iface.v1.ProductDetailResponse
-	5,  // 36: warehouse_iface.v1.InventoryService.ProductHistory:output_type -> warehouse_iface.v1.ProductHistoryResponse
-	30, // [30:37] is the sub-list for method output_type
-	23, // [23:30] is the sub-list for method input_type
-	23, // [23:23] is the sub-list for extension type_name
-	23, // [23:23] is the sub-list for extension extendee
-	0,  // [0:23] is the sub-list for field type_name
+	22, // 20: warehouse_iface.v1.PlacementDetail.variant_detail:type_name -> warehouse_iface.v1.PlacementVariantDetail
+	26, // 21: warehouse_iface.v1.PlacementsResponse.data:type_name -> warehouse_iface.v1.PlacementsResponse.DataEntry
+	18, // 22: warehouse_iface.v1.BlacklistedSkuResponse.DataEntry.value:type_name -> warehouse_iface.v1.SkuBlacklistDetail
+	23, // 23: warehouse_iface.v1.PlacementsResponse.DataEntry.value:type_name -> warehouse_iface.v1.PlacementDetail
+	20, // 24: warehouse_iface.v1.InventoryService.Placements:input_type -> warehouse_iface.v1.PlacementsRequest
+	17, // 25: warehouse_iface.v1.InventoryService.BlacklistedSku:input_type -> warehouse_iface.v1.BlacklistedSkuRequest
+	13, // 26: warehouse_iface.v1.InventoryService.BlacklistedSkuAdd:input_type -> warehouse_iface.v1.BlacklistedSkuAddRequest
+	15, // 27: warehouse_iface.v1.InventoryService.BlacklistedSkuRemove:input_type -> warehouse_iface.v1.BlacklistedSkuRemoveRequest
+	8,  // 28: warehouse_iface.v1.InventoryService.ProductList:input_type -> warehouse_iface.v1.ProductListRequest
+	11, // 29: warehouse_iface.v1.InventoryService.ProductDetail:input_type -> warehouse_iface.v1.ProductDetailRequest
+	3,  // 30: warehouse_iface.v1.InventoryService.ProductHistory:input_type -> warehouse_iface.v1.ProductHistoryRequest
+	24, // 31: warehouse_iface.v1.InventoryService.Placements:output_type -> warehouse_iface.v1.PlacementsResponse
+	19, // 32: warehouse_iface.v1.InventoryService.BlacklistedSku:output_type -> warehouse_iface.v1.BlacklistedSkuResponse
+	14, // 33: warehouse_iface.v1.InventoryService.BlacklistedSkuAdd:output_type -> warehouse_iface.v1.BlacklistedSkuAddResponse
+	16, // 34: warehouse_iface.v1.InventoryService.BlacklistedSkuRemove:output_type -> warehouse_iface.v1.BlacklistedSkuRemoveResponse
+	10, // 35: warehouse_iface.v1.InventoryService.ProductList:output_type -> warehouse_iface.v1.ProductListResponse
+	12, // 36: warehouse_iface.v1.InventoryService.ProductDetail:output_type -> warehouse_iface.v1.ProductDetailResponse
+	5,  // 37: warehouse_iface.v1.InventoryService.ProductHistory:output_type -> warehouse_iface.v1.ProductHistoryResponse
+	31, // [31:38] is the sub-list for method output_type
+	24, // [24:31] is the sub-list for method input_type
+	24, // [24:24] is the sub-list for extension type_name
+	24, // [24:24] is the sub-list for extension extendee
+	0,  // [0:24] is the sub-list for field type_name
 }
 
 func init() { file_warehouse_iface_v1_inventory_proto_init() }
@@ -1620,7 +1704,7 @@ func file_warehouse_iface_v1_inventory_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_warehouse_iface_v1_inventory_proto_rawDesc), len(file_warehouse_iface_v1_inventory_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   24,
+			NumMessages:   25,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

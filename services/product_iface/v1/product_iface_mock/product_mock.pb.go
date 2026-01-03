@@ -124,3 +124,29 @@ func (mr *MockProductServiceClientMockRecorder) ProductMapConnect(ctx, req inter
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ProductMapConnect", reflect.TypeOf((*MockProductService)(nil).ProductMapConnect), ctx, req)
 }
 
+func (m *MockProductService) ProductByIDs(ctx context.Context, req *connect.Request[v1.ProductByIDsRequest]) (*connect.Response[v1.ProductByIDsResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "ProductByIDs", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.ProductByIDsResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockProductServiceMockRecorder) ProductByIDs(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ProductByIDs", reflect.TypeOf((*MockProductService)(nil).ProductByIDs), ctx, req)
+}
+
+func (m *MockProductServiceClient) ProductByIDs(ctx context.Context, req *connect.Request[v1.ProductByIDsRequest]) (*connect.Response[v1.ProductByIDsResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "ProductByIDs", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.ProductByIDsResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockProductServiceClientMockRecorder) ProductByIDs(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ProductByIDs", reflect.TypeOf((*MockProductService)(nil).ProductByIDs), ctx, req)
+}
+
