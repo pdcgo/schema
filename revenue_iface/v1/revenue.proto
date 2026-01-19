@@ -291,6 +291,7 @@ enum ProductSource {
 
 message OrderInfo {
   string receipt = 1;
+  // uint64 order_id = 4 [(buf.validate.field).uint64 = {gt: 0}];
   string external_order_id = 2;
   uint64 parent_external_order_id = 3;
 }

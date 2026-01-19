@@ -2258,10 +2258,11 @@ func (x *ExtraLabelInfo) GetTypeLabels() []*v1.TypeLabel {
 }
 
 type OrderInfo struct {
-	state                 protoimpl.MessageState `protogen:"open.v1"`
-	Receipt               string                 `protobuf:"bytes,1,opt,name=receipt,proto3" json:"receipt,omitempty"`
-	ExternalOrderId       string                 `protobuf:"bytes,2,opt,name=external_order_id,json=externalOrderId,proto3" json:"external_order_id,omitempty"`
-	ParentExternalOrderId uint64                 `protobuf:"varint,3,opt,name=parent_external_order_id,json=parentExternalOrderId,proto3" json:"parent_external_order_id,omitempty"`
+	state   protoimpl.MessageState `protogen:"open.v1"`
+	Receipt string                 `protobuf:"bytes,1,opt,name=receipt,proto3" json:"receipt,omitempty"`
+	// uint64 order_id = 4 [(buf.validate.field).uint64 = {gt: 0}];
+	ExternalOrderId       string `protobuf:"bytes,2,opt,name=external_order_id,json=externalOrderId,proto3" json:"external_order_id,omitempty"`
+	ParentExternalOrderId uint64 `protobuf:"varint,3,opt,name=parent_external_order_id,json=parentExternalOrderId,proto3" json:"parent_external_order_id,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
