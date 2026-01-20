@@ -33,6 +33,21 @@ const (
 // reflection-formatted method names, remove the leading slash and convert the remaining slash to a
 // period.
 const (
+	// OrderServiceOrderDraftCreateProcedure is the fully-qualified name of the OrderService's
+	// OrderDraftCreate RPC.
+	OrderServiceOrderDraftCreateProcedure = "/order_iface.v1.OrderService/OrderDraftCreate"
+	// OrderServiceOrderDraftDeleteProcedure is the fully-qualified name of the OrderService's
+	// OrderDraftDelete RPC.
+	OrderServiceOrderDraftDeleteProcedure = "/order_iface.v1.OrderService/OrderDraftDelete"
+	// OrderServiceOrderDraftListProcedure is the fully-qualified name of the OrderService's
+	// OrderDraftList RPC.
+	OrderServiceOrderDraftListProcedure = "/order_iface.v1.OrderService/OrderDraftList"
+	// OrderServiceOrderDraftGetProcedure is the fully-qualified name of the OrderService's
+	// OrderDraftGet RPC.
+	OrderServiceOrderDraftGetProcedure = "/order_iface.v1.OrderService/OrderDraftGet"
+	// OrderServiceOrderCreateProcedure is the fully-qualified name of the OrderService's OrderCreate
+	// RPC.
+	OrderServiceOrderCreateProcedure = "/order_iface.v1.OrderService/OrderCreate"
 	// OrderServiceOrderFundSetProcedure is the fully-qualified name of the OrderService's OrderFundSet
 	// RPC.
 	OrderServiceOrderFundSetProcedure = "/order_iface.v1.OrderService/OrderFundSet"
@@ -69,6 +84,13 @@ const (
 
 // OrderServiceClient is a client for the order_iface.v1.OrderService service.
 type OrderServiceClient interface {
+	// masalah creating order
+	OrderDraftCreate(context.Context, *connect.Request[v1.OrderDraftCreateRequest]) (*connect.Response[v1.OrderDraftCreateResponse], error)
+	OrderDraftDelete(context.Context, *connect.Request[v1.OrderDraftDeleteRequest]) (*connect.Response[v1.OrderDraftDeleteResponse], error)
+	OrderDraftList(context.Context, *connect.Request[v1.OrderDraftListRequest]) (*connect.Response[v1.OrderDraftListResponse], error)
+	OrderDraftGet(context.Context, *connect.Request[v1.OrderDraftGetRequest]) (*connect.Response[v1.OrderDraftGetResponse], error)
+	OrderCreate(context.Context, *connect.Request[v1.OrderCreateRequest]) (*connect.Response[v1.OrderCreateResponse], error)
+	// bagian accounting
 	OrderFundSet(context.Context) *connect.ClientStreamForClient[v1.OrderFundSetRequest, v1.OrderFundSetResponse]
 	OrderTagRemove(context.Context, *connect.Request[v1.OrderTagRemoveRequest]) (*connect.Response[v1.OrderTagRemoveResponse], error)
 	OrderTagAdd(context.Context, *connect.Request[v1.OrderTagAddRequest]) (*connect.Response[v1.OrderTagAddResponse], error)
@@ -98,6 +120,36 @@ func NewOrderServiceClient(httpClient connect.HTTPClient, baseURL string, opts .
 	baseURL = strings.TrimRight(baseURL, "/")
 	orderServiceMethods := v1.File_order_iface_v1_order_proto.Services().ByName("OrderService").Methods()
 	return &orderServiceClient{
+		orderDraftCreate: connect.NewClient[v1.OrderDraftCreateRequest, v1.OrderDraftCreateResponse](
+			httpClient,
+			baseURL+OrderServiceOrderDraftCreateProcedure,
+			connect.WithSchema(orderServiceMethods.ByName("OrderDraftCreate")),
+			connect.WithClientOptions(opts...),
+		),
+		orderDraftDelete: connect.NewClient[v1.OrderDraftDeleteRequest, v1.OrderDraftDeleteResponse](
+			httpClient,
+			baseURL+OrderServiceOrderDraftDeleteProcedure,
+			connect.WithSchema(orderServiceMethods.ByName("OrderDraftDelete")),
+			connect.WithClientOptions(opts...),
+		),
+		orderDraftList: connect.NewClient[v1.OrderDraftListRequest, v1.OrderDraftListResponse](
+			httpClient,
+			baseURL+OrderServiceOrderDraftListProcedure,
+			connect.WithSchema(orderServiceMethods.ByName("OrderDraftList")),
+			connect.WithClientOptions(opts...),
+		),
+		orderDraftGet: connect.NewClient[v1.OrderDraftGetRequest, v1.OrderDraftGetResponse](
+			httpClient,
+			baseURL+OrderServiceOrderDraftGetProcedure,
+			connect.WithSchema(orderServiceMethods.ByName("OrderDraftGet")),
+			connect.WithClientOptions(opts...),
+		),
+		orderCreate: connect.NewClient[v1.OrderCreateRequest, v1.OrderCreateResponse](
+			httpClient,
+			baseURL+OrderServiceOrderCreateProcedure,
+			connect.WithSchema(orderServiceMethods.ByName("OrderCreate")),
+			connect.WithClientOptions(opts...),
+		),
 		orderFundSet: connect.NewClient[v1.OrderFundSetRequest, v1.OrderFundSetResponse](
 			httpClient,
 			baseURL+OrderServiceOrderFundSetProcedure,
@@ -169,6 +221,11 @@ func NewOrderServiceClient(httpClient connect.HTTPClient, baseURL string, opts .
 
 // orderServiceClient implements OrderServiceClient.
 type orderServiceClient struct {
+	orderDraftCreate   *connect.Client[v1.OrderDraftCreateRequest, v1.OrderDraftCreateResponse]
+	orderDraftDelete   *connect.Client[v1.OrderDraftDeleteRequest, v1.OrderDraftDeleteResponse]
+	orderDraftList     *connect.Client[v1.OrderDraftListRequest, v1.OrderDraftListResponse]
+	orderDraftGet      *connect.Client[v1.OrderDraftGetRequest, v1.OrderDraftGetResponse]
+	orderCreate        *connect.Client[v1.OrderCreateRequest, v1.OrderCreateResponse]
 	orderFundSet       *connect.Client[v1.OrderFundSetRequest, v1.OrderFundSetResponse]
 	orderTagRemove     *connect.Client[v1.OrderTagRemoveRequest, v1.OrderTagRemoveResponse]
 	orderTagAdd        *connect.Client[v1.OrderTagAddRequest, v1.OrderTagAddResponse]
@@ -180,6 +237,31 @@ type orderServiceClient struct {
 	mpPaymentCreate    *connect.Client[v1.MpPaymentCreateRequest, v1.MpPaymentCreateResponse]
 	mpPaymentOrderList *connect.Client[v1.MpPaymentOrderListRequest, v1.MpPaymentOrderListResponse]
 	mpPaymentDelete    *connect.Client[v1.MpPaymentDeleteRequest, v1.MpPaymentDeleteResponse]
+}
+
+// OrderDraftCreate calls order_iface.v1.OrderService.OrderDraftCreate.
+func (c *orderServiceClient) OrderDraftCreate(ctx context.Context, req *connect.Request[v1.OrderDraftCreateRequest]) (*connect.Response[v1.OrderDraftCreateResponse], error) {
+	return c.orderDraftCreate.CallUnary(ctx, req)
+}
+
+// OrderDraftDelete calls order_iface.v1.OrderService.OrderDraftDelete.
+func (c *orderServiceClient) OrderDraftDelete(ctx context.Context, req *connect.Request[v1.OrderDraftDeleteRequest]) (*connect.Response[v1.OrderDraftDeleteResponse], error) {
+	return c.orderDraftDelete.CallUnary(ctx, req)
+}
+
+// OrderDraftList calls order_iface.v1.OrderService.OrderDraftList.
+func (c *orderServiceClient) OrderDraftList(ctx context.Context, req *connect.Request[v1.OrderDraftListRequest]) (*connect.Response[v1.OrderDraftListResponse], error) {
+	return c.orderDraftList.CallUnary(ctx, req)
+}
+
+// OrderDraftGet calls order_iface.v1.OrderService.OrderDraftGet.
+func (c *orderServiceClient) OrderDraftGet(ctx context.Context, req *connect.Request[v1.OrderDraftGetRequest]) (*connect.Response[v1.OrderDraftGetResponse], error) {
+	return c.orderDraftGet.CallUnary(ctx, req)
+}
+
+// OrderCreate calls order_iface.v1.OrderService.OrderCreate.
+func (c *orderServiceClient) OrderCreate(ctx context.Context, req *connect.Request[v1.OrderCreateRequest]) (*connect.Response[v1.OrderCreateResponse], error) {
+	return c.orderCreate.CallUnary(ctx, req)
 }
 
 // OrderFundSet calls order_iface.v1.OrderService.OrderFundSet.
@@ -239,6 +321,13 @@ func (c *orderServiceClient) MpPaymentDelete(ctx context.Context, req *connect.R
 
 // OrderServiceHandler is an implementation of the order_iface.v1.OrderService service.
 type OrderServiceHandler interface {
+	// masalah creating order
+	OrderDraftCreate(context.Context, *connect.Request[v1.OrderDraftCreateRequest]) (*connect.Response[v1.OrderDraftCreateResponse], error)
+	OrderDraftDelete(context.Context, *connect.Request[v1.OrderDraftDeleteRequest]) (*connect.Response[v1.OrderDraftDeleteResponse], error)
+	OrderDraftList(context.Context, *connect.Request[v1.OrderDraftListRequest]) (*connect.Response[v1.OrderDraftListResponse], error)
+	OrderDraftGet(context.Context, *connect.Request[v1.OrderDraftGetRequest]) (*connect.Response[v1.OrderDraftGetResponse], error)
+	OrderCreate(context.Context, *connect.Request[v1.OrderCreateRequest]) (*connect.Response[v1.OrderCreateResponse], error)
+	// bagian accounting
 	OrderFundSet(context.Context, *connect.ClientStream[v1.OrderFundSetRequest]) (*connect.Response[v1.OrderFundSetResponse], error)
 	OrderTagRemove(context.Context, *connect.Request[v1.OrderTagRemoveRequest]) (*connect.Response[v1.OrderTagRemoveResponse], error)
 	OrderTagAdd(context.Context, *connect.Request[v1.OrderTagAddRequest]) (*connect.Response[v1.OrderTagAddResponse], error)
@@ -264,6 +353,36 @@ type OrderServiceHandler interface {
 // and JSON codecs. They also support gzip compression.
 func NewOrderServiceHandler(svc OrderServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
 	orderServiceMethods := v1.File_order_iface_v1_order_proto.Services().ByName("OrderService").Methods()
+	orderServiceOrderDraftCreateHandler := connect.NewUnaryHandler(
+		OrderServiceOrderDraftCreateProcedure,
+		svc.OrderDraftCreate,
+		connect.WithSchema(orderServiceMethods.ByName("OrderDraftCreate")),
+		connect.WithHandlerOptions(opts...),
+	)
+	orderServiceOrderDraftDeleteHandler := connect.NewUnaryHandler(
+		OrderServiceOrderDraftDeleteProcedure,
+		svc.OrderDraftDelete,
+		connect.WithSchema(orderServiceMethods.ByName("OrderDraftDelete")),
+		connect.WithHandlerOptions(opts...),
+	)
+	orderServiceOrderDraftListHandler := connect.NewUnaryHandler(
+		OrderServiceOrderDraftListProcedure,
+		svc.OrderDraftList,
+		connect.WithSchema(orderServiceMethods.ByName("OrderDraftList")),
+		connect.WithHandlerOptions(opts...),
+	)
+	orderServiceOrderDraftGetHandler := connect.NewUnaryHandler(
+		OrderServiceOrderDraftGetProcedure,
+		svc.OrderDraftGet,
+		connect.WithSchema(orderServiceMethods.ByName("OrderDraftGet")),
+		connect.WithHandlerOptions(opts...),
+	)
+	orderServiceOrderCreateHandler := connect.NewUnaryHandler(
+		OrderServiceOrderCreateProcedure,
+		svc.OrderCreate,
+		connect.WithSchema(orderServiceMethods.ByName("OrderCreate")),
+		connect.WithHandlerOptions(opts...),
+	)
 	orderServiceOrderFundSetHandler := connect.NewClientStreamHandler(
 		OrderServiceOrderFundSetProcedure,
 		svc.OrderFundSet,
@@ -332,6 +451,16 @@ func NewOrderServiceHandler(svc OrderServiceHandler, opts ...connect.HandlerOpti
 	)
 	return "/order_iface.v1.OrderService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
+		case OrderServiceOrderDraftCreateProcedure:
+			orderServiceOrderDraftCreateHandler.ServeHTTP(w, r)
+		case OrderServiceOrderDraftDeleteProcedure:
+			orderServiceOrderDraftDeleteHandler.ServeHTTP(w, r)
+		case OrderServiceOrderDraftListProcedure:
+			orderServiceOrderDraftListHandler.ServeHTTP(w, r)
+		case OrderServiceOrderDraftGetProcedure:
+			orderServiceOrderDraftGetHandler.ServeHTTP(w, r)
+		case OrderServiceOrderCreateProcedure:
+			orderServiceOrderCreateHandler.ServeHTTP(w, r)
 		case OrderServiceOrderFundSetProcedure:
 			orderServiceOrderFundSetHandler.ServeHTTP(w, r)
 		case OrderServiceOrderTagRemoveProcedure:
@@ -362,6 +491,26 @@ func NewOrderServiceHandler(svc OrderServiceHandler, opts ...connect.HandlerOpti
 
 // UnimplementedOrderServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedOrderServiceHandler struct{}
+
+func (UnimplementedOrderServiceHandler) OrderDraftCreate(context.Context, *connect.Request[v1.OrderDraftCreateRequest]) (*connect.Response[v1.OrderDraftCreateResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("order_iface.v1.OrderService.OrderDraftCreate is not implemented"))
+}
+
+func (UnimplementedOrderServiceHandler) OrderDraftDelete(context.Context, *connect.Request[v1.OrderDraftDeleteRequest]) (*connect.Response[v1.OrderDraftDeleteResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("order_iface.v1.OrderService.OrderDraftDelete is not implemented"))
+}
+
+func (UnimplementedOrderServiceHandler) OrderDraftList(context.Context, *connect.Request[v1.OrderDraftListRequest]) (*connect.Response[v1.OrderDraftListResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("order_iface.v1.OrderService.OrderDraftList is not implemented"))
+}
+
+func (UnimplementedOrderServiceHandler) OrderDraftGet(context.Context, *connect.Request[v1.OrderDraftGetRequest]) (*connect.Response[v1.OrderDraftGetResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("order_iface.v1.OrderService.OrderDraftGet is not implemented"))
+}
+
+func (UnimplementedOrderServiceHandler) OrderCreate(context.Context, *connect.Request[v1.OrderCreateRequest]) (*connect.Response[v1.OrderCreateResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("order_iface.v1.OrderService.OrderCreate is not implemented"))
+}
 
 func (UnimplementedOrderServiceHandler) OrderFundSet(context.Context, *connect.ClientStream[v1.OrderFundSetRequest]) (*connect.Response[v1.OrderFundSetResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("order_iface.v1.OrderService.OrderFundSet is not implemented"))

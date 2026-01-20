@@ -5,10 +5,20 @@ package order_iface.v1;
 import "buf/validate/validate.proto";
 import "common/v1/common.proto";
 import "google/protobuf/timestamp.proto";
+import "order_iface/v1/create.proto";
+import "order_iface/v1/draft.proto";
 
 option go_package = "github.com/pdcgo/schema/services/order_iface/v1;order_iface";
 
 service OrderService {
+  // masalah creating order
+  rpc OrderDraftCreate(OrderDraftCreateRequest) returns (OrderDraftCreateResponse);
+  rpc OrderDraftDelete(OrderDraftDeleteRequest) returns (OrderDraftDeleteResponse);
+  rpc OrderDraftList(OrderDraftListRequest) returns (OrderDraftListResponse);
+  rpc OrderDraftGet(OrderDraftGetRequest) returns (OrderDraftGetResponse);
+  rpc OrderCreate(OrderCreateRequest) returns (OrderCreateResponse);
+
+  // bagian accounting
   rpc OrderFundSet(stream OrderFundSetRequest) returns (OrderFundSetResponse);
   rpc OrderTagRemove(OrderTagRemoveRequest) returns (OrderTagRemoveResponse);
   rpc OrderTagAdd(OrderTagAddRequest) returns (OrderTagAddResponse);

@@ -46,6 +46,136 @@ func (m *MockOrderServiceClient) EXPECT() *MockOrderServiceClientMockRecorder {
     return m.recorder
 }
 
+func (m *MockOrderService) OrderDraftCreate(ctx context.Context, req *connect.Request[v1.OrderDraftCreateRequest]) (*connect.Response[v1.OrderDraftCreateResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "OrderDraftCreate", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.OrderDraftCreateResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockOrderServiceMockRecorder) OrderDraftCreate(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OrderDraftCreate", reflect.TypeOf((*MockOrderService)(nil).OrderDraftCreate), ctx, req)
+}
+
+func (m *MockOrderServiceClient) OrderDraftCreate(ctx context.Context, req *connect.Request[v1.OrderDraftCreateRequest]) (*connect.Response[v1.OrderDraftCreateResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "OrderDraftCreate", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.OrderDraftCreateResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockOrderServiceClientMockRecorder) OrderDraftCreate(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OrderDraftCreate", reflect.TypeOf((*MockOrderService)(nil).OrderDraftCreate), ctx, req)
+}
+
+func (m *MockOrderService) OrderDraftDelete(ctx context.Context, req *connect.Request[v1.OrderDraftDeleteRequest]) (*connect.Response[v1.OrderDraftDeleteResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "OrderDraftDelete", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.OrderDraftDeleteResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockOrderServiceMockRecorder) OrderDraftDelete(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OrderDraftDelete", reflect.TypeOf((*MockOrderService)(nil).OrderDraftDelete), ctx, req)
+}
+
+func (m *MockOrderServiceClient) OrderDraftDelete(ctx context.Context, req *connect.Request[v1.OrderDraftDeleteRequest]) (*connect.Response[v1.OrderDraftDeleteResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "OrderDraftDelete", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.OrderDraftDeleteResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockOrderServiceClientMockRecorder) OrderDraftDelete(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OrderDraftDelete", reflect.TypeOf((*MockOrderService)(nil).OrderDraftDelete), ctx, req)
+}
+
+func (m *MockOrderService) OrderDraftList(ctx context.Context, req *connect.Request[v1.OrderDraftListRequest]) (*connect.Response[v1.OrderDraftListResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "OrderDraftList", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.OrderDraftListResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockOrderServiceMockRecorder) OrderDraftList(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OrderDraftList", reflect.TypeOf((*MockOrderService)(nil).OrderDraftList), ctx, req)
+}
+
+func (m *MockOrderServiceClient) OrderDraftList(ctx context.Context, req *connect.Request[v1.OrderDraftListRequest]) (*connect.Response[v1.OrderDraftListResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "OrderDraftList", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.OrderDraftListResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockOrderServiceClientMockRecorder) OrderDraftList(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OrderDraftList", reflect.TypeOf((*MockOrderService)(nil).OrderDraftList), ctx, req)
+}
+
+func (m *MockOrderService) OrderDraftGet(ctx context.Context, req *connect.Request[v1.OrderDraftGetRequest]) (*connect.Response[v1.OrderDraftGetResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "OrderDraftGet", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.OrderDraftGetResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockOrderServiceMockRecorder) OrderDraftGet(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OrderDraftGet", reflect.TypeOf((*MockOrderService)(nil).OrderDraftGet), ctx, req)
+}
+
+func (m *MockOrderServiceClient) OrderDraftGet(ctx context.Context, req *connect.Request[v1.OrderDraftGetRequest]) (*connect.Response[v1.OrderDraftGetResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "OrderDraftGet", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.OrderDraftGetResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockOrderServiceClientMockRecorder) OrderDraftGet(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OrderDraftGet", reflect.TypeOf((*MockOrderService)(nil).OrderDraftGet), ctx, req)
+}
+
+func (m *MockOrderService) OrderCreate(ctx context.Context, req *connect.Request[v1.OrderCreateRequest]) (*connect.Response[v1.OrderCreateResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "OrderCreate", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.OrderCreateResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockOrderServiceMockRecorder) OrderCreate(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OrderCreate", reflect.TypeOf((*MockOrderService)(nil).OrderCreate), ctx, req)
+}
+
+func (m *MockOrderServiceClient) OrderCreate(ctx context.Context, req *connect.Request[v1.OrderCreateRequest]) (*connect.Response[v1.OrderCreateResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "OrderCreate", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.OrderCreateResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockOrderServiceClientMockRecorder) OrderCreate(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OrderCreate", reflect.TypeOf((*MockOrderService)(nil).OrderCreate), ctx, req)
+}
+
 func (m *MockOrderService) OrderFundSet(ctx context.Context, stream *connect.ClientStream[v1.OrderFundSetRequest]) (*connect.Response[v1.OrderFundSetResponse], error) {
     m.ctrl.T.Helper()
     ret := m.ctrl.Call(m, "OrderFundSet", ctx, stream)

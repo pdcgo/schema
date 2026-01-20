@@ -1,0 +1,91 @@
+syntax = "proto3";
+package order_iface.v1;
+
+// import "accounting_iface/v1/core.proto";
+import "buf/validate/validate.proto";
+import "common/v1/common.proto";
+import "google/protobuf/timestamp.proto";
+import "order_iface/v1/create.proto";
+
+option go_package = "github.com/pdcgo/schema/services/order_iface/v1;order_iface";
+
+message DraftOrderData {
+  string order_ref_id = 1 [(buf.validate.field).string.min_len = 1];
+  uint64 order_mp_id = 2 [(buf.validate.field).uint64.gt = 0];
+  common.v1.MarketplaceType order_from = 3;
+  google.protobuf.Timestamp order_time = 4;
+  int64 order_total = 5;
+  uint64 warehouse_id = 6;
+  uint64 team_id = 7 [(buf.validate.field).uint64.gt = 0];
+  uint64 shipping_id = 8;
+  double shipment_fee = 9;
+  ShipmentPaymentType shipment_payment_type = 10;
+  string receipt = 11;
+  string receipt_file = 12;
+  OrderAddress address = 13;
+  repeated OrderItem items = 14;
+  repeated uint64 bundle_ids = 15;
+  uint64 draft_id = 16;
+  google.protobuf.Timestamp order_deadline = 17;
+  string buyer_username = 18;
+}
+
+message MpProductItem {
+  string name = 1 [(buf.validate.field).string.min_len = 1];
+  int64 count = 2 [(buf.validate.field).int64.gt = 0];
+}
+
+message OrderDraftCreateRequest {
+  DraftOrderData payload = 1 [(buf.validate.field).required = true];
+  repeated MpProductItem mp_products = 2;
+}
+message OrderDraftCreateResponse {
+  uint64 id = 1;
+}
+
+message OrderDraftDeleteRequest {
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 draft_id = 2 [(buf.validate.field).uint64.gt = 0];
+}
+message OrderDraftDeleteResponse {}
+
+enum DraftSearchType {
+  DRAFT_SEARCH_TYPE_UNSPECIFIED = 0;
+  DRAFT_SEARCH_TYPE_RECEIPT = 1;
+  DRAFT_SEARCH_TYPE_ORDER_REFID = 2;
+}
+
+message OrderDraftListSearch {
+  DraftSearchType search_type = 1;
+  string q = 2;
+}
+
+message OrderDraftListRequest {
+  uint64 team_id = 1;
+  uint64 user_id = 2;
+  common.v1.TimeFilterRange time_range = 3 [(buf.validate.field).required = true];
+  common.v1.PageFilter page = 4 [(buf.validate.field).required = true];
+  uint64 shop_id = 5;
+  common.v1.MarketplaceType marketplace = 6;
+  OrderDraftListSearch search = 7;
+}
+
+message DraftItem {
+  uint64 id = 1;
+  uint64 team_id = 2;
+  DraftOrderData payload = 3;
+  repeated MpProductItem mp_products = 4;
+}
+
+message OrderDraftListResponse {
+  common.v1.PageInfo page_info = 1;
+  repeated DraftItem items = 2;
+}
+
+message OrderDraftGetRequest {
+  uint64 id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 team_id = 2 [(buf.validate.field).uint64.gt = 0];
+}
+message OrderDraftGetResponse {
+  DraftItem data = 1;
+}

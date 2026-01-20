@@ -1,0 +1,86 @@
+syntax = "proto3";
+package order_iface.v1;
+
+// import "accounting_iface/v1/core.proto";
+import "buf/validate/validate.proto";
+import "common/v1/common.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/pdcgo/schema/services/order_iface/v1;order_iface";
+
+// enum OrderFrom {
+//   ORDER_FROM_UNSPECIFIED = 0;
+//   ORDER_FROM_MP = 1;
+// }
+
+enum ShipmentPaymentType {
+  SHIPMENT_PAYMENT_TYPE_UNSPECIFIED = 0;
+  SHIPMENT_PAYMENT_TYPE_WAREHOUSE = 1;
+  SHIPMENT_PAYMENT_TYPE_BUYER = 2;
+}
+
+message OrderAddress {
+  string name = 1 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 128
+  }];
+  string phone = 2 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 20
+  }];
+  string province = 3 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 100
+  }];
+  string city = 4 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 100
+  }];
+  string district = 5 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 100
+  }];
+  string postal_code = 6 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 10
+  }];
+  string address = 7 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 300
+  }];
+}
+
+message OrderItem {
+  uint64 product_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 variation_id = 2 [(buf.validate.field).uint64.gt = 0];
+  int64 count = 3 [(buf.validate.field).int64.gt = 0];
+}
+
+message OrderCreateRequest {
+  string order_ref_id = 1 [(buf.validate.field).string.min_len = 1];
+  uint64 order_mp_id = 2 [(buf.validate.field).uint64.gt = 0];
+  common.v1.MarketplaceType order_from = 3;
+  google.protobuf.Timestamp order_time = 4 [(buf.validate.field).required = true];
+  int64 order_total = 5 [(buf.validate.field).int64.gt = 0];
+  uint64 warehouse_id = 6 [(buf.validate.field).uint64.gt = 0];
+  uint64 team_id = 7 [(buf.validate.field).uint64.gt = 0];
+  uint64 shipping_id = 8 [(buf.validate.field).uint64.gt = 0];
+  double shipment_fee = 9;
+  ShipmentPaymentType shipment_payment_type = 10;
+  string receipt = 11 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 100
+  }];
+  string receipt_file = 12 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 100
+  }];
+  OrderAddress address = 13 [(buf.validate.field).required = true];
+  repeated OrderItem items = 14 [(buf.validate.field).required = true];
+  repeated uint64 bundle_ids = 15;
+  uint64 draft_id = 16;
+  google.protobuf.Timestamp order_deadline = 17;
+  string buyer_username = 18;
+}
+
+message OrderCreateResponse {}
