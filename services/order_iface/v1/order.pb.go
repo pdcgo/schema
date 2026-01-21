@@ -2271,7 +2271,7 @@ var File_order_iface_v1_order_proto protoreflect.FileDescriptor
 
 const file_order_iface_v1_order_proto_rawDesc = "" +
 	"\n" +
-	"\x1aorder_iface/v1/order.proto\x12\x0eorder_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1border_iface/v1/create.proto\x1a\x1aorder_iface/v1/draft.proto\"\x96\x01\n" +
+	"\x1aorder_iface/v1/order.proto\x12\x0eorder_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1border_iface/v1/create.proto\x1a\x1aorder_iface/v1/draft.proto\x1a!order_iface/v1/order_return.proto\"\x96\x01\n" +
 	"\x17ChangeEstRevenueRequest\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12\"\n" +
 	"\border_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\aorderId\x125\n" +
@@ -2441,7 +2441,7 @@ const file_order_iface_v1_order_proto_rawDesc = "" +
 	"\x0fMpPaymentSource\x12!\n" +
 	"\x1dMP_PAYMENT_SOURCE_UNSPECIFIED\x10\x00\x12\x1c\n" +
 	"\x18MP_PAYMENT_SOURCE_MANUAL\x10\x01\x12\x1e\n" +
-	"\x1aMP_PAYMENT_SOURCE_IMPORTER\x10\x022\x9f\f\n" +
+	"\x1aMP_PAYMENT_SOURCE_IMPORTER\x10\x022\x8c\r\n" +
 	"\fOrderService\x12e\n" +
 	"\x10OrderDraftCreate\x12'.order_iface.v1.OrderDraftCreateRequest\x1a(.order_iface.v1.OrderDraftCreateResponse\x12e\n" +
 	"\x10OrderDraftDelete\x12'.order_iface.v1.OrderDraftDeleteRequest\x1a(.order_iface.v1.OrderDraftDeleteResponse\x12_\n" +
@@ -2453,7 +2453,8 @@ const file_order_iface_v1_order_proto_rawDesc = "" +
 	"\vOrderTagAdd\x12\".order_iface.v1.OrderTagAddRequest\x1a#.order_iface.v1.OrderTagAddResponse\x12e\n" +
 	"\x10ChangeOrderRefID\x12'.order_iface.v1.ChangeOrderRefIDRequest\x1a(.order_iface.v1.ChangeOrderRefIDResponse\x12e\n" +
 	"\x10ChangeEstRevenue\x12'.order_iface.v1.ChangeEstRevenueRequest\x1a(.order_iface.v1.ChangeEstRevenueResponse\x12_\n" +
-	"\x0eOrderCompleted\x12%.order_iface.v1.OrderCompletedRequest\x1a&.order_iface.v1.OrderCompletedResponse\x12R\n" +
+	"\x0eOrderCompleted\x12%.order_iface.v1.OrderCompletedRequest\x1a&.order_iface.v1.OrderCompletedResponse\x12k\n" +
+	"\x12OrderReturnArrived\x12).order_iface.v1.OrderReturnArrivedRequest\x1a*.order_iface.v1.OrderReturnArrivedResponse\x12R\n" +
 	"\tOrderList\x12 .order_iface.v1.OrderListRequest\x1a!.order_iface.v1.OrderListResponse0\x01\x12\\\n" +
 	"\rOrderOverview\x12$.order_iface.v1.OrderOverviewRequest\x1a%.order_iface.v1.OrderOverviewResponse\x12b\n" +
 	"\x0fMpPaymentCreate\x12&.order_iface.v1.MpPaymentCreateRequest\x1a'.order_iface.v1.MpPaymentCreateResponse\x12k\n" +
@@ -2525,11 +2526,13 @@ var file_order_iface_v1_order_proto_goTypes = []any{
 	(*OrderDraftListRequest)(nil),      // 45: order_iface.v1.OrderDraftListRequest
 	(*OrderDraftGetRequest)(nil),       // 46: order_iface.v1.OrderDraftGetRequest
 	(*OrderCreateRequest)(nil),         // 47: order_iface.v1.OrderCreateRequest
-	(*OrderDraftCreateResponse)(nil),   // 48: order_iface.v1.OrderDraftCreateResponse
-	(*OrderDraftDeleteResponse)(nil),   // 49: order_iface.v1.OrderDraftDeleteResponse
-	(*OrderDraftListResponse)(nil),     // 50: order_iface.v1.OrderDraftListResponse
-	(*OrderDraftGetResponse)(nil),      // 51: order_iface.v1.OrderDraftGetResponse
-	(*OrderCreateResponse)(nil),        // 52: order_iface.v1.OrderCreateResponse
+	(*OrderReturnArrivedRequest)(nil),  // 48: order_iface.v1.OrderReturnArrivedRequest
+	(*OrderDraftCreateResponse)(nil),   // 49: order_iface.v1.OrderDraftCreateResponse
+	(*OrderDraftDeleteResponse)(nil),   // 50: order_iface.v1.OrderDraftDeleteResponse
+	(*OrderDraftListResponse)(nil),     // 51: order_iface.v1.OrderDraftListResponse
+	(*OrderDraftGetResponse)(nil),      // 52: order_iface.v1.OrderDraftGetResponse
+	(*OrderCreateResponse)(nil),        // 53: order_iface.v1.OrderCreateResponse
+	(*OrderReturnArrivedResponse)(nil), // 54: order_iface.v1.OrderReturnArrivedResponse
 }
 var file_order_iface_v1_order_proto_depIdxs = []int32{
 	38, // 0: order_iface.v1.MpPaymentCreateRequest.at:type_name -> google.protobuf.Timestamp
@@ -2571,29 +2574,31 @@ var file_order_iface_v1_order_proto_depIdxs = []int32{
 	11, // 36: order_iface.v1.OrderService.ChangeOrderRefID:input_type -> order_iface.v1.ChangeOrderRefIDRequest
 	7,  // 37: order_iface.v1.OrderService.ChangeEstRevenue:input_type -> order_iface.v1.ChangeEstRevenueRequest
 	9,  // 38: order_iface.v1.OrderService.OrderCompleted:input_type -> order_iface.v1.OrderCompletedRequest
-	26, // 39: order_iface.v1.OrderService.OrderList:input_type -> order_iface.v1.OrderListRequest
-	24, // 40: order_iface.v1.OrderService.OrderOverview:input_type -> order_iface.v1.OrderOverviewRequest
-	13, // 41: order_iface.v1.OrderService.MpPaymentCreate:input_type -> order_iface.v1.MpPaymentCreateRequest
-	15, // 42: order_iface.v1.OrderService.MpPaymentOrderList:input_type -> order_iface.v1.MpPaymentOrderListRequest
-	18, // 43: order_iface.v1.OrderService.MpPaymentDelete:input_type -> order_iface.v1.MpPaymentDeleteRequest
-	48, // 44: order_iface.v1.OrderService.OrderDraftCreate:output_type -> order_iface.v1.OrderDraftCreateResponse
-	49, // 45: order_iface.v1.OrderService.OrderDraftDelete:output_type -> order_iface.v1.OrderDraftDeleteResponse
-	50, // 46: order_iface.v1.OrderService.OrderDraftList:output_type -> order_iface.v1.OrderDraftListResponse
-	51, // 47: order_iface.v1.OrderService.OrderDraftGet:output_type -> order_iface.v1.OrderDraftGetResponse
-	52, // 48: order_iface.v1.OrderService.OrderCreate:output_type -> order_iface.v1.OrderCreateResponse
-	37, // 49: order_iface.v1.OrderService.OrderFundSet:output_type -> order_iface.v1.OrderFundSetResponse
-	32, // 50: order_iface.v1.OrderService.OrderTagRemove:output_type -> order_iface.v1.OrderTagRemoveResponse
-	30, // 51: order_iface.v1.OrderService.OrderTagAdd:output_type -> order_iface.v1.OrderTagAddResponse
-	12, // 52: order_iface.v1.OrderService.ChangeOrderRefID:output_type -> order_iface.v1.ChangeOrderRefIDResponse
-	8,  // 53: order_iface.v1.OrderService.ChangeEstRevenue:output_type -> order_iface.v1.ChangeEstRevenueResponse
-	10, // 54: order_iface.v1.OrderService.OrderCompleted:output_type -> order_iface.v1.OrderCompletedResponse
-	27, // 55: order_iface.v1.OrderService.OrderList:output_type -> order_iface.v1.OrderListResponse
-	25, // 56: order_iface.v1.OrderService.OrderOverview:output_type -> order_iface.v1.OrderOverviewResponse
-	14, // 57: order_iface.v1.OrderService.MpPaymentCreate:output_type -> order_iface.v1.MpPaymentCreateResponse
-	17, // 58: order_iface.v1.OrderService.MpPaymentOrderList:output_type -> order_iface.v1.MpPaymentOrderListResponse
-	19, // 59: order_iface.v1.OrderService.MpPaymentDelete:output_type -> order_iface.v1.MpPaymentDeleteResponse
-	44, // [44:60] is the sub-list for method output_type
-	28, // [28:44] is the sub-list for method input_type
+	48, // 39: order_iface.v1.OrderService.OrderReturnArrived:input_type -> order_iface.v1.OrderReturnArrivedRequest
+	26, // 40: order_iface.v1.OrderService.OrderList:input_type -> order_iface.v1.OrderListRequest
+	24, // 41: order_iface.v1.OrderService.OrderOverview:input_type -> order_iface.v1.OrderOverviewRequest
+	13, // 42: order_iface.v1.OrderService.MpPaymentCreate:input_type -> order_iface.v1.MpPaymentCreateRequest
+	15, // 43: order_iface.v1.OrderService.MpPaymentOrderList:input_type -> order_iface.v1.MpPaymentOrderListRequest
+	18, // 44: order_iface.v1.OrderService.MpPaymentDelete:input_type -> order_iface.v1.MpPaymentDeleteRequest
+	49, // 45: order_iface.v1.OrderService.OrderDraftCreate:output_type -> order_iface.v1.OrderDraftCreateResponse
+	50, // 46: order_iface.v1.OrderService.OrderDraftDelete:output_type -> order_iface.v1.OrderDraftDeleteResponse
+	51, // 47: order_iface.v1.OrderService.OrderDraftList:output_type -> order_iface.v1.OrderDraftListResponse
+	52, // 48: order_iface.v1.OrderService.OrderDraftGet:output_type -> order_iface.v1.OrderDraftGetResponse
+	53, // 49: order_iface.v1.OrderService.OrderCreate:output_type -> order_iface.v1.OrderCreateResponse
+	37, // 50: order_iface.v1.OrderService.OrderFundSet:output_type -> order_iface.v1.OrderFundSetResponse
+	32, // 51: order_iface.v1.OrderService.OrderTagRemove:output_type -> order_iface.v1.OrderTagRemoveResponse
+	30, // 52: order_iface.v1.OrderService.OrderTagAdd:output_type -> order_iface.v1.OrderTagAddResponse
+	12, // 53: order_iface.v1.OrderService.ChangeOrderRefID:output_type -> order_iface.v1.ChangeOrderRefIDResponse
+	8,  // 54: order_iface.v1.OrderService.ChangeEstRevenue:output_type -> order_iface.v1.ChangeEstRevenueResponse
+	10, // 55: order_iface.v1.OrderService.OrderCompleted:output_type -> order_iface.v1.OrderCompletedResponse
+	54, // 56: order_iface.v1.OrderService.OrderReturnArrived:output_type -> order_iface.v1.OrderReturnArrivedResponse
+	27, // 57: order_iface.v1.OrderService.OrderList:output_type -> order_iface.v1.OrderListResponse
+	25, // 58: order_iface.v1.OrderService.OrderOverview:output_type -> order_iface.v1.OrderOverviewResponse
+	14, // 59: order_iface.v1.OrderService.MpPaymentCreate:output_type -> order_iface.v1.MpPaymentCreateResponse
+	17, // 60: order_iface.v1.OrderService.MpPaymentOrderList:output_type -> order_iface.v1.MpPaymentOrderListResponse
+	19, // 61: order_iface.v1.OrderService.MpPaymentDelete:output_type -> order_iface.v1.MpPaymentDeleteResponse
+	45, // [45:62] is the sub-list for method output_type
+	28, // [28:45] is the sub-list for method input_type
 	28, // [28:28] is the sub-list for extension type_name
 	28, // [28:28] is the sub-list for extension extendee
 	0,  // [0:28] is the sub-list for field type_name
@@ -2606,6 +2611,7 @@ func file_order_iface_v1_order_proto_init() {
 	}
 	file_order_iface_v1_create_proto_init()
 	file_order_iface_v1_draft_proto_init()
+	file_order_iface_v1_order_return_proto_init()
 	file_order_iface_v1_order_proto_msgTypes[26].OneofWrappers = []any{
 		(*OrderFundSet_OrderId)(nil),
 		(*OrderFundSet_OrderRefId)(nil),

@@ -1,0 +1,16 @@
+syntax = "proto3";
+package order_iface.v1;
+
+// import "accounting_iface/v1/core.proto";
+import "buf/validate/validate.proto";
+// import "common/v1/common.proto";
+// import "google/protobuf/timestamp.proto";
+// import "order_iface/v1/create.proto";
+// import "order_iface/v1/draft.proto";
+
+option go_package = "github.com/pdcgo/schema/services/order_iface/v1;order_iface";
+
+message OrderReturnArrivedRequest {
+  uint64 tx_id = 1 [(buf.validate.field).uint64.gt = 0];
+}
+message OrderReturnArrivedResponse {}

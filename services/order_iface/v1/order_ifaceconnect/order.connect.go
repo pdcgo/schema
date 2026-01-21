@@ -66,6 +66,9 @@ const (
 	// OrderServiceOrderCompletedProcedure is the fully-qualified name of the OrderService's
 	// OrderCompleted RPC.
 	OrderServiceOrderCompletedProcedure = "/order_iface.v1.OrderService/OrderCompleted"
+	// OrderServiceOrderReturnArrivedProcedure is the fully-qualified name of the OrderService's
+	// OrderReturnArrived RPC.
+	OrderServiceOrderReturnArrivedProcedure = "/order_iface.v1.OrderService/OrderReturnArrived"
 	// OrderServiceOrderListProcedure is the fully-qualified name of the OrderService's OrderList RPC.
 	OrderServiceOrderListProcedure = "/order_iface.v1.OrderService/OrderList"
 	// OrderServiceOrderOverviewProcedure is the fully-qualified name of the OrderService's
@@ -98,6 +101,8 @@ type OrderServiceClient interface {
 	ChangeOrderRefID(context.Context, *connect.Request[v1.ChangeOrderRefIDRequest]) (*connect.Response[v1.ChangeOrderRefIDResponse], error)
 	ChangeEstRevenue(context.Context, *connect.Request[v1.ChangeEstRevenueRequest]) (*connect.Response[v1.ChangeEstRevenueResponse], error)
 	OrderCompleted(context.Context, *connect.Request[v1.OrderCompletedRequest]) (*connect.Response[v1.OrderCompletedResponse], error)
+	// bagian return
+	OrderReturnArrived(context.Context, *connect.Request[v1.OrderReturnArrivedRequest]) (*connect.Response[v1.OrderReturnArrivedResponse], error)
 	// bagian view
 	OrderList(context.Context, *connect.Request[v1.OrderListRequest]) (*connect.ServerStreamForClient[v1.OrderListResponse], error)
 	// bagian overview
@@ -186,6 +191,12 @@ func NewOrderServiceClient(httpClient connect.HTTPClient, baseURL string, opts .
 			connect.WithSchema(orderServiceMethods.ByName("OrderCompleted")),
 			connect.WithClientOptions(opts...),
 		),
+		orderReturnArrived: connect.NewClient[v1.OrderReturnArrivedRequest, v1.OrderReturnArrivedResponse](
+			httpClient,
+			baseURL+OrderServiceOrderReturnArrivedProcedure,
+			connect.WithSchema(orderServiceMethods.ByName("OrderReturnArrived")),
+			connect.WithClientOptions(opts...),
+		),
 		orderList: connect.NewClient[v1.OrderListRequest, v1.OrderListResponse](
 			httpClient,
 			baseURL+OrderServiceOrderListProcedure,
@@ -232,6 +243,7 @@ type orderServiceClient struct {
 	changeOrderRefID   *connect.Client[v1.ChangeOrderRefIDRequest, v1.ChangeOrderRefIDResponse]
 	changeEstRevenue   *connect.Client[v1.ChangeEstRevenueRequest, v1.ChangeEstRevenueResponse]
 	orderCompleted     *connect.Client[v1.OrderCompletedRequest, v1.OrderCompletedResponse]
+	orderReturnArrived *connect.Client[v1.OrderReturnArrivedRequest, v1.OrderReturnArrivedResponse]
 	orderList          *connect.Client[v1.OrderListRequest, v1.OrderListResponse]
 	orderOverview      *connect.Client[v1.OrderOverviewRequest, v1.OrderOverviewResponse]
 	mpPaymentCreate    *connect.Client[v1.MpPaymentCreateRequest, v1.MpPaymentCreateResponse]
@@ -294,6 +306,11 @@ func (c *orderServiceClient) OrderCompleted(ctx context.Context, req *connect.Re
 	return c.orderCompleted.CallUnary(ctx, req)
 }
 
+// OrderReturnArrived calls order_iface.v1.OrderService.OrderReturnArrived.
+func (c *orderServiceClient) OrderReturnArrived(ctx context.Context, req *connect.Request[v1.OrderReturnArrivedRequest]) (*connect.Response[v1.OrderReturnArrivedResponse], error) {
+	return c.orderReturnArrived.CallUnary(ctx, req)
+}
+
 // OrderList calls order_iface.v1.OrderService.OrderList.
 func (c *orderServiceClient) OrderList(ctx context.Context, req *connect.Request[v1.OrderListRequest]) (*connect.ServerStreamForClient[v1.OrderListResponse], error) {
 	return c.orderList.CallServerStream(ctx, req)
@@ -335,6 +352,8 @@ type OrderServiceHandler interface {
 	ChangeOrderRefID(context.Context, *connect.Request[v1.ChangeOrderRefIDRequest]) (*connect.Response[v1.ChangeOrderRefIDResponse], error)
 	ChangeEstRevenue(context.Context, *connect.Request[v1.ChangeEstRevenueRequest]) (*connect.Response[v1.ChangeEstRevenueResponse], error)
 	OrderCompleted(context.Context, *connect.Request[v1.OrderCompletedRequest]) (*connect.Response[v1.OrderCompletedResponse], error)
+	// bagian return
+	OrderReturnArrived(context.Context, *connect.Request[v1.OrderReturnArrivedRequest]) (*connect.Response[v1.OrderReturnArrivedResponse], error)
 	// bagian view
 	OrderList(context.Context, *connect.Request[v1.OrderListRequest], *connect.ServerStream[v1.OrderListResponse]) error
 	// bagian overview
@@ -419,6 +438,12 @@ func NewOrderServiceHandler(svc OrderServiceHandler, opts ...connect.HandlerOpti
 		connect.WithSchema(orderServiceMethods.ByName("OrderCompleted")),
 		connect.WithHandlerOptions(opts...),
 	)
+	orderServiceOrderReturnArrivedHandler := connect.NewUnaryHandler(
+		OrderServiceOrderReturnArrivedProcedure,
+		svc.OrderReturnArrived,
+		connect.WithSchema(orderServiceMethods.ByName("OrderReturnArrived")),
+		connect.WithHandlerOptions(opts...),
+	)
 	orderServiceOrderListHandler := connect.NewServerStreamHandler(
 		OrderServiceOrderListProcedure,
 		svc.OrderList,
@@ -473,6 +498,8 @@ func NewOrderServiceHandler(svc OrderServiceHandler, opts ...connect.HandlerOpti
 			orderServiceChangeEstRevenueHandler.ServeHTTP(w, r)
 		case OrderServiceOrderCompletedProcedure:
 			orderServiceOrderCompletedHandler.ServeHTTP(w, r)
+		case OrderServiceOrderReturnArrivedProcedure:
+			orderServiceOrderReturnArrivedHandler.ServeHTTP(w, r)
 		case OrderServiceOrderListProcedure:
 			orderServiceOrderListHandler.ServeHTTP(w, r)
 		case OrderServiceOrderOverviewProcedure:
@@ -534,6 +561,10 @@ func (UnimplementedOrderServiceHandler) ChangeEstRevenue(context.Context, *conne
 
 func (UnimplementedOrderServiceHandler) OrderCompleted(context.Context, *connect.Request[v1.OrderCompletedRequest]) (*connect.Response[v1.OrderCompletedResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("order_iface.v1.OrderService.OrderCompleted is not implemented"))
+}
+
+func (UnimplementedOrderServiceHandler) OrderReturnArrived(context.Context, *connect.Request[v1.OrderReturnArrivedRequest]) (*connect.Response[v1.OrderReturnArrivedResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("order_iface.v1.OrderService.OrderReturnArrived is not implemented"))
 }
 
 func (UnimplementedOrderServiceHandler) OrderList(context.Context, *connect.Request[v1.OrderListRequest], *connect.ServerStream[v1.OrderListResponse]) error {

@@ -35,6 +35,7 @@ const (
 	ReceivableAdjustmentType_RECEIVABLE_ADJUSTMENT_TYPE_OTHER_COST      ReceivableAdjustmentType = 4
 	ReceivableAdjustmentType_RECEIVABLE_ADJUSTMENT_TYPE_OTHER_REVENUE   ReceivableAdjustmentType = 5
 	ReceivableAdjustmentType_RECEIVABLE_ADJUSTMENT_TYPE_CREATED_REVENUE ReceivableAdjustmentType = 6
+	ReceivableAdjustmentType_RECEIVABLE_ADJUSTMENT_TYPE_CANCEL_RECEIVE  ReceivableAdjustmentType = 7 // gegara return diterima / cancel
 )
 
 // Enum value maps for ReceivableAdjustmentType.
@@ -47,6 +48,7 @@ var (
 		4: "RECEIVABLE_ADJUSTMENT_TYPE_OTHER_COST",
 		5: "RECEIVABLE_ADJUSTMENT_TYPE_OTHER_REVENUE",
 		6: "RECEIVABLE_ADJUSTMENT_TYPE_CREATED_REVENUE",
+		7: "RECEIVABLE_ADJUSTMENT_TYPE_CANCEL_RECEIVE",
 	}
 	ReceivableAdjustmentType_value = map[string]int32{
 		"RECEIVABLE_ADJUSTMENT_TYPE_UNSPECIFIED":     0,
@@ -56,6 +58,7 @@ var (
 		"RECEIVABLE_ADJUSTMENT_TYPE_OTHER_COST":      4,
 		"RECEIVABLE_ADJUSTMENT_TYPE_OTHER_REVENUE":   5,
 		"RECEIVABLE_ADJUSTMENT_TYPE_CREATED_REVENUE": 6,
+		"RECEIVABLE_ADJUSTMENT_TYPE_CANCEL_RECEIVE":  7,
 	}
 )
 
@@ -2919,7 +2922,7 @@ const file_revenue_iface_v1_revenue_proto_rawDesc = "" +
 	"\"warehouse_required_when_not_custom\x127warehouse_id is required when is_custom_order is false.\x1a-this.is_custom_order || this.warehouse_id > 0\x1a\x88\x01\n" +
 	"\x1eorder_amount_greater_than_zero\x127order_amount is required when is_custom_order is false.\x1a-this.is_custom_order || this.order_amount > 0B\x14\n" +
 	"\x12additional_payment\"\x11\n" +
-	"\x0fOnOrderResponse*\xd2\x02\n" +
+	"\x0fOnOrderResponse*\x81\x03\n" +
 	"\x18ReceivableAdjustmentType\x12*\n" +
 	"&RECEIVABLE_ADJUSTMENT_TYPE_UNSPECIFIED\x10\x00\x12*\n" +
 	"&RECEIVABLE_ADJUSTMENT_TYPE_RETURN_COST\x10\x01\x12)\n" +
@@ -2927,7 +2930,8 @@ const file_revenue_iface_v1_revenue_proto_rawDesc = "" +
 	"&RECEIVABLE_ADJUSTMENT_TYPE_REFUND_LOST\x10\x03\x12)\n" +
 	"%RECEIVABLE_ADJUSTMENT_TYPE_OTHER_COST\x10\x04\x12,\n" +
 	"(RECEIVABLE_ADJUSTMENT_TYPE_OTHER_REVENUE\x10\x05\x12.\n" +
-	"*RECEIVABLE_ADJUSTMENT_TYPE_CREATED_REVENUE\x10\x06*d\n" +
+	"*RECEIVABLE_ADJUSTMENT_TYPE_CREATED_REVENUE\x10\x06\x12-\n" +
+	")RECEIVABLE_ADJUSTMENT_TYPE_CANCEL_RECEIVE\x10\a*d\n" +
 	"\x15RevenueAdjustmentType\x12'\n" +
 	"#REVENUE_ADJUSTMENT_TYPE_UNSPECIFIED\x10\x00\x12\"\n" +
 	"\x1eREVENUE_ADJUSTMENT_TYPE_RETURN\x10\x01*B\n" +

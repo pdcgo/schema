@@ -58,6 +58,7 @@ enum ReceivableAdjustmentType {
   RECEIVABLE_ADJUSTMENT_TYPE_OTHER_COST = 4;
   RECEIVABLE_ADJUSTMENT_TYPE_OTHER_REVENUE = 5;
   RECEIVABLE_ADJUSTMENT_TYPE_CREATED_REVENUE = 6;
+  RECEIVABLE_ADJUSTMENT_TYPE_CANCEL_RECEIVE = 7; // gegara return diterima / cancel
 }
 
 message SellingExpenseOtherRequest {

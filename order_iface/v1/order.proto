@@ -7,6 +7,7 @@ import "common/v1/common.proto";
 import "google/protobuf/timestamp.proto";
 import "order_iface/v1/create.proto";
 import "order_iface/v1/draft.proto";
+import "order_iface/v1/order_return.proto";
 
 option go_package = "github.com/pdcgo/schema/services/order_iface/v1;order_iface";
 
@@ -28,6 +29,8 @@ service OrderService {
   rpc ChangeEstRevenue(ChangeEstRevenueRequest) returns (ChangeEstRevenueResponse);
 
   rpc OrderCompleted(OrderCompletedRequest) returns (OrderCompletedResponse);
+  // bagian return
+  rpc OrderReturnArrived(OrderReturnArrivedRequest) returns (OrderReturnArrivedResponse);
 
   // bagian view
   rpc OrderList(OrderListRequest) returns (stream OrderListResponse);

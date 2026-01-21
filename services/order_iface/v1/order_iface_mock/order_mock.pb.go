@@ -331,6 +331,32 @@ func (mr *MockOrderServiceClientMockRecorder) OrderCompleted(ctx, req interface{
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OrderCompleted", reflect.TypeOf((*MockOrderService)(nil).OrderCompleted), ctx, req)
 }
 
+func (m *MockOrderService) OrderReturnArrived(ctx context.Context, req *connect.Request[v1.OrderReturnArrivedRequest]) (*connect.Response[v1.OrderReturnArrivedResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "OrderReturnArrived", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.OrderReturnArrivedResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockOrderServiceMockRecorder) OrderReturnArrived(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OrderReturnArrived", reflect.TypeOf((*MockOrderService)(nil).OrderReturnArrived), ctx, req)
+}
+
+func (m *MockOrderServiceClient) OrderReturnArrived(ctx context.Context, req *connect.Request[v1.OrderReturnArrivedRequest]) (*connect.Response[v1.OrderReturnArrivedResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "OrderReturnArrived", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.OrderReturnArrivedResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockOrderServiceClientMockRecorder) OrderReturnArrived(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OrderReturnArrived", reflect.TypeOf((*MockOrderService)(nil).OrderReturnArrived), ctx, req)
+}
+
 func (m *MockOrderService) OrderList(ctx context.Context, req *connect.Request[v1.OrderListRequest], stream *connect.ServerStream[v1.OrderListResponse]) error {
     m.ctrl.T.Helper()
     ret := m.ctrl.Call(m, "OrderList", ctx, req, stream)
