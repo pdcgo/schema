@@ -41,7 +41,17 @@ service RevenueService {
   // penghasilan lain
   rpc RevenueOther(RevenueOtherRequest) returns (RevenueOtherResponse);
   rpc SellingExpenseOther(SellingExpenseOtherRequest) returns (SellingExpenseOtherResponse);
+
+  // shop revenue
+  // rpc ShopReceivableAdjustment(ShopReceivableAdjustmentRequest) returns (ShopReceivableAdjustmentResponse);
 }
+
+// message ShopReceivableAdjustmentRequest {
+//   uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+//   uint64 shop_id = 2 [(buf.validate.field).uint64.gt = 0];
+//   double amount = 3;
+// }
+// message ShopReceivableAdjustmentResponse {}
 
 message OrderEditSellingReceivableRequest {
   uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];

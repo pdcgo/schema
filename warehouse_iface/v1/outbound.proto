@@ -11,6 +11,7 @@ option go_package = "github.com/pdcgo/schema/services/warehouse_iface/v1;warehou
 service OutboundService {
   rpc OutboundList(OutboundListRequest) returns (OutboundListResponse);
   rpc OutboundDetail(OutboundDetailRequest) returns (OutboundDetailResponse);
+  rpc OutboundDetailIDs(OutboundDetailIDsRequest) returns (OutboundDetailIDsResponse);
   rpc OrderDetailSearch(OrderDetailSearchRequest) returns (OrderDetailSearchResponse);
 }
 
@@ -23,6 +24,18 @@ enum OutboundDetailSearchType {
   OUTBOUND_DETAIL_SEARCH_TYPE_UNSPECIFIED = 0;
   OUTBOUND_DETAIL_SEARCH_TYPE_TXID = 1;
   OUTBOUND_DETAIL_SEARCH_TYPE_RECEIPT_ORDREF = 2;
+}
+
+message OutboundDetailIDsRequest {
+  repeated uint64 tx_ids = 1 [(buf.validate.field).repeated = {
+    min_items: 1 // must have at least 1 id
+    max_items: 1000
+  }];
+  bool load_all = 4;
+}
+
+message OutboundDetailIDsResponse {
+  map<uint64, OutboundDetailResponse> data = 1;
 }
 
 message OutboundDetailRequest {

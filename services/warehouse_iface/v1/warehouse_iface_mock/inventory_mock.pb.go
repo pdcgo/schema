@@ -72,6 +72,32 @@ func (mr *MockInventoryServiceClientMockRecorder) Placements(ctx, req interface{
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Placements", reflect.TypeOf((*MockInventoryService)(nil).Placements), ctx, req)
 }
 
+func (m *MockInventoryService) PlacementsIDs(ctx context.Context, req *connect.Request[v1.PlacementsIDsRequest]) (*connect.Response[v1.PlacementsIDsResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "PlacementsIDs", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.PlacementsIDsResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInventoryServiceMockRecorder) PlacementsIDs(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PlacementsIDs", reflect.TypeOf((*MockInventoryService)(nil).PlacementsIDs), ctx, req)
+}
+
+func (m *MockInventoryServiceClient) PlacementsIDs(ctx context.Context, req *connect.Request[v1.PlacementsIDsRequest]) (*connect.Response[v1.PlacementsIDsResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "PlacementsIDs", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.PlacementsIDsResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInventoryServiceClientMockRecorder) PlacementsIDs(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PlacementsIDs", reflect.TypeOf((*MockInventoryService)(nil).PlacementsIDs), ctx, req)
+}
+
 func (m *MockInventoryService) BlacklistedSku(ctx context.Context, req *connect.Request[v1.BlacklistedSkuRequest]) (*connect.Response[v1.BlacklistedSkuResponse], error) {
     m.ctrl.T.Helper()
     ret := m.ctrl.Call(m, "BlacklistedSku", ctx, req)

@@ -637,8 +637,10 @@ type DraftItem struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	TeamId        uint64                 `protobuf:"varint,2,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	UserId        uint64                 `protobuf:"varint,6,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Payload       *DraftOrderData        `protobuf:"bytes,3,opt,name=payload,proto3" json:"payload,omitempty"`
 	MpProducts    []*MpProductItem       `protobuf:"bytes,4,rep,name=mp_products,json=mpProducts,proto3" json:"mp_products,omitempty"`
+	Created       *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=created,proto3" json:"created,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -687,6 +689,13 @@ func (x *DraftItem) GetTeamId() uint64 {
 	return 0
 }
 
+func (x *DraftItem) GetUserId() uint64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
 func (x *DraftItem) GetPayload() *DraftOrderData {
 	if x != nil {
 		return x.Payload
@@ -697,6 +706,13 @@ func (x *DraftItem) GetPayload() *DraftOrderData {
 func (x *DraftItem) GetMpProducts() []*MpProductItem {
 	if x != nil {
 		return x.MpProducts
+	}
+	return nil
+}
+
+func (x *DraftItem) GetCreated() *timestamppb.Timestamp {
+	if x != nil {
+		return x.Created
 	}
 	return nil
 }
@@ -905,13 +921,15 @@ const file_order_iface_v1_draft_proto_rawDesc = "" +
 	"\x04page\x18\x04 \x01(\v2\x15.common.v1.PageFilterB\x06\xbaH\x03\xc8\x01\x01R\x04page\x12\x17\n" +
 	"\ashop_id\x18\x05 \x01(\x04R\x06shopId\x12<\n" +
 	"\vmarketplace\x18\x06 \x01(\x0e2\x1a.common.v1.MarketplaceTypeR\vmarketplace\x12<\n" +
-	"\x06search\x18\a \x01(\v2$.order_iface.v1.OrderDraftListSearchR\x06search\"\xae\x01\n" +
+	"\x06search\x18\a \x01(\v2$.order_iface.v1.OrderDraftListSearchR\x06search\"\xfd\x01\n" +
 	"\tDraftItem\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x17\n" +
-	"\ateam_id\x18\x02 \x01(\x04R\x06teamId\x128\n" +
+	"\ateam_id\x18\x02 \x01(\x04R\x06teamId\x12\x17\n" +
+	"\auser_id\x18\x06 \x01(\x04R\x06userId\x128\n" +
 	"\apayload\x18\x03 \x01(\v2\x1e.order_iface.v1.DraftOrderDataR\apayload\x12>\n" +
 	"\vmp_products\x18\x04 \x03(\v2\x1d.order_iface.v1.MpProductItemR\n" +
-	"mpProducts\"{\n" +
+	"mpProducts\x124\n" +
+	"\acreated\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\acreated\"{\n" +
 	"\x16OrderDraftListResponse\x120\n" +
 	"\tpage_info\x18\x01 \x01(\v2\x13.common.v1.PageInfoR\bpageInfo\x12/\n" +
 	"\x05items\x18\x02 \x03(\v2\x19.order_iface.v1.DraftItemR\x05items\"Q\n" +
@@ -980,14 +998,15 @@ var file_order_iface_v1_draft_proto_depIdxs = []int32{
 	7,  // 12: order_iface.v1.OrderDraftListRequest.search:type_name -> order_iface.v1.OrderDraftListSearch
 	1,  // 13: order_iface.v1.DraftItem.payload:type_name -> order_iface.v1.DraftOrderData
 	2,  // 14: order_iface.v1.DraftItem.mp_products:type_name -> order_iface.v1.MpProductItem
-	20, // 15: order_iface.v1.OrderDraftListResponse.page_info:type_name -> common.v1.PageInfo
-	9,  // 16: order_iface.v1.OrderDraftListResponse.items:type_name -> order_iface.v1.DraftItem
-	9,  // 17: order_iface.v1.OrderDraftGetResponse.data:type_name -> order_iface.v1.DraftItem
-	18, // [18:18] is the sub-list for method output_type
-	18, // [18:18] is the sub-list for method input_type
-	18, // [18:18] is the sub-list for extension type_name
-	18, // [18:18] is the sub-list for extension extendee
-	0,  // [0:18] is the sub-list for field type_name
+	14, // 15: order_iface.v1.DraftItem.created:type_name -> google.protobuf.Timestamp
+	20, // 16: order_iface.v1.OrderDraftListResponse.page_info:type_name -> common.v1.PageInfo
+	9,  // 17: order_iface.v1.OrderDraftListResponse.items:type_name -> order_iface.v1.DraftItem
+	9,  // 18: order_iface.v1.OrderDraftGetResponse.data:type_name -> order_iface.v1.DraftItem
+	19, // [19:19] is the sub-list for method output_type
+	19, // [19:19] is the sub-list for method input_type
+	19, // [19:19] is the sub-list for extension type_name
+	19, // [19:19] is the sub-list for extension extendee
+	0,  // [0:19] is the sub-list for field type_name
 }
 
 func init() { file_order_iface_v1_draft_proto_init() }

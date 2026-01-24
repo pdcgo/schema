@@ -11,6 +11,7 @@ option go_package = "github.com/pdcgo/schema/services/warehouse_iface/v1;warehou
 
 service InventoryService {
   rpc Placements(PlacementsRequest) returns (PlacementsResponse);
+  rpc PlacementsIDs(PlacementsIDsRequest) returns (PlacementsIDsResponse);
   rpc BlacklistedSku(BlacklistedSkuRequest) returns (BlacklistedSkuResponse);
   rpc BlacklistedSkuAdd(BlacklistedSkuAddRequest) returns (BlacklistedSkuAddResponse);
   rpc BlacklistedSkuRemove(BlacklistedSkuRemoveRequest) returns (BlacklistedSkuRemoveResponse);
@@ -148,6 +149,20 @@ message SkuBlacklistDetail {
 
 message BlacklistedSkuResponse {
   map<string, SkuBlacklistDetail> data = 1;
+}
+
+message BulkPlacement {
+  map<string, PlacementDetail> data = 1;
+}
+
+message PlacementsIDsRequest {
+  repeated uint64 tx_ids = 1 [(buf.validate.field).repeated = {
+    min_items: 1 // must have at least 1 id
+    max_items: 1000
+  }];
+}
+message PlacementsIDsResponse {
+  map<uint64, BulkPlacement> bulk_placements = 2;
 }
 
 message PlacementsRequest {

@@ -73,8 +73,10 @@ message OrderDraftListRequest {
 message DraftItem {
   uint64 id = 1;
   uint64 team_id = 2;
+  uint64 user_id = 6;
   DraftOrderData payload = 3;
   repeated MpProductItem mp_products = 4;
+  google.protobuf.Timestamp created = 5;
 }
 
 message OrderDraftListResponse {
