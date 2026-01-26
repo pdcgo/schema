@@ -1,0 +1,52 @@
+syntax = "proto3";
+package access_iface.v1;
+
+import "buf/validate/validate.proto";
+// import "common/v1/common.proto";
+
+option go_package = "github.com/pdcgo/schema/services/access_iface/v1;access_iface";
+
+service ConfigurationService {
+  rpc ExtensionConfiguration(ExtensionConfigurationRequest) returns (ExtensionConfigurationResponse);
+  rpc ExtensionConfigurationReplace(ExtensionConfigurationReplaceRequest) returns (ExtensionConfigurationReplaceResponse);
+}
+
+enum Mode {
+  MODE_UNSPECIFIED = 0;
+  MODE_PRODUCTION = 1;
+  MODE_STAGING = 2;
+  MODE_DEVELOPMENT = 3;
+  MODE_TEST = 4;
+}
+
+message ExtensionConfiguration {
+  Mode mode = 1;
+  string version = 2;
+  map<string, string> endpoint = 3;
+}
+
+message ExtensionConfigurationRequest {
+  Mode mode = 1;
+  string version = 2;
+}
+message ExtensionConfigurationResponse {
+  ExtensionConfiguration data = 1;
+}
+
+message ExtensionConfigurationPayload {
+  Mode mode = 1 [(buf.validate.field).required = true];
+  string version = 2 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 1000
+  }];
+  map<string, string> endpoint = 3;
+}
+
+message ExtensionConfigurationReplaceRequest {
+  string token = 1 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 1000
+  }];
+  ExtensionConfigurationPayload data = 2 [(buf.validate.field).required = true];
+}
+message ExtensionConfigurationReplaceResponse {}
