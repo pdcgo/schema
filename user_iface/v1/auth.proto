@@ -9,6 +9,7 @@ option go_package = "github.com/pdcgo/schema/services/user_iface/v1;user_iface";
 
 service AuthService {
   rpc Login(LoginRequest) returns (LoginResponse);
+  rpc CheckLogin(CheckLoginRequest) returns (CheckLoginResponse);
   rpc Logout(LogoutRequest) returns (LogoutResponse);
 }
 
@@ -45,6 +46,12 @@ message LoginResponse {
   User user = 1;
   string token = 2;
   string x_pdc_source = 3;
+  Team team = 4;
+}
+
+message CheckLoginRequest {}
+message CheckLoginResponse {
+  User user = 1;
   Team team = 4;
 }
 

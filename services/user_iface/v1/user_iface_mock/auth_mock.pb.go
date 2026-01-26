@@ -72,6 +72,32 @@ func (mr *MockAuthServiceClientMockRecorder) Login(ctx, req interface{}) *gomock
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Login", reflect.TypeOf((*MockAuthService)(nil).Login), ctx, req)
 }
 
+func (m *MockAuthService) CheckLogin(ctx context.Context, req *connect.Request[v1.CheckLoginRequest]) (*connect.Response[v1.CheckLoginResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "CheckLogin", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.CheckLoginResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockAuthServiceMockRecorder) CheckLogin(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CheckLogin", reflect.TypeOf((*MockAuthService)(nil).CheckLogin), ctx, req)
+}
+
+func (m *MockAuthServiceClient) CheckLogin(ctx context.Context, req *connect.Request[v1.CheckLoginRequest]) (*connect.Response[v1.CheckLoginResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "CheckLogin", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.CheckLoginResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockAuthServiceClientMockRecorder) CheckLogin(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CheckLogin", reflect.TypeOf((*MockAuthService)(nil).CheckLogin), ctx, req)
+}
+
 func (m *MockAuthService) Logout(ctx context.Context, req *connect.Request[v1.LogoutRequest]) (*connect.Response[v1.LogoutResponse], error) {
     m.ctrl.T.Helper()
     ret := m.ctrl.Call(m, "Logout", ctx, req)

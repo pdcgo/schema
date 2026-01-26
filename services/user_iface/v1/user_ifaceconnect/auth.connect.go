@@ -35,6 +35,8 @@ const (
 const (
 	// AuthServiceLoginProcedure is the fully-qualified name of the AuthService's Login RPC.
 	AuthServiceLoginProcedure = "/user_iface.v1.AuthService/Login"
+	// AuthServiceCheckLoginProcedure is the fully-qualified name of the AuthService's CheckLogin RPC.
+	AuthServiceCheckLoginProcedure = "/user_iface.v1.AuthService/CheckLogin"
 	// AuthServiceLogoutProcedure is the fully-qualified name of the AuthService's Logout RPC.
 	AuthServiceLogoutProcedure = "/user_iface.v1.AuthService/Logout"
 )
@@ -42,6 +44,7 @@ const (
 // AuthServiceClient is a client for the user_iface.v1.AuthService service.
 type AuthServiceClient interface {
 	Login(context.Context, *connect.Request[v1.LoginRequest]) (*connect.Response[v1.LoginResponse], error)
+	CheckLogin(context.Context, *connect.Request[v1.CheckLoginRequest]) (*connect.Response[v1.CheckLoginResponse], error)
 	Logout(context.Context, *connect.Request[v1.LogoutRequest]) (*connect.Response[v1.LogoutResponse], error)
 }
 
@@ -62,6 +65,12 @@ func NewAuthServiceClient(httpClient connect.HTTPClient, baseURL string, opts ..
 			connect.WithSchema(authServiceMethods.ByName("Login")),
 			connect.WithClientOptions(opts...),
 		),
+		checkLogin: connect.NewClient[v1.CheckLoginRequest, v1.CheckLoginResponse](
+			httpClient,
+			baseURL+AuthServiceCheckLoginProcedure,
+			connect.WithSchema(authServiceMethods.ByName("CheckLogin")),
+			connect.WithClientOptions(opts...),
+		),
 		logout: connect.NewClient[v1.LogoutRequest, v1.LogoutResponse](
 			httpClient,
 			baseURL+AuthServiceLogoutProcedure,
@@ -73,13 +82,19 @@ func NewAuthServiceClient(httpClient connect.HTTPClient, baseURL string, opts ..
 
 // authServiceClient implements AuthServiceClient.
 type authServiceClient struct {
-	login  *connect.Client[v1.LoginRequest, v1.LoginResponse]
-	logout *connect.Client[v1.LogoutRequest, v1.LogoutResponse]
+	login      *connect.Client[v1.LoginRequest, v1.LoginResponse]
+	checkLogin *connect.Client[v1.CheckLoginRequest, v1.CheckLoginResponse]
+	logout     *connect.Client[v1.LogoutRequest, v1.LogoutResponse]
 }
 
 // Login calls user_iface.v1.AuthService.Login.
 func (c *authServiceClient) Login(ctx context.Context, req *connect.Request[v1.LoginRequest]) (*connect.Response[v1.LoginResponse], error) {
 	return c.login.CallUnary(ctx, req)
+}
+
+// CheckLogin calls user_iface.v1.AuthService.CheckLogin.
+func (c *authServiceClient) CheckLogin(ctx context.Context, req *connect.Request[v1.CheckLoginRequest]) (*connect.Response[v1.CheckLoginResponse], error) {
+	return c.checkLogin.CallUnary(ctx, req)
 }
 
 // Logout calls user_iface.v1.AuthService.Logout.
@@ -90,6 +105,7 @@ func (c *authServiceClient) Logout(ctx context.Context, req *connect.Request[v1.
 // AuthServiceHandler is an implementation of the user_iface.v1.AuthService service.
 type AuthServiceHandler interface {
 	Login(context.Context, *connect.Request[v1.LoginRequest]) (*connect.Response[v1.LoginResponse], error)
+	CheckLogin(context.Context, *connect.Request[v1.CheckLoginRequest]) (*connect.Response[v1.CheckLoginResponse], error)
 	Logout(context.Context, *connect.Request[v1.LogoutRequest]) (*connect.Response[v1.LogoutResponse], error)
 }
 
@@ -106,6 +122,12 @@ func NewAuthServiceHandler(svc AuthServiceHandler, opts ...connect.HandlerOption
 		connect.WithSchema(authServiceMethods.ByName("Login")),
 		connect.WithHandlerOptions(opts...),
 	)
+	authServiceCheckLoginHandler := connect.NewUnaryHandler(
+		AuthServiceCheckLoginProcedure,
+		svc.CheckLogin,
+		connect.WithSchema(authServiceMethods.ByName("CheckLogin")),
+		connect.WithHandlerOptions(opts...),
+	)
 	authServiceLogoutHandler := connect.NewUnaryHandler(
 		AuthServiceLogoutProcedure,
 		svc.Logout,
@@ -116,6 +138,8 @@ func NewAuthServiceHandler(svc AuthServiceHandler, opts ...connect.HandlerOption
 		switch r.URL.Path {
 		case AuthServiceLoginProcedure:
 			authServiceLoginHandler.ServeHTTP(w, r)
+		case AuthServiceCheckLoginProcedure:
+			authServiceCheckLoginHandler.ServeHTTP(w, r)
 		case AuthServiceLogoutProcedure:
 			authServiceLogoutHandler.ServeHTTP(w, r)
 		default:
@@ -129,6 +153,10 @@ type UnimplementedAuthServiceHandler struct{}
 
 func (UnimplementedAuthServiceHandler) Login(context.Context, *connect.Request[v1.LoginRequest]) (*connect.Response[v1.LoginResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("user_iface.v1.AuthService.Login is not implemented"))
+}
+
+func (UnimplementedAuthServiceHandler) CheckLogin(context.Context, *connect.Request[v1.CheckLoginRequest]) (*connect.Response[v1.CheckLoginResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("user_iface.v1.AuthService.CheckLogin is not implemented"))
 }
 
 func (UnimplementedAuthServiceHandler) Logout(context.Context, *connect.Request[v1.LogoutRequest]) (*connect.Response[v1.LogoutResponse], error) {
