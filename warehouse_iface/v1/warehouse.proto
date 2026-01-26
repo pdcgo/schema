@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package warehouse_iface.v1;
+
+import "buf/validate/validate.proto";
+// import "common/v1/common.proto";
+// import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/pdcgo/schema/services/warehouse_iface/v1;warehouse_iface";
+
+service WarehouseService {
+  rpc PublicWarehouseIDs(PublicWarehouseIDsRequest) returns (PublicWarehouseIDsResponse);
+  rpc PublicWarehouseList(PublicWarehouseListRequest) returns (PublicWarehouseListResponse);
+}
+
+message Warehouse {
+  uint64 id = 1;
+  string name = 2;
+  string desc = 3;
+}
+
+message PublicWarehouseIDsRequest {
+  repeated uint64 ids = 1 [(buf.validate.field).repeated = {
+    min_items: 1 // must have at least 1 id
+    max_items: 200
+    unique: true // no duplicate IDs allowed
+    items: {
+      uint64: {gt: 0}
+    }
+  }];
+}
+
+message PublicWarehouseIDsResponse {
+  map<uint64, Warehouse> data = 1;
+}
+
+message PublicWarehouseListRequest {}
+message PublicWarehouseListResponse {
+  repeated Warehouse list = 1;
+}
