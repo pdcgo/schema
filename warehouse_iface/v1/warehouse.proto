@@ -9,8 +9,8 @@ import "buf/validate/validate.proto";
 option go_package = "github.com/pdcgo/schema/services/warehouse_iface/v1;warehouse_iface";
 
 service WarehouseService {
-  rpc PublicWarehouseIDs(PublicWarehouseIDsRequest) returns (PublicWarehouseIDsResponse);
-  rpc PublicWarehouseList(PublicWarehouseListRequest) returns (PublicWarehouseListResponse);
+  rpc WarehouseIDs(WarehouseIDsRequest) returns (WarehouseIDsResponse);
+  rpc WarehouseList(WarehouseListRequest) returns (WarehouseListResponse);
 }
 
 message Warehouse {
@@ -19,7 +19,7 @@ message Warehouse {
   string desc = 3;
 }
 
-message PublicWarehouseIDsRequest {
+message WarehouseIDsRequest {
   repeated uint64 ids = 1 [(buf.validate.field).repeated = {
     min_items: 1 // must have at least 1 id
     max_items: 200
@@ -30,11 +30,11 @@ message PublicWarehouseIDsRequest {
   }];
 }
 
-message PublicWarehouseIDsResponse {
+message WarehouseIDsResponse {
   map<uint64, Warehouse> data = 1;
 }
 
-message PublicWarehouseListRequest {}
-message PublicWarehouseListResponse {
+message WarehouseListRequest {}
+message WarehouseListResponse {
   repeated Warehouse list = 1;
 }

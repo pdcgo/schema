@@ -33,18 +33,18 @@ const (
 // reflection-formatted method names, remove the leading slash and convert the remaining slash to a
 // period.
 const (
-	// WarehouseServicePublicWarehouseIDsProcedure is the fully-qualified name of the WarehouseService's
-	// PublicWarehouseIDs RPC.
-	WarehouseServicePublicWarehouseIDsProcedure = "/warehouse_iface.v1.WarehouseService/PublicWarehouseIDs"
-	// WarehouseServicePublicWarehouseListProcedure is the fully-qualified name of the
-	// WarehouseService's PublicWarehouseList RPC.
-	WarehouseServicePublicWarehouseListProcedure = "/warehouse_iface.v1.WarehouseService/PublicWarehouseList"
+	// WarehouseServiceWarehouseIDsProcedure is the fully-qualified name of the WarehouseService's
+	// WarehouseIDs RPC.
+	WarehouseServiceWarehouseIDsProcedure = "/warehouse_iface.v1.WarehouseService/WarehouseIDs"
+	// WarehouseServiceWarehouseListProcedure is the fully-qualified name of the WarehouseService's
+	// WarehouseList RPC.
+	WarehouseServiceWarehouseListProcedure = "/warehouse_iface.v1.WarehouseService/WarehouseList"
 )
 
 // WarehouseServiceClient is a client for the warehouse_iface.v1.WarehouseService service.
 type WarehouseServiceClient interface {
-	PublicWarehouseIDs(context.Context, *connect.Request[v1.PublicWarehouseIDsRequest]) (*connect.Response[v1.PublicWarehouseIDsResponse], error)
-	PublicWarehouseList(context.Context, *connect.Request[v1.PublicWarehouseListRequest]) (*connect.Response[v1.PublicWarehouseListResponse], error)
+	WarehouseIDs(context.Context, *connect.Request[v1.WarehouseIDsRequest]) (*connect.Response[v1.WarehouseIDsResponse], error)
+	WarehouseList(context.Context, *connect.Request[v1.WarehouseListRequest]) (*connect.Response[v1.WarehouseListResponse], error)
 }
 
 // NewWarehouseServiceClient constructs a client for the warehouse_iface.v1.WarehouseService
@@ -58,16 +58,16 @@ func NewWarehouseServiceClient(httpClient connect.HTTPClient, baseURL string, op
 	baseURL = strings.TrimRight(baseURL, "/")
 	warehouseServiceMethods := v1.File_warehouse_iface_v1_warehouse_proto.Services().ByName("WarehouseService").Methods()
 	return &warehouseServiceClient{
-		publicWarehouseIDs: connect.NewClient[v1.PublicWarehouseIDsRequest, v1.PublicWarehouseIDsResponse](
+		warehouseIDs: connect.NewClient[v1.WarehouseIDsRequest, v1.WarehouseIDsResponse](
 			httpClient,
-			baseURL+WarehouseServicePublicWarehouseIDsProcedure,
-			connect.WithSchema(warehouseServiceMethods.ByName("PublicWarehouseIDs")),
+			baseURL+WarehouseServiceWarehouseIDsProcedure,
+			connect.WithSchema(warehouseServiceMethods.ByName("WarehouseIDs")),
 			connect.WithClientOptions(opts...),
 		),
-		publicWarehouseList: connect.NewClient[v1.PublicWarehouseListRequest, v1.PublicWarehouseListResponse](
+		warehouseList: connect.NewClient[v1.WarehouseListRequest, v1.WarehouseListResponse](
 			httpClient,
-			baseURL+WarehouseServicePublicWarehouseListProcedure,
-			connect.WithSchema(warehouseServiceMethods.ByName("PublicWarehouseList")),
+			baseURL+WarehouseServiceWarehouseListProcedure,
+			connect.WithSchema(warehouseServiceMethods.ByName("WarehouseList")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -75,24 +75,24 @@ func NewWarehouseServiceClient(httpClient connect.HTTPClient, baseURL string, op
 
 // warehouseServiceClient implements WarehouseServiceClient.
 type warehouseServiceClient struct {
-	publicWarehouseIDs  *connect.Client[v1.PublicWarehouseIDsRequest, v1.PublicWarehouseIDsResponse]
-	publicWarehouseList *connect.Client[v1.PublicWarehouseListRequest, v1.PublicWarehouseListResponse]
+	warehouseIDs  *connect.Client[v1.WarehouseIDsRequest, v1.WarehouseIDsResponse]
+	warehouseList *connect.Client[v1.WarehouseListRequest, v1.WarehouseListResponse]
 }
 
-// PublicWarehouseIDs calls warehouse_iface.v1.WarehouseService.PublicWarehouseIDs.
-func (c *warehouseServiceClient) PublicWarehouseIDs(ctx context.Context, req *connect.Request[v1.PublicWarehouseIDsRequest]) (*connect.Response[v1.PublicWarehouseIDsResponse], error) {
-	return c.publicWarehouseIDs.CallUnary(ctx, req)
+// WarehouseIDs calls warehouse_iface.v1.WarehouseService.WarehouseIDs.
+func (c *warehouseServiceClient) WarehouseIDs(ctx context.Context, req *connect.Request[v1.WarehouseIDsRequest]) (*connect.Response[v1.WarehouseIDsResponse], error) {
+	return c.warehouseIDs.CallUnary(ctx, req)
 }
 
-// PublicWarehouseList calls warehouse_iface.v1.WarehouseService.PublicWarehouseList.
-func (c *warehouseServiceClient) PublicWarehouseList(ctx context.Context, req *connect.Request[v1.PublicWarehouseListRequest]) (*connect.Response[v1.PublicWarehouseListResponse], error) {
-	return c.publicWarehouseList.CallUnary(ctx, req)
+// WarehouseList calls warehouse_iface.v1.WarehouseService.WarehouseList.
+func (c *warehouseServiceClient) WarehouseList(ctx context.Context, req *connect.Request[v1.WarehouseListRequest]) (*connect.Response[v1.WarehouseListResponse], error) {
+	return c.warehouseList.CallUnary(ctx, req)
 }
 
 // WarehouseServiceHandler is an implementation of the warehouse_iface.v1.WarehouseService service.
 type WarehouseServiceHandler interface {
-	PublicWarehouseIDs(context.Context, *connect.Request[v1.PublicWarehouseIDsRequest]) (*connect.Response[v1.PublicWarehouseIDsResponse], error)
-	PublicWarehouseList(context.Context, *connect.Request[v1.PublicWarehouseListRequest]) (*connect.Response[v1.PublicWarehouseListResponse], error)
+	WarehouseIDs(context.Context, *connect.Request[v1.WarehouseIDsRequest]) (*connect.Response[v1.WarehouseIDsResponse], error)
+	WarehouseList(context.Context, *connect.Request[v1.WarehouseListRequest]) (*connect.Response[v1.WarehouseListResponse], error)
 }
 
 // NewWarehouseServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -102,24 +102,24 @@ type WarehouseServiceHandler interface {
 // and JSON codecs. They also support gzip compression.
 func NewWarehouseServiceHandler(svc WarehouseServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
 	warehouseServiceMethods := v1.File_warehouse_iface_v1_warehouse_proto.Services().ByName("WarehouseService").Methods()
-	warehouseServicePublicWarehouseIDsHandler := connect.NewUnaryHandler(
-		WarehouseServicePublicWarehouseIDsProcedure,
-		svc.PublicWarehouseIDs,
-		connect.WithSchema(warehouseServiceMethods.ByName("PublicWarehouseIDs")),
+	warehouseServiceWarehouseIDsHandler := connect.NewUnaryHandler(
+		WarehouseServiceWarehouseIDsProcedure,
+		svc.WarehouseIDs,
+		connect.WithSchema(warehouseServiceMethods.ByName("WarehouseIDs")),
 		connect.WithHandlerOptions(opts...),
 	)
-	warehouseServicePublicWarehouseListHandler := connect.NewUnaryHandler(
-		WarehouseServicePublicWarehouseListProcedure,
-		svc.PublicWarehouseList,
-		connect.WithSchema(warehouseServiceMethods.ByName("PublicWarehouseList")),
+	warehouseServiceWarehouseListHandler := connect.NewUnaryHandler(
+		WarehouseServiceWarehouseListProcedure,
+		svc.WarehouseList,
+		connect.WithSchema(warehouseServiceMethods.ByName("WarehouseList")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/warehouse_iface.v1.WarehouseService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
-		case WarehouseServicePublicWarehouseIDsProcedure:
-			warehouseServicePublicWarehouseIDsHandler.ServeHTTP(w, r)
-		case WarehouseServicePublicWarehouseListProcedure:
-			warehouseServicePublicWarehouseListHandler.ServeHTTP(w, r)
+		case WarehouseServiceWarehouseIDsProcedure:
+			warehouseServiceWarehouseIDsHandler.ServeHTTP(w, r)
+		case WarehouseServiceWarehouseListProcedure:
+			warehouseServiceWarehouseListHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -129,10 +129,10 @@ func NewWarehouseServiceHandler(svc WarehouseServiceHandler, opts ...connect.Han
 // UnimplementedWarehouseServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedWarehouseServiceHandler struct{}
 
-func (UnimplementedWarehouseServiceHandler) PublicWarehouseIDs(context.Context, *connect.Request[v1.PublicWarehouseIDsRequest]) (*connect.Response[v1.PublicWarehouseIDsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("warehouse_iface.v1.WarehouseService.PublicWarehouseIDs is not implemented"))
+func (UnimplementedWarehouseServiceHandler) WarehouseIDs(context.Context, *connect.Request[v1.WarehouseIDsRequest]) (*connect.Response[v1.WarehouseIDsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("warehouse_iface.v1.WarehouseService.WarehouseIDs is not implemented"))
 }
 
-func (UnimplementedWarehouseServiceHandler) PublicWarehouseList(context.Context, *connect.Request[v1.PublicWarehouseListRequest]) (*connect.Response[v1.PublicWarehouseListResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("warehouse_iface.v1.WarehouseService.PublicWarehouseList is not implemented"))
+func (UnimplementedWarehouseServiceHandler) WarehouseList(context.Context, *connect.Request[v1.WarehouseListRequest]) (*connect.Response[v1.WarehouseListResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("warehouse_iface.v1.WarehouseService.WarehouseList is not implemented"))
 }

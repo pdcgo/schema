@@ -82,27 +82,27 @@ func (x *Warehouse) GetDesc() string {
 	return ""
 }
 
-type PublicWarehouseIDsRequest struct {
+type WarehouseIDsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Ids           []uint64               `protobuf:"varint,1,rep,packed,name=ids,proto3" json:"ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *PublicWarehouseIDsRequest) Reset() {
-	*x = PublicWarehouseIDsRequest{}
+func (x *WarehouseIDsRequest) Reset() {
+	*x = WarehouseIDsRequest{}
 	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *PublicWarehouseIDsRequest) String() string {
+func (x *WarehouseIDsRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PublicWarehouseIDsRequest) ProtoMessage() {}
+func (*WarehouseIDsRequest) ProtoMessage() {}
 
-func (x *PublicWarehouseIDsRequest) ProtoReflect() protoreflect.Message {
+func (x *WarehouseIDsRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -114,39 +114,39 @@ func (x *PublicWarehouseIDsRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PublicWarehouseIDsRequest.ProtoReflect.Descriptor instead.
-func (*PublicWarehouseIDsRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use WarehouseIDsRequest.ProtoReflect.Descriptor instead.
+func (*WarehouseIDsRequest) Descriptor() ([]byte, []int) {
 	return file_warehouse_iface_v1_warehouse_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *PublicWarehouseIDsRequest) GetIds() []uint64 {
+func (x *WarehouseIDsRequest) GetIds() []uint64 {
 	if x != nil {
 		return x.Ids
 	}
 	return nil
 }
 
-type PublicWarehouseIDsResponse struct {
+type WarehouseIDsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Data          map[uint64]*Warehouse  `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *PublicWarehouseIDsResponse) Reset() {
-	*x = PublicWarehouseIDsResponse{}
+func (x *WarehouseIDsResponse) Reset() {
+	*x = WarehouseIDsResponse{}
 	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *PublicWarehouseIDsResponse) String() string {
+func (x *WarehouseIDsResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PublicWarehouseIDsResponse) ProtoMessage() {}
+func (*WarehouseIDsResponse) ProtoMessage() {}
 
-func (x *PublicWarehouseIDsResponse) ProtoReflect() protoreflect.Message {
+func (x *WarehouseIDsResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -158,38 +158,38 @@ func (x *PublicWarehouseIDsResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PublicWarehouseIDsResponse.ProtoReflect.Descriptor instead.
-func (*PublicWarehouseIDsResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use WarehouseIDsResponse.ProtoReflect.Descriptor instead.
+func (*WarehouseIDsResponse) Descriptor() ([]byte, []int) {
 	return file_warehouse_iface_v1_warehouse_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *PublicWarehouseIDsResponse) GetData() map[uint64]*Warehouse {
+func (x *WarehouseIDsResponse) GetData() map[uint64]*Warehouse {
 	if x != nil {
 		return x.Data
 	}
 	return nil
 }
 
-type PublicWarehouseListRequest struct {
+type WarehouseListRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *PublicWarehouseListRequest) Reset() {
-	*x = PublicWarehouseListRequest{}
+func (x *WarehouseListRequest) Reset() {
+	*x = WarehouseListRequest{}
 	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *PublicWarehouseListRequest) String() string {
+func (x *WarehouseListRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PublicWarehouseListRequest) ProtoMessage() {}
+func (*WarehouseListRequest) ProtoMessage() {}
 
-func (x *PublicWarehouseListRequest) ProtoReflect() protoreflect.Message {
+func (x *WarehouseListRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -201,32 +201,32 @@ func (x *PublicWarehouseListRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PublicWarehouseListRequest.ProtoReflect.Descriptor instead.
-func (*PublicWarehouseListRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use WarehouseListRequest.ProtoReflect.Descriptor instead.
+func (*WarehouseListRequest) Descriptor() ([]byte, []int) {
 	return file_warehouse_iface_v1_warehouse_proto_rawDescGZIP(), []int{3}
 }
 
-type PublicWarehouseListResponse struct {
+type WarehouseListResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	List          []*Warehouse           `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *PublicWarehouseListResponse) Reset() {
-	*x = PublicWarehouseListResponse{}
+func (x *WarehouseListResponse) Reset() {
+	*x = WarehouseListResponse{}
 	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *PublicWarehouseListResponse) String() string {
+func (x *WarehouseListResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PublicWarehouseListResponse) ProtoMessage() {}
+func (*WarehouseListResponse) ProtoMessage() {}
 
-func (x *PublicWarehouseListResponse) ProtoReflect() protoreflect.Message {
+func (x *WarehouseListResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -238,12 +238,12 @@ func (x *PublicWarehouseListResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PublicWarehouseListResponse.ProtoReflect.Descriptor instead.
-func (*PublicWarehouseListResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use WarehouseListResponse.ProtoReflect.Descriptor instead.
+func (*WarehouseListResponse) Descriptor() ([]byte, []int) {
 	return file_warehouse_iface_v1_warehouse_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *PublicWarehouseListResponse) GetList() []*Warehouse {
+func (x *WarehouseListResponse) GetList() []*Warehouse {
 	if x != nil {
 		return x.List
 	}
@@ -258,20 +258,20 @@ const file_warehouse_iface_v1_warehouse_proto_rawDesc = "" +
 	"\tWarehouse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x12\n" +
-	"\x04desc\x18\x03 \x01(\tR\x04desc\"B\n" +
-	"\x19PublicWarehouseIDsRequest\x12%\n" +
-	"\x03ids\x18\x01 \x03(\x04B\x13\xbaH\x10\x92\x01\r\b\x01\x10\xc8\x01\x18\x01\"\x042\x02 \x00R\x03ids\"\xc2\x01\n" +
-	"\x1aPublicWarehouseIDsResponse\x12L\n" +
-	"\x04data\x18\x01 \x03(\v28.warehouse_iface.v1.PublicWarehouseIDsResponse.DataEntryR\x04data\x1aV\n" +
+	"\x04desc\x18\x03 \x01(\tR\x04desc\"<\n" +
+	"\x13WarehouseIDsRequest\x12%\n" +
+	"\x03ids\x18\x01 \x03(\x04B\x13\xbaH\x10\x92\x01\r\b\x01\x10\xc8\x01\x18\x01\"\x042\x02 \x00R\x03ids\"\xb6\x01\n" +
+	"\x14WarehouseIDsResponse\x12F\n" +
+	"\x04data\x18\x01 \x03(\v22.warehouse_iface.v1.WarehouseIDsResponse.DataEntryR\x04data\x1aV\n" +
 	"\tDataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\x04R\x03key\x123\n" +
-	"\x05value\x18\x02 \x01(\v2\x1d.warehouse_iface.v1.WarehouseR\x05value:\x028\x01\"\x1c\n" +
-	"\x1aPublicWarehouseListRequest\"P\n" +
-	"\x1bPublicWarehouseListResponse\x121\n" +
-	"\x04list\x18\x01 \x03(\v2\x1d.warehouse_iface.v1.WarehouseR\x04list2\xff\x01\n" +
-	"\x10WarehouseService\x12s\n" +
-	"\x12PublicWarehouseIDs\x12-.warehouse_iface.v1.PublicWarehouseIDsRequest\x1a..warehouse_iface.v1.PublicWarehouseIDsResponse\x12v\n" +
-	"\x13PublicWarehouseList\x12..warehouse_iface.v1.PublicWarehouseListRequest\x1a/.warehouse_iface.v1.PublicWarehouseListResponseB\xd2\x01\n" +
+	"\x05value\x18\x02 \x01(\v2\x1d.warehouse_iface.v1.WarehouseR\x05value:\x028\x01\"\x16\n" +
+	"\x14WarehouseListRequest\"J\n" +
+	"\x15WarehouseListResponse\x121\n" +
+	"\x04list\x18\x01 \x03(\v2\x1d.warehouse_iface.v1.WarehouseR\x04list2\xdb\x01\n" +
+	"\x10WarehouseService\x12a\n" +
+	"\fWarehouseIDs\x12'.warehouse_iface.v1.WarehouseIDsRequest\x1a(.warehouse_iface.v1.WarehouseIDsResponse\x12d\n" +
+	"\rWarehouseList\x12(.warehouse_iface.v1.WarehouseListRequest\x1a).warehouse_iface.v1.WarehouseListResponseB\xd2\x01\n" +
 	"\x16com.warehouse_iface.v1B\x0eWarehouseProtoP\x01ZCgithub.com/pdcgo/schema/services/warehouse_iface/v1;warehouse_iface\xa2\x02\x03WXX\xaa\x02\x11WarehouseIface.V1\xca\x02\x11WarehouseIface\\V1\xe2\x02\x1dWarehouseIface\\V1\\GPBMetadata\xea\x02\x12WarehouseIface::V1b\x06proto3"
 
 var (
@@ -288,21 +288,21 @@ func file_warehouse_iface_v1_warehouse_proto_rawDescGZIP() []byte {
 
 var file_warehouse_iface_v1_warehouse_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_warehouse_iface_v1_warehouse_proto_goTypes = []any{
-	(*Warehouse)(nil),                   // 0: warehouse_iface.v1.Warehouse
-	(*PublicWarehouseIDsRequest)(nil),   // 1: warehouse_iface.v1.PublicWarehouseIDsRequest
-	(*PublicWarehouseIDsResponse)(nil),  // 2: warehouse_iface.v1.PublicWarehouseIDsResponse
-	(*PublicWarehouseListRequest)(nil),  // 3: warehouse_iface.v1.PublicWarehouseListRequest
-	(*PublicWarehouseListResponse)(nil), // 4: warehouse_iface.v1.PublicWarehouseListResponse
-	nil,                                 // 5: warehouse_iface.v1.PublicWarehouseIDsResponse.DataEntry
+	(*Warehouse)(nil),             // 0: warehouse_iface.v1.Warehouse
+	(*WarehouseIDsRequest)(nil),   // 1: warehouse_iface.v1.WarehouseIDsRequest
+	(*WarehouseIDsResponse)(nil),  // 2: warehouse_iface.v1.WarehouseIDsResponse
+	(*WarehouseListRequest)(nil),  // 3: warehouse_iface.v1.WarehouseListRequest
+	(*WarehouseListResponse)(nil), // 4: warehouse_iface.v1.WarehouseListResponse
+	nil,                           // 5: warehouse_iface.v1.WarehouseIDsResponse.DataEntry
 }
 var file_warehouse_iface_v1_warehouse_proto_depIdxs = []int32{
-	5, // 0: warehouse_iface.v1.PublicWarehouseIDsResponse.data:type_name -> warehouse_iface.v1.PublicWarehouseIDsResponse.DataEntry
-	0, // 1: warehouse_iface.v1.PublicWarehouseListResponse.list:type_name -> warehouse_iface.v1.Warehouse
-	0, // 2: warehouse_iface.v1.PublicWarehouseIDsResponse.DataEntry.value:type_name -> warehouse_iface.v1.Warehouse
-	1, // 3: warehouse_iface.v1.WarehouseService.PublicWarehouseIDs:input_type -> warehouse_iface.v1.PublicWarehouseIDsRequest
-	3, // 4: warehouse_iface.v1.WarehouseService.PublicWarehouseList:input_type -> warehouse_iface.v1.PublicWarehouseListRequest
-	2, // 5: warehouse_iface.v1.WarehouseService.PublicWarehouseIDs:output_type -> warehouse_iface.v1.PublicWarehouseIDsResponse
-	4, // 6: warehouse_iface.v1.WarehouseService.PublicWarehouseList:output_type -> warehouse_iface.v1.PublicWarehouseListResponse
+	5, // 0: warehouse_iface.v1.WarehouseIDsResponse.data:type_name -> warehouse_iface.v1.WarehouseIDsResponse.DataEntry
+	0, // 1: warehouse_iface.v1.WarehouseListResponse.list:type_name -> warehouse_iface.v1.Warehouse
+	0, // 2: warehouse_iface.v1.WarehouseIDsResponse.DataEntry.value:type_name -> warehouse_iface.v1.Warehouse
+	1, // 3: warehouse_iface.v1.WarehouseService.WarehouseIDs:input_type -> warehouse_iface.v1.WarehouseIDsRequest
+	3, // 4: warehouse_iface.v1.WarehouseService.WarehouseList:input_type -> warehouse_iface.v1.WarehouseListRequest
+	2, // 5: warehouse_iface.v1.WarehouseService.WarehouseIDs:output_type -> warehouse_iface.v1.WarehouseIDsResponse
+	4, // 6: warehouse_iface.v1.WarehouseService.WarehouseList:output_type -> warehouse_iface.v1.WarehouseListResponse
 	5, // [5:7] is the sub-list for method output_type
 	3, // [3:5] is the sub-list for method input_type
 	3, // [3:3] is the sub-list for extension type_name
