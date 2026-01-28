@@ -17,6 +17,7 @@ service OrderService {
   rpc OrderDraftDelete(OrderDraftDeleteRequest) returns (OrderDraftDeleteResponse);
   rpc OrderDraftList(OrderDraftListRequest) returns (OrderDraftListResponse);
   rpc OrderDraftGet(OrderDraftGetRequest) returns (OrderDraftGetResponse);
+  rpc OrderDraftCheck(OrderDraftCheckRequest) returns (OrderDraftCheckResponse);
   rpc OrderCreate(OrderCreateRequest) returns (OrderCreateResponse);
 
   // bagian accounting

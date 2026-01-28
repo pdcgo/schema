@@ -45,6 +45,9 @@ const (
 	// OrderServiceOrderDraftGetProcedure is the fully-qualified name of the OrderService's
 	// OrderDraftGet RPC.
 	OrderServiceOrderDraftGetProcedure = "/order_iface.v1.OrderService/OrderDraftGet"
+	// OrderServiceOrderDraftCheckProcedure is the fully-qualified name of the OrderService's
+	// OrderDraftCheck RPC.
+	OrderServiceOrderDraftCheckProcedure = "/order_iface.v1.OrderService/OrderDraftCheck"
 	// OrderServiceOrderCreateProcedure is the fully-qualified name of the OrderService's OrderCreate
 	// RPC.
 	OrderServiceOrderCreateProcedure = "/order_iface.v1.OrderService/OrderCreate"
@@ -92,6 +95,7 @@ type OrderServiceClient interface {
 	OrderDraftDelete(context.Context, *connect.Request[v1.OrderDraftDeleteRequest]) (*connect.Response[v1.OrderDraftDeleteResponse], error)
 	OrderDraftList(context.Context, *connect.Request[v1.OrderDraftListRequest]) (*connect.Response[v1.OrderDraftListResponse], error)
 	OrderDraftGet(context.Context, *connect.Request[v1.OrderDraftGetRequest]) (*connect.Response[v1.OrderDraftGetResponse], error)
+	OrderDraftCheck(context.Context, *connect.Request[v1.OrderDraftCheckRequest]) (*connect.Response[v1.OrderDraftCheckResponse], error)
 	OrderCreate(context.Context, *connect.Request[v1.OrderCreateRequest]) (*connect.Response[v1.OrderCreateResponse], error)
 	// bagian accounting
 	OrderFundSet(context.Context) *connect.ClientStreamForClient[v1.OrderFundSetRequest, v1.OrderFundSetResponse]
@@ -147,6 +151,12 @@ func NewOrderServiceClient(httpClient connect.HTTPClient, baseURL string, opts .
 			httpClient,
 			baseURL+OrderServiceOrderDraftGetProcedure,
 			connect.WithSchema(orderServiceMethods.ByName("OrderDraftGet")),
+			connect.WithClientOptions(opts...),
+		),
+		orderDraftCheck: connect.NewClient[v1.OrderDraftCheckRequest, v1.OrderDraftCheckResponse](
+			httpClient,
+			baseURL+OrderServiceOrderDraftCheckProcedure,
+			connect.WithSchema(orderServiceMethods.ByName("OrderDraftCheck")),
 			connect.WithClientOptions(opts...),
 		),
 		orderCreate: connect.NewClient[v1.OrderCreateRequest, v1.OrderCreateResponse](
@@ -236,6 +246,7 @@ type orderServiceClient struct {
 	orderDraftDelete   *connect.Client[v1.OrderDraftDeleteRequest, v1.OrderDraftDeleteResponse]
 	orderDraftList     *connect.Client[v1.OrderDraftListRequest, v1.OrderDraftListResponse]
 	orderDraftGet      *connect.Client[v1.OrderDraftGetRequest, v1.OrderDraftGetResponse]
+	orderDraftCheck    *connect.Client[v1.OrderDraftCheckRequest, v1.OrderDraftCheckResponse]
 	orderCreate        *connect.Client[v1.OrderCreateRequest, v1.OrderCreateResponse]
 	orderFundSet       *connect.Client[v1.OrderFundSetRequest, v1.OrderFundSetResponse]
 	orderTagRemove     *connect.Client[v1.OrderTagRemoveRequest, v1.OrderTagRemoveResponse]
@@ -269,6 +280,11 @@ func (c *orderServiceClient) OrderDraftList(ctx context.Context, req *connect.Re
 // OrderDraftGet calls order_iface.v1.OrderService.OrderDraftGet.
 func (c *orderServiceClient) OrderDraftGet(ctx context.Context, req *connect.Request[v1.OrderDraftGetRequest]) (*connect.Response[v1.OrderDraftGetResponse], error) {
 	return c.orderDraftGet.CallUnary(ctx, req)
+}
+
+// OrderDraftCheck calls order_iface.v1.OrderService.OrderDraftCheck.
+func (c *orderServiceClient) OrderDraftCheck(ctx context.Context, req *connect.Request[v1.OrderDraftCheckRequest]) (*connect.Response[v1.OrderDraftCheckResponse], error) {
+	return c.orderDraftCheck.CallUnary(ctx, req)
 }
 
 // OrderCreate calls order_iface.v1.OrderService.OrderCreate.
@@ -343,6 +359,7 @@ type OrderServiceHandler interface {
 	OrderDraftDelete(context.Context, *connect.Request[v1.OrderDraftDeleteRequest]) (*connect.Response[v1.OrderDraftDeleteResponse], error)
 	OrderDraftList(context.Context, *connect.Request[v1.OrderDraftListRequest]) (*connect.Response[v1.OrderDraftListResponse], error)
 	OrderDraftGet(context.Context, *connect.Request[v1.OrderDraftGetRequest]) (*connect.Response[v1.OrderDraftGetResponse], error)
+	OrderDraftCheck(context.Context, *connect.Request[v1.OrderDraftCheckRequest]) (*connect.Response[v1.OrderDraftCheckResponse], error)
 	OrderCreate(context.Context, *connect.Request[v1.OrderCreateRequest]) (*connect.Response[v1.OrderCreateResponse], error)
 	// bagian accounting
 	OrderFundSet(context.Context, *connect.ClientStream[v1.OrderFundSetRequest]) (*connect.Response[v1.OrderFundSetResponse], error)
@@ -394,6 +411,12 @@ func NewOrderServiceHandler(svc OrderServiceHandler, opts ...connect.HandlerOpti
 		OrderServiceOrderDraftGetProcedure,
 		svc.OrderDraftGet,
 		connect.WithSchema(orderServiceMethods.ByName("OrderDraftGet")),
+		connect.WithHandlerOptions(opts...),
+	)
+	orderServiceOrderDraftCheckHandler := connect.NewUnaryHandler(
+		OrderServiceOrderDraftCheckProcedure,
+		svc.OrderDraftCheck,
+		connect.WithSchema(orderServiceMethods.ByName("OrderDraftCheck")),
 		connect.WithHandlerOptions(opts...),
 	)
 	orderServiceOrderCreateHandler := connect.NewUnaryHandler(
@@ -484,6 +507,8 @@ func NewOrderServiceHandler(svc OrderServiceHandler, opts ...connect.HandlerOpti
 			orderServiceOrderDraftListHandler.ServeHTTP(w, r)
 		case OrderServiceOrderDraftGetProcedure:
 			orderServiceOrderDraftGetHandler.ServeHTTP(w, r)
+		case OrderServiceOrderDraftCheckProcedure:
+			orderServiceOrderDraftCheckHandler.ServeHTTP(w, r)
 		case OrderServiceOrderCreateProcedure:
 			orderServiceOrderCreateHandler.ServeHTTP(w, r)
 		case OrderServiceOrderFundSetProcedure:
@@ -533,6 +558,10 @@ func (UnimplementedOrderServiceHandler) OrderDraftList(context.Context, *connect
 
 func (UnimplementedOrderServiceHandler) OrderDraftGet(context.Context, *connect.Request[v1.OrderDraftGetRequest]) (*connect.Response[v1.OrderDraftGetResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("order_iface.v1.OrderService.OrderDraftGet is not implemented"))
+}
+
+func (UnimplementedOrderServiceHandler) OrderDraftCheck(context.Context, *connect.Request[v1.OrderDraftCheckRequest]) (*connect.Response[v1.OrderDraftCheckResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("order_iface.v1.OrderService.OrderDraftCheck is not implemented"))
 }
 
 func (UnimplementedOrderServiceHandler) OrderCreate(context.Context, *connect.Request[v1.OrderCreateRequest]) (*connect.Response[v1.OrderCreateResponse], error) {

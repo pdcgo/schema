@@ -91,3 +91,20 @@ message OrderDraftGetRequest {
 message OrderDraftGetResponse {
   DraftItem data = 1;
 }
+
+message OrderDraftCheckRequest {
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  repeated string order_ref_ids = 2 [(buf.validate.field).repeated = {
+    min_items: 1
+    max_items: 300
+  }];
+}
+
+message DraftCheckItem {
+  string order_ref_id = 1;
+  bool is_exist = 2;
+}
+
+message OrderDraftCheckResponse {
+  map<string, DraftCheckItem> data = 1;
+}

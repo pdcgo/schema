@@ -865,6 +865,154 @@ func (x *OrderDraftGetResponse) GetData() *DraftItem {
 	return nil
 }
 
+type OrderDraftCheckRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	OrderRefIds   []string               `protobuf:"bytes,2,rep,name=order_ref_ids,json=orderRefIds,proto3" json:"order_ref_ids,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *OrderDraftCheckRequest) Reset() {
+	*x = OrderDraftCheckRequest{}
+	mi := &file_order_iface_v1_draft_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *OrderDraftCheckRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*OrderDraftCheckRequest) ProtoMessage() {}
+
+func (x *OrderDraftCheckRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_order_iface_v1_draft_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use OrderDraftCheckRequest.ProtoReflect.Descriptor instead.
+func (*OrderDraftCheckRequest) Descriptor() ([]byte, []int) {
+	return file_order_iface_v1_draft_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *OrderDraftCheckRequest) GetTeamId() uint64 {
+	if x != nil {
+		return x.TeamId
+	}
+	return 0
+}
+
+func (x *OrderDraftCheckRequest) GetOrderRefIds() []string {
+	if x != nil {
+		return x.OrderRefIds
+	}
+	return nil
+}
+
+type DraftCheckItem struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	OrderRefId    string                 `protobuf:"bytes,1,opt,name=order_ref_id,json=orderRefId,proto3" json:"order_ref_id,omitempty"`
+	IsExist       bool                   `protobuf:"varint,2,opt,name=is_exist,json=isExist,proto3" json:"is_exist,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DraftCheckItem) Reset() {
+	*x = DraftCheckItem{}
+	mi := &file_order_iface_v1_draft_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DraftCheckItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DraftCheckItem) ProtoMessage() {}
+
+func (x *DraftCheckItem) ProtoReflect() protoreflect.Message {
+	mi := &file_order_iface_v1_draft_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DraftCheckItem.ProtoReflect.Descriptor instead.
+func (*DraftCheckItem) Descriptor() ([]byte, []int) {
+	return file_order_iface_v1_draft_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *DraftCheckItem) GetOrderRefId() string {
+	if x != nil {
+		return x.OrderRefId
+	}
+	return ""
+}
+
+func (x *DraftCheckItem) GetIsExist() bool {
+	if x != nil {
+		return x.IsExist
+	}
+	return false
+}
+
+type OrderDraftCheckResponse struct {
+	state         protoimpl.MessageState     `protogen:"open.v1"`
+	Data          map[string]*DraftCheckItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *OrderDraftCheckResponse) Reset() {
+	*x = OrderDraftCheckResponse{}
+	mi := &file_order_iface_v1_draft_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *OrderDraftCheckResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*OrderDraftCheckResponse) ProtoMessage() {}
+
+func (x *OrderDraftCheckResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_order_iface_v1_draft_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use OrderDraftCheckResponse.ProtoReflect.Descriptor instead.
+func (*OrderDraftCheckResponse) Descriptor() ([]byte, []int) {
+	return file_order_iface_v1_draft_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *OrderDraftCheckResponse) GetData() map[string]*DraftCheckItem {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
 var File_order_iface_v1_draft_proto protoreflect.FileDescriptor
 
 const file_order_iface_v1_draft_proto_rawDesc = "" +
@@ -937,7 +1085,19 @@ const file_order_iface_v1_draft_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12 \n" +
 	"\ateam_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\"F\n" +
 	"\x15OrderDraftGetResponse\x12-\n" +
-	"\x04data\x18\x01 \x01(\v2\x19.order_iface.v1.DraftItemR\x04data*v\n" +
+	"\x04data\x18\x01 \x01(\v2\x19.order_iface.v1.DraftItemR\x04data\"k\n" +
+	"\x16OrderDraftCheckRequest\x12 \n" +
+	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12/\n" +
+	"\rorder_ref_ids\x18\x02 \x03(\tB\v\xbaH\b\x92\x01\x05\b\x01\x10\xac\x02R\vorderRefIds\"M\n" +
+	"\x0eDraftCheckItem\x12 \n" +
+	"\forder_ref_id\x18\x01 \x01(\tR\n" +
+	"orderRefId\x12\x19\n" +
+	"\bis_exist\x18\x02 \x01(\bR\aisExist\"\xb9\x01\n" +
+	"\x17OrderDraftCheckResponse\x12E\n" +
+	"\x04data\x18\x01 \x03(\v21.order_iface.v1.OrderDraftCheckResponse.DataEntryR\x04data\x1aW\n" +
+	"\tDataEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x124\n" +
+	"\x05value\x18\x02 \x01(\v2\x1e.order_iface.v1.DraftCheckItemR\x05value:\x028\x01*v\n" +
 	"\x0fDraftSearchType\x12!\n" +
 	"\x1dDRAFT_SEARCH_TYPE_UNSPECIFIED\x10\x00\x12\x1d\n" +
 	"\x19DRAFT_SEARCH_TYPE_RECEIPT\x10\x01\x12!\n" +
@@ -958,7 +1118,7 @@ func file_order_iface_v1_draft_proto_rawDescGZIP() []byte {
 }
 
 var file_order_iface_v1_draft_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_order_iface_v1_draft_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_order_iface_v1_draft_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_order_iface_v1_draft_proto_goTypes = []any{
 	(DraftSearchType)(0),             // 0: order_iface.v1.DraftSearchType
 	(*DraftOrderData)(nil),           // 1: order_iface.v1.DraftOrderData
@@ -973,40 +1133,46 @@ var file_order_iface_v1_draft_proto_goTypes = []any{
 	(*OrderDraftListResponse)(nil),   // 10: order_iface.v1.OrderDraftListResponse
 	(*OrderDraftGetRequest)(nil),     // 11: order_iface.v1.OrderDraftGetRequest
 	(*OrderDraftGetResponse)(nil),    // 12: order_iface.v1.OrderDraftGetResponse
-	(v1.MarketplaceType)(0),          // 13: common.v1.MarketplaceType
-	(*timestamppb.Timestamp)(nil),    // 14: google.protobuf.Timestamp
-	(ShipmentPaymentType)(0),         // 15: order_iface.v1.ShipmentPaymentType
-	(*OrderAddress)(nil),             // 16: order_iface.v1.OrderAddress
-	(*OrderItem)(nil),                // 17: order_iface.v1.OrderItem
-	(*v1.TimeFilterRange)(nil),       // 18: common.v1.TimeFilterRange
-	(*v1.PageFilter)(nil),            // 19: common.v1.PageFilter
-	(*v1.PageInfo)(nil),              // 20: common.v1.PageInfo
+	(*OrderDraftCheckRequest)(nil),   // 13: order_iface.v1.OrderDraftCheckRequest
+	(*DraftCheckItem)(nil),           // 14: order_iface.v1.DraftCheckItem
+	(*OrderDraftCheckResponse)(nil),  // 15: order_iface.v1.OrderDraftCheckResponse
+	nil,                              // 16: order_iface.v1.OrderDraftCheckResponse.DataEntry
+	(v1.MarketplaceType)(0),          // 17: common.v1.MarketplaceType
+	(*timestamppb.Timestamp)(nil),    // 18: google.protobuf.Timestamp
+	(ShipmentPaymentType)(0),         // 19: order_iface.v1.ShipmentPaymentType
+	(*OrderAddress)(nil),             // 20: order_iface.v1.OrderAddress
+	(*OrderItem)(nil),                // 21: order_iface.v1.OrderItem
+	(*v1.TimeFilterRange)(nil),       // 22: common.v1.TimeFilterRange
+	(*v1.PageFilter)(nil),            // 23: common.v1.PageFilter
+	(*v1.PageInfo)(nil),              // 24: common.v1.PageInfo
 }
 var file_order_iface_v1_draft_proto_depIdxs = []int32{
-	13, // 0: order_iface.v1.DraftOrderData.order_from:type_name -> common.v1.MarketplaceType
-	14, // 1: order_iface.v1.DraftOrderData.order_time:type_name -> google.protobuf.Timestamp
-	15, // 2: order_iface.v1.DraftOrderData.shipment_payment_type:type_name -> order_iface.v1.ShipmentPaymentType
-	16, // 3: order_iface.v1.DraftOrderData.address:type_name -> order_iface.v1.OrderAddress
-	17, // 4: order_iface.v1.DraftOrderData.items:type_name -> order_iface.v1.OrderItem
-	14, // 5: order_iface.v1.DraftOrderData.order_deadline:type_name -> google.protobuf.Timestamp
+	17, // 0: order_iface.v1.DraftOrderData.order_from:type_name -> common.v1.MarketplaceType
+	18, // 1: order_iface.v1.DraftOrderData.order_time:type_name -> google.protobuf.Timestamp
+	19, // 2: order_iface.v1.DraftOrderData.shipment_payment_type:type_name -> order_iface.v1.ShipmentPaymentType
+	20, // 3: order_iface.v1.DraftOrderData.address:type_name -> order_iface.v1.OrderAddress
+	21, // 4: order_iface.v1.DraftOrderData.items:type_name -> order_iface.v1.OrderItem
+	18, // 5: order_iface.v1.DraftOrderData.order_deadline:type_name -> google.protobuf.Timestamp
 	1,  // 6: order_iface.v1.OrderDraftCreateRequest.payload:type_name -> order_iface.v1.DraftOrderData
 	2,  // 7: order_iface.v1.OrderDraftCreateRequest.mp_products:type_name -> order_iface.v1.MpProductItem
 	0,  // 8: order_iface.v1.OrderDraftListSearch.search_type:type_name -> order_iface.v1.DraftSearchType
-	18, // 9: order_iface.v1.OrderDraftListRequest.time_range:type_name -> common.v1.TimeFilterRange
-	19, // 10: order_iface.v1.OrderDraftListRequest.page:type_name -> common.v1.PageFilter
-	13, // 11: order_iface.v1.OrderDraftListRequest.marketplace:type_name -> common.v1.MarketplaceType
+	22, // 9: order_iface.v1.OrderDraftListRequest.time_range:type_name -> common.v1.TimeFilterRange
+	23, // 10: order_iface.v1.OrderDraftListRequest.page:type_name -> common.v1.PageFilter
+	17, // 11: order_iface.v1.OrderDraftListRequest.marketplace:type_name -> common.v1.MarketplaceType
 	7,  // 12: order_iface.v1.OrderDraftListRequest.search:type_name -> order_iface.v1.OrderDraftListSearch
 	1,  // 13: order_iface.v1.DraftItem.payload:type_name -> order_iface.v1.DraftOrderData
 	2,  // 14: order_iface.v1.DraftItem.mp_products:type_name -> order_iface.v1.MpProductItem
-	14, // 15: order_iface.v1.DraftItem.created:type_name -> google.protobuf.Timestamp
-	20, // 16: order_iface.v1.OrderDraftListResponse.page_info:type_name -> common.v1.PageInfo
+	18, // 15: order_iface.v1.DraftItem.created:type_name -> google.protobuf.Timestamp
+	24, // 16: order_iface.v1.OrderDraftListResponse.page_info:type_name -> common.v1.PageInfo
 	9,  // 17: order_iface.v1.OrderDraftListResponse.items:type_name -> order_iface.v1.DraftItem
 	9,  // 18: order_iface.v1.OrderDraftGetResponse.data:type_name -> order_iface.v1.DraftItem
-	19, // [19:19] is the sub-list for method output_type
-	19, // [19:19] is the sub-list for method input_type
-	19, // [19:19] is the sub-list for extension type_name
-	19, // [19:19] is the sub-list for extension extendee
-	0,  // [0:19] is the sub-list for field type_name
+	16, // 19: order_iface.v1.OrderDraftCheckResponse.data:type_name -> order_iface.v1.OrderDraftCheckResponse.DataEntry
+	14, // 20: order_iface.v1.OrderDraftCheckResponse.DataEntry.value:type_name -> order_iface.v1.DraftCheckItem
+	21, // [21:21] is the sub-list for method output_type
+	21, // [21:21] is the sub-list for method input_type
+	21, // [21:21] is the sub-list for extension type_name
+	21, // [21:21] is the sub-list for extension extendee
+	0,  // [0:21] is the sub-list for field type_name
 }
 
 func init() { file_order_iface_v1_draft_proto_init() }
@@ -1021,7 +1187,7 @@ func file_order_iface_v1_draft_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_order_iface_v1_draft_proto_rawDesc), len(file_order_iface_v1_draft_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   12,
+			NumMessages:   16,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

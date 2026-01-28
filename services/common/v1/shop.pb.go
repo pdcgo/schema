@@ -26,6 +26,7 @@ type PublicShopListRequest struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
 	Limit           int64                  `protobuf:"varint,1,opt,name=limit,proto3" json:"limit,omitempty"`
 	TeamId          uint64                 `protobuf:"varint,2,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	UserId          uint64                 `protobuf:"varint,5,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	MarketplaceType MarketplaceType        `protobuf:"varint,3,opt,name=marketplace_type,json=marketplaceType,proto3,enum=common.v1.MarketplaceType" json:"marketplace_type,omitempty"`
 	Q               string                 `protobuf:"bytes,4,opt,name=q,proto3" json:"q,omitempty"`
 	unknownFields   protoimpl.UnknownFields
@@ -72,6 +73,13 @@ func (x *PublicShopListRequest) GetLimit() int64 {
 func (x *PublicShopListRequest) GetTeamId() uint64 {
 	if x != nil {
 		return x.TeamId
+	}
+	return 0
+}
+
+func (x *PublicShopListRequest) GetUserId() uint64 {
+	if x != nil {
+		return x.UserId
 	}
 	return 0
 }
@@ -354,10 +362,11 @@ var File_common_v1_shop_proto protoreflect.FileDescriptor
 
 const file_common_v1_shop_proto_rawDesc = "" +
 	"\n" +
-	"\x14common/v1/shop.proto\x12\tcommon.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\"\xa6\x01\n" +
+	"\x14common/v1/shop.proto\x12\tcommon.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\"\xbf\x01\n" +
 	"\x15PublicShopListRequest\x12\x1f\n" +
 	"\x05limit\x18\x01 \x01(\x03B\t\xbaH\x06\"\x04\x102 \x00R\x05limit\x12\x17\n" +
-	"\ateam_id\x18\x02 \x01(\x04R\x06teamId\x12E\n" +
+	"\ateam_id\x18\x02 \x01(\x04R\x06teamId\x12\x17\n" +
+	"\auser_id\x18\x05 \x01(\x04R\x06userId\x12E\n" +
 	"\x10marketplace_type\x18\x03 \x01(\x0e2\x1a.common.v1.MarketplaceTypeR\x0fmarketplaceType\x12\f\n" +
 	"\x01q\x18\x04 \x01(\tR\x01q\"=\n" +
 	"\x16PublicShopListResponse\x12#\n" +

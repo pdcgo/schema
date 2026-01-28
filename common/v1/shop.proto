@@ -18,6 +18,7 @@ message PublicShopListRequest {
     lt: 50
   }];
   uint64 team_id = 2;
+  uint64 user_id = 5;
   MarketplaceType marketplace_type = 3;
   string q = 4;
 }
