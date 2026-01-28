@@ -170,6 +170,86 @@ func (x *PublicShipmentIDsResponse) GetData() map[uint64]*Shipment {
 	return nil
 }
 
+type PublicShipmentListRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PublicShipmentListRequest) Reset() {
+	*x = PublicShipmentListRequest{}
+	mi := &file_common_v1_shipment_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PublicShipmentListRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PublicShipmentListRequest) ProtoMessage() {}
+
+func (x *PublicShipmentListRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_common_v1_shipment_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PublicShipmentListRequest.ProtoReflect.Descriptor instead.
+func (*PublicShipmentListRequest) Descriptor() ([]byte, []int) {
+	return file_common_v1_shipment_proto_rawDescGZIP(), []int{3}
+}
+
+type PublicShipmentListResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Data          []*Shipment            `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PublicShipmentListResponse) Reset() {
+	*x = PublicShipmentListResponse{}
+	mi := &file_common_v1_shipment_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PublicShipmentListResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PublicShipmentListResponse) ProtoMessage() {}
+
+func (x *PublicShipmentListResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_common_v1_shipment_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PublicShipmentListResponse.ProtoReflect.Descriptor instead.
+func (*PublicShipmentListResponse) Descriptor() ([]byte, []int) {
+	return file_common_v1_shipment_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *PublicShipmentListResponse) GetData() []*Shipment {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
 var File_common_v1_shipment_proto protoreflect.FileDescriptor
 
 const file_common_v1_shipment_proto_rawDesc = "" +
@@ -185,9 +265,13 @@ const file_common_v1_shipment_proto_rawDesc = "" +
 	"\x04data\x18\x01 \x03(\v2..common.v1.PublicShipmentIDsResponse.DataEntryR\x04data\x1aL\n" +
 	"\tDataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\x04R\x03key\x12)\n" +
-	"\x05value\x18\x02 \x01(\v2\x13.common.v1.ShipmentR\x05value:\x028\x012q\n" +
+	"\x05value\x18\x02 \x01(\v2\x13.common.v1.ShipmentR\x05value:\x028\x01\"\x1b\n" +
+	"\x19PublicShipmentListRequest\"E\n" +
+	"\x1aPublicShipmentListResponse\x12'\n" +
+	"\x04data\x18\x01 \x03(\v2\x13.common.v1.ShipmentR\x04data2\xd4\x01\n" +
 	"\x0fShipmentService\x12^\n" +
-	"\x11PublicShipmentIDs\x12#.common.v1.PublicShipmentIDsRequest\x1a$.common.v1.PublicShipmentIDsResponseB\x96\x01\n" +
+	"\x11PublicShipmentIDs\x12#.common.v1.PublicShipmentIDsRequest\x1a$.common.v1.PublicShipmentIDsResponse\x12a\n" +
+	"\x12PublicShipmentList\x12$.common.v1.PublicShipmentListRequest\x1a%.common.v1.PublicShipmentListResponseB\x96\x01\n" +
 	"\rcom.common.v1B\rShipmentProtoP\x01Z1github.com/pdcgo/schema/services/common/v1;common\xa2\x02\x03CXX\xaa\x02\tCommon.V1\xca\x02\tCommon\\V1\xe2\x02\x15Common\\V1\\GPBMetadata\xea\x02\n" +
 	"Common::V1b\x06proto3"
 
@@ -203,23 +287,28 @@ func file_common_v1_shipment_proto_rawDescGZIP() []byte {
 	return file_common_v1_shipment_proto_rawDescData
 }
 
-var file_common_v1_shipment_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_common_v1_shipment_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_common_v1_shipment_proto_goTypes = []any{
-	(*Shipment)(nil),                  // 0: common.v1.Shipment
-	(*PublicShipmentIDsRequest)(nil),  // 1: common.v1.PublicShipmentIDsRequest
-	(*PublicShipmentIDsResponse)(nil), // 2: common.v1.PublicShipmentIDsResponse
-	nil,                               // 3: common.v1.PublicShipmentIDsResponse.DataEntry
+	(*Shipment)(nil),                   // 0: common.v1.Shipment
+	(*PublicShipmentIDsRequest)(nil),   // 1: common.v1.PublicShipmentIDsRequest
+	(*PublicShipmentIDsResponse)(nil),  // 2: common.v1.PublicShipmentIDsResponse
+	(*PublicShipmentListRequest)(nil),  // 3: common.v1.PublicShipmentListRequest
+	(*PublicShipmentListResponse)(nil), // 4: common.v1.PublicShipmentListResponse
+	nil,                                // 5: common.v1.PublicShipmentIDsResponse.DataEntry
 }
 var file_common_v1_shipment_proto_depIdxs = []int32{
-	3, // 0: common.v1.PublicShipmentIDsResponse.data:type_name -> common.v1.PublicShipmentIDsResponse.DataEntry
-	0, // 1: common.v1.PublicShipmentIDsResponse.DataEntry.value:type_name -> common.v1.Shipment
-	1, // 2: common.v1.ShipmentService.PublicShipmentIDs:input_type -> common.v1.PublicShipmentIDsRequest
-	2, // 3: common.v1.ShipmentService.PublicShipmentIDs:output_type -> common.v1.PublicShipmentIDsResponse
-	3, // [3:4] is the sub-list for method output_type
-	2, // [2:3] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	5, // 0: common.v1.PublicShipmentIDsResponse.data:type_name -> common.v1.PublicShipmentIDsResponse.DataEntry
+	0, // 1: common.v1.PublicShipmentListResponse.data:type_name -> common.v1.Shipment
+	0, // 2: common.v1.PublicShipmentIDsResponse.DataEntry.value:type_name -> common.v1.Shipment
+	1, // 3: common.v1.ShipmentService.PublicShipmentIDs:input_type -> common.v1.PublicShipmentIDsRequest
+	3, // 4: common.v1.ShipmentService.PublicShipmentList:input_type -> common.v1.PublicShipmentListRequest
+	2, // 5: common.v1.ShipmentService.PublicShipmentIDs:output_type -> common.v1.PublicShipmentIDsResponse
+	4, // 6: common.v1.ShipmentService.PublicShipmentList:output_type -> common.v1.PublicShipmentListResponse
+	5, // [5:7] is the sub-list for method output_type
+	3, // [3:5] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_common_v1_shipment_proto_init() }
@@ -233,7 +322,7 @@ func file_common_v1_shipment_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_common_v1_shipment_proto_rawDesc), len(file_common_v1_shipment_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

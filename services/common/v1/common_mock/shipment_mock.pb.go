@@ -72,3 +72,29 @@ func (mr *MockShipmentServiceClientMockRecorder) PublicShipmentIDs(ctx, req inte
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PublicShipmentIDs", reflect.TypeOf((*MockShipmentService)(nil).PublicShipmentIDs), ctx, req)
 }
 
+func (m *MockShipmentService) PublicShipmentList(ctx context.Context, req *connect.Request[v1.PublicShipmentListRequest]) (*connect.Response[v1.PublicShipmentListResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "PublicShipmentList", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.PublicShipmentListResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockShipmentServiceMockRecorder) PublicShipmentList(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PublicShipmentList", reflect.TypeOf((*MockShipmentService)(nil).PublicShipmentList), ctx, req)
+}
+
+func (m *MockShipmentServiceClient) PublicShipmentList(ctx context.Context, req *connect.Request[v1.PublicShipmentListRequest]) (*connect.Response[v1.PublicShipmentListResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "PublicShipmentList", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.PublicShipmentListResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockShipmentServiceClientMockRecorder) PublicShipmentList(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PublicShipmentList", reflect.TypeOf((*MockShipmentService)(nil).PublicShipmentList), ctx, req)
+}
+

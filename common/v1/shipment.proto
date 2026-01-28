@@ -9,6 +9,7 @@ option go_package = "github.com/pdcgo/schema/services/common/v1;common";
 
 service ShipmentService {
   rpc PublicShipmentIDs(PublicShipmentIDsRequest) returns (PublicShipmentIDsResponse);
+  rpc PublicShipmentList(PublicShipmentListRequest) returns (PublicShipmentListResponse);
 }
 
 message Shipment {
@@ -30,4 +31,9 @@ message PublicShipmentIDsRequest {
 
 message PublicShipmentIDsResponse {
   map<uint64, Shipment> data = 1;
+}
+
+message PublicShipmentListRequest {}
+message PublicShipmentListResponse {
+  repeated Shipment data = 1;
 }

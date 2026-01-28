@@ -36,11 +36,15 @@ const (
 	// ShipmentServicePublicShipmentIDsProcedure is the fully-qualified name of the ShipmentService's
 	// PublicShipmentIDs RPC.
 	ShipmentServicePublicShipmentIDsProcedure = "/common.v1.ShipmentService/PublicShipmentIDs"
+	// ShipmentServicePublicShipmentListProcedure is the fully-qualified name of the ShipmentService's
+	// PublicShipmentList RPC.
+	ShipmentServicePublicShipmentListProcedure = "/common.v1.ShipmentService/PublicShipmentList"
 )
 
 // ShipmentServiceClient is a client for the common.v1.ShipmentService service.
 type ShipmentServiceClient interface {
 	PublicShipmentIDs(context.Context, *connect.Request[v1.PublicShipmentIDsRequest]) (*connect.Response[v1.PublicShipmentIDsResponse], error)
+	PublicShipmentList(context.Context, *connect.Request[v1.PublicShipmentListRequest]) (*connect.Response[v1.PublicShipmentListResponse], error)
 }
 
 // NewShipmentServiceClient constructs a client for the common.v1.ShipmentService service. By
@@ -60,12 +64,19 @@ func NewShipmentServiceClient(httpClient connect.HTTPClient, baseURL string, opt
 			connect.WithSchema(shipmentServiceMethods.ByName("PublicShipmentIDs")),
 			connect.WithClientOptions(opts...),
 		),
+		publicShipmentList: connect.NewClient[v1.PublicShipmentListRequest, v1.PublicShipmentListResponse](
+			httpClient,
+			baseURL+ShipmentServicePublicShipmentListProcedure,
+			connect.WithSchema(shipmentServiceMethods.ByName("PublicShipmentList")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // shipmentServiceClient implements ShipmentServiceClient.
 type shipmentServiceClient struct {
-	publicShipmentIDs *connect.Client[v1.PublicShipmentIDsRequest, v1.PublicShipmentIDsResponse]
+	publicShipmentIDs  *connect.Client[v1.PublicShipmentIDsRequest, v1.PublicShipmentIDsResponse]
+	publicShipmentList *connect.Client[v1.PublicShipmentListRequest, v1.PublicShipmentListResponse]
 }
 
 // PublicShipmentIDs calls common.v1.ShipmentService.PublicShipmentIDs.
@@ -73,9 +84,15 @@ func (c *shipmentServiceClient) PublicShipmentIDs(ctx context.Context, req *conn
 	return c.publicShipmentIDs.CallUnary(ctx, req)
 }
 
+// PublicShipmentList calls common.v1.ShipmentService.PublicShipmentList.
+func (c *shipmentServiceClient) PublicShipmentList(ctx context.Context, req *connect.Request[v1.PublicShipmentListRequest]) (*connect.Response[v1.PublicShipmentListResponse], error) {
+	return c.publicShipmentList.CallUnary(ctx, req)
+}
+
 // ShipmentServiceHandler is an implementation of the common.v1.ShipmentService service.
 type ShipmentServiceHandler interface {
 	PublicShipmentIDs(context.Context, *connect.Request[v1.PublicShipmentIDsRequest]) (*connect.Response[v1.PublicShipmentIDsResponse], error)
+	PublicShipmentList(context.Context, *connect.Request[v1.PublicShipmentListRequest]) (*connect.Response[v1.PublicShipmentListResponse], error)
 }
 
 // NewShipmentServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -91,10 +108,18 @@ func NewShipmentServiceHandler(svc ShipmentServiceHandler, opts ...connect.Handl
 		connect.WithSchema(shipmentServiceMethods.ByName("PublicShipmentIDs")),
 		connect.WithHandlerOptions(opts...),
 	)
+	shipmentServicePublicShipmentListHandler := connect.NewUnaryHandler(
+		ShipmentServicePublicShipmentListProcedure,
+		svc.PublicShipmentList,
+		connect.WithSchema(shipmentServiceMethods.ByName("PublicShipmentList")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/common.v1.ShipmentService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case ShipmentServicePublicShipmentIDsProcedure:
 			shipmentServicePublicShipmentIDsHandler.ServeHTTP(w, r)
+		case ShipmentServicePublicShipmentListProcedure:
+			shipmentServicePublicShipmentListHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -106,4 +131,8 @@ type UnimplementedShipmentServiceHandler struct{}
 
 func (UnimplementedShipmentServiceHandler) PublicShipmentIDs(context.Context, *connect.Request[v1.PublicShipmentIDsRequest]) (*connect.Response[v1.PublicShipmentIDsResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("common.v1.ShipmentService.PublicShipmentIDs is not implemented"))
+}
+
+func (UnimplementedShipmentServiceHandler) PublicShipmentList(context.Context, *connect.Request[v1.PublicShipmentListRequest]) (*connect.Response[v1.PublicShipmentListResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("common.v1.ShipmentService.PublicShipmentList is not implemented"))
 }
