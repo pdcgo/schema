@@ -73,6 +73,98 @@ func (DraftSearchType) EnumDescriptor() ([]byte, []int) {
 	return file_order_iface_v1_draft_proto_rawDescGZIP(), []int{0}
 }
 
+type DraftOrderAddress struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Phone         string                 `protobuf:"bytes,2,opt,name=phone,proto3" json:"phone,omitempty"`
+	Province      string                 `protobuf:"bytes,3,opt,name=province,proto3" json:"province,omitempty"`
+	City          string                 `protobuf:"bytes,4,opt,name=city,proto3" json:"city,omitempty"`
+	District      string                 `protobuf:"bytes,5,opt,name=district,proto3" json:"district,omitempty"`
+	PostalCode    string                 `protobuf:"bytes,6,opt,name=postal_code,json=postalCode,proto3" json:"postal_code,omitempty"`
+	Address       string                 `protobuf:"bytes,7,opt,name=address,proto3" json:"address,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DraftOrderAddress) Reset() {
+	*x = DraftOrderAddress{}
+	mi := &file_order_iface_v1_draft_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DraftOrderAddress) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DraftOrderAddress) ProtoMessage() {}
+
+func (x *DraftOrderAddress) ProtoReflect() protoreflect.Message {
+	mi := &file_order_iface_v1_draft_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DraftOrderAddress.ProtoReflect.Descriptor instead.
+func (*DraftOrderAddress) Descriptor() ([]byte, []int) {
+	return file_order_iface_v1_draft_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *DraftOrderAddress) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *DraftOrderAddress) GetPhone() string {
+	if x != nil {
+		return x.Phone
+	}
+	return ""
+}
+
+func (x *DraftOrderAddress) GetProvince() string {
+	if x != nil {
+		return x.Province
+	}
+	return ""
+}
+
+func (x *DraftOrderAddress) GetCity() string {
+	if x != nil {
+		return x.City
+	}
+	return ""
+}
+
+func (x *DraftOrderAddress) GetDistrict() string {
+	if x != nil {
+		return x.District
+	}
+	return ""
+}
+
+func (x *DraftOrderAddress) GetPostalCode() string {
+	if x != nil {
+		return x.PostalCode
+	}
+	return ""
+}
+
+func (x *DraftOrderAddress) GetAddress() string {
+	if x != nil {
+		return x.Address
+	}
+	return ""
+}
+
 type DraftOrderData struct {
 	state               protoimpl.MessageState `protogen:"open.v1"`
 	OrderRefId          string                 `protobuf:"bytes,1,opt,name=order_ref_id,json=orderRefId,proto3" json:"order_ref_id,omitempty"`
@@ -87,7 +179,7 @@ type DraftOrderData struct {
 	ShipmentPaymentType ShipmentPaymentType    `protobuf:"varint,10,opt,name=shipment_payment_type,json=shipmentPaymentType,proto3,enum=order_iface.v1.ShipmentPaymentType" json:"shipment_payment_type,omitempty"`
 	Receipt             string                 `protobuf:"bytes,11,opt,name=receipt,proto3" json:"receipt,omitempty"`
 	ReceiptFile         string                 `protobuf:"bytes,12,opt,name=receipt_file,json=receiptFile,proto3" json:"receipt_file,omitempty"`
-	Address             *OrderAddress          `protobuf:"bytes,13,opt,name=address,proto3" json:"address,omitempty"`
+	Address             *DraftOrderAddress     `protobuf:"bytes,13,opt,name=address,proto3" json:"address,omitempty"`
 	Items               []*OrderItem           `protobuf:"bytes,14,rep,name=items,proto3" json:"items,omitempty"`
 	BundleIds           []uint64               `protobuf:"varint,15,rep,packed,name=bundle_ids,json=bundleIds,proto3" json:"bundle_ids,omitempty"`
 	DraftId             uint64                 `protobuf:"varint,16,opt,name=draft_id,json=draftId,proto3" json:"draft_id,omitempty"`
@@ -99,7 +191,7 @@ type DraftOrderData struct {
 
 func (x *DraftOrderData) Reset() {
 	*x = DraftOrderData{}
-	mi := &file_order_iface_v1_draft_proto_msgTypes[0]
+	mi := &file_order_iface_v1_draft_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -111,7 +203,7 @@ func (x *DraftOrderData) String() string {
 func (*DraftOrderData) ProtoMessage() {}
 
 func (x *DraftOrderData) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_draft_proto_msgTypes[0]
+	mi := &file_order_iface_v1_draft_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -124,7 +216,7 @@ func (x *DraftOrderData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DraftOrderData.ProtoReflect.Descriptor instead.
 func (*DraftOrderData) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_draft_proto_rawDescGZIP(), []int{0}
+	return file_order_iface_v1_draft_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *DraftOrderData) GetOrderRefId() string {
@@ -211,7 +303,7 @@ func (x *DraftOrderData) GetReceiptFile() string {
 	return ""
 }
 
-func (x *DraftOrderData) GetAddress() *OrderAddress {
+func (x *DraftOrderData) GetAddress() *DraftOrderAddress {
 	if x != nil {
 		return x.Address
 	}
@@ -263,7 +355,7 @@ type MpProductItem struct {
 
 func (x *MpProductItem) Reset() {
 	*x = MpProductItem{}
-	mi := &file_order_iface_v1_draft_proto_msgTypes[1]
+	mi := &file_order_iface_v1_draft_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -275,7 +367,7 @@ func (x *MpProductItem) String() string {
 func (*MpProductItem) ProtoMessage() {}
 
 func (x *MpProductItem) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_draft_proto_msgTypes[1]
+	mi := &file_order_iface_v1_draft_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -288,7 +380,7 @@ func (x *MpProductItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MpProductItem.ProtoReflect.Descriptor instead.
 func (*MpProductItem) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_draft_proto_rawDescGZIP(), []int{1}
+	return file_order_iface_v1_draft_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *MpProductItem) GetName() string {
@@ -315,7 +407,7 @@ type OrderDraftCreateRequest struct {
 
 func (x *OrderDraftCreateRequest) Reset() {
 	*x = OrderDraftCreateRequest{}
-	mi := &file_order_iface_v1_draft_proto_msgTypes[2]
+	mi := &file_order_iface_v1_draft_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -327,7 +419,7 @@ func (x *OrderDraftCreateRequest) String() string {
 func (*OrderDraftCreateRequest) ProtoMessage() {}
 
 func (x *OrderDraftCreateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_draft_proto_msgTypes[2]
+	mi := &file_order_iface_v1_draft_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -340,7 +432,7 @@ func (x *OrderDraftCreateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderDraftCreateRequest.ProtoReflect.Descriptor instead.
 func (*OrderDraftCreateRequest) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_draft_proto_rawDescGZIP(), []int{2}
+	return file_order_iface_v1_draft_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *OrderDraftCreateRequest) GetPayload() *DraftOrderData {
@@ -366,7 +458,7 @@ type OrderDraftCreateResponse struct {
 
 func (x *OrderDraftCreateResponse) Reset() {
 	*x = OrderDraftCreateResponse{}
-	mi := &file_order_iface_v1_draft_proto_msgTypes[3]
+	mi := &file_order_iface_v1_draft_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -378,7 +470,7 @@ func (x *OrderDraftCreateResponse) String() string {
 func (*OrderDraftCreateResponse) ProtoMessage() {}
 
 func (x *OrderDraftCreateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_draft_proto_msgTypes[3]
+	mi := &file_order_iface_v1_draft_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -391,7 +483,7 @@ func (x *OrderDraftCreateResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderDraftCreateResponse.ProtoReflect.Descriptor instead.
 func (*OrderDraftCreateResponse) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_draft_proto_rawDescGZIP(), []int{3}
+	return file_order_iface_v1_draft_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *OrderDraftCreateResponse) GetId() uint64 {
@@ -411,7 +503,7 @@ type OrderDraftDeleteRequest struct {
 
 func (x *OrderDraftDeleteRequest) Reset() {
 	*x = OrderDraftDeleteRequest{}
-	mi := &file_order_iface_v1_draft_proto_msgTypes[4]
+	mi := &file_order_iface_v1_draft_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -423,7 +515,7 @@ func (x *OrderDraftDeleteRequest) String() string {
 func (*OrderDraftDeleteRequest) ProtoMessage() {}
 
 func (x *OrderDraftDeleteRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_draft_proto_msgTypes[4]
+	mi := &file_order_iface_v1_draft_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -436,7 +528,7 @@ func (x *OrderDraftDeleteRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderDraftDeleteRequest.ProtoReflect.Descriptor instead.
 func (*OrderDraftDeleteRequest) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_draft_proto_rawDescGZIP(), []int{4}
+	return file_order_iface_v1_draft_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *OrderDraftDeleteRequest) GetTeamId() uint64 {
@@ -461,7 +553,7 @@ type OrderDraftDeleteResponse struct {
 
 func (x *OrderDraftDeleteResponse) Reset() {
 	*x = OrderDraftDeleteResponse{}
-	mi := &file_order_iface_v1_draft_proto_msgTypes[5]
+	mi := &file_order_iface_v1_draft_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -473,7 +565,7 @@ func (x *OrderDraftDeleteResponse) String() string {
 func (*OrderDraftDeleteResponse) ProtoMessage() {}
 
 func (x *OrderDraftDeleteResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_draft_proto_msgTypes[5]
+	mi := &file_order_iface_v1_draft_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -486,7 +578,7 @@ func (x *OrderDraftDeleteResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderDraftDeleteResponse.ProtoReflect.Descriptor instead.
 func (*OrderDraftDeleteResponse) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_draft_proto_rawDescGZIP(), []int{5}
+	return file_order_iface_v1_draft_proto_rawDescGZIP(), []int{6}
 }
 
 type OrderDraftListSearch struct {
@@ -499,7 +591,7 @@ type OrderDraftListSearch struct {
 
 func (x *OrderDraftListSearch) Reset() {
 	*x = OrderDraftListSearch{}
-	mi := &file_order_iface_v1_draft_proto_msgTypes[6]
+	mi := &file_order_iface_v1_draft_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -511,7 +603,7 @@ func (x *OrderDraftListSearch) String() string {
 func (*OrderDraftListSearch) ProtoMessage() {}
 
 func (x *OrderDraftListSearch) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_draft_proto_msgTypes[6]
+	mi := &file_order_iface_v1_draft_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -524,7 +616,7 @@ func (x *OrderDraftListSearch) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderDraftListSearch.ProtoReflect.Descriptor instead.
 func (*OrderDraftListSearch) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_draft_proto_rawDescGZIP(), []int{6}
+	return file_order_iface_v1_draft_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *OrderDraftListSearch) GetSearchType() DraftSearchType {
@@ -556,7 +648,7 @@ type OrderDraftListRequest struct {
 
 func (x *OrderDraftListRequest) Reset() {
 	*x = OrderDraftListRequest{}
-	mi := &file_order_iface_v1_draft_proto_msgTypes[7]
+	mi := &file_order_iface_v1_draft_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -568,7 +660,7 @@ func (x *OrderDraftListRequest) String() string {
 func (*OrderDraftListRequest) ProtoMessage() {}
 
 func (x *OrderDraftListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_draft_proto_msgTypes[7]
+	mi := &file_order_iface_v1_draft_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -581,7 +673,7 @@ func (x *OrderDraftListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderDraftListRequest.ProtoReflect.Descriptor instead.
 func (*OrderDraftListRequest) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_draft_proto_rawDescGZIP(), []int{7}
+	return file_order_iface_v1_draft_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *OrderDraftListRequest) GetTeamId() uint64 {
@@ -647,7 +739,7 @@ type DraftItem struct {
 
 func (x *DraftItem) Reset() {
 	*x = DraftItem{}
-	mi := &file_order_iface_v1_draft_proto_msgTypes[8]
+	mi := &file_order_iface_v1_draft_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -659,7 +751,7 @@ func (x *DraftItem) String() string {
 func (*DraftItem) ProtoMessage() {}
 
 func (x *DraftItem) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_draft_proto_msgTypes[8]
+	mi := &file_order_iface_v1_draft_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -672,7 +764,7 @@ func (x *DraftItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DraftItem.ProtoReflect.Descriptor instead.
 func (*DraftItem) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_draft_proto_rawDescGZIP(), []int{8}
+	return file_order_iface_v1_draft_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *DraftItem) GetId() uint64 {
@@ -727,7 +819,7 @@ type OrderDraftListResponse struct {
 
 func (x *OrderDraftListResponse) Reset() {
 	*x = OrderDraftListResponse{}
-	mi := &file_order_iface_v1_draft_proto_msgTypes[9]
+	mi := &file_order_iface_v1_draft_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -739,7 +831,7 @@ func (x *OrderDraftListResponse) String() string {
 func (*OrderDraftListResponse) ProtoMessage() {}
 
 func (x *OrderDraftListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_draft_proto_msgTypes[9]
+	mi := &file_order_iface_v1_draft_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -752,7 +844,7 @@ func (x *OrderDraftListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderDraftListResponse.ProtoReflect.Descriptor instead.
 func (*OrderDraftListResponse) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_draft_proto_rawDescGZIP(), []int{9}
+	return file_order_iface_v1_draft_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *OrderDraftListResponse) GetPageInfo() *v1.PageInfo {
@@ -779,7 +871,7 @@ type OrderDraftGetRequest struct {
 
 func (x *OrderDraftGetRequest) Reset() {
 	*x = OrderDraftGetRequest{}
-	mi := &file_order_iface_v1_draft_proto_msgTypes[10]
+	mi := &file_order_iface_v1_draft_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -791,7 +883,7 @@ func (x *OrderDraftGetRequest) String() string {
 func (*OrderDraftGetRequest) ProtoMessage() {}
 
 func (x *OrderDraftGetRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_draft_proto_msgTypes[10]
+	mi := &file_order_iface_v1_draft_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -804,7 +896,7 @@ func (x *OrderDraftGetRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderDraftGetRequest.ProtoReflect.Descriptor instead.
 func (*OrderDraftGetRequest) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_draft_proto_rawDescGZIP(), []int{10}
+	return file_order_iface_v1_draft_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *OrderDraftGetRequest) GetId() uint64 {
@@ -830,7 +922,7 @@ type OrderDraftGetResponse struct {
 
 func (x *OrderDraftGetResponse) Reset() {
 	*x = OrderDraftGetResponse{}
-	mi := &file_order_iface_v1_draft_proto_msgTypes[11]
+	mi := &file_order_iface_v1_draft_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -842,7 +934,7 @@ func (x *OrderDraftGetResponse) String() string {
 func (*OrderDraftGetResponse) ProtoMessage() {}
 
 func (x *OrderDraftGetResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_draft_proto_msgTypes[11]
+	mi := &file_order_iface_v1_draft_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -855,7 +947,7 @@ func (x *OrderDraftGetResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderDraftGetResponse.ProtoReflect.Descriptor instead.
 func (*OrderDraftGetResponse) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_draft_proto_rawDescGZIP(), []int{11}
+	return file_order_iface_v1_draft_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *OrderDraftGetResponse) GetData() *DraftItem {
@@ -875,7 +967,7 @@ type OrderDraftCheckRequest struct {
 
 func (x *OrderDraftCheckRequest) Reset() {
 	*x = OrderDraftCheckRequest{}
-	mi := &file_order_iface_v1_draft_proto_msgTypes[12]
+	mi := &file_order_iface_v1_draft_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -887,7 +979,7 @@ func (x *OrderDraftCheckRequest) String() string {
 func (*OrderDraftCheckRequest) ProtoMessage() {}
 
 func (x *OrderDraftCheckRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_draft_proto_msgTypes[12]
+	mi := &file_order_iface_v1_draft_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -900,7 +992,7 @@ func (x *OrderDraftCheckRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderDraftCheckRequest.ProtoReflect.Descriptor instead.
 func (*OrderDraftCheckRequest) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_draft_proto_rawDescGZIP(), []int{12}
+	return file_order_iface_v1_draft_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *OrderDraftCheckRequest) GetTeamId() uint64 {
@@ -921,13 +1013,14 @@ type DraftCheckItem struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	OrderRefId    string                 `protobuf:"bytes,1,opt,name=order_ref_id,json=orderRefId,proto3" json:"order_ref_id,omitempty"`
 	IsExist       bool                   `protobuf:"varint,2,opt,name=is_exist,json=isExist,proto3" json:"is_exist,omitempty"`
+	OrderIsExist  bool                   `protobuf:"varint,3,opt,name=order_is_exist,json=orderIsExist,proto3" json:"order_is_exist,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *DraftCheckItem) Reset() {
 	*x = DraftCheckItem{}
-	mi := &file_order_iface_v1_draft_proto_msgTypes[13]
+	mi := &file_order_iface_v1_draft_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -939,7 +1032,7 @@ func (x *DraftCheckItem) String() string {
 func (*DraftCheckItem) ProtoMessage() {}
 
 func (x *DraftCheckItem) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_draft_proto_msgTypes[13]
+	mi := &file_order_iface_v1_draft_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -952,7 +1045,7 @@ func (x *DraftCheckItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DraftCheckItem.ProtoReflect.Descriptor instead.
 func (*DraftCheckItem) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_draft_proto_rawDescGZIP(), []int{13}
+	return file_order_iface_v1_draft_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *DraftCheckItem) GetOrderRefId() string {
@@ -969,6 +1062,13 @@ func (x *DraftCheckItem) GetIsExist() bool {
 	return false
 }
 
+func (x *DraftCheckItem) GetOrderIsExist() bool {
+	if x != nil {
+		return x.OrderIsExist
+	}
+	return false
+}
+
 type OrderDraftCheckResponse struct {
 	state         protoimpl.MessageState     `protogen:"open.v1"`
 	Data          map[string]*DraftCheckItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
@@ -978,7 +1078,7 @@ type OrderDraftCheckResponse struct {
 
 func (x *OrderDraftCheckResponse) Reset() {
 	*x = OrderDraftCheckResponse{}
-	mi := &file_order_iface_v1_draft_proto_msgTypes[14]
+	mi := &file_order_iface_v1_draft_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -990,7 +1090,7 @@ func (x *OrderDraftCheckResponse) String() string {
 func (*OrderDraftCheckResponse) ProtoMessage() {}
 
 func (x *OrderDraftCheckResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_draft_proto_msgTypes[14]
+	mi := &file_order_iface_v1_draft_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1003,7 +1103,7 @@ func (x *OrderDraftCheckResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderDraftCheckResponse.ProtoReflect.Descriptor instead.
 func (*OrderDraftCheckResponse) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_draft_proto_rawDescGZIP(), []int{14}
+	return file_order_iface_v1_draft_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *OrderDraftCheckResponse) GetData() map[string]*DraftCheckItem {
@@ -1017,7 +1117,16 @@ var File_order_iface_v1_draft_proto protoreflect.FileDescriptor
 
 const file_order_iface_v1_draft_proto_rawDesc = "" +
 	"\n" +
-	"\x1aorder_iface/v1/draft.proto\x12\x0eorder_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1border_iface/v1/create.proto\"\xa7\x06\n" +
+	"\x1aorder_iface/v1/draft.proto\x12\x0eorder_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1border_iface/v1/create.proto\"\xc4\x01\n" +
+	"\x11DraftOrderAddress\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12\x14\n" +
+	"\x05phone\x18\x02 \x01(\tR\x05phone\x12\x1a\n" +
+	"\bprovince\x18\x03 \x01(\tR\bprovince\x12\x12\n" +
+	"\x04city\x18\x04 \x01(\tR\x04city\x12\x1a\n" +
+	"\bdistrict\x18\x05 \x01(\tR\bdistrict\x12\x1f\n" +
+	"\vpostal_code\x18\x06 \x01(\tR\n" +
+	"postalCode\x12\x18\n" +
+	"\aaddress\x18\a \x01(\tR\aaddress\"\xac\x06\n" +
 	"\x0eDraftOrderData\x12)\n" +
 	"\forder_ref_id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\n" +
 	"orderRefId\x12'\n" +
@@ -1036,8 +1145,8 @@ const file_order_iface_v1_draft_proto_rawDesc = "" +
 	"\x15shipment_payment_type\x18\n" +
 	" \x01(\x0e2#.order_iface.v1.ShipmentPaymentTypeR\x13shipmentPaymentType\x12\x18\n" +
 	"\areceipt\x18\v \x01(\tR\areceipt\x12!\n" +
-	"\freceipt_file\x18\f \x01(\tR\vreceiptFile\x126\n" +
-	"\aaddress\x18\r \x01(\v2\x1c.order_iface.v1.OrderAddressR\aaddress\x12/\n" +
+	"\freceipt_file\x18\f \x01(\tR\vreceiptFile\x12;\n" +
+	"\aaddress\x18\r \x01(\v2!.order_iface.v1.DraftOrderAddressR\aaddress\x12/\n" +
 	"\x05items\x18\x0e \x03(\v2\x19.order_iface.v1.OrderItemR\x05items\x12\x1d\n" +
 	"\n" +
 	"bundle_ids\x18\x0f \x03(\x04R\tbundleIds\x12\x19\n" +
@@ -1088,11 +1197,12 @@ const file_order_iface_v1_draft_proto_rawDesc = "" +
 	"\x04data\x18\x01 \x01(\v2\x19.order_iface.v1.DraftItemR\x04data\"k\n" +
 	"\x16OrderDraftCheckRequest\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12/\n" +
-	"\rorder_ref_ids\x18\x02 \x03(\tB\v\xbaH\b\x92\x01\x05\b\x01\x10\xac\x02R\vorderRefIds\"M\n" +
+	"\rorder_ref_ids\x18\x02 \x03(\tB\v\xbaH\b\x92\x01\x05\b\x01\x10\xac\x02R\vorderRefIds\"s\n" +
 	"\x0eDraftCheckItem\x12 \n" +
 	"\forder_ref_id\x18\x01 \x01(\tR\n" +
 	"orderRefId\x12\x19\n" +
-	"\bis_exist\x18\x02 \x01(\bR\aisExist\"\xb9\x01\n" +
+	"\bis_exist\x18\x02 \x01(\bR\aisExist\x12$\n" +
+	"\x0eorder_is_exist\x18\x03 \x01(\bR\forderIsExist\"\xb9\x01\n" +
 	"\x17OrderDraftCheckResponse\x12E\n" +
 	"\x04data\x18\x01 \x03(\v21.order_iface.v1.OrderDraftCheckResponse.DataEntryR\x04data\x1aW\n" +
 	"\tDataEntry\x12\x10\n" +
@@ -1118,56 +1228,56 @@ func file_order_iface_v1_draft_proto_rawDescGZIP() []byte {
 }
 
 var file_order_iface_v1_draft_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_order_iface_v1_draft_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
+var file_order_iface_v1_draft_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
 var file_order_iface_v1_draft_proto_goTypes = []any{
 	(DraftSearchType)(0),             // 0: order_iface.v1.DraftSearchType
-	(*DraftOrderData)(nil),           // 1: order_iface.v1.DraftOrderData
-	(*MpProductItem)(nil),            // 2: order_iface.v1.MpProductItem
-	(*OrderDraftCreateRequest)(nil),  // 3: order_iface.v1.OrderDraftCreateRequest
-	(*OrderDraftCreateResponse)(nil), // 4: order_iface.v1.OrderDraftCreateResponse
-	(*OrderDraftDeleteRequest)(nil),  // 5: order_iface.v1.OrderDraftDeleteRequest
-	(*OrderDraftDeleteResponse)(nil), // 6: order_iface.v1.OrderDraftDeleteResponse
-	(*OrderDraftListSearch)(nil),     // 7: order_iface.v1.OrderDraftListSearch
-	(*OrderDraftListRequest)(nil),    // 8: order_iface.v1.OrderDraftListRequest
-	(*DraftItem)(nil),                // 9: order_iface.v1.DraftItem
-	(*OrderDraftListResponse)(nil),   // 10: order_iface.v1.OrderDraftListResponse
-	(*OrderDraftGetRequest)(nil),     // 11: order_iface.v1.OrderDraftGetRequest
-	(*OrderDraftGetResponse)(nil),    // 12: order_iface.v1.OrderDraftGetResponse
-	(*OrderDraftCheckRequest)(nil),   // 13: order_iface.v1.OrderDraftCheckRequest
-	(*DraftCheckItem)(nil),           // 14: order_iface.v1.DraftCheckItem
-	(*OrderDraftCheckResponse)(nil),  // 15: order_iface.v1.OrderDraftCheckResponse
-	nil,                              // 16: order_iface.v1.OrderDraftCheckResponse.DataEntry
-	(v1.MarketplaceType)(0),          // 17: common.v1.MarketplaceType
-	(*timestamppb.Timestamp)(nil),    // 18: google.protobuf.Timestamp
-	(ShipmentPaymentType)(0),         // 19: order_iface.v1.ShipmentPaymentType
-	(*OrderAddress)(nil),             // 20: order_iface.v1.OrderAddress
+	(*DraftOrderAddress)(nil),        // 1: order_iface.v1.DraftOrderAddress
+	(*DraftOrderData)(nil),           // 2: order_iface.v1.DraftOrderData
+	(*MpProductItem)(nil),            // 3: order_iface.v1.MpProductItem
+	(*OrderDraftCreateRequest)(nil),  // 4: order_iface.v1.OrderDraftCreateRequest
+	(*OrderDraftCreateResponse)(nil), // 5: order_iface.v1.OrderDraftCreateResponse
+	(*OrderDraftDeleteRequest)(nil),  // 6: order_iface.v1.OrderDraftDeleteRequest
+	(*OrderDraftDeleteResponse)(nil), // 7: order_iface.v1.OrderDraftDeleteResponse
+	(*OrderDraftListSearch)(nil),     // 8: order_iface.v1.OrderDraftListSearch
+	(*OrderDraftListRequest)(nil),    // 9: order_iface.v1.OrderDraftListRequest
+	(*DraftItem)(nil),                // 10: order_iface.v1.DraftItem
+	(*OrderDraftListResponse)(nil),   // 11: order_iface.v1.OrderDraftListResponse
+	(*OrderDraftGetRequest)(nil),     // 12: order_iface.v1.OrderDraftGetRequest
+	(*OrderDraftGetResponse)(nil),    // 13: order_iface.v1.OrderDraftGetResponse
+	(*OrderDraftCheckRequest)(nil),   // 14: order_iface.v1.OrderDraftCheckRequest
+	(*DraftCheckItem)(nil),           // 15: order_iface.v1.DraftCheckItem
+	(*OrderDraftCheckResponse)(nil),  // 16: order_iface.v1.OrderDraftCheckResponse
+	nil,                              // 17: order_iface.v1.OrderDraftCheckResponse.DataEntry
+	(v1.MarketplaceType)(0),          // 18: common.v1.MarketplaceType
+	(*timestamppb.Timestamp)(nil),    // 19: google.protobuf.Timestamp
+	(ShipmentPaymentType)(0),         // 20: order_iface.v1.ShipmentPaymentType
 	(*OrderItem)(nil),                // 21: order_iface.v1.OrderItem
 	(*v1.TimeFilterRange)(nil),       // 22: common.v1.TimeFilterRange
 	(*v1.PageFilter)(nil),            // 23: common.v1.PageFilter
 	(*v1.PageInfo)(nil),              // 24: common.v1.PageInfo
 }
 var file_order_iface_v1_draft_proto_depIdxs = []int32{
-	17, // 0: order_iface.v1.DraftOrderData.order_from:type_name -> common.v1.MarketplaceType
-	18, // 1: order_iface.v1.DraftOrderData.order_time:type_name -> google.protobuf.Timestamp
-	19, // 2: order_iface.v1.DraftOrderData.shipment_payment_type:type_name -> order_iface.v1.ShipmentPaymentType
-	20, // 3: order_iface.v1.DraftOrderData.address:type_name -> order_iface.v1.OrderAddress
+	18, // 0: order_iface.v1.DraftOrderData.order_from:type_name -> common.v1.MarketplaceType
+	19, // 1: order_iface.v1.DraftOrderData.order_time:type_name -> google.protobuf.Timestamp
+	20, // 2: order_iface.v1.DraftOrderData.shipment_payment_type:type_name -> order_iface.v1.ShipmentPaymentType
+	1,  // 3: order_iface.v1.DraftOrderData.address:type_name -> order_iface.v1.DraftOrderAddress
 	21, // 4: order_iface.v1.DraftOrderData.items:type_name -> order_iface.v1.OrderItem
-	18, // 5: order_iface.v1.DraftOrderData.order_deadline:type_name -> google.protobuf.Timestamp
-	1,  // 6: order_iface.v1.OrderDraftCreateRequest.payload:type_name -> order_iface.v1.DraftOrderData
-	2,  // 7: order_iface.v1.OrderDraftCreateRequest.mp_products:type_name -> order_iface.v1.MpProductItem
+	19, // 5: order_iface.v1.DraftOrderData.order_deadline:type_name -> google.protobuf.Timestamp
+	2,  // 6: order_iface.v1.OrderDraftCreateRequest.payload:type_name -> order_iface.v1.DraftOrderData
+	3,  // 7: order_iface.v1.OrderDraftCreateRequest.mp_products:type_name -> order_iface.v1.MpProductItem
 	0,  // 8: order_iface.v1.OrderDraftListSearch.search_type:type_name -> order_iface.v1.DraftSearchType
 	22, // 9: order_iface.v1.OrderDraftListRequest.time_range:type_name -> common.v1.TimeFilterRange
 	23, // 10: order_iface.v1.OrderDraftListRequest.page:type_name -> common.v1.PageFilter
-	17, // 11: order_iface.v1.OrderDraftListRequest.marketplace:type_name -> common.v1.MarketplaceType
-	7,  // 12: order_iface.v1.OrderDraftListRequest.search:type_name -> order_iface.v1.OrderDraftListSearch
-	1,  // 13: order_iface.v1.DraftItem.payload:type_name -> order_iface.v1.DraftOrderData
-	2,  // 14: order_iface.v1.DraftItem.mp_products:type_name -> order_iface.v1.MpProductItem
-	18, // 15: order_iface.v1.DraftItem.created:type_name -> google.protobuf.Timestamp
+	18, // 11: order_iface.v1.OrderDraftListRequest.marketplace:type_name -> common.v1.MarketplaceType
+	8,  // 12: order_iface.v1.OrderDraftListRequest.search:type_name -> order_iface.v1.OrderDraftListSearch
+	2,  // 13: order_iface.v1.DraftItem.payload:type_name -> order_iface.v1.DraftOrderData
+	3,  // 14: order_iface.v1.DraftItem.mp_products:type_name -> order_iface.v1.MpProductItem
+	19, // 15: order_iface.v1.DraftItem.created:type_name -> google.protobuf.Timestamp
 	24, // 16: order_iface.v1.OrderDraftListResponse.page_info:type_name -> common.v1.PageInfo
-	9,  // 17: order_iface.v1.OrderDraftListResponse.items:type_name -> order_iface.v1.DraftItem
-	9,  // 18: order_iface.v1.OrderDraftGetResponse.data:type_name -> order_iface.v1.DraftItem
-	16, // 19: order_iface.v1.OrderDraftCheckResponse.data:type_name -> order_iface.v1.OrderDraftCheckResponse.DataEntry
-	14, // 20: order_iface.v1.OrderDraftCheckResponse.DataEntry.value:type_name -> order_iface.v1.DraftCheckItem
+	10, // 17: order_iface.v1.OrderDraftListResponse.items:type_name -> order_iface.v1.DraftItem
+	10, // 18: order_iface.v1.OrderDraftGetResponse.data:type_name -> order_iface.v1.DraftItem
+	17, // 19: order_iface.v1.OrderDraftCheckResponse.data:type_name -> order_iface.v1.OrderDraftCheckResponse.DataEntry
+	15, // 20: order_iface.v1.OrderDraftCheckResponse.DataEntry.value:type_name -> order_iface.v1.DraftCheckItem
 	21, // [21:21] is the sub-list for method output_type
 	21, // [21:21] is the sub-list for method input_type
 	21, // [21:21] is the sub-list for extension type_name
@@ -1187,7 +1297,7 @@ func file_order_iface_v1_draft_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_order_iface_v1_draft_proto_rawDesc), len(file_order_iface_v1_draft_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   16,
+			NumMessages:   17,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

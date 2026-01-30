@@ -9,6 +9,16 @@ import "order_iface/v1/create.proto";
 
 option go_package = "github.com/pdcgo/schema/services/order_iface/v1;order_iface";
 
+message DraftOrderAddress {
+  string name = 1;
+  string phone = 2;
+  string province = 3;
+  string city = 4;
+  string district = 5;
+  string postal_code = 6;
+  string address = 7;
+}
+
 message DraftOrderData {
   string order_ref_id = 1 [(buf.validate.field).string.min_len = 1];
   uint64 order_mp_id = 2 [(buf.validate.field).uint64.gt = 0];
@@ -22,7 +32,7 @@ message DraftOrderData {
   ShipmentPaymentType shipment_payment_type = 10;
   string receipt = 11;
   string receipt_file = 12;
-  OrderAddress address = 13;
+  DraftOrderAddress address = 13;
   repeated OrderItem items = 14;
   repeated uint64 bundle_ids = 15;
   uint64 draft_id = 16;
@@ -103,6 +113,7 @@ message OrderDraftCheckRequest {
 message DraftCheckItem {
   string order_ref_id = 1;
   bool is_exist = 2;
+  bool order_is_exist = 3;
 }
 
 message OrderDraftCheckResponse {
