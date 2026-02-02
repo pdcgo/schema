@@ -39,12 +39,16 @@ const (
 	// WarehouseServiceWarehouseListProcedure is the fully-qualified name of the WarehouseService's
 	// WarehouseList RPC.
 	WarehouseServiceWarehouseListProcedure = "/warehouse_iface.v1.WarehouseService/WarehouseList"
+	// WarehouseServiceTeamWarehouseReturnInfoProcedure is the fully-qualified name of the
+	// WarehouseService's TeamWarehouseReturnInfo RPC.
+	WarehouseServiceTeamWarehouseReturnInfoProcedure = "/warehouse_iface.v1.WarehouseService/TeamWarehouseReturnInfo"
 )
 
 // WarehouseServiceClient is a client for the warehouse_iface.v1.WarehouseService service.
 type WarehouseServiceClient interface {
 	WarehouseIDs(context.Context, *connect.Request[v1.WarehouseIDsRequest]) (*connect.Response[v1.WarehouseIDsResponse], error)
 	WarehouseList(context.Context, *connect.Request[v1.WarehouseListRequest]) (*connect.Response[v1.WarehouseListResponse], error)
+	TeamWarehouseReturnInfo(context.Context, *connect.Request[v1.TeamWarehouseReturnInfoRequest]) (*connect.Response[v1.TeamWarehouseReturnInfoResponse], error)
 }
 
 // NewWarehouseServiceClient constructs a client for the warehouse_iface.v1.WarehouseService
@@ -70,13 +74,20 @@ func NewWarehouseServiceClient(httpClient connect.HTTPClient, baseURL string, op
 			connect.WithSchema(warehouseServiceMethods.ByName("WarehouseList")),
 			connect.WithClientOptions(opts...),
 		),
+		teamWarehouseReturnInfo: connect.NewClient[v1.TeamWarehouseReturnInfoRequest, v1.TeamWarehouseReturnInfoResponse](
+			httpClient,
+			baseURL+WarehouseServiceTeamWarehouseReturnInfoProcedure,
+			connect.WithSchema(warehouseServiceMethods.ByName("TeamWarehouseReturnInfo")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // warehouseServiceClient implements WarehouseServiceClient.
 type warehouseServiceClient struct {
-	warehouseIDs  *connect.Client[v1.WarehouseIDsRequest, v1.WarehouseIDsResponse]
-	warehouseList *connect.Client[v1.WarehouseListRequest, v1.WarehouseListResponse]
+	warehouseIDs            *connect.Client[v1.WarehouseIDsRequest, v1.WarehouseIDsResponse]
+	warehouseList           *connect.Client[v1.WarehouseListRequest, v1.WarehouseListResponse]
+	teamWarehouseReturnInfo *connect.Client[v1.TeamWarehouseReturnInfoRequest, v1.TeamWarehouseReturnInfoResponse]
 }
 
 // WarehouseIDs calls warehouse_iface.v1.WarehouseService.WarehouseIDs.
@@ -89,10 +100,16 @@ func (c *warehouseServiceClient) WarehouseList(ctx context.Context, req *connect
 	return c.warehouseList.CallUnary(ctx, req)
 }
 
+// TeamWarehouseReturnInfo calls warehouse_iface.v1.WarehouseService.TeamWarehouseReturnInfo.
+func (c *warehouseServiceClient) TeamWarehouseReturnInfo(ctx context.Context, req *connect.Request[v1.TeamWarehouseReturnInfoRequest]) (*connect.Response[v1.TeamWarehouseReturnInfoResponse], error) {
+	return c.teamWarehouseReturnInfo.CallUnary(ctx, req)
+}
+
 // WarehouseServiceHandler is an implementation of the warehouse_iface.v1.WarehouseService service.
 type WarehouseServiceHandler interface {
 	WarehouseIDs(context.Context, *connect.Request[v1.WarehouseIDsRequest]) (*connect.Response[v1.WarehouseIDsResponse], error)
 	WarehouseList(context.Context, *connect.Request[v1.WarehouseListRequest]) (*connect.Response[v1.WarehouseListResponse], error)
+	TeamWarehouseReturnInfo(context.Context, *connect.Request[v1.TeamWarehouseReturnInfoRequest]) (*connect.Response[v1.TeamWarehouseReturnInfoResponse], error)
 }
 
 // NewWarehouseServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -114,12 +131,20 @@ func NewWarehouseServiceHandler(svc WarehouseServiceHandler, opts ...connect.Han
 		connect.WithSchema(warehouseServiceMethods.ByName("WarehouseList")),
 		connect.WithHandlerOptions(opts...),
 	)
+	warehouseServiceTeamWarehouseReturnInfoHandler := connect.NewUnaryHandler(
+		WarehouseServiceTeamWarehouseReturnInfoProcedure,
+		svc.TeamWarehouseReturnInfo,
+		connect.WithSchema(warehouseServiceMethods.ByName("TeamWarehouseReturnInfo")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/warehouse_iface.v1.WarehouseService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case WarehouseServiceWarehouseIDsProcedure:
 			warehouseServiceWarehouseIDsHandler.ServeHTTP(w, r)
 		case WarehouseServiceWarehouseListProcedure:
 			warehouseServiceWarehouseListHandler.ServeHTTP(w, r)
+		case WarehouseServiceTeamWarehouseReturnInfoProcedure:
+			warehouseServiceTeamWarehouseReturnInfoHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -135,4 +160,8 @@ func (UnimplementedWarehouseServiceHandler) WarehouseIDs(context.Context, *conne
 
 func (UnimplementedWarehouseServiceHandler) WarehouseList(context.Context, *connect.Request[v1.WarehouseListRequest]) (*connect.Response[v1.WarehouseListResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("warehouse_iface.v1.WarehouseService.WarehouseList is not implemented"))
+}
+
+func (UnimplementedWarehouseServiceHandler) TeamWarehouseReturnInfo(context.Context, *connect.Request[v1.TeamWarehouseReturnInfoRequest]) (*connect.Response[v1.TeamWarehouseReturnInfoResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("warehouse_iface.v1.WarehouseService.TeamWarehouseReturnInfo is not implemented"))
 }

@@ -3,7 +3,7 @@ syntax = "proto3";
 package warehouse_iface.v1;
 
 import "buf/validate/validate.proto";
-// import "common/v1/common.proto";
+import "common/v1/common.proto";
 // import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/pdcgo/schema/services/warehouse_iface/v1;warehouse_iface";
@@ -11,6 +11,7 @@ option go_package = "github.com/pdcgo/schema/services/warehouse_iface/v1;warehou
 service WarehouseService {
   rpc WarehouseIDs(WarehouseIDsRequest) returns (WarehouseIDsResponse);
   rpc WarehouseList(WarehouseListRequest) returns (WarehouseListResponse);
+  rpc TeamWarehouseReturnInfo(TeamWarehouseReturnInfoRequest) returns (TeamWarehouseReturnInfoResponse);
 }
 
 message Warehouse {
@@ -37,4 +38,13 @@ message WarehouseIDsResponse {
 message WarehouseListRequest {}
 message WarehouseListResponse {
   repeated Warehouse list = 1;
+}
+
+message TeamWarehouseReturnInfoRequest {
+  uint64 team_id = 1;
+}
+
+message TeamWarehouseReturnInfoResponse {
+  Warehouse warehouse_return = 1;
+  common.v1.User user_return = 2;
 }

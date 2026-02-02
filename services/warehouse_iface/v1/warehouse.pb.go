@@ -8,6 +8,7 @@ package warehouse_iface
 
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
+	v1 "github.com/pdcgo/schema/services/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -250,11 +251,107 @@ func (x *WarehouseListResponse) GetList() []*Warehouse {
 	return nil
 }
 
+type TeamWarehouseReturnInfoRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TeamWarehouseReturnInfoRequest) Reset() {
+	*x = TeamWarehouseReturnInfoRequest{}
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TeamWarehouseReturnInfoRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TeamWarehouseReturnInfoRequest) ProtoMessage() {}
+
+func (x *TeamWarehouseReturnInfoRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TeamWarehouseReturnInfoRequest.ProtoReflect.Descriptor instead.
+func (*TeamWarehouseReturnInfoRequest) Descriptor() ([]byte, []int) {
+	return file_warehouse_iface_v1_warehouse_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *TeamWarehouseReturnInfoRequest) GetTeamId() uint64 {
+	if x != nil {
+		return x.TeamId
+	}
+	return 0
+}
+
+type TeamWarehouseReturnInfoResponse struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	WarehouseReturn *Warehouse             `protobuf:"bytes,1,opt,name=warehouse_return,json=warehouseReturn,proto3" json:"warehouse_return,omitempty"`
+	UserReturn      *v1.User               `protobuf:"bytes,2,opt,name=user_return,json=userReturn,proto3" json:"user_return,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *TeamWarehouseReturnInfoResponse) Reset() {
+	*x = TeamWarehouseReturnInfoResponse{}
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TeamWarehouseReturnInfoResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TeamWarehouseReturnInfoResponse) ProtoMessage() {}
+
+func (x *TeamWarehouseReturnInfoResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TeamWarehouseReturnInfoResponse.ProtoReflect.Descriptor instead.
+func (*TeamWarehouseReturnInfoResponse) Descriptor() ([]byte, []int) {
+	return file_warehouse_iface_v1_warehouse_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *TeamWarehouseReturnInfoResponse) GetWarehouseReturn() *Warehouse {
+	if x != nil {
+		return x.WarehouseReturn
+	}
+	return nil
+}
+
+func (x *TeamWarehouseReturnInfoResponse) GetUserReturn() *v1.User {
+	if x != nil {
+		return x.UserReturn
+	}
+	return nil
+}
+
 var File_warehouse_iface_v1_warehouse_proto protoreflect.FileDescriptor
 
 const file_warehouse_iface_v1_warehouse_proto_rawDesc = "" +
 	"\n" +
-	"\"warehouse_iface/v1/warehouse.proto\x12\x12warehouse_iface.v1\x1a\x1bbuf/validate/validate.proto\"C\n" +
+	"\"warehouse_iface/v1/warehouse.proto\x12\x12warehouse_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\"C\n" +
 	"\tWarehouse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x12\n" +
@@ -268,10 +365,17 @@ const file_warehouse_iface_v1_warehouse_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\v2\x1d.warehouse_iface.v1.WarehouseR\x05value:\x028\x01\"\x16\n" +
 	"\x14WarehouseListRequest\"J\n" +
 	"\x15WarehouseListResponse\x121\n" +
-	"\x04list\x18\x01 \x03(\v2\x1d.warehouse_iface.v1.WarehouseR\x04list2\xdb\x01\n" +
+	"\x04list\x18\x01 \x03(\v2\x1d.warehouse_iface.v1.WarehouseR\x04list\"9\n" +
+	"\x1eTeamWarehouseReturnInfoRequest\x12\x17\n" +
+	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\"\x9d\x01\n" +
+	"\x1fTeamWarehouseReturnInfoResponse\x12H\n" +
+	"\x10warehouse_return\x18\x01 \x01(\v2\x1d.warehouse_iface.v1.WarehouseR\x0fwarehouseReturn\x120\n" +
+	"\vuser_return\x18\x02 \x01(\v2\x0f.common.v1.UserR\n" +
+	"userReturn2\xe0\x02\n" +
 	"\x10WarehouseService\x12a\n" +
 	"\fWarehouseIDs\x12'.warehouse_iface.v1.WarehouseIDsRequest\x1a(.warehouse_iface.v1.WarehouseIDsResponse\x12d\n" +
-	"\rWarehouseList\x12(.warehouse_iface.v1.WarehouseListRequest\x1a).warehouse_iface.v1.WarehouseListResponseB\xd2\x01\n" +
+	"\rWarehouseList\x12(.warehouse_iface.v1.WarehouseListRequest\x1a).warehouse_iface.v1.WarehouseListResponse\x12\x82\x01\n" +
+	"\x17TeamWarehouseReturnInfo\x122.warehouse_iface.v1.TeamWarehouseReturnInfoRequest\x1a3.warehouse_iface.v1.TeamWarehouseReturnInfoResponseB\xd2\x01\n" +
 	"\x16com.warehouse_iface.v1B\x0eWarehouseProtoP\x01ZCgithub.com/pdcgo/schema/services/warehouse_iface/v1;warehouse_iface\xa2\x02\x03WXX\xaa\x02\x11WarehouseIface.V1\xca\x02\x11WarehouseIface\\V1\xe2\x02\x1dWarehouseIface\\V1\\GPBMetadata\xea\x02\x12WarehouseIface::V1b\x06proto3"
 
 var (
@@ -286,28 +390,35 @@ func file_warehouse_iface_v1_warehouse_proto_rawDescGZIP() []byte {
 	return file_warehouse_iface_v1_warehouse_proto_rawDescData
 }
 
-var file_warehouse_iface_v1_warehouse_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_warehouse_iface_v1_warehouse_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_warehouse_iface_v1_warehouse_proto_goTypes = []any{
-	(*Warehouse)(nil),             // 0: warehouse_iface.v1.Warehouse
-	(*WarehouseIDsRequest)(nil),   // 1: warehouse_iface.v1.WarehouseIDsRequest
-	(*WarehouseIDsResponse)(nil),  // 2: warehouse_iface.v1.WarehouseIDsResponse
-	(*WarehouseListRequest)(nil),  // 3: warehouse_iface.v1.WarehouseListRequest
-	(*WarehouseListResponse)(nil), // 4: warehouse_iface.v1.WarehouseListResponse
-	nil,                           // 5: warehouse_iface.v1.WarehouseIDsResponse.DataEntry
+	(*Warehouse)(nil),                       // 0: warehouse_iface.v1.Warehouse
+	(*WarehouseIDsRequest)(nil),             // 1: warehouse_iface.v1.WarehouseIDsRequest
+	(*WarehouseIDsResponse)(nil),            // 2: warehouse_iface.v1.WarehouseIDsResponse
+	(*WarehouseListRequest)(nil),            // 3: warehouse_iface.v1.WarehouseListRequest
+	(*WarehouseListResponse)(nil),           // 4: warehouse_iface.v1.WarehouseListResponse
+	(*TeamWarehouseReturnInfoRequest)(nil),  // 5: warehouse_iface.v1.TeamWarehouseReturnInfoRequest
+	(*TeamWarehouseReturnInfoResponse)(nil), // 6: warehouse_iface.v1.TeamWarehouseReturnInfoResponse
+	nil,                                     // 7: warehouse_iface.v1.WarehouseIDsResponse.DataEntry
+	(*v1.User)(nil),                         // 8: common.v1.User
 }
 var file_warehouse_iface_v1_warehouse_proto_depIdxs = []int32{
-	5, // 0: warehouse_iface.v1.WarehouseIDsResponse.data:type_name -> warehouse_iface.v1.WarehouseIDsResponse.DataEntry
+	7, // 0: warehouse_iface.v1.WarehouseIDsResponse.data:type_name -> warehouse_iface.v1.WarehouseIDsResponse.DataEntry
 	0, // 1: warehouse_iface.v1.WarehouseListResponse.list:type_name -> warehouse_iface.v1.Warehouse
-	0, // 2: warehouse_iface.v1.WarehouseIDsResponse.DataEntry.value:type_name -> warehouse_iface.v1.Warehouse
-	1, // 3: warehouse_iface.v1.WarehouseService.WarehouseIDs:input_type -> warehouse_iface.v1.WarehouseIDsRequest
-	3, // 4: warehouse_iface.v1.WarehouseService.WarehouseList:input_type -> warehouse_iface.v1.WarehouseListRequest
-	2, // 5: warehouse_iface.v1.WarehouseService.WarehouseIDs:output_type -> warehouse_iface.v1.WarehouseIDsResponse
-	4, // 6: warehouse_iface.v1.WarehouseService.WarehouseList:output_type -> warehouse_iface.v1.WarehouseListResponse
-	5, // [5:7] is the sub-list for method output_type
-	3, // [3:5] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	0, // 2: warehouse_iface.v1.TeamWarehouseReturnInfoResponse.warehouse_return:type_name -> warehouse_iface.v1.Warehouse
+	8, // 3: warehouse_iface.v1.TeamWarehouseReturnInfoResponse.user_return:type_name -> common.v1.User
+	0, // 4: warehouse_iface.v1.WarehouseIDsResponse.DataEntry.value:type_name -> warehouse_iface.v1.Warehouse
+	1, // 5: warehouse_iface.v1.WarehouseService.WarehouseIDs:input_type -> warehouse_iface.v1.WarehouseIDsRequest
+	3, // 6: warehouse_iface.v1.WarehouseService.WarehouseList:input_type -> warehouse_iface.v1.WarehouseListRequest
+	5, // 7: warehouse_iface.v1.WarehouseService.TeamWarehouseReturnInfo:input_type -> warehouse_iface.v1.TeamWarehouseReturnInfoRequest
+	2, // 8: warehouse_iface.v1.WarehouseService.WarehouseIDs:output_type -> warehouse_iface.v1.WarehouseIDsResponse
+	4, // 9: warehouse_iface.v1.WarehouseService.WarehouseList:output_type -> warehouse_iface.v1.WarehouseListResponse
+	6, // 10: warehouse_iface.v1.WarehouseService.TeamWarehouseReturnInfo:output_type -> warehouse_iface.v1.TeamWarehouseReturnInfoResponse
+	8, // [8:11] is the sub-list for method output_type
+	5, // [5:8] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_warehouse_iface_v1_warehouse_proto_init() }
@@ -321,7 +432,7 @@ func file_warehouse_iface_v1_warehouse_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_warehouse_iface_v1_warehouse_proto_rawDesc), len(file_warehouse_iface_v1_warehouse_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
