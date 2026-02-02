@@ -124,3 +124,55 @@ func (mr *MockWarehouseServiceClientMockRecorder) TeamWarehouseReturnInfo(ctx, r
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "TeamWarehouseReturnInfo", reflect.TypeOf((*MockWarehouseService)(nil).TeamWarehouseReturnInfo), ctx, req)
 }
 
+func (m *MockWarehouseService) TransactionNoteCreate(ctx context.Context, req *connect.Request[v1.TransactionNoteCreateRequest]) (*connect.Response[v1.TransactionNoteCreateResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "TransactionNoteCreate", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.TransactionNoteCreateResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockWarehouseServiceMockRecorder) TransactionNoteCreate(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "TransactionNoteCreate", reflect.TypeOf((*MockWarehouseService)(nil).TransactionNoteCreate), ctx, req)
+}
+
+func (m *MockWarehouseServiceClient) TransactionNoteCreate(ctx context.Context, req *connect.Request[v1.TransactionNoteCreateRequest]) (*connect.Response[v1.TransactionNoteCreateResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "TransactionNoteCreate", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.TransactionNoteCreateResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockWarehouseServiceClientMockRecorder) TransactionNoteCreate(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "TransactionNoteCreate", reflect.TypeOf((*MockWarehouseService)(nil).TransactionNoteCreate), ctx, req)
+}
+
+func (m *MockWarehouseService) TransactionNoteList(ctx context.Context, req *connect.Request[v1.TransactionNoteListRequest]) (*connect.Response[v1.TransactionNoteListResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "TransactionNoteList", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.TransactionNoteListResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockWarehouseServiceMockRecorder) TransactionNoteList(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "TransactionNoteList", reflect.TypeOf((*MockWarehouseService)(nil).TransactionNoteList), ctx, req)
+}
+
+func (m *MockWarehouseServiceClient) TransactionNoteList(ctx context.Context, req *connect.Request[v1.TransactionNoteListRequest]) (*connect.Response[v1.TransactionNoteListResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "TransactionNoteList", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.TransactionNoteListResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockWarehouseServiceClientMockRecorder) TransactionNoteList(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "TransactionNoteList", reflect.TypeOf((*MockWarehouseService)(nil).TransactionNoteList), ctx, req)
+}
+

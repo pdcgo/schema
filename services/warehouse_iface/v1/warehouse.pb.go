@@ -23,6 +23,332 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type TransactionNoteType int32
+
+const (
+	TransactionNoteType_TRANSACTION_NOTE_TYPE_UNSPECIFIED TransactionNoteType = 0
+	TransactionNoteType_TRANSACTION_NOTE_TYPE_COMMON      TransactionNoteType = 1
+	TransactionNoteType_TRANSACTION_NOTE_TYPE_RETURN      TransactionNoteType = 2
+	TransactionNoteType_TRANSACTION_NOTE_TYPE_CANCEL      TransactionNoteType = 3
+	TransactionNoteType_TRANSACTION_NOTE_TYPE_BROKEN      TransactionNoteType = 4
+	TransactionNoteType_TRANSACTION_NOTE_TYPE_PROBLEM     TransactionNoteType = 5
+)
+
+// Enum value maps for TransactionNoteType.
+var (
+	TransactionNoteType_name = map[int32]string{
+		0: "TRANSACTION_NOTE_TYPE_UNSPECIFIED",
+		1: "TRANSACTION_NOTE_TYPE_COMMON",
+		2: "TRANSACTION_NOTE_TYPE_RETURN",
+		3: "TRANSACTION_NOTE_TYPE_CANCEL",
+		4: "TRANSACTION_NOTE_TYPE_BROKEN",
+		5: "TRANSACTION_NOTE_TYPE_PROBLEM",
+	}
+	TransactionNoteType_value = map[string]int32{
+		"TRANSACTION_NOTE_TYPE_UNSPECIFIED": 0,
+		"TRANSACTION_NOTE_TYPE_COMMON":      1,
+		"TRANSACTION_NOTE_TYPE_RETURN":      2,
+		"TRANSACTION_NOTE_TYPE_CANCEL":      3,
+		"TRANSACTION_NOTE_TYPE_BROKEN":      4,
+		"TRANSACTION_NOTE_TYPE_PROBLEM":     5,
+	}
+)
+
+func (x TransactionNoteType) Enum() *TransactionNoteType {
+	p := new(TransactionNoteType)
+	*p = x
+	return p
+}
+
+func (x TransactionNoteType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (TransactionNoteType) Descriptor() protoreflect.EnumDescriptor {
+	return file_warehouse_iface_v1_warehouse_proto_enumTypes[0].Descriptor()
+}
+
+func (TransactionNoteType) Type() protoreflect.EnumType {
+	return &file_warehouse_iface_v1_warehouse_proto_enumTypes[0]
+}
+
+func (x TransactionNoteType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use TransactionNoteType.Descriptor instead.
+func (TransactionNoteType) EnumDescriptor() ([]byte, []int) {
+	return file_warehouse_iface_v1_warehouse_proto_rawDescGZIP(), []int{0}
+}
+
+type Note struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Type          TransactionNoteType    `protobuf:"varint,5,opt,name=type,proto3,enum=warehouse_iface.v1.TransactionNoteType" json:"type,omitempty"`
+	NoteText      string                 `protobuf:"bytes,6,opt,name=note_text,json=noteText,proto3" json:"note_text,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Note) Reset() {
+	*x = Note{}
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Note) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Note) ProtoMessage() {}
+
+func (x *Note) ProtoReflect() protoreflect.Message {
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Note.ProtoReflect.Descriptor instead.
+func (*Note) Descriptor() ([]byte, []int) {
+	return file_warehouse_iface_v1_warehouse_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *Note) GetType() TransactionNoteType {
+	if x != nil {
+		return x.Type
+	}
+	return TransactionNoteType_TRANSACTION_NOTE_TYPE_UNSPECIFIED
+}
+
+func (x *Note) GetNoteText() string {
+	if x != nil {
+		return x.NoteText
+	}
+	return ""
+}
+
+type TransactionNoteCreateRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TxId          uint64                 `protobuf:"varint,1,opt,name=tx_id,json=txId,proto3" json:"tx_id,omitempty"`
+	TeamId        uint64                 `protobuf:"varint,2,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	OrderId       uint64                 `protobuf:"varint,3,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	Notes         []*Note                `protobuf:"bytes,4,rep,name=notes,proto3" json:"notes,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TransactionNoteCreateRequest) Reset() {
+	*x = TransactionNoteCreateRequest{}
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TransactionNoteCreateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TransactionNoteCreateRequest) ProtoMessage() {}
+
+func (x *TransactionNoteCreateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TransactionNoteCreateRequest.ProtoReflect.Descriptor instead.
+func (*TransactionNoteCreateRequest) Descriptor() ([]byte, []int) {
+	return file_warehouse_iface_v1_warehouse_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *TransactionNoteCreateRequest) GetTxId() uint64 {
+	if x != nil {
+		return x.TxId
+	}
+	return 0
+}
+
+func (x *TransactionNoteCreateRequest) GetTeamId() uint64 {
+	if x != nil {
+		return x.TeamId
+	}
+	return 0
+}
+
+func (x *TransactionNoteCreateRequest) GetOrderId() uint64 {
+	if x != nil {
+		return x.OrderId
+	}
+	return 0
+}
+
+func (x *TransactionNoteCreateRequest) GetNotes() []*Note {
+	if x != nil {
+		return x.Notes
+	}
+	return nil
+}
+
+type TransactionNoteCreateResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Ids           []uint64               `protobuf:"varint,1,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TransactionNoteCreateResponse) Reset() {
+	*x = TransactionNoteCreateResponse{}
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TransactionNoteCreateResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TransactionNoteCreateResponse) ProtoMessage() {}
+
+func (x *TransactionNoteCreateResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TransactionNoteCreateResponse.ProtoReflect.Descriptor instead.
+func (*TransactionNoteCreateResponse) Descriptor() ([]byte, []int) {
+	return file_warehouse_iface_v1_warehouse_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *TransactionNoteCreateResponse) GetIds() []uint64 {
+	if x != nil {
+		return x.Ids
+	}
+	return nil
+}
+
+type TransactionNoteListRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TxId          uint64                 `protobuf:"varint,1,opt,name=tx_id,json=txId,proto3" json:"tx_id,omitempty"`
+	TeamId        uint64                 `protobuf:"varint,2,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	OrderId       uint64                 `protobuf:"varint,3,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TransactionNoteListRequest) Reset() {
+	*x = TransactionNoteListRequest{}
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TransactionNoteListRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TransactionNoteListRequest) ProtoMessage() {}
+
+func (x *TransactionNoteListRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TransactionNoteListRequest.ProtoReflect.Descriptor instead.
+func (*TransactionNoteListRequest) Descriptor() ([]byte, []int) {
+	return file_warehouse_iface_v1_warehouse_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *TransactionNoteListRequest) GetTxId() uint64 {
+	if x != nil {
+		return x.TxId
+	}
+	return 0
+}
+
+func (x *TransactionNoteListRequest) GetTeamId() uint64 {
+	if x != nil {
+		return x.TeamId
+	}
+	return 0
+}
+
+func (x *TransactionNoteListRequest) GetOrderId() uint64 {
+	if x != nil {
+		return x.OrderId
+	}
+	return 0
+}
+
+type TransactionNoteListResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	List          []*Note                `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TransactionNoteListResponse) Reset() {
+	*x = TransactionNoteListResponse{}
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TransactionNoteListResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TransactionNoteListResponse) ProtoMessage() {}
+
+func (x *TransactionNoteListResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TransactionNoteListResponse.ProtoReflect.Descriptor instead.
+func (*TransactionNoteListResponse) Descriptor() ([]byte, []int) {
+	return file_warehouse_iface_v1_warehouse_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *TransactionNoteListResponse) GetList() []*Note {
+	if x != nil {
+		return x.List
+	}
+	return nil
+}
+
 type Warehouse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -34,7 +360,7 @@ type Warehouse struct {
 
 func (x *Warehouse) Reset() {
 	*x = Warehouse{}
-	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[0]
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -46,7 +372,7 @@ func (x *Warehouse) String() string {
 func (*Warehouse) ProtoMessage() {}
 
 func (x *Warehouse) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[0]
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -59,7 +385,7 @@ func (x *Warehouse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Warehouse.ProtoReflect.Descriptor instead.
 func (*Warehouse) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_warehouse_proto_rawDescGZIP(), []int{0}
+	return file_warehouse_iface_v1_warehouse_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *Warehouse) GetId() uint64 {
@@ -92,7 +418,7 @@ type WarehouseIDsRequest struct {
 
 func (x *WarehouseIDsRequest) Reset() {
 	*x = WarehouseIDsRequest{}
-	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[1]
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -104,7 +430,7 @@ func (x *WarehouseIDsRequest) String() string {
 func (*WarehouseIDsRequest) ProtoMessage() {}
 
 func (x *WarehouseIDsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[1]
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -117,7 +443,7 @@ func (x *WarehouseIDsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WarehouseIDsRequest.ProtoReflect.Descriptor instead.
 func (*WarehouseIDsRequest) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_warehouse_proto_rawDescGZIP(), []int{1}
+	return file_warehouse_iface_v1_warehouse_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *WarehouseIDsRequest) GetIds() []uint64 {
@@ -136,7 +462,7 @@ type WarehouseIDsResponse struct {
 
 func (x *WarehouseIDsResponse) Reset() {
 	*x = WarehouseIDsResponse{}
-	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[2]
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -148,7 +474,7 @@ func (x *WarehouseIDsResponse) String() string {
 func (*WarehouseIDsResponse) ProtoMessage() {}
 
 func (x *WarehouseIDsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[2]
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -161,7 +487,7 @@ func (x *WarehouseIDsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WarehouseIDsResponse.ProtoReflect.Descriptor instead.
 func (*WarehouseIDsResponse) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_warehouse_proto_rawDescGZIP(), []int{2}
+	return file_warehouse_iface_v1_warehouse_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *WarehouseIDsResponse) GetData() map[uint64]*Warehouse {
@@ -179,7 +505,7 @@ type WarehouseListRequest struct {
 
 func (x *WarehouseListRequest) Reset() {
 	*x = WarehouseListRequest{}
-	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[3]
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -191,7 +517,7 @@ func (x *WarehouseListRequest) String() string {
 func (*WarehouseListRequest) ProtoMessage() {}
 
 func (x *WarehouseListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[3]
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -204,7 +530,7 @@ func (x *WarehouseListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WarehouseListRequest.ProtoReflect.Descriptor instead.
 func (*WarehouseListRequest) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_warehouse_proto_rawDescGZIP(), []int{3}
+	return file_warehouse_iface_v1_warehouse_proto_rawDescGZIP(), []int{8}
 }
 
 type WarehouseListResponse struct {
@@ -216,7 +542,7 @@ type WarehouseListResponse struct {
 
 func (x *WarehouseListResponse) Reset() {
 	*x = WarehouseListResponse{}
-	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[4]
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -228,7 +554,7 @@ func (x *WarehouseListResponse) String() string {
 func (*WarehouseListResponse) ProtoMessage() {}
 
 func (x *WarehouseListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[4]
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -241,7 +567,7 @@ func (x *WarehouseListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WarehouseListResponse.ProtoReflect.Descriptor instead.
 func (*WarehouseListResponse) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_warehouse_proto_rawDescGZIP(), []int{4}
+	return file_warehouse_iface_v1_warehouse_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *WarehouseListResponse) GetList() []*Warehouse {
@@ -260,7 +586,7 @@ type TeamWarehouseReturnInfoRequest struct {
 
 func (x *TeamWarehouseReturnInfoRequest) Reset() {
 	*x = TeamWarehouseReturnInfoRequest{}
-	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[5]
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -272,7 +598,7 @@ func (x *TeamWarehouseReturnInfoRequest) String() string {
 func (*TeamWarehouseReturnInfoRequest) ProtoMessage() {}
 
 func (x *TeamWarehouseReturnInfoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[5]
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -285,7 +611,7 @@ func (x *TeamWarehouseReturnInfoRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TeamWarehouseReturnInfoRequest.ProtoReflect.Descriptor instead.
 func (*TeamWarehouseReturnInfoRequest) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_warehouse_proto_rawDescGZIP(), []int{5}
+	return file_warehouse_iface_v1_warehouse_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *TeamWarehouseReturnInfoRequest) GetTeamId() uint64 {
@@ -305,7 +631,7 @@ type TeamWarehouseReturnInfoResponse struct {
 
 func (x *TeamWarehouseReturnInfoResponse) Reset() {
 	*x = TeamWarehouseReturnInfoResponse{}
-	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[6]
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -317,7 +643,7 @@ func (x *TeamWarehouseReturnInfoResponse) String() string {
 func (*TeamWarehouseReturnInfoResponse) ProtoMessage() {}
 
 func (x *TeamWarehouseReturnInfoResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[6]
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -330,7 +656,7 @@ func (x *TeamWarehouseReturnInfoResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TeamWarehouseReturnInfoResponse.ProtoReflect.Descriptor instead.
 func (*TeamWarehouseReturnInfoResponse) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_warehouse_proto_rawDescGZIP(), []int{6}
+	return file_warehouse_iface_v1_warehouse_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *TeamWarehouseReturnInfoResponse) GetWarehouseReturn() *Warehouse {
@@ -351,7 +677,23 @@ var File_warehouse_iface_v1_warehouse_proto protoreflect.FileDescriptor
 
 const file_warehouse_iface_v1_warehouse_proto_rawDesc = "" +
 	"\n" +
-	"\"warehouse_iface/v1/warehouse.proto\x12\x12warehouse_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\"C\n" +
+	"\"warehouse_iface/v1/warehouse.proto\x12\x12warehouse_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\"`\n" +
+	"\x04Note\x12;\n" +
+	"\x04type\x18\x05 \x01(\x0e2'.warehouse_iface.v1.TransactionNoteTypeR\x04type\x12\x1b\n" +
+	"\tnote_text\x18\x06 \x01(\tR\bnoteText\"\xb3\x01\n" +
+	"\x1cTransactionNoteCreateRequest\x12\x1c\n" +
+	"\x05tx_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x04txId\x12 \n" +
+	"\ateam_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12\x19\n" +
+	"\border_id\x18\x03 \x01(\x04R\aorderId\x128\n" +
+	"\x05notes\x18\x04 \x03(\v2\x18.warehouse_iface.v1.NoteB\b\xbaH\x05\x92\x01\x02\x10\x05R\x05notes\"1\n" +
+	"\x1dTransactionNoteCreateResponse\x12\x10\n" +
+	"\x03ids\x18\x01 \x03(\x04R\x03ids\"w\n" +
+	"\x1aTransactionNoteListRequest\x12\x1c\n" +
+	"\x05tx_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x04txId\x12 \n" +
+	"\ateam_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12\x19\n" +
+	"\border_id\x18\x03 \x01(\x04R\aorderId\"K\n" +
+	"\x1bTransactionNoteListResponse\x12,\n" +
+	"\x04list\x18\x01 \x03(\v2\x18.warehouse_iface.v1.NoteR\x04list\"C\n" +
 	"\tWarehouse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x12\n" +
@@ -371,11 +713,20 @@ const file_warehouse_iface_v1_warehouse_proto_rawDesc = "" +
 	"\x1fTeamWarehouseReturnInfoResponse\x12H\n" +
 	"\x10warehouse_return\x18\x01 \x01(\v2\x1d.warehouse_iface.v1.WarehouseR\x0fwarehouseReturn\x120\n" +
 	"\vuser_return\x18\x02 \x01(\v2\x0f.common.v1.UserR\n" +
-	"userReturn2\xe0\x02\n" +
+	"userReturn*\xe7\x01\n" +
+	"\x13TransactionNoteType\x12%\n" +
+	"!TRANSACTION_NOTE_TYPE_UNSPECIFIED\x10\x00\x12 \n" +
+	"\x1cTRANSACTION_NOTE_TYPE_COMMON\x10\x01\x12 \n" +
+	"\x1cTRANSACTION_NOTE_TYPE_RETURN\x10\x02\x12 \n" +
+	"\x1cTRANSACTION_NOTE_TYPE_CANCEL\x10\x03\x12 \n" +
+	"\x1cTRANSACTION_NOTE_TYPE_BROKEN\x10\x04\x12!\n" +
+	"\x1dTRANSACTION_NOTE_TYPE_PROBLEM\x10\x052\xd6\x04\n" +
 	"\x10WarehouseService\x12a\n" +
 	"\fWarehouseIDs\x12'.warehouse_iface.v1.WarehouseIDsRequest\x1a(.warehouse_iface.v1.WarehouseIDsResponse\x12d\n" +
 	"\rWarehouseList\x12(.warehouse_iface.v1.WarehouseListRequest\x1a).warehouse_iface.v1.WarehouseListResponse\x12\x82\x01\n" +
-	"\x17TeamWarehouseReturnInfo\x122.warehouse_iface.v1.TeamWarehouseReturnInfoRequest\x1a3.warehouse_iface.v1.TeamWarehouseReturnInfoResponseB\xd2\x01\n" +
+	"\x17TeamWarehouseReturnInfo\x122.warehouse_iface.v1.TeamWarehouseReturnInfoRequest\x1a3.warehouse_iface.v1.TeamWarehouseReturnInfoResponse\x12|\n" +
+	"\x15TransactionNoteCreate\x120.warehouse_iface.v1.TransactionNoteCreateRequest\x1a1.warehouse_iface.v1.TransactionNoteCreateResponse\x12v\n" +
+	"\x13TransactionNoteList\x12..warehouse_iface.v1.TransactionNoteListRequest\x1a/.warehouse_iface.v1.TransactionNoteListResponseB\xd2\x01\n" +
 	"\x16com.warehouse_iface.v1B\x0eWarehouseProtoP\x01ZCgithub.com/pdcgo/schema/services/warehouse_iface/v1;warehouse_iface\xa2\x02\x03WXX\xaa\x02\x11WarehouseIface.V1\xca\x02\x11WarehouseIface\\V1\xe2\x02\x1dWarehouseIface\\V1\\GPBMetadata\xea\x02\x12WarehouseIface::V1b\x06proto3"
 
 var (
@@ -390,35 +741,49 @@ func file_warehouse_iface_v1_warehouse_proto_rawDescGZIP() []byte {
 	return file_warehouse_iface_v1_warehouse_proto_rawDescData
 }
 
-var file_warehouse_iface_v1_warehouse_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_warehouse_iface_v1_warehouse_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_warehouse_iface_v1_warehouse_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_warehouse_iface_v1_warehouse_proto_goTypes = []any{
-	(*Warehouse)(nil),                       // 0: warehouse_iface.v1.Warehouse
-	(*WarehouseIDsRequest)(nil),             // 1: warehouse_iface.v1.WarehouseIDsRequest
-	(*WarehouseIDsResponse)(nil),            // 2: warehouse_iface.v1.WarehouseIDsResponse
-	(*WarehouseListRequest)(nil),            // 3: warehouse_iface.v1.WarehouseListRequest
-	(*WarehouseListResponse)(nil),           // 4: warehouse_iface.v1.WarehouseListResponse
-	(*TeamWarehouseReturnInfoRequest)(nil),  // 5: warehouse_iface.v1.TeamWarehouseReturnInfoRequest
-	(*TeamWarehouseReturnInfoResponse)(nil), // 6: warehouse_iface.v1.TeamWarehouseReturnInfoResponse
-	nil,                                     // 7: warehouse_iface.v1.WarehouseIDsResponse.DataEntry
-	(*v1.User)(nil),                         // 8: common.v1.User
+	(TransactionNoteType)(0),                // 0: warehouse_iface.v1.TransactionNoteType
+	(*Note)(nil),                            // 1: warehouse_iface.v1.Note
+	(*TransactionNoteCreateRequest)(nil),    // 2: warehouse_iface.v1.TransactionNoteCreateRequest
+	(*TransactionNoteCreateResponse)(nil),   // 3: warehouse_iface.v1.TransactionNoteCreateResponse
+	(*TransactionNoteListRequest)(nil),      // 4: warehouse_iface.v1.TransactionNoteListRequest
+	(*TransactionNoteListResponse)(nil),     // 5: warehouse_iface.v1.TransactionNoteListResponse
+	(*Warehouse)(nil),                       // 6: warehouse_iface.v1.Warehouse
+	(*WarehouseIDsRequest)(nil),             // 7: warehouse_iface.v1.WarehouseIDsRequest
+	(*WarehouseIDsResponse)(nil),            // 8: warehouse_iface.v1.WarehouseIDsResponse
+	(*WarehouseListRequest)(nil),            // 9: warehouse_iface.v1.WarehouseListRequest
+	(*WarehouseListResponse)(nil),           // 10: warehouse_iface.v1.WarehouseListResponse
+	(*TeamWarehouseReturnInfoRequest)(nil),  // 11: warehouse_iface.v1.TeamWarehouseReturnInfoRequest
+	(*TeamWarehouseReturnInfoResponse)(nil), // 12: warehouse_iface.v1.TeamWarehouseReturnInfoResponse
+	nil,                                     // 13: warehouse_iface.v1.WarehouseIDsResponse.DataEntry
+	(*v1.User)(nil),                         // 14: common.v1.User
 }
 var file_warehouse_iface_v1_warehouse_proto_depIdxs = []int32{
-	7, // 0: warehouse_iface.v1.WarehouseIDsResponse.data:type_name -> warehouse_iface.v1.WarehouseIDsResponse.DataEntry
-	0, // 1: warehouse_iface.v1.WarehouseListResponse.list:type_name -> warehouse_iface.v1.Warehouse
-	0, // 2: warehouse_iface.v1.TeamWarehouseReturnInfoResponse.warehouse_return:type_name -> warehouse_iface.v1.Warehouse
-	8, // 3: warehouse_iface.v1.TeamWarehouseReturnInfoResponse.user_return:type_name -> common.v1.User
-	0, // 4: warehouse_iface.v1.WarehouseIDsResponse.DataEntry.value:type_name -> warehouse_iface.v1.Warehouse
-	1, // 5: warehouse_iface.v1.WarehouseService.WarehouseIDs:input_type -> warehouse_iface.v1.WarehouseIDsRequest
-	3, // 6: warehouse_iface.v1.WarehouseService.WarehouseList:input_type -> warehouse_iface.v1.WarehouseListRequest
-	5, // 7: warehouse_iface.v1.WarehouseService.TeamWarehouseReturnInfo:input_type -> warehouse_iface.v1.TeamWarehouseReturnInfoRequest
-	2, // 8: warehouse_iface.v1.WarehouseService.WarehouseIDs:output_type -> warehouse_iface.v1.WarehouseIDsResponse
-	4, // 9: warehouse_iface.v1.WarehouseService.WarehouseList:output_type -> warehouse_iface.v1.WarehouseListResponse
-	6, // 10: warehouse_iface.v1.WarehouseService.TeamWarehouseReturnInfo:output_type -> warehouse_iface.v1.TeamWarehouseReturnInfoResponse
-	8, // [8:11] is the sub-list for method output_type
-	5, // [5:8] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	0,  // 0: warehouse_iface.v1.Note.type:type_name -> warehouse_iface.v1.TransactionNoteType
+	1,  // 1: warehouse_iface.v1.TransactionNoteCreateRequest.notes:type_name -> warehouse_iface.v1.Note
+	1,  // 2: warehouse_iface.v1.TransactionNoteListResponse.list:type_name -> warehouse_iface.v1.Note
+	13, // 3: warehouse_iface.v1.WarehouseIDsResponse.data:type_name -> warehouse_iface.v1.WarehouseIDsResponse.DataEntry
+	6,  // 4: warehouse_iface.v1.WarehouseListResponse.list:type_name -> warehouse_iface.v1.Warehouse
+	6,  // 5: warehouse_iface.v1.TeamWarehouseReturnInfoResponse.warehouse_return:type_name -> warehouse_iface.v1.Warehouse
+	14, // 6: warehouse_iface.v1.TeamWarehouseReturnInfoResponse.user_return:type_name -> common.v1.User
+	6,  // 7: warehouse_iface.v1.WarehouseIDsResponse.DataEntry.value:type_name -> warehouse_iface.v1.Warehouse
+	7,  // 8: warehouse_iface.v1.WarehouseService.WarehouseIDs:input_type -> warehouse_iface.v1.WarehouseIDsRequest
+	9,  // 9: warehouse_iface.v1.WarehouseService.WarehouseList:input_type -> warehouse_iface.v1.WarehouseListRequest
+	11, // 10: warehouse_iface.v1.WarehouseService.TeamWarehouseReturnInfo:input_type -> warehouse_iface.v1.TeamWarehouseReturnInfoRequest
+	2,  // 11: warehouse_iface.v1.WarehouseService.TransactionNoteCreate:input_type -> warehouse_iface.v1.TransactionNoteCreateRequest
+	4,  // 12: warehouse_iface.v1.WarehouseService.TransactionNoteList:input_type -> warehouse_iface.v1.TransactionNoteListRequest
+	8,  // 13: warehouse_iface.v1.WarehouseService.WarehouseIDs:output_type -> warehouse_iface.v1.WarehouseIDsResponse
+	10, // 14: warehouse_iface.v1.WarehouseService.WarehouseList:output_type -> warehouse_iface.v1.WarehouseListResponse
+	12, // 15: warehouse_iface.v1.WarehouseService.TeamWarehouseReturnInfo:output_type -> warehouse_iface.v1.TeamWarehouseReturnInfoResponse
+	3,  // 16: warehouse_iface.v1.WarehouseService.TransactionNoteCreate:output_type -> warehouse_iface.v1.TransactionNoteCreateResponse
+	5,  // 17: warehouse_iface.v1.WarehouseService.TransactionNoteList:output_type -> warehouse_iface.v1.TransactionNoteListResponse
+	13, // [13:18] is the sub-list for method output_type
+	8,  // [8:13] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_warehouse_iface_v1_warehouse_proto_init() }
@@ -431,13 +796,14 @@ func file_warehouse_iface_v1_warehouse_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_warehouse_iface_v1_warehouse_proto_rawDesc), len(file_warehouse_iface_v1_warehouse_proto_rawDesc)),
-			NumEnums:      0,
-			NumMessages:   8,
+			NumEnums:      1,
+			NumMessages:   13,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
 		GoTypes:           file_warehouse_iface_v1_warehouse_proto_goTypes,
 		DependencyIndexes: file_warehouse_iface_v1_warehouse_proto_depIdxs,
+		EnumInfos:         file_warehouse_iface_v1_warehouse_proto_enumTypes,
 		MessageInfos:      file_warehouse_iface_v1_warehouse_proto_msgTypes,
 	}.Build()
 	File_warehouse_iface_v1_warehouse_proto = out.File

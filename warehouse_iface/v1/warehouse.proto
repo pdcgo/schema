@@ -12,6 +12,44 @@ service WarehouseService {
   rpc WarehouseIDs(WarehouseIDsRequest) returns (WarehouseIDsResponse);
   rpc WarehouseList(WarehouseListRequest) returns (WarehouseListResponse);
   rpc TeamWarehouseReturnInfo(TeamWarehouseReturnInfoRequest) returns (TeamWarehouseReturnInfoResponse);
+
+  rpc TransactionNoteCreate(TransactionNoteCreateRequest) returns (TransactionNoteCreateResponse);
+  rpc TransactionNoteList(TransactionNoteListRequest) returns (TransactionNoteListResponse);
+}
+
+enum TransactionNoteType {
+  TRANSACTION_NOTE_TYPE_UNSPECIFIED = 0;
+  TRANSACTION_NOTE_TYPE_COMMON = 1;
+  TRANSACTION_NOTE_TYPE_RETURN = 2;
+  TRANSACTION_NOTE_TYPE_CANCEL = 3;
+  TRANSACTION_NOTE_TYPE_BROKEN = 4;
+  TRANSACTION_NOTE_TYPE_PROBLEM = 5;
+}
+
+message Note {
+  TransactionNoteType type = 5;
+  string note_text = 6;
+}
+
+message TransactionNoteCreateRequest {
+  uint64 tx_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 team_id = 2 [(buf.validate.field).uint64.gt = 0];
+  uint64 order_id = 3;
+
+  repeated Note notes = 4 [(buf.validate.field).repeated = {max_items: 5}];
+}
+
+message TransactionNoteCreateResponse {
+  repeated uint64 ids = 1;
+}
+
+message TransactionNoteListRequest {
+  uint64 tx_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 team_id = 2 [(buf.validate.field).uint64.gt = 0];
+  uint64 order_id = 3;
+}
+message TransactionNoteListResponse {
+  repeated Note list = 1;
 }
 
 message Warehouse {
