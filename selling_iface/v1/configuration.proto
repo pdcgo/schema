@@ -20,7 +20,25 @@ service ConfigurationLimitService {
   rpc OweLimitCustomDelete(OweLimitCustomDeleteRequest) returns (OweLimitCustomDeleteResponse);
   rpc OweLimitCustomByIDs(OweLimitCustomByIDsRequest) returns (OweLimitCustomByIDsResponse);
   rpc CheckOweLimit(CheckOweLimitRequest) returns (CheckOweLimitResponse);
+
+  // selling limit profit
+  rpc SellingLimitProfitGet(SellingLimitProfitGetRequest) returns (SellingLimitProfitGetResponse);
+  rpc SellingLimitProfitEdit(SellingLimitProfitEditRequest) returns (SellingLimitProfitEditResponse);
 }
+
+message SellingLimitProfitConfig {
+  double profit_limit_percent = 1;
+}
+
+message SellingLimitProfitGetRequest {}
+message SellingLimitProfitGetResponse {
+  SellingLimitProfitConfig data = 1;
+}
+
+message SellingLimitProfitEditRequest {
+  SellingLimitProfitConfig data = 1;
+}
+message SellingLimitProfitEditResponse {}
 
 message OweDefaultLimitGetRequest {
   uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];

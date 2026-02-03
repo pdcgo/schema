@@ -254,3 +254,55 @@ func (mr *MockConfigurationLimitServiceClientMockRecorder) CheckOweLimit(ctx, re
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CheckOweLimit", reflect.TypeOf((*MockConfigurationLimitService)(nil).CheckOweLimit), ctx, req)
 }
 
+func (m *MockConfigurationLimitService) SellingLimitProfitGet(ctx context.Context, req *connect.Request[v1.SellingLimitProfitGetRequest]) (*connect.Response[v1.SellingLimitProfitGetResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "SellingLimitProfitGet", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.SellingLimitProfitGetResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockConfigurationLimitServiceMockRecorder) SellingLimitProfitGet(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SellingLimitProfitGet", reflect.TypeOf((*MockConfigurationLimitService)(nil).SellingLimitProfitGet), ctx, req)
+}
+
+func (m *MockConfigurationLimitServiceClient) SellingLimitProfitGet(ctx context.Context, req *connect.Request[v1.SellingLimitProfitGetRequest]) (*connect.Response[v1.SellingLimitProfitGetResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "SellingLimitProfitGet", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.SellingLimitProfitGetResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockConfigurationLimitServiceClientMockRecorder) SellingLimitProfitGet(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SellingLimitProfitGet", reflect.TypeOf((*MockConfigurationLimitService)(nil).SellingLimitProfitGet), ctx, req)
+}
+
+func (m *MockConfigurationLimitService) SellingLimitProfitEdit(ctx context.Context, req *connect.Request[v1.SellingLimitProfitEditRequest]) (*connect.Response[v1.SellingLimitProfitEditResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "SellingLimitProfitEdit", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.SellingLimitProfitEditResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockConfigurationLimitServiceMockRecorder) SellingLimitProfitEdit(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SellingLimitProfitEdit", reflect.TypeOf((*MockConfigurationLimitService)(nil).SellingLimitProfitEdit), ctx, req)
+}
+
+func (m *MockConfigurationLimitServiceClient) SellingLimitProfitEdit(ctx context.Context, req *connect.Request[v1.SellingLimitProfitEditRequest]) (*connect.Response[v1.SellingLimitProfitEditResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "SellingLimitProfitEdit", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.SellingLimitProfitEditResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockConfigurationLimitServiceClientMockRecorder) SellingLimitProfitEdit(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SellingLimitProfitEdit", reflect.TypeOf((*MockConfigurationLimitService)(nil).SellingLimitProfitEdit), ctx, req)
+}
+

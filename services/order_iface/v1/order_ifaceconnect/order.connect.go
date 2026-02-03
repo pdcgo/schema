@@ -96,6 +96,7 @@ type OrderServiceClient interface {
 	OrderDraftList(context.Context, *connect.Request[v1.OrderDraftListRequest]) (*connect.Response[v1.OrderDraftListResponse], error)
 	OrderDraftGet(context.Context, *connect.Request[v1.OrderDraftGetRequest]) (*connect.Response[v1.OrderDraftGetResponse], error)
 	OrderDraftCheck(context.Context, *connect.Request[v1.OrderDraftCheckRequest]) (*connect.Response[v1.OrderDraftCheckResponse], error)
+	// create order
 	OrderCreate(context.Context, *connect.Request[v1.OrderCreateRequest]) (*connect.Response[v1.OrderCreateResponse], error)
 	// bagian accounting
 	OrderFundSet(context.Context) *connect.ClientStreamForClient[v1.OrderFundSetRequest, v1.OrderFundSetResponse]
@@ -360,6 +361,7 @@ type OrderServiceHandler interface {
 	OrderDraftList(context.Context, *connect.Request[v1.OrderDraftListRequest]) (*connect.Response[v1.OrderDraftListResponse], error)
 	OrderDraftGet(context.Context, *connect.Request[v1.OrderDraftGetRequest]) (*connect.Response[v1.OrderDraftGetResponse], error)
 	OrderDraftCheck(context.Context, *connect.Request[v1.OrderDraftCheckRequest]) (*connect.Response[v1.OrderDraftCheckResponse], error)
+	// create order
 	OrderCreate(context.Context, *connect.Request[v1.OrderCreateRequest]) (*connect.Response[v1.OrderCreateResponse], error)
 	// bagian accounting
 	OrderFundSet(context.Context, *connect.ClientStream[v1.OrderFundSetRequest]) (*connect.Response[v1.OrderFundSetResponse], error)

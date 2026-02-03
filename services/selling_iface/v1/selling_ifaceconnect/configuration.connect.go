@@ -58,6 +58,12 @@ const (
 	// ConfigurationLimitServiceCheckOweLimitProcedure is the fully-qualified name of the
 	// ConfigurationLimitService's CheckOweLimit RPC.
 	ConfigurationLimitServiceCheckOweLimitProcedure = "/selling_iface.v1.ConfigurationLimitService/CheckOweLimit"
+	// ConfigurationLimitServiceSellingLimitProfitGetProcedure is the fully-qualified name of the
+	// ConfigurationLimitService's SellingLimitProfitGet RPC.
+	ConfigurationLimitServiceSellingLimitProfitGetProcedure = "/selling_iface.v1.ConfigurationLimitService/SellingLimitProfitGet"
+	// ConfigurationLimitServiceSellingLimitProfitEditProcedure is the fully-qualified name of the
+	// ConfigurationLimitService's SellingLimitProfitEdit RPC.
+	ConfigurationLimitServiceSellingLimitProfitEditProcedure = "/selling_iface.v1.ConfigurationLimitService/SellingLimitProfitEdit"
 )
 
 // ConfigurationLimitServiceClient is a client for the selling_iface.v1.ConfigurationLimitService
@@ -72,6 +78,9 @@ type ConfigurationLimitServiceClient interface {
 	OweLimitCustomDelete(context.Context, *connect.Request[v1.OweLimitCustomDeleteRequest]) (*connect.Response[v1.OweLimitCustomDeleteResponse], error)
 	OweLimitCustomByIDs(context.Context, *connect.Request[v1.OweLimitCustomByIDsRequest]) (*connect.Response[v1.OweLimitCustomByIDsResponse], error)
 	CheckOweLimit(context.Context, *connect.Request[v1.CheckOweLimitRequest]) (*connect.Response[v1.CheckOweLimitResponse], error)
+	// selling limit profit
+	SellingLimitProfitGet(context.Context, *connect.Request[v1.SellingLimitProfitGetRequest]) (*connect.Response[v1.SellingLimitProfitGetResponse], error)
+	SellingLimitProfitEdit(context.Context, *connect.Request[v1.SellingLimitProfitEditRequest]) (*connect.Response[v1.SellingLimitProfitEditResponse], error)
 }
 
 // NewConfigurationLimitServiceClient constructs a client for the
@@ -133,19 +142,33 @@ func NewConfigurationLimitServiceClient(httpClient connect.HTTPClient, baseURL s
 			connect.WithSchema(configurationLimitServiceMethods.ByName("CheckOweLimit")),
 			connect.WithClientOptions(opts...),
 		),
+		sellingLimitProfitGet: connect.NewClient[v1.SellingLimitProfitGetRequest, v1.SellingLimitProfitGetResponse](
+			httpClient,
+			baseURL+ConfigurationLimitServiceSellingLimitProfitGetProcedure,
+			connect.WithSchema(configurationLimitServiceMethods.ByName("SellingLimitProfitGet")),
+			connect.WithClientOptions(opts...),
+		),
+		sellingLimitProfitEdit: connect.NewClient[v1.SellingLimitProfitEditRequest, v1.SellingLimitProfitEditResponse](
+			httpClient,
+			baseURL+ConfigurationLimitServiceSellingLimitProfitEditProcedure,
+			connect.WithSchema(configurationLimitServiceMethods.ByName("SellingLimitProfitEdit")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // configurationLimitServiceClient implements ConfigurationLimitServiceClient.
 type configurationLimitServiceClient struct {
-	limitInvoice         *connect.Client[v1.LimitInvoiceRequest, v1.LimitInvoiceResponse]
-	oweDefaultLimitGet   *connect.Client[v1.OweDefaultLimitGetRequest, v1.OweDefaultLimitGetResponse]
-	oweDefaultLimitEdit  *connect.Client[v1.OweDefaultLimitEditRequest, v1.OweDefaultLimitEditResponse]
-	oweLimitCustomCreate *connect.Client[v1.OweLimitCustomCreateRequest, v1.OweLimitCustomCreateResponse]
-	oweLimitCustomList   *connect.Client[v1.OweLimitCustomListRequest, v1.OweLimitCustomListResponse]
-	oweLimitCustomDelete *connect.Client[v1.OweLimitCustomDeleteRequest, v1.OweLimitCustomDeleteResponse]
-	oweLimitCustomByIDs  *connect.Client[v1.OweLimitCustomByIDsRequest, v1.OweLimitCustomByIDsResponse]
-	checkOweLimit        *connect.Client[v1.CheckOweLimitRequest, v1.CheckOweLimitResponse]
+	limitInvoice           *connect.Client[v1.LimitInvoiceRequest, v1.LimitInvoiceResponse]
+	oweDefaultLimitGet     *connect.Client[v1.OweDefaultLimitGetRequest, v1.OweDefaultLimitGetResponse]
+	oweDefaultLimitEdit    *connect.Client[v1.OweDefaultLimitEditRequest, v1.OweDefaultLimitEditResponse]
+	oweLimitCustomCreate   *connect.Client[v1.OweLimitCustomCreateRequest, v1.OweLimitCustomCreateResponse]
+	oweLimitCustomList     *connect.Client[v1.OweLimitCustomListRequest, v1.OweLimitCustomListResponse]
+	oweLimitCustomDelete   *connect.Client[v1.OweLimitCustomDeleteRequest, v1.OweLimitCustomDeleteResponse]
+	oweLimitCustomByIDs    *connect.Client[v1.OweLimitCustomByIDsRequest, v1.OweLimitCustomByIDsResponse]
+	checkOweLimit          *connect.Client[v1.CheckOweLimitRequest, v1.CheckOweLimitResponse]
+	sellingLimitProfitGet  *connect.Client[v1.SellingLimitProfitGetRequest, v1.SellingLimitProfitGetResponse]
+	sellingLimitProfitEdit *connect.Client[v1.SellingLimitProfitEditRequest, v1.SellingLimitProfitEditResponse]
 }
 
 // LimitInvoice calls selling_iface.v1.ConfigurationLimitService.LimitInvoice.
@@ -188,6 +211,16 @@ func (c *configurationLimitServiceClient) CheckOweLimit(ctx context.Context, req
 	return c.checkOweLimit.CallUnary(ctx, req)
 }
 
+// SellingLimitProfitGet calls selling_iface.v1.ConfigurationLimitService.SellingLimitProfitGet.
+func (c *configurationLimitServiceClient) SellingLimitProfitGet(ctx context.Context, req *connect.Request[v1.SellingLimitProfitGetRequest]) (*connect.Response[v1.SellingLimitProfitGetResponse], error) {
+	return c.sellingLimitProfitGet.CallUnary(ctx, req)
+}
+
+// SellingLimitProfitEdit calls selling_iface.v1.ConfigurationLimitService.SellingLimitProfitEdit.
+func (c *configurationLimitServiceClient) SellingLimitProfitEdit(ctx context.Context, req *connect.Request[v1.SellingLimitProfitEditRequest]) (*connect.Response[v1.SellingLimitProfitEditResponse], error) {
+	return c.sellingLimitProfitEdit.CallUnary(ctx, req)
+}
+
 // ConfigurationLimitServiceHandler is an implementation of the
 // selling_iface.v1.ConfigurationLimitService service.
 type ConfigurationLimitServiceHandler interface {
@@ -200,6 +233,9 @@ type ConfigurationLimitServiceHandler interface {
 	OweLimitCustomDelete(context.Context, *connect.Request[v1.OweLimitCustomDeleteRequest]) (*connect.Response[v1.OweLimitCustomDeleteResponse], error)
 	OweLimitCustomByIDs(context.Context, *connect.Request[v1.OweLimitCustomByIDsRequest]) (*connect.Response[v1.OweLimitCustomByIDsResponse], error)
 	CheckOweLimit(context.Context, *connect.Request[v1.CheckOweLimitRequest]) (*connect.Response[v1.CheckOweLimitResponse], error)
+	// selling limit profit
+	SellingLimitProfitGet(context.Context, *connect.Request[v1.SellingLimitProfitGetRequest]) (*connect.Response[v1.SellingLimitProfitGetResponse], error)
+	SellingLimitProfitEdit(context.Context, *connect.Request[v1.SellingLimitProfitEditRequest]) (*connect.Response[v1.SellingLimitProfitEditResponse], error)
 }
 
 // NewConfigurationLimitServiceHandler builds an HTTP handler from the service implementation. It
@@ -257,6 +293,18 @@ func NewConfigurationLimitServiceHandler(svc ConfigurationLimitServiceHandler, o
 		connect.WithSchema(configurationLimitServiceMethods.ByName("CheckOweLimit")),
 		connect.WithHandlerOptions(opts...),
 	)
+	configurationLimitServiceSellingLimitProfitGetHandler := connect.NewUnaryHandler(
+		ConfigurationLimitServiceSellingLimitProfitGetProcedure,
+		svc.SellingLimitProfitGet,
+		connect.WithSchema(configurationLimitServiceMethods.ByName("SellingLimitProfitGet")),
+		connect.WithHandlerOptions(opts...),
+	)
+	configurationLimitServiceSellingLimitProfitEditHandler := connect.NewUnaryHandler(
+		ConfigurationLimitServiceSellingLimitProfitEditProcedure,
+		svc.SellingLimitProfitEdit,
+		connect.WithSchema(configurationLimitServiceMethods.ByName("SellingLimitProfitEdit")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/selling_iface.v1.ConfigurationLimitService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case ConfigurationLimitServiceLimitInvoiceProcedure:
@@ -275,6 +323,10 @@ func NewConfigurationLimitServiceHandler(svc ConfigurationLimitServiceHandler, o
 			configurationLimitServiceOweLimitCustomByIDsHandler.ServeHTTP(w, r)
 		case ConfigurationLimitServiceCheckOweLimitProcedure:
 			configurationLimitServiceCheckOweLimitHandler.ServeHTTP(w, r)
+		case ConfigurationLimitServiceSellingLimitProfitGetProcedure:
+			configurationLimitServiceSellingLimitProfitGetHandler.ServeHTTP(w, r)
+		case ConfigurationLimitServiceSellingLimitProfitEditProcedure:
+			configurationLimitServiceSellingLimitProfitEditHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -314,4 +366,12 @@ func (UnimplementedConfigurationLimitServiceHandler) OweLimitCustomByIDs(context
 
 func (UnimplementedConfigurationLimitServiceHandler) CheckOweLimit(context.Context, *connect.Request[v1.CheckOweLimitRequest]) (*connect.Response[v1.CheckOweLimitResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("selling_iface.v1.ConfigurationLimitService.CheckOweLimit is not implemented"))
+}
+
+func (UnimplementedConfigurationLimitServiceHandler) SellingLimitProfitGet(context.Context, *connect.Request[v1.SellingLimitProfitGetRequest]) (*connect.Response[v1.SellingLimitProfitGetResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("selling_iface.v1.ConfigurationLimitService.SellingLimitProfitGet is not implemented"))
+}
+
+func (UnimplementedConfigurationLimitServiceHandler) SellingLimitProfitEdit(context.Context, *connect.Request[v1.SellingLimitProfitEditRequest]) (*connect.Response[v1.SellingLimitProfitEditResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("selling_iface.v1.ConfigurationLimitService.SellingLimitProfitEdit is not implemented"))
 }

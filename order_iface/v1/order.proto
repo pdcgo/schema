@@ -18,7 +18,10 @@ service OrderService {
   rpc OrderDraftList(OrderDraftListRequest) returns (OrderDraftListResponse);
   rpc OrderDraftGet(OrderDraftGetRequest) returns (OrderDraftGetResponse);
   rpc OrderDraftCheck(OrderDraftCheckRequest) returns (OrderDraftCheckResponse);
+
+  // create order
   rpc OrderCreate(OrderCreateRequest) returns (OrderCreateResponse);
+  // rpc ShopAccess(ShopAccessRequest) returns (ShopAccessResponse);
 
   // bagian accounting
   rpc OrderFundSet(stream OrderFundSetRequest) returns (OrderFundSetResponse);
