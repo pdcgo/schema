@@ -27,7 +27,8 @@ service ConfigurationLimitService {
 }
 
 message SellingLimitProfitConfig {
-  double profit_limit_percent = 1;
+  double min_percent = 1;
+  double max_percent = 2;
 }
 
 message SellingLimitProfitGetRequest {}

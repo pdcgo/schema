@@ -24,10 +24,11 @@ const (
 )
 
 type SellingLimitProfitConfig struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	ProfitLimitPercent float64                `protobuf:"fixed64,1,opt,name=profit_limit_percent,json=profitLimitPercent,proto3" json:"profit_limit_percent,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	MinPercent    float64                `protobuf:"fixed64,1,opt,name=min_percent,json=minPercent,proto3" json:"min_percent,omitempty"`
+	MaxPercent    float64                `protobuf:"fixed64,2,opt,name=max_percent,json=maxPercent,proto3" json:"max_percent,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *SellingLimitProfitConfig) Reset() {
@@ -60,9 +61,16 @@ func (*SellingLimitProfitConfig) Descriptor() ([]byte, []int) {
 	return file_selling_iface_v1_configuration_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *SellingLimitProfitConfig) GetProfitLimitPercent() float64 {
+func (x *SellingLimitProfitConfig) GetMinPercent() float64 {
 	if x != nil {
-		return x.ProfitLimitPercent
+		return x.MinPercent
+	}
+	return 0
+}
+
+func (x *SellingLimitProfitConfig) GetMaxPercent() float64 {
+	if x != nil {
+		return x.MaxPercent
 	}
 	return 0
 }
@@ -1383,9 +1391,12 @@ var File_selling_iface_v1_configuration_proto protoreflect.FileDescriptor
 
 const file_selling_iface_v1_configuration_proto_rawDesc = "" +
 	"\n" +
-	"$selling_iface/v1/configuration.proto\x12\x10selling_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x14common/v1/team.proto\"L\n" +
-	"\x18SellingLimitProfitConfig\x120\n" +
-	"\x14profit_limit_percent\x18\x01 \x01(\x01R\x12profitLimitPercent\"\x1e\n" +
+	"$selling_iface/v1/configuration.proto\x12\x10selling_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x14common/v1/team.proto\"\\\n" +
+	"\x18SellingLimitProfitConfig\x12\x1f\n" +
+	"\vmin_percent\x18\x01 \x01(\x01R\n" +
+	"minPercent\x12\x1f\n" +
+	"\vmax_percent\x18\x02 \x01(\x01R\n" +
+	"maxPercent\"\x1e\n" +
 	"\x1cSellingLimitProfitGetRequest\"_\n" +
 	"\x1dSellingLimitProfitGetResponse\x12>\n" +
 	"\x04data\x18\x01 \x01(\v2*.selling_iface.v1.SellingLimitProfitConfigR\x04data\"_\n" +
