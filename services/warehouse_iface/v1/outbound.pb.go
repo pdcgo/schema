@@ -319,6 +319,7 @@ type OutboundDetailIDsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TxIds         []uint64               `protobuf:"varint,1,rep,packed,name=tx_ids,json=txIds,proto3" json:"tx_ids,omitempty"`
 	LoadAll       bool                   `protobuf:"varint,4,opt,name=load_all,json=loadAll,proto3" json:"load_all,omitempty"`
+	IncludeCancel bool                   `protobuf:"varint,5,opt,name=include_cancel,json=includeCancel,proto3" json:"include_cancel,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -363,6 +364,13 @@ func (x *OutboundDetailIDsRequest) GetTxIds() []uint64 {
 func (x *OutboundDetailIDsRequest) GetLoadAll() bool {
 	if x != nil {
 		return x.LoadAll
+	}
+	return false
+}
+
+func (x *OutboundDetailIDsRequest) GetIncludeCancel() bool {
+	if x != nil {
+		return x.IncludeCancel
 	}
 	return false
 }
@@ -417,6 +425,7 @@ type OutboundDetailRequest struct {
 	Q             string                   `protobuf:"bytes,2,opt,name=q,proto3" json:"q,omitempty"`
 	TxId          uint64                   `protobuf:"varint,3,opt,name=tx_id,json=txId,proto3" json:"tx_id,omitempty"`
 	LoadAll       bool                     `protobuf:"varint,4,opt,name=load_all,json=loadAll,proto3" json:"load_all,omitempty"`
+	GetCancel     bool                     `protobuf:"varint,5,opt,name=get_cancel,json=getCancel,proto3" json:"get_cancel,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -475,6 +484,13 @@ func (x *OutboundDetailRequest) GetTxId() uint64 {
 func (x *OutboundDetailRequest) GetLoadAll() bool {
 	if x != nil {
 		return x.LoadAll
+	}
+	return false
+}
+
+func (x *OutboundDetailRequest) GetGetCancel() bool {
+	if x != nil {
+		return x.GetCancel
 	}
 	return false
 }
@@ -1703,21 +1719,24 @@ var File_warehouse_iface_v1_outbound_proto protoreflect.FileDescriptor
 
 const file_warehouse_iface_v1_outbound_proto_rawDesc = "" +
 	"\n" +
-	"!warehouse_iface/v1/outbound.proto\x12\x12warehouse_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"Y\n" +
+	"!warehouse_iface/v1/outbound.proto\x12\x12warehouse_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x80\x01\n" +
 	"\x18OutboundDetailIDsRequest\x12\"\n" +
 	"\x06tx_ids\x18\x01 \x03(\x04B\v\xbaH\b\x92\x01\x05\b\x01\x10\xe8\aR\x05txIds\x12\x19\n" +
-	"\bload_all\x18\x04 \x01(\bR\aloadAll\"\xcd\x01\n" +
+	"\bload_all\x18\x04 \x01(\bR\aloadAll\x12%\n" +
+	"\x0einclude_cancel\x18\x05 \x01(\bR\rincludeCancel\"\xcd\x01\n" +
 	"\x19OutboundDetailIDsResponse\x12K\n" +
 	"\x04data\x18\x01 \x03(\v27.warehouse_iface.v1.OutboundDetailIDsResponse.DataEntryR\x04data\x1ac\n" +
 	"\tDataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\x04R\x03key\x12@\n" +
-	"\x05value\x18\x02 \x01(\v2*.warehouse_iface.v1.OutboundDetailResponseR\x05value:\x028\x01\"\xae\x01\n" +
+	"\x05value\x18\x02 \x01(\v2*.warehouse_iface.v1.OutboundDetailResponseR\x05value:\x028\x01\"\xcd\x01\n" +
 	"\x15OutboundDetailRequest\x12W\n" +
 	"\vsearch_type\x18\x01 \x01(\x0e2,.warehouse_iface.v1.OutboundDetailSearchTypeB\b\xbaH\x05\x82\x01\x02 \x00R\n" +
 	"searchType\x12\f\n" +
 	"\x01q\x18\x02 \x01(\tR\x01q\x12\x13\n" +
 	"\x05tx_id\x18\x03 \x01(\x04R\x04txId\x12\x19\n" +
-	"\bload_all\x18\x04 \x01(\bR\aloadAll\"\xd4\x02\n" +
+	"\bload_all\x18\x04 \x01(\bR\aloadAll\x12\x1d\n" +
+	"\n" +
+	"get_cancel\x18\x05 \x01(\bR\tgetCancel\"\xd4\x02\n" +
 	"\vOrderDetail\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x17\n" +
 	"\ateam_id\x18\x02 \x01(\x04R\x06teamId\x12 \n" +
