@@ -1,0 +1,59 @@
+syntax = "proto3";
+package order_iface.v1;
+
+// import "buf/validate/validate.proto";
+import "common/v1/common.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/pdcgo/schema/services/order_iface/v1;order_iface";
+
+service OrderReportService {
+  rpc DailyFundList(DailyFundListRequest) returns (DailyFundListResponse);
+}
+
+enum DaySort {
+  DAY_SORT_UNSPECIFIED = 0;
+  DAY_SORT_ASC = 1;
+  DAY_SORT_DESC = 2;
+}
+
+message TeamFilter {
+  uint64 team_id = 1;
+}
+
+message ShopFilter {
+  uint64 shop_id = 1;
+}
+
+message DailyFundListRequest {
+  DaySort sort = 1;
+  common.v1.PageFilter page = 2;
+  common.v1.TimeFilterRange time_range = 3;
+  oneof filter {
+    TeamFilter team_filter = 4;
+    ShopFilter shop_filter = 5;
+  }
+}
+
+message HoldFundValue {
+  google.protobuf.Timestamp day = 1;
+  int64 hold_count = 2;
+  double hold_amount = 3;
+  google.protobuf.Timestamp sync_at = 4;
+
+  oneof label {
+    uint64 shop_id = 5;
+    uint64 team_id = 6;
+  }
+}
+
+message DailyFundListResponse {
+  repeated HoldFundValue data = 1;
+  common.v1.PageInfo page_info = 2;
+}
+
+message HoldFundListFilter {
+  uint64 team_id = 1;
+  uint64 shop_id = 2;
+  common.v1.MarketplaceType marketplace = 3;
+}

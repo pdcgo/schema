@@ -150,3 +150,29 @@ func (mr *MockOutboundServiceClientMockRecorder) OrderDetailSearch(ctx, req inte
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OrderDetailSearch", reflect.TypeOf((*MockOutboundService)(nil).OrderDetailSearch), ctx, req)
 }
 
+func (m *MockOutboundService) OutboundByProduct(ctx context.Context, req *connect.Request[v1.OutboundByProductRequest]) (*connect.Response[v1.OutboundByProductResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "OutboundByProduct", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.OutboundByProductResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockOutboundServiceMockRecorder) OutboundByProduct(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OutboundByProduct", reflect.TypeOf((*MockOutboundService)(nil).OutboundByProduct), ctx, req)
+}
+
+func (m *MockOutboundServiceClient) OutboundByProduct(ctx context.Context, req *connect.Request[v1.OutboundByProductRequest]) (*connect.Response[v1.OutboundByProductResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "OutboundByProduct", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.OutboundByProductResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockOutboundServiceClientMockRecorder) OutboundByProduct(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OutboundByProduct", reflect.TypeOf((*MockOutboundService)(nil).OutboundByProduct), ctx, req)
+}
+

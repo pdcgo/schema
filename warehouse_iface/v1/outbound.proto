@@ -13,6 +13,9 @@ service OutboundService {
   rpc OutboundDetail(OutboundDetailRequest) returns (OutboundDetailResponse);
   rpc OutboundDetailIDs(OutboundDetailIDsRequest) returns (OutboundDetailIDsResponse);
   rpc OrderDetailSearch(OrderDetailSearchRequest) returns (OrderDetailSearchResponse);
+
+  // requestan internal
+  rpc OutboundByProduct(OutboundByProductRequest) returns (OutboundByProductResponse);
 }
 
 enum OrderDetailSearchType {
@@ -24,6 +27,23 @@ enum OutboundDetailSearchType {
   OUTBOUND_DETAIL_SEARCH_TYPE_UNSPECIFIED = 0;
   OUTBOUND_DETAIL_SEARCH_TYPE_TXID = 1;
   OUTBOUND_DETAIL_SEARCH_TYPE_RECEIPT_ORDREF = 2;
+}
+
+message OutboundByProductRequest {
+  uint64 warehouse_id = 1 [(buf.validate.field).uint64.gt = 1];
+  uint64 team_id = 2;
+  uint64 shop_id = 3;
+}
+
+message OutboundByProductItem {
+  string sku_id = 1;
+  uint64 variation_id = 2;
+  int64 tx_count = 3;
+  int64 item_count = 4;
+}
+
+message OutboundByProductResponse {
+  repeated OutboundByProductItem data = 1;
 }
 
 message OutboundDetailIDsRequest {
