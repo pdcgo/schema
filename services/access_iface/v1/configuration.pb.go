@@ -385,7 +385,7 @@ var File_access_iface_v1_configuration_proto protoreflect.FileDescriptor
 
 const file_access_iface_v1_configuration_proto_rawDesc = "" +
 	"\n" +
-	"#access_iface/v1/configuration.proto\x12\x0faccess_iface.v1\x1a\x1bbuf/validate/validate.proto\"\xed\x01\n" +
+	"#access_iface/v1/configuration.proto\x12\x0faccess_iface.v1\x1a\x1daccess_iface/v1/android.proto\x1a\x1bbuf/validate/validate.proto\"\xed\x01\n" +
 	"\x16ExtensionConfiguration\x12)\n" +
 	"\x04mode\x18\x01 \x01(\x0e2\x15.access_iface.v1.ModeR\x04mode\x12\x18\n" +
 	"\aversion\x18\x02 \x01(\tR\aversion\x12Q\n" +
@@ -416,10 +416,13 @@ const file_access_iface_v1_configuration_proto_rawDesc = "" +
 	"\x0fMODE_PRODUCTION\x10\x01\x12\x10\n" +
 	"\fMODE_STAGING\x10\x02\x12\x14\n" +
 	"\x10MODE_DEVELOPMENT\x10\x03\x12\r\n" +
-	"\tMODE_TEST\x10\x042\xa2\x02\n" +
+	"\tMODE_TEST\x10\x042\xf9\x04\n" +
 	"\x14ConfigurationService\x12y\n" +
 	"\x16ExtensionConfiguration\x12..access_iface.v1.ExtensionConfigurationRequest\x1a/.access_iface.v1.ExtensionConfigurationResponse\x12\x8e\x01\n" +
-	"\x1dExtensionConfigurationReplace\x125.access_iface.v1.ExtensionConfigurationReplaceRequest\x1a6.access_iface.v1.ExtensionConfigurationReplaceResponseB\xc1\x01\n" +
+	"\x1dExtensionConfigurationReplace\x125.access_iface.v1.ExtensionConfigurationReplaceRequest\x1a6.access_iface.v1.ExtensionConfigurationReplaceResponse\x12\x82\x01\n" +
+	"\x19AndroidCheckLatestVersion\x121.access_iface.v1.AndroidCheckLatestVersionRequest\x1a2.access_iface.v1.AndroidCheckLatestVersionResponse\x12d\n" +
+	"\x0fAndroidReleases\x12'.access_iface.v1.AndroidReleasesRequest\x1a(.access_iface.v1.AndroidReleasesResponse\x12j\n" +
+	"\x11AndroidReleaseGet\x12).access_iface.v1.AndroidReleaseGetRequest\x1a*.access_iface.v1.AndroidReleaseGetResponseB\xc1\x01\n" +
 	"\x13com.access_iface.v1B\x12ConfigurationProtoP\x01Z=github.com/pdcgo/schema/services/access_iface/v1;access_iface\xa2\x02\x03AXX\xaa\x02\x0eAccessIface.V1\xca\x02\x0eAccessIface\\V1\xe2\x02\x1aAccessIface\\V1\\GPBMetadata\xea\x02\x0fAccessIface::V1b\x06proto3"
 
 var (
@@ -444,26 +447,38 @@ var file_access_iface_v1_configuration_proto_goTypes = []any{
 	(*ExtensionConfigurationPayload)(nil),         // 4: access_iface.v1.ExtensionConfigurationPayload
 	(*ExtensionConfigurationReplaceRequest)(nil),  // 5: access_iface.v1.ExtensionConfigurationReplaceRequest
 	(*ExtensionConfigurationReplaceResponse)(nil), // 6: access_iface.v1.ExtensionConfigurationReplaceResponse
-	nil, // 7: access_iface.v1.ExtensionConfiguration.EndpointEntry
-	nil, // 8: access_iface.v1.ExtensionConfigurationPayload.EndpointEntry
+	nil,                                      // 7: access_iface.v1.ExtensionConfiguration.EndpointEntry
+	nil,                                      // 8: access_iface.v1.ExtensionConfigurationPayload.EndpointEntry
+	(*AndroidCheckLatestVersionRequest)(nil), // 9: access_iface.v1.AndroidCheckLatestVersionRequest
+	(*AndroidReleasesRequest)(nil),           // 10: access_iface.v1.AndroidReleasesRequest
+	(*AndroidReleaseGetRequest)(nil),         // 11: access_iface.v1.AndroidReleaseGetRequest
+	(*AndroidCheckLatestVersionResponse)(nil), // 12: access_iface.v1.AndroidCheckLatestVersionResponse
+	(*AndroidReleasesResponse)(nil),           // 13: access_iface.v1.AndroidReleasesResponse
+	(*AndroidReleaseGetResponse)(nil),         // 14: access_iface.v1.AndroidReleaseGetResponse
 }
 var file_access_iface_v1_configuration_proto_depIdxs = []int32{
-	0, // 0: access_iface.v1.ExtensionConfiguration.mode:type_name -> access_iface.v1.Mode
-	7, // 1: access_iface.v1.ExtensionConfiguration.endpoint:type_name -> access_iface.v1.ExtensionConfiguration.EndpointEntry
-	0, // 2: access_iface.v1.ExtensionConfigurationRequest.mode:type_name -> access_iface.v1.Mode
-	1, // 3: access_iface.v1.ExtensionConfigurationResponse.data:type_name -> access_iface.v1.ExtensionConfiguration
-	0, // 4: access_iface.v1.ExtensionConfigurationPayload.mode:type_name -> access_iface.v1.Mode
-	8, // 5: access_iface.v1.ExtensionConfigurationPayload.endpoint:type_name -> access_iface.v1.ExtensionConfigurationPayload.EndpointEntry
-	4, // 6: access_iface.v1.ExtensionConfigurationReplaceRequest.data:type_name -> access_iface.v1.ExtensionConfigurationPayload
-	2, // 7: access_iface.v1.ConfigurationService.ExtensionConfiguration:input_type -> access_iface.v1.ExtensionConfigurationRequest
-	5, // 8: access_iface.v1.ConfigurationService.ExtensionConfigurationReplace:input_type -> access_iface.v1.ExtensionConfigurationReplaceRequest
-	3, // 9: access_iface.v1.ConfigurationService.ExtensionConfiguration:output_type -> access_iface.v1.ExtensionConfigurationResponse
-	6, // 10: access_iface.v1.ConfigurationService.ExtensionConfigurationReplace:output_type -> access_iface.v1.ExtensionConfigurationReplaceResponse
-	9, // [9:11] is the sub-list for method output_type
-	7, // [7:9] is the sub-list for method input_type
-	7, // [7:7] is the sub-list for extension type_name
-	7, // [7:7] is the sub-list for extension extendee
-	0, // [0:7] is the sub-list for field type_name
+	0,  // 0: access_iface.v1.ExtensionConfiguration.mode:type_name -> access_iface.v1.Mode
+	7,  // 1: access_iface.v1.ExtensionConfiguration.endpoint:type_name -> access_iface.v1.ExtensionConfiguration.EndpointEntry
+	0,  // 2: access_iface.v1.ExtensionConfigurationRequest.mode:type_name -> access_iface.v1.Mode
+	1,  // 3: access_iface.v1.ExtensionConfigurationResponse.data:type_name -> access_iface.v1.ExtensionConfiguration
+	0,  // 4: access_iface.v1.ExtensionConfigurationPayload.mode:type_name -> access_iface.v1.Mode
+	8,  // 5: access_iface.v1.ExtensionConfigurationPayload.endpoint:type_name -> access_iface.v1.ExtensionConfigurationPayload.EndpointEntry
+	4,  // 6: access_iface.v1.ExtensionConfigurationReplaceRequest.data:type_name -> access_iface.v1.ExtensionConfigurationPayload
+	2,  // 7: access_iface.v1.ConfigurationService.ExtensionConfiguration:input_type -> access_iface.v1.ExtensionConfigurationRequest
+	5,  // 8: access_iface.v1.ConfigurationService.ExtensionConfigurationReplace:input_type -> access_iface.v1.ExtensionConfigurationReplaceRequest
+	9,  // 9: access_iface.v1.ConfigurationService.AndroidCheckLatestVersion:input_type -> access_iface.v1.AndroidCheckLatestVersionRequest
+	10, // 10: access_iface.v1.ConfigurationService.AndroidReleases:input_type -> access_iface.v1.AndroidReleasesRequest
+	11, // 11: access_iface.v1.ConfigurationService.AndroidReleaseGet:input_type -> access_iface.v1.AndroidReleaseGetRequest
+	3,  // 12: access_iface.v1.ConfigurationService.ExtensionConfiguration:output_type -> access_iface.v1.ExtensionConfigurationResponse
+	6,  // 13: access_iface.v1.ConfigurationService.ExtensionConfigurationReplace:output_type -> access_iface.v1.ExtensionConfigurationReplaceResponse
+	12, // 14: access_iface.v1.ConfigurationService.AndroidCheckLatestVersion:output_type -> access_iface.v1.AndroidCheckLatestVersionResponse
+	13, // 15: access_iface.v1.ConfigurationService.AndroidReleases:output_type -> access_iface.v1.AndroidReleasesResponse
+	14, // 16: access_iface.v1.ConfigurationService.AndroidReleaseGet:output_type -> access_iface.v1.AndroidReleaseGetResponse
+	12, // [12:17] is the sub-list for method output_type
+	7,  // [7:12] is the sub-list for method input_type
+	7,  // [7:7] is the sub-list for extension type_name
+	7,  // [7:7] is the sub-list for extension extendee
+	0,  // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_access_iface_v1_configuration_proto_init() }
@@ -471,6 +486,7 @@ func file_access_iface_v1_configuration_proto_init() {
 	if File_access_iface_v1_configuration_proto != nil {
 		return
 	}
+	file_access_iface_v1_android_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

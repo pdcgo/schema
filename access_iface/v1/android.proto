@@ -1,0 +1,117 @@
+syntax = "proto3";
+package access_iface.v1;
+
+import "buf/validate/validate.proto";
+// import "common/v1/common.proto";
+
+option go_package = "github.com/pdcgo/schema/services/access_iface/v1;access_iface";
+
+message AndroidCheckLatestVersionRequest {}
+message AndroidCheckLatestVersionResponse {
+  Release release = 1;
+}
+
+message AndroidReleasesRequest {
+  int32 page = 1 [(buf.validate.field).int32.gt = 1];
+  int32 per_page = 2 [(buf.validate.field).int32 = {
+    gt: 1
+    lte: 30
+  }];
+}
+message AndroidReleasesResponse {
+  repeated Release releases = 1;
+}
+
+message AndroidReleaseGetRequest {
+  oneof by {
+    string tag = 1;
+    int32 release_id = 2;
+  }
+}
+message AndroidReleaseGetResponse {
+  Release release = 1;
+}
+
+message Assets {
+  int32 size = 1;
+  string content_type = 2;
+  int32 download_count = 3;
+  string updated_at = 4;
+  Uploader uploader = 5;
+  string state = 6;
+  string digest = 7;
+  string browser_download_url = 8;
+  string label = 9;
+  int32 id = 10;
+  string node_id = 11;
+  string name = 12;
+  string created_at = 13;
+  string url = 14;
+}
+
+message Author {
+  bool site_admin = 1;
+  int32 id = 2;
+  string gravatar_id = 3;
+  string followers_url = 4;
+  string organizations_url = 5;
+  string events_url = 6;
+  string received_events_url = 7;
+  string node_id = 8;
+  string avatar_url = 9;
+  string type = 10;
+  string user_view_type = 11;
+  string url = 12;
+  string html_url = 13;
+  string following_url = 14;
+  string gists_url = 15;
+  string repos_url = 16;
+  string login = 17;
+  string starred_url = 18;
+  string subscriptions_url = 19;
+}
+
+message Uploader {
+  string node_id = 1;
+  string url = 2;
+  string repos_url = 3;
+  string type = 4;
+  string login = 5;
+  string starred_url = 6;
+  string subscriptions_url = 7;
+  string events_url = 8;
+  string user_view_type = 9;
+  int32 id = 10;
+  string avatar_url = 11;
+  string html_url = 12;
+  string gists_url = 13;
+  string received_events_url = 14;
+  bool site_admin = 15;
+  string gravatar_id = 16;
+  string followers_url = 17;
+  string following_url = 18;
+  string organizations_url = 19;
+}
+
+message Release {
+  string target_commitish = 1;
+  string name = 2;
+  string tarball_url = 3;
+  repeated Assets assets = 4;
+  Author author = 5;
+  string tag_name = 6;
+  bool prerelease = 7;
+  string published_at = 8;
+  bool immutable = 9;
+  string created_at = 10;
+  string body = 11;
+  string url = 12;
+  string upload_url = 13;
+  string node_id = 14;
+  bool draft = 15;
+  string zipball_url = 16;
+  string assets_url = 17;
+  string html_url = 18;
+  int32 id = 19;
+  string updated_at = 20;
+}

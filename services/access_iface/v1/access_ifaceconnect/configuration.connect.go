@@ -39,12 +39,24 @@ const (
 	// ConfigurationServiceExtensionConfigurationReplaceProcedure is the fully-qualified name of the
 	// ConfigurationService's ExtensionConfigurationReplace RPC.
 	ConfigurationServiceExtensionConfigurationReplaceProcedure = "/access_iface.v1.ConfigurationService/ExtensionConfigurationReplace"
+	// ConfigurationServiceAndroidCheckLatestVersionProcedure is the fully-qualified name of the
+	// ConfigurationService's AndroidCheckLatestVersion RPC.
+	ConfigurationServiceAndroidCheckLatestVersionProcedure = "/access_iface.v1.ConfigurationService/AndroidCheckLatestVersion"
+	// ConfigurationServiceAndroidReleasesProcedure is the fully-qualified name of the
+	// ConfigurationService's AndroidReleases RPC.
+	ConfigurationServiceAndroidReleasesProcedure = "/access_iface.v1.ConfigurationService/AndroidReleases"
+	// ConfigurationServiceAndroidReleaseGetProcedure is the fully-qualified name of the
+	// ConfigurationService's AndroidReleaseGet RPC.
+	ConfigurationServiceAndroidReleaseGetProcedure = "/access_iface.v1.ConfigurationService/AndroidReleaseGet"
 )
 
 // ConfigurationServiceClient is a client for the access_iface.v1.ConfigurationService service.
 type ConfigurationServiceClient interface {
 	ExtensionConfiguration(context.Context, *connect.Request[v1.ExtensionConfigurationRequest]) (*connect.Response[v1.ExtensionConfigurationResponse], error)
 	ExtensionConfigurationReplace(context.Context, *connect.Request[v1.ExtensionConfigurationReplaceRequest]) (*connect.Response[v1.ExtensionConfigurationReplaceResponse], error)
+	AndroidCheckLatestVersion(context.Context, *connect.Request[v1.AndroidCheckLatestVersionRequest]) (*connect.Response[v1.AndroidCheckLatestVersionResponse], error)
+	AndroidReleases(context.Context, *connect.Request[v1.AndroidReleasesRequest]) (*connect.Response[v1.AndroidReleasesResponse], error)
+	AndroidReleaseGet(context.Context, *connect.Request[v1.AndroidReleaseGetRequest]) (*connect.Response[v1.AndroidReleaseGetResponse], error)
 }
 
 // NewConfigurationServiceClient constructs a client for the access_iface.v1.ConfigurationService
@@ -70,6 +82,24 @@ func NewConfigurationServiceClient(httpClient connect.HTTPClient, baseURL string
 			connect.WithSchema(configurationServiceMethods.ByName("ExtensionConfigurationReplace")),
 			connect.WithClientOptions(opts...),
 		),
+		androidCheckLatestVersion: connect.NewClient[v1.AndroidCheckLatestVersionRequest, v1.AndroidCheckLatestVersionResponse](
+			httpClient,
+			baseURL+ConfigurationServiceAndroidCheckLatestVersionProcedure,
+			connect.WithSchema(configurationServiceMethods.ByName("AndroidCheckLatestVersion")),
+			connect.WithClientOptions(opts...),
+		),
+		androidReleases: connect.NewClient[v1.AndroidReleasesRequest, v1.AndroidReleasesResponse](
+			httpClient,
+			baseURL+ConfigurationServiceAndroidReleasesProcedure,
+			connect.WithSchema(configurationServiceMethods.ByName("AndroidReleases")),
+			connect.WithClientOptions(opts...),
+		),
+		androidReleaseGet: connect.NewClient[v1.AndroidReleaseGetRequest, v1.AndroidReleaseGetResponse](
+			httpClient,
+			baseURL+ConfigurationServiceAndroidReleaseGetProcedure,
+			connect.WithSchema(configurationServiceMethods.ByName("AndroidReleaseGet")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -77,6 +107,9 @@ func NewConfigurationServiceClient(httpClient connect.HTTPClient, baseURL string
 type configurationServiceClient struct {
 	extensionConfiguration        *connect.Client[v1.ExtensionConfigurationRequest, v1.ExtensionConfigurationResponse]
 	extensionConfigurationReplace *connect.Client[v1.ExtensionConfigurationReplaceRequest, v1.ExtensionConfigurationReplaceResponse]
+	androidCheckLatestVersion     *connect.Client[v1.AndroidCheckLatestVersionRequest, v1.AndroidCheckLatestVersionResponse]
+	androidReleases               *connect.Client[v1.AndroidReleasesRequest, v1.AndroidReleasesResponse]
+	androidReleaseGet             *connect.Client[v1.AndroidReleaseGetRequest, v1.AndroidReleaseGetResponse]
 }
 
 // ExtensionConfiguration calls access_iface.v1.ConfigurationService.ExtensionConfiguration.
@@ -90,11 +123,29 @@ func (c *configurationServiceClient) ExtensionConfigurationReplace(ctx context.C
 	return c.extensionConfigurationReplace.CallUnary(ctx, req)
 }
 
+// AndroidCheckLatestVersion calls access_iface.v1.ConfigurationService.AndroidCheckLatestVersion.
+func (c *configurationServiceClient) AndroidCheckLatestVersion(ctx context.Context, req *connect.Request[v1.AndroidCheckLatestVersionRequest]) (*connect.Response[v1.AndroidCheckLatestVersionResponse], error) {
+	return c.androidCheckLatestVersion.CallUnary(ctx, req)
+}
+
+// AndroidReleases calls access_iface.v1.ConfigurationService.AndroidReleases.
+func (c *configurationServiceClient) AndroidReleases(ctx context.Context, req *connect.Request[v1.AndroidReleasesRequest]) (*connect.Response[v1.AndroidReleasesResponse], error) {
+	return c.androidReleases.CallUnary(ctx, req)
+}
+
+// AndroidReleaseGet calls access_iface.v1.ConfigurationService.AndroidReleaseGet.
+func (c *configurationServiceClient) AndroidReleaseGet(ctx context.Context, req *connect.Request[v1.AndroidReleaseGetRequest]) (*connect.Response[v1.AndroidReleaseGetResponse], error) {
+	return c.androidReleaseGet.CallUnary(ctx, req)
+}
+
 // ConfigurationServiceHandler is an implementation of the access_iface.v1.ConfigurationService
 // service.
 type ConfigurationServiceHandler interface {
 	ExtensionConfiguration(context.Context, *connect.Request[v1.ExtensionConfigurationRequest]) (*connect.Response[v1.ExtensionConfigurationResponse], error)
 	ExtensionConfigurationReplace(context.Context, *connect.Request[v1.ExtensionConfigurationReplaceRequest]) (*connect.Response[v1.ExtensionConfigurationReplaceResponse], error)
+	AndroidCheckLatestVersion(context.Context, *connect.Request[v1.AndroidCheckLatestVersionRequest]) (*connect.Response[v1.AndroidCheckLatestVersionResponse], error)
+	AndroidReleases(context.Context, *connect.Request[v1.AndroidReleasesRequest]) (*connect.Response[v1.AndroidReleasesResponse], error)
+	AndroidReleaseGet(context.Context, *connect.Request[v1.AndroidReleaseGetRequest]) (*connect.Response[v1.AndroidReleaseGetResponse], error)
 }
 
 // NewConfigurationServiceHandler builds an HTTP handler from the service implementation. It returns
@@ -116,12 +167,36 @@ func NewConfigurationServiceHandler(svc ConfigurationServiceHandler, opts ...con
 		connect.WithSchema(configurationServiceMethods.ByName("ExtensionConfigurationReplace")),
 		connect.WithHandlerOptions(opts...),
 	)
+	configurationServiceAndroidCheckLatestVersionHandler := connect.NewUnaryHandler(
+		ConfigurationServiceAndroidCheckLatestVersionProcedure,
+		svc.AndroidCheckLatestVersion,
+		connect.WithSchema(configurationServiceMethods.ByName("AndroidCheckLatestVersion")),
+		connect.WithHandlerOptions(opts...),
+	)
+	configurationServiceAndroidReleasesHandler := connect.NewUnaryHandler(
+		ConfigurationServiceAndroidReleasesProcedure,
+		svc.AndroidReleases,
+		connect.WithSchema(configurationServiceMethods.ByName("AndroidReleases")),
+		connect.WithHandlerOptions(opts...),
+	)
+	configurationServiceAndroidReleaseGetHandler := connect.NewUnaryHandler(
+		ConfigurationServiceAndroidReleaseGetProcedure,
+		svc.AndroidReleaseGet,
+		connect.WithSchema(configurationServiceMethods.ByName("AndroidReleaseGet")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/access_iface.v1.ConfigurationService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case ConfigurationServiceExtensionConfigurationProcedure:
 			configurationServiceExtensionConfigurationHandler.ServeHTTP(w, r)
 		case ConfigurationServiceExtensionConfigurationReplaceProcedure:
 			configurationServiceExtensionConfigurationReplaceHandler.ServeHTTP(w, r)
+		case ConfigurationServiceAndroidCheckLatestVersionProcedure:
+			configurationServiceAndroidCheckLatestVersionHandler.ServeHTTP(w, r)
+		case ConfigurationServiceAndroidReleasesProcedure:
+			configurationServiceAndroidReleasesHandler.ServeHTTP(w, r)
+		case ConfigurationServiceAndroidReleaseGetProcedure:
+			configurationServiceAndroidReleaseGetHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -137,4 +212,16 @@ func (UnimplementedConfigurationServiceHandler) ExtensionConfiguration(context.C
 
 func (UnimplementedConfigurationServiceHandler) ExtensionConfigurationReplace(context.Context, *connect.Request[v1.ExtensionConfigurationReplaceRequest]) (*connect.Response[v1.ExtensionConfigurationReplaceResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("access_iface.v1.ConfigurationService.ExtensionConfigurationReplace is not implemented"))
+}
+
+func (UnimplementedConfigurationServiceHandler) AndroidCheckLatestVersion(context.Context, *connect.Request[v1.AndroidCheckLatestVersionRequest]) (*connect.Response[v1.AndroidCheckLatestVersionResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("access_iface.v1.ConfigurationService.AndroidCheckLatestVersion is not implemented"))
+}
+
+func (UnimplementedConfigurationServiceHandler) AndroidReleases(context.Context, *connect.Request[v1.AndroidReleasesRequest]) (*connect.Response[v1.AndroidReleasesResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("access_iface.v1.ConfigurationService.AndroidReleases is not implemented"))
+}
+
+func (UnimplementedConfigurationServiceHandler) AndroidReleaseGet(context.Context, *connect.Request[v1.AndroidReleaseGetRequest]) (*connect.Response[v1.AndroidReleaseGetResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("access_iface.v1.ConfigurationService.AndroidReleaseGet is not implemented"))
 }

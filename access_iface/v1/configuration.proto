@@ -1,6 +1,7 @@
 syntax = "proto3";
 package access_iface.v1;
 
+import "access_iface/v1/android.proto";
 import "buf/validate/validate.proto";
 // import "common/v1/common.proto";
 
@@ -9,6 +10,10 @@ option go_package = "github.com/pdcgo/schema/services/access_iface/v1;access_ifa
 service ConfigurationService {
   rpc ExtensionConfiguration(ExtensionConfigurationRequest) returns (ExtensionConfigurationResponse);
   rpc ExtensionConfigurationReplace(ExtensionConfigurationReplaceRequest) returns (ExtensionConfigurationReplaceResponse);
+
+  rpc AndroidCheckLatestVersion(AndroidCheckLatestVersionRequest) returns (AndroidCheckLatestVersionResponse);
+  rpc AndroidReleases(AndroidReleasesRequest) returns (AndroidReleasesResponse);
+  rpc AndroidReleaseGet(AndroidReleaseGetRequest) returns (AndroidReleaseGetResponse);
 }
 
 enum Mode {
