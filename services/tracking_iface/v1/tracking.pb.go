@@ -23,8 +23,131 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type Status int32
+
+const (
+	Status_STATUS_UNSPECIFIED      Status = 0
+	Status_STATUS_DELIVERED        Status = 1
+	Status_STATUS_ON_PROCESS       Status = 2
+	Status_STATUS_RETURN_PROCESS   Status = 3
+	Status_STATUS_RETURNED         Status = 4
+	Status_STATUS_SHIPMENT_PROCESS Status = 5
+	Status_STATUS_LOST             Status = 6
+	Status_STATUS_DELIVERY_FAILED  Status = 7
+	Status_STATUS_CANCEL           Status = 8
+	Status_STATUS_CREATED          Status = 9
+)
+
+// Enum value maps for Status.
+var (
+	Status_name = map[int32]string{
+		0: "STATUS_UNSPECIFIED",
+		1: "STATUS_DELIVERED",
+		2: "STATUS_ON_PROCESS",
+		3: "STATUS_RETURN_PROCESS",
+		4: "STATUS_RETURNED",
+		5: "STATUS_SHIPMENT_PROCESS",
+		6: "STATUS_LOST",
+		7: "STATUS_DELIVERY_FAILED",
+		8: "STATUS_CANCEL",
+		9: "STATUS_CREATED",
+	}
+	Status_value = map[string]int32{
+		"STATUS_UNSPECIFIED":      0,
+		"STATUS_DELIVERED":        1,
+		"STATUS_ON_PROCESS":       2,
+		"STATUS_RETURN_PROCESS":   3,
+		"STATUS_RETURNED":         4,
+		"STATUS_SHIPMENT_PROCESS": 5,
+		"STATUS_LOST":             6,
+		"STATUS_DELIVERY_FAILED":  7,
+		"STATUS_CANCEL":           8,
+		"STATUS_CREATED":          9,
+	}
+)
+
+func (x Status) Enum() *Status {
+	p := new(Status)
+	*p = x
+	return p
+}
+
+func (x Status) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (Status) Descriptor() protoreflect.EnumDescriptor {
+	return file_tracking_iface_v1_tracking_proto_enumTypes[0].Descriptor()
+}
+
+func (Status) Type() protoreflect.EnumType {
+	return &file_tracking_iface_v1_tracking_proto_enumTypes[0]
+}
+
+func (x Status) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use Status.Descriptor instead.
+func (Status) EnumDescriptor() ([]byte, []int) {
+	return file_tracking_iface_v1_tracking_proto_rawDescGZIP(), []int{0}
+}
+
+type Thirdparty int32
+
+const (
+	Thirdparty_THIRDPARTY_UNSPECIFIED      Thirdparty = 0
+	Thirdparty_THIRDPARTY_TONI_UNDERGROUND Thirdparty = 1
+	Thirdparty_THIRDPARTY_RAJAONGKIR       Thirdparty = 2
+	Thirdparty_THIRDPARTY_SPX_UNDERGROUND  Thirdparty = 3
+)
+
+// Enum value maps for Thirdparty.
+var (
+	Thirdparty_name = map[int32]string{
+		0: "THIRDPARTY_UNSPECIFIED",
+		1: "THIRDPARTY_TONI_UNDERGROUND",
+		2: "THIRDPARTY_RAJAONGKIR",
+		3: "THIRDPARTY_SPX_UNDERGROUND",
+	}
+	Thirdparty_value = map[string]int32{
+		"THIRDPARTY_UNSPECIFIED":      0,
+		"THIRDPARTY_TONI_UNDERGROUND": 1,
+		"THIRDPARTY_RAJAONGKIR":       2,
+		"THIRDPARTY_SPX_UNDERGROUND":  3,
+	}
+)
+
+func (x Thirdparty) Enum() *Thirdparty {
+	p := new(Thirdparty)
+	*p = x
+	return p
+}
+
+func (x Thirdparty) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (Thirdparty) Descriptor() protoreflect.EnumDescriptor {
+	return file_tracking_iface_v1_tracking_proto_enumTypes[1].Descriptor()
+}
+
+func (Thirdparty) Type() protoreflect.EnumType {
+	return &file_tracking_iface_v1_tracking_proto_enumTypes[1]
+}
+
+func (x Thirdparty) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use Thirdparty.Descriptor instead.
+func (Thirdparty) EnumDescriptor() ([]byte, []int) {
+	return file_tracking_iface_v1_tracking_proto_rawDescGZIP(), []int{1}
+}
+
 type TrackingGetRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	ShippingId    uint64                 `protobuf:"varint,1,opt,name=shipping_id,json=shippingId,proto3" json:"shipping_id,omitempty"`
 	Receipt       string                 `protobuf:"bytes,2,opt,name=receipt,proto3" json:"receipt,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -58,6 +181,13 @@ func (x *TrackingGetRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use TrackingGetRequest.ProtoReflect.Descriptor instead.
 func (*TrackingGetRequest) Descriptor() ([]byte, []int) {
 	return file_tracking_iface_v1_tracking_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *TrackingGetRequest) GetShippingId() uint64 {
+	if x != nil {
+		return x.ShippingId
+	}
+	return 0
 }
 
 func (x *TrackingGetRequest) GetReceipt() string {
@@ -127,16 +257,168 @@ func (x *HistoryItem) GetAt() *timestamppb.Timestamp {
 	return nil
 }
 
+type Shipping struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Key           string                 `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
+	DisplayName   string                 `protobuf:"bytes,2,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Shipping) Reset() {
+	*x = Shipping{}
+	mi := &file_tracking_iface_v1_tracking_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Shipping) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Shipping) ProtoMessage() {}
+
+func (x *Shipping) ProtoReflect() protoreflect.Message {
+	mi := &file_tracking_iface_v1_tracking_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Shipping.ProtoReflect.Descriptor instead.
+func (*Shipping) Descriptor() ([]byte, []int) {
+	return file_tracking_iface_v1_tracking_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *Shipping) GetKey() string {
+	if x != nil {
+		return x.Key
+	}
+	return ""
+}
+
+func (x *Shipping) GetDisplayName() string {
+	if x != nil {
+		return x.DisplayName
+	}
+	return ""
+}
+
+type TrackInfo struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	ShippingId    uint64                 `protobuf:"varint,2,opt,name=shipping_id,json=shippingId,proto3" json:"shipping_id,omitempty"`
+	Receipt       string                 `protobuf:"bytes,3,opt,name=receipt,proto3" json:"receipt,omitempty"`
+	LastUpdated   *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=last_updated,json=lastUpdated,proto3" json:"last_updated,omitempty"`
+	Shipping      *Shipping              `protobuf:"bytes,5,opt,name=shipping,proto3" json:"shipping,omitempty"`
+	Status        Status                 `protobuf:"varint,6,opt,name=status,proto3,enum=tracking_iface.v1.Status" json:"status,omitempty"`
+	Histories     []*HistoryItem         `protobuf:"bytes,7,rep,name=histories,proto3" json:"histories,omitempty"`
+	Thirdparties  []Thirdparty           `protobuf:"varint,8,rep,packed,name=thirdparties,proto3,enum=tracking_iface.v1.Thirdparty" json:"thirdparties,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TrackInfo) Reset() {
+	*x = TrackInfo{}
+	mi := &file_tracking_iface_v1_tracking_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TrackInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TrackInfo) ProtoMessage() {}
+
+func (x *TrackInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_tracking_iface_v1_tracking_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TrackInfo.ProtoReflect.Descriptor instead.
+func (*TrackInfo) Descriptor() ([]byte, []int) {
+	return file_tracking_iface_v1_tracking_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *TrackInfo) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *TrackInfo) GetShippingId() uint64 {
+	if x != nil {
+		return x.ShippingId
+	}
+	return 0
+}
+
+func (x *TrackInfo) GetReceipt() string {
+	if x != nil {
+		return x.Receipt
+	}
+	return ""
+}
+
+func (x *TrackInfo) GetLastUpdated() *timestamppb.Timestamp {
+	if x != nil {
+		return x.LastUpdated
+	}
+	return nil
+}
+
+func (x *TrackInfo) GetShipping() *Shipping {
+	if x != nil {
+		return x.Shipping
+	}
+	return nil
+}
+
+func (x *TrackInfo) GetStatus() Status {
+	if x != nil {
+		return x.Status
+	}
+	return Status_STATUS_UNSPECIFIED
+}
+
+func (x *TrackInfo) GetHistories() []*HistoryItem {
+	if x != nil {
+		return x.Histories
+	}
+	return nil
+}
+
+func (x *TrackInfo) GetThirdparties() []Thirdparty {
+	if x != nil {
+		return x.Thirdparties
+	}
+	return nil
+}
+
 type TrackingGetResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	History       []*HistoryItem         `protobuf:"bytes,1,rep,name=history,proto3" json:"history,omitempty"`
+	TrackInfo     *TrackInfo             `protobuf:"bytes,1,opt,name=track_info,json=trackInfo,proto3" json:"track_info,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *TrackingGetResponse) Reset() {
 	*x = TrackingGetResponse{}
-	mi := &file_tracking_iface_v1_tracking_proto_msgTypes[2]
+	mi := &file_tracking_iface_v1_tracking_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -148,7 +430,7 @@ func (x *TrackingGetResponse) String() string {
 func (*TrackingGetResponse) ProtoMessage() {}
 
 func (x *TrackingGetResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tracking_iface_v1_tracking_proto_msgTypes[2]
+	mi := &file_tracking_iface_v1_tracking_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -161,12 +443,108 @@ func (x *TrackingGetResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TrackingGetResponse.ProtoReflect.Descriptor instead.
 func (*TrackingGetResponse) Descriptor() ([]byte, []int) {
-	return file_tracking_iface_v1_tracking_proto_rawDescGZIP(), []int{2}
+	return file_tracking_iface_v1_tracking_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *TrackingGetResponse) GetHistory() []*HistoryItem {
+func (x *TrackingGetResponse) GetTrackInfo() *TrackInfo {
 	if x != nil {
-		return x.History
+		return x.TrackInfo
+	}
+	return nil
+}
+
+type TrackingProcessRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ShippingId    uint64                 `protobuf:"varint,1,opt,name=shipping_id,json=shippingId,proto3" json:"shipping_id,omitempty"`
+	Receipt       string                 `protobuf:"bytes,2,opt,name=receipt,proto3" json:"receipt,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TrackingProcessRequest) Reset() {
+	*x = TrackingProcessRequest{}
+	mi := &file_tracking_iface_v1_tracking_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TrackingProcessRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TrackingProcessRequest) ProtoMessage() {}
+
+func (x *TrackingProcessRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_tracking_iface_v1_tracking_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TrackingProcessRequest.ProtoReflect.Descriptor instead.
+func (*TrackingProcessRequest) Descriptor() ([]byte, []int) {
+	return file_tracking_iface_v1_tracking_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *TrackingProcessRequest) GetShippingId() uint64 {
+	if x != nil {
+		return x.ShippingId
+	}
+	return 0
+}
+
+func (x *TrackingProcessRequest) GetReceipt() string {
+	if x != nil {
+		return x.Receipt
+	}
+	return ""
+}
+
+type TrackingProcessResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TrackInfo     *TrackInfo             `protobuf:"bytes,1,opt,name=track_info,json=trackInfo,proto3" json:"track_info,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TrackingProcessResponse) Reset() {
+	*x = TrackingProcessResponse{}
+	mi := &file_tracking_iface_v1_tracking_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TrackingProcessResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TrackingProcessResponse) ProtoMessage() {}
+
+func (x *TrackingProcessResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_tracking_iface_v1_tracking_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TrackingProcessResponse.ProtoReflect.Descriptor instead.
+func (*TrackingProcessResponse) Descriptor() ([]byte, []int) {
+	return file_tracking_iface_v1_tracking_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *TrackingProcessResponse) GetTrackInfo() *TrackInfo {
+	if x != nil {
+		return x.TrackInfo
 	}
 	return nil
 }
@@ -175,17 +553,58 @@ var File_tracking_iface_v1_tracking_proto protoreflect.FileDescriptor
 
 const file_tracking_iface_v1_tracking_proto_rawDesc = "" +
 	"\n" +
-	" tracking_iface/v1/tracking.proto\x12\x11tracking_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"6\n" +
-	"\x12TrackingGetRequest\x12 \n" +
+	" tracking_iface/v1/tracking.proto\x12\x11tracking_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"_\n" +
+	"\x12TrackingGetRequest\x12'\n" +
+	"\vshipping_id\x18\x01 \x01(\x04B\x06\xbaH\x03\xc8\x01\x01R\n" +
+	"shippingId\x12 \n" +
 	"\areceipt\x18\x02 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\areceipt\"a\n" +
 	"\vHistoryItem\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x12\n" +
 	"\x04desc\x18\x02 \x01(\tR\x04desc\x12*\n" +
-	"\x02at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\x02at\"O\n" +
-	"\x13TrackingGetResponse\x128\n" +
-	"\ahistory\x18\x01 \x03(\v2\x1e.tracking_iface.v1.HistoryItemR\ahistory2o\n" +
+	"\x02at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\x02at\"?\n" +
+	"\bShipping\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12!\n" +
+	"\fdisplay_name\x18\x02 \x01(\tR\vdisplayName\"\x82\x03\n" +
+	"\tTrackInfo\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x1f\n" +
+	"\vshipping_id\x18\x02 \x01(\x04R\n" +
+	"shippingId\x12\x18\n" +
+	"\areceipt\x18\x03 \x01(\tR\areceipt\x12=\n" +
+	"\flast_updated\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\vlastUpdated\x127\n" +
+	"\bshipping\x18\x05 \x01(\v2\x1b.tracking_iface.v1.ShippingR\bshipping\x121\n" +
+	"\x06status\x18\x06 \x01(\x0e2\x19.tracking_iface.v1.StatusR\x06status\x12<\n" +
+	"\thistories\x18\a \x03(\v2\x1e.tracking_iface.v1.HistoryItemR\thistories\x12A\n" +
+	"\fthirdparties\x18\b \x03(\x0e2\x1d.tracking_iface.v1.ThirdpartyR\fthirdparties\"R\n" +
+	"\x13TrackingGetResponse\x12;\n" +
+	"\n" +
+	"track_info\x18\x01 \x01(\v2\x1c.tracking_iface.v1.TrackInfoR\ttrackInfo\"c\n" +
+	"\x16TrackingProcessRequest\x12'\n" +
+	"\vshipping_id\x18\x01 \x01(\x04B\x06\xbaH\x03\xc8\x01\x01R\n" +
+	"shippingId\x12 \n" +
+	"\areceipt\x18\x02 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\areceipt\"V\n" +
+	"\x17TrackingProcessResponse\x12;\n" +
+	"\n" +
+	"track_info\x18\x01 \x01(\v2\x1c.tracking_iface.v1.TrackInfoR\ttrackInfo*\xee\x01\n" +
+	"\x06Status\x12\x16\n" +
+	"\x12STATUS_UNSPECIFIED\x10\x00\x12\x14\n" +
+	"\x10STATUS_DELIVERED\x10\x01\x12\x15\n" +
+	"\x11STATUS_ON_PROCESS\x10\x02\x12\x19\n" +
+	"\x15STATUS_RETURN_PROCESS\x10\x03\x12\x13\n" +
+	"\x0fSTATUS_RETURNED\x10\x04\x12\x1b\n" +
+	"\x17STATUS_SHIPMENT_PROCESS\x10\x05\x12\x0f\n" +
+	"\vSTATUS_LOST\x10\x06\x12\x1a\n" +
+	"\x16STATUS_DELIVERY_FAILED\x10\a\x12\x11\n" +
+	"\rSTATUS_CANCEL\x10\b\x12\x12\n" +
+	"\x0eSTATUS_CREATED\x10\t*\x84\x01\n" +
+	"\n" +
+	"Thirdparty\x12\x1a\n" +
+	"\x16THIRDPARTY_UNSPECIFIED\x10\x00\x12\x1f\n" +
+	"\x1bTHIRDPARTY_TONI_UNDERGROUND\x10\x01\x12\x19\n" +
+	"\x15THIRDPARTY_RAJAONGKIR\x10\x02\x12\x1e\n" +
+	"\x1aTHIRDPARTY_SPX_UNDERGROUND\x10\x032\xd9\x01\n" +
 	"\x0fTrackingService\x12\\\n" +
-	"\vTrackingGet\x12%.tracking_iface.v1.TrackingGetRequest\x1a&.tracking_iface.v1.TrackingGetResponseB\xca\x01\n" +
+	"\vTrackingGet\x12%.tracking_iface.v1.TrackingGetRequest\x1a&.tracking_iface.v1.TrackingGetResponse\x12h\n" +
+	"\x0fTrackingProcess\x12).tracking_iface.v1.TrackingProcessRequest\x1a*.tracking_iface.v1.TrackingProcessResponseB\xca\x01\n" +
 	"\x15com.tracking_iface.v1B\rTrackingProtoP\x01ZAgithub.com/pdcgo/schema/services/tracking_iface/v1;tracking_iface\xa2\x02\x03TXX\xaa\x02\x10TrackingIface.V1\xca\x02\x10TrackingIface\\V1\xe2\x02\x1cTrackingIface\\V1\\GPBMetadata\xea\x02\x11TrackingIface::V1b\x06proto3"
 
 var (
@@ -200,23 +619,38 @@ func file_tracking_iface_v1_tracking_proto_rawDescGZIP() []byte {
 	return file_tracking_iface_v1_tracking_proto_rawDescData
 }
 
-var file_tracking_iface_v1_tracking_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_tracking_iface_v1_tracking_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_tracking_iface_v1_tracking_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_tracking_iface_v1_tracking_proto_goTypes = []any{
-	(*TrackingGetRequest)(nil),    // 0: tracking_iface.v1.TrackingGetRequest
-	(*HistoryItem)(nil),           // 1: tracking_iface.v1.HistoryItem
-	(*TrackingGetResponse)(nil),   // 2: tracking_iface.v1.TrackingGetResponse
-	(*timestamppb.Timestamp)(nil), // 3: google.protobuf.Timestamp
+	(Status)(0),                     // 0: tracking_iface.v1.Status
+	(Thirdparty)(0),                 // 1: tracking_iface.v1.Thirdparty
+	(*TrackingGetRequest)(nil),      // 2: tracking_iface.v1.TrackingGetRequest
+	(*HistoryItem)(nil),             // 3: tracking_iface.v1.HistoryItem
+	(*Shipping)(nil),                // 4: tracking_iface.v1.Shipping
+	(*TrackInfo)(nil),               // 5: tracking_iface.v1.TrackInfo
+	(*TrackingGetResponse)(nil),     // 6: tracking_iface.v1.TrackingGetResponse
+	(*TrackingProcessRequest)(nil),  // 7: tracking_iface.v1.TrackingProcessRequest
+	(*TrackingProcessResponse)(nil), // 8: tracking_iface.v1.TrackingProcessResponse
+	(*timestamppb.Timestamp)(nil),   // 9: google.protobuf.Timestamp
 }
 var file_tracking_iface_v1_tracking_proto_depIdxs = []int32{
-	3, // 0: tracking_iface.v1.HistoryItem.at:type_name -> google.protobuf.Timestamp
-	1, // 1: tracking_iface.v1.TrackingGetResponse.history:type_name -> tracking_iface.v1.HistoryItem
-	0, // 2: tracking_iface.v1.TrackingService.TrackingGet:input_type -> tracking_iface.v1.TrackingGetRequest
-	2, // 3: tracking_iface.v1.TrackingService.TrackingGet:output_type -> tracking_iface.v1.TrackingGetResponse
-	3, // [3:4] is the sub-list for method output_type
-	2, // [2:3] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	9,  // 0: tracking_iface.v1.HistoryItem.at:type_name -> google.protobuf.Timestamp
+	9,  // 1: tracking_iface.v1.TrackInfo.last_updated:type_name -> google.protobuf.Timestamp
+	4,  // 2: tracking_iface.v1.TrackInfo.shipping:type_name -> tracking_iface.v1.Shipping
+	0,  // 3: tracking_iface.v1.TrackInfo.status:type_name -> tracking_iface.v1.Status
+	3,  // 4: tracking_iface.v1.TrackInfo.histories:type_name -> tracking_iface.v1.HistoryItem
+	1,  // 5: tracking_iface.v1.TrackInfo.thirdparties:type_name -> tracking_iface.v1.Thirdparty
+	5,  // 6: tracking_iface.v1.TrackingGetResponse.track_info:type_name -> tracking_iface.v1.TrackInfo
+	5,  // 7: tracking_iface.v1.TrackingProcessResponse.track_info:type_name -> tracking_iface.v1.TrackInfo
+	2,  // 8: tracking_iface.v1.TrackingService.TrackingGet:input_type -> tracking_iface.v1.TrackingGetRequest
+	7,  // 9: tracking_iface.v1.TrackingService.TrackingProcess:input_type -> tracking_iface.v1.TrackingProcessRequest
+	6,  // 10: tracking_iface.v1.TrackingService.TrackingGet:output_type -> tracking_iface.v1.TrackingGetResponse
+	8,  // 11: tracking_iface.v1.TrackingService.TrackingProcess:output_type -> tracking_iface.v1.TrackingProcessResponse
+	10, // [10:12] is the sub-list for method output_type
+	8,  // [8:10] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_tracking_iface_v1_tracking_proto_init() }
@@ -229,13 +663,14 @@ func file_tracking_iface_v1_tracking_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_tracking_iface_v1_tracking_proto_rawDesc), len(file_tracking_iface_v1_tracking_proto_rawDesc)),
-			NumEnums:      0,
-			NumMessages:   3,
+			NumEnums:      2,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
 		GoTypes:           file_tracking_iface_v1_tracking_proto_goTypes,
 		DependencyIndexes: file_tracking_iface_v1_tracking_proto_depIdxs,
+		EnumInfos:         file_tracking_iface_v1_tracking_proto_enumTypes,
 		MessageInfos:      file_tracking_iface_v1_tracking_proto_msgTypes,
 	}.Build()
 	File_tracking_iface_v1_tracking_proto = out.File

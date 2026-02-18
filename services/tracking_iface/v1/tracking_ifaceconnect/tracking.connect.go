@@ -36,11 +36,15 @@ const (
 	// TrackingServiceTrackingGetProcedure is the fully-qualified name of the TrackingService's
 	// TrackingGet RPC.
 	TrackingServiceTrackingGetProcedure = "/tracking_iface.v1.TrackingService/TrackingGet"
+	// TrackingServiceTrackingProcessProcedure is the fully-qualified name of the TrackingService's
+	// TrackingProcess RPC.
+	TrackingServiceTrackingProcessProcedure = "/tracking_iface.v1.TrackingService/TrackingProcess"
 )
 
 // TrackingServiceClient is a client for the tracking_iface.v1.TrackingService service.
 type TrackingServiceClient interface {
 	TrackingGet(context.Context, *connect.Request[v1.TrackingGetRequest]) (*connect.Response[v1.TrackingGetResponse], error)
+	TrackingProcess(context.Context, *connect.Request[v1.TrackingProcessRequest]) (*connect.Response[v1.TrackingProcessResponse], error)
 }
 
 // NewTrackingServiceClient constructs a client for the tracking_iface.v1.TrackingService service.
@@ -60,12 +64,19 @@ func NewTrackingServiceClient(httpClient connect.HTTPClient, baseURL string, opt
 			connect.WithSchema(trackingServiceMethods.ByName("TrackingGet")),
 			connect.WithClientOptions(opts...),
 		),
+		trackingProcess: connect.NewClient[v1.TrackingProcessRequest, v1.TrackingProcessResponse](
+			httpClient,
+			baseURL+TrackingServiceTrackingProcessProcedure,
+			connect.WithSchema(trackingServiceMethods.ByName("TrackingProcess")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // trackingServiceClient implements TrackingServiceClient.
 type trackingServiceClient struct {
-	trackingGet *connect.Client[v1.TrackingGetRequest, v1.TrackingGetResponse]
+	trackingGet     *connect.Client[v1.TrackingGetRequest, v1.TrackingGetResponse]
+	trackingProcess *connect.Client[v1.TrackingProcessRequest, v1.TrackingProcessResponse]
 }
 
 // TrackingGet calls tracking_iface.v1.TrackingService.TrackingGet.
@@ -73,9 +84,15 @@ func (c *trackingServiceClient) TrackingGet(ctx context.Context, req *connect.Re
 	return c.trackingGet.CallUnary(ctx, req)
 }
 
+// TrackingProcess calls tracking_iface.v1.TrackingService.TrackingProcess.
+func (c *trackingServiceClient) TrackingProcess(ctx context.Context, req *connect.Request[v1.TrackingProcessRequest]) (*connect.Response[v1.TrackingProcessResponse], error) {
+	return c.trackingProcess.CallUnary(ctx, req)
+}
+
 // TrackingServiceHandler is an implementation of the tracking_iface.v1.TrackingService service.
 type TrackingServiceHandler interface {
 	TrackingGet(context.Context, *connect.Request[v1.TrackingGetRequest]) (*connect.Response[v1.TrackingGetResponse], error)
+	TrackingProcess(context.Context, *connect.Request[v1.TrackingProcessRequest]) (*connect.Response[v1.TrackingProcessResponse], error)
 }
 
 // NewTrackingServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -91,10 +108,18 @@ func NewTrackingServiceHandler(svc TrackingServiceHandler, opts ...connect.Handl
 		connect.WithSchema(trackingServiceMethods.ByName("TrackingGet")),
 		connect.WithHandlerOptions(opts...),
 	)
+	trackingServiceTrackingProcessHandler := connect.NewUnaryHandler(
+		TrackingServiceTrackingProcessProcedure,
+		svc.TrackingProcess,
+		connect.WithSchema(trackingServiceMethods.ByName("TrackingProcess")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/tracking_iface.v1.TrackingService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case TrackingServiceTrackingGetProcedure:
 			trackingServiceTrackingGetHandler.ServeHTTP(w, r)
+		case TrackingServiceTrackingProcessProcedure:
+			trackingServiceTrackingProcessHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -106,4 +131,8 @@ type UnimplementedTrackingServiceHandler struct{}
 
 func (UnimplementedTrackingServiceHandler) TrackingGet(context.Context, *connect.Request[v1.TrackingGetRequest]) (*connect.Response[v1.TrackingGetResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tracking_iface.v1.TrackingService.TrackingGet is not implemented"))
+}
+
+func (UnimplementedTrackingServiceHandler) TrackingProcess(context.Context, *connect.Request[v1.TrackingProcessRequest]) (*connect.Response[v1.TrackingProcessResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tracking_iface.v1.TrackingService.TrackingProcess is not implemented"))
 }

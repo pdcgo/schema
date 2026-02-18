@@ -10,9 +10,11 @@ option go_package = "github.com/pdcgo/schema/services/tracking_iface/v1;tracking
 
 service TrackingService {
   rpc TrackingGet(TrackingGetRequest) returns (TrackingGetResponse);
+  rpc TrackingProcess(TrackingProcessRequest) returns (TrackingProcessResponse);
 }
 
 message TrackingGetRequest {
+  uint64 shipping_id = 1 [(buf.validate.field).required = true];
   string receipt = 2 [(buf.validate.field).required = true];
 }
 
@@ -22,6 +24,52 @@ message HistoryItem {
   google.protobuf.Timestamp at = 3;
 }
 
+message Shipping {
+  string key = 1;
+  string display_name = 2;
+}
+
+enum Status {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_DELIVERED = 1;
+  STATUS_ON_PROCESS = 2;
+  STATUS_RETURN_PROCESS = 3;
+  STATUS_RETURNED = 4;
+  STATUS_SHIPMENT_PROCESS = 5;
+  STATUS_LOST = 6;
+  STATUS_DELIVERY_FAILED = 7;
+  STATUS_CANCEL = 8;
+  STATUS_CREATED = 9;
+}
+
+enum Thirdparty {
+  THIRDPARTY_UNSPECIFIED = 0;
+  THIRDPARTY_TONI_UNDERGROUND = 1;
+  THIRDPARTY_RAJAONGKIR = 2;
+  THIRDPARTY_SPX_UNDERGROUND = 3;
+}
+
+message TrackInfo {
+  uint64 id = 1;
+  uint64 shipping_id = 2;
+  string receipt = 3;
+  google.protobuf.Timestamp last_updated = 4;
+  Shipping shipping = 5;
+
+  Status status = 6;
+  repeated HistoryItem histories = 7;
+  repeated Thirdparty thirdparties = 8;
+}
+
 message TrackingGetResponse {
-  repeated HistoryItem history = 1;
+  TrackInfo track_info = 1;
+}
+
+message TrackingProcessRequest {
+  uint64 shipping_id = 1 [(buf.validate.field).required = true];
+  string receipt = 2 [(buf.validate.field).required = true];
+}
+
+message TrackingProcessResponse {
+  TrackInfo track_info = 1;
 }

@@ -72,3 +72,29 @@ func (mr *MockTrackingServiceClientMockRecorder) TrackingGet(ctx, req interface{
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "TrackingGet", reflect.TypeOf((*MockTrackingService)(nil).TrackingGet), ctx, req)
 }
 
+func (m *MockTrackingService) TrackingProcess(ctx context.Context, req *connect.Request[v1.TrackingProcessRequest]) (*connect.Response[v1.TrackingProcessResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "TrackingProcess", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.TrackingProcessResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockTrackingServiceMockRecorder) TrackingProcess(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "TrackingProcess", reflect.TypeOf((*MockTrackingService)(nil).TrackingProcess), ctx, req)
+}
+
+func (m *MockTrackingServiceClient) TrackingProcess(ctx context.Context, req *connect.Request[v1.TrackingProcessRequest]) (*connect.Response[v1.TrackingProcessResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "TrackingProcess", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.TrackingProcessResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockTrackingServiceClientMockRecorder) TrackingProcess(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "TrackingProcess", reflect.TypeOf((*MockTrackingService)(nil).TrackingProcess), ctx, req)
+}
+
