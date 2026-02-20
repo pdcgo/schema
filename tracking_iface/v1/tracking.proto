@@ -13,9 +13,22 @@ service TrackingService {
   rpc TrackingProcess(TrackingProcessRequest) returns (TrackingProcessResponse);
 }
 
-message TrackingGetRequest {
+message OrderShipped {
+  uint64 order_id = 1 [(buf.validate.field).required = true];
+  uint64 tx_id = 2 [(buf.validate.field).required = true];
+  uint64 team_id = 3 [(buf.validate.field).required = true];
+}
+
+message TrackingPayload {
   uint64 shipping_id = 1 [(buf.validate.field).required = true];
   string receipt = 2 [(buf.validate.field).required = true];
+  oneof type {
+    OrderShipped order_shipped = 3;
+  }
+}
+
+message TrackingGetRequest {
+  TrackingPayload payload = 1 [(buf.validate.field).required = true];
 }
 
 message HistoryItem {
@@ -66,8 +79,7 @@ message TrackingGetResponse {
 }
 
 message TrackingProcessRequest {
-  uint64 shipping_id = 1 [(buf.validate.field).required = true];
-  string receipt = 2 [(buf.validate.field).required = true];
+  TrackingPayload payload = 1 [(buf.validate.field).required = true];
 }
 
 message TrackingProcessResponse {
