@@ -7,7 +7,9 @@ import "common/v1/common.proto";
 import "google/protobuf/timestamp.proto";
 import "order_iface/v1/create.proto";
 import "order_iface/v1/draft.proto";
+import "order_iface/v1/order_core.proto";
 import "order_iface/v1/order_return.proto";
+import "tracking_iface/v1/tracking.proto";
 
 option go_package = "github.com/pdcgo/schema/services/order_iface/v1;order_iface";
 
@@ -21,6 +23,7 @@ service OrderService {
 
   // create order
   rpc OrderCreate(OrderCreateRequest) returns (OrderCreateResponse);
+  rpc OrderChangeStatus(OrderChangeStatusRequest) returns (OrderChangeStatusResponse);
   // rpc ShopAccess(ShopAccessRequest) returns (ShopAccessResponse);
 
   // bagian accounting
@@ -47,6 +50,8 @@ service OrderService {
   rpc MpPaymentCreate(MpPaymentCreateRequest) returns (MpPaymentCreateResponse);
   rpc MpPaymentOrderList(MpPaymentOrderListRequest) returns (MpPaymentOrderListResponse);
   rpc MpPaymentDelete(MpPaymentDeleteRequest) returns (MpPaymentDeleteResponse);
+
+  rpc OrderTracking(OrderTrackingRequest) returns (OrderTrackingResponse);
 
   // bagian ops frequently
 }
@@ -103,6 +108,26 @@ enum WarehouseStatus {
   WAREHOUSE_STATUS_PACKING = 2;
   WAREHOUSE_STATUS_PACKING_COMPLETED = 3;
   WAREHOUSE_STATUS_SHIPPED = 4;
+}
+
+message ShippedTrack {
+  bool set_shipment = 1;
+  repeated uint64 order_ids = 4 [
+    (buf.validate.field).repeated.min_items = 1,
+    (buf.validate.field).repeated.max_items = 100,
+    (buf.validate.field).repeated.unique = true,
+    (buf.validate.field).repeated.items.uint64.gt = 0
+  ];
+}
+
+message OrderTrackingRequest {
+  oneof track {
+    ShippedTrack shipped = 2;
+  }
+}
+
+message OrderTrackingResponse {
+  map<uint64, tracking_iface.v1.TrackInfo> result = 1;
 }
 
 message ChangeEstRevenueRequest {

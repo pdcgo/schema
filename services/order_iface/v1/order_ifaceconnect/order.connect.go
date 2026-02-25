@@ -86,6 +86,9 @@ const (
 	// OrderServiceMpPaymentDeleteProcedure is the fully-qualified name of the OrderService's
 	// MpPaymentDelete RPC.
 	OrderServiceMpPaymentDeleteProcedure = "/order_iface.v1.OrderService/MpPaymentDelete"
+	// OrderServiceOrderTrackingProcedure is the fully-qualified name of the OrderService's
+	// OrderTracking RPC.
+	OrderServiceOrderTrackingProcedure = "/order_iface.v1.OrderService/OrderTracking"
 )
 
 // OrderServiceClient is a client for the order_iface.v1.OrderService service.
@@ -117,6 +120,7 @@ type OrderServiceClient interface {
 	MpPaymentCreate(context.Context, *connect.Request[v1.MpPaymentCreateRequest]) (*connect.Response[v1.MpPaymentCreateResponse], error)
 	MpPaymentOrderList(context.Context, *connect.Request[v1.MpPaymentOrderListRequest]) (*connect.Response[v1.MpPaymentOrderListResponse], error)
 	MpPaymentDelete(context.Context, *connect.Request[v1.MpPaymentDeleteRequest]) (*connect.Response[v1.MpPaymentDeleteResponse], error)
+	OrderTracking(context.Context, *connect.Request[v1.OrderTrackingRequest]) (*connect.Response[v1.OrderTrackingResponse], error)
 }
 
 // NewOrderServiceClient constructs a client for the order_iface.v1.OrderService service. By
@@ -238,6 +242,12 @@ func NewOrderServiceClient(httpClient connect.HTTPClient, baseURL string, opts .
 			connect.WithSchema(orderServiceMethods.ByName("MpPaymentDelete")),
 			connect.WithClientOptions(opts...),
 		),
+		orderTracking: connect.NewClient[v1.OrderTrackingRequest, v1.OrderTrackingResponse](
+			httpClient,
+			baseURL+OrderServiceOrderTrackingProcedure,
+			connect.WithSchema(orderServiceMethods.ByName("OrderTracking")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -261,6 +271,7 @@ type orderServiceClient struct {
 	mpPaymentCreate    *connect.Client[v1.MpPaymentCreateRequest, v1.MpPaymentCreateResponse]
 	mpPaymentOrderList *connect.Client[v1.MpPaymentOrderListRequest, v1.MpPaymentOrderListResponse]
 	mpPaymentDelete    *connect.Client[v1.MpPaymentDeleteRequest, v1.MpPaymentDeleteResponse]
+	orderTracking      *connect.Client[v1.OrderTrackingRequest, v1.OrderTrackingResponse]
 }
 
 // OrderDraftCreate calls order_iface.v1.OrderService.OrderDraftCreate.
@@ -353,6 +364,11 @@ func (c *orderServiceClient) MpPaymentDelete(ctx context.Context, req *connect.R
 	return c.mpPaymentDelete.CallUnary(ctx, req)
 }
 
+// OrderTracking calls order_iface.v1.OrderService.OrderTracking.
+func (c *orderServiceClient) OrderTracking(ctx context.Context, req *connect.Request[v1.OrderTrackingRequest]) (*connect.Response[v1.OrderTrackingResponse], error) {
+	return c.orderTracking.CallUnary(ctx, req)
+}
+
 // OrderServiceHandler is an implementation of the order_iface.v1.OrderService service.
 type OrderServiceHandler interface {
 	// masalah creating order
@@ -382,6 +398,7 @@ type OrderServiceHandler interface {
 	MpPaymentCreate(context.Context, *connect.Request[v1.MpPaymentCreateRequest]) (*connect.Response[v1.MpPaymentCreateResponse], error)
 	MpPaymentOrderList(context.Context, *connect.Request[v1.MpPaymentOrderListRequest]) (*connect.Response[v1.MpPaymentOrderListResponse], error)
 	MpPaymentDelete(context.Context, *connect.Request[v1.MpPaymentDeleteRequest]) (*connect.Response[v1.MpPaymentDeleteResponse], error)
+	OrderTracking(context.Context, *connect.Request[v1.OrderTrackingRequest]) (*connect.Response[v1.OrderTrackingResponse], error)
 }
 
 // NewOrderServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -499,6 +516,12 @@ func NewOrderServiceHandler(svc OrderServiceHandler, opts ...connect.HandlerOpti
 		connect.WithSchema(orderServiceMethods.ByName("MpPaymentDelete")),
 		connect.WithHandlerOptions(opts...),
 	)
+	orderServiceOrderTrackingHandler := connect.NewUnaryHandler(
+		OrderServiceOrderTrackingProcedure,
+		svc.OrderTracking,
+		connect.WithSchema(orderServiceMethods.ByName("OrderTracking")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/order_iface.v1.OrderService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case OrderServiceOrderDraftCreateProcedure:
@@ -537,6 +560,8 @@ func NewOrderServiceHandler(svc OrderServiceHandler, opts ...connect.HandlerOpti
 			orderServiceMpPaymentOrderListHandler.ServeHTTP(w, r)
 		case OrderServiceMpPaymentDeleteProcedure:
 			orderServiceMpPaymentDeleteHandler.ServeHTTP(w, r)
+		case OrderServiceOrderTrackingProcedure:
+			orderServiceOrderTrackingHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -616,4 +641,8 @@ func (UnimplementedOrderServiceHandler) MpPaymentOrderList(context.Context, *con
 
 func (UnimplementedOrderServiceHandler) MpPaymentDelete(context.Context, *connect.Request[v1.MpPaymentDeleteRequest]) (*connect.Response[v1.MpPaymentDeleteResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("order_iface.v1.OrderService.MpPaymentDelete is not implemented"))
+}
+
+func (UnimplementedOrderServiceHandler) OrderTracking(context.Context, *connect.Request[v1.OrderTrackingRequest]) (*connect.Response[v1.OrderTrackingResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("order_iface.v1.OrderService.OrderTracking is not implemented"))
 }

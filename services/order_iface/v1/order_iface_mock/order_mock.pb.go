@@ -512,3 +512,29 @@ func (mr *MockOrderServiceClientMockRecorder) MpPaymentDelete(ctx, req interface
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "MpPaymentDelete", reflect.TypeOf((*MockOrderService)(nil).MpPaymentDelete), ctx, req)
 }
 
+func (m *MockOrderService) OrderTracking(ctx context.Context, req *connect.Request[v1.OrderTrackingRequest]) (*connect.Response[v1.OrderTrackingResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "OrderTracking", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.OrderTrackingResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockOrderServiceMockRecorder) OrderTracking(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OrderTracking", reflect.TypeOf((*MockOrderService)(nil).OrderTracking), ctx, req)
+}
+
+func (m *MockOrderServiceClient) OrderTracking(ctx context.Context, req *connect.Request[v1.OrderTrackingRequest]) (*connect.Response[v1.OrderTrackingResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "OrderTracking", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.OrderTrackingResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockOrderServiceClientMockRecorder) OrderTracking(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OrderTracking", reflect.TypeOf((*MockOrderService)(nil).OrderTracking), ctx, req)
+}
+
