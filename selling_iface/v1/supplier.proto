@@ -1,0 +1,116 @@
+syntax = "proto3";
+package selling_iface.v1;
+
+// import "accounting_iface/v1/core.proto";
+// import "accounting_iface/v1/revenue.proto";
+import "buf/validate/validate.proto";
+import "common/v1/common.proto";
+// import "common/v1/team.proto";
+// import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/pdcgo/schema/services/selling_iface/v1;selling_iface";
+
+service SupplierService {
+  rpc SupplierList(SupplierListRequest) returns (SupplierListResponse);
+  rpc SupplierCreate(SupplierCreateRequest) returns (SupplierCreateResponse);
+  rpc SupplierDelete(SupplierDeleteRequest) returns (SupplierDeleteResponse);
+  rpc SupplierUpdate(SupplierUpdateRequest) returns (SupplierUpdateResponse);
+  rpc SupplierGet(SupplierGetRequest) returns (SupplierGetResponse);
+}
+
+enum SupplierType {
+  SUPPLIER_TYPE_UNSPECIFIED = 0;
+  SUPPLIER_TYPE_CUSTOM = 1;
+  SUPPLIER_TYPE_MARKETPLACE = 2;
+}
+
+message SupplierCustom {
+  string name = 3 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 200
+  }];
+  string contact = 4 [(buf.validate.field).string = {pattern: "^\\+[1-9]\\d{1,14}$"}];
+  string description = 5 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 500
+  }];
+}
+
+message SupplierMarketplace {
+  common.v1.MarketplaceType mp_type = 1;
+
+  string name = 3 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 200
+  }];
+  string uri = 4 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 500
+  }];
+  string description = 5 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 500
+  }];
+}
+
+message Supplier {
+  uint64 id = 1;
+  uint64 team_id = 2;
+  oneof data {
+    SupplierCustom custom = 3;
+    SupplierMarketplace marketplace = 4;
+  }
+}
+
+message SupplierCreateRequest {
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  oneof data {
+    SupplierCustom custom = 2;
+    SupplierMarketplace marketplace = 3;
+  }
+}
+
+message SupplierCreateResponse {
+  uint64 id = 1;
+  Supplier data = 2;
+}
+
+message SupplierListRequest {
+  string q = 1;
+  SupplierType type = 2 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+  uint64 team_id = 3 [(buf.validate.field).uint64.gt = 0];
+  common.v1.PageFilter page = 4 [(buf.validate.field).required = true];
+}
+
+message SupplierListResponse {
+  repeated Supplier data = 1;
+  common.v1.PageInfo page_info = 2;
+}
+
+message SupplierGetRequest {
+  uint64 id = 1 [(buf.validate.field).uint64.gt = 0];
+  SupplierType type = 2 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+}
+message SupplierGetResponse {
+  Supplier data = 1;
+}
+
+message SupplierUpdateRequest {
+  Supplier data = 1;
+}
+message SupplierUpdateResponse {}
+
+message SupplierDeleteRequest {
+  SupplierType type = 2 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+  uint64 id = 1 [(buf.validate.field).uint64.gt = 0];
+}
+message SupplierDeleteResponse {}

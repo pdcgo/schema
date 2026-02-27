@@ -51,6 +51,9 @@ const (
 	// OrderServiceOrderCreateProcedure is the fully-qualified name of the OrderService's OrderCreate
 	// RPC.
 	OrderServiceOrderCreateProcedure = "/order_iface.v1.OrderService/OrderCreate"
+	// OrderServiceOrderChangeStatusProcedure is the fully-qualified name of the OrderService's
+	// OrderChangeStatus RPC.
+	OrderServiceOrderChangeStatusProcedure = "/order_iface.v1.OrderService/OrderChangeStatus"
 	// OrderServiceOrderFundSetProcedure is the fully-qualified name of the OrderService's OrderFundSet
 	// RPC.
 	OrderServiceOrderFundSetProcedure = "/order_iface.v1.OrderService/OrderFundSet"
@@ -101,6 +104,7 @@ type OrderServiceClient interface {
 	OrderDraftCheck(context.Context, *connect.Request[v1.OrderDraftCheckRequest]) (*connect.Response[v1.OrderDraftCheckResponse], error)
 	// create order
 	OrderCreate(context.Context, *connect.Request[v1.OrderCreateRequest]) (*connect.Response[v1.OrderCreateResponse], error)
+	OrderChangeStatus(context.Context, *connect.Request[v1.OrderChangeStatusRequest]) (*connect.Response[v1.OrderChangeStatusResponse], error)
 	// bagian accounting
 	OrderFundSet(context.Context) *connect.ClientStreamForClient[v1.OrderFundSetRequest, v1.OrderFundSetResponse]
 	OrderTagRemove(context.Context, *connect.Request[v1.OrderTagRemoveRequest]) (*connect.Response[v1.OrderTagRemoveResponse], error)
@@ -168,6 +172,12 @@ func NewOrderServiceClient(httpClient connect.HTTPClient, baseURL string, opts .
 			httpClient,
 			baseURL+OrderServiceOrderCreateProcedure,
 			connect.WithSchema(orderServiceMethods.ByName("OrderCreate")),
+			connect.WithClientOptions(opts...),
+		),
+		orderChangeStatus: connect.NewClient[v1.OrderChangeStatusRequest, v1.OrderChangeStatusResponse](
+			httpClient,
+			baseURL+OrderServiceOrderChangeStatusProcedure,
+			connect.WithSchema(orderServiceMethods.ByName("OrderChangeStatus")),
 			connect.WithClientOptions(opts...),
 		),
 		orderFundSet: connect.NewClient[v1.OrderFundSetRequest, v1.OrderFundSetResponse](
@@ -259,6 +269,7 @@ type orderServiceClient struct {
 	orderDraftGet      *connect.Client[v1.OrderDraftGetRequest, v1.OrderDraftGetResponse]
 	orderDraftCheck    *connect.Client[v1.OrderDraftCheckRequest, v1.OrderDraftCheckResponse]
 	orderCreate        *connect.Client[v1.OrderCreateRequest, v1.OrderCreateResponse]
+	orderChangeStatus  *connect.Client[v1.OrderChangeStatusRequest, v1.OrderChangeStatusResponse]
 	orderFundSet       *connect.Client[v1.OrderFundSetRequest, v1.OrderFundSetResponse]
 	orderTagRemove     *connect.Client[v1.OrderTagRemoveRequest, v1.OrderTagRemoveResponse]
 	orderTagAdd        *connect.Client[v1.OrderTagAddRequest, v1.OrderTagAddResponse]
@@ -302,6 +313,11 @@ func (c *orderServiceClient) OrderDraftCheck(ctx context.Context, req *connect.R
 // OrderCreate calls order_iface.v1.OrderService.OrderCreate.
 func (c *orderServiceClient) OrderCreate(ctx context.Context, req *connect.Request[v1.OrderCreateRequest]) (*connect.Response[v1.OrderCreateResponse], error) {
 	return c.orderCreate.CallUnary(ctx, req)
+}
+
+// OrderChangeStatus calls order_iface.v1.OrderService.OrderChangeStatus.
+func (c *orderServiceClient) OrderChangeStatus(ctx context.Context, req *connect.Request[v1.OrderChangeStatusRequest]) (*connect.Response[v1.OrderChangeStatusResponse], error) {
+	return c.orderChangeStatus.CallUnary(ctx, req)
 }
 
 // OrderFundSet calls order_iface.v1.OrderService.OrderFundSet.
@@ -379,6 +395,7 @@ type OrderServiceHandler interface {
 	OrderDraftCheck(context.Context, *connect.Request[v1.OrderDraftCheckRequest]) (*connect.Response[v1.OrderDraftCheckResponse], error)
 	// create order
 	OrderCreate(context.Context, *connect.Request[v1.OrderCreateRequest]) (*connect.Response[v1.OrderCreateResponse], error)
+	OrderChangeStatus(context.Context, *connect.Request[v1.OrderChangeStatusRequest]) (*connect.Response[v1.OrderChangeStatusResponse], error)
 	// bagian accounting
 	OrderFundSet(context.Context, *connect.ClientStream[v1.OrderFundSetRequest]) (*connect.Response[v1.OrderFundSetResponse], error)
 	OrderTagRemove(context.Context, *connect.Request[v1.OrderTagRemoveRequest]) (*connect.Response[v1.OrderTagRemoveResponse], error)
@@ -442,6 +459,12 @@ func NewOrderServiceHandler(svc OrderServiceHandler, opts ...connect.HandlerOpti
 		OrderServiceOrderCreateProcedure,
 		svc.OrderCreate,
 		connect.WithSchema(orderServiceMethods.ByName("OrderCreate")),
+		connect.WithHandlerOptions(opts...),
+	)
+	orderServiceOrderChangeStatusHandler := connect.NewUnaryHandler(
+		OrderServiceOrderChangeStatusProcedure,
+		svc.OrderChangeStatus,
+		connect.WithSchema(orderServiceMethods.ByName("OrderChangeStatus")),
 		connect.WithHandlerOptions(opts...),
 	)
 	orderServiceOrderFundSetHandler := connect.NewClientStreamHandler(
@@ -536,6 +559,8 @@ func NewOrderServiceHandler(svc OrderServiceHandler, opts ...connect.HandlerOpti
 			orderServiceOrderDraftCheckHandler.ServeHTTP(w, r)
 		case OrderServiceOrderCreateProcedure:
 			orderServiceOrderCreateHandler.ServeHTTP(w, r)
+		case OrderServiceOrderChangeStatusProcedure:
+			orderServiceOrderChangeStatusHandler.ServeHTTP(w, r)
 		case OrderServiceOrderFundSetProcedure:
 			orderServiceOrderFundSetHandler.ServeHTTP(w, r)
 		case OrderServiceOrderTagRemoveProcedure:
@@ -593,6 +618,10 @@ func (UnimplementedOrderServiceHandler) OrderDraftCheck(context.Context, *connec
 
 func (UnimplementedOrderServiceHandler) OrderCreate(context.Context, *connect.Request[v1.OrderCreateRequest]) (*connect.Response[v1.OrderCreateResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("order_iface.v1.OrderService.OrderCreate is not implemented"))
+}
+
+func (UnimplementedOrderServiceHandler) OrderChangeStatus(context.Context, *connect.Request[v1.OrderChangeStatusRequest]) (*connect.Response[v1.OrderChangeStatusResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("order_iface.v1.OrderService.OrderChangeStatus is not implemented"))
 }
 
 func (UnimplementedOrderServiceHandler) OrderFundSet(context.Context, *connect.ClientStream[v1.OrderFundSetRequest]) (*connect.Response[v1.OrderFundSetResponse], error) {

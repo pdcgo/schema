@@ -202,6 +202,32 @@ func (mr *MockOrderServiceClientMockRecorder) OrderCreate(ctx, req interface{}) 
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OrderCreate", reflect.TypeOf((*MockOrderService)(nil).OrderCreate), ctx, req)
 }
 
+func (m *MockOrderService) OrderChangeStatus(ctx context.Context, req *connect.Request[v1.OrderChangeStatusRequest]) (*connect.Response[v1.OrderChangeStatusResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "OrderChangeStatus", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.OrderChangeStatusResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockOrderServiceMockRecorder) OrderChangeStatus(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OrderChangeStatus", reflect.TypeOf((*MockOrderService)(nil).OrderChangeStatus), ctx, req)
+}
+
+func (m *MockOrderServiceClient) OrderChangeStatus(ctx context.Context, req *connect.Request[v1.OrderChangeStatusRequest]) (*connect.Response[v1.OrderChangeStatusResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "OrderChangeStatus", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.OrderChangeStatusResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockOrderServiceClientMockRecorder) OrderChangeStatus(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OrderChangeStatus", reflect.TypeOf((*MockOrderService)(nil).OrderChangeStatus), ctx, req)
+}
+
 func (m *MockOrderService) OrderFundSet(ctx context.Context, stream *connect.ClientStream[v1.OrderFundSetRequest]) (*connect.Response[v1.OrderFundSetResponse], error) {
     m.ctrl.T.Helper()
     ret := m.ctrl.Call(m, "OrderFundSet", ctx, stream)

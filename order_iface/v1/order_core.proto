@@ -12,5 +12,11 @@ package order_iface.v1;
 
 option go_package = "github.com/pdcgo/schema/services/order_iface/v1;order_iface";
 
-message OrderChangeStatusRequest {}
+message ShippedStatus {}
+
+message OrderChangeStatusRequest {
+  oneof status {
+    ShippedStatus shipped = 1;
+  }
+}
 message OrderChangeStatusResponse {}
