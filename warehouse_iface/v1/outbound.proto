@@ -29,21 +29,43 @@ enum OutboundDetailSearchType {
   OUTBOUND_DETAIL_SEARCH_TYPE_RECEIPT_ORDREF = 2;
 }
 
-message OutboundByProductRequest {
+message OutboundByProductFilter {
   uint64 warehouse_id = 1 [(buf.validate.field).uint64.gt = 1];
   uint64 team_id = 2;
   uint64 shop_id = 3;
+  repeated string tx_status = 4;
+  common.v1.TimeFilterRange time_range = 9 [(buf.validate.field).required = true];
+}
+
+message OutboundByProductRequest {
+  OutboundByProductFilter filter = 1 [(buf.validate.field).required = true];
+  common.v1.PageFilter page = 4 [(buf.validate.field).required = true];
+}
+
+message OutboundByProductItemVariant {
+  uint64 variant_id = 1;
+  string product_name = 2;
+  repeated string images = 3;
+  string variant_image = 4;
+  repeated string variant_names = 5;
+  repeated string variant_values = 6;
+  string variant_ref_id = 7;
 }
 
 message OutboundByProductItem {
   string sku_id = 1;
   uint64 variation_id = 2;
-  int64 tx_count = 3;
-  int64 item_count = 4;
+  uint64 product_id = 3;
+
+  int64 tx_count = 4;
+  int64 item_count = 5;
+  // @gotags: gorm:"-"
+  OutboundByProductItemVariant variant = 6;
 }
 
 message OutboundByProductResponse {
   repeated OutboundByProductItem data = 1;
+  common.v1.PageInfo page_info = 2;
 }
 
 message OutboundDetailIDsRequest {
@@ -133,6 +155,7 @@ enum OutboundSortField {
   OUTBOUND_SORT_FIELD_UNSPECIFIED = 0;
   OUTBOUND_SORT_FIELD_CREATED = 1;
   OUTBOUND_SORT_FIELD_MP_CREATED = 2;
+  OUTBOUND_SORT_FIELD_DEADLINE = 3;
 }
 
 enum OutboundType {
@@ -145,6 +168,13 @@ enum OutboundSearchType {
   OUTBOUND_SEARCH_TYPE_UNSPECIFIED = 0;
   OUTBOUND_SEARCH_TYPE_SHOPNAME = 1;
   OUTBOUND_SEARCH_TYPE_ORDER_RECEIPT = 2;
+  OUTBOUND_SEARCH_TYPE_SKU_REFID = 3;
+}
+
+enum TimeFilterType {
+  TIME_FILTER_TYPE_UNSPECIFIED = 0;
+  TIME_FILTER_TYPE_DEADLINE = 1;
+  TIME_FILTER_TYPE_TRANSACTION_CREATED = 2;
 }
 
 message OutboundSort {
@@ -156,7 +186,9 @@ message OutboundListFilter {
   uint64 team_id = 1;
   uint64 user_id = 2;
   uint64 shop_id = 7;
+  repeated string sku_ids = 13;
   string q = 3;
+
   OutboundSearchType search_type = 12;
   bool include_deleted = 10;
   ShipmentStatus shipment = 11;
@@ -165,6 +197,7 @@ message OutboundListFilter {
   repeated common.v1.MarketplaceType marketplaces = 6;
   OutboundType outbound_type = 8;
   common.v1.TimeFilterRange time_range = 9 [(buf.validate.field).required = true];
+  // TimeFilterType time_range_type = 14;
 }
 
 message OutboundListRequest {
@@ -195,6 +228,7 @@ message Order {
   uint64 shop_id = 2;
   uint64 customer_id = 3;
   google.protobuf.Timestamp order_time = 4;
+  google.protobuf.Timestamp deadline_time = 5;
 }
 
 message TransferFrom {
