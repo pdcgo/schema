@@ -39,7 +39,8 @@ message SupplierCustom {
 message SupplierMarketplace {
   common.v1.MarketplaceType mp_type = 1;
 
-  string name = 3 [(buf.validate.field).string = {
+  string shop_name = 2;
+  string product_name = 3 [(buf.validate.field).string = {
     min_len: 1
     max_len: 200
   }];

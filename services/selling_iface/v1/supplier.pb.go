@@ -135,7 +135,8 @@ func (x *SupplierCustom) GetDescription() string {
 type SupplierMarketplace struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	MpType        v1.MarketplaceType     `protobuf:"varint,1,opt,name=mp_type,json=mpType,proto3,enum=common.v1.MarketplaceType" json:"mp_type,omitempty"`
-	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	ShopName      string                 `protobuf:"bytes,2,opt,name=shop_name,json=shopName,proto3" json:"shop_name,omitempty"`
+	ProductName   string                 `protobuf:"bytes,3,opt,name=product_name,json=productName,proto3" json:"product_name,omitempty"`
 	Uri           string                 `protobuf:"bytes,4,opt,name=uri,proto3" json:"uri,omitempty"`
 	Description   string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -179,9 +180,16 @@ func (x *SupplierMarketplace) GetMpType() v1.MarketplaceType {
 	return v1.MarketplaceType(0)
 }
 
-func (x *SupplierMarketplace) GetName() string {
+func (x *SupplierMarketplace) GetShopName() string {
 	if x != nil {
-		return x.Name
+		return x.ShopName
+	}
+	return ""
+}
+
+func (x *SupplierMarketplace) GetProductName() string {
+	if x != nil {
+		return x.ProductName
 	}
 	return ""
 }
@@ -834,11 +842,12 @@ const file_selling_iface_v1_supplier_proto_rawDesc = "" +
 	"\xbaH\ar\x05\x10\x01\x18\xc8\x01R\x04name\x122\n" +
 	"\acontact\x18\x04 \x01(\tB\x18\xbaH\x15r\x132\x11^\\+[1-9]\\d{1,14}$R\acontact\x12,\n" +
 	"\vdescription\x18\x05 \x01(\tB\n" +
-	"\xbaH\ar\x05\x10\x01\x18\xf4\x03R\vdescription\"\xb6\x01\n" +
+	"\xbaH\ar\x05\x10\x01\x18\xf4\x03R\vdescription\"\xe2\x01\n" +
 	"\x13SupplierMarketplace\x123\n" +
-	"\amp_type\x18\x01 \x01(\x0e2\x1a.common.v1.MarketplaceTypeR\x06mpType\x12\x1e\n" +
-	"\x04name\x18\x03 \x01(\tB\n" +
-	"\xbaH\ar\x05\x10\x01\x18\xc8\x01R\x04name\x12\x1c\n" +
+	"\amp_type\x18\x01 \x01(\x0e2\x1a.common.v1.MarketplaceTypeR\x06mpType\x12\x1b\n" +
+	"\tshop_name\x18\x02 \x01(\tR\bshopName\x12-\n" +
+	"\fproduct_name\x18\x03 \x01(\tB\n" +
+	"\xbaH\ar\x05\x10\x01\x18\xc8\x01R\vproductName\x12\x1c\n" +
 	"\x03uri\x18\x04 \x01(\tB\n" +
 	"\xbaH\ar\x05\x10\x01\x18\xf4\x03R\x03uri\x12,\n" +
 	"\vdescription\x18\x05 \x01(\tB\n" +
