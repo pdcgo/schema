@@ -12,7 +12,13 @@ package order_iface.v1;
 
 option go_package = "github.com/pdcgo/schema/services/order_iface/v1;order_iface";
 
-message ShippedStatus {}
+message ShippedStatus {
+  uint64 team_id = 1;
+  oneof by {
+    uint64 order_id = 2;
+    string ref_id = 3;
+  }
+}
 
 message OrderChangeStatusRequest {
   oneof status {

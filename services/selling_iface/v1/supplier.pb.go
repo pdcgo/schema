@@ -568,7 +568,7 @@ func (x *SupplierListResponse) GetPageInfo() *v1.PageInfo {
 	return nil
 }
 
-type SupplierGetRequest struct {
+type SupplierGetItem struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Type          SupplierType           `protobuf:"varint,2,opt,name=type,proto3,enum=selling_iface.v1.SupplierType" json:"type,omitempty"`
@@ -576,9 +576,60 @@ type SupplierGetRequest struct {
 	sizeCache     protoimpl.SizeCache
 }
 
+func (x *SupplierGetItem) Reset() {
+	*x = SupplierGetItem{}
+	mi := &file_selling_iface_v1_supplier_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SupplierGetItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SupplierGetItem) ProtoMessage() {}
+
+func (x *SupplierGetItem) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_supplier_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SupplierGetItem.ProtoReflect.Descriptor instead.
+func (*SupplierGetItem) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_supplier_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *SupplierGetItem) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *SupplierGetItem) GetType() SupplierType {
+	if x != nil {
+		return x.Type
+	}
+	return SupplierType_SUPPLIER_TYPE_UNSPECIFIED
+}
+
+type SupplierGetRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Items         []*SupplierGetItem     `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
 func (x *SupplierGetRequest) Reset() {
 	*x = SupplierGetRequest{}
-	mi := &file_selling_iface_v1_supplier_proto_msgTypes[7]
+	mi := &file_selling_iface_v1_supplier_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -590,7 +641,7 @@ func (x *SupplierGetRequest) String() string {
 func (*SupplierGetRequest) ProtoMessage() {}
 
 func (x *SupplierGetRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_supplier_proto_msgTypes[7]
+	mi := &file_selling_iface_v1_supplier_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -603,33 +654,26 @@ func (x *SupplierGetRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SupplierGetRequest.ProtoReflect.Descriptor instead.
 func (*SupplierGetRequest) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_supplier_proto_rawDescGZIP(), []int{7}
+	return file_selling_iface_v1_supplier_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *SupplierGetRequest) GetId() uint64 {
+func (x *SupplierGetRequest) GetItems() []*SupplierGetItem {
 	if x != nil {
-		return x.Id
+		return x.Items
 	}
-	return 0
-}
-
-func (x *SupplierGetRequest) GetType() SupplierType {
-	if x != nil {
-		return x.Type
-	}
-	return SupplierType_SUPPLIER_TYPE_UNSPECIFIED
+	return nil
 }
 
 type SupplierGetResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Data          *Supplier              `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
+	Data          []*Supplier            `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *SupplierGetResponse) Reset() {
 	*x = SupplierGetResponse{}
-	mi := &file_selling_iface_v1_supplier_proto_msgTypes[8]
+	mi := &file_selling_iface_v1_supplier_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -641,7 +685,7 @@ func (x *SupplierGetResponse) String() string {
 func (*SupplierGetResponse) ProtoMessage() {}
 
 func (x *SupplierGetResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_supplier_proto_msgTypes[8]
+	mi := &file_selling_iface_v1_supplier_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -654,10 +698,10 @@ func (x *SupplierGetResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SupplierGetResponse.ProtoReflect.Descriptor instead.
 func (*SupplierGetResponse) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_supplier_proto_rawDescGZIP(), []int{8}
+	return file_selling_iface_v1_supplier_proto_rawDescGZIP(), []int{9}
 }
 
-func (x *SupplierGetResponse) GetData() *Supplier {
+func (x *SupplierGetResponse) GetData() []*Supplier {
 	if x != nil {
 		return x.Data
 	}
@@ -673,7 +717,7 @@ type SupplierUpdateRequest struct {
 
 func (x *SupplierUpdateRequest) Reset() {
 	*x = SupplierUpdateRequest{}
-	mi := &file_selling_iface_v1_supplier_proto_msgTypes[9]
+	mi := &file_selling_iface_v1_supplier_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -685,7 +729,7 @@ func (x *SupplierUpdateRequest) String() string {
 func (*SupplierUpdateRequest) ProtoMessage() {}
 
 func (x *SupplierUpdateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_supplier_proto_msgTypes[9]
+	mi := &file_selling_iface_v1_supplier_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -698,7 +742,7 @@ func (x *SupplierUpdateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SupplierUpdateRequest.ProtoReflect.Descriptor instead.
 func (*SupplierUpdateRequest) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_supplier_proto_rawDescGZIP(), []int{9}
+	return file_selling_iface_v1_supplier_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *SupplierUpdateRequest) GetData() *Supplier {
@@ -716,7 +760,7 @@ type SupplierUpdateResponse struct {
 
 func (x *SupplierUpdateResponse) Reset() {
 	*x = SupplierUpdateResponse{}
-	mi := &file_selling_iface_v1_supplier_proto_msgTypes[10]
+	mi := &file_selling_iface_v1_supplier_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -728,7 +772,7 @@ func (x *SupplierUpdateResponse) String() string {
 func (*SupplierUpdateResponse) ProtoMessage() {}
 
 func (x *SupplierUpdateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_supplier_proto_msgTypes[10]
+	mi := &file_selling_iface_v1_supplier_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -741,7 +785,7 @@ func (x *SupplierUpdateResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SupplierUpdateResponse.ProtoReflect.Descriptor instead.
 func (*SupplierUpdateResponse) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_supplier_proto_rawDescGZIP(), []int{10}
+	return file_selling_iface_v1_supplier_proto_rawDescGZIP(), []int{11}
 }
 
 type SupplierDeleteRequest struct {
@@ -754,7 +798,7 @@ type SupplierDeleteRequest struct {
 
 func (x *SupplierDeleteRequest) Reset() {
 	*x = SupplierDeleteRequest{}
-	mi := &file_selling_iface_v1_supplier_proto_msgTypes[11]
+	mi := &file_selling_iface_v1_supplier_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -766,7 +810,7 @@ func (x *SupplierDeleteRequest) String() string {
 func (*SupplierDeleteRequest) ProtoMessage() {}
 
 func (x *SupplierDeleteRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_supplier_proto_msgTypes[11]
+	mi := &file_selling_iface_v1_supplier_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -779,7 +823,7 @@ func (x *SupplierDeleteRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SupplierDeleteRequest.ProtoReflect.Descriptor instead.
 func (*SupplierDeleteRequest) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_supplier_proto_rawDescGZIP(), []int{11}
+	return file_selling_iface_v1_supplier_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *SupplierDeleteRequest) GetType() SupplierType {
@@ -804,7 +848,7 @@ type SupplierDeleteResponse struct {
 
 func (x *SupplierDeleteResponse) Reset() {
 	*x = SupplierDeleteResponse{}
-	mi := &file_selling_iface_v1_supplier_proto_msgTypes[12]
+	mi := &file_selling_iface_v1_supplier_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -816,7 +860,7 @@ func (x *SupplierDeleteResponse) String() string {
 func (*SupplierDeleteResponse) ProtoMessage() {}
 
 func (x *SupplierDeleteResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_supplier_proto_msgTypes[12]
+	mi := &file_selling_iface_v1_supplier_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -829,7 +873,7 @@ func (x *SupplierDeleteResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SupplierDeleteResponse.ProtoReflect.Descriptor instead.
 func (*SupplierDeleteResponse) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_supplier_proto_rawDescGZIP(), []int{12}
+	return file_selling_iface_v1_supplier_proto_rawDescGZIP(), []int{13}
 }
 
 var File_selling_iface_v1_supplier_proto protoreflect.FileDescriptor
@@ -874,13 +918,15 @@ const file_selling_iface_v1_supplier_proto_rawDesc = "" +
 	"\x04page\x18\x04 \x01(\v2\x15.common.v1.PageFilterB\x06\xbaH\x03\xc8\x01\x01R\x04page\"x\n" +
 	"\x14SupplierListResponse\x12.\n" +
 	"\x04data\x18\x01 \x03(\v2\x1a.selling_iface.v1.SupplierR\x04data\x120\n" +
-	"\tpage_info\x18\x02 \x01(\v2\x13.common.v1.PageInfoR\bpageInfo\"m\n" +
-	"\x12SupplierGetRequest\x12\x17\n" +
+	"\tpage_info\x18\x02 \x01(\v2\x13.common.v1.PageInfoR\bpageInfo\"j\n" +
+	"\x0fSupplierGetItem\x12\x17\n" +
 	"\x02id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12>\n" +
 	"\x04type\x18\x02 \x01(\x0e2\x1e.selling_iface.v1.SupplierTypeB\n" +
-	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x04type\"E\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x04type\"U\n" +
+	"\x12SupplierGetRequest\x12?\n" +
+	"\x05items\x18\x01 \x03(\v2!.selling_iface.v1.SupplierGetItemB\x06\xbaH\x03\xc8\x01\x01R\x05items\"E\n" +
 	"\x13SupplierGetResponse\x12.\n" +
-	"\x04data\x18\x01 \x01(\v2\x1a.selling_iface.v1.SupplierR\x04data\"G\n" +
+	"\x04data\x18\x01 \x03(\v2\x1a.selling_iface.v1.SupplierR\x04data\"G\n" +
 	"\x15SupplierUpdateRequest\x12.\n" +
 	"\x04data\x18\x01 \x01(\v2\x1a.selling_iface.v1.SupplierR\x04data\"\x18\n" +
 	"\x16SupplierUpdateResponse\"p\n" +
@@ -914,7 +960,7 @@ func file_selling_iface_v1_supplier_proto_rawDescGZIP() []byte {
 }
 
 var file_selling_iface_v1_supplier_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_selling_iface_v1_supplier_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
+var file_selling_iface_v1_supplier_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_selling_iface_v1_supplier_proto_goTypes = []any{
 	(SupplierType)(0),              // 0: selling_iface.v1.SupplierType
 	(*SupplierCustom)(nil),         // 1: selling_iface.v1.SupplierCustom
@@ -924,46 +970,48 @@ var file_selling_iface_v1_supplier_proto_goTypes = []any{
 	(*SupplierCreateResponse)(nil), // 5: selling_iface.v1.SupplierCreateResponse
 	(*SupplierListRequest)(nil),    // 6: selling_iface.v1.SupplierListRequest
 	(*SupplierListResponse)(nil),   // 7: selling_iface.v1.SupplierListResponse
-	(*SupplierGetRequest)(nil),     // 8: selling_iface.v1.SupplierGetRequest
-	(*SupplierGetResponse)(nil),    // 9: selling_iface.v1.SupplierGetResponse
-	(*SupplierUpdateRequest)(nil),  // 10: selling_iface.v1.SupplierUpdateRequest
-	(*SupplierUpdateResponse)(nil), // 11: selling_iface.v1.SupplierUpdateResponse
-	(*SupplierDeleteRequest)(nil),  // 12: selling_iface.v1.SupplierDeleteRequest
-	(*SupplierDeleteResponse)(nil), // 13: selling_iface.v1.SupplierDeleteResponse
-	(v1.MarketplaceType)(0),        // 14: common.v1.MarketplaceType
-	(*v1.PageFilter)(nil),          // 15: common.v1.PageFilter
-	(*v1.PageInfo)(nil),            // 16: common.v1.PageInfo
+	(*SupplierGetItem)(nil),        // 8: selling_iface.v1.SupplierGetItem
+	(*SupplierGetRequest)(nil),     // 9: selling_iface.v1.SupplierGetRequest
+	(*SupplierGetResponse)(nil),    // 10: selling_iface.v1.SupplierGetResponse
+	(*SupplierUpdateRequest)(nil),  // 11: selling_iface.v1.SupplierUpdateRequest
+	(*SupplierUpdateResponse)(nil), // 12: selling_iface.v1.SupplierUpdateResponse
+	(*SupplierDeleteRequest)(nil),  // 13: selling_iface.v1.SupplierDeleteRequest
+	(*SupplierDeleteResponse)(nil), // 14: selling_iface.v1.SupplierDeleteResponse
+	(v1.MarketplaceType)(0),        // 15: common.v1.MarketplaceType
+	(*v1.PageFilter)(nil),          // 16: common.v1.PageFilter
+	(*v1.PageInfo)(nil),            // 17: common.v1.PageInfo
 }
 var file_selling_iface_v1_supplier_proto_depIdxs = []int32{
-	14, // 0: selling_iface.v1.SupplierMarketplace.mp_type:type_name -> common.v1.MarketplaceType
+	15, // 0: selling_iface.v1.SupplierMarketplace.mp_type:type_name -> common.v1.MarketplaceType
 	1,  // 1: selling_iface.v1.Supplier.custom:type_name -> selling_iface.v1.SupplierCustom
 	2,  // 2: selling_iface.v1.Supplier.marketplace:type_name -> selling_iface.v1.SupplierMarketplace
 	1,  // 3: selling_iface.v1.SupplierCreateRequest.custom:type_name -> selling_iface.v1.SupplierCustom
 	2,  // 4: selling_iface.v1.SupplierCreateRequest.marketplace:type_name -> selling_iface.v1.SupplierMarketplace
 	3,  // 5: selling_iface.v1.SupplierCreateResponse.data:type_name -> selling_iface.v1.Supplier
 	0,  // 6: selling_iface.v1.SupplierListRequest.type:type_name -> selling_iface.v1.SupplierType
-	15, // 7: selling_iface.v1.SupplierListRequest.page:type_name -> common.v1.PageFilter
+	16, // 7: selling_iface.v1.SupplierListRequest.page:type_name -> common.v1.PageFilter
 	3,  // 8: selling_iface.v1.SupplierListResponse.data:type_name -> selling_iface.v1.Supplier
-	16, // 9: selling_iface.v1.SupplierListResponse.page_info:type_name -> common.v1.PageInfo
-	0,  // 10: selling_iface.v1.SupplierGetRequest.type:type_name -> selling_iface.v1.SupplierType
-	3,  // 11: selling_iface.v1.SupplierGetResponse.data:type_name -> selling_iface.v1.Supplier
-	3,  // 12: selling_iface.v1.SupplierUpdateRequest.data:type_name -> selling_iface.v1.Supplier
-	0,  // 13: selling_iface.v1.SupplierDeleteRequest.type:type_name -> selling_iface.v1.SupplierType
-	6,  // 14: selling_iface.v1.SupplierService.SupplierList:input_type -> selling_iface.v1.SupplierListRequest
-	4,  // 15: selling_iface.v1.SupplierService.SupplierCreate:input_type -> selling_iface.v1.SupplierCreateRequest
-	12, // 16: selling_iface.v1.SupplierService.SupplierDelete:input_type -> selling_iface.v1.SupplierDeleteRequest
-	10, // 17: selling_iface.v1.SupplierService.SupplierUpdate:input_type -> selling_iface.v1.SupplierUpdateRequest
-	8,  // 18: selling_iface.v1.SupplierService.SupplierGet:input_type -> selling_iface.v1.SupplierGetRequest
-	7,  // 19: selling_iface.v1.SupplierService.SupplierList:output_type -> selling_iface.v1.SupplierListResponse
-	5,  // 20: selling_iface.v1.SupplierService.SupplierCreate:output_type -> selling_iface.v1.SupplierCreateResponse
-	13, // 21: selling_iface.v1.SupplierService.SupplierDelete:output_type -> selling_iface.v1.SupplierDeleteResponse
-	11, // 22: selling_iface.v1.SupplierService.SupplierUpdate:output_type -> selling_iface.v1.SupplierUpdateResponse
-	9,  // 23: selling_iface.v1.SupplierService.SupplierGet:output_type -> selling_iface.v1.SupplierGetResponse
-	19, // [19:24] is the sub-list for method output_type
-	14, // [14:19] is the sub-list for method input_type
-	14, // [14:14] is the sub-list for extension type_name
-	14, // [14:14] is the sub-list for extension extendee
-	0,  // [0:14] is the sub-list for field type_name
+	17, // 9: selling_iface.v1.SupplierListResponse.page_info:type_name -> common.v1.PageInfo
+	0,  // 10: selling_iface.v1.SupplierGetItem.type:type_name -> selling_iface.v1.SupplierType
+	8,  // 11: selling_iface.v1.SupplierGetRequest.items:type_name -> selling_iface.v1.SupplierGetItem
+	3,  // 12: selling_iface.v1.SupplierGetResponse.data:type_name -> selling_iface.v1.Supplier
+	3,  // 13: selling_iface.v1.SupplierUpdateRequest.data:type_name -> selling_iface.v1.Supplier
+	0,  // 14: selling_iface.v1.SupplierDeleteRequest.type:type_name -> selling_iface.v1.SupplierType
+	6,  // 15: selling_iface.v1.SupplierService.SupplierList:input_type -> selling_iface.v1.SupplierListRequest
+	4,  // 16: selling_iface.v1.SupplierService.SupplierCreate:input_type -> selling_iface.v1.SupplierCreateRequest
+	13, // 17: selling_iface.v1.SupplierService.SupplierDelete:input_type -> selling_iface.v1.SupplierDeleteRequest
+	11, // 18: selling_iface.v1.SupplierService.SupplierUpdate:input_type -> selling_iface.v1.SupplierUpdateRequest
+	9,  // 19: selling_iface.v1.SupplierService.SupplierGet:input_type -> selling_iface.v1.SupplierGetRequest
+	7,  // 20: selling_iface.v1.SupplierService.SupplierList:output_type -> selling_iface.v1.SupplierListResponse
+	5,  // 21: selling_iface.v1.SupplierService.SupplierCreate:output_type -> selling_iface.v1.SupplierCreateResponse
+	14, // 22: selling_iface.v1.SupplierService.SupplierDelete:output_type -> selling_iface.v1.SupplierDeleteResponse
+	12, // 23: selling_iface.v1.SupplierService.SupplierUpdate:output_type -> selling_iface.v1.SupplierUpdateResponse
+	10, // 24: selling_iface.v1.SupplierService.SupplierGet:output_type -> selling_iface.v1.SupplierGetResponse
+	20, // [20:25] is the sub-list for method output_type
+	15, // [15:20] is the sub-list for method input_type
+	15, // [15:15] is the sub-list for extension type_name
+	15, // [15:15] is the sub-list for extension extendee
+	0,  // [0:15] is the sub-list for field type_name
 }
 
 func init() { file_selling_iface_v1_supplier_proto_init() }
@@ -985,7 +1033,7 @@ func file_selling_iface_v1_supplier_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_selling_iface_v1_supplier_proto_rawDesc), len(file_selling_iface_v1_supplier_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   13,
+			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -22,7 +22,13 @@ const (
 )
 
 type ShippedStatus struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state  protoimpl.MessageState `protogen:"open.v1"`
+	TeamId uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	// Types that are valid to be assigned to By:
+	//
+	//	*ShippedStatus_OrderId
+	//	*ShippedStatus_RefId
+	By            isShippedStatus_By `protobuf_oneof:"by"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -56,6 +62,54 @@ func (x *ShippedStatus) ProtoReflect() protoreflect.Message {
 func (*ShippedStatus) Descriptor() ([]byte, []int) {
 	return file_order_iface_v1_order_core_proto_rawDescGZIP(), []int{0}
 }
+
+func (x *ShippedStatus) GetTeamId() uint64 {
+	if x != nil {
+		return x.TeamId
+	}
+	return 0
+}
+
+func (x *ShippedStatus) GetBy() isShippedStatus_By {
+	if x != nil {
+		return x.By
+	}
+	return nil
+}
+
+func (x *ShippedStatus) GetOrderId() uint64 {
+	if x != nil {
+		if x, ok := x.By.(*ShippedStatus_OrderId); ok {
+			return x.OrderId
+		}
+	}
+	return 0
+}
+
+func (x *ShippedStatus) GetRefId() string {
+	if x != nil {
+		if x, ok := x.By.(*ShippedStatus_RefId); ok {
+			return x.RefId
+		}
+	}
+	return ""
+}
+
+type isShippedStatus_By interface {
+	isShippedStatus_By()
+}
+
+type ShippedStatus_OrderId struct {
+	OrderId uint64 `protobuf:"varint,2,opt,name=order_id,json=orderId,proto3,oneof"`
+}
+
+type ShippedStatus_RefId struct {
+	RefId string `protobuf:"bytes,3,opt,name=ref_id,json=refId,proto3,oneof"`
+}
+
+func (*ShippedStatus_OrderId) isShippedStatus_By() {}
+
+func (*ShippedStatus_RefId) isShippedStatus_By() {}
 
 type OrderChangeStatusRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -163,8 +217,12 @@ var File_order_iface_v1_order_core_proto protoreflect.FileDescriptor
 
 const file_order_iface_v1_order_core_proto_rawDesc = "" +
 	"\n" +
-	"\x1forder_iface/v1/order_core.proto\x12\x0eorder_iface.v1\"\x0f\n" +
-	"\rShippedStatus\"_\n" +
+	"\x1forder_iface/v1/order_core.proto\x12\x0eorder_iface.v1\"d\n" +
+	"\rShippedStatus\x12\x17\n" +
+	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12\x1b\n" +
+	"\border_id\x18\x02 \x01(\x04H\x00R\aorderId\x12\x17\n" +
+	"\x06ref_id\x18\x03 \x01(\tH\x00R\x05refIdB\x04\n" +
+	"\x02by\"_\n" +
 	"\x18OrderChangeStatusRequest\x129\n" +
 	"\ashipped\x18\x01 \x01(\v2\x1d.order_iface.v1.ShippedStatusH\x00R\ashippedB\b\n" +
 	"\x06status\"\x1b\n" +
@@ -202,6 +260,10 @@ func init() { file_order_iface_v1_order_core_proto_init() }
 func file_order_iface_v1_order_core_proto_init() {
 	if File_order_iface_v1_order_core_proto != nil {
 		return
+	}
+	file_order_iface_v1_order_core_proto_msgTypes[0].OneofWrappers = []any{
+		(*ShippedStatus_OrderId)(nil),
+		(*ShippedStatus_RefId)(nil),
 	}
 	file_order_iface_v1_order_core_proto_msgTypes[1].OneofWrappers = []any{
 		(*OrderChangeStatusRequest_Shipped)(nil),
