@@ -91,16 +91,14 @@ message SupplierListResponse {
   common.v1.PageInfo page_info = 2;
 }
 
-message SupplierGetItem {
-  uint64 id = 1 [(buf.validate.field).uint64.gt = 0];
-  SupplierType type = 2 [(buf.validate.field).enum = {
-    defined_only: true
-    not_in: [0]
-  }];
-}
-
 message SupplierGetRequest {
-  repeated SupplierGetItem items = 1 [(buf.validate.field).required = true];
+  repeated uint64 ids = 1 [(buf.validate.field).repeated = {
+    min_items: 1
+    max_items: 100
+    items: {
+      uint64: {gt: 0}
+    }
+  }];
 }
 message SupplierGetResponse {
   repeated Supplier data = 1;
