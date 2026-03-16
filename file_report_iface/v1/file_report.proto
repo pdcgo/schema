@@ -1,0 +1,38 @@
+syntax = "proto3";
+package file_report_iface.v1;
+
+// import "accounting_iface/v1/core.proto";
+// import "buf/validate/validate.proto";
+// import "common/v1/common.proto";
+// import "google/protobuf/timestamp.proto";
+// import "order_iface/v1/create.proto";
+// import "order_iface/v1/draft.proto";
+// import "order_iface/v1/order_core.proto";
+// import "order_iface/v1/order_return.proto";
+// import "tracking_iface/v1/tracking.proto";
+
+option go_package = "github.com/pdcgo/schema/services/file_report_iface/v1;file_report_iface";
+
+service FileReportService {
+  rpc AvailableReport(AvailableReportRequest) returns (AvailableReportResponse);
+  rpc CreateReport(CreateReportRequest) returns (CreateReportResponse);
+}
+
+message CreateReportRequest {
+  string name = 1;
+  string query = 2;
+
+  oneof variable {
+    uint64 team_id = 3;
+    uint64 warehouse_id = 4;
+  }
+}
+
+message CreateReportResponse {
+  string id = 1;
+}
+
+message AvailableReportRequest {}
+message AvailableReportResponse {
+  repeated string reports = 1;
+}
