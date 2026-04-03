@@ -36,11 +36,15 @@ const (
 	// FileReportServiceAvailableReportProcedure is the fully-qualified name of the FileReportService's
 	// AvailableReport RPC.
 	FileReportServiceAvailableReportProcedure = "/file_report_iface.v1.FileReportService/AvailableReport"
+	// FileReportServiceCreateReportProcedure is the fully-qualified name of the FileReportService's
+	// CreateReport RPC.
+	FileReportServiceCreateReportProcedure = "/file_report_iface.v1.FileReportService/CreateReport"
 )
 
 // FileReportServiceClient is a client for the file_report_iface.v1.FileReportService service.
 type FileReportServiceClient interface {
 	AvailableReport(context.Context, *connect.Request[v1.AvailableReportRequest]) (*connect.Response[v1.AvailableReportResponse], error)
+	CreateReport(context.Context, *connect.Request[v1.CreateReportRequest]) (*connect.Response[v1.CreateReportResponse], error)
 }
 
 // NewFileReportServiceClient constructs a client for the file_report_iface.v1.FileReportService
@@ -60,12 +64,19 @@ func NewFileReportServiceClient(httpClient connect.HTTPClient, baseURL string, o
 			connect.WithSchema(fileReportServiceMethods.ByName("AvailableReport")),
 			connect.WithClientOptions(opts...),
 		),
+		createReport: connect.NewClient[v1.CreateReportRequest, v1.CreateReportResponse](
+			httpClient,
+			baseURL+FileReportServiceCreateReportProcedure,
+			connect.WithSchema(fileReportServiceMethods.ByName("CreateReport")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // fileReportServiceClient implements FileReportServiceClient.
 type fileReportServiceClient struct {
 	availableReport *connect.Client[v1.AvailableReportRequest, v1.AvailableReportResponse]
+	createReport    *connect.Client[v1.CreateReportRequest, v1.CreateReportResponse]
 }
 
 // AvailableReport calls file_report_iface.v1.FileReportService.AvailableReport.
@@ -73,10 +84,16 @@ func (c *fileReportServiceClient) AvailableReport(ctx context.Context, req *conn
 	return c.availableReport.CallUnary(ctx, req)
 }
 
+// CreateReport calls file_report_iface.v1.FileReportService.CreateReport.
+func (c *fileReportServiceClient) CreateReport(ctx context.Context, req *connect.Request[v1.CreateReportRequest]) (*connect.Response[v1.CreateReportResponse], error) {
+	return c.createReport.CallUnary(ctx, req)
+}
+
 // FileReportServiceHandler is an implementation of the file_report_iface.v1.FileReportService
 // service.
 type FileReportServiceHandler interface {
 	AvailableReport(context.Context, *connect.Request[v1.AvailableReportRequest]) (*connect.Response[v1.AvailableReportResponse], error)
+	CreateReport(context.Context, *connect.Request[v1.CreateReportRequest]) (*connect.Response[v1.CreateReportResponse], error)
 }
 
 // NewFileReportServiceHandler builds an HTTP handler from the service implementation. It returns
@@ -92,10 +109,18 @@ func NewFileReportServiceHandler(svc FileReportServiceHandler, opts ...connect.H
 		connect.WithSchema(fileReportServiceMethods.ByName("AvailableReport")),
 		connect.WithHandlerOptions(opts...),
 	)
+	fileReportServiceCreateReportHandler := connect.NewUnaryHandler(
+		FileReportServiceCreateReportProcedure,
+		svc.CreateReport,
+		connect.WithSchema(fileReportServiceMethods.ByName("CreateReport")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/file_report_iface.v1.FileReportService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case FileReportServiceAvailableReportProcedure:
 			fileReportServiceAvailableReportHandler.ServeHTTP(w, r)
+		case FileReportServiceCreateReportProcedure:
+			fileReportServiceCreateReportHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -107,4 +132,8 @@ type UnimplementedFileReportServiceHandler struct{}
 
 func (UnimplementedFileReportServiceHandler) AvailableReport(context.Context, *connect.Request[v1.AvailableReportRequest]) (*connect.Response[v1.AvailableReportResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("file_report_iface.v1.FileReportService.AvailableReport is not implemented"))
+}
+
+func (UnimplementedFileReportServiceHandler) CreateReport(context.Context, *connect.Request[v1.CreateReportRequest]) (*connect.Response[v1.CreateReportResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("file_report_iface.v1.FileReportService.CreateReport is not implemented"))
 }

@@ -54,13 +54,18 @@ message SupplierMarketplace {
   }];
 }
 
-message Supplier {
+message SupplierDetail {
   uint64 id = 1;
   uint64 team_id = 2;
-  oneof data {
-    SupplierCustom custom = 3;
-    SupplierMarketplace marketplace = 4;
-  }
+  string code = 3;
+
+  string name = 4;
+  string contact = 5;
+  string description = 6;
+  string address = 7;
+
+  repeated SupplierCustom custom = 8;
+  repeated SupplierMarketplace marketplace = 9;
 }
 
 message SupplierCreateRequest {
@@ -73,21 +78,28 @@ message SupplierCreateRequest {
 
 message SupplierCreateResponse {
   uint64 id = 1;
-  Supplier data = 2;
+  SupplierDetail data = 2;
+}
+
+message SupplierListItem {
+  uint64 id = 1;
+  uint64 team_id = 2;
+  string code = 3;
+
+  string name = 4;
+  string contact = 5;
+  string description = 6;
+  string address = 7;
 }
 
 message SupplierListRequest {
   string q = 1;
-  SupplierType type = 2 [(buf.validate.field).enum = {
-    defined_only: true
-    not_in: [0]
-  }];
-  uint64 team_id = 3 [(buf.validate.field).uint64.gt = 0];
-  common.v1.PageFilter page = 4 [(buf.validate.field).required = true];
+  uint64 team_id = 2;
+  common.v1.PageFilter page = 3 [(buf.validate.field).required = true];
 }
 
 message SupplierListResponse {
-  repeated Supplier data = 1;
+  repeated SupplierListItem data = 1;
   common.v1.PageInfo page_info = 2;
 }
 
@@ -100,20 +112,52 @@ message SupplierGetRequest {
     }
   }];
 }
+
 message SupplierGetResponse {
-  repeated Supplier data = 1;
+  repeated SupplierDetail data = 1;
+}
+
+enum SupplierChildUpdateType {
+  SUPPLIER_CHILD_UPDATE_TYPE_UNSPECIFIED = 0;
+  SUPPLIER_CHILD_UPDATE_TYPE_UPSERT = 1;
+  SUPPLIER_CHILD_UPDATE_TYPE_REMOVE = 2;
+}
+message SupplierChildUpdate {
+  SupplierChildUpdateType type = 2 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+  oneof data {
+    SupplierCustom custom = 3;
+    SupplierMarketplace marketplace = 4;
+  }
+}
+
+message SupplierDetailUpdate {
+  string name = 1 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 200
+  }];
+  string contact = 2 [(buf.validate.field).string = {pattern: "^\\+[1-9]\\d{1,14}$"}];
+  string description = 3 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 500
+  }];
+  string address = 4 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 500
+  }];
 }
 
 message SupplierUpdateRequest {
-  Supplier data = 1;
+  uint64 id = 1 [(buf.validate.field).uint64.gt = 0];
+  oneof update {
+    SupplierDetailUpdate detail = 2;
+  }
 }
 message SupplierUpdateResponse {}
 
 message SupplierDeleteRequest {
-  SupplierType type = 2 [(buf.validate.field).enum = {
-    defined_only: true
-    not_in: [0]
-  }];
   uint64 id = 1 [(buf.validate.field).uint64.gt = 0];
 }
 message SupplierDeleteResponse {}

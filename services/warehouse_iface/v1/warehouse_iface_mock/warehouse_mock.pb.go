@@ -176,3 +176,29 @@ func (mr *MockWarehouseServiceClientMockRecorder) TransactionNoteList(ctx, req i
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "TransactionNoteList", reflect.TypeOf((*MockWarehouseService)(nil).TransactionNoteList), ctx, req)
 }
 
+func (m *MockWarehouseService) SellingTeamList(ctx context.Context, req *connect.Request[v1.SellingTeamListRequest]) (*connect.Response[v1.SellingTeamListResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "SellingTeamList", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.SellingTeamListResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockWarehouseServiceMockRecorder) SellingTeamList(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SellingTeamList", reflect.TypeOf((*MockWarehouseService)(nil).SellingTeamList), ctx, req)
+}
+
+func (m *MockWarehouseServiceClient) SellingTeamList(ctx context.Context, req *connect.Request[v1.SellingTeamListRequest]) (*connect.Response[v1.SellingTeamListResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "SellingTeamList", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.SellingTeamListResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockWarehouseServiceClientMockRecorder) SellingTeamList(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SellingTeamList", reflect.TypeOf((*MockWarehouseService)(nil).SellingTeamList), ctx, req)
+}
+

@@ -1,0 +1,27 @@
+syntax = "proto3";
+package event_iface.v1;
+
+// import "buf/validate/validate.proto";
+// import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/pdcgo/schema/services/event_iface/v1;event_iface";
+
+service EventService {
+  rpc Send(SendRequest) returns (SendResponse);
+}
+
+service PushService {
+  rpc Push(PushRequest) returns (PushResponse);
+}
+
+message Event {
+  // order created
+  // order cancel
+  // barang rusak / hilang
+}
+
+message SendRequest {}
+message SendResponse {}
+
+message PushRequest {}
+message PushResponse {}

@@ -48,6 +48,9 @@ const (
 	// WarehouseServiceTransactionNoteListProcedure is the fully-qualified name of the
 	// WarehouseService's TransactionNoteList RPC.
 	WarehouseServiceTransactionNoteListProcedure = "/warehouse_iface.v1.WarehouseService/TransactionNoteList"
+	// WarehouseServiceSellingTeamListProcedure is the fully-qualified name of the WarehouseService's
+	// SellingTeamList RPC.
+	WarehouseServiceSellingTeamListProcedure = "/warehouse_iface.v1.WarehouseService/SellingTeamList"
 )
 
 // WarehouseServiceClient is a client for the warehouse_iface.v1.WarehouseService service.
@@ -57,6 +60,7 @@ type WarehouseServiceClient interface {
 	TeamWarehouseReturnInfo(context.Context, *connect.Request[v1.TeamWarehouseReturnInfoRequest]) (*connect.Response[v1.TeamWarehouseReturnInfoResponse], error)
 	TransactionNoteCreate(context.Context, *connect.Request[v1.TransactionNoteCreateRequest]) (*connect.Response[v1.TransactionNoteCreateResponse], error)
 	TransactionNoteList(context.Context, *connect.Request[v1.TransactionNoteListRequest]) (*connect.Response[v1.TransactionNoteListResponse], error)
+	SellingTeamList(context.Context, *connect.Request[v1.SellingTeamListRequest]) (*connect.Response[v1.SellingTeamListResponse], error)
 }
 
 // NewWarehouseServiceClient constructs a client for the warehouse_iface.v1.WarehouseService
@@ -100,6 +104,12 @@ func NewWarehouseServiceClient(httpClient connect.HTTPClient, baseURL string, op
 			connect.WithSchema(warehouseServiceMethods.ByName("TransactionNoteList")),
 			connect.WithClientOptions(opts...),
 		),
+		sellingTeamList: connect.NewClient[v1.SellingTeamListRequest, v1.SellingTeamListResponse](
+			httpClient,
+			baseURL+WarehouseServiceSellingTeamListProcedure,
+			connect.WithSchema(warehouseServiceMethods.ByName("SellingTeamList")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -110,6 +120,7 @@ type warehouseServiceClient struct {
 	teamWarehouseReturnInfo *connect.Client[v1.TeamWarehouseReturnInfoRequest, v1.TeamWarehouseReturnInfoResponse]
 	transactionNoteCreate   *connect.Client[v1.TransactionNoteCreateRequest, v1.TransactionNoteCreateResponse]
 	transactionNoteList     *connect.Client[v1.TransactionNoteListRequest, v1.TransactionNoteListResponse]
+	sellingTeamList         *connect.Client[v1.SellingTeamListRequest, v1.SellingTeamListResponse]
 }
 
 // WarehouseIDs calls warehouse_iface.v1.WarehouseService.WarehouseIDs.
@@ -137,6 +148,11 @@ func (c *warehouseServiceClient) TransactionNoteList(ctx context.Context, req *c
 	return c.transactionNoteList.CallUnary(ctx, req)
 }
 
+// SellingTeamList calls warehouse_iface.v1.WarehouseService.SellingTeamList.
+func (c *warehouseServiceClient) SellingTeamList(ctx context.Context, req *connect.Request[v1.SellingTeamListRequest]) (*connect.Response[v1.SellingTeamListResponse], error) {
+	return c.sellingTeamList.CallUnary(ctx, req)
+}
+
 // WarehouseServiceHandler is an implementation of the warehouse_iface.v1.WarehouseService service.
 type WarehouseServiceHandler interface {
 	WarehouseIDs(context.Context, *connect.Request[v1.WarehouseIDsRequest]) (*connect.Response[v1.WarehouseIDsResponse], error)
@@ -144,6 +160,7 @@ type WarehouseServiceHandler interface {
 	TeamWarehouseReturnInfo(context.Context, *connect.Request[v1.TeamWarehouseReturnInfoRequest]) (*connect.Response[v1.TeamWarehouseReturnInfoResponse], error)
 	TransactionNoteCreate(context.Context, *connect.Request[v1.TransactionNoteCreateRequest]) (*connect.Response[v1.TransactionNoteCreateResponse], error)
 	TransactionNoteList(context.Context, *connect.Request[v1.TransactionNoteListRequest]) (*connect.Response[v1.TransactionNoteListResponse], error)
+	SellingTeamList(context.Context, *connect.Request[v1.SellingTeamListRequest]) (*connect.Response[v1.SellingTeamListResponse], error)
 }
 
 // NewWarehouseServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -183,6 +200,12 @@ func NewWarehouseServiceHandler(svc WarehouseServiceHandler, opts ...connect.Han
 		connect.WithSchema(warehouseServiceMethods.ByName("TransactionNoteList")),
 		connect.WithHandlerOptions(opts...),
 	)
+	warehouseServiceSellingTeamListHandler := connect.NewUnaryHandler(
+		WarehouseServiceSellingTeamListProcedure,
+		svc.SellingTeamList,
+		connect.WithSchema(warehouseServiceMethods.ByName("SellingTeamList")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/warehouse_iface.v1.WarehouseService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case WarehouseServiceWarehouseIDsProcedure:
@@ -195,6 +218,8 @@ func NewWarehouseServiceHandler(svc WarehouseServiceHandler, opts ...connect.Han
 			warehouseServiceTransactionNoteCreateHandler.ServeHTTP(w, r)
 		case WarehouseServiceTransactionNoteListProcedure:
 			warehouseServiceTransactionNoteListHandler.ServeHTTP(w, r)
+		case WarehouseServiceSellingTeamListProcedure:
+			warehouseServiceSellingTeamListHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -222,4 +247,8 @@ func (UnimplementedWarehouseServiceHandler) TransactionNoteCreate(context.Contex
 
 func (UnimplementedWarehouseServiceHandler) TransactionNoteList(context.Context, *connect.Request[v1.TransactionNoteListRequest]) (*connect.Response[v1.TransactionNoteListResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("warehouse_iface.v1.WarehouseService.TransactionNoteList is not implemented"))
+}
+
+func (UnimplementedWarehouseServiceHandler) SellingTeamList(context.Context, *connect.Request[v1.SellingTeamListRequest]) (*connect.Response[v1.SellingTeamListResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("warehouse_iface.v1.WarehouseService.SellingTeamList is not implemented"))
 }

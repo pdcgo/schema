@@ -21,6 +21,148 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type CreateReportRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	Name  string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Query string                 `protobuf:"bytes,2,opt,name=query,proto3" json:"query,omitempty"`
+	// Types that are valid to be assigned to Variable:
+	//
+	//	*CreateReportRequest_TeamId
+	//	*CreateReportRequest_WarehouseId
+	Variable      isCreateReportRequest_Variable `protobuf_oneof:"variable"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateReportRequest) Reset() {
+	*x = CreateReportRequest{}
+	mi := &file_file_report_iface_v1_file_report_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateReportRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateReportRequest) ProtoMessage() {}
+
+func (x *CreateReportRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_file_report_iface_v1_file_report_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateReportRequest.ProtoReflect.Descriptor instead.
+func (*CreateReportRequest) Descriptor() ([]byte, []int) {
+	return file_file_report_iface_v1_file_report_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *CreateReportRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *CreateReportRequest) GetQuery() string {
+	if x != nil {
+		return x.Query
+	}
+	return ""
+}
+
+func (x *CreateReportRequest) GetVariable() isCreateReportRequest_Variable {
+	if x != nil {
+		return x.Variable
+	}
+	return nil
+}
+
+func (x *CreateReportRequest) GetTeamId() uint64 {
+	if x != nil {
+		if x, ok := x.Variable.(*CreateReportRequest_TeamId); ok {
+			return x.TeamId
+		}
+	}
+	return 0
+}
+
+func (x *CreateReportRequest) GetWarehouseId() uint64 {
+	if x != nil {
+		if x, ok := x.Variable.(*CreateReportRequest_WarehouseId); ok {
+			return x.WarehouseId
+		}
+	}
+	return 0
+}
+
+type isCreateReportRequest_Variable interface {
+	isCreateReportRequest_Variable()
+}
+
+type CreateReportRequest_TeamId struct {
+	TeamId uint64 `protobuf:"varint,3,opt,name=team_id,json=teamId,proto3,oneof"`
+}
+
+type CreateReportRequest_WarehouseId struct {
+	WarehouseId uint64 `protobuf:"varint,4,opt,name=warehouse_id,json=warehouseId,proto3,oneof"`
+}
+
+func (*CreateReportRequest_TeamId) isCreateReportRequest_Variable() {}
+
+func (*CreateReportRequest_WarehouseId) isCreateReportRequest_Variable() {}
+
+type CreateReportResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateReportResponse) Reset() {
+	*x = CreateReportResponse{}
+	mi := &file_file_report_iface_v1_file_report_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateReportResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateReportResponse) ProtoMessage() {}
+
+func (x *CreateReportResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_file_report_iface_v1_file_report_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateReportResponse.ProtoReflect.Descriptor instead.
+func (*CreateReportResponse) Descriptor() ([]byte, []int) {
+	return file_file_report_iface_v1_file_report_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *CreateReportResponse) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
 type AvailableReportRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -29,7 +171,7 @@ type AvailableReportRequest struct {
 
 func (x *AvailableReportRequest) Reset() {
 	*x = AvailableReportRequest{}
-	mi := &file_file_report_iface_v1_file_report_proto_msgTypes[0]
+	mi := &file_file_report_iface_v1_file_report_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -41,7 +183,7 @@ func (x *AvailableReportRequest) String() string {
 func (*AvailableReportRequest) ProtoMessage() {}
 
 func (x *AvailableReportRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_file_report_iface_v1_file_report_proto_msgTypes[0]
+	mi := &file_file_report_iface_v1_file_report_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -54,7 +196,7 @@ func (x *AvailableReportRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AvailableReportRequest.ProtoReflect.Descriptor instead.
 func (*AvailableReportRequest) Descriptor() ([]byte, []int) {
-	return file_file_report_iface_v1_file_report_proto_rawDescGZIP(), []int{0}
+	return file_file_report_iface_v1_file_report_proto_rawDescGZIP(), []int{2}
 }
 
 type AvailableReportResponse struct {
@@ -66,7 +208,7 @@ type AvailableReportResponse struct {
 
 func (x *AvailableReportResponse) Reset() {
 	*x = AvailableReportResponse{}
-	mi := &file_file_report_iface_v1_file_report_proto_msgTypes[1]
+	mi := &file_file_report_iface_v1_file_report_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -78,7 +220,7 @@ func (x *AvailableReportResponse) String() string {
 func (*AvailableReportResponse) ProtoMessage() {}
 
 func (x *AvailableReportResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_file_report_iface_v1_file_report_proto_msgTypes[1]
+	mi := &file_file_report_iface_v1_file_report_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -91,7 +233,7 @@ func (x *AvailableReportResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AvailableReportResponse.ProtoReflect.Descriptor instead.
 func (*AvailableReportResponse) Descriptor() ([]byte, []int) {
-	return file_file_report_iface_v1_file_report_proto_rawDescGZIP(), []int{1}
+	return file_file_report_iface_v1_file_report_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *AvailableReportResponse) GetReports() []string {
@@ -105,12 +247,22 @@ var File_file_report_iface_v1_file_report_proto protoreflect.FileDescriptor
 
 const file_file_report_iface_v1_file_report_proto_rawDesc = "" +
 	"\n" +
-	"&file_report_iface/v1/file_report.proto\x12\x14file_report_iface.v1\"\x18\n" +
+	"&file_report_iface/v1/file_report.proto\x12\x14file_report_iface.v1\"\x8b\x01\n" +
+	"\x13CreateReportRequest\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12\x14\n" +
+	"\x05query\x18\x02 \x01(\tR\x05query\x12\x19\n" +
+	"\ateam_id\x18\x03 \x01(\x04H\x00R\x06teamId\x12#\n" +
+	"\fwarehouse_id\x18\x04 \x01(\x04H\x00R\vwarehouseIdB\n" +
+	"\n" +
+	"\bvariable\"&\n" +
+	"\x14CreateReportResponse\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\"\x18\n" +
 	"\x16AvailableReportRequest\"3\n" +
 	"\x17AvailableReportResponse\x12\x18\n" +
-	"\areports\x18\x01 \x03(\tR\areports2\x83\x01\n" +
+	"\areports\x18\x01 \x03(\tR\areports2\xea\x01\n" +
 	"\x11FileReportService\x12n\n" +
-	"\x0fAvailableReport\x12,.file_report_iface.v1.AvailableReportRequest\x1a-.file_report_iface.v1.AvailableReportResponseB\xdd\x01\n" +
+	"\x0fAvailableReport\x12,.file_report_iface.v1.AvailableReportRequest\x1a-.file_report_iface.v1.AvailableReportResponse\x12e\n" +
+	"\fCreateReport\x12).file_report_iface.v1.CreateReportRequest\x1a*.file_report_iface.v1.CreateReportResponseB\xdd\x01\n" +
 	"\x18com.file_report_iface.v1B\x0fFileReportProtoP\x01ZGgithub.com/pdcgo/schema/services/file_report_iface/v1;file_report_iface\xa2\x02\x03FXX\xaa\x02\x12FileReportIface.V1\xca\x02\x12FileReportIface\\V1\xe2\x02\x1eFileReportIface\\V1\\GPBMetadata\xea\x02\x13FileReportIface::V1b\x06proto3"
 
 var (
@@ -125,16 +277,20 @@ func file_file_report_iface_v1_file_report_proto_rawDescGZIP() []byte {
 	return file_file_report_iface_v1_file_report_proto_rawDescData
 }
 
-var file_file_report_iface_v1_file_report_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_file_report_iface_v1_file_report_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_file_report_iface_v1_file_report_proto_goTypes = []any{
-	(*AvailableReportRequest)(nil),  // 0: file_report_iface.v1.AvailableReportRequest
-	(*AvailableReportResponse)(nil), // 1: file_report_iface.v1.AvailableReportResponse
+	(*CreateReportRequest)(nil),     // 0: file_report_iface.v1.CreateReportRequest
+	(*CreateReportResponse)(nil),    // 1: file_report_iface.v1.CreateReportResponse
+	(*AvailableReportRequest)(nil),  // 2: file_report_iface.v1.AvailableReportRequest
+	(*AvailableReportResponse)(nil), // 3: file_report_iface.v1.AvailableReportResponse
 }
 var file_file_report_iface_v1_file_report_proto_depIdxs = []int32{
-	0, // 0: file_report_iface.v1.FileReportService.AvailableReport:input_type -> file_report_iface.v1.AvailableReportRequest
-	1, // 1: file_report_iface.v1.FileReportService.AvailableReport:output_type -> file_report_iface.v1.AvailableReportResponse
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
+	2, // 0: file_report_iface.v1.FileReportService.AvailableReport:input_type -> file_report_iface.v1.AvailableReportRequest
+	0, // 1: file_report_iface.v1.FileReportService.CreateReport:input_type -> file_report_iface.v1.CreateReportRequest
+	3, // 2: file_report_iface.v1.FileReportService.AvailableReport:output_type -> file_report_iface.v1.AvailableReportResponse
+	1, // 3: file_report_iface.v1.FileReportService.CreateReport:output_type -> file_report_iface.v1.CreateReportResponse
+	2, // [2:4] is the sub-list for method output_type
+	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -145,13 +301,17 @@ func file_file_report_iface_v1_file_report_proto_init() {
 	if File_file_report_iface_v1_file_report_proto != nil {
 		return
 	}
+	file_file_report_iface_v1_file_report_proto_msgTypes[0].OneofWrappers = []any{
+		(*CreateReportRequest_TeamId)(nil),
+		(*CreateReportRequest_WarehouseId)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_file_report_iface_v1_file_report_proto_rawDesc), len(file_file_report_iface_v1_file_report_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -15,6 +15,8 @@ service WarehouseService {
 
   rpc TransactionNoteCreate(TransactionNoteCreateRequest) returns (TransactionNoteCreateResponse);
   rpc TransactionNoteList(TransactionNoteListRequest) returns (TransactionNoteListResponse);
+
+  rpc SellingTeamList(SellingTeamListRequest) returns (SellingTeamListResponse);
 }
 
 enum TransactionNoteType {
@@ -24,6 +26,17 @@ enum TransactionNoteType {
   TRANSACTION_NOTE_TYPE_CANCEL = 3;
   TRANSACTION_NOTE_TYPE_BROKEN = 4;
   TRANSACTION_NOTE_TYPE_PROBLEM = 5;
+}
+
+message SellingTeamListRequest {
+  string q = 1;
+  uint64 warehouse_id = 2 [(buf.validate.field).uint64.gt = 0];
+  common.v1.PageFilter page = 3;
+}
+
+message SellingTeamListResponse {
+  repeated common.v1.Team list = 1;
+  common.v1.PageInfo page_info = 2;
 }
 
 message Note {
