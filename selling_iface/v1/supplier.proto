@@ -153,6 +153,7 @@ message SupplierUpdateRequest {
   uint64 id = 1 [(buf.validate.field).uint64.gt = 0];
   oneof update {
     SupplierDetailUpdate detail = 2;
+    SupplierChildUpdate child = 3;
   }
 }
 message SupplierUpdateResponse {}
