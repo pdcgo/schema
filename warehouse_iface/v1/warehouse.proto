@@ -17,6 +17,8 @@ service WarehouseService {
   rpc TransactionNoteList(TransactionNoteListRequest) returns (TransactionNoteListResponse);
 
   rpc SellingTeamList(SellingTeamListRequest) returns (SellingTeamListResponse);
+  // potensi ruweettttttttt
+  rpc TeamRackList(TeamRackListRequest) returns (TeamRackListResponse);
 }
 
 enum TransactionNoteType {
@@ -26,6 +28,28 @@ enum TransactionNoteType {
   TRANSACTION_NOTE_TYPE_CANCEL = 3;
   TRANSACTION_NOTE_TYPE_BROKEN = 4;
   TRANSACTION_NOTE_TYPE_PROBLEM = 5;
+}
+
+message Rack {
+  uint64 id = 1;
+  string name = 3;
+  int32 count = 4;
+}
+
+message TeamRackListRequest {
+  uint64 warehouse_id = 1 [(buf.validate.field).uint64.gt = 0];
+  repeated uint64 team_ids = 2 [(buf.validate.field).repeated = {
+    min_items: 1
+    max_items: 200
+    items: {
+      uint64: {gt: 0}
+    }
+  }];
+  string q = 3;
+}
+
+message TeamRackListResponse {
+  repeated Rack list = 1;
 }
 
 message SellingTeamListRequest {

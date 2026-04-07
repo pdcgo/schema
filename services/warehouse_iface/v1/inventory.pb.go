@@ -1328,7 +1328,7 @@ func (x *PlacementsIDsResponse) GetBulkPlacements() map[uint64]*BulkPlacement {
 
 type PlacementsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// uint64 warehouse_id = 1;
+	//   uint64 warehouse_id = 1;
 	TxId          uint64 `protobuf:"varint,2,opt,name=tx_id,json=txId,proto3" json:"tx_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
