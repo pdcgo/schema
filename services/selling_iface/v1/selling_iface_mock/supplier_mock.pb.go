@@ -176,3 +176,29 @@ func (mr *MockSupplierServiceClientMockRecorder) SupplierGet(ctx, req interface{
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SupplierGet", reflect.TypeOf((*MockSupplierService)(nil).SupplierGet), ctx, req)
 }
 
+func (m *MockSupplierService) SupplierGetChild(ctx context.Context, req *connect.Request[v1.SupplierGetChildRequest]) (*connect.Response[v1.SupplierGetChildResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "SupplierGetChild", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.SupplierGetChildResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockSupplierServiceMockRecorder) SupplierGetChild(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SupplierGetChild", reflect.TypeOf((*MockSupplierService)(nil).SupplierGetChild), ctx, req)
+}
+
+func (m *MockSupplierServiceClient) SupplierGetChild(ctx context.Context, req *connect.Request[v1.SupplierGetChildRequest]) (*connect.Response[v1.SupplierGetChildResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "SupplierGetChild", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.SupplierGetChildResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockSupplierServiceClientMockRecorder) SupplierGetChild(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SupplierGetChild", reflect.TypeOf((*MockSupplierService)(nil).SupplierGetChild), ctx, req)
+}
+

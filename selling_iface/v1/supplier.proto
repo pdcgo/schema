@@ -16,6 +16,7 @@ service SupplierService {
   rpc SupplierDelete(SupplierDeleteRequest) returns (SupplierDeleteResponse);
   rpc SupplierUpdate(SupplierUpdateRequest) returns (SupplierUpdateResponse);
   rpc SupplierGet(SupplierGetRequest) returns (SupplierGetResponse);
+  rpc SupplierGetChild(SupplierGetChildRequest) returns (SupplierGetChildResponse);
 }
 
 enum SupplierType {
@@ -39,16 +40,17 @@ message SupplierCustom {
 message SupplierMarketplace {
   common.v1.MarketplaceType mp_type = 1;
 
-  string shop_name = 2;
-  string product_name = 3 [(buf.validate.field).string = {
+  uint64 supplier_id = 2;
+  string shop_name = 3;
+  string product_name = 4 [(buf.validate.field).string = {
     min_len: 1
     max_len: 200
   }];
-  string uri = 4 [(buf.validate.field).string = {
+  string uri = 5 [(buf.validate.field).string = {
     min_len: 1
     max_len: 500
   }];
-  string description = 5 [(buf.validate.field).string = {
+  string description = 6 [(buf.validate.field).string = {
     min_len: 1
     max_len: 500
   }];
@@ -63,17 +65,21 @@ message SupplierDetail {
   string contact = 5;
   string description = 6;
   string address = 7;
+  string province = 8;
+  string city = 9;
 
-  repeated SupplierCustom custom = 8;
-  repeated SupplierMarketplace marketplace = 9;
+  repeated SupplierMarketplace childs = 10;
 }
 
 message SupplierCreateRequest {
   uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
-  oneof data {
-    SupplierCustom custom = 2;
-    SupplierMarketplace marketplace = 3;
-  }
+  string code = 2;
+  string name = 3;
+  string contact = 4;
+  string description = 5;
+  string address = 6;
+  string province = 7;
+  string city = 8;
 }
 
 message SupplierCreateResponse {
@@ -90,12 +96,16 @@ message SupplierListItem {
   string contact = 5;
   string description = 6;
   string address = 7;
+  string province = 8;
+  string city = 9;
 }
 
 message SupplierListRequest {
   string q = 1;
   uint64 team_id = 2;
-  common.v1.PageFilter page = 3 [(buf.validate.field).required = true];
+  string province = 3;
+  string city = 4;
+  common.v1.PageFilter page = 5 [(buf.validate.field).required = true];
 }
 
 message SupplierListResponse {
@@ -117,36 +127,42 @@ message SupplierGetResponse {
   repeated SupplierDetail data = 1;
 }
 
+message SupplierGetChildRequest {
+  repeated uint64 ids = 1 [(buf.validate.field).repeated = {
+    min_items: 1
+    max_items: 100
+    items: {
+      uint64: {gt: 0}
+    }
+  }];
+}
+
+message SupplierGetChildResponse {
+  repeated SupplierMarketplace data = 1;
+}
+
 enum SupplierChildUpdateType {
   SUPPLIER_CHILD_UPDATE_TYPE_UNSPECIFIED = 0;
   SUPPLIER_CHILD_UPDATE_TYPE_UPSERT = 1;
   SUPPLIER_CHILD_UPDATE_TYPE_REMOVE = 2;
 }
 message SupplierChildUpdate {
+  uint64 id = 1;
   SupplierChildUpdateType type = 2 [(buf.validate.field).enum = {
     defined_only: true
     not_in: [0]
   }];
-  oneof data {
-    SupplierCustom custom = 3;
-    SupplierMarketplace marketplace = 4;
-  }
+  SupplierMarketplace data = 3;
 }
 
 message SupplierDetailUpdate {
-  string name = 1 [(buf.validate.field).string = {
-    min_len: 1
-    max_len: 200
-  }];
-  string contact = 2 [(buf.validate.field).string = {pattern: "^\\+[1-9]\\d{1,14}$"}];
-  string description = 3 [(buf.validate.field).string = {
-    min_len: 1
-    max_len: 500
-  }];
-  string address = 4 [(buf.validate.field).string = {
-    min_len: 1
-    max_len: 500
-  }];
+  string code = 1;
+  string name = 2;
+  string contact = 3;
+  string description = 4;
+  string address = 5;
+  string province = 6;
+  string city = 7;
 }
 
 message SupplierUpdateRequest {

@@ -72,6 +72,55 @@ func (SupplierType) EnumDescriptor() ([]byte, []int) {
 	return file_selling_iface_v1_supplier_proto_rawDescGZIP(), []int{0}
 }
 
+type SupplierChildUpdateType int32
+
+const (
+	SupplierChildUpdateType_SUPPLIER_CHILD_UPDATE_TYPE_UNSPECIFIED SupplierChildUpdateType = 0
+	SupplierChildUpdateType_SUPPLIER_CHILD_UPDATE_TYPE_UPSERT      SupplierChildUpdateType = 1
+	SupplierChildUpdateType_SUPPLIER_CHILD_UPDATE_TYPE_REMOVE      SupplierChildUpdateType = 2
+)
+
+// Enum value maps for SupplierChildUpdateType.
+var (
+	SupplierChildUpdateType_name = map[int32]string{
+		0: "SUPPLIER_CHILD_UPDATE_TYPE_UNSPECIFIED",
+		1: "SUPPLIER_CHILD_UPDATE_TYPE_UPSERT",
+		2: "SUPPLIER_CHILD_UPDATE_TYPE_REMOVE",
+	}
+	SupplierChildUpdateType_value = map[string]int32{
+		"SUPPLIER_CHILD_UPDATE_TYPE_UNSPECIFIED": 0,
+		"SUPPLIER_CHILD_UPDATE_TYPE_UPSERT":      1,
+		"SUPPLIER_CHILD_UPDATE_TYPE_REMOVE":      2,
+	}
+)
+
+func (x SupplierChildUpdateType) Enum() *SupplierChildUpdateType {
+	p := new(SupplierChildUpdateType)
+	*p = x
+	return p
+}
+
+func (x SupplierChildUpdateType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (SupplierChildUpdateType) Descriptor() protoreflect.EnumDescriptor {
+	return file_selling_iface_v1_supplier_proto_enumTypes[1].Descriptor()
+}
+
+func (SupplierChildUpdateType) Type() protoreflect.EnumType {
+	return &file_selling_iface_v1_supplier_proto_enumTypes[1]
+}
+
+func (x SupplierChildUpdateType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use SupplierChildUpdateType.Descriptor instead.
+func (SupplierChildUpdateType) EnumDescriptor() ([]byte, []int) {
+	return file_selling_iface_v1_supplier_proto_rawDescGZIP(), []int{1}
+}
+
 type SupplierCustom struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
@@ -135,10 +184,11 @@ func (x *SupplierCustom) GetDescription() string {
 type SupplierMarketplace struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	MpType        v1.MarketplaceType     `protobuf:"varint,1,opt,name=mp_type,json=mpType,proto3,enum=common.v1.MarketplaceType" json:"mp_type,omitempty"`
-	ShopName      string                 `protobuf:"bytes,2,opt,name=shop_name,json=shopName,proto3" json:"shop_name,omitempty"`
-	ProductName   string                 `protobuf:"bytes,3,opt,name=product_name,json=productName,proto3" json:"product_name,omitempty"`
-	Uri           string                 `protobuf:"bytes,4,opt,name=uri,proto3" json:"uri,omitempty"`
-	Description   string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
+	SupplierId    uint64                 `protobuf:"varint,2,opt,name=supplier_id,json=supplierId,proto3" json:"supplier_id,omitempty"`
+	ShopName      string                 `protobuf:"bytes,3,opt,name=shop_name,json=shopName,proto3" json:"shop_name,omitempty"`
+	ProductName   string                 `protobuf:"bytes,4,opt,name=product_name,json=productName,proto3" json:"product_name,omitempty"`
+	Uri           string                 `protobuf:"bytes,5,opt,name=uri,proto3" json:"uri,omitempty"`
+	Description   string                 `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -180,6 +230,13 @@ func (x *SupplierMarketplace) GetMpType() v1.MarketplaceType {
 	return v1.MarketplaceType(0)
 }
 
+func (x *SupplierMarketplace) GetSupplierId() uint64 {
+	if x != nil {
+		return x.SupplierId
+	}
+	return 0
+}
+
 func (x *SupplierMarketplace) GetShopName() string {
 	if x != nil {
 		return x.ShopName
@@ -208,33 +265,36 @@ func (x *SupplierMarketplace) GetDescription() string {
 	return ""
 }
 
-type Supplier struct {
-	state  protoimpl.MessageState `protogen:"open.v1"`
-	Id     uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	TeamId uint64                 `protobuf:"varint,2,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
-	// Types that are valid to be assigned to Data:
-	//
-	//	*Supplier_Custom
-	//	*Supplier_Marketplace
-	Data          isSupplier_Data `protobuf_oneof:"data"`
+type SupplierDetail struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	TeamId        uint64                 `protobuf:"varint,2,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	Code          string                 `protobuf:"bytes,3,opt,name=code,proto3" json:"code,omitempty"`
+	Name          string                 `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
+	Contact       string                 `protobuf:"bytes,5,opt,name=contact,proto3" json:"contact,omitempty"`
+	Description   string                 `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"`
+	Address       string                 `protobuf:"bytes,7,opt,name=address,proto3" json:"address,omitempty"`
+	Province      string                 `protobuf:"bytes,8,opt,name=province,proto3" json:"province,omitempty"`
+	City          string                 `protobuf:"bytes,9,opt,name=city,proto3" json:"city,omitempty"`
+	Childs        []*SupplierMarketplace `protobuf:"bytes,10,rep,name=childs,proto3" json:"childs,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *Supplier) Reset() {
-	*x = Supplier{}
+func (x *SupplierDetail) Reset() {
+	*x = SupplierDetail{}
 	mi := &file_selling_iface_v1_supplier_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Supplier) String() string {
+func (x *SupplierDetail) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Supplier) ProtoMessage() {}
+func (*SupplierDetail) ProtoMessage() {}
 
-func (x *Supplier) ProtoReflect() protoreflect.Message {
+func (x *SupplierDetail) ProtoReflect() protoreflect.Message {
 	mi := &file_selling_iface_v1_supplier_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -246,74 +306,91 @@ func (x *Supplier) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Supplier.ProtoReflect.Descriptor instead.
-func (*Supplier) Descriptor() ([]byte, []int) {
+// Deprecated: Use SupplierDetail.ProtoReflect.Descriptor instead.
+func (*SupplierDetail) Descriptor() ([]byte, []int) {
 	return file_selling_iface_v1_supplier_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *Supplier) GetId() uint64 {
+func (x *SupplierDetail) GetId() uint64 {
 	if x != nil {
 		return x.Id
 	}
 	return 0
 }
 
-func (x *Supplier) GetTeamId() uint64 {
+func (x *SupplierDetail) GetTeamId() uint64 {
 	if x != nil {
 		return x.TeamId
 	}
 	return 0
 }
 
-func (x *Supplier) GetData() isSupplier_Data {
+func (x *SupplierDetail) GetCode() string {
 	if x != nil {
-		return x.Data
+		return x.Code
+	}
+	return ""
+}
+
+func (x *SupplierDetail) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *SupplierDetail) GetContact() string {
+	if x != nil {
+		return x.Contact
+	}
+	return ""
+}
+
+func (x *SupplierDetail) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *SupplierDetail) GetAddress() string {
+	if x != nil {
+		return x.Address
+	}
+	return ""
+}
+
+func (x *SupplierDetail) GetProvince() string {
+	if x != nil {
+		return x.Province
+	}
+	return ""
+}
+
+func (x *SupplierDetail) GetCity() string {
+	if x != nil {
+		return x.City
+	}
+	return ""
+}
+
+func (x *SupplierDetail) GetChilds() []*SupplierMarketplace {
+	if x != nil {
+		return x.Childs
 	}
 	return nil
 }
-
-func (x *Supplier) GetCustom() *SupplierCustom {
-	if x != nil {
-		if x, ok := x.Data.(*Supplier_Custom); ok {
-			return x.Custom
-		}
-	}
-	return nil
-}
-
-func (x *Supplier) GetMarketplace() *SupplierMarketplace {
-	if x != nil {
-		if x, ok := x.Data.(*Supplier_Marketplace); ok {
-			return x.Marketplace
-		}
-	}
-	return nil
-}
-
-type isSupplier_Data interface {
-	isSupplier_Data()
-}
-
-type Supplier_Custom struct {
-	Custom *SupplierCustom `protobuf:"bytes,3,opt,name=custom,proto3,oneof"`
-}
-
-type Supplier_Marketplace struct {
-	Marketplace *SupplierMarketplace `protobuf:"bytes,4,opt,name=marketplace,proto3,oneof"`
-}
-
-func (*Supplier_Custom) isSupplier_Data() {}
-
-func (*Supplier_Marketplace) isSupplier_Data() {}
 
 type SupplierCreateRequest struct {
-	state  protoimpl.MessageState `protogen:"open.v1"`
-	TeamId uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
-	// Types that are valid to be assigned to Data:
-	//
-	//	*SupplierCreateRequest_Custom
-	//	*SupplierCreateRequest_Marketplace
-	Data          isSupplierCreateRequest_Data `protobuf_oneof:"data"`
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	Code          string                 `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`
+	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	Contact       string                 `protobuf:"bytes,4,opt,name=contact,proto3" json:"contact,omitempty"`
+	Description   string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
+	Address       string                 `protobuf:"bytes,6,opt,name=address,proto3" json:"address,omitempty"`
+	Province      string                 `protobuf:"bytes,7,opt,name=province,proto3" json:"province,omitempty"`
+	City          string                 `protobuf:"bytes,8,opt,name=city,proto3" json:"city,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -355,51 +432,59 @@ func (x *SupplierCreateRequest) GetTeamId() uint64 {
 	return 0
 }
 
-func (x *SupplierCreateRequest) GetData() isSupplierCreateRequest_Data {
+func (x *SupplierCreateRequest) GetCode() string {
 	if x != nil {
-		return x.Data
+		return x.Code
 	}
-	return nil
+	return ""
 }
 
-func (x *SupplierCreateRequest) GetCustom() *SupplierCustom {
+func (x *SupplierCreateRequest) GetName() string {
 	if x != nil {
-		if x, ok := x.Data.(*SupplierCreateRequest_Custom); ok {
-			return x.Custom
-		}
+		return x.Name
 	}
-	return nil
+	return ""
 }
 
-func (x *SupplierCreateRequest) GetMarketplace() *SupplierMarketplace {
+func (x *SupplierCreateRequest) GetContact() string {
 	if x != nil {
-		if x, ok := x.Data.(*SupplierCreateRequest_Marketplace); ok {
-			return x.Marketplace
-		}
+		return x.Contact
 	}
-	return nil
+	return ""
 }
 
-type isSupplierCreateRequest_Data interface {
-	isSupplierCreateRequest_Data()
+func (x *SupplierCreateRequest) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
 }
 
-type SupplierCreateRequest_Custom struct {
-	Custom *SupplierCustom `protobuf:"bytes,2,opt,name=custom,proto3,oneof"`
+func (x *SupplierCreateRequest) GetAddress() string {
+	if x != nil {
+		return x.Address
+	}
+	return ""
 }
 
-type SupplierCreateRequest_Marketplace struct {
-	Marketplace *SupplierMarketplace `protobuf:"bytes,3,opt,name=marketplace,proto3,oneof"`
+func (x *SupplierCreateRequest) GetProvince() string {
+	if x != nil {
+		return x.Province
+	}
+	return ""
 }
 
-func (*SupplierCreateRequest_Custom) isSupplierCreateRequest_Data() {}
-
-func (*SupplierCreateRequest_Marketplace) isSupplierCreateRequest_Data() {}
+func (x *SupplierCreateRequest) GetCity() string {
+	if x != nil {
+		return x.City
+	}
+	return ""
+}
 
 type SupplierCreateResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Data          *Supplier              `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
+	Data          *SupplierDetail        `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -441,26 +526,135 @@ func (x *SupplierCreateResponse) GetId() uint64 {
 	return 0
 }
 
-func (x *SupplierCreateResponse) GetData() *Supplier {
+func (x *SupplierCreateResponse) GetData() *SupplierDetail {
 	if x != nil {
 		return x.Data
 	}
 	return nil
 }
 
+type SupplierListItem struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	TeamId        uint64                 `protobuf:"varint,2,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	Code          string                 `protobuf:"bytes,3,opt,name=code,proto3" json:"code,omitempty"`
+	Name          string                 `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
+	Contact       string                 `protobuf:"bytes,5,opt,name=contact,proto3" json:"contact,omitempty"`
+	Description   string                 `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"`
+	Address       string                 `protobuf:"bytes,7,opt,name=address,proto3" json:"address,omitempty"`
+	Province      string                 `protobuf:"bytes,8,opt,name=province,proto3" json:"province,omitempty"`
+	City          string                 `protobuf:"bytes,9,opt,name=city,proto3" json:"city,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SupplierListItem) Reset() {
+	*x = SupplierListItem{}
+	mi := &file_selling_iface_v1_supplier_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SupplierListItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SupplierListItem) ProtoMessage() {}
+
+func (x *SupplierListItem) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_supplier_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SupplierListItem.ProtoReflect.Descriptor instead.
+func (*SupplierListItem) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_supplier_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *SupplierListItem) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *SupplierListItem) GetTeamId() uint64 {
+	if x != nil {
+		return x.TeamId
+	}
+	return 0
+}
+
+func (x *SupplierListItem) GetCode() string {
+	if x != nil {
+		return x.Code
+	}
+	return ""
+}
+
+func (x *SupplierListItem) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *SupplierListItem) GetContact() string {
+	if x != nil {
+		return x.Contact
+	}
+	return ""
+}
+
+func (x *SupplierListItem) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *SupplierListItem) GetAddress() string {
+	if x != nil {
+		return x.Address
+	}
+	return ""
+}
+
+func (x *SupplierListItem) GetProvince() string {
+	if x != nil {
+		return x.Province
+	}
+	return ""
+}
+
+func (x *SupplierListItem) GetCity() string {
+	if x != nil {
+		return x.City
+	}
+	return ""
+}
+
 type SupplierListRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Q             string                 `protobuf:"bytes,1,opt,name=q,proto3" json:"q,omitempty"`
-	Type          SupplierType           `protobuf:"varint,2,opt,name=type,proto3,enum=selling_iface.v1.SupplierType" json:"type,omitempty"`
-	TeamId        uint64                 `protobuf:"varint,3,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
-	Page          *v1.PageFilter         `protobuf:"bytes,4,opt,name=page,proto3" json:"page,omitempty"`
+	TeamId        uint64                 `protobuf:"varint,2,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	Province      string                 `protobuf:"bytes,3,opt,name=province,proto3" json:"province,omitempty"`
+	City          string                 `protobuf:"bytes,4,opt,name=city,proto3" json:"city,omitempty"`
+	Page          *v1.PageFilter         `protobuf:"bytes,5,opt,name=page,proto3" json:"page,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *SupplierListRequest) Reset() {
 	*x = SupplierListRequest{}
-	mi := &file_selling_iface_v1_supplier_proto_msgTypes[5]
+	mi := &file_selling_iface_v1_supplier_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -472,7 +666,7 @@ func (x *SupplierListRequest) String() string {
 func (*SupplierListRequest) ProtoMessage() {}
 
 func (x *SupplierListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_supplier_proto_msgTypes[5]
+	mi := &file_selling_iface_v1_supplier_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -485,7 +679,7 @@ func (x *SupplierListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SupplierListRequest.ProtoReflect.Descriptor instead.
 func (*SupplierListRequest) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_supplier_proto_rawDescGZIP(), []int{5}
+	return file_selling_iface_v1_supplier_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *SupplierListRequest) GetQ() string {
@@ -495,18 +689,25 @@ func (x *SupplierListRequest) GetQ() string {
 	return ""
 }
 
-func (x *SupplierListRequest) GetType() SupplierType {
-	if x != nil {
-		return x.Type
-	}
-	return SupplierType_SUPPLIER_TYPE_UNSPECIFIED
-}
-
 func (x *SupplierListRequest) GetTeamId() uint64 {
 	if x != nil {
 		return x.TeamId
 	}
 	return 0
+}
+
+func (x *SupplierListRequest) GetProvince() string {
+	if x != nil {
+		return x.Province
+	}
+	return ""
+}
+
+func (x *SupplierListRequest) GetCity() string {
+	if x != nil {
+		return x.City
+	}
+	return ""
 }
 
 func (x *SupplierListRequest) GetPage() *v1.PageFilter {
@@ -518,7 +719,7 @@ func (x *SupplierListRequest) GetPage() *v1.PageFilter {
 
 type SupplierListResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Data          []*Supplier            `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
+	Data          []*SupplierListItem    `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
 	PageInfo      *v1.PageInfo           `protobuf:"bytes,2,opt,name=page_info,json=pageInfo,proto3" json:"page_info,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -526,7 +727,7 @@ type SupplierListResponse struct {
 
 func (x *SupplierListResponse) Reset() {
 	*x = SupplierListResponse{}
-	mi := &file_selling_iface_v1_supplier_proto_msgTypes[6]
+	mi := &file_selling_iface_v1_supplier_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -538,7 +739,7 @@ func (x *SupplierListResponse) String() string {
 func (*SupplierListResponse) ProtoMessage() {}
 
 func (x *SupplierListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_supplier_proto_msgTypes[6]
+	mi := &file_selling_iface_v1_supplier_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -551,10 +752,10 @@ func (x *SupplierListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SupplierListResponse.ProtoReflect.Descriptor instead.
 func (*SupplierListResponse) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_supplier_proto_rawDescGZIP(), []int{6}
+	return file_selling_iface_v1_supplier_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *SupplierListResponse) GetData() []*Supplier {
+func (x *SupplierListResponse) GetData() []*SupplierListItem {
 	if x != nil {
 		return x.Data
 	}
@@ -577,7 +778,7 @@ type SupplierGetRequest struct {
 
 func (x *SupplierGetRequest) Reset() {
 	*x = SupplierGetRequest{}
-	mi := &file_selling_iface_v1_supplier_proto_msgTypes[7]
+	mi := &file_selling_iface_v1_supplier_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -589,7 +790,7 @@ func (x *SupplierGetRequest) String() string {
 func (*SupplierGetRequest) ProtoMessage() {}
 
 func (x *SupplierGetRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_supplier_proto_msgTypes[7]
+	mi := &file_selling_iface_v1_supplier_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -602,7 +803,7 @@ func (x *SupplierGetRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SupplierGetRequest.ProtoReflect.Descriptor instead.
 func (*SupplierGetRequest) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_supplier_proto_rawDescGZIP(), []int{7}
+	return file_selling_iface_v1_supplier_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *SupplierGetRequest) GetIds() []uint64 {
@@ -614,14 +815,14 @@ func (x *SupplierGetRequest) GetIds() []uint64 {
 
 type SupplierGetResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Data          []*Supplier            `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
+	Data          []*SupplierDetail      `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *SupplierGetResponse) Reset() {
 	*x = SupplierGetResponse{}
-	mi := &file_selling_iface_v1_supplier_proto_msgTypes[8]
+	mi := &file_selling_iface_v1_supplier_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -633,7 +834,7 @@ func (x *SupplierGetResponse) String() string {
 func (*SupplierGetResponse) ProtoMessage() {}
 
 func (x *SupplierGetResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_supplier_proto_msgTypes[8]
+	mi := &file_selling_iface_v1_supplier_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -646,26 +847,271 @@ func (x *SupplierGetResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SupplierGetResponse.ProtoReflect.Descriptor instead.
 func (*SupplierGetResponse) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_supplier_proto_rawDescGZIP(), []int{8}
+	return file_selling_iface_v1_supplier_proto_rawDescGZIP(), []int{9}
 }
 
-func (x *SupplierGetResponse) GetData() []*Supplier {
+func (x *SupplierGetResponse) GetData() []*SupplierDetail {
 	if x != nil {
 		return x.Data
 	}
 	return nil
 }
 
-type SupplierUpdateRequest struct {
+type SupplierGetChildRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Data          *Supplier              `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
+	Ids           []uint64               `protobuf:"varint,1,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SupplierGetChildRequest) Reset() {
+	*x = SupplierGetChildRequest{}
+	mi := &file_selling_iface_v1_supplier_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SupplierGetChildRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SupplierGetChildRequest) ProtoMessage() {}
+
+func (x *SupplierGetChildRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_supplier_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SupplierGetChildRequest.ProtoReflect.Descriptor instead.
+func (*SupplierGetChildRequest) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_supplier_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *SupplierGetChildRequest) GetIds() []uint64 {
+	if x != nil {
+		return x.Ids
+	}
+	return nil
+}
+
+type SupplierGetChildResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Data          []*SupplierMarketplace `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SupplierGetChildResponse) Reset() {
+	*x = SupplierGetChildResponse{}
+	mi := &file_selling_iface_v1_supplier_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SupplierGetChildResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SupplierGetChildResponse) ProtoMessage() {}
+
+func (x *SupplierGetChildResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_supplier_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SupplierGetChildResponse.ProtoReflect.Descriptor instead.
+func (*SupplierGetChildResponse) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_supplier_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *SupplierGetChildResponse) GetData() []*SupplierMarketplace {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+type SupplierChildUpdate struct {
+	state         protoimpl.MessageState  `protogen:"open.v1"`
+	Id            uint64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Type          SupplierChildUpdateType `protobuf:"varint,2,opt,name=type,proto3,enum=selling_iface.v1.SupplierChildUpdateType" json:"type,omitempty"`
+	Data          *SupplierMarketplace    `protobuf:"bytes,3,opt,name=data,proto3" json:"data,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SupplierChildUpdate) Reset() {
+	*x = SupplierChildUpdate{}
+	mi := &file_selling_iface_v1_supplier_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SupplierChildUpdate) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SupplierChildUpdate) ProtoMessage() {}
+
+func (x *SupplierChildUpdate) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_supplier_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SupplierChildUpdate.ProtoReflect.Descriptor instead.
+func (*SupplierChildUpdate) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_supplier_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *SupplierChildUpdate) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *SupplierChildUpdate) GetType() SupplierChildUpdateType {
+	if x != nil {
+		return x.Type
+	}
+	return SupplierChildUpdateType_SUPPLIER_CHILD_UPDATE_TYPE_UNSPECIFIED
+}
+
+func (x *SupplierChildUpdate) GetData() *SupplierMarketplace {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+type SupplierDetailUpdate struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          string                 `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Contact       string                 `protobuf:"bytes,3,opt,name=contact,proto3" json:"contact,omitempty"`
+	Description   string                 `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	Address       string                 `protobuf:"bytes,5,opt,name=address,proto3" json:"address,omitempty"`
+	Province      string                 `protobuf:"bytes,6,opt,name=province,proto3" json:"province,omitempty"`
+	City          string                 `protobuf:"bytes,7,opt,name=city,proto3" json:"city,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SupplierDetailUpdate) Reset() {
+	*x = SupplierDetailUpdate{}
+	mi := &file_selling_iface_v1_supplier_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SupplierDetailUpdate) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SupplierDetailUpdate) ProtoMessage() {}
+
+func (x *SupplierDetailUpdate) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_supplier_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SupplierDetailUpdate.ProtoReflect.Descriptor instead.
+func (*SupplierDetailUpdate) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_supplier_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *SupplierDetailUpdate) GetCode() string {
+	if x != nil {
+		return x.Code
+	}
+	return ""
+}
+
+func (x *SupplierDetailUpdate) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *SupplierDetailUpdate) GetContact() string {
+	if x != nil {
+		return x.Contact
+	}
+	return ""
+}
+
+func (x *SupplierDetailUpdate) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *SupplierDetailUpdate) GetAddress() string {
+	if x != nil {
+		return x.Address
+	}
+	return ""
+}
+
+func (x *SupplierDetailUpdate) GetProvince() string {
+	if x != nil {
+		return x.Province
+	}
+	return ""
+}
+
+func (x *SupplierDetailUpdate) GetCity() string {
+	if x != nil {
+		return x.City
+	}
+	return ""
+}
+
+type SupplierUpdateRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	Id    uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	// Types that are valid to be assigned to Update:
+	//
+	//	*SupplierUpdateRequest_Detail
+	//	*SupplierUpdateRequest_Child
+	Update        isSupplierUpdateRequest_Update `protobuf_oneof:"update"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *SupplierUpdateRequest) Reset() {
 	*x = SupplierUpdateRequest{}
-	mi := &file_selling_iface_v1_supplier_proto_msgTypes[9]
+	mi := &file_selling_iface_v1_supplier_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -677,7 +1123,7 @@ func (x *SupplierUpdateRequest) String() string {
 func (*SupplierUpdateRequest) ProtoMessage() {}
 
 func (x *SupplierUpdateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_supplier_proto_msgTypes[9]
+	mi := &file_selling_iface_v1_supplier_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -690,15 +1136,56 @@ func (x *SupplierUpdateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SupplierUpdateRequest.ProtoReflect.Descriptor instead.
 func (*SupplierUpdateRequest) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_supplier_proto_rawDescGZIP(), []int{9}
+	return file_selling_iface_v1_supplier_proto_rawDescGZIP(), []int{14}
 }
 
-func (x *SupplierUpdateRequest) GetData() *Supplier {
+func (x *SupplierUpdateRequest) GetId() uint64 {
 	if x != nil {
-		return x.Data
+		return x.Id
+	}
+	return 0
+}
+
+func (x *SupplierUpdateRequest) GetUpdate() isSupplierUpdateRequest_Update {
+	if x != nil {
+		return x.Update
 	}
 	return nil
 }
+
+func (x *SupplierUpdateRequest) GetDetail() *SupplierDetailUpdate {
+	if x != nil {
+		if x, ok := x.Update.(*SupplierUpdateRequest_Detail); ok {
+			return x.Detail
+		}
+	}
+	return nil
+}
+
+func (x *SupplierUpdateRequest) GetChild() *SupplierChildUpdate {
+	if x != nil {
+		if x, ok := x.Update.(*SupplierUpdateRequest_Child); ok {
+			return x.Child
+		}
+	}
+	return nil
+}
+
+type isSupplierUpdateRequest_Update interface {
+	isSupplierUpdateRequest_Update()
+}
+
+type SupplierUpdateRequest_Detail struct {
+	Detail *SupplierDetailUpdate `protobuf:"bytes,2,opt,name=detail,proto3,oneof"`
+}
+
+type SupplierUpdateRequest_Child struct {
+	Child *SupplierChildUpdate `protobuf:"bytes,3,opt,name=child,proto3,oneof"`
+}
+
+func (*SupplierUpdateRequest_Detail) isSupplierUpdateRequest_Update() {}
+
+func (*SupplierUpdateRequest_Child) isSupplierUpdateRequest_Update() {}
 
 type SupplierUpdateResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -708,7 +1195,7 @@ type SupplierUpdateResponse struct {
 
 func (x *SupplierUpdateResponse) Reset() {
 	*x = SupplierUpdateResponse{}
-	mi := &file_selling_iface_v1_supplier_proto_msgTypes[10]
+	mi := &file_selling_iface_v1_supplier_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -720,7 +1207,7 @@ func (x *SupplierUpdateResponse) String() string {
 func (*SupplierUpdateResponse) ProtoMessage() {}
 
 func (x *SupplierUpdateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_supplier_proto_msgTypes[10]
+	mi := &file_selling_iface_v1_supplier_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -733,12 +1220,11 @@ func (x *SupplierUpdateResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SupplierUpdateResponse.ProtoReflect.Descriptor instead.
 func (*SupplierUpdateResponse) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_supplier_proto_rawDescGZIP(), []int{10}
+	return file_selling_iface_v1_supplier_proto_rawDescGZIP(), []int{15}
 }
 
 type SupplierDeleteRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Type          SupplierType           `protobuf:"varint,2,opt,name=type,proto3,enum=selling_iface.v1.SupplierType" json:"type,omitempty"`
 	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -746,7 +1232,7 @@ type SupplierDeleteRequest struct {
 
 func (x *SupplierDeleteRequest) Reset() {
 	*x = SupplierDeleteRequest{}
-	mi := &file_selling_iface_v1_supplier_proto_msgTypes[11]
+	mi := &file_selling_iface_v1_supplier_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -758,7 +1244,7 @@ func (x *SupplierDeleteRequest) String() string {
 func (*SupplierDeleteRequest) ProtoMessage() {}
 
 func (x *SupplierDeleteRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_supplier_proto_msgTypes[11]
+	mi := &file_selling_iface_v1_supplier_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -771,14 +1257,7 @@ func (x *SupplierDeleteRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SupplierDeleteRequest.ProtoReflect.Descriptor instead.
 func (*SupplierDeleteRequest) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_supplier_proto_rawDescGZIP(), []int{11}
-}
-
-func (x *SupplierDeleteRequest) GetType() SupplierType {
-	if x != nil {
-		return x.Type
-	}
-	return SupplierType_SUPPLIER_TYPE_UNSPECIFIED
+	return file_selling_iface_v1_supplier_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *SupplierDeleteRequest) GetId() uint64 {
@@ -796,7 +1275,7 @@ type SupplierDeleteResponse struct {
 
 func (x *SupplierDeleteResponse) Reset() {
 	*x = SupplierDeleteResponse{}
-	mi := &file_selling_iface_v1_supplier_proto_msgTypes[12]
+	mi := &file_selling_iface_v1_supplier_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -808,7 +1287,7 @@ func (x *SupplierDeleteResponse) String() string {
 func (*SupplierDeleteResponse) ProtoMessage() {}
 
 func (x *SupplierDeleteResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_supplier_proto_msgTypes[12]
+	mi := &file_selling_iface_v1_supplier_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -821,7 +1300,7 @@ func (x *SupplierDeleteResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SupplierDeleteResponse.ProtoReflect.Descriptor instead.
 func (*SupplierDeleteResponse) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_supplier_proto_rawDescGZIP(), []int{12}
+	return file_selling_iface_v1_supplier_proto_rawDescGZIP(), []int{17}
 }
 
 var File_selling_iface_v1_supplier_proto protoreflect.FileDescriptor
@@ -834,62 +1313,108 @@ const file_selling_iface_v1_supplier_proto_rawDesc = "" +
 	"\xbaH\ar\x05\x10\x01\x18\xc8\x01R\x04name\x122\n" +
 	"\acontact\x18\x04 \x01(\tB\x18\xbaH\x15r\x132\x11^\\+[1-9]\\d{1,14}$R\acontact\x12,\n" +
 	"\vdescription\x18\x05 \x01(\tB\n" +
-	"\xbaH\ar\x05\x10\x01\x18\xf4\x03R\vdescription\"\xe2\x01\n" +
+	"\xbaH\ar\x05\x10\x01\x18\xf4\x03R\vdescription\"\x83\x02\n" +
 	"\x13SupplierMarketplace\x123\n" +
-	"\amp_type\x18\x01 \x01(\x0e2\x1a.common.v1.MarketplaceTypeR\x06mpType\x12\x1b\n" +
-	"\tshop_name\x18\x02 \x01(\tR\bshopName\x12-\n" +
-	"\fproduct_name\x18\x03 \x01(\tB\n" +
+	"\amp_type\x18\x01 \x01(\x0e2\x1a.common.v1.MarketplaceTypeR\x06mpType\x12\x1f\n" +
+	"\vsupplier_id\x18\x02 \x01(\x04R\n" +
+	"supplierId\x12\x1b\n" +
+	"\tshop_name\x18\x03 \x01(\tR\bshopName\x12-\n" +
+	"\fproduct_name\x18\x04 \x01(\tB\n" +
 	"\xbaH\ar\x05\x10\x01\x18\xc8\x01R\vproductName\x12\x1c\n" +
-	"\x03uri\x18\x04 \x01(\tB\n" +
+	"\x03uri\x18\x05 \x01(\tB\n" +
 	"\xbaH\ar\x05\x10\x01\x18\xf4\x03R\x03uri\x12,\n" +
-	"\vdescription\x18\x05 \x01(\tB\n" +
-	"\xbaH\ar\x05\x10\x01\x18\xf4\x03R\vdescription\"\xc2\x01\n" +
-	"\bSupplier\x12\x0e\n" +
+	"\vdescription\x18\x06 \x01(\tB\n" +
+	"\xbaH\ar\x05\x10\x01\x18\xf4\x03R\vdescription\"\xa6\x02\n" +
+	"\x0eSupplierDetail\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x17\n" +
-	"\ateam_id\x18\x02 \x01(\x04R\x06teamId\x12:\n" +
-	"\x06custom\x18\x03 \x01(\v2 .selling_iface.v1.SupplierCustomH\x00R\x06custom\x12I\n" +
-	"\vmarketplace\x18\x04 \x01(\v2%.selling_iface.v1.SupplierMarketplaceH\x00R\vmarketplaceB\x06\n" +
-	"\x04data\"\xc8\x01\n" +
+	"\ateam_id\x18\x02 \x01(\x04R\x06teamId\x12\x12\n" +
+	"\x04code\x18\x03 \x01(\tR\x04code\x12\x12\n" +
+	"\x04name\x18\x04 \x01(\tR\x04name\x12\x18\n" +
+	"\acontact\x18\x05 \x01(\tR\acontact\x12 \n" +
+	"\vdescription\x18\x06 \x01(\tR\vdescription\x12\x18\n" +
+	"\aaddress\x18\a \x01(\tR\aaddress\x12\x1a\n" +
+	"\bprovince\x18\b \x01(\tR\bprovince\x12\x12\n" +
+	"\x04city\x18\t \x01(\tR\x04city\x12=\n" +
+	"\x06childs\x18\n" +
+	" \x03(\v2%.selling_iface.v1.SupplierMarketplaceR\x06childs\"\xe7\x01\n" +
 	"\x15SupplierCreateRequest\x12 \n" +
-	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12:\n" +
-	"\x06custom\x18\x02 \x01(\v2 .selling_iface.v1.SupplierCustomH\x00R\x06custom\x12I\n" +
-	"\vmarketplace\x18\x03 \x01(\v2%.selling_iface.v1.SupplierMarketplaceH\x00R\vmarketplaceB\x06\n" +
-	"\x04data\"X\n" +
+	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12\x12\n" +
+	"\x04code\x18\x02 \x01(\tR\x04code\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12\x18\n" +
+	"\acontact\x18\x04 \x01(\tR\acontact\x12 \n" +
+	"\vdescription\x18\x05 \x01(\tR\vdescription\x12\x18\n" +
+	"\aaddress\x18\x06 \x01(\tR\aaddress\x12\x1a\n" +
+	"\bprovince\x18\a \x01(\tR\bprovince\x12\x12\n" +
+	"\x04city\x18\b \x01(\tR\x04city\"^\n" +
 	"\x16SupplierCreateResponse\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x04R\x02id\x12.\n" +
-	"\x04data\x18\x02 \x01(\v2\x1a.selling_iface.v1.SupplierR\x04data\"\xb8\x01\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\x124\n" +
+	"\x04data\x18\x02 \x01(\v2 .selling_iface.v1.SupplierDetailR\x04data\"\xe9\x01\n" +
+	"\x10SupplierListItem\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x17\n" +
+	"\ateam_id\x18\x02 \x01(\x04R\x06teamId\x12\x12\n" +
+	"\x04code\x18\x03 \x01(\tR\x04code\x12\x12\n" +
+	"\x04name\x18\x04 \x01(\tR\x04name\x12\x18\n" +
+	"\acontact\x18\x05 \x01(\tR\acontact\x12 \n" +
+	"\vdescription\x18\x06 \x01(\tR\vdescription\x12\x18\n" +
+	"\aaddress\x18\a \x01(\tR\aaddress\x12\x1a\n" +
+	"\bprovince\x18\b \x01(\tR\bprovince\x12\x12\n" +
+	"\x04city\x18\t \x01(\tR\x04city\"\x9f\x01\n" +
 	"\x13SupplierListRequest\x12\f\n" +
-	"\x01q\x18\x01 \x01(\tR\x01q\x12>\n" +
-	"\x04type\x18\x02 \x01(\x0e2\x1e.selling_iface.v1.SupplierTypeB\n" +
-	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x04type\x12 \n" +
-	"\ateam_id\x18\x03 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x121\n" +
-	"\x04page\x18\x04 \x01(\v2\x15.common.v1.PageFilterB\x06\xbaH\x03\xc8\x01\x01R\x04page\"x\n" +
-	"\x14SupplierListResponse\x12.\n" +
-	"\x04data\x18\x01 \x03(\v2\x1a.selling_iface.v1.SupplierR\x04data\x120\n" +
+	"\x01q\x18\x01 \x01(\tR\x01q\x12\x17\n" +
+	"\ateam_id\x18\x02 \x01(\x04R\x06teamId\x12\x1a\n" +
+	"\bprovince\x18\x03 \x01(\tR\bprovince\x12\x12\n" +
+	"\x04city\x18\x04 \x01(\tR\x04city\x121\n" +
+	"\x04page\x18\x05 \x01(\v2\x15.common.v1.PageFilterB\x06\xbaH\x03\xc8\x01\x01R\x04page\"\x80\x01\n" +
+	"\x14SupplierListResponse\x126\n" +
+	"\x04data\x18\x01 \x03(\v2\".selling_iface.v1.SupplierListItemR\x04data\x120\n" +
 	"\tpage_info\x18\x02 \x01(\v2\x13.common.v1.PageInfoR\bpageInfo\"8\n" +
 	"\x12SupplierGetRequest\x12\"\n" +
 	"\x03ids\x18\x01 \x03(\x04B\x10\xbaH\r\x92\x01\n" +
-	"\b\x01\x10d\"\x042\x02 \x00R\x03ids\"E\n" +
-	"\x13SupplierGetResponse\x12.\n" +
-	"\x04data\x18\x01 \x03(\v2\x1a.selling_iface.v1.SupplierR\x04data\"G\n" +
-	"\x15SupplierUpdateRequest\x12.\n" +
-	"\x04data\x18\x01 \x01(\v2\x1a.selling_iface.v1.SupplierR\x04data\"\x18\n" +
-	"\x16SupplierUpdateResponse\"p\n" +
-	"\x15SupplierDeleteRequest\x12>\n" +
-	"\x04type\x18\x02 \x01(\x0e2\x1e.selling_iface.v1.SupplierTypeB\n" +
-	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x04type\x12\x17\n" +
+	"\b\x01\x10d\"\x042\x02 \x00R\x03ids\"K\n" +
+	"\x13SupplierGetResponse\x124\n" +
+	"\x04data\x18\x01 \x03(\v2 .selling_iface.v1.SupplierDetailR\x04data\"=\n" +
+	"\x17SupplierGetChildRequest\x12\"\n" +
+	"\x03ids\x18\x01 \x03(\x04B\x10\xbaH\r\x92\x01\n" +
+	"\b\x01\x10d\"\x042\x02 \x00R\x03ids\"U\n" +
+	"\x18SupplierGetChildResponse\x129\n" +
+	"\x04data\x18\x01 \x03(\v2%.selling_iface.v1.SupplierMarketplaceR\x04data\"\xab\x01\n" +
+	"\x13SupplierChildUpdate\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\x12I\n" +
+	"\x04type\x18\x02 \x01(\x0e2).selling_iface.v1.SupplierChildUpdateTypeB\n" +
+	"\xbaH\a\x82\x01\x04\x10\x01 \x00R\x04type\x129\n" +
+	"\x04data\x18\x03 \x01(\v2%.selling_iface.v1.SupplierMarketplaceR\x04data\"\xc4\x01\n" +
+	"\x14SupplierDetailUpdate\x12\x12\n" +
+	"\x04code\x18\x01 \x01(\tR\x04code\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x18\n" +
+	"\acontact\x18\x03 \x01(\tR\acontact\x12 \n" +
+	"\vdescription\x18\x04 \x01(\tR\vdescription\x12\x18\n" +
+	"\aaddress\x18\x05 \x01(\tR\aaddress\x12\x1a\n" +
+	"\bprovince\x18\x06 \x01(\tR\bprovince\x12\x12\n" +
+	"\x04city\x18\a \x01(\tR\x04city\"\xbb\x01\n" +
+	"\x15SupplierUpdateRequest\x12\x17\n" +
+	"\x02id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12@\n" +
+	"\x06detail\x18\x02 \x01(\v2&.selling_iface.v1.SupplierDetailUpdateH\x00R\x06detail\x12=\n" +
+	"\x05child\x18\x03 \x01(\v2%.selling_iface.v1.SupplierChildUpdateH\x00R\x05childB\b\n" +
+	"\x06update\"\x18\n" +
+	"\x16SupplierUpdateResponse\"0\n" +
+	"\x15SupplierDeleteRequest\x12\x17\n" +
 	"\x02id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\"\x18\n" +
 	"\x16SupplierDeleteResponse*f\n" +
 	"\fSupplierType\x12\x1d\n" +
 	"\x19SUPPLIER_TYPE_UNSPECIFIED\x10\x00\x12\x18\n" +
 	"\x14SUPPLIER_TYPE_CUSTOM\x10\x01\x12\x1d\n" +
-	"\x19SUPPLIER_TYPE_MARKETPLACE\x10\x022\xfb\x03\n" +
+	"\x19SUPPLIER_TYPE_MARKETPLACE\x10\x02*\x93\x01\n" +
+	"\x17SupplierChildUpdateType\x12*\n" +
+	"&SUPPLIER_CHILD_UPDATE_TYPE_UNSPECIFIED\x10\x00\x12%\n" +
+	"!SUPPLIER_CHILD_UPDATE_TYPE_UPSERT\x10\x01\x12%\n" +
+	"!SUPPLIER_CHILD_UPDATE_TYPE_REMOVE\x10\x022\xe6\x04\n" +
 	"\x0fSupplierService\x12]\n" +
 	"\fSupplierList\x12%.selling_iface.v1.SupplierListRequest\x1a&.selling_iface.v1.SupplierListResponse\x12c\n" +
 	"\x0eSupplierCreate\x12'.selling_iface.v1.SupplierCreateRequest\x1a(.selling_iface.v1.SupplierCreateResponse\x12c\n" +
 	"\x0eSupplierDelete\x12'.selling_iface.v1.SupplierDeleteRequest\x1a(.selling_iface.v1.SupplierDeleteResponse\x12c\n" +
 	"\x0eSupplierUpdate\x12'.selling_iface.v1.SupplierUpdateRequest\x1a(.selling_iface.v1.SupplierUpdateResponse\x12Z\n" +
-	"\vSupplierGet\x12$.selling_iface.v1.SupplierGetRequest\x1a%.selling_iface.v1.SupplierGetResponseB\xc3\x01\n" +
+	"\vSupplierGet\x12$.selling_iface.v1.SupplierGetRequest\x1a%.selling_iface.v1.SupplierGetResponse\x12i\n" +
+	"\x10SupplierGetChild\x12).selling_iface.v1.SupplierGetChildRequest\x1a*.selling_iface.v1.SupplierGetChildResponseB\xc3\x01\n" +
 	"\x14com.selling_iface.v1B\rSupplierProtoP\x01Z?github.com/pdcgo/schema/services/selling_iface/v1;selling_iface\xa2\x02\x03SXX\xaa\x02\x0fSellingIface.V1\xca\x02\x0fSellingIface\\V1\xe2\x02\x1bSellingIface\\V1\\GPBMetadata\xea\x02\x10SellingIface::V1b\x06proto3"
 
 var (
@@ -904,56 +1429,63 @@ func file_selling_iface_v1_supplier_proto_rawDescGZIP() []byte {
 	return file_selling_iface_v1_supplier_proto_rawDescData
 }
 
-var file_selling_iface_v1_supplier_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_selling_iface_v1_supplier_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
+var file_selling_iface_v1_supplier_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_selling_iface_v1_supplier_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
 var file_selling_iface_v1_supplier_proto_goTypes = []any{
-	(SupplierType)(0),              // 0: selling_iface.v1.SupplierType
-	(*SupplierCustom)(nil),         // 1: selling_iface.v1.SupplierCustom
-	(*SupplierMarketplace)(nil),    // 2: selling_iface.v1.SupplierMarketplace
-	(*Supplier)(nil),               // 3: selling_iface.v1.Supplier
-	(*SupplierCreateRequest)(nil),  // 4: selling_iface.v1.SupplierCreateRequest
-	(*SupplierCreateResponse)(nil), // 5: selling_iface.v1.SupplierCreateResponse
-	(*SupplierListRequest)(nil),    // 6: selling_iface.v1.SupplierListRequest
-	(*SupplierListResponse)(nil),   // 7: selling_iface.v1.SupplierListResponse
-	(*SupplierGetRequest)(nil),     // 8: selling_iface.v1.SupplierGetRequest
-	(*SupplierGetResponse)(nil),    // 9: selling_iface.v1.SupplierGetResponse
-	(*SupplierUpdateRequest)(nil),  // 10: selling_iface.v1.SupplierUpdateRequest
-	(*SupplierUpdateResponse)(nil), // 11: selling_iface.v1.SupplierUpdateResponse
-	(*SupplierDeleteRequest)(nil),  // 12: selling_iface.v1.SupplierDeleteRequest
-	(*SupplierDeleteResponse)(nil), // 13: selling_iface.v1.SupplierDeleteResponse
-	(v1.MarketplaceType)(0),        // 14: common.v1.MarketplaceType
-	(*v1.PageFilter)(nil),          // 15: common.v1.PageFilter
-	(*v1.PageInfo)(nil),            // 16: common.v1.PageInfo
+	(SupplierType)(0),                // 0: selling_iface.v1.SupplierType
+	(SupplierChildUpdateType)(0),     // 1: selling_iface.v1.SupplierChildUpdateType
+	(*SupplierCustom)(nil),           // 2: selling_iface.v1.SupplierCustom
+	(*SupplierMarketplace)(nil),      // 3: selling_iface.v1.SupplierMarketplace
+	(*SupplierDetail)(nil),           // 4: selling_iface.v1.SupplierDetail
+	(*SupplierCreateRequest)(nil),    // 5: selling_iface.v1.SupplierCreateRequest
+	(*SupplierCreateResponse)(nil),   // 6: selling_iface.v1.SupplierCreateResponse
+	(*SupplierListItem)(nil),         // 7: selling_iface.v1.SupplierListItem
+	(*SupplierListRequest)(nil),      // 8: selling_iface.v1.SupplierListRequest
+	(*SupplierListResponse)(nil),     // 9: selling_iface.v1.SupplierListResponse
+	(*SupplierGetRequest)(nil),       // 10: selling_iface.v1.SupplierGetRequest
+	(*SupplierGetResponse)(nil),      // 11: selling_iface.v1.SupplierGetResponse
+	(*SupplierGetChildRequest)(nil),  // 12: selling_iface.v1.SupplierGetChildRequest
+	(*SupplierGetChildResponse)(nil), // 13: selling_iface.v1.SupplierGetChildResponse
+	(*SupplierChildUpdate)(nil),      // 14: selling_iface.v1.SupplierChildUpdate
+	(*SupplierDetailUpdate)(nil),     // 15: selling_iface.v1.SupplierDetailUpdate
+	(*SupplierUpdateRequest)(nil),    // 16: selling_iface.v1.SupplierUpdateRequest
+	(*SupplierUpdateResponse)(nil),   // 17: selling_iface.v1.SupplierUpdateResponse
+	(*SupplierDeleteRequest)(nil),    // 18: selling_iface.v1.SupplierDeleteRequest
+	(*SupplierDeleteResponse)(nil),   // 19: selling_iface.v1.SupplierDeleteResponse
+	(v1.MarketplaceType)(0),          // 20: common.v1.MarketplaceType
+	(*v1.PageFilter)(nil),            // 21: common.v1.PageFilter
+	(*v1.PageInfo)(nil),              // 22: common.v1.PageInfo
 }
 var file_selling_iface_v1_supplier_proto_depIdxs = []int32{
-	14, // 0: selling_iface.v1.SupplierMarketplace.mp_type:type_name -> common.v1.MarketplaceType
-	1,  // 1: selling_iface.v1.Supplier.custom:type_name -> selling_iface.v1.SupplierCustom
-	2,  // 2: selling_iface.v1.Supplier.marketplace:type_name -> selling_iface.v1.SupplierMarketplace
-	1,  // 3: selling_iface.v1.SupplierCreateRequest.custom:type_name -> selling_iface.v1.SupplierCustom
-	2,  // 4: selling_iface.v1.SupplierCreateRequest.marketplace:type_name -> selling_iface.v1.SupplierMarketplace
-	3,  // 5: selling_iface.v1.SupplierCreateResponse.data:type_name -> selling_iface.v1.Supplier
-	0,  // 6: selling_iface.v1.SupplierListRequest.type:type_name -> selling_iface.v1.SupplierType
-	15, // 7: selling_iface.v1.SupplierListRequest.page:type_name -> common.v1.PageFilter
-	3,  // 8: selling_iface.v1.SupplierListResponse.data:type_name -> selling_iface.v1.Supplier
-	16, // 9: selling_iface.v1.SupplierListResponse.page_info:type_name -> common.v1.PageInfo
-	3,  // 10: selling_iface.v1.SupplierGetResponse.data:type_name -> selling_iface.v1.Supplier
-	3,  // 11: selling_iface.v1.SupplierUpdateRequest.data:type_name -> selling_iface.v1.Supplier
-	0,  // 12: selling_iface.v1.SupplierDeleteRequest.type:type_name -> selling_iface.v1.SupplierType
-	6,  // 13: selling_iface.v1.SupplierService.SupplierList:input_type -> selling_iface.v1.SupplierListRequest
-	4,  // 14: selling_iface.v1.SupplierService.SupplierCreate:input_type -> selling_iface.v1.SupplierCreateRequest
-	12, // 15: selling_iface.v1.SupplierService.SupplierDelete:input_type -> selling_iface.v1.SupplierDeleteRequest
-	10, // 16: selling_iface.v1.SupplierService.SupplierUpdate:input_type -> selling_iface.v1.SupplierUpdateRequest
-	8,  // 17: selling_iface.v1.SupplierService.SupplierGet:input_type -> selling_iface.v1.SupplierGetRequest
-	7,  // 18: selling_iface.v1.SupplierService.SupplierList:output_type -> selling_iface.v1.SupplierListResponse
-	5,  // 19: selling_iface.v1.SupplierService.SupplierCreate:output_type -> selling_iface.v1.SupplierCreateResponse
-	13, // 20: selling_iface.v1.SupplierService.SupplierDelete:output_type -> selling_iface.v1.SupplierDeleteResponse
-	11, // 21: selling_iface.v1.SupplierService.SupplierUpdate:output_type -> selling_iface.v1.SupplierUpdateResponse
-	9,  // 22: selling_iface.v1.SupplierService.SupplierGet:output_type -> selling_iface.v1.SupplierGetResponse
-	18, // [18:23] is the sub-list for method output_type
-	13, // [13:18] is the sub-list for method input_type
-	13, // [13:13] is the sub-list for extension type_name
-	13, // [13:13] is the sub-list for extension extendee
-	0,  // [0:13] is the sub-list for field type_name
+	20, // 0: selling_iface.v1.SupplierMarketplace.mp_type:type_name -> common.v1.MarketplaceType
+	3,  // 1: selling_iface.v1.SupplierDetail.childs:type_name -> selling_iface.v1.SupplierMarketplace
+	4,  // 2: selling_iface.v1.SupplierCreateResponse.data:type_name -> selling_iface.v1.SupplierDetail
+	21, // 3: selling_iface.v1.SupplierListRequest.page:type_name -> common.v1.PageFilter
+	7,  // 4: selling_iface.v1.SupplierListResponse.data:type_name -> selling_iface.v1.SupplierListItem
+	22, // 5: selling_iface.v1.SupplierListResponse.page_info:type_name -> common.v1.PageInfo
+	4,  // 6: selling_iface.v1.SupplierGetResponse.data:type_name -> selling_iface.v1.SupplierDetail
+	3,  // 7: selling_iface.v1.SupplierGetChildResponse.data:type_name -> selling_iface.v1.SupplierMarketplace
+	1,  // 8: selling_iface.v1.SupplierChildUpdate.type:type_name -> selling_iface.v1.SupplierChildUpdateType
+	3,  // 9: selling_iface.v1.SupplierChildUpdate.data:type_name -> selling_iface.v1.SupplierMarketplace
+	15, // 10: selling_iface.v1.SupplierUpdateRequest.detail:type_name -> selling_iface.v1.SupplierDetailUpdate
+	14, // 11: selling_iface.v1.SupplierUpdateRequest.child:type_name -> selling_iface.v1.SupplierChildUpdate
+	8,  // 12: selling_iface.v1.SupplierService.SupplierList:input_type -> selling_iface.v1.SupplierListRequest
+	5,  // 13: selling_iface.v1.SupplierService.SupplierCreate:input_type -> selling_iface.v1.SupplierCreateRequest
+	18, // 14: selling_iface.v1.SupplierService.SupplierDelete:input_type -> selling_iface.v1.SupplierDeleteRequest
+	16, // 15: selling_iface.v1.SupplierService.SupplierUpdate:input_type -> selling_iface.v1.SupplierUpdateRequest
+	10, // 16: selling_iface.v1.SupplierService.SupplierGet:input_type -> selling_iface.v1.SupplierGetRequest
+	12, // 17: selling_iface.v1.SupplierService.SupplierGetChild:input_type -> selling_iface.v1.SupplierGetChildRequest
+	9,  // 18: selling_iface.v1.SupplierService.SupplierList:output_type -> selling_iface.v1.SupplierListResponse
+	6,  // 19: selling_iface.v1.SupplierService.SupplierCreate:output_type -> selling_iface.v1.SupplierCreateResponse
+	19, // 20: selling_iface.v1.SupplierService.SupplierDelete:output_type -> selling_iface.v1.SupplierDeleteResponse
+	17, // 21: selling_iface.v1.SupplierService.SupplierUpdate:output_type -> selling_iface.v1.SupplierUpdateResponse
+	11, // 22: selling_iface.v1.SupplierService.SupplierGet:output_type -> selling_iface.v1.SupplierGetResponse
+	13, // 23: selling_iface.v1.SupplierService.SupplierGetChild:output_type -> selling_iface.v1.SupplierGetChildResponse
+	18, // [18:24] is the sub-list for method output_type
+	12, // [12:18] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_selling_iface_v1_supplier_proto_init() }
@@ -961,21 +1493,17 @@ func file_selling_iface_v1_supplier_proto_init() {
 	if File_selling_iface_v1_supplier_proto != nil {
 		return
 	}
-	file_selling_iface_v1_supplier_proto_msgTypes[2].OneofWrappers = []any{
-		(*Supplier_Custom)(nil),
-		(*Supplier_Marketplace)(nil),
-	}
-	file_selling_iface_v1_supplier_proto_msgTypes[3].OneofWrappers = []any{
-		(*SupplierCreateRequest_Custom)(nil),
-		(*SupplierCreateRequest_Marketplace)(nil),
+	file_selling_iface_v1_supplier_proto_msgTypes[14].OneofWrappers = []any{
+		(*SupplierUpdateRequest_Detail)(nil),
+		(*SupplierUpdateRequest_Child)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_selling_iface_v1_supplier_proto_rawDesc), len(file_selling_iface_v1_supplier_proto_rawDesc)),
-			NumEnums:      1,
-			NumMessages:   13,
+			NumEnums:      2,
+			NumMessages:   18,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

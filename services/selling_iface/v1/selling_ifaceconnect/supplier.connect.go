@@ -48,6 +48,9 @@ const (
 	// SupplierServiceSupplierGetProcedure is the fully-qualified name of the SupplierService's
 	// SupplierGet RPC.
 	SupplierServiceSupplierGetProcedure = "/selling_iface.v1.SupplierService/SupplierGet"
+	// SupplierServiceSupplierGetChildProcedure is the fully-qualified name of the SupplierService's
+	// SupplierGetChild RPC.
+	SupplierServiceSupplierGetChildProcedure = "/selling_iface.v1.SupplierService/SupplierGetChild"
 )
 
 // SupplierServiceClient is a client for the selling_iface.v1.SupplierService service.
@@ -57,6 +60,7 @@ type SupplierServiceClient interface {
 	SupplierDelete(context.Context, *connect.Request[v1.SupplierDeleteRequest]) (*connect.Response[v1.SupplierDeleteResponse], error)
 	SupplierUpdate(context.Context, *connect.Request[v1.SupplierUpdateRequest]) (*connect.Response[v1.SupplierUpdateResponse], error)
 	SupplierGet(context.Context, *connect.Request[v1.SupplierGetRequest]) (*connect.Response[v1.SupplierGetResponse], error)
+	SupplierGetChild(context.Context, *connect.Request[v1.SupplierGetChildRequest]) (*connect.Response[v1.SupplierGetChildResponse], error)
 }
 
 // NewSupplierServiceClient constructs a client for the selling_iface.v1.SupplierService service. By
@@ -100,16 +104,23 @@ func NewSupplierServiceClient(httpClient connect.HTTPClient, baseURL string, opt
 			connect.WithSchema(supplierServiceMethods.ByName("SupplierGet")),
 			connect.WithClientOptions(opts...),
 		),
+		supplierGetChild: connect.NewClient[v1.SupplierGetChildRequest, v1.SupplierGetChildResponse](
+			httpClient,
+			baseURL+SupplierServiceSupplierGetChildProcedure,
+			connect.WithSchema(supplierServiceMethods.ByName("SupplierGetChild")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // supplierServiceClient implements SupplierServiceClient.
 type supplierServiceClient struct {
-	supplierList   *connect.Client[v1.SupplierListRequest, v1.SupplierListResponse]
-	supplierCreate *connect.Client[v1.SupplierCreateRequest, v1.SupplierCreateResponse]
-	supplierDelete *connect.Client[v1.SupplierDeleteRequest, v1.SupplierDeleteResponse]
-	supplierUpdate *connect.Client[v1.SupplierUpdateRequest, v1.SupplierUpdateResponse]
-	supplierGet    *connect.Client[v1.SupplierGetRequest, v1.SupplierGetResponse]
+	supplierList     *connect.Client[v1.SupplierListRequest, v1.SupplierListResponse]
+	supplierCreate   *connect.Client[v1.SupplierCreateRequest, v1.SupplierCreateResponse]
+	supplierDelete   *connect.Client[v1.SupplierDeleteRequest, v1.SupplierDeleteResponse]
+	supplierUpdate   *connect.Client[v1.SupplierUpdateRequest, v1.SupplierUpdateResponse]
+	supplierGet      *connect.Client[v1.SupplierGetRequest, v1.SupplierGetResponse]
+	supplierGetChild *connect.Client[v1.SupplierGetChildRequest, v1.SupplierGetChildResponse]
 }
 
 // SupplierList calls selling_iface.v1.SupplierService.SupplierList.
@@ -137,6 +148,11 @@ func (c *supplierServiceClient) SupplierGet(ctx context.Context, req *connect.Re
 	return c.supplierGet.CallUnary(ctx, req)
 }
 
+// SupplierGetChild calls selling_iface.v1.SupplierService.SupplierGetChild.
+func (c *supplierServiceClient) SupplierGetChild(ctx context.Context, req *connect.Request[v1.SupplierGetChildRequest]) (*connect.Response[v1.SupplierGetChildResponse], error) {
+	return c.supplierGetChild.CallUnary(ctx, req)
+}
+
 // SupplierServiceHandler is an implementation of the selling_iface.v1.SupplierService service.
 type SupplierServiceHandler interface {
 	SupplierList(context.Context, *connect.Request[v1.SupplierListRequest]) (*connect.Response[v1.SupplierListResponse], error)
@@ -144,6 +160,7 @@ type SupplierServiceHandler interface {
 	SupplierDelete(context.Context, *connect.Request[v1.SupplierDeleteRequest]) (*connect.Response[v1.SupplierDeleteResponse], error)
 	SupplierUpdate(context.Context, *connect.Request[v1.SupplierUpdateRequest]) (*connect.Response[v1.SupplierUpdateResponse], error)
 	SupplierGet(context.Context, *connect.Request[v1.SupplierGetRequest]) (*connect.Response[v1.SupplierGetResponse], error)
+	SupplierGetChild(context.Context, *connect.Request[v1.SupplierGetChildRequest]) (*connect.Response[v1.SupplierGetChildResponse], error)
 }
 
 // NewSupplierServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -183,6 +200,12 @@ func NewSupplierServiceHandler(svc SupplierServiceHandler, opts ...connect.Handl
 		connect.WithSchema(supplierServiceMethods.ByName("SupplierGet")),
 		connect.WithHandlerOptions(opts...),
 	)
+	supplierServiceSupplierGetChildHandler := connect.NewUnaryHandler(
+		SupplierServiceSupplierGetChildProcedure,
+		svc.SupplierGetChild,
+		connect.WithSchema(supplierServiceMethods.ByName("SupplierGetChild")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/selling_iface.v1.SupplierService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case SupplierServiceSupplierListProcedure:
@@ -195,6 +218,8 @@ func NewSupplierServiceHandler(svc SupplierServiceHandler, opts ...connect.Handl
 			supplierServiceSupplierUpdateHandler.ServeHTTP(w, r)
 		case SupplierServiceSupplierGetProcedure:
 			supplierServiceSupplierGetHandler.ServeHTTP(w, r)
+		case SupplierServiceSupplierGetChildProcedure:
+			supplierServiceSupplierGetChildHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -222,4 +247,8 @@ func (UnimplementedSupplierServiceHandler) SupplierUpdate(context.Context, *conn
 
 func (UnimplementedSupplierServiceHandler) SupplierGet(context.Context, *connect.Request[v1.SupplierGetRequest]) (*connect.Response[v1.SupplierGetResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("selling_iface.v1.SupplierService.SupplierGet is not implemented"))
+}
+
+func (UnimplementedSupplierServiceHandler) SupplierGetChild(context.Context, *connect.Request[v1.SupplierGetChildRequest]) (*connect.Response[v1.SupplierGetChildResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("selling_iface.v1.SupplierService.SupplierGetChild is not implemented"))
 }
