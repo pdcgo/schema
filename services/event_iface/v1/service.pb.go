@@ -7,6 +7,7 @@
 package event_iface
 
 import (
+	v1 "github.com/pdcgo/schema/services/stock_iface/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -23,6 +24,7 @@ const (
 
 type Event struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Stock         *v1.StockEvent         `protobuf:"bytes,1,opt,name=stock,proto3" json:"stock,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -55,6 +57,13 @@ func (x *Event) ProtoReflect() protoreflect.Message {
 // Deprecated: Use Event.ProtoReflect.Descriptor instead.
 func (*Event) Descriptor() ([]byte, []int) {
 	return file_event_iface_v1_service_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *Event) GetStock() *v1.StockEvent {
+	if x != nil {
+		return x.Stock
+	}
+	return nil
 }
 
 type SendRequest struct {
@@ -205,8 +214,9 @@ var File_event_iface_v1_service_proto protoreflect.FileDescriptor
 
 const file_event_iface_v1_service_proto_rawDesc = "" +
 	"\n" +
-	"\x1cevent_iface/v1/service.proto\x12\x0eevent_iface.v1\"\a\n" +
-	"\x05Event\"\r\n" +
+	"\x1cevent_iface/v1/service.proto\x12\x0eevent_iface.v1\x1a\x1astock_iface/v1/event.proto\"9\n" +
+	"\x05Event\x120\n" +
+	"\x05stock\x18\x01 \x01(\v2\x1a.stock_iface.v1.StockEventR\x05stock\"\r\n" +
 	"\vSendRequest\"\x0e\n" +
 	"\fSendResponse\"\r\n" +
 	"\vPushRequest\"\x0e\n" +
@@ -231,22 +241,24 @@ func file_event_iface_v1_service_proto_rawDescGZIP() []byte {
 
 var file_event_iface_v1_service_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_event_iface_v1_service_proto_goTypes = []any{
-	(*Event)(nil),        // 0: event_iface.v1.Event
-	(*SendRequest)(nil),  // 1: event_iface.v1.SendRequest
-	(*SendResponse)(nil), // 2: event_iface.v1.SendResponse
-	(*PushRequest)(nil),  // 3: event_iface.v1.PushRequest
-	(*PushResponse)(nil), // 4: event_iface.v1.PushResponse
+	(*Event)(nil),         // 0: event_iface.v1.Event
+	(*SendRequest)(nil),   // 1: event_iface.v1.SendRequest
+	(*SendResponse)(nil),  // 2: event_iface.v1.SendResponse
+	(*PushRequest)(nil),   // 3: event_iface.v1.PushRequest
+	(*PushResponse)(nil),  // 4: event_iface.v1.PushResponse
+	(*v1.StockEvent)(nil), // 5: stock_iface.v1.StockEvent
 }
 var file_event_iface_v1_service_proto_depIdxs = []int32{
-	1, // 0: event_iface.v1.EventService.Send:input_type -> event_iface.v1.SendRequest
-	3, // 1: event_iface.v1.PushService.Push:input_type -> event_iface.v1.PushRequest
-	2, // 2: event_iface.v1.EventService.Send:output_type -> event_iface.v1.SendResponse
-	4, // 3: event_iface.v1.PushService.Push:output_type -> event_iface.v1.PushResponse
-	2, // [2:4] is the sub-list for method output_type
-	0, // [0:2] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	5, // 0: event_iface.v1.Event.stock:type_name -> stock_iface.v1.StockEvent
+	1, // 1: event_iface.v1.EventService.Send:input_type -> event_iface.v1.SendRequest
+	3, // 2: event_iface.v1.PushService.Push:input_type -> event_iface.v1.PushRequest
+	2, // 3: event_iface.v1.EventService.Send:output_type -> event_iface.v1.SendResponse
+	4, // 4: event_iface.v1.PushService.Push:output_type -> event_iface.v1.PushResponse
+	3, // [3:5] is the sub-list for method output_type
+	1, // [1:3] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_event_iface_v1_service_proto_init() }

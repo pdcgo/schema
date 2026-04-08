@@ -3,6 +3,7 @@ package event_iface.v1;
 
 // import "buf/validate/validate.proto";
 // import "google/protobuf/timestamp.proto";
+import "stock_iface/v1/event.proto";
 
 option go_package = "github.com/pdcgo/schema/services/event_iface/v1;event_iface";
 
@@ -15,9 +16,7 @@ service PushService {
 }
 
 message Event {
-  // order created
-  // order cancel
-  // barang rusak / hilang
+  stock_iface.v1.StockEvent stock = 1;
 }
 
 message SendRequest {}

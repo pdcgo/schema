@@ -254,3 +254,29 @@ func (mr *MockInventoryServiceClientMockRecorder) ProductHistory(ctx, req interf
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ProductHistory", reflect.TypeOf((*MockInventoryService)(nil).ProductHistory), ctx, req)
 }
 
+func (m *MockInventoryService) SkuList(ctx context.Context, req *connect.Request[v1.SkuListRequest]) (*connect.Response[v1.SkuListResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "SkuList", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.SkuListResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInventoryServiceMockRecorder) SkuList(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SkuList", reflect.TypeOf((*MockInventoryService)(nil).SkuList), ctx, req)
+}
+
+func (m *MockInventoryServiceClient) SkuList(ctx context.Context, req *connect.Request[v1.SkuListRequest]) (*connect.Response[v1.SkuListResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "SkuList", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.SkuListResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInventoryServiceClientMockRecorder) SkuList(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SkuList", reflect.TypeOf((*MockInventoryService)(nil).SkuList), ctx, req)
+}
+

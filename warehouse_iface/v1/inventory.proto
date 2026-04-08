@@ -23,6 +23,36 @@ service InventoryService {
   rpc ProductList(ProductListRequest) returns (ProductListResponse);
   rpc ProductDetail(ProductDetailRequest) returns (ProductDetailResponse);
   rpc ProductHistory(ProductHistoryRequest) returns (ProductHistoryResponse);
+
+  // bagian sku
+  rpc SkuList(SkuListRequest) returns (SkuListResponse);
+}
+
+message ProductDetail {
+  string name = 1;
+  string image = 2;
+}
+
+message SkuListItem {
+  string sku_id = 1;
+  ProductDetail product_detail = 2;
+}
+
+message SkuListRequest {
+  repeated uint64 team_ids = 1 [(buf.validate.field).repeated = {
+    min_items: 1
+    max_items: 100
+  }];
+  repeated uint64 rack_ids = 2 [(buf.validate.field).repeated = {
+    min_items: 1
+    max_items: 100
+  }];
+  common.v1.PageFilter page = 3 [(buf.validate.field).required = true];
+}
+
+message SkuListResponse {
+  repeated SkuListItem skus = 1;
+  common.v1.PageInfo page_info = 2;
 }
 
 message ProductHistoryRequestFilter {

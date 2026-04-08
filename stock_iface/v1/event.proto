@@ -1,0 +1,35 @@
+syntax = "proto3";
+package stock_iface.v1;
+
+// import "buf/validate/validate.proto";
+// import "common/v1/stock.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/pdcgo/schema/services/stock_iface/v1;stock_iface";
+
+enum StockLogType {
+  STOCK_LOG_TYPE_UNSPECIFIED = 0;
+  STOCK_LOG_TYPE_OUT = 1;
+  STOCK_LOG_TYPE_IN = 2;
+}
+
+message StockLog {
+  uint32 team_id = 1;
+  uint32 warehouse_id = 2;
+  uint32 actor_id = 3;
+  uint64 transaction_id = 4;
+  string sku_id = 5;
+  int64 change = 6;
+  double price = 7;
+  google.protobuf.Timestamp at = 8;
+}
+
+message StockLogList {
+  repeated StockLog list = 1;
+}
+
+message StockEvent {
+  oneof event_data {
+    StockLogList stock_logs = 1;
+  }
+}
