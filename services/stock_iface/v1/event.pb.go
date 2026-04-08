@@ -28,6 +28,7 @@ const (
 	StockLogType_STOCK_LOG_TYPE_UNSPECIFIED StockLogType = 0
 	StockLogType_STOCK_LOG_TYPE_OUT         StockLogType = 1
 	StockLogType_STOCK_LOG_TYPE_IN          StockLogType = 2
+	StockLogType_STOCK_LOG_TYPE_ADJUSTMENT  StockLogType = 3
 )
 
 // Enum value maps for StockLogType.
@@ -36,11 +37,13 @@ var (
 		0: "STOCK_LOG_TYPE_UNSPECIFIED",
 		1: "STOCK_LOG_TYPE_OUT",
 		2: "STOCK_LOG_TYPE_IN",
+		3: "STOCK_LOG_TYPE_ADJUSTMENT",
 	}
 	StockLogType_value = map[string]int32{
 		"STOCK_LOG_TYPE_UNSPECIFIED": 0,
 		"STOCK_LOG_TYPE_OUT":         1,
 		"STOCK_LOG_TYPE_IN":          2,
+		"STOCK_LOG_TYPE_ADJUSTMENT":  3,
 	}
 )
 
@@ -302,11 +305,12 @@ const file_stock_iface_v1_event_proto_rawDesc = "" +
 	"\n" +
 	"stock_logs\x18\x01 \x01(\v2\x1c.stock_iface.v1.StockLogListH\x00R\tstockLogsB\f\n" +
 	"\n" +
-	"event_data*]\n" +
+	"event_data*|\n" +
 	"\fStockLogType\x12\x1e\n" +
 	"\x1aSTOCK_LOG_TYPE_UNSPECIFIED\x10\x00\x12\x16\n" +
 	"\x12STOCK_LOG_TYPE_OUT\x10\x01\x12\x15\n" +
-	"\x11STOCK_LOG_TYPE_IN\x10\x02B\xb2\x01\n" +
+	"\x11STOCK_LOG_TYPE_IN\x10\x02\x12\x1d\n" +
+	"\x19STOCK_LOG_TYPE_ADJUSTMENT\x10\x03B\xb2\x01\n" +
 	"\x12com.stock_iface.v1B\n" +
 	"EventProtoP\x01Z;github.com/pdcgo/schema/services/stock_iface/v1;stock_iface\xa2\x02\x03SXX\xaa\x02\rStockIface.V1\xca\x02\rStockIface\\V1\xe2\x02\x19StockIface\\V1\\GPBMetadata\xea\x02\x0eStockIface::V1b\x06proto3"
 

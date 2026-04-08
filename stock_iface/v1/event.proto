@@ -11,6 +11,7 @@ enum StockLogType {
   STOCK_LOG_TYPE_UNSPECIFIED = 0;
   STOCK_LOG_TYPE_OUT = 1;
   STOCK_LOG_TYPE_IN = 2;
+  STOCK_LOG_TYPE_ADJUSTMENT = 3;
 }
 
 message StockLog {
