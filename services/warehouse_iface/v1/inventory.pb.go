@@ -175,9 +175,11 @@ func (x *ProductDetail) GetImage() string {
 }
 
 type SkuListItem struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	SkuId         string                 `protobuf:"bytes,1,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
-	ProductDetail *ProductDetail         `protobuf:"bytes,2,opt,name=product_detail,json=productDetail,proto3" json:"product_detail,omitempty"`
+	state     protoimpl.MessageState `protogen:"open.v1"`
+	SkuId     string                 `protobuf:"bytes,1,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
+	ProductId uint64                 `protobuf:"varint,2,opt,name=product_id,json=productId,proto3" json:"product_id,omitempty"`
+	// @gotags: gorm:"-"
+	ProductDetail *ProductDetail `protobuf:"bytes,4,opt,name=product_detail,json=productDetail,proto3" json:"product_detail,omitempty" gorm:"-"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -219,6 +221,13 @@ func (x *SkuListItem) GetSkuId() string {
 	return ""
 }
 
+func (x *SkuListItem) GetProductId() uint64 {
+	if x != nil {
+		return x.ProductId
+	}
+	return 0
+}
+
 func (x *SkuListItem) GetProductDetail() *ProductDetail {
 	if x != nil {
 		return x.ProductDetail
@@ -230,7 +239,8 @@ type SkuListRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TeamIds       []uint64               `protobuf:"varint,1,rep,packed,name=team_ids,json=teamIds,proto3" json:"team_ids,omitempty"`
 	RackIds       []uint64               `protobuf:"varint,2,rep,packed,name=rack_ids,json=rackIds,proto3" json:"rack_ids,omitempty"`
-	Page          *v1.PageFilter         `protobuf:"bytes,3,opt,name=page,proto3" json:"page,omitempty"`
+	WarehouseId   uint64                 `protobuf:"varint,3,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
+	Page          *v1.PageFilter         `protobuf:"bytes,4,opt,name=page,proto3" json:"page,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -277,6 +287,13 @@ func (x *SkuListRequest) GetRackIds() []uint64 {
 		return x.RackIds
 	}
 	return nil
+}
+
+func (x *SkuListRequest) GetWarehouseId() uint64 {
+	if x != nil {
+		return x.WarehouseId
+	}
+	return 0
 }
 
 func (x *SkuListRequest) GetPage() *v1.PageFilter {
@@ -1826,16 +1843,19 @@ const file_warehouse_iface_v1_inventory_proto_rawDesc = "" +
 	"\"warehouse_iface/v1/inventory.proto\x12\x12warehouse_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!warehouse_iface/v1/outbound.proto\"9\n" +
 	"\rProductDetail\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x14\n" +
-	"\x05image\x18\x02 \x01(\tR\x05image\"n\n" +
+	"\x05image\x18\x02 \x01(\tR\x05image\"\x8d\x01\n" +
 	"\vSkuListItem\x12\x15\n" +
-	"\x06sku_id\x18\x01 \x01(\tR\x05skuId\x12H\n" +
-	"\x0eproduct_detail\x18\x02 \x01(\v2!.warehouse_iface.v1.ProductDetailR\rproductDetail\"\x91\x01\n" +
+	"\x06sku_id\x18\x01 \x01(\tR\x05skuId\x12\x1d\n" +
+	"\n" +
+	"product_id\x18\x02 \x01(\x04R\tproductId\x12H\n" +
+	"\x0eproduct_detail\x18\x04 \x01(\v2!.warehouse_iface.v1.ProductDetailR\rproductDetail\"\xbd\x01\n" +
 	"\x0eSkuListRequest\x12%\n" +
 	"\bteam_ids\x18\x01 \x03(\x04B\n" +
 	"\xbaH\a\x92\x01\x04\b\x01\x10dR\ateamIds\x12%\n" +
 	"\brack_ids\x18\x02 \x03(\x04B\n" +
-	"\xbaH\a\x92\x01\x04\b\x01\x10dR\arackIds\x121\n" +
-	"\x04page\x18\x03 \x01(\v2\x15.common.v1.PageFilterB\x06\xbaH\x03\xc8\x01\x01R\x04page\"x\n" +
+	"\xbaH\a\x92\x01\x04\b\x01\x10dR\arackIds\x12*\n" +
+	"\fwarehouse_id\x18\x03 \x01(\x04B\a\xbaH\x042\x02 \x00R\vwarehouseId\x121\n" +
+	"\x04page\x18\x04 \x01(\v2\x15.common.v1.PageFilterB\x06\xbaH\x03\xc8\x01\x01R\x04page\"x\n" +
 	"\x0fSkuListResponse\x123\n" +
 	"\x04skus\x18\x01 \x03(\v2\x1f.warehouse_iface.v1.SkuListItemR\x04skus\x120\n" +
 	"\tpage_info\x18\x02 \x01(\v2\x13.common.v1.PageInfoR\bpageInfo\"H\n" +
