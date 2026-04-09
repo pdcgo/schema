@@ -40,17 +40,18 @@ message SupplierCustom {
 message SupplierMarketplace {
   common.v1.MarketplaceType mp_type = 1;
 
-  uint64 supplier_id = 2;
-  string shop_name = 3;
-  string product_name = 4 [(buf.validate.field).string = {
+  uint64 id = 2;
+  uint64 supplier_id = 3;
+  string shop_name = 4;
+  string product_name = 5 [(buf.validate.field).string = {
     min_len: 1
     max_len: 200
   }];
-  string uri = 5 [(buf.validate.field).string = {
+  string uri = 6 [(buf.validate.field).string = {
     min_len: 1
     max_len: 500
   }];
-  string description = 6 [(buf.validate.field).string = {
+  string description = 7 [(buf.validate.field).string = {
     min_len: 1
     max_len: 500
   }];
@@ -67,8 +68,6 @@ message SupplierDetail {
   string address = 7;
   string province = 8;
   string city = 9;
-
-  repeated SupplierMarketplace childs = 10;
 }
 
 message SupplierCreateRequest {
@@ -127,8 +126,15 @@ message SupplierGetResponse {
   repeated SupplierDetail data = 1;
 }
 
+enum SupplierChildType {
+  SUPPLIER_CHILD_TYPE_UNSPECIFIED = 0;
+  SUPPLIER_CHILD_TYPE_DETAIL = 1;
+  SUPPLIER_CHILD_TYPE_CHILD = 2;
+}
+
 message SupplierGetChildRequest {
-  repeated uint64 ids = 1 [(buf.validate.field).repeated = {
+  SupplierChildType type = 1;
+  repeated uint64 ids = 2 [(buf.validate.field).repeated = {
     min_items: 1
     max_items: 100
     items: {

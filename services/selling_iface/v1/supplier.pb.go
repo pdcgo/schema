@@ -72,6 +72,55 @@ func (SupplierType) EnumDescriptor() ([]byte, []int) {
 	return file_selling_iface_v1_supplier_proto_rawDescGZIP(), []int{0}
 }
 
+type SupplierChildType int32
+
+const (
+	SupplierChildType_SUPPLIER_CHILD_TYPE_UNSPECIFIED SupplierChildType = 0
+	SupplierChildType_SUPPLIER_CHILD_TYPE_DETAIL      SupplierChildType = 1
+	SupplierChildType_SUPPLIER_CHILD_TYPE_CHILD       SupplierChildType = 2
+)
+
+// Enum value maps for SupplierChildType.
+var (
+	SupplierChildType_name = map[int32]string{
+		0: "SUPPLIER_CHILD_TYPE_UNSPECIFIED",
+		1: "SUPPLIER_CHILD_TYPE_DETAIL",
+		2: "SUPPLIER_CHILD_TYPE_CHILD",
+	}
+	SupplierChildType_value = map[string]int32{
+		"SUPPLIER_CHILD_TYPE_UNSPECIFIED": 0,
+		"SUPPLIER_CHILD_TYPE_DETAIL":      1,
+		"SUPPLIER_CHILD_TYPE_CHILD":       2,
+	}
+)
+
+func (x SupplierChildType) Enum() *SupplierChildType {
+	p := new(SupplierChildType)
+	*p = x
+	return p
+}
+
+func (x SupplierChildType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (SupplierChildType) Descriptor() protoreflect.EnumDescriptor {
+	return file_selling_iface_v1_supplier_proto_enumTypes[1].Descriptor()
+}
+
+func (SupplierChildType) Type() protoreflect.EnumType {
+	return &file_selling_iface_v1_supplier_proto_enumTypes[1]
+}
+
+func (x SupplierChildType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use SupplierChildType.Descriptor instead.
+func (SupplierChildType) EnumDescriptor() ([]byte, []int) {
+	return file_selling_iface_v1_supplier_proto_rawDescGZIP(), []int{1}
+}
+
 type SupplierChildUpdateType int32
 
 const (
@@ -105,11 +154,11 @@ func (x SupplierChildUpdateType) String() string {
 }
 
 func (SupplierChildUpdateType) Descriptor() protoreflect.EnumDescriptor {
-	return file_selling_iface_v1_supplier_proto_enumTypes[1].Descriptor()
+	return file_selling_iface_v1_supplier_proto_enumTypes[2].Descriptor()
 }
 
 func (SupplierChildUpdateType) Type() protoreflect.EnumType {
-	return &file_selling_iface_v1_supplier_proto_enumTypes[1]
+	return &file_selling_iface_v1_supplier_proto_enumTypes[2]
 }
 
 func (x SupplierChildUpdateType) Number() protoreflect.EnumNumber {
@@ -118,7 +167,7 @@ func (x SupplierChildUpdateType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use SupplierChildUpdateType.Descriptor instead.
 func (SupplierChildUpdateType) EnumDescriptor() ([]byte, []int) {
-	return file_selling_iface_v1_supplier_proto_rawDescGZIP(), []int{1}
+	return file_selling_iface_v1_supplier_proto_rawDescGZIP(), []int{2}
 }
 
 type SupplierCustom struct {
@@ -184,11 +233,12 @@ func (x *SupplierCustom) GetDescription() string {
 type SupplierMarketplace struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	MpType        v1.MarketplaceType     `protobuf:"varint,1,opt,name=mp_type,json=mpType,proto3,enum=common.v1.MarketplaceType" json:"mp_type,omitempty"`
-	SupplierId    uint64                 `protobuf:"varint,2,opt,name=supplier_id,json=supplierId,proto3" json:"supplier_id,omitempty"`
-	ShopName      string                 `protobuf:"bytes,3,opt,name=shop_name,json=shopName,proto3" json:"shop_name,omitempty"`
-	ProductName   string                 `protobuf:"bytes,4,opt,name=product_name,json=productName,proto3" json:"product_name,omitempty"`
-	Uri           string                 `protobuf:"bytes,5,opt,name=uri,proto3" json:"uri,omitempty"`
-	Description   string                 `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"`
+	Id            uint64                 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
+	SupplierId    uint64                 `protobuf:"varint,3,opt,name=supplier_id,json=supplierId,proto3" json:"supplier_id,omitempty"`
+	ShopName      string                 `protobuf:"bytes,4,opt,name=shop_name,json=shopName,proto3" json:"shop_name,omitempty"`
+	ProductName   string                 `protobuf:"bytes,5,opt,name=product_name,json=productName,proto3" json:"product_name,omitempty"`
+	Uri           string                 `protobuf:"bytes,6,opt,name=uri,proto3" json:"uri,omitempty"`
+	Description   string                 `protobuf:"bytes,7,opt,name=description,proto3" json:"description,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -228,6 +278,13 @@ func (x *SupplierMarketplace) GetMpType() v1.MarketplaceType {
 		return x.MpType
 	}
 	return v1.MarketplaceType(0)
+}
+
+func (x *SupplierMarketplace) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
 }
 
 func (x *SupplierMarketplace) GetSupplierId() uint64 {
@@ -276,7 +333,6 @@ type SupplierDetail struct {
 	Address       string                 `protobuf:"bytes,7,opt,name=address,proto3" json:"address,omitempty"`
 	Province      string                 `protobuf:"bytes,8,opt,name=province,proto3" json:"province,omitempty"`
 	City          string                 `protobuf:"bytes,9,opt,name=city,proto3" json:"city,omitempty"`
-	Childs        []*SupplierMarketplace `protobuf:"bytes,10,rep,name=childs,proto3" json:"childs,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -372,13 +428,6 @@ func (x *SupplierDetail) GetCity() string {
 		return x.City
 	}
 	return ""
-}
-
-func (x *SupplierDetail) GetChilds() []*SupplierMarketplace {
-	if x != nil {
-		return x.Childs
-	}
-	return nil
 }
 
 type SupplierCreateRequest struct {
@@ -859,7 +908,8 @@ func (x *SupplierGetResponse) GetData() []*SupplierDetail {
 
 type SupplierGetChildRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Ids           []uint64               `protobuf:"varint,1,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	Type          SupplierChildType      `protobuf:"varint,1,opt,name=type,proto3,enum=selling_iface.v1.SupplierChildType" json:"type,omitempty"`
+	Ids           []uint64               `protobuf:"varint,2,rep,packed,name=ids,proto3" json:"ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -892,6 +942,13 @@ func (x *SupplierGetChildRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use SupplierGetChildRequest.ProtoReflect.Descriptor instead.
 func (*SupplierGetChildRequest) Descriptor() ([]byte, []int) {
 	return file_selling_iface_v1_supplier_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *SupplierGetChildRequest) GetType() SupplierChildType {
+	if x != nil {
+		return x.Type
+	}
+	return SupplierChildType_SUPPLIER_CHILD_TYPE_UNSPECIFIED
 }
 
 func (x *SupplierGetChildRequest) GetIds() []uint64 {
@@ -1313,18 +1370,19 @@ const file_selling_iface_v1_supplier_proto_rawDesc = "" +
 	"\xbaH\ar\x05\x10\x01\x18\xc8\x01R\x04name\x122\n" +
 	"\acontact\x18\x04 \x01(\tB\x18\xbaH\x15r\x132\x11^\\+[1-9]\\d{1,14}$R\acontact\x12,\n" +
 	"\vdescription\x18\x05 \x01(\tB\n" +
-	"\xbaH\ar\x05\x10\x01\x18\xf4\x03R\vdescription\"\x83\x02\n" +
+	"\xbaH\ar\x05\x10\x01\x18\xf4\x03R\vdescription\"\x93\x02\n" +
 	"\x13SupplierMarketplace\x123\n" +
-	"\amp_type\x18\x01 \x01(\x0e2\x1a.common.v1.MarketplaceTypeR\x06mpType\x12\x1f\n" +
-	"\vsupplier_id\x18\x02 \x01(\x04R\n" +
+	"\amp_type\x18\x01 \x01(\x0e2\x1a.common.v1.MarketplaceTypeR\x06mpType\x12\x0e\n" +
+	"\x02id\x18\x02 \x01(\x04R\x02id\x12\x1f\n" +
+	"\vsupplier_id\x18\x03 \x01(\x04R\n" +
 	"supplierId\x12\x1b\n" +
-	"\tshop_name\x18\x03 \x01(\tR\bshopName\x12-\n" +
-	"\fproduct_name\x18\x04 \x01(\tB\n" +
+	"\tshop_name\x18\x04 \x01(\tR\bshopName\x12-\n" +
+	"\fproduct_name\x18\x05 \x01(\tB\n" +
 	"\xbaH\ar\x05\x10\x01\x18\xc8\x01R\vproductName\x12\x1c\n" +
-	"\x03uri\x18\x05 \x01(\tB\n" +
+	"\x03uri\x18\x06 \x01(\tB\n" +
 	"\xbaH\ar\x05\x10\x01\x18\xf4\x03R\x03uri\x12,\n" +
-	"\vdescription\x18\x06 \x01(\tB\n" +
-	"\xbaH\ar\x05\x10\x01\x18\xf4\x03R\vdescription\"\xa6\x02\n" +
+	"\vdescription\x18\a \x01(\tB\n" +
+	"\xbaH\ar\x05\x10\x01\x18\xf4\x03R\vdescription\"\xe7\x01\n" +
 	"\x0eSupplierDetail\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x17\n" +
 	"\ateam_id\x18\x02 \x01(\x04R\x06teamId\x12\x12\n" +
@@ -1334,9 +1392,7 @@ const file_selling_iface_v1_supplier_proto_rawDesc = "" +
 	"\vdescription\x18\x06 \x01(\tR\vdescription\x12\x18\n" +
 	"\aaddress\x18\a \x01(\tR\aaddress\x12\x1a\n" +
 	"\bprovince\x18\b \x01(\tR\bprovince\x12\x12\n" +
-	"\x04city\x18\t \x01(\tR\x04city\x12=\n" +
-	"\x06childs\x18\n" +
-	" \x03(\v2%.selling_iface.v1.SupplierMarketplaceR\x06childs\"\xe7\x01\n" +
+	"\x04city\x18\t \x01(\tR\x04city\"\xe7\x01\n" +
 	"\x15SupplierCreateRequest\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\tR\x04code\x12\x12\n" +
@@ -1372,9 +1428,10 @@ const file_selling_iface_v1_supplier_proto_rawDesc = "" +
 	"\x03ids\x18\x01 \x03(\x04B\x10\xbaH\r\x92\x01\n" +
 	"\b\x01\x10d\"\x042\x02 \x00R\x03ids\"K\n" +
 	"\x13SupplierGetResponse\x124\n" +
-	"\x04data\x18\x01 \x03(\v2 .selling_iface.v1.SupplierDetailR\x04data\"=\n" +
-	"\x17SupplierGetChildRequest\x12\"\n" +
-	"\x03ids\x18\x01 \x03(\x04B\x10\xbaH\r\x92\x01\n" +
+	"\x04data\x18\x01 \x03(\v2 .selling_iface.v1.SupplierDetailR\x04data\"v\n" +
+	"\x17SupplierGetChildRequest\x127\n" +
+	"\x04type\x18\x01 \x01(\x0e2#.selling_iface.v1.SupplierChildTypeR\x04type\x12\"\n" +
+	"\x03ids\x18\x02 \x03(\x04B\x10\xbaH\r\x92\x01\n" +
 	"\b\x01\x10d\"\x042\x02 \x00R\x03ids\"U\n" +
 	"\x18SupplierGetChildResponse\x129\n" +
 	"\x04data\x18\x01 \x03(\v2%.selling_iface.v1.SupplierMarketplaceR\x04data\"\xab\x01\n" +
@@ -1403,7 +1460,11 @@ const file_selling_iface_v1_supplier_proto_rawDesc = "" +
 	"\fSupplierType\x12\x1d\n" +
 	"\x19SUPPLIER_TYPE_UNSPECIFIED\x10\x00\x12\x18\n" +
 	"\x14SUPPLIER_TYPE_CUSTOM\x10\x01\x12\x1d\n" +
-	"\x19SUPPLIER_TYPE_MARKETPLACE\x10\x02*\x93\x01\n" +
+	"\x19SUPPLIER_TYPE_MARKETPLACE\x10\x02*w\n" +
+	"\x11SupplierChildType\x12#\n" +
+	"\x1fSUPPLIER_CHILD_TYPE_UNSPECIFIED\x10\x00\x12\x1e\n" +
+	"\x1aSUPPLIER_CHILD_TYPE_DETAIL\x10\x01\x12\x1d\n" +
+	"\x19SUPPLIER_CHILD_TYPE_CHILD\x10\x02*\x93\x01\n" +
 	"\x17SupplierChildUpdateType\x12*\n" +
 	"&SUPPLIER_CHILD_UPDATE_TYPE_UNSPECIFIED\x10\x00\x12%\n" +
 	"!SUPPLIER_CHILD_UPDATE_TYPE_UPSERT\x10\x01\x12%\n" +
@@ -1429,58 +1490,59 @@ func file_selling_iface_v1_supplier_proto_rawDescGZIP() []byte {
 	return file_selling_iface_v1_supplier_proto_rawDescData
 }
 
-var file_selling_iface_v1_supplier_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_selling_iface_v1_supplier_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
 var file_selling_iface_v1_supplier_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
 var file_selling_iface_v1_supplier_proto_goTypes = []any{
 	(SupplierType)(0),                // 0: selling_iface.v1.SupplierType
-	(SupplierChildUpdateType)(0),     // 1: selling_iface.v1.SupplierChildUpdateType
-	(*SupplierCustom)(nil),           // 2: selling_iface.v1.SupplierCustom
-	(*SupplierMarketplace)(nil),      // 3: selling_iface.v1.SupplierMarketplace
-	(*SupplierDetail)(nil),           // 4: selling_iface.v1.SupplierDetail
-	(*SupplierCreateRequest)(nil),    // 5: selling_iface.v1.SupplierCreateRequest
-	(*SupplierCreateResponse)(nil),   // 6: selling_iface.v1.SupplierCreateResponse
-	(*SupplierListItem)(nil),         // 7: selling_iface.v1.SupplierListItem
-	(*SupplierListRequest)(nil),      // 8: selling_iface.v1.SupplierListRequest
-	(*SupplierListResponse)(nil),     // 9: selling_iface.v1.SupplierListResponse
-	(*SupplierGetRequest)(nil),       // 10: selling_iface.v1.SupplierGetRequest
-	(*SupplierGetResponse)(nil),      // 11: selling_iface.v1.SupplierGetResponse
-	(*SupplierGetChildRequest)(nil),  // 12: selling_iface.v1.SupplierGetChildRequest
-	(*SupplierGetChildResponse)(nil), // 13: selling_iface.v1.SupplierGetChildResponse
-	(*SupplierChildUpdate)(nil),      // 14: selling_iface.v1.SupplierChildUpdate
-	(*SupplierDetailUpdate)(nil),     // 15: selling_iface.v1.SupplierDetailUpdate
-	(*SupplierUpdateRequest)(nil),    // 16: selling_iface.v1.SupplierUpdateRequest
-	(*SupplierUpdateResponse)(nil),   // 17: selling_iface.v1.SupplierUpdateResponse
-	(*SupplierDeleteRequest)(nil),    // 18: selling_iface.v1.SupplierDeleteRequest
-	(*SupplierDeleteResponse)(nil),   // 19: selling_iface.v1.SupplierDeleteResponse
-	(v1.MarketplaceType)(0),          // 20: common.v1.MarketplaceType
-	(*v1.PageFilter)(nil),            // 21: common.v1.PageFilter
-	(*v1.PageInfo)(nil),              // 22: common.v1.PageInfo
+	(SupplierChildType)(0),           // 1: selling_iface.v1.SupplierChildType
+	(SupplierChildUpdateType)(0),     // 2: selling_iface.v1.SupplierChildUpdateType
+	(*SupplierCustom)(nil),           // 3: selling_iface.v1.SupplierCustom
+	(*SupplierMarketplace)(nil),      // 4: selling_iface.v1.SupplierMarketplace
+	(*SupplierDetail)(nil),           // 5: selling_iface.v1.SupplierDetail
+	(*SupplierCreateRequest)(nil),    // 6: selling_iface.v1.SupplierCreateRequest
+	(*SupplierCreateResponse)(nil),   // 7: selling_iface.v1.SupplierCreateResponse
+	(*SupplierListItem)(nil),         // 8: selling_iface.v1.SupplierListItem
+	(*SupplierListRequest)(nil),      // 9: selling_iface.v1.SupplierListRequest
+	(*SupplierListResponse)(nil),     // 10: selling_iface.v1.SupplierListResponse
+	(*SupplierGetRequest)(nil),       // 11: selling_iface.v1.SupplierGetRequest
+	(*SupplierGetResponse)(nil),      // 12: selling_iface.v1.SupplierGetResponse
+	(*SupplierGetChildRequest)(nil),  // 13: selling_iface.v1.SupplierGetChildRequest
+	(*SupplierGetChildResponse)(nil), // 14: selling_iface.v1.SupplierGetChildResponse
+	(*SupplierChildUpdate)(nil),      // 15: selling_iface.v1.SupplierChildUpdate
+	(*SupplierDetailUpdate)(nil),     // 16: selling_iface.v1.SupplierDetailUpdate
+	(*SupplierUpdateRequest)(nil),    // 17: selling_iface.v1.SupplierUpdateRequest
+	(*SupplierUpdateResponse)(nil),   // 18: selling_iface.v1.SupplierUpdateResponse
+	(*SupplierDeleteRequest)(nil),    // 19: selling_iface.v1.SupplierDeleteRequest
+	(*SupplierDeleteResponse)(nil),   // 20: selling_iface.v1.SupplierDeleteResponse
+	(v1.MarketplaceType)(0),          // 21: common.v1.MarketplaceType
+	(*v1.PageFilter)(nil),            // 22: common.v1.PageFilter
+	(*v1.PageInfo)(nil),              // 23: common.v1.PageInfo
 }
 var file_selling_iface_v1_supplier_proto_depIdxs = []int32{
-	20, // 0: selling_iface.v1.SupplierMarketplace.mp_type:type_name -> common.v1.MarketplaceType
-	3,  // 1: selling_iface.v1.SupplierDetail.childs:type_name -> selling_iface.v1.SupplierMarketplace
-	4,  // 2: selling_iface.v1.SupplierCreateResponse.data:type_name -> selling_iface.v1.SupplierDetail
-	21, // 3: selling_iface.v1.SupplierListRequest.page:type_name -> common.v1.PageFilter
-	7,  // 4: selling_iface.v1.SupplierListResponse.data:type_name -> selling_iface.v1.SupplierListItem
-	22, // 5: selling_iface.v1.SupplierListResponse.page_info:type_name -> common.v1.PageInfo
-	4,  // 6: selling_iface.v1.SupplierGetResponse.data:type_name -> selling_iface.v1.SupplierDetail
-	3,  // 7: selling_iface.v1.SupplierGetChildResponse.data:type_name -> selling_iface.v1.SupplierMarketplace
-	1,  // 8: selling_iface.v1.SupplierChildUpdate.type:type_name -> selling_iface.v1.SupplierChildUpdateType
-	3,  // 9: selling_iface.v1.SupplierChildUpdate.data:type_name -> selling_iface.v1.SupplierMarketplace
-	15, // 10: selling_iface.v1.SupplierUpdateRequest.detail:type_name -> selling_iface.v1.SupplierDetailUpdate
-	14, // 11: selling_iface.v1.SupplierUpdateRequest.child:type_name -> selling_iface.v1.SupplierChildUpdate
-	8,  // 12: selling_iface.v1.SupplierService.SupplierList:input_type -> selling_iface.v1.SupplierListRequest
-	5,  // 13: selling_iface.v1.SupplierService.SupplierCreate:input_type -> selling_iface.v1.SupplierCreateRequest
-	18, // 14: selling_iface.v1.SupplierService.SupplierDelete:input_type -> selling_iface.v1.SupplierDeleteRequest
-	16, // 15: selling_iface.v1.SupplierService.SupplierUpdate:input_type -> selling_iface.v1.SupplierUpdateRequest
-	10, // 16: selling_iface.v1.SupplierService.SupplierGet:input_type -> selling_iface.v1.SupplierGetRequest
-	12, // 17: selling_iface.v1.SupplierService.SupplierGetChild:input_type -> selling_iface.v1.SupplierGetChildRequest
-	9,  // 18: selling_iface.v1.SupplierService.SupplierList:output_type -> selling_iface.v1.SupplierListResponse
-	6,  // 19: selling_iface.v1.SupplierService.SupplierCreate:output_type -> selling_iface.v1.SupplierCreateResponse
-	19, // 20: selling_iface.v1.SupplierService.SupplierDelete:output_type -> selling_iface.v1.SupplierDeleteResponse
-	17, // 21: selling_iface.v1.SupplierService.SupplierUpdate:output_type -> selling_iface.v1.SupplierUpdateResponse
-	11, // 22: selling_iface.v1.SupplierService.SupplierGet:output_type -> selling_iface.v1.SupplierGetResponse
-	13, // 23: selling_iface.v1.SupplierService.SupplierGetChild:output_type -> selling_iface.v1.SupplierGetChildResponse
+	21, // 0: selling_iface.v1.SupplierMarketplace.mp_type:type_name -> common.v1.MarketplaceType
+	5,  // 1: selling_iface.v1.SupplierCreateResponse.data:type_name -> selling_iface.v1.SupplierDetail
+	22, // 2: selling_iface.v1.SupplierListRequest.page:type_name -> common.v1.PageFilter
+	8,  // 3: selling_iface.v1.SupplierListResponse.data:type_name -> selling_iface.v1.SupplierListItem
+	23, // 4: selling_iface.v1.SupplierListResponse.page_info:type_name -> common.v1.PageInfo
+	5,  // 5: selling_iface.v1.SupplierGetResponse.data:type_name -> selling_iface.v1.SupplierDetail
+	1,  // 6: selling_iface.v1.SupplierGetChildRequest.type:type_name -> selling_iface.v1.SupplierChildType
+	4,  // 7: selling_iface.v1.SupplierGetChildResponse.data:type_name -> selling_iface.v1.SupplierMarketplace
+	2,  // 8: selling_iface.v1.SupplierChildUpdate.type:type_name -> selling_iface.v1.SupplierChildUpdateType
+	4,  // 9: selling_iface.v1.SupplierChildUpdate.data:type_name -> selling_iface.v1.SupplierMarketplace
+	16, // 10: selling_iface.v1.SupplierUpdateRequest.detail:type_name -> selling_iface.v1.SupplierDetailUpdate
+	15, // 11: selling_iface.v1.SupplierUpdateRequest.child:type_name -> selling_iface.v1.SupplierChildUpdate
+	9,  // 12: selling_iface.v1.SupplierService.SupplierList:input_type -> selling_iface.v1.SupplierListRequest
+	6,  // 13: selling_iface.v1.SupplierService.SupplierCreate:input_type -> selling_iface.v1.SupplierCreateRequest
+	19, // 14: selling_iface.v1.SupplierService.SupplierDelete:input_type -> selling_iface.v1.SupplierDeleteRequest
+	17, // 15: selling_iface.v1.SupplierService.SupplierUpdate:input_type -> selling_iface.v1.SupplierUpdateRequest
+	11, // 16: selling_iface.v1.SupplierService.SupplierGet:input_type -> selling_iface.v1.SupplierGetRequest
+	13, // 17: selling_iface.v1.SupplierService.SupplierGetChild:input_type -> selling_iface.v1.SupplierGetChildRequest
+	10, // 18: selling_iface.v1.SupplierService.SupplierList:output_type -> selling_iface.v1.SupplierListResponse
+	7,  // 19: selling_iface.v1.SupplierService.SupplierCreate:output_type -> selling_iface.v1.SupplierCreateResponse
+	20, // 20: selling_iface.v1.SupplierService.SupplierDelete:output_type -> selling_iface.v1.SupplierDeleteResponse
+	18, // 21: selling_iface.v1.SupplierService.SupplierUpdate:output_type -> selling_iface.v1.SupplierUpdateResponse
+	12, // 22: selling_iface.v1.SupplierService.SupplierGet:output_type -> selling_iface.v1.SupplierGetResponse
+	14, // 23: selling_iface.v1.SupplierService.SupplierGetChild:output_type -> selling_iface.v1.SupplierGetChildResponse
 	18, // [18:24] is the sub-list for method output_type
 	12, // [12:18] is the sub-list for method input_type
 	12, // [12:12] is the sub-list for extension type_name
@@ -1502,7 +1564,7 @@ func file_selling_iface_v1_supplier_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_selling_iface_v1_supplier_proto_rawDesc), len(file_selling_iface_v1_supplier_proto_rawDesc)),
-			NumEnums:      2,
+			NumEnums:      3,
 			NumMessages:   18,
 			NumExtensions: 0,
 			NumServices:   1,
