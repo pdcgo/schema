@@ -1,0 +1,76 @@
+syntax = "proto3";
+
+package warehouse_iface.v1;
+
+import "buf/validate/validate.proto";
+import "common/v1/common.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/pdcgo/schema/services/warehouse_iface/v1;warehouse_iface";
+
+message OrderDetailSearch {
+  uint64 id = 1;
+  uint64 team_id = 2;
+  uint64 create_by_id = 3;
+  uint64 invertory_tx_id = 4;
+  uint64 invertory_return_tx_id = 5;
+  string status = 12;
+  bool double_order = 6;
+  string order_ref_id = 7;
+  string receipt = 8;
+  string return_receipt = 9;
+  common.v1.MarketplaceType order_from = 10;
+  google.protobuf.Timestamp order_time = 11;
+}
+
+message CustomerSearch {
+  string name = 1 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 100
+  }];
+  string city = 2 [(buf.validate.field).string = {max_len: 100}];
+}
+
+message OrderDetailSearchRequest {
+  oneof search {
+    string receipt = 1;
+    string order_ref_id = 2;
+    CustomerSearch customer = 3;
+  }
+
+  string status = 4;
+
+  int64 limit = 5 [(buf.validate.field).int64 = {
+    gt: 0
+    lt: 10
+  }];
+}
+
+message TransactionDetail {
+  uint64 id = 1;
+  uint64 team_id = 2;
+  uint64 warehouse_id = 3;
+  uint64 create_by_id = 4;
+  uint64 verify_by_id = 5;
+  uint64 shipping_id = 6;
+  string extern_ord_id = 7;
+  string receipt = 8;
+  string receipt_file = 9;
+  string type = 10;
+  string status = 11;
+  bool is_shipped = 12;
+  double total = 13;
+  google.protobuf.Timestamp created = 14;
+  google.protobuf.Timestamp send_at = 15;
+  google.protobuf.Timestamp arrived = 16;
+}
+
+message OrderDetailSearchItem {
+  OrderDetailSearch order = 1;
+  TransactionDetail outbound = 2;
+  TransactionDetail inbound = 3;
+}
+
+message OrderDetailSearchResponse {
+  repeated OrderDetailSearchItem data = 1;
+}

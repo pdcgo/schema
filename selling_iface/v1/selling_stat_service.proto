@@ -1,0 +1,110 @@
+syntax = "proto3";
+package selling_iface.v1;
+
+import "buf/validate/validate.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/pdcgo/schema/services/selling_iface/v1;selling_iface";
+
+service SellingStatService {
+  rpc Stat(StatRequest) returns (StatResponse);
+}
+
+enum TimeType {
+  TIME_TYPE_UNSPECIFIED = 0;
+  TIME_TYPE_DAY = 1;
+  TIME_TYPE_WEEK = 2;
+  TIME_TYPE_MONTH = 3;
+  TIME_TYPE_YEAR = 4;
+}
+
+enum MetricType {
+  METRIC_TYPE_UNSPECIFIED = 0;
+  METRIC_TYPE_TOTAL_STOCK = 1;
+  METRIC_TYPE_ONGOING_STOCK = 2;
+  METRIC_TYPE_READY_STOCK = 3;
+  METRIC_TYPE_PAYABLE = 4;
+  METRIC_TYPE_RECEIVABLE = 5;
+}
+
+message TimeRange {
+  google.protobuf.Timestamp start = 1 [(buf.validate.field).required = true];
+  google.protobuf.Timestamp end = 2 [(buf.validate.field).required = true];
+  TimeType type = 3 [(buf.validate.field).required = true];
+}
+
+message TotalStockMetric {
+  MetricType type = 1;
+  uint64 total_count = 2;
+  uint64 total_sku_count = 3;
+  double total_amount = 4;
+}
+
+message OngoingStockMetric {
+  MetricType type = 1;
+  uint64 total_count = 2;
+  uint64 total_sku_count = 3;
+  double total_amount = 4;
+
+  uint64 return_count = 5;
+  uint64 return_sku_count = 6;
+  double return_amount = 7;
+
+  uint64 restock_count = 8;
+  uint64 restock_sku_count = 9;
+  double restock_amount = 10;
+
+  uint64 adj_restock_count = 11;
+  uint64 adj_restock_sku_count = 12;
+  double adj_restock_amount = 13;
+
+  uint64 transfer_in_count = 14;
+  uint64 transfer_in_sku_count = 15;
+  double transfer_in_amount = 16;
+}
+
+message ReadyStockMetric {
+  MetricType type = 1;
+  uint64 total_count = 2;
+  uint64 total_sku_count = 3;
+  double total_amount = 4;
+}
+
+message PayableMetric {
+  MetricType type = 1;
+  int64 invoice_count = 2;
+  double amount = 3;
+}
+
+message ReceivableMetric {
+  MetricType type = 1;
+  int64 invoice_count = 2;
+  double amount = 3;
+}
+
+message Metric {
+  oneof data {
+    TotalStockMetric total_stock = 1;
+    OngoingStockMetric ongoing_stock = 2;
+    ReadyStockMetric ready_stock = 3;
+    PayableMetric payable = 4;
+    ReceivableMetric receivable = 5;
+  }
+}
+
+message StatFilter {
+  uint64 team_id = 1;
+}
+message StatRequest {
+  TimeRange range = 1 [(buf.validate.field).required = true];
+  StatFilter filter = 2;
+  repeated MetricType metric_types = 3 [(buf.validate.field).repeated = {
+    min_items: 1
+    max_items: 10
+    unique: true
+  }];
+}
+
+message StatResponse {
+  repeated Metric metrics = 1;
+}
