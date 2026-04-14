@@ -89,21 +89,25 @@ const (
 	MetricType_METRIC_TYPE_HISTORY_PRODUCT_SOLD MetricType = 8
 	MetricType_METRIC_TYPE_ORDER_ACTIVE         MetricType = 7
 	MetricType_METRIC_TYPE_HISTORY_ORDER        MetricType = 9
+	MetricType_METRIC_TYPE_TOP_PRODUCT_SOLD     MetricType = 10
+	MetricType_METRIC_TYPE_TOP_PRODUCT_UNSOLD   MetricType = 11
 )
 
 // Enum value maps for MetricType.
 var (
 	MetricType_name = map[int32]string{
-		0: "METRIC_TYPE_UNSPECIFIED",
-		1: "METRIC_TYPE_TOTAL_STOCK",
-		2: "METRIC_TYPE_ONGOING_STOCK",
-		3: "METRIC_TYPE_READY_STOCK",
-		4: "METRIC_TYPE_PAYABLE",
-		5: "METRIC_TYPE_RECEIVABLE",
-		6: "METRIC_TYPE_PRODUCT_SOLD",
-		8: "METRIC_TYPE_HISTORY_PRODUCT_SOLD",
-		7: "METRIC_TYPE_ORDER_ACTIVE",
-		9: "METRIC_TYPE_HISTORY_ORDER",
+		0:  "METRIC_TYPE_UNSPECIFIED",
+		1:  "METRIC_TYPE_TOTAL_STOCK",
+		2:  "METRIC_TYPE_ONGOING_STOCK",
+		3:  "METRIC_TYPE_READY_STOCK",
+		4:  "METRIC_TYPE_PAYABLE",
+		5:  "METRIC_TYPE_RECEIVABLE",
+		6:  "METRIC_TYPE_PRODUCT_SOLD",
+		8:  "METRIC_TYPE_HISTORY_PRODUCT_SOLD",
+		7:  "METRIC_TYPE_ORDER_ACTIVE",
+		9:  "METRIC_TYPE_HISTORY_ORDER",
+		10: "METRIC_TYPE_TOP_PRODUCT_SOLD",
+		11: "METRIC_TYPE_TOP_PRODUCT_UNSOLD",
 	}
 	MetricType_value = map[string]int32{
 		"METRIC_TYPE_UNSPECIFIED":          0,
@@ -116,6 +120,8 @@ var (
 		"METRIC_TYPE_HISTORY_PRODUCT_SOLD": 8,
 		"METRIC_TYPE_ORDER_ACTIVE":         7,
 		"METRIC_TYPE_HISTORY_ORDER":        9,
+		"METRIC_TYPE_TOP_PRODUCT_SOLD":     10,
+		"METRIC_TYPE_TOP_PRODUCT_UNSOLD":   11,
 	}
 )
 
@@ -156,7 +162,7 @@ const file_selling_iface_v1_metric_proto_rawDesc = "" +
 	"\rTIME_TYPE_DAY\x10\x01\x12\x12\n" +
 	"\x0eTIME_TYPE_WEEK\x10\x02\x12\x13\n" +
 	"\x0fTIME_TYPE_MONTH\x10\x03\x12\x12\n" +
-	"\x0eTIME_TYPE_YEAR\x10\x04*\xb8\x02\n" +
+	"\x0eTIME_TYPE_YEAR\x10\x04*\xfe\x02\n" +
 	"\n" +
 	"MetricType\x12\x1b\n" +
 	"\x17METRIC_TYPE_UNSPECIFIED\x10\x00\x12\x1b\n" +
@@ -168,7 +174,10 @@ const file_selling_iface_v1_metric_proto_rawDesc = "" +
 	"\x18METRIC_TYPE_PRODUCT_SOLD\x10\x06\x12$\n" +
 	" METRIC_TYPE_HISTORY_PRODUCT_SOLD\x10\b\x12\x1c\n" +
 	"\x18METRIC_TYPE_ORDER_ACTIVE\x10\a\x12\x1d\n" +
-	"\x19METRIC_TYPE_HISTORY_ORDER\x10\tB\xc1\x01\n" +
+	"\x19METRIC_TYPE_HISTORY_ORDER\x10\t\x12 \n" +
+	"\x1cMETRIC_TYPE_TOP_PRODUCT_SOLD\x10\n" +
+	"\x12\"\n" +
+	"\x1eMETRIC_TYPE_TOP_PRODUCT_UNSOLD\x10\vB\xc1\x01\n" +
 	"\x14com.selling_iface.v1B\vMetricProtoP\x01Z?github.com/pdcgo/schema/services/selling_iface/v1;selling_iface\xa2\x02\x03SXX\xaa\x02\x0fSellingIface.V1\xca\x02\x0fSellingIface\\V1\xe2\x02\x1bSellingIface\\V1\\GPBMetadata\xea\x02\x10SellingIface::V1b\x06proto3"
 
 var (

@@ -60,6 +60,9 @@ const (
 	// InventoryServiceSkuListProcedure is the fully-qualified name of the InventoryService's SkuList
 	// RPC.
 	InventoryServiceSkuListProcedure = "/warehouse_iface.v1.InventoryService/SkuList"
+	// InventoryServiceSkuByIDsProcedure is the fully-qualified name of the InventoryService's SkuByIDs
+	// RPC.
+	InventoryServiceSkuByIDsProcedure = "/warehouse_iface.v1.InventoryService/SkuByIDs"
 )
 
 // InventoryServiceClient is a client for the warehouse_iface.v1.InventoryService service.
@@ -75,6 +78,7 @@ type InventoryServiceClient interface {
 	ProductHistory(context.Context, *connect.Request[v1.ProductHistoryRequest]) (*connect.Response[v1.ProductHistoryResponse], error)
 	// bagian sku
 	SkuList(context.Context, *connect.Request[v1.SkuListRequest]) (*connect.Response[v1.SkuListResponse], error)
+	SkuByIDs(context.Context, *connect.Request[v1.SkuByIDsRequest]) (*connect.Response[v1.SkuByIDsResponse], error)
 }
 
 // NewInventoryServiceClient constructs a client for the warehouse_iface.v1.InventoryService
@@ -142,6 +146,12 @@ func NewInventoryServiceClient(httpClient connect.HTTPClient, baseURL string, op
 			connect.WithSchema(inventoryServiceMethods.ByName("SkuList")),
 			connect.WithClientOptions(opts...),
 		),
+		skuByIDs: connect.NewClient[v1.SkuByIDsRequest, v1.SkuByIDsResponse](
+			httpClient,
+			baseURL+InventoryServiceSkuByIDsProcedure,
+			connect.WithSchema(inventoryServiceMethods.ByName("SkuByIDs")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -156,6 +166,7 @@ type inventoryServiceClient struct {
 	productDetail        *connect.Client[v1.ProductDetailRequest, v1.ProductDetailResponse]
 	productHistory       *connect.Client[v1.ProductHistoryRequest, v1.ProductHistoryResponse]
 	skuList              *connect.Client[v1.SkuListRequest, v1.SkuListResponse]
+	skuByIDs             *connect.Client[v1.SkuByIDsRequest, v1.SkuByIDsResponse]
 }
 
 // Placements calls warehouse_iface.v1.InventoryService.Placements.
@@ -203,6 +214,11 @@ func (c *inventoryServiceClient) SkuList(ctx context.Context, req *connect.Reque
 	return c.skuList.CallUnary(ctx, req)
 }
 
+// SkuByIDs calls warehouse_iface.v1.InventoryService.SkuByIDs.
+func (c *inventoryServiceClient) SkuByIDs(ctx context.Context, req *connect.Request[v1.SkuByIDsRequest]) (*connect.Response[v1.SkuByIDsResponse], error) {
+	return c.skuByIDs.CallUnary(ctx, req)
+}
+
 // InventoryServiceHandler is an implementation of the warehouse_iface.v1.InventoryService service.
 type InventoryServiceHandler interface {
 	Placements(context.Context, *connect.Request[v1.PlacementsRequest]) (*connect.Response[v1.PlacementsResponse], error)
@@ -216,6 +232,7 @@ type InventoryServiceHandler interface {
 	ProductHistory(context.Context, *connect.Request[v1.ProductHistoryRequest]) (*connect.Response[v1.ProductHistoryResponse], error)
 	// bagian sku
 	SkuList(context.Context, *connect.Request[v1.SkuListRequest]) (*connect.Response[v1.SkuListResponse], error)
+	SkuByIDs(context.Context, *connect.Request[v1.SkuByIDsRequest]) (*connect.Response[v1.SkuByIDsResponse], error)
 }
 
 // NewInventoryServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -279,6 +296,12 @@ func NewInventoryServiceHandler(svc InventoryServiceHandler, opts ...connect.Han
 		connect.WithSchema(inventoryServiceMethods.ByName("SkuList")),
 		connect.WithHandlerOptions(opts...),
 	)
+	inventoryServiceSkuByIDsHandler := connect.NewUnaryHandler(
+		InventoryServiceSkuByIDsProcedure,
+		svc.SkuByIDs,
+		connect.WithSchema(inventoryServiceMethods.ByName("SkuByIDs")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/warehouse_iface.v1.InventoryService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case InventoryServicePlacementsProcedure:
@@ -299,6 +322,8 @@ func NewInventoryServiceHandler(svc InventoryServiceHandler, opts ...connect.Han
 			inventoryServiceProductHistoryHandler.ServeHTTP(w, r)
 		case InventoryServiceSkuListProcedure:
 			inventoryServiceSkuListHandler.ServeHTTP(w, r)
+		case InventoryServiceSkuByIDsProcedure:
+			inventoryServiceSkuByIDsHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -342,4 +367,8 @@ func (UnimplementedInventoryServiceHandler) ProductHistory(context.Context, *con
 
 func (UnimplementedInventoryServiceHandler) SkuList(context.Context, *connect.Request[v1.SkuListRequest]) (*connect.Response[v1.SkuListResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("warehouse_iface.v1.InventoryService.SkuList is not implemented"))
+}
+
+func (UnimplementedInventoryServiceHandler) SkuByIDs(context.Context, *connect.Request[v1.SkuByIDsRequest]) (*connect.Response[v1.SkuByIDsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("warehouse_iface.v1.InventoryService.SkuByIDs is not implemented"))
 }

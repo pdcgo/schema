@@ -280,3 +280,29 @@ func (mr *MockInventoryServiceClientMockRecorder) SkuList(ctx, req interface{}) 
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SkuList", reflect.TypeOf((*MockInventoryService)(nil).SkuList), ctx, req)
 }
 
+func (m *MockInventoryService) SkuByIDs(ctx context.Context, req *connect.Request[v1.SkuByIDsRequest]) (*connect.Response[v1.SkuByIDsResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "SkuByIDs", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.SkuByIDsResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInventoryServiceMockRecorder) SkuByIDs(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SkuByIDs", reflect.TypeOf((*MockInventoryService)(nil).SkuByIDs), ctx, req)
+}
+
+func (m *MockInventoryServiceClient) SkuByIDs(ctx context.Context, req *connect.Request[v1.SkuByIDsRequest]) (*connect.Response[v1.SkuByIDsResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "SkuByIDs", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.SkuByIDsResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInventoryServiceClientMockRecorder) SkuByIDs(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SkuByIDs", reflect.TypeOf((*MockInventoryService)(nil).SkuByIDs), ctx, req)
+}
+

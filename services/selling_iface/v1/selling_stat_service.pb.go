@@ -516,6 +516,8 @@ type Metric struct {
 	//	*Metric_HistoryProductSold
 	//	*Metric_OrderActive
 	//	*Metric_HistoryOrder
+	//	*Metric_TopProductSold
+	//	*Metric_TopProductUnsold
 	Data          isMetric_Data `protobuf_oneof:"data"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -639,6 +641,24 @@ func (x *Metric) GetHistoryOrder() *HistoryOrderMetric {
 	return nil
 }
 
+func (x *Metric) GetTopProductSold() *TopProductSoldMetric {
+	if x != nil {
+		if x, ok := x.Data.(*Metric_TopProductSold); ok {
+			return x.TopProductSold
+		}
+	}
+	return nil
+}
+
+func (x *Metric) GetTopProductUnsold() *TopProductUnsoldMetric {
+	if x != nil {
+		if x, ok := x.Data.(*Metric_TopProductUnsold); ok {
+			return x.TopProductUnsold
+		}
+	}
+	return nil
+}
+
 type isMetric_Data interface {
 	isMetric_Data()
 }
@@ -679,6 +699,14 @@ type Metric_HistoryOrder struct {
 	HistoryOrder *HistoryOrderMetric `protobuf:"bytes,9,opt,name=history_order,json=historyOrder,proto3,oneof"`
 }
 
+type Metric_TopProductSold struct {
+	TopProductSold *TopProductSoldMetric `protobuf:"bytes,10,opt,name=top_product_sold,json=topProductSold,proto3,oneof"`
+}
+
+type Metric_TopProductUnsold struct {
+	TopProductUnsold *TopProductUnsoldMetric `protobuf:"bytes,11,opt,name=top_product_unsold,json=topProductUnsold,proto3,oneof"`
+}
+
 func (*Metric_TotalStock) isMetric_Data() {}
 
 func (*Metric_OngoingStock) isMetric_Data() {}
@@ -697,9 +725,14 @@ func (*Metric_OrderActive) isMetric_Data() {}
 
 func (*Metric_HistoryOrder) isMetric_Data() {}
 
+func (*Metric_TopProductSold) isMetric_Data() {}
+
+func (*Metric_TopProductUnsold) isMetric_Data() {}
+
 type StatFilter struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	TopN          int32                  `protobuf:"varint,2,opt,name=top_n,json=topN,proto3" json:"top_n,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -737,6 +770,13 @@ func (*StatFilter) Descriptor() ([]byte, []int) {
 func (x *StatFilter) GetTeamId() uint64 {
 	if x != nil {
 		return x.TeamId
+	}
+	return 0
+}
+
+func (x *StatFilter) GetTopN() int32 {
+	if x != nil {
+		return x.TopN
 	}
 	return 0
 }
@@ -996,7 +1036,7 @@ const file_selling_iface_v1_selling_stat_service_proto_rawDesc = "" +
 	"\x10ReceivableMetric\x120\n" +
 	"\x04type\x18\x01 \x01(\x0e2\x1c.selling_iface.v1.MetricTypeR\x04type\x12#\n" +
 	"\rinvoice_count\x18\x02 \x01(\x03R\finvoiceCount\x12\x16\n" +
-	"\x06amount\x18\x03 \x01(\x01R\x06amount\"\xaf\x05\n" +
+	"\x06amount\x18\x03 \x01(\x01R\x06amount\"\xdd\x06\n" +
 	"\x06Metric\x12E\n" +
 	"\vtotal_stock\x18\x01 \x01(\v2\".selling_iface.v1.TotalStockMetricH\x00R\n" +
 	"totalStock\x12K\n" +
@@ -1010,11 +1050,15 @@ const file_selling_iface_v1_selling_stat_service_proto_rawDesc = "" +
 	"\fproduct_sold\x18\x06 \x01(\v2#.selling_iface.v1.ProductSoldMetricH\x00R\vproductSold\x12^\n" +
 	"\x14history_product_sold\x18\a \x01(\v2*.selling_iface.v1.HistoryProductSoldMetricH\x00R\x12historyProductSold\x12H\n" +
 	"\forder_active\x18\b \x01(\v2#.selling_iface.v1.OrderActiveMetricH\x00R\vorderActive\x12K\n" +
-	"\rhistory_order\x18\t \x01(\v2$.selling_iface.v1.HistoryOrderMetricH\x00R\fhistoryOrderB\x06\n" +
-	"\x04data\"%\n" +
+	"\rhistory_order\x18\t \x01(\v2$.selling_iface.v1.HistoryOrderMetricH\x00R\fhistoryOrder\x12R\n" +
+	"\x10top_product_sold\x18\n" +
+	" \x01(\v2&.selling_iface.v1.TopProductSoldMetricH\x00R\x0etopProductSold\x12X\n" +
+	"\x12top_product_unsold\x18\v \x01(\v2(.selling_iface.v1.TopProductUnsoldMetricH\x00R\x10topProductUnsoldB\x06\n" +
+	"\x04data\":\n" +
 	"\n" +
 	"StatFilter\x12\x17\n" +
-	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\"\xcd\x01\n" +
+	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12\x13\n" +
+	"\x05top_n\x18\x02 \x01(\x05R\x04topN\"\xcd\x01\n" +
 	"\vStatRequest\x129\n" +
 	"\x05range\x18\x01 \x01(\v2\x1b.selling_iface.v1.TimeRangeB\x06\xbaH\x03\xc8\x01\x01R\x05range\x124\n" +
 	"\x06filter\x18\x02 \x01(\v2\x1c.selling_iface.v1.StatFilterR\x06filter\x12M\n" +
@@ -1067,6 +1111,8 @@ var file_selling_iface_v1_selling_stat_service_proto_goTypes = []any{
 	(*HistoryProductSoldMetric)(nil), // 16: selling_iface.v1.HistoryProductSoldMetric
 	(*OrderActiveMetric)(nil),        // 17: selling_iface.v1.OrderActiveMetric
 	(*HistoryOrderMetric)(nil),       // 18: selling_iface.v1.HistoryOrderMetric
+	(*TopProductSoldMetric)(nil),     // 19: selling_iface.v1.TopProductSoldMetric
+	(*TopProductUnsoldMetric)(nil),   // 20: selling_iface.v1.TopProductUnsoldMetric
 }
 var file_selling_iface_v1_selling_stat_service_proto_depIdxs = []int32{
 	12, // 0: selling_iface.v1.TimeRange.start:type_name -> google.protobuf.Timestamp
@@ -1086,23 +1132,25 @@ var file_selling_iface_v1_selling_stat_service_proto_depIdxs = []int32{
 	16, // 14: selling_iface.v1.Metric.history_product_sold:type_name -> selling_iface.v1.HistoryProductSoldMetric
 	17, // 15: selling_iface.v1.Metric.order_active:type_name -> selling_iface.v1.OrderActiveMetric
 	18, // 16: selling_iface.v1.Metric.history_order:type_name -> selling_iface.v1.HistoryOrderMetric
-	0,  // 17: selling_iface.v1.StatRequest.range:type_name -> selling_iface.v1.TimeRange
-	7,  // 18: selling_iface.v1.StatRequest.filter:type_name -> selling_iface.v1.StatFilter
-	14, // 19: selling_iface.v1.StatRequest.metric_types:type_name -> selling_iface.v1.MetricType
-	6,  // 20: selling_iface.v1.StatResponse.metrics:type_name -> selling_iface.v1.Metric
-	0,  // 21: selling_iface.v1.StatStreamRequest.range:type_name -> selling_iface.v1.TimeRange
-	7,  // 22: selling_iface.v1.StatStreamRequest.filter:type_name -> selling_iface.v1.StatFilter
-	14, // 23: selling_iface.v1.StatStreamRequest.metric_types:type_name -> selling_iface.v1.MetricType
-	6,  // 24: selling_iface.v1.StatStreamResponse.metric:type_name -> selling_iface.v1.Metric
-	8,  // 25: selling_iface.v1.SellingStatService.Stat:input_type -> selling_iface.v1.StatRequest
-	10, // 26: selling_iface.v1.SellingStatService.StatStream:input_type -> selling_iface.v1.StatStreamRequest
-	9,  // 27: selling_iface.v1.SellingStatService.Stat:output_type -> selling_iface.v1.StatResponse
-	11, // 28: selling_iface.v1.SellingStatService.StatStream:output_type -> selling_iface.v1.StatStreamResponse
-	27, // [27:29] is the sub-list for method output_type
-	25, // [25:27] is the sub-list for method input_type
-	25, // [25:25] is the sub-list for extension type_name
-	25, // [25:25] is the sub-list for extension extendee
-	0,  // [0:25] is the sub-list for field type_name
+	19, // 17: selling_iface.v1.Metric.top_product_sold:type_name -> selling_iface.v1.TopProductSoldMetric
+	20, // 18: selling_iface.v1.Metric.top_product_unsold:type_name -> selling_iface.v1.TopProductUnsoldMetric
+	0,  // 19: selling_iface.v1.StatRequest.range:type_name -> selling_iface.v1.TimeRange
+	7,  // 20: selling_iface.v1.StatRequest.filter:type_name -> selling_iface.v1.StatFilter
+	14, // 21: selling_iface.v1.StatRequest.metric_types:type_name -> selling_iface.v1.MetricType
+	6,  // 22: selling_iface.v1.StatResponse.metrics:type_name -> selling_iface.v1.Metric
+	0,  // 23: selling_iface.v1.StatStreamRequest.range:type_name -> selling_iface.v1.TimeRange
+	7,  // 24: selling_iface.v1.StatStreamRequest.filter:type_name -> selling_iface.v1.StatFilter
+	14, // 25: selling_iface.v1.StatStreamRequest.metric_types:type_name -> selling_iface.v1.MetricType
+	6,  // 26: selling_iface.v1.StatStreamResponse.metric:type_name -> selling_iface.v1.Metric
+	8,  // 27: selling_iface.v1.SellingStatService.Stat:input_type -> selling_iface.v1.StatRequest
+	10, // 28: selling_iface.v1.SellingStatService.StatStream:input_type -> selling_iface.v1.StatStreamRequest
+	9,  // 29: selling_iface.v1.SellingStatService.Stat:output_type -> selling_iface.v1.StatResponse
+	11, // 30: selling_iface.v1.SellingStatService.StatStream:output_type -> selling_iface.v1.StatStreamResponse
+	29, // [29:31] is the sub-list for method output_type
+	27, // [27:29] is the sub-list for method input_type
+	27, // [27:27] is the sub-list for extension type_name
+	27, // [27:27] is the sub-list for extension extendee
+	0,  // [0:27] is the sub-list for field type_name
 }
 
 func init() { file_selling_iface_v1_selling_stat_service_proto_init() }
@@ -1123,6 +1171,8 @@ func file_selling_iface_v1_selling_stat_service_proto_init() {
 		(*Metric_HistoryProductSold)(nil),
 		(*Metric_OrderActive)(nil),
 		(*Metric_HistoryOrder)(nil),
+		(*Metric_TopProductSold)(nil),
+		(*Metric_TopProductUnsold)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

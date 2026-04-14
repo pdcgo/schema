@@ -80,11 +80,14 @@ message Metric {
     HistoryProductSoldMetric history_product_sold = 7;
     OrderActiveMetric order_active = 8;
     HistoryOrderMetric history_order = 9;
+    TopProductSoldMetric top_product_sold = 10;
+    TopProductUnsoldMetric top_product_unsold = 11;
   }
 }
 
 message StatFilter {
   uint64 team_id = 1;
+  int32 top_n = 2;
 }
 message StatRequest {
   TimeRange range = 1 [(buf.validate.field).required = true];

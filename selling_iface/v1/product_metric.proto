@@ -44,3 +44,33 @@ message HistoryProductSoldMetric {
   MetricType type = 2;
   repeated HistoryProductSoldItem datas = 3;
 }
+
+message SoldProductItem {
+  uint64 product_id = 1;
+  string name = 2;
+  string image = 3;
+  string ref_id = 4;
+  int64 order_count = 5;
+}
+
+message TopProductSoldMetric {
+  MetricType type = 1;
+  repeated SoldProductItem items = 2;
+}
+
+message UnsoldProductItem {
+  int64 id = 1;
+  int64 warehouse_id = 2;
+  string ref_id = 3;
+  string name = 4;
+  string image = 5;
+  int64 piece_count = 6;
+  // @gotags: gorm:"serializer:timestamptz"
+  google.protobuf.Timestamp last_order_time = 7;
+  string warehouse_name = 8;
+}
+
+message TopProductUnsoldMetric {
+  MetricType type = 1;
+  repeated UnsoldProductItem items = 2;
+}
