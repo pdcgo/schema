@@ -51,6 +51,7 @@ message SoldProductItem {
   string image = 3;
   string ref_id = 4;
   int64 order_count = 5;
+  int64 piece_count = 6;
 }
 
 message TopProductSoldMetric {

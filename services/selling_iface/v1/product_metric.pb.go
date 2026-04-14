@@ -322,6 +322,7 @@ type SoldProductItem struct {
 	Image         string                 `protobuf:"bytes,3,opt,name=image,proto3" json:"image,omitempty"`
 	RefId         string                 `protobuf:"bytes,4,opt,name=ref_id,json=refId,proto3" json:"ref_id,omitempty"`
 	OrderCount    int64                  `protobuf:"varint,5,opt,name=order_count,json=orderCount,proto3" json:"order_count,omitempty"`
+	PieceCount    int64                  `protobuf:"varint,6,opt,name=piece_count,json=pieceCount,proto3" json:"piece_count,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -387,6 +388,13 @@ func (x *SoldProductItem) GetRefId() string {
 func (x *SoldProductItem) GetOrderCount() int64 {
 	if x != nil {
 		return x.OrderCount
+	}
+	return 0
+}
+
+func (x *SoldProductItem) GetPieceCount() int64 {
+	if x != nil {
+		return x.PieceCount
 	}
 	return 0
 }
@@ -632,7 +640,7 @@ const file_selling_iface_v1_product_metric_proto_rawDesc = "" +
 	"\x18HistoryProductSoldMetric\x127\n" +
 	"\ttime_type\x18\x01 \x01(\x0e2\x1a.selling_iface.v1.TimeTypeR\btimeType\x120\n" +
 	"\x04type\x18\x02 \x01(\x0e2\x1c.selling_iface.v1.MetricTypeR\x04type\x12>\n" +
-	"\x05datas\x18\x03 \x03(\v2(.selling_iface.v1.HistoryProductSoldItemR\x05datas\"\x92\x01\n" +
+	"\x05datas\x18\x03 \x03(\v2(.selling_iface.v1.HistoryProductSoldItemR\x05datas\"\xb3\x01\n" +
 	"\x0fSoldProductItem\x12\x1d\n" +
 	"\n" +
 	"product_id\x18\x01 \x01(\x04R\tproductId\x12\x12\n" +
@@ -640,7 +648,9 @@ const file_selling_iface_v1_product_metric_proto_rawDesc = "" +
 	"\x05image\x18\x03 \x01(\tR\x05image\x12\x15\n" +
 	"\x06ref_id\x18\x04 \x01(\tR\x05refId\x12\x1f\n" +
 	"\vorder_count\x18\x05 \x01(\x03R\n" +
-	"orderCount\"\x81\x01\n" +
+	"orderCount\x12\x1f\n" +
+	"\vpiece_count\x18\x06 \x01(\x03R\n" +
+	"pieceCount\"\x81\x01\n" +
 	"\x14TopProductSoldMetric\x120\n" +
 	"\x04type\x18\x01 \x01(\x0e2\x1c.selling_iface.v1.MetricTypeR\x04type\x127\n" +
 	"\x05items\x18\x02 \x03(\v2!.selling_iface.v1.SoldProductItemR\x05items\"\x93\x02\n" +
