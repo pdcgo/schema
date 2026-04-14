@@ -1,0 +1,26 @@
+syntax = "proto3";
+package selling_iface.v1;
+
+import "google/protobuf/timestamp.proto";
+// import "buf/validate/validate.proto";
+import "selling_iface/v1/metric.proto";
+
+option go_package = "github.com/pdcgo/schema/services/selling_iface/v1;selling_iface";
+
+message OrderActiveMetric {
+  MetricType type = 1;
+  int64 order_count = 2;
+}
+
+message HistoryOrderItem {
+  // @gotags: gorm:"serializer:timestamptz"
+  google.protobuf.Timestamp t = 1;
+  int64 total_count = 2;
+  double total_amount = 3;
+}
+
+message HistoryOrderMetric {
+  MetricType type = 1;
+  TimeType time_type = 2;
+  repeated HistoryOrderItem datas = 3;
+}

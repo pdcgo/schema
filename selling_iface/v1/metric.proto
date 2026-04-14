@@ -1,0 +1,28 @@
+syntax = "proto3";
+package selling_iface.v1;
+
+// import "buf/validate/validate.proto";
+// import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/pdcgo/schema/services/selling_iface/v1;selling_iface";
+
+enum TimeType {
+  TIME_TYPE_UNSPECIFIED = 0;
+  TIME_TYPE_DAY = 1;
+  TIME_TYPE_WEEK = 2;
+  TIME_TYPE_MONTH = 3;
+  TIME_TYPE_YEAR = 4;
+}
+
+enum MetricType {
+  METRIC_TYPE_UNSPECIFIED = 0;
+  METRIC_TYPE_TOTAL_STOCK = 1;
+  METRIC_TYPE_ONGOING_STOCK = 2;
+  METRIC_TYPE_READY_STOCK = 3;
+  METRIC_TYPE_PAYABLE = 4;
+  METRIC_TYPE_RECEIVABLE = 5;
+  METRIC_TYPE_PRODUCT_SOLD = 6;
+  METRIC_TYPE_HISTORY_PRODUCT_SOLD = 8;
+  METRIC_TYPE_ORDER_ACTIVE = 7;
+  METRIC_TYPE_HISTORY_ORDER = 9;
+}

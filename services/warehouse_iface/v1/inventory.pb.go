@@ -1840,7 +1840,7 @@ var File_warehouse_iface_v1_inventory_proto protoreflect.FileDescriptor
 
 const file_warehouse_iface_v1_inventory_proto_rawDesc = "" +
 	"\n" +
-	"\"warehouse_iface/v1/inventory.proto\x12\x12warehouse_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!warehouse_iface/v1/outbound.proto\"9\n" +
+	"\"warehouse_iface/v1/inventory.proto\x12\x12warehouse_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1ewarehouse_iface/v1/order.proto\"9\n" +
 	"\rProductDetail\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x14\n" +
 	"\x05image\x18\x02 \x01(\tR\x05image\"\x8d\x01\n" +
@@ -2115,7 +2115,7 @@ func file_warehouse_iface_v1_inventory_proto_init() {
 	if File_warehouse_iface_v1_inventory_proto != nil {
 		return
 	}
-	file_warehouse_iface_v1_outbound_proto_init()
+	file_warehouse_iface_v1_order_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

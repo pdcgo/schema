@@ -8,6 +8,34 @@ import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/pdcgo/schema/services/warehouse_iface/v1;warehouse_iface";
 
+message SkuDataDetail {
+  uint64 product_id = 1;
+  uint64 variant_id = 2;
+  uint64 warehouse_id = 3;
+  uint64 team_id = 4;
+}
+
+message OutboundItem {
+  option deprecated = true;
+  uint64 id = 1;
+  string sku_id = 2;
+  bool owned = 3;
+  int64 count = 4;
+  double price = 5;
+  double total = 6;
+  SkuDataDetail sku_detail = 7;
+}
+
+message TransactionItem {
+  uint64 id = 1;
+  string sku_id = 2;
+  bool owned = 3;
+  int64 count = 4;
+  double price = 5;
+  double total = 6;
+  SkuDataDetail sku_detail = 7;
+}
+
 message OrderDetailSearch {
   uint64 id = 1;
   uint64 team_id = 2;
@@ -63,6 +91,7 @@ message TransactionDetail {
   google.protobuf.Timestamp created = 14;
   google.protobuf.Timestamp send_at = 15;
   google.protobuf.Timestamp arrived = 16;
+  repeated TransactionItem items = 17;
 }
 
 message OrderDetailSearchItem {

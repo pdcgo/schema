@@ -23,119 +23,6 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type TimeType int32
-
-const (
-	TimeType_TIME_TYPE_UNSPECIFIED TimeType = 0
-	TimeType_TIME_TYPE_DAY         TimeType = 1
-	TimeType_TIME_TYPE_WEEK        TimeType = 2
-	TimeType_TIME_TYPE_MONTH       TimeType = 3
-	TimeType_TIME_TYPE_YEAR        TimeType = 4
-)
-
-// Enum value maps for TimeType.
-var (
-	TimeType_name = map[int32]string{
-		0: "TIME_TYPE_UNSPECIFIED",
-		1: "TIME_TYPE_DAY",
-		2: "TIME_TYPE_WEEK",
-		3: "TIME_TYPE_MONTH",
-		4: "TIME_TYPE_YEAR",
-	}
-	TimeType_value = map[string]int32{
-		"TIME_TYPE_UNSPECIFIED": 0,
-		"TIME_TYPE_DAY":         1,
-		"TIME_TYPE_WEEK":        2,
-		"TIME_TYPE_MONTH":       3,
-		"TIME_TYPE_YEAR":        4,
-	}
-)
-
-func (x TimeType) Enum() *TimeType {
-	p := new(TimeType)
-	*p = x
-	return p
-}
-
-func (x TimeType) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (TimeType) Descriptor() protoreflect.EnumDescriptor {
-	return file_selling_iface_v1_selling_stat_service_proto_enumTypes[0].Descriptor()
-}
-
-func (TimeType) Type() protoreflect.EnumType {
-	return &file_selling_iface_v1_selling_stat_service_proto_enumTypes[0]
-}
-
-func (x TimeType) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use TimeType.Descriptor instead.
-func (TimeType) EnumDescriptor() ([]byte, []int) {
-	return file_selling_iface_v1_selling_stat_service_proto_rawDescGZIP(), []int{0}
-}
-
-type MetricType int32
-
-const (
-	MetricType_METRIC_TYPE_UNSPECIFIED   MetricType = 0
-	MetricType_METRIC_TYPE_TOTAL_STOCK   MetricType = 1
-	MetricType_METRIC_TYPE_ONGOING_STOCK MetricType = 2
-	MetricType_METRIC_TYPE_READY_STOCK   MetricType = 3
-	MetricType_METRIC_TYPE_PAYABLE       MetricType = 4
-	MetricType_METRIC_TYPE_RECEIVABLE    MetricType = 5
-)
-
-// Enum value maps for MetricType.
-var (
-	MetricType_name = map[int32]string{
-		0: "METRIC_TYPE_UNSPECIFIED",
-		1: "METRIC_TYPE_TOTAL_STOCK",
-		2: "METRIC_TYPE_ONGOING_STOCK",
-		3: "METRIC_TYPE_READY_STOCK",
-		4: "METRIC_TYPE_PAYABLE",
-		5: "METRIC_TYPE_RECEIVABLE",
-	}
-	MetricType_value = map[string]int32{
-		"METRIC_TYPE_UNSPECIFIED":   0,
-		"METRIC_TYPE_TOTAL_STOCK":   1,
-		"METRIC_TYPE_ONGOING_STOCK": 2,
-		"METRIC_TYPE_READY_STOCK":   3,
-		"METRIC_TYPE_PAYABLE":       4,
-		"METRIC_TYPE_RECEIVABLE":    5,
-	}
-)
-
-func (x MetricType) Enum() *MetricType {
-	p := new(MetricType)
-	*p = x
-	return p
-}
-
-func (x MetricType) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (MetricType) Descriptor() protoreflect.EnumDescriptor {
-	return file_selling_iface_v1_selling_stat_service_proto_enumTypes[1].Descriptor()
-}
-
-func (MetricType) Type() protoreflect.EnumType {
-	return &file_selling_iface_v1_selling_stat_service_proto_enumTypes[1]
-}
-
-func (x MetricType) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use MetricType.Descriptor instead.
-func (MetricType) EnumDescriptor() ([]byte, []int) {
-	return file_selling_iface_v1_selling_stat_service_proto_rawDescGZIP(), []int{1}
-}
-
 type TimeRange struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Start         *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=start,proto3" json:"start,omitempty"`
@@ -625,6 +512,10 @@ type Metric struct {
 	//	*Metric_ReadyStock
 	//	*Metric_Payable
 	//	*Metric_Receivable
+	//	*Metric_ProductSold
+	//	*Metric_HistoryProductSold
+	//	*Metric_OrderActive
+	//	*Metric_HistoryOrder
 	Data          isMetric_Data `protobuf_oneof:"data"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -712,6 +603,42 @@ func (x *Metric) GetReceivable() *ReceivableMetric {
 	return nil
 }
 
+func (x *Metric) GetProductSold() *ProductSoldMetric {
+	if x != nil {
+		if x, ok := x.Data.(*Metric_ProductSold); ok {
+			return x.ProductSold
+		}
+	}
+	return nil
+}
+
+func (x *Metric) GetHistoryProductSold() *HistoryProductSoldMetric {
+	if x != nil {
+		if x, ok := x.Data.(*Metric_HistoryProductSold); ok {
+			return x.HistoryProductSold
+		}
+	}
+	return nil
+}
+
+func (x *Metric) GetOrderActive() *OrderActiveMetric {
+	if x != nil {
+		if x, ok := x.Data.(*Metric_OrderActive); ok {
+			return x.OrderActive
+		}
+	}
+	return nil
+}
+
+func (x *Metric) GetHistoryOrder() *HistoryOrderMetric {
+	if x != nil {
+		if x, ok := x.Data.(*Metric_HistoryOrder); ok {
+			return x.HistoryOrder
+		}
+	}
+	return nil
+}
+
 type isMetric_Data interface {
 	isMetric_Data()
 }
@@ -736,6 +663,22 @@ type Metric_Receivable struct {
 	Receivable *ReceivableMetric `protobuf:"bytes,5,opt,name=receivable,proto3,oneof"`
 }
 
+type Metric_ProductSold struct {
+	ProductSold *ProductSoldMetric `protobuf:"bytes,6,opt,name=product_sold,json=productSold,proto3,oneof"`
+}
+
+type Metric_HistoryProductSold struct {
+	HistoryProductSold *HistoryProductSoldMetric `protobuf:"bytes,7,opt,name=history_product_sold,json=historyProductSold,proto3,oneof"`
+}
+
+type Metric_OrderActive struct {
+	OrderActive *OrderActiveMetric `protobuf:"bytes,8,opt,name=order_active,json=orderActive,proto3,oneof"`
+}
+
+type Metric_HistoryOrder struct {
+	HistoryOrder *HistoryOrderMetric `protobuf:"bytes,9,opt,name=history_order,json=historyOrder,proto3,oneof"`
+}
+
 func (*Metric_TotalStock) isMetric_Data() {}
 
 func (*Metric_OngoingStock) isMetric_Data() {}
@@ -745,6 +688,14 @@ func (*Metric_ReadyStock) isMetric_Data() {}
 func (*Metric_Payable) isMetric_Data() {}
 
 func (*Metric_Receivable) isMetric_Data() {}
+
+func (*Metric_ProductSold) isMetric_Data() {}
+
+func (*Metric_HistoryProductSold) isMetric_Data() {}
+
+func (*Metric_OrderActive) isMetric_Data() {}
+
+func (*Metric_HistoryOrder) isMetric_Data() {}
 
 type StatFilter struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -894,11 +845,115 @@ func (x *StatResponse) GetMetrics() []*Metric {
 	return nil
 }
 
+type StatStreamRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Range         *TimeRange             `protobuf:"bytes,1,opt,name=range,proto3" json:"range,omitempty"`
+	Filter        *StatFilter            `protobuf:"bytes,2,opt,name=filter,proto3" json:"filter,omitempty"`
+	MetricTypes   []MetricType           `protobuf:"varint,3,rep,packed,name=metric_types,json=metricTypes,proto3,enum=selling_iface.v1.MetricType" json:"metric_types,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StatStreamRequest) Reset() {
+	*x = StatStreamRequest{}
+	mi := &file_selling_iface_v1_selling_stat_service_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StatStreamRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StatStreamRequest) ProtoMessage() {}
+
+func (x *StatStreamRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_selling_stat_service_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StatStreamRequest.ProtoReflect.Descriptor instead.
+func (*StatStreamRequest) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_selling_stat_service_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *StatStreamRequest) GetRange() *TimeRange {
+	if x != nil {
+		return x.Range
+	}
+	return nil
+}
+
+func (x *StatStreamRequest) GetFilter() *StatFilter {
+	if x != nil {
+		return x.Filter
+	}
+	return nil
+}
+
+func (x *StatStreamRequest) GetMetricTypes() []MetricType {
+	if x != nil {
+		return x.MetricTypes
+	}
+	return nil
+}
+
+type StatStreamResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Metric        *Metric                `protobuf:"bytes,1,opt,name=metric,proto3" json:"metric,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StatStreamResponse) Reset() {
+	*x = StatStreamResponse{}
+	mi := &file_selling_iface_v1_selling_stat_service_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StatStreamResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StatStreamResponse) ProtoMessage() {}
+
+func (x *StatStreamResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_selling_stat_service_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StatStreamResponse.ProtoReflect.Descriptor instead.
+func (*StatStreamResponse) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_selling_stat_service_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *StatStreamResponse) GetMetric() *Metric {
+	if x != nil {
+		return x.Metric
+	}
+	return nil
+}
+
 var File_selling_iface_v1_selling_stat_service_proto protoreflect.FileDescriptor
 
 const file_selling_iface_v1_selling_stat_service_proto_rawDesc = "" +
 	"\n" +
-	"+selling_iface/v1/selling_stat_service.proto\x12\x10selling_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xb3\x01\n" +
+	"+selling_iface/v1/selling_stat_service.proto\x12\x10selling_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dselling_iface/v1/metric.proto\x1a#selling_iface/v1/order_metric.proto\x1a%selling_iface/v1/product_metric.proto\"\xb3\x01\n" +
 	"\tTimeRange\x128\n" +
 	"\x05start\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\x05start\x124\n" +
 	"\x03end\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\x03end\x126\n" +
@@ -941,7 +996,7 @@ const file_selling_iface_v1_selling_stat_service_proto_rawDesc = "" +
 	"\x10ReceivableMetric\x120\n" +
 	"\x04type\x18\x01 \x01(\x0e2\x1c.selling_iface.v1.MetricTypeR\x04type\x12#\n" +
 	"\rinvoice_count\x18\x02 \x01(\x03R\finvoiceCount\x12\x16\n" +
-	"\x06amount\x18\x03 \x01(\x01R\x06amount\"\xee\x02\n" +
+	"\x06amount\x18\x03 \x01(\x01R\x06amount\"\xaf\x05\n" +
 	"\x06Metric\x12E\n" +
 	"\vtotal_stock\x18\x01 \x01(\v2\".selling_iface.v1.TotalStockMetricH\x00R\n" +
 	"totalStock\x12K\n" +
@@ -951,7 +1006,11 @@ const file_selling_iface_v1_selling_stat_service_proto_rawDesc = "" +
 	"\apayable\x18\x04 \x01(\v2\x1f.selling_iface.v1.PayableMetricH\x00R\apayable\x12D\n" +
 	"\n" +
 	"receivable\x18\x05 \x01(\v2\".selling_iface.v1.ReceivableMetricH\x00R\n" +
-	"receivableB\x06\n" +
+	"receivable\x12H\n" +
+	"\fproduct_sold\x18\x06 \x01(\v2#.selling_iface.v1.ProductSoldMetricH\x00R\vproductSold\x12^\n" +
+	"\x14history_product_sold\x18\a \x01(\v2*.selling_iface.v1.HistoryProductSoldMetricH\x00R\x12historyProductSold\x12H\n" +
+	"\forder_active\x18\b \x01(\v2#.selling_iface.v1.OrderActiveMetricH\x00R\vorderActive\x12K\n" +
+	"\rhistory_order\x18\t \x01(\v2$.selling_iface.v1.HistoryOrderMetricH\x00R\fhistoryOrderB\x06\n" +
 	"\x04data\"%\n" +
 	"\n" +
 	"StatFilter\x12\x17\n" +
@@ -962,23 +1021,17 @@ const file_selling_iface_v1_selling_stat_service_proto_rawDesc = "" +
 	"\fmetric_types\x18\x03 \x03(\x0e2\x1c.selling_iface.v1.MetricTypeB\f\xbaH\t\x92\x01\x06\b\x01\x10\n" +
 	"\x18\x01R\vmetricTypes\"B\n" +
 	"\fStatResponse\x122\n" +
-	"\ametrics\x18\x01 \x03(\v2\x18.selling_iface.v1.MetricR\ametrics*u\n" +
-	"\bTimeType\x12\x19\n" +
-	"\x15TIME_TYPE_UNSPECIFIED\x10\x00\x12\x11\n" +
-	"\rTIME_TYPE_DAY\x10\x01\x12\x12\n" +
-	"\x0eTIME_TYPE_WEEK\x10\x02\x12\x13\n" +
-	"\x0fTIME_TYPE_MONTH\x10\x03\x12\x12\n" +
-	"\x0eTIME_TYPE_YEAR\x10\x04*\xb7\x01\n" +
-	"\n" +
-	"MetricType\x12\x1b\n" +
-	"\x17METRIC_TYPE_UNSPECIFIED\x10\x00\x12\x1b\n" +
-	"\x17METRIC_TYPE_TOTAL_STOCK\x10\x01\x12\x1d\n" +
-	"\x19METRIC_TYPE_ONGOING_STOCK\x10\x02\x12\x1b\n" +
-	"\x17METRIC_TYPE_READY_STOCK\x10\x03\x12\x17\n" +
-	"\x13METRIC_TYPE_PAYABLE\x10\x04\x12\x1a\n" +
-	"\x16METRIC_TYPE_RECEIVABLE\x10\x052[\n" +
+	"\ametrics\x18\x01 \x03(\v2\x18.selling_iface.v1.MetricR\ametrics\"\xd3\x01\n" +
+	"\x11StatStreamRequest\x129\n" +
+	"\x05range\x18\x01 \x01(\v2\x1b.selling_iface.v1.TimeRangeB\x06\xbaH\x03\xc8\x01\x01R\x05range\x124\n" +
+	"\x06filter\x18\x02 \x01(\v2\x1c.selling_iface.v1.StatFilterR\x06filter\x12M\n" +
+	"\fmetric_types\x18\x03 \x03(\x0e2\x1c.selling_iface.v1.MetricTypeB\f\xbaH\t\x92\x01\x06\b\x01\x10d\x18\x01R\vmetricTypes\"F\n" +
+	"\x12StatStreamResponse\x120\n" +
+	"\x06metric\x18\x01 \x01(\v2\x18.selling_iface.v1.MetricR\x06metric2\xb6\x01\n" +
 	"\x12SellingStatService\x12E\n" +
-	"\x04Stat\x12\x1d.selling_iface.v1.StatRequest\x1a\x1e.selling_iface.v1.StatResponseB\xcd\x01\n" +
+	"\x04Stat\x12\x1d.selling_iface.v1.StatRequest\x1a\x1e.selling_iface.v1.StatResponse\x12Y\n" +
+	"\n" +
+	"StatStream\x12#.selling_iface.v1.StatStreamRequest\x1a$.selling_iface.v1.StatStreamResponse0\x01B\xcd\x01\n" +
 	"\x14com.selling_iface.v1B\x17SellingStatServiceProtoP\x01Z?github.com/pdcgo/schema/services/selling_iface/v1;selling_iface\xa2\x02\x03SXX\xaa\x02\x0fSellingIface.V1\xca\x02\x0fSellingIface\\V1\xe2\x02\x1bSellingIface\\V1\\GPBMetadata\xea\x02\x10SellingIface::V1b\x06proto3"
 
 var (
@@ -993,48 +1046,63 @@ func file_selling_iface_v1_selling_stat_service_proto_rawDescGZIP() []byte {
 	return file_selling_iface_v1_selling_stat_service_proto_rawDescData
 }
 
-var file_selling_iface_v1_selling_stat_service_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_selling_iface_v1_selling_stat_service_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_selling_iface_v1_selling_stat_service_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_selling_iface_v1_selling_stat_service_proto_goTypes = []any{
-	(TimeType)(0),                 // 0: selling_iface.v1.TimeType
-	(MetricType)(0),               // 1: selling_iface.v1.MetricType
-	(*TimeRange)(nil),             // 2: selling_iface.v1.TimeRange
-	(*TotalStockMetric)(nil),      // 3: selling_iface.v1.TotalStockMetric
-	(*OngoingStockMetric)(nil),    // 4: selling_iface.v1.OngoingStockMetric
-	(*ReadyStockMetric)(nil),      // 5: selling_iface.v1.ReadyStockMetric
-	(*PayableMetric)(nil),         // 6: selling_iface.v1.PayableMetric
-	(*ReceivableMetric)(nil),      // 7: selling_iface.v1.ReceivableMetric
-	(*Metric)(nil),                // 8: selling_iface.v1.Metric
-	(*StatFilter)(nil),            // 9: selling_iface.v1.StatFilter
-	(*StatRequest)(nil),           // 10: selling_iface.v1.StatRequest
-	(*StatResponse)(nil),          // 11: selling_iface.v1.StatResponse
-	(*timestamppb.Timestamp)(nil), // 12: google.protobuf.Timestamp
+	(*TimeRange)(nil),                // 0: selling_iface.v1.TimeRange
+	(*TotalStockMetric)(nil),         // 1: selling_iface.v1.TotalStockMetric
+	(*OngoingStockMetric)(nil),       // 2: selling_iface.v1.OngoingStockMetric
+	(*ReadyStockMetric)(nil),         // 3: selling_iface.v1.ReadyStockMetric
+	(*PayableMetric)(nil),            // 4: selling_iface.v1.PayableMetric
+	(*ReceivableMetric)(nil),         // 5: selling_iface.v1.ReceivableMetric
+	(*Metric)(nil),                   // 6: selling_iface.v1.Metric
+	(*StatFilter)(nil),               // 7: selling_iface.v1.StatFilter
+	(*StatRequest)(nil),              // 8: selling_iface.v1.StatRequest
+	(*StatResponse)(nil),             // 9: selling_iface.v1.StatResponse
+	(*StatStreamRequest)(nil),        // 10: selling_iface.v1.StatStreamRequest
+	(*StatStreamResponse)(nil),       // 11: selling_iface.v1.StatStreamResponse
+	(*timestamppb.Timestamp)(nil),    // 12: google.protobuf.Timestamp
+	(TimeType)(0),                    // 13: selling_iface.v1.TimeType
+	(MetricType)(0),                  // 14: selling_iface.v1.MetricType
+	(*ProductSoldMetric)(nil),        // 15: selling_iface.v1.ProductSoldMetric
+	(*HistoryProductSoldMetric)(nil), // 16: selling_iface.v1.HistoryProductSoldMetric
+	(*OrderActiveMetric)(nil),        // 17: selling_iface.v1.OrderActiveMetric
+	(*HistoryOrderMetric)(nil),       // 18: selling_iface.v1.HistoryOrderMetric
 }
 var file_selling_iface_v1_selling_stat_service_proto_depIdxs = []int32{
 	12, // 0: selling_iface.v1.TimeRange.start:type_name -> google.protobuf.Timestamp
 	12, // 1: selling_iface.v1.TimeRange.end:type_name -> google.protobuf.Timestamp
-	0,  // 2: selling_iface.v1.TimeRange.type:type_name -> selling_iface.v1.TimeType
-	1,  // 3: selling_iface.v1.TotalStockMetric.type:type_name -> selling_iface.v1.MetricType
-	1,  // 4: selling_iface.v1.OngoingStockMetric.type:type_name -> selling_iface.v1.MetricType
-	1,  // 5: selling_iface.v1.ReadyStockMetric.type:type_name -> selling_iface.v1.MetricType
-	1,  // 6: selling_iface.v1.PayableMetric.type:type_name -> selling_iface.v1.MetricType
-	1,  // 7: selling_iface.v1.ReceivableMetric.type:type_name -> selling_iface.v1.MetricType
-	3,  // 8: selling_iface.v1.Metric.total_stock:type_name -> selling_iface.v1.TotalStockMetric
-	4,  // 9: selling_iface.v1.Metric.ongoing_stock:type_name -> selling_iface.v1.OngoingStockMetric
-	5,  // 10: selling_iface.v1.Metric.ready_stock:type_name -> selling_iface.v1.ReadyStockMetric
-	6,  // 11: selling_iface.v1.Metric.payable:type_name -> selling_iface.v1.PayableMetric
-	7,  // 12: selling_iface.v1.Metric.receivable:type_name -> selling_iface.v1.ReceivableMetric
-	2,  // 13: selling_iface.v1.StatRequest.range:type_name -> selling_iface.v1.TimeRange
-	9,  // 14: selling_iface.v1.StatRequest.filter:type_name -> selling_iface.v1.StatFilter
-	1,  // 15: selling_iface.v1.StatRequest.metric_types:type_name -> selling_iface.v1.MetricType
-	8,  // 16: selling_iface.v1.StatResponse.metrics:type_name -> selling_iface.v1.Metric
-	10, // 17: selling_iface.v1.SellingStatService.Stat:input_type -> selling_iface.v1.StatRequest
-	11, // 18: selling_iface.v1.SellingStatService.Stat:output_type -> selling_iface.v1.StatResponse
-	18, // [18:19] is the sub-list for method output_type
-	17, // [17:18] is the sub-list for method input_type
-	17, // [17:17] is the sub-list for extension type_name
-	17, // [17:17] is the sub-list for extension extendee
-	0,  // [0:17] is the sub-list for field type_name
+	13, // 2: selling_iface.v1.TimeRange.type:type_name -> selling_iface.v1.TimeType
+	14, // 3: selling_iface.v1.TotalStockMetric.type:type_name -> selling_iface.v1.MetricType
+	14, // 4: selling_iface.v1.OngoingStockMetric.type:type_name -> selling_iface.v1.MetricType
+	14, // 5: selling_iface.v1.ReadyStockMetric.type:type_name -> selling_iface.v1.MetricType
+	14, // 6: selling_iface.v1.PayableMetric.type:type_name -> selling_iface.v1.MetricType
+	14, // 7: selling_iface.v1.ReceivableMetric.type:type_name -> selling_iface.v1.MetricType
+	1,  // 8: selling_iface.v1.Metric.total_stock:type_name -> selling_iface.v1.TotalStockMetric
+	2,  // 9: selling_iface.v1.Metric.ongoing_stock:type_name -> selling_iface.v1.OngoingStockMetric
+	3,  // 10: selling_iface.v1.Metric.ready_stock:type_name -> selling_iface.v1.ReadyStockMetric
+	4,  // 11: selling_iface.v1.Metric.payable:type_name -> selling_iface.v1.PayableMetric
+	5,  // 12: selling_iface.v1.Metric.receivable:type_name -> selling_iface.v1.ReceivableMetric
+	15, // 13: selling_iface.v1.Metric.product_sold:type_name -> selling_iface.v1.ProductSoldMetric
+	16, // 14: selling_iface.v1.Metric.history_product_sold:type_name -> selling_iface.v1.HistoryProductSoldMetric
+	17, // 15: selling_iface.v1.Metric.order_active:type_name -> selling_iface.v1.OrderActiveMetric
+	18, // 16: selling_iface.v1.Metric.history_order:type_name -> selling_iface.v1.HistoryOrderMetric
+	0,  // 17: selling_iface.v1.StatRequest.range:type_name -> selling_iface.v1.TimeRange
+	7,  // 18: selling_iface.v1.StatRequest.filter:type_name -> selling_iface.v1.StatFilter
+	14, // 19: selling_iface.v1.StatRequest.metric_types:type_name -> selling_iface.v1.MetricType
+	6,  // 20: selling_iface.v1.StatResponse.metrics:type_name -> selling_iface.v1.Metric
+	0,  // 21: selling_iface.v1.StatStreamRequest.range:type_name -> selling_iface.v1.TimeRange
+	7,  // 22: selling_iface.v1.StatStreamRequest.filter:type_name -> selling_iface.v1.StatFilter
+	14, // 23: selling_iface.v1.StatStreamRequest.metric_types:type_name -> selling_iface.v1.MetricType
+	6,  // 24: selling_iface.v1.StatStreamResponse.metric:type_name -> selling_iface.v1.Metric
+	8,  // 25: selling_iface.v1.SellingStatService.Stat:input_type -> selling_iface.v1.StatRequest
+	10, // 26: selling_iface.v1.SellingStatService.StatStream:input_type -> selling_iface.v1.StatStreamRequest
+	9,  // 27: selling_iface.v1.SellingStatService.Stat:output_type -> selling_iface.v1.StatResponse
+	11, // 28: selling_iface.v1.SellingStatService.StatStream:output_type -> selling_iface.v1.StatStreamResponse
+	27, // [27:29] is the sub-list for method output_type
+	25, // [25:27] is the sub-list for method input_type
+	25, // [25:25] is the sub-list for extension type_name
+	25, // [25:25] is the sub-list for extension extendee
+	0,  // [0:25] is the sub-list for field type_name
 }
 
 func init() { file_selling_iface_v1_selling_stat_service_proto_init() }
@@ -1042,26 +1110,32 @@ func file_selling_iface_v1_selling_stat_service_proto_init() {
 	if File_selling_iface_v1_selling_stat_service_proto != nil {
 		return
 	}
+	file_selling_iface_v1_metric_proto_init()
+	file_selling_iface_v1_order_metric_proto_init()
+	file_selling_iface_v1_product_metric_proto_init()
 	file_selling_iface_v1_selling_stat_service_proto_msgTypes[6].OneofWrappers = []any{
 		(*Metric_TotalStock)(nil),
 		(*Metric_OngoingStock)(nil),
 		(*Metric_ReadyStock)(nil),
 		(*Metric_Payable)(nil),
 		(*Metric_Receivable)(nil),
+		(*Metric_ProductSold)(nil),
+		(*Metric_HistoryProductSold)(nil),
+		(*Metric_OrderActive)(nil),
+		(*Metric_HistoryOrder)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_selling_iface_v1_selling_stat_service_proto_rawDesc), len(file_selling_iface_v1_selling_stat_service_proto_rawDesc)),
-			NumEnums:      2,
-			NumMessages:   10,
+			NumEnums:      0,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
 		GoTypes:           file_selling_iface_v1_selling_stat_service_proto_goTypes,
 		DependencyIndexes: file_selling_iface_v1_selling_stat_service_proto_depIdxs,
-		EnumInfos:         file_selling_iface_v1_selling_stat_service_proto_enumTypes,
 		MessageInfos:      file_selling_iface_v1_selling_stat_service_proto_msgTypes,
 	}.Build()
 	File_selling_iface_v1_selling_stat_service_proto = out.File

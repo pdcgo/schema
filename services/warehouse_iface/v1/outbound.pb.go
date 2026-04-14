@@ -1295,166 +1295,6 @@ func (x *OutboundListRequest) GetPage() *v1.PageFilter {
 	return nil
 }
 
-type SkuDataDetail struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ProductId     uint64                 `protobuf:"varint,1,opt,name=product_id,json=productId,proto3" json:"product_id,omitempty"`
-	VariantId     uint64                 `protobuf:"varint,2,opt,name=variant_id,json=variantId,proto3" json:"variant_id,omitempty"`
-	WarehouseId   uint64                 `protobuf:"varint,3,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
-	TeamId        uint64                 `protobuf:"varint,4,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SkuDataDetail) Reset() {
-	*x = SkuDataDetail{}
-	mi := &file_warehouse_iface_v1_outbound_proto_msgTypes[13]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SkuDataDetail) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SkuDataDetail) ProtoMessage() {}
-
-func (x *SkuDataDetail) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_outbound_proto_msgTypes[13]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SkuDataDetail.ProtoReflect.Descriptor instead.
-func (*SkuDataDetail) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_outbound_proto_rawDescGZIP(), []int{13}
-}
-
-func (x *SkuDataDetail) GetProductId() uint64 {
-	if x != nil {
-		return x.ProductId
-	}
-	return 0
-}
-
-func (x *SkuDataDetail) GetVariantId() uint64 {
-	if x != nil {
-		return x.VariantId
-	}
-	return 0
-}
-
-func (x *SkuDataDetail) GetWarehouseId() uint64 {
-	if x != nil {
-		return x.WarehouseId
-	}
-	return 0
-}
-
-func (x *SkuDataDetail) GetTeamId() uint64 {
-	if x != nil {
-		return x.TeamId
-	}
-	return 0
-}
-
-type OutboundItem struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	SkuId         string                 `protobuf:"bytes,2,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
-	Owned         bool                   `protobuf:"varint,3,opt,name=owned,proto3" json:"owned,omitempty"`
-	Count         int64                  `protobuf:"varint,4,opt,name=count,proto3" json:"count,omitempty"`
-	Price         float64                `protobuf:"fixed64,5,opt,name=price,proto3" json:"price,omitempty"`
-	Total         float64                `protobuf:"fixed64,6,opt,name=total,proto3" json:"total,omitempty"`
-	SkuDetail     *SkuDataDetail         `protobuf:"bytes,7,opt,name=sku_detail,json=skuDetail,proto3" json:"sku_detail,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *OutboundItem) Reset() {
-	*x = OutboundItem{}
-	mi := &file_warehouse_iface_v1_outbound_proto_msgTypes[14]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *OutboundItem) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*OutboundItem) ProtoMessage() {}
-
-func (x *OutboundItem) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_outbound_proto_msgTypes[14]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use OutboundItem.ProtoReflect.Descriptor instead.
-func (*OutboundItem) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_outbound_proto_rawDescGZIP(), []int{14}
-}
-
-func (x *OutboundItem) GetId() uint64 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
-}
-
-func (x *OutboundItem) GetSkuId() string {
-	if x != nil {
-		return x.SkuId
-	}
-	return ""
-}
-
-func (x *OutboundItem) GetOwned() bool {
-	if x != nil {
-		return x.Owned
-	}
-	return false
-}
-
-func (x *OutboundItem) GetCount() int64 {
-	if x != nil {
-		return x.Count
-	}
-	return 0
-}
-
-func (x *OutboundItem) GetPrice() float64 {
-	if x != nil {
-		return x.Price
-	}
-	return 0
-}
-
-func (x *OutboundItem) GetTotal() float64 {
-	if x != nil {
-		return x.Total
-	}
-	return 0
-}
-
-func (x *OutboundItem) GetSkuDetail() *SkuDataDetail {
-	if x != nil {
-		return x.SkuDetail
-	}
-	return nil
-}
-
 type Order struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -1468,7 +1308,7 @@ type Order struct {
 
 func (x *Order) Reset() {
 	*x = Order{}
-	mi := &file_warehouse_iface_v1_outbound_proto_msgTypes[15]
+	mi := &file_warehouse_iface_v1_outbound_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1480,7 +1320,7 @@ func (x *Order) String() string {
 func (*Order) ProtoMessage() {}
 
 func (x *Order) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_outbound_proto_msgTypes[15]
+	mi := &file_warehouse_iface_v1_outbound_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1493,7 +1333,7 @@ func (x *Order) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Order.ProtoReflect.Descriptor instead.
 func (*Order) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_outbound_proto_rawDescGZIP(), []int{15}
+	return file_warehouse_iface_v1_outbound_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *Order) GetId() uint64 {
@@ -1541,7 +1381,7 @@ type TransferFrom struct {
 
 func (x *TransferFrom) Reset() {
 	*x = TransferFrom{}
-	mi := &file_warehouse_iface_v1_outbound_proto_msgTypes[16]
+	mi := &file_warehouse_iface_v1_outbound_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1553,7 +1393,7 @@ func (x *TransferFrom) String() string {
 func (*TransferFrom) ProtoMessage() {}
 
 func (x *TransferFrom) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_outbound_proto_msgTypes[16]
+	mi := &file_warehouse_iface_v1_outbound_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1566,7 +1406,7 @@ func (x *TransferFrom) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TransferFrom.ProtoReflect.Descriptor instead.
 func (*TransferFrom) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_outbound_proto_rawDescGZIP(), []int{16}
+	return file_warehouse_iface_v1_outbound_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *TransferFrom) GetId() uint64 {
@@ -1609,7 +1449,7 @@ type Outbound struct {
 
 func (x *Outbound) Reset() {
 	*x = Outbound{}
-	mi := &file_warehouse_iface_v1_outbound_proto_msgTypes[17]
+	mi := &file_warehouse_iface_v1_outbound_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1621,7 +1461,7 @@ func (x *Outbound) String() string {
 func (*Outbound) ProtoMessage() {}
 
 func (x *Outbound) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_outbound_proto_msgTypes[17]
+	mi := &file_warehouse_iface_v1_outbound_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1634,7 +1474,7 @@ func (x *Outbound) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Outbound.ProtoReflect.Descriptor instead.
 func (*Outbound) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_outbound_proto_rawDescGZIP(), []int{17}
+	return file_warehouse_iface_v1_outbound_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *Outbound) GetId() uint64 {
@@ -1779,7 +1619,7 @@ type OutboundListResponse struct {
 
 func (x *OutboundListResponse) Reset() {
 	*x = OutboundListResponse{}
-	mi := &file_warehouse_iface_v1_outbound_proto_msgTypes[18]
+	mi := &file_warehouse_iface_v1_outbound_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1791,7 +1631,7 @@ func (x *OutboundListResponse) String() string {
 func (*OutboundListResponse) ProtoMessage() {}
 
 func (x *OutboundListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_outbound_proto_msgTypes[18]
+	mi := &file_warehouse_iface_v1_outbound_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1804,7 +1644,7 @@ func (x *OutboundListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OutboundListResponse.ProtoReflect.Descriptor instead.
 func (*OutboundListResponse) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_outbound_proto_rawDescGZIP(), []int{18}
+	return file_warehouse_iface_v1_outbound_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *OutboundListResponse) GetData() []*Outbound {
@@ -1915,23 +1755,7 @@ const file_warehouse_iface_v1_outbound_proto_rawDesc = "" +
 	"\x13OutboundListRequest\x12F\n" +
 	"\x06filter\x18\x01 \x01(\v2&.warehouse_iface.v1.OutboundListFilterB\x06\xbaH\x03\xc8\x01\x01R\x06filter\x12<\n" +
 	"\x04sort\x18\x02 \x01(\v2 .warehouse_iface.v1.OutboundSortB\x06\xbaH\x03\xc8\x01\x01R\x04sort\x121\n" +
-	"\x04page\x18\x03 \x01(\v2\x15.common.v1.PageFilterB\x06\xbaH\x03\xc8\x01\x01R\x04page\"\x89\x01\n" +
-	"\rSkuDataDetail\x12\x1d\n" +
-	"\n" +
-	"product_id\x18\x01 \x01(\x04R\tproductId\x12\x1d\n" +
-	"\n" +
-	"variant_id\x18\x02 \x01(\x04R\tvariantId\x12!\n" +
-	"\fwarehouse_id\x18\x03 \x01(\x04R\vwarehouseId\x12\x17\n" +
-	"\ateam_id\x18\x04 \x01(\x04R\x06teamId\"\xcf\x01\n" +
-	"\fOutboundItem\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x15\n" +
-	"\x06sku_id\x18\x02 \x01(\tR\x05skuId\x12\x14\n" +
-	"\x05owned\x18\x03 \x01(\bR\x05owned\x12\x14\n" +
-	"\x05count\x18\x04 \x01(\x03R\x05count\x12\x14\n" +
-	"\x05price\x18\x05 \x01(\x01R\x05price\x12\x14\n" +
-	"\x05total\x18\x06 \x01(\x01R\x05total\x12@\n" +
-	"\n" +
-	"sku_detail\x18\a \x01(\v2!.warehouse_iface.v1.SkuDataDetailR\tskuDetail\"\xcd\x01\n" +
+	"\x04page\x18\x03 \x01(\v2\x15.common.v1.PageFilterB\x06\xbaH\x03\xc8\x01\x01R\x04page\"\xcd\x01\n" +
 	"\x05Order\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x17\n" +
 	"\ashop_id\x18\x02 \x01(\x04R\x06shopId\x12\x1f\n" +
@@ -2015,7 +1839,7 @@ func file_warehouse_iface_v1_outbound_proto_rawDescGZIP() []byte {
 }
 
 var file_warehouse_iface_v1_outbound_proto_enumTypes = make([]protoimpl.EnumInfo, 6)
-var file_warehouse_iface_v1_outbound_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
+var file_warehouse_iface_v1_outbound_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
 var file_warehouse_iface_v1_outbound_proto_goTypes = []any{
 	(OutboundDetailSearchType)(0),        // 0: warehouse_iface.v1.OutboundDetailSearchType
 	(ShipmentStatus)(0),                  // 1: warehouse_iface.v1.ShipmentStatus
@@ -2036,69 +1860,67 @@ var file_warehouse_iface_v1_outbound_proto_goTypes = []any{
 	(*OutboundSort)(nil),                 // 16: warehouse_iface.v1.OutboundSort
 	(*OutboundListFilter)(nil),           // 17: warehouse_iface.v1.OutboundListFilter
 	(*OutboundListRequest)(nil),          // 18: warehouse_iface.v1.OutboundListRequest
-	(*SkuDataDetail)(nil),                // 19: warehouse_iface.v1.SkuDataDetail
-	(*OutboundItem)(nil),                 // 20: warehouse_iface.v1.OutboundItem
-	(*Order)(nil),                        // 21: warehouse_iface.v1.Order
-	(*TransferFrom)(nil),                 // 22: warehouse_iface.v1.TransferFrom
-	(*Outbound)(nil),                     // 23: warehouse_iface.v1.Outbound
-	(*OutboundListResponse)(nil),         // 24: warehouse_iface.v1.OutboundListResponse
-	nil,                                  // 25: warehouse_iface.v1.OutboundDetailIDsResponse.DataEntry
-	(*timestamppb.Timestamp)(nil),        // 26: google.protobuf.Timestamp
-	(*v1.TimeFilterRange)(nil),           // 27: common.v1.TimeFilterRange
-	(*v1.PageFilter)(nil),                // 28: common.v1.PageFilter
-	(*v1.PageInfo)(nil),                  // 29: common.v1.PageInfo
-	(v1.SortType)(0),                     // 30: common.v1.SortType
-	(v1.MarketplaceType)(0),              // 31: common.v1.MarketplaceType
-	(*OrderDetailSearchRequest)(nil),     // 32: warehouse_iface.v1.OrderDetailSearchRequest
-	(*OrderDetailSearchResponse)(nil),    // 33: warehouse_iface.v1.OrderDetailSearchResponse
+	(*Order)(nil),                        // 19: warehouse_iface.v1.Order
+	(*TransferFrom)(nil),                 // 20: warehouse_iface.v1.TransferFrom
+	(*Outbound)(nil),                     // 21: warehouse_iface.v1.Outbound
+	(*OutboundListResponse)(nil),         // 22: warehouse_iface.v1.OutboundListResponse
+	nil,                                  // 23: warehouse_iface.v1.OutboundDetailIDsResponse.DataEntry
+	(*timestamppb.Timestamp)(nil),        // 24: google.protobuf.Timestamp
+	(*v1.TimeFilterRange)(nil),           // 25: common.v1.TimeFilterRange
+	(*v1.PageFilter)(nil),                // 26: common.v1.PageFilter
+	(*v1.PageInfo)(nil),                  // 27: common.v1.PageInfo
+	(v1.SortType)(0),                     // 28: common.v1.SortType
+	(v1.MarketplaceType)(0),              // 29: common.v1.MarketplaceType
+	(*OutboundItem)(nil),                 // 30: warehouse_iface.v1.OutboundItem
+	(*OrderDetailSearchRequest)(nil),     // 31: warehouse_iface.v1.OrderDetailSearchRequest
+	(*OrderDetailSearchResponse)(nil),    // 32: warehouse_iface.v1.OrderDetailSearchResponse
 }
 var file_warehouse_iface_v1_outbound_proto_depIdxs = []int32{
-	26, // 0: warehouse_iface.v1.OrderDetail.order_time:type_name -> google.protobuf.Timestamp
-	27, // 1: warehouse_iface.v1.OutboundByProductFilter.time_range:type_name -> common.v1.TimeFilterRange
+	24, // 0: warehouse_iface.v1.OrderDetail.order_time:type_name -> google.protobuf.Timestamp
+	25, // 1: warehouse_iface.v1.OutboundByProductFilter.time_range:type_name -> common.v1.TimeFilterRange
 	7,  // 2: warehouse_iface.v1.OutboundByProductRequest.filter:type_name -> warehouse_iface.v1.OutboundByProductFilter
-	28, // 3: warehouse_iface.v1.OutboundByProductRequest.page:type_name -> common.v1.PageFilter
+	26, // 3: warehouse_iface.v1.OutboundByProductRequest.page:type_name -> common.v1.PageFilter
 	9,  // 4: warehouse_iface.v1.OutboundByProductItem.variant:type_name -> warehouse_iface.v1.OutboundByProductItemVariant
 	10, // 5: warehouse_iface.v1.OutboundByProductResponse.data:type_name -> warehouse_iface.v1.OutboundByProductItem
-	29, // 6: warehouse_iface.v1.OutboundByProductResponse.page_info:type_name -> common.v1.PageInfo
-	25, // 7: warehouse_iface.v1.OutboundDetailIDsResponse.data:type_name -> warehouse_iface.v1.OutboundDetailIDsResponse.DataEntry
+	27, // 6: warehouse_iface.v1.OutboundByProductResponse.page_info:type_name -> common.v1.PageInfo
+	23, // 7: warehouse_iface.v1.OutboundDetailIDsResponse.data:type_name -> warehouse_iface.v1.OutboundDetailIDsResponse.DataEntry
 	0,  // 8: warehouse_iface.v1.OutboundDetailRequest.search_type:type_name -> warehouse_iface.v1.OutboundDetailSearchType
-	23, // 9: warehouse_iface.v1.OutboundDetailResponse.outbound:type_name -> warehouse_iface.v1.Outbound
+	21, // 9: warehouse_iface.v1.OutboundDetailResponse.outbound:type_name -> warehouse_iface.v1.Outbound
 	6,  // 10: warehouse_iface.v1.OutboundDetailResponse.order_detail:type_name -> warehouse_iface.v1.OrderDetail
 	2,  // 11: warehouse_iface.v1.OutboundSort.field:type_name -> warehouse_iface.v1.OutboundSortField
-	30, // 12: warehouse_iface.v1.OutboundSort.type:type_name -> common.v1.SortType
+	28, // 12: warehouse_iface.v1.OutboundSort.type:type_name -> common.v1.SortType
 	4,  // 13: warehouse_iface.v1.OutboundListFilter.search_type:type_name -> warehouse_iface.v1.OutboundSearchType
 	1,  // 14: warehouse_iface.v1.OutboundListFilter.shipment:type_name -> warehouse_iface.v1.ShipmentStatus
-	31, // 15: warehouse_iface.v1.OutboundListFilter.marketplaces:type_name -> common.v1.MarketplaceType
+	29, // 15: warehouse_iface.v1.OutboundListFilter.marketplaces:type_name -> common.v1.MarketplaceType
 	3,  // 16: warehouse_iface.v1.OutboundListFilter.outbound_type:type_name -> warehouse_iface.v1.OutboundType
-	27, // 17: warehouse_iface.v1.OutboundListFilter.time_range:type_name -> common.v1.TimeFilterRange
+	25, // 17: warehouse_iface.v1.OutboundListFilter.time_range:type_name -> common.v1.TimeFilterRange
 	17, // 18: warehouse_iface.v1.OutboundListRequest.filter:type_name -> warehouse_iface.v1.OutboundListFilter
 	16, // 19: warehouse_iface.v1.OutboundListRequest.sort:type_name -> warehouse_iface.v1.OutboundSort
-	28, // 20: warehouse_iface.v1.OutboundListRequest.page:type_name -> common.v1.PageFilter
-	19, // 21: warehouse_iface.v1.OutboundItem.sku_detail:type_name -> warehouse_iface.v1.SkuDataDetail
-	26, // 22: warehouse_iface.v1.Order.order_time:type_name -> google.protobuf.Timestamp
-	26, // 23: warehouse_iface.v1.Order.deadline_time:type_name -> google.protobuf.Timestamp
-	20, // 24: warehouse_iface.v1.Outbound.items:type_name -> warehouse_iface.v1.OutboundItem
-	26, // 25: warehouse_iface.v1.Outbound.created:type_name -> google.protobuf.Timestamp
-	21, // 26: warehouse_iface.v1.Outbound.order:type_name -> warehouse_iface.v1.Order
-	22, // 27: warehouse_iface.v1.Outbound.transfer_from:type_name -> warehouse_iface.v1.TransferFrom
-	23, // 28: warehouse_iface.v1.OutboundListResponse.data:type_name -> warehouse_iface.v1.Outbound
-	29, // 29: warehouse_iface.v1.OutboundListResponse.page_info:type_name -> common.v1.PageInfo
-	15, // 30: warehouse_iface.v1.OutboundDetailIDsResponse.DataEntry.value:type_name -> warehouse_iface.v1.OutboundDetailResponse
-	18, // 31: warehouse_iface.v1.OutboundService.OutboundList:input_type -> warehouse_iface.v1.OutboundListRequest
-	14, // 32: warehouse_iface.v1.OutboundService.OutboundDetail:input_type -> warehouse_iface.v1.OutboundDetailRequest
-	12, // 33: warehouse_iface.v1.OutboundService.OutboundDetailIDs:input_type -> warehouse_iface.v1.OutboundDetailIDsRequest
-	32, // 34: warehouse_iface.v1.OutboundService.OrderDetailSearch:input_type -> warehouse_iface.v1.OrderDetailSearchRequest
-	8,  // 35: warehouse_iface.v1.OutboundService.OutboundByProduct:input_type -> warehouse_iface.v1.OutboundByProductRequest
-	24, // 36: warehouse_iface.v1.OutboundService.OutboundList:output_type -> warehouse_iface.v1.OutboundListResponse
-	15, // 37: warehouse_iface.v1.OutboundService.OutboundDetail:output_type -> warehouse_iface.v1.OutboundDetailResponse
-	13, // 38: warehouse_iface.v1.OutboundService.OutboundDetailIDs:output_type -> warehouse_iface.v1.OutboundDetailIDsResponse
-	33, // 39: warehouse_iface.v1.OutboundService.OrderDetailSearch:output_type -> warehouse_iface.v1.OrderDetailSearchResponse
-	11, // 40: warehouse_iface.v1.OutboundService.OutboundByProduct:output_type -> warehouse_iface.v1.OutboundByProductResponse
-	36, // [36:41] is the sub-list for method output_type
-	31, // [31:36] is the sub-list for method input_type
-	31, // [31:31] is the sub-list for extension type_name
-	31, // [31:31] is the sub-list for extension extendee
-	0,  // [0:31] is the sub-list for field type_name
+	26, // 20: warehouse_iface.v1.OutboundListRequest.page:type_name -> common.v1.PageFilter
+	24, // 21: warehouse_iface.v1.Order.order_time:type_name -> google.protobuf.Timestamp
+	24, // 22: warehouse_iface.v1.Order.deadline_time:type_name -> google.protobuf.Timestamp
+	30, // 23: warehouse_iface.v1.Outbound.items:type_name -> warehouse_iface.v1.OutboundItem
+	24, // 24: warehouse_iface.v1.Outbound.created:type_name -> google.protobuf.Timestamp
+	19, // 25: warehouse_iface.v1.Outbound.order:type_name -> warehouse_iface.v1.Order
+	20, // 26: warehouse_iface.v1.Outbound.transfer_from:type_name -> warehouse_iface.v1.TransferFrom
+	21, // 27: warehouse_iface.v1.OutboundListResponse.data:type_name -> warehouse_iface.v1.Outbound
+	27, // 28: warehouse_iface.v1.OutboundListResponse.page_info:type_name -> common.v1.PageInfo
+	15, // 29: warehouse_iface.v1.OutboundDetailIDsResponse.DataEntry.value:type_name -> warehouse_iface.v1.OutboundDetailResponse
+	18, // 30: warehouse_iface.v1.OutboundService.OutboundList:input_type -> warehouse_iface.v1.OutboundListRequest
+	14, // 31: warehouse_iface.v1.OutboundService.OutboundDetail:input_type -> warehouse_iface.v1.OutboundDetailRequest
+	12, // 32: warehouse_iface.v1.OutboundService.OutboundDetailIDs:input_type -> warehouse_iface.v1.OutboundDetailIDsRequest
+	31, // 33: warehouse_iface.v1.OutboundService.OrderDetailSearch:input_type -> warehouse_iface.v1.OrderDetailSearchRequest
+	8,  // 34: warehouse_iface.v1.OutboundService.OutboundByProduct:input_type -> warehouse_iface.v1.OutboundByProductRequest
+	22, // 35: warehouse_iface.v1.OutboundService.OutboundList:output_type -> warehouse_iface.v1.OutboundListResponse
+	15, // 36: warehouse_iface.v1.OutboundService.OutboundDetail:output_type -> warehouse_iface.v1.OutboundDetailResponse
+	13, // 37: warehouse_iface.v1.OutboundService.OutboundDetailIDs:output_type -> warehouse_iface.v1.OutboundDetailIDsResponse
+	32, // 38: warehouse_iface.v1.OutboundService.OrderDetailSearch:output_type -> warehouse_iface.v1.OrderDetailSearchResponse
+	11, // 39: warehouse_iface.v1.OutboundService.OutboundByProduct:output_type -> warehouse_iface.v1.OutboundByProductResponse
+	35, // [35:40] is the sub-list for method output_type
+	30, // [30:35] is the sub-list for method input_type
+	30, // [30:30] is the sub-list for extension type_name
+	30, // [30:30] is the sub-list for extension extendee
+	0,  // [0:30] is the sub-list for field type_name
 }
 
 func init() { file_warehouse_iface_v1_outbound_proto_init() }
@@ -2110,7 +1932,7 @@ func file_warehouse_iface_v1_outbound_proto_init() {
 	file_warehouse_iface_v1_outbound_proto_msgTypes[9].OneofWrappers = []any{
 		(*OutboundDetailResponse_OrderDetail)(nil),
 	}
-	file_warehouse_iface_v1_outbound_proto_msgTypes[17].OneofWrappers = []any{
+	file_warehouse_iface_v1_outbound_proto_msgTypes[15].OneofWrappers = []any{
 		(*Outbound_Order)(nil),
 		(*Outbound_TransferFrom)(nil),
 	}
@@ -2120,7 +1942,7 @@ func file_warehouse_iface_v1_outbound_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_warehouse_iface_v1_outbound_proto_rawDesc), len(file_warehouse_iface_v1_outbound_proto_rawDesc)),
 			NumEnums:      6,
-			NumMessages:   20,
+			NumMessages:   18,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

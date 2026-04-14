@@ -35,11 +35,15 @@ const (
 const (
 	// SellingStatServiceStatProcedure is the fully-qualified name of the SellingStatService's Stat RPC.
 	SellingStatServiceStatProcedure = "/selling_iface.v1.SellingStatService/Stat"
+	// SellingStatServiceStatStreamProcedure is the fully-qualified name of the SellingStatService's
+	// StatStream RPC.
+	SellingStatServiceStatStreamProcedure = "/selling_iface.v1.SellingStatService/StatStream"
 )
 
 // SellingStatServiceClient is a client for the selling_iface.v1.SellingStatService service.
 type SellingStatServiceClient interface {
 	Stat(context.Context, *connect.Request[v1.StatRequest]) (*connect.Response[v1.StatResponse], error)
+	StatStream(context.Context, *connect.Request[v1.StatStreamRequest]) (*connect.ServerStreamForClient[v1.StatStreamResponse], error)
 }
 
 // NewSellingStatServiceClient constructs a client for the selling_iface.v1.SellingStatService
@@ -59,12 +63,19 @@ func NewSellingStatServiceClient(httpClient connect.HTTPClient, baseURL string, 
 			connect.WithSchema(sellingStatServiceMethods.ByName("Stat")),
 			connect.WithClientOptions(opts...),
 		),
+		statStream: connect.NewClient[v1.StatStreamRequest, v1.StatStreamResponse](
+			httpClient,
+			baseURL+SellingStatServiceStatStreamProcedure,
+			connect.WithSchema(sellingStatServiceMethods.ByName("StatStream")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // sellingStatServiceClient implements SellingStatServiceClient.
 type sellingStatServiceClient struct {
-	stat *connect.Client[v1.StatRequest, v1.StatResponse]
+	stat       *connect.Client[v1.StatRequest, v1.StatResponse]
+	statStream *connect.Client[v1.StatStreamRequest, v1.StatStreamResponse]
 }
 
 // Stat calls selling_iface.v1.SellingStatService.Stat.
@@ -72,10 +83,16 @@ func (c *sellingStatServiceClient) Stat(ctx context.Context, req *connect.Reques
 	return c.stat.CallUnary(ctx, req)
 }
 
+// StatStream calls selling_iface.v1.SellingStatService.StatStream.
+func (c *sellingStatServiceClient) StatStream(ctx context.Context, req *connect.Request[v1.StatStreamRequest]) (*connect.ServerStreamForClient[v1.StatStreamResponse], error) {
+	return c.statStream.CallServerStream(ctx, req)
+}
+
 // SellingStatServiceHandler is an implementation of the selling_iface.v1.SellingStatService
 // service.
 type SellingStatServiceHandler interface {
 	Stat(context.Context, *connect.Request[v1.StatRequest]) (*connect.Response[v1.StatResponse], error)
+	StatStream(context.Context, *connect.Request[v1.StatStreamRequest], *connect.ServerStream[v1.StatStreamResponse]) error
 }
 
 // NewSellingStatServiceHandler builds an HTTP handler from the service implementation. It returns
@@ -91,10 +108,18 @@ func NewSellingStatServiceHandler(svc SellingStatServiceHandler, opts ...connect
 		connect.WithSchema(sellingStatServiceMethods.ByName("Stat")),
 		connect.WithHandlerOptions(opts...),
 	)
+	sellingStatServiceStatStreamHandler := connect.NewServerStreamHandler(
+		SellingStatServiceStatStreamProcedure,
+		svc.StatStream,
+		connect.WithSchema(sellingStatServiceMethods.ByName("StatStream")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/selling_iface.v1.SellingStatService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case SellingStatServiceStatProcedure:
 			sellingStatServiceStatHandler.ServeHTTP(w, r)
+		case SellingStatServiceStatStreamProcedure:
+			sellingStatServiceStatStreamHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -106,4 +131,8 @@ type UnimplementedSellingStatServiceHandler struct{}
 
 func (UnimplementedSellingStatServiceHandler) Stat(context.Context, *connect.Request[v1.StatRequest]) (*connect.Response[v1.StatResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("selling_iface.v1.SellingStatService.Stat is not implemented"))
+}
+
+func (UnimplementedSellingStatServiceHandler) StatStream(context.Context, *connect.Request[v1.StatStreamRequest], *connect.ServerStream[v1.StatStreamResponse]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("selling_iface.v1.SellingStatService.StatStream is not implemented"))
 }

@@ -3,28 +3,15 @@ package selling_iface.v1;
 
 import "buf/validate/validate.proto";
 import "google/protobuf/timestamp.proto";
+import "selling_iface/v1/metric.proto";
+import "selling_iface/v1/order_metric.proto";
+import "selling_iface/v1/product_metric.proto";
 
 option go_package = "github.com/pdcgo/schema/services/selling_iface/v1;selling_iface";
 
 service SellingStatService {
   rpc Stat(StatRequest) returns (StatResponse);
-}
-
-enum TimeType {
-  TIME_TYPE_UNSPECIFIED = 0;
-  TIME_TYPE_DAY = 1;
-  TIME_TYPE_WEEK = 2;
-  TIME_TYPE_MONTH = 3;
-  TIME_TYPE_YEAR = 4;
-}
-
-enum MetricType {
-  METRIC_TYPE_UNSPECIFIED = 0;
-  METRIC_TYPE_TOTAL_STOCK = 1;
-  METRIC_TYPE_ONGOING_STOCK = 2;
-  METRIC_TYPE_READY_STOCK = 3;
-  METRIC_TYPE_PAYABLE = 4;
-  METRIC_TYPE_RECEIVABLE = 5;
+  rpc StatStream(StatStreamRequest) returns (stream StatStreamResponse);
 }
 
 message TimeRange {
@@ -89,6 +76,10 @@ message Metric {
     ReadyStockMetric ready_stock = 3;
     PayableMetric payable = 4;
     ReceivableMetric receivable = 5;
+    ProductSoldMetric product_sold = 6;
+    HistoryProductSoldMetric history_product_sold = 7;
+    OrderActiveMetric order_active = 8;
+    HistoryOrderMetric history_order = 9;
   }
 }
 
@@ -107,4 +98,18 @@ message StatRequest {
 
 message StatResponse {
   repeated Metric metrics = 1;
+}
+
+message StatStreamRequest {
+  TimeRange range = 1 [(buf.validate.field).required = true];
+  StatFilter filter = 2;
+  repeated MetricType metric_types = 3 [(buf.validate.field).repeated = {
+    min_items: 1
+    max_items: 100
+    unique: true
+  }];
+}
+
+message StatStreamResponse {
+  Metric metric = 1;
 }
