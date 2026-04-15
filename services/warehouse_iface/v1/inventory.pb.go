@@ -222,6 +222,7 @@ type ProductDetail struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	Image         string                 `protobuf:"bytes,2,opt,name=image,proto3" json:"image,omitempty"`
+	RefId         string                 `protobuf:"bytes,3,opt,name=ref_id,json=refId,proto3" json:"ref_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -270,19 +271,73 @@ func (x *ProductDetail) GetImage() string {
 	return ""
 }
 
-type SkuListItem struct {
-	state     protoimpl.MessageState `protogen:"open.v1"`
-	SkuId     string                 `protobuf:"bytes,1,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
-	ProductId uint64                 `protobuf:"varint,2,opt,name=product_id,json=productId,proto3" json:"product_id,omitempty"`
-	// @gotags: gorm:"-"
-	ProductDetail *ProductDetail `protobuf:"bytes,4,opt,name=product_detail,json=productDetail,proto3" json:"product_detail,omitempty" gorm:"-"`
+func (x *ProductDetail) GetRefId() string {
+	if x != nil {
+		return x.RefId
+	}
+	return ""
+}
+
+type VariationDetail struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	RefId         string                 `protobuf:"bytes,1,opt,name=ref_id,json=refId,proto3" json:"ref_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
+func (x *VariationDetail) Reset() {
+	*x = VariationDetail{}
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *VariationDetail) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*VariationDetail) ProtoMessage() {}
+
+func (x *VariationDetail) ProtoReflect() protoreflect.Message {
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use VariationDetail.ProtoReflect.Descriptor instead.
+func (*VariationDetail) Descriptor() ([]byte, []int) {
+	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *VariationDetail) GetRefId() string {
+	if x != nil {
+		return x.RefId
+	}
+	return ""
+}
+
+type SkuListItem struct {
+	state     protoimpl.MessageState `protogen:"open.v1"`
+	SkuId     string                 `protobuf:"bytes,1,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
+	ProductId uint64                 `protobuf:"varint,2,opt,name=product_id,json=productId,proto3" json:"product_id,omitempty"`
+	VariantId uint64                 `protobuf:"varint,6,opt,name=variant_id,json=variantId,proto3" json:"variant_id,omitempty"`
+	// @gotags: gorm:"-"
+	ProductDetail *ProductDetail `protobuf:"bytes,4,opt,name=product_detail,json=productDetail,proto3" json:"product_detail,omitempty" gorm:"-"`
+	// @gotags: gorm:"-"
+	VariationDetail *VariationDetail `protobuf:"bytes,5,opt,name=variation_detail,json=variationDetail,proto3" json:"variation_detail,omitempty" gorm:"-"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
 func (x *SkuListItem) Reset() {
 	*x = SkuListItem{}
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[3]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -294,7 +349,7 @@ func (x *SkuListItem) String() string {
 func (*SkuListItem) ProtoMessage() {}
 
 func (x *SkuListItem) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[3]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -307,7 +362,7 @@ func (x *SkuListItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SkuListItem.ProtoReflect.Descriptor instead.
 func (*SkuListItem) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{3}
+	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *SkuListItem) GetSkuId() string {
@@ -324,9 +379,23 @@ func (x *SkuListItem) GetProductId() uint64 {
 	return 0
 }
 
+func (x *SkuListItem) GetVariantId() uint64 {
+	if x != nil {
+		return x.VariantId
+	}
+	return 0
+}
+
 func (x *SkuListItem) GetProductDetail() *ProductDetail {
 	if x != nil {
 		return x.ProductDetail
+	}
+	return nil
+}
+
+func (x *SkuListItem) GetVariationDetail() *VariationDetail {
+	if x != nil {
+		return x.VariationDetail
 	}
 	return nil
 }
@@ -343,7 +412,7 @@ type SkuListRequest struct {
 
 func (x *SkuListRequest) Reset() {
 	*x = SkuListRequest{}
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[4]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -355,7 +424,7 @@ func (x *SkuListRequest) String() string {
 func (*SkuListRequest) ProtoMessage() {}
 
 func (x *SkuListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[4]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -368,7 +437,7 @@ func (x *SkuListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SkuListRequest.ProtoReflect.Descriptor instead.
 func (*SkuListRequest) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{4}
+	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *SkuListRequest) GetTeamIds() []uint64 {
@@ -409,7 +478,7 @@ type SkuListResponse struct {
 
 func (x *SkuListResponse) Reset() {
 	*x = SkuListResponse{}
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[5]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -421,7 +490,7 @@ func (x *SkuListResponse) String() string {
 func (*SkuListResponse) ProtoMessage() {}
 
 func (x *SkuListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[5]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -434,7 +503,7 @@ func (x *SkuListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SkuListResponse.ProtoReflect.Descriptor instead.
 func (*SkuListResponse) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{5}
+	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *SkuListResponse) GetSkus() []*SkuListItem {
@@ -461,7 +530,7 @@ type ProductHistoryRequestFilter struct {
 
 func (x *ProductHistoryRequestFilter) Reset() {
 	*x = ProductHistoryRequestFilter{}
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[6]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -473,7 +542,7 @@ func (x *ProductHistoryRequestFilter) String() string {
 func (*ProductHistoryRequestFilter) ProtoMessage() {}
 
 func (x *ProductHistoryRequestFilter) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[6]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -486,7 +555,7 @@ func (x *ProductHistoryRequestFilter) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProductHistoryRequestFilter.ProtoReflect.Descriptor instead.
 func (*ProductHistoryRequestFilter) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{6}
+	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *ProductHistoryRequestFilter) GetSkuId() string {
@@ -513,7 +582,7 @@ type ProductHistoryRequest struct {
 
 func (x *ProductHistoryRequest) Reset() {
 	*x = ProductHistoryRequest{}
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[7]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -525,7 +594,7 @@ func (x *ProductHistoryRequest) String() string {
 func (*ProductHistoryRequest) ProtoMessage() {}
 
 func (x *ProductHistoryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[7]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -538,7 +607,7 @@ func (x *ProductHistoryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProductHistoryRequest.ProtoReflect.Descriptor instead.
 func (*ProductHistoryRequest) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{7}
+	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *ProductHistoryRequest) GetFilter() *ProductHistoryRequestFilter {
@@ -575,7 +644,7 @@ type HistoryItem struct {
 
 func (x *HistoryItem) Reset() {
 	*x = HistoryItem{}
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[8]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -587,7 +656,7 @@ func (x *HistoryItem) String() string {
 func (*HistoryItem) ProtoMessage() {}
 
 func (x *HistoryItem) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[8]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -600,7 +669,7 @@ func (x *HistoryItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HistoryItem.ProtoReflect.Descriptor instead.
 func (*HistoryItem) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{8}
+	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *HistoryItem) GetId() uint64 {
@@ -697,7 +766,7 @@ type ProductHistoryResponse struct {
 
 func (x *ProductHistoryResponse) Reset() {
 	*x = ProductHistoryResponse{}
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[9]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -709,7 +778,7 @@ func (x *ProductHistoryResponse) String() string {
 func (*ProductHistoryResponse) ProtoMessage() {}
 
 func (x *ProductHistoryResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[9]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -722,7 +791,7 @@ func (x *ProductHistoryResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProductHistoryResponse.ProtoReflect.Descriptor instead.
 func (*ProductHistoryResponse) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{9}
+	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *ProductHistoryResponse) GetData() []*HistoryItem {
@@ -754,7 +823,7 @@ type ProductListRequestFilter struct {
 
 func (x *ProductListRequestFilter) Reset() {
 	*x = ProductListRequestFilter{}
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[10]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -766,7 +835,7 @@ func (x *ProductListRequestFilter) String() string {
 func (*ProductListRequestFilter) ProtoMessage() {}
 
 func (x *ProductListRequestFilter) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[10]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -779,7 +848,7 @@ func (x *ProductListRequestFilter) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProductListRequestFilter.ProtoReflect.Descriptor instead.
 func (*ProductListRequestFilter) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{10}
+	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *ProductListRequestFilter) GetSearchType() ProductSearchType {
@@ -841,7 +910,7 @@ type ProductListRequestSort struct {
 
 func (x *ProductListRequestSort) Reset() {
 	*x = ProductListRequestSort{}
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[11]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -853,7 +922,7 @@ func (x *ProductListRequestSort) String() string {
 func (*ProductListRequestSort) ProtoMessage() {}
 
 func (x *ProductListRequestSort) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[11]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -866,7 +935,7 @@ func (x *ProductListRequestSort) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProductListRequestSort.ProtoReflect.Descriptor instead.
 func (*ProductListRequestSort) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{11}
+	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *ProductListRequestSort) GetSort() ProductListSort {
@@ -894,7 +963,7 @@ type ProductListRequest struct {
 
 func (x *ProductListRequest) Reset() {
 	*x = ProductListRequest{}
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[12]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -906,7 +975,7 @@ func (x *ProductListRequest) String() string {
 func (*ProductListRequest) ProtoMessage() {}
 
 func (x *ProductListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[12]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -919,7 +988,7 @@ func (x *ProductListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProductListRequest.ProtoReflect.Descriptor instead.
 func (*ProductListRequest) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{12}
+	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *ProductListRequest) GetFilter() *ProductListRequestFilter {
@@ -965,7 +1034,7 @@ type WarehouseProduct struct {
 
 func (x *WarehouseProduct) Reset() {
 	*x = WarehouseProduct{}
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[13]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -977,7 +1046,7 @@ func (x *WarehouseProduct) String() string {
 func (*WarehouseProduct) ProtoMessage() {}
 
 func (x *WarehouseProduct) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[13]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -990,7 +1059,7 @@ func (x *WarehouseProduct) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WarehouseProduct.ProtoReflect.Descriptor instead.
 func (*WarehouseProduct) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{13}
+	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *WarehouseProduct) GetSkuId() string {
@@ -1101,7 +1170,7 @@ type ProductListResponse struct {
 
 func (x *ProductListResponse) Reset() {
 	*x = ProductListResponse{}
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[14]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1113,7 +1182,7 @@ func (x *ProductListResponse) String() string {
 func (*ProductListResponse) ProtoMessage() {}
 
 func (x *ProductListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[14]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1126,7 +1195,7 @@ func (x *ProductListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProductListResponse.ProtoReflect.Descriptor instead.
 func (*ProductListResponse) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{14}
+	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *ProductListResponse) GetData() []*WarehouseProduct {
@@ -1151,7 +1220,7 @@ type ProductDetailRequest struct {
 
 func (x *ProductDetailRequest) Reset() {
 	*x = ProductDetailRequest{}
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[15]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1163,7 +1232,7 @@ func (x *ProductDetailRequest) String() string {
 func (*ProductDetailRequest) ProtoMessage() {}
 
 func (x *ProductDetailRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[15]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1176,7 +1245,7 @@ func (x *ProductDetailRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProductDetailRequest.ProtoReflect.Descriptor instead.
 func (*ProductDetailRequest) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{15}
+	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{16}
 }
 
 type ProductDetailResponse struct {
@@ -1187,7 +1256,7 @@ type ProductDetailResponse struct {
 
 func (x *ProductDetailResponse) Reset() {
 	*x = ProductDetailResponse{}
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[16]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1199,7 +1268,7 @@ func (x *ProductDetailResponse) String() string {
 func (*ProductDetailResponse) ProtoMessage() {}
 
 func (x *ProductDetailResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[16]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1212,7 +1281,7 @@ func (x *ProductDetailResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProductDetailResponse.ProtoReflect.Descriptor instead.
 func (*ProductDetailResponse) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{16}
+	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{17}
 }
 
 type BlacklistedSkuAddRequest struct {
@@ -1224,7 +1293,7 @@ type BlacklistedSkuAddRequest struct {
 
 func (x *BlacklistedSkuAddRequest) Reset() {
 	*x = BlacklistedSkuAddRequest{}
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[17]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1236,7 +1305,7 @@ func (x *BlacklistedSkuAddRequest) String() string {
 func (*BlacklistedSkuAddRequest) ProtoMessage() {}
 
 func (x *BlacklistedSkuAddRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[17]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1249,7 +1318,7 @@ func (x *BlacklistedSkuAddRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BlacklistedSkuAddRequest.ProtoReflect.Descriptor instead.
 func (*BlacklistedSkuAddRequest) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{17}
+	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *BlacklistedSkuAddRequest) GetSkus() []string {
@@ -1267,7 +1336,7 @@ type BlacklistedSkuAddResponse struct {
 
 func (x *BlacklistedSkuAddResponse) Reset() {
 	*x = BlacklistedSkuAddResponse{}
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[18]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1279,7 +1348,7 @@ func (x *BlacklistedSkuAddResponse) String() string {
 func (*BlacklistedSkuAddResponse) ProtoMessage() {}
 
 func (x *BlacklistedSkuAddResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[18]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1292,7 +1361,7 @@ func (x *BlacklistedSkuAddResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BlacklistedSkuAddResponse.ProtoReflect.Descriptor instead.
 func (*BlacklistedSkuAddResponse) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{18}
+	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{19}
 }
 
 type BlacklistedSkuRemoveRequest struct {
@@ -1304,7 +1373,7 @@ type BlacklistedSkuRemoveRequest struct {
 
 func (x *BlacklistedSkuRemoveRequest) Reset() {
 	*x = BlacklistedSkuRemoveRequest{}
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[19]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1316,7 +1385,7 @@ func (x *BlacklistedSkuRemoveRequest) String() string {
 func (*BlacklistedSkuRemoveRequest) ProtoMessage() {}
 
 func (x *BlacklistedSkuRemoveRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[19]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1329,7 +1398,7 @@ func (x *BlacklistedSkuRemoveRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BlacklistedSkuRemoveRequest.ProtoReflect.Descriptor instead.
 func (*BlacklistedSkuRemoveRequest) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{19}
+	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *BlacklistedSkuRemoveRequest) GetSkus() []string {
@@ -1347,7 +1416,7 @@ type BlacklistedSkuRemoveResponse struct {
 
 func (x *BlacklistedSkuRemoveResponse) Reset() {
 	*x = BlacklistedSkuRemoveResponse{}
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[20]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1359,7 +1428,7 @@ func (x *BlacklistedSkuRemoveResponse) String() string {
 func (*BlacklistedSkuRemoveResponse) ProtoMessage() {}
 
 func (x *BlacklistedSkuRemoveResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[20]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1372,7 +1441,7 @@ func (x *BlacklistedSkuRemoveResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BlacklistedSkuRemoveResponse.ProtoReflect.Descriptor instead.
 func (*BlacklistedSkuRemoveResponse) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{20}
+	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{21}
 }
 
 type BlacklistedSkuRequest struct {
@@ -1384,7 +1453,7 @@ type BlacklistedSkuRequest struct {
 
 func (x *BlacklistedSkuRequest) Reset() {
 	*x = BlacklistedSkuRequest{}
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[21]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1396,7 +1465,7 @@ func (x *BlacklistedSkuRequest) String() string {
 func (*BlacklistedSkuRequest) ProtoMessage() {}
 
 func (x *BlacklistedSkuRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[21]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1409,7 +1478,7 @@ func (x *BlacklistedSkuRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BlacklistedSkuRequest.ProtoReflect.Descriptor instead.
 func (*BlacklistedSkuRequest) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{21}
+	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *BlacklistedSkuRequest) GetSkus() []string {
@@ -1430,7 +1499,7 @@ type SkuBlacklistDetail struct {
 
 func (x *SkuBlacklistDetail) Reset() {
 	*x = SkuBlacklistDetail{}
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[22]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1442,7 +1511,7 @@ func (x *SkuBlacklistDetail) String() string {
 func (*SkuBlacklistDetail) ProtoMessage() {}
 
 func (x *SkuBlacklistDetail) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[22]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1455,7 +1524,7 @@ func (x *SkuBlacklistDetail) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SkuBlacklistDetail.ProtoReflect.Descriptor instead.
 func (*SkuBlacklistDetail) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{22}
+	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *SkuBlacklistDetail) GetSkuId() string {
@@ -1488,7 +1557,7 @@ type BlacklistedSkuResponse struct {
 
 func (x *BlacklistedSkuResponse) Reset() {
 	*x = BlacklistedSkuResponse{}
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[23]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1500,7 +1569,7 @@ func (x *BlacklistedSkuResponse) String() string {
 func (*BlacklistedSkuResponse) ProtoMessage() {}
 
 func (x *BlacklistedSkuResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[23]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1513,7 +1582,7 @@ func (x *BlacklistedSkuResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BlacklistedSkuResponse.ProtoReflect.Descriptor instead.
 func (*BlacklistedSkuResponse) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{23}
+	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *BlacklistedSkuResponse) GetData() map[string]*SkuBlacklistDetail {
@@ -1532,7 +1601,7 @@ type BulkPlacement struct {
 
 func (x *BulkPlacement) Reset() {
 	*x = BulkPlacement{}
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[24]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1544,7 +1613,7 @@ func (x *BulkPlacement) String() string {
 func (*BulkPlacement) ProtoMessage() {}
 
 func (x *BulkPlacement) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[24]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1557,7 +1626,7 @@ func (x *BulkPlacement) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BulkPlacement.ProtoReflect.Descriptor instead.
 func (*BulkPlacement) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{24}
+	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *BulkPlacement) GetData() map[string]*PlacementDetail {
@@ -1576,7 +1645,7 @@ type PlacementsIDsRequest struct {
 
 func (x *PlacementsIDsRequest) Reset() {
 	*x = PlacementsIDsRequest{}
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[25]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1588,7 +1657,7 @@ func (x *PlacementsIDsRequest) String() string {
 func (*PlacementsIDsRequest) ProtoMessage() {}
 
 func (x *PlacementsIDsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[25]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1601,7 +1670,7 @@ func (x *PlacementsIDsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PlacementsIDsRequest.ProtoReflect.Descriptor instead.
 func (*PlacementsIDsRequest) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{25}
+	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *PlacementsIDsRequest) GetTxIds() []uint64 {
@@ -1620,7 +1689,7 @@ type PlacementsIDsResponse struct {
 
 func (x *PlacementsIDsResponse) Reset() {
 	*x = PlacementsIDsResponse{}
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[26]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1632,7 +1701,7 @@ func (x *PlacementsIDsResponse) String() string {
 func (*PlacementsIDsResponse) ProtoMessage() {}
 
 func (x *PlacementsIDsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[26]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1645,7 +1714,7 @@ func (x *PlacementsIDsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PlacementsIDsResponse.ProtoReflect.Descriptor instead.
 func (*PlacementsIDsResponse) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{26}
+	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *PlacementsIDsResponse) GetBulkPlacements() map[uint64]*BulkPlacement {
@@ -1665,7 +1734,7 @@ type PlacementsRequest struct {
 
 func (x *PlacementsRequest) Reset() {
 	*x = PlacementsRequest{}
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[27]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1677,7 +1746,7 @@ func (x *PlacementsRequest) String() string {
 func (*PlacementsRequest) ProtoMessage() {}
 
 func (x *PlacementsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[27]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1690,7 +1759,7 @@ func (x *PlacementsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PlacementsRequest.ProtoReflect.Descriptor instead.
 func (*PlacementsRequest) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{27}
+	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *PlacementsRequest) GetTxId() uint64 {
@@ -1711,7 +1780,7 @@ type RackPlacement struct {
 
 func (x *RackPlacement) Reset() {
 	*x = RackPlacement{}
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[28]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1723,7 +1792,7 @@ func (x *RackPlacement) String() string {
 func (*RackPlacement) ProtoMessage() {}
 
 func (x *RackPlacement) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[28]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1736,7 +1805,7 @@ func (x *RackPlacement) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RackPlacement.ProtoReflect.Descriptor instead.
 func (*RackPlacement) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{28}
+	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *RackPlacement) GetRackId() uint64 {
@@ -1772,7 +1841,7 @@ type PlacementVariantDetail struct {
 
 func (x *PlacementVariantDetail) Reset() {
 	*x = PlacementVariantDetail{}
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[29]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1784,7 +1853,7 @@ func (x *PlacementVariantDetail) String() string {
 func (*PlacementVariantDetail) ProtoMessage() {}
 
 func (x *PlacementVariantDetail) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[29]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1797,7 +1866,7 @@ func (x *PlacementVariantDetail) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PlacementVariantDetail.ProtoReflect.Descriptor instead.
 func (*PlacementVariantDetail) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{29}
+	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *PlacementVariantDetail) GetId() uint64 {
@@ -1839,7 +1908,7 @@ type PlacementDetail struct {
 
 func (x *PlacementDetail) Reset() {
 	*x = PlacementDetail{}
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[30]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1851,7 +1920,7 @@ func (x *PlacementDetail) String() string {
 func (*PlacementDetail) ProtoMessage() {}
 
 func (x *PlacementDetail) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[30]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1864,7 +1933,7 @@ func (x *PlacementDetail) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PlacementDetail.ProtoReflect.Descriptor instead.
 func (*PlacementDetail) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{30}
+	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *PlacementDetail) GetSkuDetail() *SkuDataDetail {
@@ -1897,7 +1966,7 @@ type PlacementsResponse struct {
 
 func (x *PlacementsResponse) Reset() {
 	*x = PlacementsResponse{}
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[31]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1909,7 +1978,7 @@ func (x *PlacementsResponse) String() string {
 func (*PlacementsResponse) ProtoMessage() {}
 
 func (x *PlacementsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[31]
+	mi := &file_warehouse_iface_v1_inventory_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1922,7 +1991,7 @@ func (x *PlacementsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PlacementsResponse.ProtoReflect.Descriptor instead.
 func (*PlacementsResponse) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{31}
+	return file_warehouse_iface_v1_inventory_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *PlacementsResponse) GetData() map[string]*PlacementDetail {
@@ -1936,23 +2005,29 @@ var File_warehouse_iface_v1_inventory_proto protoreflect.FileDescriptor
 
 const file_warehouse_iface_v1_inventory_proto_rawDesc = "" +
 	"\n" +
-	"\"warehouse_iface/v1/inventory.proto\x12\x12warehouse_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1ewarehouse_iface/v1/order.proto\"d\n" +
-	"\x0fSkuByIDsRequest\x12*\n" +
-	"\fwarehouse_id\x18\x01 \x01(\x05B\a\xbaH\x04\x1a\x02 \x00R\vwarehouseId\x12%\n" +
+	"\"warehouse_iface/v1/inventory.proto\x12\x12warehouse_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1ewarehouse_iface/v1/order.proto\"[\n" +
+	"\x0fSkuByIDsRequest\x12!\n" +
+	"\fwarehouse_id\x18\x01 \x01(\x05R\vwarehouseId\x12%\n" +
 	"\asku_ids\x18\x02 \x03(\tB\f\xbaH\t\x92\x01\x06\b\x01\x10d\x18\x01R\x06skuIds\"\xb0\x01\n" +
 	"\x10SkuByIDsResponse\x12B\n" +
 	"\x04skus\x18\x01 \x03(\v2..warehouse_iface.v1.SkuByIDsResponse.SkusEntryR\x04skus\x1aX\n" +
 	"\tSkusEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x125\n" +
-	"\x05value\x18\x02 \x01(\v2\x1f.warehouse_iface.v1.SkuListItemR\x05value:\x028\x01\"9\n" +
+	"\x05value\x18\x02 \x01(\v2\x1f.warehouse_iface.v1.SkuListItemR\x05value:\x028\x01\"P\n" +
 	"\rProductDetail\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x14\n" +
-	"\x05image\x18\x02 \x01(\tR\x05image\"\x8d\x01\n" +
+	"\x05image\x18\x02 \x01(\tR\x05image\x12\x15\n" +
+	"\x06ref_id\x18\x03 \x01(\tR\x05refId\"(\n" +
+	"\x0fVariationDetail\x12\x15\n" +
+	"\x06ref_id\x18\x01 \x01(\tR\x05refId\"\xfc\x01\n" +
 	"\vSkuListItem\x12\x15\n" +
 	"\x06sku_id\x18\x01 \x01(\tR\x05skuId\x12\x1d\n" +
 	"\n" +
-	"product_id\x18\x02 \x01(\x04R\tproductId\x12H\n" +
-	"\x0eproduct_detail\x18\x04 \x01(\v2!.warehouse_iface.v1.ProductDetailR\rproductDetail\"\xbd\x01\n" +
+	"product_id\x18\x02 \x01(\x04R\tproductId\x12\x1d\n" +
+	"\n" +
+	"variant_id\x18\x06 \x01(\x04R\tvariantId\x12H\n" +
+	"\x0eproduct_detail\x18\x04 \x01(\v2!.warehouse_iface.v1.ProductDetailR\rproductDetail\x12N\n" +
+	"\x10variation_detail\x18\x05 \x01(\v2#.warehouse_iface.v1.VariationDetailR\x0fvariationDetail\"\xbd\x01\n" +
 	"\x0eSkuListRequest\x12%\n" +
 	"\bteam_ids\x18\x01 \x03(\x04B\n" +
 	"\xbaH\a\x92\x01\x04\b\x01\x10dR\ateamIds\x12%\n" +
@@ -2114,112 +2189,114 @@ func file_warehouse_iface_v1_inventory_proto_rawDescGZIP() []byte {
 }
 
 var file_warehouse_iface_v1_inventory_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_warehouse_iface_v1_inventory_proto_msgTypes = make([]protoimpl.MessageInfo, 37)
+var file_warehouse_iface_v1_inventory_proto_msgTypes = make([]protoimpl.MessageInfo, 38)
 var file_warehouse_iface_v1_inventory_proto_goTypes = []any{
 	(ProductSearchType)(0),               // 0: warehouse_iface.v1.ProductSearchType
 	(ProductListSort)(0),                 // 1: warehouse_iface.v1.ProductListSort
 	(*SkuByIDsRequest)(nil),              // 2: warehouse_iface.v1.SkuByIDsRequest
 	(*SkuByIDsResponse)(nil),             // 3: warehouse_iface.v1.SkuByIDsResponse
 	(*ProductDetail)(nil),                // 4: warehouse_iface.v1.ProductDetail
-	(*SkuListItem)(nil),                  // 5: warehouse_iface.v1.SkuListItem
-	(*SkuListRequest)(nil),               // 6: warehouse_iface.v1.SkuListRequest
-	(*SkuListResponse)(nil),              // 7: warehouse_iface.v1.SkuListResponse
-	(*ProductHistoryRequestFilter)(nil),  // 8: warehouse_iface.v1.ProductHistoryRequestFilter
-	(*ProductHistoryRequest)(nil),        // 9: warehouse_iface.v1.ProductHistoryRequest
-	(*HistoryItem)(nil),                  // 10: warehouse_iface.v1.HistoryItem
-	(*ProductHistoryResponse)(nil),       // 11: warehouse_iface.v1.ProductHistoryResponse
-	(*ProductListRequestFilter)(nil),     // 12: warehouse_iface.v1.ProductListRequestFilter
-	(*ProductListRequestSort)(nil),       // 13: warehouse_iface.v1.ProductListRequestSort
-	(*ProductListRequest)(nil),           // 14: warehouse_iface.v1.ProductListRequest
-	(*WarehouseProduct)(nil),             // 15: warehouse_iface.v1.WarehouseProduct
-	(*ProductListResponse)(nil),          // 16: warehouse_iface.v1.ProductListResponse
-	(*ProductDetailRequest)(nil),         // 17: warehouse_iface.v1.ProductDetailRequest
-	(*ProductDetailResponse)(nil),        // 18: warehouse_iface.v1.ProductDetailResponse
-	(*BlacklistedSkuAddRequest)(nil),     // 19: warehouse_iface.v1.BlacklistedSkuAddRequest
-	(*BlacklistedSkuAddResponse)(nil),    // 20: warehouse_iface.v1.BlacklistedSkuAddResponse
-	(*BlacklistedSkuRemoveRequest)(nil),  // 21: warehouse_iface.v1.BlacklistedSkuRemoveRequest
-	(*BlacklistedSkuRemoveResponse)(nil), // 22: warehouse_iface.v1.BlacklistedSkuRemoveResponse
-	(*BlacklistedSkuRequest)(nil),        // 23: warehouse_iface.v1.BlacklistedSkuRequest
-	(*SkuBlacklistDetail)(nil),           // 24: warehouse_iface.v1.SkuBlacklistDetail
-	(*BlacklistedSkuResponse)(nil),       // 25: warehouse_iface.v1.BlacklistedSkuResponse
-	(*BulkPlacement)(nil),                // 26: warehouse_iface.v1.BulkPlacement
-	(*PlacementsIDsRequest)(nil),         // 27: warehouse_iface.v1.PlacementsIDsRequest
-	(*PlacementsIDsResponse)(nil),        // 28: warehouse_iface.v1.PlacementsIDsResponse
-	(*PlacementsRequest)(nil),            // 29: warehouse_iface.v1.PlacementsRequest
-	(*RackPlacement)(nil),                // 30: warehouse_iface.v1.RackPlacement
-	(*PlacementVariantDetail)(nil),       // 31: warehouse_iface.v1.PlacementVariantDetail
-	(*PlacementDetail)(nil),              // 32: warehouse_iface.v1.PlacementDetail
-	(*PlacementsResponse)(nil),           // 33: warehouse_iface.v1.PlacementsResponse
-	nil,                                  // 34: warehouse_iface.v1.SkuByIDsResponse.SkusEntry
-	nil,                                  // 35: warehouse_iface.v1.BlacklistedSkuResponse.DataEntry
-	nil,                                  // 36: warehouse_iface.v1.BulkPlacement.DataEntry
-	nil,                                  // 37: warehouse_iface.v1.PlacementsIDsResponse.BulkPlacementsEntry
-	nil,                                  // 38: warehouse_iface.v1.PlacementsResponse.DataEntry
-	(*v1.PageFilter)(nil),                // 39: common.v1.PageFilter
-	(*v1.PageInfo)(nil),                  // 40: common.v1.PageInfo
-	(*timestamppb.Timestamp)(nil),        // 41: google.protobuf.Timestamp
-	(*SkuDataDetail)(nil),                // 42: warehouse_iface.v1.SkuDataDetail
+	(*VariationDetail)(nil),              // 5: warehouse_iface.v1.VariationDetail
+	(*SkuListItem)(nil),                  // 6: warehouse_iface.v1.SkuListItem
+	(*SkuListRequest)(nil),               // 7: warehouse_iface.v1.SkuListRequest
+	(*SkuListResponse)(nil),              // 8: warehouse_iface.v1.SkuListResponse
+	(*ProductHistoryRequestFilter)(nil),  // 9: warehouse_iface.v1.ProductHistoryRequestFilter
+	(*ProductHistoryRequest)(nil),        // 10: warehouse_iface.v1.ProductHistoryRequest
+	(*HistoryItem)(nil),                  // 11: warehouse_iface.v1.HistoryItem
+	(*ProductHistoryResponse)(nil),       // 12: warehouse_iface.v1.ProductHistoryResponse
+	(*ProductListRequestFilter)(nil),     // 13: warehouse_iface.v1.ProductListRequestFilter
+	(*ProductListRequestSort)(nil),       // 14: warehouse_iface.v1.ProductListRequestSort
+	(*ProductListRequest)(nil),           // 15: warehouse_iface.v1.ProductListRequest
+	(*WarehouseProduct)(nil),             // 16: warehouse_iface.v1.WarehouseProduct
+	(*ProductListResponse)(nil),          // 17: warehouse_iface.v1.ProductListResponse
+	(*ProductDetailRequest)(nil),         // 18: warehouse_iface.v1.ProductDetailRequest
+	(*ProductDetailResponse)(nil),        // 19: warehouse_iface.v1.ProductDetailResponse
+	(*BlacklistedSkuAddRequest)(nil),     // 20: warehouse_iface.v1.BlacklistedSkuAddRequest
+	(*BlacklistedSkuAddResponse)(nil),    // 21: warehouse_iface.v1.BlacklistedSkuAddResponse
+	(*BlacklistedSkuRemoveRequest)(nil),  // 22: warehouse_iface.v1.BlacklistedSkuRemoveRequest
+	(*BlacklistedSkuRemoveResponse)(nil), // 23: warehouse_iface.v1.BlacklistedSkuRemoveResponse
+	(*BlacklistedSkuRequest)(nil),        // 24: warehouse_iface.v1.BlacklistedSkuRequest
+	(*SkuBlacklistDetail)(nil),           // 25: warehouse_iface.v1.SkuBlacklistDetail
+	(*BlacklistedSkuResponse)(nil),       // 26: warehouse_iface.v1.BlacklistedSkuResponse
+	(*BulkPlacement)(nil),                // 27: warehouse_iface.v1.BulkPlacement
+	(*PlacementsIDsRequest)(nil),         // 28: warehouse_iface.v1.PlacementsIDsRequest
+	(*PlacementsIDsResponse)(nil),        // 29: warehouse_iface.v1.PlacementsIDsResponse
+	(*PlacementsRequest)(nil),            // 30: warehouse_iface.v1.PlacementsRequest
+	(*RackPlacement)(nil),                // 31: warehouse_iface.v1.RackPlacement
+	(*PlacementVariantDetail)(nil),       // 32: warehouse_iface.v1.PlacementVariantDetail
+	(*PlacementDetail)(nil),              // 33: warehouse_iface.v1.PlacementDetail
+	(*PlacementsResponse)(nil),           // 34: warehouse_iface.v1.PlacementsResponse
+	nil,                                  // 35: warehouse_iface.v1.SkuByIDsResponse.SkusEntry
+	nil,                                  // 36: warehouse_iface.v1.BlacklistedSkuResponse.DataEntry
+	nil,                                  // 37: warehouse_iface.v1.BulkPlacement.DataEntry
+	nil,                                  // 38: warehouse_iface.v1.PlacementsIDsResponse.BulkPlacementsEntry
+	nil,                                  // 39: warehouse_iface.v1.PlacementsResponse.DataEntry
+	(*v1.PageFilter)(nil),                // 40: common.v1.PageFilter
+	(*v1.PageInfo)(nil),                  // 41: common.v1.PageInfo
+	(*timestamppb.Timestamp)(nil),        // 42: google.protobuf.Timestamp
+	(*SkuDataDetail)(nil),                // 43: warehouse_iface.v1.SkuDataDetail
 }
 var file_warehouse_iface_v1_inventory_proto_depIdxs = []int32{
-	34, // 0: warehouse_iface.v1.SkuByIDsResponse.skus:type_name -> warehouse_iface.v1.SkuByIDsResponse.SkusEntry
+	35, // 0: warehouse_iface.v1.SkuByIDsResponse.skus:type_name -> warehouse_iface.v1.SkuByIDsResponse.SkusEntry
 	4,  // 1: warehouse_iface.v1.SkuListItem.product_detail:type_name -> warehouse_iface.v1.ProductDetail
-	39, // 2: warehouse_iface.v1.SkuListRequest.page:type_name -> common.v1.PageFilter
-	5,  // 3: warehouse_iface.v1.SkuListResponse.skus:type_name -> warehouse_iface.v1.SkuListItem
-	40, // 4: warehouse_iface.v1.SkuListResponse.page_info:type_name -> common.v1.PageInfo
-	8,  // 5: warehouse_iface.v1.ProductHistoryRequest.filter:type_name -> warehouse_iface.v1.ProductHistoryRequestFilter
-	39, // 6: warehouse_iface.v1.ProductHistoryRequest.page:type_name -> common.v1.PageFilter
-	41, // 7: warehouse_iface.v1.HistoryItem.order_created_time:type_name -> google.protobuf.Timestamp
-	41, // 8: warehouse_iface.v1.HistoryItem.arrived_time:type_name -> google.protobuf.Timestamp
-	41, // 9: warehouse_iface.v1.HistoryItem.tx_created_time:type_name -> google.protobuf.Timestamp
-	10, // 10: warehouse_iface.v1.ProductHistoryResponse.data:type_name -> warehouse_iface.v1.HistoryItem
-	40, // 11: warehouse_iface.v1.ProductHistoryResponse.page_info:type_name -> common.v1.PageInfo
-	0,  // 12: warehouse_iface.v1.ProductListRequestFilter.search_type:type_name -> warehouse_iface.v1.ProductSearchType
-	1,  // 13: warehouse_iface.v1.ProductListRequestSort.sort:type_name -> warehouse_iface.v1.ProductListSort
-	12, // 14: warehouse_iface.v1.ProductListRequest.filter:type_name -> warehouse_iface.v1.ProductListRequestFilter
-	13, // 15: warehouse_iface.v1.ProductListRequest.sort:type_name -> warehouse_iface.v1.ProductListRequestSort
-	39, // 16: warehouse_iface.v1.ProductListRequest.page:type_name -> common.v1.PageFilter
-	41, // 17: warehouse_iface.v1.WarehouseProduct.created:type_name -> google.protobuf.Timestamp
-	41, // 18: warehouse_iface.v1.WarehouseProduct.last_inbound:type_name -> google.protobuf.Timestamp
-	41, // 19: warehouse_iface.v1.WarehouseProduct.last_outbound:type_name -> google.protobuf.Timestamp
-	15, // 20: warehouse_iface.v1.ProductListResponse.data:type_name -> warehouse_iface.v1.WarehouseProduct
-	40, // 21: warehouse_iface.v1.ProductListResponse.page_info:type_name -> common.v1.PageInfo
-	35, // 22: warehouse_iface.v1.BlacklistedSkuResponse.data:type_name -> warehouse_iface.v1.BlacklistedSkuResponse.DataEntry
-	36, // 23: warehouse_iface.v1.BulkPlacement.data:type_name -> warehouse_iface.v1.BulkPlacement.DataEntry
-	37, // 24: warehouse_iface.v1.PlacementsIDsResponse.bulk_placements:type_name -> warehouse_iface.v1.PlacementsIDsResponse.BulkPlacementsEntry
-	42, // 25: warehouse_iface.v1.PlacementDetail.sku_detail:type_name -> warehouse_iface.v1.SkuDataDetail
-	30, // 26: warehouse_iface.v1.PlacementDetail.racks:type_name -> warehouse_iface.v1.RackPlacement
-	31, // 27: warehouse_iface.v1.PlacementDetail.variant_detail:type_name -> warehouse_iface.v1.PlacementVariantDetail
-	38, // 28: warehouse_iface.v1.PlacementsResponse.data:type_name -> warehouse_iface.v1.PlacementsResponse.DataEntry
-	5,  // 29: warehouse_iface.v1.SkuByIDsResponse.SkusEntry.value:type_name -> warehouse_iface.v1.SkuListItem
-	24, // 30: warehouse_iface.v1.BlacklistedSkuResponse.DataEntry.value:type_name -> warehouse_iface.v1.SkuBlacklistDetail
-	32, // 31: warehouse_iface.v1.BulkPlacement.DataEntry.value:type_name -> warehouse_iface.v1.PlacementDetail
-	26, // 32: warehouse_iface.v1.PlacementsIDsResponse.BulkPlacementsEntry.value:type_name -> warehouse_iface.v1.BulkPlacement
-	32, // 33: warehouse_iface.v1.PlacementsResponse.DataEntry.value:type_name -> warehouse_iface.v1.PlacementDetail
-	29, // 34: warehouse_iface.v1.InventoryService.Placements:input_type -> warehouse_iface.v1.PlacementsRequest
-	27, // 35: warehouse_iface.v1.InventoryService.PlacementsIDs:input_type -> warehouse_iface.v1.PlacementsIDsRequest
-	23, // 36: warehouse_iface.v1.InventoryService.BlacklistedSku:input_type -> warehouse_iface.v1.BlacklistedSkuRequest
-	19, // 37: warehouse_iface.v1.InventoryService.BlacklistedSkuAdd:input_type -> warehouse_iface.v1.BlacklistedSkuAddRequest
-	21, // 38: warehouse_iface.v1.InventoryService.BlacklistedSkuRemove:input_type -> warehouse_iface.v1.BlacklistedSkuRemoveRequest
-	14, // 39: warehouse_iface.v1.InventoryService.ProductList:input_type -> warehouse_iface.v1.ProductListRequest
-	17, // 40: warehouse_iface.v1.InventoryService.ProductDetail:input_type -> warehouse_iface.v1.ProductDetailRequest
-	9,  // 41: warehouse_iface.v1.InventoryService.ProductHistory:input_type -> warehouse_iface.v1.ProductHistoryRequest
-	6,  // 42: warehouse_iface.v1.InventoryService.SkuList:input_type -> warehouse_iface.v1.SkuListRequest
-	2,  // 43: warehouse_iface.v1.InventoryService.SkuByIDs:input_type -> warehouse_iface.v1.SkuByIDsRequest
-	33, // 44: warehouse_iface.v1.InventoryService.Placements:output_type -> warehouse_iface.v1.PlacementsResponse
-	28, // 45: warehouse_iface.v1.InventoryService.PlacementsIDs:output_type -> warehouse_iface.v1.PlacementsIDsResponse
-	25, // 46: warehouse_iface.v1.InventoryService.BlacklistedSku:output_type -> warehouse_iface.v1.BlacklistedSkuResponse
-	20, // 47: warehouse_iface.v1.InventoryService.BlacklistedSkuAdd:output_type -> warehouse_iface.v1.BlacklistedSkuAddResponse
-	22, // 48: warehouse_iface.v1.InventoryService.BlacklistedSkuRemove:output_type -> warehouse_iface.v1.BlacklistedSkuRemoveResponse
-	16, // 49: warehouse_iface.v1.InventoryService.ProductList:output_type -> warehouse_iface.v1.ProductListResponse
-	18, // 50: warehouse_iface.v1.InventoryService.ProductDetail:output_type -> warehouse_iface.v1.ProductDetailResponse
-	11, // 51: warehouse_iface.v1.InventoryService.ProductHistory:output_type -> warehouse_iface.v1.ProductHistoryResponse
-	7,  // 52: warehouse_iface.v1.InventoryService.SkuList:output_type -> warehouse_iface.v1.SkuListResponse
-	3,  // 53: warehouse_iface.v1.InventoryService.SkuByIDs:output_type -> warehouse_iface.v1.SkuByIDsResponse
-	44, // [44:54] is the sub-list for method output_type
-	34, // [34:44] is the sub-list for method input_type
-	34, // [34:34] is the sub-list for extension type_name
-	34, // [34:34] is the sub-list for extension extendee
-	0,  // [0:34] is the sub-list for field type_name
+	5,  // 2: warehouse_iface.v1.SkuListItem.variation_detail:type_name -> warehouse_iface.v1.VariationDetail
+	40, // 3: warehouse_iface.v1.SkuListRequest.page:type_name -> common.v1.PageFilter
+	6,  // 4: warehouse_iface.v1.SkuListResponse.skus:type_name -> warehouse_iface.v1.SkuListItem
+	41, // 5: warehouse_iface.v1.SkuListResponse.page_info:type_name -> common.v1.PageInfo
+	9,  // 6: warehouse_iface.v1.ProductHistoryRequest.filter:type_name -> warehouse_iface.v1.ProductHistoryRequestFilter
+	40, // 7: warehouse_iface.v1.ProductHistoryRequest.page:type_name -> common.v1.PageFilter
+	42, // 8: warehouse_iface.v1.HistoryItem.order_created_time:type_name -> google.protobuf.Timestamp
+	42, // 9: warehouse_iface.v1.HistoryItem.arrived_time:type_name -> google.protobuf.Timestamp
+	42, // 10: warehouse_iface.v1.HistoryItem.tx_created_time:type_name -> google.protobuf.Timestamp
+	11, // 11: warehouse_iface.v1.ProductHistoryResponse.data:type_name -> warehouse_iface.v1.HistoryItem
+	41, // 12: warehouse_iface.v1.ProductHistoryResponse.page_info:type_name -> common.v1.PageInfo
+	0,  // 13: warehouse_iface.v1.ProductListRequestFilter.search_type:type_name -> warehouse_iface.v1.ProductSearchType
+	1,  // 14: warehouse_iface.v1.ProductListRequestSort.sort:type_name -> warehouse_iface.v1.ProductListSort
+	13, // 15: warehouse_iface.v1.ProductListRequest.filter:type_name -> warehouse_iface.v1.ProductListRequestFilter
+	14, // 16: warehouse_iface.v1.ProductListRequest.sort:type_name -> warehouse_iface.v1.ProductListRequestSort
+	40, // 17: warehouse_iface.v1.ProductListRequest.page:type_name -> common.v1.PageFilter
+	42, // 18: warehouse_iface.v1.WarehouseProduct.created:type_name -> google.protobuf.Timestamp
+	42, // 19: warehouse_iface.v1.WarehouseProduct.last_inbound:type_name -> google.protobuf.Timestamp
+	42, // 20: warehouse_iface.v1.WarehouseProduct.last_outbound:type_name -> google.protobuf.Timestamp
+	16, // 21: warehouse_iface.v1.ProductListResponse.data:type_name -> warehouse_iface.v1.WarehouseProduct
+	41, // 22: warehouse_iface.v1.ProductListResponse.page_info:type_name -> common.v1.PageInfo
+	36, // 23: warehouse_iface.v1.BlacklistedSkuResponse.data:type_name -> warehouse_iface.v1.BlacklistedSkuResponse.DataEntry
+	37, // 24: warehouse_iface.v1.BulkPlacement.data:type_name -> warehouse_iface.v1.BulkPlacement.DataEntry
+	38, // 25: warehouse_iface.v1.PlacementsIDsResponse.bulk_placements:type_name -> warehouse_iface.v1.PlacementsIDsResponse.BulkPlacementsEntry
+	43, // 26: warehouse_iface.v1.PlacementDetail.sku_detail:type_name -> warehouse_iface.v1.SkuDataDetail
+	31, // 27: warehouse_iface.v1.PlacementDetail.racks:type_name -> warehouse_iface.v1.RackPlacement
+	32, // 28: warehouse_iface.v1.PlacementDetail.variant_detail:type_name -> warehouse_iface.v1.PlacementVariantDetail
+	39, // 29: warehouse_iface.v1.PlacementsResponse.data:type_name -> warehouse_iface.v1.PlacementsResponse.DataEntry
+	6,  // 30: warehouse_iface.v1.SkuByIDsResponse.SkusEntry.value:type_name -> warehouse_iface.v1.SkuListItem
+	25, // 31: warehouse_iface.v1.BlacklistedSkuResponse.DataEntry.value:type_name -> warehouse_iface.v1.SkuBlacklistDetail
+	33, // 32: warehouse_iface.v1.BulkPlacement.DataEntry.value:type_name -> warehouse_iface.v1.PlacementDetail
+	27, // 33: warehouse_iface.v1.PlacementsIDsResponse.BulkPlacementsEntry.value:type_name -> warehouse_iface.v1.BulkPlacement
+	33, // 34: warehouse_iface.v1.PlacementsResponse.DataEntry.value:type_name -> warehouse_iface.v1.PlacementDetail
+	30, // 35: warehouse_iface.v1.InventoryService.Placements:input_type -> warehouse_iface.v1.PlacementsRequest
+	28, // 36: warehouse_iface.v1.InventoryService.PlacementsIDs:input_type -> warehouse_iface.v1.PlacementsIDsRequest
+	24, // 37: warehouse_iface.v1.InventoryService.BlacklistedSku:input_type -> warehouse_iface.v1.BlacklistedSkuRequest
+	20, // 38: warehouse_iface.v1.InventoryService.BlacklistedSkuAdd:input_type -> warehouse_iface.v1.BlacklistedSkuAddRequest
+	22, // 39: warehouse_iface.v1.InventoryService.BlacklistedSkuRemove:input_type -> warehouse_iface.v1.BlacklistedSkuRemoveRequest
+	15, // 40: warehouse_iface.v1.InventoryService.ProductList:input_type -> warehouse_iface.v1.ProductListRequest
+	18, // 41: warehouse_iface.v1.InventoryService.ProductDetail:input_type -> warehouse_iface.v1.ProductDetailRequest
+	10, // 42: warehouse_iface.v1.InventoryService.ProductHistory:input_type -> warehouse_iface.v1.ProductHistoryRequest
+	7,  // 43: warehouse_iface.v1.InventoryService.SkuList:input_type -> warehouse_iface.v1.SkuListRequest
+	2,  // 44: warehouse_iface.v1.InventoryService.SkuByIDs:input_type -> warehouse_iface.v1.SkuByIDsRequest
+	34, // 45: warehouse_iface.v1.InventoryService.Placements:output_type -> warehouse_iface.v1.PlacementsResponse
+	29, // 46: warehouse_iface.v1.InventoryService.PlacementsIDs:output_type -> warehouse_iface.v1.PlacementsIDsResponse
+	26, // 47: warehouse_iface.v1.InventoryService.BlacklistedSku:output_type -> warehouse_iface.v1.BlacklistedSkuResponse
+	21, // 48: warehouse_iface.v1.InventoryService.BlacklistedSkuAdd:output_type -> warehouse_iface.v1.BlacklistedSkuAddResponse
+	23, // 49: warehouse_iface.v1.InventoryService.BlacklistedSkuRemove:output_type -> warehouse_iface.v1.BlacklistedSkuRemoveResponse
+	17, // 50: warehouse_iface.v1.InventoryService.ProductList:output_type -> warehouse_iface.v1.ProductListResponse
+	19, // 51: warehouse_iface.v1.InventoryService.ProductDetail:output_type -> warehouse_iface.v1.ProductDetailResponse
+	12, // 52: warehouse_iface.v1.InventoryService.ProductHistory:output_type -> warehouse_iface.v1.ProductHistoryResponse
+	8,  // 53: warehouse_iface.v1.InventoryService.SkuList:output_type -> warehouse_iface.v1.SkuListResponse
+	3,  // 54: warehouse_iface.v1.InventoryService.SkuByIDs:output_type -> warehouse_iface.v1.SkuByIDsResponse
+	45, // [45:55] is the sub-list for method output_type
+	35, // [35:45] is the sub-list for method input_type
+	35, // [35:35] is the sub-list for extension type_name
+	35, // [35:35] is the sub-list for extension extendee
+	0,  // [0:35] is the sub-list for field type_name
 }
 
 func init() { file_warehouse_iface_v1_inventory_proto_init() }
@@ -2234,7 +2311,7 @@ func file_warehouse_iface_v1_inventory_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_warehouse_iface_v1_inventory_proto_rawDesc), len(file_warehouse_iface_v1_inventory_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   37,
+			NumMessages:   38,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

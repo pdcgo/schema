@@ -30,7 +30,7 @@ service InventoryService {
 }
 
 message SkuByIDsRequest {
-  int32 warehouse_id = 1 [(buf.validate.field).int32 = {gt: 0}];
+  int32 warehouse_id = 1;
   repeated string sku_ids = 2 [(buf.validate.field).repeated = {
     min_items: 1
     max_items: 100
@@ -45,13 +45,21 @@ message SkuByIDsResponse {
 message ProductDetail {
   string name = 1;
   string image = 2;
+  string ref_id = 3;
+}
+
+message VariationDetail {
+  string ref_id = 1;
 }
 
 message SkuListItem {
   string sku_id = 1;
   uint64 product_id = 2;
+  uint64 variant_id = 6;
   // @gotags: gorm:"-"
   ProductDetail product_detail = 4;
+  // @gotags: gorm:"-"
+  VariationDetail variation_detail = 5;
 }
 
 message SkuListRequest {
