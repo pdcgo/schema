@@ -630,6 +630,7 @@ type Warehouse struct {
 	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Desc          string                 `protobuf:"bytes,3,opt,name=desc,proto3" json:"desc,omitempty"`
+	Address       string                 `protobuf:"bytes,4,opt,name=address,proto3" json:"address,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -681,6 +682,13 @@ func (x *Warehouse) GetName() string {
 func (x *Warehouse) GetDesc() string {
 	if x != nil {
 		return x.Desc
+	}
+	return ""
+}
+
+func (x *Warehouse) GetAddress() string {
+	if x != nil {
+		return x.Address
 	}
 	return ""
 }
@@ -986,11 +994,12 @@ const file_warehouse_iface_v1_warehouse_proto_rawDesc = "" +
 	"\ateam_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12\x19\n" +
 	"\border_id\x18\x03 \x01(\x04R\aorderId\"K\n" +
 	"\x1bTransactionNoteListResponse\x12,\n" +
-	"\x04list\x18\x01 \x03(\v2\x18.warehouse_iface.v1.NoteR\x04list\"C\n" +
+	"\x04list\x18\x01 \x03(\v2\x18.warehouse_iface.v1.NoteR\x04list\"]\n" +
 	"\tWarehouse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x12\n" +
-	"\x04desc\x18\x03 \x01(\tR\x04desc\"<\n" +
+	"\x04desc\x18\x03 \x01(\tR\x04desc\x12\x18\n" +
+	"\aaddress\x18\x04 \x01(\tR\aaddress\"<\n" +
 	"\x13WarehouseIDsRequest\x12%\n" +
 	"\x03ids\x18\x01 \x03(\x04B\x13\xbaH\x10\x92\x01\r\b\x01\x10\xc8\x01\x18\x01\"\x042\x02 \x00R\x03ids\"\xb6\x01\n" +
 	"\x14WarehouseIDsResponse\x12F\n" +

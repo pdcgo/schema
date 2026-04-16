@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.11
 // 	protoc        (unknown)
-// source: selling_iface/v1/order_metric.proto
+// source: selling_iface/v1/metric_order.proto
 
 package selling_iface
 
@@ -32,7 +32,7 @@ type OrderActiveMetric struct {
 
 func (x *OrderActiveMetric) Reset() {
 	*x = OrderActiveMetric{}
-	mi := &file_selling_iface_v1_order_metric_proto_msgTypes[0]
+	mi := &file_selling_iface_v1_metric_order_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -44,7 +44,7 @@ func (x *OrderActiveMetric) String() string {
 func (*OrderActiveMetric) ProtoMessage() {}
 
 func (x *OrderActiveMetric) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_order_metric_proto_msgTypes[0]
+	mi := &file_selling_iface_v1_metric_order_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -57,7 +57,7 @@ func (x *OrderActiveMetric) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderActiveMetric.ProtoReflect.Descriptor instead.
 func (*OrderActiveMetric) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_order_metric_proto_rawDescGZIP(), []int{0}
+	return file_selling_iface_v1_metric_order_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *OrderActiveMetric) GetType() MetricType {
@@ -86,7 +86,7 @@ type HistoryOrderItem struct {
 
 func (x *HistoryOrderItem) Reset() {
 	*x = HistoryOrderItem{}
-	mi := &file_selling_iface_v1_order_metric_proto_msgTypes[1]
+	mi := &file_selling_iface_v1_metric_order_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -98,7 +98,7 @@ func (x *HistoryOrderItem) String() string {
 func (*HistoryOrderItem) ProtoMessage() {}
 
 func (x *HistoryOrderItem) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_order_metric_proto_msgTypes[1]
+	mi := &file_selling_iface_v1_metric_order_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -111,7 +111,7 @@ func (x *HistoryOrderItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HistoryOrderItem.ProtoReflect.Descriptor instead.
 func (*HistoryOrderItem) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_order_metric_proto_rawDescGZIP(), []int{1}
+	return file_selling_iface_v1_metric_order_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *HistoryOrderItem) GetT() *timestamppb.Timestamp {
@@ -146,7 +146,7 @@ type HistoryOrderMetric struct {
 
 func (x *HistoryOrderMetric) Reset() {
 	*x = HistoryOrderMetric{}
-	mi := &file_selling_iface_v1_order_metric_proto_msgTypes[2]
+	mi := &file_selling_iface_v1_metric_order_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -158,7 +158,7 @@ func (x *HistoryOrderMetric) String() string {
 func (*HistoryOrderMetric) ProtoMessage() {}
 
 func (x *HistoryOrderMetric) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_order_metric_proto_msgTypes[2]
+	mi := &file_selling_iface_v1_metric_order_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -171,7 +171,7 @@ func (x *HistoryOrderMetric) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HistoryOrderMetric.ProtoReflect.Descriptor instead.
 func (*HistoryOrderMetric) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_order_metric_proto_rawDescGZIP(), []int{2}
+	return file_selling_iface_v1_metric_order_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *HistoryOrderMetric) GetType() MetricType {
@@ -195,11 +195,11 @@ func (x *HistoryOrderMetric) GetDatas() []*HistoryOrderItem {
 	return nil
 }
 
-var File_selling_iface_v1_order_metric_proto protoreflect.FileDescriptor
+var File_selling_iface_v1_metric_order_proto protoreflect.FileDescriptor
 
-const file_selling_iface_v1_order_metric_proto_rawDesc = "" +
+const file_selling_iface_v1_metric_order_proto_rawDesc = "" +
 	"\n" +
-	"#selling_iface/v1/order_metric.proto\x12\x10selling_iface.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dselling_iface/v1/metric.proto\"f\n" +
+	"#selling_iface/v1/metric_order.proto\x12\x10selling_iface.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dselling_iface/v1/metric.proto\"f\n" +
 	"\x11OrderActiveMetric\x120\n" +
 	"\x04type\x18\x01 \x01(\x0e2\x1c.selling_iface.v1.MetricTypeR\x04type\x12\x1f\n" +
 	"\vorder_count\x18\x02 \x01(\x03R\n" +
@@ -213,22 +213,22 @@ const file_selling_iface_v1_order_metric_proto_rawDesc = "" +
 	"\x04type\x18\x01 \x01(\x0e2\x1c.selling_iface.v1.MetricTypeR\x04type\x127\n" +
 	"\ttime_type\x18\x02 \x01(\x0e2\x1a.selling_iface.v1.TimeTypeR\btimeType\x128\n" +
 	"\x05datas\x18\x03 \x03(\v2\".selling_iface.v1.HistoryOrderItemR\x05datasB\xc6\x01\n" +
-	"\x14com.selling_iface.v1B\x10OrderMetricProtoP\x01Z?github.com/pdcgo/schema/services/selling_iface/v1;selling_iface\xa2\x02\x03SXX\xaa\x02\x0fSellingIface.V1\xca\x02\x0fSellingIface\\V1\xe2\x02\x1bSellingIface\\V1\\GPBMetadata\xea\x02\x10SellingIface::V1b\x06proto3"
+	"\x14com.selling_iface.v1B\x10MetricOrderProtoP\x01Z?github.com/pdcgo/schema/services/selling_iface/v1;selling_iface\xa2\x02\x03SXX\xaa\x02\x0fSellingIface.V1\xca\x02\x0fSellingIface\\V1\xe2\x02\x1bSellingIface\\V1\\GPBMetadata\xea\x02\x10SellingIface::V1b\x06proto3"
 
 var (
-	file_selling_iface_v1_order_metric_proto_rawDescOnce sync.Once
-	file_selling_iface_v1_order_metric_proto_rawDescData []byte
+	file_selling_iface_v1_metric_order_proto_rawDescOnce sync.Once
+	file_selling_iface_v1_metric_order_proto_rawDescData []byte
 )
 
-func file_selling_iface_v1_order_metric_proto_rawDescGZIP() []byte {
-	file_selling_iface_v1_order_metric_proto_rawDescOnce.Do(func() {
-		file_selling_iface_v1_order_metric_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_selling_iface_v1_order_metric_proto_rawDesc), len(file_selling_iface_v1_order_metric_proto_rawDesc)))
+func file_selling_iface_v1_metric_order_proto_rawDescGZIP() []byte {
+	file_selling_iface_v1_metric_order_proto_rawDescOnce.Do(func() {
+		file_selling_iface_v1_metric_order_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_selling_iface_v1_metric_order_proto_rawDesc), len(file_selling_iface_v1_metric_order_proto_rawDesc)))
 	})
-	return file_selling_iface_v1_order_metric_proto_rawDescData
+	return file_selling_iface_v1_metric_order_proto_rawDescData
 }
 
-var file_selling_iface_v1_order_metric_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
-var file_selling_iface_v1_order_metric_proto_goTypes = []any{
+var file_selling_iface_v1_metric_order_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_selling_iface_v1_metric_order_proto_goTypes = []any{
 	(*OrderActiveMetric)(nil),     // 0: selling_iface.v1.OrderActiveMetric
 	(*HistoryOrderItem)(nil),      // 1: selling_iface.v1.HistoryOrderItem
 	(*HistoryOrderMetric)(nil),    // 2: selling_iface.v1.HistoryOrderMetric
@@ -236,7 +236,7 @@ var file_selling_iface_v1_order_metric_proto_goTypes = []any{
 	(*timestamppb.Timestamp)(nil), // 4: google.protobuf.Timestamp
 	(TimeType)(0),                 // 5: selling_iface.v1.TimeType
 }
-var file_selling_iface_v1_order_metric_proto_depIdxs = []int32{
+var file_selling_iface_v1_metric_order_proto_depIdxs = []int32{
 	3, // 0: selling_iface.v1.OrderActiveMetric.type:type_name -> selling_iface.v1.MetricType
 	4, // 1: selling_iface.v1.HistoryOrderItem.t:type_name -> google.protobuf.Timestamp
 	3, // 2: selling_iface.v1.HistoryOrderMetric.type:type_name -> selling_iface.v1.MetricType
@@ -249,9 +249,9 @@ var file_selling_iface_v1_order_metric_proto_depIdxs = []int32{
 	0, // [0:5] is the sub-list for field type_name
 }
 
-func init() { file_selling_iface_v1_order_metric_proto_init() }
-func file_selling_iface_v1_order_metric_proto_init() {
-	if File_selling_iface_v1_order_metric_proto != nil {
+func init() { file_selling_iface_v1_metric_order_proto_init() }
+func file_selling_iface_v1_metric_order_proto_init() {
+	if File_selling_iface_v1_metric_order_proto != nil {
 		return
 	}
 	file_selling_iface_v1_metric_proto_init()
@@ -259,17 +259,17 @@ func file_selling_iface_v1_order_metric_proto_init() {
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_selling_iface_v1_order_metric_proto_rawDesc), len(file_selling_iface_v1_order_metric_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_selling_iface_v1_metric_order_proto_rawDesc), len(file_selling_iface_v1_metric_order_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
-		GoTypes:           file_selling_iface_v1_order_metric_proto_goTypes,
-		DependencyIndexes: file_selling_iface_v1_order_metric_proto_depIdxs,
-		MessageInfos:      file_selling_iface_v1_order_metric_proto_msgTypes,
+		GoTypes:           file_selling_iface_v1_metric_order_proto_goTypes,
+		DependencyIndexes: file_selling_iface_v1_metric_order_proto_depIdxs,
+		MessageInfos:      file_selling_iface_v1_metric_order_proto_msgTypes,
 	}.Build()
-	File_selling_iface_v1_order_metric_proto = out.File
-	file_selling_iface_v1_order_metric_proto_goTypes = nil
-	file_selling_iface_v1_order_metric_proto_depIdxs = nil
+	File_selling_iface_v1_metric_order_proto = out.File
+	file_selling_iface_v1_metric_order_proto_goTypes = nil
+	file_selling_iface_v1_metric_order_proto_depIdxs = nil
 }

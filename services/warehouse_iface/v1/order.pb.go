@@ -277,6 +277,98 @@ func (x *TransactionItem) GetSkuDetail() *SkuDataDetail {
 	return nil
 }
 
+type CustomerDetail struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Phone         string                 `protobuf:"bytes,3,opt,name=phone,proto3" json:"phone,omitempty"`
+	City          string                 `protobuf:"bytes,4,opt,name=city,proto3" json:"city,omitempty"`
+	District      string                 `protobuf:"bytes,5,opt,name=district,proto3" json:"district,omitempty"`
+	PostalCode    string                 `protobuf:"bytes,6,opt,name=postal_code,json=postalCode,proto3" json:"postal_code,omitempty"`
+	Address       string                 `protobuf:"bytes,7,opt,name=address,proto3" json:"address,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CustomerDetail) Reset() {
+	*x = CustomerDetail{}
+	mi := &file_warehouse_iface_v1_order_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CustomerDetail) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CustomerDetail) ProtoMessage() {}
+
+func (x *CustomerDetail) ProtoReflect() protoreflect.Message {
+	mi := &file_warehouse_iface_v1_order_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CustomerDetail.ProtoReflect.Descriptor instead.
+func (*CustomerDetail) Descriptor() ([]byte, []int) {
+	return file_warehouse_iface_v1_order_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *CustomerDetail) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *CustomerDetail) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *CustomerDetail) GetPhone() string {
+	if x != nil {
+		return x.Phone
+	}
+	return ""
+}
+
+func (x *CustomerDetail) GetCity() string {
+	if x != nil {
+		return x.City
+	}
+	return ""
+}
+
+func (x *CustomerDetail) GetDistrict() string {
+	if x != nil {
+		return x.District
+	}
+	return ""
+}
+
+func (x *CustomerDetail) GetPostalCode() string {
+	if x != nil {
+		return x.PostalCode
+	}
+	return ""
+}
+
+func (x *CustomerDetail) GetAddress() string {
+	if x != nil {
+		return x.Address
+	}
+	return ""
+}
+
 type OrderDetailSearch struct {
 	state               protoimpl.MessageState `protogen:"open.v1"`
 	Id                  uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -291,13 +383,14 @@ type OrderDetailSearch struct {
 	ReturnReceipt       string                 `protobuf:"bytes,9,opt,name=return_receipt,json=returnReceipt,proto3" json:"return_receipt,omitempty"`
 	OrderFrom           v1.MarketplaceType     `protobuf:"varint,10,opt,name=order_from,json=orderFrom,proto3,enum=common.v1.MarketplaceType" json:"order_from,omitempty"`
 	OrderTime           *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=order_time,json=orderTime,proto3" json:"order_time,omitempty"`
+	Customer            *CustomerDetail        `protobuf:"bytes,13,opt,name=customer,proto3" json:"customer,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
 
 func (x *OrderDetailSearch) Reset() {
 	*x = OrderDetailSearch{}
-	mi := &file_warehouse_iface_v1_order_proto_msgTypes[3]
+	mi := &file_warehouse_iface_v1_order_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -309,7 +402,7 @@ func (x *OrderDetailSearch) String() string {
 func (*OrderDetailSearch) ProtoMessage() {}
 
 func (x *OrderDetailSearch) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_order_proto_msgTypes[3]
+	mi := &file_warehouse_iface_v1_order_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -322,7 +415,7 @@ func (x *OrderDetailSearch) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderDetailSearch.ProtoReflect.Descriptor instead.
 func (*OrderDetailSearch) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_order_proto_rawDescGZIP(), []int{3}
+	return file_warehouse_iface_v1_order_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *OrderDetailSearch) GetId() uint64 {
@@ -409,6 +502,13 @@ func (x *OrderDetailSearch) GetOrderTime() *timestamppb.Timestamp {
 	return nil
 }
 
+func (x *OrderDetailSearch) GetCustomer() *CustomerDetail {
+	if x != nil {
+		return x.Customer
+	}
+	return nil
+}
+
 type CustomerSearch struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
@@ -419,7 +519,7 @@ type CustomerSearch struct {
 
 func (x *CustomerSearch) Reset() {
 	*x = CustomerSearch{}
-	mi := &file_warehouse_iface_v1_order_proto_msgTypes[4]
+	mi := &file_warehouse_iface_v1_order_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -431,7 +531,7 @@ func (x *CustomerSearch) String() string {
 func (*CustomerSearch) ProtoMessage() {}
 
 func (x *CustomerSearch) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_order_proto_msgTypes[4]
+	mi := &file_warehouse_iface_v1_order_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -444,7 +544,7 @@ func (x *CustomerSearch) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CustomerSearch.ProtoReflect.Descriptor instead.
 func (*CustomerSearch) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_order_proto_rawDescGZIP(), []int{4}
+	return file_warehouse_iface_v1_order_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *CustomerSearch) GetName() string {
@@ -469,6 +569,7 @@ type OrderDetailSearchRequest struct {
 	//	*OrderDetailSearchRequest_OrderRefId
 	//	*OrderDetailSearchRequest_Customer
 	Search        isOrderDetailSearchRequest_Search `protobuf_oneof:"search"`
+	WarehouseId   uint64                            `protobuf:"varint,6,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
 	Status        string                            `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
 	Limit         int64                             `protobuf:"varint,5,opt,name=limit,proto3" json:"limit,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -477,7 +578,7 @@ type OrderDetailSearchRequest struct {
 
 func (x *OrderDetailSearchRequest) Reset() {
 	*x = OrderDetailSearchRequest{}
-	mi := &file_warehouse_iface_v1_order_proto_msgTypes[5]
+	mi := &file_warehouse_iface_v1_order_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -489,7 +590,7 @@ func (x *OrderDetailSearchRequest) String() string {
 func (*OrderDetailSearchRequest) ProtoMessage() {}
 
 func (x *OrderDetailSearchRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_order_proto_msgTypes[5]
+	mi := &file_warehouse_iface_v1_order_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -502,7 +603,7 @@ func (x *OrderDetailSearchRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderDetailSearchRequest.ProtoReflect.Descriptor instead.
 func (*OrderDetailSearchRequest) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_order_proto_rawDescGZIP(), []int{5}
+	return file_warehouse_iface_v1_order_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *OrderDetailSearchRequest) GetSearch() isOrderDetailSearchRequest_Search {
@@ -537,6 +638,13 @@ func (x *OrderDetailSearchRequest) GetCustomer() *CustomerSearch {
 		}
 	}
 	return nil
+}
+
+func (x *OrderDetailSearchRequest) GetWarehouseId() uint64 {
+	if x != nil {
+		return x.WarehouseId
+	}
+	return 0
 }
 
 func (x *OrderDetailSearchRequest) GetStatus() string {
@@ -600,7 +708,7 @@ type TransactionDetail struct {
 
 func (x *TransactionDetail) Reset() {
 	*x = TransactionDetail{}
-	mi := &file_warehouse_iface_v1_order_proto_msgTypes[6]
+	mi := &file_warehouse_iface_v1_order_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -612,7 +720,7 @@ func (x *TransactionDetail) String() string {
 func (*TransactionDetail) ProtoMessage() {}
 
 func (x *TransactionDetail) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_order_proto_msgTypes[6]
+	mi := &file_warehouse_iface_v1_order_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -625,7 +733,7 @@ func (x *TransactionDetail) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TransactionDetail.ProtoReflect.Descriptor instead.
 func (*TransactionDetail) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_order_proto_rawDescGZIP(), []int{6}
+	return file_warehouse_iface_v1_order_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *TransactionDetail) GetId() uint64 {
@@ -758,7 +866,7 @@ type OrderDetailSearchItem struct {
 
 func (x *OrderDetailSearchItem) Reset() {
 	*x = OrderDetailSearchItem{}
-	mi := &file_warehouse_iface_v1_order_proto_msgTypes[7]
+	mi := &file_warehouse_iface_v1_order_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -770,7 +878,7 @@ func (x *OrderDetailSearchItem) String() string {
 func (*OrderDetailSearchItem) ProtoMessage() {}
 
 func (x *OrderDetailSearchItem) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_order_proto_msgTypes[7]
+	mi := &file_warehouse_iface_v1_order_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -783,7 +891,7 @@ func (x *OrderDetailSearchItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderDetailSearchItem.ProtoReflect.Descriptor instead.
 func (*OrderDetailSearchItem) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_order_proto_rawDescGZIP(), []int{7}
+	return file_warehouse_iface_v1_order_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *OrderDetailSearchItem) GetOrder() *OrderDetailSearch {
@@ -816,7 +924,7 @@ type OrderDetailSearchResponse struct {
 
 func (x *OrderDetailSearchResponse) Reset() {
 	*x = OrderDetailSearchResponse{}
-	mi := &file_warehouse_iface_v1_order_proto_msgTypes[8]
+	mi := &file_warehouse_iface_v1_order_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -828,7 +936,7 @@ func (x *OrderDetailSearchResponse) String() string {
 func (*OrderDetailSearchResponse) ProtoMessage() {}
 
 func (x *OrderDetailSearchResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_order_proto_msgTypes[8]
+	mi := &file_warehouse_iface_v1_order_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -841,7 +949,7 @@ func (x *OrderDetailSearchResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderDetailSearchResponse.ProtoReflect.Descriptor instead.
 func (*OrderDetailSearchResponse) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_order_proto_rawDescGZIP(), []int{8}
+	return file_warehouse_iface_v1_order_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *OrderDetailSearchResponse) GetData() []*OrderDetailSearchItem {
@@ -880,7 +988,16 @@ const file_warehouse_iface_v1_order_proto_rawDesc = "" +
 	"\x05price\x18\x05 \x01(\x01R\x05price\x12\x14\n" +
 	"\x05total\x18\x06 \x01(\x01R\x05total\x12@\n" +
 	"\n" +
-	"sku_detail\x18\a \x01(\v2!.warehouse_iface.v1.SkuDataDetailR\tskuDetail\"\xcf\x03\n" +
+	"sku_detail\x18\a \x01(\v2!.warehouse_iface.v1.SkuDataDetailR\tskuDetail\"\xb5\x01\n" +
+	"\x0eCustomerDetail\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x14\n" +
+	"\x05phone\x18\x03 \x01(\tR\x05phone\x12\x12\n" +
+	"\x04city\x18\x04 \x01(\tR\x04city\x12\x1a\n" +
+	"\bdistrict\x18\x05 \x01(\tR\bdistrict\x12\x1f\n" +
+	"\vpostal_code\x18\x06 \x01(\tR\n" +
+	"postalCode\x12\x18\n" +
+	"\aaddress\x18\a \x01(\tR\aaddress\"\x8f\x04\n" +
 	"\x11OrderDetailSearch\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x17\n" +
 	"\ateam_id\x18\x02 \x01(\x04R\x06teamId\x12 \n" +
@@ -898,15 +1015,17 @@ const file_warehouse_iface_v1_order_proto_rawDesc = "" +
 	"order_from\x18\n" +
 	" \x01(\x0e2\x1a.common.v1.MarketplaceTypeR\torderFrom\x129\n" +
 	"\n" +
-	"order_time\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\torderTime\"L\n" +
+	"order_time\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\torderTime\x12>\n" +
+	"\bcustomer\x18\r \x01(\v2\".warehouse_iface.v1.CustomerDetailR\bcustomer\"L\n" +
 	"\x0eCustomerSearch\x12\x1d\n" +
 	"\x04name\x18\x01 \x01(\tB\t\xbaH\x06r\x04\x10\x01\x18dR\x04name\x12\x1b\n" +
-	"\x04city\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x18dR\x04city\"\xdf\x01\n" +
+	"\x04city\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x18dR\x04city\"\x8b\x02\n" +
 	"\x18OrderDetailSearchRequest\x12\x1a\n" +
 	"\areceipt\x18\x01 \x01(\tH\x00R\areceipt\x12\"\n" +
 	"\forder_ref_id\x18\x02 \x01(\tH\x00R\n" +
 	"orderRefId\x12@\n" +
-	"\bcustomer\x18\x03 \x01(\v2\".warehouse_iface.v1.CustomerSearchH\x00R\bcustomer\x12\x16\n" +
+	"\bcustomer\x18\x03 \x01(\v2\".warehouse_iface.v1.CustomerSearchH\x00R\bcustomer\x12*\n" +
+	"\fwarehouse_id\x18\x06 \x01(\x04B\a\xbaH\x042\x02 \x00R\vwarehouseId\x12\x16\n" +
 	"\x06status\x18\x04 \x01(\tR\x06status\x12\x1f\n" +
 	"\x05limit\x18\x05 \x01(\x03B\t\xbaH\x06\"\x04\x10\n" +
 	" \x00R\x05limitB\b\n" +
@@ -955,39 +1074,41 @@ func file_warehouse_iface_v1_order_proto_rawDescGZIP() []byte {
 	return file_warehouse_iface_v1_order_proto_rawDescData
 }
 
-var file_warehouse_iface_v1_order_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_warehouse_iface_v1_order_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_warehouse_iface_v1_order_proto_goTypes = []any{
 	(*SkuDataDetail)(nil),             // 0: warehouse_iface.v1.SkuDataDetail
 	(*OutboundItem)(nil),              // 1: warehouse_iface.v1.OutboundItem
 	(*TransactionItem)(nil),           // 2: warehouse_iface.v1.TransactionItem
-	(*OrderDetailSearch)(nil),         // 3: warehouse_iface.v1.OrderDetailSearch
-	(*CustomerSearch)(nil),            // 4: warehouse_iface.v1.CustomerSearch
-	(*OrderDetailSearchRequest)(nil),  // 5: warehouse_iface.v1.OrderDetailSearchRequest
-	(*TransactionDetail)(nil),         // 6: warehouse_iface.v1.TransactionDetail
-	(*OrderDetailSearchItem)(nil),     // 7: warehouse_iface.v1.OrderDetailSearchItem
-	(*OrderDetailSearchResponse)(nil), // 8: warehouse_iface.v1.OrderDetailSearchResponse
-	(v1.MarketplaceType)(0),           // 9: common.v1.MarketplaceType
-	(*timestamppb.Timestamp)(nil),     // 10: google.protobuf.Timestamp
+	(*CustomerDetail)(nil),            // 3: warehouse_iface.v1.CustomerDetail
+	(*OrderDetailSearch)(nil),         // 4: warehouse_iface.v1.OrderDetailSearch
+	(*CustomerSearch)(nil),            // 5: warehouse_iface.v1.CustomerSearch
+	(*OrderDetailSearchRequest)(nil),  // 6: warehouse_iface.v1.OrderDetailSearchRequest
+	(*TransactionDetail)(nil),         // 7: warehouse_iface.v1.TransactionDetail
+	(*OrderDetailSearchItem)(nil),     // 8: warehouse_iface.v1.OrderDetailSearchItem
+	(*OrderDetailSearchResponse)(nil), // 9: warehouse_iface.v1.OrderDetailSearchResponse
+	(v1.MarketplaceType)(0),           // 10: common.v1.MarketplaceType
+	(*timestamppb.Timestamp)(nil),     // 11: google.protobuf.Timestamp
 }
 var file_warehouse_iface_v1_order_proto_depIdxs = []int32{
 	0,  // 0: warehouse_iface.v1.OutboundItem.sku_detail:type_name -> warehouse_iface.v1.SkuDataDetail
 	0,  // 1: warehouse_iface.v1.TransactionItem.sku_detail:type_name -> warehouse_iface.v1.SkuDataDetail
-	9,  // 2: warehouse_iface.v1.OrderDetailSearch.order_from:type_name -> common.v1.MarketplaceType
-	10, // 3: warehouse_iface.v1.OrderDetailSearch.order_time:type_name -> google.protobuf.Timestamp
-	4,  // 4: warehouse_iface.v1.OrderDetailSearchRequest.customer:type_name -> warehouse_iface.v1.CustomerSearch
-	10, // 5: warehouse_iface.v1.TransactionDetail.created:type_name -> google.protobuf.Timestamp
-	10, // 6: warehouse_iface.v1.TransactionDetail.send_at:type_name -> google.protobuf.Timestamp
-	10, // 7: warehouse_iface.v1.TransactionDetail.arrived:type_name -> google.protobuf.Timestamp
-	2,  // 8: warehouse_iface.v1.TransactionDetail.items:type_name -> warehouse_iface.v1.TransactionItem
-	3,  // 9: warehouse_iface.v1.OrderDetailSearchItem.order:type_name -> warehouse_iface.v1.OrderDetailSearch
-	6,  // 10: warehouse_iface.v1.OrderDetailSearchItem.outbound:type_name -> warehouse_iface.v1.TransactionDetail
-	6,  // 11: warehouse_iface.v1.OrderDetailSearchItem.inbound:type_name -> warehouse_iface.v1.TransactionDetail
-	7,  // 12: warehouse_iface.v1.OrderDetailSearchResponse.data:type_name -> warehouse_iface.v1.OrderDetailSearchItem
-	13, // [13:13] is the sub-list for method output_type
-	13, // [13:13] is the sub-list for method input_type
-	13, // [13:13] is the sub-list for extension type_name
-	13, // [13:13] is the sub-list for extension extendee
-	0,  // [0:13] is the sub-list for field type_name
+	10, // 2: warehouse_iface.v1.OrderDetailSearch.order_from:type_name -> common.v1.MarketplaceType
+	11, // 3: warehouse_iface.v1.OrderDetailSearch.order_time:type_name -> google.protobuf.Timestamp
+	3,  // 4: warehouse_iface.v1.OrderDetailSearch.customer:type_name -> warehouse_iface.v1.CustomerDetail
+	5,  // 5: warehouse_iface.v1.OrderDetailSearchRequest.customer:type_name -> warehouse_iface.v1.CustomerSearch
+	11, // 6: warehouse_iface.v1.TransactionDetail.created:type_name -> google.protobuf.Timestamp
+	11, // 7: warehouse_iface.v1.TransactionDetail.send_at:type_name -> google.protobuf.Timestamp
+	11, // 8: warehouse_iface.v1.TransactionDetail.arrived:type_name -> google.protobuf.Timestamp
+	2,  // 9: warehouse_iface.v1.TransactionDetail.items:type_name -> warehouse_iface.v1.TransactionItem
+	4,  // 10: warehouse_iface.v1.OrderDetailSearchItem.order:type_name -> warehouse_iface.v1.OrderDetailSearch
+	7,  // 11: warehouse_iface.v1.OrderDetailSearchItem.outbound:type_name -> warehouse_iface.v1.TransactionDetail
+	7,  // 12: warehouse_iface.v1.OrderDetailSearchItem.inbound:type_name -> warehouse_iface.v1.TransactionDetail
+	8,  // 13: warehouse_iface.v1.OrderDetailSearchResponse.data:type_name -> warehouse_iface.v1.OrderDetailSearchItem
+	14, // [14:14] is the sub-list for method output_type
+	14, // [14:14] is the sub-list for method input_type
+	14, // [14:14] is the sub-list for extension type_name
+	14, // [14:14] is the sub-list for extension extendee
+	0,  // [0:14] is the sub-list for field type_name
 }
 
 func init() { file_warehouse_iface_v1_order_proto_init() }
@@ -995,7 +1116,7 @@ func file_warehouse_iface_v1_order_proto_init() {
 	if File_warehouse_iface_v1_order_proto != nil {
 		return
 	}
-	file_warehouse_iface_v1_order_proto_msgTypes[5].OneofWrappers = []any{
+	file_warehouse_iface_v1_order_proto_msgTypes[6].OneofWrappers = []any{
 		(*OrderDetailSearchRequest_Receipt)(nil),
 		(*OrderDetailSearchRequest_OrderRefId)(nil),
 		(*OrderDetailSearchRequest_Customer)(nil),
@@ -1006,7 +1127,7 @@ func file_warehouse_iface_v1_order_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_warehouse_iface_v1_order_proto_rawDesc), len(file_warehouse_iface_v1_order_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

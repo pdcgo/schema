@@ -2,7 +2,6 @@ syntax = "proto3";
 package selling_iface.v1;
 
 import "google/protobuf/timestamp.proto";
-// import "buf/validate/validate.proto";
 import "selling_iface/v1/metric.proto";
 
 option go_package = "github.com/pdcgo/schema/services/selling_iface/v1;selling_iface";

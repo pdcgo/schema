@@ -26,11 +26,19 @@ message User {
   string profile_picture = 4;
 }
 
+message TeamInfo {
+  uint64 team_id = 1;
+  string contact_number = 2;
+  uint64 return_warehouse_id = 3;
+  uint64 return_user_id = 4;
+}
+
 message Team {
   uint64 id = 1;
   string name = 2;
   string team_code = 3;
   string type = 4;
+  TeamInfo info = 5;
 }
 
 message KeyName {

@@ -1,0 +1,126 @@
+syntax = "proto3";
+package selling_iface.v1;
+
+import "google/protobuf/timestamp.proto";
+import "selling_iface/v1/metric.proto";
+
+option go_package = "github.com/pdcgo/schema/services/selling_iface/v1;selling_iface";
+
+message HistoryRestockItem {
+  // @gotags: gorm:"serializer:timestamptz"
+  google.protobuf.Timestamp t = 1;
+  int32 created_transaction_count = 2;
+  int32 created_piece_count = 3;
+  double created_piece_amount = 4;
+
+  int32 arrived_transaction_count = 5;
+  int32 arrived_piece_count = 6;
+  double arrived_piece_amount = 7;
+}
+
+message HistoryRestockMetric {
+  TimeType time_type = 1;
+  repeated HistoryRestockItem items = 2;
+}
+
+message HistoryReturnItem {
+  // @gotags: gorm:"serializer:timestamptz"
+  google.protobuf.Timestamp t = 1;
+  int32 created_transaction_count = 2;
+  int32 created_piece_count = 3;
+  double created_piece_amount = 4;
+
+  int32 arrived_transaction_count = 5;
+  int32 arrived_piece_count = 6;
+  double arrived_piece_amount = 7;
+}
+
+message HistoryReturnMetric {
+  TimeType time_type = 1;
+  repeated HistoryReturnItem items = 2;
+}
+
+message HistoryStockResolutionItem {
+  // @gotags: gorm:"serializer:timestamptz"
+  google.protobuf.Timestamp t = 1;
+  int32 found_transaction_count = 2;
+  int32 found_piece_count = 3;
+  double found_piece_amount = 4;
+}
+
+message HistoryStockResolutionMetric {
+  TimeType time_type = 1;
+  repeated HistoryStockResolutionItem items = 2;
+}
+
+message HistoryInboundItem {
+  // @gotags: gorm:"serializer:timestamptz"
+  google.protobuf.Timestamp t = 1;
+  int32 created_transaction_count = 2;
+  int32 created_piece_count = 3;
+  double created_piece_amount = 4;
+
+  int32 arrived_transaction_count = 5;
+  int32 arrived_piece_count = 6;
+  double arrived_piece_amount = 7;
+
+  int32 found_transaction_count = 8;
+  int32 found_piece_count = 9;
+  double found_piece_amount = 10;
+}
+
+message HistoryInboundMetric {
+  TimeType time_type = 1;
+  repeated HistoryInboundItem items = 2;
+}
+
+message OutboundMetric {
+  int32 order_transaction_count = 1;
+  int32 order_piece_count = 2;
+  double order_piece_amount = 3;
+
+  int32 lost_in_shipment_transaction_count = 4;
+  int32 lost_in_shipment_piece_count = 5;
+  double lost_in_shipment_piece_amount = 6;
+
+  int32 damaged_in_shipment_transaction_count = 7;
+  int32 damaged_in_shipment_piece_count = 8;
+  double damaged_in_shipment_piece_amount = 9;
+
+  int32 lost_in_warehouse_transaction_count = 10;
+  int32 lost_in_warehouse_piece_count = 11;
+  double lost_in_warehouse_piece_amount = 12;
+
+  int32 damaged_in_warehouse_transaction_count = 13;
+  int32 damaged_in_warehouse_piece_count = 14;
+  double damaged_in_warehouse_piece_amount = 15;
+}
+
+message HistoryOutboundItem {
+  // @gotags: gorm:"serializer:timestamptz"
+  google.protobuf.Timestamp t = 1;
+  int32 order_transaction_count = 2;
+  int32 order_piece_count = 3;
+  double order_piece_amount = 4;
+
+  int32 lost_in_shipment_transaction_count = 5;
+  int32 lost_in_shipment_piece_count = 6;
+  double lost_in_shipment_piece_amount = 7;
+
+  int32 damaged_in_shipment_transaction_count = 8;
+  int32 damaged_in_shipment_piece_count = 9;
+  double damaged_in_shipment_piece_amount = 10;
+
+  int32 lost_in_warehouse_transaction_count = 11;
+  int32 lost_in_warehouse_piece_count = 12;
+  double lost_in_warehouse_piece_amount = 13;
+
+  int32 damaged_in_warehouse_transaction_count = 14;
+  int32 damaged_in_warehouse_piece_count = 15;
+  double damaged_in_warehouse_piece_amount = 16;
+}
+
+message HistoryOutboundMetric {
+  TimeType time_type = 1;
+  repeated HistoryOutboundItem items = 2;
+}

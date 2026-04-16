@@ -36,6 +36,16 @@ message TransactionItem {
   SkuDataDetail sku_detail = 7;
 }
 
+message CustomerDetail {
+  uint64 id = 1;
+  string name = 2;
+  string phone = 3;
+  string city = 4;
+  string district = 5;
+  string postal_code = 6;
+  string address = 7;
+}
+
 message OrderDetailSearch {
   uint64 id = 1;
   uint64 team_id = 2;
@@ -49,6 +59,7 @@ message OrderDetailSearch {
   string return_receipt = 9;
   common.v1.MarketplaceType order_from = 10;
   google.protobuf.Timestamp order_time = 11;
+  CustomerDetail customer = 13;
 }
 
 message CustomerSearch {
@@ -65,7 +76,7 @@ message OrderDetailSearchRequest {
     string order_ref_id = 2;
     CustomerSearch customer = 3;
   }
-
+  uint64 warehouse_id = 6 [(buf.validate.field).uint64.gt = 0];
   string status = 4;
 
   int64 limit = 5 [(buf.validate.field).int64 = {
