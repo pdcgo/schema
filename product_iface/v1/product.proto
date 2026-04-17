@@ -21,8 +21,11 @@ service ProductService {
 
 enum ProductListFieldSort {
   PRODUCT_LIST_FIELD_SORT_UNSPECIFIED = 0;
-  PRODUCT_LIST_FIELD_SORT_PRODUCT_NAME = 1;
-  PRODUCT_LIST_FIELD_SORT_SKU_ID = 2;
+  PRODUCT_LIST_FIELD_SORT_PIECE_COUNT = 1;
+  PRODUCT_LIST_FIELD_SORT_REVENUE_AMOUNT = 2;
+  PRODUCT_LIST_FIELD_SORT_ORDER_COUNT = 3;
+  PRODUCT_LIST_FIELD_SORT_SHOP_COUNT = 4;
+  PRODUCT_LIST_FIELD_SORT_TEAM_COUNT = 5;
 }
 
 message ProductListSort {
@@ -33,7 +36,7 @@ message ProductListSort {
 message ProductListExportRequest {
   uint64 team_id = 1;
   bool is_locked = 2;
-  ProductListSort sort = 3;
+  ProductListSort sort = 3 [(buf.validate.field).required = true];
 
   oneof sold_by {
     uint64 sold_by_team_id = 4;

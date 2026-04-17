@@ -26,22 +26,31 @@ const (
 type ProductListFieldSort int32
 
 const (
-	ProductListFieldSort_PRODUCT_LIST_FIELD_SORT_UNSPECIFIED  ProductListFieldSort = 0
-	ProductListFieldSort_PRODUCT_LIST_FIELD_SORT_PRODUCT_NAME ProductListFieldSort = 1
-	ProductListFieldSort_PRODUCT_LIST_FIELD_SORT_SKU_ID       ProductListFieldSort = 2
+	ProductListFieldSort_PRODUCT_LIST_FIELD_SORT_UNSPECIFIED    ProductListFieldSort = 0
+	ProductListFieldSort_PRODUCT_LIST_FIELD_SORT_PIECE_COUNT    ProductListFieldSort = 1
+	ProductListFieldSort_PRODUCT_LIST_FIELD_SORT_REVENUE_AMOUNT ProductListFieldSort = 2
+	ProductListFieldSort_PRODUCT_LIST_FIELD_SORT_ORDER_COUNT    ProductListFieldSort = 3
+	ProductListFieldSort_PRODUCT_LIST_FIELD_SORT_SHOP_COUNT     ProductListFieldSort = 4
+	ProductListFieldSort_PRODUCT_LIST_FIELD_SORT_TEAM_COUNT     ProductListFieldSort = 5
 )
 
 // Enum value maps for ProductListFieldSort.
 var (
 	ProductListFieldSort_name = map[int32]string{
 		0: "PRODUCT_LIST_FIELD_SORT_UNSPECIFIED",
-		1: "PRODUCT_LIST_FIELD_SORT_PRODUCT_NAME",
-		2: "PRODUCT_LIST_FIELD_SORT_SKU_ID",
+		1: "PRODUCT_LIST_FIELD_SORT_PIECE_COUNT",
+		2: "PRODUCT_LIST_FIELD_SORT_REVENUE_AMOUNT",
+		3: "PRODUCT_LIST_FIELD_SORT_ORDER_COUNT",
+		4: "PRODUCT_LIST_FIELD_SORT_SHOP_COUNT",
+		5: "PRODUCT_LIST_FIELD_SORT_TEAM_COUNT",
 	}
 	ProductListFieldSort_value = map[string]int32{
-		"PRODUCT_LIST_FIELD_SORT_UNSPECIFIED":  0,
-		"PRODUCT_LIST_FIELD_SORT_PRODUCT_NAME": 1,
-		"PRODUCT_LIST_FIELD_SORT_SKU_ID":       2,
+		"PRODUCT_LIST_FIELD_SORT_UNSPECIFIED":    0,
+		"PRODUCT_LIST_FIELD_SORT_PIECE_COUNT":    1,
+		"PRODUCT_LIST_FIELD_SORT_REVENUE_AMOUNT": 2,
+		"PRODUCT_LIST_FIELD_SORT_ORDER_COUNT":    3,
+		"PRODUCT_LIST_FIELD_SORT_SHOP_COUNT":     4,
+		"PRODUCT_LIST_FIELD_SORT_TEAM_COUNT":     5,
 	}
 )
 
@@ -959,11 +968,11 @@ const file_product_iface_v1_product_proto_rawDesc = "" +
 	"\x1eproduct_iface/v1/product.proto\x12\x10product_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\"x\n" +
 	"\x0fProductListSort\x12<\n" +
 	"\x05field\x18\x01 \x01(\x0e2&.product_iface.v1.ProductListFieldSortR\x05field\x12'\n" +
-	"\x04type\x18\x02 \x01(\x0e2\x13.common.v1.SortTypeR\x04type\"\xef\x02\n" +
+	"\x04type\x18\x02 \x01(\x0e2\x13.common.v1.SortTypeR\x04type\"\xf7\x02\n" +
 	"\x18ProductListExportRequest\x12\x17\n" +
 	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12\x1b\n" +
-	"\tis_locked\x18\x02 \x01(\bR\bisLocked\x125\n" +
-	"\x04sort\x18\x03 \x01(\v2!.product_iface.v1.ProductListSortR\x04sort\x12'\n" +
+	"\tis_locked\x18\x02 \x01(\bR\bisLocked\x12=\n" +
+	"\x04sort\x18\x03 \x01(\v2!.product_iface.v1.ProductListSortB\x06\xbaH\x03\xc8\x01\x01R\x04sort\x12'\n" +
 	"\x0fsold_by_team_id\x18\x04 \x01(\x04H\x00R\fsoldByTeamId\x12'\n" +
 	"\x0fsold_by_shop_id\x18\x05 \x01(\x04H\x00R\fsoldByShopId\x12#\n" +
 	"\fproduct_name\x18\x06 \x01(\tH\x01R\vproductName\x12\x17\n" +
@@ -1027,11 +1036,14 @@ const file_product_iface_v1_product_proto_rawDesc = "" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12*\n" +
 	"\fvariation_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\vvariationId\x12/\n" +
 	"\x0fto_variation_id\x18\x03 \x01(\x04B\a\xbaH\x042\x02 \x00R\rtoVariationId\"\x1b\n" +
-	"\x19ProductMapConnectResponse*\x8d\x01\n" +
+	"\x19ProductMapConnectResponse*\x8d\x02\n" +
 	"\x14ProductListFieldSort\x12'\n" +
-	"#PRODUCT_LIST_FIELD_SORT_UNSPECIFIED\x10\x00\x12(\n" +
-	"$PRODUCT_LIST_FIELD_SORT_PRODUCT_NAME\x10\x01\x12\"\n" +
-	"\x1ePRODUCT_LIST_FIELD_SORT_SKU_ID\x10\x022\x9a\x04\n" +
+	"#PRODUCT_LIST_FIELD_SORT_UNSPECIFIED\x10\x00\x12'\n" +
+	"#PRODUCT_LIST_FIELD_SORT_PIECE_COUNT\x10\x01\x12*\n" +
+	"&PRODUCT_LIST_FIELD_SORT_REVENUE_AMOUNT\x10\x02\x12'\n" +
+	"#PRODUCT_LIST_FIELD_SORT_ORDER_COUNT\x10\x03\x12&\n" +
+	"\"PRODUCT_LIST_FIELD_SORT_SHOP_COUNT\x10\x04\x12&\n" +
+	"\"PRODUCT_LIST_FIELD_SORT_TEAM_COUNT\x10\x052\x9a\x04\n" +
 	"\x0eProductService\x12i\n" +
 	"\x10ProductDuplicate\x12).product_iface.v1.ProductDuplicateRequest\x1a*.product_iface.v1.ProductDuplicateResponse\x12`\n" +
 	"\rProductMapGet\x12&.product_iface.v1.ProductMapGetRequest\x1a'.product_iface.v1.ProductMapGetResponse\x12l\n" +
