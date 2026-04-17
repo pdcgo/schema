@@ -26,6 +26,10 @@ enum ProductListFieldSort {
   PRODUCT_LIST_FIELD_SORT_ORDER_COUNT = 3;
   PRODUCT_LIST_FIELD_SORT_SHOP_COUNT = 4;
   PRODUCT_LIST_FIELD_SORT_TEAM_COUNT = 5;
+  PRODUCT_LIST_FIELD_SORT_ONGOING_STOCK = 6;
+  PRODUCT_LIST_FIELD_SORT_READY_STOCK = 7;
+  PRODUCT_LIST_FIELD_SORT_TOTAL_STOCK = 8;
+  PRODUCT_LIST_FIELD_SORT_RESERVED_STOCK = 9;
 }
 
 message ProductListSort {
@@ -64,7 +68,8 @@ message ProductItem {
 
   int64 ongoing_stock = 10;
   int64 ready_stock = 11;
-  int64 reserved_stock = 12;
+  int64 total_stock = 12;
+  int64 reserved_stock = 13;
 }
 
 message ProductListExportResponse {

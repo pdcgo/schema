@@ -32,6 +32,10 @@ const (
 	ProductListFieldSort_PRODUCT_LIST_FIELD_SORT_ORDER_COUNT    ProductListFieldSort = 3
 	ProductListFieldSort_PRODUCT_LIST_FIELD_SORT_SHOP_COUNT     ProductListFieldSort = 4
 	ProductListFieldSort_PRODUCT_LIST_FIELD_SORT_TEAM_COUNT     ProductListFieldSort = 5
+	ProductListFieldSort_PRODUCT_LIST_FIELD_SORT_ONGOING_STOCK  ProductListFieldSort = 6
+	ProductListFieldSort_PRODUCT_LIST_FIELD_SORT_READY_STOCK    ProductListFieldSort = 7
+	ProductListFieldSort_PRODUCT_LIST_FIELD_SORT_TOTAL_STOCK    ProductListFieldSort = 8
+	ProductListFieldSort_PRODUCT_LIST_FIELD_SORT_RESERVED_STOCK ProductListFieldSort = 9
 )
 
 // Enum value maps for ProductListFieldSort.
@@ -43,6 +47,10 @@ var (
 		3: "PRODUCT_LIST_FIELD_SORT_ORDER_COUNT",
 		4: "PRODUCT_LIST_FIELD_SORT_SHOP_COUNT",
 		5: "PRODUCT_LIST_FIELD_SORT_TEAM_COUNT",
+		6: "PRODUCT_LIST_FIELD_SORT_ONGOING_STOCK",
+		7: "PRODUCT_LIST_FIELD_SORT_READY_STOCK",
+		8: "PRODUCT_LIST_FIELD_SORT_TOTAL_STOCK",
+		9: "PRODUCT_LIST_FIELD_SORT_RESERVED_STOCK",
 	}
 	ProductListFieldSort_value = map[string]int32{
 		"PRODUCT_LIST_FIELD_SORT_UNSPECIFIED":    0,
@@ -51,6 +59,10 @@ var (
 		"PRODUCT_LIST_FIELD_SORT_ORDER_COUNT":    3,
 		"PRODUCT_LIST_FIELD_SORT_SHOP_COUNT":     4,
 		"PRODUCT_LIST_FIELD_SORT_TEAM_COUNT":     5,
+		"PRODUCT_LIST_FIELD_SORT_ONGOING_STOCK":  6,
+		"PRODUCT_LIST_FIELD_SORT_READY_STOCK":    7,
+		"PRODUCT_LIST_FIELD_SORT_TOTAL_STOCK":    8,
+		"PRODUCT_LIST_FIELD_SORT_RESERVED_STOCK": 9,
 	}
 )
 
@@ -306,7 +318,8 @@ type ProductItem struct {
 	RevenueAmount float64                `protobuf:"fixed64,9,opt,name=revenue_amount,json=revenueAmount,proto3" json:"revenue_amount,omitempty"`
 	OngoingStock  int64                  `protobuf:"varint,10,opt,name=ongoing_stock,json=ongoingStock,proto3" json:"ongoing_stock,omitempty"`
 	ReadyStock    int64                  `protobuf:"varint,11,opt,name=ready_stock,json=readyStock,proto3" json:"ready_stock,omitempty"`
-	ReservedStock int64                  `protobuf:"varint,12,opt,name=reserved_stock,json=reservedStock,proto3" json:"reserved_stock,omitempty"`
+	TotalStock    int64                  `protobuf:"varint,12,opt,name=total_stock,json=totalStock,proto3" json:"total_stock,omitempty"`
+	ReservedStock int64                  `protobuf:"varint,13,opt,name=reserved_stock,json=reservedStock,proto3" json:"reserved_stock,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -414,6 +427,13 @@ func (x *ProductItem) GetOngoingStock() int64 {
 func (x *ProductItem) GetReadyStock() int64 {
 	if x != nil {
 		return x.ReadyStock
+	}
+	return 0
+}
+
+func (x *ProductItem) GetTotalStock() int64 {
+	if x != nil {
+		return x.TotalStock
 	}
 	return 0
 }
@@ -980,7 +1000,7 @@ const file_product_iface_v1_product_proto_rawDesc = "" +
 	"\n" +
 	"time_range\x18\b \x01(\v2\x1a.common.v1.TimeFilterRangeB\x06\xbaH\x03\xc8\x01\x01R\ttimeRangeB\t\n" +
 	"\asold_byB\b\n" +
-	"\x06search\"\x84\x03\n" +
+	"\x06search\"\xa5\x03\n" +
 	"\vProductItem\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x15\n" +
@@ -998,8 +1018,10 @@ const file_product_iface_v1_product_proto_rawDesc = "" +
 	"\rongoing_stock\x18\n" +
 	" \x01(\x03R\fongoingStock\x12\x1f\n" +
 	"\vready_stock\x18\v \x01(\x03R\n" +
-	"readyStock\x12%\n" +
-	"\x0ereserved_stock\x18\f \x01(\x03R\rreservedStock\"w\n" +
+	"readyStock\x12\x1f\n" +
+	"\vtotal_stock\x18\f \x01(\x03R\n" +
+	"totalStock\x12%\n" +
+	"\x0ereserved_stock\x18\r \x01(\x03R\rreservedStock\"w\n" +
 	"\x19ProductListExportResponse\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\x12\x16\n" +
 	"\x06offset\x18\x02 \x01(\x03R\x06offset\x12\x14\n" +
@@ -1036,14 +1058,18 @@ const file_product_iface_v1_product_proto_rawDesc = "" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12*\n" +
 	"\fvariation_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\vvariationId\x12/\n" +
 	"\x0fto_variation_id\x18\x03 \x01(\x04B\a\xbaH\x042\x02 \x00R\rtoVariationId\"\x1b\n" +
-	"\x19ProductMapConnectResponse*\x8d\x02\n" +
+	"\x19ProductMapConnectResponse*\xb6\x03\n" +
 	"\x14ProductListFieldSort\x12'\n" +
 	"#PRODUCT_LIST_FIELD_SORT_UNSPECIFIED\x10\x00\x12'\n" +
 	"#PRODUCT_LIST_FIELD_SORT_PIECE_COUNT\x10\x01\x12*\n" +
 	"&PRODUCT_LIST_FIELD_SORT_REVENUE_AMOUNT\x10\x02\x12'\n" +
 	"#PRODUCT_LIST_FIELD_SORT_ORDER_COUNT\x10\x03\x12&\n" +
 	"\"PRODUCT_LIST_FIELD_SORT_SHOP_COUNT\x10\x04\x12&\n" +
-	"\"PRODUCT_LIST_FIELD_SORT_TEAM_COUNT\x10\x052\x9a\x04\n" +
+	"\"PRODUCT_LIST_FIELD_SORT_TEAM_COUNT\x10\x05\x12)\n" +
+	"%PRODUCT_LIST_FIELD_SORT_ONGOING_STOCK\x10\x06\x12'\n" +
+	"#PRODUCT_LIST_FIELD_SORT_READY_STOCK\x10\a\x12'\n" +
+	"#PRODUCT_LIST_FIELD_SORT_TOTAL_STOCK\x10\b\x12*\n" +
+	"&PRODUCT_LIST_FIELD_SORT_RESERVED_STOCK\x10\t2\x9a\x04\n" +
 	"\x0eProductService\x12i\n" +
 	"\x10ProductDuplicate\x12).product_iface.v1.ProductDuplicateRequest\x1a*.product_iface.v1.ProductDuplicateResponse\x12`\n" +
 	"\rProductMapGet\x12&.product_iface.v1.ProductMapGetRequest\x1a'.product_iface.v1.ProductMapGetResponse\x12l\n" +
