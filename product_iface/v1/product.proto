@@ -3,7 +3,7 @@ package product_iface.v1;
 
 // import "accounting_iface/v1/core.proto";
 import "buf/validate/validate.proto";
-// import "common/v1/common.proto";
+import "common/v1/common.proto";
 // import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/pdcgo/schema/services/product_iface/v1;product_iface";
@@ -15,6 +15,60 @@ service ProductService {
 
   // info Product
   rpc ProductByIDs(ProductByIDsRequest) returns (ProductByIDsResponse);
+
+  rpc ProductListExport(ProductListExportRequest) returns (stream ProductListExportResponse);
+}
+
+enum ProductListFieldSort {
+  PRODUCT_LIST_FIELD_SORT_UNSPECIFIED = 0;
+  PRODUCT_LIST_FIELD_SORT_PRODUCT_NAME = 1;
+  PRODUCT_LIST_FIELD_SORT_SKU_ID = 2;
+}
+
+message ProductListSort {
+  ProductListFieldSort field = 1;
+  common.v1.SortType type = 2;
+}
+
+message ProductListExportRequest {
+  uint64 team_id = 1;
+  bool is_locked = 2;
+  ProductListSort sort = 3;
+
+  oneof sold_by {
+    uint64 sold_by_team_id = 4;
+    uint64 sold_by_shop_id = 5;
+  }
+
+  oneof search {
+    string product_name = 6;
+    string sku_id = 7;
+  }
+  common.v1.TimeFilterRange time_range = 8 [(buf.validate.field).required = true];
+}
+
+message ProductItem {
+  uint64 id = 1;
+  string name = 2;
+  string ref_id = 3;
+  string owner_team_name = 4;
+
+  int64 shop_count = 5;
+  int64 team_count = 6;
+  int64 order_count = 7;
+  int64 piece_count = 8;
+  double revenue_amount = 9;
+
+  int64 ongoing_stock = 10;
+  int64 ready_stock = 11;
+  int64 reserved_stock = 12;
+}
+
+message ProductListExportResponse {
+  string message = 1;
+  int64 offset = 2;
+  int64 total = 3;
+  bytes data = 4;
 }
 
 message ProductByIDsRequest {

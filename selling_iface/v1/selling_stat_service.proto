@@ -83,12 +83,12 @@ message Metric {
     HistoryOrderMetric history_order = 9;
     TopProductSoldMetric top_product_sold = 10;
     TopProductUnsoldMetric top_product_unsold = 11;
-    HistoryInboundMetric history_inbound = 12;
-    HistoryOutboundMetric history_outbound = 13;
-    HistoryRestockMetric history_restock = 14;
-    HistoryReturnMetric history_return = 15;
-    HistoryStockResolutionMetric history_stock_resolution = 16;
-    OutboundMetric outbound = 17;
+    HistoryRestockMetric history_restock = 12;
+    HistoryReturnMetric history_return = 13;
+    HistoryStockResolutionMetric history_stock_resolution = 14;
+    HistoryStockOrderMetric history_stock_order = 15;
+    HistoryShipmentProblemMetric history_shipment_problem = 16;
+    HistoryWarehouseProblemMetric history_warehouse_problem = 17;
   }
 }
 

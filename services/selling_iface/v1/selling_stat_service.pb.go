@@ -518,12 +518,12 @@ type Metric struct {
 	//	*Metric_HistoryOrder
 	//	*Metric_TopProductSold
 	//	*Metric_TopProductUnsold
-	//	*Metric_HistoryInbound
-	//	*Metric_HistoryOutbound
 	//	*Metric_HistoryRestock
 	//	*Metric_HistoryReturn
 	//	*Metric_HistoryStockResolution
-	//	*Metric_Outbound
+	//	*Metric_HistoryStockOrder
+	//	*Metric_HistoryShipmentProblem
+	//	*Metric_HistoryWarehouseProblem
 	Data          isMetric_Data `protobuf_oneof:"data"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -665,24 +665,6 @@ func (x *Metric) GetTopProductUnsold() *TopProductUnsoldMetric {
 	return nil
 }
 
-func (x *Metric) GetHistoryInbound() *HistoryInboundMetric {
-	if x != nil {
-		if x, ok := x.Data.(*Metric_HistoryInbound); ok {
-			return x.HistoryInbound
-		}
-	}
-	return nil
-}
-
-func (x *Metric) GetHistoryOutbound() *HistoryOutboundMetric {
-	if x != nil {
-		if x, ok := x.Data.(*Metric_HistoryOutbound); ok {
-			return x.HistoryOutbound
-		}
-	}
-	return nil
-}
-
 func (x *Metric) GetHistoryRestock() *HistoryRestockMetric {
 	if x != nil {
 		if x, ok := x.Data.(*Metric_HistoryRestock); ok {
@@ -710,10 +692,28 @@ func (x *Metric) GetHistoryStockResolution() *HistoryStockResolutionMetric {
 	return nil
 }
 
-func (x *Metric) GetOutbound() *OutboundMetric {
+func (x *Metric) GetHistoryStockOrder() *HistoryStockOrderMetric {
 	if x != nil {
-		if x, ok := x.Data.(*Metric_Outbound); ok {
-			return x.Outbound
+		if x, ok := x.Data.(*Metric_HistoryStockOrder); ok {
+			return x.HistoryStockOrder
+		}
+	}
+	return nil
+}
+
+func (x *Metric) GetHistoryShipmentProblem() *HistoryShipmentProblemMetric {
+	if x != nil {
+		if x, ok := x.Data.(*Metric_HistoryShipmentProblem); ok {
+			return x.HistoryShipmentProblem
+		}
+	}
+	return nil
+}
+
+func (x *Metric) GetHistoryWarehouseProblem() *HistoryWarehouseProblemMetric {
+	if x != nil {
+		if x, ok := x.Data.(*Metric_HistoryWarehouseProblem); ok {
+			return x.HistoryWarehouseProblem
 		}
 	}
 	return nil
@@ -767,28 +767,28 @@ type Metric_TopProductUnsold struct {
 	TopProductUnsold *TopProductUnsoldMetric `protobuf:"bytes,11,opt,name=top_product_unsold,json=topProductUnsold,proto3,oneof"`
 }
 
-type Metric_HistoryInbound struct {
-	HistoryInbound *HistoryInboundMetric `protobuf:"bytes,12,opt,name=history_inbound,json=historyInbound,proto3,oneof"`
-}
-
-type Metric_HistoryOutbound struct {
-	HistoryOutbound *HistoryOutboundMetric `protobuf:"bytes,13,opt,name=history_outbound,json=historyOutbound,proto3,oneof"`
-}
-
 type Metric_HistoryRestock struct {
-	HistoryRestock *HistoryRestockMetric `protobuf:"bytes,14,opt,name=history_restock,json=historyRestock,proto3,oneof"`
+	HistoryRestock *HistoryRestockMetric `protobuf:"bytes,12,opt,name=history_restock,json=historyRestock,proto3,oneof"`
 }
 
 type Metric_HistoryReturn struct {
-	HistoryReturn *HistoryReturnMetric `protobuf:"bytes,15,opt,name=history_return,json=historyReturn,proto3,oneof"`
+	HistoryReturn *HistoryReturnMetric `protobuf:"bytes,13,opt,name=history_return,json=historyReturn,proto3,oneof"`
 }
 
 type Metric_HistoryStockResolution struct {
-	HistoryStockResolution *HistoryStockResolutionMetric `protobuf:"bytes,16,opt,name=history_stock_resolution,json=historyStockResolution,proto3,oneof"`
+	HistoryStockResolution *HistoryStockResolutionMetric `protobuf:"bytes,14,opt,name=history_stock_resolution,json=historyStockResolution,proto3,oneof"`
 }
 
-type Metric_Outbound struct {
-	Outbound *OutboundMetric `protobuf:"bytes,17,opt,name=outbound,proto3,oneof"`
+type Metric_HistoryStockOrder struct {
+	HistoryStockOrder *HistoryStockOrderMetric `protobuf:"bytes,15,opt,name=history_stock_order,json=historyStockOrder,proto3,oneof"`
+}
+
+type Metric_HistoryShipmentProblem struct {
+	HistoryShipmentProblem *HistoryShipmentProblemMetric `protobuf:"bytes,16,opt,name=history_shipment_problem,json=historyShipmentProblem,proto3,oneof"`
+}
+
+type Metric_HistoryWarehouseProblem struct {
+	HistoryWarehouseProblem *HistoryWarehouseProblemMetric `protobuf:"bytes,17,opt,name=history_warehouse_problem,json=historyWarehouseProblem,proto3,oneof"`
 }
 
 func (*Metric_TotalStock) isMetric_Data() {}
@@ -813,17 +813,17 @@ func (*Metric_TopProductSold) isMetric_Data() {}
 
 func (*Metric_TopProductUnsold) isMetric_Data() {}
 
-func (*Metric_HistoryInbound) isMetric_Data() {}
-
-func (*Metric_HistoryOutbound) isMetric_Data() {}
-
 func (*Metric_HistoryRestock) isMetric_Data() {}
 
 func (*Metric_HistoryReturn) isMetric_Data() {}
 
 func (*Metric_HistoryStockResolution) isMetric_Data() {}
 
-func (*Metric_Outbound) isMetric_Data() {}
+func (*Metric_HistoryStockOrder) isMetric_Data() {}
+
+func (*Metric_HistoryShipmentProblem) isMetric_Data() {}
+
+func (*Metric_HistoryWarehouseProblem) isMetric_Data() {}
 
 type StatFilter struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -1140,8 +1140,7 @@ const file_selling_iface_v1_selling_stat_service_proto_rawDesc = "" +
 	"\x10ReceivableMetric\x120\n" +
 	"\x04type\x18\x01 \x01(\x0e2\x1c.selling_iface.v1.MetricTypeR\x04type\x12#\n" +
 	"\rinvoice_count\x18\x02 \x01(\x03R\finvoiceCount\x12\x16\n" +
-	"\x06amount\x18\x03 \x01(\x01R\x06amount\"\xd5\n" +
-	"\n" +
+	"\x06amount\x18\x03 \x01(\x01R\x06amount\"\xa4\v\n" +
 	"\x06Metric\x12E\n" +
 	"\vtotal_stock\x18\x01 \x01(\v2\".selling_iface.v1.TotalStockMetricH\x00R\n" +
 	"totalStock\x12K\n" +
@@ -1159,12 +1158,12 @@ const file_selling_iface_v1_selling_stat_service_proto_rawDesc = "" +
 	"\x10top_product_sold\x18\n" +
 	" \x01(\v2&.selling_iface.v1.TopProductSoldMetricH\x00R\x0etopProductSold\x12X\n" +
 	"\x12top_product_unsold\x18\v \x01(\v2(.selling_iface.v1.TopProductUnsoldMetricH\x00R\x10topProductUnsold\x12Q\n" +
-	"\x0fhistory_inbound\x18\f \x01(\v2&.selling_iface.v1.HistoryInboundMetricH\x00R\x0ehistoryInbound\x12T\n" +
-	"\x10history_outbound\x18\r \x01(\v2'.selling_iface.v1.HistoryOutboundMetricH\x00R\x0fhistoryOutbound\x12Q\n" +
-	"\x0fhistory_restock\x18\x0e \x01(\v2&.selling_iface.v1.HistoryRestockMetricH\x00R\x0ehistoryRestock\x12N\n" +
-	"\x0ehistory_return\x18\x0f \x01(\v2%.selling_iface.v1.HistoryReturnMetricH\x00R\rhistoryReturn\x12j\n" +
-	"\x18history_stock_resolution\x18\x10 \x01(\v2..selling_iface.v1.HistoryStockResolutionMetricH\x00R\x16historyStockResolution\x12>\n" +
-	"\boutbound\x18\x11 \x01(\v2 .selling_iface.v1.OutboundMetricH\x00R\boutboundB\x06\n" +
+	"\x0fhistory_restock\x18\f \x01(\v2&.selling_iface.v1.HistoryRestockMetricH\x00R\x0ehistoryRestock\x12N\n" +
+	"\x0ehistory_return\x18\r \x01(\v2%.selling_iface.v1.HistoryReturnMetricH\x00R\rhistoryReturn\x12j\n" +
+	"\x18history_stock_resolution\x18\x0e \x01(\v2..selling_iface.v1.HistoryStockResolutionMetricH\x00R\x16historyStockResolution\x12[\n" +
+	"\x13history_stock_order\x18\x0f \x01(\v2).selling_iface.v1.HistoryStockOrderMetricH\x00R\x11historyStockOrder\x12j\n" +
+	"\x18history_shipment_problem\x18\x10 \x01(\v2..selling_iface.v1.HistoryShipmentProblemMetricH\x00R\x16historyShipmentProblem\x12m\n" +
+	"\x19history_warehouse_problem\x18\x11 \x01(\v2/.selling_iface.v1.HistoryWarehouseProblemMetricH\x00R\x17historyWarehouseProblemB\x06\n" +
 	"\x04data\"]\n" +
 	"\n" +
 	"StatFilter\x12\x17\n" +
@@ -1204,33 +1203,33 @@ func file_selling_iface_v1_selling_stat_service_proto_rawDescGZIP() []byte {
 
 var file_selling_iface_v1_selling_stat_service_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_selling_iface_v1_selling_stat_service_proto_goTypes = []any{
-	(*TimeRange)(nil),                    // 0: selling_iface.v1.TimeRange
-	(*TotalStockMetric)(nil),             // 1: selling_iface.v1.TotalStockMetric
-	(*OngoingStockMetric)(nil),           // 2: selling_iface.v1.OngoingStockMetric
-	(*ReadyStockMetric)(nil),             // 3: selling_iface.v1.ReadyStockMetric
-	(*PayableMetric)(nil),                // 4: selling_iface.v1.PayableMetric
-	(*ReceivableMetric)(nil),             // 5: selling_iface.v1.ReceivableMetric
-	(*Metric)(nil),                       // 6: selling_iface.v1.Metric
-	(*StatFilter)(nil),                   // 7: selling_iface.v1.StatFilter
-	(*StatRequest)(nil),                  // 8: selling_iface.v1.StatRequest
-	(*StatResponse)(nil),                 // 9: selling_iface.v1.StatResponse
-	(*StatStreamRequest)(nil),            // 10: selling_iface.v1.StatStreamRequest
-	(*StatStreamResponse)(nil),           // 11: selling_iface.v1.StatStreamResponse
-	(*timestamppb.Timestamp)(nil),        // 12: google.protobuf.Timestamp
-	(TimeType)(0),                        // 13: selling_iface.v1.TimeType
-	(MetricType)(0),                      // 14: selling_iface.v1.MetricType
-	(*ProductSoldMetric)(nil),            // 15: selling_iface.v1.ProductSoldMetric
-	(*HistoryProductSoldMetric)(nil),     // 16: selling_iface.v1.HistoryProductSoldMetric
-	(*OrderActiveMetric)(nil),            // 17: selling_iface.v1.OrderActiveMetric
-	(*HistoryOrderMetric)(nil),           // 18: selling_iface.v1.HistoryOrderMetric
-	(*TopProductSoldMetric)(nil),         // 19: selling_iface.v1.TopProductSoldMetric
-	(*TopProductUnsoldMetric)(nil),       // 20: selling_iface.v1.TopProductUnsoldMetric
-	(*HistoryInboundMetric)(nil),         // 21: selling_iface.v1.HistoryInboundMetric
-	(*HistoryOutboundMetric)(nil),        // 22: selling_iface.v1.HistoryOutboundMetric
-	(*HistoryRestockMetric)(nil),         // 23: selling_iface.v1.HistoryRestockMetric
-	(*HistoryReturnMetric)(nil),          // 24: selling_iface.v1.HistoryReturnMetric
-	(*HistoryStockResolutionMetric)(nil), // 25: selling_iface.v1.HistoryStockResolutionMetric
-	(*OutboundMetric)(nil),               // 26: selling_iface.v1.OutboundMetric
+	(*TimeRange)(nil),                     // 0: selling_iface.v1.TimeRange
+	(*TotalStockMetric)(nil),              // 1: selling_iface.v1.TotalStockMetric
+	(*OngoingStockMetric)(nil),            // 2: selling_iface.v1.OngoingStockMetric
+	(*ReadyStockMetric)(nil),              // 3: selling_iface.v1.ReadyStockMetric
+	(*PayableMetric)(nil),                 // 4: selling_iface.v1.PayableMetric
+	(*ReceivableMetric)(nil),              // 5: selling_iface.v1.ReceivableMetric
+	(*Metric)(nil),                        // 6: selling_iface.v1.Metric
+	(*StatFilter)(nil),                    // 7: selling_iface.v1.StatFilter
+	(*StatRequest)(nil),                   // 8: selling_iface.v1.StatRequest
+	(*StatResponse)(nil),                  // 9: selling_iface.v1.StatResponse
+	(*StatStreamRequest)(nil),             // 10: selling_iface.v1.StatStreamRequest
+	(*StatStreamResponse)(nil),            // 11: selling_iface.v1.StatStreamResponse
+	(*timestamppb.Timestamp)(nil),         // 12: google.protobuf.Timestamp
+	(TimeType)(0),                         // 13: selling_iface.v1.TimeType
+	(MetricType)(0),                       // 14: selling_iface.v1.MetricType
+	(*ProductSoldMetric)(nil),             // 15: selling_iface.v1.ProductSoldMetric
+	(*HistoryProductSoldMetric)(nil),      // 16: selling_iface.v1.HistoryProductSoldMetric
+	(*OrderActiveMetric)(nil),             // 17: selling_iface.v1.OrderActiveMetric
+	(*HistoryOrderMetric)(nil),            // 18: selling_iface.v1.HistoryOrderMetric
+	(*TopProductSoldMetric)(nil),          // 19: selling_iface.v1.TopProductSoldMetric
+	(*TopProductUnsoldMetric)(nil),        // 20: selling_iface.v1.TopProductUnsoldMetric
+	(*HistoryRestockMetric)(nil),          // 21: selling_iface.v1.HistoryRestockMetric
+	(*HistoryReturnMetric)(nil),           // 22: selling_iface.v1.HistoryReturnMetric
+	(*HistoryStockResolutionMetric)(nil),  // 23: selling_iface.v1.HistoryStockResolutionMetric
+	(*HistoryStockOrderMetric)(nil),       // 24: selling_iface.v1.HistoryStockOrderMetric
+	(*HistoryShipmentProblemMetric)(nil),  // 25: selling_iface.v1.HistoryShipmentProblemMetric
+	(*HistoryWarehouseProblemMetric)(nil), // 26: selling_iface.v1.HistoryWarehouseProblemMetric
 }
 var file_selling_iface_v1_selling_stat_service_proto_depIdxs = []int32{
 	12, // 0: selling_iface.v1.TimeRange.start:type_name -> google.protobuf.Timestamp
@@ -1252,12 +1251,12 @@ var file_selling_iface_v1_selling_stat_service_proto_depIdxs = []int32{
 	18, // 16: selling_iface.v1.Metric.history_order:type_name -> selling_iface.v1.HistoryOrderMetric
 	19, // 17: selling_iface.v1.Metric.top_product_sold:type_name -> selling_iface.v1.TopProductSoldMetric
 	20, // 18: selling_iface.v1.Metric.top_product_unsold:type_name -> selling_iface.v1.TopProductUnsoldMetric
-	21, // 19: selling_iface.v1.Metric.history_inbound:type_name -> selling_iface.v1.HistoryInboundMetric
-	22, // 20: selling_iface.v1.Metric.history_outbound:type_name -> selling_iface.v1.HistoryOutboundMetric
-	23, // 21: selling_iface.v1.Metric.history_restock:type_name -> selling_iface.v1.HistoryRestockMetric
-	24, // 22: selling_iface.v1.Metric.history_return:type_name -> selling_iface.v1.HistoryReturnMetric
-	25, // 23: selling_iface.v1.Metric.history_stock_resolution:type_name -> selling_iface.v1.HistoryStockResolutionMetric
-	26, // 24: selling_iface.v1.Metric.outbound:type_name -> selling_iface.v1.OutboundMetric
+	21, // 19: selling_iface.v1.Metric.history_restock:type_name -> selling_iface.v1.HistoryRestockMetric
+	22, // 20: selling_iface.v1.Metric.history_return:type_name -> selling_iface.v1.HistoryReturnMetric
+	23, // 21: selling_iface.v1.Metric.history_stock_resolution:type_name -> selling_iface.v1.HistoryStockResolutionMetric
+	24, // 22: selling_iface.v1.Metric.history_stock_order:type_name -> selling_iface.v1.HistoryStockOrderMetric
+	25, // 23: selling_iface.v1.Metric.history_shipment_problem:type_name -> selling_iface.v1.HistoryShipmentProblemMetric
+	26, // 24: selling_iface.v1.Metric.history_warehouse_problem:type_name -> selling_iface.v1.HistoryWarehouseProblemMetric
 	0,  // 25: selling_iface.v1.StatRequest.range:type_name -> selling_iface.v1.TimeRange
 	7,  // 26: selling_iface.v1.StatRequest.filter:type_name -> selling_iface.v1.StatFilter
 	14, // 27: selling_iface.v1.StatRequest.metric_types:type_name -> selling_iface.v1.MetricType
@@ -1298,12 +1297,12 @@ func file_selling_iface_v1_selling_stat_service_proto_init() {
 		(*Metric_HistoryOrder)(nil),
 		(*Metric_TopProductSold)(nil),
 		(*Metric_TopProductUnsold)(nil),
-		(*Metric_HistoryInbound)(nil),
-		(*Metric_HistoryOutbound)(nil),
 		(*Metric_HistoryRestock)(nil),
 		(*Metric_HistoryReturn)(nil),
 		(*Metric_HistoryStockResolution)(nil),
-		(*Metric_Outbound)(nil),
+		(*Metric_HistoryStockOrder)(nil),
+		(*Metric_HistoryShipmentProblem)(nil),
+		(*Metric_HistoryWarehouseProblem)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

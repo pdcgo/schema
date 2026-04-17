@@ -45,6 +45,9 @@ const (
 	// ProductServiceProductByIDsProcedure is the fully-qualified name of the ProductService's
 	// ProductByIDs RPC.
 	ProductServiceProductByIDsProcedure = "/product_iface.v1.ProductService/ProductByIDs"
+	// ProductServiceProductListExportProcedure is the fully-qualified name of the ProductService's
+	// ProductListExport RPC.
+	ProductServiceProductListExportProcedure = "/product_iface.v1.ProductService/ProductListExport"
 )
 
 // ProductServiceClient is a client for the product_iface.v1.ProductService service.
@@ -54,6 +57,7 @@ type ProductServiceClient interface {
 	ProductMapConnect(context.Context, *connect.Request[v1.ProductMapConnectRequest]) (*connect.Response[v1.ProductMapConnectResponse], error)
 	// info Product
 	ProductByIDs(context.Context, *connect.Request[v1.ProductByIDsRequest]) (*connect.Response[v1.ProductByIDsResponse], error)
+	ProductListExport(context.Context, *connect.Request[v1.ProductListExportRequest]) (*connect.ServerStreamForClient[v1.ProductListExportResponse], error)
 }
 
 // NewProductServiceClient constructs a client for the product_iface.v1.ProductService service. By
@@ -91,6 +95,12 @@ func NewProductServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			connect.WithSchema(productServiceMethods.ByName("ProductByIDs")),
 			connect.WithClientOptions(opts...),
 		),
+		productListExport: connect.NewClient[v1.ProductListExportRequest, v1.ProductListExportResponse](
+			httpClient,
+			baseURL+ProductServiceProductListExportProcedure,
+			connect.WithSchema(productServiceMethods.ByName("ProductListExport")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -100,6 +110,7 @@ type productServiceClient struct {
 	productMapGet     *connect.Client[v1.ProductMapGetRequest, v1.ProductMapGetResponse]
 	productMapConnect *connect.Client[v1.ProductMapConnectRequest, v1.ProductMapConnectResponse]
 	productByIDs      *connect.Client[v1.ProductByIDsRequest, v1.ProductByIDsResponse]
+	productListExport *connect.Client[v1.ProductListExportRequest, v1.ProductListExportResponse]
 }
 
 // ProductDuplicate calls product_iface.v1.ProductService.ProductDuplicate.
@@ -122,6 +133,11 @@ func (c *productServiceClient) ProductByIDs(ctx context.Context, req *connect.Re
 	return c.productByIDs.CallUnary(ctx, req)
 }
 
+// ProductListExport calls product_iface.v1.ProductService.ProductListExport.
+func (c *productServiceClient) ProductListExport(ctx context.Context, req *connect.Request[v1.ProductListExportRequest]) (*connect.ServerStreamForClient[v1.ProductListExportResponse], error) {
+	return c.productListExport.CallServerStream(ctx, req)
+}
+
 // ProductServiceHandler is an implementation of the product_iface.v1.ProductService service.
 type ProductServiceHandler interface {
 	ProductDuplicate(context.Context, *connect.Request[v1.ProductDuplicateRequest]) (*connect.Response[v1.ProductDuplicateResponse], error)
@@ -129,6 +145,7 @@ type ProductServiceHandler interface {
 	ProductMapConnect(context.Context, *connect.Request[v1.ProductMapConnectRequest]) (*connect.Response[v1.ProductMapConnectResponse], error)
 	// info Product
 	ProductByIDs(context.Context, *connect.Request[v1.ProductByIDsRequest]) (*connect.Response[v1.ProductByIDsResponse], error)
+	ProductListExport(context.Context, *connect.Request[v1.ProductListExportRequest], *connect.ServerStream[v1.ProductListExportResponse]) error
 }
 
 // NewProductServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -162,6 +179,12 @@ func NewProductServiceHandler(svc ProductServiceHandler, opts ...connect.Handler
 		connect.WithSchema(productServiceMethods.ByName("ProductByIDs")),
 		connect.WithHandlerOptions(opts...),
 	)
+	productServiceProductListExportHandler := connect.NewServerStreamHandler(
+		ProductServiceProductListExportProcedure,
+		svc.ProductListExport,
+		connect.WithSchema(productServiceMethods.ByName("ProductListExport")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/product_iface.v1.ProductService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case ProductServiceProductDuplicateProcedure:
@@ -172,6 +195,8 @@ func NewProductServiceHandler(svc ProductServiceHandler, opts ...connect.Handler
 			productServiceProductMapConnectHandler.ServeHTTP(w, r)
 		case ProductServiceProductByIDsProcedure:
 			productServiceProductByIDsHandler.ServeHTTP(w, r)
+		case ProductServiceProductListExportProcedure:
+			productServiceProductListExportHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -195,4 +220,8 @@ func (UnimplementedProductServiceHandler) ProductMapConnect(context.Context, *co
 
 func (UnimplementedProductServiceHandler) ProductByIDs(context.Context, *connect.Request[v1.ProductByIDsRequest]) (*connect.Response[v1.ProductByIDsResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("product_iface.v1.ProductService.ProductByIDs is not implemented"))
+}
+
+func (UnimplementedProductServiceHandler) ProductListExport(context.Context, *connect.Request[v1.ProductListExportRequest], *connect.ServerStream[v1.ProductListExportResponse]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("product_iface.v1.ProductService.ProductListExport is not implemented"))
 }

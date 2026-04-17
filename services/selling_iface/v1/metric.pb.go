@@ -79,24 +79,25 @@ func (TimeType) EnumDescriptor() ([]byte, []int) {
 type MetricType int32
 
 const (
-	MetricType_METRIC_TYPE_UNSPECIFIED              MetricType = 0
-	MetricType_METRIC_TYPE_TOTAL_STOCK              MetricType = 1
-	MetricType_METRIC_TYPE_ONGOING_STOCK            MetricType = 2
-	MetricType_METRIC_TYPE_READY_STOCK              MetricType = 3
-	MetricType_METRIC_TYPE_PAYABLE                  MetricType = 4
-	MetricType_METRIC_TYPE_RECEIVABLE               MetricType = 5
-	MetricType_METRIC_TYPE_PRODUCT_SOLD             MetricType = 6
-	MetricType_METRIC_TYPE_HISTORY_PRODUCT_SOLD     MetricType = 8
-	MetricType_METRIC_TYPE_ORDER_ACTIVE             MetricType = 7
-	MetricType_METRIC_TYPE_HISTORY_ORDER            MetricType = 9
-	MetricType_METRIC_TYPE_TOP_PRODUCT_SOLD         MetricType = 10
-	MetricType_METRIC_TYPE_TOP_PRODUCT_UNSOLD       MetricType = 11
-	MetricType_METRIC_TYPE_HISTORY_INBOUND          MetricType = 12
-	MetricType_METRIC_TYPE_HISTORY_OUTBOUND         MetricType = 13
-	MetricType_METRIC_TYPE_HISTORY_RESTOCK          MetricType = 14
-	MetricType_METRIC_TYPE_HISTORY_RETURN           MetricType = 15
-	MetricType_METRIC_TYPE_HISTORY_STOCK_RESOLUTION MetricType = 16
-	MetricType_METRIC_TYPE_OUTBOUND                 MetricType = 17
+	MetricType_METRIC_TYPE_UNSPECIFIED               MetricType = 0
+	MetricType_METRIC_TYPE_TOTAL_STOCK               MetricType = 1
+	MetricType_METRIC_TYPE_ONGOING_STOCK             MetricType = 2
+	MetricType_METRIC_TYPE_READY_STOCK               MetricType = 3
+	MetricType_METRIC_TYPE_PAYABLE                   MetricType = 4
+	MetricType_METRIC_TYPE_RECEIVABLE                MetricType = 5
+	MetricType_METRIC_TYPE_PRODUCT_SOLD              MetricType = 6
+	MetricType_METRIC_TYPE_HISTORY_PRODUCT_SOLD      MetricType = 8
+	MetricType_METRIC_TYPE_ORDER_ACTIVE              MetricType = 7
+	MetricType_METRIC_TYPE_HISTORY_ORDER             MetricType = 9
+	MetricType_METRIC_TYPE_TOP_PRODUCT_SOLD          MetricType = 10
+	MetricType_METRIC_TYPE_TOP_PRODUCT_UNSOLD        MetricType = 11
+	MetricType_METRIC_TYPE_HISTORY_OUTBOUND          MetricType = 13
+	MetricType_METRIC_TYPE_HISTORY_RESTOCK           MetricType = 14
+	MetricType_METRIC_TYPE_HISTORY_RETURN            MetricType = 15
+	MetricType_METRIC_TYPE_HISTORY_STOCK_RESOLUTION  MetricType = 16
+	MetricType_METRIC_TYPE_HISTORY_STOCK_ORDER       MetricType = 17
+	MetricType_METRIC_TYPE_HISTORY_SHIPMENT_PROBLEM  MetricType = 18
+	MetricType_METRIC_TYPE_HISTORY_WAREHOUSE_PROBLEM MetricType = 19
 )
 
 // Enum value maps for MetricType.
@@ -114,32 +115,34 @@ var (
 		9:  "METRIC_TYPE_HISTORY_ORDER",
 		10: "METRIC_TYPE_TOP_PRODUCT_SOLD",
 		11: "METRIC_TYPE_TOP_PRODUCT_UNSOLD",
-		12: "METRIC_TYPE_HISTORY_INBOUND",
 		13: "METRIC_TYPE_HISTORY_OUTBOUND",
 		14: "METRIC_TYPE_HISTORY_RESTOCK",
 		15: "METRIC_TYPE_HISTORY_RETURN",
 		16: "METRIC_TYPE_HISTORY_STOCK_RESOLUTION",
-		17: "METRIC_TYPE_OUTBOUND",
+		17: "METRIC_TYPE_HISTORY_STOCK_ORDER",
+		18: "METRIC_TYPE_HISTORY_SHIPMENT_PROBLEM",
+		19: "METRIC_TYPE_HISTORY_WAREHOUSE_PROBLEM",
 	}
 	MetricType_value = map[string]int32{
-		"METRIC_TYPE_UNSPECIFIED":              0,
-		"METRIC_TYPE_TOTAL_STOCK":              1,
-		"METRIC_TYPE_ONGOING_STOCK":            2,
-		"METRIC_TYPE_READY_STOCK":              3,
-		"METRIC_TYPE_PAYABLE":                  4,
-		"METRIC_TYPE_RECEIVABLE":               5,
-		"METRIC_TYPE_PRODUCT_SOLD":             6,
-		"METRIC_TYPE_HISTORY_PRODUCT_SOLD":     8,
-		"METRIC_TYPE_ORDER_ACTIVE":             7,
-		"METRIC_TYPE_HISTORY_ORDER":            9,
-		"METRIC_TYPE_TOP_PRODUCT_SOLD":         10,
-		"METRIC_TYPE_TOP_PRODUCT_UNSOLD":       11,
-		"METRIC_TYPE_HISTORY_INBOUND":          12,
-		"METRIC_TYPE_HISTORY_OUTBOUND":         13,
-		"METRIC_TYPE_HISTORY_RESTOCK":          14,
-		"METRIC_TYPE_HISTORY_RETURN":           15,
-		"METRIC_TYPE_HISTORY_STOCK_RESOLUTION": 16,
-		"METRIC_TYPE_OUTBOUND":                 17,
+		"METRIC_TYPE_UNSPECIFIED":               0,
+		"METRIC_TYPE_TOTAL_STOCK":               1,
+		"METRIC_TYPE_ONGOING_STOCK":             2,
+		"METRIC_TYPE_READY_STOCK":               3,
+		"METRIC_TYPE_PAYABLE":                   4,
+		"METRIC_TYPE_RECEIVABLE":                5,
+		"METRIC_TYPE_PRODUCT_SOLD":              6,
+		"METRIC_TYPE_HISTORY_PRODUCT_SOLD":      8,
+		"METRIC_TYPE_ORDER_ACTIVE":              7,
+		"METRIC_TYPE_HISTORY_ORDER":             9,
+		"METRIC_TYPE_TOP_PRODUCT_SOLD":          10,
+		"METRIC_TYPE_TOP_PRODUCT_UNSOLD":        11,
+		"METRIC_TYPE_HISTORY_OUTBOUND":          13,
+		"METRIC_TYPE_HISTORY_RESTOCK":           14,
+		"METRIC_TYPE_HISTORY_RETURN":            15,
+		"METRIC_TYPE_HISTORY_STOCK_RESOLUTION":  16,
+		"METRIC_TYPE_HISTORY_STOCK_ORDER":       17,
+		"METRIC_TYPE_HISTORY_SHIPMENT_PROBLEM":  18,
+		"METRIC_TYPE_HISTORY_WAREHOUSE_PROBLEM": 19,
 	}
 )
 
@@ -180,7 +183,7 @@ const file_selling_iface_v1_metric_proto_rawDesc = "" +
 	"\rTIME_TYPE_DAY\x10\x01\x12\x12\n" +
 	"\x0eTIME_TYPE_WEEK\x10\x02\x12\x13\n" +
 	"\x0fTIME_TYPE_MONTH\x10\x03\x12\x12\n" +
-	"\x0eTIME_TYPE_YEAR\x10\x04*\xc6\x04\n" +
+	"\x0eTIME_TYPE_YEAR\x10\x04*\x85\x05\n" +
 	"\n" +
 	"MetricType\x12\x1b\n" +
 	"\x17METRIC_TYPE_UNSPECIFIED\x10\x00\x12\x1b\n" +
@@ -195,13 +198,14 @@ const file_selling_iface_v1_metric_proto_rawDesc = "" +
 	"\x19METRIC_TYPE_HISTORY_ORDER\x10\t\x12 \n" +
 	"\x1cMETRIC_TYPE_TOP_PRODUCT_SOLD\x10\n" +
 	"\x12\"\n" +
-	"\x1eMETRIC_TYPE_TOP_PRODUCT_UNSOLD\x10\v\x12\x1f\n" +
-	"\x1bMETRIC_TYPE_HISTORY_INBOUND\x10\f\x12 \n" +
+	"\x1eMETRIC_TYPE_TOP_PRODUCT_UNSOLD\x10\v\x12 \n" +
 	"\x1cMETRIC_TYPE_HISTORY_OUTBOUND\x10\r\x12\x1f\n" +
 	"\x1bMETRIC_TYPE_HISTORY_RESTOCK\x10\x0e\x12\x1e\n" +
 	"\x1aMETRIC_TYPE_HISTORY_RETURN\x10\x0f\x12(\n" +
-	"$METRIC_TYPE_HISTORY_STOCK_RESOLUTION\x10\x10\x12\x18\n" +
-	"\x14METRIC_TYPE_OUTBOUND\x10\x11B\xc1\x01\n" +
+	"$METRIC_TYPE_HISTORY_STOCK_RESOLUTION\x10\x10\x12#\n" +
+	"\x1fMETRIC_TYPE_HISTORY_STOCK_ORDER\x10\x11\x12(\n" +
+	"$METRIC_TYPE_HISTORY_SHIPMENT_PROBLEM\x10\x12\x12)\n" +
+	"%METRIC_TYPE_HISTORY_WAREHOUSE_PROBLEM\x10\x13B\xc1\x01\n" +
 	"\x14com.selling_iface.v1B\vMetricProtoP\x01Z?github.com/pdcgo/schema/services/selling_iface/v1;selling_iface\xa2\x02\x03SXX\xaa\x02\x0fSellingIface.V1\xca\x02\x0fSellingIface\\V1\xe2\x02\x1bSellingIface\\V1\\GPBMetadata\xea\x02\x10SellingIface::V1b\x06proto3"
 
 var (

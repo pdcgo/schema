@@ -433,37 +433,37 @@ func (x *HistoryStockResolutionMetric) GetItems() []*HistoryStockResolutionItem 
 	return nil
 }
 
-type HistoryInboundItem struct {
+type HistoryStockOrderItem struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @gotags: gorm:"serializer:timestamptz"
-	T                       *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=t,proto3" json:"t,omitempty" gorm:"serializer:timestamptz"`
-	CreatedTransactionCount int32                  `protobuf:"varint,2,opt,name=created_transaction_count,json=createdTransactionCount,proto3" json:"created_transaction_count,omitempty"`
-	CreatedPieceCount       int32                  `protobuf:"varint,3,opt,name=created_piece_count,json=createdPieceCount,proto3" json:"created_piece_count,omitempty"`
-	CreatedPieceAmount      float64                `protobuf:"fixed64,4,opt,name=created_piece_amount,json=createdPieceAmount,proto3" json:"created_piece_amount,omitempty"`
-	ArrivedTransactionCount int32                  `protobuf:"varint,5,opt,name=arrived_transaction_count,json=arrivedTransactionCount,proto3" json:"arrived_transaction_count,omitempty"`
-	ArrivedPieceCount       int32                  `protobuf:"varint,6,opt,name=arrived_piece_count,json=arrivedPieceCount,proto3" json:"arrived_piece_count,omitempty"`
-	ArrivedPieceAmount      float64                `protobuf:"fixed64,7,opt,name=arrived_piece_amount,json=arrivedPieceAmount,proto3" json:"arrived_piece_amount,omitempty"`
-	FoundTransactionCount   int32                  `protobuf:"varint,8,opt,name=found_transaction_count,json=foundTransactionCount,proto3" json:"found_transaction_count,omitempty"`
-	FoundPieceCount         int32                  `protobuf:"varint,9,opt,name=found_piece_count,json=foundPieceCount,proto3" json:"found_piece_count,omitempty"`
-	FoundPieceAmount        float64                `protobuf:"fixed64,10,opt,name=found_piece_amount,json=foundPieceAmount,proto3" json:"found_piece_amount,omitempty"`
-	unknownFields           protoimpl.UnknownFields
-	sizeCache               protoimpl.SizeCache
+	T                     *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=t,proto3" json:"t,omitempty" gorm:"serializer:timestamptz"`
+	TransactionCount      int32                  `protobuf:"varint,2,opt,name=transaction_count,json=transactionCount,proto3" json:"transaction_count,omitempty"`
+	PieceCount            int32                  `protobuf:"varint,3,opt,name=piece_count,json=pieceCount,proto3" json:"piece_count,omitempty"`
+	PieceAmount           float64                `protobuf:"fixed64,4,opt,name=piece_amount,json=pieceAmount,proto3" json:"piece_amount,omitempty"`
+	OwnTransactionCount   int32                  `protobuf:"varint,5,opt,name=own_transaction_count,json=ownTransactionCount,proto3" json:"own_transaction_count,omitempty"`
+	OwnPieceCount         int32                  `protobuf:"varint,6,opt,name=own_piece_count,json=ownPieceCount,proto3" json:"own_piece_count,omitempty"`
+	OwnPieceAmount        float64                `protobuf:"fixed64,7,opt,name=own_piece_amount,json=ownPieceAmount,proto3" json:"own_piece_amount,omitempty"`
+	CrossTransactionCount int32                  `protobuf:"varint,8,opt,name=cross_transaction_count,json=crossTransactionCount,proto3" json:"cross_transaction_count,omitempty"`
+	CrossPieceCount       int32                  `protobuf:"varint,9,opt,name=cross_piece_count,json=crossPieceCount,proto3" json:"cross_piece_count,omitempty"`
+	CrossPieceAmount      float64                `protobuf:"fixed64,10,opt,name=cross_piece_amount,json=crossPieceAmount,proto3" json:"cross_piece_amount,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
-func (x *HistoryInboundItem) Reset() {
-	*x = HistoryInboundItem{}
+func (x *HistoryStockOrderItem) Reset() {
+	*x = HistoryStockOrderItem{}
 	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *HistoryInboundItem) String() string {
+func (x *HistoryStockOrderItem) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*HistoryInboundItem) ProtoMessage() {}
+func (*HistoryStockOrderItem) ProtoMessage() {}
 
-func (x *HistoryInboundItem) ProtoReflect() protoreflect.Message {
+func (x *HistoryStockOrderItem) ProtoReflect() protoreflect.Message {
 	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -475,103 +475,103 @@ func (x *HistoryInboundItem) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use HistoryInboundItem.ProtoReflect.Descriptor instead.
-func (*HistoryInboundItem) Descriptor() ([]byte, []int) {
+// Deprecated: Use HistoryStockOrderItem.ProtoReflect.Descriptor instead.
+func (*HistoryStockOrderItem) Descriptor() ([]byte, []int) {
 	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *HistoryInboundItem) GetT() *timestamppb.Timestamp {
+func (x *HistoryStockOrderItem) GetT() *timestamppb.Timestamp {
 	if x != nil {
 		return x.T
 	}
 	return nil
 }
 
-func (x *HistoryInboundItem) GetCreatedTransactionCount() int32 {
+func (x *HistoryStockOrderItem) GetTransactionCount() int32 {
 	if x != nil {
-		return x.CreatedTransactionCount
+		return x.TransactionCount
 	}
 	return 0
 }
 
-func (x *HistoryInboundItem) GetCreatedPieceCount() int32 {
+func (x *HistoryStockOrderItem) GetPieceCount() int32 {
 	if x != nil {
-		return x.CreatedPieceCount
+		return x.PieceCount
 	}
 	return 0
 }
 
-func (x *HistoryInboundItem) GetCreatedPieceAmount() float64 {
+func (x *HistoryStockOrderItem) GetPieceAmount() float64 {
 	if x != nil {
-		return x.CreatedPieceAmount
+		return x.PieceAmount
 	}
 	return 0
 }
 
-func (x *HistoryInboundItem) GetArrivedTransactionCount() int32 {
+func (x *HistoryStockOrderItem) GetOwnTransactionCount() int32 {
 	if x != nil {
-		return x.ArrivedTransactionCount
+		return x.OwnTransactionCount
 	}
 	return 0
 }
 
-func (x *HistoryInboundItem) GetArrivedPieceCount() int32 {
+func (x *HistoryStockOrderItem) GetOwnPieceCount() int32 {
 	if x != nil {
-		return x.ArrivedPieceCount
+		return x.OwnPieceCount
 	}
 	return 0
 }
 
-func (x *HistoryInboundItem) GetArrivedPieceAmount() float64 {
+func (x *HistoryStockOrderItem) GetOwnPieceAmount() float64 {
 	if x != nil {
-		return x.ArrivedPieceAmount
+		return x.OwnPieceAmount
 	}
 	return 0
 }
 
-func (x *HistoryInboundItem) GetFoundTransactionCount() int32 {
+func (x *HistoryStockOrderItem) GetCrossTransactionCount() int32 {
 	if x != nil {
-		return x.FoundTransactionCount
+		return x.CrossTransactionCount
 	}
 	return 0
 }
 
-func (x *HistoryInboundItem) GetFoundPieceCount() int32 {
+func (x *HistoryStockOrderItem) GetCrossPieceCount() int32 {
 	if x != nil {
-		return x.FoundPieceCount
+		return x.CrossPieceCount
 	}
 	return 0
 }
 
-func (x *HistoryInboundItem) GetFoundPieceAmount() float64 {
+func (x *HistoryStockOrderItem) GetCrossPieceAmount() float64 {
 	if x != nil {
-		return x.FoundPieceAmount
+		return x.CrossPieceAmount
 	}
 	return 0
 }
 
-type HistoryInboundMetric struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	TimeType      TimeType               `protobuf:"varint,1,opt,name=time_type,json=timeType,proto3,enum=selling_iface.v1.TimeType" json:"time_type,omitempty"`
-	Items         []*HistoryInboundItem  `protobuf:"bytes,2,rep,name=items,proto3" json:"items,omitempty"`
+type HistoryStockOrderMetric struct {
+	state         protoimpl.MessageState   `protogen:"open.v1"`
+	TimeType      TimeType                 `protobuf:"varint,1,opt,name=time_type,json=timeType,proto3,enum=selling_iface.v1.TimeType" json:"time_type,omitempty"`
+	Items         []*HistoryStockOrderItem `protobuf:"bytes,2,rep,name=items,proto3" json:"items,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *HistoryInboundMetric) Reset() {
-	*x = HistoryInboundMetric{}
+func (x *HistoryStockOrderMetric) Reset() {
+	*x = HistoryStockOrderMetric{}
 	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *HistoryInboundMetric) String() string {
+func (x *HistoryStockOrderMetric) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*HistoryInboundMetric) ProtoMessage() {}
+func (*HistoryStockOrderMetric) ProtoMessage() {}
 
-func (x *HistoryInboundMetric) ProtoReflect() protoreflect.Message {
+func (x *HistoryStockOrderMetric) ProtoReflect() protoreflect.Message {
 	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -583,60 +583,53 @@ func (x *HistoryInboundMetric) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use HistoryInboundMetric.ProtoReflect.Descriptor instead.
-func (*HistoryInboundMetric) Descriptor() ([]byte, []int) {
+// Deprecated: Use HistoryStockOrderMetric.ProtoReflect.Descriptor instead.
+func (*HistoryStockOrderMetric) Descriptor() ([]byte, []int) {
 	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *HistoryInboundMetric) GetTimeType() TimeType {
+func (x *HistoryStockOrderMetric) GetTimeType() TimeType {
 	if x != nil {
 		return x.TimeType
 	}
 	return TimeType_TIME_TYPE_UNSPECIFIED
 }
 
-func (x *HistoryInboundMetric) GetItems() []*HistoryInboundItem {
+func (x *HistoryStockOrderMetric) GetItems() []*HistoryStockOrderItem {
 	if x != nil {
 		return x.Items
 	}
 	return nil
 }
 
-type OutboundMetric struct {
-	state                              protoimpl.MessageState `protogen:"open.v1"`
-	OrderTransactionCount              int32                  `protobuf:"varint,1,opt,name=order_transaction_count,json=orderTransactionCount,proto3" json:"order_transaction_count,omitempty"`
-	OrderPieceCount                    int32                  `protobuf:"varint,2,opt,name=order_piece_count,json=orderPieceCount,proto3" json:"order_piece_count,omitempty"`
-	OrderPieceAmount                   float64                `protobuf:"fixed64,3,opt,name=order_piece_amount,json=orderPieceAmount,proto3" json:"order_piece_amount,omitempty"`
-	LostInShipmentTransactionCount     int32                  `protobuf:"varint,4,opt,name=lost_in_shipment_transaction_count,json=lostInShipmentTransactionCount,proto3" json:"lost_in_shipment_transaction_count,omitempty"`
-	LostInShipmentPieceCount           int32                  `protobuf:"varint,5,opt,name=lost_in_shipment_piece_count,json=lostInShipmentPieceCount,proto3" json:"lost_in_shipment_piece_count,omitempty"`
-	LostInShipmentPieceAmount          float64                `protobuf:"fixed64,6,opt,name=lost_in_shipment_piece_amount,json=lostInShipmentPieceAmount,proto3" json:"lost_in_shipment_piece_amount,omitempty"`
-	DamagedInShipmentTransactionCount  int32                  `protobuf:"varint,7,opt,name=damaged_in_shipment_transaction_count,json=damagedInShipmentTransactionCount,proto3" json:"damaged_in_shipment_transaction_count,omitempty"`
-	DamagedInShipmentPieceCount        int32                  `protobuf:"varint,8,opt,name=damaged_in_shipment_piece_count,json=damagedInShipmentPieceCount,proto3" json:"damaged_in_shipment_piece_count,omitempty"`
-	DamagedInShipmentPieceAmount       float64                `protobuf:"fixed64,9,opt,name=damaged_in_shipment_piece_amount,json=damagedInShipmentPieceAmount,proto3" json:"damaged_in_shipment_piece_amount,omitempty"`
-	LostInWarehouseTransactionCount    int32                  `protobuf:"varint,10,opt,name=lost_in_warehouse_transaction_count,json=lostInWarehouseTransactionCount,proto3" json:"lost_in_warehouse_transaction_count,omitempty"`
-	LostInWarehousePieceCount          int32                  `protobuf:"varint,11,opt,name=lost_in_warehouse_piece_count,json=lostInWarehousePieceCount,proto3" json:"lost_in_warehouse_piece_count,omitempty"`
-	LostInWarehousePieceAmount         float64                `protobuf:"fixed64,12,opt,name=lost_in_warehouse_piece_amount,json=lostInWarehousePieceAmount,proto3" json:"lost_in_warehouse_piece_amount,omitempty"`
-	DamagedInWarehouseTransactionCount int32                  `protobuf:"varint,13,opt,name=damaged_in_warehouse_transaction_count,json=damagedInWarehouseTransactionCount,proto3" json:"damaged_in_warehouse_transaction_count,omitempty"`
-	DamagedInWarehousePieceCount       int32                  `protobuf:"varint,14,opt,name=damaged_in_warehouse_piece_count,json=damagedInWarehousePieceCount,proto3" json:"damaged_in_warehouse_piece_count,omitempty"`
-	DamagedInWarehousePieceAmount      float64                `protobuf:"fixed64,15,opt,name=damaged_in_warehouse_piece_amount,json=damagedInWarehousePieceAmount,proto3" json:"damaged_in_warehouse_piece_amount,omitempty"`
-	unknownFields                      protoimpl.UnknownFields
-	sizeCache                          protoimpl.SizeCache
+type ShipmentProblemItem struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// @gotags: gorm:"serializer:timestamptz"
+	T                       *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=t,proto3" json:"t,omitempty" gorm:"serializer:timestamptz"`
+	LostTransactionCount    int32                  `protobuf:"varint,2,opt,name=lost_transaction_count,json=lostTransactionCount,proto3" json:"lost_transaction_count,omitempty"`
+	LostPieceCount          int32                  `protobuf:"varint,3,opt,name=lost_piece_count,json=lostPieceCount,proto3" json:"lost_piece_count,omitempty"`
+	LostPieceAmount         float64                `protobuf:"fixed64,4,opt,name=lost_piece_amount,json=lostPieceAmount,proto3" json:"lost_piece_amount,omitempty"`
+	DamagedTransactionCount int32                  `protobuf:"varint,5,opt,name=damaged_transaction_count,json=damagedTransactionCount,proto3" json:"damaged_transaction_count,omitempty"`
+	DamagedPieceCount       int32                  `protobuf:"varint,6,opt,name=damaged_piece_count,json=damagedPieceCount,proto3" json:"damaged_piece_count,omitempty"`
+	DamagedPieceAmount      float64                `protobuf:"fixed64,7,opt,name=damaged_piece_amount,json=damagedPieceAmount,proto3" json:"damaged_piece_amount,omitempty"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
-func (x *OutboundMetric) Reset() {
-	*x = OutboundMetric{}
+func (x *ShipmentProblemItem) Reset() {
+	*x = ShipmentProblemItem{}
 	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *OutboundMetric) String() string {
+func (x *ShipmentProblemItem) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*OutboundMetric) ProtoMessage() {}
+func (*ShipmentProblemItem) ProtoMessage() {}
 
-func (x *OutboundMetric) ProtoReflect() protoreflect.Message {
+func (x *ShipmentProblemItem) ProtoReflect() protoreflect.Message {
 	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -648,303 +641,140 @@ func (x *OutboundMetric) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use OutboundMetric.ProtoReflect.Descriptor instead.
-func (*OutboundMetric) Descriptor() ([]byte, []int) {
+// Deprecated: Use ShipmentProblemItem.ProtoReflect.Descriptor instead.
+func (*ShipmentProblemItem) Descriptor() ([]byte, []int) {
 	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *OutboundMetric) GetOrderTransactionCount() int32 {
-	if x != nil {
-		return x.OrderTransactionCount
-	}
-	return 0
-}
-
-func (x *OutboundMetric) GetOrderPieceCount() int32 {
-	if x != nil {
-		return x.OrderPieceCount
-	}
-	return 0
-}
-
-func (x *OutboundMetric) GetOrderPieceAmount() float64 {
-	if x != nil {
-		return x.OrderPieceAmount
-	}
-	return 0
-}
-
-func (x *OutboundMetric) GetLostInShipmentTransactionCount() int32 {
-	if x != nil {
-		return x.LostInShipmentTransactionCount
-	}
-	return 0
-}
-
-func (x *OutboundMetric) GetLostInShipmentPieceCount() int32 {
-	if x != nil {
-		return x.LostInShipmentPieceCount
-	}
-	return 0
-}
-
-func (x *OutboundMetric) GetLostInShipmentPieceAmount() float64 {
-	if x != nil {
-		return x.LostInShipmentPieceAmount
-	}
-	return 0
-}
-
-func (x *OutboundMetric) GetDamagedInShipmentTransactionCount() int32 {
-	if x != nil {
-		return x.DamagedInShipmentTransactionCount
-	}
-	return 0
-}
-
-func (x *OutboundMetric) GetDamagedInShipmentPieceCount() int32 {
-	if x != nil {
-		return x.DamagedInShipmentPieceCount
-	}
-	return 0
-}
-
-func (x *OutboundMetric) GetDamagedInShipmentPieceAmount() float64 {
-	if x != nil {
-		return x.DamagedInShipmentPieceAmount
-	}
-	return 0
-}
-
-func (x *OutboundMetric) GetLostInWarehouseTransactionCount() int32 {
-	if x != nil {
-		return x.LostInWarehouseTransactionCount
-	}
-	return 0
-}
-
-func (x *OutboundMetric) GetLostInWarehousePieceCount() int32 {
-	if x != nil {
-		return x.LostInWarehousePieceCount
-	}
-	return 0
-}
-
-func (x *OutboundMetric) GetLostInWarehousePieceAmount() float64 {
-	if x != nil {
-		return x.LostInWarehousePieceAmount
-	}
-	return 0
-}
-
-func (x *OutboundMetric) GetDamagedInWarehouseTransactionCount() int32 {
-	if x != nil {
-		return x.DamagedInWarehouseTransactionCount
-	}
-	return 0
-}
-
-func (x *OutboundMetric) GetDamagedInWarehousePieceCount() int32 {
-	if x != nil {
-		return x.DamagedInWarehousePieceCount
-	}
-	return 0
-}
-
-func (x *OutboundMetric) GetDamagedInWarehousePieceAmount() float64 {
-	if x != nil {
-		return x.DamagedInWarehousePieceAmount
-	}
-	return 0
-}
-
-type HistoryOutboundItem struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// @gotags: gorm:"serializer:timestamptz"
-	T                                  *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=t,proto3" json:"t,omitempty" gorm:"serializer:timestamptz"`
-	OrderTransactionCount              int32                  `protobuf:"varint,2,opt,name=order_transaction_count,json=orderTransactionCount,proto3" json:"order_transaction_count,omitempty"`
-	OrderPieceCount                    int32                  `protobuf:"varint,3,opt,name=order_piece_count,json=orderPieceCount,proto3" json:"order_piece_count,omitempty"`
-	OrderPieceAmount                   float64                `protobuf:"fixed64,4,opt,name=order_piece_amount,json=orderPieceAmount,proto3" json:"order_piece_amount,omitempty"`
-	LostInShipmentTransactionCount     int32                  `protobuf:"varint,5,opt,name=lost_in_shipment_transaction_count,json=lostInShipmentTransactionCount,proto3" json:"lost_in_shipment_transaction_count,omitempty"`
-	LostInShipmentPieceCount           int32                  `protobuf:"varint,6,opt,name=lost_in_shipment_piece_count,json=lostInShipmentPieceCount,proto3" json:"lost_in_shipment_piece_count,omitempty"`
-	LostInShipmentPieceAmount          float64                `protobuf:"fixed64,7,opt,name=lost_in_shipment_piece_amount,json=lostInShipmentPieceAmount,proto3" json:"lost_in_shipment_piece_amount,omitempty"`
-	DamagedInShipmentTransactionCount  int32                  `protobuf:"varint,8,opt,name=damaged_in_shipment_transaction_count,json=damagedInShipmentTransactionCount,proto3" json:"damaged_in_shipment_transaction_count,omitempty"`
-	DamagedInShipmentPieceCount        int32                  `protobuf:"varint,9,opt,name=damaged_in_shipment_piece_count,json=damagedInShipmentPieceCount,proto3" json:"damaged_in_shipment_piece_count,omitempty"`
-	DamagedInShipmentPieceAmount       float64                `protobuf:"fixed64,10,opt,name=damaged_in_shipment_piece_amount,json=damagedInShipmentPieceAmount,proto3" json:"damaged_in_shipment_piece_amount,omitempty"`
-	LostInWarehouseTransactionCount    int32                  `protobuf:"varint,11,opt,name=lost_in_warehouse_transaction_count,json=lostInWarehouseTransactionCount,proto3" json:"lost_in_warehouse_transaction_count,omitempty"`
-	LostInWarehousePieceCount          int32                  `protobuf:"varint,12,opt,name=lost_in_warehouse_piece_count,json=lostInWarehousePieceCount,proto3" json:"lost_in_warehouse_piece_count,omitempty"`
-	LostInWarehousePieceAmount         float64                `protobuf:"fixed64,13,opt,name=lost_in_warehouse_piece_amount,json=lostInWarehousePieceAmount,proto3" json:"lost_in_warehouse_piece_amount,omitempty"`
-	DamagedInWarehouseTransactionCount int32                  `protobuf:"varint,14,opt,name=damaged_in_warehouse_transaction_count,json=damagedInWarehouseTransactionCount,proto3" json:"damaged_in_warehouse_transaction_count,omitempty"`
-	DamagedInWarehousePieceCount       int32                  `protobuf:"varint,15,opt,name=damaged_in_warehouse_piece_count,json=damagedInWarehousePieceCount,proto3" json:"damaged_in_warehouse_piece_count,omitempty"`
-	DamagedInWarehousePieceAmount      float64                `protobuf:"fixed64,16,opt,name=damaged_in_warehouse_piece_amount,json=damagedInWarehousePieceAmount,proto3" json:"damaged_in_warehouse_piece_amount,omitempty"`
-	unknownFields                      protoimpl.UnknownFields
-	sizeCache                          protoimpl.SizeCache
-}
-
-func (x *HistoryOutboundItem) Reset() {
-	*x = HistoryOutboundItem{}
-	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[9]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *HistoryOutboundItem) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*HistoryOutboundItem) ProtoMessage() {}
-
-func (x *HistoryOutboundItem) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[9]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use HistoryOutboundItem.ProtoReflect.Descriptor instead.
-func (*HistoryOutboundItem) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{9}
-}
-
-func (x *HistoryOutboundItem) GetT() *timestamppb.Timestamp {
+func (x *ShipmentProblemItem) GetT() *timestamppb.Timestamp {
 	if x != nil {
 		return x.T
 	}
 	return nil
 }
 
-func (x *HistoryOutboundItem) GetOrderTransactionCount() int32 {
+func (x *ShipmentProblemItem) GetLostTransactionCount() int32 {
 	if x != nil {
-		return x.OrderTransactionCount
+		return x.LostTransactionCount
 	}
 	return 0
 }
 
-func (x *HistoryOutboundItem) GetOrderPieceCount() int32 {
+func (x *ShipmentProblemItem) GetLostPieceCount() int32 {
 	if x != nil {
-		return x.OrderPieceCount
+		return x.LostPieceCount
 	}
 	return 0
 }
 
-func (x *HistoryOutboundItem) GetOrderPieceAmount() float64 {
+func (x *ShipmentProblemItem) GetLostPieceAmount() float64 {
 	if x != nil {
-		return x.OrderPieceAmount
+		return x.LostPieceAmount
 	}
 	return 0
 }
 
-func (x *HistoryOutboundItem) GetLostInShipmentTransactionCount() int32 {
+func (x *ShipmentProblemItem) GetDamagedTransactionCount() int32 {
 	if x != nil {
-		return x.LostInShipmentTransactionCount
+		return x.DamagedTransactionCount
 	}
 	return 0
 }
 
-func (x *HistoryOutboundItem) GetLostInShipmentPieceCount() int32 {
+func (x *ShipmentProblemItem) GetDamagedPieceCount() int32 {
 	if x != nil {
-		return x.LostInShipmentPieceCount
+		return x.DamagedPieceCount
 	}
 	return 0
 }
 
-func (x *HistoryOutboundItem) GetLostInShipmentPieceAmount() float64 {
+func (x *ShipmentProblemItem) GetDamagedPieceAmount() float64 {
 	if x != nil {
-		return x.LostInShipmentPieceAmount
+		return x.DamagedPieceAmount
 	}
 	return 0
 }
 
-func (x *HistoryOutboundItem) GetDamagedInShipmentTransactionCount() int32 {
-	if x != nil {
-		return x.DamagedInShipmentTransactionCount
-	}
-	return 0
-}
-
-func (x *HistoryOutboundItem) GetDamagedInShipmentPieceCount() int32 {
-	if x != nil {
-		return x.DamagedInShipmentPieceCount
-	}
-	return 0
-}
-
-func (x *HistoryOutboundItem) GetDamagedInShipmentPieceAmount() float64 {
-	if x != nil {
-		return x.DamagedInShipmentPieceAmount
-	}
-	return 0
-}
-
-func (x *HistoryOutboundItem) GetLostInWarehouseTransactionCount() int32 {
-	if x != nil {
-		return x.LostInWarehouseTransactionCount
-	}
-	return 0
-}
-
-func (x *HistoryOutboundItem) GetLostInWarehousePieceCount() int32 {
-	if x != nil {
-		return x.LostInWarehousePieceCount
-	}
-	return 0
-}
-
-func (x *HistoryOutboundItem) GetLostInWarehousePieceAmount() float64 {
-	if x != nil {
-		return x.LostInWarehousePieceAmount
-	}
-	return 0
-}
-
-func (x *HistoryOutboundItem) GetDamagedInWarehouseTransactionCount() int32 {
-	if x != nil {
-		return x.DamagedInWarehouseTransactionCount
-	}
-	return 0
-}
-
-func (x *HistoryOutboundItem) GetDamagedInWarehousePieceCount() int32 {
-	if x != nil {
-		return x.DamagedInWarehousePieceCount
-	}
-	return 0
-}
-
-func (x *HistoryOutboundItem) GetDamagedInWarehousePieceAmount() float64 {
-	if x != nil {
-		return x.DamagedInWarehousePieceAmount
-	}
-	return 0
-}
-
-type HistoryOutboundMetric struct {
+type HistoryShipmentProblemMetric struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TimeType      TimeType               `protobuf:"varint,1,opt,name=time_type,json=timeType,proto3,enum=selling_iface.v1.TimeType" json:"time_type,omitempty"`
-	Items         []*HistoryOutboundItem `protobuf:"bytes,2,rep,name=items,proto3" json:"items,omitempty"`
+	Items         []*ShipmentProblemItem `protobuf:"bytes,2,rep,name=items,proto3" json:"items,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *HistoryOutboundMetric) Reset() {
-	*x = HistoryOutboundMetric{}
+func (x *HistoryShipmentProblemMetric) Reset() {
+	*x = HistoryShipmentProblemMetric{}
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HistoryShipmentProblemMetric) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HistoryShipmentProblemMetric) ProtoMessage() {}
+
+func (x *HistoryShipmentProblemMetric) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HistoryShipmentProblemMetric.ProtoReflect.Descriptor instead.
+func (*HistoryShipmentProblemMetric) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *HistoryShipmentProblemMetric) GetTimeType() TimeType {
+	if x != nil {
+		return x.TimeType
+	}
+	return TimeType_TIME_TYPE_UNSPECIFIED
+}
+
+func (x *HistoryShipmentProblemMetric) GetItems() []*ShipmentProblemItem {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
+type WarehouseProblemItem struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// @gotags: gorm:"serializer:timestamptz"
+	T                       *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=t,proto3" json:"t,omitempty" gorm:"serializer:timestamptz"`
+	LostTransactionCount    int32                  `protobuf:"varint,2,opt,name=lost_transaction_count,json=lostTransactionCount,proto3" json:"lost_transaction_count,omitempty"`
+	LostPieceCount          int32                  `protobuf:"varint,3,opt,name=lost_piece_count,json=lostPieceCount,proto3" json:"lost_piece_count,omitempty"`
+	LostPieceAmount         float64                `protobuf:"fixed64,4,opt,name=lost_piece_amount,json=lostPieceAmount,proto3" json:"lost_piece_amount,omitempty"`
+	DamagedTransactionCount int32                  `protobuf:"varint,5,opt,name=damaged_transaction_count,json=damagedTransactionCount,proto3" json:"damaged_transaction_count,omitempty"`
+	DamagedPieceCount       int32                  `protobuf:"varint,6,opt,name=damaged_piece_count,json=damagedPieceCount,proto3" json:"damaged_piece_count,omitempty"`
+	DamagedPieceAmount      float64                `protobuf:"fixed64,7,opt,name=damaged_piece_amount,json=damagedPieceAmount,proto3" json:"damaged_piece_amount,omitempty"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
+}
+
+func (x *WarehouseProblemItem) Reset() {
+	*x = WarehouseProblemItem{}
 	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *HistoryOutboundMetric) String() string {
+func (x *WarehouseProblemItem) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*HistoryOutboundMetric) ProtoMessage() {}
+func (*WarehouseProblemItem) ProtoMessage() {}
 
-func (x *HistoryOutboundMetric) ProtoReflect() protoreflect.Message {
+func (x *WarehouseProblemItem) ProtoReflect() protoreflect.Message {
 	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -956,19 +786,106 @@ func (x *HistoryOutboundMetric) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use HistoryOutboundMetric.ProtoReflect.Descriptor instead.
-func (*HistoryOutboundMetric) Descriptor() ([]byte, []int) {
+// Deprecated: Use WarehouseProblemItem.ProtoReflect.Descriptor instead.
+func (*WarehouseProblemItem) Descriptor() ([]byte, []int) {
 	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{10}
 }
 
-func (x *HistoryOutboundMetric) GetTimeType() TimeType {
+func (x *WarehouseProblemItem) GetT() *timestamppb.Timestamp {
+	if x != nil {
+		return x.T
+	}
+	return nil
+}
+
+func (x *WarehouseProblemItem) GetLostTransactionCount() int32 {
+	if x != nil {
+		return x.LostTransactionCount
+	}
+	return 0
+}
+
+func (x *WarehouseProblemItem) GetLostPieceCount() int32 {
+	if x != nil {
+		return x.LostPieceCount
+	}
+	return 0
+}
+
+func (x *WarehouseProblemItem) GetLostPieceAmount() float64 {
+	if x != nil {
+		return x.LostPieceAmount
+	}
+	return 0
+}
+
+func (x *WarehouseProblemItem) GetDamagedTransactionCount() int32 {
+	if x != nil {
+		return x.DamagedTransactionCount
+	}
+	return 0
+}
+
+func (x *WarehouseProblemItem) GetDamagedPieceCount() int32 {
+	if x != nil {
+		return x.DamagedPieceCount
+	}
+	return 0
+}
+
+func (x *WarehouseProblemItem) GetDamagedPieceAmount() float64 {
+	if x != nil {
+		return x.DamagedPieceAmount
+	}
+	return 0
+}
+
+type HistoryWarehouseProblemMetric struct {
+	state         protoimpl.MessageState  `protogen:"open.v1"`
+	TimeType      TimeType                `protobuf:"varint,1,opt,name=time_type,json=timeType,proto3,enum=selling_iface.v1.TimeType" json:"time_type,omitempty"`
+	Items         []*WarehouseProblemItem `protobuf:"bytes,2,rep,name=items,proto3" json:"items,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *HistoryWarehouseProblemMetric) Reset() {
+	*x = HistoryWarehouseProblemMetric{}
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HistoryWarehouseProblemMetric) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HistoryWarehouseProblemMetric) ProtoMessage() {}
+
+func (x *HistoryWarehouseProblemMetric) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HistoryWarehouseProblemMetric.ProtoReflect.Descriptor instead.
+func (*HistoryWarehouseProblemMetric) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *HistoryWarehouseProblemMetric) GetTimeType() TimeType {
 	if x != nil {
 		return x.TimeType
 	}
 	return TimeType_TIME_TYPE_UNSPECIFIED
 }
 
-func (x *HistoryOutboundMetric) GetItems() []*HistoryOutboundItem {
+func (x *HistoryWarehouseProblemMetric) GetItems() []*WarehouseProblemItem {
 	if x != nil {
 		return x.Items
 	}
@@ -1009,60 +926,45 @@ const file_selling_iface_v1_metric_stock_proto_rawDesc = "" +
 	"\x12found_piece_amount\x18\x04 \x01(\x01R\x10foundPieceAmount\"\x9b\x01\n" +
 	"\x1cHistoryStockResolutionMetric\x127\n" +
 	"\ttime_type\x18\x01 \x01(\x0e2\x1a.selling_iface.v1.TimeTypeR\btimeType\x12B\n" +
-	"\x05items\x18\x02 \x03(\v2,.selling_iface.v1.HistoryStockResolutionItemR\x05items\"\x8c\x04\n" +
-	"\x12HistoryInboundItem\x12(\n" +
-	"\x01t\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x01t\x12:\n" +
-	"\x19created_transaction_count\x18\x02 \x01(\x05R\x17createdTransactionCount\x12.\n" +
-	"\x13created_piece_count\x18\x03 \x01(\x05R\x11createdPieceCount\x120\n" +
-	"\x14created_piece_amount\x18\x04 \x01(\x01R\x12createdPieceAmount\x12:\n" +
-	"\x19arrived_transaction_count\x18\x05 \x01(\x05R\x17arrivedTransactionCount\x12.\n" +
-	"\x13arrived_piece_count\x18\x06 \x01(\x05R\x11arrivedPieceCount\x120\n" +
-	"\x14arrived_piece_amount\x18\a \x01(\x01R\x12arrivedPieceAmount\x126\n" +
-	"\x17found_transaction_count\x18\b \x01(\x05R\x15foundTransactionCount\x12*\n" +
-	"\x11found_piece_count\x18\t \x01(\x05R\x0ffoundPieceCount\x12,\n" +
-	"\x12found_piece_amount\x18\n" +
-	" \x01(\x01R\x10foundPieceAmount\"\x8b\x01\n" +
-	"\x14HistoryInboundMetric\x127\n" +
-	"\ttime_type\x18\x01 \x01(\x0e2\x1a.selling_iface.v1.TimeTypeR\btimeType\x12:\n" +
-	"\x05items\x18\x02 \x03(\v2$.selling_iface.v1.HistoryInboundItemR\x05items\"\x8a\b\n" +
-	"\x0eOutboundMetric\x126\n" +
-	"\x17order_transaction_count\x18\x01 \x01(\x05R\x15orderTransactionCount\x12*\n" +
-	"\x11order_piece_count\x18\x02 \x01(\x05R\x0forderPieceCount\x12,\n" +
-	"\x12order_piece_amount\x18\x03 \x01(\x01R\x10orderPieceAmount\x12J\n" +
-	"\"lost_in_shipment_transaction_count\x18\x04 \x01(\x05R\x1elostInShipmentTransactionCount\x12>\n" +
-	"\x1clost_in_shipment_piece_count\x18\x05 \x01(\x05R\x18lostInShipmentPieceCount\x12@\n" +
-	"\x1dlost_in_shipment_piece_amount\x18\x06 \x01(\x01R\x19lostInShipmentPieceAmount\x12P\n" +
-	"%damaged_in_shipment_transaction_count\x18\a \x01(\x05R!damagedInShipmentTransactionCount\x12D\n" +
-	"\x1fdamaged_in_shipment_piece_count\x18\b \x01(\x05R\x1bdamagedInShipmentPieceCount\x12F\n" +
-	" damaged_in_shipment_piece_amount\x18\t \x01(\x01R\x1cdamagedInShipmentPieceAmount\x12L\n" +
-	"#lost_in_warehouse_transaction_count\x18\n" +
-	" \x01(\x05R\x1flostInWarehouseTransactionCount\x12@\n" +
-	"\x1dlost_in_warehouse_piece_count\x18\v \x01(\x05R\x19lostInWarehousePieceCount\x12B\n" +
-	"\x1elost_in_warehouse_piece_amount\x18\f \x01(\x01R\x1alostInWarehousePieceAmount\x12R\n" +
-	"&damaged_in_warehouse_transaction_count\x18\r \x01(\x05R\"damagedInWarehouseTransactionCount\x12F\n" +
-	" damaged_in_warehouse_piece_count\x18\x0e \x01(\x05R\x1cdamagedInWarehousePieceCount\x12H\n" +
-	"!damaged_in_warehouse_piece_amount\x18\x0f \x01(\x01R\x1ddamagedInWarehousePieceAmount\"\xb9\b\n" +
-	"\x13HistoryOutboundItem\x12(\n" +
-	"\x01t\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x01t\x126\n" +
-	"\x17order_transaction_count\x18\x02 \x01(\x05R\x15orderTransactionCount\x12*\n" +
-	"\x11order_piece_count\x18\x03 \x01(\x05R\x0forderPieceCount\x12,\n" +
-	"\x12order_piece_amount\x18\x04 \x01(\x01R\x10orderPieceAmount\x12J\n" +
-	"\"lost_in_shipment_transaction_count\x18\x05 \x01(\x05R\x1elostInShipmentTransactionCount\x12>\n" +
-	"\x1clost_in_shipment_piece_count\x18\x06 \x01(\x05R\x18lostInShipmentPieceCount\x12@\n" +
-	"\x1dlost_in_shipment_piece_amount\x18\a \x01(\x01R\x19lostInShipmentPieceAmount\x12P\n" +
-	"%damaged_in_shipment_transaction_count\x18\b \x01(\x05R!damagedInShipmentTransactionCount\x12D\n" +
-	"\x1fdamaged_in_shipment_piece_count\x18\t \x01(\x05R\x1bdamagedInShipmentPieceCount\x12F\n" +
-	" damaged_in_shipment_piece_amount\x18\n" +
-	" \x01(\x01R\x1cdamagedInShipmentPieceAmount\x12L\n" +
-	"#lost_in_warehouse_transaction_count\x18\v \x01(\x05R\x1flostInWarehouseTransactionCount\x12@\n" +
-	"\x1dlost_in_warehouse_piece_count\x18\f \x01(\x05R\x19lostInWarehousePieceCount\x12B\n" +
-	"\x1elost_in_warehouse_piece_amount\x18\r \x01(\x01R\x1alostInWarehousePieceAmount\x12R\n" +
-	"&damaged_in_warehouse_transaction_count\x18\x0e \x01(\x05R\"damagedInWarehouseTransactionCount\x12F\n" +
-	" damaged_in_warehouse_piece_count\x18\x0f \x01(\x05R\x1cdamagedInWarehousePieceCount\x12H\n" +
-	"!damaged_in_warehouse_piece_amount\x18\x10 \x01(\x01R\x1ddamagedInWarehousePieceAmount\"\x8d\x01\n" +
-	"\x15HistoryOutboundMetric\x127\n" +
+	"\x05items\x18\x02 \x03(\v2,.selling_iface.v1.HistoryStockResolutionItemR\x05items\"\xca\x03\n" +
+	"\x15HistoryStockOrderItem\x12(\n" +
+	"\x01t\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x01t\x12+\n" +
+	"\x11transaction_count\x18\x02 \x01(\x05R\x10transactionCount\x12\x1f\n" +
+	"\vpiece_count\x18\x03 \x01(\x05R\n" +
+	"pieceCount\x12!\n" +
+	"\fpiece_amount\x18\x04 \x01(\x01R\vpieceAmount\x122\n" +
+	"\x15own_transaction_count\x18\x05 \x01(\x05R\x13ownTransactionCount\x12&\n" +
+	"\x0fown_piece_count\x18\x06 \x01(\x05R\rownPieceCount\x12(\n" +
+	"\x10own_piece_amount\x18\a \x01(\x01R\x0eownPieceAmount\x126\n" +
+	"\x17cross_transaction_count\x18\b \x01(\x05R\x15crossTransactionCount\x12*\n" +
+	"\x11cross_piece_count\x18\t \x01(\x05R\x0fcrossPieceCount\x12,\n" +
+	"\x12cross_piece_amount\x18\n" +
+	" \x01(\x01R\x10crossPieceAmount\"\x91\x01\n" +
+	"\x17HistoryStockOrderMetric\x127\n" +
+	"\ttime_type\x18\x01 \x01(\x0e2\x1a.selling_iface.v1.TimeTypeR\btimeType\x12=\n" +
+	"\x05items\x18\x02 \x03(\v2'.selling_iface.v1.HistoryStockOrderItemR\x05items\"\xe9\x02\n" +
+	"\x13ShipmentProblemItem\x12(\n" +
+	"\x01t\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x01t\x124\n" +
+	"\x16lost_transaction_count\x18\x02 \x01(\x05R\x14lostTransactionCount\x12(\n" +
+	"\x10lost_piece_count\x18\x03 \x01(\x05R\x0elostPieceCount\x12*\n" +
+	"\x11lost_piece_amount\x18\x04 \x01(\x01R\x0flostPieceAmount\x12:\n" +
+	"\x19damaged_transaction_count\x18\x05 \x01(\x05R\x17damagedTransactionCount\x12.\n" +
+	"\x13damaged_piece_count\x18\x06 \x01(\x05R\x11damagedPieceCount\x120\n" +
+	"\x14damaged_piece_amount\x18\a \x01(\x01R\x12damagedPieceAmount\"\x94\x01\n" +
+	"\x1cHistoryShipmentProblemMetric\x127\n" +
 	"\ttime_type\x18\x01 \x01(\x0e2\x1a.selling_iface.v1.TimeTypeR\btimeType\x12;\n" +
-	"\x05items\x18\x02 \x03(\v2%.selling_iface.v1.HistoryOutboundItemR\x05itemsB\xc6\x01\n" +
+	"\x05items\x18\x02 \x03(\v2%.selling_iface.v1.ShipmentProblemItemR\x05items\"\xea\x02\n" +
+	"\x14WarehouseProblemItem\x12(\n" +
+	"\x01t\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x01t\x124\n" +
+	"\x16lost_transaction_count\x18\x02 \x01(\x05R\x14lostTransactionCount\x12(\n" +
+	"\x10lost_piece_count\x18\x03 \x01(\x05R\x0elostPieceCount\x12*\n" +
+	"\x11lost_piece_amount\x18\x04 \x01(\x01R\x0flostPieceAmount\x12:\n" +
+	"\x19damaged_transaction_count\x18\x05 \x01(\x05R\x17damagedTransactionCount\x12.\n" +
+	"\x13damaged_piece_count\x18\x06 \x01(\x05R\x11damagedPieceCount\x120\n" +
+	"\x14damaged_piece_amount\x18\a \x01(\x01R\x12damagedPieceAmount\"\x96\x01\n" +
+	"\x1dHistoryWarehouseProblemMetric\x127\n" +
+	"\ttime_type\x18\x01 \x01(\x0e2\x1a.selling_iface.v1.TimeTypeR\btimeType\x12<\n" +
+	"\x05items\x18\x02 \x03(\v2&.selling_iface.v1.WarehouseProblemItemR\x05itemsB\xc6\x01\n" +
 	"\x14com.selling_iface.v1B\x10MetricStockProtoP\x01Z?github.com/pdcgo/schema/services/selling_iface/v1;selling_iface\xa2\x02\x03SXX\xaa\x02\x0fSellingIface.V1\xca\x02\x0fSellingIface\\V1\xe2\x02\x1bSellingIface\\V1\\GPBMetadata\xea\x02\x10SellingIface::V1b\x06proto3"
 
 var (
@@ -1077,43 +979,47 @@ func file_selling_iface_v1_metric_stock_proto_rawDescGZIP() []byte {
 	return file_selling_iface_v1_metric_stock_proto_rawDescData
 }
 
-var file_selling_iface_v1_metric_stock_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_selling_iface_v1_metric_stock_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_selling_iface_v1_metric_stock_proto_goTypes = []any{
-	(*HistoryRestockItem)(nil),           // 0: selling_iface.v1.HistoryRestockItem
-	(*HistoryRestockMetric)(nil),         // 1: selling_iface.v1.HistoryRestockMetric
-	(*HistoryReturnItem)(nil),            // 2: selling_iface.v1.HistoryReturnItem
-	(*HistoryReturnMetric)(nil),          // 3: selling_iface.v1.HistoryReturnMetric
-	(*HistoryStockResolutionItem)(nil),   // 4: selling_iface.v1.HistoryStockResolutionItem
-	(*HistoryStockResolutionMetric)(nil), // 5: selling_iface.v1.HistoryStockResolutionMetric
-	(*HistoryInboundItem)(nil),           // 6: selling_iface.v1.HistoryInboundItem
-	(*HistoryInboundMetric)(nil),         // 7: selling_iface.v1.HistoryInboundMetric
-	(*OutboundMetric)(nil),               // 8: selling_iface.v1.OutboundMetric
-	(*HistoryOutboundItem)(nil),          // 9: selling_iface.v1.HistoryOutboundItem
-	(*HistoryOutboundMetric)(nil),        // 10: selling_iface.v1.HistoryOutboundMetric
-	(*timestamppb.Timestamp)(nil),        // 11: google.protobuf.Timestamp
-	(TimeType)(0),                        // 12: selling_iface.v1.TimeType
+	(*HistoryRestockItem)(nil),            // 0: selling_iface.v1.HistoryRestockItem
+	(*HistoryRestockMetric)(nil),          // 1: selling_iface.v1.HistoryRestockMetric
+	(*HistoryReturnItem)(nil),             // 2: selling_iface.v1.HistoryReturnItem
+	(*HistoryReturnMetric)(nil),           // 3: selling_iface.v1.HistoryReturnMetric
+	(*HistoryStockResolutionItem)(nil),    // 4: selling_iface.v1.HistoryStockResolutionItem
+	(*HistoryStockResolutionMetric)(nil),  // 5: selling_iface.v1.HistoryStockResolutionMetric
+	(*HistoryStockOrderItem)(nil),         // 6: selling_iface.v1.HistoryStockOrderItem
+	(*HistoryStockOrderMetric)(nil),       // 7: selling_iface.v1.HistoryStockOrderMetric
+	(*ShipmentProblemItem)(nil),           // 8: selling_iface.v1.ShipmentProblemItem
+	(*HistoryShipmentProblemMetric)(nil),  // 9: selling_iface.v1.HistoryShipmentProblemMetric
+	(*WarehouseProblemItem)(nil),          // 10: selling_iface.v1.WarehouseProblemItem
+	(*HistoryWarehouseProblemMetric)(nil), // 11: selling_iface.v1.HistoryWarehouseProblemMetric
+	(*timestamppb.Timestamp)(nil),         // 12: google.protobuf.Timestamp
+	(TimeType)(0),                         // 13: selling_iface.v1.TimeType
 }
 var file_selling_iface_v1_metric_stock_proto_depIdxs = []int32{
-	11, // 0: selling_iface.v1.HistoryRestockItem.t:type_name -> google.protobuf.Timestamp
-	12, // 1: selling_iface.v1.HistoryRestockMetric.time_type:type_name -> selling_iface.v1.TimeType
+	12, // 0: selling_iface.v1.HistoryRestockItem.t:type_name -> google.protobuf.Timestamp
+	13, // 1: selling_iface.v1.HistoryRestockMetric.time_type:type_name -> selling_iface.v1.TimeType
 	0,  // 2: selling_iface.v1.HistoryRestockMetric.items:type_name -> selling_iface.v1.HistoryRestockItem
-	11, // 3: selling_iface.v1.HistoryReturnItem.t:type_name -> google.protobuf.Timestamp
-	12, // 4: selling_iface.v1.HistoryReturnMetric.time_type:type_name -> selling_iface.v1.TimeType
+	12, // 3: selling_iface.v1.HistoryReturnItem.t:type_name -> google.protobuf.Timestamp
+	13, // 4: selling_iface.v1.HistoryReturnMetric.time_type:type_name -> selling_iface.v1.TimeType
 	2,  // 5: selling_iface.v1.HistoryReturnMetric.items:type_name -> selling_iface.v1.HistoryReturnItem
-	11, // 6: selling_iface.v1.HistoryStockResolutionItem.t:type_name -> google.protobuf.Timestamp
-	12, // 7: selling_iface.v1.HistoryStockResolutionMetric.time_type:type_name -> selling_iface.v1.TimeType
+	12, // 6: selling_iface.v1.HistoryStockResolutionItem.t:type_name -> google.protobuf.Timestamp
+	13, // 7: selling_iface.v1.HistoryStockResolutionMetric.time_type:type_name -> selling_iface.v1.TimeType
 	4,  // 8: selling_iface.v1.HistoryStockResolutionMetric.items:type_name -> selling_iface.v1.HistoryStockResolutionItem
-	11, // 9: selling_iface.v1.HistoryInboundItem.t:type_name -> google.protobuf.Timestamp
-	12, // 10: selling_iface.v1.HistoryInboundMetric.time_type:type_name -> selling_iface.v1.TimeType
-	6,  // 11: selling_iface.v1.HistoryInboundMetric.items:type_name -> selling_iface.v1.HistoryInboundItem
-	11, // 12: selling_iface.v1.HistoryOutboundItem.t:type_name -> google.protobuf.Timestamp
-	12, // 13: selling_iface.v1.HistoryOutboundMetric.time_type:type_name -> selling_iface.v1.TimeType
-	9,  // 14: selling_iface.v1.HistoryOutboundMetric.items:type_name -> selling_iface.v1.HistoryOutboundItem
-	15, // [15:15] is the sub-list for method output_type
-	15, // [15:15] is the sub-list for method input_type
-	15, // [15:15] is the sub-list for extension type_name
-	15, // [15:15] is the sub-list for extension extendee
-	0,  // [0:15] is the sub-list for field type_name
+	12, // 9: selling_iface.v1.HistoryStockOrderItem.t:type_name -> google.protobuf.Timestamp
+	13, // 10: selling_iface.v1.HistoryStockOrderMetric.time_type:type_name -> selling_iface.v1.TimeType
+	6,  // 11: selling_iface.v1.HistoryStockOrderMetric.items:type_name -> selling_iface.v1.HistoryStockOrderItem
+	12, // 12: selling_iface.v1.ShipmentProblemItem.t:type_name -> google.protobuf.Timestamp
+	13, // 13: selling_iface.v1.HistoryShipmentProblemMetric.time_type:type_name -> selling_iface.v1.TimeType
+	8,  // 14: selling_iface.v1.HistoryShipmentProblemMetric.items:type_name -> selling_iface.v1.ShipmentProblemItem
+	12, // 15: selling_iface.v1.WarehouseProblemItem.t:type_name -> google.protobuf.Timestamp
+	13, // 16: selling_iface.v1.HistoryWarehouseProblemMetric.time_type:type_name -> selling_iface.v1.TimeType
+	10, // 17: selling_iface.v1.HistoryWarehouseProblemMetric.items:type_name -> selling_iface.v1.WarehouseProblemItem
+	18, // [18:18] is the sub-list for method output_type
+	18, // [18:18] is the sub-list for method input_type
+	18, // [18:18] is the sub-list for extension type_name
+	18, // [18:18] is the sub-list for extension extendee
+	0,  // [0:18] is the sub-list for field type_name
 }
 
 func init() { file_selling_iface_v1_metric_stock_proto_init() }
@@ -1128,7 +1034,7 @@ func file_selling_iface_v1_metric_stock_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_selling_iface_v1_metric_stock_proto_rawDesc), len(file_selling_iface_v1_metric_stock_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   11,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
