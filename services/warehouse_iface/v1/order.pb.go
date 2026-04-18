@@ -568,6 +568,7 @@ type OrderDetailSearchRequest struct {
 	//	*OrderDetailSearchRequest_Receipt
 	//	*OrderDetailSearchRequest_OrderRefId
 	//	*OrderDetailSearchRequest_Customer
+	//	*OrderDetailSearchRequest_TxId
 	Search        isOrderDetailSearchRequest_Search `protobuf_oneof:"search"`
 	WarehouseId   uint64                            `protobuf:"varint,6,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
 	Status        string                            `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
@@ -640,6 +641,15 @@ func (x *OrderDetailSearchRequest) GetCustomer() *CustomerSearch {
 	return nil
 }
 
+func (x *OrderDetailSearchRequest) GetTxId() int64 {
+	if x != nil {
+		if x, ok := x.Search.(*OrderDetailSearchRequest_TxId); ok {
+			return x.TxId
+		}
+	}
+	return 0
+}
+
 func (x *OrderDetailSearchRequest) GetWarehouseId() uint64 {
 	if x != nil {
 		return x.WarehouseId
@@ -677,11 +687,17 @@ type OrderDetailSearchRequest_Customer struct {
 	Customer *CustomerSearch `protobuf:"bytes,3,opt,name=customer,proto3,oneof"`
 }
 
+type OrderDetailSearchRequest_TxId struct {
+	TxId int64 `protobuf:"varint,7,opt,name=tx_id,json=txId,proto3,oneof"`
+}
+
 func (*OrderDetailSearchRequest_Receipt) isOrderDetailSearchRequest_Search() {}
 
 func (*OrderDetailSearchRequest_OrderRefId) isOrderDetailSearchRequest_Search() {}
 
 func (*OrderDetailSearchRequest_Customer) isOrderDetailSearchRequest_Search() {}
+
+func (*OrderDetailSearchRequest_TxId) isOrderDetailSearchRequest_Search() {}
 
 type TransactionDetail struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -1019,12 +1035,13 @@ const file_warehouse_iface_v1_order_proto_rawDesc = "" +
 	"\bcustomer\x18\r \x01(\v2\".warehouse_iface.v1.CustomerDetailR\bcustomer\"L\n" +
 	"\x0eCustomerSearch\x12\x1d\n" +
 	"\x04name\x18\x01 \x01(\tB\t\xbaH\x06r\x04\x10\x01\x18dR\x04name\x12\x1b\n" +
-	"\x04city\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x18dR\x04city\"\x8b\x02\n" +
+	"\x04city\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x18dR\x04city\"\xa2\x02\n" +
 	"\x18OrderDetailSearchRequest\x12\x1a\n" +
 	"\areceipt\x18\x01 \x01(\tH\x00R\areceipt\x12\"\n" +
 	"\forder_ref_id\x18\x02 \x01(\tH\x00R\n" +
 	"orderRefId\x12@\n" +
-	"\bcustomer\x18\x03 \x01(\v2\".warehouse_iface.v1.CustomerSearchH\x00R\bcustomer\x12*\n" +
+	"\bcustomer\x18\x03 \x01(\v2\".warehouse_iface.v1.CustomerSearchH\x00R\bcustomer\x12\x15\n" +
+	"\x05tx_id\x18\a \x01(\x03H\x00R\x04txId\x12*\n" +
 	"\fwarehouse_id\x18\x06 \x01(\x04B\a\xbaH\x042\x02 \x00R\vwarehouseId\x12\x16\n" +
 	"\x06status\x18\x04 \x01(\tR\x06status\x12\x1f\n" +
 	"\x05limit\x18\x05 \x01(\x03B\t\xbaH\x06\"\x04\x10\n" +
@@ -1120,6 +1137,7 @@ func file_warehouse_iface_v1_order_proto_init() {
 		(*OrderDetailSearchRequest_Receipt)(nil),
 		(*OrderDetailSearchRequest_OrderRefId)(nil),
 		(*OrderDetailSearchRequest_Customer)(nil),
+		(*OrderDetailSearchRequest_TxId)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
