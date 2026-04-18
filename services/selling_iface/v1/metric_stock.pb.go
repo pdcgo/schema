@@ -750,15 +750,13 @@ func (x *HistoryShipmentProblemMetric) GetItems() []*ShipmentProblemItem {
 type WarehouseProblemItem struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @gotags: gorm:"serializer:timestamptz"
-	T                       *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=t,proto3" json:"t,omitempty" gorm:"serializer:timestamptz"`
-	LostTransactionCount    int32                  `protobuf:"varint,2,opt,name=lost_transaction_count,json=lostTransactionCount,proto3" json:"lost_transaction_count,omitempty"`
-	LostPieceCount          int32                  `protobuf:"varint,3,opt,name=lost_piece_count,json=lostPieceCount,proto3" json:"lost_piece_count,omitempty"`
-	LostPieceAmount         float64                `protobuf:"fixed64,4,opt,name=lost_piece_amount,json=lostPieceAmount,proto3" json:"lost_piece_amount,omitempty"`
-	DamagedTransactionCount int32                  `protobuf:"varint,5,opt,name=damaged_transaction_count,json=damagedTransactionCount,proto3" json:"damaged_transaction_count,omitempty"`
-	DamagedPieceCount       int32                  `protobuf:"varint,6,opt,name=damaged_piece_count,json=damagedPieceCount,proto3" json:"damaged_piece_count,omitempty"`
-	DamagedPieceAmount      float64                `protobuf:"fixed64,7,opt,name=damaged_piece_amount,json=damagedPieceAmount,proto3" json:"damaged_piece_amount,omitempty"`
-	unknownFields           protoimpl.UnknownFields
-	sizeCache               protoimpl.SizeCache
+	T                  *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=t,proto3" json:"t,omitempty" gorm:"serializer:timestamptz"`
+	LostPieceCount     int32                  `protobuf:"varint,2,opt,name=lost_piece_count,json=lostPieceCount,proto3" json:"lost_piece_count,omitempty"`
+	LostPieceAmount    float64                `protobuf:"fixed64,3,opt,name=lost_piece_amount,json=lostPieceAmount,proto3" json:"lost_piece_amount,omitempty"`
+	DamagedPieceCount  int32                  `protobuf:"varint,4,opt,name=damaged_piece_count,json=damagedPieceCount,proto3" json:"damaged_piece_count,omitempty"`
+	DamagedPieceAmount float64                `protobuf:"fixed64,5,opt,name=damaged_piece_amount,json=damagedPieceAmount,proto3" json:"damaged_piece_amount,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *WarehouseProblemItem) Reset() {
@@ -798,13 +796,6 @@ func (x *WarehouseProblemItem) GetT() *timestamppb.Timestamp {
 	return nil
 }
 
-func (x *WarehouseProblemItem) GetLostTransactionCount() int32 {
-	if x != nil {
-		return x.LostTransactionCount
-	}
-	return 0
-}
-
 func (x *WarehouseProblemItem) GetLostPieceCount() int32 {
 	if x != nil {
 		return x.LostPieceCount
@@ -815,13 +806,6 @@ func (x *WarehouseProblemItem) GetLostPieceCount() int32 {
 func (x *WarehouseProblemItem) GetLostPieceAmount() float64 {
 	if x != nil {
 		return x.LostPieceAmount
-	}
-	return 0
-}
-
-func (x *WarehouseProblemItem) GetDamagedTransactionCount() int32 {
-	if x != nil {
-		return x.DamagedTransactionCount
 	}
 	return 0
 }
@@ -953,15 +937,13 @@ const file_selling_iface_v1_metric_stock_proto_rawDesc = "" +
 	"\x14damaged_piece_amount\x18\a \x01(\x01R\x12damagedPieceAmount\"\x94\x01\n" +
 	"\x1cHistoryShipmentProblemMetric\x127\n" +
 	"\ttime_type\x18\x01 \x01(\x0e2\x1a.selling_iface.v1.TimeTypeR\btimeType\x12;\n" +
-	"\x05items\x18\x02 \x03(\v2%.selling_iface.v1.ShipmentProblemItemR\x05items\"\xea\x02\n" +
+	"\x05items\x18\x02 \x03(\v2%.selling_iface.v1.ShipmentProblemItemR\x05items\"\xf8\x01\n" +
 	"\x14WarehouseProblemItem\x12(\n" +
-	"\x01t\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x01t\x124\n" +
-	"\x16lost_transaction_count\x18\x02 \x01(\x05R\x14lostTransactionCount\x12(\n" +
-	"\x10lost_piece_count\x18\x03 \x01(\x05R\x0elostPieceCount\x12*\n" +
-	"\x11lost_piece_amount\x18\x04 \x01(\x01R\x0flostPieceAmount\x12:\n" +
-	"\x19damaged_transaction_count\x18\x05 \x01(\x05R\x17damagedTransactionCount\x12.\n" +
-	"\x13damaged_piece_count\x18\x06 \x01(\x05R\x11damagedPieceCount\x120\n" +
-	"\x14damaged_piece_amount\x18\a \x01(\x01R\x12damagedPieceAmount\"\x96\x01\n" +
+	"\x01t\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x01t\x12(\n" +
+	"\x10lost_piece_count\x18\x02 \x01(\x05R\x0elostPieceCount\x12*\n" +
+	"\x11lost_piece_amount\x18\x03 \x01(\x01R\x0flostPieceAmount\x12.\n" +
+	"\x13damaged_piece_count\x18\x04 \x01(\x05R\x11damagedPieceCount\x120\n" +
+	"\x14damaged_piece_amount\x18\x05 \x01(\x01R\x12damagedPieceAmount\"\x96\x01\n" +
 	"\x1dHistoryWarehouseProblemMetric\x127\n" +
 	"\ttime_type\x18\x01 \x01(\x0e2\x1a.selling_iface.v1.TimeTypeR\btimeType\x12<\n" +
 	"\x05items\x18\x02 \x03(\v2&.selling_iface.v1.WarehouseProblemItemR\x05itemsB\xc6\x01\n" +

@@ -94,13 +94,12 @@ message HistoryShipmentProblemMetric {
 message WarehouseProblemItem {
   // @gotags: gorm:"serializer:timestamptz"
   google.protobuf.Timestamp t = 1;
-  int32 lost_transaction_count = 2;
-  int32 lost_piece_count = 3;
-  double lost_piece_amount = 4;
 
-  int32 damaged_transaction_count = 5;
-  int32 damaged_piece_count = 6;
-  double damaged_piece_amount = 7;
+  int32 lost_piece_count = 2;
+  double lost_piece_amount = 3;
+
+  int32 damaged_piece_count = 4;
+  double damaged_piece_amount = 5;
 }
 
 message HistoryWarehouseProblemMetric {
