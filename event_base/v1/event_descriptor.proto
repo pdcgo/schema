@@ -1,0 +1,35 @@
+syntax = "proto3";
+package event_base.v1;
+
+import "google/protobuf/descriptor.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/pdcgo/schema/services/event_base/v1;event_base";
+
+message MessageEventConfig {
+  string event_topic = 1;
+}
+
+extend google.protobuf.MessageOptions {
+  MessageEventConfig event_config = 50001;
+}
+
+// // mirrors the exact JSON shape Pub/Sub sends to your push endpoint
+// message PushRequest {
+//   PushMessage message = 1 [json_name = "message"];
+//   string subscription = 2 [json_name = "subscription"];
+// }
+
+// message PushMessage {
+//   bytes data = 1 [json_name = "data"];
+//   map<string, string> attributes = 2 [json_name = "attributes"];
+//   string message_id = 3 [json_name = "messageId"];
+//   string ordering_key = 4 [json_name = "orderingKey"];
+//   google.protobuf.Timestamp publish_time = 5 [json_name = "publishTime"];
+// }
+
+message HelloExampleEvent {
+  option (event_config).event_topic = "hello-topic";
+
+  string name = 1;
+}
