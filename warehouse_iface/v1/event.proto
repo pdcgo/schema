@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package warehouse_iface.v1;
+
+import "buf/validate/validate.proto";
+import "event_base/v1/event.proto";
+// import "common/v1/common.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/pdcgo/schema/services/warehouse_iface/v1;warehouse_iface";
+
+enum StockChangeType {
+  STOCK_CHANGE_TYPE_UNSPECIFIED = 0;
+  STOCK_CHANGE_TYPE_ADJUSTMENT = 1;
+  STOCK_CHANGE_TYPE_RESTOCK = 2;
+  STOCK_CHANGE_TYPE_RETURN = 3;
+  STOCK_CHANGE_TYPE_ORDER = 4;
+  STOCK_CHANGE_TYPE_DAMAGE = 5;
+  STOCK_CHANGE_TYPE_LOST = 6;
+  STOCK_CHANGE_TYPE_EXPIRED = 7;
+}
+
+message StockChangeLog {
+  string sku_id = 1 [(buf.validate.field).string.min_len = 1];
+  uint64 warehouse_id = 2 [(buf.validate.field).uint64.gt = 0];
+  uint64 actor_id = 3 [(buf.validate.field).uint64.gt = 0];
+  uint64 transaction_id = 4 [(buf.validate.field).uint64.gt = 0];
+  int32 change_count = 5 [(buf.validate.field).int32.not_in = 0];
+  double change_amount = 6 [(buf.validate.field).double.not_in = 0];
+}
+
+message StockChange {
+  google.protobuf.Timestamp created_time = 1 [(buf.validate.field).required = true];
+  repeated StockChangeLog changes = 2 [(buf.validate.field).repeated.min_items = 1];
+}
+
+message PendingStockChange {
+  google.protobuf.Timestamp created_time = 1 [(buf.validate.field).required = true];
+  repeated StockChangeLog changes = 2 [(buf.validate.field).repeated.min_items = 1];
+}
+
+message StockEvent {
+  option (event_base.v1.event_config).event_topic = "stock-topic";
+
+  oneof data {
+    StockChange stock_change = 1;
+    PendingStockChange pending_stock_change = 2;
+  }
+}

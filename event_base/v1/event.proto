@@ -2,7 +2,7 @@ syntax = "proto3";
 package event_base.v1;
 
 import "google/protobuf/descriptor.proto";
-import "google/protobuf/timestamp.proto";
+// import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/pdcgo/schema/services/event_base/v1;event_base";
 

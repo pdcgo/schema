@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.11
 // 	protoc        (unknown)
-// source: event_base/v1/event_descriptor.proto
+// source: event_base/v1/event.proto
 
 package event_base
 
@@ -10,7 +10,6 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	descriptorpb "google.golang.org/protobuf/types/descriptorpb"
-	_ "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -32,7 +31,7 @@ type MessageEventConfig struct {
 
 func (x *MessageEventConfig) Reset() {
 	*x = MessageEventConfig{}
-	mi := &file_event_base_v1_event_descriptor_proto_msgTypes[0]
+	mi := &file_event_base_v1_event_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -44,7 +43,7 @@ func (x *MessageEventConfig) String() string {
 func (*MessageEventConfig) ProtoMessage() {}
 
 func (x *MessageEventConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_event_base_v1_event_descriptor_proto_msgTypes[0]
+	mi := &file_event_base_v1_event_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -57,7 +56,7 @@ func (x *MessageEventConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MessageEventConfig.ProtoReflect.Descriptor instead.
 func (*MessageEventConfig) Descriptor() ([]byte, []int) {
-	return file_event_base_v1_event_descriptor_proto_rawDescGZIP(), []int{0}
+	return file_event_base_v1_event_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *MessageEventConfig) GetEventTopic() string {
@@ -76,7 +75,7 @@ type HelloExampleEvent struct {
 
 func (x *HelloExampleEvent) Reset() {
 	*x = HelloExampleEvent{}
-	mi := &file_event_base_v1_event_descriptor_proto_msgTypes[1]
+	mi := &file_event_base_v1_event_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -88,7 +87,7 @@ func (x *HelloExampleEvent) String() string {
 func (*HelloExampleEvent) ProtoMessage() {}
 
 func (x *HelloExampleEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_event_base_v1_event_descriptor_proto_msgTypes[1]
+	mi := &file_event_base_v1_event_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -101,7 +100,7 @@ func (x *HelloExampleEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HelloExampleEvent.ProtoReflect.Descriptor instead.
 func (*HelloExampleEvent) Descriptor() ([]byte, []int) {
-	return file_event_base_v1_event_descriptor_proto_rawDescGZIP(), []int{1}
+	return file_event_base_v1_event_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *HelloExampleEvent) GetName() string {
@@ -111,56 +110,57 @@ func (x *HelloExampleEvent) GetName() string {
 	return ""
 }
 
-var file_event_base_v1_event_descriptor_proto_extTypes = []protoimpl.ExtensionInfo{
+var file_event_base_v1_event_proto_extTypes = []protoimpl.ExtensionInfo{
 	{
 		ExtendedType:  (*descriptorpb.MessageOptions)(nil),
 		ExtensionType: (*MessageEventConfig)(nil),
 		Field:         50001,
 		Name:          "event_base.v1.event_config",
 		Tag:           "bytes,50001,opt,name=event_config",
-		Filename:      "event_base/v1/event_descriptor.proto",
+		Filename:      "event_base/v1/event.proto",
 	},
 }
 
 // Extension fields to descriptorpb.MessageOptions.
 var (
 	// optional event_base.v1.MessageEventConfig event_config = 50001;
-	E_EventConfig = &file_event_base_v1_event_descriptor_proto_extTypes[0]
+	E_EventConfig = &file_event_base_v1_event_proto_extTypes[0]
 )
 
-var File_event_base_v1_event_descriptor_proto protoreflect.FileDescriptor
+var File_event_base_v1_event_proto protoreflect.FileDescriptor
 
-const file_event_base_v1_event_descriptor_proto_rawDesc = "" +
+const file_event_base_v1_event_proto_rawDesc = "" +
 	"\n" +
-	"$event_base/v1/event_descriptor.proto\x12\revent_base.v1\x1a google/protobuf/descriptor.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"5\n" +
+	"\x19event_base/v1/event.proto\x12\revent_base.v1\x1a google/protobuf/descriptor.proto\"5\n" +
 	"\x12MessageEventConfig\x12\x1f\n" +
 	"\vevent_topic\x18\x01 \x01(\tR\n" +
 	"eventTopic\":\n" +
 	"\x11HelloExampleEvent\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name:\x11\x8a\xb5\x18\r\n" +
 	"\vhello-topic:g\n" +
-	"\fevent_config\x12\x1f.google.protobuf.MessageOptions\x18ц\x03 \x01(\v2!.event_base.v1.MessageEventConfigR\veventConfigB\xb5\x01\n" +
-	"\x11com.event_base.v1B\x14EventDescriptorProtoP\x01Z9github.com/pdcgo/schema/services/event_base/v1;event_base\xa2\x02\x03EXX\xaa\x02\fEventBase.V1\xca\x02\fEventBase\\V1\xe2\x02\x18EventBase\\V1\\GPBMetadata\xea\x02\rEventBase::V1b\x06proto3"
+	"\fevent_config\x12\x1f.google.protobuf.MessageOptions\x18ц\x03 \x01(\v2!.event_base.v1.MessageEventConfigR\veventConfigB\xab\x01\n" +
+	"\x11com.event_base.v1B\n" +
+	"EventProtoP\x01Z9github.com/pdcgo/schema/services/event_base/v1;event_base\xa2\x02\x03EXX\xaa\x02\fEventBase.V1\xca\x02\fEventBase\\V1\xe2\x02\x18EventBase\\V1\\GPBMetadata\xea\x02\rEventBase::V1b\x06proto3"
 
 var (
-	file_event_base_v1_event_descriptor_proto_rawDescOnce sync.Once
-	file_event_base_v1_event_descriptor_proto_rawDescData []byte
+	file_event_base_v1_event_proto_rawDescOnce sync.Once
+	file_event_base_v1_event_proto_rawDescData []byte
 )
 
-func file_event_base_v1_event_descriptor_proto_rawDescGZIP() []byte {
-	file_event_base_v1_event_descriptor_proto_rawDescOnce.Do(func() {
-		file_event_base_v1_event_descriptor_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_event_base_v1_event_descriptor_proto_rawDesc), len(file_event_base_v1_event_descriptor_proto_rawDesc)))
+func file_event_base_v1_event_proto_rawDescGZIP() []byte {
+	file_event_base_v1_event_proto_rawDescOnce.Do(func() {
+		file_event_base_v1_event_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_event_base_v1_event_proto_rawDesc), len(file_event_base_v1_event_proto_rawDesc)))
 	})
-	return file_event_base_v1_event_descriptor_proto_rawDescData
+	return file_event_base_v1_event_proto_rawDescData
 }
 
-var file_event_base_v1_event_descriptor_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_event_base_v1_event_descriptor_proto_goTypes = []any{
+var file_event_base_v1_event_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_event_base_v1_event_proto_goTypes = []any{
 	(*MessageEventConfig)(nil),          // 0: event_base.v1.MessageEventConfig
 	(*HelloExampleEvent)(nil),           // 1: event_base.v1.HelloExampleEvent
 	(*descriptorpb.MessageOptions)(nil), // 2: google.protobuf.MessageOptions
 }
-var file_event_base_v1_event_descriptor_proto_depIdxs = []int32{
+var file_event_base_v1_event_proto_depIdxs = []int32{
 	2, // 0: event_base.v1.event_config:extendee -> google.protobuf.MessageOptions
 	0, // 1: event_base.v1.event_config:type_name -> event_base.v1.MessageEventConfig
 	2, // [2:2] is the sub-list for method output_type
@@ -170,27 +170,27 @@ var file_event_base_v1_event_descriptor_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_event_base_v1_event_descriptor_proto_init() }
-func file_event_base_v1_event_descriptor_proto_init() {
-	if File_event_base_v1_event_descriptor_proto != nil {
+func init() { file_event_base_v1_event_proto_init() }
+func file_event_base_v1_event_proto_init() {
+	if File_event_base_v1_event_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_event_base_v1_event_descriptor_proto_rawDesc), len(file_event_base_v1_event_descriptor_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_event_base_v1_event_proto_rawDesc), len(file_event_base_v1_event_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   2,
 			NumExtensions: 1,
 			NumServices:   0,
 		},
-		GoTypes:           file_event_base_v1_event_descriptor_proto_goTypes,
-		DependencyIndexes: file_event_base_v1_event_descriptor_proto_depIdxs,
-		MessageInfos:      file_event_base_v1_event_descriptor_proto_msgTypes,
-		ExtensionInfos:    file_event_base_v1_event_descriptor_proto_extTypes,
+		GoTypes:           file_event_base_v1_event_proto_goTypes,
+		DependencyIndexes: file_event_base_v1_event_proto_depIdxs,
+		MessageInfos:      file_event_base_v1_event_proto_msgTypes,
+		ExtensionInfos:    file_event_base_v1_event_proto_extTypes,
 	}.Build()
-	File_event_base_v1_event_descriptor_proto = out.File
-	file_event_base_v1_event_descriptor_proto_goTypes = nil
-	file_event_base_v1_event_descriptor_proto_depIdxs = nil
+	File_event_base_v1_event_proto = out.File
+	file_event_base_v1_event_proto_goTypes = nil
+	file_event_base_v1_event_proto_depIdxs = nil
 }
