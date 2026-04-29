@@ -276,27 +276,27 @@ func (x *PendingStockChange) GetChanges() []*StockChangeLog {
 	return nil
 }
 
-type OrderCreated struct {
+type OrderAccepted struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TransactionId uint64                 `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *OrderCreated) Reset() {
-	*x = OrderCreated{}
+func (x *OrderAccepted) Reset() {
+	*x = OrderAccepted{}
 	mi := &file_warehouse_iface_v1_event_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *OrderCreated) String() string {
+func (x *OrderAccepted) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*OrderCreated) ProtoMessage() {}
+func (*OrderAccepted) ProtoMessage() {}
 
-func (x *OrderCreated) ProtoReflect() protoreflect.Message {
+func (x *OrderAccepted) ProtoReflect() protoreflect.Message {
 	mi := &file_warehouse_iface_v1_event_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -308,12 +308,12 @@ func (x *OrderCreated) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use OrderCreated.ProtoReflect.Descriptor instead.
-func (*OrderCreated) Descriptor() ([]byte, []int) {
+// Deprecated: Use OrderAccepted.ProtoReflect.Descriptor instead.
+func (*OrderAccepted) Descriptor() ([]byte, []int) {
 	return file_warehouse_iface_v1_event_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *OrderCreated) GetTransactionId() uint64 {
+func (x *OrderAccepted) GetTransactionId() uint64 {
 	if x != nil {
 		return x.TransactionId
 	}
@@ -460,7 +460,7 @@ type StockEvent struct {
 	//	*StockEvent_PendingStockChange
 	//	*StockEvent_RestockAccepted
 	//	*StockEvent_ReturnAccepted
-	//	*StockEvent_OrderCreated
+	//	*StockEvent_OrderAccepted
 	//	*StockEvent_OrderCanceled
 	Data          isStockEvent_Data `protobuf_oneof:"data"`
 	unknownFields protoimpl.UnknownFields
@@ -540,10 +540,10 @@ func (x *StockEvent) GetReturnAccepted() *ReturnAccepted {
 	return nil
 }
 
-func (x *StockEvent) GetOrderCreated() *OrderCreated {
+func (x *StockEvent) GetOrderAccepted() *OrderAccepted {
 	if x != nil {
-		if x, ok := x.Data.(*StockEvent_OrderCreated); ok {
-			return x.OrderCreated
+		if x, ok := x.Data.(*StockEvent_OrderAccepted); ok {
+			return x.OrderAccepted
 		}
 	}
 	return nil
@@ -578,8 +578,8 @@ type StockEvent_ReturnAccepted struct {
 	ReturnAccepted *ReturnAccepted `protobuf:"bytes,4,opt,name=return_accepted,json=returnAccepted,proto3,oneof"`
 }
 
-type StockEvent_OrderCreated struct {
-	OrderCreated *OrderCreated `protobuf:"bytes,5,opt,name=order_created,json=orderCreated,proto3,oneof"`
+type StockEvent_OrderAccepted struct {
+	OrderAccepted *OrderAccepted `protobuf:"bytes,5,opt,name=order_accepted,json=orderAccepted,proto3,oneof"`
 }
 
 type StockEvent_OrderCanceled struct {
@@ -594,7 +594,7 @@ func (*StockEvent_RestockAccepted) isStockEvent_Data() {}
 
 func (*StockEvent_ReturnAccepted) isStockEvent_Data() {}
 
-func (*StockEvent_OrderCreated) isStockEvent_Data() {}
+func (*StockEvent_OrderAccepted) isStockEvent_Data() {}
 
 func (*StockEvent_OrderCanceled) isStockEvent_Data() {}
 
@@ -615,22 +615,22 @@ const file_warehouse_iface_v1_event_proto_rawDesc = "" +
 	"\achanges\x18\x02 \x03(\v2\".warehouse_iface.v1.StockChangeLogB\b\xbaH\x05\x92\x01\x02\b\x01R\achanges\"\xa3\x01\n" +
 	"\x12PendingStockChange\x12E\n" +
 	"\fcreated_time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\vcreatedTime\x12F\n" +
-	"\achanges\x18\x02 \x03(\v2\".warehouse_iface.v1.StockChangeLogB\b\xbaH\x05\x92\x01\x02\b\x01R\achanges\"5\n" +
-	"\fOrderCreated\x12%\n" +
-	"\x0etransaction_id\x18\x01 \x01(\x04R\rtransactionId\"6\n" +
-	"\rOrderCanceled\x12%\n" +
-	"\x0etransaction_id\x18\x01 \x01(\x04R\rtransactionId\"8\n" +
-	"\x0fRestockAccepted\x12%\n" +
-	"\x0etransaction_id\x18\x01 \x01(\x04R\rtransactionId\"7\n" +
-	"\x0eReturnAccepted\x12%\n" +
-	"\x0etransaction_id\x18\x01 \x01(\x04R\rtransactionId\"\xff\x03\n" +
+	"\achanges\x18\x02 \x03(\v2\".warehouse_iface.v1.StockChangeLogB\b\xbaH\x05\x92\x01\x02\b\x01R\achanges\"?\n" +
+	"\rOrderAccepted\x12.\n" +
+	"\x0etransaction_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\rtransactionId\"?\n" +
+	"\rOrderCanceled\x12.\n" +
+	"\x0etransaction_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\rtransactionId\"A\n" +
+	"\x0fRestockAccepted\x12.\n" +
+	"\x0etransaction_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\rtransactionId\"@\n" +
+	"\x0eReturnAccepted\x12.\n" +
+	"\x0etransaction_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\rtransactionId\"\x82\x04\n" +
 	"\n" +
 	"StockEvent\x12D\n" +
 	"\fstock_change\x18\x01 \x01(\v2\x1f.warehouse_iface.v1.StockChangeH\x00R\vstockChange\x12Z\n" +
 	"\x14pending_stock_change\x18\x02 \x01(\v2&.warehouse_iface.v1.PendingStockChangeH\x00R\x12pendingStockChange\x12P\n" +
 	"\x10restock_accepted\x18\x03 \x01(\v2#.warehouse_iface.v1.RestockAcceptedH\x00R\x0frestockAccepted\x12M\n" +
-	"\x0freturn_accepted\x18\x04 \x01(\v2\".warehouse_iface.v1.ReturnAcceptedH\x00R\x0ereturnAccepted\x12G\n" +
-	"\rorder_created\x18\x05 \x01(\v2 .warehouse_iface.v1.OrderCreatedH\x00R\forderCreated\x12J\n" +
+	"\x0freturn_accepted\x18\x04 \x01(\v2\".warehouse_iface.v1.ReturnAcceptedH\x00R\x0ereturnAccepted\x12J\n" +
+	"\x0eorder_accepted\x18\x05 \x01(\v2!.warehouse_iface.v1.OrderAcceptedH\x00R\rorderAccepted\x12J\n" +
 	"\x0eorder_canceled\x18\x06 \x01(\v2!.warehouse_iface.v1.OrderCanceledH\x00R\rorderCanceled:\x11\x8a\xb5\x18\r\n" +
 	"\vstock-topicB\x06\n" +
 	"\x04data*\x89\x02\n" +
@@ -665,7 +665,7 @@ var file_warehouse_iface_v1_event_proto_goTypes = []any{
 	(*StockChangeLog)(nil),        // 1: warehouse_iface.v1.StockChangeLog
 	(*StockChange)(nil),           // 2: warehouse_iface.v1.StockChange
 	(*PendingStockChange)(nil),    // 3: warehouse_iface.v1.PendingStockChange
-	(*OrderCreated)(nil),          // 4: warehouse_iface.v1.OrderCreated
+	(*OrderAccepted)(nil),         // 4: warehouse_iface.v1.OrderAccepted
 	(*OrderCanceled)(nil),         // 5: warehouse_iface.v1.OrderCanceled
 	(*RestockAccepted)(nil),       // 6: warehouse_iface.v1.RestockAccepted
 	(*ReturnAccepted)(nil),        // 7: warehouse_iface.v1.ReturnAccepted
@@ -681,7 +681,7 @@ var file_warehouse_iface_v1_event_proto_depIdxs = []int32{
 	3,  // 5: warehouse_iface.v1.StockEvent.pending_stock_change:type_name -> warehouse_iface.v1.PendingStockChange
 	6,  // 6: warehouse_iface.v1.StockEvent.restock_accepted:type_name -> warehouse_iface.v1.RestockAccepted
 	7,  // 7: warehouse_iface.v1.StockEvent.return_accepted:type_name -> warehouse_iface.v1.ReturnAccepted
-	4,  // 8: warehouse_iface.v1.StockEvent.order_created:type_name -> warehouse_iface.v1.OrderCreated
+	4,  // 8: warehouse_iface.v1.StockEvent.order_accepted:type_name -> warehouse_iface.v1.OrderAccepted
 	5,  // 9: warehouse_iface.v1.StockEvent.order_canceled:type_name -> warehouse_iface.v1.OrderCanceled
 	10, // [10:10] is the sub-list for method output_type
 	10, // [10:10] is the sub-list for method input_type
@@ -700,7 +700,7 @@ func file_warehouse_iface_v1_event_proto_init() {
 		(*StockEvent_PendingStockChange)(nil),
 		(*StockEvent_RestockAccepted)(nil),
 		(*StockEvent_ReturnAccepted)(nil),
-		(*StockEvent_OrderCreated)(nil),
+		(*StockEvent_OrderAccepted)(nil),
 		(*StockEvent_OrderCanceled)(nil),
 	}
 	type x struct{}
