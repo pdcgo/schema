@@ -1,0 +1,41 @@
+syntax = "proto3";
+package role_base.v1;
+
+import "google/protobuf/descriptor.proto";
+
+option go_package = "github.com/pdcgo/schema/services/role_base/v1;role_base";
+
+enum Role {
+  ROLE_UNSPECIFIED = 0;
+  ROLE_ROOT = 1;
+  ROLE_ADMIN = 2;
+  ROLE_TEAM_OWNER = 3;
+  ROLE_TEAM_ADMIN = 4;
+  ROLE_TEAM_CUSTOMER_SERVICE = 5;
+  ROLE_WAREHOUSE_OWNER = 6;
+  ROLE_WAREHOUSE_LEADER = 7;
+  ROLE_WAREHOUSE_STAFF = 8;
+}
+
+enum IdentityType {
+  IDENTITY_TYPE_UNSPECIFIED = 0;
+  IDENTITY_TYPE_SYSTEM = 1;
+  IDENTITY_TYPE_GENERAL_USER = 2;
+  IDENTITY_TYPE_EXTENSION = 3;
+}
+
+message Identity {
+  uint32 identity_id = 1;
+  Role role = 2;
+  IdentityType identity_type = 3;
+  string agent = 4;
+}
+message RequestPolicy {
+  repeated Role roles = 1;
+  bool allow_authenticated = 2;
+  bool allow_public = 3;
+}
+
+extend google.protobuf.MessageOptions {
+  RequestPolicy request_policy = 50002;
+}

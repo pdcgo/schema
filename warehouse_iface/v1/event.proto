@@ -39,11 +39,21 @@ message PendingStockChange {
   repeated StockChangeLog changes = 2 [(buf.validate.field).repeated.min_items = 1];
 }
 
+message RestockAccepted {
+  uint64 transaction_id = 1;
+}
+
+message ReturnAccepted {
+  uint64 transaction_id = 1;
+}
+
 message StockEvent {
   option (event_base.v1.event_config).event_topic = "stock-topic";
 
   oneof data {
     StockChange stock_change = 1;
     PendingStockChange pending_stock_change = 2;
+    RestockAccepted restock_accepted = 3;
+    ReturnAccepted return_accepted = 4;
   }
 }

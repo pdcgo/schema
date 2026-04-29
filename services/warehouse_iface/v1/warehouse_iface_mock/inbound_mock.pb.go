@@ -46,6 +46,32 @@ func (m *MockInboundServiceClient) EXPECT() *MockInboundServiceClientMockRecorde
     return m.recorder
 }
 
+func (m *MockInboundService) InboundCreate(ctx context.Context, req *connect.Request[v1.InboundCreateRequest]) (*connect.Response[v1.InboundCreateResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "InboundCreate", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.InboundCreateResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInboundServiceMockRecorder) InboundCreate(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "InboundCreate", reflect.TypeOf((*MockInboundService)(nil).InboundCreate), ctx, req)
+}
+
+func (m *MockInboundServiceClient) InboundCreate(ctx context.Context, req *connect.Request[v1.InboundCreateRequest]) (*connect.Response[v1.InboundCreateResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "InboundCreate", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.InboundCreateResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInboundServiceClientMockRecorder) InboundCreate(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "InboundCreate", reflect.TypeOf((*MockInboundService)(nil).InboundCreate), ctx, req)
+}
+
 func (m *MockInboundService) InboundAccept(ctx context.Context, req *connect.Request[v1.InboundAcceptRequest]) (*connect.Response[v1.InboundAcceptResponse], error) {
     m.ctrl.T.Helper()
     ret := m.ctrl.Call(m, "InboundAccept", ctx, req)

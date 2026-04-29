@@ -10,6 +10,7 @@ option go_package = "github.com/pdcgo/schema/services/warehouse_iface/v1;warehou
 
 service InboundService {
   // rpc ResyncStockPending(ResyncStockPendingRequest) returns (ResyncStockPendingResponse);
+  rpc InboundCreate(InboundCreateRequest) returns (InboundCreateResponse);
   rpc InboundAccept(InboundAcceptRequest) returns (InboundAcceptResponse);
   rpc InboundReject(InboundRejectRequest) returns (InboundRejectResponse);
   rpc InboundDetailSearch(InboundDetailSearchRequest) returns (InboundDetailSearchResponse);
@@ -31,6 +32,49 @@ enum SearchBy {
   SEARCH_BY_ID = 1;
   SEARCH_BY_RECEIPT = 2;
   SEARCH_BY_ORDERID = 3;
+}
+
+enum PaymentType {
+  PAYMENT_TYPE_UNSPECIFIED = 0;
+  PAYMENT_TYPE_SHOPEEPAY = 1;
+  PAYMENT_TYPE_TRANSFER = 2;
+}
+
+message RestockInfo {
+  string extern_ord_id = 1;
+  string receipt = 2;
+  double shipping_cost = 4;
+  PaymentType payment_type = 5;
+}
+
+message ReturnInfo {
+  string extern_ord_id = 1;
+  string receipt = 2;
+}
+
+message InboundItem {
+  uint64 variant_id = 1;
+  uint64 product_id = 2;
+  int64 count = 3;
+  double price = 4;
+}
+
+message InboundCreateRequest {
+  uint64 warehouse_id = 1;
+  uint64 shipping_id = 2;
+  uint64 team_id = 3;
+  string note = 4;
+
+  oneof inbound_info {
+    RestockInfo restock = 5;
+    ReturnInfo return = 6;
+  }
+
+  repeated InboundItem items = 7;
+}
+
+message InboundCreateResponse {
+  uint64 id = 1;
 }
 
 // message ResyncStockPendingRequest {

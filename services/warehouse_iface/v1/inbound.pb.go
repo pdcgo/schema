@@ -134,6 +134,409 @@ func (SearchBy) EnumDescriptor() ([]byte, []int) {
 	return file_warehouse_iface_v1_inbound_proto_rawDescGZIP(), []int{1}
 }
 
+type PaymentType int32
+
+const (
+	PaymentType_PAYMENT_TYPE_UNSPECIFIED PaymentType = 0
+	PaymentType_PAYMENT_TYPE_SHOPEEPAY   PaymentType = 1
+	PaymentType_PAYMENT_TYPE_TRANSFER    PaymentType = 2
+)
+
+// Enum value maps for PaymentType.
+var (
+	PaymentType_name = map[int32]string{
+		0: "PAYMENT_TYPE_UNSPECIFIED",
+		1: "PAYMENT_TYPE_SHOPEEPAY",
+		2: "PAYMENT_TYPE_TRANSFER",
+	}
+	PaymentType_value = map[string]int32{
+		"PAYMENT_TYPE_UNSPECIFIED": 0,
+		"PAYMENT_TYPE_SHOPEEPAY":   1,
+		"PAYMENT_TYPE_TRANSFER":    2,
+	}
+)
+
+func (x PaymentType) Enum() *PaymentType {
+	p := new(PaymentType)
+	*p = x
+	return p
+}
+
+func (x PaymentType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (PaymentType) Descriptor() protoreflect.EnumDescriptor {
+	return file_warehouse_iface_v1_inbound_proto_enumTypes[2].Descriptor()
+}
+
+func (PaymentType) Type() protoreflect.EnumType {
+	return &file_warehouse_iface_v1_inbound_proto_enumTypes[2]
+}
+
+func (x PaymentType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use PaymentType.Descriptor instead.
+func (PaymentType) EnumDescriptor() ([]byte, []int) {
+	return file_warehouse_iface_v1_inbound_proto_rawDescGZIP(), []int{2}
+}
+
+type RestockInfo struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ExternOrdId   string                 `protobuf:"bytes,1,opt,name=extern_ord_id,json=externOrdId,proto3" json:"extern_ord_id,omitempty"`
+	Receipt       string                 `protobuf:"bytes,2,opt,name=receipt,proto3" json:"receipt,omitempty"`
+	ShippingCost  float64                `protobuf:"fixed64,4,opt,name=shipping_cost,json=shippingCost,proto3" json:"shipping_cost,omitempty"`
+	PaymentType   PaymentType            `protobuf:"varint,5,opt,name=payment_type,json=paymentType,proto3,enum=warehouse_iface.v1.PaymentType" json:"payment_type,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RestockInfo) Reset() {
+	*x = RestockInfo{}
+	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RestockInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RestockInfo) ProtoMessage() {}
+
+func (x *RestockInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RestockInfo.ProtoReflect.Descriptor instead.
+func (*RestockInfo) Descriptor() ([]byte, []int) {
+	return file_warehouse_iface_v1_inbound_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *RestockInfo) GetExternOrdId() string {
+	if x != nil {
+		return x.ExternOrdId
+	}
+	return ""
+}
+
+func (x *RestockInfo) GetReceipt() string {
+	if x != nil {
+		return x.Receipt
+	}
+	return ""
+}
+
+func (x *RestockInfo) GetShippingCost() float64 {
+	if x != nil {
+		return x.ShippingCost
+	}
+	return 0
+}
+
+func (x *RestockInfo) GetPaymentType() PaymentType {
+	if x != nil {
+		return x.PaymentType
+	}
+	return PaymentType_PAYMENT_TYPE_UNSPECIFIED
+}
+
+type ReturnInfo struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ExternOrdId   string                 `protobuf:"bytes,1,opt,name=extern_ord_id,json=externOrdId,proto3" json:"extern_ord_id,omitempty"`
+	Receipt       string                 `protobuf:"bytes,2,opt,name=receipt,proto3" json:"receipt,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ReturnInfo) Reset() {
+	*x = ReturnInfo{}
+	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReturnInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReturnInfo) ProtoMessage() {}
+
+func (x *ReturnInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReturnInfo.ProtoReflect.Descriptor instead.
+func (*ReturnInfo) Descriptor() ([]byte, []int) {
+	return file_warehouse_iface_v1_inbound_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *ReturnInfo) GetExternOrdId() string {
+	if x != nil {
+		return x.ExternOrdId
+	}
+	return ""
+}
+
+func (x *ReturnInfo) GetReceipt() string {
+	if x != nil {
+		return x.Receipt
+	}
+	return ""
+}
+
+type InboundItem struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	VariantId     uint64                 `protobuf:"varint,1,opt,name=variant_id,json=variantId,proto3" json:"variant_id,omitempty"`
+	ProductId     uint64                 `protobuf:"varint,2,opt,name=product_id,json=productId,proto3" json:"product_id,omitempty"`
+	Count         int64                  `protobuf:"varint,3,opt,name=count,proto3" json:"count,omitempty"`
+	Price         float64                `protobuf:"fixed64,4,opt,name=price,proto3" json:"price,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *InboundItem) Reset() {
+	*x = InboundItem{}
+	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *InboundItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InboundItem) ProtoMessage() {}
+
+func (x *InboundItem) ProtoReflect() protoreflect.Message {
+	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use InboundItem.ProtoReflect.Descriptor instead.
+func (*InboundItem) Descriptor() ([]byte, []int) {
+	return file_warehouse_iface_v1_inbound_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *InboundItem) GetVariantId() uint64 {
+	if x != nil {
+		return x.VariantId
+	}
+	return 0
+}
+
+func (x *InboundItem) GetProductId() uint64 {
+	if x != nil {
+		return x.ProductId
+	}
+	return 0
+}
+
+func (x *InboundItem) GetCount() int64 {
+	if x != nil {
+		return x.Count
+	}
+	return 0
+}
+
+func (x *InboundItem) GetPrice() float64 {
+	if x != nil {
+		return x.Price
+	}
+	return 0
+}
+
+type InboundCreateRequest struct {
+	state       protoimpl.MessageState `protogen:"open.v1"`
+	WarehouseId uint64                 `protobuf:"varint,1,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
+	ShippingId  uint64                 `protobuf:"varint,2,opt,name=shipping_id,json=shippingId,proto3" json:"shipping_id,omitempty"`
+	TeamId      uint64                 `protobuf:"varint,3,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	Note        string                 `protobuf:"bytes,4,opt,name=note,proto3" json:"note,omitempty"`
+	// Types that are valid to be assigned to InboundInfo:
+	//
+	//	*InboundCreateRequest_Restock
+	//	*InboundCreateRequest_Return
+	InboundInfo   isInboundCreateRequest_InboundInfo `protobuf_oneof:"inbound_info"`
+	Items         []*InboundItem                     `protobuf:"bytes,7,rep,name=items,proto3" json:"items,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *InboundCreateRequest) Reset() {
+	*x = InboundCreateRequest{}
+	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *InboundCreateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InboundCreateRequest) ProtoMessage() {}
+
+func (x *InboundCreateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use InboundCreateRequest.ProtoReflect.Descriptor instead.
+func (*InboundCreateRequest) Descriptor() ([]byte, []int) {
+	return file_warehouse_iface_v1_inbound_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *InboundCreateRequest) GetWarehouseId() uint64 {
+	if x != nil {
+		return x.WarehouseId
+	}
+	return 0
+}
+
+func (x *InboundCreateRequest) GetShippingId() uint64 {
+	if x != nil {
+		return x.ShippingId
+	}
+	return 0
+}
+
+func (x *InboundCreateRequest) GetTeamId() uint64 {
+	if x != nil {
+		return x.TeamId
+	}
+	return 0
+}
+
+func (x *InboundCreateRequest) GetNote() string {
+	if x != nil {
+		return x.Note
+	}
+	return ""
+}
+
+func (x *InboundCreateRequest) GetInboundInfo() isInboundCreateRequest_InboundInfo {
+	if x != nil {
+		return x.InboundInfo
+	}
+	return nil
+}
+
+func (x *InboundCreateRequest) GetRestock() *RestockInfo {
+	if x != nil {
+		if x, ok := x.InboundInfo.(*InboundCreateRequest_Restock); ok {
+			return x.Restock
+		}
+	}
+	return nil
+}
+
+func (x *InboundCreateRequest) GetReturn() *ReturnInfo {
+	if x != nil {
+		if x, ok := x.InboundInfo.(*InboundCreateRequest_Return); ok {
+			return x.Return
+		}
+	}
+	return nil
+}
+
+func (x *InboundCreateRequest) GetItems() []*InboundItem {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
+type isInboundCreateRequest_InboundInfo interface {
+	isInboundCreateRequest_InboundInfo()
+}
+
+type InboundCreateRequest_Restock struct {
+	Restock *RestockInfo `protobuf:"bytes,5,opt,name=restock,proto3,oneof"`
+}
+
+type InboundCreateRequest_Return struct {
+	Return *ReturnInfo `protobuf:"bytes,6,opt,name=return,proto3,oneof"`
+}
+
+func (*InboundCreateRequest_Restock) isInboundCreateRequest_InboundInfo() {}
+
+func (*InboundCreateRequest_Return) isInboundCreateRequest_InboundInfo() {}
+
+type InboundCreateResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *InboundCreateResponse) Reset() {
+	*x = InboundCreateResponse{}
+	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *InboundCreateResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InboundCreateResponse) ProtoMessage() {}
+
+func (x *InboundCreateResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use InboundCreateResponse.ProtoReflect.Descriptor instead.
+func (*InboundCreateResponse) Descriptor() ([]byte, []int) {
+	return file_warehouse_iface_v1_inbound_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *InboundCreateResponse) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
 type InboundCancelRequest struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
 	InvTransactionId uint64                 `protobuf:"varint,1,opt,name=inv_transaction_id,json=invTransactionId,proto3" json:"inv_transaction_id,omitempty"`
@@ -145,7 +548,7 @@ type InboundCancelRequest struct {
 
 func (x *InboundCancelRequest) Reset() {
 	*x = InboundCancelRequest{}
-	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[0]
+	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -157,7 +560,7 @@ func (x *InboundCancelRequest) String() string {
 func (*InboundCancelRequest) ProtoMessage() {}
 
 func (x *InboundCancelRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[0]
+	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -170,7 +573,7 @@ func (x *InboundCancelRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InboundCancelRequest.ProtoReflect.Descriptor instead.
 func (*InboundCancelRequest) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_inbound_proto_rawDescGZIP(), []int{0}
+	return file_warehouse_iface_v1_inbound_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *InboundCancelRequest) GetInvTransactionId() uint64 {
@@ -202,7 +605,7 @@ type InboundCancelResponse struct {
 
 func (x *InboundCancelResponse) Reset() {
 	*x = InboundCancelResponse{}
-	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[1]
+	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -214,7 +617,7 @@ func (x *InboundCancelResponse) String() string {
 func (*InboundCancelResponse) ProtoMessage() {}
 
 func (x *InboundCancelResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[1]
+	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -227,7 +630,7 @@ func (x *InboundCancelResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InboundCancelResponse.ProtoReflect.Descriptor instead.
 func (*InboundCancelResponse) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_inbound_proto_rawDescGZIP(), []int{1}
+	return file_warehouse_iface_v1_inbound_proto_rawDescGZIP(), []int{6}
 }
 
 type InboundDetailSearchRequest struct {
@@ -241,7 +644,7 @@ type InboundDetailSearchRequest struct {
 
 func (x *InboundDetailSearchRequest) Reset() {
 	*x = InboundDetailSearchRequest{}
-	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[2]
+	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -253,7 +656,7 @@ func (x *InboundDetailSearchRequest) String() string {
 func (*InboundDetailSearchRequest) ProtoMessage() {}
 
 func (x *InboundDetailSearchRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[2]
+	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -266,7 +669,7 @@ func (x *InboundDetailSearchRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InboundDetailSearchRequest.ProtoReflect.Descriptor instead.
 func (*InboundDetailSearchRequest) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_inbound_proto_rawDescGZIP(), []int{2}
+	return file_warehouse_iface_v1_inbound_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *InboundDetailSearchRequest) GetSearchBy() SearchBy {
@@ -304,7 +707,7 @@ type InboundDetail struct {
 
 func (x *InboundDetail) Reset() {
 	*x = InboundDetail{}
-	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[3]
+	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -316,7 +719,7 @@ func (x *InboundDetail) String() string {
 func (*InboundDetail) ProtoMessage() {}
 
 func (x *InboundDetail) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[3]
+	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -329,7 +732,7 @@ func (x *InboundDetail) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InboundDetail.ProtoReflect.Descriptor instead.
 func (*InboundDetail) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_inbound_proto_rawDescGZIP(), []int{3}
+	return file_warehouse_iface_v1_inbound_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *InboundDetail) GetId() uint64 {
@@ -383,7 +786,7 @@ type InboundDetailSearchResponse struct {
 
 func (x *InboundDetailSearchResponse) Reset() {
 	*x = InboundDetailSearchResponse{}
-	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[4]
+	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -395,7 +798,7 @@ func (x *InboundDetailSearchResponse) String() string {
 func (*InboundDetailSearchResponse) ProtoMessage() {}
 
 func (x *InboundDetailSearchResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[4]
+	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -408,7 +811,7 @@ func (x *InboundDetailSearchResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InboundDetailSearchResponse.ProtoReflect.Descriptor instead.
 func (*InboundDetailSearchResponse) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_inbound_proto_rawDescGZIP(), []int{4}
+	return file_warehouse_iface_v1_inbound_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *InboundDetailSearchResponse) GetInbound() *InboundDetail {
@@ -430,7 +833,7 @@ type PlacementItem struct {
 
 func (x *PlacementItem) Reset() {
 	*x = PlacementItem{}
-	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[5]
+	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -442,7 +845,7 @@ func (x *PlacementItem) String() string {
 func (*PlacementItem) ProtoMessage() {}
 
 func (x *PlacementItem) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[5]
+	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -455,7 +858,7 @@ func (x *PlacementItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PlacementItem.ProtoReflect.Descriptor instead.
 func (*PlacementItem) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_inbound_proto_rawDescGZIP(), []int{5}
+	return file_warehouse_iface_v1_inbound_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *PlacementItem) GetRackId() uint64 {
@@ -495,7 +898,7 @@ type PlacementList struct {
 
 func (x *PlacementList) Reset() {
 	*x = PlacementList{}
-	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[6]
+	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -507,7 +910,7 @@ func (x *PlacementList) String() string {
 func (*PlacementList) ProtoMessage() {}
 
 func (x *PlacementList) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[6]
+	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -520,7 +923,7 @@ func (x *PlacementList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PlacementList.ProtoReflect.Descriptor instead.
 func (*PlacementList) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_inbound_proto_rawDescGZIP(), []int{6}
+	return file_warehouse_iface_v1_inbound_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *PlacementList) GetList() []*PlacementItem {
@@ -543,7 +946,7 @@ type InboundAcceptRequest struct {
 
 func (x *InboundAcceptRequest) Reset() {
 	*x = InboundAcceptRequest{}
-	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[7]
+	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -555,7 +958,7 @@ func (x *InboundAcceptRequest) String() string {
 func (*InboundAcceptRequest) ProtoMessage() {}
 
 func (x *InboundAcceptRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[7]
+	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -568,7 +971,7 @@ func (x *InboundAcceptRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InboundAcceptRequest.ProtoReflect.Descriptor instead.
 func (*InboundAcceptRequest) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_inbound_proto_rawDescGZIP(), []int{7}
+	return file_warehouse_iface_v1_inbound_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *InboundAcceptRequest) GetInvTransactionId() uint64 {
@@ -615,7 +1018,7 @@ type InboundAcceptResponse struct {
 
 func (x *InboundAcceptResponse) Reset() {
 	*x = InboundAcceptResponse{}
-	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[8]
+	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -627,7 +1030,7 @@ func (x *InboundAcceptResponse) String() string {
 func (*InboundAcceptResponse) ProtoMessage() {}
 
 func (x *InboundAcceptResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[8]
+	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -640,7 +1043,7 @@ func (x *InboundAcceptResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InboundAcceptResponse.ProtoReflect.Descriptor instead.
 func (*InboundAcceptResponse) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_inbound_proto_rawDescGZIP(), []int{8}
+	return file_warehouse_iface_v1_inbound_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *InboundAcceptResponse) GetTxId() uint64 {
@@ -661,7 +1064,7 @@ type InboundRejectRequest struct {
 
 func (x *InboundRejectRequest) Reset() {
 	*x = InboundRejectRequest{}
-	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[9]
+	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -673,7 +1076,7 @@ func (x *InboundRejectRequest) String() string {
 func (*InboundRejectRequest) ProtoMessage() {}
 
 func (x *InboundRejectRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[9]
+	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -686,7 +1089,7 @@ func (x *InboundRejectRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InboundRejectRequest.ProtoReflect.Descriptor instead.
 func (*InboundRejectRequest) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_inbound_proto_rawDescGZIP(), []int{9}
+	return file_warehouse_iface_v1_inbound_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *InboundRejectRequest) GetInvTransactionId() uint64 {
@@ -718,7 +1121,7 @@ type InboundRejectResponse struct {
 
 func (x *InboundRejectResponse) Reset() {
 	*x = InboundRejectResponse{}
-	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[10]
+	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -730,7 +1133,7 @@ func (x *InboundRejectResponse) String() string {
 func (*InboundRejectResponse) ProtoMessage() {}
 
 func (x *InboundRejectResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[10]
+	mi := &file_warehouse_iface_v1_inbound_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -743,14 +1146,42 @@ func (x *InboundRejectResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InboundRejectResponse.ProtoReflect.Descriptor instead.
 func (*InboundRejectResponse) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_inbound_proto_rawDescGZIP(), []int{10}
+	return file_warehouse_iface_v1_inbound_proto_rawDescGZIP(), []int{15}
 }
 
 var File_warehouse_iface_v1_inbound_proto protoreflect.FileDescriptor
 
 const file_warehouse_iface_v1_inbound_proto_rawDesc = "" +
 	"\n" +
-	" warehouse_iface/v1/inbound.proto\x12\x12warehouse_iface.v1\"\x7f\n" +
+	" warehouse_iface/v1/inbound.proto\x12\x12warehouse_iface.v1\"\xb4\x01\n" +
+	"\vRestockInfo\x12\"\n" +
+	"\rextern_ord_id\x18\x01 \x01(\tR\vexternOrdId\x12\x18\n" +
+	"\areceipt\x18\x02 \x01(\tR\areceipt\x12#\n" +
+	"\rshipping_cost\x18\x04 \x01(\x01R\fshippingCost\x12B\n" +
+	"\fpayment_type\x18\x05 \x01(\x0e2\x1f.warehouse_iface.v1.PaymentTypeR\vpaymentType\"J\n" +
+	"\n" +
+	"ReturnInfo\x12\"\n" +
+	"\rextern_ord_id\x18\x01 \x01(\tR\vexternOrdId\x12\x18\n" +
+	"\areceipt\x18\x02 \x01(\tR\areceipt\"w\n" +
+	"\vInboundItem\x12\x1d\n" +
+	"\n" +
+	"variant_id\x18\x01 \x01(\x04R\tvariantId\x12\x1d\n" +
+	"\n" +
+	"product_id\x18\x02 \x01(\x04R\tproductId\x12\x14\n" +
+	"\x05count\x18\x03 \x01(\x03R\x05count\x12\x14\n" +
+	"\x05price\x18\x04 \x01(\x01R\x05price\"\xc5\x02\n" +
+	"\x14InboundCreateRequest\x12!\n" +
+	"\fwarehouse_id\x18\x01 \x01(\x04R\vwarehouseId\x12\x1f\n" +
+	"\vshipping_id\x18\x02 \x01(\x04R\n" +
+	"shippingId\x12\x17\n" +
+	"\ateam_id\x18\x03 \x01(\x04R\x06teamId\x12\x12\n" +
+	"\x04note\x18\x04 \x01(\tR\x04note\x12;\n" +
+	"\arestock\x18\x05 \x01(\v2\x1f.warehouse_iface.v1.RestockInfoH\x00R\arestock\x128\n" +
+	"\x06return\x18\x06 \x01(\v2\x1e.warehouse_iface.v1.ReturnInfoH\x00R\x06return\x125\n" +
+	"\x05items\x18\a \x03(\v2\x1f.warehouse_iface.v1.InboundItemR\x05itemsB\x0e\n" +
+	"\finbound_info\"'\n" +
+	"\x15InboundCreateResponse\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\"\x7f\n" +
 	"\x14InboundCancelRequest\x12,\n" +
 	"\x12inv_transaction_id\x18\x01 \x01(\x04R\x10invTransactionId\x12!\n" +
 	"\fwarehouse_id\x18\x02 \x01(\x04R\vwarehouseId\x12\x16\n" +
@@ -804,8 +1235,13 @@ const file_warehouse_iface_v1_inbound_proto_rawDesc = "" +
 	"\x15SEARCH_BY_UNSPECIFIED\x10\x00\x12\x10\n" +
 	"\fSEARCH_BY_ID\x10\x01\x12\x15\n" +
 	"\x11SEARCH_BY_RECEIPT\x10\x02\x12\x15\n" +
-	"\x11SEARCH_BY_ORDERID\x10\x032\xba\x03\n" +
+	"\x11SEARCH_BY_ORDERID\x10\x03*b\n" +
+	"\vPaymentType\x12\x1c\n" +
+	"\x18PAYMENT_TYPE_UNSPECIFIED\x10\x00\x12\x1a\n" +
+	"\x16PAYMENT_TYPE_SHOPEEPAY\x10\x01\x12\x19\n" +
+	"\x15PAYMENT_TYPE_TRANSFER\x10\x022\xa0\x04\n" +
 	"\x0eInboundService\x12d\n" +
+	"\rInboundCreate\x12(.warehouse_iface.v1.InboundCreateRequest\x1a).warehouse_iface.v1.InboundCreateResponse\x12d\n" +
 	"\rInboundAccept\x12(.warehouse_iface.v1.InboundAcceptRequest\x1a).warehouse_iface.v1.InboundAcceptResponse\x12d\n" +
 	"\rInboundReject\x12(.warehouse_iface.v1.InboundRejectRequest\x1a).warehouse_iface.v1.InboundRejectResponse\x12v\n" +
 	"\x13InboundDetailSearch\x12..warehouse_iface.v1.InboundDetailSearchRequest\x1a/.warehouse_iface.v1.InboundDetailSearchResponse\x12d\n" +
@@ -824,44 +1260,56 @@ func file_warehouse_iface_v1_inbound_proto_rawDescGZIP() []byte {
 	return file_warehouse_iface_v1_inbound_proto_rawDescData
 }
 
-var file_warehouse_iface_v1_inbound_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_warehouse_iface_v1_inbound_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_warehouse_iface_v1_inbound_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
+var file_warehouse_iface_v1_inbound_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
 var file_warehouse_iface_v1_inbound_proto_goTypes = []any{
 	(ProblemType)(0),                    // 0: warehouse_iface.v1.ProblemType
 	(SearchBy)(0),                       // 1: warehouse_iface.v1.SearchBy
-	(*InboundCancelRequest)(nil),        // 2: warehouse_iface.v1.InboundCancelRequest
-	(*InboundCancelResponse)(nil),       // 3: warehouse_iface.v1.InboundCancelResponse
-	(*InboundDetailSearchRequest)(nil),  // 4: warehouse_iface.v1.InboundDetailSearchRequest
-	(*InboundDetail)(nil),               // 5: warehouse_iface.v1.InboundDetail
-	(*InboundDetailSearchResponse)(nil), // 6: warehouse_iface.v1.InboundDetailSearchResponse
-	(*PlacementItem)(nil),               // 7: warehouse_iface.v1.PlacementItem
-	(*PlacementList)(nil),               // 8: warehouse_iface.v1.PlacementList
-	(*InboundAcceptRequest)(nil),        // 9: warehouse_iface.v1.InboundAcceptRequest
-	(*InboundAcceptResponse)(nil),       // 10: warehouse_iface.v1.InboundAcceptResponse
-	(*InboundRejectRequest)(nil),        // 11: warehouse_iface.v1.InboundRejectRequest
-	(*InboundRejectResponse)(nil),       // 12: warehouse_iface.v1.InboundRejectResponse
-	nil,                                 // 13: warehouse_iface.v1.InboundAcceptRequest.PlacementEntry
+	(PaymentType)(0),                    // 2: warehouse_iface.v1.PaymentType
+	(*RestockInfo)(nil),                 // 3: warehouse_iface.v1.RestockInfo
+	(*ReturnInfo)(nil),                  // 4: warehouse_iface.v1.ReturnInfo
+	(*InboundItem)(nil),                 // 5: warehouse_iface.v1.InboundItem
+	(*InboundCreateRequest)(nil),        // 6: warehouse_iface.v1.InboundCreateRequest
+	(*InboundCreateResponse)(nil),       // 7: warehouse_iface.v1.InboundCreateResponse
+	(*InboundCancelRequest)(nil),        // 8: warehouse_iface.v1.InboundCancelRequest
+	(*InboundCancelResponse)(nil),       // 9: warehouse_iface.v1.InboundCancelResponse
+	(*InboundDetailSearchRequest)(nil),  // 10: warehouse_iface.v1.InboundDetailSearchRequest
+	(*InboundDetail)(nil),               // 11: warehouse_iface.v1.InboundDetail
+	(*InboundDetailSearchResponse)(nil), // 12: warehouse_iface.v1.InboundDetailSearchResponse
+	(*PlacementItem)(nil),               // 13: warehouse_iface.v1.PlacementItem
+	(*PlacementList)(nil),               // 14: warehouse_iface.v1.PlacementList
+	(*InboundAcceptRequest)(nil),        // 15: warehouse_iface.v1.InboundAcceptRequest
+	(*InboundAcceptResponse)(nil),       // 16: warehouse_iface.v1.InboundAcceptResponse
+	(*InboundRejectRequest)(nil),        // 17: warehouse_iface.v1.InboundRejectRequest
+	(*InboundRejectResponse)(nil),       // 18: warehouse_iface.v1.InboundRejectResponse
+	nil,                                 // 19: warehouse_iface.v1.InboundAcceptRequest.PlacementEntry
 }
 var file_warehouse_iface_v1_inbound_proto_depIdxs = []int32{
-	1,  // 0: warehouse_iface.v1.InboundDetailSearchRequest.search_by:type_name -> warehouse_iface.v1.SearchBy
-	5,  // 1: warehouse_iface.v1.InboundDetailSearchResponse.inbound:type_name -> warehouse_iface.v1.InboundDetail
-	0,  // 2: warehouse_iface.v1.PlacementItem.problem_type:type_name -> warehouse_iface.v1.ProblemType
-	7,  // 3: warehouse_iface.v1.PlacementList.list:type_name -> warehouse_iface.v1.PlacementItem
-	13, // 4: warehouse_iface.v1.InboundAcceptRequest.placement:type_name -> warehouse_iface.v1.InboundAcceptRequest.PlacementEntry
-	8,  // 5: warehouse_iface.v1.InboundAcceptRequest.PlacementEntry.value:type_name -> warehouse_iface.v1.PlacementList
-	9,  // 6: warehouse_iface.v1.InboundService.InboundAccept:input_type -> warehouse_iface.v1.InboundAcceptRequest
-	11, // 7: warehouse_iface.v1.InboundService.InboundReject:input_type -> warehouse_iface.v1.InboundRejectRequest
-	4,  // 8: warehouse_iface.v1.InboundService.InboundDetailSearch:input_type -> warehouse_iface.v1.InboundDetailSearchRequest
-	2,  // 9: warehouse_iface.v1.InboundService.InboundCancel:input_type -> warehouse_iface.v1.InboundCancelRequest
-	10, // 10: warehouse_iface.v1.InboundService.InboundAccept:output_type -> warehouse_iface.v1.InboundAcceptResponse
-	12, // 11: warehouse_iface.v1.InboundService.InboundReject:output_type -> warehouse_iface.v1.InboundRejectResponse
-	6,  // 12: warehouse_iface.v1.InboundService.InboundDetailSearch:output_type -> warehouse_iface.v1.InboundDetailSearchResponse
-	3,  // 13: warehouse_iface.v1.InboundService.InboundCancel:output_type -> warehouse_iface.v1.InboundCancelResponse
-	10, // [10:14] is the sub-list for method output_type
-	6,  // [6:10] is the sub-list for method input_type
-	6,  // [6:6] is the sub-list for extension type_name
-	6,  // [6:6] is the sub-list for extension extendee
-	0,  // [0:6] is the sub-list for field type_name
+	2,  // 0: warehouse_iface.v1.RestockInfo.payment_type:type_name -> warehouse_iface.v1.PaymentType
+	3,  // 1: warehouse_iface.v1.InboundCreateRequest.restock:type_name -> warehouse_iface.v1.RestockInfo
+	4,  // 2: warehouse_iface.v1.InboundCreateRequest.return:type_name -> warehouse_iface.v1.ReturnInfo
+	5,  // 3: warehouse_iface.v1.InboundCreateRequest.items:type_name -> warehouse_iface.v1.InboundItem
+	1,  // 4: warehouse_iface.v1.InboundDetailSearchRequest.search_by:type_name -> warehouse_iface.v1.SearchBy
+	11, // 5: warehouse_iface.v1.InboundDetailSearchResponse.inbound:type_name -> warehouse_iface.v1.InboundDetail
+	0,  // 6: warehouse_iface.v1.PlacementItem.problem_type:type_name -> warehouse_iface.v1.ProblemType
+	13, // 7: warehouse_iface.v1.PlacementList.list:type_name -> warehouse_iface.v1.PlacementItem
+	19, // 8: warehouse_iface.v1.InboundAcceptRequest.placement:type_name -> warehouse_iface.v1.InboundAcceptRequest.PlacementEntry
+	14, // 9: warehouse_iface.v1.InboundAcceptRequest.PlacementEntry.value:type_name -> warehouse_iface.v1.PlacementList
+	6,  // 10: warehouse_iface.v1.InboundService.InboundCreate:input_type -> warehouse_iface.v1.InboundCreateRequest
+	15, // 11: warehouse_iface.v1.InboundService.InboundAccept:input_type -> warehouse_iface.v1.InboundAcceptRequest
+	17, // 12: warehouse_iface.v1.InboundService.InboundReject:input_type -> warehouse_iface.v1.InboundRejectRequest
+	10, // 13: warehouse_iface.v1.InboundService.InboundDetailSearch:input_type -> warehouse_iface.v1.InboundDetailSearchRequest
+	8,  // 14: warehouse_iface.v1.InboundService.InboundCancel:input_type -> warehouse_iface.v1.InboundCancelRequest
+	7,  // 15: warehouse_iface.v1.InboundService.InboundCreate:output_type -> warehouse_iface.v1.InboundCreateResponse
+	16, // 16: warehouse_iface.v1.InboundService.InboundAccept:output_type -> warehouse_iface.v1.InboundAcceptResponse
+	18, // 17: warehouse_iface.v1.InboundService.InboundReject:output_type -> warehouse_iface.v1.InboundRejectResponse
+	12, // 18: warehouse_iface.v1.InboundService.InboundDetailSearch:output_type -> warehouse_iface.v1.InboundDetailSearchResponse
+	9,  // 19: warehouse_iface.v1.InboundService.InboundCancel:output_type -> warehouse_iface.v1.InboundCancelResponse
+	15, // [15:20] is the sub-list for method output_type
+	10, // [10:15] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_warehouse_iface_v1_inbound_proto_init() }
@@ -869,13 +1317,17 @@ func file_warehouse_iface_v1_inbound_proto_init() {
 	if File_warehouse_iface_v1_inbound_proto != nil {
 		return
 	}
+	file_warehouse_iface_v1_inbound_proto_msgTypes[3].OneofWrappers = []any{
+		(*InboundCreateRequest_Restock)(nil),
+		(*InboundCreateRequest_Return)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_warehouse_iface_v1_inbound_proto_rawDesc), len(file_warehouse_iface_v1_inbound_proto_rawDesc)),
-			NumEnums:      2,
-			NumMessages:   12,
+			NumEnums:      3,
+			NumMessages:   17,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

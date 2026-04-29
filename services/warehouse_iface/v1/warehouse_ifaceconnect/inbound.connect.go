@@ -33,6 +33,9 @@ const (
 // reflection-formatted method names, remove the leading slash and convert the remaining slash to a
 // period.
 const (
+	// InboundServiceInboundCreateProcedure is the fully-qualified name of the InboundService's
+	// InboundCreate RPC.
+	InboundServiceInboundCreateProcedure = "/warehouse_iface.v1.InboundService/InboundCreate"
 	// InboundServiceInboundAcceptProcedure is the fully-qualified name of the InboundService's
 	// InboundAccept RPC.
 	InboundServiceInboundAcceptProcedure = "/warehouse_iface.v1.InboundService/InboundAccept"
@@ -50,6 +53,7 @@ const (
 // InboundServiceClient is a client for the warehouse_iface.v1.InboundService service.
 type InboundServiceClient interface {
 	// rpc ResyncStockPending(ResyncStockPendingRequest) returns (ResyncStockPendingResponse);
+	InboundCreate(context.Context, *connect.Request[v1.InboundCreateRequest]) (*connect.Response[v1.InboundCreateResponse], error)
 	InboundAccept(context.Context, *connect.Request[v1.InboundAcceptRequest]) (*connect.Response[v1.InboundAcceptResponse], error)
 	InboundReject(context.Context, *connect.Request[v1.InboundRejectRequest]) (*connect.Response[v1.InboundRejectResponse], error)
 	InboundDetailSearch(context.Context, *connect.Request[v1.InboundDetailSearchRequest]) (*connect.Response[v1.InboundDetailSearchResponse], error)
@@ -67,6 +71,12 @@ func NewInboundServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 	baseURL = strings.TrimRight(baseURL, "/")
 	inboundServiceMethods := v1.File_warehouse_iface_v1_inbound_proto.Services().ByName("InboundService").Methods()
 	return &inboundServiceClient{
+		inboundCreate: connect.NewClient[v1.InboundCreateRequest, v1.InboundCreateResponse](
+			httpClient,
+			baseURL+InboundServiceInboundCreateProcedure,
+			connect.WithSchema(inboundServiceMethods.ByName("InboundCreate")),
+			connect.WithClientOptions(opts...),
+		),
 		inboundAccept: connect.NewClient[v1.InboundAcceptRequest, v1.InboundAcceptResponse](
 			httpClient,
 			baseURL+InboundServiceInboundAcceptProcedure,
@@ -96,10 +106,16 @@ func NewInboundServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 
 // inboundServiceClient implements InboundServiceClient.
 type inboundServiceClient struct {
+	inboundCreate       *connect.Client[v1.InboundCreateRequest, v1.InboundCreateResponse]
 	inboundAccept       *connect.Client[v1.InboundAcceptRequest, v1.InboundAcceptResponse]
 	inboundReject       *connect.Client[v1.InboundRejectRequest, v1.InboundRejectResponse]
 	inboundDetailSearch *connect.Client[v1.InboundDetailSearchRequest, v1.InboundDetailSearchResponse]
 	inboundCancel       *connect.Client[v1.InboundCancelRequest, v1.InboundCancelResponse]
+}
+
+// InboundCreate calls warehouse_iface.v1.InboundService.InboundCreate.
+func (c *inboundServiceClient) InboundCreate(ctx context.Context, req *connect.Request[v1.InboundCreateRequest]) (*connect.Response[v1.InboundCreateResponse], error) {
+	return c.inboundCreate.CallUnary(ctx, req)
 }
 
 // InboundAccept calls warehouse_iface.v1.InboundService.InboundAccept.
@@ -125,6 +141,7 @@ func (c *inboundServiceClient) InboundCancel(ctx context.Context, req *connect.R
 // InboundServiceHandler is an implementation of the warehouse_iface.v1.InboundService service.
 type InboundServiceHandler interface {
 	// rpc ResyncStockPending(ResyncStockPendingRequest) returns (ResyncStockPendingResponse);
+	InboundCreate(context.Context, *connect.Request[v1.InboundCreateRequest]) (*connect.Response[v1.InboundCreateResponse], error)
 	InboundAccept(context.Context, *connect.Request[v1.InboundAcceptRequest]) (*connect.Response[v1.InboundAcceptResponse], error)
 	InboundReject(context.Context, *connect.Request[v1.InboundRejectRequest]) (*connect.Response[v1.InboundRejectResponse], error)
 	InboundDetailSearch(context.Context, *connect.Request[v1.InboundDetailSearchRequest]) (*connect.Response[v1.InboundDetailSearchResponse], error)
@@ -138,6 +155,12 @@ type InboundServiceHandler interface {
 // and JSON codecs. They also support gzip compression.
 func NewInboundServiceHandler(svc InboundServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
 	inboundServiceMethods := v1.File_warehouse_iface_v1_inbound_proto.Services().ByName("InboundService").Methods()
+	inboundServiceInboundCreateHandler := connect.NewUnaryHandler(
+		InboundServiceInboundCreateProcedure,
+		svc.InboundCreate,
+		connect.WithSchema(inboundServiceMethods.ByName("InboundCreate")),
+		connect.WithHandlerOptions(opts...),
+	)
 	inboundServiceInboundAcceptHandler := connect.NewUnaryHandler(
 		InboundServiceInboundAcceptProcedure,
 		svc.InboundAccept,
@@ -164,6 +187,8 @@ func NewInboundServiceHandler(svc InboundServiceHandler, opts ...connect.Handler
 	)
 	return "/warehouse_iface.v1.InboundService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
+		case InboundServiceInboundCreateProcedure:
+			inboundServiceInboundCreateHandler.ServeHTTP(w, r)
 		case InboundServiceInboundAcceptProcedure:
 			inboundServiceInboundAcceptHandler.ServeHTTP(w, r)
 		case InboundServiceInboundRejectProcedure:
@@ -180,6 +205,10 @@ func NewInboundServiceHandler(svc InboundServiceHandler, opts ...connect.Handler
 
 // UnimplementedInboundServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedInboundServiceHandler struct{}
+
+func (UnimplementedInboundServiceHandler) InboundCreate(context.Context, *connect.Request[v1.InboundCreateRequest]) (*connect.Response[v1.InboundCreateResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("warehouse_iface.v1.InboundService.InboundCreate is not implemented"))
+}
 
 func (UnimplementedInboundServiceHandler) InboundAccept(context.Context, *connect.Request[v1.InboundAcceptRequest]) (*connect.Response[v1.InboundAcceptResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("warehouse_iface.v1.InboundService.InboundAccept is not implemented"))

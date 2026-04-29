@@ -1,0 +1,19 @@
+syntax = "proto3";
+package devel_iface.v1;
+
+import "warehouse_iface/v1/event.proto";
+
+option go_package = "github.com/pdcgo/schema/services/devel_iface/v1;devel_iface";
+
+service DevelToolService {
+  rpc SendEvent(SendEventRequest) returns (SendEventResponse);
+}
+
+message SendEventRequest {
+  bool direct = 1;
+  oneof d {
+    warehouse_iface.v1.StockEvent stock = 2;
+  }
+}
+
+message SendEventResponse {}

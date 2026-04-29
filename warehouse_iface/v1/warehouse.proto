@@ -19,6 +19,8 @@ service WarehouseService {
   rpc SellingTeamList(SellingTeamListRequest) returns (SellingTeamListResponse);
   // potensi ruweettttttttt
   rpc TeamRackList(TeamRackListRequest) returns (TeamRackListResponse);
+
+  // inbound rpc
 }
 
 enum TransactionNoteType {
