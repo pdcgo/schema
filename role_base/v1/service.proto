@@ -1,8 +1,8 @@
 syntax = "proto3";
 package role_base.v1;
 
-import "role_base/v1/role.proto";
 import "buf/validate/validate.proto";
+import "role_base/v1/role.proto";
 
 option go_package = "github.com/pdcgo/schema/services/role_base/v1;role_base";
 
@@ -14,10 +14,15 @@ service RoleBaseService {
   rpc UserRoleUpdate(UserRoleUpdateRequest) returns (UserRoleUpdateResponse);
 }
 
+message RoleData {
+  uint64 domain_id = 1;
+  Role role = 2;
+}
+
 message User {
   uint64 id = 1;
   string name = 2;
-  Role role = 3;
+  repeated RoleData roles = 3;
 }
 
 message PageFilter {

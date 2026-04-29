@@ -66,6 +66,50 @@ func (x *SenderDirectOption) GetEndpoint() string {
 	return ""
 }
 
+type SenderProductionOption struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ProjectId     string                 `protobuf:"bytes,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SenderProductionOption) Reset() {
+	*x = SenderProductionOption{}
+	mi := &file_devel_iface_v1_service_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SenderProductionOption) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SenderProductionOption) ProtoMessage() {}
+
+func (x *SenderProductionOption) ProtoReflect() protoreflect.Message {
+	mi := &file_devel_iface_v1_service_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SenderProductionOption.ProtoReflect.Descriptor instead.
+func (*SenderProductionOption) Descriptor() ([]byte, []int) {
+	return file_devel_iface_v1_service_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *SenderProductionOption) GetProjectId() string {
+	if x != nil {
+		return x.ProjectId
+	}
+	return ""
+}
+
 type SenderEmulatorOption struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -74,7 +118,7 @@ type SenderEmulatorOption struct {
 
 func (x *SenderEmulatorOption) Reset() {
 	*x = SenderEmulatorOption{}
-	mi := &file_devel_iface_v1_service_proto_msgTypes[1]
+	mi := &file_devel_iface_v1_service_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -86,7 +130,7 @@ func (x *SenderEmulatorOption) String() string {
 func (*SenderEmulatorOption) ProtoMessage() {}
 
 func (x *SenderEmulatorOption) ProtoReflect() protoreflect.Message {
-	mi := &file_devel_iface_v1_service_proto_msgTypes[1]
+	mi := &file_devel_iface_v1_service_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -99,7 +143,7 @@ func (x *SenderEmulatorOption) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SenderEmulatorOption.ProtoReflect.Descriptor instead.
 func (*SenderEmulatorOption) Descriptor() ([]byte, []int) {
-	return file_devel_iface_v1_service_proto_rawDescGZIP(), []int{1}
+	return file_devel_iface_v1_service_proto_rawDescGZIP(), []int{2}
 }
 
 type SendEventRequest struct {
@@ -108,6 +152,7 @@ type SendEventRequest struct {
 	//
 	//	*SendEventRequest_DirectOption
 	//	*SendEventRequest_EmulatorOption
+	//	*SendEventRequest_ProductionOption
 	Sender isSendEventRequest_Sender `protobuf_oneof:"sender"`
 	// Types that are valid to be assigned to D:
 	//
@@ -119,7 +164,7 @@ type SendEventRequest struct {
 
 func (x *SendEventRequest) Reset() {
 	*x = SendEventRequest{}
-	mi := &file_devel_iface_v1_service_proto_msgTypes[2]
+	mi := &file_devel_iface_v1_service_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -131,7 +176,7 @@ func (x *SendEventRequest) String() string {
 func (*SendEventRequest) ProtoMessage() {}
 
 func (x *SendEventRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_devel_iface_v1_service_proto_msgTypes[2]
+	mi := &file_devel_iface_v1_service_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -144,7 +189,7 @@ func (x *SendEventRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SendEventRequest.ProtoReflect.Descriptor instead.
 func (*SendEventRequest) Descriptor() ([]byte, []int) {
-	return file_devel_iface_v1_service_proto_rawDescGZIP(), []int{2}
+	return file_devel_iface_v1_service_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *SendEventRequest) GetSender() isSendEventRequest_Sender {
@@ -167,6 +212,15 @@ func (x *SendEventRequest) GetEmulatorOption() *SenderEmulatorOption {
 	if x != nil {
 		if x, ok := x.Sender.(*SendEventRequest_EmulatorOption); ok {
 			return x.EmulatorOption
+		}
+	}
+	return nil
+}
+
+func (x *SendEventRequest) GetProductionOption() *SenderProductionOption {
+	if x != nil {
+		if x, ok := x.Sender.(*SendEventRequest_ProductionOption); ok {
+			return x.ProductionOption
 		}
 	}
 	return nil
@@ -200,16 +254,22 @@ type SendEventRequest_EmulatorOption struct {
 	EmulatorOption *SenderEmulatorOption `protobuf:"bytes,2,opt,name=emulator_option,json=emulatorOption,proto3,oneof"`
 }
 
+type SendEventRequest_ProductionOption struct {
+	ProductionOption *SenderProductionOption `protobuf:"bytes,3,opt,name=production_option,json=productionOption,proto3,oneof"`
+}
+
 func (*SendEventRequest_DirectOption) isSendEventRequest_Sender() {}
 
 func (*SendEventRequest_EmulatorOption) isSendEventRequest_Sender() {}
+
+func (*SendEventRequest_ProductionOption) isSendEventRequest_Sender() {}
 
 type isSendEventRequest_D interface {
 	isSendEventRequest_D()
 }
 
 type SendEventRequest_Stock struct {
-	Stock *v1.StockEvent `protobuf:"bytes,3,opt,name=stock,proto3,oneof"`
+	Stock *v1.StockEvent `protobuf:"bytes,4,opt,name=stock,proto3,oneof"`
 }
 
 func (*SendEventRequest_Stock) isSendEventRequest_D() {}
@@ -222,7 +282,7 @@ type SendEventResponse struct {
 
 func (x *SendEventResponse) Reset() {
 	*x = SendEventResponse{}
-	mi := &file_devel_iface_v1_service_proto_msgTypes[3]
+	mi := &file_devel_iface_v1_service_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -234,7 +294,7 @@ func (x *SendEventResponse) String() string {
 func (*SendEventResponse) ProtoMessage() {}
 
 func (x *SendEventResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_devel_iface_v1_service_proto_msgTypes[3]
+	mi := &file_devel_iface_v1_service_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -247,7 +307,7 @@ func (x *SendEventResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SendEventResponse.ProtoReflect.Descriptor instead.
 func (*SendEventResponse) Descriptor() ([]byte, []int) {
-	return file_devel_iface_v1_service_proto_rawDescGZIP(), []int{3}
+	return file_devel_iface_v1_service_proto_rawDescGZIP(), []int{4}
 }
 
 var File_devel_iface_v1_service_proto protoreflect.FileDescriptor
@@ -256,12 +316,16 @@ const file_devel_iface_v1_service_proto_rawDesc = "" +
 	"\n" +
 	"\x1cdevel_iface/v1/service.proto\x12\x0edevel_iface.v1\x1a\x1ewarehouse_iface/v1/event.proto\"0\n" +
 	"\x12SenderDirectOption\x12\x1a\n" +
-	"\bendpoint\x18\x01 \x01(\tR\bendpoint\"\x16\n" +
-	"\x14SenderEmulatorOption\"\xf5\x01\n" +
+	"\bendpoint\x18\x01 \x01(\tR\bendpoint\"7\n" +
+	"\x16SenderProductionOption\x12\x1d\n" +
+	"\n" +
+	"project_id\x18\x01 \x01(\tR\tprojectId\"\x16\n" +
+	"\x14SenderEmulatorOption\"\xcc\x02\n" +
 	"\x10SendEventRequest\x12I\n" +
 	"\rdirect_option\x18\x01 \x01(\v2\".devel_iface.v1.SenderDirectOptionH\x00R\fdirectOption\x12O\n" +
-	"\x0femulator_option\x18\x02 \x01(\v2$.devel_iface.v1.SenderEmulatorOptionH\x00R\x0eemulatorOption\x126\n" +
-	"\x05stock\x18\x03 \x01(\v2\x1e.warehouse_iface.v1.StockEventH\x01R\x05stockB\b\n" +
+	"\x0femulator_option\x18\x02 \x01(\v2$.devel_iface.v1.SenderEmulatorOptionH\x00R\x0eemulatorOption\x12U\n" +
+	"\x11production_option\x18\x03 \x01(\v2&.devel_iface.v1.SenderProductionOptionH\x00R\x10productionOption\x126\n" +
+	"\x05stock\x18\x04 \x01(\v2\x1e.warehouse_iface.v1.StockEventH\x01R\x05stockB\b\n" +
 	"\x06senderB\x03\n" +
 	"\x01d\"\x13\n" +
 	"\x11SendEventResponse2d\n" +
@@ -281,25 +345,27 @@ func file_devel_iface_v1_service_proto_rawDescGZIP() []byte {
 	return file_devel_iface_v1_service_proto_rawDescData
 }
 
-var file_devel_iface_v1_service_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_devel_iface_v1_service_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_devel_iface_v1_service_proto_goTypes = []any{
-	(*SenderDirectOption)(nil),   // 0: devel_iface.v1.SenderDirectOption
-	(*SenderEmulatorOption)(nil), // 1: devel_iface.v1.SenderEmulatorOption
-	(*SendEventRequest)(nil),     // 2: devel_iface.v1.SendEventRequest
-	(*SendEventResponse)(nil),    // 3: devel_iface.v1.SendEventResponse
-	(*v1.StockEvent)(nil),        // 4: warehouse_iface.v1.StockEvent
+	(*SenderDirectOption)(nil),     // 0: devel_iface.v1.SenderDirectOption
+	(*SenderProductionOption)(nil), // 1: devel_iface.v1.SenderProductionOption
+	(*SenderEmulatorOption)(nil),   // 2: devel_iface.v1.SenderEmulatorOption
+	(*SendEventRequest)(nil),       // 3: devel_iface.v1.SendEventRequest
+	(*SendEventResponse)(nil),      // 4: devel_iface.v1.SendEventResponse
+	(*v1.StockEvent)(nil),          // 5: warehouse_iface.v1.StockEvent
 }
 var file_devel_iface_v1_service_proto_depIdxs = []int32{
 	0, // 0: devel_iface.v1.SendEventRequest.direct_option:type_name -> devel_iface.v1.SenderDirectOption
-	1, // 1: devel_iface.v1.SendEventRequest.emulator_option:type_name -> devel_iface.v1.SenderEmulatorOption
-	4, // 2: devel_iface.v1.SendEventRequest.stock:type_name -> warehouse_iface.v1.StockEvent
-	2, // 3: devel_iface.v1.DevelToolService.SendEvent:input_type -> devel_iface.v1.SendEventRequest
-	3, // 4: devel_iface.v1.DevelToolService.SendEvent:output_type -> devel_iface.v1.SendEventResponse
-	4, // [4:5] is the sub-list for method output_type
-	3, // [3:4] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	2, // 1: devel_iface.v1.SendEventRequest.emulator_option:type_name -> devel_iface.v1.SenderEmulatorOption
+	1, // 2: devel_iface.v1.SendEventRequest.production_option:type_name -> devel_iface.v1.SenderProductionOption
+	5, // 3: devel_iface.v1.SendEventRequest.stock:type_name -> warehouse_iface.v1.StockEvent
+	3, // 4: devel_iface.v1.DevelToolService.SendEvent:input_type -> devel_iface.v1.SendEventRequest
+	4, // 5: devel_iface.v1.DevelToolService.SendEvent:output_type -> devel_iface.v1.SendEventResponse
+	5, // [5:6] is the sub-list for method output_type
+	4, // [4:5] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_devel_iface_v1_service_proto_init() }
@@ -307,9 +373,10 @@ func file_devel_iface_v1_service_proto_init() {
 	if File_devel_iface_v1_service_proto != nil {
 		return
 	}
-	file_devel_iface_v1_service_proto_msgTypes[2].OneofWrappers = []any{
+	file_devel_iface_v1_service_proto_msgTypes[3].OneofWrappers = []any{
 		(*SendEventRequest_DirectOption)(nil),
 		(*SendEventRequest_EmulatorOption)(nil),
+		(*SendEventRequest_ProductionOption)(nil),
 		(*SendEventRequest_Stock)(nil),
 	}
 	type x struct{}
@@ -318,7 +385,7 @@ func file_devel_iface_v1_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_devel_iface_v1_service_proto_rawDesc), len(file_devel_iface_v1_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

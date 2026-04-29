@@ -13,15 +13,20 @@ message SenderDirectOption {
   string endpoint = 1;
 }
 
+message SenderProductionOption {
+  string project_id = 1;
+}
+
 message SenderEmulatorOption {}
 
 message SendEventRequest {
   oneof sender {
     SenderDirectOption direct_option = 1;
     SenderEmulatorOption emulator_option = 2;
+    SenderProductionOption production_option = 3;
   }
   oneof d {
-    warehouse_iface.v1.StockEvent stock = 3;
+    warehouse_iface.v1.StockEvent stock = 4;
   }
 }
 

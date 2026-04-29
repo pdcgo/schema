@@ -22,18 +22,70 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type RoleData struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	DomainId      uint64                 `protobuf:"varint,1,opt,name=domain_id,json=domainId,proto3" json:"domain_id,omitempty"`
+	Role          Role                   `protobuf:"varint,2,opt,name=role,proto3,enum=role_base.v1.Role" json:"role,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RoleData) Reset() {
+	*x = RoleData{}
+	mi := &file_role_base_v1_service_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RoleData) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RoleData) ProtoMessage() {}
+
+func (x *RoleData) ProtoReflect() protoreflect.Message {
+	mi := &file_role_base_v1_service_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RoleData.ProtoReflect.Descriptor instead.
+func (*RoleData) Descriptor() ([]byte, []int) {
+	return file_role_base_v1_service_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *RoleData) GetDomainId() uint64 {
+	if x != nil {
+		return x.DomainId
+	}
+	return 0
+}
+
+func (x *RoleData) GetRole() Role {
+	if x != nil {
+		return x.Role
+	}
+	return Role_ROLE_UNSPECIFIED
+}
+
 type User struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Role          Role                   `protobuf:"varint,3,opt,name=role,proto3,enum=role_base.v1.Role" json:"role,omitempty"`
+	Roles         []*RoleData            `protobuf:"bytes,3,rep,name=roles,proto3" json:"roles,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *User) Reset() {
 	*x = User{}
-	mi := &file_role_base_v1_service_proto_msgTypes[0]
+	mi := &file_role_base_v1_service_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -45,7 +97,7 @@ func (x *User) String() string {
 func (*User) ProtoMessage() {}
 
 func (x *User) ProtoReflect() protoreflect.Message {
-	mi := &file_role_base_v1_service_proto_msgTypes[0]
+	mi := &file_role_base_v1_service_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -58,7 +110,7 @@ func (x *User) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use User.ProtoReflect.Descriptor instead.
 func (*User) Descriptor() ([]byte, []int) {
-	return file_role_base_v1_service_proto_rawDescGZIP(), []int{0}
+	return file_role_base_v1_service_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *User) GetId() uint64 {
@@ -75,11 +127,11 @@ func (x *User) GetName() string {
 	return ""
 }
 
-func (x *User) GetRole() Role {
+func (x *User) GetRoles() []*RoleData {
 	if x != nil {
-		return x.Role
+		return x.Roles
 	}
-	return Role_ROLE_UNSPECIFIED
+	return nil
 }
 
 type PageFilter struct {
@@ -92,7 +144,7 @@ type PageFilter struct {
 
 func (x *PageFilter) Reset() {
 	*x = PageFilter{}
-	mi := &file_role_base_v1_service_proto_msgTypes[1]
+	mi := &file_role_base_v1_service_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -104,7 +156,7 @@ func (x *PageFilter) String() string {
 func (*PageFilter) ProtoMessage() {}
 
 func (x *PageFilter) ProtoReflect() protoreflect.Message {
-	mi := &file_role_base_v1_service_proto_msgTypes[1]
+	mi := &file_role_base_v1_service_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -117,7 +169,7 @@ func (x *PageFilter) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PageFilter.ProtoReflect.Descriptor instead.
 func (*PageFilter) Descriptor() ([]byte, []int) {
-	return file_role_base_v1_service_proto_rawDescGZIP(), []int{1}
+	return file_role_base_v1_service_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *PageFilter) GetPage() int64 {
@@ -145,7 +197,7 @@ type PageInfo struct {
 
 func (x *PageInfo) Reset() {
 	*x = PageInfo{}
-	mi := &file_role_base_v1_service_proto_msgTypes[2]
+	mi := &file_role_base_v1_service_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -157,7 +209,7 @@ func (x *PageInfo) String() string {
 func (*PageInfo) ProtoMessage() {}
 
 func (x *PageInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_role_base_v1_service_proto_msgTypes[2]
+	mi := &file_role_base_v1_service_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -170,7 +222,7 @@ func (x *PageInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PageInfo.ProtoReflect.Descriptor instead.
 func (*PageInfo) Descriptor() ([]byte, []int) {
-	return file_role_base_v1_service_proto_rawDescGZIP(), []int{2}
+	return file_role_base_v1_service_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *PageInfo) GetCurrentPage() int64 {
@@ -204,7 +256,7 @@ type UserListRequest struct {
 
 func (x *UserListRequest) Reset() {
 	*x = UserListRequest{}
-	mi := &file_role_base_v1_service_proto_msgTypes[3]
+	mi := &file_role_base_v1_service_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -216,7 +268,7 @@ func (x *UserListRequest) String() string {
 func (*UserListRequest) ProtoMessage() {}
 
 func (x *UserListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_role_base_v1_service_proto_msgTypes[3]
+	mi := &file_role_base_v1_service_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -229,7 +281,7 @@ func (x *UserListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserListRequest.ProtoReflect.Descriptor instead.
 func (*UserListRequest) Descriptor() ([]byte, []int) {
-	return file_role_base_v1_service_proto_rawDescGZIP(), []int{3}
+	return file_role_base_v1_service_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *UserListRequest) GetDomainId() uint32 {
@@ -256,7 +308,7 @@ type UserListResponse struct {
 
 func (x *UserListResponse) Reset() {
 	*x = UserListResponse{}
-	mi := &file_role_base_v1_service_proto_msgTypes[4]
+	mi := &file_role_base_v1_service_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -268,7 +320,7 @@ func (x *UserListResponse) String() string {
 func (*UserListResponse) ProtoMessage() {}
 
 func (x *UserListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_role_base_v1_service_proto_msgTypes[4]
+	mi := &file_role_base_v1_service_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -281,7 +333,7 @@ func (x *UserListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserListResponse.ProtoReflect.Descriptor instead.
 func (*UserListResponse) Descriptor() ([]byte, []int) {
-	return file_role_base_v1_service_proto_rawDescGZIP(), []int{4}
+	return file_role_base_v1_service_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *UserListResponse) GetUsers() []*User {
@@ -307,7 +359,7 @@ type UserRoleListRequest struct {
 
 func (x *UserRoleListRequest) Reset() {
 	*x = UserRoleListRequest{}
-	mi := &file_role_base_v1_service_proto_msgTypes[5]
+	mi := &file_role_base_v1_service_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -319,7 +371,7 @@ func (x *UserRoleListRequest) String() string {
 func (*UserRoleListRequest) ProtoMessage() {}
 
 func (x *UserRoleListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_role_base_v1_service_proto_msgTypes[5]
+	mi := &file_role_base_v1_service_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -332,7 +384,7 @@ func (x *UserRoleListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserRoleListRequest.ProtoReflect.Descriptor instead.
 func (*UserRoleListRequest) Descriptor() ([]byte, []int) {
-	return file_role_base_v1_service_proto_rawDescGZIP(), []int{5}
+	return file_role_base_v1_service_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *UserRoleListRequest) GetUserId() uint64 {
@@ -351,7 +403,7 @@ type UserRoleListResponse struct {
 
 func (x *UserRoleListResponse) Reset() {
 	*x = UserRoleListResponse{}
-	mi := &file_role_base_v1_service_proto_msgTypes[6]
+	mi := &file_role_base_v1_service_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -363,7 +415,7 @@ func (x *UserRoleListResponse) String() string {
 func (*UserRoleListResponse) ProtoMessage() {}
 
 func (x *UserRoleListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_role_base_v1_service_proto_msgTypes[6]
+	mi := &file_role_base_v1_service_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -376,7 +428,7 @@ func (x *UserRoleListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserRoleListResponse.ProtoReflect.Descriptor instead.
 func (*UserRoleListResponse) Descriptor() ([]byte, []int) {
-	return file_role_base_v1_service_proto_rawDescGZIP(), []int{6}
+	return file_role_base_v1_service_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *UserRoleListResponse) GetUserRoles() map[uint64]Role {
@@ -397,7 +449,7 @@ type UserRoleUpdateRequest struct {
 
 func (x *UserRoleUpdateRequest) Reset() {
 	*x = UserRoleUpdateRequest{}
-	mi := &file_role_base_v1_service_proto_msgTypes[7]
+	mi := &file_role_base_v1_service_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -409,7 +461,7 @@ func (x *UserRoleUpdateRequest) String() string {
 func (*UserRoleUpdateRequest) ProtoMessage() {}
 
 func (x *UserRoleUpdateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_role_base_v1_service_proto_msgTypes[7]
+	mi := &file_role_base_v1_service_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -422,7 +474,7 @@ func (x *UserRoleUpdateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserRoleUpdateRequest.ProtoReflect.Descriptor instead.
 func (*UserRoleUpdateRequest) Descriptor() ([]byte, []int) {
-	return file_role_base_v1_service_proto_rawDescGZIP(), []int{7}
+	return file_role_base_v1_service_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *UserRoleUpdateRequest) GetTeamId() uint64 {
@@ -454,7 +506,7 @@ type UserRoleUpdateResponse struct {
 
 func (x *UserRoleUpdateResponse) Reset() {
 	*x = UserRoleUpdateResponse{}
-	mi := &file_role_base_v1_service_proto_msgTypes[8]
+	mi := &file_role_base_v1_service_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -466,7 +518,7 @@ func (x *UserRoleUpdateResponse) String() string {
 func (*UserRoleUpdateResponse) ProtoMessage() {}
 
 func (x *UserRoleUpdateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_role_base_v1_service_proto_msgTypes[8]
+	mi := &file_role_base_v1_service_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -479,7 +531,7 @@ func (x *UserRoleUpdateResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserRoleUpdateResponse.ProtoReflect.Descriptor instead.
 func (*UserRoleUpdateResponse) Descriptor() ([]byte, []int) {
-	return file_role_base_v1_service_proto_rawDescGZIP(), []int{8}
+	return file_role_base_v1_service_proto_rawDescGZIP(), []int{9}
 }
 
 type RoleListRequest struct {
@@ -490,7 +542,7 @@ type RoleListRequest struct {
 
 func (x *RoleListRequest) Reset() {
 	*x = RoleListRequest{}
-	mi := &file_role_base_v1_service_proto_msgTypes[9]
+	mi := &file_role_base_v1_service_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -502,7 +554,7 @@ func (x *RoleListRequest) String() string {
 func (*RoleListRequest) ProtoMessage() {}
 
 func (x *RoleListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_role_base_v1_service_proto_msgTypes[9]
+	mi := &file_role_base_v1_service_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -515,7 +567,7 @@ func (x *RoleListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RoleListRequest.ProtoReflect.Descriptor instead.
 func (*RoleListRequest) Descriptor() ([]byte, []int) {
-	return file_role_base_v1_service_proto_rawDescGZIP(), []int{9}
+	return file_role_base_v1_service_proto_rawDescGZIP(), []int{10}
 }
 
 type RoleListResponse struct {
@@ -527,7 +579,7 @@ type RoleListResponse struct {
 
 func (x *RoleListResponse) Reset() {
 	*x = RoleListResponse{}
-	mi := &file_role_base_v1_service_proto_msgTypes[10]
+	mi := &file_role_base_v1_service_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -539,7 +591,7 @@ func (x *RoleListResponse) String() string {
 func (*RoleListResponse) ProtoMessage() {}
 
 func (x *RoleListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_role_base_v1_service_proto_msgTypes[10]
+	mi := &file_role_base_v1_service_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -552,7 +604,7 @@ func (x *RoleListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RoleListResponse.ProtoReflect.Descriptor instead.
 func (*RoleListResponse) Descriptor() ([]byte, []int) {
-	return file_role_base_v1_service_proto_rawDescGZIP(), []int{10}
+	return file_role_base_v1_service_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *RoleListResponse) GetRoles() []Role {
@@ -570,7 +622,7 @@ type RequestAccessRequest struct {
 
 func (x *RequestAccessRequest) Reset() {
 	*x = RequestAccessRequest{}
-	mi := &file_role_base_v1_service_proto_msgTypes[11]
+	mi := &file_role_base_v1_service_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -582,7 +634,7 @@ func (x *RequestAccessRequest) String() string {
 func (*RequestAccessRequest) ProtoMessage() {}
 
 func (x *RequestAccessRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_role_base_v1_service_proto_msgTypes[11]
+	mi := &file_role_base_v1_service_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -595,7 +647,7 @@ func (x *RequestAccessRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RequestAccessRequest.ProtoReflect.Descriptor instead.
 func (*RequestAccessRequest) Descriptor() ([]byte, []int) {
-	return file_role_base_v1_service_proto_rawDescGZIP(), []int{11}
+	return file_role_base_v1_service_proto_rawDescGZIP(), []int{12}
 }
 
 type RequestAccessResponse struct {
@@ -606,7 +658,7 @@ type RequestAccessResponse struct {
 
 func (x *RequestAccessResponse) Reset() {
 	*x = RequestAccessResponse{}
-	mi := &file_role_base_v1_service_proto_msgTypes[12]
+	mi := &file_role_base_v1_service_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -618,7 +670,7 @@ func (x *RequestAccessResponse) String() string {
 func (*RequestAccessResponse) ProtoMessage() {}
 
 func (x *RequestAccessResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_role_base_v1_service_proto_msgTypes[12]
+	mi := &file_role_base_v1_service_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -631,18 +683,21 @@ func (x *RequestAccessResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RequestAccessResponse.ProtoReflect.Descriptor instead.
 func (*RequestAccessResponse) Descriptor() ([]byte, []int) {
-	return file_role_base_v1_service_proto_rawDescGZIP(), []int{12}
+	return file_role_base_v1_service_proto_rawDescGZIP(), []int{13}
 }
 
 var File_role_base_v1_service_proto protoreflect.FileDescriptor
 
 const file_role_base_v1_service_proto_rawDesc = "" +
 	"\n" +
-	"\x1arole_base/v1/service.proto\x12\frole_base.v1\x1a\x17role_base/v1/role.proto\x1a\x1bbuf/validate/validate.proto\"R\n" +
+	"\x1arole_base/v1/service.proto\x12\frole_base.v1\x1a\x1bbuf/validate/validate.proto\x1a\x17role_base/v1/role.proto\"O\n" +
+	"\bRoleData\x12\x1b\n" +
+	"\tdomain_id\x18\x01 \x01(\x04R\bdomainId\x12&\n" +
+	"\x04role\x18\x02 \x01(\x0e2\x12.role_base.v1.RoleR\x04role\"X\n" +
 	"\x04User\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x12&\n" +
-	"\x04role\x18\x03 \x01(\x0e2\x12.role_base.v1.RoleR\x04role\"K\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12,\n" +
+	"\x05roles\x18\x03 \x03(\v2\x16.role_base.v1.RoleDataR\x05roles\"K\n" +
 	"\n" +
 	"PageFilter\x12\x1b\n" +
 	"\x04page\x18\x01 \x01(\x03B\a\xbaH\x04\"\x02(\x01R\x04page\x12 \n" +
@@ -699,48 +754,50 @@ func file_role_base_v1_service_proto_rawDescGZIP() []byte {
 	return file_role_base_v1_service_proto_rawDescData
 }
 
-var file_role_base_v1_service_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
+var file_role_base_v1_service_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
 var file_role_base_v1_service_proto_goTypes = []any{
-	(*User)(nil),                   // 0: role_base.v1.User
-	(*PageFilter)(nil),             // 1: role_base.v1.PageFilter
-	(*PageInfo)(nil),               // 2: role_base.v1.PageInfo
-	(*UserListRequest)(nil),        // 3: role_base.v1.UserListRequest
-	(*UserListResponse)(nil),       // 4: role_base.v1.UserListResponse
-	(*UserRoleListRequest)(nil),    // 5: role_base.v1.UserRoleListRequest
-	(*UserRoleListResponse)(nil),   // 6: role_base.v1.UserRoleListResponse
-	(*UserRoleUpdateRequest)(nil),  // 7: role_base.v1.UserRoleUpdateRequest
-	(*UserRoleUpdateResponse)(nil), // 8: role_base.v1.UserRoleUpdateResponse
-	(*RoleListRequest)(nil),        // 9: role_base.v1.RoleListRequest
-	(*RoleListResponse)(nil),       // 10: role_base.v1.RoleListResponse
-	(*RequestAccessRequest)(nil),   // 11: role_base.v1.RequestAccessRequest
-	(*RequestAccessResponse)(nil),  // 12: role_base.v1.RequestAccessResponse
-	nil,                            // 13: role_base.v1.UserRoleListResponse.UserRolesEntry
-	(Role)(0),                      // 14: role_base.v1.Role
+	(*RoleData)(nil),               // 0: role_base.v1.RoleData
+	(*User)(nil),                   // 1: role_base.v1.User
+	(*PageFilter)(nil),             // 2: role_base.v1.PageFilter
+	(*PageInfo)(nil),               // 3: role_base.v1.PageInfo
+	(*UserListRequest)(nil),        // 4: role_base.v1.UserListRequest
+	(*UserListResponse)(nil),       // 5: role_base.v1.UserListResponse
+	(*UserRoleListRequest)(nil),    // 6: role_base.v1.UserRoleListRequest
+	(*UserRoleListResponse)(nil),   // 7: role_base.v1.UserRoleListResponse
+	(*UserRoleUpdateRequest)(nil),  // 8: role_base.v1.UserRoleUpdateRequest
+	(*UserRoleUpdateResponse)(nil), // 9: role_base.v1.UserRoleUpdateResponse
+	(*RoleListRequest)(nil),        // 10: role_base.v1.RoleListRequest
+	(*RoleListResponse)(nil),       // 11: role_base.v1.RoleListResponse
+	(*RequestAccessRequest)(nil),   // 12: role_base.v1.RequestAccessRequest
+	(*RequestAccessResponse)(nil),  // 13: role_base.v1.RequestAccessResponse
+	nil,                            // 14: role_base.v1.UserRoleListResponse.UserRolesEntry
+	(Role)(0),                      // 15: role_base.v1.Role
 }
 var file_role_base_v1_service_proto_depIdxs = []int32{
-	14, // 0: role_base.v1.User.role:type_name -> role_base.v1.Role
-	1,  // 1: role_base.v1.UserListRequest.page_filter:type_name -> role_base.v1.PageFilter
-	0,  // 2: role_base.v1.UserListResponse.users:type_name -> role_base.v1.User
-	2,  // 3: role_base.v1.UserListResponse.page_info:type_name -> role_base.v1.PageInfo
-	13, // 4: role_base.v1.UserRoleListResponse.user_roles:type_name -> role_base.v1.UserRoleListResponse.UserRolesEntry
-	14, // 5: role_base.v1.UserRoleUpdateRequest.role:type_name -> role_base.v1.Role
-	14, // 6: role_base.v1.RoleListResponse.roles:type_name -> role_base.v1.Role
-	14, // 7: role_base.v1.UserRoleListResponse.UserRolesEntry.value:type_name -> role_base.v1.Role
-	11, // 8: role_base.v1.RoleBaseService.RequestAccess:input_type -> role_base.v1.RequestAccessRequest
-	9,  // 9: role_base.v1.RoleBaseService.RoleList:input_type -> role_base.v1.RoleListRequest
-	5,  // 10: role_base.v1.RoleBaseService.UserRoleList:input_type -> role_base.v1.UserRoleListRequest
-	3,  // 11: role_base.v1.RoleBaseService.UserList:input_type -> role_base.v1.UserListRequest
-	7,  // 12: role_base.v1.RoleBaseService.UserRoleUpdate:input_type -> role_base.v1.UserRoleUpdateRequest
-	12, // 13: role_base.v1.RoleBaseService.RequestAccess:output_type -> role_base.v1.RequestAccessResponse
-	10, // 14: role_base.v1.RoleBaseService.RoleList:output_type -> role_base.v1.RoleListResponse
-	6,  // 15: role_base.v1.RoleBaseService.UserRoleList:output_type -> role_base.v1.UserRoleListResponse
-	4,  // 16: role_base.v1.RoleBaseService.UserList:output_type -> role_base.v1.UserListResponse
-	8,  // 17: role_base.v1.RoleBaseService.UserRoleUpdate:output_type -> role_base.v1.UserRoleUpdateResponse
-	13, // [13:18] is the sub-list for method output_type
-	8,  // [8:13] is the sub-list for method input_type
-	8,  // [8:8] is the sub-list for extension type_name
-	8,  // [8:8] is the sub-list for extension extendee
-	0,  // [0:8] is the sub-list for field type_name
+	15, // 0: role_base.v1.RoleData.role:type_name -> role_base.v1.Role
+	0,  // 1: role_base.v1.User.roles:type_name -> role_base.v1.RoleData
+	2,  // 2: role_base.v1.UserListRequest.page_filter:type_name -> role_base.v1.PageFilter
+	1,  // 3: role_base.v1.UserListResponse.users:type_name -> role_base.v1.User
+	3,  // 4: role_base.v1.UserListResponse.page_info:type_name -> role_base.v1.PageInfo
+	14, // 5: role_base.v1.UserRoleListResponse.user_roles:type_name -> role_base.v1.UserRoleListResponse.UserRolesEntry
+	15, // 6: role_base.v1.UserRoleUpdateRequest.role:type_name -> role_base.v1.Role
+	15, // 7: role_base.v1.RoleListResponse.roles:type_name -> role_base.v1.Role
+	15, // 8: role_base.v1.UserRoleListResponse.UserRolesEntry.value:type_name -> role_base.v1.Role
+	12, // 9: role_base.v1.RoleBaseService.RequestAccess:input_type -> role_base.v1.RequestAccessRequest
+	10, // 10: role_base.v1.RoleBaseService.RoleList:input_type -> role_base.v1.RoleListRequest
+	6,  // 11: role_base.v1.RoleBaseService.UserRoleList:input_type -> role_base.v1.UserRoleListRequest
+	4,  // 12: role_base.v1.RoleBaseService.UserList:input_type -> role_base.v1.UserListRequest
+	8,  // 13: role_base.v1.RoleBaseService.UserRoleUpdate:input_type -> role_base.v1.UserRoleUpdateRequest
+	13, // 14: role_base.v1.RoleBaseService.RequestAccess:output_type -> role_base.v1.RequestAccessResponse
+	11, // 15: role_base.v1.RoleBaseService.RoleList:output_type -> role_base.v1.RoleListResponse
+	7,  // 16: role_base.v1.RoleBaseService.UserRoleList:output_type -> role_base.v1.UserRoleListResponse
+	5,  // 17: role_base.v1.RoleBaseService.UserList:output_type -> role_base.v1.UserListResponse
+	9,  // 18: role_base.v1.RoleBaseService.UserRoleUpdate:output_type -> role_base.v1.UserRoleUpdateResponse
+	14, // [14:19] is the sub-list for method output_type
+	9,  // [9:14] is the sub-list for method input_type
+	9,  // [9:9] is the sub-list for extension type_name
+	9,  // [9:9] is the sub-list for extension extendee
+	0,  // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_role_base_v1_service_proto_init() }
@@ -755,7 +812,7 @@ func file_role_base_v1_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_role_base_v1_service_proto_rawDesc), len(file_role_base_v1_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   14,
+			NumMessages:   15,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
