@@ -9,10 +9,19 @@ service DevelToolService {
   rpc SendEvent(SendEventRequest) returns (SendEventResponse);
 }
 
+message SenderDirectOption {
+  string endpoint = 1;
+}
+
+message SenderEmulatorOption {}
+
 message SendEventRequest {
-  bool direct = 1;
+  oneof sender {
+    SenderDirectOption direct_option = 1;
+    SenderEmulatorOption emulator_option = 2;
+  }
   oneof d {
-    warehouse_iface.v1.StockEvent stock = 2;
+    warehouse_iface.v1.StockEvent stock = 3;
   }
 }
 

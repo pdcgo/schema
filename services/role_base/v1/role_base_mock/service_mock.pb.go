@@ -124,6 +124,32 @@ func (mr *MockRoleBaseServiceClientMockRecorder) UserRoleList(ctx, req interface
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UserRoleList", reflect.TypeOf((*MockRoleBaseService)(nil).UserRoleList), ctx, req)
 }
 
+func (m *MockRoleBaseService) UserList(ctx context.Context, req *connect.Request[v1.UserListRequest]) (*connect.Response[v1.UserListResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "UserList", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.UserListResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockRoleBaseServiceMockRecorder) UserList(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UserList", reflect.TypeOf((*MockRoleBaseService)(nil).UserList), ctx, req)
+}
+
+func (m *MockRoleBaseServiceClient) UserList(ctx context.Context, req *connect.Request[v1.UserListRequest]) (*connect.Response[v1.UserListResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "UserList", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.UserListResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockRoleBaseServiceClientMockRecorder) UserList(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UserList", reflect.TypeOf((*MockRoleBaseService)(nil).UserList), ctx, req)
+}
+
 func (m *MockRoleBaseService) UserRoleUpdate(ctx context.Context, req *connect.Request[v1.UserRoleUpdateRequest]) (*connect.Response[v1.UserRoleUpdateResponse], error) {
     m.ctrl.T.Helper()
     ret := m.ctrl.Call(m, "UserRoleUpdate", ctx, req)

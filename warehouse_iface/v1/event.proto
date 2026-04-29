@@ -39,6 +39,14 @@ message PendingStockChange {
   repeated StockChangeLog changes = 2 [(buf.validate.field).repeated.min_items = 1];
 }
 
+message OrderCreated {
+  uint64 transaction_id = 1;
+}
+
+message OrderCanceled {
+  uint64 transaction_id = 1;
+}
+
 message RestockAccepted {
   uint64 transaction_id = 1;
 }
@@ -55,5 +63,7 @@ message StockEvent {
     PendingStockChange pending_stock_change = 2;
     RestockAccepted restock_accepted = 3;
     ReturnAccepted return_accepted = 4;
+    OrderCreated order_created = 5;
+    OrderCanceled order_canceled = 6;
   }
 }

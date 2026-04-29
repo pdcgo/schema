@@ -42,6 +42,9 @@ const (
 	// RoleBaseServiceUserRoleListProcedure is the fully-qualified name of the RoleBaseService's
 	// UserRoleList RPC.
 	RoleBaseServiceUserRoleListProcedure = "/role_base.v1.RoleBaseService/UserRoleList"
+	// RoleBaseServiceUserListProcedure is the fully-qualified name of the RoleBaseService's UserList
+	// RPC.
+	RoleBaseServiceUserListProcedure = "/role_base.v1.RoleBaseService/UserList"
 	// RoleBaseServiceUserRoleUpdateProcedure is the fully-qualified name of the RoleBaseService's
 	// UserRoleUpdate RPC.
 	RoleBaseServiceUserRoleUpdateProcedure = "/role_base.v1.RoleBaseService/UserRoleUpdate"
@@ -52,6 +55,7 @@ type RoleBaseServiceClient interface {
 	RequestAccess(context.Context, *connect.Request[v1.RequestAccessRequest]) (*connect.Response[v1.RequestAccessResponse], error)
 	RoleList(context.Context, *connect.Request[v1.RoleListRequest]) (*connect.Response[v1.RoleListResponse], error)
 	UserRoleList(context.Context, *connect.Request[v1.UserRoleListRequest]) (*connect.Response[v1.UserRoleListResponse], error)
+	UserList(context.Context, *connect.Request[v1.UserListRequest]) (*connect.Response[v1.UserListResponse], error)
 	UserRoleUpdate(context.Context, *connect.Request[v1.UserRoleUpdateRequest]) (*connect.Response[v1.UserRoleUpdateResponse], error)
 }
 
@@ -84,6 +88,12 @@ func NewRoleBaseServiceClient(httpClient connect.HTTPClient, baseURL string, opt
 			connect.WithSchema(roleBaseServiceMethods.ByName("UserRoleList")),
 			connect.WithClientOptions(opts...),
 		),
+		userList: connect.NewClient[v1.UserListRequest, v1.UserListResponse](
+			httpClient,
+			baseURL+RoleBaseServiceUserListProcedure,
+			connect.WithSchema(roleBaseServiceMethods.ByName("UserList")),
+			connect.WithClientOptions(opts...),
+		),
 		userRoleUpdate: connect.NewClient[v1.UserRoleUpdateRequest, v1.UserRoleUpdateResponse](
 			httpClient,
 			baseURL+RoleBaseServiceUserRoleUpdateProcedure,
@@ -98,6 +108,7 @@ type roleBaseServiceClient struct {
 	requestAccess  *connect.Client[v1.RequestAccessRequest, v1.RequestAccessResponse]
 	roleList       *connect.Client[v1.RoleListRequest, v1.RoleListResponse]
 	userRoleList   *connect.Client[v1.UserRoleListRequest, v1.UserRoleListResponse]
+	userList       *connect.Client[v1.UserListRequest, v1.UserListResponse]
 	userRoleUpdate *connect.Client[v1.UserRoleUpdateRequest, v1.UserRoleUpdateResponse]
 }
 
@@ -116,6 +127,11 @@ func (c *roleBaseServiceClient) UserRoleList(ctx context.Context, req *connect.R
 	return c.userRoleList.CallUnary(ctx, req)
 }
 
+// UserList calls role_base.v1.RoleBaseService.UserList.
+func (c *roleBaseServiceClient) UserList(ctx context.Context, req *connect.Request[v1.UserListRequest]) (*connect.Response[v1.UserListResponse], error) {
+	return c.userList.CallUnary(ctx, req)
+}
+
 // UserRoleUpdate calls role_base.v1.RoleBaseService.UserRoleUpdate.
 func (c *roleBaseServiceClient) UserRoleUpdate(ctx context.Context, req *connect.Request[v1.UserRoleUpdateRequest]) (*connect.Response[v1.UserRoleUpdateResponse], error) {
 	return c.userRoleUpdate.CallUnary(ctx, req)
@@ -126,6 +142,7 @@ type RoleBaseServiceHandler interface {
 	RequestAccess(context.Context, *connect.Request[v1.RequestAccessRequest]) (*connect.Response[v1.RequestAccessResponse], error)
 	RoleList(context.Context, *connect.Request[v1.RoleListRequest]) (*connect.Response[v1.RoleListResponse], error)
 	UserRoleList(context.Context, *connect.Request[v1.UserRoleListRequest]) (*connect.Response[v1.UserRoleListResponse], error)
+	UserList(context.Context, *connect.Request[v1.UserListRequest]) (*connect.Response[v1.UserListResponse], error)
 	UserRoleUpdate(context.Context, *connect.Request[v1.UserRoleUpdateRequest]) (*connect.Response[v1.UserRoleUpdateResponse], error)
 }
 
@@ -154,6 +171,12 @@ func NewRoleBaseServiceHandler(svc RoleBaseServiceHandler, opts ...connect.Handl
 		connect.WithSchema(roleBaseServiceMethods.ByName("UserRoleList")),
 		connect.WithHandlerOptions(opts...),
 	)
+	roleBaseServiceUserListHandler := connect.NewUnaryHandler(
+		RoleBaseServiceUserListProcedure,
+		svc.UserList,
+		connect.WithSchema(roleBaseServiceMethods.ByName("UserList")),
+		connect.WithHandlerOptions(opts...),
+	)
 	roleBaseServiceUserRoleUpdateHandler := connect.NewUnaryHandler(
 		RoleBaseServiceUserRoleUpdateProcedure,
 		svc.UserRoleUpdate,
@@ -168,6 +191,8 @@ func NewRoleBaseServiceHandler(svc RoleBaseServiceHandler, opts ...connect.Handl
 			roleBaseServiceRoleListHandler.ServeHTTP(w, r)
 		case RoleBaseServiceUserRoleListProcedure:
 			roleBaseServiceUserRoleListHandler.ServeHTTP(w, r)
+		case RoleBaseServiceUserListProcedure:
+			roleBaseServiceUserListHandler.ServeHTTP(w, r)
 		case RoleBaseServiceUserRoleUpdateProcedure:
 			roleBaseServiceUserRoleUpdateHandler.ServeHTTP(w, r)
 		default:
@@ -189,6 +214,10 @@ func (UnimplementedRoleBaseServiceHandler) RoleList(context.Context, *connect.Re
 
 func (UnimplementedRoleBaseServiceHandler) UserRoleList(context.Context, *connect.Request[v1.UserRoleListRequest]) (*connect.Response[v1.UserRoleListResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("role_base.v1.RoleBaseService.UserRoleList is not implemented"))
+}
+
+func (UnimplementedRoleBaseServiceHandler) UserList(context.Context, *connect.Request[v1.UserListRequest]) (*connect.Response[v1.UserListResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("role_base.v1.RoleBaseService.UserList is not implemented"))
 }
 
 func (UnimplementedRoleBaseServiceHandler) UserRoleUpdate(context.Context, *connect.Request[v1.UserRoleUpdateRequest]) (*connect.Response[v1.UserRoleUpdateResponse], error) {

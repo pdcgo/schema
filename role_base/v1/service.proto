@@ -2,6 +2,7 @@ syntax = "proto3";
 package role_base.v1;
 
 import "role_base/v1/role.proto";
+import "buf/validate/validate.proto";
 
 option go_package = "github.com/pdcgo/schema/services/role_base/v1;role_base";
 
@@ -9,7 +10,37 @@ service RoleBaseService {
   rpc RequestAccess(RequestAccessRequest) returns (RequestAccessResponse);
   rpc RoleList(RoleListRequest) returns (RoleListResponse);
   rpc UserRoleList(UserRoleListRequest) returns (UserRoleListResponse);
+  rpc UserList(UserListRequest) returns (UserListResponse);
   rpc UserRoleUpdate(UserRoleUpdateRequest) returns (UserRoleUpdateResponse);
+}
+
+message User {
+  uint64 id = 1;
+  string name = 2;
+  Role role = 3;
+}
+
+message PageFilter {
+  int64 page = 1 [(buf.validate.field).int64.gte = 1];
+  int64 limit = 2 [
+    (buf.validate.field).int64.gte = 1,
+    (buf.validate.field).int64.lte = 1000
+  ];
+}
+
+message PageInfo {
+  int64 current_page = 1;
+  int64 total_page = 2;
+  int64 total_items = 3;
+}
+
+message UserListRequest {
+  uint32 domain_id = 1;
+  PageFilter page_filter = 2;
+}
+message UserListResponse {
+  repeated User users = 1;
+  PageInfo page_info = 2;
 }
 
 message UserRoleListRequest {
