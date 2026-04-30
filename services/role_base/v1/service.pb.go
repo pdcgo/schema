@@ -352,7 +352,7 @@ func (x *UserListResponse) GetPageInfo() *PageInfo {
 
 type UserRoleListRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserId        []uint64               `protobuf:"varint,1,rep,packed,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -387,16 +387,16 @@ func (*UserRoleListRequest) Descriptor() ([]byte, []int) {
 	return file_role_base_v1_service_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *UserRoleListRequest) GetUserId() uint64 {
+func (x *UserRoleListRequest) GetUserId() []uint64 {
 	if x != nil {
 		return x.UserId
 	}
-	return 0
+	return nil
 }
 
 type UserRoleListResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserRoles     map[uint64]Role        `protobuf:"bytes,1,rep,name=user_roles,json=userRoles,proto3" json:"user_roles,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"varint,2,opt,name=value,enum=role_base.v1.Role"`
+	Users         map[uint64]*User       `protobuf:"bytes,1,rep,name=users,proto3" json:"users,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -431,18 +431,17 @@ func (*UserRoleListResponse) Descriptor() ([]byte, []int) {
 	return file_role_base_v1_service_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *UserRoleListResponse) GetUserRoles() map[uint64]Role {
+func (x *UserRoleListResponse) GetUsers() map[uint64]*User {
 	if x != nil {
-		return x.UserRoles
+		return x.Users
 	}
 	return nil
 }
 
 type UserRoleUpdateRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
-	UserId        uint64                 `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Role          Role                   `protobuf:"varint,3,opt,name=role,proto3,enum=role_base.v1.Role" json:"role,omitempty"`
+	UserId        uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Roles         []*RoleData            `protobuf:"bytes,2,rep,name=roles,proto3" json:"roles,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -477,13 +476,6 @@ func (*UserRoleUpdateRequest) Descriptor() ([]byte, []int) {
 	return file_role_base_v1_service_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *UserRoleUpdateRequest) GetTeamId() uint64 {
-	if x != nil {
-		return x.TeamId
-	}
-	return 0
-}
-
 func (x *UserRoleUpdateRequest) GetUserId() uint64 {
 	if x != nil {
 		return x.UserId
@@ -491,11 +483,11 @@ func (x *UserRoleUpdateRequest) GetUserId() uint64 {
 	return 0
 }
 
-func (x *UserRoleUpdateRequest) GetRole() Role {
+func (x *UserRoleUpdateRequest) GetRoles() []*RoleData {
 	if x != nil {
-		return x.Role
+		return x.Roles
 	}
-	return Role_ROLE_UNSPECIFIED
+	return nil
 }
 
 type UserRoleUpdateResponse struct {
@@ -616,6 +608,7 @@ func (x *RoleListResponse) GetRoles() []Role {
 
 type RequestAccessRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Username      string                 `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -648,6 +641,13 @@ func (x *RequestAccessRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use RequestAccessRequest.ProtoReflect.Descriptor instead.
 func (*RequestAccessRequest) Descriptor() ([]byte, []int) {
 	return file_role_base_v1_service_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *RequestAccessRequest) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
 }
 
 type RequestAccessResponse struct {
@@ -717,22 +717,22 @@ const file_role_base_v1_service_proto_rawDesc = "" +
 	"\x05users\x18\x01 \x03(\v2\x12.role_base.v1.UserR\x05users\x123\n" +
 	"\tpage_info\x18\x02 \x01(\v2\x16.role_base.v1.PageInfoR\bpageInfo\".\n" +
 	"\x13UserRoleListRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x04R\x06userId\"\xba\x01\n" +
-	"\x14UserRoleListResponse\x12P\n" +
+	"\auser_id\x18\x01 \x03(\x04R\x06userId\"\xa9\x01\n" +
+	"\x14UserRoleListResponse\x12C\n" +
+	"\x05users\x18\x01 \x03(\v2-.role_base.v1.UserRoleListResponse.UsersEntryR\x05users\x1aL\n" +
 	"\n" +
-	"user_roles\x18\x01 \x03(\v21.role_base.v1.UserRoleListResponse.UserRolesEntryR\tuserRoles\x1aP\n" +
-	"\x0eUserRolesEntry\x12\x10\n" +
+	"UsersEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\x04R\x03key\x12(\n" +
-	"\x05value\x18\x02 \x01(\x0e2\x12.role_base.v1.RoleR\x05value:\x028\x01\"q\n" +
+	"\x05value\x18\x02 \x01(\v2\x12.role_base.v1.UserR\x05value:\x028\x01\"^\n" +
 	"\x15UserRoleUpdateRequest\x12\x17\n" +
-	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12\x17\n" +
-	"\auser_id\x18\x02 \x01(\x04R\x06userId\x12&\n" +
-	"\x04role\x18\x03 \x01(\x0e2\x12.role_base.v1.RoleR\x04role\"\x18\n" +
+	"\auser_id\x18\x01 \x01(\x04R\x06userId\x12,\n" +
+	"\x05roles\x18\x02 \x03(\v2\x16.role_base.v1.RoleDataR\x05roles\"\x18\n" +
 	"\x16UserRoleUpdateResponse\"\x11\n" +
 	"\x0fRoleListRequest\"<\n" +
 	"\x10RoleListResponse\x12(\n" +
-	"\x05roles\x18\x01 \x03(\x0e2\x12.role_base.v1.RoleR\x05roles\"\x16\n" +
-	"\x14RequestAccessRequest\"\x17\n" +
+	"\x05roles\x18\x01 \x03(\x0e2\x12.role_base.v1.RoleR\x05roles\"2\n" +
+	"\x14RequestAccessRequest\x12\x1a\n" +
+	"\busername\x18\x01 \x01(\tR\busername\"\x17\n" +
 	"\x15RequestAccessResponse2\xb5\x03\n" +
 	"\x0fRoleBaseService\x12X\n" +
 	"\rRequestAccess\x12\".role_base.v1.RequestAccessRequest\x1a#.role_base.v1.RequestAccessResponse\x12I\n" +
@@ -770,7 +770,7 @@ var file_role_base_v1_service_proto_goTypes = []any{
 	(*RoleListResponse)(nil),       // 11: role_base.v1.RoleListResponse
 	(*RequestAccessRequest)(nil),   // 12: role_base.v1.RequestAccessRequest
 	(*RequestAccessResponse)(nil),  // 13: role_base.v1.RequestAccessResponse
-	nil,                            // 14: role_base.v1.UserRoleListResponse.UserRolesEntry
+	nil,                            // 14: role_base.v1.UserRoleListResponse.UsersEntry
 	(Role)(0),                      // 15: role_base.v1.Role
 }
 var file_role_base_v1_service_proto_depIdxs = []int32{
@@ -779,10 +779,10 @@ var file_role_base_v1_service_proto_depIdxs = []int32{
 	2,  // 2: role_base.v1.UserListRequest.page_filter:type_name -> role_base.v1.PageFilter
 	1,  // 3: role_base.v1.UserListResponse.users:type_name -> role_base.v1.User
 	3,  // 4: role_base.v1.UserListResponse.page_info:type_name -> role_base.v1.PageInfo
-	14, // 5: role_base.v1.UserRoleListResponse.user_roles:type_name -> role_base.v1.UserRoleListResponse.UserRolesEntry
-	15, // 6: role_base.v1.UserRoleUpdateRequest.role:type_name -> role_base.v1.Role
+	14, // 5: role_base.v1.UserRoleListResponse.users:type_name -> role_base.v1.UserRoleListResponse.UsersEntry
+	0,  // 6: role_base.v1.UserRoleUpdateRequest.roles:type_name -> role_base.v1.RoleData
 	15, // 7: role_base.v1.RoleListResponse.roles:type_name -> role_base.v1.Role
-	15, // 8: role_base.v1.UserRoleListResponse.UserRolesEntry.value:type_name -> role_base.v1.Role
+	1,  // 8: role_base.v1.UserRoleListResponse.UsersEntry.value:type_name -> role_base.v1.User
 	12, // 9: role_base.v1.RoleBaseService.RequestAccess:input_type -> role_base.v1.RequestAccessRequest
 	10, // 10: role_base.v1.RoleBaseService.RoleList:input_type -> role_base.v1.RoleListRequest
 	6,  // 11: role_base.v1.RoleBaseService.UserRoleList:input_type -> role_base.v1.UserRoleListRequest

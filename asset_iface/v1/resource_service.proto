@@ -1,0 +1,19 @@
+syntax = "proto3";
+package asset_iface.v1;
+
+// import "common/v1/common.proto";
+// import "buf/validate/validate.proto";
+
+option go_package = "github.com/pdcgo/schema/services/asset_iface/v1;asset_iface";
+
+service ResourceService {
+  rpc UploadResource(UploadResourceRequest) returns (UploadResourceResponse);
+}
+
+message UploadResourceRequest {
+  bytes content = 1;
+}
+
+message UploadResourceResponse {
+  string resource_url = 1;
+}

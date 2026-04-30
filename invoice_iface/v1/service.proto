@@ -1,0 +1,132 @@
+syntax = "proto3";
+package invoice_iface.v1;
+
+// import "buf/validate/validate.proto";
+import "common/v1/common.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/pdcgo/schema/services/invoice_iface/v1;invoice_iface";
+
+service InvoiceService {
+  rpc Balance(BalanceRequest) returns (BalanceResponse);
+  rpc TransactionList(TransactionListRequest) returns (TransactionListResponse);
+  rpc CreateInvoice(CreateInvoiceRequest) returns (CreateInvoiceResponse);
+  rpc InvoiceDetail(InvoiceDetailRequest) returns (InvoiceDetailResponse);
+  rpc ListInvoice(ListInvoiceRequest) returns (ListInvoiceResponse);
+  rpc ConfirmInvoice(ConfirmInvoiceRequest) returns (ConfirmInvoiceResponse);
+  rpc RejectInvoice(RejectInvoiceRequest) returns (RejectInvoiceResponse);
+  rpc DailySummary(DailySummaryRequest) returns (DailySummaryResponse);
+}
+
+enum TeamType {
+  TEAM_TYPE_UNSPECIFIED = 0;
+  TEAM_TYPE_SELLING = 1;
+  TEAM_TYPE_WAREHOUSE = 2;
+}
+
+enum InvoiceStatus {
+  INVOICE_STATUS_UNSPECIFIED = 0;
+  INVOICE_STATUS_PENDING = 1;
+  INVOICE_STATUS_CONFIRMED = 2;
+  INVOICE_STATUS_REJECTED = 3;
+}
+
+message DailySummaryItem {
+  google.protobuf.Timestamp date = 1;
+  double payable = 2;
+  double receivable = 3;
+}
+
+message DailySummaryRequest {
+  uint64 team_id = 1;
+  uint64 user_id = 2;
+  TeamType team_type = 3;
+  common.v1.TimeFilterRange time_filter = 4;
+}
+
+message DailySummaryResponse {
+  repeated DailySummaryItem data = 1;
+}
+
+message BalanceRequest {
+  uint64 team_id = 1;
+  uint64 user_id = 2;
+  TeamType team_type = 3;
+}
+
+message BalanceResponse {
+  double payable = 1;
+  double receivable = 2;
+}
+
+message TransactionItem {}
+
+message TransactionListRequest {
+  uint64 team_id = 1;
+  uint64 user_id = 2;
+}
+
+message TransactionListResponse {
+  repeated TransactionItem data = 1;
+  common.v1.PageInfo page_info = 2;
+}
+
+message InvoiceDetailRequest {
+  uint64 team_id = 1;
+  uint64 user_id = 2;
+  uint64 invoice_id = 3;
+}
+
+message InvoiceDetailResponse {
+  InvoiceItem data = 1;
+}
+
+message InvoiceItem {
+  uint64 id = 1;
+  uint64 from_team_id = 2;
+  uint64 to_team_id = 3;
+  double amount = 4;
+  string payment_proof = 5;
+  string note = 6;
+  InvoiceStatus status = 7;
+  google.protobuf.Timestamp created_at = 8;
+  google.protobuf.Timestamp confirmed_at = 9;
+  google.protobuf.Timestamp rejected_at = 10;
+}
+
+message ListInvoiceRequest {
+  uint64 team_id = 1;
+  uint64 user_id = 2;
+  InvoiceStatus status = 3;
+  common.v1.TimeFilterRange time_filter = 4;
+  common.v1.PageFilter page = 5;
+}
+
+message ListInvoiceResponse {
+  repeated InvoiceItem data = 1;
+  common.v1.PageInfo page_info = 2;
+}
+
+message CreateInvoiceRequest {
+  uint64 team_id = 1;
+  double amount = 2;
+  string note = 3;
+}
+
+message CreateInvoiceResponse {
+  uint64 id = 1;
+}
+
+message ConfirmInvoiceRequest {
+  uint64 team_id = 1;
+  uint64 invoice_id = 2;
+}
+
+message ConfirmInvoiceResponse {}
+
+message RejectInvoiceRequest {
+  uint64 team_id = 1;
+  uint64 invoice_id = 2;
+}
+
+message RejectInvoiceResponse {}

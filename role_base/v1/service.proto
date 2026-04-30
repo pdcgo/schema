@@ -49,17 +49,16 @@ message UserListResponse {
 }
 
 message UserRoleListRequest {
-  uint64 user_id = 1;
+  repeated uint64 user_id = 1;
 }
 
 message UserRoleListResponse {
-  map<uint64, Role> user_roles = 1;
+  map<uint64, User> users = 1;
 }
 
 message UserRoleUpdateRequest {
-  uint64 team_id = 1;
-  uint64 user_id = 2;
-  Role role = 3;
+  uint64 user_id = 1;
+  repeated RoleData roles = 2;
 }
 
 message UserRoleUpdateResponse {}
@@ -70,6 +69,8 @@ message RoleListResponse {
   repeated Role roles = 1;
 }
 
-message RequestAccessRequest {}
+message RequestAccessRequest {
+  string username = 1;
+}
 
 message RequestAccessResponse {}
