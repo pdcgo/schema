@@ -1,0 +1,21 @@
+syntax = "proto3";
+package common.v1;
+
+import "buf/validate/validate.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/pdcgo/schema/services/common/v1;common";
+
+enum StatTimeType {
+  STAT_TIME_TYPE_UNSPECIFIED = 0;
+  STAT_TIME_TYPE_DAY = 1;
+  STAT_TIME_TYPE_WEEK = 2;
+  STAT_TIME_TYPE_MONTH = 3;
+  STAT_TIME_TYPE_YEAR = 4;
+}
+
+message StatTimeRange {
+  google.protobuf.Timestamp start = 1 [(buf.validate.field).required = true];
+  google.protobuf.Timestamp end = 2 [(buf.validate.field).required = true];
+  StatTimeType type = 3 [(buf.validate.field).required = true];
+}

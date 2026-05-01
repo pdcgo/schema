@@ -7,6 +7,7 @@
 package selling_iface
 
 import (
+	v1 "github.com/pdcgo/schema/services/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -117,7 +118,7 @@ func (x *HistoryRestockItem) GetArrivedPieceAmount() float64 {
 
 type HistoryRestockMetric struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	TimeType      TimeType               `protobuf:"varint,1,opt,name=time_type,json=timeType,proto3,enum=selling_iface.v1.TimeType" json:"time_type,omitempty"`
+	TimeType      v1.StatTimeType        `protobuf:"varint,1,opt,name=time_type,json=timeType,proto3,enum=common.v1.StatTimeType" json:"time_type,omitempty"`
 	Items         []*HistoryRestockItem  `protobuf:"bytes,2,rep,name=items,proto3" json:"items,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -153,11 +154,11 @@ func (*HistoryRestockMetric) Descriptor() ([]byte, []int) {
 	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *HistoryRestockMetric) GetTimeType() TimeType {
+func (x *HistoryRestockMetric) GetTimeType() v1.StatTimeType {
 	if x != nil {
 		return x.TimeType
 	}
-	return TimeType_TIME_TYPE_UNSPECIFIED
+	return v1.StatTimeType(0)
 }
 
 func (x *HistoryRestockMetric) GetItems() []*HistoryRestockItem {
@@ -262,7 +263,7 @@ func (x *HistoryReturnItem) GetArrivedPieceAmount() float64 {
 
 type HistoryReturnMetric struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	TimeType      TimeType               `protobuf:"varint,1,opt,name=time_type,json=timeType,proto3,enum=selling_iface.v1.TimeType" json:"time_type,omitempty"`
+	TimeType      v1.StatTimeType        `protobuf:"varint,1,opt,name=time_type,json=timeType,proto3,enum=common.v1.StatTimeType" json:"time_type,omitempty"`
 	Items         []*HistoryReturnItem   `protobuf:"bytes,2,rep,name=items,proto3" json:"items,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -298,11 +299,11 @@ func (*HistoryReturnMetric) Descriptor() ([]byte, []int) {
 	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *HistoryReturnMetric) GetTimeType() TimeType {
+func (x *HistoryReturnMetric) GetTimeType() v1.StatTimeType {
 	if x != nil {
 		return x.TimeType
 	}
-	return TimeType_TIME_TYPE_UNSPECIFIED
+	return v1.StatTimeType(0)
 }
 
 func (x *HistoryReturnMetric) GetItems() []*HistoryReturnItem {
@@ -383,7 +384,7 @@ func (x *HistoryStockResolutionItem) GetFoundPieceAmount() float64 {
 
 type HistoryStockResolutionMetric struct {
 	state         protoimpl.MessageState        `protogen:"open.v1"`
-	TimeType      TimeType                      `protobuf:"varint,1,opt,name=time_type,json=timeType,proto3,enum=selling_iface.v1.TimeType" json:"time_type,omitempty"`
+	TimeType      v1.StatTimeType               `protobuf:"varint,1,opt,name=time_type,json=timeType,proto3,enum=common.v1.StatTimeType" json:"time_type,omitempty"`
 	Items         []*HistoryStockResolutionItem `protobuf:"bytes,2,rep,name=items,proto3" json:"items,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -419,11 +420,11 @@ func (*HistoryStockResolutionMetric) Descriptor() ([]byte, []int) {
 	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *HistoryStockResolutionMetric) GetTimeType() TimeType {
+func (x *HistoryStockResolutionMetric) GetTimeType() v1.StatTimeType {
 	if x != nil {
 		return x.TimeType
 	}
-	return TimeType_TIME_TYPE_UNSPECIFIED
+	return v1.StatTimeType(0)
 }
 
 func (x *HistoryStockResolutionMetric) GetItems() []*HistoryStockResolutionItem {
@@ -552,7 +553,7 @@ func (x *HistoryStockOrderItem) GetCrossPieceAmount() float64 {
 
 type HistoryStockOrderMetric struct {
 	state         protoimpl.MessageState   `protogen:"open.v1"`
-	TimeType      TimeType                 `protobuf:"varint,1,opt,name=time_type,json=timeType,proto3,enum=selling_iface.v1.TimeType" json:"time_type,omitempty"`
+	TimeType      v1.StatTimeType          `protobuf:"varint,1,opt,name=time_type,json=timeType,proto3,enum=common.v1.StatTimeType" json:"time_type,omitempty"`
 	Items         []*HistoryStockOrderItem `protobuf:"bytes,2,rep,name=items,proto3" json:"items,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -588,11 +589,11 @@ func (*HistoryStockOrderMetric) Descriptor() ([]byte, []int) {
 	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *HistoryStockOrderMetric) GetTimeType() TimeType {
+func (x *HistoryStockOrderMetric) GetTimeType() v1.StatTimeType {
 	if x != nil {
 		return x.TimeType
 	}
-	return TimeType_TIME_TYPE_UNSPECIFIED
+	return v1.StatTimeType(0)
 }
 
 func (x *HistoryStockOrderMetric) GetItems() []*HistoryStockOrderItem {
@@ -697,7 +698,7 @@ func (x *ShipmentProblemItem) GetDamagedPieceAmount() float64 {
 
 type HistoryShipmentProblemMetric struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	TimeType      TimeType               `protobuf:"varint,1,opt,name=time_type,json=timeType,proto3,enum=selling_iface.v1.TimeType" json:"time_type,omitempty"`
+	TimeType      v1.StatTimeType        `protobuf:"varint,1,opt,name=time_type,json=timeType,proto3,enum=common.v1.StatTimeType" json:"time_type,omitempty"`
 	Items         []*ShipmentProblemItem `protobuf:"bytes,2,rep,name=items,proto3" json:"items,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -733,11 +734,11 @@ func (*HistoryShipmentProblemMetric) Descriptor() ([]byte, []int) {
 	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{9}
 }
 
-func (x *HistoryShipmentProblemMetric) GetTimeType() TimeType {
+func (x *HistoryShipmentProblemMetric) GetTimeType() v1.StatTimeType {
 	if x != nil {
 		return x.TimeType
 	}
-	return TimeType_TIME_TYPE_UNSPECIFIED
+	return v1.StatTimeType(0)
 }
 
 func (x *HistoryShipmentProblemMetric) GetItems() []*ShipmentProblemItem {
@@ -826,7 +827,7 @@ func (x *WarehouseProblemItem) GetDamagedPieceAmount() float64 {
 
 type HistoryWarehouseProblemMetric struct {
 	state         protoimpl.MessageState  `protogen:"open.v1"`
-	TimeType      TimeType                `protobuf:"varint,1,opt,name=time_type,json=timeType,proto3,enum=selling_iface.v1.TimeType" json:"time_type,omitempty"`
+	TimeType      v1.StatTimeType         `protobuf:"varint,1,opt,name=time_type,json=timeType,proto3,enum=common.v1.StatTimeType" json:"time_type,omitempty"`
 	Items         []*WarehouseProblemItem `protobuf:"bytes,2,rep,name=items,proto3" json:"items,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -862,11 +863,11 @@ func (*HistoryWarehouseProblemMetric) Descriptor() ([]byte, []int) {
 	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{11}
 }
 
-func (x *HistoryWarehouseProblemMetric) GetTimeType() TimeType {
+func (x *HistoryWarehouseProblemMetric) GetTimeType() v1.StatTimeType {
 	if x != nil {
 		return x.TimeType
 	}
-	return TimeType_TIME_TYPE_UNSPECIFIED
+	return v1.StatTimeType(0)
 }
 
 func (x *HistoryWarehouseProblemMetric) GetItems() []*WarehouseProblemItem {
@@ -880,7 +881,7 @@ var File_selling_iface_v1_metric_stock_proto protoreflect.FileDescriptor
 
 const file_selling_iface_v1_metric_stock_proto_rawDesc = "" +
 	"\n" +
-	"#selling_iface/v1/metric_stock.proto\x12\x10selling_iface.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dselling_iface/v1/metric.proto\"\xfa\x02\n" +
+	"#selling_iface/v1/metric_stock.proto\x12\x10selling_iface.v1\x1a\x14common/v1/stat.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xfa\x02\n" +
 	"\x12HistoryRestockItem\x12(\n" +
 	"\x01t\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x01t\x12:\n" +
 	"\x19created_transaction_count\x18\x02 \x01(\x05R\x17createdTransactionCount\x12.\n" +
@@ -888,9 +889,9 @@ const file_selling_iface_v1_metric_stock_proto_rawDesc = "" +
 	"\x14created_piece_amount\x18\x04 \x01(\x01R\x12createdPieceAmount\x12:\n" +
 	"\x19arrived_transaction_count\x18\x05 \x01(\x05R\x17arrivedTransactionCount\x12.\n" +
 	"\x13arrived_piece_count\x18\x06 \x01(\x05R\x11arrivedPieceCount\x120\n" +
-	"\x14arrived_piece_amount\x18\a \x01(\x01R\x12arrivedPieceAmount\"\x8b\x01\n" +
-	"\x14HistoryRestockMetric\x127\n" +
-	"\ttime_type\x18\x01 \x01(\x0e2\x1a.selling_iface.v1.TimeTypeR\btimeType\x12:\n" +
+	"\x14arrived_piece_amount\x18\a \x01(\x01R\x12arrivedPieceAmount\"\x88\x01\n" +
+	"\x14HistoryRestockMetric\x124\n" +
+	"\ttime_type\x18\x01 \x01(\x0e2\x17.common.v1.StatTimeTypeR\btimeType\x12:\n" +
 	"\x05items\x18\x02 \x03(\v2$.selling_iface.v1.HistoryRestockItemR\x05items\"\xf9\x02\n" +
 	"\x11HistoryReturnItem\x12(\n" +
 	"\x01t\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x01t\x12:\n" +
@@ -899,17 +900,17 @@ const file_selling_iface_v1_metric_stock_proto_rawDesc = "" +
 	"\x14created_piece_amount\x18\x04 \x01(\x01R\x12createdPieceAmount\x12:\n" +
 	"\x19arrived_transaction_count\x18\x05 \x01(\x05R\x17arrivedTransactionCount\x12.\n" +
 	"\x13arrived_piece_count\x18\x06 \x01(\x05R\x11arrivedPieceCount\x120\n" +
-	"\x14arrived_piece_amount\x18\a \x01(\x01R\x12arrivedPieceAmount\"\x89\x01\n" +
-	"\x13HistoryReturnMetric\x127\n" +
-	"\ttime_type\x18\x01 \x01(\x0e2\x1a.selling_iface.v1.TimeTypeR\btimeType\x129\n" +
+	"\x14arrived_piece_amount\x18\a \x01(\x01R\x12arrivedPieceAmount\"\x86\x01\n" +
+	"\x13HistoryReturnMetric\x124\n" +
+	"\ttime_type\x18\x01 \x01(\x0e2\x17.common.v1.StatTimeTypeR\btimeType\x129\n" +
 	"\x05items\x18\x02 \x03(\v2#.selling_iface.v1.HistoryReturnItemR\x05items\"\xd8\x01\n" +
 	"\x1aHistoryStockResolutionItem\x12(\n" +
 	"\x01t\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x01t\x126\n" +
 	"\x17found_transaction_count\x18\x02 \x01(\x05R\x15foundTransactionCount\x12*\n" +
 	"\x11found_piece_count\x18\x03 \x01(\x05R\x0ffoundPieceCount\x12,\n" +
-	"\x12found_piece_amount\x18\x04 \x01(\x01R\x10foundPieceAmount\"\x9b\x01\n" +
-	"\x1cHistoryStockResolutionMetric\x127\n" +
-	"\ttime_type\x18\x01 \x01(\x0e2\x1a.selling_iface.v1.TimeTypeR\btimeType\x12B\n" +
+	"\x12found_piece_amount\x18\x04 \x01(\x01R\x10foundPieceAmount\"\x98\x01\n" +
+	"\x1cHistoryStockResolutionMetric\x124\n" +
+	"\ttime_type\x18\x01 \x01(\x0e2\x17.common.v1.StatTimeTypeR\btimeType\x12B\n" +
 	"\x05items\x18\x02 \x03(\v2,.selling_iface.v1.HistoryStockResolutionItemR\x05items\"\xca\x03\n" +
 	"\x15HistoryStockOrderItem\x12(\n" +
 	"\x01t\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x01t\x12+\n" +
@@ -923,9 +924,9 @@ const file_selling_iface_v1_metric_stock_proto_rawDesc = "" +
 	"\x17cross_transaction_count\x18\b \x01(\x05R\x15crossTransactionCount\x12*\n" +
 	"\x11cross_piece_count\x18\t \x01(\x05R\x0fcrossPieceCount\x12,\n" +
 	"\x12cross_piece_amount\x18\n" +
-	" \x01(\x01R\x10crossPieceAmount\"\x91\x01\n" +
-	"\x17HistoryStockOrderMetric\x127\n" +
-	"\ttime_type\x18\x01 \x01(\x0e2\x1a.selling_iface.v1.TimeTypeR\btimeType\x12=\n" +
+	" \x01(\x01R\x10crossPieceAmount\"\x8e\x01\n" +
+	"\x17HistoryStockOrderMetric\x124\n" +
+	"\ttime_type\x18\x01 \x01(\x0e2\x17.common.v1.StatTimeTypeR\btimeType\x12=\n" +
 	"\x05items\x18\x02 \x03(\v2'.selling_iface.v1.HistoryStockOrderItemR\x05items\"\xe9\x02\n" +
 	"\x13ShipmentProblemItem\x12(\n" +
 	"\x01t\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x01t\x124\n" +
@@ -934,18 +935,18 @@ const file_selling_iface_v1_metric_stock_proto_rawDesc = "" +
 	"\x11lost_piece_amount\x18\x04 \x01(\x01R\x0flostPieceAmount\x12:\n" +
 	"\x19damaged_transaction_count\x18\x05 \x01(\x05R\x17damagedTransactionCount\x12.\n" +
 	"\x13damaged_piece_count\x18\x06 \x01(\x05R\x11damagedPieceCount\x120\n" +
-	"\x14damaged_piece_amount\x18\a \x01(\x01R\x12damagedPieceAmount\"\x94\x01\n" +
-	"\x1cHistoryShipmentProblemMetric\x127\n" +
-	"\ttime_type\x18\x01 \x01(\x0e2\x1a.selling_iface.v1.TimeTypeR\btimeType\x12;\n" +
+	"\x14damaged_piece_amount\x18\a \x01(\x01R\x12damagedPieceAmount\"\x91\x01\n" +
+	"\x1cHistoryShipmentProblemMetric\x124\n" +
+	"\ttime_type\x18\x01 \x01(\x0e2\x17.common.v1.StatTimeTypeR\btimeType\x12;\n" +
 	"\x05items\x18\x02 \x03(\v2%.selling_iface.v1.ShipmentProblemItemR\x05items\"\xf8\x01\n" +
 	"\x14WarehouseProblemItem\x12(\n" +
 	"\x01t\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x01t\x12(\n" +
 	"\x10lost_piece_count\x18\x02 \x01(\x05R\x0elostPieceCount\x12*\n" +
 	"\x11lost_piece_amount\x18\x03 \x01(\x01R\x0flostPieceAmount\x12.\n" +
 	"\x13damaged_piece_count\x18\x04 \x01(\x05R\x11damagedPieceCount\x120\n" +
-	"\x14damaged_piece_amount\x18\x05 \x01(\x01R\x12damagedPieceAmount\"\x96\x01\n" +
-	"\x1dHistoryWarehouseProblemMetric\x127\n" +
-	"\ttime_type\x18\x01 \x01(\x0e2\x1a.selling_iface.v1.TimeTypeR\btimeType\x12<\n" +
+	"\x14damaged_piece_amount\x18\x05 \x01(\x01R\x12damagedPieceAmount\"\x93\x01\n" +
+	"\x1dHistoryWarehouseProblemMetric\x124\n" +
+	"\ttime_type\x18\x01 \x01(\x0e2\x17.common.v1.StatTimeTypeR\btimeType\x12<\n" +
 	"\x05items\x18\x02 \x03(\v2&.selling_iface.v1.WarehouseProblemItemR\x05itemsB\xc6\x01\n" +
 	"\x14com.selling_iface.v1B\x10MetricStockProtoP\x01Z?github.com/pdcgo/schema/services/selling_iface/v1;selling_iface\xa2\x02\x03SXX\xaa\x02\x0fSellingIface.V1\xca\x02\x0fSellingIface\\V1\xe2\x02\x1bSellingIface\\V1\\GPBMetadata\xea\x02\x10SellingIface::V1b\x06proto3"
 
@@ -976,26 +977,26 @@ var file_selling_iface_v1_metric_stock_proto_goTypes = []any{
 	(*WarehouseProblemItem)(nil),          // 10: selling_iface.v1.WarehouseProblemItem
 	(*HistoryWarehouseProblemMetric)(nil), // 11: selling_iface.v1.HistoryWarehouseProblemMetric
 	(*timestamppb.Timestamp)(nil),         // 12: google.protobuf.Timestamp
-	(TimeType)(0),                         // 13: selling_iface.v1.TimeType
+	(v1.StatTimeType)(0),                  // 13: common.v1.StatTimeType
 }
 var file_selling_iface_v1_metric_stock_proto_depIdxs = []int32{
 	12, // 0: selling_iface.v1.HistoryRestockItem.t:type_name -> google.protobuf.Timestamp
-	13, // 1: selling_iface.v1.HistoryRestockMetric.time_type:type_name -> selling_iface.v1.TimeType
+	13, // 1: selling_iface.v1.HistoryRestockMetric.time_type:type_name -> common.v1.StatTimeType
 	0,  // 2: selling_iface.v1.HistoryRestockMetric.items:type_name -> selling_iface.v1.HistoryRestockItem
 	12, // 3: selling_iface.v1.HistoryReturnItem.t:type_name -> google.protobuf.Timestamp
-	13, // 4: selling_iface.v1.HistoryReturnMetric.time_type:type_name -> selling_iface.v1.TimeType
+	13, // 4: selling_iface.v1.HistoryReturnMetric.time_type:type_name -> common.v1.StatTimeType
 	2,  // 5: selling_iface.v1.HistoryReturnMetric.items:type_name -> selling_iface.v1.HistoryReturnItem
 	12, // 6: selling_iface.v1.HistoryStockResolutionItem.t:type_name -> google.protobuf.Timestamp
-	13, // 7: selling_iface.v1.HistoryStockResolutionMetric.time_type:type_name -> selling_iface.v1.TimeType
+	13, // 7: selling_iface.v1.HistoryStockResolutionMetric.time_type:type_name -> common.v1.StatTimeType
 	4,  // 8: selling_iface.v1.HistoryStockResolutionMetric.items:type_name -> selling_iface.v1.HistoryStockResolutionItem
 	12, // 9: selling_iface.v1.HistoryStockOrderItem.t:type_name -> google.protobuf.Timestamp
-	13, // 10: selling_iface.v1.HistoryStockOrderMetric.time_type:type_name -> selling_iface.v1.TimeType
+	13, // 10: selling_iface.v1.HistoryStockOrderMetric.time_type:type_name -> common.v1.StatTimeType
 	6,  // 11: selling_iface.v1.HistoryStockOrderMetric.items:type_name -> selling_iface.v1.HistoryStockOrderItem
 	12, // 12: selling_iface.v1.ShipmentProblemItem.t:type_name -> google.protobuf.Timestamp
-	13, // 13: selling_iface.v1.HistoryShipmentProblemMetric.time_type:type_name -> selling_iface.v1.TimeType
+	13, // 13: selling_iface.v1.HistoryShipmentProblemMetric.time_type:type_name -> common.v1.StatTimeType
 	8,  // 14: selling_iface.v1.HistoryShipmentProblemMetric.items:type_name -> selling_iface.v1.ShipmentProblemItem
 	12, // 15: selling_iface.v1.WarehouseProblemItem.t:type_name -> google.protobuf.Timestamp
-	13, // 16: selling_iface.v1.HistoryWarehouseProblemMetric.time_type:type_name -> selling_iface.v1.TimeType
+	13, // 16: selling_iface.v1.HistoryWarehouseProblemMetric.time_type:type_name -> common.v1.StatTimeType
 	10, // 17: selling_iface.v1.HistoryWarehouseProblemMetric.items:type_name -> selling_iface.v1.WarehouseProblemItem
 	18, // [18:18] is the sub-list for method output_type
 	18, // [18:18] is the sub-list for method input_type
@@ -1009,7 +1010,6 @@ func file_selling_iface_v1_metric_stock_proto_init() {
 	if File_selling_iface_v1_metric_stock_proto != nil {
 		return
 	}
-	file_selling_iface_v1_metric_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

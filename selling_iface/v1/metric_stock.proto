@@ -1,8 +1,8 @@
 syntax = "proto3";
 package selling_iface.v1;
 
+import "common/v1/stat.proto";
 import "google/protobuf/timestamp.proto";
-import "selling_iface/v1/metric.proto";
 
 option go_package = "github.com/pdcgo/schema/services/selling_iface/v1;selling_iface";
 
@@ -19,7 +19,7 @@ message HistoryRestockItem {
 }
 
 message HistoryRestockMetric {
-  TimeType time_type = 1;
+  common.v1.StatTimeType time_type = 1;
   repeated HistoryRestockItem items = 2;
 }
 
@@ -36,7 +36,7 @@ message HistoryReturnItem {
 }
 
 message HistoryReturnMetric {
-  TimeType time_type = 1;
+  common.v1.StatTimeType time_type = 1;
   repeated HistoryReturnItem items = 2;
 }
 
@@ -49,7 +49,7 @@ message HistoryStockResolutionItem {
 }
 
 message HistoryStockResolutionMetric {
-  TimeType time_type = 1;
+  common.v1.StatTimeType time_type = 1;
   repeated HistoryStockResolutionItem items = 2;
 }
 
@@ -70,7 +70,7 @@ message HistoryStockOrderItem {
 }
 
 message HistoryStockOrderMetric {
-  TimeType time_type = 1;
+  common.v1.StatTimeType time_type = 1;
   repeated HistoryStockOrderItem items = 2;
 }
 
@@ -87,7 +87,7 @@ message ShipmentProblemItem {
 }
 
 message HistoryShipmentProblemMetric {
-  TimeType time_type = 1;
+  common.v1.StatTimeType time_type = 1;
   repeated ShipmentProblemItem items = 2;
 }
 
@@ -103,6 +103,6 @@ message WarehouseProblemItem {
 }
 
 message HistoryWarehouseProblemMetric {
-  TimeType time_type = 1;
+  common.v1.StatTimeType time_type = 1;
   repeated WarehouseProblemItem items = 2;
 }

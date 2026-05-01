@@ -2,6 +2,7 @@ syntax = "proto3";
 package selling_iface.v1;
 
 // import "buf/validate/validate.proto";
+import "common/v1/stat.proto";
 import "google/protobuf/timestamp.proto";
 import "selling_iface/v1/metric.proto";
 
@@ -40,7 +41,7 @@ message HistoryProductSoldItem {
 }
 
 message HistoryProductSoldMetric {
-  TimeType time_type = 1;
+  common.v1.StatTimeType time_type = 1;
   MetricType type = 2;
   repeated HistoryProductSoldItem datas = 3;
 }

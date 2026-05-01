@@ -55,6 +55,14 @@ message ReturnAccepted {
   uint64 transaction_id = 1 [(buf.validate.field).uint64.gt = 0];
 }
 
+message StockProblem {
+  uint64 transaction_id = 1 [(buf.validate.field).uint64.gt = 0];
+}
+
+message StockAdjustment {
+  uint64 transaction_id = 1 [(buf.validate.field).uint64.gt = 0];
+}
+
 message StockEvent {
   option (event_base.v1.event_config).event_topic = "stock-topic";
 
@@ -65,5 +73,7 @@ message StockEvent {
     ReturnAccepted return_accepted = 4;
     OrderAccepted order_accepted = 5;
     OrderCanceled order_canceled = 6;
+    StockProblem stock_problem = 7;
+    StockAdjustment stock_adjustment = 8;
   }
 }

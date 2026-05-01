@@ -2,7 +2,7 @@ syntax = "proto3";
 package selling_iface.v1;
 
 import "buf/validate/validate.proto";
-import "google/protobuf/timestamp.proto";
+import "common/v1/stat.proto";
 import "selling_iface/v1/metric.proto";
 import "selling_iface/v1/metric_order.proto";
 import "selling_iface/v1/metric_product.proto";
@@ -13,12 +13,6 @@ option go_package = "github.com/pdcgo/schema/services/selling_iface/v1;selling_i
 service SellingStatService {
   rpc Stat(StatRequest) returns (StatResponse);
   rpc StatStream(StatStreamRequest) returns (stream StatStreamResponse);
-}
-
-message TimeRange {
-  google.protobuf.Timestamp start = 1 [(buf.validate.field).required = true];
-  google.protobuf.Timestamp end = 2 [(buf.validate.field).required = true];
-  TimeType type = 3 [(buf.validate.field).required = true];
 }
 
 message TotalStockMetric {
@@ -98,7 +92,7 @@ message StatFilter {
   uint64 warehouse_id = 3;
 }
 message StatRequest {
-  TimeRange range = 1 [(buf.validate.field).required = true];
+  common.v1.StatTimeRange range = 1 [(buf.validate.field).required = true];
   StatFilter filter = 2;
   repeated MetricType metric_types = 3 [(buf.validate.field).repeated = {
     min_items: 1
@@ -112,7 +106,7 @@ message StatResponse {
 }
 
 message StatStreamRequest {
-  TimeRange range = 1 [(buf.validate.field).required = true];
+  common.v1.StatTimeRange range = 1 [(buf.validate.field).required = true];
   StatFilter filter = 2;
   repeated MetricType metric_types = 3 [(buf.validate.field).repeated = {
     min_items: 1

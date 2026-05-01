@@ -21,61 +21,6 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type TimeType int32
-
-const (
-	TimeType_TIME_TYPE_UNSPECIFIED TimeType = 0
-	TimeType_TIME_TYPE_DAY         TimeType = 1
-	TimeType_TIME_TYPE_WEEK        TimeType = 2
-	TimeType_TIME_TYPE_MONTH       TimeType = 3
-	TimeType_TIME_TYPE_YEAR        TimeType = 4
-)
-
-// Enum value maps for TimeType.
-var (
-	TimeType_name = map[int32]string{
-		0: "TIME_TYPE_UNSPECIFIED",
-		1: "TIME_TYPE_DAY",
-		2: "TIME_TYPE_WEEK",
-		3: "TIME_TYPE_MONTH",
-		4: "TIME_TYPE_YEAR",
-	}
-	TimeType_value = map[string]int32{
-		"TIME_TYPE_UNSPECIFIED": 0,
-		"TIME_TYPE_DAY":         1,
-		"TIME_TYPE_WEEK":        2,
-		"TIME_TYPE_MONTH":       3,
-		"TIME_TYPE_YEAR":        4,
-	}
-)
-
-func (x TimeType) Enum() *TimeType {
-	p := new(TimeType)
-	*p = x
-	return p
-}
-
-func (x TimeType) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (TimeType) Descriptor() protoreflect.EnumDescriptor {
-	return file_selling_iface_v1_metric_proto_enumTypes[0].Descriptor()
-}
-
-func (TimeType) Type() protoreflect.EnumType {
-	return &file_selling_iface_v1_metric_proto_enumTypes[0]
-}
-
-func (x TimeType) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use TimeType.Descriptor instead.
-func (TimeType) EnumDescriptor() ([]byte, []int) {
-	return file_selling_iface_v1_metric_proto_rawDescGZIP(), []int{0}
-}
-
 type MetricType int32
 
 const (
@@ -157,11 +102,11 @@ func (x MetricType) String() string {
 }
 
 func (MetricType) Descriptor() protoreflect.EnumDescriptor {
-	return file_selling_iface_v1_metric_proto_enumTypes[1].Descriptor()
+	return file_selling_iface_v1_metric_proto_enumTypes[0].Descriptor()
 }
 
 func (MetricType) Type() protoreflect.EnumType {
-	return &file_selling_iface_v1_metric_proto_enumTypes[1]
+	return &file_selling_iface_v1_metric_proto_enumTypes[0]
 }
 
 func (x MetricType) Number() protoreflect.EnumNumber {
@@ -170,20 +115,14 @@ func (x MetricType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use MetricType.Descriptor instead.
 func (MetricType) EnumDescriptor() ([]byte, []int) {
-	return file_selling_iface_v1_metric_proto_rawDescGZIP(), []int{1}
+	return file_selling_iface_v1_metric_proto_rawDescGZIP(), []int{0}
 }
 
 var File_selling_iface_v1_metric_proto protoreflect.FileDescriptor
 
 const file_selling_iface_v1_metric_proto_rawDesc = "" +
 	"\n" +
-	"\x1dselling_iface/v1/metric.proto\x12\x10selling_iface.v1*u\n" +
-	"\bTimeType\x12\x19\n" +
-	"\x15TIME_TYPE_UNSPECIFIED\x10\x00\x12\x11\n" +
-	"\rTIME_TYPE_DAY\x10\x01\x12\x12\n" +
-	"\x0eTIME_TYPE_WEEK\x10\x02\x12\x13\n" +
-	"\x0fTIME_TYPE_MONTH\x10\x03\x12\x12\n" +
-	"\x0eTIME_TYPE_YEAR\x10\x04*\x85\x05\n" +
+	"\x1dselling_iface/v1/metric.proto\x12\x10selling_iface.v1*\x85\x05\n" +
 	"\n" +
 	"MetricType\x12\x1b\n" +
 	"\x17METRIC_TYPE_UNSPECIFIED\x10\x00\x12\x1b\n" +
@@ -220,10 +159,9 @@ func file_selling_iface_v1_metric_proto_rawDescGZIP() []byte {
 	return file_selling_iface_v1_metric_proto_rawDescData
 }
 
-var file_selling_iface_v1_metric_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_selling_iface_v1_metric_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_selling_iface_v1_metric_proto_goTypes = []any{
-	(TimeType)(0),   // 0: selling_iface.v1.TimeType
-	(MetricType)(0), // 1: selling_iface.v1.MetricType
+	(MetricType)(0), // 0: selling_iface.v1.MetricType
 }
 var file_selling_iface_v1_metric_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
@@ -243,7 +181,7 @@ func file_selling_iface_v1_metric_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_selling_iface_v1_metric_proto_rawDesc), len(file_selling_iface_v1_metric_proto_rawDesc)),
-			NumEnums:      2,
+			NumEnums:      1,
 			NumMessages:   0,
 			NumExtensions: 0,
 			NumServices:   0,

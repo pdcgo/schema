@@ -7,6 +7,7 @@
 package selling_iface
 
 import (
+	v1 "github.com/pdcgo/schema/services/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -138,7 +139,7 @@ func (x *HistoryOrderItem) GetTotalAmount() float64 {
 type HistoryOrderMetric struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Type          MetricType             `protobuf:"varint,1,opt,name=type,proto3,enum=selling_iface.v1.MetricType" json:"type,omitempty"`
-	TimeType      TimeType               `protobuf:"varint,2,opt,name=time_type,json=timeType,proto3,enum=selling_iface.v1.TimeType" json:"time_type,omitempty"`
+	TimeType      v1.StatTimeType        `protobuf:"varint,2,opt,name=time_type,json=timeType,proto3,enum=common.v1.StatTimeType" json:"time_type,omitempty"`
 	Datas         []*HistoryOrderItem    `protobuf:"bytes,3,rep,name=datas,proto3" json:"datas,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -181,11 +182,11 @@ func (x *HistoryOrderMetric) GetType() MetricType {
 	return MetricType_METRIC_TYPE_UNSPECIFIED
 }
 
-func (x *HistoryOrderMetric) GetTimeType() TimeType {
+func (x *HistoryOrderMetric) GetTimeType() v1.StatTimeType {
 	if x != nil {
 		return x.TimeType
 	}
-	return TimeType_TIME_TYPE_UNSPECIFIED
+	return v1.StatTimeType(0)
 }
 
 func (x *HistoryOrderMetric) GetDatas() []*HistoryOrderItem {
@@ -199,7 +200,7 @@ var File_selling_iface_v1_metric_order_proto protoreflect.FileDescriptor
 
 const file_selling_iface_v1_metric_order_proto_rawDesc = "" +
 	"\n" +
-	"#selling_iface/v1/metric_order.proto\x12\x10selling_iface.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dselling_iface/v1/metric.proto\"f\n" +
+	"#selling_iface/v1/metric_order.proto\x12\x10selling_iface.v1\x1a\x14common/v1/stat.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dselling_iface/v1/metric.proto\"f\n" +
 	"\x11OrderActiveMetric\x120\n" +
 	"\x04type\x18\x01 \x01(\x0e2\x1c.selling_iface.v1.MetricTypeR\x04type\x12\x1f\n" +
 	"\vorder_count\x18\x02 \x01(\x03R\n" +
@@ -208,10 +209,10 @@ const file_selling_iface_v1_metric_order_proto_rawDesc = "" +
 	"\x01t\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x01t\x12\x1f\n" +
 	"\vtotal_count\x18\x02 \x01(\x03R\n" +
 	"totalCount\x12!\n" +
-	"\ftotal_amount\x18\x03 \x01(\x01R\vtotalAmount\"\xb9\x01\n" +
+	"\ftotal_amount\x18\x03 \x01(\x01R\vtotalAmount\"\xb6\x01\n" +
 	"\x12HistoryOrderMetric\x120\n" +
-	"\x04type\x18\x01 \x01(\x0e2\x1c.selling_iface.v1.MetricTypeR\x04type\x127\n" +
-	"\ttime_type\x18\x02 \x01(\x0e2\x1a.selling_iface.v1.TimeTypeR\btimeType\x128\n" +
+	"\x04type\x18\x01 \x01(\x0e2\x1c.selling_iface.v1.MetricTypeR\x04type\x124\n" +
+	"\ttime_type\x18\x02 \x01(\x0e2\x17.common.v1.StatTimeTypeR\btimeType\x128\n" +
 	"\x05datas\x18\x03 \x03(\v2\".selling_iface.v1.HistoryOrderItemR\x05datasB\xc6\x01\n" +
 	"\x14com.selling_iface.v1B\x10MetricOrderProtoP\x01Z?github.com/pdcgo/schema/services/selling_iface/v1;selling_iface\xa2\x02\x03SXX\xaa\x02\x0fSellingIface.V1\xca\x02\x0fSellingIface\\V1\xe2\x02\x1bSellingIface\\V1\\GPBMetadata\xea\x02\x10SellingIface::V1b\x06proto3"
 
@@ -234,13 +235,13 @@ var file_selling_iface_v1_metric_order_proto_goTypes = []any{
 	(*HistoryOrderMetric)(nil),    // 2: selling_iface.v1.HistoryOrderMetric
 	(MetricType)(0),               // 3: selling_iface.v1.MetricType
 	(*timestamppb.Timestamp)(nil), // 4: google.protobuf.Timestamp
-	(TimeType)(0),                 // 5: selling_iface.v1.TimeType
+	(v1.StatTimeType)(0),          // 5: common.v1.StatTimeType
 }
 var file_selling_iface_v1_metric_order_proto_depIdxs = []int32{
 	3, // 0: selling_iface.v1.OrderActiveMetric.type:type_name -> selling_iface.v1.MetricType
 	4, // 1: selling_iface.v1.HistoryOrderItem.t:type_name -> google.protobuf.Timestamp
 	3, // 2: selling_iface.v1.HistoryOrderMetric.type:type_name -> selling_iface.v1.MetricType
-	5, // 3: selling_iface.v1.HistoryOrderMetric.time_type:type_name -> selling_iface.v1.TimeType
+	5, // 3: selling_iface.v1.HistoryOrderMetric.time_type:type_name -> common.v1.StatTimeType
 	1, // 4: selling_iface.v1.HistoryOrderMetric.datas:type_name -> selling_iface.v1.HistoryOrderItem
 	5, // [5:5] is the sub-list for method output_type
 	5, // [5:5] is the sub-list for method input_type

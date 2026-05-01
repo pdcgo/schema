@@ -6,14 +6,6 @@ package selling_iface.v1;
 
 option go_package = "github.com/pdcgo/schema/services/selling_iface/v1;selling_iface";
 
-enum TimeType {
-  TIME_TYPE_UNSPECIFIED = 0;
-  TIME_TYPE_DAY = 1;
-  TIME_TYPE_WEEK = 2;
-  TIME_TYPE_MONTH = 3;
-  TIME_TYPE_YEAR = 4;
-}
-
 enum MetricType {
   METRIC_TYPE_UNSPECIFIED = 0;
   METRIC_TYPE_TOTAL_STOCK = 1;

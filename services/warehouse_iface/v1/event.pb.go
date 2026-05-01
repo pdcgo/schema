@@ -452,6 +452,94 @@ func (x *ReturnAccepted) GetTransactionId() uint64 {
 	return 0
 }
 
+type StockProblem struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TransactionId uint64                 `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StockProblem) Reset() {
+	*x = StockProblem{}
+	mi := &file_warehouse_iface_v1_event_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StockProblem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StockProblem) ProtoMessage() {}
+
+func (x *StockProblem) ProtoReflect() protoreflect.Message {
+	mi := &file_warehouse_iface_v1_event_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StockProblem.ProtoReflect.Descriptor instead.
+func (*StockProblem) Descriptor() ([]byte, []int) {
+	return file_warehouse_iface_v1_event_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *StockProblem) GetTransactionId() uint64 {
+	if x != nil {
+		return x.TransactionId
+	}
+	return 0
+}
+
+type StockAdjustment struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TransactionId uint64                 `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StockAdjustment) Reset() {
+	*x = StockAdjustment{}
+	mi := &file_warehouse_iface_v1_event_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StockAdjustment) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StockAdjustment) ProtoMessage() {}
+
+func (x *StockAdjustment) ProtoReflect() protoreflect.Message {
+	mi := &file_warehouse_iface_v1_event_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StockAdjustment.ProtoReflect.Descriptor instead.
+func (*StockAdjustment) Descriptor() ([]byte, []int) {
+	return file_warehouse_iface_v1_event_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *StockAdjustment) GetTransactionId() uint64 {
+	if x != nil {
+		return x.TransactionId
+	}
+	return 0
+}
+
 type StockEvent struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Types that are valid to be assigned to Data:
@@ -462,6 +550,8 @@ type StockEvent struct {
 	//	*StockEvent_ReturnAccepted
 	//	*StockEvent_OrderAccepted
 	//	*StockEvent_OrderCanceled
+	//	*StockEvent_StockProblem
+	//	*StockEvent_StockAdjustment
 	Data          isStockEvent_Data `protobuf_oneof:"data"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -469,7 +559,7 @@ type StockEvent struct {
 
 func (x *StockEvent) Reset() {
 	*x = StockEvent{}
-	mi := &file_warehouse_iface_v1_event_proto_msgTypes[7]
+	mi := &file_warehouse_iface_v1_event_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -481,7 +571,7 @@ func (x *StockEvent) String() string {
 func (*StockEvent) ProtoMessage() {}
 
 func (x *StockEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_event_proto_msgTypes[7]
+	mi := &file_warehouse_iface_v1_event_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -494,7 +584,7 @@ func (x *StockEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StockEvent.ProtoReflect.Descriptor instead.
 func (*StockEvent) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_event_proto_rawDescGZIP(), []int{7}
+	return file_warehouse_iface_v1_event_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *StockEvent) GetData() isStockEvent_Data {
@@ -558,6 +648,24 @@ func (x *StockEvent) GetOrderCanceled() *OrderCanceled {
 	return nil
 }
 
+func (x *StockEvent) GetStockProblem() *StockProblem {
+	if x != nil {
+		if x, ok := x.Data.(*StockEvent_StockProblem); ok {
+			return x.StockProblem
+		}
+	}
+	return nil
+}
+
+func (x *StockEvent) GetStockAdjustment() *StockAdjustment {
+	if x != nil {
+		if x, ok := x.Data.(*StockEvent_StockAdjustment); ok {
+			return x.StockAdjustment
+		}
+	}
+	return nil
+}
+
 type isStockEvent_Data interface {
 	isStockEvent_Data()
 }
@@ -586,6 +694,14 @@ type StockEvent_OrderCanceled struct {
 	OrderCanceled *OrderCanceled `protobuf:"bytes,6,opt,name=order_canceled,json=orderCanceled,proto3,oneof"`
 }
 
+type StockEvent_StockProblem struct {
+	StockProblem *StockProblem `protobuf:"bytes,7,opt,name=stock_problem,json=stockProblem,proto3,oneof"`
+}
+
+type StockEvent_StockAdjustment struct {
+	StockAdjustment *StockAdjustment `protobuf:"bytes,8,opt,name=stock_adjustment,json=stockAdjustment,proto3,oneof"`
+}
+
 func (*StockEvent_StockChange) isStockEvent_Data() {}
 
 func (*StockEvent_PendingStockChange) isStockEvent_Data() {}
@@ -597,6 +713,10 @@ func (*StockEvent_ReturnAccepted) isStockEvent_Data() {}
 func (*StockEvent_OrderAccepted) isStockEvent_Data() {}
 
 func (*StockEvent_OrderCanceled) isStockEvent_Data() {}
+
+func (*StockEvent_StockProblem) isStockEvent_Data() {}
+
+func (*StockEvent_StockAdjustment) isStockEvent_Data() {}
 
 var File_warehouse_iface_v1_event_proto protoreflect.FileDescriptor
 
@@ -623,7 +743,11 @@ const file_warehouse_iface_v1_event_proto_rawDesc = "" +
 	"\x0fRestockAccepted\x12.\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\rtransactionId\"@\n" +
 	"\x0eReturnAccepted\x12.\n" +
-	"\x0etransaction_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\rtransactionId\"\x82\x04\n" +
+	"\x0etransaction_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\rtransactionId\">\n" +
+	"\fStockProblem\x12.\n" +
+	"\x0etransaction_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\rtransactionId\"A\n" +
+	"\x0fStockAdjustment\x12.\n" +
+	"\x0etransaction_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\rtransactionId\"\x9d\x05\n" +
 	"\n" +
 	"StockEvent\x12D\n" +
 	"\fstock_change\x18\x01 \x01(\v2\x1f.warehouse_iface.v1.StockChangeH\x00R\vstockChange\x12Z\n" +
@@ -631,7 +755,9 @@ const file_warehouse_iface_v1_event_proto_rawDesc = "" +
 	"\x10restock_accepted\x18\x03 \x01(\v2#.warehouse_iface.v1.RestockAcceptedH\x00R\x0frestockAccepted\x12M\n" +
 	"\x0freturn_accepted\x18\x04 \x01(\v2\".warehouse_iface.v1.ReturnAcceptedH\x00R\x0ereturnAccepted\x12J\n" +
 	"\x0eorder_accepted\x18\x05 \x01(\v2!.warehouse_iface.v1.OrderAcceptedH\x00R\rorderAccepted\x12J\n" +
-	"\x0eorder_canceled\x18\x06 \x01(\v2!.warehouse_iface.v1.OrderCanceledH\x00R\rorderCanceled:\x11\x8a\xb5\x18\r\n" +
+	"\x0eorder_canceled\x18\x06 \x01(\v2!.warehouse_iface.v1.OrderCanceledH\x00R\rorderCanceled\x12G\n" +
+	"\rstock_problem\x18\a \x01(\v2 .warehouse_iface.v1.StockProblemH\x00R\fstockProblem\x12P\n" +
+	"\x10stock_adjustment\x18\b \x01(\v2#.warehouse_iface.v1.StockAdjustmentH\x00R\x0fstockAdjustment:\x11\x8a\xb5\x18\r\n" +
 	"\vstock-topicB\x06\n" +
 	"\x04data*\x89\x02\n" +
 	"\x0fStockChangeType\x12!\n" +
@@ -659,7 +785,7 @@ func file_warehouse_iface_v1_event_proto_rawDescGZIP() []byte {
 }
 
 var file_warehouse_iface_v1_event_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_warehouse_iface_v1_event_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_warehouse_iface_v1_event_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_warehouse_iface_v1_event_proto_goTypes = []any{
 	(StockChangeType)(0),          // 0: warehouse_iface.v1.StockChangeType
 	(*StockChangeLog)(nil),        // 1: warehouse_iface.v1.StockChangeLog
@@ -669,13 +795,15 @@ var file_warehouse_iface_v1_event_proto_goTypes = []any{
 	(*OrderCanceled)(nil),         // 5: warehouse_iface.v1.OrderCanceled
 	(*RestockAccepted)(nil),       // 6: warehouse_iface.v1.RestockAccepted
 	(*ReturnAccepted)(nil),        // 7: warehouse_iface.v1.ReturnAccepted
-	(*StockEvent)(nil),            // 8: warehouse_iface.v1.StockEvent
-	(*timestamppb.Timestamp)(nil), // 9: google.protobuf.Timestamp
+	(*StockProblem)(nil),          // 8: warehouse_iface.v1.StockProblem
+	(*StockAdjustment)(nil),       // 9: warehouse_iface.v1.StockAdjustment
+	(*StockEvent)(nil),            // 10: warehouse_iface.v1.StockEvent
+	(*timestamppb.Timestamp)(nil), // 11: google.protobuf.Timestamp
 }
 var file_warehouse_iface_v1_event_proto_depIdxs = []int32{
-	9,  // 0: warehouse_iface.v1.StockChange.created_time:type_name -> google.protobuf.Timestamp
+	11, // 0: warehouse_iface.v1.StockChange.created_time:type_name -> google.protobuf.Timestamp
 	1,  // 1: warehouse_iface.v1.StockChange.changes:type_name -> warehouse_iface.v1.StockChangeLog
-	9,  // 2: warehouse_iface.v1.PendingStockChange.created_time:type_name -> google.protobuf.Timestamp
+	11, // 2: warehouse_iface.v1.PendingStockChange.created_time:type_name -> google.protobuf.Timestamp
 	1,  // 3: warehouse_iface.v1.PendingStockChange.changes:type_name -> warehouse_iface.v1.StockChangeLog
 	2,  // 4: warehouse_iface.v1.StockEvent.stock_change:type_name -> warehouse_iface.v1.StockChange
 	3,  // 5: warehouse_iface.v1.StockEvent.pending_stock_change:type_name -> warehouse_iface.v1.PendingStockChange
@@ -683,11 +811,13 @@ var file_warehouse_iface_v1_event_proto_depIdxs = []int32{
 	7,  // 7: warehouse_iface.v1.StockEvent.return_accepted:type_name -> warehouse_iface.v1.ReturnAccepted
 	4,  // 8: warehouse_iface.v1.StockEvent.order_accepted:type_name -> warehouse_iface.v1.OrderAccepted
 	5,  // 9: warehouse_iface.v1.StockEvent.order_canceled:type_name -> warehouse_iface.v1.OrderCanceled
-	10, // [10:10] is the sub-list for method output_type
-	10, // [10:10] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	8,  // 10: warehouse_iface.v1.StockEvent.stock_problem:type_name -> warehouse_iface.v1.StockProblem
+	9,  // 11: warehouse_iface.v1.StockEvent.stock_adjustment:type_name -> warehouse_iface.v1.StockAdjustment
+	12, // [12:12] is the sub-list for method output_type
+	12, // [12:12] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_warehouse_iface_v1_event_proto_init() }
@@ -695,13 +825,15 @@ func file_warehouse_iface_v1_event_proto_init() {
 	if File_warehouse_iface_v1_event_proto != nil {
 		return
 	}
-	file_warehouse_iface_v1_event_proto_msgTypes[7].OneofWrappers = []any{
+	file_warehouse_iface_v1_event_proto_msgTypes[9].OneofWrappers = []any{
 		(*StockEvent_StockChange)(nil),
 		(*StockEvent_PendingStockChange)(nil),
 		(*StockEvent_RestockAccepted)(nil),
 		(*StockEvent_ReturnAccepted)(nil),
 		(*StockEvent_OrderAccepted)(nil),
 		(*StockEvent_OrderCanceled)(nil),
+		(*StockEvent_StockProblem)(nil),
+		(*StockEvent_StockAdjustment)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -709,7 +841,7 @@ func file_warehouse_iface_v1_event_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_warehouse_iface_v1_event_proto_rawDesc), len(file_warehouse_iface_v1_event_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   8,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

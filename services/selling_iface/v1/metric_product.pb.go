@@ -7,6 +7,7 @@
 package selling_iface
 
 import (
+	v1 "github.com/pdcgo/schema/services/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -257,7 +258,7 @@ func (x *HistoryProductSoldItem) GetCrossTotalAmount() float64 {
 
 type HistoryProductSoldMetric struct {
 	state         protoimpl.MessageState    `protogen:"open.v1"`
-	TimeType      TimeType                  `protobuf:"varint,1,opt,name=time_type,json=timeType,proto3,enum=selling_iface.v1.TimeType" json:"time_type,omitempty"`
+	TimeType      v1.StatTimeType           `protobuf:"varint,1,opt,name=time_type,json=timeType,proto3,enum=common.v1.StatTimeType" json:"time_type,omitempty"`
 	Type          MetricType                `protobuf:"varint,2,opt,name=type,proto3,enum=selling_iface.v1.MetricType" json:"type,omitempty"`
 	Datas         []*HistoryProductSoldItem `protobuf:"bytes,3,rep,name=datas,proto3" json:"datas,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -294,11 +295,11 @@ func (*HistoryProductSoldMetric) Descriptor() ([]byte, []int) {
 	return file_selling_iface_v1_metric_product_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *HistoryProductSoldMetric) GetTimeType() TimeType {
+func (x *HistoryProductSoldMetric) GetTimeType() v1.StatTimeType {
 	if x != nil {
 		return x.TimeType
 	}
-	return TimeType_TIME_TYPE_UNSPECIFIED
+	return v1.StatTimeType(0)
 }
 
 func (x *HistoryProductSoldMetric) GetType() MetricType {
@@ -608,7 +609,7 @@ var File_selling_iface_v1_metric_product_proto protoreflect.FileDescriptor
 
 const file_selling_iface_v1_metric_product_proto_rawDesc = "" +
 	"\n" +
-	"%selling_iface/v1/metric_product.proto\x12\x10selling_iface.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dselling_iface/v1/metric.proto\"\xaa\x03\n" +
+	"%selling_iface/v1/metric_product.proto\x12\x10selling_iface.v1\x1a\x14common/v1/stat.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dselling_iface/v1/metric.proto\"\xaa\x03\n" +
 	"\x11ProductSoldMetric\x120\n" +
 	"\x04type\x18\x01 \x01(\x0e2\x1c.selling_iface.v1.MetricTypeR\x04type\x12\x1f\n" +
 	"\vpiece_count\x18\x02 \x01(\x03R\n" +
@@ -636,9 +637,9 @@ const file_selling_iface_v1_metric_product_proto_rawDesc = "" +
 	"\x11cross_piece_count\x18\b \x01(\x03R\x0fcrossPieceCount\x12*\n" +
 	"\x11cross_order_count\x18\t \x01(\x03R\x0fcrossOrderCount\x12,\n" +
 	"\x12cross_total_amount\x18\n" +
-	" \x01(\x01R\x10crossTotalAmount\"\xc5\x01\n" +
-	"\x18HistoryProductSoldMetric\x127\n" +
-	"\ttime_type\x18\x01 \x01(\x0e2\x1a.selling_iface.v1.TimeTypeR\btimeType\x120\n" +
+	" \x01(\x01R\x10crossTotalAmount\"\xc2\x01\n" +
+	"\x18HistoryProductSoldMetric\x124\n" +
+	"\ttime_type\x18\x01 \x01(\x0e2\x17.common.v1.StatTimeTypeR\btimeType\x120\n" +
 	"\x04type\x18\x02 \x01(\x0e2\x1c.selling_iface.v1.MetricTypeR\x04type\x12>\n" +
 	"\x05datas\x18\x03 \x03(\v2(.selling_iface.v1.HistoryProductSoldItemR\x05datas\"\xb3\x01\n" +
 	"\x0fSoldProductItem\x12\x1d\n" +
@@ -692,12 +693,12 @@ var file_selling_iface_v1_metric_product_proto_goTypes = []any{
 	(*TopProductUnsoldMetric)(nil),   // 6: selling_iface.v1.TopProductUnsoldMetric
 	(MetricType)(0),                  // 7: selling_iface.v1.MetricType
 	(*timestamppb.Timestamp)(nil),    // 8: google.protobuf.Timestamp
-	(TimeType)(0),                    // 9: selling_iface.v1.TimeType
+	(v1.StatTimeType)(0),             // 9: common.v1.StatTimeType
 }
 var file_selling_iface_v1_metric_product_proto_depIdxs = []int32{
 	7,  // 0: selling_iface.v1.ProductSoldMetric.type:type_name -> selling_iface.v1.MetricType
 	8,  // 1: selling_iface.v1.HistoryProductSoldItem.t:type_name -> google.protobuf.Timestamp
-	9,  // 2: selling_iface.v1.HistoryProductSoldMetric.time_type:type_name -> selling_iface.v1.TimeType
+	9,  // 2: selling_iface.v1.HistoryProductSoldMetric.time_type:type_name -> common.v1.StatTimeType
 	7,  // 3: selling_iface.v1.HistoryProductSoldMetric.type:type_name -> selling_iface.v1.MetricType
 	1,  // 4: selling_iface.v1.HistoryProductSoldMetric.datas:type_name -> selling_iface.v1.HistoryProductSoldItem
 	7,  // 5: selling_iface.v1.TopProductSoldMetric.type:type_name -> selling_iface.v1.MetricType

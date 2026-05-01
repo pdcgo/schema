@@ -1,6 +1,7 @@
 syntax = "proto3";
 package selling_iface.v1;
 
+import "common/v1/stat.proto";
 import "google/protobuf/timestamp.proto";
 import "selling_iface/v1/metric.proto";
 
@@ -20,6 +21,6 @@ message HistoryOrderItem {
 
 message HistoryOrderMetric {
   MetricType type = 1;
-  TimeType time_type = 2;
+  common.v1.StatTimeType time_type = 2;
   repeated HistoryOrderItem datas = 3;
 }
