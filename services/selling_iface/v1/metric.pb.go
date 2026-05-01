@@ -43,6 +43,7 @@ const (
 	MetricType_METRIC_TYPE_HISTORY_STOCK_ORDER       MetricType = 17
 	MetricType_METRIC_TYPE_HISTORY_SHIPMENT_PROBLEM  MetricType = 18
 	MetricType_METRIC_TYPE_HISTORY_WAREHOUSE_PROBLEM MetricType = 19
+	MetricType_METRIC_TYPE_HISTORY_READY_STOCK       MetricType = 20
 )
 
 // Enum value maps for MetricType.
@@ -67,6 +68,7 @@ var (
 		17: "METRIC_TYPE_HISTORY_STOCK_ORDER",
 		18: "METRIC_TYPE_HISTORY_SHIPMENT_PROBLEM",
 		19: "METRIC_TYPE_HISTORY_WAREHOUSE_PROBLEM",
+		20: "METRIC_TYPE_HISTORY_READY_STOCK",
 	}
 	MetricType_value = map[string]int32{
 		"METRIC_TYPE_UNSPECIFIED":               0,
@@ -88,6 +90,7 @@ var (
 		"METRIC_TYPE_HISTORY_STOCK_ORDER":       17,
 		"METRIC_TYPE_HISTORY_SHIPMENT_PROBLEM":  18,
 		"METRIC_TYPE_HISTORY_WAREHOUSE_PROBLEM": 19,
+		"METRIC_TYPE_HISTORY_READY_STOCK":       20,
 	}
 )
 
@@ -122,7 +125,7 @@ var File_selling_iface_v1_metric_proto protoreflect.FileDescriptor
 
 const file_selling_iface_v1_metric_proto_rawDesc = "" +
 	"\n" +
-	"\x1dselling_iface/v1/metric.proto\x12\x10selling_iface.v1*\x85\x05\n" +
+	"\x1dselling_iface/v1/metric.proto\x12\x10selling_iface.v1*\xaa\x05\n" +
 	"\n" +
 	"MetricType\x12\x1b\n" +
 	"\x17METRIC_TYPE_UNSPECIFIED\x10\x00\x12\x1b\n" +
@@ -144,7 +147,8 @@ const file_selling_iface_v1_metric_proto_rawDesc = "" +
 	"$METRIC_TYPE_HISTORY_STOCK_RESOLUTION\x10\x10\x12#\n" +
 	"\x1fMETRIC_TYPE_HISTORY_STOCK_ORDER\x10\x11\x12(\n" +
 	"$METRIC_TYPE_HISTORY_SHIPMENT_PROBLEM\x10\x12\x12)\n" +
-	"%METRIC_TYPE_HISTORY_WAREHOUSE_PROBLEM\x10\x13B\xc1\x01\n" +
+	"%METRIC_TYPE_HISTORY_WAREHOUSE_PROBLEM\x10\x13\x12#\n" +
+	"\x1fMETRIC_TYPE_HISTORY_READY_STOCK\x10\x14B\xc1\x01\n" +
 	"\x14com.selling_iface.v1B\vMetricProtoP\x01Z?github.com/pdcgo/schema/services/selling_iface/v1;selling_iface\xa2\x02\x03SXX\xaa\x02\x0fSellingIface.V1\xca\x02\x0fSellingIface\\V1\xe2\x02\x1bSellingIface\\V1\\GPBMetadata\xea\x02\x10SellingIface::V1b\x06proto3"
 
 var (

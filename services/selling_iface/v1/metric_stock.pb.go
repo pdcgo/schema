@@ -877,6 +877,135 @@ func (x *HistoryWarehouseProblemMetric) GetItems() []*WarehouseProblemItem {
 	return nil
 }
 
+type HistoryReadyStockItem struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// @gotags: gorm:"serializer:timestamptz"
+	T             *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=t,proto3" json:"t,omitempty" gorm:"serializer:timestamptz"`
+	PieceCount    int32                  `protobuf:"varint,2,opt,name=piece_count,json=pieceCount,proto3" json:"piece_count,omitempty"`
+	PieceAmount   float64                `protobuf:"fixed64,3,opt,name=piece_amount,json=pieceAmount,proto3" json:"piece_amount,omitempty"`
+	SpentCount    int32                  `protobuf:"varint,4,opt,name=spent_count,json=spentCount,proto3" json:"spent_count,omitempty"`
+	SpentAmount   float64                `protobuf:"fixed64,5,opt,name=spent_amount,json=spentAmount,proto3" json:"spent_amount,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *HistoryReadyStockItem) Reset() {
+	*x = HistoryReadyStockItem{}
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HistoryReadyStockItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HistoryReadyStockItem) ProtoMessage() {}
+
+func (x *HistoryReadyStockItem) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HistoryReadyStockItem.ProtoReflect.Descriptor instead.
+func (*HistoryReadyStockItem) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *HistoryReadyStockItem) GetT() *timestamppb.Timestamp {
+	if x != nil {
+		return x.T
+	}
+	return nil
+}
+
+func (x *HistoryReadyStockItem) GetPieceCount() int32 {
+	if x != nil {
+		return x.PieceCount
+	}
+	return 0
+}
+
+func (x *HistoryReadyStockItem) GetPieceAmount() float64 {
+	if x != nil {
+		return x.PieceAmount
+	}
+	return 0
+}
+
+func (x *HistoryReadyStockItem) GetSpentCount() int32 {
+	if x != nil {
+		return x.SpentCount
+	}
+	return 0
+}
+
+func (x *HistoryReadyStockItem) GetSpentAmount() float64 {
+	if x != nil {
+		return x.SpentAmount
+	}
+	return 0
+}
+
+type HistoryReadyStockMetric struct {
+	state         protoimpl.MessageState   `protogen:"open.v1"`
+	TimeType      v1.StatTimeType          `protobuf:"varint,1,opt,name=time_type,json=timeType,proto3,enum=common.v1.StatTimeType" json:"time_type,omitempty"`
+	Items         []*HistoryReadyStockItem `protobuf:"bytes,2,rep,name=items,proto3" json:"items,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *HistoryReadyStockMetric) Reset() {
+	*x = HistoryReadyStockMetric{}
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HistoryReadyStockMetric) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HistoryReadyStockMetric) ProtoMessage() {}
+
+func (x *HistoryReadyStockMetric) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HistoryReadyStockMetric.ProtoReflect.Descriptor instead.
+func (*HistoryReadyStockMetric) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *HistoryReadyStockMetric) GetTimeType() v1.StatTimeType {
+	if x != nil {
+		return x.TimeType
+	}
+	return v1.StatTimeType(0)
+}
+
+func (x *HistoryReadyStockMetric) GetItems() []*HistoryReadyStockItem {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
 var File_selling_iface_v1_metric_stock_proto protoreflect.FileDescriptor
 
 const file_selling_iface_v1_metric_stock_proto_rawDesc = "" +
@@ -947,7 +1076,18 @@ const file_selling_iface_v1_metric_stock_proto_rawDesc = "" +
 	"\x14damaged_piece_amount\x18\x05 \x01(\x01R\x12damagedPieceAmount\"\x93\x01\n" +
 	"\x1dHistoryWarehouseProblemMetric\x124\n" +
 	"\ttime_type\x18\x01 \x01(\x0e2\x17.common.v1.StatTimeTypeR\btimeType\x12<\n" +
-	"\x05items\x18\x02 \x03(\v2&.selling_iface.v1.WarehouseProblemItemR\x05itemsB\xc6\x01\n" +
+	"\x05items\x18\x02 \x03(\v2&.selling_iface.v1.WarehouseProblemItemR\x05items\"\xc9\x01\n" +
+	"\x15HistoryReadyStockItem\x12(\n" +
+	"\x01t\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x01t\x12\x1f\n" +
+	"\vpiece_count\x18\x02 \x01(\x05R\n" +
+	"pieceCount\x12!\n" +
+	"\fpiece_amount\x18\x03 \x01(\x01R\vpieceAmount\x12\x1f\n" +
+	"\vspent_count\x18\x04 \x01(\x05R\n" +
+	"spentCount\x12!\n" +
+	"\fspent_amount\x18\x05 \x01(\x01R\vspentAmount\"\x8e\x01\n" +
+	"\x17HistoryReadyStockMetric\x124\n" +
+	"\ttime_type\x18\x01 \x01(\x0e2\x17.common.v1.StatTimeTypeR\btimeType\x12=\n" +
+	"\x05items\x18\x02 \x03(\v2'.selling_iface.v1.HistoryReadyStockItemR\x05itemsB\xc6\x01\n" +
 	"\x14com.selling_iface.v1B\x10MetricStockProtoP\x01Z?github.com/pdcgo/schema/services/selling_iface/v1;selling_iface\xa2\x02\x03SXX\xaa\x02\x0fSellingIface.V1\xca\x02\x0fSellingIface\\V1\xe2\x02\x1bSellingIface\\V1\\GPBMetadata\xea\x02\x10SellingIface::V1b\x06proto3"
 
 var (
@@ -962,7 +1102,7 @@ func file_selling_iface_v1_metric_stock_proto_rawDescGZIP() []byte {
 	return file_selling_iface_v1_metric_stock_proto_rawDescData
 }
 
-var file_selling_iface_v1_metric_stock_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_selling_iface_v1_metric_stock_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_selling_iface_v1_metric_stock_proto_goTypes = []any{
 	(*HistoryRestockItem)(nil),            // 0: selling_iface.v1.HistoryRestockItem
 	(*HistoryRestockMetric)(nil),          // 1: selling_iface.v1.HistoryRestockMetric
@@ -976,33 +1116,38 @@ var file_selling_iface_v1_metric_stock_proto_goTypes = []any{
 	(*HistoryShipmentProblemMetric)(nil),  // 9: selling_iface.v1.HistoryShipmentProblemMetric
 	(*WarehouseProblemItem)(nil),          // 10: selling_iface.v1.WarehouseProblemItem
 	(*HistoryWarehouseProblemMetric)(nil), // 11: selling_iface.v1.HistoryWarehouseProblemMetric
-	(*timestamppb.Timestamp)(nil),         // 12: google.protobuf.Timestamp
-	(v1.StatTimeType)(0),                  // 13: common.v1.StatTimeType
+	(*HistoryReadyStockItem)(nil),         // 12: selling_iface.v1.HistoryReadyStockItem
+	(*HistoryReadyStockMetric)(nil),       // 13: selling_iface.v1.HistoryReadyStockMetric
+	(*timestamppb.Timestamp)(nil),         // 14: google.protobuf.Timestamp
+	(v1.StatTimeType)(0),                  // 15: common.v1.StatTimeType
 }
 var file_selling_iface_v1_metric_stock_proto_depIdxs = []int32{
-	12, // 0: selling_iface.v1.HistoryRestockItem.t:type_name -> google.protobuf.Timestamp
-	13, // 1: selling_iface.v1.HistoryRestockMetric.time_type:type_name -> common.v1.StatTimeType
+	14, // 0: selling_iface.v1.HistoryRestockItem.t:type_name -> google.protobuf.Timestamp
+	15, // 1: selling_iface.v1.HistoryRestockMetric.time_type:type_name -> common.v1.StatTimeType
 	0,  // 2: selling_iface.v1.HistoryRestockMetric.items:type_name -> selling_iface.v1.HistoryRestockItem
-	12, // 3: selling_iface.v1.HistoryReturnItem.t:type_name -> google.protobuf.Timestamp
-	13, // 4: selling_iface.v1.HistoryReturnMetric.time_type:type_name -> common.v1.StatTimeType
+	14, // 3: selling_iface.v1.HistoryReturnItem.t:type_name -> google.protobuf.Timestamp
+	15, // 4: selling_iface.v1.HistoryReturnMetric.time_type:type_name -> common.v1.StatTimeType
 	2,  // 5: selling_iface.v1.HistoryReturnMetric.items:type_name -> selling_iface.v1.HistoryReturnItem
-	12, // 6: selling_iface.v1.HistoryStockResolutionItem.t:type_name -> google.protobuf.Timestamp
-	13, // 7: selling_iface.v1.HistoryStockResolutionMetric.time_type:type_name -> common.v1.StatTimeType
+	14, // 6: selling_iface.v1.HistoryStockResolutionItem.t:type_name -> google.protobuf.Timestamp
+	15, // 7: selling_iface.v1.HistoryStockResolutionMetric.time_type:type_name -> common.v1.StatTimeType
 	4,  // 8: selling_iface.v1.HistoryStockResolutionMetric.items:type_name -> selling_iface.v1.HistoryStockResolutionItem
-	12, // 9: selling_iface.v1.HistoryStockOrderItem.t:type_name -> google.protobuf.Timestamp
-	13, // 10: selling_iface.v1.HistoryStockOrderMetric.time_type:type_name -> common.v1.StatTimeType
+	14, // 9: selling_iface.v1.HistoryStockOrderItem.t:type_name -> google.protobuf.Timestamp
+	15, // 10: selling_iface.v1.HistoryStockOrderMetric.time_type:type_name -> common.v1.StatTimeType
 	6,  // 11: selling_iface.v1.HistoryStockOrderMetric.items:type_name -> selling_iface.v1.HistoryStockOrderItem
-	12, // 12: selling_iface.v1.ShipmentProblemItem.t:type_name -> google.protobuf.Timestamp
-	13, // 13: selling_iface.v1.HistoryShipmentProblemMetric.time_type:type_name -> common.v1.StatTimeType
+	14, // 12: selling_iface.v1.ShipmentProblemItem.t:type_name -> google.protobuf.Timestamp
+	15, // 13: selling_iface.v1.HistoryShipmentProblemMetric.time_type:type_name -> common.v1.StatTimeType
 	8,  // 14: selling_iface.v1.HistoryShipmentProblemMetric.items:type_name -> selling_iface.v1.ShipmentProblemItem
-	12, // 15: selling_iface.v1.WarehouseProblemItem.t:type_name -> google.protobuf.Timestamp
-	13, // 16: selling_iface.v1.HistoryWarehouseProblemMetric.time_type:type_name -> common.v1.StatTimeType
+	14, // 15: selling_iface.v1.WarehouseProblemItem.t:type_name -> google.protobuf.Timestamp
+	15, // 16: selling_iface.v1.HistoryWarehouseProblemMetric.time_type:type_name -> common.v1.StatTimeType
 	10, // 17: selling_iface.v1.HistoryWarehouseProblemMetric.items:type_name -> selling_iface.v1.WarehouseProblemItem
-	18, // [18:18] is the sub-list for method output_type
-	18, // [18:18] is the sub-list for method input_type
-	18, // [18:18] is the sub-list for extension type_name
-	18, // [18:18] is the sub-list for extension extendee
-	0,  // [0:18] is the sub-list for field type_name
+	14, // 18: selling_iface.v1.HistoryReadyStockItem.t:type_name -> google.protobuf.Timestamp
+	15, // 19: selling_iface.v1.HistoryReadyStockMetric.time_type:type_name -> common.v1.StatTimeType
+	12, // 20: selling_iface.v1.HistoryReadyStockMetric.items:type_name -> selling_iface.v1.HistoryReadyStockItem
+	21, // [21:21] is the sub-list for method output_type
+	21, // [21:21] is the sub-list for method input_type
+	21, // [21:21] is the sub-list for extension type_name
+	21, // [21:21] is the sub-list for extension extendee
+	0,  // [0:21] is the sub-list for field type_name
 }
 
 func init() { file_selling_iface_v1_metric_stock_proto_init() }
@@ -1016,7 +1161,7 @@ func file_selling_iface_v1_metric_stock_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_selling_iface_v1_metric_stock_proto_rawDesc), len(file_selling_iface_v1_metric_stock_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   12,
+			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

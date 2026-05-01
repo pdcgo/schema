@@ -83,14 +83,21 @@ message Metric {
     HistoryStockOrderMetric history_stock_order = 15;
     HistoryShipmentProblemMetric history_shipment_problem = 16;
     HistoryWarehouseProblemMetric history_warehouse_problem = 17;
+    HistoryReadyStockMetric history_ready_stock = 18;
   }
+}
+
+message ProductFilter {
+  uint64 product_id = 1 [(buf.validate.field).uint64.gt = 0];
 }
 
 message StatFilter {
   uint64 team_id = 1;
   int32 top_n = 2;
   uint64 warehouse_id = 3;
+  ProductFilter product_filter = 4;
 }
+
 message StatRequest {
   common.v1.StatTimeRange range = 1 [(buf.validate.field).required = true];
   StatFilter filter = 2;

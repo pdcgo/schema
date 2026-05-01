@@ -106,3 +106,17 @@ message HistoryWarehouseProblemMetric {
   common.v1.StatTimeType time_type = 1;
   repeated WarehouseProblemItem items = 2;
 }
+
+message HistoryReadyStockItem {
+  // @gotags: gorm:"serializer:timestamptz"
+  google.protobuf.Timestamp t = 1;
+  int32 piece_count = 2;
+  double piece_amount = 3;
+  int32 spent_count = 4;
+  double spent_amount = 5;
+}
+
+message HistoryReadyStockMetric {
+  common.v1.StatTimeType time_type = 1;
+  repeated HistoryReadyStockItem items = 2;
+}
