@@ -4,6 +4,7 @@ package warehouse_iface.v1;
 
 import "buf/validate/validate.proto";
 import "common/v1/common.proto";
+import "warehouse_iface/v1/stat.proto";
 // import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/pdcgo/schema/services/warehouse_iface/v1;warehouse_iface";
@@ -21,6 +22,9 @@ service WarehouseService {
   rpc TeamRackList(TeamRackListRequest) returns (TeamRackListResponse);
 
   // inbound rpc
+
+  //stat rpc
+  rpc Stat(StatRequest) returns (StatResponse);
 }
 
 enum TransactionNoteType {

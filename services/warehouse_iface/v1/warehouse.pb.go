@@ -961,7 +961,7 @@ var File_warehouse_iface_v1_warehouse_proto protoreflect.FileDescriptor
 
 const file_warehouse_iface_v1_warehouse_proto_rawDesc = "" +
 	"\n" +
-	"\"warehouse_iface/v1/warehouse.proto\x12\x12warehouse_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\"@\n" +
+	"\"warehouse_iface/v1/warehouse.proto\x12\x12warehouse_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1dwarehouse_iface/v1/stat.proto\"@\n" +
 	"\x04Rack\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x12\n" +
 	"\x04name\x18\x03 \x01(\tR\x04name\x12\x14\n" +
@@ -1022,7 +1022,7 @@ const file_warehouse_iface_v1_warehouse_proto_rawDesc = "" +
 	"\x1cTRANSACTION_NOTE_TYPE_RETURN\x10\x02\x12 \n" +
 	"\x1cTRANSACTION_NOTE_TYPE_CANCEL\x10\x03\x12 \n" +
 	"\x1cTRANSACTION_NOTE_TYPE_BROKEN\x10\x04\x12!\n" +
-	"\x1dTRANSACTION_NOTE_TYPE_PROBLEM\x10\x052\xa5\x06\n" +
+	"\x1dTRANSACTION_NOTE_TYPE_PROBLEM\x10\x052\xf0\x06\n" +
 	"\x10WarehouseService\x12a\n" +
 	"\fWarehouseIDs\x12'.warehouse_iface.v1.WarehouseIDsRequest\x1a(.warehouse_iface.v1.WarehouseIDsResponse\x12d\n" +
 	"\rWarehouseList\x12(.warehouse_iface.v1.WarehouseListRequest\x1a).warehouse_iface.v1.WarehouseListResponse\x12\x82\x01\n" +
@@ -1030,7 +1030,8 @@ const file_warehouse_iface_v1_warehouse_proto_rawDesc = "" +
 	"\x15TransactionNoteCreate\x120.warehouse_iface.v1.TransactionNoteCreateRequest\x1a1.warehouse_iface.v1.TransactionNoteCreateResponse\x12v\n" +
 	"\x13TransactionNoteList\x12..warehouse_iface.v1.TransactionNoteListRequest\x1a/.warehouse_iface.v1.TransactionNoteListResponse\x12j\n" +
 	"\x0fSellingTeamList\x12*.warehouse_iface.v1.SellingTeamListRequest\x1a+.warehouse_iface.v1.SellingTeamListResponse\x12a\n" +
-	"\fTeamRackList\x12'.warehouse_iface.v1.TeamRackListRequest\x1a(.warehouse_iface.v1.TeamRackListResponseB\xd2\x01\n" +
+	"\fTeamRackList\x12'.warehouse_iface.v1.TeamRackListRequest\x1a(.warehouse_iface.v1.TeamRackListResponse\x12I\n" +
+	"\x04Stat\x12\x1f.warehouse_iface.v1.StatRequest\x1a .warehouse_iface.v1.StatResponseB\xd2\x01\n" +
 	"\x16com.warehouse_iface.v1B\x0eWarehouseProtoP\x01ZCgithub.com/pdcgo/schema/services/warehouse_iface/v1;warehouse_iface\xa2\x02\x03WXX\xaa\x02\x11WarehouseIface.V1\xca\x02\x11WarehouseIface\\V1\xe2\x02\x1dWarehouseIface\\V1\\GPBMetadata\xea\x02\x12WarehouseIface::V1b\x06proto3"
 
 var (
@@ -1071,6 +1072,8 @@ var file_warehouse_iface_v1_warehouse_proto_goTypes = []any{
 	(*v1.Team)(nil),                         // 20: common.v1.Team
 	(*v1.PageInfo)(nil),                     // 21: common.v1.PageInfo
 	(*v1.User)(nil),                         // 22: common.v1.User
+	(*StatRequest)(nil),                     // 23: warehouse_iface.v1.StatRequest
+	(*StatResponse)(nil),                    // 24: warehouse_iface.v1.StatResponse
 }
 var file_warehouse_iface_v1_warehouse_proto_depIdxs = []int32{
 	1,  // 0: warehouse_iface.v1.TeamRackListResponse.list:type_name -> warehouse_iface.v1.Rack
@@ -1092,15 +1095,17 @@ var file_warehouse_iface_v1_warehouse_proto_depIdxs = []int32{
 	9,  // 16: warehouse_iface.v1.WarehouseService.TransactionNoteList:input_type -> warehouse_iface.v1.TransactionNoteListRequest
 	4,  // 17: warehouse_iface.v1.WarehouseService.SellingTeamList:input_type -> warehouse_iface.v1.SellingTeamListRequest
 	2,  // 18: warehouse_iface.v1.WarehouseService.TeamRackList:input_type -> warehouse_iface.v1.TeamRackListRequest
-	13, // 19: warehouse_iface.v1.WarehouseService.WarehouseIDs:output_type -> warehouse_iface.v1.WarehouseIDsResponse
-	15, // 20: warehouse_iface.v1.WarehouseService.WarehouseList:output_type -> warehouse_iface.v1.WarehouseListResponse
-	17, // 21: warehouse_iface.v1.WarehouseService.TeamWarehouseReturnInfo:output_type -> warehouse_iface.v1.TeamWarehouseReturnInfoResponse
-	8,  // 22: warehouse_iface.v1.WarehouseService.TransactionNoteCreate:output_type -> warehouse_iface.v1.TransactionNoteCreateResponse
-	10, // 23: warehouse_iface.v1.WarehouseService.TransactionNoteList:output_type -> warehouse_iface.v1.TransactionNoteListResponse
-	5,  // 24: warehouse_iface.v1.WarehouseService.SellingTeamList:output_type -> warehouse_iface.v1.SellingTeamListResponse
-	3,  // 25: warehouse_iface.v1.WarehouseService.TeamRackList:output_type -> warehouse_iface.v1.TeamRackListResponse
-	19, // [19:26] is the sub-list for method output_type
-	12, // [12:19] is the sub-list for method input_type
+	23, // 19: warehouse_iface.v1.WarehouseService.Stat:input_type -> warehouse_iface.v1.StatRequest
+	13, // 20: warehouse_iface.v1.WarehouseService.WarehouseIDs:output_type -> warehouse_iface.v1.WarehouseIDsResponse
+	15, // 21: warehouse_iface.v1.WarehouseService.WarehouseList:output_type -> warehouse_iface.v1.WarehouseListResponse
+	17, // 22: warehouse_iface.v1.WarehouseService.TeamWarehouseReturnInfo:output_type -> warehouse_iface.v1.TeamWarehouseReturnInfoResponse
+	8,  // 23: warehouse_iface.v1.WarehouseService.TransactionNoteCreate:output_type -> warehouse_iface.v1.TransactionNoteCreateResponse
+	10, // 24: warehouse_iface.v1.WarehouseService.TransactionNoteList:output_type -> warehouse_iface.v1.TransactionNoteListResponse
+	5,  // 25: warehouse_iface.v1.WarehouseService.SellingTeamList:output_type -> warehouse_iface.v1.SellingTeamListResponse
+	3,  // 26: warehouse_iface.v1.WarehouseService.TeamRackList:output_type -> warehouse_iface.v1.TeamRackListResponse
+	24, // 27: warehouse_iface.v1.WarehouseService.Stat:output_type -> warehouse_iface.v1.StatResponse
+	20, // [20:28] is the sub-list for method output_type
+	12, // [12:20] is the sub-list for method input_type
 	12, // [12:12] is the sub-list for extension type_name
 	12, // [12:12] is the sub-list for extension extendee
 	0,  // [0:12] is the sub-list for field type_name
@@ -1111,6 +1116,7 @@ func file_warehouse_iface_v1_warehouse_proto_init() {
 	if File_warehouse_iface_v1_warehouse_proto != nil {
 		return
 	}
+	file_warehouse_iface_v1_stat_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

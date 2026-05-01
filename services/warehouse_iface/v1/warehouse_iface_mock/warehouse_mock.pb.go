@@ -228,3 +228,29 @@ func (mr *MockWarehouseServiceClientMockRecorder) TeamRackList(ctx, req interfac
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "TeamRackList", reflect.TypeOf((*MockWarehouseService)(nil).TeamRackList), ctx, req)
 }
 
+func (m *MockWarehouseService) Stat(ctx context.Context, req *connect.Request[v1.StatRequest]) (*connect.Response[v1.StatResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "Stat", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.StatResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockWarehouseServiceMockRecorder) Stat(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Stat", reflect.TypeOf((*MockWarehouseService)(nil).Stat), ctx, req)
+}
+
+func (m *MockWarehouseServiceClient) Stat(ctx context.Context, req *connect.Request[v1.StatRequest]) (*connect.Response[v1.StatResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "Stat", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.StatResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockWarehouseServiceClientMockRecorder) Stat(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Stat", reflect.TypeOf((*MockWarehouseService)(nil).Stat), ctx, req)
+}
+

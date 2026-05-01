@@ -496,6 +496,50 @@ func (x *StockProblem) GetTransactionId() uint64 {
 	return 0
 }
 
+type StockFoundBack struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TransactionId uint64                 `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StockFoundBack) Reset() {
+	*x = StockFoundBack{}
+	mi := &file_warehouse_iface_v1_event_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StockFoundBack) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StockFoundBack) ProtoMessage() {}
+
+func (x *StockFoundBack) ProtoReflect() protoreflect.Message {
+	mi := &file_warehouse_iface_v1_event_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StockFoundBack.ProtoReflect.Descriptor instead.
+func (*StockFoundBack) Descriptor() ([]byte, []int) {
+	return file_warehouse_iface_v1_event_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *StockFoundBack) GetTransactionId() uint64 {
+	if x != nil {
+		return x.TransactionId
+	}
+	return 0
+}
+
 type StockAdjustment struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TransactionId uint64                 `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
@@ -505,7 +549,7 @@ type StockAdjustment struct {
 
 func (x *StockAdjustment) Reset() {
 	*x = StockAdjustment{}
-	mi := &file_warehouse_iface_v1_event_proto_msgTypes[8]
+	mi := &file_warehouse_iface_v1_event_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -517,7 +561,7 @@ func (x *StockAdjustment) String() string {
 func (*StockAdjustment) ProtoMessage() {}
 
 func (x *StockAdjustment) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_event_proto_msgTypes[8]
+	mi := &file_warehouse_iface_v1_event_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -530,7 +574,7 @@ func (x *StockAdjustment) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StockAdjustment.ProtoReflect.Descriptor instead.
 func (*StockAdjustment) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_event_proto_rawDescGZIP(), []int{8}
+	return file_warehouse_iface_v1_event_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *StockAdjustment) GetTransactionId() uint64 {
@@ -551,6 +595,7 @@ type StockEvent struct {
 	//	*StockEvent_OrderAccepted
 	//	*StockEvent_OrderCanceled
 	//	*StockEvent_StockProblem
+	//	*StockEvent_StockFoundBack
 	//	*StockEvent_StockAdjustment
 	Data          isStockEvent_Data `protobuf_oneof:"data"`
 	unknownFields protoimpl.UnknownFields
@@ -559,7 +604,7 @@ type StockEvent struct {
 
 func (x *StockEvent) Reset() {
 	*x = StockEvent{}
-	mi := &file_warehouse_iface_v1_event_proto_msgTypes[9]
+	mi := &file_warehouse_iface_v1_event_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -571,7 +616,7 @@ func (x *StockEvent) String() string {
 func (*StockEvent) ProtoMessage() {}
 
 func (x *StockEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_event_proto_msgTypes[9]
+	mi := &file_warehouse_iface_v1_event_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -584,7 +629,7 @@ func (x *StockEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StockEvent.ProtoReflect.Descriptor instead.
 func (*StockEvent) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_event_proto_rawDescGZIP(), []int{9}
+	return file_warehouse_iface_v1_event_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *StockEvent) GetData() isStockEvent_Data {
@@ -657,6 +702,15 @@ func (x *StockEvent) GetStockProblem() *StockProblem {
 	return nil
 }
 
+func (x *StockEvent) GetStockFoundBack() *StockFoundBack {
+	if x != nil {
+		if x, ok := x.Data.(*StockEvent_StockFoundBack); ok {
+			return x.StockFoundBack
+		}
+	}
+	return nil
+}
+
 func (x *StockEvent) GetStockAdjustment() *StockAdjustment {
 	if x != nil {
 		if x, ok := x.Data.(*StockEvent_StockAdjustment); ok {
@@ -698,8 +752,12 @@ type StockEvent_StockProblem struct {
 	StockProblem *StockProblem `protobuf:"bytes,7,opt,name=stock_problem,json=stockProblem,proto3,oneof"`
 }
 
+type StockEvent_StockFoundBack struct {
+	StockFoundBack *StockFoundBack `protobuf:"bytes,8,opt,name=stock_found_back,json=stockFoundBack,proto3,oneof"`
+}
+
 type StockEvent_StockAdjustment struct {
-	StockAdjustment *StockAdjustment `protobuf:"bytes,8,opt,name=stock_adjustment,json=stockAdjustment,proto3,oneof"`
+	StockAdjustment *StockAdjustment `protobuf:"bytes,9,opt,name=stock_adjustment,json=stockAdjustment,proto3,oneof"`
 }
 
 func (*StockEvent_StockChange) isStockEvent_Data() {}
@@ -715,6 +773,8 @@ func (*StockEvent_OrderAccepted) isStockEvent_Data() {}
 func (*StockEvent_OrderCanceled) isStockEvent_Data() {}
 
 func (*StockEvent_StockProblem) isStockEvent_Data() {}
+
+func (*StockEvent_StockFoundBack) isStockEvent_Data() {}
 
 func (*StockEvent_StockAdjustment) isStockEvent_Data() {}
 
@@ -745,9 +805,11 @@ const file_warehouse_iface_v1_event_proto_rawDesc = "" +
 	"\x0eReturnAccepted\x12.\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\rtransactionId\">\n" +
 	"\fStockProblem\x12.\n" +
+	"\x0etransaction_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\rtransactionId\"@\n" +
+	"\x0eStockFoundBack\x12.\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\rtransactionId\"A\n" +
 	"\x0fStockAdjustment\x12.\n" +
-	"\x0etransaction_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\rtransactionId\"\x9d\x05\n" +
+	"\x0etransaction_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\rtransactionId\"\xed\x05\n" +
 	"\n" +
 	"StockEvent\x12D\n" +
 	"\fstock_change\x18\x01 \x01(\v2\x1f.warehouse_iface.v1.StockChangeH\x00R\vstockChange\x12Z\n" +
@@ -756,8 +818,9 @@ const file_warehouse_iface_v1_event_proto_rawDesc = "" +
 	"\x0freturn_accepted\x18\x04 \x01(\v2\".warehouse_iface.v1.ReturnAcceptedH\x00R\x0ereturnAccepted\x12J\n" +
 	"\x0eorder_accepted\x18\x05 \x01(\v2!.warehouse_iface.v1.OrderAcceptedH\x00R\rorderAccepted\x12J\n" +
 	"\x0eorder_canceled\x18\x06 \x01(\v2!.warehouse_iface.v1.OrderCanceledH\x00R\rorderCanceled\x12G\n" +
-	"\rstock_problem\x18\a \x01(\v2 .warehouse_iface.v1.StockProblemH\x00R\fstockProblem\x12P\n" +
-	"\x10stock_adjustment\x18\b \x01(\v2#.warehouse_iface.v1.StockAdjustmentH\x00R\x0fstockAdjustment:\x11\x8a\xb5\x18\r\n" +
+	"\rstock_problem\x18\a \x01(\v2 .warehouse_iface.v1.StockProblemH\x00R\fstockProblem\x12N\n" +
+	"\x10stock_found_back\x18\b \x01(\v2\".warehouse_iface.v1.StockFoundBackH\x00R\x0estockFoundBack\x12P\n" +
+	"\x10stock_adjustment\x18\t \x01(\v2#.warehouse_iface.v1.StockAdjustmentH\x00R\x0fstockAdjustment:\x11\x8a\xb5\x18\r\n" +
 	"\vstock-topicB\x06\n" +
 	"\x04data*\x89\x02\n" +
 	"\x0fStockChangeType\x12!\n" +
@@ -785,7 +848,7 @@ func file_warehouse_iface_v1_event_proto_rawDescGZIP() []byte {
 }
 
 var file_warehouse_iface_v1_event_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_warehouse_iface_v1_event_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_warehouse_iface_v1_event_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_warehouse_iface_v1_event_proto_goTypes = []any{
 	(StockChangeType)(0),          // 0: warehouse_iface.v1.StockChangeType
 	(*StockChangeLog)(nil),        // 1: warehouse_iface.v1.StockChangeLog
@@ -796,14 +859,15 @@ var file_warehouse_iface_v1_event_proto_goTypes = []any{
 	(*RestockAccepted)(nil),       // 6: warehouse_iface.v1.RestockAccepted
 	(*ReturnAccepted)(nil),        // 7: warehouse_iface.v1.ReturnAccepted
 	(*StockProblem)(nil),          // 8: warehouse_iface.v1.StockProblem
-	(*StockAdjustment)(nil),       // 9: warehouse_iface.v1.StockAdjustment
-	(*StockEvent)(nil),            // 10: warehouse_iface.v1.StockEvent
-	(*timestamppb.Timestamp)(nil), // 11: google.protobuf.Timestamp
+	(*StockFoundBack)(nil),        // 9: warehouse_iface.v1.StockFoundBack
+	(*StockAdjustment)(nil),       // 10: warehouse_iface.v1.StockAdjustment
+	(*StockEvent)(nil),            // 11: warehouse_iface.v1.StockEvent
+	(*timestamppb.Timestamp)(nil), // 12: google.protobuf.Timestamp
 }
 var file_warehouse_iface_v1_event_proto_depIdxs = []int32{
-	11, // 0: warehouse_iface.v1.StockChange.created_time:type_name -> google.protobuf.Timestamp
+	12, // 0: warehouse_iface.v1.StockChange.created_time:type_name -> google.protobuf.Timestamp
 	1,  // 1: warehouse_iface.v1.StockChange.changes:type_name -> warehouse_iface.v1.StockChangeLog
-	11, // 2: warehouse_iface.v1.PendingStockChange.created_time:type_name -> google.protobuf.Timestamp
+	12, // 2: warehouse_iface.v1.PendingStockChange.created_time:type_name -> google.protobuf.Timestamp
 	1,  // 3: warehouse_iface.v1.PendingStockChange.changes:type_name -> warehouse_iface.v1.StockChangeLog
 	2,  // 4: warehouse_iface.v1.StockEvent.stock_change:type_name -> warehouse_iface.v1.StockChange
 	3,  // 5: warehouse_iface.v1.StockEvent.pending_stock_change:type_name -> warehouse_iface.v1.PendingStockChange
@@ -812,12 +876,13 @@ var file_warehouse_iface_v1_event_proto_depIdxs = []int32{
 	4,  // 8: warehouse_iface.v1.StockEvent.order_accepted:type_name -> warehouse_iface.v1.OrderAccepted
 	5,  // 9: warehouse_iface.v1.StockEvent.order_canceled:type_name -> warehouse_iface.v1.OrderCanceled
 	8,  // 10: warehouse_iface.v1.StockEvent.stock_problem:type_name -> warehouse_iface.v1.StockProblem
-	9,  // 11: warehouse_iface.v1.StockEvent.stock_adjustment:type_name -> warehouse_iface.v1.StockAdjustment
-	12, // [12:12] is the sub-list for method output_type
-	12, // [12:12] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	9,  // 11: warehouse_iface.v1.StockEvent.stock_found_back:type_name -> warehouse_iface.v1.StockFoundBack
+	10, // 12: warehouse_iface.v1.StockEvent.stock_adjustment:type_name -> warehouse_iface.v1.StockAdjustment
+	13, // [13:13] is the sub-list for method output_type
+	13, // [13:13] is the sub-list for method input_type
+	13, // [13:13] is the sub-list for extension type_name
+	13, // [13:13] is the sub-list for extension extendee
+	0,  // [0:13] is the sub-list for field type_name
 }
 
 func init() { file_warehouse_iface_v1_event_proto_init() }
@@ -825,7 +890,7 @@ func file_warehouse_iface_v1_event_proto_init() {
 	if File_warehouse_iface_v1_event_proto != nil {
 		return
 	}
-	file_warehouse_iface_v1_event_proto_msgTypes[9].OneofWrappers = []any{
+	file_warehouse_iface_v1_event_proto_msgTypes[10].OneofWrappers = []any{
 		(*StockEvent_StockChange)(nil),
 		(*StockEvent_PendingStockChange)(nil),
 		(*StockEvent_RestockAccepted)(nil),
@@ -833,6 +898,7 @@ func file_warehouse_iface_v1_event_proto_init() {
 		(*StockEvent_OrderAccepted)(nil),
 		(*StockEvent_OrderCanceled)(nil),
 		(*StockEvent_StockProblem)(nil),
+		(*StockEvent_StockFoundBack)(nil),
 		(*StockEvent_StockAdjustment)(nil),
 	}
 	type x struct{}
@@ -841,7 +907,7 @@ func file_warehouse_iface_v1_event_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_warehouse_iface_v1_event_proto_rawDesc), len(file_warehouse_iface_v1_event_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   10,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

@@ -59,6 +59,10 @@ message StockProblem {
   uint64 transaction_id = 1 [(buf.validate.field).uint64.gt = 0];
 }
 
+message StockFoundBack {
+  uint64 transaction_id = 1 [(buf.validate.field).uint64.gt = 0];
+}
+
 message StockAdjustment {
   uint64 transaction_id = 1 [(buf.validate.field).uint64.gt = 0];
 }
@@ -74,6 +78,7 @@ message StockEvent {
     OrderAccepted order_accepted = 5;
     OrderCanceled order_canceled = 6;
     StockProblem stock_problem = 7;
-    StockAdjustment stock_adjustment = 8;
+    StockFoundBack stock_found_back = 8;
+    StockAdjustment stock_adjustment = 9;
   }
 }
