@@ -175,3 +175,29 @@ func (mr *MockProductServiceClientMockRecorder) ProductListExport(ctx, req inter
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ProductListExport", reflect.TypeOf((*MockProductService)(nil).ProductListExport), ctx, req)
 }
 
+func (m *MockProductService) ProductSearch(ctx context.Context, req *connect.Request[v1.ProductSearchRequest]) (*connect.Response[v1.ProductSearchResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "ProductSearch", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.ProductSearchResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockProductServiceMockRecorder) ProductSearch(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ProductSearch", reflect.TypeOf((*MockProductService)(nil).ProductSearch), ctx, req)
+}
+
+func (m *MockProductServiceClient) ProductSearch(ctx context.Context, req *connect.Request[v1.ProductSearchRequest]) (*connect.Response[v1.ProductSearchResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "ProductSearch", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.ProductSearchResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockProductServiceClientMockRecorder) ProductSearch(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ProductSearch", reflect.TypeOf((*MockProductService)(nil).ProductSearch), ctx, req)
+}
+

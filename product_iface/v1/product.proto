@@ -17,6 +17,28 @@ service ProductService {
   rpc ProductByIDs(ProductByIDsRequest) returns (ProductByIDsResponse);
 
   rpc ProductListExport(ProductListExportRequest) returns (stream ProductListExportResponse);
+  rpc ProductSearch(ProductSearchRequest) returns (ProductSearchResponse);
+}
+
+message ProductSearchRequest {
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  oneof search {
+    string name = 2;
+    string ref_id = 3;
+  }
+
+  int32 limit = 4 [(buf.validate.field).int32.gt = 0];
+}
+
+message ProductSearchItem {
+  uint64 id = 1;
+  string name = 2;
+  string ref_id = 3;
+  string image = 4;
+}
+
+message ProductSearchResponse {
+  repeated ProductSearchItem products = 1;
 }
 
 enum ProductListFieldSort {
