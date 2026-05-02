@@ -48,6 +48,9 @@ const (
 	// InventoryServiceBlacklistedSkuRemoveProcedure is the fully-qualified name of the
 	// InventoryService's BlacklistedSkuRemove RPC.
 	InventoryServiceBlacklistedSkuRemoveProcedure = "/warehouse_iface.v1.InventoryService/BlacklistedSkuRemove"
+	// InventoryServicePrepareSkusProcedure is the fully-qualified name of the InventoryService's
+	// PrepareSkus RPC.
+	InventoryServicePrepareSkusProcedure = "/warehouse_iface.v1.InventoryService/PrepareSkus"
 	// InventoryServiceProductListProcedure is the fully-qualified name of the InventoryService's
 	// ProductList RPC.
 	InventoryServiceProductListProcedure = "/warehouse_iface.v1.InventoryService/ProductList"
@@ -72,6 +75,8 @@ type InventoryServiceClient interface {
 	BlacklistedSku(context.Context, *connect.Request[v1.BlacklistedSkuRequest]) (*connect.Response[v1.BlacklistedSkuResponse], error)
 	BlacklistedSkuAdd(context.Context, *connect.Request[v1.BlacklistedSkuAddRequest]) (*connect.Response[v1.BlacklistedSkuAddResponse], error)
 	BlacklistedSkuRemove(context.Context, *connect.Request[v1.BlacklistedSkuRemoveRequest]) (*connect.Response[v1.BlacklistedSkuRemoveResponse], error)
+	// untuk prepare sku masalah statistik, wajib dipanggil setiap sebelum menghitung
+	PrepareSkus(context.Context, *connect.Request[v1.PrepareSkusRequest]) (*connect.Response[v1.PrepareSkusResponse], error)
 	// bagian product untuk warehouse
 	ProductList(context.Context, *connect.Request[v1.ProductListRequest]) (*connect.Response[v1.ProductListResponse], error)
 	ProductDetail(context.Context, *connect.Request[v1.ProductDetailRequest]) (*connect.Response[v1.ProductDetailResponse], error)
@@ -122,6 +127,12 @@ func NewInventoryServiceClient(httpClient connect.HTTPClient, baseURL string, op
 			connect.WithSchema(inventoryServiceMethods.ByName("BlacklistedSkuRemove")),
 			connect.WithClientOptions(opts...),
 		),
+		prepareSkus: connect.NewClient[v1.PrepareSkusRequest, v1.PrepareSkusResponse](
+			httpClient,
+			baseURL+InventoryServicePrepareSkusProcedure,
+			connect.WithSchema(inventoryServiceMethods.ByName("PrepareSkus")),
+			connect.WithClientOptions(opts...),
+		),
 		productList: connect.NewClient[v1.ProductListRequest, v1.ProductListResponse](
 			httpClient,
 			baseURL+InventoryServiceProductListProcedure,
@@ -162,6 +173,7 @@ type inventoryServiceClient struct {
 	blacklistedSku       *connect.Client[v1.BlacklistedSkuRequest, v1.BlacklistedSkuResponse]
 	blacklistedSkuAdd    *connect.Client[v1.BlacklistedSkuAddRequest, v1.BlacklistedSkuAddResponse]
 	blacklistedSkuRemove *connect.Client[v1.BlacklistedSkuRemoveRequest, v1.BlacklistedSkuRemoveResponse]
+	prepareSkus          *connect.Client[v1.PrepareSkusRequest, v1.PrepareSkusResponse]
 	productList          *connect.Client[v1.ProductListRequest, v1.ProductListResponse]
 	productDetail        *connect.Client[v1.ProductDetailRequest, v1.ProductDetailResponse]
 	productHistory       *connect.Client[v1.ProductHistoryRequest, v1.ProductHistoryResponse]
@@ -192,6 +204,11 @@ func (c *inventoryServiceClient) BlacklistedSkuAdd(ctx context.Context, req *con
 // BlacklistedSkuRemove calls warehouse_iface.v1.InventoryService.BlacklistedSkuRemove.
 func (c *inventoryServiceClient) BlacklistedSkuRemove(ctx context.Context, req *connect.Request[v1.BlacklistedSkuRemoveRequest]) (*connect.Response[v1.BlacklistedSkuRemoveResponse], error) {
 	return c.blacklistedSkuRemove.CallUnary(ctx, req)
+}
+
+// PrepareSkus calls warehouse_iface.v1.InventoryService.PrepareSkus.
+func (c *inventoryServiceClient) PrepareSkus(ctx context.Context, req *connect.Request[v1.PrepareSkusRequest]) (*connect.Response[v1.PrepareSkusResponse], error) {
+	return c.prepareSkus.CallUnary(ctx, req)
 }
 
 // ProductList calls warehouse_iface.v1.InventoryService.ProductList.
@@ -226,6 +243,8 @@ type InventoryServiceHandler interface {
 	BlacklistedSku(context.Context, *connect.Request[v1.BlacklistedSkuRequest]) (*connect.Response[v1.BlacklistedSkuResponse], error)
 	BlacklistedSkuAdd(context.Context, *connect.Request[v1.BlacklistedSkuAddRequest]) (*connect.Response[v1.BlacklistedSkuAddResponse], error)
 	BlacklistedSkuRemove(context.Context, *connect.Request[v1.BlacklistedSkuRemoveRequest]) (*connect.Response[v1.BlacklistedSkuRemoveResponse], error)
+	// untuk prepare sku masalah statistik, wajib dipanggil setiap sebelum menghitung
+	PrepareSkus(context.Context, *connect.Request[v1.PrepareSkusRequest]) (*connect.Response[v1.PrepareSkusResponse], error)
 	// bagian product untuk warehouse
 	ProductList(context.Context, *connect.Request[v1.ProductListRequest]) (*connect.Response[v1.ProductListResponse], error)
 	ProductDetail(context.Context, *connect.Request[v1.ProductDetailRequest]) (*connect.Response[v1.ProductDetailResponse], error)
@@ -272,6 +291,12 @@ func NewInventoryServiceHandler(svc InventoryServiceHandler, opts ...connect.Han
 		connect.WithSchema(inventoryServiceMethods.ByName("BlacklistedSkuRemove")),
 		connect.WithHandlerOptions(opts...),
 	)
+	inventoryServicePrepareSkusHandler := connect.NewUnaryHandler(
+		InventoryServicePrepareSkusProcedure,
+		svc.PrepareSkus,
+		connect.WithSchema(inventoryServiceMethods.ByName("PrepareSkus")),
+		connect.WithHandlerOptions(opts...),
+	)
 	inventoryServiceProductListHandler := connect.NewUnaryHandler(
 		InventoryServiceProductListProcedure,
 		svc.ProductList,
@@ -314,6 +339,8 @@ func NewInventoryServiceHandler(svc InventoryServiceHandler, opts ...connect.Han
 			inventoryServiceBlacklistedSkuAddHandler.ServeHTTP(w, r)
 		case InventoryServiceBlacklistedSkuRemoveProcedure:
 			inventoryServiceBlacklistedSkuRemoveHandler.ServeHTTP(w, r)
+		case InventoryServicePrepareSkusProcedure:
+			inventoryServicePrepareSkusHandler.ServeHTTP(w, r)
 		case InventoryServiceProductListProcedure:
 			inventoryServiceProductListHandler.ServeHTTP(w, r)
 		case InventoryServiceProductDetailProcedure:
@@ -351,6 +378,10 @@ func (UnimplementedInventoryServiceHandler) BlacklistedSkuAdd(context.Context, *
 
 func (UnimplementedInventoryServiceHandler) BlacklistedSkuRemove(context.Context, *connect.Request[v1.BlacklistedSkuRemoveRequest]) (*connect.Response[v1.BlacklistedSkuRemoveResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("warehouse_iface.v1.InventoryService.BlacklistedSkuRemove is not implemented"))
+}
+
+func (UnimplementedInventoryServiceHandler) PrepareSkus(context.Context, *connect.Request[v1.PrepareSkusRequest]) (*connect.Response[v1.PrepareSkusResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("warehouse_iface.v1.InventoryService.PrepareSkus is not implemented"))
 }
 
 func (UnimplementedInventoryServiceHandler) ProductList(context.Context, *connect.Request[v1.ProductListRequest]) (*connect.Response[v1.ProductListResponse], error) {

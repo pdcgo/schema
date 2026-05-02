@@ -16,6 +16,9 @@ service InventoryService {
   rpc BlacklistedSkuAdd(BlacklistedSkuAddRequest) returns (BlacklistedSkuAddResponse);
   rpc BlacklistedSkuRemove(BlacklistedSkuRemoveRequest) returns (BlacklistedSkuRemoveResponse);
 
+  // untuk prepare sku masalah statistik, wajib dipanggil setiap sebelum menghitung
+  rpc PrepareSkus(PrepareSkusRequest) returns (PrepareSkusResponse);
+
   // bagian rack
   // rpc RackIDs(RackIDsRequest) returns (RackIDsResponse);
 
@@ -28,6 +31,19 @@ service InventoryService {
   rpc SkuList(SkuListRequest) returns (SkuListResponse);
   rpc SkuByIDs(SkuByIDsRequest) returns (SkuByIDsResponse);
 }
+
+message PrepareSkusRequest {
+  repeated string sku_ids = 1 [(buf.validate.field).repeated = {
+    min_items: 1
+    max_items: 200
+    unique: true
+    items: {
+      string: {min_len: 1}
+    }
+  }];
+}
+
+message PrepareSkusResponse {}
 
 message SkuByIDsRequest {
   int32 warehouse_id = 1;

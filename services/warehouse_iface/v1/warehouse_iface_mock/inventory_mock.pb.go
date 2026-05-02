@@ -176,6 +176,32 @@ func (mr *MockInventoryServiceClientMockRecorder) BlacklistedSkuRemove(ctx, req 
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "BlacklistedSkuRemove", reflect.TypeOf((*MockInventoryService)(nil).BlacklistedSkuRemove), ctx, req)
 }
 
+func (m *MockInventoryService) PrepareSkus(ctx context.Context, req *connect.Request[v1.PrepareSkusRequest]) (*connect.Response[v1.PrepareSkusResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "PrepareSkus", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.PrepareSkusResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInventoryServiceMockRecorder) PrepareSkus(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PrepareSkus", reflect.TypeOf((*MockInventoryService)(nil).PrepareSkus), ctx, req)
+}
+
+func (m *MockInventoryServiceClient) PrepareSkus(ctx context.Context, req *connect.Request[v1.PrepareSkusRequest]) (*connect.Response[v1.PrepareSkusResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "PrepareSkus", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.PrepareSkusResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInventoryServiceClientMockRecorder) PrepareSkus(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PrepareSkus", reflect.TypeOf((*MockInventoryService)(nil).PrepareSkus), ctx, req)
+}
+
 func (m *MockInventoryService) ProductList(ctx context.Context, req *connect.Request[v1.ProductListRequest]) (*connect.Response[v1.ProductListResponse], error) {
     m.ctrl.T.Helper()
     ret := m.ctrl.Call(m, "ProductList", ctx, req)
