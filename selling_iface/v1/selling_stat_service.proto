@@ -4,6 +4,7 @@ package selling_iface.v1;
 import "buf/validate/validate.proto";
 import "common/v1/stat.proto";
 import "selling_iface/v1/metric.proto";
+import "selling_iface/v1/metric_cost.proto";
 import "selling_iface/v1/metric_order.proto";
 import "selling_iface/v1/metric_product.proto";
 import "selling_iface/v1/metric_stock.proto";
@@ -84,6 +85,7 @@ message Metric {
     HistoryShipmentProblemMetric history_shipment_problem = 16;
     HistoryWarehouseProblemMetric history_warehouse_problem = 17;
     HistoryReadyStockMetric history_ready_stock = 18;
+    HistoryWarehouseCodCostMetric history_warehouse_cod_cost = 19;
   }
 }
 
