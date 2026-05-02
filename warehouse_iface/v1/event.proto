@@ -11,13 +11,13 @@ option go_package = "github.com/pdcgo/schema/services/warehouse_iface/v1;warehou
 
 enum StockChangeType {
   STOCK_CHANGE_TYPE_UNSPECIFIED = 0;
-  STOCK_CHANGE_TYPE_ADJUSTMENT = 1;
-  STOCK_CHANGE_TYPE_RESTOCK = 2;
-  STOCK_CHANGE_TYPE_RETURN = 3;
-  STOCK_CHANGE_TYPE_ORDER = 4;
-  STOCK_CHANGE_TYPE_DAMAGE = 5;
-  STOCK_CHANGE_TYPE_LOST = 6;
-  STOCK_CHANGE_TYPE_EXPIRED = 7;
+  STOCK_CHANGE_TYPE_ORDER_ACCEPTED = 1;
+  STOCK_CHANGE_TYPE_ORDER_CANCELED = 2;
+  STOCK_CHANGE_TYPE_RESTOCK_ACCEPTED = 3;
+  STOCK_CHANGE_TYPE_RETURN_ACCEPTED = 4;
+  STOCK_CHANGE_TYPE_STOCK_PROBLEM = 5;
+  STOCK_CHANGE_TYPE_STOCK_FOUND_BACK = 6;
+  STOCK_CHANGE_TYPE_STOCK_ADJUSTMENT = 7;
 }
 
 message StockChangeLog {
@@ -27,6 +27,9 @@ message StockChangeLog {
   uint64 transaction_id = 4 [(buf.validate.field).uint64.gt = 0];
   int32 change_count = 5 [(buf.validate.field).int32.not_in = 0];
   double change_amount = 6 [(buf.validate.field).double.not_in = 0];
+  // @gotags: gorm:"serializer:timestamptz"
+  google.protobuf.Timestamp transaction_at = 7 [(buf.validate.field).required = true];
+  StockChangeType type = 8 [(buf.validate.field).enum.defined_only = true];
 }
 
 message StockChange {

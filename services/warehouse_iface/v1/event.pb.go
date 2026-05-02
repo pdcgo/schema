@@ -27,37 +27,37 @@ const (
 type StockChangeType int32
 
 const (
-	StockChangeType_STOCK_CHANGE_TYPE_UNSPECIFIED StockChangeType = 0
-	StockChangeType_STOCK_CHANGE_TYPE_ADJUSTMENT  StockChangeType = 1
-	StockChangeType_STOCK_CHANGE_TYPE_RESTOCK     StockChangeType = 2
-	StockChangeType_STOCK_CHANGE_TYPE_RETURN      StockChangeType = 3
-	StockChangeType_STOCK_CHANGE_TYPE_ORDER       StockChangeType = 4
-	StockChangeType_STOCK_CHANGE_TYPE_DAMAGE      StockChangeType = 5
-	StockChangeType_STOCK_CHANGE_TYPE_LOST        StockChangeType = 6
-	StockChangeType_STOCK_CHANGE_TYPE_EXPIRED     StockChangeType = 7
+	StockChangeType_STOCK_CHANGE_TYPE_UNSPECIFIED      StockChangeType = 0
+	StockChangeType_STOCK_CHANGE_TYPE_ORDER_ACCEPTED   StockChangeType = 1
+	StockChangeType_STOCK_CHANGE_TYPE_ORDER_CANCELED   StockChangeType = 2
+	StockChangeType_STOCK_CHANGE_TYPE_RESTOCK_ACCEPTED StockChangeType = 3
+	StockChangeType_STOCK_CHANGE_TYPE_RETURN_ACCEPTED  StockChangeType = 4
+	StockChangeType_STOCK_CHANGE_TYPE_STOCK_PROBLEM    StockChangeType = 5
+	StockChangeType_STOCK_CHANGE_TYPE_STOCK_FOUND_BACK StockChangeType = 6
+	StockChangeType_STOCK_CHANGE_TYPE_STOCK_ADJUSTMENT StockChangeType = 7
 )
 
 // Enum value maps for StockChangeType.
 var (
 	StockChangeType_name = map[int32]string{
 		0: "STOCK_CHANGE_TYPE_UNSPECIFIED",
-		1: "STOCK_CHANGE_TYPE_ADJUSTMENT",
-		2: "STOCK_CHANGE_TYPE_RESTOCK",
-		3: "STOCK_CHANGE_TYPE_RETURN",
-		4: "STOCK_CHANGE_TYPE_ORDER",
-		5: "STOCK_CHANGE_TYPE_DAMAGE",
-		6: "STOCK_CHANGE_TYPE_LOST",
-		7: "STOCK_CHANGE_TYPE_EXPIRED",
+		1: "STOCK_CHANGE_TYPE_ORDER_ACCEPTED",
+		2: "STOCK_CHANGE_TYPE_ORDER_CANCELED",
+		3: "STOCK_CHANGE_TYPE_RESTOCK_ACCEPTED",
+		4: "STOCK_CHANGE_TYPE_RETURN_ACCEPTED",
+		5: "STOCK_CHANGE_TYPE_STOCK_PROBLEM",
+		6: "STOCK_CHANGE_TYPE_STOCK_FOUND_BACK",
+		7: "STOCK_CHANGE_TYPE_STOCK_ADJUSTMENT",
 	}
 	StockChangeType_value = map[string]int32{
-		"STOCK_CHANGE_TYPE_UNSPECIFIED": 0,
-		"STOCK_CHANGE_TYPE_ADJUSTMENT":  1,
-		"STOCK_CHANGE_TYPE_RESTOCK":     2,
-		"STOCK_CHANGE_TYPE_RETURN":      3,
-		"STOCK_CHANGE_TYPE_ORDER":       4,
-		"STOCK_CHANGE_TYPE_DAMAGE":      5,
-		"STOCK_CHANGE_TYPE_LOST":        6,
-		"STOCK_CHANGE_TYPE_EXPIRED":     7,
+		"STOCK_CHANGE_TYPE_UNSPECIFIED":      0,
+		"STOCK_CHANGE_TYPE_ORDER_ACCEPTED":   1,
+		"STOCK_CHANGE_TYPE_ORDER_CANCELED":   2,
+		"STOCK_CHANGE_TYPE_RESTOCK_ACCEPTED": 3,
+		"STOCK_CHANGE_TYPE_RETURN_ACCEPTED":  4,
+		"STOCK_CHANGE_TYPE_STOCK_PROBLEM":    5,
+		"STOCK_CHANGE_TYPE_STOCK_FOUND_BACK": 6,
+		"STOCK_CHANGE_TYPE_STOCK_ADJUSTMENT": 7,
 	}
 )
 
@@ -96,6 +96,9 @@ type StockChangeLog struct {
 	TransactionId uint64                 `protobuf:"varint,4,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
 	ChangeCount   int32                  `protobuf:"varint,5,opt,name=change_count,json=changeCount,proto3" json:"change_count,omitempty"`
 	ChangeAmount  float64                `protobuf:"fixed64,6,opt,name=change_amount,json=changeAmount,proto3" json:"change_amount,omitempty"`
+	// @gotags: gorm:"serializer:timestamptz"
+	TransactionAt *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=transaction_at,json=transactionAt,proto3" json:"transaction_at,omitempty" gorm:"serializer:timestamptz"`
+	Type          StockChangeType        `protobuf:"varint,8,opt,name=type,proto3,enum=warehouse_iface.v1.StockChangeType" json:"type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -170,6 +173,20 @@ func (x *StockChangeLog) GetChangeAmount() float64 {
 		return x.ChangeAmount
 	}
 	return 0
+}
+
+func (x *StockChangeLog) GetTransactionAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.TransactionAt
+	}
+	return nil
+}
+
+func (x *StockChangeLog) GetType() StockChangeType {
+	if x != nil {
+		return x.Type
+	}
+	return StockChangeType_STOCK_CHANGE_TYPE_UNSPECIFIED
 }
 
 type StockChange struct {
@@ -782,14 +799,16 @@ var File_warehouse_iface_v1_event_proto protoreflect.FileDescriptor
 
 const file_warehouse_iface_v1_event_proto_rawDesc = "" +
 	"\n" +
-	"\x1ewarehouse_iface/v1/event.proto\x12\x12warehouse_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x19event_base/v1/event.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x91\x02\n" +
+	"\x1ewarehouse_iface/v1/event.proto\x12\x12warehouse_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x19event_base/v1/event.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x9f\x03\n" +
 	"\x0eStockChangeLog\x12\x1e\n" +
 	"\x06sku_id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x05skuId\x12*\n" +
 	"\fwarehouse_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\vwarehouseId\x12\"\n" +
 	"\bactor_id\x18\x03 \x01(\x04B\a\xbaH\x042\x02 \x00R\aactorId\x12.\n" +
 	"\x0etransaction_id\x18\x04 \x01(\x04B\a\xbaH\x042\x02 \x00R\rtransactionId\x12*\n" +
 	"\fchange_count\x18\x05 \x01(\x05B\a\xbaH\x04\x1a\x028\x00R\vchangeCount\x123\n" +
-	"\rchange_amount\x18\x06 \x01(\x01B\x0e\xbaH\v\x12\t9\x00\x00\x00\x00\x00\x00\x00\x00R\fchangeAmount\"\x9c\x01\n" +
+	"\rchange_amount\x18\x06 \x01(\x01B\x0e\xbaH\v\x12\t9\x00\x00\x00\x00\x00\x00\x00\x00R\fchangeAmount\x12I\n" +
+	"\x0etransaction_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\rtransactionAt\x12A\n" +
+	"\x04type\x18\b \x01(\x0e2#.warehouse_iface.v1.StockChangeTypeB\b\xbaH\x05\x82\x01\x02\x10\x01R\x04type\"\x9c\x01\n" +
 	"\vStockChange\x12E\n" +
 	"\fcreated_time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\vcreatedTime\x12F\n" +
 	"\achanges\x18\x02 \x03(\v2\".warehouse_iface.v1.StockChangeLogB\b\xbaH\x05\x92\x01\x02\b\x01R\achanges\"\xa3\x01\n" +
@@ -822,16 +841,16 @@ const file_warehouse_iface_v1_event_proto_rawDesc = "" +
 	"\x10stock_found_back\x18\b \x01(\v2\".warehouse_iface.v1.StockFoundBackH\x00R\x0estockFoundBack\x12P\n" +
 	"\x10stock_adjustment\x18\t \x01(\v2#.warehouse_iface.v1.StockAdjustmentH\x00R\x0fstockAdjustment:\x11\x8a\xb5\x18\r\n" +
 	"\vstock-topicB\x06\n" +
-	"\x04data*\x89\x02\n" +
+	"\x04data*\xc4\x02\n" +
 	"\x0fStockChangeType\x12!\n" +
-	"\x1dSTOCK_CHANGE_TYPE_UNSPECIFIED\x10\x00\x12 \n" +
-	"\x1cSTOCK_CHANGE_TYPE_ADJUSTMENT\x10\x01\x12\x1d\n" +
-	"\x19STOCK_CHANGE_TYPE_RESTOCK\x10\x02\x12\x1c\n" +
-	"\x18STOCK_CHANGE_TYPE_RETURN\x10\x03\x12\x1b\n" +
-	"\x17STOCK_CHANGE_TYPE_ORDER\x10\x04\x12\x1c\n" +
-	"\x18STOCK_CHANGE_TYPE_DAMAGE\x10\x05\x12\x1a\n" +
-	"\x16STOCK_CHANGE_TYPE_LOST\x10\x06\x12\x1d\n" +
-	"\x19STOCK_CHANGE_TYPE_EXPIRED\x10\aB\xce\x01\n" +
+	"\x1dSTOCK_CHANGE_TYPE_UNSPECIFIED\x10\x00\x12$\n" +
+	" STOCK_CHANGE_TYPE_ORDER_ACCEPTED\x10\x01\x12$\n" +
+	" STOCK_CHANGE_TYPE_ORDER_CANCELED\x10\x02\x12&\n" +
+	"\"STOCK_CHANGE_TYPE_RESTOCK_ACCEPTED\x10\x03\x12%\n" +
+	"!STOCK_CHANGE_TYPE_RETURN_ACCEPTED\x10\x04\x12#\n" +
+	"\x1fSTOCK_CHANGE_TYPE_STOCK_PROBLEM\x10\x05\x12&\n" +
+	"\"STOCK_CHANGE_TYPE_STOCK_FOUND_BACK\x10\x06\x12&\n" +
+	"\"STOCK_CHANGE_TYPE_STOCK_ADJUSTMENT\x10\aB\xce\x01\n" +
 	"\x16com.warehouse_iface.v1B\n" +
 	"EventProtoP\x01ZCgithub.com/pdcgo/schema/services/warehouse_iface/v1;warehouse_iface\xa2\x02\x03WXX\xaa\x02\x11WarehouseIface.V1\xca\x02\x11WarehouseIface\\V1\xe2\x02\x1dWarehouseIface\\V1\\GPBMetadata\xea\x02\x12WarehouseIface::V1b\x06proto3"
 
@@ -865,24 +884,26 @@ var file_warehouse_iface_v1_event_proto_goTypes = []any{
 	(*timestamppb.Timestamp)(nil), // 12: google.protobuf.Timestamp
 }
 var file_warehouse_iface_v1_event_proto_depIdxs = []int32{
-	12, // 0: warehouse_iface.v1.StockChange.created_time:type_name -> google.protobuf.Timestamp
-	1,  // 1: warehouse_iface.v1.StockChange.changes:type_name -> warehouse_iface.v1.StockChangeLog
-	12, // 2: warehouse_iface.v1.PendingStockChange.created_time:type_name -> google.protobuf.Timestamp
-	1,  // 3: warehouse_iface.v1.PendingStockChange.changes:type_name -> warehouse_iface.v1.StockChangeLog
-	2,  // 4: warehouse_iface.v1.StockEvent.stock_change:type_name -> warehouse_iface.v1.StockChange
-	3,  // 5: warehouse_iface.v1.StockEvent.pending_stock_change:type_name -> warehouse_iface.v1.PendingStockChange
-	6,  // 6: warehouse_iface.v1.StockEvent.restock_accepted:type_name -> warehouse_iface.v1.RestockAccepted
-	7,  // 7: warehouse_iface.v1.StockEvent.return_accepted:type_name -> warehouse_iface.v1.ReturnAccepted
-	4,  // 8: warehouse_iface.v1.StockEvent.order_accepted:type_name -> warehouse_iface.v1.OrderAccepted
-	5,  // 9: warehouse_iface.v1.StockEvent.order_canceled:type_name -> warehouse_iface.v1.OrderCanceled
-	8,  // 10: warehouse_iface.v1.StockEvent.stock_problem:type_name -> warehouse_iface.v1.StockProblem
-	9,  // 11: warehouse_iface.v1.StockEvent.stock_found_back:type_name -> warehouse_iface.v1.StockFoundBack
-	10, // 12: warehouse_iface.v1.StockEvent.stock_adjustment:type_name -> warehouse_iface.v1.StockAdjustment
-	13, // [13:13] is the sub-list for method output_type
-	13, // [13:13] is the sub-list for method input_type
-	13, // [13:13] is the sub-list for extension type_name
-	13, // [13:13] is the sub-list for extension extendee
-	0,  // [0:13] is the sub-list for field type_name
+	12, // 0: warehouse_iface.v1.StockChangeLog.transaction_at:type_name -> google.protobuf.Timestamp
+	0,  // 1: warehouse_iface.v1.StockChangeLog.type:type_name -> warehouse_iface.v1.StockChangeType
+	12, // 2: warehouse_iface.v1.StockChange.created_time:type_name -> google.protobuf.Timestamp
+	1,  // 3: warehouse_iface.v1.StockChange.changes:type_name -> warehouse_iface.v1.StockChangeLog
+	12, // 4: warehouse_iface.v1.PendingStockChange.created_time:type_name -> google.protobuf.Timestamp
+	1,  // 5: warehouse_iface.v1.PendingStockChange.changes:type_name -> warehouse_iface.v1.StockChangeLog
+	2,  // 6: warehouse_iface.v1.StockEvent.stock_change:type_name -> warehouse_iface.v1.StockChange
+	3,  // 7: warehouse_iface.v1.StockEvent.pending_stock_change:type_name -> warehouse_iface.v1.PendingStockChange
+	6,  // 8: warehouse_iface.v1.StockEvent.restock_accepted:type_name -> warehouse_iface.v1.RestockAccepted
+	7,  // 9: warehouse_iface.v1.StockEvent.return_accepted:type_name -> warehouse_iface.v1.ReturnAccepted
+	4,  // 10: warehouse_iface.v1.StockEvent.order_accepted:type_name -> warehouse_iface.v1.OrderAccepted
+	5,  // 11: warehouse_iface.v1.StockEvent.order_canceled:type_name -> warehouse_iface.v1.OrderCanceled
+	8,  // 12: warehouse_iface.v1.StockEvent.stock_problem:type_name -> warehouse_iface.v1.StockProblem
+	9,  // 13: warehouse_iface.v1.StockEvent.stock_found_back:type_name -> warehouse_iface.v1.StockFoundBack
+	10, // 14: warehouse_iface.v1.StockEvent.stock_adjustment:type_name -> warehouse_iface.v1.StockAdjustment
+	15, // [15:15] is the sub-list for method output_type
+	15, // [15:15] is the sub-list for method input_type
+	15, // [15:15] is the sub-list for extension type_name
+	15, // [15:15] is the sub-list for extension extendee
+	0,  // [0:15] is the sub-list for field type_name
 }
 
 func init() { file_warehouse_iface_v1_event_proto_init() }
