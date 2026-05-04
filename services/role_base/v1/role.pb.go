@@ -10,6 +10,7 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	descriptorpb "google.golang.org/protobuf/types/descriptorpb"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -147,6 +148,8 @@ type Identity struct {
 	Role          Role                   `protobuf:"varint,2,opt,name=role,proto3,enum=role_base.v1.Role" json:"role,omitempty"`
 	IdentityType  IdentityType           `protobuf:"varint,3,opt,name=identity_type,json=identityType,proto3,enum=role_base.v1.IdentityType" json:"identity_type,omitempty"`
 	Agent         string                 `protobuf:"bytes,4,opt,name=agent,proto3" json:"agent,omitempty"`
+	Username      string                 `protobuf:"bytes,5,opt,name=username,proto3" json:"username,omitempty"`
+	ExpiredAt     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=expired_at,json=expiredAt,proto3" json:"expired_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -209,13 +212,26 @@ func (x *Identity) GetAgent() string {
 	return ""
 }
 
+func (x *Identity) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
+func (x *Identity) GetExpiredAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.ExpiredAt
+	}
+	return nil
+}
+
 type RequestPolicy struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	Roles              []Role                 `protobuf:"varint,1,rep,packed,name=roles,proto3,enum=role_base.v1.Role" json:"roles,omitempty"`
-	AllowAuthenticated bool                   `protobuf:"varint,2,opt,name=allow_authenticated,json=allowAuthenticated,proto3" json:"allow_authenticated,omitempty"`
-	AllowPublic        bool                   `protobuf:"varint,3,opt,name=allow_public,json=allowPublic,proto3" json:"allow_public,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Roles         []Role                 `protobuf:"varint,1,rep,packed,name=roles,proto3,enum=role_base.v1.Role" json:"roles,omitempty"`
+	AllowAll      bool                   `protobuf:"varint,3,opt,name=allow_all,json=allowAll,proto3" json:"allow_all,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *RequestPolicy) Reset() {
@@ -255,16 +271,9 @@ func (x *RequestPolicy) GetRoles() []Role {
 	return nil
 }
 
-func (x *RequestPolicy) GetAllowAuthenticated() bool {
+func (x *RequestPolicy) GetAllowAll() bool {
 	if x != nil {
-		return x.AllowAuthenticated
-	}
-	return false
-}
-
-func (x *RequestPolicy) GetAllowPublic() bool {
-	if x != nil {
-		return x.AllowPublic
+		return x.AllowAll
 	}
 	return false
 }
@@ -290,17 +299,19 @@ var File_role_base_v1_role_proto protoreflect.FileDescriptor
 
 const file_role_base_v1_role_proto_rawDesc = "" +
 	"\n" +
-	"\x17role_base/v1/role.proto\x12\frole_base.v1\x1a google/protobuf/descriptor.proto\"\xaa\x01\n" +
+	"\x17role_base/v1/role.proto\x12\frole_base.v1\x1a google/protobuf/descriptor.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x81\x02\n" +
 	"\bIdentity\x12\x1f\n" +
 	"\videntity_id\x18\x01 \x01(\rR\n" +
 	"identityId\x12&\n" +
 	"\x04role\x18\x02 \x01(\x0e2\x12.role_base.v1.RoleR\x04role\x12?\n" +
 	"\ridentity_type\x18\x03 \x01(\x0e2\x1a.role_base.v1.IdentityTypeR\fidentityType\x12\x14\n" +
-	"\x05agent\x18\x04 \x01(\tR\x05agent\"\x8d\x01\n" +
+	"\x05agent\x18\x04 \x01(\tR\x05agent\x12\x1a\n" +
+	"\busername\x18\x05 \x01(\tR\busername\x129\n" +
+	"\n" +
+	"expired_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\texpiredAt\"V\n" +
 	"\rRequestPolicy\x12(\n" +
-	"\x05roles\x18\x01 \x03(\x0e2\x12.role_base.v1.RoleR\x05roles\x12/\n" +
-	"\x13allow_authenticated\x18\x02 \x01(\bR\x12allowAuthenticated\x12!\n" +
-	"\fallow_public\x18\x03 \x01(\bR\vallowPublic*\xd4\x01\n" +
+	"\x05roles\x18\x01 \x03(\x0e2\x12.role_base.v1.RoleR\x05roles\x12\x1b\n" +
+	"\tallow_all\x18\x03 \x01(\bR\ballowAll*\xd4\x01\n" +
 	"\x04Role\x12\x14\n" +
 	"\x10ROLE_UNSPECIFIED\x10\x00\x12\r\n" +
 	"\tROLE_ROOT\x10\x01\x12\x0e\n" +
@@ -339,19 +350,21 @@ var file_role_base_v1_role_proto_goTypes = []any{
 	(IdentityType)(0),                   // 1: role_base.v1.IdentityType
 	(*Identity)(nil),                    // 2: role_base.v1.Identity
 	(*RequestPolicy)(nil),               // 3: role_base.v1.RequestPolicy
-	(*descriptorpb.MessageOptions)(nil), // 4: google.protobuf.MessageOptions
+	(*timestamppb.Timestamp)(nil),       // 4: google.protobuf.Timestamp
+	(*descriptorpb.MessageOptions)(nil), // 5: google.protobuf.MessageOptions
 }
 var file_role_base_v1_role_proto_depIdxs = []int32{
 	0, // 0: role_base.v1.Identity.role:type_name -> role_base.v1.Role
 	1, // 1: role_base.v1.Identity.identity_type:type_name -> role_base.v1.IdentityType
-	0, // 2: role_base.v1.RequestPolicy.roles:type_name -> role_base.v1.Role
-	4, // 3: role_base.v1.request_policy:extendee -> google.protobuf.MessageOptions
-	3, // 4: role_base.v1.request_policy:type_name -> role_base.v1.RequestPolicy
-	5, // [5:5] is the sub-list for method output_type
-	5, // [5:5] is the sub-list for method input_type
-	4, // [4:5] is the sub-list for extension type_name
-	3, // [3:4] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	4, // 2: role_base.v1.Identity.expired_at:type_name -> google.protobuf.Timestamp
+	0, // 3: role_base.v1.RequestPolicy.roles:type_name -> role_base.v1.Role
+	5, // 4: role_base.v1.request_policy:extendee -> google.protobuf.MessageOptions
+	3, // 5: role_base.v1.request_policy:type_name -> role_base.v1.RequestPolicy
+	6, // [6:6] is the sub-list for method output_type
+	6, // [6:6] is the sub-list for method input_type
+	5, // [5:6] is the sub-list for extension type_name
+	4, // [4:5] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_role_base_v1_role_proto_init() }

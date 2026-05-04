@@ -1,0 +1,43 @@
+syntax = "proto3";
+package example_iface.v1;
+
+import "role_base/v1/role.proto";
+
+option go_package = "github.com/pdcgo/schema/services/example_iface/v1;example_iface";
+
+service ExampleHelloService {
+  rpc CreateToken(CreateTokenRequest) returns (CreateTokenResponse);
+  rpc HelloWorld(HelloWorldRequest) returns (HelloWorldResponse);
+  rpc HelloAdmin(HelloAdminRequest) returns (HelloAdminResponse);
+}
+
+message CreateTokenRequest {
+  option (role_base.v1.request_policy) = {allow_all: true};
+  role_base.v1.Identity identity = 1;
+}
+
+message CreateTokenResponse {
+  string token = 1;
+}
+
+message HelloAdminRequest {
+  option (role_base.v1.request_policy) = {
+    roles: [
+      ROLE_ROOT,
+      ROLE_ADMIN
+    ]
+  };
+  string name = 1;
+}
+
+message HelloAdminResponse {
+  string message = 1;
+}
+
+message HelloWorldRequest {
+  string name = 1;
+}
+
+message HelloWorldResponse {
+  string message = 1;
+}

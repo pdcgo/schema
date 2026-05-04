@@ -2,6 +2,7 @@ syntax = "proto3";
 package role_base.v1;
 
 import "google/protobuf/descriptor.proto";
+import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/pdcgo/schema/services/role_base/v1;role_base";
 
@@ -29,11 +30,12 @@ message Identity {
   Role role = 2;
   IdentityType identity_type = 3;
   string agent = 4;
+  string username = 5;
+  google.protobuf.Timestamp expired_at = 6;
 }
 message RequestPolicy {
   repeated Role roles = 1;
-  bool allow_authenticated = 2;
-  bool allow_public = 3;
+  bool allow_all = 3;
 }
 
 extend google.protobuf.MessageOptions {
