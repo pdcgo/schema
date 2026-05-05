@@ -1195,9 +1195,9 @@ var File_product_iface_v1_product_proto protoreflect.FileDescriptor
 
 const file_product_iface_v1_product_proto_rawDesc = "" +
 	"\n" +
-	"\x1eproduct_iface/v1/product.proto\x12\x10product_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\"\x90\x01\n" +
-	"\x14ProductSearchRequest\x12 \n" +
-	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12\x14\n" +
+	"\x1eproduct_iface/v1/product.proto\x12\x10product_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\"\x87\x01\n" +
+	"\x14ProductSearchRequest\x12\x17\n" +
+	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12\x14\n" +
 	"\x04name\x18\x02 \x01(\tH\x00R\x04name\x12\x17\n" +
 	"\x06ref_id\x18\x03 \x01(\tH\x00R\x05refId\x12\x1d\n" +
 	"\x05limit\x18\x04 \x01(\x05B\a\xbaH\x04\x1a\x02 \x00R\x05limitB\b\n" +

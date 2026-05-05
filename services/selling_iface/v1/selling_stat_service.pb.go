@@ -1121,7 +1121,7 @@ var File_selling_iface_v1_selling_stat_service_proto protoreflect.FileDescriptor
 
 const file_selling_iface_v1_selling_stat_service_proto_rawDesc = "" +
 	"\n" +
-	"+selling_iface/v1/selling_stat_service.proto\x12\x10selling_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x14common/v1/stat.proto\x1a\x1dselling_iface/v1/metric.proto\x1a\"selling_iface/v1/metric_cost.proto\x1a#selling_iface/v1/metric_order.proto\x1a%selling_iface/v1/metric_product.proto\x1a#selling_iface/v1/metric_stock.proto\"\xb0\x01\n" +
+	"+selling_iface/v1/selling_stat_service.proto\x12\x10selling_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x14common/v1/stat.proto\x1a\x1dselling_iface/v1/metric.proto\x1a\"selling_iface/v1/metric_cost.proto\x1a#selling_iface/v1/metric_order.proto\x1a%selling_iface/v1/metric_product.proto\x1a#selling_iface/v1/metric_stock.proto\x1a*selling_iface/v1/product_stat_metric.proto\"\xb0\x01\n" +
 	"\x10TotalStockMetric\x120\n" +
 	"\x04type\x18\x01 \x01(\x0e2\x1c.selling_iface.v1.MetricTypeR\x04type\x12\x1f\n" +
 	"\vtotal_count\x18\x02 \x01(\x04R\n" +
@@ -1208,9 +1208,10 @@ const file_selling_iface_v1_selling_stat_service_proto_rawDesc = "" +
 	"\x06filter\x18\x02 \x01(\v2\x1c.selling_iface.v1.StatFilterR\x06filter\x12M\n" +
 	"\fmetric_types\x18\x03 \x03(\x0e2\x1c.selling_iface.v1.MetricTypeB\f\xbaH\t\x92\x01\x06\b\x01\x10d\x18\x01R\vmetricTypes\"F\n" +
 	"\x12StatStreamResponse\x120\n" +
-	"\x06metric\x18\x01 \x01(\v2\x18.selling_iface.v1.MetricR\x06metric2\xb6\x01\n" +
+	"\x06metric\x18\x01 \x01(\v2\x18.selling_iface.v1.MetricR\x06metric2\xa4\x02\n" +
 	"\x12SellingStatService\x12E\n" +
-	"\x04Stat\x12\x1d.selling_iface.v1.StatRequest\x1a\x1e.selling_iface.v1.StatResponse\x12Y\n" +
+	"\x04Stat\x12\x1d.selling_iface.v1.StatRequest\x1a\x1e.selling_iface.v1.StatResponse\x12l\n" +
+	"\x11ProductStatMetric\x12*.selling_iface.v1.ProductStatMetricRequest\x1a+.selling_iface.v1.ProductStatMetricResponse\x12Y\n" +
 	"\n" +
 	"StatStream\x12#.selling_iface.v1.StatStreamRequest\x1a$.selling_iface.v1.StatStreamResponse0\x01B\xcd\x01\n" +
 	"\x14com.selling_iface.v1B\x17SellingStatServiceProtoP\x01Z?github.com/pdcgo/schema/services/selling_iface/v1;selling_iface\xa2\x02\x03SXX\xaa\x02\x0fSellingIface.V1\xca\x02\x0fSellingIface\\V1\xe2\x02\x1bSellingIface\\V1\\GPBMetadata\xea\x02\x10SellingIface::V1b\x06proto3"
@@ -1257,6 +1258,8 @@ var file_selling_iface_v1_selling_stat_service_proto_goTypes = []any{
 	(*HistoryReadyStockMetric)(nil),       // 25: selling_iface.v1.HistoryReadyStockMetric
 	(*HistoryWarehouseCodCostMetric)(nil), // 26: selling_iface.v1.HistoryWarehouseCodCostMetric
 	(*v1.StatTimeRange)(nil),              // 27: common.v1.StatTimeRange
+	(*ProductStatMetricRequest)(nil),      // 28: selling_iface.v1.ProductStatMetricRequest
+	(*ProductStatMetricResponse)(nil),     // 29: selling_iface.v1.ProductStatMetricResponse
 }
 var file_selling_iface_v1_selling_stat_service_proto_depIdxs = []int32{
 	12, // 0: selling_iface.v1.TotalStockMetric.type:type_name -> selling_iface.v1.MetricType
@@ -1293,11 +1296,13 @@ var file_selling_iface_v1_selling_stat_service_proto_depIdxs = []int32{
 	12, // 31: selling_iface.v1.StatStreamRequest.metric_types:type_name -> selling_iface.v1.MetricType
 	5,  // 32: selling_iface.v1.StatStreamResponse.metric:type_name -> selling_iface.v1.Metric
 	8,  // 33: selling_iface.v1.SellingStatService.Stat:input_type -> selling_iface.v1.StatRequest
-	10, // 34: selling_iface.v1.SellingStatService.StatStream:input_type -> selling_iface.v1.StatStreamRequest
-	9,  // 35: selling_iface.v1.SellingStatService.Stat:output_type -> selling_iface.v1.StatResponse
-	11, // 36: selling_iface.v1.SellingStatService.StatStream:output_type -> selling_iface.v1.StatStreamResponse
-	35, // [35:37] is the sub-list for method output_type
-	33, // [33:35] is the sub-list for method input_type
+	28, // 34: selling_iface.v1.SellingStatService.ProductStatMetric:input_type -> selling_iface.v1.ProductStatMetricRequest
+	10, // 35: selling_iface.v1.SellingStatService.StatStream:input_type -> selling_iface.v1.StatStreamRequest
+	9,  // 36: selling_iface.v1.SellingStatService.Stat:output_type -> selling_iface.v1.StatResponse
+	29, // 37: selling_iface.v1.SellingStatService.ProductStatMetric:output_type -> selling_iface.v1.ProductStatMetricResponse
+	11, // 38: selling_iface.v1.SellingStatService.StatStream:output_type -> selling_iface.v1.StatStreamResponse
+	36, // [36:39] is the sub-list for method output_type
+	33, // [33:36] is the sub-list for method input_type
 	33, // [33:33] is the sub-list for extension type_name
 	33, // [33:33] is the sub-list for extension extendee
 	0,  // [0:33] is the sub-list for field type_name
@@ -1313,6 +1318,7 @@ func file_selling_iface_v1_selling_stat_service_proto_init() {
 	file_selling_iface_v1_metric_order_proto_init()
 	file_selling_iface_v1_metric_product_proto_init()
 	file_selling_iface_v1_metric_stock_proto_init()
+	file_selling_iface_v1_product_stat_metric_proto_init()
 	file_selling_iface_v1_selling_stat_service_proto_msgTypes[5].OneofWrappers = []any{
 		(*Metric_TotalStock)(nil),
 		(*Metric_OngoingStock)(nil),

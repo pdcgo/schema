@@ -35,6 +35,9 @@ const (
 const (
 	// SellingStatServiceStatProcedure is the fully-qualified name of the SellingStatService's Stat RPC.
 	SellingStatServiceStatProcedure = "/selling_iface.v1.SellingStatService/Stat"
+	// SellingStatServiceProductStatMetricProcedure is the fully-qualified name of the
+	// SellingStatService's ProductStatMetric RPC.
+	SellingStatServiceProductStatMetricProcedure = "/selling_iface.v1.SellingStatService/ProductStatMetric"
 	// SellingStatServiceStatStreamProcedure is the fully-qualified name of the SellingStatService's
 	// StatStream RPC.
 	SellingStatServiceStatStreamProcedure = "/selling_iface.v1.SellingStatService/StatStream"
@@ -43,6 +46,7 @@ const (
 // SellingStatServiceClient is a client for the selling_iface.v1.SellingStatService service.
 type SellingStatServiceClient interface {
 	Stat(context.Context, *connect.Request[v1.StatRequest]) (*connect.Response[v1.StatResponse], error)
+	ProductStatMetric(context.Context, *connect.Request[v1.ProductStatMetricRequest]) (*connect.Response[v1.ProductStatMetricResponse], error)
 	StatStream(context.Context, *connect.Request[v1.StatStreamRequest]) (*connect.ServerStreamForClient[v1.StatStreamResponse], error)
 }
 
@@ -63,6 +67,12 @@ func NewSellingStatServiceClient(httpClient connect.HTTPClient, baseURL string, 
 			connect.WithSchema(sellingStatServiceMethods.ByName("Stat")),
 			connect.WithClientOptions(opts...),
 		),
+		productStatMetric: connect.NewClient[v1.ProductStatMetricRequest, v1.ProductStatMetricResponse](
+			httpClient,
+			baseURL+SellingStatServiceProductStatMetricProcedure,
+			connect.WithSchema(sellingStatServiceMethods.ByName("ProductStatMetric")),
+			connect.WithClientOptions(opts...),
+		),
 		statStream: connect.NewClient[v1.StatStreamRequest, v1.StatStreamResponse](
 			httpClient,
 			baseURL+SellingStatServiceStatStreamProcedure,
@@ -74,13 +84,19 @@ func NewSellingStatServiceClient(httpClient connect.HTTPClient, baseURL string, 
 
 // sellingStatServiceClient implements SellingStatServiceClient.
 type sellingStatServiceClient struct {
-	stat       *connect.Client[v1.StatRequest, v1.StatResponse]
-	statStream *connect.Client[v1.StatStreamRequest, v1.StatStreamResponse]
+	stat              *connect.Client[v1.StatRequest, v1.StatResponse]
+	productStatMetric *connect.Client[v1.ProductStatMetricRequest, v1.ProductStatMetricResponse]
+	statStream        *connect.Client[v1.StatStreamRequest, v1.StatStreamResponse]
 }
 
 // Stat calls selling_iface.v1.SellingStatService.Stat.
 func (c *sellingStatServiceClient) Stat(ctx context.Context, req *connect.Request[v1.StatRequest]) (*connect.Response[v1.StatResponse], error) {
 	return c.stat.CallUnary(ctx, req)
+}
+
+// ProductStatMetric calls selling_iface.v1.SellingStatService.ProductStatMetric.
+func (c *sellingStatServiceClient) ProductStatMetric(ctx context.Context, req *connect.Request[v1.ProductStatMetricRequest]) (*connect.Response[v1.ProductStatMetricResponse], error) {
+	return c.productStatMetric.CallUnary(ctx, req)
 }
 
 // StatStream calls selling_iface.v1.SellingStatService.StatStream.
@@ -92,6 +108,7 @@ func (c *sellingStatServiceClient) StatStream(ctx context.Context, req *connect.
 // service.
 type SellingStatServiceHandler interface {
 	Stat(context.Context, *connect.Request[v1.StatRequest]) (*connect.Response[v1.StatResponse], error)
+	ProductStatMetric(context.Context, *connect.Request[v1.ProductStatMetricRequest]) (*connect.Response[v1.ProductStatMetricResponse], error)
 	StatStream(context.Context, *connect.Request[v1.StatStreamRequest], *connect.ServerStream[v1.StatStreamResponse]) error
 }
 
@@ -108,6 +125,12 @@ func NewSellingStatServiceHandler(svc SellingStatServiceHandler, opts ...connect
 		connect.WithSchema(sellingStatServiceMethods.ByName("Stat")),
 		connect.WithHandlerOptions(opts...),
 	)
+	sellingStatServiceProductStatMetricHandler := connect.NewUnaryHandler(
+		SellingStatServiceProductStatMetricProcedure,
+		svc.ProductStatMetric,
+		connect.WithSchema(sellingStatServiceMethods.ByName("ProductStatMetric")),
+		connect.WithHandlerOptions(opts...),
+	)
 	sellingStatServiceStatStreamHandler := connect.NewServerStreamHandler(
 		SellingStatServiceStatStreamProcedure,
 		svc.StatStream,
@@ -118,6 +141,8 @@ func NewSellingStatServiceHandler(svc SellingStatServiceHandler, opts ...connect
 		switch r.URL.Path {
 		case SellingStatServiceStatProcedure:
 			sellingStatServiceStatHandler.ServeHTTP(w, r)
+		case SellingStatServiceProductStatMetricProcedure:
+			sellingStatServiceProductStatMetricHandler.ServeHTTP(w, r)
 		case SellingStatServiceStatStreamProcedure:
 			sellingStatServiceStatStreamHandler.ServeHTTP(w, r)
 		default:
@@ -131,6 +156,10 @@ type UnimplementedSellingStatServiceHandler struct{}
 
 func (UnimplementedSellingStatServiceHandler) Stat(context.Context, *connect.Request[v1.StatRequest]) (*connect.Response[v1.StatResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("selling_iface.v1.SellingStatService.Stat is not implemented"))
+}
+
+func (UnimplementedSellingStatServiceHandler) ProductStatMetric(context.Context, *connect.Request[v1.ProductStatMetricRequest]) (*connect.Response[v1.ProductStatMetricResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("selling_iface.v1.SellingStatService.ProductStatMetric is not implemented"))
 }
 
 func (UnimplementedSellingStatServiceHandler) StatStream(context.Context, *connect.Request[v1.StatStreamRequest], *connect.ServerStream[v1.StatStreamResponse]) error {

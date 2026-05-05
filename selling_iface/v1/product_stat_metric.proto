@@ -1,0 +1,42 @@
+syntax = "proto3";
+package selling_iface.v1;
+
+import "buf/validate/validate.proto";
+import "common/v1/common.proto";
+import "common/v1/stat.proto";
+
+option go_package = "github.com/pdcgo/schema/services/selling_iface/v1;selling_iface";
+
+enum ProductMetricType {
+  PRODUCT_METRIC_TYPE_UNSPECIFIED = 0;
+  PRODUCT_METRIC_TYPE_STOCK_READY = 1;
+  PRODUCT_METRIC_TYPE_STOCK_ONGOING = 2;
+  PRODUCT_METRIC_TYPE_ORDER = 3;
+  PRODUCT_METRIC_TYPE_RESTOCK = 4;
+  PRODUCT_METRIC_TYPE_RETURN = 5;
+  PRODUCT_METRIC_TYPE_STOCK_WAREHOUSE_PROBLEM = 6;
+  PRODUCT_METRIC_TYPE_STOCK_SHIPMENT_PROBLEM = 7;
+  PRODUCT_METRIC_TYPE_STOCK_RESOLUTION = 8;
+}
+
+message ProductMetricExtra {}
+
+message ProductStatMetricFilter {
+  uint64 team_id = 1;
+  uint64 warehouse_id = 2;
+  string product_name = 3;
+  common.v1.PageFilter page = 4;
+}
+
+message ProductStatMetricRequest {
+  common.v1.StatTimeRange range = 1 [(buf.validate.field).required = true];
+  ProductStatMetricFilter filter = 2 [(buf.validate.field).required = true];
+  repeated ProductMetricExtra metric_extras = 3;
+  repeated ProductMetricType metrics = 4;
+}
+
+message ProductStatMetricResponse {
+  repeated ProductMetric metrics = 1;
+}
+
+message ProductMetric {}

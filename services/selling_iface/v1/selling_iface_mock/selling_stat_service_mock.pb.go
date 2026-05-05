@@ -72,6 +72,32 @@ func (mr *MockSellingStatServiceClientMockRecorder) Stat(ctx, req interface{}) *
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Stat", reflect.TypeOf((*MockSellingStatService)(nil).Stat), ctx, req)
 }
 
+func (m *MockSellingStatService) ProductStatMetric(ctx context.Context, req *connect.Request[v1.ProductStatMetricRequest]) (*connect.Response[v1.ProductStatMetricResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "ProductStatMetric", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.ProductStatMetricResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockSellingStatServiceMockRecorder) ProductStatMetric(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ProductStatMetric", reflect.TypeOf((*MockSellingStatService)(nil).ProductStatMetric), ctx, req)
+}
+
+func (m *MockSellingStatServiceClient) ProductStatMetric(ctx context.Context, req *connect.Request[v1.ProductStatMetricRequest]) (*connect.Response[v1.ProductStatMetricResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "ProductStatMetric", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.ProductStatMetricResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockSellingStatServiceClientMockRecorder) ProductStatMetric(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ProductStatMetric", reflect.TypeOf((*MockSellingStatService)(nil).ProductStatMetric), ctx, req)
+}
+
 func (m *MockSellingStatService) StatStream(ctx context.Context, req *connect.Request[v1.StatStreamRequest], stream *connect.ServerStream[v1.StatStreamResponse]) error {
     m.ctrl.T.Helper()
     ret := m.ctrl.Call(m, "StatStream", ctx, req, stream)

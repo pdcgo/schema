@@ -21,7 +21,7 @@ service ProductService {
 }
 
 message ProductSearchRequest {
-  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 team_id = 1;
   oneof search {
     string name = 2;
     string ref_id = 3;
