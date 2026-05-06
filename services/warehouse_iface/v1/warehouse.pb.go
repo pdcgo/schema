@@ -783,6 +783,7 @@ func (x *WarehouseIDsResponse) GetData() map[uint64]*Warehouse {
 
 type WarehouseListRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Q             string                 `protobuf:"bytes,1,opt,name=q,proto3" json:"q,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -815,6 +816,13 @@ func (x *WarehouseListRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use WarehouseListRequest.ProtoReflect.Descriptor instead.
 func (*WarehouseListRequest) Descriptor() ([]byte, []int) {
 	return file_warehouse_iface_v1_warehouse_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *WarehouseListRequest) GetQ() string {
+	if x != nil {
+		return x.Q
+	}
+	return ""
 }
 
 type WarehouseListResponse struct {
@@ -1006,8 +1014,9 @@ const file_warehouse_iface_v1_warehouse_proto_rawDesc = "" +
 	"\x04data\x18\x01 \x03(\v22.warehouse_iface.v1.WarehouseIDsResponse.DataEntryR\x04data\x1aV\n" +
 	"\tDataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\x04R\x03key\x123\n" +
-	"\x05value\x18\x02 \x01(\v2\x1d.warehouse_iface.v1.WarehouseR\x05value:\x028\x01\"\x16\n" +
-	"\x14WarehouseListRequest\"J\n" +
+	"\x05value\x18\x02 \x01(\v2\x1d.warehouse_iface.v1.WarehouseR\x05value:\x028\x01\"$\n" +
+	"\x14WarehouseListRequest\x12\f\n" +
+	"\x01q\x18\x01 \x01(\tR\x01q\"J\n" +
 	"\x15WarehouseListResponse\x121\n" +
 	"\x04list\x18\x01 \x03(\v2\x1d.warehouse_iface.v1.WarehouseR\x04list\"9\n" +
 	"\x1eTeamWarehouseReturnInfoRequest\x12\x17\n" +

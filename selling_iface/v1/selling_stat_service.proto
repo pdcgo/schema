@@ -15,7 +15,7 @@ option go_package = "github.com/pdcgo/schema/services/selling_iface/v1;selling_i
 service SellingStatService {
   rpc Stat(StatRequest) returns (StatResponse);
   rpc ProductStatMetric(ProductStatMetricRequest) returns (ProductStatMetricResponse);
-  rpc StatStream(StatStreamRequest) returns (stream StatStreamResponse);
+  rpc CrossProductList(CrossProductListRequest) returns (CrossProductListResponse);
 }
 
 message TotalStockMetric {
@@ -116,16 +116,8 @@ message StatResponse {
   repeated Metric metrics = 1;
 }
 
-message StatStreamRequest {
-  common.v1.StatTimeRange range = 1 [(buf.validate.field).required = true];
-  StatFilter filter = 2;
-  repeated MetricType metric_types = 3 [(buf.validate.field).repeated = {
-    min_items: 1
-    max_items: 100
-    unique: true
-  }];
+message CrossProductListRequest {
+  uint64 team_id = 1;
+  uint64 warehouse_id = 2;
 }
-
-message StatStreamResponse {
-  Metric metric = 1;
-}
+message CrossProductListResponse {}

@@ -117,7 +117,10 @@ message WarehouseIDsResponse {
   map<uint64, Warehouse> data = 1;
 }
 
-message WarehouseListRequest {}
+message WarehouseListRequest {
+  string q = 1;
+}
+
 message WarehouseListResponse {
   repeated Warehouse list = 1;
 }

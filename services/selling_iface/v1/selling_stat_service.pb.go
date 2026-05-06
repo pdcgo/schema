@@ -1013,29 +1013,28 @@ func (x *StatResponse) GetMetrics() []*Metric {
 	return nil
 }
 
-type StatStreamRequest struct {
+type CrossProductListRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Range         *v1.StatTimeRange      `protobuf:"bytes,1,opt,name=range,proto3" json:"range,omitempty"`
-	Filter        *StatFilter            `protobuf:"bytes,2,opt,name=filter,proto3" json:"filter,omitempty"`
-	MetricTypes   []MetricType           `protobuf:"varint,3,rep,packed,name=metric_types,json=metricTypes,proto3,enum=selling_iface.v1.MetricType" json:"metric_types,omitempty"`
+	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	WarehouseId   uint64                 `protobuf:"varint,2,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *StatStreamRequest) Reset() {
-	*x = StatStreamRequest{}
+func (x *CrossProductListRequest) Reset() {
+	*x = CrossProductListRequest{}
 	mi := &file_selling_iface_v1_selling_stat_service_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *StatStreamRequest) String() string {
+func (x *CrossProductListRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*StatStreamRequest) ProtoMessage() {}
+func (*CrossProductListRequest) ProtoMessage() {}
 
-func (x *StatStreamRequest) ProtoReflect() protoreflect.Message {
+func (x *CrossProductListRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_selling_iface_v1_selling_stat_service_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1047,53 +1046,45 @@ func (x *StatStreamRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StatStreamRequest.ProtoReflect.Descriptor instead.
-func (*StatStreamRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use CrossProductListRequest.ProtoReflect.Descriptor instead.
+func (*CrossProductListRequest) Descriptor() ([]byte, []int) {
 	return file_selling_iface_v1_selling_stat_service_proto_rawDescGZIP(), []int{10}
 }
 
-func (x *StatStreamRequest) GetRange() *v1.StatTimeRange {
+func (x *CrossProductListRequest) GetTeamId() uint64 {
 	if x != nil {
-		return x.Range
+		return x.TeamId
 	}
-	return nil
+	return 0
 }
 
-func (x *StatStreamRequest) GetFilter() *StatFilter {
+func (x *CrossProductListRequest) GetWarehouseId() uint64 {
 	if x != nil {
-		return x.Filter
+		return x.WarehouseId
 	}
-	return nil
+	return 0
 }
 
-func (x *StatStreamRequest) GetMetricTypes() []MetricType {
-	if x != nil {
-		return x.MetricTypes
-	}
-	return nil
-}
-
-type StatStreamResponse struct {
+type CrossProductListResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Metric        *Metric                `protobuf:"bytes,1,opt,name=metric,proto3" json:"metric,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *StatStreamResponse) Reset() {
-	*x = StatStreamResponse{}
+func (x *CrossProductListResponse) Reset() {
+	*x = CrossProductListResponse{}
 	mi := &file_selling_iface_v1_selling_stat_service_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *StatStreamResponse) String() string {
+func (x *CrossProductListResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*StatStreamResponse) ProtoMessage() {}
+func (*CrossProductListResponse) ProtoMessage() {}
 
-func (x *StatStreamResponse) ProtoReflect() protoreflect.Message {
+func (x *CrossProductListResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_selling_iface_v1_selling_stat_service_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1105,16 +1096,9 @@ func (x *StatStreamResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StatStreamResponse.ProtoReflect.Descriptor instead.
-func (*StatStreamResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use CrossProductListResponse.ProtoReflect.Descriptor instead.
+func (*CrossProductListResponse) Descriptor() ([]byte, []int) {
 	return file_selling_iface_v1_selling_stat_service_proto_rawDescGZIP(), []int{11}
-}
-
-func (x *StatStreamResponse) GetMetric() *Metric {
-	if x != nil {
-		return x.Metric
-	}
-	return nil
 }
 
 var File_selling_iface_v1_selling_stat_service_proto protoreflect.FileDescriptor
@@ -1202,18 +1186,15 @@ const file_selling_iface_v1_selling_stat_service_proto_rawDesc = "" +
 	"\fmetric_types\x18\x03 \x03(\x0e2\x1c.selling_iface.v1.MetricTypeB\f\xbaH\t\x92\x01\x06\b\x01\x10\n" +
 	"\x18\x01R\vmetricTypes\"B\n" +
 	"\fStatResponse\x122\n" +
-	"\ametrics\x18\x01 \x03(\v2\x18.selling_iface.v1.MetricR\ametrics\"\xd0\x01\n" +
-	"\x11StatStreamRequest\x126\n" +
-	"\x05range\x18\x01 \x01(\v2\x18.common.v1.StatTimeRangeB\x06\xbaH\x03\xc8\x01\x01R\x05range\x124\n" +
-	"\x06filter\x18\x02 \x01(\v2\x1c.selling_iface.v1.StatFilterR\x06filter\x12M\n" +
-	"\fmetric_types\x18\x03 \x03(\x0e2\x1c.selling_iface.v1.MetricTypeB\f\xbaH\t\x92\x01\x06\b\x01\x10d\x18\x01R\vmetricTypes\"F\n" +
-	"\x12StatStreamResponse\x120\n" +
-	"\x06metric\x18\x01 \x01(\v2\x18.selling_iface.v1.MetricR\x06metric2\xa4\x02\n" +
+	"\ametrics\x18\x01 \x03(\v2\x18.selling_iface.v1.MetricR\ametrics\"U\n" +
+	"\x17CrossProductListRequest\x12\x17\n" +
+	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12!\n" +
+	"\fwarehouse_id\x18\x02 \x01(\x04R\vwarehouseId\"\x1a\n" +
+	"\x18CrossProductListResponse2\xb4\x02\n" +
 	"\x12SellingStatService\x12E\n" +
 	"\x04Stat\x12\x1d.selling_iface.v1.StatRequest\x1a\x1e.selling_iface.v1.StatResponse\x12l\n" +
-	"\x11ProductStatMetric\x12*.selling_iface.v1.ProductStatMetricRequest\x1a+.selling_iface.v1.ProductStatMetricResponse\x12Y\n" +
-	"\n" +
-	"StatStream\x12#.selling_iface.v1.StatStreamRequest\x1a$.selling_iface.v1.StatStreamResponse0\x01B\xcd\x01\n" +
+	"\x11ProductStatMetric\x12*.selling_iface.v1.ProductStatMetricRequest\x1a+.selling_iface.v1.ProductStatMetricResponse\x12i\n" +
+	"\x10CrossProductList\x12).selling_iface.v1.CrossProductListRequest\x1a*.selling_iface.v1.CrossProductListResponseB\xcd\x01\n" +
 	"\x14com.selling_iface.v1B\x17SellingStatServiceProtoP\x01Z?github.com/pdcgo/schema/services/selling_iface/v1;selling_iface\xa2\x02\x03SXX\xaa\x02\x0fSellingIface.V1\xca\x02\x0fSellingIface\\V1\xe2\x02\x1bSellingIface\\V1\\GPBMetadata\xea\x02\x10SellingIface::V1b\x06proto3"
 
 var (
@@ -1240,8 +1221,8 @@ var file_selling_iface_v1_selling_stat_service_proto_goTypes = []any{
 	(*StatFilter)(nil),                    // 7: selling_iface.v1.StatFilter
 	(*StatRequest)(nil),                   // 8: selling_iface.v1.StatRequest
 	(*StatResponse)(nil),                  // 9: selling_iface.v1.StatResponse
-	(*StatStreamRequest)(nil),             // 10: selling_iface.v1.StatStreamRequest
-	(*StatStreamResponse)(nil),            // 11: selling_iface.v1.StatStreamResponse
+	(*CrossProductListRequest)(nil),       // 10: selling_iface.v1.CrossProductListRequest
+	(*CrossProductListResponse)(nil),      // 11: selling_iface.v1.CrossProductListResponse
 	(MetricType)(0),                       // 12: selling_iface.v1.MetricType
 	(*ProductSoldMetric)(nil),             // 13: selling_iface.v1.ProductSoldMetric
 	(*HistoryProductSoldMetric)(nil),      // 14: selling_iface.v1.HistoryProductSoldMetric
@@ -1291,21 +1272,17 @@ var file_selling_iface_v1_selling_stat_service_proto_depIdxs = []int32{
 	7,  // 26: selling_iface.v1.StatRequest.filter:type_name -> selling_iface.v1.StatFilter
 	12, // 27: selling_iface.v1.StatRequest.metric_types:type_name -> selling_iface.v1.MetricType
 	5,  // 28: selling_iface.v1.StatResponse.metrics:type_name -> selling_iface.v1.Metric
-	27, // 29: selling_iface.v1.StatStreamRequest.range:type_name -> common.v1.StatTimeRange
-	7,  // 30: selling_iface.v1.StatStreamRequest.filter:type_name -> selling_iface.v1.StatFilter
-	12, // 31: selling_iface.v1.StatStreamRequest.metric_types:type_name -> selling_iface.v1.MetricType
-	5,  // 32: selling_iface.v1.StatStreamResponse.metric:type_name -> selling_iface.v1.Metric
-	8,  // 33: selling_iface.v1.SellingStatService.Stat:input_type -> selling_iface.v1.StatRequest
-	28, // 34: selling_iface.v1.SellingStatService.ProductStatMetric:input_type -> selling_iface.v1.ProductStatMetricRequest
-	10, // 35: selling_iface.v1.SellingStatService.StatStream:input_type -> selling_iface.v1.StatStreamRequest
-	9,  // 36: selling_iface.v1.SellingStatService.Stat:output_type -> selling_iface.v1.StatResponse
-	29, // 37: selling_iface.v1.SellingStatService.ProductStatMetric:output_type -> selling_iface.v1.ProductStatMetricResponse
-	11, // 38: selling_iface.v1.SellingStatService.StatStream:output_type -> selling_iface.v1.StatStreamResponse
-	36, // [36:39] is the sub-list for method output_type
-	33, // [33:36] is the sub-list for method input_type
-	33, // [33:33] is the sub-list for extension type_name
-	33, // [33:33] is the sub-list for extension extendee
-	0,  // [0:33] is the sub-list for field type_name
+	8,  // 29: selling_iface.v1.SellingStatService.Stat:input_type -> selling_iface.v1.StatRequest
+	28, // 30: selling_iface.v1.SellingStatService.ProductStatMetric:input_type -> selling_iface.v1.ProductStatMetricRequest
+	10, // 31: selling_iface.v1.SellingStatService.CrossProductList:input_type -> selling_iface.v1.CrossProductListRequest
+	9,  // 32: selling_iface.v1.SellingStatService.Stat:output_type -> selling_iface.v1.StatResponse
+	29, // 33: selling_iface.v1.SellingStatService.ProductStatMetric:output_type -> selling_iface.v1.ProductStatMetricResponse
+	11, // 34: selling_iface.v1.SellingStatService.CrossProductList:output_type -> selling_iface.v1.CrossProductListResponse
+	32, // [32:35] is the sub-list for method output_type
+	29, // [29:32] is the sub-list for method input_type
+	29, // [29:29] is the sub-list for extension type_name
+	29, // [29:29] is the sub-list for extension extendee
+	0,  // [0:29] is the sub-list for field type_name
 }
 
 func init() { file_selling_iface_v1_selling_stat_service_proto_init() }

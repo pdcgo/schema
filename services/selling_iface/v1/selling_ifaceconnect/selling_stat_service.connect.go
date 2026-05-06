@@ -38,16 +38,16 @@ const (
 	// SellingStatServiceProductStatMetricProcedure is the fully-qualified name of the
 	// SellingStatService's ProductStatMetric RPC.
 	SellingStatServiceProductStatMetricProcedure = "/selling_iface.v1.SellingStatService/ProductStatMetric"
-	// SellingStatServiceStatStreamProcedure is the fully-qualified name of the SellingStatService's
-	// StatStream RPC.
-	SellingStatServiceStatStreamProcedure = "/selling_iface.v1.SellingStatService/StatStream"
+	// SellingStatServiceCrossProductListProcedure is the fully-qualified name of the
+	// SellingStatService's CrossProductList RPC.
+	SellingStatServiceCrossProductListProcedure = "/selling_iface.v1.SellingStatService/CrossProductList"
 )
 
 // SellingStatServiceClient is a client for the selling_iface.v1.SellingStatService service.
 type SellingStatServiceClient interface {
 	Stat(context.Context, *connect.Request[v1.StatRequest]) (*connect.Response[v1.StatResponse], error)
 	ProductStatMetric(context.Context, *connect.Request[v1.ProductStatMetricRequest]) (*connect.Response[v1.ProductStatMetricResponse], error)
-	StatStream(context.Context, *connect.Request[v1.StatStreamRequest]) (*connect.ServerStreamForClient[v1.StatStreamResponse], error)
+	CrossProductList(context.Context, *connect.Request[v1.CrossProductListRequest]) (*connect.Response[v1.CrossProductListResponse], error)
 }
 
 // NewSellingStatServiceClient constructs a client for the selling_iface.v1.SellingStatService
@@ -73,10 +73,10 @@ func NewSellingStatServiceClient(httpClient connect.HTTPClient, baseURL string, 
 			connect.WithSchema(sellingStatServiceMethods.ByName("ProductStatMetric")),
 			connect.WithClientOptions(opts...),
 		),
-		statStream: connect.NewClient[v1.StatStreamRequest, v1.StatStreamResponse](
+		crossProductList: connect.NewClient[v1.CrossProductListRequest, v1.CrossProductListResponse](
 			httpClient,
-			baseURL+SellingStatServiceStatStreamProcedure,
-			connect.WithSchema(sellingStatServiceMethods.ByName("StatStream")),
+			baseURL+SellingStatServiceCrossProductListProcedure,
+			connect.WithSchema(sellingStatServiceMethods.ByName("CrossProductList")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -86,7 +86,7 @@ func NewSellingStatServiceClient(httpClient connect.HTTPClient, baseURL string, 
 type sellingStatServiceClient struct {
 	stat              *connect.Client[v1.StatRequest, v1.StatResponse]
 	productStatMetric *connect.Client[v1.ProductStatMetricRequest, v1.ProductStatMetricResponse]
-	statStream        *connect.Client[v1.StatStreamRequest, v1.StatStreamResponse]
+	crossProductList  *connect.Client[v1.CrossProductListRequest, v1.CrossProductListResponse]
 }
 
 // Stat calls selling_iface.v1.SellingStatService.Stat.
@@ -99,9 +99,9 @@ func (c *sellingStatServiceClient) ProductStatMetric(ctx context.Context, req *c
 	return c.productStatMetric.CallUnary(ctx, req)
 }
 
-// StatStream calls selling_iface.v1.SellingStatService.StatStream.
-func (c *sellingStatServiceClient) StatStream(ctx context.Context, req *connect.Request[v1.StatStreamRequest]) (*connect.ServerStreamForClient[v1.StatStreamResponse], error) {
-	return c.statStream.CallServerStream(ctx, req)
+// CrossProductList calls selling_iface.v1.SellingStatService.CrossProductList.
+func (c *sellingStatServiceClient) CrossProductList(ctx context.Context, req *connect.Request[v1.CrossProductListRequest]) (*connect.Response[v1.CrossProductListResponse], error) {
+	return c.crossProductList.CallUnary(ctx, req)
 }
 
 // SellingStatServiceHandler is an implementation of the selling_iface.v1.SellingStatService
@@ -109,7 +109,7 @@ func (c *sellingStatServiceClient) StatStream(ctx context.Context, req *connect.
 type SellingStatServiceHandler interface {
 	Stat(context.Context, *connect.Request[v1.StatRequest]) (*connect.Response[v1.StatResponse], error)
 	ProductStatMetric(context.Context, *connect.Request[v1.ProductStatMetricRequest]) (*connect.Response[v1.ProductStatMetricResponse], error)
-	StatStream(context.Context, *connect.Request[v1.StatStreamRequest], *connect.ServerStream[v1.StatStreamResponse]) error
+	CrossProductList(context.Context, *connect.Request[v1.CrossProductListRequest]) (*connect.Response[v1.CrossProductListResponse], error)
 }
 
 // NewSellingStatServiceHandler builds an HTTP handler from the service implementation. It returns
@@ -131,10 +131,10 @@ func NewSellingStatServiceHandler(svc SellingStatServiceHandler, opts ...connect
 		connect.WithSchema(sellingStatServiceMethods.ByName("ProductStatMetric")),
 		connect.WithHandlerOptions(opts...),
 	)
-	sellingStatServiceStatStreamHandler := connect.NewServerStreamHandler(
-		SellingStatServiceStatStreamProcedure,
-		svc.StatStream,
-		connect.WithSchema(sellingStatServiceMethods.ByName("StatStream")),
+	sellingStatServiceCrossProductListHandler := connect.NewUnaryHandler(
+		SellingStatServiceCrossProductListProcedure,
+		svc.CrossProductList,
+		connect.WithSchema(sellingStatServiceMethods.ByName("CrossProductList")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/selling_iface.v1.SellingStatService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -143,8 +143,8 @@ func NewSellingStatServiceHandler(svc SellingStatServiceHandler, opts ...connect
 			sellingStatServiceStatHandler.ServeHTTP(w, r)
 		case SellingStatServiceProductStatMetricProcedure:
 			sellingStatServiceProductStatMetricHandler.ServeHTTP(w, r)
-		case SellingStatServiceStatStreamProcedure:
-			sellingStatServiceStatStreamHandler.ServeHTTP(w, r)
+		case SellingStatServiceCrossProductListProcedure:
+			sellingStatServiceCrossProductListHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -162,6 +162,6 @@ func (UnimplementedSellingStatServiceHandler) ProductStatMetric(context.Context,
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("selling_iface.v1.SellingStatService.ProductStatMetric is not implemented"))
 }
 
-func (UnimplementedSellingStatServiceHandler) StatStream(context.Context, *connect.Request[v1.StatStreamRequest], *connect.ServerStream[v1.StatStreamResponse]) error {
-	return connect.NewError(connect.CodeUnimplemented, errors.New("selling_iface.v1.SellingStatService.StatStream is not implemented"))
+func (UnimplementedSellingStatServiceHandler) CrossProductList(context.Context, *connect.Request[v1.CrossProductListRequest]) (*connect.Response[v1.CrossProductListResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("selling_iface.v1.SellingStatService.CrossProductList is not implemented"))
 }
