@@ -116,7 +116,8 @@ message ProductByIDsRequest {
 message ProductIDsData {
   uint64 id = 1;
   string name = 2;
-  repeated string images = 3;
+  string image = 3;
+  string ref_id = 4;
 }
 
 message ProductByIDsResponse {

@@ -779,7 +779,8 @@ type ProductIDsData struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Images        []string               `protobuf:"bytes,3,rep,name=images,proto3" json:"images,omitempty"`
+	Image         string                 `protobuf:"bytes,3,opt,name=image,proto3" json:"image,omitempty"`
+	RefId         string                 `protobuf:"bytes,4,opt,name=ref_id,json=refId,proto3" json:"ref_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -828,11 +829,18 @@ func (x *ProductIDsData) GetName() string {
 	return ""
 }
 
-func (x *ProductIDsData) GetImages() []string {
+func (x *ProductIDsData) GetImage() string {
 	if x != nil {
-		return x.Images
+		return x.Image
 	}
-	return nil
+	return ""
+}
+
+func (x *ProductIDsData) GetRefId() string {
+	if x != nil {
+		return x.RefId
+	}
+	return ""
 }
 
 type ProductByIDsResponse struct {
@@ -1253,11 +1261,12 @@ const file_product_iface_v1_product_proto_rawDesc = "" +
 	"\x13ProductByIDsRequest\x12\"\n" +
 	"\x03ids\x18\x01 \x03(\x04B\x10\xbaH\r\x92\x01\n" +
 	"\b\x01\x10d\"\x042\x02 \x00R\x03ids\x12'\n" +
-	"\x0finclude_variant\x18\x02 \x01(\bR\x0eincludeVariant\"L\n" +
+	"\x0finclude_variant\x18\x02 \x01(\bR\x0eincludeVariant\"a\n" +
 	"\x0eProductIDsData\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x12\x16\n" +
-	"\x06images\x18\x03 \x03(\tR\x06images\"\xc7\x01\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x14\n" +
+	"\x05image\x18\x03 \x01(\tR\x05image\x12\x15\n" +
+	"\x06ref_id\x18\x04 \x01(\tR\x05refId\"\xc7\x01\n" +
 	"\x14ProductByIDsResponse\x12P\n" +
 	"\bproducts\x18\x01 \x03(\v24.product_iface.v1.ProductByIDsResponse.ProductsEntryR\bproducts\x1a]\n" +
 	"\rProductsEntry\x12\x10\n" +
