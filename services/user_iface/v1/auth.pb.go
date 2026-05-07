@@ -23,6 +23,142 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type McpLoginRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Username      string                 `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
+	Password      string                 `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
+	TeamId        uint64                 `protobuf:"varint,3,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	SessionId     string                 `protobuf:"bytes,4,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *McpLoginRequest) Reset() {
+	*x = McpLoginRequest{}
+	mi := &file_user_iface_v1_auth_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *McpLoginRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*McpLoginRequest) ProtoMessage() {}
+
+func (x *McpLoginRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_iface_v1_auth_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use McpLoginRequest.ProtoReflect.Descriptor instead.
+func (*McpLoginRequest) Descriptor() ([]byte, []int) {
+	return file_user_iface_v1_auth_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *McpLoginRequest) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
+func (x *McpLoginRequest) GetPassword() string {
+	if x != nil {
+		return x.Password
+	}
+	return ""
+}
+
+func (x *McpLoginRequest) GetTeamId() uint64 {
+	if x != nil {
+		return x.TeamId
+	}
+	return 0
+}
+
+func (x *McpLoginRequest) GetSessionId() string {
+	if x != nil {
+		return x.SessionId
+	}
+	return ""
+}
+
+type McpLoginResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	User          *User                  `protobuf:"bytes,1,opt,name=user,proto3" json:"user,omitempty"`
+	Token         string                 `protobuf:"bytes,2,opt,name=token,proto3" json:"token,omitempty"`
+	XPdcSource    string                 `protobuf:"bytes,3,opt,name=x_pdc_source,json=xPdcSource,proto3" json:"x_pdc_source,omitempty"`
+	Team          *Team                  `protobuf:"bytes,4,opt,name=team,proto3" json:"team,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *McpLoginResponse) Reset() {
+	*x = McpLoginResponse{}
+	mi := &file_user_iface_v1_auth_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *McpLoginResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*McpLoginResponse) ProtoMessage() {}
+
+func (x *McpLoginResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_user_iface_v1_auth_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use McpLoginResponse.ProtoReflect.Descriptor instead.
+func (*McpLoginResponse) Descriptor() ([]byte, []int) {
+	return file_user_iface_v1_auth_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *McpLoginResponse) GetUser() *User {
+	if x != nil {
+		return x.User
+	}
+	return nil
+}
+
+func (x *McpLoginResponse) GetToken() string {
+	if x != nil {
+		return x.Token
+	}
+	return ""
+}
+
+func (x *McpLoginResponse) GetXPdcSource() string {
+	if x != nil {
+		return x.XPdcSource
+	}
+	return ""
+}
+
+func (x *McpLoginResponse) GetTeam() *Team {
+	if x != nil {
+		return x.Team
+	}
+	return nil
+}
+
 type User struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	Id             uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -35,7 +171,7 @@ type User struct {
 
 func (x *User) Reset() {
 	*x = User{}
-	mi := &file_user_iface_v1_auth_proto_msgTypes[0]
+	mi := &file_user_iface_v1_auth_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -47,7 +183,7 @@ func (x *User) String() string {
 func (*User) ProtoMessage() {}
 
 func (x *User) ProtoReflect() protoreflect.Message {
-	mi := &file_user_iface_v1_auth_proto_msgTypes[0]
+	mi := &file_user_iface_v1_auth_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -60,7 +196,7 @@ func (x *User) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use User.ProtoReflect.Descriptor instead.
 func (*User) Descriptor() ([]byte, []int) {
-	return file_user_iface_v1_auth_proto_rawDescGZIP(), []int{0}
+	return file_user_iface_v1_auth_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *User) GetId() uint64 {
@@ -101,7 +237,7 @@ type Team struct {
 
 func (x *Team) Reset() {
 	*x = Team{}
-	mi := &file_user_iface_v1_auth_proto_msgTypes[1]
+	mi := &file_user_iface_v1_auth_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -113,7 +249,7 @@ func (x *Team) String() string {
 func (*Team) ProtoMessage() {}
 
 func (x *Team) ProtoReflect() protoreflect.Message {
-	mi := &file_user_iface_v1_auth_proto_msgTypes[1]
+	mi := &file_user_iface_v1_auth_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -126,7 +262,7 @@ func (x *Team) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Team.ProtoReflect.Descriptor instead.
 func (*Team) Descriptor() ([]byte, []int) {
-	return file_user_iface_v1_auth_proto_rawDescGZIP(), []int{1}
+	return file_user_iface_v1_auth_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *Team) GetId() uint64 {
@@ -155,7 +291,7 @@ type LoginRequest struct {
 
 func (x *LoginRequest) Reset() {
 	*x = LoginRequest{}
-	mi := &file_user_iface_v1_auth_proto_msgTypes[2]
+	mi := &file_user_iface_v1_auth_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -167,7 +303,7 @@ func (x *LoginRequest) String() string {
 func (*LoginRequest) ProtoMessage() {}
 
 func (x *LoginRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_iface_v1_auth_proto_msgTypes[2]
+	mi := &file_user_iface_v1_auth_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -180,7 +316,7 @@ func (x *LoginRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LoginRequest.ProtoReflect.Descriptor instead.
 func (*LoginRequest) Descriptor() ([]byte, []int) {
-	return file_user_iface_v1_auth_proto_rawDescGZIP(), []int{2}
+	return file_user_iface_v1_auth_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *LoginRequest) GetUsername() string {
@@ -223,7 +359,7 @@ type LoginResponse struct {
 
 func (x *LoginResponse) Reset() {
 	*x = LoginResponse{}
-	mi := &file_user_iface_v1_auth_proto_msgTypes[3]
+	mi := &file_user_iface_v1_auth_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -235,7 +371,7 @@ func (x *LoginResponse) String() string {
 func (*LoginResponse) ProtoMessage() {}
 
 func (x *LoginResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_iface_v1_auth_proto_msgTypes[3]
+	mi := &file_user_iface_v1_auth_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -248,7 +384,7 @@ func (x *LoginResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LoginResponse.ProtoReflect.Descriptor instead.
 func (*LoginResponse) Descriptor() ([]byte, []int) {
-	return file_user_iface_v1_auth_proto_rawDescGZIP(), []int{3}
+	return file_user_iface_v1_auth_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *LoginResponse) GetUser() *User {
@@ -287,7 +423,7 @@ type CheckLoginRequest struct {
 
 func (x *CheckLoginRequest) Reset() {
 	*x = CheckLoginRequest{}
-	mi := &file_user_iface_v1_auth_proto_msgTypes[4]
+	mi := &file_user_iface_v1_auth_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -299,7 +435,7 @@ func (x *CheckLoginRequest) String() string {
 func (*CheckLoginRequest) ProtoMessage() {}
 
 func (x *CheckLoginRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_iface_v1_auth_proto_msgTypes[4]
+	mi := &file_user_iface_v1_auth_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -312,7 +448,7 @@ func (x *CheckLoginRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckLoginRequest.ProtoReflect.Descriptor instead.
 func (*CheckLoginRequest) Descriptor() ([]byte, []int) {
-	return file_user_iface_v1_auth_proto_rawDescGZIP(), []int{4}
+	return file_user_iface_v1_auth_proto_rawDescGZIP(), []int{6}
 }
 
 type CheckLoginResponse struct {
@@ -325,7 +461,7 @@ type CheckLoginResponse struct {
 
 func (x *CheckLoginResponse) Reset() {
 	*x = CheckLoginResponse{}
-	mi := &file_user_iface_v1_auth_proto_msgTypes[5]
+	mi := &file_user_iface_v1_auth_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -337,7 +473,7 @@ func (x *CheckLoginResponse) String() string {
 func (*CheckLoginResponse) ProtoMessage() {}
 
 func (x *CheckLoginResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_iface_v1_auth_proto_msgTypes[5]
+	mi := &file_user_iface_v1_auth_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -350,7 +486,7 @@ func (x *CheckLoginResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckLoginResponse.ProtoReflect.Descriptor instead.
 func (*CheckLoginResponse) Descriptor() ([]byte, []int) {
-	return file_user_iface_v1_auth_proto_rawDescGZIP(), []int{5}
+	return file_user_iface_v1_auth_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *CheckLoginResponse) GetUser() *User {
@@ -375,7 +511,7 @@ type LogoutRequest struct {
 
 func (x *LogoutRequest) Reset() {
 	*x = LogoutRequest{}
-	mi := &file_user_iface_v1_auth_proto_msgTypes[6]
+	mi := &file_user_iface_v1_auth_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -387,7 +523,7 @@ func (x *LogoutRequest) String() string {
 func (*LogoutRequest) ProtoMessage() {}
 
 func (x *LogoutRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_iface_v1_auth_proto_msgTypes[6]
+	mi := &file_user_iface_v1_auth_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -400,7 +536,7 @@ func (x *LogoutRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LogoutRequest.ProtoReflect.Descriptor instead.
 func (*LogoutRequest) Descriptor() ([]byte, []int) {
-	return file_user_iface_v1_auth_proto_rawDescGZIP(), []int{6}
+	return file_user_iface_v1_auth_proto_rawDescGZIP(), []int{8}
 }
 
 type LogoutResponse struct {
@@ -411,7 +547,7 @@ type LogoutResponse struct {
 
 func (x *LogoutResponse) Reset() {
 	*x = LogoutResponse{}
-	mi := &file_user_iface_v1_auth_proto_msgTypes[7]
+	mi := &file_user_iface_v1_auth_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -423,7 +559,7 @@ func (x *LogoutResponse) String() string {
 func (*LogoutResponse) ProtoMessage() {}
 
 func (x *LogoutResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_iface_v1_auth_proto_msgTypes[7]
+	mi := &file_user_iface_v1_auth_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -436,14 +572,27 @@ func (x *LogoutResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LogoutResponse.ProtoReflect.Descriptor instead.
 func (*LogoutResponse) Descriptor() ([]byte, []int) {
-	return file_user_iface_v1_auth_proto_rawDescGZIP(), []int{7}
+	return file_user_iface_v1_auth_proto_rawDescGZIP(), []int{9}
 }
 
 var File_user_iface_v1_auth_proto protoreflect.FileDescriptor
 
 const file_user_iface_v1_auth_proto_rawDesc = "" +
 	"\n" +
-	"\x18user_iface/v1/auth.proto\x12\ruser_iface.v1\x1a\x19access_iface/v1/api.proto\x1a\x1bbuf/validate/validate.proto\"o\n" +
+	"\x18user_iface/v1/auth.proto\x12\ruser_iface.v1\x1a\x19access_iface/v1/api.proto\x1a\x1bbuf/validate/validate.proto\"\xa3\x01\n" +
+	"\x0fMcpLoginRequest\x12%\n" +
+	"\busername\x18\x01 \x01(\tB\t\xbaH\x06r\x04\x10\x01\x18dR\busername\x12%\n" +
+	"\bpassword\x18\x02 \x01(\tB\t\xbaH\x06r\x04\x10\x01\x18dR\bpassword\x12\x17\n" +
+	"\ateam_id\x18\x03 \x01(\x04R\x06teamId\x12)\n" +
+	"\n" +
+	"session_id\x18\x04 \x01(\tB\n" +
+	"\xbaH\ar\x05\x10\x01\x18\xff\x01R\tsessionId\"\x9c\x01\n" +
+	"\x10McpLoginResponse\x12'\n" +
+	"\x04user\x18\x01 \x01(\v2\x13.user_iface.v1.UserR\x04user\x12\x14\n" +
+	"\x05token\x18\x02 \x01(\tR\x05token\x12 \n" +
+	"\fx_pdc_source\x18\x03 \x01(\tR\n" +
+	"xPdcSource\x12'\n" +
+	"\x04team\x18\x04 \x01(\v2\x13.user_iface.v1.TeamR\x04team\"o\n" +
 	"\x04User\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1a\n" +
@@ -469,9 +618,10 @@ const file_user_iface_v1_auth_proto_rawDesc = "" +
 	"\x04user\x18\x01 \x01(\v2\x13.user_iface.v1.UserR\x04user\x12'\n" +
 	"\x04team\x18\x04 \x01(\v2\x13.user_iface.v1.TeamR\x04team\"\x0f\n" +
 	"\rLogoutRequest\"\x10\n" +
-	"\x0eLogoutResponse2\xeb\x01\n" +
+	"\x0eLogoutResponse2\xb8\x02\n" +
 	"\vAuthService\x12B\n" +
-	"\x05Login\x12\x1b.user_iface.v1.LoginRequest\x1a\x1c.user_iface.v1.LoginResponse\x12Q\n" +
+	"\x05Login\x12\x1b.user_iface.v1.LoginRequest\x1a\x1c.user_iface.v1.LoginResponse\x12K\n" +
+	"\bMcpLogin\x12\x1e.user_iface.v1.McpLoginRequest\x1a\x1f.user_iface.v1.McpLoginResponse\x12Q\n" +
 	"\n" +
 	"CheckLogin\x12 .user_iface.v1.CheckLoginRequest\x1a!.user_iface.v1.CheckLoginResponse\x12E\n" +
 	"\x06Logout\x12\x1c.user_iface.v1.LogoutRequest\x1a\x1d.user_iface.v1.LogoutResponseB\xaa\x01\n" +
@@ -489,35 +639,41 @@ func file_user_iface_v1_auth_proto_rawDescGZIP() []byte {
 	return file_user_iface_v1_auth_proto_rawDescData
 }
 
-var file_user_iface_v1_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_user_iface_v1_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_user_iface_v1_auth_proto_goTypes = []any{
-	(*User)(nil),               // 0: user_iface.v1.User
-	(*Team)(nil),               // 1: user_iface.v1.Team
-	(*LoginRequest)(nil),       // 2: user_iface.v1.LoginRequest
-	(*LoginResponse)(nil),      // 3: user_iface.v1.LoginResponse
-	(*CheckLoginRequest)(nil),  // 4: user_iface.v1.CheckLoginRequest
-	(*CheckLoginResponse)(nil), // 5: user_iface.v1.CheckLoginResponse
-	(*LogoutRequest)(nil),      // 6: user_iface.v1.LogoutRequest
-	(*LogoutResponse)(nil),     // 7: user_iface.v1.LogoutResponse
-	(v1.RequestFrom)(0),        // 8: access_iface.v1.RequestFrom
+	(*McpLoginRequest)(nil),    // 0: user_iface.v1.McpLoginRequest
+	(*McpLoginResponse)(nil),   // 1: user_iface.v1.McpLoginResponse
+	(*User)(nil),               // 2: user_iface.v1.User
+	(*Team)(nil),               // 3: user_iface.v1.Team
+	(*LoginRequest)(nil),       // 4: user_iface.v1.LoginRequest
+	(*LoginResponse)(nil),      // 5: user_iface.v1.LoginResponse
+	(*CheckLoginRequest)(nil),  // 6: user_iface.v1.CheckLoginRequest
+	(*CheckLoginResponse)(nil), // 7: user_iface.v1.CheckLoginResponse
+	(*LogoutRequest)(nil),      // 8: user_iface.v1.LogoutRequest
+	(*LogoutResponse)(nil),     // 9: user_iface.v1.LogoutResponse
+	(v1.RequestFrom)(0),        // 10: access_iface.v1.RequestFrom
 }
 var file_user_iface_v1_auth_proto_depIdxs = []int32{
-	8, // 0: user_iface.v1.LoginRequest.from:type_name -> access_iface.v1.RequestFrom
-	0, // 1: user_iface.v1.LoginResponse.user:type_name -> user_iface.v1.User
-	1, // 2: user_iface.v1.LoginResponse.team:type_name -> user_iface.v1.Team
-	0, // 3: user_iface.v1.CheckLoginResponse.user:type_name -> user_iface.v1.User
-	1, // 4: user_iface.v1.CheckLoginResponse.team:type_name -> user_iface.v1.Team
-	2, // 5: user_iface.v1.AuthService.Login:input_type -> user_iface.v1.LoginRequest
-	4, // 6: user_iface.v1.AuthService.CheckLogin:input_type -> user_iface.v1.CheckLoginRequest
-	6, // 7: user_iface.v1.AuthService.Logout:input_type -> user_iface.v1.LogoutRequest
-	3, // 8: user_iface.v1.AuthService.Login:output_type -> user_iface.v1.LoginResponse
-	5, // 9: user_iface.v1.AuthService.CheckLogin:output_type -> user_iface.v1.CheckLoginResponse
-	7, // 10: user_iface.v1.AuthService.Logout:output_type -> user_iface.v1.LogoutResponse
-	8, // [8:11] is the sub-list for method output_type
-	5, // [5:8] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	2,  // 0: user_iface.v1.McpLoginResponse.user:type_name -> user_iface.v1.User
+	3,  // 1: user_iface.v1.McpLoginResponse.team:type_name -> user_iface.v1.Team
+	10, // 2: user_iface.v1.LoginRequest.from:type_name -> access_iface.v1.RequestFrom
+	2,  // 3: user_iface.v1.LoginResponse.user:type_name -> user_iface.v1.User
+	3,  // 4: user_iface.v1.LoginResponse.team:type_name -> user_iface.v1.Team
+	2,  // 5: user_iface.v1.CheckLoginResponse.user:type_name -> user_iface.v1.User
+	3,  // 6: user_iface.v1.CheckLoginResponse.team:type_name -> user_iface.v1.Team
+	4,  // 7: user_iface.v1.AuthService.Login:input_type -> user_iface.v1.LoginRequest
+	0,  // 8: user_iface.v1.AuthService.McpLogin:input_type -> user_iface.v1.McpLoginRequest
+	6,  // 9: user_iface.v1.AuthService.CheckLogin:input_type -> user_iface.v1.CheckLoginRequest
+	8,  // 10: user_iface.v1.AuthService.Logout:input_type -> user_iface.v1.LogoutRequest
+	5,  // 11: user_iface.v1.AuthService.Login:output_type -> user_iface.v1.LoginResponse
+	1,  // 12: user_iface.v1.AuthService.McpLogin:output_type -> user_iface.v1.McpLoginResponse
+	7,  // 13: user_iface.v1.AuthService.CheckLogin:output_type -> user_iface.v1.CheckLoginResponse
+	9,  // 14: user_iface.v1.AuthService.Logout:output_type -> user_iface.v1.LogoutResponse
+	11, // [11:15] is the sub-list for method output_type
+	7,  // [7:11] is the sub-list for method input_type
+	7,  // [7:7] is the sub-list for extension type_name
+	7,  // [7:7] is the sub-list for extension extendee
+	0,  // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_user_iface_v1_auth_proto_init() }
@@ -531,7 +687,7 @@ func file_user_iface_v1_auth_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_user_iface_v1_auth_proto_rawDesc), len(file_user_iface_v1_auth_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   8,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

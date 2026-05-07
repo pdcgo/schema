@@ -31,6 +31,7 @@ const (
 	RequestFrom_REQUEST_FROM_WAREHOUSE   RequestFrom = 3
 	RequestFrom_REQUEST_FROM_SYSTEM      RequestFrom = 4
 	RequestFrom_REQUEST_FROM_EXTENSION   RequestFrom = 5
+	RequestFrom_REQUEST_FROM_MCP         RequestFrom = 6
 )
 
 // Enum value maps for RequestFrom.
@@ -42,6 +43,7 @@ var (
 		3: "REQUEST_FROM_WAREHOUSE",
 		4: "REQUEST_FROM_SYSTEM",
 		5: "REQUEST_FROM_EXTENSION",
+		6: "REQUEST_FROM_MCP",
 	}
 	RequestFrom_value = map[string]int32{
 		"REQUEST_FROM_UNSPECIFIED": 0,
@@ -50,6 +52,7 @@ var (
 		"REQUEST_FROM_WAREHOUSE":   3,
 		"REQUEST_FROM_SYSTEM":      4,
 		"REQUEST_FROM_EXTENSION":   5,
+		"REQUEST_FROM_MCP":         6,
 	}
 )
 
@@ -756,14 +759,15 @@ const file_access_iface_v1_api_proto_rawDesc = "" +
 	"\x04name\x18\x01 \x01(\tR\x04name\"a\n" +
 	"\rHelloResponse\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\x126\n" +
-	"\x06source\x18\x02 \x01(\v2\x1e.access_iface.v1.RequestSourceR\x06source*\xae\x01\n" +
+	"\x06source\x18\x02 \x01(\v2\x1e.access_iface.v1.RequestSourceR\x06source*\xc4\x01\n" +
 	"\vRequestFrom\x12\x1c\n" +
 	"\x18REQUEST_FROM_UNSPECIFIED\x10\x00\x12\x18\n" +
 	"\x14REQUEST_FROM_SELLING\x10\x01\x12\x16\n" +
 	"\x12REQUEST_FROM_ADMIN\x10\x02\x12\x1a\n" +
 	"\x16REQUEST_FROM_WAREHOUSE\x10\x03\x12\x17\n" +
 	"\x13REQUEST_FROM_SYSTEM\x10\x04\x12\x1a\n" +
-	"\x16REQUEST_FROM_EXTENSION\x10\x052\x9c\x03\n" +
+	"\x16REQUEST_FROM_EXTENSION\x10\x05\x12\x14\n" +
+	"\x10REQUEST_FROM_MCP\x10\x062\x9c\x03\n" +
 	"\fHelloService\x12F\n" +
 	"\x05Hello\x12\x1d.access_iface.v1.HelloRequest\x1a\x1e.access_iface.v1.HelloResponse\x12l\n" +
 	"\x11HelloClientStream\x12).access_iface.v1.HelloClientStreamRequest\x1a*.access_iface.v1.HelloClientStreamResponse(\x01\x12l\n" +

@@ -35,6 +35,8 @@ const (
 const (
 	// AuthServiceLoginProcedure is the fully-qualified name of the AuthService's Login RPC.
 	AuthServiceLoginProcedure = "/user_iface.v1.AuthService/Login"
+	// AuthServiceMcpLoginProcedure is the fully-qualified name of the AuthService's McpLogin RPC.
+	AuthServiceMcpLoginProcedure = "/user_iface.v1.AuthService/McpLogin"
 	// AuthServiceCheckLoginProcedure is the fully-qualified name of the AuthService's CheckLogin RPC.
 	AuthServiceCheckLoginProcedure = "/user_iface.v1.AuthService/CheckLogin"
 	// AuthServiceLogoutProcedure is the fully-qualified name of the AuthService's Logout RPC.
@@ -44,6 +46,7 @@ const (
 // AuthServiceClient is a client for the user_iface.v1.AuthService service.
 type AuthServiceClient interface {
 	Login(context.Context, *connect.Request[v1.LoginRequest]) (*connect.Response[v1.LoginResponse], error)
+	McpLogin(context.Context, *connect.Request[v1.McpLoginRequest]) (*connect.Response[v1.McpLoginResponse], error)
 	CheckLogin(context.Context, *connect.Request[v1.CheckLoginRequest]) (*connect.Response[v1.CheckLoginResponse], error)
 	Logout(context.Context, *connect.Request[v1.LogoutRequest]) (*connect.Response[v1.LogoutResponse], error)
 }
@@ -65,6 +68,12 @@ func NewAuthServiceClient(httpClient connect.HTTPClient, baseURL string, opts ..
 			connect.WithSchema(authServiceMethods.ByName("Login")),
 			connect.WithClientOptions(opts...),
 		),
+		mcpLogin: connect.NewClient[v1.McpLoginRequest, v1.McpLoginResponse](
+			httpClient,
+			baseURL+AuthServiceMcpLoginProcedure,
+			connect.WithSchema(authServiceMethods.ByName("McpLogin")),
+			connect.WithClientOptions(opts...),
+		),
 		checkLogin: connect.NewClient[v1.CheckLoginRequest, v1.CheckLoginResponse](
 			httpClient,
 			baseURL+AuthServiceCheckLoginProcedure,
@@ -83,6 +92,7 @@ func NewAuthServiceClient(httpClient connect.HTTPClient, baseURL string, opts ..
 // authServiceClient implements AuthServiceClient.
 type authServiceClient struct {
 	login      *connect.Client[v1.LoginRequest, v1.LoginResponse]
+	mcpLogin   *connect.Client[v1.McpLoginRequest, v1.McpLoginResponse]
 	checkLogin *connect.Client[v1.CheckLoginRequest, v1.CheckLoginResponse]
 	logout     *connect.Client[v1.LogoutRequest, v1.LogoutResponse]
 }
@@ -90,6 +100,11 @@ type authServiceClient struct {
 // Login calls user_iface.v1.AuthService.Login.
 func (c *authServiceClient) Login(ctx context.Context, req *connect.Request[v1.LoginRequest]) (*connect.Response[v1.LoginResponse], error) {
 	return c.login.CallUnary(ctx, req)
+}
+
+// McpLogin calls user_iface.v1.AuthService.McpLogin.
+func (c *authServiceClient) McpLogin(ctx context.Context, req *connect.Request[v1.McpLoginRequest]) (*connect.Response[v1.McpLoginResponse], error) {
+	return c.mcpLogin.CallUnary(ctx, req)
 }
 
 // CheckLogin calls user_iface.v1.AuthService.CheckLogin.
@@ -105,6 +120,7 @@ func (c *authServiceClient) Logout(ctx context.Context, req *connect.Request[v1.
 // AuthServiceHandler is an implementation of the user_iface.v1.AuthService service.
 type AuthServiceHandler interface {
 	Login(context.Context, *connect.Request[v1.LoginRequest]) (*connect.Response[v1.LoginResponse], error)
+	McpLogin(context.Context, *connect.Request[v1.McpLoginRequest]) (*connect.Response[v1.McpLoginResponse], error)
 	CheckLogin(context.Context, *connect.Request[v1.CheckLoginRequest]) (*connect.Response[v1.CheckLoginResponse], error)
 	Logout(context.Context, *connect.Request[v1.LogoutRequest]) (*connect.Response[v1.LogoutResponse], error)
 }
@@ -120,6 +136,12 @@ func NewAuthServiceHandler(svc AuthServiceHandler, opts ...connect.HandlerOption
 		AuthServiceLoginProcedure,
 		svc.Login,
 		connect.WithSchema(authServiceMethods.ByName("Login")),
+		connect.WithHandlerOptions(opts...),
+	)
+	authServiceMcpLoginHandler := connect.NewUnaryHandler(
+		AuthServiceMcpLoginProcedure,
+		svc.McpLogin,
+		connect.WithSchema(authServiceMethods.ByName("McpLogin")),
 		connect.WithHandlerOptions(opts...),
 	)
 	authServiceCheckLoginHandler := connect.NewUnaryHandler(
@@ -138,6 +160,8 @@ func NewAuthServiceHandler(svc AuthServiceHandler, opts ...connect.HandlerOption
 		switch r.URL.Path {
 		case AuthServiceLoginProcedure:
 			authServiceLoginHandler.ServeHTTP(w, r)
+		case AuthServiceMcpLoginProcedure:
+			authServiceMcpLoginHandler.ServeHTTP(w, r)
 		case AuthServiceCheckLoginProcedure:
 			authServiceCheckLoginHandler.ServeHTTP(w, r)
 		case AuthServiceLogoutProcedure:
@@ -153,6 +177,10 @@ type UnimplementedAuthServiceHandler struct{}
 
 func (UnimplementedAuthServiceHandler) Login(context.Context, *connect.Request[v1.LoginRequest]) (*connect.Response[v1.LoginResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("user_iface.v1.AuthService.Login is not implemented"))
+}
+
+func (UnimplementedAuthServiceHandler) McpLogin(context.Context, *connect.Request[v1.McpLoginRequest]) (*connect.Response[v1.McpLoginResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("user_iface.v1.AuthService.McpLogin is not implemented"))
 }
 
 func (UnimplementedAuthServiceHandler) CheckLogin(context.Context, *connect.Request[v1.CheckLoginRequest]) (*connect.Response[v1.CheckLoginResponse], error) {

@@ -9,8 +9,34 @@ option go_package = "github.com/pdcgo/schema/services/user_iface/v1;user_iface";
 
 service AuthService {
   rpc Login(LoginRequest) returns (LoginResponse);
+  rpc McpLogin(McpLoginRequest) returns (McpLoginResponse);
   rpc CheckLogin(CheckLoginRequest) returns (CheckLoginResponse);
   rpc Logout(LogoutRequest) returns (LogoutResponse);
+}
+
+message McpLoginRequest {
+  
+  string username = 1 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 100
+  }];
+  string password = 2 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 100
+  }];
+
+  uint64 team_id = 3;
+  string session_id = 4 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 255
+  }];
+}
+
+message McpLoginResponse {
+  User user = 1;
+  string token = 2;
+  string x_pdc_source = 3;
+  Team team = 4;
 }
 
 message User {
