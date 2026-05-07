@@ -23,6 +23,19 @@ message HistoryRestockMetric {
   repeated HistoryRestockItem items = 2;
 }
 
+message HistoryRestockCancelItem {
+  // @gotags: gorm:"serializer:timestamptz"
+  google.protobuf.Timestamp t = 1;
+  int32 cancel_transaction_count = 2;
+  int32 cancel_piece_count = 3;
+  double cancel_piece_amount = 4;
+}
+
+message HistoryRestockCancelMetric {
+  common.v1.StatTimeType time_type = 1;
+  repeated HistoryRestockCancelItem items = 2;
+}
+
 message HistoryReturnItem {
   // @gotags: gorm:"serializer:timestamptz"
   google.protobuf.Timestamp t = 1;
@@ -72,6 +85,27 @@ message HistoryStockOrderItem {
 message HistoryStockOrderMetric {
   common.v1.StatTimeType time_type = 1;
   repeated HistoryStockOrderItem items = 2;
+}
+
+message HistoryStockOrderCancelItem {
+  // @gotags: gorm:"serializer:timestamptz"
+  google.protobuf.Timestamp t = 1;
+  int32 transaction_count = 2;
+  int32 piece_count = 3;
+  double piece_amount = 4;
+
+  int32 own_transaction_count = 5;
+  int32 own_piece_count = 6;
+  double own_piece_amount = 7;
+
+  int32 cross_transaction_count = 8;
+  int32 cross_piece_count = 9;
+  double cross_piece_amount = 10;
+}
+
+message HistoryStockOrderCancelMetric {
+  common.v1.StatTimeType time_type = 1;
+  repeated HistoryStockOrderCancelItem items = 2;
 }
 
 message ShipmentProblemItem {

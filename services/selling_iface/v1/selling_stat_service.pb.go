@@ -459,9 +459,11 @@ type Metric struct {
 	//	*Metric_TopProductSold
 	//	*Metric_TopProductUnsold
 	//	*Metric_HistoryRestock
+	//	*Metric_HistoryRestockCancel
 	//	*Metric_HistoryReturn
 	//	*Metric_HistoryStockResolution
 	//	*Metric_HistoryStockOrder
+	//	*Metric_HistoryStockOrderCancel
 	//	*Metric_HistoryShipmentProblem
 	//	*Metric_HistoryWarehouseProblem
 	//	*Metric_HistoryReadyStock
@@ -616,6 +618,15 @@ func (x *Metric) GetHistoryRestock() *HistoryRestockMetric {
 	return nil
 }
 
+func (x *Metric) GetHistoryRestockCancel() *HistoryRestockCancelMetric {
+	if x != nil {
+		if x, ok := x.Data.(*Metric_HistoryRestockCancel); ok {
+			return x.HistoryRestockCancel
+		}
+	}
+	return nil
+}
+
 func (x *Metric) GetHistoryReturn() *HistoryReturnMetric {
 	if x != nil {
 		if x, ok := x.Data.(*Metric_HistoryReturn); ok {
@@ -638,6 +649,15 @@ func (x *Metric) GetHistoryStockOrder() *HistoryStockOrderMetric {
 	if x != nil {
 		if x, ok := x.Data.(*Metric_HistoryStockOrder); ok {
 			return x.HistoryStockOrder
+		}
+	}
+	return nil
+}
+
+func (x *Metric) GetHistoryStockOrderCancel() *HistoryStockOrderCancelMetric {
+	if x != nil {
+		if x, ok := x.Data.(*Metric_HistoryStockOrderCancel); ok {
+			return x.HistoryStockOrderCancel
 		}
 	}
 	return nil
@@ -731,6 +751,10 @@ type Metric_HistoryRestock struct {
 	HistoryRestock *HistoryRestockMetric `protobuf:"bytes,12,opt,name=history_restock,json=historyRestock,proto3,oneof"`
 }
 
+type Metric_HistoryRestockCancel struct {
+	HistoryRestockCancel *HistoryRestockCancelMetric `protobuf:"bytes,21,opt,name=history_restock_cancel,json=historyRestockCancel,proto3,oneof"`
+}
+
 type Metric_HistoryReturn struct {
 	HistoryReturn *HistoryReturnMetric `protobuf:"bytes,13,opt,name=history_return,json=historyReturn,proto3,oneof"`
 }
@@ -741,6 +765,10 @@ type Metric_HistoryStockResolution struct {
 
 type Metric_HistoryStockOrder struct {
 	HistoryStockOrder *HistoryStockOrderMetric `protobuf:"bytes,15,opt,name=history_stock_order,json=historyStockOrder,proto3,oneof"`
+}
+
+type Metric_HistoryStockOrderCancel struct {
+	HistoryStockOrderCancel *HistoryStockOrderCancelMetric `protobuf:"bytes,20,opt,name=history_stock_order_cancel,json=historyStockOrderCancel,proto3,oneof"`
 }
 
 type Metric_HistoryShipmentProblem struct {
@@ -783,11 +811,15 @@ func (*Metric_TopProductUnsold) isMetric_Data() {}
 
 func (*Metric_HistoryRestock) isMetric_Data() {}
 
+func (*Metric_HistoryRestockCancel) isMetric_Data() {}
+
 func (*Metric_HistoryReturn) isMetric_Data() {}
 
 func (*Metric_HistoryStockResolution) isMetric_Data() {}
 
 func (*Metric_HistoryStockOrder) isMetric_Data() {}
+
+func (*Metric_HistoryStockOrderCancel) isMetric_Data() {}
 
 func (*Metric_HistoryShipmentProblem) isMetric_Data() {}
 
@@ -1144,7 +1176,7 @@ const file_selling_iface_v1_selling_stat_service_proto_rawDesc = "" +
 	"\x10ReceivableMetric\x120\n" +
 	"\x04type\x18\x01 \x01(\x0e2\x1c.selling_iface.v1.MetricTypeR\x04type\x12#\n" +
 	"\rinvoice_count\x18\x02 \x01(\x03R\finvoiceCount\x12\x16\n" +
-	"\x06amount\x18\x03 \x01(\x01R\x06amount\"\xf1\f\n" +
+	"\x06amount\x18\x03 \x01(\x01R\x06amount\"\xc7\x0e\n" +
 	"\x06Metric\x12E\n" +
 	"\vtotal_stock\x18\x01 \x01(\v2\".selling_iface.v1.TotalStockMetricH\x00R\n" +
 	"totalStock\x12K\n" +
@@ -1162,10 +1194,12 @@ const file_selling_iface_v1_selling_stat_service_proto_rawDesc = "" +
 	"\x10top_product_sold\x18\n" +
 	" \x01(\v2&.selling_iface.v1.TopProductSoldMetricH\x00R\x0etopProductSold\x12X\n" +
 	"\x12top_product_unsold\x18\v \x01(\v2(.selling_iface.v1.TopProductUnsoldMetricH\x00R\x10topProductUnsold\x12Q\n" +
-	"\x0fhistory_restock\x18\f \x01(\v2&.selling_iface.v1.HistoryRestockMetricH\x00R\x0ehistoryRestock\x12N\n" +
+	"\x0fhistory_restock\x18\f \x01(\v2&.selling_iface.v1.HistoryRestockMetricH\x00R\x0ehistoryRestock\x12d\n" +
+	"\x16history_restock_cancel\x18\x15 \x01(\v2,.selling_iface.v1.HistoryRestockCancelMetricH\x00R\x14historyRestockCancel\x12N\n" +
 	"\x0ehistory_return\x18\r \x01(\v2%.selling_iface.v1.HistoryReturnMetricH\x00R\rhistoryReturn\x12j\n" +
 	"\x18history_stock_resolution\x18\x0e \x01(\v2..selling_iface.v1.HistoryStockResolutionMetricH\x00R\x16historyStockResolution\x12[\n" +
-	"\x13history_stock_order\x18\x0f \x01(\v2).selling_iface.v1.HistoryStockOrderMetricH\x00R\x11historyStockOrder\x12j\n" +
+	"\x13history_stock_order\x18\x0f \x01(\v2).selling_iface.v1.HistoryStockOrderMetricH\x00R\x11historyStockOrder\x12n\n" +
+	"\x1ahistory_stock_order_cancel\x18\x14 \x01(\v2/.selling_iface.v1.HistoryStockOrderCancelMetricH\x00R\x17historyStockOrderCancel\x12j\n" +
 	"\x18history_shipment_problem\x18\x10 \x01(\v2..selling_iface.v1.HistoryShipmentProblemMetricH\x00R\x16historyShipmentProblem\x12m\n" +
 	"\x19history_warehouse_problem\x18\x11 \x01(\v2/.selling_iface.v1.HistoryWarehouseProblemMetricH\x00R\x17historyWarehouseProblem\x12[\n" +
 	"\x13history_ready_stock\x18\x12 \x01(\v2).selling_iface.v1.HistoryReadyStockMetricH\x00R\x11historyReadyStock\x12n\n" +
@@ -1231,16 +1265,18 @@ var file_selling_iface_v1_selling_stat_service_proto_goTypes = []any{
 	(*TopProductSoldMetric)(nil),          // 17: selling_iface.v1.TopProductSoldMetric
 	(*TopProductUnsoldMetric)(nil),        // 18: selling_iface.v1.TopProductUnsoldMetric
 	(*HistoryRestockMetric)(nil),          // 19: selling_iface.v1.HistoryRestockMetric
-	(*HistoryReturnMetric)(nil),           // 20: selling_iface.v1.HistoryReturnMetric
-	(*HistoryStockResolutionMetric)(nil),  // 21: selling_iface.v1.HistoryStockResolutionMetric
-	(*HistoryStockOrderMetric)(nil),       // 22: selling_iface.v1.HistoryStockOrderMetric
-	(*HistoryShipmentProblemMetric)(nil),  // 23: selling_iface.v1.HistoryShipmentProblemMetric
-	(*HistoryWarehouseProblemMetric)(nil), // 24: selling_iface.v1.HistoryWarehouseProblemMetric
-	(*HistoryReadyStockMetric)(nil),       // 25: selling_iface.v1.HistoryReadyStockMetric
-	(*HistoryWarehouseCodCostMetric)(nil), // 26: selling_iface.v1.HistoryWarehouseCodCostMetric
-	(*v1.StatTimeRange)(nil),              // 27: common.v1.StatTimeRange
-	(*ProductStatMetricRequest)(nil),      // 28: selling_iface.v1.ProductStatMetricRequest
-	(*ProductStatMetricResponse)(nil),     // 29: selling_iface.v1.ProductStatMetricResponse
+	(*HistoryRestockCancelMetric)(nil),    // 20: selling_iface.v1.HistoryRestockCancelMetric
+	(*HistoryReturnMetric)(nil),           // 21: selling_iface.v1.HistoryReturnMetric
+	(*HistoryStockResolutionMetric)(nil),  // 22: selling_iface.v1.HistoryStockResolutionMetric
+	(*HistoryStockOrderMetric)(nil),       // 23: selling_iface.v1.HistoryStockOrderMetric
+	(*HistoryStockOrderCancelMetric)(nil), // 24: selling_iface.v1.HistoryStockOrderCancelMetric
+	(*HistoryShipmentProblemMetric)(nil),  // 25: selling_iface.v1.HistoryShipmentProblemMetric
+	(*HistoryWarehouseProblemMetric)(nil), // 26: selling_iface.v1.HistoryWarehouseProblemMetric
+	(*HistoryReadyStockMetric)(nil),       // 27: selling_iface.v1.HistoryReadyStockMetric
+	(*HistoryWarehouseCodCostMetric)(nil), // 28: selling_iface.v1.HistoryWarehouseCodCostMetric
+	(*v1.StatTimeRange)(nil),              // 29: common.v1.StatTimeRange
+	(*ProductStatMetricRequest)(nil),      // 30: selling_iface.v1.ProductStatMetricRequest
+	(*ProductStatMetricResponse)(nil),     // 31: selling_iface.v1.ProductStatMetricResponse
 }
 var file_selling_iface_v1_selling_stat_service_proto_depIdxs = []int32{
 	12, // 0: selling_iface.v1.TotalStockMetric.type:type_name -> selling_iface.v1.MetricType
@@ -1260,29 +1296,31 @@ var file_selling_iface_v1_selling_stat_service_proto_depIdxs = []int32{
 	17, // 14: selling_iface.v1.Metric.top_product_sold:type_name -> selling_iface.v1.TopProductSoldMetric
 	18, // 15: selling_iface.v1.Metric.top_product_unsold:type_name -> selling_iface.v1.TopProductUnsoldMetric
 	19, // 16: selling_iface.v1.Metric.history_restock:type_name -> selling_iface.v1.HistoryRestockMetric
-	20, // 17: selling_iface.v1.Metric.history_return:type_name -> selling_iface.v1.HistoryReturnMetric
-	21, // 18: selling_iface.v1.Metric.history_stock_resolution:type_name -> selling_iface.v1.HistoryStockResolutionMetric
-	22, // 19: selling_iface.v1.Metric.history_stock_order:type_name -> selling_iface.v1.HistoryStockOrderMetric
-	23, // 20: selling_iface.v1.Metric.history_shipment_problem:type_name -> selling_iface.v1.HistoryShipmentProblemMetric
-	24, // 21: selling_iface.v1.Metric.history_warehouse_problem:type_name -> selling_iface.v1.HistoryWarehouseProblemMetric
-	25, // 22: selling_iface.v1.Metric.history_ready_stock:type_name -> selling_iface.v1.HistoryReadyStockMetric
-	26, // 23: selling_iface.v1.Metric.history_warehouse_cod_cost:type_name -> selling_iface.v1.HistoryWarehouseCodCostMetric
-	6,  // 24: selling_iface.v1.StatFilter.product_filter:type_name -> selling_iface.v1.ProductFilter
-	27, // 25: selling_iface.v1.StatRequest.range:type_name -> common.v1.StatTimeRange
-	7,  // 26: selling_iface.v1.StatRequest.filter:type_name -> selling_iface.v1.StatFilter
-	12, // 27: selling_iface.v1.StatRequest.metric_types:type_name -> selling_iface.v1.MetricType
-	5,  // 28: selling_iface.v1.StatResponse.metrics:type_name -> selling_iface.v1.Metric
-	8,  // 29: selling_iface.v1.SellingStatService.Stat:input_type -> selling_iface.v1.StatRequest
-	28, // 30: selling_iface.v1.SellingStatService.ProductStatMetric:input_type -> selling_iface.v1.ProductStatMetricRequest
-	10, // 31: selling_iface.v1.SellingStatService.CrossProductList:input_type -> selling_iface.v1.CrossProductListRequest
-	9,  // 32: selling_iface.v1.SellingStatService.Stat:output_type -> selling_iface.v1.StatResponse
-	29, // 33: selling_iface.v1.SellingStatService.ProductStatMetric:output_type -> selling_iface.v1.ProductStatMetricResponse
-	11, // 34: selling_iface.v1.SellingStatService.CrossProductList:output_type -> selling_iface.v1.CrossProductListResponse
-	32, // [32:35] is the sub-list for method output_type
-	29, // [29:32] is the sub-list for method input_type
-	29, // [29:29] is the sub-list for extension type_name
-	29, // [29:29] is the sub-list for extension extendee
-	0,  // [0:29] is the sub-list for field type_name
+	20, // 17: selling_iface.v1.Metric.history_restock_cancel:type_name -> selling_iface.v1.HistoryRestockCancelMetric
+	21, // 18: selling_iface.v1.Metric.history_return:type_name -> selling_iface.v1.HistoryReturnMetric
+	22, // 19: selling_iface.v1.Metric.history_stock_resolution:type_name -> selling_iface.v1.HistoryStockResolutionMetric
+	23, // 20: selling_iface.v1.Metric.history_stock_order:type_name -> selling_iface.v1.HistoryStockOrderMetric
+	24, // 21: selling_iface.v1.Metric.history_stock_order_cancel:type_name -> selling_iface.v1.HistoryStockOrderCancelMetric
+	25, // 22: selling_iface.v1.Metric.history_shipment_problem:type_name -> selling_iface.v1.HistoryShipmentProblemMetric
+	26, // 23: selling_iface.v1.Metric.history_warehouse_problem:type_name -> selling_iface.v1.HistoryWarehouseProblemMetric
+	27, // 24: selling_iface.v1.Metric.history_ready_stock:type_name -> selling_iface.v1.HistoryReadyStockMetric
+	28, // 25: selling_iface.v1.Metric.history_warehouse_cod_cost:type_name -> selling_iface.v1.HistoryWarehouseCodCostMetric
+	6,  // 26: selling_iface.v1.StatFilter.product_filter:type_name -> selling_iface.v1.ProductFilter
+	29, // 27: selling_iface.v1.StatRequest.range:type_name -> common.v1.StatTimeRange
+	7,  // 28: selling_iface.v1.StatRequest.filter:type_name -> selling_iface.v1.StatFilter
+	12, // 29: selling_iface.v1.StatRequest.metric_types:type_name -> selling_iface.v1.MetricType
+	5,  // 30: selling_iface.v1.StatResponse.metrics:type_name -> selling_iface.v1.Metric
+	8,  // 31: selling_iface.v1.SellingStatService.Stat:input_type -> selling_iface.v1.StatRequest
+	30, // 32: selling_iface.v1.SellingStatService.ProductStatMetric:input_type -> selling_iface.v1.ProductStatMetricRequest
+	10, // 33: selling_iface.v1.SellingStatService.CrossProductList:input_type -> selling_iface.v1.CrossProductListRequest
+	9,  // 34: selling_iface.v1.SellingStatService.Stat:output_type -> selling_iface.v1.StatResponse
+	31, // 35: selling_iface.v1.SellingStatService.ProductStatMetric:output_type -> selling_iface.v1.ProductStatMetricResponse
+	11, // 36: selling_iface.v1.SellingStatService.CrossProductList:output_type -> selling_iface.v1.CrossProductListResponse
+	34, // [34:37] is the sub-list for method output_type
+	31, // [31:34] is the sub-list for method input_type
+	31, // [31:31] is the sub-list for extension type_name
+	31, // [31:31] is the sub-list for extension extendee
+	0,  // [0:31] is the sub-list for field type_name
 }
 
 func init() { file_selling_iface_v1_selling_stat_service_proto_init() }
@@ -1309,9 +1347,11 @@ func file_selling_iface_v1_selling_stat_service_proto_init() {
 		(*Metric_TopProductSold)(nil),
 		(*Metric_TopProductUnsold)(nil),
 		(*Metric_HistoryRestock)(nil),
+		(*Metric_HistoryRestockCancel)(nil),
 		(*Metric_HistoryReturn)(nil),
 		(*Metric_HistoryStockResolution)(nil),
 		(*Metric_HistoryStockOrder)(nil),
+		(*Metric_HistoryStockOrderCancel)(nil),
 		(*Metric_HistoryShipmentProblem)(nil),
 		(*Metric_HistoryWarehouseProblem)(nil),
 		(*Metric_HistoryReadyStock)(nil),

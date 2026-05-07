@@ -81,9 +81,11 @@ message Metric {
     TopProductSoldMetric top_product_sold = 10;
     TopProductUnsoldMetric top_product_unsold = 11;
     HistoryRestockMetric history_restock = 12;
+    HistoryRestockCancelMetric history_restock_cancel = 21;
     HistoryReturnMetric history_return = 13;
     HistoryStockResolutionMetric history_stock_resolution = 14;
     HistoryStockOrderMetric history_stock_order = 15;
+    HistoryStockOrderCancelMetric history_stock_order_cancel = 20;
     HistoryShipmentProblemMetric history_shipment_problem = 16;
     HistoryWarehouseProblemMetric history_warehouse_problem = 17;
     HistoryReadyStockMetric history_ready_stock = 18;
