@@ -7,6 +7,7 @@
 package warehouse_iface
 
 import (
+	_ "github.com/pdcgo/schema/services/mcp_iface/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -1153,7 +1154,7 @@ var File_warehouse_iface_v1_inbound_proto protoreflect.FileDescriptor
 
 const file_warehouse_iface_v1_inbound_proto_rawDesc = "" +
 	"\n" +
-	" warehouse_iface/v1/inbound.proto\x12\x12warehouse_iface.v1\"\xb4\x01\n" +
+	" warehouse_iface/v1/inbound.proto\x12\x12warehouse_iface.v1\x1a\x19mcp_iface/v1/option.proto\"\xb4\x01\n" +
 	"\vRestockInfo\x12\"\n" +
 	"\rextern_ord_id\x18\x01 \x01(\tR\vexternOrdId\x12\x18\n" +
 	"\areceipt\x18\x02 \x01(\tR\areceipt\x12#\n" +
@@ -1239,12 +1240,12 @@ const file_warehouse_iface_v1_inbound_proto_rawDesc = "" +
 	"\vPaymentType\x12\x1c\n" +
 	"\x18PAYMENT_TYPE_UNSPECIFIED\x10\x00\x12\x1a\n" +
 	"\x16PAYMENT_TYPE_SHOPEEPAY\x10\x01\x12\x19\n" +
-	"\x15PAYMENT_TYPE_TRANSFER\x10\x022\xa0\x04\n" +
+	"\x15PAYMENT_TYPE_TRANSFER\x10\x022\xa6\x04\n" +
 	"\x0eInboundService\x12d\n" +
 	"\rInboundCreate\x12(.warehouse_iface.v1.InboundCreateRequest\x1a).warehouse_iface.v1.InboundCreateResponse\x12d\n" +
 	"\rInboundAccept\x12(.warehouse_iface.v1.InboundAcceptRequest\x1a).warehouse_iface.v1.InboundAcceptResponse\x12d\n" +
-	"\rInboundReject\x12(.warehouse_iface.v1.InboundRejectRequest\x1a).warehouse_iface.v1.InboundRejectResponse\x12v\n" +
-	"\x13InboundDetailSearch\x12..warehouse_iface.v1.InboundDetailSearchRequest\x1a/.warehouse_iface.v1.InboundDetailSearchResponse\x12d\n" +
+	"\rInboundReject\x12(.warehouse_iface.v1.InboundRejectRequest\x1a).warehouse_iface.v1.InboundRejectResponse\x12|\n" +
+	"\x13InboundDetailSearch\x12..warehouse_iface.v1.InboundDetailSearchRequest\x1a/.warehouse_iface.v1.InboundDetailSearchResponse\"\x04\x88\xa6\x1d\x01\x12d\n" +
 	"\rInboundCancel\x12(.warehouse_iface.v1.InboundCancelRequest\x1a).warehouse_iface.v1.InboundCancelResponseB\xd0\x01\n" +
 	"\x16com.warehouse_iface.v1B\fInboundProtoP\x01ZCgithub.com/pdcgo/schema/services/warehouse_iface/v1;warehouse_iface\xa2\x02\x03WXX\xaa\x02\x11WarehouseIface.V1\xca\x02\x11WarehouseIface\\V1\xe2\x02\x1dWarehouseIface\\V1\\GPBMetadata\xea\x02\x12WarehouseIface::V1b\x06proto3"
 

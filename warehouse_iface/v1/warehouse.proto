@@ -4,22 +4,30 @@ package warehouse_iface.v1;
 
 import "buf/validate/validate.proto";
 import "common/v1/common.proto";
+import "mcp_iface/v1/option.proto";
 import "warehouse_iface/v1/stat.proto";
-// import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/pdcgo/schema/services/warehouse_iface/v1;warehouse_iface";
 
 service WarehouseService {
   rpc WarehouseIDs(WarehouseIDsRequest) returns (WarehouseIDsResponse);
   rpc WarehouseList(WarehouseListRequest) returns (WarehouseListResponse);
-  rpc TeamWarehouseReturnInfo(TeamWarehouseReturnInfoRequest) returns (TeamWarehouseReturnInfoResponse);
+  rpc TeamWarehouseReturnInfo(TeamWarehouseReturnInfoRequest) returns (TeamWarehouseReturnInfoResponse) {
+    option (mcp_iface.v1.include) = true;
+  }
 
   rpc TransactionNoteCreate(TransactionNoteCreateRequest) returns (TransactionNoteCreateResponse);
-  rpc TransactionNoteList(TransactionNoteListRequest) returns (TransactionNoteListResponse);
+  rpc TransactionNoteList(TransactionNoteListRequest) returns (TransactionNoteListResponse) {
+    option (mcp_iface.v1.include) = true;
+  }
 
-  rpc SellingTeamList(SellingTeamListRequest) returns (SellingTeamListResponse);
+  rpc SellingTeamList(SellingTeamListRequest) returns (SellingTeamListResponse) {
+    option (mcp_iface.v1.include) = true;
+  }
   // potensi ruweettttttttt
-  rpc TeamRackList(TeamRackListRequest) returns (TeamRackListResponse);
+  rpc TeamRackList(TeamRackListRequest) returns (TeamRackListResponse) {
+    option (mcp_iface.v1.include) = true;
+  }
 
   // inbound rpc
 

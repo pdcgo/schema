@@ -5,18 +5,29 @@ package warehouse_iface.v1;
 import "buf/validate/validate.proto";
 import "common/v1/common.proto";
 import "google/protobuf/timestamp.proto";
+import "mcp_iface/v1/option.proto";
 import "warehouse_iface/v1/order.proto";
 
 option go_package = "github.com/pdcgo/schema/services/warehouse_iface/v1;warehouse_iface";
 
 service OutboundService {
-  rpc OutboundList(OutboundListRequest) returns (OutboundListResponse);
-  rpc OutboundDetail(OutboundDetailRequest) returns (OutboundDetailResponse);
-  rpc OutboundDetailIDs(OutboundDetailIDsRequest) returns (OutboundDetailIDsResponse);
-  rpc OrderDetailSearch(OrderDetailSearchRequest) returns (OrderDetailSearchResponse);
+  rpc OutboundList(OutboundListRequest) returns (OutboundListResponse) {
+    option (mcp_iface.v1.include) = true;
+  }
+  rpc OutboundDetail(OutboundDetailRequest) returns (OutboundDetailResponse) {
+    option (mcp_iface.v1.include) = true;
+  }
+  rpc OutboundDetailIDs(OutboundDetailIDsRequest) returns (OutboundDetailIDsResponse) {
+    option (mcp_iface.v1.include) = true;
+  }
+  rpc OrderDetailSearch(OrderDetailSearchRequest) returns (OrderDetailSearchResponse) {
+    option (mcp_iface.v1.include) = true;
+  }
 
   // requestan internal
-  rpc OutboundByProduct(OutboundByProductRequest) returns (OutboundByProductResponse);
+  rpc OutboundByProduct(OutboundByProductRequest) returns (OutboundByProductResponse) {
+    option (mcp_iface.v1.include) = true;
+  }
 }
 
 enum OutboundDetailSearchType {
@@ -166,7 +177,6 @@ message OutboundListRequest {
   OutboundSort sort = 2 [(buf.validate.field).required = true];
   common.v1.PageFilter page = 3 [(buf.validate.field).required = true];
 }
-
 
 message Order {
   uint64 id = 1;

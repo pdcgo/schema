@@ -15,6 +15,10 @@ plugins:
     opt:
       - paths=source_relative
 
+  - local: ["go", "run", "../pkgs/san_collection/cmd/protoc-gen-mcp"]
+    out: services
+    opt: paths=source_relative
+
   # - local: protoc-gen-dispatcher
   #   out: services
   #   opt:

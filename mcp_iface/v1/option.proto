@@ -1,0 +1,12 @@
+syntax = "proto3";
+package mcp_iface.v1;
+
+import "google/protobuf/descriptor.proto";
+
+option go_package = "github.com/pdcgo/schema/services/mcp_iface/v1;mcp_iface";
+
+extend google.protobuf.MethodOptions {
+  // include marks an RPC for export as an MCP tool by protoc-gen-mcp.
+  // RPCs without this option (or with it set to false) are skipped.
+  bool include = 60001;
+}

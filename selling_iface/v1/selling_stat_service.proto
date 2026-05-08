@@ -3,6 +3,7 @@ package selling_iface.v1;
 
 import "buf/validate/validate.proto";
 import "common/v1/stat.proto";
+import "mcp_iface/v1/option.proto";
 import "selling_iface/v1/metric.proto";
 import "selling_iface/v1/metric_cost.proto";
 import "selling_iface/v1/metric_order.proto";
@@ -13,8 +14,12 @@ import "selling_iface/v1/product_stat_metric.proto";
 option go_package = "github.com/pdcgo/schema/services/selling_iface/v1;selling_iface";
 
 service SellingStatService {
-  rpc Stat(StatRequest) returns (StatResponse);
-  rpc ProductStatMetric(ProductStatMetricRequest) returns (ProductStatMetricResponse);
+  rpc Stat(StatRequest) returns (StatResponse) {
+    option (mcp_iface.v1.include) = true;
+  }
+  rpc ProductStatMetric(ProductStatMetricRequest) returns (ProductStatMetricResponse) {
+    option (mcp_iface.v1.include) = true;
+  }
   rpc CrossProductList(CrossProductListRequest) returns (CrossProductListResponse);
 }
 

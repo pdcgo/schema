@@ -5,6 +5,7 @@ package warehouse_iface.v1;
 // import "buf/validate/validate.proto";
 // import "common/v1/common.proto";
 // import "google/protobuf/timestamp.proto";
+import "mcp_iface/v1/option.proto";
 
 option go_package = "github.com/pdcgo/schema/services/warehouse_iface/v1;warehouse_iface";
 
@@ -13,7 +14,9 @@ service InboundService {
   rpc InboundCreate(InboundCreateRequest) returns (InboundCreateResponse);
   rpc InboundAccept(InboundAcceptRequest) returns (InboundAcceptResponse);
   rpc InboundReject(InboundRejectRequest) returns (InboundRejectResponse);
-  rpc InboundDetailSearch(InboundDetailSearchRequest) returns (InboundDetailSearchResponse);
+  rpc InboundDetailSearch(InboundDetailSearchRequest) returns (InboundDetailSearchResponse) {
+    option (mcp_iface.v1.include) = true;
+  }
   rpc InboundCancel(InboundCancelRequest) returns (InboundCancelResponse);
 }
 

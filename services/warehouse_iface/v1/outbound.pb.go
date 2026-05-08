@@ -9,6 +9,7 @@ package warehouse_iface
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	v1 "github.com/pdcgo/schema/services/common/v1"
+	_ "github.com/pdcgo/schema/services/mcp_iface/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -1665,7 +1666,7 @@ var File_warehouse_iface_v1_outbound_proto protoreflect.FileDescriptor
 
 const file_warehouse_iface_v1_outbound_proto_rawDesc = "" +
 	"\n" +
-	"!warehouse_iface/v1/outbound.proto\x12\x12warehouse_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1ewarehouse_iface/v1/order.proto\"\xd4\x02\n" +
+	"!warehouse_iface/v1/outbound.proto\x12\x12warehouse_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x19mcp_iface/v1/option.proto\x1a\x1ewarehouse_iface/v1/order.proto\"\xd4\x02\n" +
 	"\vOrderDetail\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x17\n" +
 	"\ateam_id\x18\x02 \x01(\x04R\x06teamId\x12 \n" +
@@ -1817,13 +1818,13 @@ const file_warehouse_iface_v1_outbound_proto_rawDesc = "" +
 	"\x0eTimeFilterType\x12 \n" +
 	"\x1cTIME_FILTER_TYPE_UNSPECIFIED\x10\x00\x12\x1d\n" +
 	"\x19TIME_FILTER_TYPE_DEADLINE\x10\x01\x12(\n" +
-	"$TIME_FILTER_TYPE_TRANSACTION_CREATED\x10\x022\xb3\x04\n" +
-	"\x0fOutboundService\x12a\n" +
-	"\fOutboundList\x12'.warehouse_iface.v1.OutboundListRequest\x1a(.warehouse_iface.v1.OutboundListResponse\x12g\n" +
-	"\x0eOutboundDetail\x12).warehouse_iface.v1.OutboundDetailRequest\x1a*.warehouse_iface.v1.OutboundDetailResponse\x12p\n" +
-	"\x11OutboundDetailIDs\x12,.warehouse_iface.v1.OutboundDetailIDsRequest\x1a-.warehouse_iface.v1.OutboundDetailIDsResponse\x12p\n" +
-	"\x11OrderDetailSearch\x12,.warehouse_iface.v1.OrderDetailSearchRequest\x1a-.warehouse_iface.v1.OrderDetailSearchResponse\x12p\n" +
-	"\x11OutboundByProduct\x12,.warehouse_iface.v1.OutboundByProductRequest\x1a-.warehouse_iface.v1.OutboundByProductResponseB\xd1\x01\n" +
+	"$TIME_FILTER_TYPE_TRANSACTION_CREATED\x10\x022\xd1\x04\n" +
+	"\x0fOutboundService\x12g\n" +
+	"\fOutboundList\x12'.warehouse_iface.v1.OutboundListRequest\x1a(.warehouse_iface.v1.OutboundListResponse\"\x04\x88\xa6\x1d\x01\x12m\n" +
+	"\x0eOutboundDetail\x12).warehouse_iface.v1.OutboundDetailRequest\x1a*.warehouse_iface.v1.OutboundDetailResponse\"\x04\x88\xa6\x1d\x01\x12v\n" +
+	"\x11OutboundDetailIDs\x12,.warehouse_iface.v1.OutboundDetailIDsRequest\x1a-.warehouse_iface.v1.OutboundDetailIDsResponse\"\x04\x88\xa6\x1d\x01\x12v\n" +
+	"\x11OrderDetailSearch\x12,.warehouse_iface.v1.OrderDetailSearchRequest\x1a-.warehouse_iface.v1.OrderDetailSearchResponse\"\x04\x88\xa6\x1d\x01\x12v\n" +
+	"\x11OutboundByProduct\x12,.warehouse_iface.v1.OutboundByProductRequest\x1a-.warehouse_iface.v1.OutboundByProductResponse\"\x04\x88\xa6\x1d\x01B\xd1\x01\n" +
 	"\x16com.warehouse_iface.v1B\rOutboundProtoP\x01ZCgithub.com/pdcgo/schema/services/warehouse_iface/v1;warehouse_iface\xa2\x02\x03WXX\xaa\x02\x11WarehouseIface.V1\xca\x02\x11WarehouseIface\\V1\xe2\x02\x1dWarehouseIface\\V1\\GPBMetadata\xea\x02\x12WarehouseIface::V1b\x06proto3"
 
 var (
