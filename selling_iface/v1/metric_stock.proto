@@ -23,6 +23,36 @@ message HistoryRestockMetric {
   repeated HistoryRestockItem items = 2;
 }
 
+message HistoryTransferItem {
+  // @gotags: gorm:"serializer:timestamptz"
+  google.protobuf.Timestamp t = 1;
+  int32 created_transaction_count = 2;
+  int32 created_piece_count = 3;
+  double created_piece_amount = 4;
+
+  int32 arrived_transaction_count = 5;
+  int32 arrived_piece_count = 6;
+  double arrived_piece_amount = 7;
+}
+
+message HistoryTransferMetric {
+  common.v1.StatTimeType time_type = 1;
+  repeated HistoryTransferItem items = 2;
+}
+
+message HistoryTransferCancelItem {
+  // @gotags: gorm:"serializer:timestamptz"
+  google.protobuf.Timestamp t = 1;
+  int32 cancel_transaction_count = 2;
+  int32 cancel_piece_count = 3;
+  double cancel_piece_amount = 4;
+}
+
+message HistoryTransferCancelMetric {
+  common.v1.StatTimeType time_type = 1;
+  repeated HistoryTransferCancelItem items = 2;
+}
+
 message HistoryRestockCancelItem {
   // @gotags: gorm:"serializer:timestamptz"
   google.protobuf.Timestamp t = 1;
@@ -154,3 +184,20 @@ message HistoryReadyStockMetric {
   common.v1.StatTimeType time_type = 1;
   repeated HistoryReadyStockItem items = 2;
 }
+
+// message HistoryTransferItem {
+//   // @gotags: gorm:"serializer:timestamptz"
+//   google.protobuf.Timestamp t = 1;
+//   int32 out_transaction_count = 2;
+//   int32 out_piece_count = 3;
+//   double out_piece_amount = 4;
+
+//   int32 in_transaction_count = 5;
+//   int32 in_piece_count = 6;
+//   double in_piece_amount = 7;
+// }
+
+// message HistoryTransferMetric {
+//   common.v1.StatTimeType time_type = 1;
+//   repeated HistoryTransferItem items = 2;
+// }

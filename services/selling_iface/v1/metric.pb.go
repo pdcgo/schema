@@ -36,9 +36,10 @@ const (
 	MetricType_METRIC_TYPE_HISTORY_ORDER              MetricType = 9
 	MetricType_METRIC_TYPE_TOP_PRODUCT_SOLD           MetricType = 10
 	MetricType_METRIC_TYPE_TOP_PRODUCT_UNSOLD         MetricType = 11
-	MetricType_METRIC_TYPE_HISTORY_OUTBOUND           MetricType = 13
 	MetricType_METRIC_TYPE_HISTORY_RESTOCK            MetricType = 14
 	MetricType_METRIC_TYPE_HISTORY_RESTOCK_CANCEL     MetricType = 23
+	MetricType_METRIC_TYPE_HISTORY_TRANSFER           MetricType = 24
+	MetricType_METRIC_TYPE_HISTORY_TRANSFER_CANCEL    MetricType = 25
 	MetricType_METRIC_TYPE_HISTORY_RETURN             MetricType = 15
 	MetricType_METRIC_TYPE_HISTORY_STOCK_RESOLUTION   MetricType = 16
 	MetricType_METRIC_TYPE_HISTORY_STOCK_ORDER        MetricType = 17
@@ -64,9 +65,10 @@ var (
 		9:  "METRIC_TYPE_HISTORY_ORDER",
 		10: "METRIC_TYPE_TOP_PRODUCT_SOLD",
 		11: "METRIC_TYPE_TOP_PRODUCT_UNSOLD",
-		13: "METRIC_TYPE_HISTORY_OUTBOUND",
 		14: "METRIC_TYPE_HISTORY_RESTOCK",
 		23: "METRIC_TYPE_HISTORY_RESTOCK_CANCEL",
+		24: "METRIC_TYPE_HISTORY_TRANSFER",
+		25: "METRIC_TYPE_HISTORY_TRANSFER_CANCEL",
 		15: "METRIC_TYPE_HISTORY_RETURN",
 		16: "METRIC_TYPE_HISTORY_STOCK_RESOLUTION",
 		17: "METRIC_TYPE_HISTORY_STOCK_ORDER",
@@ -89,9 +91,10 @@ var (
 		"METRIC_TYPE_HISTORY_ORDER":              9,
 		"METRIC_TYPE_TOP_PRODUCT_SOLD":           10,
 		"METRIC_TYPE_TOP_PRODUCT_UNSOLD":         11,
-		"METRIC_TYPE_HISTORY_OUTBOUND":           13,
 		"METRIC_TYPE_HISTORY_RESTOCK":            14,
 		"METRIC_TYPE_HISTORY_RESTOCK_CANCEL":     23,
+		"METRIC_TYPE_HISTORY_TRANSFER":           24,
+		"METRIC_TYPE_HISTORY_TRANSFER_CANCEL":    25,
 		"METRIC_TYPE_HISTORY_RETURN":             15,
 		"METRIC_TYPE_HISTORY_STOCK_RESOLUTION":   16,
 		"METRIC_TYPE_HISTORY_STOCK_ORDER":        17,
@@ -134,7 +137,7 @@ var File_selling_iface_v1_metric_proto protoreflect.FileDescriptor
 
 const file_selling_iface_v1_metric_proto_rawDesc = "" +
 	"\n" +
-	"\x1dselling_iface/v1/metric.proto\x12\x10selling_iface.v1*\xaa\x06\n" +
+	"\x1dselling_iface/v1/metric.proto\x12\x10selling_iface.v1*\xd3\x06\n" +
 	"\n" +
 	"MetricType\x12\x1b\n" +
 	"\x17METRIC_TYPE_UNSPECIFIED\x10\x00\x12\x1b\n" +
@@ -149,10 +152,11 @@ const file_selling_iface_v1_metric_proto_rawDesc = "" +
 	"\x19METRIC_TYPE_HISTORY_ORDER\x10\t\x12 \n" +
 	"\x1cMETRIC_TYPE_TOP_PRODUCT_SOLD\x10\n" +
 	"\x12\"\n" +
-	"\x1eMETRIC_TYPE_TOP_PRODUCT_UNSOLD\x10\v\x12 \n" +
-	"\x1cMETRIC_TYPE_HISTORY_OUTBOUND\x10\r\x12\x1f\n" +
+	"\x1eMETRIC_TYPE_TOP_PRODUCT_UNSOLD\x10\v\x12\x1f\n" +
 	"\x1bMETRIC_TYPE_HISTORY_RESTOCK\x10\x0e\x12&\n" +
-	"\"METRIC_TYPE_HISTORY_RESTOCK_CANCEL\x10\x17\x12\x1e\n" +
+	"\"METRIC_TYPE_HISTORY_RESTOCK_CANCEL\x10\x17\x12 \n" +
+	"\x1cMETRIC_TYPE_HISTORY_TRANSFER\x10\x18\x12'\n" +
+	"#METRIC_TYPE_HISTORY_TRANSFER_CANCEL\x10\x19\x12\x1e\n" +
 	"\x1aMETRIC_TYPE_HISTORY_RETURN\x10\x0f\x12(\n" +
 	"$METRIC_TYPE_HISTORY_STOCK_RESOLUTION\x10\x10\x12#\n" +
 	"\x1fMETRIC_TYPE_HISTORY_STOCK_ORDER\x10\x11\x12*\n" +

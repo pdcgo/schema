@@ -18,6 +18,10 @@ enum StockChangeType {
   STOCK_CHANGE_TYPE_STOCK_PROBLEM = 5;
   STOCK_CHANGE_TYPE_STOCK_FOUND_BACK = 6;
   STOCK_CHANGE_TYPE_STOCK_ADJUSTMENT = 7;
+  STOCK_CHANGE_TYPE_TRANSFER_WAREHOUSE_OUT = 8;
+  STOCK_CHANGE_TYPE_TRANSFER_WAREHOUSE_IN = 9;
+  STOCK_CHANGE_TYPE_TRANSFER_WAREHOUSE_OUT_CANCELED = 10;
+  STOCK_CHANGE_TYPE_TRANSFER_WAREHOUSE_IN_CANCELED = 11;
 }
 
 message StockChangeLog {
@@ -70,6 +74,18 @@ message StockAdjustment {
   uint64 transaction_id = 1 [(buf.validate.field).uint64.gt = 0];
 }
 
+message TransferWarehouseCreated {
+  uint64 transfer_id = 1 [(buf.validate.field).uint64.gt = 0];
+}
+
+message TransferWarehouseAccepted {
+  uint64 transfer_id = 1 [(buf.validate.field).uint64.gt = 0];
+}
+
+message TransferWarehouseCanceled {
+  uint64 transfer_id = 1 [(buf.validate.field).uint64.gt = 0];
+}
+
 message StockEvent {
   option (event_base.v1.event_config).event_topic = "stock-topic";
 
@@ -83,5 +99,8 @@ message StockEvent {
     StockProblem stock_problem = 7;
     StockFoundBack stock_found_back = 8;
     StockAdjustment stock_adjustment = 9;
+    TransferWarehouseCreated transfer_warehouse_created = 10;
+    TransferWarehouseAccepted transfer_warehouse_accepted = 11;
+    TransferWarehouseCanceled transfer_warehouse_canceled = 12;
   }
 }

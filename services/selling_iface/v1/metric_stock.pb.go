@@ -168,6 +168,272 @@ func (x *HistoryRestockMetric) GetItems() []*HistoryRestockItem {
 	return nil
 }
 
+type HistoryTransferItem struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// @gotags: gorm:"serializer:timestamptz"
+	T                       *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=t,proto3" json:"t,omitempty" gorm:"serializer:timestamptz"`
+	CreatedTransactionCount int32                  `protobuf:"varint,2,opt,name=created_transaction_count,json=createdTransactionCount,proto3" json:"created_transaction_count,omitempty"`
+	CreatedPieceCount       int32                  `protobuf:"varint,3,opt,name=created_piece_count,json=createdPieceCount,proto3" json:"created_piece_count,omitempty"`
+	CreatedPieceAmount      float64                `protobuf:"fixed64,4,opt,name=created_piece_amount,json=createdPieceAmount,proto3" json:"created_piece_amount,omitempty"`
+	ArrivedTransactionCount int32                  `protobuf:"varint,5,opt,name=arrived_transaction_count,json=arrivedTransactionCount,proto3" json:"arrived_transaction_count,omitempty"`
+	ArrivedPieceCount       int32                  `protobuf:"varint,6,opt,name=arrived_piece_count,json=arrivedPieceCount,proto3" json:"arrived_piece_count,omitempty"`
+	ArrivedPieceAmount      float64                `protobuf:"fixed64,7,opt,name=arrived_piece_amount,json=arrivedPieceAmount,proto3" json:"arrived_piece_amount,omitempty"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
+}
+
+func (x *HistoryTransferItem) Reset() {
+	*x = HistoryTransferItem{}
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HistoryTransferItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HistoryTransferItem) ProtoMessage() {}
+
+func (x *HistoryTransferItem) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HistoryTransferItem.ProtoReflect.Descriptor instead.
+func (*HistoryTransferItem) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *HistoryTransferItem) GetT() *timestamppb.Timestamp {
+	if x != nil {
+		return x.T
+	}
+	return nil
+}
+
+func (x *HistoryTransferItem) GetCreatedTransactionCount() int32 {
+	if x != nil {
+		return x.CreatedTransactionCount
+	}
+	return 0
+}
+
+func (x *HistoryTransferItem) GetCreatedPieceCount() int32 {
+	if x != nil {
+		return x.CreatedPieceCount
+	}
+	return 0
+}
+
+func (x *HistoryTransferItem) GetCreatedPieceAmount() float64 {
+	if x != nil {
+		return x.CreatedPieceAmount
+	}
+	return 0
+}
+
+func (x *HistoryTransferItem) GetArrivedTransactionCount() int32 {
+	if x != nil {
+		return x.ArrivedTransactionCount
+	}
+	return 0
+}
+
+func (x *HistoryTransferItem) GetArrivedPieceCount() int32 {
+	if x != nil {
+		return x.ArrivedPieceCount
+	}
+	return 0
+}
+
+func (x *HistoryTransferItem) GetArrivedPieceAmount() float64 {
+	if x != nil {
+		return x.ArrivedPieceAmount
+	}
+	return 0
+}
+
+type HistoryTransferMetric struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TimeType      v1.StatTimeType        `protobuf:"varint,1,opt,name=time_type,json=timeType,proto3,enum=common.v1.StatTimeType" json:"time_type,omitempty"`
+	Items         []*HistoryTransferItem `protobuf:"bytes,2,rep,name=items,proto3" json:"items,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *HistoryTransferMetric) Reset() {
+	*x = HistoryTransferMetric{}
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HistoryTransferMetric) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HistoryTransferMetric) ProtoMessage() {}
+
+func (x *HistoryTransferMetric) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HistoryTransferMetric.ProtoReflect.Descriptor instead.
+func (*HistoryTransferMetric) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *HistoryTransferMetric) GetTimeType() v1.StatTimeType {
+	if x != nil {
+		return x.TimeType
+	}
+	return v1.StatTimeType(0)
+}
+
+func (x *HistoryTransferMetric) GetItems() []*HistoryTransferItem {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
+type HistoryTransferCancelItem struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// @gotags: gorm:"serializer:timestamptz"
+	T                      *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=t,proto3" json:"t,omitempty" gorm:"serializer:timestamptz"`
+	CancelTransactionCount int32                  `protobuf:"varint,2,opt,name=cancel_transaction_count,json=cancelTransactionCount,proto3" json:"cancel_transaction_count,omitempty"`
+	CancelPieceCount       int32                  `protobuf:"varint,3,opt,name=cancel_piece_count,json=cancelPieceCount,proto3" json:"cancel_piece_count,omitempty"`
+	CancelPieceAmount      float64                `protobuf:"fixed64,4,opt,name=cancel_piece_amount,json=cancelPieceAmount,proto3" json:"cancel_piece_amount,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *HistoryTransferCancelItem) Reset() {
+	*x = HistoryTransferCancelItem{}
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HistoryTransferCancelItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HistoryTransferCancelItem) ProtoMessage() {}
+
+func (x *HistoryTransferCancelItem) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HistoryTransferCancelItem.ProtoReflect.Descriptor instead.
+func (*HistoryTransferCancelItem) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *HistoryTransferCancelItem) GetT() *timestamppb.Timestamp {
+	if x != nil {
+		return x.T
+	}
+	return nil
+}
+
+func (x *HistoryTransferCancelItem) GetCancelTransactionCount() int32 {
+	if x != nil {
+		return x.CancelTransactionCount
+	}
+	return 0
+}
+
+func (x *HistoryTransferCancelItem) GetCancelPieceCount() int32 {
+	if x != nil {
+		return x.CancelPieceCount
+	}
+	return 0
+}
+
+func (x *HistoryTransferCancelItem) GetCancelPieceAmount() float64 {
+	if x != nil {
+		return x.CancelPieceAmount
+	}
+	return 0
+}
+
+type HistoryTransferCancelMetric struct {
+	state         protoimpl.MessageState       `protogen:"open.v1"`
+	TimeType      v1.StatTimeType              `protobuf:"varint,1,opt,name=time_type,json=timeType,proto3,enum=common.v1.StatTimeType" json:"time_type,omitempty"`
+	Items         []*HistoryTransferCancelItem `protobuf:"bytes,2,rep,name=items,proto3" json:"items,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *HistoryTransferCancelMetric) Reset() {
+	*x = HistoryTransferCancelMetric{}
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HistoryTransferCancelMetric) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HistoryTransferCancelMetric) ProtoMessage() {}
+
+func (x *HistoryTransferCancelMetric) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HistoryTransferCancelMetric.ProtoReflect.Descriptor instead.
+func (*HistoryTransferCancelMetric) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *HistoryTransferCancelMetric) GetTimeType() v1.StatTimeType {
+	if x != nil {
+		return x.TimeType
+	}
+	return v1.StatTimeType(0)
+}
+
+func (x *HistoryTransferCancelMetric) GetItems() []*HistoryTransferCancelItem {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
 type HistoryRestockCancelItem struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @gotags: gorm:"serializer:timestamptz"
@@ -181,7 +447,7 @@ type HistoryRestockCancelItem struct {
 
 func (x *HistoryRestockCancelItem) Reset() {
 	*x = HistoryRestockCancelItem{}
-	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[2]
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -193,7 +459,7 @@ func (x *HistoryRestockCancelItem) String() string {
 func (*HistoryRestockCancelItem) ProtoMessage() {}
 
 func (x *HistoryRestockCancelItem) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[2]
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -206,7 +472,7 @@ func (x *HistoryRestockCancelItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HistoryRestockCancelItem.ProtoReflect.Descriptor instead.
 func (*HistoryRestockCancelItem) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{2}
+	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *HistoryRestockCancelItem) GetT() *timestamppb.Timestamp {
@@ -247,7 +513,7 @@ type HistoryRestockCancelMetric struct {
 
 func (x *HistoryRestockCancelMetric) Reset() {
 	*x = HistoryRestockCancelMetric{}
-	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[3]
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -259,7 +525,7 @@ func (x *HistoryRestockCancelMetric) String() string {
 func (*HistoryRestockCancelMetric) ProtoMessage() {}
 
 func (x *HistoryRestockCancelMetric) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[3]
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -272,7 +538,7 @@ func (x *HistoryRestockCancelMetric) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HistoryRestockCancelMetric.ProtoReflect.Descriptor instead.
 func (*HistoryRestockCancelMetric) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{3}
+	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *HistoryRestockCancelMetric) GetTimeType() v1.StatTimeType {
@@ -305,7 +571,7 @@ type HistoryReturnItem struct {
 
 func (x *HistoryReturnItem) Reset() {
 	*x = HistoryReturnItem{}
-	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[4]
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -317,7 +583,7 @@ func (x *HistoryReturnItem) String() string {
 func (*HistoryReturnItem) ProtoMessage() {}
 
 func (x *HistoryReturnItem) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[4]
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -330,7 +596,7 @@ func (x *HistoryReturnItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HistoryReturnItem.ProtoReflect.Descriptor instead.
 func (*HistoryReturnItem) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{4}
+	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *HistoryReturnItem) GetT() *timestamppb.Timestamp {
@@ -392,7 +658,7 @@ type HistoryReturnMetric struct {
 
 func (x *HistoryReturnMetric) Reset() {
 	*x = HistoryReturnMetric{}
-	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[5]
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -404,7 +670,7 @@ func (x *HistoryReturnMetric) String() string {
 func (*HistoryReturnMetric) ProtoMessage() {}
 
 func (x *HistoryReturnMetric) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[5]
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -417,7 +683,7 @@ func (x *HistoryReturnMetric) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HistoryReturnMetric.ProtoReflect.Descriptor instead.
 func (*HistoryReturnMetric) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{5}
+	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *HistoryReturnMetric) GetTimeType() v1.StatTimeType {
@@ -447,7 +713,7 @@ type HistoryStockResolutionItem struct {
 
 func (x *HistoryStockResolutionItem) Reset() {
 	*x = HistoryStockResolutionItem{}
-	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[6]
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -459,7 +725,7 @@ func (x *HistoryStockResolutionItem) String() string {
 func (*HistoryStockResolutionItem) ProtoMessage() {}
 
 func (x *HistoryStockResolutionItem) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[6]
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -472,7 +738,7 @@ func (x *HistoryStockResolutionItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HistoryStockResolutionItem.ProtoReflect.Descriptor instead.
 func (*HistoryStockResolutionItem) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{6}
+	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *HistoryStockResolutionItem) GetT() *timestamppb.Timestamp {
@@ -513,7 +779,7 @@ type HistoryStockResolutionMetric struct {
 
 func (x *HistoryStockResolutionMetric) Reset() {
 	*x = HistoryStockResolutionMetric{}
-	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[7]
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -525,7 +791,7 @@ func (x *HistoryStockResolutionMetric) String() string {
 func (*HistoryStockResolutionMetric) ProtoMessage() {}
 
 func (x *HistoryStockResolutionMetric) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[7]
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -538,7 +804,7 @@ func (x *HistoryStockResolutionMetric) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HistoryStockResolutionMetric.ProtoReflect.Descriptor instead.
 func (*HistoryStockResolutionMetric) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{7}
+	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *HistoryStockResolutionMetric) GetTimeType() v1.StatTimeType {
@@ -574,7 +840,7 @@ type HistoryStockOrderItem struct {
 
 func (x *HistoryStockOrderItem) Reset() {
 	*x = HistoryStockOrderItem{}
-	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[8]
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -586,7 +852,7 @@ func (x *HistoryStockOrderItem) String() string {
 func (*HistoryStockOrderItem) ProtoMessage() {}
 
 func (x *HistoryStockOrderItem) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[8]
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -599,7 +865,7 @@ func (x *HistoryStockOrderItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HistoryStockOrderItem.ProtoReflect.Descriptor instead.
 func (*HistoryStockOrderItem) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{8}
+	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *HistoryStockOrderItem) GetT() *timestamppb.Timestamp {
@@ -682,7 +948,7 @@ type HistoryStockOrderMetric struct {
 
 func (x *HistoryStockOrderMetric) Reset() {
 	*x = HistoryStockOrderMetric{}
-	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[9]
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -694,7 +960,7 @@ func (x *HistoryStockOrderMetric) String() string {
 func (*HistoryStockOrderMetric) ProtoMessage() {}
 
 func (x *HistoryStockOrderMetric) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[9]
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -707,7 +973,7 @@ func (x *HistoryStockOrderMetric) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HistoryStockOrderMetric.ProtoReflect.Descriptor instead.
 func (*HistoryStockOrderMetric) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{9}
+	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *HistoryStockOrderMetric) GetTimeType() v1.StatTimeType {
@@ -743,7 +1009,7 @@ type HistoryStockOrderCancelItem struct {
 
 func (x *HistoryStockOrderCancelItem) Reset() {
 	*x = HistoryStockOrderCancelItem{}
-	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[10]
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -755,7 +1021,7 @@ func (x *HistoryStockOrderCancelItem) String() string {
 func (*HistoryStockOrderCancelItem) ProtoMessage() {}
 
 func (x *HistoryStockOrderCancelItem) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[10]
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -768,7 +1034,7 @@ func (x *HistoryStockOrderCancelItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HistoryStockOrderCancelItem.ProtoReflect.Descriptor instead.
 func (*HistoryStockOrderCancelItem) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{10}
+	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *HistoryStockOrderCancelItem) GetT() *timestamppb.Timestamp {
@@ -851,7 +1117,7 @@ type HistoryStockOrderCancelMetric struct {
 
 func (x *HistoryStockOrderCancelMetric) Reset() {
 	*x = HistoryStockOrderCancelMetric{}
-	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[11]
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -863,7 +1129,7 @@ func (x *HistoryStockOrderCancelMetric) String() string {
 func (*HistoryStockOrderCancelMetric) ProtoMessage() {}
 
 func (x *HistoryStockOrderCancelMetric) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[11]
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -876,7 +1142,7 @@ func (x *HistoryStockOrderCancelMetric) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HistoryStockOrderCancelMetric.ProtoReflect.Descriptor instead.
 func (*HistoryStockOrderCancelMetric) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{11}
+	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *HistoryStockOrderCancelMetric) GetTimeType() v1.StatTimeType {
@@ -909,7 +1175,7 @@ type ShipmentProblemItem struct {
 
 func (x *ShipmentProblemItem) Reset() {
 	*x = ShipmentProblemItem{}
-	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[12]
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -921,7 +1187,7 @@ func (x *ShipmentProblemItem) String() string {
 func (*ShipmentProblemItem) ProtoMessage() {}
 
 func (x *ShipmentProblemItem) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[12]
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -934,7 +1200,7 @@ func (x *ShipmentProblemItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ShipmentProblemItem.ProtoReflect.Descriptor instead.
 func (*ShipmentProblemItem) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{12}
+	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *ShipmentProblemItem) GetT() *timestamppb.Timestamp {
@@ -996,7 +1262,7 @@ type HistoryShipmentProblemMetric struct {
 
 func (x *HistoryShipmentProblemMetric) Reset() {
 	*x = HistoryShipmentProblemMetric{}
-	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[13]
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1008,7 +1274,7 @@ func (x *HistoryShipmentProblemMetric) String() string {
 func (*HistoryShipmentProblemMetric) ProtoMessage() {}
 
 func (x *HistoryShipmentProblemMetric) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[13]
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1021,7 +1287,7 @@ func (x *HistoryShipmentProblemMetric) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HistoryShipmentProblemMetric.ProtoReflect.Descriptor instead.
 func (*HistoryShipmentProblemMetric) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{13}
+	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *HistoryShipmentProblemMetric) GetTimeType() v1.StatTimeType {
@@ -1052,7 +1318,7 @@ type WarehouseProblemItem struct {
 
 func (x *WarehouseProblemItem) Reset() {
 	*x = WarehouseProblemItem{}
-	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[14]
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1064,7 +1330,7 @@ func (x *WarehouseProblemItem) String() string {
 func (*WarehouseProblemItem) ProtoMessage() {}
 
 func (x *WarehouseProblemItem) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[14]
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1077,7 +1343,7 @@ func (x *WarehouseProblemItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WarehouseProblemItem.ProtoReflect.Descriptor instead.
 func (*WarehouseProblemItem) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{14}
+	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *WarehouseProblemItem) GetT() *timestamppb.Timestamp {
@@ -1125,7 +1391,7 @@ type HistoryWarehouseProblemMetric struct {
 
 func (x *HistoryWarehouseProblemMetric) Reset() {
 	*x = HistoryWarehouseProblemMetric{}
-	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[15]
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1137,7 +1403,7 @@ func (x *HistoryWarehouseProblemMetric) String() string {
 func (*HistoryWarehouseProblemMetric) ProtoMessage() {}
 
 func (x *HistoryWarehouseProblemMetric) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[15]
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1150,7 +1416,7 @@ func (x *HistoryWarehouseProblemMetric) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HistoryWarehouseProblemMetric.ProtoReflect.Descriptor instead.
 func (*HistoryWarehouseProblemMetric) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{15}
+	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *HistoryWarehouseProblemMetric) GetTimeType() v1.StatTimeType {
@@ -1181,7 +1447,7 @@ type HistoryReadyStockItem struct {
 
 func (x *HistoryReadyStockItem) Reset() {
 	*x = HistoryReadyStockItem{}
-	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[16]
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1193,7 +1459,7 @@ func (x *HistoryReadyStockItem) String() string {
 func (*HistoryReadyStockItem) ProtoMessage() {}
 
 func (x *HistoryReadyStockItem) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[16]
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1206,7 +1472,7 @@ func (x *HistoryReadyStockItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HistoryReadyStockItem.ProtoReflect.Descriptor instead.
 func (*HistoryReadyStockItem) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{16}
+	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *HistoryReadyStockItem) GetT() *timestamppb.Timestamp {
@@ -1254,7 +1520,7 @@ type HistoryReadyStockMetric struct {
 
 func (x *HistoryReadyStockMetric) Reset() {
 	*x = HistoryReadyStockMetric{}
-	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[17]
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1266,7 +1532,7 @@ func (x *HistoryReadyStockMetric) String() string {
 func (*HistoryReadyStockMetric) ProtoMessage() {}
 
 func (x *HistoryReadyStockMetric) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[17]
+	mi := &file_selling_iface_v1_metric_stock_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1279,7 +1545,7 @@ func (x *HistoryReadyStockMetric) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HistoryReadyStockMetric.ProtoReflect.Descriptor instead.
 func (*HistoryReadyStockMetric) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{17}
+	return file_selling_iface_v1_metric_stock_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *HistoryReadyStockMetric) GetTimeType() v1.StatTimeType {
@@ -1311,7 +1577,26 @@ const file_selling_iface_v1_metric_stock_proto_rawDesc = "" +
 	"\x14arrived_piece_amount\x18\a \x01(\x01R\x12arrivedPieceAmount\"\x88\x01\n" +
 	"\x14HistoryRestockMetric\x124\n" +
 	"\ttime_type\x18\x01 \x01(\x0e2\x17.common.v1.StatTimeTypeR\btimeType\x12:\n" +
-	"\x05items\x18\x02 \x03(\v2$.selling_iface.v1.HistoryRestockItemR\x05items\"\xdc\x01\n" +
+	"\x05items\x18\x02 \x03(\v2$.selling_iface.v1.HistoryRestockItemR\x05items\"\xfb\x02\n" +
+	"\x13HistoryTransferItem\x12(\n" +
+	"\x01t\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x01t\x12:\n" +
+	"\x19created_transaction_count\x18\x02 \x01(\x05R\x17createdTransactionCount\x12.\n" +
+	"\x13created_piece_count\x18\x03 \x01(\x05R\x11createdPieceCount\x120\n" +
+	"\x14created_piece_amount\x18\x04 \x01(\x01R\x12createdPieceAmount\x12:\n" +
+	"\x19arrived_transaction_count\x18\x05 \x01(\x05R\x17arrivedTransactionCount\x12.\n" +
+	"\x13arrived_piece_count\x18\x06 \x01(\x05R\x11arrivedPieceCount\x120\n" +
+	"\x14arrived_piece_amount\x18\a \x01(\x01R\x12arrivedPieceAmount\"\x8a\x01\n" +
+	"\x15HistoryTransferMetric\x124\n" +
+	"\ttime_type\x18\x01 \x01(\x0e2\x17.common.v1.StatTimeTypeR\btimeType\x12;\n" +
+	"\x05items\x18\x02 \x03(\v2%.selling_iface.v1.HistoryTransferItemR\x05items\"\xdd\x01\n" +
+	"\x19HistoryTransferCancelItem\x12(\n" +
+	"\x01t\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x01t\x128\n" +
+	"\x18cancel_transaction_count\x18\x02 \x01(\x05R\x16cancelTransactionCount\x12,\n" +
+	"\x12cancel_piece_count\x18\x03 \x01(\x05R\x10cancelPieceCount\x12.\n" +
+	"\x13cancel_piece_amount\x18\x04 \x01(\x01R\x11cancelPieceAmount\"\x96\x01\n" +
+	"\x1bHistoryTransferCancelMetric\x124\n" +
+	"\ttime_type\x18\x01 \x01(\x0e2\x17.common.v1.StatTimeTypeR\btimeType\x12A\n" +
+	"\x05items\x18\x02 \x03(\v2+.selling_iface.v1.HistoryTransferCancelItemR\x05items\"\xdc\x01\n" +
 	"\x18HistoryRestockCancelItem\x12(\n" +
 	"\x01t\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x01t\x128\n" +
 	"\x18cancel_transaction_count\x18\x02 \x01(\x05R\x16cancelTransactionCount\x12,\n" +
@@ -1416,62 +1701,72 @@ func file_selling_iface_v1_metric_stock_proto_rawDescGZIP() []byte {
 	return file_selling_iface_v1_metric_stock_proto_rawDescData
 }
 
-var file_selling_iface_v1_metric_stock_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
+var file_selling_iface_v1_metric_stock_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
 var file_selling_iface_v1_metric_stock_proto_goTypes = []any{
 	(*HistoryRestockItem)(nil),            // 0: selling_iface.v1.HistoryRestockItem
 	(*HistoryRestockMetric)(nil),          // 1: selling_iface.v1.HistoryRestockMetric
-	(*HistoryRestockCancelItem)(nil),      // 2: selling_iface.v1.HistoryRestockCancelItem
-	(*HistoryRestockCancelMetric)(nil),    // 3: selling_iface.v1.HistoryRestockCancelMetric
-	(*HistoryReturnItem)(nil),             // 4: selling_iface.v1.HistoryReturnItem
-	(*HistoryReturnMetric)(nil),           // 5: selling_iface.v1.HistoryReturnMetric
-	(*HistoryStockResolutionItem)(nil),    // 6: selling_iface.v1.HistoryStockResolutionItem
-	(*HistoryStockResolutionMetric)(nil),  // 7: selling_iface.v1.HistoryStockResolutionMetric
-	(*HistoryStockOrderItem)(nil),         // 8: selling_iface.v1.HistoryStockOrderItem
-	(*HistoryStockOrderMetric)(nil),       // 9: selling_iface.v1.HistoryStockOrderMetric
-	(*HistoryStockOrderCancelItem)(nil),   // 10: selling_iface.v1.HistoryStockOrderCancelItem
-	(*HistoryStockOrderCancelMetric)(nil), // 11: selling_iface.v1.HistoryStockOrderCancelMetric
-	(*ShipmentProblemItem)(nil),           // 12: selling_iface.v1.ShipmentProblemItem
-	(*HistoryShipmentProblemMetric)(nil),  // 13: selling_iface.v1.HistoryShipmentProblemMetric
-	(*WarehouseProblemItem)(nil),          // 14: selling_iface.v1.WarehouseProblemItem
-	(*HistoryWarehouseProblemMetric)(nil), // 15: selling_iface.v1.HistoryWarehouseProblemMetric
-	(*HistoryReadyStockItem)(nil),         // 16: selling_iface.v1.HistoryReadyStockItem
-	(*HistoryReadyStockMetric)(nil),       // 17: selling_iface.v1.HistoryReadyStockMetric
-	(*timestamppb.Timestamp)(nil),         // 18: google.protobuf.Timestamp
-	(v1.StatTimeType)(0),                  // 19: common.v1.StatTimeType
+	(*HistoryTransferItem)(nil),           // 2: selling_iface.v1.HistoryTransferItem
+	(*HistoryTransferMetric)(nil),         // 3: selling_iface.v1.HistoryTransferMetric
+	(*HistoryTransferCancelItem)(nil),     // 4: selling_iface.v1.HistoryTransferCancelItem
+	(*HistoryTransferCancelMetric)(nil),   // 5: selling_iface.v1.HistoryTransferCancelMetric
+	(*HistoryRestockCancelItem)(nil),      // 6: selling_iface.v1.HistoryRestockCancelItem
+	(*HistoryRestockCancelMetric)(nil),    // 7: selling_iface.v1.HistoryRestockCancelMetric
+	(*HistoryReturnItem)(nil),             // 8: selling_iface.v1.HistoryReturnItem
+	(*HistoryReturnMetric)(nil),           // 9: selling_iface.v1.HistoryReturnMetric
+	(*HistoryStockResolutionItem)(nil),    // 10: selling_iface.v1.HistoryStockResolutionItem
+	(*HistoryStockResolutionMetric)(nil),  // 11: selling_iface.v1.HistoryStockResolutionMetric
+	(*HistoryStockOrderItem)(nil),         // 12: selling_iface.v1.HistoryStockOrderItem
+	(*HistoryStockOrderMetric)(nil),       // 13: selling_iface.v1.HistoryStockOrderMetric
+	(*HistoryStockOrderCancelItem)(nil),   // 14: selling_iface.v1.HistoryStockOrderCancelItem
+	(*HistoryStockOrderCancelMetric)(nil), // 15: selling_iface.v1.HistoryStockOrderCancelMetric
+	(*ShipmentProblemItem)(nil),           // 16: selling_iface.v1.ShipmentProblemItem
+	(*HistoryShipmentProblemMetric)(nil),  // 17: selling_iface.v1.HistoryShipmentProblemMetric
+	(*WarehouseProblemItem)(nil),          // 18: selling_iface.v1.WarehouseProblemItem
+	(*HistoryWarehouseProblemMetric)(nil), // 19: selling_iface.v1.HistoryWarehouseProblemMetric
+	(*HistoryReadyStockItem)(nil),         // 20: selling_iface.v1.HistoryReadyStockItem
+	(*HistoryReadyStockMetric)(nil),       // 21: selling_iface.v1.HistoryReadyStockMetric
+	(*timestamppb.Timestamp)(nil),         // 22: google.protobuf.Timestamp
+	(v1.StatTimeType)(0),                  // 23: common.v1.StatTimeType
 }
 var file_selling_iface_v1_metric_stock_proto_depIdxs = []int32{
-	18, // 0: selling_iface.v1.HistoryRestockItem.t:type_name -> google.protobuf.Timestamp
-	19, // 1: selling_iface.v1.HistoryRestockMetric.time_type:type_name -> common.v1.StatTimeType
+	22, // 0: selling_iface.v1.HistoryRestockItem.t:type_name -> google.protobuf.Timestamp
+	23, // 1: selling_iface.v1.HistoryRestockMetric.time_type:type_name -> common.v1.StatTimeType
 	0,  // 2: selling_iface.v1.HistoryRestockMetric.items:type_name -> selling_iface.v1.HistoryRestockItem
-	18, // 3: selling_iface.v1.HistoryRestockCancelItem.t:type_name -> google.protobuf.Timestamp
-	19, // 4: selling_iface.v1.HistoryRestockCancelMetric.time_type:type_name -> common.v1.StatTimeType
-	2,  // 5: selling_iface.v1.HistoryRestockCancelMetric.items:type_name -> selling_iface.v1.HistoryRestockCancelItem
-	18, // 6: selling_iface.v1.HistoryReturnItem.t:type_name -> google.protobuf.Timestamp
-	19, // 7: selling_iface.v1.HistoryReturnMetric.time_type:type_name -> common.v1.StatTimeType
-	4,  // 8: selling_iface.v1.HistoryReturnMetric.items:type_name -> selling_iface.v1.HistoryReturnItem
-	18, // 9: selling_iface.v1.HistoryStockResolutionItem.t:type_name -> google.protobuf.Timestamp
-	19, // 10: selling_iface.v1.HistoryStockResolutionMetric.time_type:type_name -> common.v1.StatTimeType
-	6,  // 11: selling_iface.v1.HistoryStockResolutionMetric.items:type_name -> selling_iface.v1.HistoryStockResolutionItem
-	18, // 12: selling_iface.v1.HistoryStockOrderItem.t:type_name -> google.protobuf.Timestamp
-	19, // 13: selling_iface.v1.HistoryStockOrderMetric.time_type:type_name -> common.v1.StatTimeType
-	8,  // 14: selling_iface.v1.HistoryStockOrderMetric.items:type_name -> selling_iface.v1.HistoryStockOrderItem
-	18, // 15: selling_iface.v1.HistoryStockOrderCancelItem.t:type_name -> google.protobuf.Timestamp
-	19, // 16: selling_iface.v1.HistoryStockOrderCancelMetric.time_type:type_name -> common.v1.StatTimeType
-	10, // 17: selling_iface.v1.HistoryStockOrderCancelMetric.items:type_name -> selling_iface.v1.HistoryStockOrderCancelItem
-	18, // 18: selling_iface.v1.ShipmentProblemItem.t:type_name -> google.protobuf.Timestamp
-	19, // 19: selling_iface.v1.HistoryShipmentProblemMetric.time_type:type_name -> common.v1.StatTimeType
-	12, // 20: selling_iface.v1.HistoryShipmentProblemMetric.items:type_name -> selling_iface.v1.ShipmentProblemItem
-	18, // 21: selling_iface.v1.WarehouseProblemItem.t:type_name -> google.protobuf.Timestamp
-	19, // 22: selling_iface.v1.HistoryWarehouseProblemMetric.time_type:type_name -> common.v1.StatTimeType
-	14, // 23: selling_iface.v1.HistoryWarehouseProblemMetric.items:type_name -> selling_iface.v1.WarehouseProblemItem
-	18, // 24: selling_iface.v1.HistoryReadyStockItem.t:type_name -> google.protobuf.Timestamp
-	19, // 25: selling_iface.v1.HistoryReadyStockMetric.time_type:type_name -> common.v1.StatTimeType
-	16, // 26: selling_iface.v1.HistoryReadyStockMetric.items:type_name -> selling_iface.v1.HistoryReadyStockItem
-	27, // [27:27] is the sub-list for method output_type
-	27, // [27:27] is the sub-list for method input_type
-	27, // [27:27] is the sub-list for extension type_name
-	27, // [27:27] is the sub-list for extension extendee
-	0,  // [0:27] is the sub-list for field type_name
+	22, // 3: selling_iface.v1.HistoryTransferItem.t:type_name -> google.protobuf.Timestamp
+	23, // 4: selling_iface.v1.HistoryTransferMetric.time_type:type_name -> common.v1.StatTimeType
+	2,  // 5: selling_iface.v1.HistoryTransferMetric.items:type_name -> selling_iface.v1.HistoryTransferItem
+	22, // 6: selling_iface.v1.HistoryTransferCancelItem.t:type_name -> google.protobuf.Timestamp
+	23, // 7: selling_iface.v1.HistoryTransferCancelMetric.time_type:type_name -> common.v1.StatTimeType
+	4,  // 8: selling_iface.v1.HistoryTransferCancelMetric.items:type_name -> selling_iface.v1.HistoryTransferCancelItem
+	22, // 9: selling_iface.v1.HistoryRestockCancelItem.t:type_name -> google.protobuf.Timestamp
+	23, // 10: selling_iface.v1.HistoryRestockCancelMetric.time_type:type_name -> common.v1.StatTimeType
+	6,  // 11: selling_iface.v1.HistoryRestockCancelMetric.items:type_name -> selling_iface.v1.HistoryRestockCancelItem
+	22, // 12: selling_iface.v1.HistoryReturnItem.t:type_name -> google.protobuf.Timestamp
+	23, // 13: selling_iface.v1.HistoryReturnMetric.time_type:type_name -> common.v1.StatTimeType
+	8,  // 14: selling_iface.v1.HistoryReturnMetric.items:type_name -> selling_iface.v1.HistoryReturnItem
+	22, // 15: selling_iface.v1.HistoryStockResolutionItem.t:type_name -> google.protobuf.Timestamp
+	23, // 16: selling_iface.v1.HistoryStockResolutionMetric.time_type:type_name -> common.v1.StatTimeType
+	10, // 17: selling_iface.v1.HistoryStockResolutionMetric.items:type_name -> selling_iface.v1.HistoryStockResolutionItem
+	22, // 18: selling_iface.v1.HistoryStockOrderItem.t:type_name -> google.protobuf.Timestamp
+	23, // 19: selling_iface.v1.HistoryStockOrderMetric.time_type:type_name -> common.v1.StatTimeType
+	12, // 20: selling_iface.v1.HistoryStockOrderMetric.items:type_name -> selling_iface.v1.HistoryStockOrderItem
+	22, // 21: selling_iface.v1.HistoryStockOrderCancelItem.t:type_name -> google.protobuf.Timestamp
+	23, // 22: selling_iface.v1.HistoryStockOrderCancelMetric.time_type:type_name -> common.v1.StatTimeType
+	14, // 23: selling_iface.v1.HistoryStockOrderCancelMetric.items:type_name -> selling_iface.v1.HistoryStockOrderCancelItem
+	22, // 24: selling_iface.v1.ShipmentProblemItem.t:type_name -> google.protobuf.Timestamp
+	23, // 25: selling_iface.v1.HistoryShipmentProblemMetric.time_type:type_name -> common.v1.StatTimeType
+	16, // 26: selling_iface.v1.HistoryShipmentProblemMetric.items:type_name -> selling_iface.v1.ShipmentProblemItem
+	22, // 27: selling_iface.v1.WarehouseProblemItem.t:type_name -> google.protobuf.Timestamp
+	23, // 28: selling_iface.v1.HistoryWarehouseProblemMetric.time_type:type_name -> common.v1.StatTimeType
+	18, // 29: selling_iface.v1.HistoryWarehouseProblemMetric.items:type_name -> selling_iface.v1.WarehouseProblemItem
+	22, // 30: selling_iface.v1.HistoryReadyStockItem.t:type_name -> google.protobuf.Timestamp
+	23, // 31: selling_iface.v1.HistoryReadyStockMetric.time_type:type_name -> common.v1.StatTimeType
+	20, // 32: selling_iface.v1.HistoryReadyStockMetric.items:type_name -> selling_iface.v1.HistoryReadyStockItem
+	33, // [33:33] is the sub-list for method output_type
+	33, // [33:33] is the sub-list for method input_type
+	33, // [33:33] is the sub-list for extension type_name
+	33, // [33:33] is the sub-list for extension extendee
+	0,  // [0:33] is the sub-list for field type_name
 }
 
 func init() { file_selling_iface_v1_metric_stock_proto_init() }
@@ -1485,7 +1780,7 @@ func file_selling_iface_v1_metric_stock_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_selling_iface_v1_metric_stock_proto_rawDesc), len(file_selling_iface_v1_metric_stock_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   18,
+			NumMessages:   22,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

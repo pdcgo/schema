@@ -23,9 +23,78 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type ProductOrderMetricSort int32
+
+const (
+	ProductOrderMetricSort_PRODUCT_ORDER_METRIC_SORT_UNSPECIFIED        ProductOrderMetricSort = 0
+	ProductOrderMetricSort_PRODUCT_ORDER_METRIC_SORT_PIECE_COUNT        ProductOrderMetricSort = 1
+	ProductOrderMetricSort_PRODUCT_ORDER_METRIC_SORT_ORDER_COUNT        ProductOrderMetricSort = 2
+	ProductOrderMetricSort_PRODUCT_ORDER_METRIC_SORT_TOTAL_AMOUNT       ProductOrderMetricSort = 3
+	ProductOrderMetricSort_PRODUCT_ORDER_METRIC_SORT_OWN_PIECE_COUNT    ProductOrderMetricSort = 4
+	ProductOrderMetricSort_PRODUCT_ORDER_METRIC_SORT_OWN_ORDER_COUNT    ProductOrderMetricSort = 5
+	ProductOrderMetricSort_PRODUCT_ORDER_METRIC_SORT_OWN_TOTAL_AMOUNT   ProductOrderMetricSort = 6
+	ProductOrderMetricSort_PRODUCT_ORDER_METRIC_SORT_CROSS_PIECE_COUNT  ProductOrderMetricSort = 7
+	ProductOrderMetricSort_PRODUCT_ORDER_METRIC_SORT_CROSS_ORDER_COUNT  ProductOrderMetricSort = 8
+	ProductOrderMetricSort_PRODUCT_ORDER_METRIC_SORT_CROSS_TOTAL_AMOUNT ProductOrderMetricSort = 9
+)
+
+// Enum value maps for ProductOrderMetricSort.
+var (
+	ProductOrderMetricSort_name = map[int32]string{
+		0: "PRODUCT_ORDER_METRIC_SORT_UNSPECIFIED",
+		1: "PRODUCT_ORDER_METRIC_SORT_PIECE_COUNT",
+		2: "PRODUCT_ORDER_METRIC_SORT_ORDER_COUNT",
+		3: "PRODUCT_ORDER_METRIC_SORT_TOTAL_AMOUNT",
+		4: "PRODUCT_ORDER_METRIC_SORT_OWN_PIECE_COUNT",
+		5: "PRODUCT_ORDER_METRIC_SORT_OWN_ORDER_COUNT",
+		6: "PRODUCT_ORDER_METRIC_SORT_OWN_TOTAL_AMOUNT",
+		7: "PRODUCT_ORDER_METRIC_SORT_CROSS_PIECE_COUNT",
+		8: "PRODUCT_ORDER_METRIC_SORT_CROSS_ORDER_COUNT",
+		9: "PRODUCT_ORDER_METRIC_SORT_CROSS_TOTAL_AMOUNT",
+	}
+	ProductOrderMetricSort_value = map[string]int32{
+		"PRODUCT_ORDER_METRIC_SORT_UNSPECIFIED":        0,
+		"PRODUCT_ORDER_METRIC_SORT_PIECE_COUNT":        1,
+		"PRODUCT_ORDER_METRIC_SORT_ORDER_COUNT":        2,
+		"PRODUCT_ORDER_METRIC_SORT_TOTAL_AMOUNT":       3,
+		"PRODUCT_ORDER_METRIC_SORT_OWN_PIECE_COUNT":    4,
+		"PRODUCT_ORDER_METRIC_SORT_OWN_ORDER_COUNT":    5,
+		"PRODUCT_ORDER_METRIC_SORT_OWN_TOTAL_AMOUNT":   6,
+		"PRODUCT_ORDER_METRIC_SORT_CROSS_PIECE_COUNT":  7,
+		"PRODUCT_ORDER_METRIC_SORT_CROSS_ORDER_COUNT":  8,
+		"PRODUCT_ORDER_METRIC_SORT_CROSS_TOTAL_AMOUNT": 9,
+	}
+)
+
+func (x ProductOrderMetricSort) Enum() *ProductOrderMetricSort {
+	p := new(ProductOrderMetricSort)
+	*p = x
+	return p
+}
+
+func (x ProductOrderMetricSort) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ProductOrderMetricSort) Descriptor() protoreflect.EnumDescriptor {
+	return file_selling_iface_v1_metric_product_proto_enumTypes[0].Descriptor()
+}
+
+func (ProductOrderMetricSort) Type() protoreflect.EnumType {
+	return &file_selling_iface_v1_metric_product_proto_enumTypes[0]
+}
+
+func (x ProductOrderMetricSort) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ProductOrderMetricSort.Descriptor instead.
+func (ProductOrderMetricSort) EnumDescriptor() ([]byte, []int) {
+	return file_selling_iface_v1_metric_product_proto_rawDescGZIP(), []int{0}
+}
+
 type ProductSoldMetric struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
-	Type             MetricType             `protobuf:"varint,1,opt,name=type,proto3,enum=selling_iface.v1.MetricType" json:"type,omitempty"`
 	PieceCount       int64                  `protobuf:"varint,2,opt,name=piece_count,json=pieceCount,proto3" json:"piece_count,omitempty"`
 	OrderCount       int64                  `protobuf:"varint,3,opt,name=order_count,json=orderCount,proto3" json:"order_count,omitempty"`
 	TotalAmount      float64                `protobuf:"fixed64,4,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
@@ -67,13 +136,6 @@ func (x *ProductSoldMetric) ProtoReflect() protoreflect.Message {
 // Deprecated: Use ProductSoldMetric.ProtoReflect.Descriptor instead.
 func (*ProductSoldMetric) Descriptor() ([]byte, []int) {
 	return file_selling_iface_v1_metric_product_proto_rawDescGZIP(), []int{0}
-}
-
-func (x *ProductSoldMetric) GetType() MetricType {
-	if x != nil {
-		return x.Type
-	}
-	return MetricType_METRIC_TYPE_UNSPECIFIED
 }
 
 func (x *ProductSoldMetric) GetPieceCount() int64 {
@@ -605,13 +667,172 @@ func (x *TopProductUnsoldMetric) GetItems() []*UnsoldProductItem {
 	return nil
 }
 
+type ProductOrderMetricItem struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	ProductId        uint64                 `protobuf:"varint,1,opt,name=product_id,json=productId,proto3" json:"product_id,omitempty"`
+	PieceCount       int64                  `protobuf:"varint,2,opt,name=piece_count,json=pieceCount,proto3" json:"piece_count,omitempty"`
+	OrderCount       int64                  `protobuf:"varint,3,opt,name=order_count,json=orderCount,proto3" json:"order_count,omitempty"`
+	TotalAmount      float64                `protobuf:"fixed64,4,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
+	OwnPieceCount    int64                  `protobuf:"varint,5,opt,name=own_piece_count,json=ownPieceCount,proto3" json:"own_piece_count,omitempty"`
+	OwnOrderCount    int64                  `protobuf:"varint,6,opt,name=own_order_count,json=ownOrderCount,proto3" json:"own_order_count,omitempty"`
+	OwnTotalAmount   float64                `protobuf:"fixed64,7,opt,name=own_total_amount,json=ownTotalAmount,proto3" json:"own_total_amount,omitempty"`
+	CrossPieceCount  int64                  `protobuf:"varint,8,opt,name=cross_piece_count,json=crossPieceCount,proto3" json:"cross_piece_count,omitempty"`
+	CrossOrderCount  int64                  `protobuf:"varint,9,opt,name=cross_order_count,json=crossOrderCount,proto3" json:"cross_order_count,omitempty"`
+	CrossTotalAmount float64                `protobuf:"fixed64,10,opt,name=cross_total_amount,json=crossTotalAmount,proto3" json:"cross_total_amount,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *ProductOrderMetricItem) Reset() {
+	*x = ProductOrderMetricItem{}
+	mi := &file_selling_iface_v1_metric_product_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProductOrderMetricItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProductOrderMetricItem) ProtoMessage() {}
+
+func (x *ProductOrderMetricItem) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_metric_product_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProductOrderMetricItem.ProtoReflect.Descriptor instead.
+func (*ProductOrderMetricItem) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_metric_product_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *ProductOrderMetricItem) GetProductId() uint64 {
+	if x != nil {
+		return x.ProductId
+	}
+	return 0
+}
+
+func (x *ProductOrderMetricItem) GetPieceCount() int64 {
+	if x != nil {
+		return x.PieceCount
+	}
+	return 0
+}
+
+func (x *ProductOrderMetricItem) GetOrderCount() int64 {
+	if x != nil {
+		return x.OrderCount
+	}
+	return 0
+}
+
+func (x *ProductOrderMetricItem) GetTotalAmount() float64 {
+	if x != nil {
+		return x.TotalAmount
+	}
+	return 0
+}
+
+func (x *ProductOrderMetricItem) GetOwnPieceCount() int64 {
+	if x != nil {
+		return x.OwnPieceCount
+	}
+	return 0
+}
+
+func (x *ProductOrderMetricItem) GetOwnOrderCount() int64 {
+	if x != nil {
+		return x.OwnOrderCount
+	}
+	return 0
+}
+
+func (x *ProductOrderMetricItem) GetOwnTotalAmount() float64 {
+	if x != nil {
+		return x.OwnTotalAmount
+	}
+	return 0
+}
+
+func (x *ProductOrderMetricItem) GetCrossPieceCount() int64 {
+	if x != nil {
+		return x.CrossPieceCount
+	}
+	return 0
+}
+
+func (x *ProductOrderMetricItem) GetCrossOrderCount() int64 {
+	if x != nil {
+		return x.CrossOrderCount
+	}
+	return 0
+}
+
+func (x *ProductOrderMetricItem) GetCrossTotalAmount() float64 {
+	if x != nil {
+		return x.CrossTotalAmount
+	}
+	return 0
+}
+
+type ProductOrderMetric struct {
+	state         protoimpl.MessageState    `protogen:"open.v1"`
+	Items         []*ProductOrderMetricItem `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ProductOrderMetric) Reset() {
+	*x = ProductOrderMetric{}
+	mi := &file_selling_iface_v1_metric_product_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProductOrderMetric) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProductOrderMetric) ProtoMessage() {}
+
+func (x *ProductOrderMetric) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_metric_product_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProductOrderMetric.ProtoReflect.Descriptor instead.
+func (*ProductOrderMetric) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_metric_product_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *ProductOrderMetric) GetItems() []*ProductOrderMetricItem {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
 var File_selling_iface_v1_metric_product_proto protoreflect.FileDescriptor
 
 const file_selling_iface_v1_metric_product_proto_rawDesc = "" +
 	"\n" +
-	"%selling_iface/v1/metric_product.proto\x12\x10selling_iface.v1\x1a\x14common/v1/stat.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dselling_iface/v1/metric.proto\"\xaa\x03\n" +
-	"\x11ProductSoldMetric\x120\n" +
-	"\x04type\x18\x01 \x01(\x0e2\x1c.selling_iface.v1.MetricTypeR\x04type\x12\x1f\n" +
+	"%selling_iface/v1/metric_product.proto\x12\x10selling_iface.v1\x1a\x14common/v1/stat.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dselling_iface/v1/metric.proto\"\xf8\x02\n" +
+	"\x11ProductSoldMetric\x12\x1f\n" +
 	"\vpiece_count\x18\x02 \x01(\x03R\n" +
 	"pieceCount\x12\x1f\n" +
 	"\vorder_count\x18\x03 \x01(\x03R\n" +
@@ -667,7 +888,35 @@ const file_selling_iface_v1_metric_product_proto_rawDesc = "" +
 	"\x0ewarehouse_name\x18\b \x01(\tR\rwarehouseName\"\x85\x01\n" +
 	"\x16TopProductUnsoldMetric\x120\n" +
 	"\x04type\x18\x01 \x01(\x0e2\x1c.selling_iface.v1.MetricTypeR\x04type\x129\n" +
-	"\x05items\x18\x02 \x03(\v2#.selling_iface.v1.UnsoldProductItemR\x05itemsB\xc8\x01\n" +
+	"\x05items\x18\x02 \x03(\v2#.selling_iface.v1.UnsoldProductItemR\x05items\"\x9c\x03\n" +
+	"\x16ProductOrderMetricItem\x12\x1d\n" +
+	"\n" +
+	"product_id\x18\x01 \x01(\x04R\tproductId\x12\x1f\n" +
+	"\vpiece_count\x18\x02 \x01(\x03R\n" +
+	"pieceCount\x12\x1f\n" +
+	"\vorder_count\x18\x03 \x01(\x03R\n" +
+	"orderCount\x12!\n" +
+	"\ftotal_amount\x18\x04 \x01(\x01R\vtotalAmount\x12&\n" +
+	"\x0fown_piece_count\x18\x05 \x01(\x03R\rownPieceCount\x12&\n" +
+	"\x0fown_order_count\x18\x06 \x01(\x03R\rownOrderCount\x12(\n" +
+	"\x10own_total_amount\x18\a \x01(\x01R\x0eownTotalAmount\x12*\n" +
+	"\x11cross_piece_count\x18\b \x01(\x03R\x0fcrossPieceCount\x12*\n" +
+	"\x11cross_order_count\x18\t \x01(\x03R\x0fcrossOrderCount\x12,\n" +
+	"\x12cross_total_amount\x18\n" +
+	" \x01(\x01R\x10crossTotalAmount\"T\n" +
+	"\x12ProductOrderMetric\x12>\n" +
+	"\x05items\x18\x01 \x03(\v2(.selling_iface.v1.ProductOrderMetricItemR\x05items*\xe7\x03\n" +
+	"\x16ProductOrderMetricSort\x12)\n" +
+	"%PRODUCT_ORDER_METRIC_SORT_UNSPECIFIED\x10\x00\x12)\n" +
+	"%PRODUCT_ORDER_METRIC_SORT_PIECE_COUNT\x10\x01\x12)\n" +
+	"%PRODUCT_ORDER_METRIC_SORT_ORDER_COUNT\x10\x02\x12*\n" +
+	"&PRODUCT_ORDER_METRIC_SORT_TOTAL_AMOUNT\x10\x03\x12-\n" +
+	")PRODUCT_ORDER_METRIC_SORT_OWN_PIECE_COUNT\x10\x04\x12-\n" +
+	")PRODUCT_ORDER_METRIC_SORT_OWN_ORDER_COUNT\x10\x05\x12.\n" +
+	"*PRODUCT_ORDER_METRIC_SORT_OWN_TOTAL_AMOUNT\x10\x06\x12/\n" +
+	"+PRODUCT_ORDER_METRIC_SORT_CROSS_PIECE_COUNT\x10\a\x12/\n" +
+	"+PRODUCT_ORDER_METRIC_SORT_CROSS_ORDER_COUNT\x10\b\x120\n" +
+	",PRODUCT_ORDER_METRIC_SORT_CROSS_TOTAL_AMOUNT\x10\tB\xc8\x01\n" +
 	"\x14com.selling_iface.v1B\x12MetricProductProtoP\x01Z?github.com/pdcgo/schema/services/selling_iface/v1;selling_iface\xa2\x02\x03SXX\xaa\x02\x0fSellingIface.V1\xca\x02\x0fSellingIface\\V1\xe2\x02\x1bSellingIface\\V1\\GPBMetadata\xea\x02\x10SellingIface::V1b\x06proto3"
 
 var (
@@ -682,30 +931,34 @@ func file_selling_iface_v1_metric_product_proto_rawDescGZIP() []byte {
 	return file_selling_iface_v1_metric_product_proto_rawDescData
 }
 
-var file_selling_iface_v1_metric_product_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_selling_iface_v1_metric_product_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_selling_iface_v1_metric_product_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_selling_iface_v1_metric_product_proto_goTypes = []any{
-	(*ProductSoldMetric)(nil),        // 0: selling_iface.v1.ProductSoldMetric
-	(*HistoryProductSoldItem)(nil),   // 1: selling_iface.v1.HistoryProductSoldItem
-	(*HistoryProductSoldMetric)(nil), // 2: selling_iface.v1.HistoryProductSoldMetric
-	(*SoldProductItem)(nil),          // 3: selling_iface.v1.SoldProductItem
-	(*TopProductSoldMetric)(nil),     // 4: selling_iface.v1.TopProductSoldMetric
-	(*UnsoldProductItem)(nil),        // 5: selling_iface.v1.UnsoldProductItem
-	(*TopProductUnsoldMetric)(nil),   // 6: selling_iface.v1.TopProductUnsoldMetric
-	(MetricType)(0),                  // 7: selling_iface.v1.MetricType
-	(*timestamppb.Timestamp)(nil),    // 8: google.protobuf.Timestamp
-	(v1.StatTimeType)(0),             // 9: common.v1.StatTimeType
+	(ProductOrderMetricSort)(0),      // 0: selling_iface.v1.ProductOrderMetricSort
+	(*ProductSoldMetric)(nil),        // 1: selling_iface.v1.ProductSoldMetric
+	(*HistoryProductSoldItem)(nil),   // 2: selling_iface.v1.HistoryProductSoldItem
+	(*HistoryProductSoldMetric)(nil), // 3: selling_iface.v1.HistoryProductSoldMetric
+	(*SoldProductItem)(nil),          // 4: selling_iface.v1.SoldProductItem
+	(*TopProductSoldMetric)(nil),     // 5: selling_iface.v1.TopProductSoldMetric
+	(*UnsoldProductItem)(nil),        // 6: selling_iface.v1.UnsoldProductItem
+	(*TopProductUnsoldMetric)(nil),   // 7: selling_iface.v1.TopProductUnsoldMetric
+	(*ProductOrderMetricItem)(nil),   // 8: selling_iface.v1.ProductOrderMetricItem
+	(*ProductOrderMetric)(nil),       // 9: selling_iface.v1.ProductOrderMetric
+	(*timestamppb.Timestamp)(nil),    // 10: google.protobuf.Timestamp
+	(v1.StatTimeType)(0),             // 11: common.v1.StatTimeType
+	(MetricType)(0),                  // 12: selling_iface.v1.MetricType
 }
 var file_selling_iface_v1_metric_product_proto_depIdxs = []int32{
-	7,  // 0: selling_iface.v1.ProductSoldMetric.type:type_name -> selling_iface.v1.MetricType
-	8,  // 1: selling_iface.v1.HistoryProductSoldItem.t:type_name -> google.protobuf.Timestamp
-	9,  // 2: selling_iface.v1.HistoryProductSoldMetric.time_type:type_name -> common.v1.StatTimeType
-	7,  // 3: selling_iface.v1.HistoryProductSoldMetric.type:type_name -> selling_iface.v1.MetricType
-	1,  // 4: selling_iface.v1.HistoryProductSoldMetric.datas:type_name -> selling_iface.v1.HistoryProductSoldItem
-	7,  // 5: selling_iface.v1.TopProductSoldMetric.type:type_name -> selling_iface.v1.MetricType
-	3,  // 6: selling_iface.v1.TopProductSoldMetric.items:type_name -> selling_iface.v1.SoldProductItem
-	8,  // 7: selling_iface.v1.UnsoldProductItem.last_order_time:type_name -> google.protobuf.Timestamp
-	7,  // 8: selling_iface.v1.TopProductUnsoldMetric.type:type_name -> selling_iface.v1.MetricType
-	5,  // 9: selling_iface.v1.TopProductUnsoldMetric.items:type_name -> selling_iface.v1.UnsoldProductItem
+	10, // 0: selling_iface.v1.HistoryProductSoldItem.t:type_name -> google.protobuf.Timestamp
+	11, // 1: selling_iface.v1.HistoryProductSoldMetric.time_type:type_name -> common.v1.StatTimeType
+	12, // 2: selling_iface.v1.HistoryProductSoldMetric.type:type_name -> selling_iface.v1.MetricType
+	2,  // 3: selling_iface.v1.HistoryProductSoldMetric.datas:type_name -> selling_iface.v1.HistoryProductSoldItem
+	12, // 4: selling_iface.v1.TopProductSoldMetric.type:type_name -> selling_iface.v1.MetricType
+	4,  // 5: selling_iface.v1.TopProductSoldMetric.items:type_name -> selling_iface.v1.SoldProductItem
+	10, // 6: selling_iface.v1.UnsoldProductItem.last_order_time:type_name -> google.protobuf.Timestamp
+	12, // 7: selling_iface.v1.TopProductUnsoldMetric.type:type_name -> selling_iface.v1.MetricType
+	6,  // 8: selling_iface.v1.TopProductUnsoldMetric.items:type_name -> selling_iface.v1.UnsoldProductItem
+	8,  // 9: selling_iface.v1.ProductOrderMetric.items:type_name -> selling_iface.v1.ProductOrderMetricItem
 	10, // [10:10] is the sub-list for method output_type
 	10, // [10:10] is the sub-list for method input_type
 	10, // [10:10] is the sub-list for extension type_name
@@ -724,13 +977,14 @@ func file_selling_iface_v1_metric_product_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_selling_iface_v1_metric_product_proto_rawDesc), len(file_selling_iface_v1_metric_product_proto_rawDesc)),
-			NumEnums:      0,
-			NumMessages:   7,
+			NumEnums:      1,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_selling_iface_v1_metric_product_proto_goTypes,
 		DependencyIndexes: file_selling_iface_v1_metric_product_proto_depIdxs,
+		EnumInfos:         file_selling_iface_v1_metric_product_proto_enumTypes,
 		MessageInfos:      file_selling_iface_v1_metric_product_proto_msgTypes,
 	}.Build()
 	File_selling_iface_v1_metric_product_proto = out.File

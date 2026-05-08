@@ -27,37 +27,49 @@ const (
 type StockChangeType int32
 
 const (
-	StockChangeType_STOCK_CHANGE_TYPE_UNSPECIFIED      StockChangeType = 0
-	StockChangeType_STOCK_CHANGE_TYPE_ORDER_ACCEPTED   StockChangeType = 1
-	StockChangeType_STOCK_CHANGE_TYPE_ORDER_CANCELED   StockChangeType = 2
-	StockChangeType_STOCK_CHANGE_TYPE_RESTOCK_ACCEPTED StockChangeType = 3
-	StockChangeType_STOCK_CHANGE_TYPE_RETURN_ACCEPTED  StockChangeType = 4
-	StockChangeType_STOCK_CHANGE_TYPE_STOCK_PROBLEM    StockChangeType = 5
-	StockChangeType_STOCK_CHANGE_TYPE_STOCK_FOUND_BACK StockChangeType = 6
-	StockChangeType_STOCK_CHANGE_TYPE_STOCK_ADJUSTMENT StockChangeType = 7
+	StockChangeType_STOCK_CHANGE_TYPE_UNSPECIFIED                     StockChangeType = 0
+	StockChangeType_STOCK_CHANGE_TYPE_ORDER_ACCEPTED                  StockChangeType = 1
+	StockChangeType_STOCK_CHANGE_TYPE_ORDER_CANCELED                  StockChangeType = 2
+	StockChangeType_STOCK_CHANGE_TYPE_RESTOCK_ACCEPTED                StockChangeType = 3
+	StockChangeType_STOCK_CHANGE_TYPE_RETURN_ACCEPTED                 StockChangeType = 4
+	StockChangeType_STOCK_CHANGE_TYPE_STOCK_PROBLEM                   StockChangeType = 5
+	StockChangeType_STOCK_CHANGE_TYPE_STOCK_FOUND_BACK                StockChangeType = 6
+	StockChangeType_STOCK_CHANGE_TYPE_STOCK_ADJUSTMENT                StockChangeType = 7
+	StockChangeType_STOCK_CHANGE_TYPE_TRANSFER_WAREHOUSE_OUT          StockChangeType = 8
+	StockChangeType_STOCK_CHANGE_TYPE_TRANSFER_WAREHOUSE_IN           StockChangeType = 9
+	StockChangeType_STOCK_CHANGE_TYPE_TRANSFER_WAREHOUSE_OUT_CANCELED StockChangeType = 10
+	StockChangeType_STOCK_CHANGE_TYPE_TRANSFER_WAREHOUSE_IN_CANCELED  StockChangeType = 11
 )
 
 // Enum value maps for StockChangeType.
 var (
 	StockChangeType_name = map[int32]string{
-		0: "STOCK_CHANGE_TYPE_UNSPECIFIED",
-		1: "STOCK_CHANGE_TYPE_ORDER_ACCEPTED",
-		2: "STOCK_CHANGE_TYPE_ORDER_CANCELED",
-		3: "STOCK_CHANGE_TYPE_RESTOCK_ACCEPTED",
-		4: "STOCK_CHANGE_TYPE_RETURN_ACCEPTED",
-		5: "STOCK_CHANGE_TYPE_STOCK_PROBLEM",
-		6: "STOCK_CHANGE_TYPE_STOCK_FOUND_BACK",
-		7: "STOCK_CHANGE_TYPE_STOCK_ADJUSTMENT",
+		0:  "STOCK_CHANGE_TYPE_UNSPECIFIED",
+		1:  "STOCK_CHANGE_TYPE_ORDER_ACCEPTED",
+		2:  "STOCK_CHANGE_TYPE_ORDER_CANCELED",
+		3:  "STOCK_CHANGE_TYPE_RESTOCK_ACCEPTED",
+		4:  "STOCK_CHANGE_TYPE_RETURN_ACCEPTED",
+		5:  "STOCK_CHANGE_TYPE_STOCK_PROBLEM",
+		6:  "STOCK_CHANGE_TYPE_STOCK_FOUND_BACK",
+		7:  "STOCK_CHANGE_TYPE_STOCK_ADJUSTMENT",
+		8:  "STOCK_CHANGE_TYPE_TRANSFER_WAREHOUSE_OUT",
+		9:  "STOCK_CHANGE_TYPE_TRANSFER_WAREHOUSE_IN",
+		10: "STOCK_CHANGE_TYPE_TRANSFER_WAREHOUSE_OUT_CANCELED",
+		11: "STOCK_CHANGE_TYPE_TRANSFER_WAREHOUSE_IN_CANCELED",
 	}
 	StockChangeType_value = map[string]int32{
-		"STOCK_CHANGE_TYPE_UNSPECIFIED":      0,
-		"STOCK_CHANGE_TYPE_ORDER_ACCEPTED":   1,
-		"STOCK_CHANGE_TYPE_ORDER_CANCELED":   2,
-		"STOCK_CHANGE_TYPE_RESTOCK_ACCEPTED": 3,
-		"STOCK_CHANGE_TYPE_RETURN_ACCEPTED":  4,
-		"STOCK_CHANGE_TYPE_STOCK_PROBLEM":    5,
-		"STOCK_CHANGE_TYPE_STOCK_FOUND_BACK": 6,
-		"STOCK_CHANGE_TYPE_STOCK_ADJUSTMENT": 7,
+		"STOCK_CHANGE_TYPE_UNSPECIFIED":                     0,
+		"STOCK_CHANGE_TYPE_ORDER_ACCEPTED":                  1,
+		"STOCK_CHANGE_TYPE_ORDER_CANCELED":                  2,
+		"STOCK_CHANGE_TYPE_RESTOCK_ACCEPTED":                3,
+		"STOCK_CHANGE_TYPE_RETURN_ACCEPTED":                 4,
+		"STOCK_CHANGE_TYPE_STOCK_PROBLEM":                   5,
+		"STOCK_CHANGE_TYPE_STOCK_FOUND_BACK":                6,
+		"STOCK_CHANGE_TYPE_STOCK_ADJUSTMENT":                7,
+		"STOCK_CHANGE_TYPE_TRANSFER_WAREHOUSE_OUT":          8,
+		"STOCK_CHANGE_TYPE_TRANSFER_WAREHOUSE_IN":           9,
+		"STOCK_CHANGE_TYPE_TRANSFER_WAREHOUSE_OUT_CANCELED": 10,
+		"STOCK_CHANGE_TYPE_TRANSFER_WAREHOUSE_IN_CANCELED":  11,
 	}
 )
 
@@ -601,6 +613,138 @@ func (x *StockAdjustment) GetTransactionId() uint64 {
 	return 0
 }
 
+type TransferWarehouseCreated struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TransferId    uint64                 `protobuf:"varint,1,opt,name=transfer_id,json=transferId,proto3" json:"transfer_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TransferWarehouseCreated) Reset() {
+	*x = TransferWarehouseCreated{}
+	mi := &file_warehouse_iface_v1_event_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TransferWarehouseCreated) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TransferWarehouseCreated) ProtoMessage() {}
+
+func (x *TransferWarehouseCreated) ProtoReflect() protoreflect.Message {
+	mi := &file_warehouse_iface_v1_event_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TransferWarehouseCreated.ProtoReflect.Descriptor instead.
+func (*TransferWarehouseCreated) Descriptor() ([]byte, []int) {
+	return file_warehouse_iface_v1_event_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *TransferWarehouseCreated) GetTransferId() uint64 {
+	if x != nil {
+		return x.TransferId
+	}
+	return 0
+}
+
+type TransferWarehouseAccepted struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TransferId    uint64                 `protobuf:"varint,1,opt,name=transfer_id,json=transferId,proto3" json:"transfer_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TransferWarehouseAccepted) Reset() {
+	*x = TransferWarehouseAccepted{}
+	mi := &file_warehouse_iface_v1_event_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TransferWarehouseAccepted) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TransferWarehouseAccepted) ProtoMessage() {}
+
+func (x *TransferWarehouseAccepted) ProtoReflect() protoreflect.Message {
+	mi := &file_warehouse_iface_v1_event_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TransferWarehouseAccepted.ProtoReflect.Descriptor instead.
+func (*TransferWarehouseAccepted) Descriptor() ([]byte, []int) {
+	return file_warehouse_iface_v1_event_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *TransferWarehouseAccepted) GetTransferId() uint64 {
+	if x != nil {
+		return x.TransferId
+	}
+	return 0
+}
+
+type TransferWarehouseCanceled struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TransferId    uint64                 `protobuf:"varint,1,opt,name=transfer_id,json=transferId,proto3" json:"transfer_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TransferWarehouseCanceled) Reset() {
+	*x = TransferWarehouseCanceled{}
+	mi := &file_warehouse_iface_v1_event_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TransferWarehouseCanceled) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TransferWarehouseCanceled) ProtoMessage() {}
+
+func (x *TransferWarehouseCanceled) ProtoReflect() protoreflect.Message {
+	mi := &file_warehouse_iface_v1_event_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TransferWarehouseCanceled.ProtoReflect.Descriptor instead.
+func (*TransferWarehouseCanceled) Descriptor() ([]byte, []int) {
+	return file_warehouse_iface_v1_event_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *TransferWarehouseCanceled) GetTransferId() uint64 {
+	if x != nil {
+		return x.TransferId
+	}
+	return 0
+}
+
 type StockEvent struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Types that are valid to be assigned to Data:
@@ -614,6 +758,9 @@ type StockEvent struct {
 	//	*StockEvent_StockProblem
 	//	*StockEvent_StockFoundBack
 	//	*StockEvent_StockAdjustment
+	//	*StockEvent_TransferWarehouseCreated
+	//	*StockEvent_TransferWarehouseAccepted
+	//	*StockEvent_TransferWarehouseCanceled
 	Data          isStockEvent_Data `protobuf_oneof:"data"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -621,7 +768,7 @@ type StockEvent struct {
 
 func (x *StockEvent) Reset() {
 	*x = StockEvent{}
-	mi := &file_warehouse_iface_v1_event_proto_msgTypes[10]
+	mi := &file_warehouse_iface_v1_event_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -633,7 +780,7 @@ func (x *StockEvent) String() string {
 func (*StockEvent) ProtoMessage() {}
 
 func (x *StockEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_event_proto_msgTypes[10]
+	mi := &file_warehouse_iface_v1_event_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -646,7 +793,7 @@ func (x *StockEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StockEvent.ProtoReflect.Descriptor instead.
 func (*StockEvent) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_event_proto_rawDescGZIP(), []int{10}
+	return file_warehouse_iface_v1_event_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *StockEvent) GetData() isStockEvent_Data {
@@ -737,6 +884,33 @@ func (x *StockEvent) GetStockAdjustment() *StockAdjustment {
 	return nil
 }
 
+func (x *StockEvent) GetTransferWarehouseCreated() *TransferWarehouseCreated {
+	if x != nil {
+		if x, ok := x.Data.(*StockEvent_TransferWarehouseCreated); ok {
+			return x.TransferWarehouseCreated
+		}
+	}
+	return nil
+}
+
+func (x *StockEvent) GetTransferWarehouseAccepted() *TransferWarehouseAccepted {
+	if x != nil {
+		if x, ok := x.Data.(*StockEvent_TransferWarehouseAccepted); ok {
+			return x.TransferWarehouseAccepted
+		}
+	}
+	return nil
+}
+
+func (x *StockEvent) GetTransferWarehouseCanceled() *TransferWarehouseCanceled {
+	if x != nil {
+		if x, ok := x.Data.(*StockEvent_TransferWarehouseCanceled); ok {
+			return x.TransferWarehouseCanceled
+		}
+	}
+	return nil
+}
+
 type isStockEvent_Data interface {
 	isStockEvent_Data()
 }
@@ -777,6 +951,18 @@ type StockEvent_StockAdjustment struct {
 	StockAdjustment *StockAdjustment `protobuf:"bytes,9,opt,name=stock_adjustment,json=stockAdjustment,proto3,oneof"`
 }
 
+type StockEvent_TransferWarehouseCreated struct {
+	TransferWarehouseCreated *TransferWarehouseCreated `protobuf:"bytes,10,opt,name=transfer_warehouse_created,json=transferWarehouseCreated,proto3,oneof"`
+}
+
+type StockEvent_TransferWarehouseAccepted struct {
+	TransferWarehouseAccepted *TransferWarehouseAccepted `protobuf:"bytes,11,opt,name=transfer_warehouse_accepted,json=transferWarehouseAccepted,proto3,oneof"`
+}
+
+type StockEvent_TransferWarehouseCanceled struct {
+	TransferWarehouseCanceled *TransferWarehouseCanceled `protobuf:"bytes,12,opt,name=transfer_warehouse_canceled,json=transferWarehouseCanceled,proto3,oneof"`
+}
+
 func (*StockEvent_StockChange) isStockEvent_Data() {}
 
 func (*StockEvent_PendingStockChange) isStockEvent_Data() {}
@@ -794,6 +980,12 @@ func (*StockEvent_StockProblem) isStockEvent_Data() {}
 func (*StockEvent_StockFoundBack) isStockEvent_Data() {}
 
 func (*StockEvent_StockAdjustment) isStockEvent_Data() {}
+
+func (*StockEvent_TransferWarehouseCreated) isStockEvent_Data() {}
+
+func (*StockEvent_TransferWarehouseAccepted) isStockEvent_Data() {}
+
+func (*StockEvent_TransferWarehouseCanceled) isStockEvent_Data() {}
 
 var File_warehouse_iface_v1_event_proto protoreflect.FileDescriptor
 
@@ -828,7 +1020,16 @@ const file_warehouse_iface_v1_event_proto_rawDesc = "" +
 	"\x0eStockFoundBack\x12.\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\rtransactionId\"A\n" +
 	"\x0fStockAdjustment\x12.\n" +
-	"\x0etransaction_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\rtransactionId\"\xed\x05\n" +
+	"\x0etransaction_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\rtransactionId\"D\n" +
+	"\x18TransferWarehouseCreated\x12(\n" +
+	"\vtransfer_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\n" +
+	"transferId\"E\n" +
+	"\x19TransferWarehouseAccepted\x12(\n" +
+	"\vtransfer_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\n" +
+	"transferId\"E\n" +
+	"\x19TransferWarehouseCanceled\x12(\n" +
+	"\vtransfer_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\n" +
+	"transferId\"\xbd\b\n" +
 	"\n" +
 	"StockEvent\x12D\n" +
 	"\fstock_change\x18\x01 \x01(\v2\x1f.warehouse_iface.v1.StockChangeH\x00R\vstockChange\x12Z\n" +
@@ -839,9 +1040,13 @@ const file_warehouse_iface_v1_event_proto_rawDesc = "" +
 	"\x0eorder_canceled\x18\x06 \x01(\v2!.warehouse_iface.v1.OrderCanceledH\x00R\rorderCanceled\x12G\n" +
 	"\rstock_problem\x18\a \x01(\v2 .warehouse_iface.v1.StockProblemH\x00R\fstockProblem\x12N\n" +
 	"\x10stock_found_back\x18\b \x01(\v2\".warehouse_iface.v1.StockFoundBackH\x00R\x0estockFoundBack\x12P\n" +
-	"\x10stock_adjustment\x18\t \x01(\v2#.warehouse_iface.v1.StockAdjustmentH\x00R\x0fstockAdjustment:\x11\x8a\xb5\x18\r\n" +
+	"\x10stock_adjustment\x18\t \x01(\v2#.warehouse_iface.v1.StockAdjustmentH\x00R\x0fstockAdjustment\x12l\n" +
+	"\x1atransfer_warehouse_created\x18\n" +
+	" \x01(\v2,.warehouse_iface.v1.TransferWarehouseCreatedH\x00R\x18transferWarehouseCreated\x12o\n" +
+	"\x1btransfer_warehouse_accepted\x18\v \x01(\v2-.warehouse_iface.v1.TransferWarehouseAcceptedH\x00R\x19transferWarehouseAccepted\x12o\n" +
+	"\x1btransfer_warehouse_canceled\x18\f \x01(\v2-.warehouse_iface.v1.TransferWarehouseCanceledH\x00R\x19transferWarehouseCanceled:\x11\x8a\xb5\x18\r\n" +
 	"\vstock-topicB\x06\n" +
-	"\x04data*\xc4\x02\n" +
+	"\x04data*\x8c\x04\n" +
 	"\x0fStockChangeType\x12!\n" +
 	"\x1dSTOCK_CHANGE_TYPE_UNSPECIFIED\x10\x00\x12$\n" +
 	" STOCK_CHANGE_TYPE_ORDER_ACCEPTED\x10\x01\x12$\n" +
@@ -850,7 +1055,12 @@ const file_warehouse_iface_v1_event_proto_rawDesc = "" +
 	"!STOCK_CHANGE_TYPE_RETURN_ACCEPTED\x10\x04\x12#\n" +
 	"\x1fSTOCK_CHANGE_TYPE_STOCK_PROBLEM\x10\x05\x12&\n" +
 	"\"STOCK_CHANGE_TYPE_STOCK_FOUND_BACK\x10\x06\x12&\n" +
-	"\"STOCK_CHANGE_TYPE_STOCK_ADJUSTMENT\x10\aB\xce\x01\n" +
+	"\"STOCK_CHANGE_TYPE_STOCK_ADJUSTMENT\x10\a\x12,\n" +
+	"(STOCK_CHANGE_TYPE_TRANSFER_WAREHOUSE_OUT\x10\b\x12+\n" +
+	"'STOCK_CHANGE_TYPE_TRANSFER_WAREHOUSE_IN\x10\t\x125\n" +
+	"1STOCK_CHANGE_TYPE_TRANSFER_WAREHOUSE_OUT_CANCELED\x10\n" +
+	"\x124\n" +
+	"0STOCK_CHANGE_TYPE_TRANSFER_WAREHOUSE_IN_CANCELED\x10\vB\xce\x01\n" +
 	"\x16com.warehouse_iface.v1B\n" +
 	"EventProtoP\x01ZCgithub.com/pdcgo/schema/services/warehouse_iface/v1;warehouse_iface\xa2\x02\x03WXX\xaa\x02\x11WarehouseIface.V1\xca\x02\x11WarehouseIface\\V1\xe2\x02\x1dWarehouseIface\\V1\\GPBMetadata\xea\x02\x12WarehouseIface::V1b\x06proto3"
 
@@ -867,28 +1077,31 @@ func file_warehouse_iface_v1_event_proto_rawDescGZIP() []byte {
 }
 
 var file_warehouse_iface_v1_event_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_warehouse_iface_v1_event_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_warehouse_iface_v1_event_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_warehouse_iface_v1_event_proto_goTypes = []any{
-	(StockChangeType)(0),          // 0: warehouse_iface.v1.StockChangeType
-	(*StockChangeLog)(nil),        // 1: warehouse_iface.v1.StockChangeLog
-	(*StockChange)(nil),           // 2: warehouse_iface.v1.StockChange
-	(*PendingStockChange)(nil),    // 3: warehouse_iface.v1.PendingStockChange
-	(*OrderAccepted)(nil),         // 4: warehouse_iface.v1.OrderAccepted
-	(*OrderCanceled)(nil),         // 5: warehouse_iface.v1.OrderCanceled
-	(*RestockAccepted)(nil),       // 6: warehouse_iface.v1.RestockAccepted
-	(*ReturnAccepted)(nil),        // 7: warehouse_iface.v1.ReturnAccepted
-	(*StockProblem)(nil),          // 8: warehouse_iface.v1.StockProblem
-	(*StockFoundBack)(nil),        // 9: warehouse_iface.v1.StockFoundBack
-	(*StockAdjustment)(nil),       // 10: warehouse_iface.v1.StockAdjustment
-	(*StockEvent)(nil),            // 11: warehouse_iface.v1.StockEvent
-	(*timestamppb.Timestamp)(nil), // 12: google.protobuf.Timestamp
+	(StockChangeType)(0),              // 0: warehouse_iface.v1.StockChangeType
+	(*StockChangeLog)(nil),            // 1: warehouse_iface.v1.StockChangeLog
+	(*StockChange)(nil),               // 2: warehouse_iface.v1.StockChange
+	(*PendingStockChange)(nil),        // 3: warehouse_iface.v1.PendingStockChange
+	(*OrderAccepted)(nil),             // 4: warehouse_iface.v1.OrderAccepted
+	(*OrderCanceled)(nil),             // 5: warehouse_iface.v1.OrderCanceled
+	(*RestockAccepted)(nil),           // 6: warehouse_iface.v1.RestockAccepted
+	(*ReturnAccepted)(nil),            // 7: warehouse_iface.v1.ReturnAccepted
+	(*StockProblem)(nil),              // 8: warehouse_iface.v1.StockProblem
+	(*StockFoundBack)(nil),            // 9: warehouse_iface.v1.StockFoundBack
+	(*StockAdjustment)(nil),           // 10: warehouse_iface.v1.StockAdjustment
+	(*TransferWarehouseCreated)(nil),  // 11: warehouse_iface.v1.TransferWarehouseCreated
+	(*TransferWarehouseAccepted)(nil), // 12: warehouse_iface.v1.TransferWarehouseAccepted
+	(*TransferWarehouseCanceled)(nil), // 13: warehouse_iface.v1.TransferWarehouseCanceled
+	(*StockEvent)(nil),                // 14: warehouse_iface.v1.StockEvent
+	(*timestamppb.Timestamp)(nil),     // 15: google.protobuf.Timestamp
 }
 var file_warehouse_iface_v1_event_proto_depIdxs = []int32{
-	12, // 0: warehouse_iface.v1.StockChangeLog.transaction_at:type_name -> google.protobuf.Timestamp
+	15, // 0: warehouse_iface.v1.StockChangeLog.transaction_at:type_name -> google.protobuf.Timestamp
 	0,  // 1: warehouse_iface.v1.StockChangeLog.type:type_name -> warehouse_iface.v1.StockChangeType
-	12, // 2: warehouse_iface.v1.StockChange.created_time:type_name -> google.protobuf.Timestamp
+	15, // 2: warehouse_iface.v1.StockChange.created_time:type_name -> google.protobuf.Timestamp
 	1,  // 3: warehouse_iface.v1.StockChange.changes:type_name -> warehouse_iface.v1.StockChangeLog
-	12, // 4: warehouse_iface.v1.PendingStockChange.created_time:type_name -> google.protobuf.Timestamp
+	15, // 4: warehouse_iface.v1.PendingStockChange.created_time:type_name -> google.protobuf.Timestamp
 	1,  // 5: warehouse_iface.v1.PendingStockChange.changes:type_name -> warehouse_iface.v1.StockChangeLog
 	2,  // 6: warehouse_iface.v1.StockEvent.stock_change:type_name -> warehouse_iface.v1.StockChange
 	3,  // 7: warehouse_iface.v1.StockEvent.pending_stock_change:type_name -> warehouse_iface.v1.PendingStockChange
@@ -899,11 +1112,14 @@ var file_warehouse_iface_v1_event_proto_depIdxs = []int32{
 	8,  // 12: warehouse_iface.v1.StockEvent.stock_problem:type_name -> warehouse_iface.v1.StockProblem
 	9,  // 13: warehouse_iface.v1.StockEvent.stock_found_back:type_name -> warehouse_iface.v1.StockFoundBack
 	10, // 14: warehouse_iface.v1.StockEvent.stock_adjustment:type_name -> warehouse_iface.v1.StockAdjustment
-	15, // [15:15] is the sub-list for method output_type
-	15, // [15:15] is the sub-list for method input_type
-	15, // [15:15] is the sub-list for extension type_name
-	15, // [15:15] is the sub-list for extension extendee
-	0,  // [0:15] is the sub-list for field type_name
+	11, // 15: warehouse_iface.v1.StockEvent.transfer_warehouse_created:type_name -> warehouse_iface.v1.TransferWarehouseCreated
+	12, // 16: warehouse_iface.v1.StockEvent.transfer_warehouse_accepted:type_name -> warehouse_iface.v1.TransferWarehouseAccepted
+	13, // 17: warehouse_iface.v1.StockEvent.transfer_warehouse_canceled:type_name -> warehouse_iface.v1.TransferWarehouseCanceled
+	18, // [18:18] is the sub-list for method output_type
+	18, // [18:18] is the sub-list for method input_type
+	18, // [18:18] is the sub-list for extension type_name
+	18, // [18:18] is the sub-list for extension extendee
+	0,  // [0:18] is the sub-list for field type_name
 }
 
 func init() { file_warehouse_iface_v1_event_proto_init() }
@@ -911,7 +1127,7 @@ func file_warehouse_iface_v1_event_proto_init() {
 	if File_warehouse_iface_v1_event_proto != nil {
 		return
 	}
-	file_warehouse_iface_v1_event_proto_msgTypes[10].OneofWrappers = []any{
+	file_warehouse_iface_v1_event_proto_msgTypes[13].OneofWrappers = []any{
 		(*StockEvent_StockChange)(nil),
 		(*StockEvent_PendingStockChange)(nil),
 		(*StockEvent_RestockAccepted)(nil),
@@ -921,6 +1137,9 @@ func file_warehouse_iface_v1_event_proto_init() {
 		(*StockEvent_StockProblem)(nil),
 		(*StockEvent_StockFoundBack)(nil),
 		(*StockEvent_StockAdjustment)(nil),
+		(*StockEvent_TransferWarehouseCreated)(nil),
+		(*StockEvent_TransferWarehouseAccepted)(nil),
+		(*StockEvent_TransferWarehouseCanceled)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -928,7 +1147,7 @@ func file_warehouse_iface_v1_event_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_warehouse_iface_v1_event_proto_rawDesc), len(file_warehouse_iface_v1_event_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   11,
+			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
