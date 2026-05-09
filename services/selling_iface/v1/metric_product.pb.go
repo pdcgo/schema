@@ -29,13 +29,13 @@ const (
 	ProductOrderMetricSort_PRODUCT_ORDER_METRIC_SORT_UNSPECIFIED        ProductOrderMetricSort = 0
 	ProductOrderMetricSort_PRODUCT_ORDER_METRIC_SORT_PIECE_COUNT        ProductOrderMetricSort = 1
 	ProductOrderMetricSort_PRODUCT_ORDER_METRIC_SORT_ORDER_COUNT        ProductOrderMetricSort = 2
-	ProductOrderMetricSort_PRODUCT_ORDER_METRIC_SORT_TOTAL_AMOUNT       ProductOrderMetricSort = 3
+	ProductOrderMetricSort_PRODUCT_ORDER_METRIC_SORT_PIECE_AMOUNT       ProductOrderMetricSort = 3
 	ProductOrderMetricSort_PRODUCT_ORDER_METRIC_SORT_OWN_PIECE_COUNT    ProductOrderMetricSort = 4
 	ProductOrderMetricSort_PRODUCT_ORDER_METRIC_SORT_OWN_ORDER_COUNT    ProductOrderMetricSort = 5
-	ProductOrderMetricSort_PRODUCT_ORDER_METRIC_SORT_OWN_TOTAL_AMOUNT   ProductOrderMetricSort = 6
+	ProductOrderMetricSort_PRODUCT_ORDER_METRIC_SORT_OWN_PIECE_AMOUNT   ProductOrderMetricSort = 6
 	ProductOrderMetricSort_PRODUCT_ORDER_METRIC_SORT_CROSS_PIECE_COUNT  ProductOrderMetricSort = 7
 	ProductOrderMetricSort_PRODUCT_ORDER_METRIC_SORT_CROSS_ORDER_COUNT  ProductOrderMetricSort = 8
-	ProductOrderMetricSort_PRODUCT_ORDER_METRIC_SORT_CROSS_TOTAL_AMOUNT ProductOrderMetricSort = 9
+	ProductOrderMetricSort_PRODUCT_ORDER_METRIC_SORT_CROSS_PIECE_AMOUNT ProductOrderMetricSort = 9
 )
 
 // Enum value maps for ProductOrderMetricSort.
@@ -44,25 +44,25 @@ var (
 		0: "PRODUCT_ORDER_METRIC_SORT_UNSPECIFIED",
 		1: "PRODUCT_ORDER_METRIC_SORT_PIECE_COUNT",
 		2: "PRODUCT_ORDER_METRIC_SORT_ORDER_COUNT",
-		3: "PRODUCT_ORDER_METRIC_SORT_TOTAL_AMOUNT",
+		3: "PRODUCT_ORDER_METRIC_SORT_PIECE_AMOUNT",
 		4: "PRODUCT_ORDER_METRIC_SORT_OWN_PIECE_COUNT",
 		5: "PRODUCT_ORDER_METRIC_SORT_OWN_ORDER_COUNT",
-		6: "PRODUCT_ORDER_METRIC_SORT_OWN_TOTAL_AMOUNT",
+		6: "PRODUCT_ORDER_METRIC_SORT_OWN_PIECE_AMOUNT",
 		7: "PRODUCT_ORDER_METRIC_SORT_CROSS_PIECE_COUNT",
 		8: "PRODUCT_ORDER_METRIC_SORT_CROSS_ORDER_COUNT",
-		9: "PRODUCT_ORDER_METRIC_SORT_CROSS_TOTAL_AMOUNT",
+		9: "PRODUCT_ORDER_METRIC_SORT_CROSS_PIECE_AMOUNT",
 	}
 	ProductOrderMetricSort_value = map[string]int32{
 		"PRODUCT_ORDER_METRIC_SORT_UNSPECIFIED":        0,
 		"PRODUCT_ORDER_METRIC_SORT_PIECE_COUNT":        1,
 		"PRODUCT_ORDER_METRIC_SORT_ORDER_COUNT":        2,
-		"PRODUCT_ORDER_METRIC_SORT_TOTAL_AMOUNT":       3,
+		"PRODUCT_ORDER_METRIC_SORT_PIECE_AMOUNT":       3,
 		"PRODUCT_ORDER_METRIC_SORT_OWN_PIECE_COUNT":    4,
 		"PRODUCT_ORDER_METRIC_SORT_OWN_ORDER_COUNT":    5,
-		"PRODUCT_ORDER_METRIC_SORT_OWN_TOTAL_AMOUNT":   6,
+		"PRODUCT_ORDER_METRIC_SORT_OWN_PIECE_AMOUNT":   6,
 		"PRODUCT_ORDER_METRIC_SORT_CROSS_PIECE_COUNT":  7,
 		"PRODUCT_ORDER_METRIC_SORT_CROSS_ORDER_COUNT":  8,
-		"PRODUCT_ORDER_METRIC_SORT_CROSS_TOTAL_AMOUNT": 9,
+		"PRODUCT_ORDER_METRIC_SORT_CROSS_PIECE_AMOUNT": 9,
 	}
 )
 
@@ -672,13 +672,13 @@ type ProductOrderMetricItem struct {
 	ProductId        uint64                 `protobuf:"varint,1,opt,name=product_id,json=productId,proto3" json:"product_id,omitempty"`
 	PieceCount       int64                  `protobuf:"varint,2,opt,name=piece_count,json=pieceCount,proto3" json:"piece_count,omitempty"`
 	OrderCount       int64                  `protobuf:"varint,3,opt,name=order_count,json=orderCount,proto3" json:"order_count,omitempty"`
-	TotalAmount      float64                `protobuf:"fixed64,4,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
+	PieceAmount      float64                `protobuf:"fixed64,4,opt,name=piece_amount,json=pieceAmount,proto3" json:"piece_amount,omitempty"`
 	OwnPieceCount    int64                  `protobuf:"varint,5,opt,name=own_piece_count,json=ownPieceCount,proto3" json:"own_piece_count,omitempty"`
 	OwnOrderCount    int64                  `protobuf:"varint,6,opt,name=own_order_count,json=ownOrderCount,proto3" json:"own_order_count,omitempty"`
-	OwnTotalAmount   float64                `protobuf:"fixed64,7,opt,name=own_total_amount,json=ownTotalAmount,proto3" json:"own_total_amount,omitempty"`
+	OwnPieceAmount   float64                `protobuf:"fixed64,7,opt,name=own_piece_amount,json=ownPieceAmount,proto3" json:"own_piece_amount,omitempty"`
 	CrossPieceCount  int64                  `protobuf:"varint,8,opt,name=cross_piece_count,json=crossPieceCount,proto3" json:"cross_piece_count,omitempty"`
 	CrossOrderCount  int64                  `protobuf:"varint,9,opt,name=cross_order_count,json=crossOrderCount,proto3" json:"cross_order_count,omitempty"`
-	CrossTotalAmount float64                `protobuf:"fixed64,10,opt,name=cross_total_amount,json=crossTotalAmount,proto3" json:"cross_total_amount,omitempty"`
+	CrossPieceAmount float64                `protobuf:"fixed64,10,opt,name=cross_piece_amount,json=crossPieceAmount,proto3" json:"cross_piece_amount,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -734,9 +734,9 @@ func (x *ProductOrderMetricItem) GetOrderCount() int64 {
 	return 0
 }
 
-func (x *ProductOrderMetricItem) GetTotalAmount() float64 {
+func (x *ProductOrderMetricItem) GetPieceAmount() float64 {
 	if x != nil {
-		return x.TotalAmount
+		return x.PieceAmount
 	}
 	return 0
 }
@@ -755,9 +755,9 @@ func (x *ProductOrderMetricItem) GetOwnOrderCount() int64 {
 	return 0
 }
 
-func (x *ProductOrderMetricItem) GetOwnTotalAmount() float64 {
+func (x *ProductOrderMetricItem) GetOwnPieceAmount() float64 {
 	if x != nil {
-		return x.OwnTotalAmount
+		return x.OwnPieceAmount
 	}
 	return 0
 }
@@ -776,9 +776,9 @@ func (x *ProductOrderMetricItem) GetCrossOrderCount() int64 {
 	return 0
 }
 
-func (x *ProductOrderMetricItem) GetCrossTotalAmount() float64 {
+func (x *ProductOrderMetricItem) GetCrossPieceAmount() float64 {
 	if x != nil {
-		return x.CrossTotalAmount
+		return x.CrossPieceAmount
 	}
 	return 0
 }
@@ -896,14 +896,14 @@ const file_selling_iface_v1_metric_product_proto_rawDesc = "" +
 	"pieceCount\x12\x1f\n" +
 	"\vorder_count\x18\x03 \x01(\x03R\n" +
 	"orderCount\x12!\n" +
-	"\ftotal_amount\x18\x04 \x01(\x01R\vtotalAmount\x12&\n" +
+	"\fpiece_amount\x18\x04 \x01(\x01R\vpieceAmount\x12&\n" +
 	"\x0fown_piece_count\x18\x05 \x01(\x03R\rownPieceCount\x12&\n" +
 	"\x0fown_order_count\x18\x06 \x01(\x03R\rownOrderCount\x12(\n" +
-	"\x10own_total_amount\x18\a \x01(\x01R\x0eownTotalAmount\x12*\n" +
+	"\x10own_piece_amount\x18\a \x01(\x01R\x0eownPieceAmount\x12*\n" +
 	"\x11cross_piece_count\x18\b \x01(\x03R\x0fcrossPieceCount\x12*\n" +
 	"\x11cross_order_count\x18\t \x01(\x03R\x0fcrossOrderCount\x12,\n" +
-	"\x12cross_total_amount\x18\n" +
-	" \x01(\x01R\x10crossTotalAmount\"\xbb\x01\n" +
+	"\x12cross_piece_amount\x18\n" +
+	" \x01(\x01R\x10crossPieceAmount\"\xbb\x01\n" +
 	"\x12ProductOrderMetric\x12B\n" +
 	"\x04data\x18\x01 \x03(\v2..selling_iface.v1.ProductOrderMetric.DataEntryR\x04data\x1aa\n" +
 	"\tDataEntry\x12\x10\n" +
@@ -913,13 +913,13 @@ const file_selling_iface_v1_metric_product_proto_rawDesc = "" +
 	"%PRODUCT_ORDER_METRIC_SORT_UNSPECIFIED\x10\x00\x12)\n" +
 	"%PRODUCT_ORDER_METRIC_SORT_PIECE_COUNT\x10\x01\x12)\n" +
 	"%PRODUCT_ORDER_METRIC_SORT_ORDER_COUNT\x10\x02\x12*\n" +
-	"&PRODUCT_ORDER_METRIC_SORT_TOTAL_AMOUNT\x10\x03\x12-\n" +
+	"&PRODUCT_ORDER_METRIC_SORT_PIECE_AMOUNT\x10\x03\x12-\n" +
 	")PRODUCT_ORDER_METRIC_SORT_OWN_PIECE_COUNT\x10\x04\x12-\n" +
 	")PRODUCT_ORDER_METRIC_SORT_OWN_ORDER_COUNT\x10\x05\x12.\n" +
-	"*PRODUCT_ORDER_METRIC_SORT_OWN_TOTAL_AMOUNT\x10\x06\x12/\n" +
+	"*PRODUCT_ORDER_METRIC_SORT_OWN_PIECE_AMOUNT\x10\x06\x12/\n" +
 	"+PRODUCT_ORDER_METRIC_SORT_CROSS_PIECE_COUNT\x10\a\x12/\n" +
 	"+PRODUCT_ORDER_METRIC_SORT_CROSS_ORDER_COUNT\x10\b\x120\n" +
-	",PRODUCT_ORDER_METRIC_SORT_CROSS_TOTAL_AMOUNT\x10\tB\xc8\x01\n" +
+	",PRODUCT_ORDER_METRIC_SORT_CROSS_PIECE_AMOUNT\x10\tB\xc8\x01\n" +
 	"\x14com.selling_iface.v1B\x12MetricProductProtoP\x01Z?github.com/pdcgo/schema/services/selling_iface/v1;selling_iface\xa2\x02\x03SXX\xaa\x02\x0fSellingIface.V1\xca\x02\x0fSellingIface\\V1\xe2\x02\x1bSellingIface\\V1\\GPBMetadata\xea\x02\x10SellingIface::V1b\x06proto3"
 
 var (

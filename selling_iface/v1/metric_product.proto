@@ -79,13 +79,13 @@ enum ProductOrderMetricSort {
   PRODUCT_ORDER_METRIC_SORT_UNSPECIFIED = 0;
   PRODUCT_ORDER_METRIC_SORT_PIECE_COUNT = 1;
   PRODUCT_ORDER_METRIC_SORT_ORDER_COUNT = 2;
-  PRODUCT_ORDER_METRIC_SORT_TOTAL_AMOUNT = 3;
+  PRODUCT_ORDER_METRIC_SORT_PIECE_AMOUNT = 3;
   PRODUCT_ORDER_METRIC_SORT_OWN_PIECE_COUNT = 4;
   PRODUCT_ORDER_METRIC_SORT_OWN_ORDER_COUNT = 5;
-  PRODUCT_ORDER_METRIC_SORT_OWN_TOTAL_AMOUNT = 6;
+  PRODUCT_ORDER_METRIC_SORT_OWN_PIECE_AMOUNT = 6;
   PRODUCT_ORDER_METRIC_SORT_CROSS_PIECE_COUNT = 7;
   PRODUCT_ORDER_METRIC_SORT_CROSS_ORDER_COUNT = 8;
-  PRODUCT_ORDER_METRIC_SORT_CROSS_TOTAL_AMOUNT = 9;
+  PRODUCT_ORDER_METRIC_SORT_CROSS_PIECE_AMOUNT = 9;
 }
 
 message ProductOrderMetricItem {
@@ -93,15 +93,15 @@ message ProductOrderMetricItem {
 
   int64 piece_count = 2;
   int64 order_count = 3;
-  double total_amount = 4;
+  double piece_amount = 4;
 
   int64 own_piece_count = 5;
   int64 own_order_count = 6;
-  double own_total_amount = 7;
+  double own_piece_amount = 7;
 
   int64 cross_piece_count = 8;
   int64 cross_order_count = 9;
-  double cross_total_amount = 10;
+  double cross_piece_amount = 10;
 }
 
 message ProductOrderMetric {
