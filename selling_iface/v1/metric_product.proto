@@ -105,5 +105,5 @@ message ProductOrderMetricItem {
 }
 
 message ProductOrderMetric {
-  repeated ProductOrderMetricItem items = 1;
+  map<uint64, ProductOrderMetricItem> data = 1;
 }

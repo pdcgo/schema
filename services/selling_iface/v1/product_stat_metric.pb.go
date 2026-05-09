@@ -91,52 +91,52 @@ func (ProductMetricType) EnumDescriptor() ([]byte, []int) {
 	return file_selling_iface_v1_product_stat_metric_proto_rawDescGZIP(), []int{0}
 }
 
-type CommonProductSortType int32
+type ProductMetricSortType int32
 
 const (
-	CommonProductSortType_COMMON_PRODUCT_SORT_TYPE_UNSPECIFIED CommonProductSortType = 0
-	CommonProductSortType_COMMON_PRODUCT_SORT_TYPE_ASC         CommonProductSortType = 1
-	CommonProductSortType_COMMON_PRODUCT_SORT_TYPE_DESC        CommonProductSortType = 2
+	ProductMetricSortType_PRODUCT_METRIC_SORT_TYPE_UNSPECIFIED ProductMetricSortType = 0
+	ProductMetricSortType_PRODUCT_METRIC_SORT_TYPE_ASC         ProductMetricSortType = 1
+	ProductMetricSortType_PRODUCT_METRIC_SORT_TYPE_DESC        ProductMetricSortType = 2
 )
 
-// Enum value maps for CommonProductSortType.
+// Enum value maps for ProductMetricSortType.
 var (
-	CommonProductSortType_name = map[int32]string{
-		0: "COMMON_PRODUCT_SORT_TYPE_UNSPECIFIED",
-		1: "COMMON_PRODUCT_SORT_TYPE_ASC",
-		2: "COMMON_PRODUCT_SORT_TYPE_DESC",
+	ProductMetricSortType_name = map[int32]string{
+		0: "PRODUCT_METRIC_SORT_TYPE_UNSPECIFIED",
+		1: "PRODUCT_METRIC_SORT_TYPE_ASC",
+		2: "PRODUCT_METRIC_SORT_TYPE_DESC",
 	}
-	CommonProductSortType_value = map[string]int32{
-		"COMMON_PRODUCT_SORT_TYPE_UNSPECIFIED": 0,
-		"COMMON_PRODUCT_SORT_TYPE_ASC":         1,
-		"COMMON_PRODUCT_SORT_TYPE_DESC":        2,
+	ProductMetricSortType_value = map[string]int32{
+		"PRODUCT_METRIC_SORT_TYPE_UNSPECIFIED": 0,
+		"PRODUCT_METRIC_SORT_TYPE_ASC":         1,
+		"PRODUCT_METRIC_SORT_TYPE_DESC":        2,
 	}
 )
 
-func (x CommonProductSortType) Enum() *CommonProductSortType {
-	p := new(CommonProductSortType)
+func (x ProductMetricSortType) Enum() *ProductMetricSortType {
+	p := new(ProductMetricSortType)
 	*p = x
 	return p
 }
 
-func (x CommonProductSortType) String() string {
+func (x ProductMetricSortType) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (CommonProductSortType) Descriptor() protoreflect.EnumDescriptor {
+func (ProductMetricSortType) Descriptor() protoreflect.EnumDescriptor {
 	return file_selling_iface_v1_product_stat_metric_proto_enumTypes[1].Descriptor()
 }
 
-func (CommonProductSortType) Type() protoreflect.EnumType {
+func (ProductMetricSortType) Type() protoreflect.EnumType {
 	return &file_selling_iface_v1_product_stat_metric_proto_enumTypes[1]
 }
 
-func (x CommonProductSortType) Number() protoreflect.EnumNumber {
+func (x ProductMetricSortType) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use CommonProductSortType.Descriptor instead.
-func (CommonProductSortType) EnumDescriptor() ([]byte, []int) {
+// Deprecated: Use ProductMetricSortType.Descriptor instead.
+func (ProductMetricSortType) EnumDescriptor() ([]byte, []int) {
 	return file_selling_iface_v1_product_stat_metric_proto_rawDescGZIP(), []int{1}
 }
 
@@ -194,7 +194,7 @@ func (CommonProductSort) EnumDescriptor() ([]byte, []int) {
 
 type ProductMetricSort struct {
 	state    protoimpl.MessageState `protogen:"open.v1"`
-	SortType CommonProductSortType  `protobuf:"varint,1,opt,name=sort_type,json=sortType,proto3,enum=selling_iface.v1.CommonProductSortType" json:"sort_type,omitempty"`
+	SortType ProductMetricSortType  `protobuf:"varint,1,opt,name=sort_type,json=sortType,proto3,enum=selling_iface.v1.ProductMetricSortType" json:"sort_type,omitempty"`
 	// Types that are valid to be assigned to S:
 	//
 	//	*ProductMetricSort_CommonSort
@@ -234,11 +234,11 @@ func (*ProductMetricSort) Descriptor() ([]byte, []int) {
 	return file_selling_iface_v1_product_stat_metric_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *ProductMetricSort) GetSortType() CommonProductSortType {
+func (x *ProductMetricSort) GetSortType() ProductMetricSortType {
 	if x != nil {
 		return x.SortType
 	}
-	return CommonProductSortType_COMMON_PRODUCT_SORT_TYPE_UNSPECIFIED
+	return ProductMetricSortType_PRODUCT_METRIC_SORT_TYPE_UNSPECIFIED
 }
 
 func (x *ProductMetricSort) GetS() isProductMetricSort_S {
@@ -324,6 +324,7 @@ type ProductStatMetricFilter struct {
 	WarehouseId   uint64                 `protobuf:"varint,2,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
 	ProductName   string                 `protobuf:"bytes,3,opt,name=product_name,json=productName,proto3" json:"product_name,omitempty"`
 	Page          *v1.PageFilter         `protobuf:"bytes,4,opt,name=page,proto3" json:"page,omitempty"`
+	Range         *ProductStatTimeRange  `protobuf:"bytes,5,opt,name=range,proto3" json:"range,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -386,6 +387,13 @@ func (x *ProductStatMetricFilter) GetPage() *v1.PageFilter {
 	return nil
 }
 
+func (x *ProductStatMetricFilter) GetRange() *ProductStatTimeRange {
+	if x != nil {
+		return x.Range
+	}
+	return nil
+}
+
 type ProductStatTimeRange struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Start         *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=start,proto3" json:"start,omitempty"`
@@ -440,7 +448,6 @@ func (x *ProductStatTimeRange) GetEnd() *timestamppb.Timestamp {
 
 type ProductStatMetricRequest struct {
 	state         protoimpl.MessageState   `protogen:"open.v1"`
-	Range         *ProductStatTimeRange    `protobuf:"bytes,1,opt,name=range,proto3" json:"range,omitempty"`
 	Filter        *ProductStatMetricFilter `protobuf:"bytes,2,opt,name=filter,proto3" json:"filter,omitempty"`
 	Sort          *ProductMetricSort       `protobuf:"bytes,3,opt,name=sort,proto3" json:"sort,omitempty"`
 	MetricExtras  []*ProductMetricExtra    `protobuf:"bytes,4,rep,name=metric_extras,json=metricExtras,proto3" json:"metric_extras,omitempty"`
@@ -477,13 +484,6 @@ func (x *ProductStatMetricRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use ProductStatMetricRequest.ProtoReflect.Descriptor instead.
 func (*ProductStatMetricRequest) Descriptor() ([]byte, []int) {
 	return file_selling_iface_v1_product_stat_metric_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *ProductStatMetricRequest) GetRange() *ProductStatTimeRange {
-	if x != nil {
-		return x.Range
-	}
-	return nil
 }
 
 func (x *ProductStatMetricRequest) GetFilter() *ProductStatMetricFilter {
@@ -630,22 +630,22 @@ const file_selling_iface_v1_product_stat_metric_proto_rawDesc = "" +
 	"\n" +
 	"*selling_iface/v1/product_stat_metric.proto\x12\x10selling_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a%selling_iface/v1/metric_product.proto\"\x8d\x02\n" +
 	"\x11ProductMetricSort\x12D\n" +
-	"\tsort_type\x18\x01 \x01(\x0e2'.selling_iface.v1.CommonProductSortTypeR\bsortType\x12F\n" +
+	"\tsort_type\x18\x01 \x01(\x0e2'.selling_iface.v1.ProductMetricSortTypeR\bsortType\x12F\n" +
 	"\vcommon_sort\x18\x02 \x01(\x0e2#.selling_iface.v1.CommonProductSortH\x00R\n" +
 	"commonSort\x12e\n" +
 	"\x19product_order_metric_sort\x18\x03 \x01(\x0e2(.selling_iface.v1.ProductOrderMetricSortH\x00R\x16productOrderMetricSortB\x03\n" +
 	"\x01s\"\x14\n" +
-	"\x12ProductMetricExtra\"\xa3\x01\n" +
+	"\x12ProductMetricExtra\"\xe9\x01\n" +
 	"\x17ProductStatMetricFilter\x12\x17\n" +
 	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12!\n" +
 	"\fwarehouse_id\x18\x02 \x01(\x04R\vwarehouseId\x12!\n" +
 	"\fproduct_name\x18\x03 \x01(\tR\vproductName\x12)\n" +
-	"\x04page\x18\x04 \x01(\v2\x15.common.v1.PageFilterR\x04page\"\x86\x01\n" +
+	"\x04page\x18\x04 \x01(\v2\x15.common.v1.PageFilterR\x04page\x12D\n" +
+	"\x05range\x18\x05 \x01(\v2&.selling_iface.v1.ProductStatTimeRangeB\x06\xbaH\x03\xc8\x01\x01R\x05range\"\x86\x01\n" +
 	"\x14ProductStatTimeRange\x128\n" +
 	"\x05start\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\x05start\x124\n" +
-	"\x03end\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\x03end\"\xf7\x02\n" +
-	"\x18ProductStatMetricRequest\x12D\n" +
-	"\x05range\x18\x01 \x01(\v2&.selling_iface.v1.ProductStatTimeRangeB\x06\xbaH\x03\xc8\x01\x01R\x05range\x12I\n" +
+	"\x03end\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\x03end\"\xb1\x02\n" +
+	"\x18ProductStatMetricRequest\x12I\n" +
 	"\x06filter\x18\x02 \x01(\v2).selling_iface.v1.ProductStatMetricFilterB\x06\xbaH\x03\xc8\x01\x01R\x06filter\x127\n" +
 	"\x04sort\x18\x03 \x01(\v2#.selling_iface.v1.ProductMetricSortR\x04sort\x12I\n" +
 	"\rmetric_extras\x18\x04 \x03(\v2$.selling_iface.v1.ProductMetricExtraR\fmetricExtras\x12F\n" +
@@ -665,10 +665,10 @@ const file_selling_iface_v1_product_stat_metric_proto_rawDesc = "" +
 	"+PRODUCT_METRIC_TYPE_STOCK_WAREHOUSE_PROBLEM\x10\x06\x12.\n" +
 	"*PRODUCT_METRIC_TYPE_STOCK_SHIPMENT_PROBLEM\x10\a\x12(\n" +
 	"$PRODUCT_METRIC_TYPE_STOCK_RESOLUTION\x10\b*\x86\x01\n" +
-	"\x15CommonProductSortType\x12(\n" +
-	"$COMMON_PRODUCT_SORT_TYPE_UNSPECIFIED\x10\x00\x12 \n" +
-	"\x1cCOMMON_PRODUCT_SORT_TYPE_ASC\x10\x01\x12!\n" +
-	"\x1dCOMMON_PRODUCT_SORT_TYPE_DESC\x10\x02*\x98\x01\n" +
+	"\x15ProductMetricSortType\x12(\n" +
+	"$PRODUCT_METRIC_SORT_TYPE_UNSPECIFIED\x10\x00\x12 \n" +
+	"\x1cPRODUCT_METRIC_SORT_TYPE_ASC\x10\x01\x12!\n" +
+	"\x1dPRODUCT_METRIC_SORT_TYPE_DESC\x10\x02*\x98\x01\n" +
 	"\x11CommonProductSort\x12#\n" +
 	"\x1fCOMMON_PRODUCT_SORT_UNSPECIFIED\x10\x00\x12\x1c\n" +
 	"\x18COMMON_PRODUCT_SORT_NAME\x10\x01\x12\x1e\n" +
@@ -692,7 +692,7 @@ var file_selling_iface_v1_product_stat_metric_proto_enumTypes = make([]protoimpl
 var file_selling_iface_v1_product_stat_metric_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_selling_iface_v1_product_stat_metric_proto_goTypes = []any{
 	(ProductMetricType)(0),            // 0: selling_iface.v1.ProductMetricType
-	(CommonProductSortType)(0),        // 1: selling_iface.v1.CommonProductSortType
+	(ProductMetricSortType)(0),        // 1: selling_iface.v1.ProductMetricSortType
 	(CommonProductSort)(0),            // 2: selling_iface.v1.CommonProductSort
 	(*ProductMetricSort)(nil),         // 3: selling_iface.v1.ProductMetricSort
 	(*ProductMetricExtra)(nil),        // 4: selling_iface.v1.ProductMetricExtra
@@ -707,13 +707,13 @@ var file_selling_iface_v1_product_stat_metric_proto_goTypes = []any{
 	(*ProductOrderMetric)(nil),        // 13: selling_iface.v1.ProductOrderMetric
 }
 var file_selling_iface_v1_product_stat_metric_proto_depIdxs = []int32{
-	1,  // 0: selling_iface.v1.ProductMetricSort.sort_type:type_name -> selling_iface.v1.CommonProductSortType
+	1,  // 0: selling_iface.v1.ProductMetricSort.sort_type:type_name -> selling_iface.v1.ProductMetricSortType
 	2,  // 1: selling_iface.v1.ProductMetricSort.common_sort:type_name -> selling_iface.v1.CommonProductSort
 	10, // 2: selling_iface.v1.ProductMetricSort.product_order_metric_sort:type_name -> selling_iface.v1.ProductOrderMetricSort
 	11, // 3: selling_iface.v1.ProductStatMetricFilter.page:type_name -> common.v1.PageFilter
-	12, // 4: selling_iface.v1.ProductStatTimeRange.start:type_name -> google.protobuf.Timestamp
-	12, // 5: selling_iface.v1.ProductStatTimeRange.end:type_name -> google.protobuf.Timestamp
-	6,  // 6: selling_iface.v1.ProductStatMetricRequest.range:type_name -> selling_iface.v1.ProductStatTimeRange
+	6,  // 4: selling_iface.v1.ProductStatMetricFilter.range:type_name -> selling_iface.v1.ProductStatTimeRange
+	12, // 5: selling_iface.v1.ProductStatTimeRange.start:type_name -> google.protobuf.Timestamp
+	12, // 6: selling_iface.v1.ProductStatTimeRange.end:type_name -> google.protobuf.Timestamp
 	5,  // 7: selling_iface.v1.ProductStatMetricRequest.filter:type_name -> selling_iface.v1.ProductStatMetricFilter
 	3,  // 8: selling_iface.v1.ProductStatMetricRequest.sort:type_name -> selling_iface.v1.ProductMetricSort
 	4,  // 9: selling_iface.v1.ProductStatMetricRequest.metric_extras:type_name -> selling_iface.v1.ProductMetricExtra

@@ -20,10 +20,10 @@ enum ProductMetricType {
   PRODUCT_METRIC_TYPE_STOCK_RESOLUTION = 8;
 }
 
-enum CommonProductSortType {
-  COMMON_PRODUCT_SORT_TYPE_UNSPECIFIED = 0;
-  COMMON_PRODUCT_SORT_TYPE_ASC = 1;
-  COMMON_PRODUCT_SORT_TYPE_DESC = 2;
+enum ProductMetricSortType {
+  PRODUCT_METRIC_SORT_TYPE_UNSPECIFIED = 0;
+  PRODUCT_METRIC_SORT_TYPE_ASC = 1;
+  PRODUCT_METRIC_SORT_TYPE_DESC = 2;
 }
 
 enum CommonProductSort {
@@ -34,7 +34,7 @@ enum CommonProductSort {
 }
 
 message ProductMetricSort {
-  CommonProductSortType sort_type = 1;
+  ProductMetricSortType sort_type = 1;
   oneof s {
     CommonProductSort common_sort = 2;
     ProductOrderMetricSort product_order_metric_sort = 3;
@@ -48,6 +48,7 @@ message ProductStatMetricFilter {
   uint64 warehouse_id = 2;
   string product_name = 3;
   common.v1.PageFilter page = 4;
+  ProductStatTimeRange range = 5 [(buf.validate.field).required = true];
 }
 
 message ProductStatTimeRange {
@@ -56,7 +57,6 @@ message ProductStatTimeRange {
 }
 
 message ProductStatMetricRequest {
-  ProductStatTimeRange range = 1 [(buf.validate.field).required = true];
   ProductStatMetricFilter filter = 2 [(buf.validate.field).required = true];
   ProductMetricSort sort = 3;
   repeated ProductMetricExtra metric_extras = 4;
