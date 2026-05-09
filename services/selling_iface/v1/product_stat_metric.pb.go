@@ -517,6 +517,7 @@ func (x *ProductStatMetricRequest) GetMetricTypes() []ProductMetricType {
 type ProductStatMetricResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Metrics       []*ProductMetric       `protobuf:"bytes,1,rep,name=metrics,proto3" json:"metrics,omitempty"`
+	Ids           []uint64               `protobuf:"varint,2,rep,packed,name=ids,proto3" json:"ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -554,6 +555,13 @@ func (*ProductStatMetricResponse) Descriptor() ([]byte, []int) {
 func (x *ProductStatMetricResponse) GetMetrics() []*ProductMetric {
 	if x != nil {
 		return x.Metrics
+	}
+	return nil
+}
+
+func (x *ProductStatMetricResponse) GetIds() []uint64 {
+	if x != nil {
+		return x.Ids
 	}
 	return nil
 }
@@ -649,9 +657,10 @@ const file_selling_iface_v1_product_stat_metric_proto_rawDesc = "" +
 	"\x06filter\x18\x02 \x01(\v2).selling_iface.v1.ProductStatMetricFilterB\x06\xbaH\x03\xc8\x01\x01R\x06filter\x127\n" +
 	"\x04sort\x18\x03 \x01(\v2#.selling_iface.v1.ProductMetricSortR\x04sort\x12I\n" +
 	"\rmetric_extras\x18\x04 \x03(\v2$.selling_iface.v1.ProductMetricExtraR\fmetricExtras\x12F\n" +
-	"\fmetric_types\x18\x05 \x03(\x0e2#.selling_iface.v1.ProductMetricTypeR\vmetricTypes\"V\n" +
+	"\fmetric_types\x18\x05 \x03(\x0e2#.selling_iface.v1.ProductMetricTypeR\vmetricTypes\"h\n" +
 	"\x19ProductStatMetricResponse\x129\n" +
-	"\ametrics\x18\x01 \x03(\v2\x1f.selling_iface.v1.ProductMetricR\ametrics\"b\n" +
+	"\ametrics\x18\x01 \x03(\v2\x1f.selling_iface.v1.ProductMetricR\ametrics\x12\x10\n" +
+	"\x03ids\x18\x02 \x03(\x04R\x03ids\"b\n" +
 	"\rProductMetric\x12I\n" +
 	"\forder_metric\x18\x01 \x01(\v2$.selling_iface.v1.ProductOrderMetricH\x00R\vorderMetricB\x06\n" +
 	"\x04data*\xef\x02\n" +

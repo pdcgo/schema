@@ -65,6 +65,7 @@ message ProductStatMetricRequest {
 
 message ProductStatMetricResponse {
   repeated ProductMetric metrics = 1;
+  repeated uint64 ids = 2;
 }
 
 message ProductMetric {
