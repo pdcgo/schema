@@ -1,0 +1,188 @@
+syntax = "proto3";
+package selling_iface.v1.product_metric.v1;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/pdcgo/schema/services/selling_iface/v1/product_metric/v1;product_metric";
+
+message RestockAcceptedItem {
+  uint64 product_id = 1;
+
+  int64 transaction_count = 2;
+  int64 piece_count = 4;
+  double cost_amount = 5;
+  double product_amount = 6;
+  double total_amount = 7;
+  // @gotags: gorm:"serializer:timestamptz"
+  google.protobuf.Timestamp last_arrived = 8;
+}
+
+message RestockAcceptedMetric {
+  map<uint64, RestockAcceptedItem> data = 1;
+}
+
+enum RestockAcceptedMetricSort {
+  RESTOCK_ACCEPTED_METRIC_SORT_UNSPECIFIED = 0;
+  RESTOCK_ACCEPTED_METRIC_SORT_PIECE_COUNT = 1;
+  RESTOCK_ACCEPTED_METRIC_SORT_LAST_ARRIVED = 2;
+  RESTOCK_ACCEPTED_METRIC_SORT_TOTAL_AMOUNT = 3;
+  RESTOCK_ACCEPTED_METRIC_SORT_COST_AMOUNT = 4;
+  RESTOCK_ACCEPTED_METRIC_SORT_PRODUCT_AMOUNT = 5;
+  RESTOCK_ACCEPTED_METRIC_SORT_TRANSACTION_COUNT = 6;
+}
+
+message RestockCreatedItem {
+  uint64 product_id = 1;
+
+  int64 transaction_count = 2;
+  double transaction_amount = 3;
+  int64 piece_count = 4;
+  double total_amount = 5;
+  // @gotags: gorm:"serializer:timestamptz"
+  google.protobuf.Timestamp last_created = 6;
+}
+
+message RestockCreatedMetric {
+  map<uint64, RestockCreatedItem> data = 1;
+}
+
+enum RestockCreatedMetricSort {
+  RESTOCK_CREATED_METRIC_SORT_UNSPECIFIED = 0;
+  RESTOCK_CREATED_METRIC_SORT_PIECE_COUNT = 1;
+  RESTOCK_CREATED_METRIC_SORT_LAST_CREATED = 2;
+  RESTOCK_CREATED_METRIC_SORT_TOTAL_AMOUNT = 3;
+  RESTOCK_CREATED_METRIC_SORT_TRANSACTION_COUNT = 4;
+  RESTOCK_CREATED_METRIC_SORT_TRANSACTION_AMOUNT = 5;
+}
+
+message RestockCancelledItem {
+  uint64 product_id = 1;
+
+  int64 transaction_count = 2;
+  double transaction_amount = 3;
+  int64 piece_count = 4;
+  double total_amount = 5;
+  // @gotags: gorm:"serializer:timestamptz"
+  google.protobuf.Timestamp last_cancelled = 6;
+}
+
+message RestockCancelledMetric {
+  map<uint64, RestockCancelledItem> data = 1;
+}
+
+enum RestockCancelledMetricSort {
+  RESTOCK_CANCELLED_METRIC_SORT_UNSPECIFIED = 0;
+  RESTOCK_CANCELLED_METRIC_SORT_PIECE_COUNT = 1;
+  RESTOCK_CANCELLED_METRIC_SORT_LAST_CANCELLED = 2;
+  RESTOCK_CANCELLED_METRIC_SORT_TOTAL_AMOUNT = 3;
+  RESTOCK_CANCELLED_METRIC_SORT_TRANSACTION_COUNT = 4;
+  RESTOCK_CANCELLED_METRIC_SORT_TRANSACTION_AMOUNT = 5;
+}
+
+message RestockCostItem {
+  uint64 product_id = 1;
+  double total_cost = 2;
+  double piece_cost = 3;
+}
+
+message RestockCostMetric {
+  map<uint64, RestockCostItem> data = 1;
+}
+
+enum RestockCostMetricSort {
+  RESTOCK_COST_METRIC_SORT_UNSPECIFIED = 0;
+  RESTOCK_COST_METRIC_SORT_PIECE_COST = 1;
+  RESTOCK_COST_METRIC_SORT_TOTAL_COST = 2;
+}
+
+message ReturnCreatedItem {
+  uint64 product_id = 1;
+
+  int64 transaction_count = 2;
+  double transaction_amount = 3;
+  int64 piece_count = 4;
+  double total_amount = 5;
+  // @gotags: gorm:"serializer:timestamptz"
+  google.protobuf.Timestamp last_return = 6;
+}
+
+message ReturnCreatedMetric {
+  map<uint64, ReturnCreatedItem> data = 1;
+}
+
+enum ReturnCreatedMetricSort {
+  RETURN_CREATED_METRIC_SORT_UNSPECIFIED = 0;
+  RETURN_CREATED_METRIC_SORT_PIECE_COUNT = 1;
+  RETURN_CREATED_METRIC_SORT_LAST_RETURN = 2;
+  RETURN_CREATED_METRIC_SORT_TOTAL_AMOUNT = 3;
+  RETURN_CREATED_METRIC_SORT_TRANSACTION_COUNT = 4;
+  RETURN_CREATED_METRIC_SORT_TRANSACTION_AMOUNT = 5;
+}
+
+message ReturnArrivedItem {
+  uint64 product_id = 1;
+
+  int64 transaction_count = 2;
+  double transaction_amount = 3;
+  int64 piece_count = 4;
+  double total_amount = 5;
+  // @gotags: gorm:"serializer:timestamptz"
+  google.protobuf.Timestamp last_arrived = 6;
+}
+
+message ReturnArrivedMetric {
+  map<uint64, ReturnArrivedItem> data = 1;
+}
+
+enum ReturnArrivedMetricSort {
+  RETURN_ARRIVED_METRIC_SORT_UNSPECIFIED = 0;
+  RETURN_ARRIVED_METRIC_SORT_PIECE_COUNT = 1;
+  RETURN_ARRIVED_METRIC_SORT_LAST_ARRIVED = 2;
+  RETURN_ARRIVED_METRIC_SORT_TOTAL_AMOUNT = 3;
+  RETURN_ARRIVED_METRIC_SORT_TRANSACTION_COUNT = 4;
+  RETURN_ARRIVED_METRIC_SORT_TRANSACTION_AMOUNT = 5;
+}
+
+message ReturnCancelledItem {
+  uint64 product_id = 1;
+
+  int64 transaction_count = 2;
+  double transaction_amount = 3;
+  int64 piece_count = 4;
+  double total_amount = 5;
+  // @gotags: gorm:"serializer:timestamptz"
+  google.protobuf.Timestamp last_cancelled = 6;
+}
+
+message ReturnCancelledMetric {
+  map<uint64, ReturnCancelledItem> data = 1;
+}
+
+enum ReturnCancelledMetricSort {
+  RETURN_CANCELLED_METRIC_SORT_UNSPECIFIED = 0;
+  RETURN_CANCELLED_METRIC_SORT_PIECE_COUNT = 1;
+  RETURN_CANCELLED_METRIC_SORT_LAST_CANCELLED = 2;
+  RETURN_CANCELLED_METRIC_SORT_TOTAL_AMOUNT = 3;
+  RETURN_CANCELLED_METRIC_SORT_TRANSACTION_COUNT = 4;
+  RETURN_CANCELLED_METRIC_SORT_TRANSACTION_AMOUNT = 5;
+}
+
+message ReadyStockItem {
+  uint64 product_id = 1;
+
+  int64 piece_count = 4;
+  double total_amount = 5;
+}
+
+message ReadyStockMetric {
+  map<uint64, ReadyStockItem> data = 1;
+}
+
+enum ReadyStockMetricSort {
+  READY_STOCK_METRIC_SORT_UNSPECIFIED = 0;
+  READY_STOCK_METRIC_SORT_PIECE_COUNT = 1;
+  READY_STOCK_METRIC_SORT_TOTAL_AMOUNT = 2;
+}
+
+message ProblemStockMetric {}
+message ResolutionStockMetric {}

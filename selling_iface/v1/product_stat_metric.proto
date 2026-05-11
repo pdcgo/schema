@@ -5,6 +5,7 @@ import "buf/validate/validate.proto";
 import "common/v1/common.proto";
 import "google/protobuf/timestamp.proto";
 import "selling_iface/v1/metric_product.proto";
+import "selling_iface/v1/product_metric/v1/stock_metric.proto";
 
 option go_package = "github.com/pdcgo/schema/services/selling_iface/v1;selling_iface";
 
@@ -13,7 +14,7 @@ enum ProductMetricType {
   PRODUCT_METRIC_TYPE_STOCK_READY = 1;
   PRODUCT_METRIC_TYPE_STOCK_ONGOING = 2;
   PRODUCT_METRIC_TYPE_ORDER = 3;
-  PRODUCT_METRIC_TYPE_RESTOCK = 4;
+  PRODUCT_METRIC_TYPE_RESTOCK_ACCEPTED = 4;
   PRODUCT_METRIC_TYPE_RETURN = 5;
   PRODUCT_METRIC_TYPE_STOCK_WAREHOUSE_PROBLEM = 6;
   PRODUCT_METRIC_TYPE_STOCK_SHIPMENT_PROBLEM = 7;
@@ -38,6 +39,7 @@ message ProductMetricSort {
   oneof s {
     CommonProductSort common_sort = 2;
     ProductOrderMetricSort product_order_metric_sort = 3;
+    selling_iface.v1.product_metric.v1.RestockAcceptedMetricSort restock_accepted_metric_sort = 4;
   }
 }
 
@@ -71,5 +73,6 @@ message ProductStatMetricResponse {
 message ProductMetric {
   oneof data {
     ProductOrderMetric order_metric = 1;
+    selling_iface.v1.product_metric.v1.RestockAcceptedMetric restock_accepted_metric = 2;
   }
 }

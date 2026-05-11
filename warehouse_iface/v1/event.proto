@@ -26,6 +26,7 @@ enum StockChangeType {
 
 message StockChangeLog {
   string sku_id = 1 [(buf.validate.field).string.min_len = 1];
+  string external_msg_id = 9 [(buf.validate.field).string.min_len = 1];
   uint64 warehouse_id = 2 [(buf.validate.field).uint64.gt = 0];
   uint64 actor_id = 3 [(buf.validate.field).uint64.gt = 0];
   uint64 transaction_id = 4 [(buf.validate.field).uint64.gt = 0];

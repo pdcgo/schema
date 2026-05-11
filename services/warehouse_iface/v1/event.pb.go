@@ -103,6 +103,7 @@ func (StockChangeType) EnumDescriptor() ([]byte, []int) {
 type StockChangeLog struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	SkuId         string                 `protobuf:"bytes,1,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
+	ExternalMsgId string                 `protobuf:"bytes,9,opt,name=external_msg_id,json=externalMsgId,proto3" json:"external_msg_id,omitempty"`
 	WarehouseId   uint64                 `protobuf:"varint,2,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
 	ActorId       uint64                 `protobuf:"varint,3,opt,name=actor_id,json=actorId,proto3" json:"actor_id,omitempty"`
 	TransactionId uint64                 `protobuf:"varint,4,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
@@ -148,6 +149,13 @@ func (*StockChangeLog) Descriptor() ([]byte, []int) {
 func (x *StockChangeLog) GetSkuId() string {
 	if x != nil {
 		return x.SkuId
+	}
+	return ""
+}
+
+func (x *StockChangeLog) GetExternalMsgId() string {
+	if x != nil {
+		return x.ExternalMsgId
 	}
 	return ""
 }
@@ -991,9 +999,10 @@ var File_warehouse_iface_v1_event_proto protoreflect.FileDescriptor
 
 const file_warehouse_iface_v1_event_proto_rawDesc = "" +
 	"\n" +
-	"\x1ewarehouse_iface/v1/event.proto\x12\x12warehouse_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x19event_base/v1/event.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x9f\x03\n" +
+	"\x1ewarehouse_iface/v1/event.proto\x12\x12warehouse_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x19event_base/v1/event.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xd0\x03\n" +
 	"\x0eStockChangeLog\x12\x1e\n" +
-	"\x06sku_id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x05skuId\x12*\n" +
+	"\x06sku_id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x05skuId\x12/\n" +
+	"\x0fexternal_msg_id\x18\t \x01(\tB\a\xbaH\x04r\x02\x10\x01R\rexternalMsgId\x12*\n" +
 	"\fwarehouse_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\vwarehouseId\x12\"\n" +
 	"\bactor_id\x18\x03 \x01(\x04B\a\xbaH\x042\x02 \x00R\aactorId\x12.\n" +
 	"\x0etransaction_id\x18\x04 \x01(\x04B\a\xbaH\x042\x02 \x00R\rtransactionId\x12*\n" +

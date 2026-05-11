@@ -8,7 +8,8 @@ package selling_iface
 
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
-	v1 "github.com/pdcgo/schema/services/common/v1"
+	v11 "github.com/pdcgo/schema/services/common/v1"
+	v1 "github.com/pdcgo/schema/services/selling_iface/v1/product_metric/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -31,7 +32,7 @@ const (
 	ProductMetricType_PRODUCT_METRIC_TYPE_STOCK_READY             ProductMetricType = 1
 	ProductMetricType_PRODUCT_METRIC_TYPE_STOCK_ONGOING           ProductMetricType = 2
 	ProductMetricType_PRODUCT_METRIC_TYPE_ORDER                   ProductMetricType = 3
-	ProductMetricType_PRODUCT_METRIC_TYPE_RESTOCK                 ProductMetricType = 4
+	ProductMetricType_PRODUCT_METRIC_TYPE_RESTOCK_ACCEPTED        ProductMetricType = 4
 	ProductMetricType_PRODUCT_METRIC_TYPE_RETURN                  ProductMetricType = 5
 	ProductMetricType_PRODUCT_METRIC_TYPE_STOCK_WAREHOUSE_PROBLEM ProductMetricType = 6
 	ProductMetricType_PRODUCT_METRIC_TYPE_STOCK_SHIPMENT_PROBLEM  ProductMetricType = 7
@@ -45,7 +46,7 @@ var (
 		1: "PRODUCT_METRIC_TYPE_STOCK_READY",
 		2: "PRODUCT_METRIC_TYPE_STOCK_ONGOING",
 		3: "PRODUCT_METRIC_TYPE_ORDER",
-		4: "PRODUCT_METRIC_TYPE_RESTOCK",
+		4: "PRODUCT_METRIC_TYPE_RESTOCK_ACCEPTED",
 		5: "PRODUCT_METRIC_TYPE_RETURN",
 		6: "PRODUCT_METRIC_TYPE_STOCK_WAREHOUSE_PROBLEM",
 		7: "PRODUCT_METRIC_TYPE_STOCK_SHIPMENT_PROBLEM",
@@ -56,7 +57,7 @@ var (
 		"PRODUCT_METRIC_TYPE_STOCK_READY":             1,
 		"PRODUCT_METRIC_TYPE_STOCK_ONGOING":           2,
 		"PRODUCT_METRIC_TYPE_ORDER":                   3,
-		"PRODUCT_METRIC_TYPE_RESTOCK":                 4,
+		"PRODUCT_METRIC_TYPE_RESTOCK_ACCEPTED":        4,
 		"PRODUCT_METRIC_TYPE_RETURN":                  5,
 		"PRODUCT_METRIC_TYPE_STOCK_WAREHOUSE_PROBLEM": 6,
 		"PRODUCT_METRIC_TYPE_STOCK_SHIPMENT_PROBLEM":  7,
@@ -199,6 +200,7 @@ type ProductMetricSort struct {
 	//
 	//	*ProductMetricSort_CommonSort
 	//	*ProductMetricSort_ProductOrderMetricSort
+	//	*ProductMetricSort_RestockAcceptedMetricSort
 	S             isProductMetricSort_S `protobuf_oneof:"s"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -266,6 +268,15 @@ func (x *ProductMetricSort) GetProductOrderMetricSort() ProductOrderMetricSort {
 	return ProductOrderMetricSort_PRODUCT_ORDER_METRIC_SORT_UNSPECIFIED
 }
 
+func (x *ProductMetricSort) GetRestockAcceptedMetricSort() v1.RestockAcceptedMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*ProductMetricSort_RestockAcceptedMetricSort); ok {
+			return x.RestockAcceptedMetricSort
+		}
+	}
+	return v1.RestockAcceptedMetricSort(0)
+}
+
 type isProductMetricSort_S interface {
 	isProductMetricSort_S()
 }
@@ -278,9 +289,15 @@ type ProductMetricSort_ProductOrderMetricSort struct {
 	ProductOrderMetricSort ProductOrderMetricSort `protobuf:"varint,3,opt,name=product_order_metric_sort,json=productOrderMetricSort,proto3,enum=selling_iface.v1.ProductOrderMetricSort,oneof"`
 }
 
+type ProductMetricSort_RestockAcceptedMetricSort struct {
+	RestockAcceptedMetricSort v1.RestockAcceptedMetricSort `protobuf:"varint,4,opt,name=restock_accepted_metric_sort,json=restockAcceptedMetricSort,proto3,enum=selling_iface.v1.product_metric.v1.RestockAcceptedMetricSort,oneof"`
+}
+
 func (*ProductMetricSort_CommonSort) isProductMetricSort_S() {}
 
 func (*ProductMetricSort_ProductOrderMetricSort) isProductMetricSort_S() {}
+
+func (*ProductMetricSort_RestockAcceptedMetricSort) isProductMetricSort_S() {}
 
 type ProductMetricExtra struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -323,7 +340,7 @@ type ProductStatMetricFilter struct {
 	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
 	WarehouseId   uint64                 `protobuf:"varint,2,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
 	ProductName   string                 `protobuf:"bytes,3,opt,name=product_name,json=productName,proto3" json:"product_name,omitempty"`
-	Page          *v1.PageFilter         `protobuf:"bytes,4,opt,name=page,proto3" json:"page,omitempty"`
+	Page          *v11.PageFilter        `protobuf:"bytes,4,opt,name=page,proto3" json:"page,omitempty"`
 	Range         *ProductStatTimeRange  `protobuf:"bytes,5,opt,name=range,proto3" json:"range,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -380,7 +397,7 @@ func (x *ProductStatMetricFilter) GetProductName() string {
 	return ""
 }
 
-func (x *ProductStatMetricFilter) GetPage() *v1.PageFilter {
+func (x *ProductStatMetricFilter) GetPage() *v11.PageFilter {
 	if x != nil {
 		return x.Page
 	}
@@ -571,6 +588,7 @@ type ProductMetric struct {
 	// Types that are valid to be assigned to Data:
 	//
 	//	*ProductMetric_OrderMetric
+	//	*ProductMetric_RestockAcceptedMetric
 	Data          isProductMetric_Data `protobuf_oneof:"data"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -622,6 +640,15 @@ func (x *ProductMetric) GetOrderMetric() *ProductOrderMetric {
 	return nil
 }
 
+func (x *ProductMetric) GetRestockAcceptedMetric() *v1.RestockAcceptedMetric {
+	if x != nil {
+		if x, ok := x.Data.(*ProductMetric_RestockAcceptedMetric); ok {
+			return x.RestockAcceptedMetric
+		}
+	}
+	return nil
+}
+
 type isProductMetric_Data interface {
 	isProductMetric_Data()
 }
@@ -630,18 +657,25 @@ type ProductMetric_OrderMetric struct {
 	OrderMetric *ProductOrderMetric `protobuf:"bytes,1,opt,name=order_metric,json=orderMetric,proto3,oneof"`
 }
 
+type ProductMetric_RestockAcceptedMetric struct {
+	RestockAcceptedMetric *v1.RestockAcceptedMetric `protobuf:"bytes,2,opt,name=restock_accepted_metric,json=restockAcceptedMetric,proto3,oneof"`
+}
+
 func (*ProductMetric_OrderMetric) isProductMetric_Data() {}
+
+func (*ProductMetric_RestockAcceptedMetric) isProductMetric_Data() {}
 
 var File_selling_iface_v1_product_stat_metric_proto protoreflect.FileDescriptor
 
 const file_selling_iface_v1_product_stat_metric_proto_rawDesc = "" +
 	"\n" +
-	"*selling_iface/v1/product_stat_metric.proto\x12\x10selling_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a%selling_iface/v1/metric_product.proto\"\x8d\x02\n" +
+	"*selling_iface/v1/product_stat_metric.proto\x12\x10selling_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a%selling_iface/v1/metric_product.proto\x1a5selling_iface/v1/product_metric/v1/stock_metric.proto\"\x90\x03\n" +
 	"\x11ProductMetricSort\x12D\n" +
 	"\tsort_type\x18\x01 \x01(\x0e2'.selling_iface.v1.ProductMetricSortTypeR\bsortType\x12F\n" +
 	"\vcommon_sort\x18\x02 \x01(\x0e2#.selling_iface.v1.CommonProductSortH\x00R\n" +
 	"commonSort\x12e\n" +
-	"\x19product_order_metric_sort\x18\x03 \x01(\x0e2(.selling_iface.v1.ProductOrderMetricSortH\x00R\x16productOrderMetricSortB\x03\n" +
+	"\x19product_order_metric_sort\x18\x03 \x01(\x0e2(.selling_iface.v1.ProductOrderMetricSortH\x00R\x16productOrderMetricSort\x12\x80\x01\n" +
+	"\x1crestock_accepted_metric_sort\x18\x04 \x01(\x0e2=.selling_iface.v1.product_metric.v1.RestockAcceptedMetricSortH\x00R\x19restockAcceptedMetricSortB\x03\n" +
 	"\x01s\"\x14\n" +
 	"\x12ProductMetricExtra\"\xe9\x01\n" +
 	"\x17ProductStatMetricFilter\x12\x17\n" +
@@ -660,16 +694,17 @@ const file_selling_iface_v1_product_stat_metric_proto_rawDesc = "" +
 	"\fmetric_types\x18\x05 \x03(\x0e2#.selling_iface.v1.ProductMetricTypeR\vmetricTypes\"h\n" +
 	"\x19ProductStatMetricResponse\x129\n" +
 	"\ametrics\x18\x01 \x03(\v2\x1f.selling_iface.v1.ProductMetricR\ametrics\x12\x10\n" +
-	"\x03ids\x18\x02 \x03(\x04R\x03ids\"b\n" +
+	"\x03ids\x18\x02 \x03(\x04R\x03ids\"\xd7\x01\n" +
 	"\rProductMetric\x12I\n" +
-	"\forder_metric\x18\x01 \x01(\v2$.selling_iface.v1.ProductOrderMetricH\x00R\vorderMetricB\x06\n" +
-	"\x04data*\xef\x02\n" +
+	"\forder_metric\x18\x01 \x01(\v2$.selling_iface.v1.ProductOrderMetricH\x00R\vorderMetric\x12s\n" +
+	"\x17restock_accepted_metric\x18\x02 \x01(\v29.selling_iface.v1.product_metric.v1.RestockAcceptedMetricH\x00R\x15restockAcceptedMetricB\x06\n" +
+	"\x04data*\xf8\x02\n" +
 	"\x11ProductMetricType\x12#\n" +
 	"\x1fPRODUCT_METRIC_TYPE_UNSPECIFIED\x10\x00\x12#\n" +
 	"\x1fPRODUCT_METRIC_TYPE_STOCK_READY\x10\x01\x12%\n" +
 	"!PRODUCT_METRIC_TYPE_STOCK_ONGOING\x10\x02\x12\x1d\n" +
-	"\x19PRODUCT_METRIC_TYPE_ORDER\x10\x03\x12\x1f\n" +
-	"\x1bPRODUCT_METRIC_TYPE_RESTOCK\x10\x04\x12\x1e\n" +
+	"\x19PRODUCT_METRIC_TYPE_ORDER\x10\x03\x12(\n" +
+	"$PRODUCT_METRIC_TYPE_RESTOCK_ACCEPTED\x10\x04\x12\x1e\n" +
 	"\x1aPRODUCT_METRIC_TYPE_RETURN\x10\x05\x12/\n" +
 	"+PRODUCT_METRIC_TYPE_STOCK_WAREHOUSE_PROBLEM\x10\x06\x12.\n" +
 	"*PRODUCT_METRIC_TYPE_STOCK_SHIPMENT_PROBLEM\x10\a\x12(\n" +
@@ -711,29 +746,33 @@ var file_selling_iface_v1_product_stat_metric_proto_goTypes = []any{
 	(*ProductStatMetricResponse)(nil), // 8: selling_iface.v1.ProductStatMetricResponse
 	(*ProductMetric)(nil),             // 9: selling_iface.v1.ProductMetric
 	(ProductOrderMetricSort)(0),       // 10: selling_iface.v1.ProductOrderMetricSort
-	(*v1.PageFilter)(nil),             // 11: common.v1.PageFilter
-	(*timestamppb.Timestamp)(nil),     // 12: google.protobuf.Timestamp
-	(*ProductOrderMetric)(nil),        // 13: selling_iface.v1.ProductOrderMetric
+	(v1.RestockAcceptedMetricSort)(0), // 11: selling_iface.v1.product_metric.v1.RestockAcceptedMetricSort
+	(*v11.PageFilter)(nil),            // 12: common.v1.PageFilter
+	(*timestamppb.Timestamp)(nil),     // 13: google.protobuf.Timestamp
+	(*ProductOrderMetric)(nil),        // 14: selling_iface.v1.ProductOrderMetric
+	(*v1.RestockAcceptedMetric)(nil),  // 15: selling_iface.v1.product_metric.v1.RestockAcceptedMetric
 }
 var file_selling_iface_v1_product_stat_metric_proto_depIdxs = []int32{
 	1,  // 0: selling_iface.v1.ProductMetricSort.sort_type:type_name -> selling_iface.v1.ProductMetricSortType
 	2,  // 1: selling_iface.v1.ProductMetricSort.common_sort:type_name -> selling_iface.v1.CommonProductSort
 	10, // 2: selling_iface.v1.ProductMetricSort.product_order_metric_sort:type_name -> selling_iface.v1.ProductOrderMetricSort
-	11, // 3: selling_iface.v1.ProductStatMetricFilter.page:type_name -> common.v1.PageFilter
-	6,  // 4: selling_iface.v1.ProductStatMetricFilter.range:type_name -> selling_iface.v1.ProductStatTimeRange
-	12, // 5: selling_iface.v1.ProductStatTimeRange.start:type_name -> google.protobuf.Timestamp
-	12, // 6: selling_iface.v1.ProductStatTimeRange.end:type_name -> google.protobuf.Timestamp
-	5,  // 7: selling_iface.v1.ProductStatMetricRequest.filter:type_name -> selling_iface.v1.ProductStatMetricFilter
-	3,  // 8: selling_iface.v1.ProductStatMetricRequest.sort:type_name -> selling_iface.v1.ProductMetricSort
-	4,  // 9: selling_iface.v1.ProductStatMetricRequest.metric_extras:type_name -> selling_iface.v1.ProductMetricExtra
-	0,  // 10: selling_iface.v1.ProductStatMetricRequest.metric_types:type_name -> selling_iface.v1.ProductMetricType
-	9,  // 11: selling_iface.v1.ProductStatMetricResponse.metrics:type_name -> selling_iface.v1.ProductMetric
-	13, // 12: selling_iface.v1.ProductMetric.order_metric:type_name -> selling_iface.v1.ProductOrderMetric
-	13, // [13:13] is the sub-list for method output_type
-	13, // [13:13] is the sub-list for method input_type
-	13, // [13:13] is the sub-list for extension type_name
-	13, // [13:13] is the sub-list for extension extendee
-	0,  // [0:13] is the sub-list for field type_name
+	11, // 3: selling_iface.v1.ProductMetricSort.restock_accepted_metric_sort:type_name -> selling_iface.v1.product_metric.v1.RestockAcceptedMetricSort
+	12, // 4: selling_iface.v1.ProductStatMetricFilter.page:type_name -> common.v1.PageFilter
+	6,  // 5: selling_iface.v1.ProductStatMetricFilter.range:type_name -> selling_iface.v1.ProductStatTimeRange
+	13, // 6: selling_iface.v1.ProductStatTimeRange.start:type_name -> google.protobuf.Timestamp
+	13, // 7: selling_iface.v1.ProductStatTimeRange.end:type_name -> google.protobuf.Timestamp
+	5,  // 8: selling_iface.v1.ProductStatMetricRequest.filter:type_name -> selling_iface.v1.ProductStatMetricFilter
+	3,  // 9: selling_iface.v1.ProductStatMetricRequest.sort:type_name -> selling_iface.v1.ProductMetricSort
+	4,  // 10: selling_iface.v1.ProductStatMetricRequest.metric_extras:type_name -> selling_iface.v1.ProductMetricExtra
+	0,  // 11: selling_iface.v1.ProductStatMetricRequest.metric_types:type_name -> selling_iface.v1.ProductMetricType
+	9,  // 12: selling_iface.v1.ProductStatMetricResponse.metrics:type_name -> selling_iface.v1.ProductMetric
+	14, // 13: selling_iface.v1.ProductMetric.order_metric:type_name -> selling_iface.v1.ProductOrderMetric
+	15, // 14: selling_iface.v1.ProductMetric.restock_accepted_metric:type_name -> selling_iface.v1.product_metric.v1.RestockAcceptedMetric
+	15, // [15:15] is the sub-list for method output_type
+	15, // [15:15] is the sub-list for method input_type
+	15, // [15:15] is the sub-list for extension type_name
+	15, // [15:15] is the sub-list for extension extendee
+	0,  // [0:15] is the sub-list for field type_name
 }
 
 func init() { file_selling_iface_v1_product_stat_metric_proto_init() }
@@ -745,9 +784,11 @@ func file_selling_iface_v1_product_stat_metric_proto_init() {
 	file_selling_iface_v1_product_stat_metric_proto_msgTypes[0].OneofWrappers = []any{
 		(*ProductMetricSort_CommonSort)(nil),
 		(*ProductMetricSort_ProductOrderMetricSort)(nil),
+		(*ProductMetricSort_RestockAcceptedMetricSort)(nil),
 	}
 	file_selling_iface_v1_product_stat_metric_proto_msgTypes[6].OneofWrappers = []any{
 		(*ProductMetric_OrderMetric)(nil),
+		(*ProductMetric_RestockAcceptedMetric)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
