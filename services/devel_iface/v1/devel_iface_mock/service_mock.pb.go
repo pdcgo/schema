@@ -72,3 +72,28 @@ func (mr *MockDevelToolServiceClientMockRecorder) SendEvent(ctx, req interface{}
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendEvent", reflect.TypeOf((*MockDevelToolService)(nil).SendEvent), ctx, req)
 }
 
+func (m *MockDevelToolService) SubmitTiktokWithdrawal(ctx context.Context, req *connect.Request[v1.SubmitTiktokWithdrawalRequest], stream *connect.ServerStream[v1.SubmitTiktokWithdrawalResponse]) error {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "SubmitTiktokWithdrawal", ctx, req, stream)
+    ret0, _ := ret[0].(error)
+    return ret0
+}
+
+func (mr *MockDevelToolServiceMockRecorder) SubmitTiktokWithdrawal(ctx, req, stream interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SubmitTiktokWithdrawal", reflect.TypeOf((*MockDevelToolService)(nil).SubmitTiktokWithdrawal), ctx, req, stream)
+}
+
+func (m *MockDevelToolServiceClient) SubmitTiktokWithdrawal(ctx context.Context, req *connect.Request[v1.SubmitTiktokWithdrawalRequest]) (*connect.ServerStreamForClient[v1.SubmitTiktokWithdrawalResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "SubmitTiktokWithdrawal", ctx, req)
+    ret0, _ := ret[0].(*connect.ServerStreamForClient[v1.SubmitTiktokWithdrawalResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockDevelToolServiceClientMockRecorder) SubmitTiktokWithdrawal(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SubmitTiktokWithdrawal", reflect.TypeOf((*MockDevelToolService)(nil).SubmitTiktokWithdrawal), ctx, req)
+}
+

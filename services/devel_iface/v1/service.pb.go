@@ -7,6 +7,7 @@
 package devel_iface
 
 import (
+	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	v1 "github.com/pdcgo/schema/services/warehouse_iface/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -22,6 +23,110 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type SubmitTiktokWithdrawalRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	LocalPath     string                 `protobuf:"bytes,1,opt,name=local_path,json=localPath,proto3" json:"local_path,omitempty"`
+	Username      string                 `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
+	Shopname      string                 `protobuf:"bytes,3,opt,name=shopname,proto3" json:"shopname,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SubmitTiktokWithdrawalRequest) Reset() {
+	*x = SubmitTiktokWithdrawalRequest{}
+	mi := &file_devel_iface_v1_service_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SubmitTiktokWithdrawalRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SubmitTiktokWithdrawalRequest) ProtoMessage() {}
+
+func (x *SubmitTiktokWithdrawalRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_devel_iface_v1_service_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SubmitTiktokWithdrawalRequest.ProtoReflect.Descriptor instead.
+func (*SubmitTiktokWithdrawalRequest) Descriptor() ([]byte, []int) {
+	return file_devel_iface_v1_service_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *SubmitTiktokWithdrawalRequest) GetLocalPath() string {
+	if x != nil {
+		return x.LocalPath
+	}
+	return ""
+}
+
+func (x *SubmitTiktokWithdrawalRequest) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
+func (x *SubmitTiktokWithdrawalRequest) GetShopname() string {
+	if x != nil {
+		return x.Shopname
+	}
+	return ""
+}
+
+type SubmitTiktokWithdrawalResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Message       string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SubmitTiktokWithdrawalResponse) Reset() {
+	*x = SubmitTiktokWithdrawalResponse{}
+	mi := &file_devel_iface_v1_service_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SubmitTiktokWithdrawalResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SubmitTiktokWithdrawalResponse) ProtoMessage() {}
+
+func (x *SubmitTiktokWithdrawalResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_devel_iface_v1_service_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SubmitTiktokWithdrawalResponse.ProtoReflect.Descriptor instead.
+func (*SubmitTiktokWithdrawalResponse) Descriptor() ([]byte, []int) {
+	return file_devel_iface_v1_service_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *SubmitTiktokWithdrawalResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
 type SenderDirectOption struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Endpoint      string                 `protobuf:"bytes,1,opt,name=endpoint,proto3" json:"endpoint,omitempty"`
@@ -31,7 +136,7 @@ type SenderDirectOption struct {
 
 func (x *SenderDirectOption) Reset() {
 	*x = SenderDirectOption{}
-	mi := &file_devel_iface_v1_service_proto_msgTypes[0]
+	mi := &file_devel_iface_v1_service_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -43,7 +148,7 @@ func (x *SenderDirectOption) String() string {
 func (*SenderDirectOption) ProtoMessage() {}
 
 func (x *SenderDirectOption) ProtoReflect() protoreflect.Message {
-	mi := &file_devel_iface_v1_service_proto_msgTypes[0]
+	mi := &file_devel_iface_v1_service_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -56,7 +161,7 @@ func (x *SenderDirectOption) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SenderDirectOption.ProtoReflect.Descriptor instead.
 func (*SenderDirectOption) Descriptor() ([]byte, []int) {
-	return file_devel_iface_v1_service_proto_rawDescGZIP(), []int{0}
+	return file_devel_iface_v1_service_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *SenderDirectOption) GetEndpoint() string {
@@ -75,7 +180,7 @@ type SenderProductionOption struct {
 
 func (x *SenderProductionOption) Reset() {
 	*x = SenderProductionOption{}
-	mi := &file_devel_iface_v1_service_proto_msgTypes[1]
+	mi := &file_devel_iface_v1_service_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -87,7 +192,7 @@ func (x *SenderProductionOption) String() string {
 func (*SenderProductionOption) ProtoMessage() {}
 
 func (x *SenderProductionOption) ProtoReflect() protoreflect.Message {
-	mi := &file_devel_iface_v1_service_proto_msgTypes[1]
+	mi := &file_devel_iface_v1_service_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -100,7 +205,7 @@ func (x *SenderProductionOption) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SenderProductionOption.ProtoReflect.Descriptor instead.
 func (*SenderProductionOption) Descriptor() ([]byte, []int) {
-	return file_devel_iface_v1_service_proto_rawDescGZIP(), []int{1}
+	return file_devel_iface_v1_service_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *SenderProductionOption) GetProjectId() string {
@@ -118,7 +223,7 @@ type SenderEmulatorOption struct {
 
 func (x *SenderEmulatorOption) Reset() {
 	*x = SenderEmulatorOption{}
-	mi := &file_devel_iface_v1_service_proto_msgTypes[2]
+	mi := &file_devel_iface_v1_service_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -130,7 +235,7 @@ func (x *SenderEmulatorOption) String() string {
 func (*SenderEmulatorOption) ProtoMessage() {}
 
 func (x *SenderEmulatorOption) ProtoReflect() protoreflect.Message {
-	mi := &file_devel_iface_v1_service_proto_msgTypes[2]
+	mi := &file_devel_iface_v1_service_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -143,7 +248,7 @@ func (x *SenderEmulatorOption) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SenderEmulatorOption.ProtoReflect.Descriptor instead.
 func (*SenderEmulatorOption) Descriptor() ([]byte, []int) {
-	return file_devel_iface_v1_service_proto_rawDescGZIP(), []int{2}
+	return file_devel_iface_v1_service_proto_rawDescGZIP(), []int{4}
 }
 
 type SendEventRequest struct {
@@ -164,7 +269,7 @@ type SendEventRequest struct {
 
 func (x *SendEventRequest) Reset() {
 	*x = SendEventRequest{}
-	mi := &file_devel_iface_v1_service_proto_msgTypes[3]
+	mi := &file_devel_iface_v1_service_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -176,7 +281,7 @@ func (x *SendEventRequest) String() string {
 func (*SendEventRequest) ProtoMessage() {}
 
 func (x *SendEventRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_devel_iface_v1_service_proto_msgTypes[3]
+	mi := &file_devel_iface_v1_service_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -189,7 +294,7 @@ func (x *SendEventRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SendEventRequest.ProtoReflect.Descriptor instead.
 func (*SendEventRequest) Descriptor() ([]byte, []int) {
-	return file_devel_iface_v1_service_proto_rawDescGZIP(), []int{3}
+	return file_devel_iface_v1_service_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *SendEventRequest) GetSender() isSendEventRequest_Sender {
@@ -282,7 +387,7 @@ type SendEventResponse struct {
 
 func (x *SendEventResponse) Reset() {
 	*x = SendEventResponse{}
-	mi := &file_devel_iface_v1_service_proto_msgTypes[4]
+	mi := &file_devel_iface_v1_service_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -294,7 +399,7 @@ func (x *SendEventResponse) String() string {
 func (*SendEventResponse) ProtoMessage() {}
 
 func (x *SendEventResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_devel_iface_v1_service_proto_msgTypes[4]
+	mi := &file_devel_iface_v1_service_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -307,14 +412,24 @@ func (x *SendEventResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SendEventResponse.ProtoReflect.Descriptor instead.
 func (*SendEventResponse) Descriptor() ([]byte, []int) {
-	return file_devel_iface_v1_service_proto_rawDescGZIP(), []int{4}
+	return file_devel_iface_v1_service_proto_rawDescGZIP(), []int{6}
 }
 
 var File_devel_iface_v1_service_proto protoreflect.FileDescriptor
 
 const file_devel_iface_v1_service_proto_rawDesc = "" +
 	"\n" +
-	"\x1cdevel_iface/v1/service.proto\x12\x0edevel_iface.v1\x1a\x1ewarehouse_iface/v1/event.proto\"0\n" +
+	"\x1cdevel_iface/v1/service.proto\x12\x0edevel_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1ewarehouse_iface/v1/event.proto\"\x9a\x01\n" +
+	"\x1dSubmitTiktokWithdrawalRequest\x12)\n" +
+	"\n" +
+	"local_path\x18\x01 \x01(\tB\n" +
+	"\xbaH\ar\x05\x10\x01\x18\xe8\aR\tlocalPath\x12&\n" +
+	"\busername\x18\x02 \x01(\tB\n" +
+	"\xbaH\ar\x05\x10\x01\x18\xe8\aR\busername\x12&\n" +
+	"\bshopname\x18\x03 \x01(\tB\n" +
+	"\xbaH\ar\x05\x10\x01\x18\xe8\aR\bshopname\":\n" +
+	"\x1eSubmitTiktokWithdrawalResponse\x12\x18\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage\"0\n" +
 	"\x12SenderDirectOption\x12\x1a\n" +
 	"\bendpoint\x18\x01 \x01(\tR\bendpoint\"7\n" +
 	"\x16SenderProductionOption\x12\x1d\n" +
@@ -328,9 +443,10 @@ const file_devel_iface_v1_service_proto_rawDesc = "" +
 	"\x05stock\x18\x04 \x01(\v2\x1e.warehouse_iface.v1.StockEventH\x01R\x05stockB\b\n" +
 	"\x06senderB\x03\n" +
 	"\x01d\"\x13\n" +
-	"\x11SendEventResponse2d\n" +
+	"\x11SendEventResponse2\xdf\x01\n" +
 	"\x10DevelToolService\x12P\n" +
-	"\tSendEvent\x12 .devel_iface.v1.SendEventRequest\x1a!.devel_iface.v1.SendEventResponseB\xb4\x01\n" +
+	"\tSendEvent\x12 .devel_iface.v1.SendEventRequest\x1a!.devel_iface.v1.SendEventResponse\x12y\n" +
+	"\x16SubmitTiktokWithdrawal\x12-.devel_iface.v1.SubmitTiktokWithdrawalRequest\x1a..devel_iface.v1.SubmitTiktokWithdrawalResponse0\x01B\xb4\x01\n" +
 	"\x12com.devel_iface.v1B\fServiceProtoP\x01Z;github.com/pdcgo/schema/services/devel_iface/v1;devel_iface\xa2\x02\x03DXX\xaa\x02\rDevelIface.V1\xca\x02\rDevelIface\\V1\xe2\x02\x19DevelIface\\V1\\GPBMetadata\xea\x02\x0eDevelIface::V1b\x06proto3"
 
 var (
@@ -345,24 +461,28 @@ func file_devel_iface_v1_service_proto_rawDescGZIP() []byte {
 	return file_devel_iface_v1_service_proto_rawDescData
 }
 
-var file_devel_iface_v1_service_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_devel_iface_v1_service_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_devel_iface_v1_service_proto_goTypes = []any{
-	(*SenderDirectOption)(nil),     // 0: devel_iface.v1.SenderDirectOption
-	(*SenderProductionOption)(nil), // 1: devel_iface.v1.SenderProductionOption
-	(*SenderEmulatorOption)(nil),   // 2: devel_iface.v1.SenderEmulatorOption
-	(*SendEventRequest)(nil),       // 3: devel_iface.v1.SendEventRequest
-	(*SendEventResponse)(nil),      // 4: devel_iface.v1.SendEventResponse
-	(*v1.StockEvent)(nil),          // 5: warehouse_iface.v1.StockEvent
+	(*SubmitTiktokWithdrawalRequest)(nil),  // 0: devel_iface.v1.SubmitTiktokWithdrawalRequest
+	(*SubmitTiktokWithdrawalResponse)(nil), // 1: devel_iface.v1.SubmitTiktokWithdrawalResponse
+	(*SenderDirectOption)(nil),             // 2: devel_iface.v1.SenderDirectOption
+	(*SenderProductionOption)(nil),         // 3: devel_iface.v1.SenderProductionOption
+	(*SenderEmulatorOption)(nil),           // 4: devel_iface.v1.SenderEmulatorOption
+	(*SendEventRequest)(nil),               // 5: devel_iface.v1.SendEventRequest
+	(*SendEventResponse)(nil),              // 6: devel_iface.v1.SendEventResponse
+	(*v1.StockEvent)(nil),                  // 7: warehouse_iface.v1.StockEvent
 }
 var file_devel_iface_v1_service_proto_depIdxs = []int32{
-	0, // 0: devel_iface.v1.SendEventRequest.direct_option:type_name -> devel_iface.v1.SenderDirectOption
-	2, // 1: devel_iface.v1.SendEventRequest.emulator_option:type_name -> devel_iface.v1.SenderEmulatorOption
-	1, // 2: devel_iface.v1.SendEventRequest.production_option:type_name -> devel_iface.v1.SenderProductionOption
-	5, // 3: devel_iface.v1.SendEventRequest.stock:type_name -> warehouse_iface.v1.StockEvent
-	3, // 4: devel_iface.v1.DevelToolService.SendEvent:input_type -> devel_iface.v1.SendEventRequest
-	4, // 5: devel_iface.v1.DevelToolService.SendEvent:output_type -> devel_iface.v1.SendEventResponse
-	5, // [5:6] is the sub-list for method output_type
-	4, // [4:5] is the sub-list for method input_type
+	2, // 0: devel_iface.v1.SendEventRequest.direct_option:type_name -> devel_iface.v1.SenderDirectOption
+	4, // 1: devel_iface.v1.SendEventRequest.emulator_option:type_name -> devel_iface.v1.SenderEmulatorOption
+	3, // 2: devel_iface.v1.SendEventRequest.production_option:type_name -> devel_iface.v1.SenderProductionOption
+	7, // 3: devel_iface.v1.SendEventRequest.stock:type_name -> warehouse_iface.v1.StockEvent
+	5, // 4: devel_iface.v1.DevelToolService.SendEvent:input_type -> devel_iface.v1.SendEventRequest
+	0, // 5: devel_iface.v1.DevelToolService.SubmitTiktokWithdrawal:input_type -> devel_iface.v1.SubmitTiktokWithdrawalRequest
+	6, // 6: devel_iface.v1.DevelToolService.SendEvent:output_type -> devel_iface.v1.SendEventResponse
+	1, // 7: devel_iface.v1.DevelToolService.SubmitTiktokWithdrawal:output_type -> devel_iface.v1.SubmitTiktokWithdrawalResponse
+	6, // [6:8] is the sub-list for method output_type
+	4, // [4:6] is the sub-list for method input_type
 	4, // [4:4] is the sub-list for extension type_name
 	4, // [4:4] is the sub-list for extension extendee
 	0, // [0:4] is the sub-list for field type_name
@@ -373,7 +493,7 @@ func file_devel_iface_v1_service_proto_init() {
 	if File_devel_iface_v1_service_proto != nil {
 		return
 	}
-	file_devel_iface_v1_service_proto_msgTypes[3].OneofWrappers = []any{
+	file_devel_iface_v1_service_proto_msgTypes[5].OneofWrappers = []any{
 		(*SendEventRequest_DirectOption)(nil),
 		(*SendEventRequest_EmulatorOption)(nil),
 		(*SendEventRequest_ProductionOption)(nil),
@@ -385,7 +505,7 @@ func file_devel_iface_v1_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_devel_iface_v1_service_proto_rawDesc), len(file_devel_iface_v1_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

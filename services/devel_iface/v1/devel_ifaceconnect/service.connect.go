@@ -36,11 +36,15 @@ const (
 	// DevelToolServiceSendEventProcedure is the fully-qualified name of the DevelToolService's
 	// SendEvent RPC.
 	DevelToolServiceSendEventProcedure = "/devel_iface.v1.DevelToolService/SendEvent"
+	// DevelToolServiceSubmitTiktokWithdrawalProcedure is the fully-qualified name of the
+	// DevelToolService's SubmitTiktokWithdrawal RPC.
+	DevelToolServiceSubmitTiktokWithdrawalProcedure = "/devel_iface.v1.DevelToolService/SubmitTiktokWithdrawal"
 )
 
 // DevelToolServiceClient is a client for the devel_iface.v1.DevelToolService service.
 type DevelToolServiceClient interface {
 	SendEvent(context.Context, *connect.Request[v1.SendEventRequest]) (*connect.Response[v1.SendEventResponse], error)
+	SubmitTiktokWithdrawal(context.Context, *connect.Request[v1.SubmitTiktokWithdrawalRequest]) (*connect.ServerStreamForClient[v1.SubmitTiktokWithdrawalResponse], error)
 }
 
 // NewDevelToolServiceClient constructs a client for the devel_iface.v1.DevelToolService service. By
@@ -60,12 +64,19 @@ func NewDevelToolServiceClient(httpClient connect.HTTPClient, baseURL string, op
 			connect.WithSchema(develToolServiceMethods.ByName("SendEvent")),
 			connect.WithClientOptions(opts...),
 		),
+		submitTiktokWithdrawal: connect.NewClient[v1.SubmitTiktokWithdrawalRequest, v1.SubmitTiktokWithdrawalResponse](
+			httpClient,
+			baseURL+DevelToolServiceSubmitTiktokWithdrawalProcedure,
+			connect.WithSchema(develToolServiceMethods.ByName("SubmitTiktokWithdrawal")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // develToolServiceClient implements DevelToolServiceClient.
 type develToolServiceClient struct {
-	sendEvent *connect.Client[v1.SendEventRequest, v1.SendEventResponse]
+	sendEvent              *connect.Client[v1.SendEventRequest, v1.SendEventResponse]
+	submitTiktokWithdrawal *connect.Client[v1.SubmitTiktokWithdrawalRequest, v1.SubmitTiktokWithdrawalResponse]
 }
 
 // SendEvent calls devel_iface.v1.DevelToolService.SendEvent.
@@ -73,9 +84,15 @@ func (c *develToolServiceClient) SendEvent(ctx context.Context, req *connect.Req
 	return c.sendEvent.CallUnary(ctx, req)
 }
 
+// SubmitTiktokWithdrawal calls devel_iface.v1.DevelToolService.SubmitTiktokWithdrawal.
+func (c *develToolServiceClient) SubmitTiktokWithdrawal(ctx context.Context, req *connect.Request[v1.SubmitTiktokWithdrawalRequest]) (*connect.ServerStreamForClient[v1.SubmitTiktokWithdrawalResponse], error) {
+	return c.submitTiktokWithdrawal.CallServerStream(ctx, req)
+}
+
 // DevelToolServiceHandler is an implementation of the devel_iface.v1.DevelToolService service.
 type DevelToolServiceHandler interface {
 	SendEvent(context.Context, *connect.Request[v1.SendEventRequest]) (*connect.Response[v1.SendEventResponse], error)
+	SubmitTiktokWithdrawal(context.Context, *connect.Request[v1.SubmitTiktokWithdrawalRequest], *connect.ServerStream[v1.SubmitTiktokWithdrawalResponse]) error
 }
 
 // NewDevelToolServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -91,10 +108,18 @@ func NewDevelToolServiceHandler(svc DevelToolServiceHandler, opts ...connect.Han
 		connect.WithSchema(develToolServiceMethods.ByName("SendEvent")),
 		connect.WithHandlerOptions(opts...),
 	)
+	develToolServiceSubmitTiktokWithdrawalHandler := connect.NewServerStreamHandler(
+		DevelToolServiceSubmitTiktokWithdrawalProcedure,
+		svc.SubmitTiktokWithdrawal,
+		connect.WithSchema(develToolServiceMethods.ByName("SubmitTiktokWithdrawal")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/devel_iface.v1.DevelToolService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case DevelToolServiceSendEventProcedure:
 			develToolServiceSendEventHandler.ServeHTTP(w, r)
+		case DevelToolServiceSubmitTiktokWithdrawalProcedure:
+			develToolServiceSubmitTiktokWithdrawalHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -106,4 +131,8 @@ type UnimplementedDevelToolServiceHandler struct{}
 
 func (UnimplementedDevelToolServiceHandler) SendEvent(context.Context, *connect.Request[v1.SendEventRequest]) (*connect.Response[v1.SendEventResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("devel_iface.v1.DevelToolService.SendEvent is not implemented"))
+}
+
+func (UnimplementedDevelToolServiceHandler) SubmitTiktokWithdrawal(context.Context, *connect.Request[v1.SubmitTiktokWithdrawalRequest], *connect.ServerStream[v1.SubmitTiktokWithdrawalResponse]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("devel_iface.v1.DevelToolService.SubmitTiktokWithdrawal is not implemented"))
 }

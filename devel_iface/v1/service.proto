@@ -1,12 +1,33 @@
 syntax = "proto3";
 package devel_iface.v1;
 
+import "buf/validate/validate.proto";
 import "warehouse_iface/v1/event.proto";
 
 option go_package = "github.com/pdcgo/schema/services/devel_iface/v1;devel_iface";
 
 service DevelToolService {
   rpc SendEvent(SendEventRequest) returns (SendEventResponse);
+  rpc SubmitTiktokWithdrawal(SubmitTiktokWithdrawalRequest) returns (stream SubmitTiktokWithdrawalResponse);
+}
+
+message SubmitTiktokWithdrawalRequest {
+  string local_path = 1 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 1000
+  }];
+  string username = 2 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 1000
+  }];
+  string shopname = 3 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 1000
+  }];
+}
+
+message SubmitTiktokWithdrawalResponse {
+  string message = 1;
 }
 
 message SenderDirectOption {
