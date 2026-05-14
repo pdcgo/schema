@@ -167,21 +167,52 @@ enum ReturnCancelledMetricSort {
   RETURN_CANCELLED_METRIC_SORT_TRANSACTION_AMOUNT = 5;
 }
 
-message ReadyStockItem {
+message StockReadyItem {
   uint64 product_id = 1;
-
-  int64 piece_count = 4;
-  double total_amount = 5;
+  int64 stock_count = 2;
+  double stock_amount = 3;
 }
 
-message ReadyStockMetric {
-  map<uint64, ReadyStockItem> data = 1;
+message StockReadyMetric {
+  map<uint64, StockReadyItem> data = 1;
 }
 
-enum ReadyStockMetricSort {
-  READY_STOCK_METRIC_SORT_UNSPECIFIED = 0;
-  READY_STOCK_METRIC_SORT_PIECE_COUNT = 1;
-  READY_STOCK_METRIC_SORT_TOTAL_AMOUNT = 2;
+enum StockReadyMetricSort {
+  STOCK_READY_METRIC_SORT_UNSPECIFIED = 0;
+  STOCK_READY_METRIC_SORT_STOCK_COUNT = 1;
+  STOCK_READY_METRIC_SORT_STOCK_AMOUNT = 2;
+}
+
+message StockOngoingItem {
+  uint64 product_id = 1;
+  int64 stock_count = 2;
+  double stock_amount = 3;
+}
+
+message StockOngoingMetric {
+  map<uint64, StockOngoingItem> data = 1;
+}
+
+enum StockOngoingMetricSort {
+  STOCK_ONGOING_METRIC_SORT_UNSPECIFIED = 0;
+  STOCK_ONGOING_METRIC_SORT_STOCK_COUNT = 1;
+  STOCK_ONGOING_METRIC_SORT_STOCK_AMOUNT = 2;
+}
+
+message ProductShipmentTimeItem {
+  uint64 product_id = 1;
+  double avg_restock_shipment_time = 2;
+  double avg_return_shipment_time = 3;
+}
+
+message ProductShipmentTimeMetric {
+  map<uint64, ProductShipmentTimeItem> data = 1;
+}
+
+enum ProductShipmentTimeMetricSort {
+  PRODUCT_SHIPMENT_TIME_METRIC_SORT_UNSPECIFIED = 0;
+  PRODUCT_SHIPMENT_TIME_METRIC_SORT_AVG_RESTOCK_SHIPMENT_TIME = 1;
+  PRODUCT_SHIPMENT_TIME_METRIC_SORT_AVG_RETURN_SHIPMENT_TIME = 2;
 }
 
 message ProblemStockMetric {}

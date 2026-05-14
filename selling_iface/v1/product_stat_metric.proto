@@ -19,6 +19,7 @@ enum ProductMetricType {
   PRODUCT_METRIC_TYPE_STOCK_WAREHOUSE_PROBLEM = 6;
   PRODUCT_METRIC_TYPE_STOCK_SHIPMENT_PROBLEM = 7;
   PRODUCT_METRIC_TYPE_STOCK_RESOLUTION = 8;
+  PRODUCT_METRIC_TYPE_SHIPMENT_TIME = 9;
 }
 
 enum ProductMetricSortType {
@@ -40,6 +41,19 @@ message ProductMetricSort {
     CommonProductSort common_sort = 2;
     ProductOrderMetricSort product_order_metric_sort = 3;
     selling_iface.v1.product_metric.v1.RestockAcceptedMetricSort restock_accepted_metric_sort = 4;
+    selling_iface.v1.product_metric.v1.StockReadyMetricSort stock_ready_metric_sort = 5;
+    selling_iface.v1.product_metric.v1.StockOngoingMetricSort stock_ongoing_metric_sort = 6;
+    selling_iface.v1.product_metric.v1.ProductShipmentTimeMetricSort product_shipment_time_metric_sort = 7;
+  }
+}
+
+message ProductMetric {
+  oneof data {
+    ProductOrderMetric order_metric = 1;
+    selling_iface.v1.product_metric.v1.RestockAcceptedMetric restock_accepted_metric = 2;
+    selling_iface.v1.product_metric.v1.StockReadyMetric stock_ready_metric = 3;
+    selling_iface.v1.product_metric.v1.StockOngoingMetric stock_ongoing_metric = 4;
+    selling_iface.v1.product_metric.v1.ProductShipmentTimeMetric product_shipment_time_metric = 5;
   }
 }
 
@@ -60,7 +74,7 @@ message ProductStatTimeRange {
 
 message ProductStatMetricRequest {
   ProductStatMetricFilter filter = 2 [(buf.validate.field).required = true];
-  ProductMetricSort sort = 3;
+  ProductMetricSort sort = 3 [(buf.validate.field).required = true];
   repeated ProductMetricExtra metric_extras = 4;
   repeated ProductMetricType metric_types = 5;
 }
@@ -68,11 +82,4 @@ message ProductStatMetricRequest {
 message ProductStatMetricResponse {
   repeated ProductMetric metrics = 1;
   repeated uint64 ids = 2;
-}
-
-message ProductMetric {
-  oneof data {
-    ProductOrderMetric order_metric = 1;
-    selling_iface.v1.product_metric.v1.RestockAcceptedMetric restock_accepted_metric = 2;
-  }
 }

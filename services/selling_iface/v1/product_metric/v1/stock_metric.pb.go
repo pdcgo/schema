@@ -422,53 +422,151 @@ func (ReturnCancelledMetricSort) EnumDescriptor() ([]byte, []int) {
 	return file_selling_iface_v1_product_metric_v1_stock_metric_proto_rawDescGZIP(), []int{6}
 }
 
-type ReadyStockMetricSort int32
+type StockReadyMetricSort int32
 
 const (
-	ReadyStockMetricSort_READY_STOCK_METRIC_SORT_UNSPECIFIED  ReadyStockMetricSort = 0
-	ReadyStockMetricSort_READY_STOCK_METRIC_SORT_PIECE_COUNT  ReadyStockMetricSort = 1
-	ReadyStockMetricSort_READY_STOCK_METRIC_SORT_TOTAL_AMOUNT ReadyStockMetricSort = 2
+	StockReadyMetricSort_STOCK_READY_METRIC_SORT_UNSPECIFIED  StockReadyMetricSort = 0
+	StockReadyMetricSort_STOCK_READY_METRIC_SORT_STOCK_COUNT  StockReadyMetricSort = 1
+	StockReadyMetricSort_STOCK_READY_METRIC_SORT_STOCK_AMOUNT StockReadyMetricSort = 2
 )
 
-// Enum value maps for ReadyStockMetricSort.
+// Enum value maps for StockReadyMetricSort.
 var (
-	ReadyStockMetricSort_name = map[int32]string{
-		0: "READY_STOCK_METRIC_SORT_UNSPECIFIED",
-		1: "READY_STOCK_METRIC_SORT_PIECE_COUNT",
-		2: "READY_STOCK_METRIC_SORT_TOTAL_AMOUNT",
+	StockReadyMetricSort_name = map[int32]string{
+		0: "STOCK_READY_METRIC_SORT_UNSPECIFIED",
+		1: "STOCK_READY_METRIC_SORT_STOCK_COUNT",
+		2: "STOCK_READY_METRIC_SORT_STOCK_AMOUNT",
 	}
-	ReadyStockMetricSort_value = map[string]int32{
-		"READY_STOCK_METRIC_SORT_UNSPECIFIED":  0,
-		"READY_STOCK_METRIC_SORT_PIECE_COUNT":  1,
-		"READY_STOCK_METRIC_SORT_TOTAL_AMOUNT": 2,
+	StockReadyMetricSort_value = map[string]int32{
+		"STOCK_READY_METRIC_SORT_UNSPECIFIED":  0,
+		"STOCK_READY_METRIC_SORT_STOCK_COUNT":  1,
+		"STOCK_READY_METRIC_SORT_STOCK_AMOUNT": 2,
 	}
 )
 
-func (x ReadyStockMetricSort) Enum() *ReadyStockMetricSort {
-	p := new(ReadyStockMetricSort)
+func (x StockReadyMetricSort) Enum() *StockReadyMetricSort {
+	p := new(StockReadyMetricSort)
 	*p = x
 	return p
 }
 
-func (x ReadyStockMetricSort) String() string {
+func (x StockReadyMetricSort) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (ReadyStockMetricSort) Descriptor() protoreflect.EnumDescriptor {
+func (StockReadyMetricSort) Descriptor() protoreflect.EnumDescriptor {
 	return file_selling_iface_v1_product_metric_v1_stock_metric_proto_enumTypes[7].Descriptor()
 }
 
-func (ReadyStockMetricSort) Type() protoreflect.EnumType {
+func (StockReadyMetricSort) Type() protoreflect.EnumType {
 	return &file_selling_iface_v1_product_metric_v1_stock_metric_proto_enumTypes[7]
 }
 
-func (x ReadyStockMetricSort) Number() protoreflect.EnumNumber {
+func (x StockReadyMetricSort) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use ReadyStockMetricSort.Descriptor instead.
-func (ReadyStockMetricSort) EnumDescriptor() ([]byte, []int) {
+// Deprecated: Use StockReadyMetricSort.Descriptor instead.
+func (StockReadyMetricSort) EnumDescriptor() ([]byte, []int) {
 	return file_selling_iface_v1_product_metric_v1_stock_metric_proto_rawDescGZIP(), []int{7}
+}
+
+type StockOngoingMetricSort int32
+
+const (
+	StockOngoingMetricSort_STOCK_ONGOING_METRIC_SORT_UNSPECIFIED  StockOngoingMetricSort = 0
+	StockOngoingMetricSort_STOCK_ONGOING_METRIC_SORT_STOCK_COUNT  StockOngoingMetricSort = 1
+	StockOngoingMetricSort_STOCK_ONGOING_METRIC_SORT_STOCK_AMOUNT StockOngoingMetricSort = 2
+)
+
+// Enum value maps for StockOngoingMetricSort.
+var (
+	StockOngoingMetricSort_name = map[int32]string{
+		0: "STOCK_ONGOING_METRIC_SORT_UNSPECIFIED",
+		1: "STOCK_ONGOING_METRIC_SORT_STOCK_COUNT",
+		2: "STOCK_ONGOING_METRIC_SORT_STOCK_AMOUNT",
+	}
+	StockOngoingMetricSort_value = map[string]int32{
+		"STOCK_ONGOING_METRIC_SORT_UNSPECIFIED":  0,
+		"STOCK_ONGOING_METRIC_SORT_STOCK_COUNT":  1,
+		"STOCK_ONGOING_METRIC_SORT_STOCK_AMOUNT": 2,
+	}
+)
+
+func (x StockOngoingMetricSort) Enum() *StockOngoingMetricSort {
+	p := new(StockOngoingMetricSort)
+	*p = x
+	return p
+}
+
+func (x StockOngoingMetricSort) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (StockOngoingMetricSort) Descriptor() protoreflect.EnumDescriptor {
+	return file_selling_iface_v1_product_metric_v1_stock_metric_proto_enumTypes[8].Descriptor()
+}
+
+func (StockOngoingMetricSort) Type() protoreflect.EnumType {
+	return &file_selling_iface_v1_product_metric_v1_stock_metric_proto_enumTypes[8]
+}
+
+func (x StockOngoingMetricSort) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use StockOngoingMetricSort.Descriptor instead.
+func (StockOngoingMetricSort) EnumDescriptor() ([]byte, []int) {
+	return file_selling_iface_v1_product_metric_v1_stock_metric_proto_rawDescGZIP(), []int{8}
+}
+
+type ProductShipmentTimeMetricSort int32
+
+const (
+	ProductShipmentTimeMetricSort_PRODUCT_SHIPMENT_TIME_METRIC_SORT_UNSPECIFIED               ProductShipmentTimeMetricSort = 0
+	ProductShipmentTimeMetricSort_PRODUCT_SHIPMENT_TIME_METRIC_SORT_AVG_RESTOCK_SHIPMENT_TIME ProductShipmentTimeMetricSort = 1
+	ProductShipmentTimeMetricSort_PRODUCT_SHIPMENT_TIME_METRIC_SORT_AVG_RETURN_SHIPMENT_TIME  ProductShipmentTimeMetricSort = 2
+)
+
+// Enum value maps for ProductShipmentTimeMetricSort.
+var (
+	ProductShipmentTimeMetricSort_name = map[int32]string{
+		0: "PRODUCT_SHIPMENT_TIME_METRIC_SORT_UNSPECIFIED",
+		1: "PRODUCT_SHIPMENT_TIME_METRIC_SORT_AVG_RESTOCK_SHIPMENT_TIME",
+		2: "PRODUCT_SHIPMENT_TIME_METRIC_SORT_AVG_RETURN_SHIPMENT_TIME",
+	}
+	ProductShipmentTimeMetricSort_value = map[string]int32{
+		"PRODUCT_SHIPMENT_TIME_METRIC_SORT_UNSPECIFIED":               0,
+		"PRODUCT_SHIPMENT_TIME_METRIC_SORT_AVG_RESTOCK_SHIPMENT_TIME": 1,
+		"PRODUCT_SHIPMENT_TIME_METRIC_SORT_AVG_RETURN_SHIPMENT_TIME":  2,
+	}
+)
+
+func (x ProductShipmentTimeMetricSort) Enum() *ProductShipmentTimeMetricSort {
+	p := new(ProductShipmentTimeMetricSort)
+	*p = x
+	return p
+}
+
+func (x ProductShipmentTimeMetricSort) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ProductShipmentTimeMetricSort) Descriptor() protoreflect.EnumDescriptor {
+	return file_selling_iface_v1_product_metric_v1_stock_metric_proto_enumTypes[9].Descriptor()
+}
+
+func (ProductShipmentTimeMetricSort) Type() protoreflect.EnumType {
+	return &file_selling_iface_v1_product_metric_v1_stock_metric_proto_enumTypes[9]
+}
+
+func (x ProductShipmentTimeMetricSort) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ProductShipmentTimeMetricSort.Descriptor instead.
+func (ProductShipmentTimeMetricSort) EnumDescriptor() ([]byte, []int) {
+	return file_selling_iface_v1_product_metric_v1_stock_metric_proto_rawDescGZIP(), []int{9}
 }
 
 type RestockAcceptedItem struct {
@@ -1357,29 +1455,29 @@ func (x *ReturnCancelledMetric) GetData() map[uint64]*ReturnCancelledItem {
 	return nil
 }
 
-type ReadyStockItem struct {
+type StockReadyItem struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ProductId     uint64                 `protobuf:"varint,1,opt,name=product_id,json=productId,proto3" json:"product_id,omitempty"`
-	PieceCount    int64                  `protobuf:"varint,4,opt,name=piece_count,json=pieceCount,proto3" json:"piece_count,omitempty"`
-	TotalAmount   float64                `protobuf:"fixed64,5,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
+	StockCount    int64                  `protobuf:"varint,2,opt,name=stock_count,json=stockCount,proto3" json:"stock_count,omitempty"`
+	StockAmount   float64                `protobuf:"fixed64,3,opt,name=stock_amount,json=stockAmount,proto3" json:"stock_amount,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ReadyStockItem) Reset() {
-	*x = ReadyStockItem{}
+func (x *StockReadyItem) Reset() {
+	*x = StockReadyItem{}
 	mi := &file_selling_iface_v1_product_metric_v1_stock_metric_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ReadyStockItem) String() string {
+func (x *StockReadyItem) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ReadyStockItem) ProtoMessage() {}
+func (*StockReadyItem) ProtoMessage() {}
 
-func (x *ReadyStockItem) ProtoReflect() protoreflect.Message {
+func (x *StockReadyItem) ProtoReflect() protoreflect.Message {
 	mi := &file_selling_iface_v1_product_metric_v1_stock_metric_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1391,53 +1489,53 @@ func (x *ReadyStockItem) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ReadyStockItem.ProtoReflect.Descriptor instead.
-func (*ReadyStockItem) Descriptor() ([]byte, []int) {
+// Deprecated: Use StockReadyItem.ProtoReflect.Descriptor instead.
+func (*StockReadyItem) Descriptor() ([]byte, []int) {
 	return file_selling_iface_v1_product_metric_v1_stock_metric_proto_rawDescGZIP(), []int{14}
 }
 
-func (x *ReadyStockItem) GetProductId() uint64 {
+func (x *StockReadyItem) GetProductId() uint64 {
 	if x != nil {
 		return x.ProductId
 	}
 	return 0
 }
 
-func (x *ReadyStockItem) GetPieceCount() int64 {
+func (x *StockReadyItem) GetStockCount() int64 {
 	if x != nil {
-		return x.PieceCount
+		return x.StockCount
 	}
 	return 0
 }
 
-func (x *ReadyStockItem) GetTotalAmount() float64 {
+func (x *StockReadyItem) GetStockAmount() float64 {
 	if x != nil {
-		return x.TotalAmount
+		return x.StockAmount
 	}
 	return 0
 }
 
-type ReadyStockMetric struct {
+type StockReadyMetric struct {
 	state         protoimpl.MessageState     `protogen:"open.v1"`
-	Data          map[uint64]*ReadyStockItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Data          map[uint64]*StockReadyItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ReadyStockMetric) Reset() {
-	*x = ReadyStockMetric{}
+func (x *StockReadyMetric) Reset() {
+	*x = StockReadyMetric{}
 	mi := &file_selling_iface_v1_product_metric_v1_stock_metric_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ReadyStockMetric) String() string {
+func (x *StockReadyMetric) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ReadyStockMetric) ProtoMessage() {}
+func (*StockReadyMetric) ProtoMessage() {}
 
-func (x *ReadyStockMetric) ProtoReflect() protoreflect.Message {
+func (x *StockReadyMetric) ProtoReflect() protoreflect.Message {
 	mi := &file_selling_iface_v1_product_metric_v1_stock_metric_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1449,12 +1547,220 @@ func (x *ReadyStockMetric) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ReadyStockMetric.ProtoReflect.Descriptor instead.
-func (*ReadyStockMetric) Descriptor() ([]byte, []int) {
+// Deprecated: Use StockReadyMetric.ProtoReflect.Descriptor instead.
+func (*StockReadyMetric) Descriptor() ([]byte, []int) {
 	return file_selling_iface_v1_product_metric_v1_stock_metric_proto_rawDescGZIP(), []int{15}
 }
 
-func (x *ReadyStockMetric) GetData() map[uint64]*ReadyStockItem {
+func (x *StockReadyMetric) GetData() map[uint64]*StockReadyItem {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+type StockOngoingItem struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ProductId     uint64                 `protobuf:"varint,1,opt,name=product_id,json=productId,proto3" json:"product_id,omitempty"`
+	StockCount    int64                  `protobuf:"varint,2,opt,name=stock_count,json=stockCount,proto3" json:"stock_count,omitempty"`
+	StockAmount   float64                `protobuf:"fixed64,3,opt,name=stock_amount,json=stockAmount,proto3" json:"stock_amount,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StockOngoingItem) Reset() {
+	*x = StockOngoingItem{}
+	mi := &file_selling_iface_v1_product_metric_v1_stock_metric_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StockOngoingItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StockOngoingItem) ProtoMessage() {}
+
+func (x *StockOngoingItem) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_product_metric_v1_stock_metric_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StockOngoingItem.ProtoReflect.Descriptor instead.
+func (*StockOngoingItem) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_product_metric_v1_stock_metric_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *StockOngoingItem) GetProductId() uint64 {
+	if x != nil {
+		return x.ProductId
+	}
+	return 0
+}
+
+func (x *StockOngoingItem) GetStockCount() int64 {
+	if x != nil {
+		return x.StockCount
+	}
+	return 0
+}
+
+func (x *StockOngoingItem) GetStockAmount() float64 {
+	if x != nil {
+		return x.StockAmount
+	}
+	return 0
+}
+
+type StockOngoingMetric struct {
+	state         protoimpl.MessageState       `protogen:"open.v1"`
+	Data          map[uint64]*StockOngoingItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StockOngoingMetric) Reset() {
+	*x = StockOngoingMetric{}
+	mi := &file_selling_iface_v1_product_metric_v1_stock_metric_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StockOngoingMetric) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StockOngoingMetric) ProtoMessage() {}
+
+func (x *StockOngoingMetric) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_product_metric_v1_stock_metric_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StockOngoingMetric.ProtoReflect.Descriptor instead.
+func (*StockOngoingMetric) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_product_metric_v1_stock_metric_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *StockOngoingMetric) GetData() map[uint64]*StockOngoingItem {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+type ProductShipmentTimeItem struct {
+	state                  protoimpl.MessageState `protogen:"open.v1"`
+	ProductId              uint64                 `protobuf:"varint,1,opt,name=product_id,json=productId,proto3" json:"product_id,omitempty"`
+	AvgRestockShipmentTime float64                `protobuf:"fixed64,2,opt,name=avg_restock_shipment_time,json=avgRestockShipmentTime,proto3" json:"avg_restock_shipment_time,omitempty"`
+	AvgReturnShipmentTime  float64                `protobuf:"fixed64,3,opt,name=avg_return_shipment_time,json=avgReturnShipmentTime,proto3" json:"avg_return_shipment_time,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *ProductShipmentTimeItem) Reset() {
+	*x = ProductShipmentTimeItem{}
+	mi := &file_selling_iface_v1_product_metric_v1_stock_metric_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProductShipmentTimeItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProductShipmentTimeItem) ProtoMessage() {}
+
+func (x *ProductShipmentTimeItem) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_product_metric_v1_stock_metric_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProductShipmentTimeItem.ProtoReflect.Descriptor instead.
+func (*ProductShipmentTimeItem) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_product_metric_v1_stock_metric_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *ProductShipmentTimeItem) GetProductId() uint64 {
+	if x != nil {
+		return x.ProductId
+	}
+	return 0
+}
+
+func (x *ProductShipmentTimeItem) GetAvgRestockShipmentTime() float64 {
+	if x != nil {
+		return x.AvgRestockShipmentTime
+	}
+	return 0
+}
+
+func (x *ProductShipmentTimeItem) GetAvgReturnShipmentTime() float64 {
+	if x != nil {
+		return x.AvgReturnShipmentTime
+	}
+	return 0
+}
+
+type ProductShipmentTimeMetric struct {
+	state         protoimpl.MessageState              `protogen:"open.v1"`
+	Data          map[uint64]*ProductShipmentTimeItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ProductShipmentTimeMetric) Reset() {
+	*x = ProductShipmentTimeMetric{}
+	mi := &file_selling_iface_v1_product_metric_v1_stock_metric_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProductShipmentTimeMetric) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProductShipmentTimeMetric) ProtoMessage() {}
+
+func (x *ProductShipmentTimeMetric) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_product_metric_v1_stock_metric_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProductShipmentTimeMetric.ProtoReflect.Descriptor instead.
+func (*ProductShipmentTimeMetric) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_product_metric_v1_stock_metric_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *ProductShipmentTimeMetric) GetData() map[uint64]*ProductShipmentTimeItem {
 	if x != nil {
 		return x.Data
 	}
@@ -1469,7 +1775,7 @@ type ProblemStockMetric struct {
 
 func (x *ProblemStockMetric) Reset() {
 	*x = ProblemStockMetric{}
-	mi := &file_selling_iface_v1_product_metric_v1_stock_metric_proto_msgTypes[16]
+	mi := &file_selling_iface_v1_product_metric_v1_stock_metric_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1481,7 +1787,7 @@ func (x *ProblemStockMetric) String() string {
 func (*ProblemStockMetric) ProtoMessage() {}
 
 func (x *ProblemStockMetric) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_product_metric_v1_stock_metric_proto_msgTypes[16]
+	mi := &file_selling_iface_v1_product_metric_v1_stock_metric_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1494,7 +1800,7 @@ func (x *ProblemStockMetric) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProblemStockMetric.ProtoReflect.Descriptor instead.
 func (*ProblemStockMetric) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_product_metric_v1_stock_metric_proto_rawDescGZIP(), []int{16}
+	return file_selling_iface_v1_product_metric_v1_stock_metric_proto_rawDescGZIP(), []int{20}
 }
 
 type ResolutionStockMetric struct {
@@ -1505,7 +1811,7 @@ type ResolutionStockMetric struct {
 
 func (x *ResolutionStockMetric) Reset() {
 	*x = ResolutionStockMetric{}
-	mi := &file_selling_iface_v1_product_metric_v1_stock_metric_proto_msgTypes[17]
+	mi := &file_selling_iface_v1_product_metric_v1_stock_metric_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1517,7 +1823,7 @@ func (x *ResolutionStockMetric) String() string {
 func (*ResolutionStockMetric) ProtoMessage() {}
 
 func (x *ResolutionStockMetric) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_product_metric_v1_stock_metric_proto_msgTypes[17]
+	mi := &file_selling_iface_v1_product_metric_v1_stock_metric_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1530,7 +1836,7 @@ func (x *ResolutionStockMetric) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResolutionStockMetric.ProtoReflect.Descriptor instead.
 func (*ResolutionStockMetric) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_product_metric_v1_stock_metric_proto_rawDescGZIP(), []int{17}
+	return file_selling_iface_v1_product_metric_v1_stock_metric_proto_rawDescGZIP(), []int{21}
 }
 
 var File_selling_iface_v1_product_metric_v1_stock_metric_proto protoreflect.FileDescriptor
@@ -1637,17 +1943,38 @@ const file_selling_iface_v1_product_metric_v1_stock_metric_proto_rawDesc = "" +
 	"\tDataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\x04R\x03key\x12M\n" +
 	"\x05value\x18\x02 \x01(\v27.selling_iface.v1.product_metric.v1.ReturnCancelledItemR\x05value:\x028\x01\"s\n" +
-	"\x0eReadyStockItem\x12\x1d\n" +
+	"\x0eStockReadyItem\x12\x1d\n" +
 	"\n" +
 	"product_id\x18\x01 \x01(\x04R\tproductId\x12\x1f\n" +
-	"\vpiece_count\x18\x04 \x01(\x03R\n" +
-	"pieceCount\x12!\n" +
-	"\ftotal_amount\x18\x05 \x01(\x01R\vtotalAmount\"\xd3\x01\n" +
-	"\x10ReadyStockMetric\x12R\n" +
-	"\x04data\x18\x01 \x03(\v2>.selling_iface.v1.product_metric.v1.ReadyStockMetric.DataEntryR\x04data\x1ak\n" +
+	"\vstock_count\x18\x02 \x01(\x03R\n" +
+	"stockCount\x12!\n" +
+	"\fstock_amount\x18\x03 \x01(\x01R\vstockAmount\"\xd3\x01\n" +
+	"\x10StockReadyMetric\x12R\n" +
+	"\x04data\x18\x01 \x03(\v2>.selling_iface.v1.product_metric.v1.StockReadyMetric.DataEntryR\x04data\x1ak\n" +
 	"\tDataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\x04R\x03key\x12H\n" +
-	"\x05value\x18\x02 \x01(\v22.selling_iface.v1.product_metric.v1.ReadyStockItemR\x05value:\x028\x01\"\x14\n" +
+	"\x05value\x18\x02 \x01(\v22.selling_iface.v1.product_metric.v1.StockReadyItemR\x05value:\x028\x01\"u\n" +
+	"\x10StockOngoingItem\x12\x1d\n" +
+	"\n" +
+	"product_id\x18\x01 \x01(\x04R\tproductId\x12\x1f\n" +
+	"\vstock_count\x18\x02 \x01(\x03R\n" +
+	"stockCount\x12!\n" +
+	"\fstock_amount\x18\x03 \x01(\x01R\vstockAmount\"\xd9\x01\n" +
+	"\x12StockOngoingMetric\x12T\n" +
+	"\x04data\x18\x01 \x03(\v2@.selling_iface.v1.product_metric.v1.StockOngoingMetric.DataEntryR\x04data\x1am\n" +
+	"\tDataEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\x04R\x03key\x12J\n" +
+	"\x05value\x18\x02 \x01(\v24.selling_iface.v1.product_metric.v1.StockOngoingItemR\x05value:\x028\x01\"\xac\x01\n" +
+	"\x17ProductShipmentTimeItem\x12\x1d\n" +
+	"\n" +
+	"product_id\x18\x01 \x01(\x04R\tproductId\x129\n" +
+	"\x19avg_restock_shipment_time\x18\x02 \x01(\x01R\x16avgRestockShipmentTime\x127\n" +
+	"\x18avg_return_shipment_time\x18\x03 \x01(\x01R\x15avgReturnShipmentTime\"\xee\x01\n" +
+	"\x19ProductShipmentTimeMetric\x12[\n" +
+	"\x04data\x18\x01 \x03(\v2G.selling_iface.v1.product_metric.v1.ProductShipmentTimeMetric.DataEntryR\x04data\x1at\n" +
+	"\tDataEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\x04R\x03key\x12Q\n" +
+	"\x05value\x18\x02 \x01(\v2;.selling_iface.v1.product_metric.v1.ProductShipmentTimeItemR\x05value:\x028\x01\"\x14\n" +
 	"\x12ProblemStockMetric\"\x17\n" +
 	"\x15ResolutionStockMetric*\xe8\x02\n" +
 	"\x19RestockAcceptedMetricSort\x12,\n" +
@@ -1697,10 +2024,18 @@ const file_selling_iface_v1_product_metric_v1_stock_metric_proto_rawDesc = "" +
 	")RETURN_CANCELLED_METRIC_SORT_TOTAL_AMOUNT\x10\x03\x122\n" +
 	".RETURN_CANCELLED_METRIC_SORT_TRANSACTION_COUNT\x10\x04\x123\n" +
 	"/RETURN_CANCELLED_METRIC_SORT_TRANSACTION_AMOUNT\x10\x05*\x92\x01\n" +
-	"\x14ReadyStockMetricSort\x12'\n" +
-	"#READY_STOCK_METRIC_SORT_UNSPECIFIED\x10\x00\x12'\n" +
-	"#READY_STOCK_METRIC_SORT_PIECE_COUNT\x10\x01\x12(\n" +
-	"$READY_STOCK_METRIC_SORT_TOTAL_AMOUNT\x10\x02B\xb1\x02\n" +
+	"\x14StockReadyMetricSort\x12'\n" +
+	"#STOCK_READY_METRIC_SORT_UNSPECIFIED\x10\x00\x12'\n" +
+	"#STOCK_READY_METRIC_SORT_STOCK_COUNT\x10\x01\x12(\n" +
+	"$STOCK_READY_METRIC_SORT_STOCK_AMOUNT\x10\x02*\x9a\x01\n" +
+	"\x16StockOngoingMetricSort\x12)\n" +
+	"%STOCK_ONGOING_METRIC_SORT_UNSPECIFIED\x10\x00\x12)\n" +
+	"%STOCK_ONGOING_METRIC_SORT_STOCK_COUNT\x10\x01\x12*\n" +
+	"&STOCK_ONGOING_METRIC_SORT_STOCK_AMOUNT\x10\x02*\xd3\x01\n" +
+	"\x1dProductShipmentTimeMetricSort\x121\n" +
+	"-PRODUCT_SHIPMENT_TIME_METRIC_SORT_UNSPECIFIED\x10\x00\x12?\n" +
+	";PRODUCT_SHIPMENT_TIME_METRIC_SORT_AVG_RESTOCK_SHIPMENT_TIME\x10\x01\x12>\n" +
+	":PRODUCT_SHIPMENT_TIME_METRIC_SORT_AVG_RETURN_SHIPMENT_TIME\x10\x02B\xb1\x02\n" +
 	"&com.selling_iface.v1.product_metric.v1B\x10StockMetricProtoP\x01ZRgithub.com/pdcgo/schema/services/selling_iface/v1/product_metric/v1;product_metric\xa2\x02\x03SVP\xaa\x02 SellingIface.V1.ProductMetric.V1\xca\x02 SellingIface\\V1\\ProductMetric\\V1\xe2\x02,SellingIface\\V1\\ProductMetric\\V1\\GPBMetadata\xea\x02#SellingIface::V1::ProductMetric::V1b\x06proto3"
 
 var (
@@ -1715,73 +2050,85 @@ func file_selling_iface_v1_product_metric_v1_stock_metric_proto_rawDescGZIP() []
 	return file_selling_iface_v1_product_metric_v1_stock_metric_proto_rawDescData
 }
 
-var file_selling_iface_v1_product_metric_v1_stock_metric_proto_enumTypes = make([]protoimpl.EnumInfo, 8)
-var file_selling_iface_v1_product_metric_v1_stock_metric_proto_msgTypes = make([]protoimpl.MessageInfo, 26)
+var file_selling_iface_v1_product_metric_v1_stock_metric_proto_enumTypes = make([]protoimpl.EnumInfo, 10)
+var file_selling_iface_v1_product_metric_v1_stock_metric_proto_msgTypes = make([]protoimpl.MessageInfo, 32)
 var file_selling_iface_v1_product_metric_v1_stock_metric_proto_goTypes = []any{
-	(RestockAcceptedMetricSort)(0),  // 0: selling_iface.v1.product_metric.v1.RestockAcceptedMetricSort
-	(RestockCreatedMetricSort)(0),   // 1: selling_iface.v1.product_metric.v1.RestockCreatedMetricSort
-	(RestockCancelledMetricSort)(0), // 2: selling_iface.v1.product_metric.v1.RestockCancelledMetricSort
-	(RestockCostMetricSort)(0),      // 3: selling_iface.v1.product_metric.v1.RestockCostMetricSort
-	(ReturnCreatedMetricSort)(0),    // 4: selling_iface.v1.product_metric.v1.ReturnCreatedMetricSort
-	(ReturnArrivedMetricSort)(0),    // 5: selling_iface.v1.product_metric.v1.ReturnArrivedMetricSort
-	(ReturnCancelledMetricSort)(0),  // 6: selling_iface.v1.product_metric.v1.ReturnCancelledMetricSort
-	(ReadyStockMetricSort)(0),       // 7: selling_iface.v1.product_metric.v1.ReadyStockMetricSort
-	(*RestockAcceptedItem)(nil),     // 8: selling_iface.v1.product_metric.v1.RestockAcceptedItem
-	(*RestockAcceptedMetric)(nil),   // 9: selling_iface.v1.product_metric.v1.RestockAcceptedMetric
-	(*RestockCreatedItem)(nil),      // 10: selling_iface.v1.product_metric.v1.RestockCreatedItem
-	(*RestockCreatedMetric)(nil),    // 11: selling_iface.v1.product_metric.v1.RestockCreatedMetric
-	(*RestockCancelledItem)(nil),    // 12: selling_iface.v1.product_metric.v1.RestockCancelledItem
-	(*RestockCancelledMetric)(nil),  // 13: selling_iface.v1.product_metric.v1.RestockCancelledMetric
-	(*RestockCostItem)(nil),         // 14: selling_iface.v1.product_metric.v1.RestockCostItem
-	(*RestockCostMetric)(nil),       // 15: selling_iface.v1.product_metric.v1.RestockCostMetric
-	(*ReturnCreatedItem)(nil),       // 16: selling_iface.v1.product_metric.v1.ReturnCreatedItem
-	(*ReturnCreatedMetric)(nil),     // 17: selling_iface.v1.product_metric.v1.ReturnCreatedMetric
-	(*ReturnArrivedItem)(nil),       // 18: selling_iface.v1.product_metric.v1.ReturnArrivedItem
-	(*ReturnArrivedMetric)(nil),     // 19: selling_iface.v1.product_metric.v1.ReturnArrivedMetric
-	(*ReturnCancelledItem)(nil),     // 20: selling_iface.v1.product_metric.v1.ReturnCancelledItem
-	(*ReturnCancelledMetric)(nil),   // 21: selling_iface.v1.product_metric.v1.ReturnCancelledMetric
-	(*ReadyStockItem)(nil),          // 22: selling_iface.v1.product_metric.v1.ReadyStockItem
-	(*ReadyStockMetric)(nil),        // 23: selling_iface.v1.product_metric.v1.ReadyStockMetric
-	(*ProblemStockMetric)(nil),      // 24: selling_iface.v1.product_metric.v1.ProblemStockMetric
-	(*ResolutionStockMetric)(nil),   // 25: selling_iface.v1.product_metric.v1.ResolutionStockMetric
-	nil,                             // 26: selling_iface.v1.product_metric.v1.RestockAcceptedMetric.DataEntry
-	nil,                             // 27: selling_iface.v1.product_metric.v1.RestockCreatedMetric.DataEntry
-	nil,                             // 28: selling_iface.v1.product_metric.v1.RestockCancelledMetric.DataEntry
-	nil,                             // 29: selling_iface.v1.product_metric.v1.RestockCostMetric.DataEntry
-	nil,                             // 30: selling_iface.v1.product_metric.v1.ReturnCreatedMetric.DataEntry
-	nil,                             // 31: selling_iface.v1.product_metric.v1.ReturnArrivedMetric.DataEntry
-	nil,                             // 32: selling_iface.v1.product_metric.v1.ReturnCancelledMetric.DataEntry
-	nil,                             // 33: selling_iface.v1.product_metric.v1.ReadyStockMetric.DataEntry
-	(*timestamppb.Timestamp)(nil),   // 34: google.protobuf.Timestamp
+	(RestockAcceptedMetricSort)(0),     // 0: selling_iface.v1.product_metric.v1.RestockAcceptedMetricSort
+	(RestockCreatedMetricSort)(0),      // 1: selling_iface.v1.product_metric.v1.RestockCreatedMetricSort
+	(RestockCancelledMetricSort)(0),    // 2: selling_iface.v1.product_metric.v1.RestockCancelledMetricSort
+	(RestockCostMetricSort)(0),         // 3: selling_iface.v1.product_metric.v1.RestockCostMetricSort
+	(ReturnCreatedMetricSort)(0),       // 4: selling_iface.v1.product_metric.v1.ReturnCreatedMetricSort
+	(ReturnArrivedMetricSort)(0),       // 5: selling_iface.v1.product_metric.v1.ReturnArrivedMetricSort
+	(ReturnCancelledMetricSort)(0),     // 6: selling_iface.v1.product_metric.v1.ReturnCancelledMetricSort
+	(StockReadyMetricSort)(0),          // 7: selling_iface.v1.product_metric.v1.StockReadyMetricSort
+	(StockOngoingMetricSort)(0),        // 8: selling_iface.v1.product_metric.v1.StockOngoingMetricSort
+	(ProductShipmentTimeMetricSort)(0), // 9: selling_iface.v1.product_metric.v1.ProductShipmentTimeMetricSort
+	(*RestockAcceptedItem)(nil),        // 10: selling_iface.v1.product_metric.v1.RestockAcceptedItem
+	(*RestockAcceptedMetric)(nil),      // 11: selling_iface.v1.product_metric.v1.RestockAcceptedMetric
+	(*RestockCreatedItem)(nil),         // 12: selling_iface.v1.product_metric.v1.RestockCreatedItem
+	(*RestockCreatedMetric)(nil),       // 13: selling_iface.v1.product_metric.v1.RestockCreatedMetric
+	(*RestockCancelledItem)(nil),       // 14: selling_iface.v1.product_metric.v1.RestockCancelledItem
+	(*RestockCancelledMetric)(nil),     // 15: selling_iface.v1.product_metric.v1.RestockCancelledMetric
+	(*RestockCostItem)(nil),            // 16: selling_iface.v1.product_metric.v1.RestockCostItem
+	(*RestockCostMetric)(nil),          // 17: selling_iface.v1.product_metric.v1.RestockCostMetric
+	(*ReturnCreatedItem)(nil),          // 18: selling_iface.v1.product_metric.v1.ReturnCreatedItem
+	(*ReturnCreatedMetric)(nil),        // 19: selling_iface.v1.product_metric.v1.ReturnCreatedMetric
+	(*ReturnArrivedItem)(nil),          // 20: selling_iface.v1.product_metric.v1.ReturnArrivedItem
+	(*ReturnArrivedMetric)(nil),        // 21: selling_iface.v1.product_metric.v1.ReturnArrivedMetric
+	(*ReturnCancelledItem)(nil),        // 22: selling_iface.v1.product_metric.v1.ReturnCancelledItem
+	(*ReturnCancelledMetric)(nil),      // 23: selling_iface.v1.product_metric.v1.ReturnCancelledMetric
+	(*StockReadyItem)(nil),             // 24: selling_iface.v1.product_metric.v1.StockReadyItem
+	(*StockReadyMetric)(nil),           // 25: selling_iface.v1.product_metric.v1.StockReadyMetric
+	(*StockOngoingItem)(nil),           // 26: selling_iface.v1.product_metric.v1.StockOngoingItem
+	(*StockOngoingMetric)(nil),         // 27: selling_iface.v1.product_metric.v1.StockOngoingMetric
+	(*ProductShipmentTimeItem)(nil),    // 28: selling_iface.v1.product_metric.v1.ProductShipmentTimeItem
+	(*ProductShipmentTimeMetric)(nil),  // 29: selling_iface.v1.product_metric.v1.ProductShipmentTimeMetric
+	(*ProblemStockMetric)(nil),         // 30: selling_iface.v1.product_metric.v1.ProblemStockMetric
+	(*ResolutionStockMetric)(nil),      // 31: selling_iface.v1.product_metric.v1.ResolutionStockMetric
+	nil,                                // 32: selling_iface.v1.product_metric.v1.RestockAcceptedMetric.DataEntry
+	nil,                                // 33: selling_iface.v1.product_metric.v1.RestockCreatedMetric.DataEntry
+	nil,                                // 34: selling_iface.v1.product_metric.v1.RestockCancelledMetric.DataEntry
+	nil,                                // 35: selling_iface.v1.product_metric.v1.RestockCostMetric.DataEntry
+	nil,                                // 36: selling_iface.v1.product_metric.v1.ReturnCreatedMetric.DataEntry
+	nil,                                // 37: selling_iface.v1.product_metric.v1.ReturnArrivedMetric.DataEntry
+	nil,                                // 38: selling_iface.v1.product_metric.v1.ReturnCancelledMetric.DataEntry
+	nil,                                // 39: selling_iface.v1.product_metric.v1.StockReadyMetric.DataEntry
+	nil,                                // 40: selling_iface.v1.product_metric.v1.StockOngoingMetric.DataEntry
+	nil,                                // 41: selling_iface.v1.product_metric.v1.ProductShipmentTimeMetric.DataEntry
+	(*timestamppb.Timestamp)(nil),      // 42: google.protobuf.Timestamp
 }
 var file_selling_iface_v1_product_metric_v1_stock_metric_proto_depIdxs = []int32{
-	34, // 0: selling_iface.v1.product_metric.v1.RestockAcceptedItem.last_arrived:type_name -> google.protobuf.Timestamp
-	26, // 1: selling_iface.v1.product_metric.v1.RestockAcceptedMetric.data:type_name -> selling_iface.v1.product_metric.v1.RestockAcceptedMetric.DataEntry
-	34, // 2: selling_iface.v1.product_metric.v1.RestockCreatedItem.last_created:type_name -> google.protobuf.Timestamp
-	27, // 3: selling_iface.v1.product_metric.v1.RestockCreatedMetric.data:type_name -> selling_iface.v1.product_metric.v1.RestockCreatedMetric.DataEntry
-	34, // 4: selling_iface.v1.product_metric.v1.RestockCancelledItem.last_cancelled:type_name -> google.protobuf.Timestamp
-	28, // 5: selling_iface.v1.product_metric.v1.RestockCancelledMetric.data:type_name -> selling_iface.v1.product_metric.v1.RestockCancelledMetric.DataEntry
-	29, // 6: selling_iface.v1.product_metric.v1.RestockCostMetric.data:type_name -> selling_iface.v1.product_metric.v1.RestockCostMetric.DataEntry
-	34, // 7: selling_iface.v1.product_metric.v1.ReturnCreatedItem.last_return:type_name -> google.protobuf.Timestamp
-	30, // 8: selling_iface.v1.product_metric.v1.ReturnCreatedMetric.data:type_name -> selling_iface.v1.product_metric.v1.ReturnCreatedMetric.DataEntry
-	34, // 9: selling_iface.v1.product_metric.v1.ReturnArrivedItem.last_arrived:type_name -> google.protobuf.Timestamp
-	31, // 10: selling_iface.v1.product_metric.v1.ReturnArrivedMetric.data:type_name -> selling_iface.v1.product_metric.v1.ReturnArrivedMetric.DataEntry
-	34, // 11: selling_iface.v1.product_metric.v1.ReturnCancelledItem.last_cancelled:type_name -> google.protobuf.Timestamp
-	32, // 12: selling_iface.v1.product_metric.v1.ReturnCancelledMetric.data:type_name -> selling_iface.v1.product_metric.v1.ReturnCancelledMetric.DataEntry
-	33, // 13: selling_iface.v1.product_metric.v1.ReadyStockMetric.data:type_name -> selling_iface.v1.product_metric.v1.ReadyStockMetric.DataEntry
-	8,  // 14: selling_iface.v1.product_metric.v1.RestockAcceptedMetric.DataEntry.value:type_name -> selling_iface.v1.product_metric.v1.RestockAcceptedItem
-	10, // 15: selling_iface.v1.product_metric.v1.RestockCreatedMetric.DataEntry.value:type_name -> selling_iface.v1.product_metric.v1.RestockCreatedItem
-	12, // 16: selling_iface.v1.product_metric.v1.RestockCancelledMetric.DataEntry.value:type_name -> selling_iface.v1.product_metric.v1.RestockCancelledItem
-	14, // 17: selling_iface.v1.product_metric.v1.RestockCostMetric.DataEntry.value:type_name -> selling_iface.v1.product_metric.v1.RestockCostItem
-	16, // 18: selling_iface.v1.product_metric.v1.ReturnCreatedMetric.DataEntry.value:type_name -> selling_iface.v1.product_metric.v1.ReturnCreatedItem
-	18, // 19: selling_iface.v1.product_metric.v1.ReturnArrivedMetric.DataEntry.value:type_name -> selling_iface.v1.product_metric.v1.ReturnArrivedItem
-	20, // 20: selling_iface.v1.product_metric.v1.ReturnCancelledMetric.DataEntry.value:type_name -> selling_iface.v1.product_metric.v1.ReturnCancelledItem
-	22, // 21: selling_iface.v1.product_metric.v1.ReadyStockMetric.DataEntry.value:type_name -> selling_iface.v1.product_metric.v1.ReadyStockItem
-	22, // [22:22] is the sub-list for method output_type
-	22, // [22:22] is the sub-list for method input_type
-	22, // [22:22] is the sub-list for extension type_name
-	22, // [22:22] is the sub-list for extension extendee
-	0,  // [0:22] is the sub-list for field type_name
+	42, // 0: selling_iface.v1.product_metric.v1.RestockAcceptedItem.last_arrived:type_name -> google.protobuf.Timestamp
+	32, // 1: selling_iface.v1.product_metric.v1.RestockAcceptedMetric.data:type_name -> selling_iface.v1.product_metric.v1.RestockAcceptedMetric.DataEntry
+	42, // 2: selling_iface.v1.product_metric.v1.RestockCreatedItem.last_created:type_name -> google.protobuf.Timestamp
+	33, // 3: selling_iface.v1.product_metric.v1.RestockCreatedMetric.data:type_name -> selling_iface.v1.product_metric.v1.RestockCreatedMetric.DataEntry
+	42, // 4: selling_iface.v1.product_metric.v1.RestockCancelledItem.last_cancelled:type_name -> google.protobuf.Timestamp
+	34, // 5: selling_iface.v1.product_metric.v1.RestockCancelledMetric.data:type_name -> selling_iface.v1.product_metric.v1.RestockCancelledMetric.DataEntry
+	35, // 6: selling_iface.v1.product_metric.v1.RestockCostMetric.data:type_name -> selling_iface.v1.product_metric.v1.RestockCostMetric.DataEntry
+	42, // 7: selling_iface.v1.product_metric.v1.ReturnCreatedItem.last_return:type_name -> google.protobuf.Timestamp
+	36, // 8: selling_iface.v1.product_metric.v1.ReturnCreatedMetric.data:type_name -> selling_iface.v1.product_metric.v1.ReturnCreatedMetric.DataEntry
+	42, // 9: selling_iface.v1.product_metric.v1.ReturnArrivedItem.last_arrived:type_name -> google.protobuf.Timestamp
+	37, // 10: selling_iface.v1.product_metric.v1.ReturnArrivedMetric.data:type_name -> selling_iface.v1.product_metric.v1.ReturnArrivedMetric.DataEntry
+	42, // 11: selling_iface.v1.product_metric.v1.ReturnCancelledItem.last_cancelled:type_name -> google.protobuf.Timestamp
+	38, // 12: selling_iface.v1.product_metric.v1.ReturnCancelledMetric.data:type_name -> selling_iface.v1.product_metric.v1.ReturnCancelledMetric.DataEntry
+	39, // 13: selling_iface.v1.product_metric.v1.StockReadyMetric.data:type_name -> selling_iface.v1.product_metric.v1.StockReadyMetric.DataEntry
+	40, // 14: selling_iface.v1.product_metric.v1.StockOngoingMetric.data:type_name -> selling_iface.v1.product_metric.v1.StockOngoingMetric.DataEntry
+	41, // 15: selling_iface.v1.product_metric.v1.ProductShipmentTimeMetric.data:type_name -> selling_iface.v1.product_metric.v1.ProductShipmentTimeMetric.DataEntry
+	10, // 16: selling_iface.v1.product_metric.v1.RestockAcceptedMetric.DataEntry.value:type_name -> selling_iface.v1.product_metric.v1.RestockAcceptedItem
+	12, // 17: selling_iface.v1.product_metric.v1.RestockCreatedMetric.DataEntry.value:type_name -> selling_iface.v1.product_metric.v1.RestockCreatedItem
+	14, // 18: selling_iface.v1.product_metric.v1.RestockCancelledMetric.DataEntry.value:type_name -> selling_iface.v1.product_metric.v1.RestockCancelledItem
+	16, // 19: selling_iface.v1.product_metric.v1.RestockCostMetric.DataEntry.value:type_name -> selling_iface.v1.product_metric.v1.RestockCostItem
+	18, // 20: selling_iface.v1.product_metric.v1.ReturnCreatedMetric.DataEntry.value:type_name -> selling_iface.v1.product_metric.v1.ReturnCreatedItem
+	20, // 21: selling_iface.v1.product_metric.v1.ReturnArrivedMetric.DataEntry.value:type_name -> selling_iface.v1.product_metric.v1.ReturnArrivedItem
+	22, // 22: selling_iface.v1.product_metric.v1.ReturnCancelledMetric.DataEntry.value:type_name -> selling_iface.v1.product_metric.v1.ReturnCancelledItem
+	24, // 23: selling_iface.v1.product_metric.v1.StockReadyMetric.DataEntry.value:type_name -> selling_iface.v1.product_metric.v1.StockReadyItem
+	26, // 24: selling_iface.v1.product_metric.v1.StockOngoingMetric.DataEntry.value:type_name -> selling_iface.v1.product_metric.v1.StockOngoingItem
+	28, // 25: selling_iface.v1.product_metric.v1.ProductShipmentTimeMetric.DataEntry.value:type_name -> selling_iface.v1.product_metric.v1.ProductShipmentTimeItem
+	26, // [26:26] is the sub-list for method output_type
+	26, // [26:26] is the sub-list for method input_type
+	26, // [26:26] is the sub-list for extension type_name
+	26, // [26:26] is the sub-list for extension extendee
+	0,  // [0:26] is the sub-list for field type_name
 }
 
 func init() { file_selling_iface_v1_product_metric_v1_stock_metric_proto_init() }
@@ -1794,8 +2141,8 @@ func file_selling_iface_v1_product_metric_v1_stock_metric_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_selling_iface_v1_product_metric_v1_stock_metric_proto_rawDesc), len(file_selling_iface_v1_product_metric_v1_stock_metric_proto_rawDesc)),
-			NumEnums:      8,
-			NumMessages:   26,
+			NumEnums:      10,
+			NumMessages:   32,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
