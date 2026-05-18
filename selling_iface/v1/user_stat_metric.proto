@@ -1,0 +1,65 @@
+syntax = "proto3";
+package selling_iface.v1;
+
+import "buf/validate/validate.proto";
+import "common/v1/common.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/pdcgo/schema/services/selling_iface/v1;selling_iface";
+
+enum UserMetricType {
+  USER_METRIC_TYPE_UNSPECIFIED = 0;
+  USER_METRIC_TYPE_ORDER = 1;
+}
+
+enum UserMetricSortType {
+  USER_METRIC_SORT_TYPE_UNSPECIFIED = 0;
+  USER_METRIC_SORT_TYPE_ASC = 1;
+  USER_METRIC_SORT_TYPE_DESC = 2;
+}
+
+enum CommonUserSort {
+  COMMON_USER_SORT_UNSPECIFIED = 0;
+  COMMON_USER_SORT_NAME = 1;
+  COMMON_USER_SORT_USERNAME = 2;
+}
+
+message UserMetricSort {
+  UserMetricSortType sort_type = 1;
+  oneof s {
+    CommonUserSort common_sort = 2;
+  }
+}
+
+message UserMetric {
+  UserMetricType type = 1;
+  oneof data {
+    string user_order_metric = 2;
+  }
+}
+
+message UserMetricExtra {}
+
+message UserStatMetricFilter {
+  uint64 team_id = 1;
+  uint64 warehouse_id = 2;
+  string product_name = 3;
+  common.v1.PageFilter page = 4;
+  UserStatTimeRange range = 5 [(buf.validate.field).required = true];
+}
+message UserStatTimeRange {
+  google.protobuf.Timestamp start = 1 [(buf.validate.field).required = true];
+  google.protobuf.Timestamp end = 2 [(buf.validate.field).required = true];
+}
+
+message UserStatMetricRequest {
+  UserStatMetricFilter filter = 1 [(buf.validate.field).required = true];
+  UserMetricSort sort = 2 [(buf.validate.field).required = true];
+  repeated UserMetricExtra metric_extras = 3;
+  repeated UserMetricType metric_types = 4;
+}
+
+message UserStatMetricResponse {
+  repeated UserMetric metrics = 1;
+  repeated uint64 ids = 2;
+}

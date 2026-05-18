@@ -36,4 +36,26 @@ func RegisterSellingStatServiceMCP(server *mcp.Server, client selling_ifaceconne
 		}
 		return &mcp.CallToolResult{}, resp.Msg, nil
 	})
+	mcp.AddTool(server, &mcp.Tool{
+		Name:        "selling_stat_service_shop_stat_metric",
+		Description: "ShopStatMetric",
+	}, func(ctx context.Context, req *mcp.CallToolRequest, args *v1.ShopStatMetricRequest) (*mcp.CallToolResult, any, error) {
+		ctx = san_mcp.WithCallToolRequest(ctx, req)
+		resp, err := client.ShopStatMetric(ctx, connect.NewRequest(args))
+		if err != nil {
+			return nil, nil, err
+		}
+		return &mcp.CallToolResult{}, resp.Msg, nil
+	})
+	mcp.AddTool(server, &mcp.Tool{
+		Name:        "selling_stat_service_user_stat_metric",
+		Description: "UserStatMetric",
+	}, func(ctx context.Context, req *mcp.CallToolRequest, args *v1.UserStatMetricRequest) (*mcp.CallToolResult, any, error) {
+		ctx = san_mcp.WithCallToolRequest(ctx, req)
+		resp, err := client.UserStatMetric(ctx, connect.NewRequest(args))
+		if err != nil {
+			return nil, nil, err
+		}
+		return &mcp.CallToolResult{}, resp.Msg, nil
+	})
 }

@@ -1,0 +1,25 @@
+syntax = "proto3";
+package selling_iface.v1.shop_metric.v1;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/pdcgo/schema/services/selling_iface/v1/shop_metric/v1;shop_metric";
+
+message ShopOrderItem {
+  uint64 shop_id = 1;
+  double total_order_amount = 2;
+  int64 transaction_count = 3;
+  // @gotags: gorm:"serializer:timestamptz"
+  google.protobuf.Timestamp last_order_created = 4;
+}
+
+message ShopOrderMetric {
+  map<uint64, ShopOrderItem> data = 1;
+}
+
+enum ShopOrderMetricSort {
+  SHOP_ORDER_METRIC_SORT_UNSPECIFIED = 0;
+  SHOP_ORDER_METRIC_SORT_TOTAL_ORDER_AMOUNT = 1;
+  SHOP_ORDER_METRIC_SORT_TRANSACTION_COUNT = 2;
+  SHOP_ORDER_METRIC_SORT_LAST_ORDER_CREATED = 3;
+}

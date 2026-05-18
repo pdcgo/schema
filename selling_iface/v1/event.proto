@@ -1,0 +1,26 @@
+syntax = "proto3";
+package selling_iface.v1;
+
+import "buf/validate/validate.proto";
+import "event_base/v1/event.proto";
+// import "common/v1/common.proto";
+// import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/pdcgo/schema/services/selling_iface/v1;selling_iface";
+
+message OrderCreated {
+  uint64 order_id = 1 [(buf.validate.field).uint64.gt = 0];
+}
+
+message OrderCanceled {
+  uint64 order_id = 1 [(buf.validate.field).uint64.gt = 0];
+}
+
+message SellingEvent {
+  option (event_base.v1.event_config).event_topic = "selling-topic";
+  oneof data {
+    OrderCreated order_created = 1;
+    OrderCanceled order_canceled = 2;
+  }
+}
+ 

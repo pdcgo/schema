@@ -1,0 +1,69 @@
+syntax = "proto3";
+package selling_iface.v1;
+
+import "buf/validate/validate.proto";
+import "common/v1/common.proto";
+import "google/protobuf/timestamp.proto";
+import "selling_iface/v1/shop_metric/v1/order_metric.proto";
+
+option go_package = "github.com/pdcgo/schema/services/selling_iface/v1;selling_iface";
+
+enum ShopMetricType {
+  SHOP_METRIC_TYPE_UNSPECIFIED = 0;
+  SHOP_METRIC_TYPE_ORDER = 1;
+  SHOP_METRIC_ADS_EXPENSE = 2;
+  SHOP_METRIC_RETURN_CREATED = 3;
+}
+
+enum ShopMetricSortType {
+  SHOP_METRIC_SORT_TYPE_UNSPECIFIED = 0;
+  SHOP_METRIC_SORT_TYPE_ASC = 1;
+  SHOP_METRIC_SORT_TYPE_DESC = 2;
+}
+
+enum CommonShopSort {
+  COMMON_SHOP_SORT_UNSPECIFIED = 0;
+  COMMON_SHOP_SORT_NAME = 1;
+  COMMON_SHOP_SORT_USERNAME = 2;
+}
+
+message ShopMetricSort {
+  ShopMetricSortType sort_type = 1;
+  oneof s {
+    CommonShopSort common_sort = 2;
+    selling_iface.v1.shop_metric.v1.ShopOrderMetricSort shop_order_metric_sort = 3;
+  }
+}
+
+message ShopMetric {
+  ShopMetricType type = 1;
+  oneof data {
+    selling_iface.v1.shop_metric.v1.ShopOrderMetric shop_order_metric = 2;
+  }
+}
+
+message ShopMetricExtra {}
+
+message ShopStatMetricFilter {
+  uint64 team_id = 1;
+  uint64 warehouse_id = 2;
+  string product_name = 3;
+  common.v1.PageFilter page = 4;
+  ShopStatTimeRange range = 5 [(buf.validate.field).required = true];
+}
+message ShopStatTimeRange {
+  google.protobuf.Timestamp start = 1 [(buf.validate.field).required = true];
+  google.protobuf.Timestamp end = 2 [(buf.validate.field).required = true];
+}
+
+message ShopStatMetricRequest {
+  ShopStatMetricFilter filter = 1 [(buf.validate.field).required = true];
+  ShopMetricSort sort = 2 [(buf.validate.field).required = true];
+  repeated ShopMetricExtra metric_extras = 3;
+  repeated ShopMetricType metric_types = 4;
+}
+
+message ShopStatMetricResponse {
+  repeated ShopMetric metrics = 1;
+  repeated uint64 ids = 2;
+}
