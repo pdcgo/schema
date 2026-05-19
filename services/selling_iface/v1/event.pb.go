@@ -201,11 +201,11 @@ const file_selling_iface_v1_event_proto_rawDesc = "" +
 	"\fOrderCreated\x12\"\n" +
 	"\border_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\aorderId\"3\n" +
 	"\rOrderCanceled\x12\"\n" +
-	"\border_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\aorderId\"\xbc\x01\n" +
+	"\border_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\aorderId\"\xba\x01\n" +
 	"\fSellingEvent\x12E\n" +
 	"\rorder_created\x18\x01 \x01(\v2\x1e.selling_iface.v1.OrderCreatedH\x00R\forderCreated\x12H\n" +
-	"\x0eorder_canceled\x18\x02 \x01(\v2\x1f.selling_iface.v1.OrderCanceledH\x00R\rorderCanceled:\x13\x8a\xb5\x18\x0f\n" +
-	"\rselling-topicB\x06\n" +
+	"\x0eorder_canceled\x18\x02 \x01(\v2\x1f.selling_iface.v1.OrderCanceledH\x00R\rorderCanceled:\x11\x8a\xb5\x18\r\n" +
+	"\vorder-topicB\x06\n" +
 	"\x04dataB\xc0\x01\n" +
 	"\x14com.selling_iface.v1B\n" +
 	"EventProtoP\x01Z?github.com/pdcgo/schema/services/selling_iface/v1;selling_iface\xa2\x02\x03SXX\xaa\x02\x0fSellingIface.V1\xca\x02\x0fSellingIface\\V1\xe2\x02\x1bSellingIface\\V1\\GPBMetadata\xea\x02\x10SellingIface::V1b\x06proto3"

@@ -14,8 +14,12 @@ enum ProductMetricType {
   PRODUCT_METRIC_TYPE_STOCK_READY = 1;
   PRODUCT_METRIC_TYPE_STOCK_ONGOING = 2;
   PRODUCT_METRIC_TYPE_ORDER = 3;
+  PRODUCT_METRIC_TYPE_RESTOCK = 10;
   PRODUCT_METRIC_TYPE_RESTOCK_ACCEPTED = 4;
+  PRODUCT_METRIC_TYPE_RESTOCK_CANCEL = 11;
   PRODUCT_METRIC_TYPE_RETURN = 5;
+  PRODUCT_METRIC_TYPE_RETURN_ACCEPTED = 12;
+  PRODUCT_METRIC_TYPE_RETURN_CANCEL = 13;
   PRODUCT_METRIC_TYPE_STOCK_WAREHOUSE_PROBLEM = 6;
   PRODUCT_METRIC_TYPE_STOCK_SHIPMENT_PROBLEM = 7;
   PRODUCT_METRIC_TYPE_STOCK_RESOLUTION = 8;
@@ -41,6 +45,11 @@ message ProductMetricSort {
     CommonProductSort common_sort = 2;
     ProductOrderMetricSort product_order_metric_sort = 3;
     selling_iface.v1.product_metric.v1.RestockAcceptedMetricSort restock_accepted_metric_sort = 4;
+    selling_iface.v1.product_metric.v1.RestockCreatedMetricSort restock_created_metric_sort = 8;
+    selling_iface.v1.product_metric.v1.RestockCancelledMetricSort restock_cancelled_metric_sort = 9;
+    selling_iface.v1.product_metric.v1.ReturnArrivedMetricSort return_arrived_metric_sort = 10;
+    selling_iface.v1.product_metric.v1.ReturnCreatedMetricSort return_created_metric_sort = 11;
+    selling_iface.v1.product_metric.v1.ReturnCancelledMetricSort return_cancelled_metric_sort = 12;
     selling_iface.v1.product_metric.v1.StockReadyMetricSort stock_ready_metric_sort = 5;
     selling_iface.v1.product_metric.v1.StockOngoingMetricSort stock_ongoing_metric_sort = 6;
     selling_iface.v1.product_metric.v1.ProductShipmentTimeMetricSort product_shipment_time_metric_sort = 7;
@@ -51,6 +60,11 @@ message ProductMetric {
   oneof data {
     ProductOrderMetric order_metric = 1;
     selling_iface.v1.product_metric.v1.RestockAcceptedMetric restock_accepted_metric = 2;
+    selling_iface.v1.product_metric.v1.RestockCreatedMetric restock_created_metric = 6;
+    selling_iface.v1.product_metric.v1.RestockCancelledMetric restock_cancelled_metric = 7;
+    selling_iface.v1.product_metric.v1.ReturnArrivedMetric return_arrived_metric = 8;
+    selling_iface.v1.product_metric.v1.ReturnCreatedMetric return_created_metric = 9;
+    selling_iface.v1.product_metric.v1.ReturnCancelledMetric return_cancelled_metric = 10;
     selling_iface.v1.product_metric.v1.StockReadyMetric stock_ready_metric = 3;
     selling_iface.v1.product_metric.v1.StockOngoingMetric stock_ongoing_metric = 4;
     selling_iface.v1.product_metric.v1.ProductShipmentTimeMetric product_shipment_time_metric = 5;

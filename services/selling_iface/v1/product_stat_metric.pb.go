@@ -32,8 +32,12 @@ const (
 	ProductMetricType_PRODUCT_METRIC_TYPE_STOCK_READY             ProductMetricType = 1
 	ProductMetricType_PRODUCT_METRIC_TYPE_STOCK_ONGOING           ProductMetricType = 2
 	ProductMetricType_PRODUCT_METRIC_TYPE_ORDER                   ProductMetricType = 3
+	ProductMetricType_PRODUCT_METRIC_TYPE_RESTOCK                 ProductMetricType = 10
 	ProductMetricType_PRODUCT_METRIC_TYPE_RESTOCK_ACCEPTED        ProductMetricType = 4
+	ProductMetricType_PRODUCT_METRIC_TYPE_RESTOCK_CANCEL          ProductMetricType = 11
 	ProductMetricType_PRODUCT_METRIC_TYPE_RETURN                  ProductMetricType = 5
+	ProductMetricType_PRODUCT_METRIC_TYPE_RETURN_ACCEPTED         ProductMetricType = 12
+	ProductMetricType_PRODUCT_METRIC_TYPE_RETURN_CANCEL           ProductMetricType = 13
 	ProductMetricType_PRODUCT_METRIC_TYPE_STOCK_WAREHOUSE_PROBLEM ProductMetricType = 6
 	ProductMetricType_PRODUCT_METRIC_TYPE_STOCK_SHIPMENT_PROBLEM  ProductMetricType = 7
 	ProductMetricType_PRODUCT_METRIC_TYPE_STOCK_RESOLUTION        ProductMetricType = 8
@@ -43,24 +47,32 @@ const (
 // Enum value maps for ProductMetricType.
 var (
 	ProductMetricType_name = map[int32]string{
-		0: "PRODUCT_METRIC_TYPE_UNSPECIFIED",
-		1: "PRODUCT_METRIC_TYPE_STOCK_READY",
-		2: "PRODUCT_METRIC_TYPE_STOCK_ONGOING",
-		3: "PRODUCT_METRIC_TYPE_ORDER",
-		4: "PRODUCT_METRIC_TYPE_RESTOCK_ACCEPTED",
-		5: "PRODUCT_METRIC_TYPE_RETURN",
-		6: "PRODUCT_METRIC_TYPE_STOCK_WAREHOUSE_PROBLEM",
-		7: "PRODUCT_METRIC_TYPE_STOCK_SHIPMENT_PROBLEM",
-		8: "PRODUCT_METRIC_TYPE_STOCK_RESOLUTION",
-		9: "PRODUCT_METRIC_TYPE_SHIPMENT_TIME",
+		0:  "PRODUCT_METRIC_TYPE_UNSPECIFIED",
+		1:  "PRODUCT_METRIC_TYPE_STOCK_READY",
+		2:  "PRODUCT_METRIC_TYPE_STOCK_ONGOING",
+		3:  "PRODUCT_METRIC_TYPE_ORDER",
+		10: "PRODUCT_METRIC_TYPE_RESTOCK",
+		4:  "PRODUCT_METRIC_TYPE_RESTOCK_ACCEPTED",
+		11: "PRODUCT_METRIC_TYPE_RESTOCK_CANCEL",
+		5:  "PRODUCT_METRIC_TYPE_RETURN",
+		12: "PRODUCT_METRIC_TYPE_RETURN_ACCEPTED",
+		13: "PRODUCT_METRIC_TYPE_RETURN_CANCEL",
+		6:  "PRODUCT_METRIC_TYPE_STOCK_WAREHOUSE_PROBLEM",
+		7:  "PRODUCT_METRIC_TYPE_STOCK_SHIPMENT_PROBLEM",
+		8:  "PRODUCT_METRIC_TYPE_STOCK_RESOLUTION",
+		9:  "PRODUCT_METRIC_TYPE_SHIPMENT_TIME",
 	}
 	ProductMetricType_value = map[string]int32{
 		"PRODUCT_METRIC_TYPE_UNSPECIFIED":             0,
 		"PRODUCT_METRIC_TYPE_STOCK_READY":             1,
 		"PRODUCT_METRIC_TYPE_STOCK_ONGOING":           2,
 		"PRODUCT_METRIC_TYPE_ORDER":                   3,
+		"PRODUCT_METRIC_TYPE_RESTOCK":                 10,
 		"PRODUCT_METRIC_TYPE_RESTOCK_ACCEPTED":        4,
+		"PRODUCT_METRIC_TYPE_RESTOCK_CANCEL":          11,
 		"PRODUCT_METRIC_TYPE_RETURN":                  5,
+		"PRODUCT_METRIC_TYPE_RETURN_ACCEPTED":         12,
+		"PRODUCT_METRIC_TYPE_RETURN_CANCEL":           13,
 		"PRODUCT_METRIC_TYPE_STOCK_WAREHOUSE_PROBLEM": 6,
 		"PRODUCT_METRIC_TYPE_STOCK_SHIPMENT_PROBLEM":  7,
 		"PRODUCT_METRIC_TYPE_STOCK_RESOLUTION":        8,
@@ -204,6 +216,11 @@ type ProductMetricSort struct {
 	//	*ProductMetricSort_CommonSort
 	//	*ProductMetricSort_ProductOrderMetricSort
 	//	*ProductMetricSort_RestockAcceptedMetricSort
+	//	*ProductMetricSort_RestockCreatedMetricSort
+	//	*ProductMetricSort_RestockCancelledMetricSort
+	//	*ProductMetricSort_ReturnArrivedMetricSort
+	//	*ProductMetricSort_ReturnCreatedMetricSort
+	//	*ProductMetricSort_ReturnCancelledMetricSort
 	//	*ProductMetricSort_StockReadyMetricSort
 	//	*ProductMetricSort_StockOngoingMetricSort
 	//	*ProductMetricSort_ProductShipmentTimeMetricSort
@@ -283,6 +300,51 @@ func (x *ProductMetricSort) GetRestockAcceptedMetricSort() v1.RestockAcceptedMet
 	return v1.RestockAcceptedMetricSort(0)
 }
 
+func (x *ProductMetricSort) GetRestockCreatedMetricSort() v1.RestockCreatedMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*ProductMetricSort_RestockCreatedMetricSort); ok {
+			return x.RestockCreatedMetricSort
+		}
+	}
+	return v1.RestockCreatedMetricSort(0)
+}
+
+func (x *ProductMetricSort) GetRestockCancelledMetricSort() v1.RestockCancelledMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*ProductMetricSort_RestockCancelledMetricSort); ok {
+			return x.RestockCancelledMetricSort
+		}
+	}
+	return v1.RestockCancelledMetricSort(0)
+}
+
+func (x *ProductMetricSort) GetReturnArrivedMetricSort() v1.ReturnArrivedMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*ProductMetricSort_ReturnArrivedMetricSort); ok {
+			return x.ReturnArrivedMetricSort
+		}
+	}
+	return v1.ReturnArrivedMetricSort(0)
+}
+
+func (x *ProductMetricSort) GetReturnCreatedMetricSort() v1.ReturnCreatedMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*ProductMetricSort_ReturnCreatedMetricSort); ok {
+			return x.ReturnCreatedMetricSort
+		}
+	}
+	return v1.ReturnCreatedMetricSort(0)
+}
+
+func (x *ProductMetricSort) GetReturnCancelledMetricSort() v1.ReturnCancelledMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*ProductMetricSort_ReturnCancelledMetricSort); ok {
+			return x.ReturnCancelledMetricSort
+		}
+	}
+	return v1.ReturnCancelledMetricSort(0)
+}
+
 func (x *ProductMetricSort) GetStockReadyMetricSort() v1.StockReadyMetricSort {
 	if x != nil {
 		if x, ok := x.S.(*ProductMetricSort_StockReadyMetricSort); ok {
@@ -326,6 +388,26 @@ type ProductMetricSort_RestockAcceptedMetricSort struct {
 	RestockAcceptedMetricSort v1.RestockAcceptedMetricSort `protobuf:"varint,4,opt,name=restock_accepted_metric_sort,json=restockAcceptedMetricSort,proto3,enum=selling_iface.v1.product_metric.v1.RestockAcceptedMetricSort,oneof"`
 }
 
+type ProductMetricSort_RestockCreatedMetricSort struct {
+	RestockCreatedMetricSort v1.RestockCreatedMetricSort `protobuf:"varint,8,opt,name=restock_created_metric_sort,json=restockCreatedMetricSort,proto3,enum=selling_iface.v1.product_metric.v1.RestockCreatedMetricSort,oneof"`
+}
+
+type ProductMetricSort_RestockCancelledMetricSort struct {
+	RestockCancelledMetricSort v1.RestockCancelledMetricSort `protobuf:"varint,9,opt,name=restock_cancelled_metric_sort,json=restockCancelledMetricSort,proto3,enum=selling_iface.v1.product_metric.v1.RestockCancelledMetricSort,oneof"`
+}
+
+type ProductMetricSort_ReturnArrivedMetricSort struct {
+	ReturnArrivedMetricSort v1.ReturnArrivedMetricSort `protobuf:"varint,10,opt,name=return_arrived_metric_sort,json=returnArrivedMetricSort,proto3,enum=selling_iface.v1.product_metric.v1.ReturnArrivedMetricSort,oneof"`
+}
+
+type ProductMetricSort_ReturnCreatedMetricSort struct {
+	ReturnCreatedMetricSort v1.ReturnCreatedMetricSort `protobuf:"varint,11,opt,name=return_created_metric_sort,json=returnCreatedMetricSort,proto3,enum=selling_iface.v1.product_metric.v1.ReturnCreatedMetricSort,oneof"`
+}
+
+type ProductMetricSort_ReturnCancelledMetricSort struct {
+	ReturnCancelledMetricSort v1.ReturnCancelledMetricSort `protobuf:"varint,12,opt,name=return_cancelled_metric_sort,json=returnCancelledMetricSort,proto3,enum=selling_iface.v1.product_metric.v1.ReturnCancelledMetricSort,oneof"`
+}
+
 type ProductMetricSort_StockReadyMetricSort struct {
 	StockReadyMetricSort v1.StockReadyMetricSort `protobuf:"varint,5,opt,name=stock_ready_metric_sort,json=stockReadyMetricSort,proto3,enum=selling_iface.v1.product_metric.v1.StockReadyMetricSort,oneof"`
 }
@@ -344,6 +426,16 @@ func (*ProductMetricSort_ProductOrderMetricSort) isProductMetricSort_S() {}
 
 func (*ProductMetricSort_RestockAcceptedMetricSort) isProductMetricSort_S() {}
 
+func (*ProductMetricSort_RestockCreatedMetricSort) isProductMetricSort_S() {}
+
+func (*ProductMetricSort_RestockCancelledMetricSort) isProductMetricSort_S() {}
+
+func (*ProductMetricSort_ReturnArrivedMetricSort) isProductMetricSort_S() {}
+
+func (*ProductMetricSort_ReturnCreatedMetricSort) isProductMetricSort_S() {}
+
+func (*ProductMetricSort_ReturnCancelledMetricSort) isProductMetricSort_S() {}
+
 func (*ProductMetricSort_StockReadyMetricSort) isProductMetricSort_S() {}
 
 func (*ProductMetricSort_StockOngoingMetricSort) isProductMetricSort_S() {}
@@ -356,6 +448,11 @@ type ProductMetric struct {
 	//
 	//	*ProductMetric_OrderMetric
 	//	*ProductMetric_RestockAcceptedMetric
+	//	*ProductMetric_RestockCreatedMetric
+	//	*ProductMetric_RestockCancelledMetric
+	//	*ProductMetric_ReturnArrivedMetric
+	//	*ProductMetric_ReturnCreatedMetric
+	//	*ProductMetric_ReturnCancelledMetric
 	//	*ProductMetric_StockReadyMetric
 	//	*ProductMetric_StockOngoingMetric
 	//	*ProductMetric_ProductShipmentTimeMetric
@@ -419,6 +516,51 @@ func (x *ProductMetric) GetRestockAcceptedMetric() *v1.RestockAcceptedMetric {
 	return nil
 }
 
+func (x *ProductMetric) GetRestockCreatedMetric() *v1.RestockCreatedMetric {
+	if x != nil {
+		if x, ok := x.Data.(*ProductMetric_RestockCreatedMetric); ok {
+			return x.RestockCreatedMetric
+		}
+	}
+	return nil
+}
+
+func (x *ProductMetric) GetRestockCancelledMetric() *v1.RestockCancelledMetric {
+	if x != nil {
+		if x, ok := x.Data.(*ProductMetric_RestockCancelledMetric); ok {
+			return x.RestockCancelledMetric
+		}
+	}
+	return nil
+}
+
+func (x *ProductMetric) GetReturnArrivedMetric() *v1.ReturnArrivedMetric {
+	if x != nil {
+		if x, ok := x.Data.(*ProductMetric_ReturnArrivedMetric); ok {
+			return x.ReturnArrivedMetric
+		}
+	}
+	return nil
+}
+
+func (x *ProductMetric) GetReturnCreatedMetric() *v1.ReturnCreatedMetric {
+	if x != nil {
+		if x, ok := x.Data.(*ProductMetric_ReturnCreatedMetric); ok {
+			return x.ReturnCreatedMetric
+		}
+	}
+	return nil
+}
+
+func (x *ProductMetric) GetReturnCancelledMetric() *v1.ReturnCancelledMetric {
+	if x != nil {
+		if x, ok := x.Data.(*ProductMetric_ReturnCancelledMetric); ok {
+			return x.ReturnCancelledMetric
+		}
+	}
+	return nil
+}
+
 func (x *ProductMetric) GetStockReadyMetric() *v1.StockReadyMetric {
 	if x != nil {
 		if x, ok := x.Data.(*ProductMetric_StockReadyMetric); ok {
@@ -458,6 +600,26 @@ type ProductMetric_RestockAcceptedMetric struct {
 	RestockAcceptedMetric *v1.RestockAcceptedMetric `protobuf:"bytes,2,opt,name=restock_accepted_metric,json=restockAcceptedMetric,proto3,oneof"`
 }
 
+type ProductMetric_RestockCreatedMetric struct {
+	RestockCreatedMetric *v1.RestockCreatedMetric `protobuf:"bytes,6,opt,name=restock_created_metric,json=restockCreatedMetric,proto3,oneof"`
+}
+
+type ProductMetric_RestockCancelledMetric struct {
+	RestockCancelledMetric *v1.RestockCancelledMetric `protobuf:"bytes,7,opt,name=restock_cancelled_metric,json=restockCancelledMetric,proto3,oneof"`
+}
+
+type ProductMetric_ReturnArrivedMetric struct {
+	ReturnArrivedMetric *v1.ReturnArrivedMetric `protobuf:"bytes,8,opt,name=return_arrived_metric,json=returnArrivedMetric,proto3,oneof"`
+}
+
+type ProductMetric_ReturnCreatedMetric struct {
+	ReturnCreatedMetric *v1.ReturnCreatedMetric `protobuf:"bytes,9,opt,name=return_created_metric,json=returnCreatedMetric,proto3,oneof"`
+}
+
+type ProductMetric_ReturnCancelledMetric struct {
+	ReturnCancelledMetric *v1.ReturnCancelledMetric `protobuf:"bytes,10,opt,name=return_cancelled_metric,json=returnCancelledMetric,proto3,oneof"`
+}
+
 type ProductMetric_StockReadyMetric struct {
 	StockReadyMetric *v1.StockReadyMetric `protobuf:"bytes,3,opt,name=stock_ready_metric,json=stockReadyMetric,proto3,oneof"`
 }
@@ -473,6 +635,16 @@ type ProductMetric_ProductShipmentTimeMetric struct {
 func (*ProductMetric_OrderMetric) isProductMetric_Data() {}
 
 func (*ProductMetric_RestockAcceptedMetric) isProductMetric_Data() {}
+
+func (*ProductMetric_RestockCreatedMetric) isProductMetric_Data() {}
+
+func (*ProductMetric_RestockCancelledMetric) isProductMetric_Data() {}
+
+func (*ProductMetric_ReturnArrivedMetric) isProductMetric_Data() {}
+
+func (*ProductMetric_ReturnCreatedMetric) isProductMetric_Data() {}
+
+func (*ProductMetric_ReturnCancelledMetric) isProductMetric_Data() {}
 
 func (*ProductMetric_StockReadyMetric) isProductMetric_Data() {}
 
@@ -768,20 +940,32 @@ var File_selling_iface_v1_product_stat_metric_proto protoreflect.FileDescriptor
 
 const file_selling_iface_v1_product_stat_metric_proto_rawDesc = "" +
 	"\n" +
-	"*selling_iface/v1/product_stat_metric.proto\x12\x10selling_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a%selling_iface/v1/metric_product.proto\x1a5selling_iface/v1/product_metric/v1/stock_metric.proto\"\x8c\x06\n" +
+	"*selling_iface/v1/product_stat_metric.proto\x12\x10selling_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a%selling_iface/v1/metric_product.proto\x1a5selling_iface/v1/product_metric/v1/stock_metric.proto\"\x8c\v\n" +
 	"\x11ProductMetricSort\x12D\n" +
 	"\tsort_type\x18\x01 \x01(\x0e2'.selling_iface.v1.ProductMetricSortTypeR\bsortType\x12F\n" +
 	"\vcommon_sort\x18\x02 \x01(\x0e2#.selling_iface.v1.CommonProductSortH\x00R\n" +
 	"commonSort\x12e\n" +
 	"\x19product_order_metric_sort\x18\x03 \x01(\x0e2(.selling_iface.v1.ProductOrderMetricSortH\x00R\x16productOrderMetricSort\x12\x80\x01\n" +
-	"\x1crestock_accepted_metric_sort\x18\x04 \x01(\x0e2=.selling_iface.v1.product_metric.v1.RestockAcceptedMetricSortH\x00R\x19restockAcceptedMetricSort\x12q\n" +
+	"\x1crestock_accepted_metric_sort\x18\x04 \x01(\x0e2=.selling_iface.v1.product_metric.v1.RestockAcceptedMetricSortH\x00R\x19restockAcceptedMetricSort\x12}\n" +
+	"\x1brestock_created_metric_sort\x18\b \x01(\x0e2<.selling_iface.v1.product_metric.v1.RestockCreatedMetricSortH\x00R\x18restockCreatedMetricSort\x12\x83\x01\n" +
+	"\x1drestock_cancelled_metric_sort\x18\t \x01(\x0e2>.selling_iface.v1.product_metric.v1.RestockCancelledMetricSortH\x00R\x1arestockCancelledMetricSort\x12z\n" +
+	"\x1areturn_arrived_metric_sort\x18\n" +
+	" \x01(\x0e2;.selling_iface.v1.product_metric.v1.ReturnArrivedMetricSortH\x00R\x17returnArrivedMetricSort\x12z\n" +
+	"\x1areturn_created_metric_sort\x18\v \x01(\x0e2;.selling_iface.v1.product_metric.v1.ReturnCreatedMetricSortH\x00R\x17returnCreatedMetricSort\x12\x80\x01\n" +
+	"\x1creturn_cancelled_metric_sort\x18\f \x01(\x0e2=.selling_iface.v1.product_metric.v1.ReturnCancelledMetricSortH\x00R\x19returnCancelledMetricSort\x12q\n" +
 	"\x17stock_ready_metric_sort\x18\x05 \x01(\x0e28.selling_iface.v1.product_metric.v1.StockReadyMetricSortH\x00R\x14stockReadyMetricSort\x12w\n" +
 	"\x19stock_ongoing_metric_sort\x18\x06 \x01(\x0e2:.selling_iface.v1.product_metric.v1.StockOngoingMetricSortH\x00R\x16stockOngoingMetricSort\x12\x8d\x01\n" +
 	"!product_shipment_time_metric_sort\x18\a \x01(\x0e2A.selling_iface.v1.product_metric.v1.ProductShipmentTimeMetricSortH\x00R\x1dproductShipmentTimeMetricSortB\x03\n" +
-	"\x01s\"\xac\x04\n" +
+	"\x01s\"\xe9\b\n" +
 	"\rProductMetric\x12I\n" +
 	"\forder_metric\x18\x01 \x01(\v2$.selling_iface.v1.ProductOrderMetricH\x00R\vorderMetric\x12s\n" +
-	"\x17restock_accepted_metric\x18\x02 \x01(\v29.selling_iface.v1.product_metric.v1.RestockAcceptedMetricH\x00R\x15restockAcceptedMetric\x12d\n" +
+	"\x17restock_accepted_metric\x18\x02 \x01(\v29.selling_iface.v1.product_metric.v1.RestockAcceptedMetricH\x00R\x15restockAcceptedMetric\x12p\n" +
+	"\x16restock_created_metric\x18\x06 \x01(\v28.selling_iface.v1.product_metric.v1.RestockCreatedMetricH\x00R\x14restockCreatedMetric\x12v\n" +
+	"\x18restock_cancelled_metric\x18\a \x01(\v2:.selling_iface.v1.product_metric.v1.RestockCancelledMetricH\x00R\x16restockCancelledMetric\x12m\n" +
+	"\x15return_arrived_metric\x18\b \x01(\v27.selling_iface.v1.product_metric.v1.ReturnArrivedMetricH\x00R\x13returnArrivedMetric\x12m\n" +
+	"\x15return_created_metric\x18\t \x01(\v27.selling_iface.v1.product_metric.v1.ReturnCreatedMetricH\x00R\x13returnCreatedMetric\x12s\n" +
+	"\x17return_cancelled_metric\x18\n" +
+	" \x01(\v29.selling_iface.v1.product_metric.v1.ReturnCancelledMetricH\x00R\x15returnCancelledMetric\x12d\n" +
 	"\x12stock_ready_metric\x18\x03 \x01(\v24.selling_iface.v1.product_metric.v1.StockReadyMetricH\x00R\x10stockReadyMetric\x12j\n" +
 	"\x14stock_ongoing_metric\x18\x04 \x01(\v26.selling_iface.v1.product_metric.v1.StockOngoingMetricH\x00R\x12stockOngoingMetric\x12\x80\x01\n" +
 	"\x1cproduct_shipment_time_metric\x18\x05 \x01(\v2=.selling_iface.v1.product_metric.v1.ProductShipmentTimeMetricH\x00R\x19productShipmentTimeMetricB\x06\n" +
@@ -803,14 +987,19 @@ const file_selling_iface_v1_product_stat_metric_proto_rawDesc = "" +
 	"\fmetric_types\x18\x05 \x03(\x0e2#.selling_iface.v1.ProductMetricTypeR\vmetricTypes\"h\n" +
 	"\x19ProductStatMetricResponse\x129\n" +
 	"\ametrics\x18\x01 \x03(\v2\x1f.selling_iface.v1.ProductMetricR\ametrics\x12\x10\n" +
-	"\x03ids\x18\x02 \x03(\x04R\x03ids*\x9f\x03\n" +
+	"\x03ids\x18\x02 \x03(\x04R\x03ids*\xb8\x04\n" +
 	"\x11ProductMetricType\x12#\n" +
 	"\x1fPRODUCT_METRIC_TYPE_UNSPECIFIED\x10\x00\x12#\n" +
 	"\x1fPRODUCT_METRIC_TYPE_STOCK_READY\x10\x01\x12%\n" +
 	"!PRODUCT_METRIC_TYPE_STOCK_ONGOING\x10\x02\x12\x1d\n" +
-	"\x19PRODUCT_METRIC_TYPE_ORDER\x10\x03\x12(\n" +
-	"$PRODUCT_METRIC_TYPE_RESTOCK_ACCEPTED\x10\x04\x12\x1e\n" +
-	"\x1aPRODUCT_METRIC_TYPE_RETURN\x10\x05\x12/\n" +
+	"\x19PRODUCT_METRIC_TYPE_ORDER\x10\x03\x12\x1f\n" +
+	"\x1bPRODUCT_METRIC_TYPE_RESTOCK\x10\n" +
+	"\x12(\n" +
+	"$PRODUCT_METRIC_TYPE_RESTOCK_ACCEPTED\x10\x04\x12&\n" +
+	"\"PRODUCT_METRIC_TYPE_RESTOCK_CANCEL\x10\v\x12\x1e\n" +
+	"\x1aPRODUCT_METRIC_TYPE_RETURN\x10\x05\x12'\n" +
+	"#PRODUCT_METRIC_TYPE_RETURN_ACCEPTED\x10\f\x12%\n" +
+	"!PRODUCT_METRIC_TYPE_RETURN_CANCEL\x10\r\x12/\n" +
 	"+PRODUCT_METRIC_TYPE_STOCK_WAREHOUSE_PROBLEM\x10\x06\x12.\n" +
 	"*PRODUCT_METRIC_TYPE_STOCK_SHIPMENT_PROBLEM\x10\a\x12(\n" +
 	"$PRODUCT_METRIC_TYPE_STOCK_RESOLUTION\x10\b\x12%\n" +
@@ -853,44 +1042,64 @@ var file_selling_iface_v1_product_stat_metric_proto_goTypes = []any{
 	(*ProductStatMetricResponse)(nil),     // 9: selling_iface.v1.ProductStatMetricResponse
 	(ProductOrderMetricSort)(0),           // 10: selling_iface.v1.ProductOrderMetricSort
 	(v1.RestockAcceptedMetricSort)(0),     // 11: selling_iface.v1.product_metric.v1.RestockAcceptedMetricSort
-	(v1.StockReadyMetricSort)(0),          // 12: selling_iface.v1.product_metric.v1.StockReadyMetricSort
-	(v1.StockOngoingMetricSort)(0),        // 13: selling_iface.v1.product_metric.v1.StockOngoingMetricSort
-	(v1.ProductShipmentTimeMetricSort)(0), // 14: selling_iface.v1.product_metric.v1.ProductShipmentTimeMetricSort
-	(*ProductOrderMetric)(nil),            // 15: selling_iface.v1.ProductOrderMetric
-	(*v1.RestockAcceptedMetric)(nil),      // 16: selling_iface.v1.product_metric.v1.RestockAcceptedMetric
-	(*v1.StockReadyMetric)(nil),           // 17: selling_iface.v1.product_metric.v1.StockReadyMetric
-	(*v1.StockOngoingMetric)(nil),         // 18: selling_iface.v1.product_metric.v1.StockOngoingMetric
-	(*v1.ProductShipmentTimeMetric)(nil),  // 19: selling_iface.v1.product_metric.v1.ProductShipmentTimeMetric
-	(*v11.PageFilter)(nil),                // 20: common.v1.PageFilter
-	(*timestamppb.Timestamp)(nil),         // 21: google.protobuf.Timestamp
+	(v1.RestockCreatedMetricSort)(0),      // 12: selling_iface.v1.product_metric.v1.RestockCreatedMetricSort
+	(v1.RestockCancelledMetricSort)(0),    // 13: selling_iface.v1.product_metric.v1.RestockCancelledMetricSort
+	(v1.ReturnArrivedMetricSort)(0),       // 14: selling_iface.v1.product_metric.v1.ReturnArrivedMetricSort
+	(v1.ReturnCreatedMetricSort)(0),       // 15: selling_iface.v1.product_metric.v1.ReturnCreatedMetricSort
+	(v1.ReturnCancelledMetricSort)(0),     // 16: selling_iface.v1.product_metric.v1.ReturnCancelledMetricSort
+	(v1.StockReadyMetricSort)(0),          // 17: selling_iface.v1.product_metric.v1.StockReadyMetricSort
+	(v1.StockOngoingMetricSort)(0),        // 18: selling_iface.v1.product_metric.v1.StockOngoingMetricSort
+	(v1.ProductShipmentTimeMetricSort)(0), // 19: selling_iface.v1.product_metric.v1.ProductShipmentTimeMetricSort
+	(*ProductOrderMetric)(nil),            // 20: selling_iface.v1.ProductOrderMetric
+	(*v1.RestockAcceptedMetric)(nil),      // 21: selling_iface.v1.product_metric.v1.RestockAcceptedMetric
+	(*v1.RestockCreatedMetric)(nil),       // 22: selling_iface.v1.product_metric.v1.RestockCreatedMetric
+	(*v1.RestockCancelledMetric)(nil),     // 23: selling_iface.v1.product_metric.v1.RestockCancelledMetric
+	(*v1.ReturnArrivedMetric)(nil),        // 24: selling_iface.v1.product_metric.v1.ReturnArrivedMetric
+	(*v1.ReturnCreatedMetric)(nil),        // 25: selling_iface.v1.product_metric.v1.ReturnCreatedMetric
+	(*v1.ReturnCancelledMetric)(nil),      // 26: selling_iface.v1.product_metric.v1.ReturnCancelledMetric
+	(*v1.StockReadyMetric)(nil),           // 27: selling_iface.v1.product_metric.v1.StockReadyMetric
+	(*v1.StockOngoingMetric)(nil),         // 28: selling_iface.v1.product_metric.v1.StockOngoingMetric
+	(*v1.ProductShipmentTimeMetric)(nil),  // 29: selling_iface.v1.product_metric.v1.ProductShipmentTimeMetric
+	(*v11.PageFilter)(nil),                // 30: common.v1.PageFilter
+	(*timestamppb.Timestamp)(nil),         // 31: google.protobuf.Timestamp
 }
 var file_selling_iface_v1_product_stat_metric_proto_depIdxs = []int32{
 	1,  // 0: selling_iface.v1.ProductMetricSort.sort_type:type_name -> selling_iface.v1.ProductMetricSortType
 	2,  // 1: selling_iface.v1.ProductMetricSort.common_sort:type_name -> selling_iface.v1.CommonProductSort
 	10, // 2: selling_iface.v1.ProductMetricSort.product_order_metric_sort:type_name -> selling_iface.v1.ProductOrderMetricSort
 	11, // 3: selling_iface.v1.ProductMetricSort.restock_accepted_metric_sort:type_name -> selling_iface.v1.product_metric.v1.RestockAcceptedMetricSort
-	12, // 4: selling_iface.v1.ProductMetricSort.stock_ready_metric_sort:type_name -> selling_iface.v1.product_metric.v1.StockReadyMetricSort
-	13, // 5: selling_iface.v1.ProductMetricSort.stock_ongoing_metric_sort:type_name -> selling_iface.v1.product_metric.v1.StockOngoingMetricSort
-	14, // 6: selling_iface.v1.ProductMetricSort.product_shipment_time_metric_sort:type_name -> selling_iface.v1.product_metric.v1.ProductShipmentTimeMetricSort
-	15, // 7: selling_iface.v1.ProductMetric.order_metric:type_name -> selling_iface.v1.ProductOrderMetric
-	16, // 8: selling_iface.v1.ProductMetric.restock_accepted_metric:type_name -> selling_iface.v1.product_metric.v1.RestockAcceptedMetric
-	17, // 9: selling_iface.v1.ProductMetric.stock_ready_metric:type_name -> selling_iface.v1.product_metric.v1.StockReadyMetric
-	18, // 10: selling_iface.v1.ProductMetric.stock_ongoing_metric:type_name -> selling_iface.v1.product_metric.v1.StockOngoingMetric
-	19, // 11: selling_iface.v1.ProductMetric.product_shipment_time_metric:type_name -> selling_iface.v1.product_metric.v1.ProductShipmentTimeMetric
-	20, // 12: selling_iface.v1.ProductStatMetricFilter.page:type_name -> common.v1.PageFilter
-	7,  // 13: selling_iface.v1.ProductStatMetricFilter.range:type_name -> selling_iface.v1.ProductStatTimeRange
-	21, // 14: selling_iface.v1.ProductStatTimeRange.start:type_name -> google.protobuf.Timestamp
-	21, // 15: selling_iface.v1.ProductStatTimeRange.end:type_name -> google.protobuf.Timestamp
-	6,  // 16: selling_iface.v1.ProductStatMetricRequest.filter:type_name -> selling_iface.v1.ProductStatMetricFilter
-	3,  // 17: selling_iface.v1.ProductStatMetricRequest.sort:type_name -> selling_iface.v1.ProductMetricSort
-	5,  // 18: selling_iface.v1.ProductStatMetricRequest.metric_extras:type_name -> selling_iface.v1.ProductMetricExtra
-	0,  // 19: selling_iface.v1.ProductStatMetricRequest.metric_types:type_name -> selling_iface.v1.ProductMetricType
-	4,  // 20: selling_iface.v1.ProductStatMetricResponse.metrics:type_name -> selling_iface.v1.ProductMetric
-	21, // [21:21] is the sub-list for method output_type
-	21, // [21:21] is the sub-list for method input_type
-	21, // [21:21] is the sub-list for extension type_name
-	21, // [21:21] is the sub-list for extension extendee
-	0,  // [0:21] is the sub-list for field type_name
+	12, // 4: selling_iface.v1.ProductMetricSort.restock_created_metric_sort:type_name -> selling_iface.v1.product_metric.v1.RestockCreatedMetricSort
+	13, // 5: selling_iface.v1.ProductMetricSort.restock_cancelled_metric_sort:type_name -> selling_iface.v1.product_metric.v1.RestockCancelledMetricSort
+	14, // 6: selling_iface.v1.ProductMetricSort.return_arrived_metric_sort:type_name -> selling_iface.v1.product_metric.v1.ReturnArrivedMetricSort
+	15, // 7: selling_iface.v1.ProductMetricSort.return_created_metric_sort:type_name -> selling_iface.v1.product_metric.v1.ReturnCreatedMetricSort
+	16, // 8: selling_iface.v1.ProductMetricSort.return_cancelled_metric_sort:type_name -> selling_iface.v1.product_metric.v1.ReturnCancelledMetricSort
+	17, // 9: selling_iface.v1.ProductMetricSort.stock_ready_metric_sort:type_name -> selling_iface.v1.product_metric.v1.StockReadyMetricSort
+	18, // 10: selling_iface.v1.ProductMetricSort.stock_ongoing_metric_sort:type_name -> selling_iface.v1.product_metric.v1.StockOngoingMetricSort
+	19, // 11: selling_iface.v1.ProductMetricSort.product_shipment_time_metric_sort:type_name -> selling_iface.v1.product_metric.v1.ProductShipmentTimeMetricSort
+	20, // 12: selling_iface.v1.ProductMetric.order_metric:type_name -> selling_iface.v1.ProductOrderMetric
+	21, // 13: selling_iface.v1.ProductMetric.restock_accepted_metric:type_name -> selling_iface.v1.product_metric.v1.RestockAcceptedMetric
+	22, // 14: selling_iface.v1.ProductMetric.restock_created_metric:type_name -> selling_iface.v1.product_metric.v1.RestockCreatedMetric
+	23, // 15: selling_iface.v1.ProductMetric.restock_cancelled_metric:type_name -> selling_iface.v1.product_metric.v1.RestockCancelledMetric
+	24, // 16: selling_iface.v1.ProductMetric.return_arrived_metric:type_name -> selling_iface.v1.product_metric.v1.ReturnArrivedMetric
+	25, // 17: selling_iface.v1.ProductMetric.return_created_metric:type_name -> selling_iface.v1.product_metric.v1.ReturnCreatedMetric
+	26, // 18: selling_iface.v1.ProductMetric.return_cancelled_metric:type_name -> selling_iface.v1.product_metric.v1.ReturnCancelledMetric
+	27, // 19: selling_iface.v1.ProductMetric.stock_ready_metric:type_name -> selling_iface.v1.product_metric.v1.StockReadyMetric
+	28, // 20: selling_iface.v1.ProductMetric.stock_ongoing_metric:type_name -> selling_iface.v1.product_metric.v1.StockOngoingMetric
+	29, // 21: selling_iface.v1.ProductMetric.product_shipment_time_metric:type_name -> selling_iface.v1.product_metric.v1.ProductShipmentTimeMetric
+	30, // 22: selling_iface.v1.ProductStatMetricFilter.page:type_name -> common.v1.PageFilter
+	7,  // 23: selling_iface.v1.ProductStatMetricFilter.range:type_name -> selling_iface.v1.ProductStatTimeRange
+	31, // 24: selling_iface.v1.ProductStatTimeRange.start:type_name -> google.protobuf.Timestamp
+	31, // 25: selling_iface.v1.ProductStatTimeRange.end:type_name -> google.protobuf.Timestamp
+	6,  // 26: selling_iface.v1.ProductStatMetricRequest.filter:type_name -> selling_iface.v1.ProductStatMetricFilter
+	3,  // 27: selling_iface.v1.ProductStatMetricRequest.sort:type_name -> selling_iface.v1.ProductMetricSort
+	5,  // 28: selling_iface.v1.ProductStatMetricRequest.metric_extras:type_name -> selling_iface.v1.ProductMetricExtra
+	0,  // 29: selling_iface.v1.ProductStatMetricRequest.metric_types:type_name -> selling_iface.v1.ProductMetricType
+	4,  // 30: selling_iface.v1.ProductStatMetricResponse.metrics:type_name -> selling_iface.v1.ProductMetric
+	31, // [31:31] is the sub-list for method output_type
+	31, // [31:31] is the sub-list for method input_type
+	31, // [31:31] is the sub-list for extension type_name
+	31, // [31:31] is the sub-list for extension extendee
+	0,  // [0:31] is the sub-list for field type_name
 }
 
 func init() { file_selling_iface_v1_product_stat_metric_proto_init() }
@@ -903,6 +1112,11 @@ func file_selling_iface_v1_product_stat_metric_proto_init() {
 		(*ProductMetricSort_CommonSort)(nil),
 		(*ProductMetricSort_ProductOrderMetricSort)(nil),
 		(*ProductMetricSort_RestockAcceptedMetricSort)(nil),
+		(*ProductMetricSort_RestockCreatedMetricSort)(nil),
+		(*ProductMetricSort_RestockCancelledMetricSort)(nil),
+		(*ProductMetricSort_ReturnArrivedMetricSort)(nil),
+		(*ProductMetricSort_ReturnCreatedMetricSort)(nil),
+		(*ProductMetricSort_ReturnCancelledMetricSort)(nil),
 		(*ProductMetricSort_StockReadyMetricSort)(nil),
 		(*ProductMetricSort_StockOngoingMetricSort)(nil),
 		(*ProductMetricSort_ProductShipmentTimeMetricSort)(nil),
@@ -910,6 +1124,11 @@ func file_selling_iface_v1_product_stat_metric_proto_init() {
 	file_selling_iface_v1_product_stat_metric_proto_msgTypes[1].OneofWrappers = []any{
 		(*ProductMetric_OrderMetric)(nil),
 		(*ProductMetric_RestockAcceptedMetric)(nil),
+		(*ProductMetric_RestockCreatedMetric)(nil),
+		(*ProductMetric_RestockCancelledMetric)(nil),
+		(*ProductMetric_ReturnArrivedMetric)(nil),
+		(*ProductMetric_ReturnCreatedMetric)(nil),
+		(*ProductMetric_ReturnCancelledMetric)(nil),
 		(*ProductMetric_StockReadyMetric)(nil),
 		(*ProductMetric_StockOngoingMetric)(nil),
 		(*ProductMetric_ProductShipmentTimeMetric)(nil),
