@@ -11,8 +11,8 @@ option go_package = "github.com/pdcgo/schema/services/selling_iface/v1;selling_i
 enum ShopMetricType {
   SHOP_METRIC_TYPE_UNSPECIFIED = 0;
   SHOP_METRIC_TYPE_ORDER = 1;
-  SHOP_METRIC_ADS_EXPENSE = 2;
-  SHOP_METRIC_RETURN_CREATED = 3;
+  SHOP_METRIC_TYPE_ADS_EXPENSE = 2;
+  SHOP_METRIC_TYPE_RETURN_CREATED = 3;
 }
 
 enum ShopMetricSortType {

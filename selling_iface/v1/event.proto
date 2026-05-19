@@ -17,7 +17,7 @@ message OrderCanceled {
 }
 
 message SellingEvent {
-  option (event_base.v1.event_config).event_topic = "order-topic";
+  option (event_base.v1.event_config).event_topic = "selling-topic";
   oneof data {
     OrderCreated order_created = 1;
     OrderCanceled order_canceled = 2;

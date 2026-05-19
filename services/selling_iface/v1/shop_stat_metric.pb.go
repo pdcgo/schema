@@ -28,10 +28,10 @@ const (
 type ShopMetricType int32
 
 const (
-	ShopMetricType_SHOP_METRIC_TYPE_UNSPECIFIED ShopMetricType = 0
-	ShopMetricType_SHOP_METRIC_TYPE_ORDER       ShopMetricType = 1
-	ShopMetricType_SHOP_METRIC_ADS_EXPENSE      ShopMetricType = 2
-	ShopMetricType_SHOP_METRIC_RETURN_CREATED   ShopMetricType = 3
+	ShopMetricType_SHOP_METRIC_TYPE_UNSPECIFIED    ShopMetricType = 0
+	ShopMetricType_SHOP_METRIC_TYPE_ORDER          ShopMetricType = 1
+	ShopMetricType_SHOP_METRIC_TYPE_ADS_EXPENSE    ShopMetricType = 2
+	ShopMetricType_SHOP_METRIC_TYPE_RETURN_CREATED ShopMetricType = 3
 )
 
 // Enum value maps for ShopMetricType.
@@ -39,14 +39,14 @@ var (
 	ShopMetricType_name = map[int32]string{
 		0: "SHOP_METRIC_TYPE_UNSPECIFIED",
 		1: "SHOP_METRIC_TYPE_ORDER",
-		2: "SHOP_METRIC_ADS_EXPENSE",
-		3: "SHOP_METRIC_RETURN_CREATED",
+		2: "SHOP_METRIC_TYPE_ADS_EXPENSE",
+		3: "SHOP_METRIC_TYPE_RETURN_CREATED",
 	}
 	ShopMetricType_value = map[string]int32{
-		"SHOP_METRIC_TYPE_UNSPECIFIED": 0,
-		"SHOP_METRIC_TYPE_ORDER":       1,
-		"SHOP_METRIC_ADS_EXPENSE":      2,
-		"SHOP_METRIC_RETURN_CREATED":   3,
+		"SHOP_METRIC_TYPE_UNSPECIFIED":    0,
+		"SHOP_METRIC_TYPE_ORDER":          1,
+		"SHOP_METRIC_TYPE_ADS_EXPENSE":    2,
+		"SHOP_METRIC_TYPE_RETURN_CREATED": 3,
 	}
 )
 
@@ -656,12 +656,12 @@ const file_selling_iface_v1_shop_stat_metric_proto_rawDesc = "" +
 	"\fmetric_types\x18\x04 \x03(\x0e2 .selling_iface.v1.ShopMetricTypeR\vmetricTypes\"b\n" +
 	"\x16ShopStatMetricResponse\x126\n" +
 	"\ametrics\x18\x01 \x03(\v2\x1c.selling_iface.v1.ShopMetricR\ametrics\x12\x10\n" +
-	"\x03ids\x18\x02 \x03(\x04R\x03ids*\x8b\x01\n" +
+	"\x03ids\x18\x02 \x03(\x04R\x03ids*\x95\x01\n" +
 	"\x0eShopMetricType\x12 \n" +
 	"\x1cSHOP_METRIC_TYPE_UNSPECIFIED\x10\x00\x12\x1a\n" +
-	"\x16SHOP_METRIC_TYPE_ORDER\x10\x01\x12\x1b\n" +
-	"\x17SHOP_METRIC_ADS_EXPENSE\x10\x02\x12\x1e\n" +
-	"\x1aSHOP_METRIC_RETURN_CREATED\x10\x03*z\n" +
+	"\x16SHOP_METRIC_TYPE_ORDER\x10\x01\x12 \n" +
+	"\x1cSHOP_METRIC_TYPE_ADS_EXPENSE\x10\x02\x12#\n" +
+	"\x1fSHOP_METRIC_TYPE_RETURN_CREATED\x10\x03*z\n" +
 	"\x12ShopMetricSortType\x12%\n" +
 	"!SHOP_METRIC_SORT_TYPE_UNSPECIFIED\x10\x00\x12\x1d\n" +
 	"\x19SHOP_METRIC_SORT_TYPE_ASC\x10\x01\x12\x1e\n" +
