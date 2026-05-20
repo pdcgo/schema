@@ -1,0 +1,48 @@
+syntax = "proto3";
+package invoice_iface.v1;
+
+// import "buf/validate/validate.proto";
+// import "common/v1/common.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/pdcgo/schema/services/invoice_iface/v1;invoice_iface";
+
+enum InvoiceLogType {
+  INVOICE_LOG_TYPE_UNSPECIFIED = 0;
+  INVOICE_LOG_TYPE_SHIPPING_FEE = 1;
+  INVOICE_LOG_TYPE_WAREHOUSE_FEE = 2;
+  INVOICE_LOG_TYPE_PRODUCT = 3;
+  INVOICE_LOG_TYPE_PRODUCT_ADJUST = 4;
+  INVOICE_LOG_TYPE_WAREHOUSE_ADJUST = 5;
+  INVOICE_LOG_TYPE_COMMON_ADJUST = 6;
+  INVOICE_LOG_TYPE_PROBLEM = 7;
+  INVOICE_LOG_TYPE_PROBLEM_ADJUST = 8;
+}
+
+enum InvoiceLogStatus {
+  INVOICE_LOG_STATUS_UNSPECIFIED = 0;
+  INVOICE_LOG_STATUS_CREATE = 1;
+  INVOICE_LOG_STATUS_PAID = 2;
+  INVOICE_LOG_STATUS_REFUND = 3;
+  INVOICE_LOG_STATUS_REJECT = 4;
+}
+
+message InvoiceLog {
+  uint64 id = 1;
+  uint64 from_team_id = 2;
+  uint64 to_team_id = 3;
+  uint64 actor_id = 4;
+  InvoiceLogStatus status = 5;
+  double amount = 6;
+  double balance = 7;
+  google.protobuf.Timestamp created_at = 8;
+}
+
+message Balance {
+  uint64 id = 1;
+  uint64 from_team_id = 2;
+  uint64 to_team_id = 3;
+  double balance = 4;
+  google.protobuf.Timestamp updated_at = 5;
+  google.protobuf.Timestamp created_at = 6;
+}

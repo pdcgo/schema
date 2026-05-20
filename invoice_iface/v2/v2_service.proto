@@ -1,0 +1,37 @@
+syntax = "proto3";
+package invoice_iface.v2;
+
+option go_package = "github.com/pdcgo/schema/services/invoice_iface/v2;invoice_iface";
+
+service InvoiceService {
+  rpc CreatePayment(CreatePaymentRequest) returns (CreatePaymentResponse);
+  rpc AcceptPayment(AcceptPaymentRequest) returns (AcceptPaymentResponse);
+  rpc RejectPayment(RejectPaymentRequest) returns (RejectPaymentResponse);
+}
+
+message CreatePaymentRequest {
+  uint64 from_team_id = 1;
+  uint64 to_team_id = 2;
+  double amount = 3;
+  string note = 4;
+}
+
+message CreatePaymentResponse {
+  uint64 id = 1;
+}
+
+message AcceptPaymentRequest {
+  uint64 from_team_id = 1;
+  uint64 to_team_id = 2;
+  uint64 payment_id = 3;
+}
+
+message AcceptPaymentResponse {}
+
+message RejectPaymentRequest {
+  uint64 from_team_id = 1;
+  uint64 to_team_id = 2;
+  uint64 payment_id = 3;
+}
+
+message RejectPaymentResponse {}

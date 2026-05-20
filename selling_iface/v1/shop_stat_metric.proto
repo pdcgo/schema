@@ -13,6 +13,10 @@ enum ShopMetricType {
   SHOP_METRIC_TYPE_ORDER = 1;
   SHOP_METRIC_TYPE_ADS_EXPENSE = 2;
   SHOP_METRIC_TYPE_RETURN_CREATED = 3;
+  SHOP_METRIC_TYPE_HOLD_AMOUNT = 4;
+  SHOP_METRIC_TYPE_PRODUCT_COST = 5;
+  SHOP_METRIC_TYPE_EXPORT_WITHDRAWAL = 6;
+  SHOP_METRIC_TYPE_REAL_REVENUE = 7;
 }
 
 enum ShopMetricSortType {
@@ -32,6 +36,7 @@ message ShopMetricSort {
   oneof s {
     CommonShopSort common_sort = 2;
     selling_iface.v1.shop_metric.v1.ShopOrderMetricSort shop_order_metric_sort = 3;
+    selling_iface.v1.shop_metric.v1.ShopProductCostMetricSort shop_product_cost_metric_sort = 4;
   }
 }
 
@@ -39,6 +44,7 @@ message ShopMetric {
   ShopMetricType type = 1;
   oneof data {
     selling_iface.v1.shop_metric.v1.ShopOrderMetric shop_order_metric = 2;
+    selling_iface.v1.shop_metric.v1.ShopProductCostMetric shop_product_cost_metric = 3;
   }
 }
 

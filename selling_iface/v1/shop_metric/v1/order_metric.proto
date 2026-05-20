@@ -23,3 +23,23 @@ enum ShopOrderMetricSort {
   SHOP_ORDER_METRIC_SORT_TRANSACTION_COUNT = 2;
   SHOP_ORDER_METRIC_SORT_LAST_ORDER_CREATED = 3;
 }
+
+message ShopProductCostItem {
+  uint64 shop_id = 1;
+  int64 own_product_count = 2;
+  double own_product_amount = 3;
+  int64 cross_product_count = 4;
+  double cross_product_amount = 5;
+}
+
+message ShopProductCostMetric {
+  map<uint64, ShopProductCostItem> data = 1;
+}
+
+enum ShopProductCostMetricSort {
+  SHOP_PRODUCT_COST_METRIC_SORT_UNSPECIFIED = 0;
+  SHOP_PRODUCT_COST_METRIC_SORT_OWN_PRODUCT_COUNT = 1;
+  SHOP_PRODUCT_COST_METRIC_SORT_OWN_PRODUCT_AMOUNT = 2;
+  SHOP_PRODUCT_COST_METRIC_SORT_CROSS_PRODUCT_COUNT = 3;
+  SHOP_PRODUCT_COST_METRIC_SORT_CROSS_PRODUCT_AMOUNT = 4;
+}

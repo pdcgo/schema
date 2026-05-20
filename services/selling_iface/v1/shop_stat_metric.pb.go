@@ -28,10 +28,14 @@ const (
 type ShopMetricType int32
 
 const (
-	ShopMetricType_SHOP_METRIC_TYPE_UNSPECIFIED    ShopMetricType = 0
-	ShopMetricType_SHOP_METRIC_TYPE_ORDER          ShopMetricType = 1
-	ShopMetricType_SHOP_METRIC_TYPE_ADS_EXPENSE    ShopMetricType = 2
-	ShopMetricType_SHOP_METRIC_TYPE_RETURN_CREATED ShopMetricType = 3
+	ShopMetricType_SHOP_METRIC_TYPE_UNSPECIFIED       ShopMetricType = 0
+	ShopMetricType_SHOP_METRIC_TYPE_ORDER             ShopMetricType = 1
+	ShopMetricType_SHOP_METRIC_TYPE_ADS_EXPENSE       ShopMetricType = 2
+	ShopMetricType_SHOP_METRIC_TYPE_RETURN_CREATED    ShopMetricType = 3
+	ShopMetricType_SHOP_METRIC_TYPE_HOLD_AMOUNT       ShopMetricType = 4
+	ShopMetricType_SHOP_METRIC_TYPE_PRODUCT_COST      ShopMetricType = 5
+	ShopMetricType_SHOP_METRIC_TYPE_EXPORT_WITHDRAWAL ShopMetricType = 6
+	ShopMetricType_SHOP_METRIC_TYPE_REAL_REVENUE      ShopMetricType = 7
 )
 
 // Enum value maps for ShopMetricType.
@@ -41,12 +45,20 @@ var (
 		1: "SHOP_METRIC_TYPE_ORDER",
 		2: "SHOP_METRIC_TYPE_ADS_EXPENSE",
 		3: "SHOP_METRIC_TYPE_RETURN_CREATED",
+		4: "SHOP_METRIC_TYPE_HOLD_AMOUNT",
+		5: "SHOP_METRIC_TYPE_PRODUCT_COST",
+		6: "SHOP_METRIC_TYPE_EXPORT_WITHDRAWAL",
+		7: "SHOP_METRIC_TYPE_REAL_REVENUE",
 	}
 	ShopMetricType_value = map[string]int32{
-		"SHOP_METRIC_TYPE_UNSPECIFIED":    0,
-		"SHOP_METRIC_TYPE_ORDER":          1,
-		"SHOP_METRIC_TYPE_ADS_EXPENSE":    2,
-		"SHOP_METRIC_TYPE_RETURN_CREATED": 3,
+		"SHOP_METRIC_TYPE_UNSPECIFIED":       0,
+		"SHOP_METRIC_TYPE_ORDER":             1,
+		"SHOP_METRIC_TYPE_ADS_EXPENSE":       2,
+		"SHOP_METRIC_TYPE_RETURN_CREATED":    3,
+		"SHOP_METRIC_TYPE_HOLD_AMOUNT":       4,
+		"SHOP_METRIC_TYPE_PRODUCT_COST":      5,
+		"SHOP_METRIC_TYPE_EXPORT_WITHDRAWAL": 6,
+		"SHOP_METRIC_TYPE_REAL_REVENUE":      7,
 	}
 )
 
@@ -182,6 +194,7 @@ type ShopMetricSort struct {
 	//
 	//	*ShopMetricSort_CommonSort
 	//	*ShopMetricSort_ShopOrderMetricSort
+	//	*ShopMetricSort_ShopProductCostMetricSort
 	S             isShopMetricSort_S `protobuf_oneof:"s"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -249,6 +262,15 @@ func (x *ShopMetricSort) GetShopOrderMetricSort() v1.ShopOrderMetricSort {
 	return v1.ShopOrderMetricSort(0)
 }
 
+func (x *ShopMetricSort) GetShopProductCostMetricSort() v1.ShopProductCostMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*ShopMetricSort_ShopProductCostMetricSort); ok {
+			return x.ShopProductCostMetricSort
+		}
+	}
+	return v1.ShopProductCostMetricSort(0)
+}
+
 type isShopMetricSort_S interface {
 	isShopMetricSort_S()
 }
@@ -261,9 +283,15 @@ type ShopMetricSort_ShopOrderMetricSort struct {
 	ShopOrderMetricSort v1.ShopOrderMetricSort `protobuf:"varint,3,opt,name=shop_order_metric_sort,json=shopOrderMetricSort,proto3,enum=selling_iface.v1.shop_metric.v1.ShopOrderMetricSort,oneof"`
 }
 
+type ShopMetricSort_ShopProductCostMetricSort struct {
+	ShopProductCostMetricSort v1.ShopProductCostMetricSort `protobuf:"varint,4,opt,name=shop_product_cost_metric_sort,json=shopProductCostMetricSort,proto3,enum=selling_iface.v1.shop_metric.v1.ShopProductCostMetricSort,oneof"`
+}
+
 func (*ShopMetricSort_CommonSort) isShopMetricSort_S() {}
 
 func (*ShopMetricSort_ShopOrderMetricSort) isShopMetricSort_S() {}
+
+func (*ShopMetricSort_ShopProductCostMetricSort) isShopMetricSort_S() {}
 
 type ShopMetric struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -271,6 +299,7 @@ type ShopMetric struct {
 	// Types that are valid to be assigned to Data:
 	//
 	//	*ShopMetric_ShopOrderMetric
+	//	*ShopMetric_ShopProductCostMetric
 	Data          isShopMetric_Data `protobuf_oneof:"data"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -329,6 +358,15 @@ func (x *ShopMetric) GetShopOrderMetric() *v1.ShopOrderMetric {
 	return nil
 }
 
+func (x *ShopMetric) GetShopProductCostMetric() *v1.ShopProductCostMetric {
+	if x != nil {
+		if x, ok := x.Data.(*ShopMetric_ShopProductCostMetric); ok {
+			return x.ShopProductCostMetric
+		}
+	}
+	return nil
+}
+
 type isShopMetric_Data interface {
 	isShopMetric_Data()
 }
@@ -337,7 +375,13 @@ type ShopMetric_ShopOrderMetric struct {
 	ShopOrderMetric *v1.ShopOrderMetric `protobuf:"bytes,2,opt,name=shop_order_metric,json=shopOrderMetric,proto3,oneof"`
 }
 
+type ShopMetric_ShopProductCostMetric struct {
+	ShopProductCostMetric *v1.ShopProductCostMetric `protobuf:"bytes,3,opt,name=shop_product_cost_metric,json=shopProductCostMetric,proto3,oneof"`
+}
+
 func (*ShopMetric_ShopOrderMetric) isShopMetric_Data() {}
+
+func (*ShopMetric_ShopProductCostMetric) isShopMetric_Data() {}
 
 type ShopMetricExtra struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -627,17 +671,19 @@ var File_selling_iface_v1_shop_stat_metric_proto protoreflect.FileDescriptor
 
 const file_selling_iface_v1_shop_stat_metric_proto_rawDesc = "" +
 	"\n" +
-	"'selling_iface/v1/shop_stat_metric.proto\x12\x10selling_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a2selling_iface/v1/shop_metric/v1/order_metric.proto\"\x8a\x02\n" +
+	"'selling_iface/v1/shop_stat_metric.proto\x12\x10selling_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a2selling_iface/v1/shop_metric/v1/order_metric.proto\"\x8a\x03\n" +
 	"\x0eShopMetricSort\x12A\n" +
 	"\tsort_type\x18\x01 \x01(\x0e2$.selling_iface.v1.ShopMetricSortTypeR\bsortType\x12C\n" +
 	"\vcommon_sort\x18\x02 \x01(\x0e2 .selling_iface.v1.CommonShopSortH\x00R\n" +
 	"commonSort\x12k\n" +
-	"\x16shop_order_metric_sort\x18\x03 \x01(\x0e24.selling_iface.v1.shop_metric.v1.ShopOrderMetricSortH\x00R\x13shopOrderMetricSortB\x03\n" +
-	"\x01s\"\xaa\x01\n" +
+	"\x16shop_order_metric_sort\x18\x03 \x01(\x0e24.selling_iface.v1.shop_metric.v1.ShopOrderMetricSortH\x00R\x13shopOrderMetricSort\x12~\n" +
+	"\x1dshop_product_cost_metric_sort\x18\x04 \x01(\x0e2:.selling_iface.v1.shop_metric.v1.ShopProductCostMetricSortH\x00R\x19shopProductCostMetricSortB\x03\n" +
+	"\x01s\"\x9d\x02\n" +
 	"\n" +
 	"ShopMetric\x124\n" +
 	"\x04type\x18\x01 \x01(\x0e2 .selling_iface.v1.ShopMetricTypeR\x04type\x12^\n" +
-	"\x11shop_order_metric\x18\x02 \x01(\v20.selling_iface.v1.shop_metric.v1.ShopOrderMetricH\x00R\x0fshopOrderMetricB\x06\n" +
+	"\x11shop_order_metric\x18\x02 \x01(\v20.selling_iface.v1.shop_metric.v1.ShopOrderMetricH\x00R\x0fshopOrderMetric\x12q\n" +
+	"\x18shop_product_cost_metric\x18\x03 \x01(\v26.selling_iface.v1.shop_metric.v1.ShopProductCostMetricH\x00R\x15shopProductCostMetricB\x06\n" +
 	"\x04data\"\x11\n" +
 	"\x0fShopMetricExtra\"\xe3\x01\n" +
 	"\x14ShopStatMetricFilter\x12\x17\n" +
@@ -656,12 +702,16 @@ const file_selling_iface_v1_shop_stat_metric_proto_rawDesc = "" +
 	"\fmetric_types\x18\x04 \x03(\x0e2 .selling_iface.v1.ShopMetricTypeR\vmetricTypes\"b\n" +
 	"\x16ShopStatMetricResponse\x126\n" +
 	"\ametrics\x18\x01 \x03(\v2\x1c.selling_iface.v1.ShopMetricR\ametrics\x12\x10\n" +
-	"\x03ids\x18\x02 \x03(\x04R\x03ids*\x95\x01\n" +
+	"\x03ids\x18\x02 \x03(\x04R\x03ids*\xa5\x02\n" +
 	"\x0eShopMetricType\x12 \n" +
 	"\x1cSHOP_METRIC_TYPE_UNSPECIFIED\x10\x00\x12\x1a\n" +
 	"\x16SHOP_METRIC_TYPE_ORDER\x10\x01\x12 \n" +
 	"\x1cSHOP_METRIC_TYPE_ADS_EXPENSE\x10\x02\x12#\n" +
-	"\x1fSHOP_METRIC_TYPE_RETURN_CREATED\x10\x03*z\n" +
+	"\x1fSHOP_METRIC_TYPE_RETURN_CREATED\x10\x03\x12 \n" +
+	"\x1cSHOP_METRIC_TYPE_HOLD_AMOUNT\x10\x04\x12!\n" +
+	"\x1dSHOP_METRIC_TYPE_PRODUCT_COST\x10\x05\x12&\n" +
+	"\"SHOP_METRIC_TYPE_EXPORT_WITHDRAWAL\x10\x06\x12!\n" +
+	"\x1dSHOP_METRIC_TYPE_REAL_REVENUE\x10\a*z\n" +
 	"\x12ShopMetricSortType\x12%\n" +
 	"!SHOP_METRIC_SORT_TYPE_UNSPECIFIED\x10\x00\x12\x1d\n" +
 	"\x19SHOP_METRIC_SORT_TYPE_ASC\x10\x01\x12\x1e\n" +
@@ -687,41 +737,45 @@ func file_selling_iface_v1_shop_stat_metric_proto_rawDescGZIP() []byte {
 var file_selling_iface_v1_shop_stat_metric_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
 var file_selling_iface_v1_shop_stat_metric_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_selling_iface_v1_shop_stat_metric_proto_goTypes = []any{
-	(ShopMetricType)(0),            // 0: selling_iface.v1.ShopMetricType
-	(ShopMetricSortType)(0),        // 1: selling_iface.v1.ShopMetricSortType
-	(CommonShopSort)(0),            // 2: selling_iface.v1.CommonShopSort
-	(*ShopMetricSort)(nil),         // 3: selling_iface.v1.ShopMetricSort
-	(*ShopMetric)(nil),             // 4: selling_iface.v1.ShopMetric
-	(*ShopMetricExtra)(nil),        // 5: selling_iface.v1.ShopMetricExtra
-	(*ShopStatMetricFilter)(nil),   // 6: selling_iface.v1.ShopStatMetricFilter
-	(*ShopStatTimeRange)(nil),      // 7: selling_iface.v1.ShopStatTimeRange
-	(*ShopStatMetricRequest)(nil),  // 8: selling_iface.v1.ShopStatMetricRequest
-	(*ShopStatMetricResponse)(nil), // 9: selling_iface.v1.ShopStatMetricResponse
-	(v1.ShopOrderMetricSort)(0),    // 10: selling_iface.v1.shop_metric.v1.ShopOrderMetricSort
-	(*v1.ShopOrderMetric)(nil),     // 11: selling_iface.v1.shop_metric.v1.ShopOrderMetric
-	(*v11.PageFilter)(nil),         // 12: common.v1.PageFilter
-	(*timestamppb.Timestamp)(nil),  // 13: google.protobuf.Timestamp
+	(ShopMetricType)(0),               // 0: selling_iface.v1.ShopMetricType
+	(ShopMetricSortType)(0),           // 1: selling_iface.v1.ShopMetricSortType
+	(CommonShopSort)(0),               // 2: selling_iface.v1.CommonShopSort
+	(*ShopMetricSort)(nil),            // 3: selling_iface.v1.ShopMetricSort
+	(*ShopMetric)(nil),                // 4: selling_iface.v1.ShopMetric
+	(*ShopMetricExtra)(nil),           // 5: selling_iface.v1.ShopMetricExtra
+	(*ShopStatMetricFilter)(nil),      // 6: selling_iface.v1.ShopStatMetricFilter
+	(*ShopStatTimeRange)(nil),         // 7: selling_iface.v1.ShopStatTimeRange
+	(*ShopStatMetricRequest)(nil),     // 8: selling_iface.v1.ShopStatMetricRequest
+	(*ShopStatMetricResponse)(nil),    // 9: selling_iface.v1.ShopStatMetricResponse
+	(v1.ShopOrderMetricSort)(0),       // 10: selling_iface.v1.shop_metric.v1.ShopOrderMetricSort
+	(v1.ShopProductCostMetricSort)(0), // 11: selling_iface.v1.shop_metric.v1.ShopProductCostMetricSort
+	(*v1.ShopOrderMetric)(nil),        // 12: selling_iface.v1.shop_metric.v1.ShopOrderMetric
+	(*v1.ShopProductCostMetric)(nil),  // 13: selling_iface.v1.shop_metric.v1.ShopProductCostMetric
+	(*v11.PageFilter)(nil),            // 14: common.v1.PageFilter
+	(*timestamppb.Timestamp)(nil),     // 15: google.protobuf.Timestamp
 }
 var file_selling_iface_v1_shop_stat_metric_proto_depIdxs = []int32{
 	1,  // 0: selling_iface.v1.ShopMetricSort.sort_type:type_name -> selling_iface.v1.ShopMetricSortType
 	2,  // 1: selling_iface.v1.ShopMetricSort.common_sort:type_name -> selling_iface.v1.CommonShopSort
 	10, // 2: selling_iface.v1.ShopMetricSort.shop_order_metric_sort:type_name -> selling_iface.v1.shop_metric.v1.ShopOrderMetricSort
-	0,  // 3: selling_iface.v1.ShopMetric.type:type_name -> selling_iface.v1.ShopMetricType
-	11, // 4: selling_iface.v1.ShopMetric.shop_order_metric:type_name -> selling_iface.v1.shop_metric.v1.ShopOrderMetric
-	12, // 5: selling_iface.v1.ShopStatMetricFilter.page:type_name -> common.v1.PageFilter
-	7,  // 6: selling_iface.v1.ShopStatMetricFilter.range:type_name -> selling_iface.v1.ShopStatTimeRange
-	13, // 7: selling_iface.v1.ShopStatTimeRange.start:type_name -> google.protobuf.Timestamp
-	13, // 8: selling_iface.v1.ShopStatTimeRange.end:type_name -> google.protobuf.Timestamp
-	6,  // 9: selling_iface.v1.ShopStatMetricRequest.filter:type_name -> selling_iface.v1.ShopStatMetricFilter
-	3,  // 10: selling_iface.v1.ShopStatMetricRequest.sort:type_name -> selling_iface.v1.ShopMetricSort
-	5,  // 11: selling_iface.v1.ShopStatMetricRequest.metric_extras:type_name -> selling_iface.v1.ShopMetricExtra
-	0,  // 12: selling_iface.v1.ShopStatMetricRequest.metric_types:type_name -> selling_iface.v1.ShopMetricType
-	4,  // 13: selling_iface.v1.ShopStatMetricResponse.metrics:type_name -> selling_iface.v1.ShopMetric
-	14, // [14:14] is the sub-list for method output_type
-	14, // [14:14] is the sub-list for method input_type
-	14, // [14:14] is the sub-list for extension type_name
-	14, // [14:14] is the sub-list for extension extendee
-	0,  // [0:14] is the sub-list for field type_name
+	11, // 3: selling_iface.v1.ShopMetricSort.shop_product_cost_metric_sort:type_name -> selling_iface.v1.shop_metric.v1.ShopProductCostMetricSort
+	0,  // 4: selling_iface.v1.ShopMetric.type:type_name -> selling_iface.v1.ShopMetricType
+	12, // 5: selling_iface.v1.ShopMetric.shop_order_metric:type_name -> selling_iface.v1.shop_metric.v1.ShopOrderMetric
+	13, // 6: selling_iface.v1.ShopMetric.shop_product_cost_metric:type_name -> selling_iface.v1.shop_metric.v1.ShopProductCostMetric
+	14, // 7: selling_iface.v1.ShopStatMetricFilter.page:type_name -> common.v1.PageFilter
+	7,  // 8: selling_iface.v1.ShopStatMetricFilter.range:type_name -> selling_iface.v1.ShopStatTimeRange
+	15, // 9: selling_iface.v1.ShopStatTimeRange.start:type_name -> google.protobuf.Timestamp
+	15, // 10: selling_iface.v1.ShopStatTimeRange.end:type_name -> google.protobuf.Timestamp
+	6,  // 11: selling_iface.v1.ShopStatMetricRequest.filter:type_name -> selling_iface.v1.ShopStatMetricFilter
+	3,  // 12: selling_iface.v1.ShopStatMetricRequest.sort:type_name -> selling_iface.v1.ShopMetricSort
+	5,  // 13: selling_iface.v1.ShopStatMetricRequest.metric_extras:type_name -> selling_iface.v1.ShopMetricExtra
+	0,  // 14: selling_iface.v1.ShopStatMetricRequest.metric_types:type_name -> selling_iface.v1.ShopMetricType
+	4,  // 15: selling_iface.v1.ShopStatMetricResponse.metrics:type_name -> selling_iface.v1.ShopMetric
+	16, // [16:16] is the sub-list for method output_type
+	16, // [16:16] is the sub-list for method input_type
+	16, // [16:16] is the sub-list for extension type_name
+	16, // [16:16] is the sub-list for extension extendee
+	0,  // [0:16] is the sub-list for field type_name
 }
 
 func init() { file_selling_iface_v1_shop_stat_metric_proto_init() }
@@ -732,9 +786,11 @@ func file_selling_iface_v1_shop_stat_metric_proto_init() {
 	file_selling_iface_v1_shop_stat_metric_proto_msgTypes[0].OneofWrappers = []any{
 		(*ShopMetricSort_CommonSort)(nil),
 		(*ShopMetricSort_ShopOrderMetricSort)(nil),
+		(*ShopMetricSort_ShopProductCostMetricSort)(nil),
 	}
 	file_selling_iface_v1_shop_stat_metric_proto_msgTypes[1].OneofWrappers = []any{
 		(*ShopMetric_ShopOrderMetric)(nil),
+		(*ShopMetric_ShopProductCostMetric)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
