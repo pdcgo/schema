@@ -115,10 +115,22 @@ message ProductFilter {
   uint64 product_id = 1 [(buf.validate.field).uint64.gt = 0];
 }
 
+enum MarketplaceType {
+  MARKETPLACE_TYPE_UNSPECIFIED = 0;
+  MARKETPLACE_TYPE_CUSTOM = 1;
+  MARKETPLACE_TYPE_SHOPEE = 2;
+  MARKETPLACE_TYPE_LAZADA = 3;
+  MARKETPLACE_TYPE_TIKTOK = 4;
+  MARKETPLACE_TYPE_TOKOPEDIA = 5;
+  MARKETPLACE_TYPE_MENGATAR = 6;
+}
+
 message StatFilter {
   uint64 team_id = 1;
   int32 top_n = 2;
   uint64 warehouse_id = 3;
+  uint64 shop_id = 6;
+  MarketplaceType marketplace_type = 5;
   ProductFilter product_filter = 4;
 }
 
