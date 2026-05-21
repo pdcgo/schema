@@ -33,6 +33,8 @@ const (
 // reflection-formatted method names, remove the leading slash and convert the remaining slash to a
 // period.
 const (
+	// RoleBaseServiceLoginProcedure is the fully-qualified name of the RoleBaseService's Login RPC.
+	RoleBaseServiceLoginProcedure = "/role_base.v1.RoleBaseService/Login"
 	// RoleBaseServiceRequestAccessProcedure is the fully-qualified name of the RoleBaseService's
 	// RequestAccess RPC.
 	RoleBaseServiceRequestAccessProcedure = "/role_base.v1.RoleBaseService/RequestAccess"
@@ -52,6 +54,7 @@ const (
 
 // RoleBaseServiceClient is a client for the role_base.v1.RoleBaseService service.
 type RoleBaseServiceClient interface {
+	Login(context.Context, *connect.Request[v1.LoginRequest]) (*connect.Response[v1.LoginResponse], error)
 	RequestAccess(context.Context, *connect.Request[v1.RequestAccessRequest]) (*connect.Response[v1.RequestAccessResponse], error)
 	RoleList(context.Context, *connect.Request[v1.RoleListRequest]) (*connect.Response[v1.RoleListResponse], error)
 	UserRoleList(context.Context, *connect.Request[v1.UserRoleListRequest]) (*connect.Response[v1.UserRoleListResponse], error)
@@ -70,6 +73,12 @@ func NewRoleBaseServiceClient(httpClient connect.HTTPClient, baseURL string, opt
 	baseURL = strings.TrimRight(baseURL, "/")
 	roleBaseServiceMethods := v1.File_role_base_v1_service_proto.Services().ByName("RoleBaseService").Methods()
 	return &roleBaseServiceClient{
+		login: connect.NewClient[v1.LoginRequest, v1.LoginResponse](
+			httpClient,
+			baseURL+RoleBaseServiceLoginProcedure,
+			connect.WithSchema(roleBaseServiceMethods.ByName("Login")),
+			connect.WithClientOptions(opts...),
+		),
 		requestAccess: connect.NewClient[v1.RequestAccessRequest, v1.RequestAccessResponse](
 			httpClient,
 			baseURL+RoleBaseServiceRequestAccessProcedure,
@@ -105,11 +114,17 @@ func NewRoleBaseServiceClient(httpClient connect.HTTPClient, baseURL string, opt
 
 // roleBaseServiceClient implements RoleBaseServiceClient.
 type roleBaseServiceClient struct {
+	login          *connect.Client[v1.LoginRequest, v1.LoginResponse]
 	requestAccess  *connect.Client[v1.RequestAccessRequest, v1.RequestAccessResponse]
 	roleList       *connect.Client[v1.RoleListRequest, v1.RoleListResponse]
 	userRoleList   *connect.Client[v1.UserRoleListRequest, v1.UserRoleListResponse]
 	userList       *connect.Client[v1.UserListRequest, v1.UserListResponse]
 	userRoleUpdate *connect.Client[v1.UserRoleUpdateRequest, v1.UserRoleUpdateResponse]
+}
+
+// Login calls role_base.v1.RoleBaseService.Login.
+func (c *roleBaseServiceClient) Login(ctx context.Context, req *connect.Request[v1.LoginRequest]) (*connect.Response[v1.LoginResponse], error) {
+	return c.login.CallUnary(ctx, req)
 }
 
 // RequestAccess calls role_base.v1.RoleBaseService.RequestAccess.
@@ -139,6 +154,7 @@ func (c *roleBaseServiceClient) UserRoleUpdate(ctx context.Context, req *connect
 
 // RoleBaseServiceHandler is an implementation of the role_base.v1.RoleBaseService service.
 type RoleBaseServiceHandler interface {
+	Login(context.Context, *connect.Request[v1.LoginRequest]) (*connect.Response[v1.LoginResponse], error)
 	RequestAccess(context.Context, *connect.Request[v1.RequestAccessRequest]) (*connect.Response[v1.RequestAccessResponse], error)
 	RoleList(context.Context, *connect.Request[v1.RoleListRequest]) (*connect.Response[v1.RoleListResponse], error)
 	UserRoleList(context.Context, *connect.Request[v1.UserRoleListRequest]) (*connect.Response[v1.UserRoleListResponse], error)
@@ -153,6 +169,12 @@ type RoleBaseServiceHandler interface {
 // and JSON codecs. They also support gzip compression.
 func NewRoleBaseServiceHandler(svc RoleBaseServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
 	roleBaseServiceMethods := v1.File_role_base_v1_service_proto.Services().ByName("RoleBaseService").Methods()
+	roleBaseServiceLoginHandler := connect.NewUnaryHandler(
+		RoleBaseServiceLoginProcedure,
+		svc.Login,
+		connect.WithSchema(roleBaseServiceMethods.ByName("Login")),
+		connect.WithHandlerOptions(opts...),
+	)
 	roleBaseServiceRequestAccessHandler := connect.NewUnaryHandler(
 		RoleBaseServiceRequestAccessProcedure,
 		svc.RequestAccess,
@@ -185,6 +207,8 @@ func NewRoleBaseServiceHandler(svc RoleBaseServiceHandler, opts ...connect.Handl
 	)
 	return "/role_base.v1.RoleBaseService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
+		case RoleBaseServiceLoginProcedure:
+			roleBaseServiceLoginHandler.ServeHTTP(w, r)
 		case RoleBaseServiceRequestAccessProcedure:
 			roleBaseServiceRequestAccessHandler.ServeHTTP(w, r)
 		case RoleBaseServiceRoleListProcedure:
@@ -203,6 +227,10 @@ func NewRoleBaseServiceHandler(svc RoleBaseServiceHandler, opts ...connect.Handl
 
 // UnimplementedRoleBaseServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedRoleBaseServiceHandler struct{}
+
+func (UnimplementedRoleBaseServiceHandler) Login(context.Context, *connect.Request[v1.LoginRequest]) (*connect.Response[v1.LoginResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("role_base.v1.RoleBaseService.Login is not implemented"))
+}
 
 func (UnimplementedRoleBaseServiceHandler) RequestAccess(context.Context, *connect.Request[v1.RequestAccessRequest]) (*connect.Response[v1.RequestAccessResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("role_base.v1.RoleBaseService.RequestAccess is not implemented"))

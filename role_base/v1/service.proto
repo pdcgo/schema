@@ -7,11 +7,27 @@ import "role_base/v1/role.proto";
 option go_package = "github.com/pdcgo/schema/services/role_base/v1;role_base";
 
 service RoleBaseService {
+  rpc Login(LoginRequest) returns (LoginResponse);
   rpc RequestAccess(RequestAccessRequest) returns (RequestAccessResponse);
   rpc RoleList(RoleListRequest) returns (RoleListResponse);
   rpc UserRoleList(UserRoleListRequest) returns (UserRoleListResponse);
   rpc UserList(UserListRequest) returns (UserListResponse);
   rpc UserRoleUpdate(UserRoleUpdateRequest) returns (UserRoleUpdateResponse);
+}
+
+message LoginRequest {
+  oneof user {
+    string username = 1;
+    string email = 2;
+  }
+
+  string password = 3;
+  string agent = 4;
+}
+
+message LoginResponse {
+  string token = 1;
+  Identity identity = 2;
 }
 
 message RoleData {

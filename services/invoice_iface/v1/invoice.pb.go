@@ -89,68 +89,13 @@ func (InvoiceLogType) EnumDescriptor() ([]byte, []int) {
 	return file_invoice_iface_v1_invoice_proto_rawDescGZIP(), []int{0}
 }
 
-type InvoiceLogStatus int32
-
-const (
-	InvoiceLogStatus_INVOICE_LOG_STATUS_UNSPECIFIED InvoiceLogStatus = 0
-	InvoiceLogStatus_INVOICE_LOG_STATUS_CREATE      InvoiceLogStatus = 1
-	InvoiceLogStatus_INVOICE_LOG_STATUS_PAID        InvoiceLogStatus = 2
-	InvoiceLogStatus_INVOICE_LOG_STATUS_REFUND      InvoiceLogStatus = 3
-	InvoiceLogStatus_INVOICE_LOG_STATUS_REJECT      InvoiceLogStatus = 4
-)
-
-// Enum value maps for InvoiceLogStatus.
-var (
-	InvoiceLogStatus_name = map[int32]string{
-		0: "INVOICE_LOG_STATUS_UNSPECIFIED",
-		1: "INVOICE_LOG_STATUS_CREATE",
-		2: "INVOICE_LOG_STATUS_PAID",
-		3: "INVOICE_LOG_STATUS_REFUND",
-		4: "INVOICE_LOG_STATUS_REJECT",
-	}
-	InvoiceLogStatus_value = map[string]int32{
-		"INVOICE_LOG_STATUS_UNSPECIFIED": 0,
-		"INVOICE_LOG_STATUS_CREATE":      1,
-		"INVOICE_LOG_STATUS_PAID":        2,
-		"INVOICE_LOG_STATUS_REFUND":      3,
-		"INVOICE_LOG_STATUS_REJECT":      4,
-	}
-)
-
-func (x InvoiceLogStatus) Enum() *InvoiceLogStatus {
-	p := new(InvoiceLogStatus)
-	*p = x
-	return p
-}
-
-func (x InvoiceLogStatus) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (InvoiceLogStatus) Descriptor() protoreflect.EnumDescriptor {
-	return file_invoice_iface_v1_invoice_proto_enumTypes[1].Descriptor()
-}
-
-func (InvoiceLogStatus) Type() protoreflect.EnumType {
-	return &file_invoice_iface_v1_invoice_proto_enumTypes[1]
-}
-
-func (x InvoiceLogStatus) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use InvoiceLogStatus.Descriptor instead.
-func (InvoiceLogStatus) EnumDescriptor() ([]byte, []int) {
-	return file_invoice_iface_v1_invoice_proto_rawDescGZIP(), []int{1}
-}
-
 type InvoiceLog struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	FromTeamId    uint64                 `protobuf:"varint,2,opt,name=from_team_id,json=fromTeamId,proto3" json:"from_team_id,omitempty"`
 	ToTeamId      uint64                 `protobuf:"varint,3,opt,name=to_team_id,json=toTeamId,proto3" json:"to_team_id,omitempty"`
 	ActorId       uint64                 `protobuf:"varint,4,opt,name=actor_id,json=actorId,proto3" json:"actor_id,omitempty"`
-	Status        InvoiceLogStatus       `protobuf:"varint,5,opt,name=status,proto3,enum=invoice_iface.v1.InvoiceLogStatus" json:"status,omitempty"`
+	LogType       InvoiceLogType         `protobuf:"varint,5,opt,name=log_type,json=logType,proto3,enum=invoice_iface.v1.InvoiceLogType" json:"log_type,omitempty"`
 	Amount        float64                `protobuf:"fixed64,6,opt,name=amount,proto3" json:"amount,omitempty"`
 	Balance       float64                `protobuf:"fixed64,7,opt,name=balance,proto3" json:"balance,omitempty"`
 	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
@@ -216,11 +161,11 @@ func (x *InvoiceLog) GetActorId() uint64 {
 	return 0
 }
 
-func (x *InvoiceLog) GetStatus() InvoiceLogStatus {
+func (x *InvoiceLog) GetLogType() InvoiceLogType {
 	if x != nil {
-		return x.Status
+		return x.LogType
 	}
-	return InvoiceLogStatus_INVOICE_LOG_STATUS_UNSPECIFIED
+	return InvoiceLogType_INVOICE_LOG_TYPE_UNSPECIFIED
 }
 
 func (x *InvoiceLog) GetAmount() float64 {
@@ -247,7 +192,7 @@ func (x *InvoiceLog) GetCreatedAt() *timestamppb.Timestamp {
 type Balance struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	FromTeamId    uint64                 `protobuf:"varint,2,opt,name=from_team_id,json=fromTeamId,proto3" json:"from_team_id,omitempty"`
+	TeamId        uint64                 `protobuf:"varint,2,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
 	ToTeamId      uint64                 `protobuf:"varint,3,opt,name=to_team_id,json=toTeamId,proto3" json:"to_team_id,omitempty"`
 	Balance       float64                `protobuf:"fixed64,4,opt,name=balance,proto3" json:"balance,omitempty"`
 	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
@@ -293,9 +238,9 @@ func (x *Balance) GetId() uint64 {
 	return 0
 }
 
-func (x *Balance) GetFromTeamId() uint64 {
+func (x *Balance) GetTeamId() uint64 {
 	if x != nil {
-		return x.FromTeamId
+		return x.TeamId
 	}
 	return 0
 }
@@ -332,7 +277,7 @@ var File_invoice_iface_v1_invoice_proto protoreflect.FileDescriptor
 
 const file_invoice_iface_v1_invoice_proto_rawDesc = "" +
 	"\n" +
-	"\x1einvoice_iface/v1/invoice.proto\x12\x10invoice_iface.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xa0\x02\n" +
+	"\x1einvoice_iface/v1/invoice.proto\x12\x10invoice_iface.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xa1\x02\n" +
 	"\n" +
 	"InvoiceLog\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12 \n" +
@@ -340,16 +285,15 @@ const file_invoice_iface_v1_invoice_proto_rawDesc = "" +
 	"fromTeamId\x12\x1c\n" +
 	"\n" +
 	"to_team_id\x18\x03 \x01(\x04R\btoTeamId\x12\x19\n" +
-	"\bactor_id\x18\x04 \x01(\x04R\aactorId\x12:\n" +
-	"\x06status\x18\x05 \x01(\x0e2\".invoice_iface.v1.InvoiceLogStatusR\x06status\x12\x16\n" +
+	"\bactor_id\x18\x04 \x01(\x04R\aactorId\x12;\n" +
+	"\blog_type\x18\x05 \x01(\x0e2 .invoice_iface.v1.InvoiceLogTypeR\alogType\x12\x16\n" +
 	"\x06amount\x18\x06 \x01(\x01R\x06amount\x12\x18\n" +
 	"\abalance\x18\a \x01(\x01R\abalance\x129\n" +
 	"\n" +
-	"created_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\xe9\x01\n" +
+	"created_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\xe0\x01\n" +
 	"\aBalance\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x04R\x02id\x12 \n" +
-	"\ffrom_team_id\x18\x02 \x01(\x04R\n" +
-	"fromTeamId\x12\x1c\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x17\n" +
+	"\ateam_id\x18\x02 \x01(\x04R\x06teamId\x12\x1c\n" +
 	"\n" +
 	"to_team_id\x18\x03 \x01(\x04R\btoTeamId\x12\x18\n" +
 	"\abalance\x18\x04 \x01(\x01R\abalance\x129\n" +
@@ -366,13 +310,7 @@ const file_invoice_iface_v1_invoice_proto_rawDesc = "" +
 	"!INVOICE_LOG_TYPE_WAREHOUSE_ADJUST\x10\x05\x12\"\n" +
 	"\x1eINVOICE_LOG_TYPE_COMMON_ADJUST\x10\x06\x12\x1c\n" +
 	"\x18INVOICE_LOG_TYPE_PROBLEM\x10\a\x12#\n" +
-	"\x1fINVOICE_LOG_TYPE_PROBLEM_ADJUST\x10\b*\xb0\x01\n" +
-	"\x10InvoiceLogStatus\x12\"\n" +
-	"\x1eINVOICE_LOG_STATUS_UNSPECIFIED\x10\x00\x12\x1d\n" +
-	"\x19INVOICE_LOG_STATUS_CREATE\x10\x01\x12\x1b\n" +
-	"\x17INVOICE_LOG_STATUS_PAID\x10\x02\x12\x1d\n" +
-	"\x19INVOICE_LOG_STATUS_REFUND\x10\x03\x12\x1d\n" +
-	"\x19INVOICE_LOG_STATUS_REJECT\x10\x04B\xc2\x01\n" +
+	"\x1fINVOICE_LOG_TYPE_PROBLEM_ADJUST\x10\bB\xc2\x01\n" +
 	"\x14com.invoice_iface.v1B\fInvoiceProtoP\x01Z?github.com/pdcgo/schema/services/invoice_iface/v1;invoice_iface\xa2\x02\x03IXX\xaa\x02\x0fInvoiceIface.V1\xca\x02\x0fInvoiceIface\\V1\xe2\x02\x1bInvoiceIface\\V1\\GPBMetadata\xea\x02\x10InvoiceIface::V1b\x06proto3"
 
 var (
@@ -387,20 +325,19 @@ func file_invoice_iface_v1_invoice_proto_rawDescGZIP() []byte {
 	return file_invoice_iface_v1_invoice_proto_rawDescData
 }
 
-var file_invoice_iface_v1_invoice_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_invoice_iface_v1_invoice_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_invoice_iface_v1_invoice_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_invoice_iface_v1_invoice_proto_goTypes = []any{
 	(InvoiceLogType)(0),           // 0: invoice_iface.v1.InvoiceLogType
-	(InvoiceLogStatus)(0),         // 1: invoice_iface.v1.InvoiceLogStatus
-	(*InvoiceLog)(nil),            // 2: invoice_iface.v1.InvoiceLog
-	(*Balance)(nil),               // 3: invoice_iface.v1.Balance
-	(*timestamppb.Timestamp)(nil), // 4: google.protobuf.Timestamp
+	(*InvoiceLog)(nil),            // 1: invoice_iface.v1.InvoiceLog
+	(*Balance)(nil),               // 2: invoice_iface.v1.Balance
+	(*timestamppb.Timestamp)(nil), // 3: google.protobuf.Timestamp
 }
 var file_invoice_iface_v1_invoice_proto_depIdxs = []int32{
-	1, // 0: invoice_iface.v1.InvoiceLog.status:type_name -> invoice_iface.v1.InvoiceLogStatus
-	4, // 1: invoice_iface.v1.InvoiceLog.created_at:type_name -> google.protobuf.Timestamp
-	4, // 2: invoice_iface.v1.Balance.updated_at:type_name -> google.protobuf.Timestamp
-	4, // 3: invoice_iface.v1.Balance.created_at:type_name -> google.protobuf.Timestamp
+	0, // 0: invoice_iface.v1.InvoiceLog.log_type:type_name -> invoice_iface.v1.InvoiceLogType
+	3, // 1: invoice_iface.v1.InvoiceLog.created_at:type_name -> google.protobuf.Timestamp
+	3, // 2: invoice_iface.v1.Balance.updated_at:type_name -> google.protobuf.Timestamp
+	3, // 3: invoice_iface.v1.Balance.created_at:type_name -> google.protobuf.Timestamp
 	4, // [4:4] is the sub-list for method output_type
 	4, // [4:4] is the sub-list for method input_type
 	4, // [4:4] is the sub-list for extension type_name
@@ -418,7 +355,7 @@ func file_invoice_iface_v1_invoice_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_invoice_iface_v1_invoice_proto_rawDesc), len(file_invoice_iface_v1_invoice_proto_rawDesc)),
-			NumEnums:      2,
+			NumEnums:      1,
 			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,

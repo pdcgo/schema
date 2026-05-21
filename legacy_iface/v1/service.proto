@@ -1,0 +1,44 @@
+syntax = "proto3";
+package legacy_iface.v1;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/pdcgo/schema/services/legacy_iface/v1;legacy_iface";
+
+service LegacyInvoiceService {
+  rpc InvoiceOverview(InvoiceOverviewRequest) returns (InvoiceOverviewResponse);
+}
+
+message InvoiceOverviewRequest {
+  uint32 domain_id = 1;
+  string from = 2;
+  uint32 from_team_id = 3;
+  string time_type = 4;
+  google.protobuf.Timestamp time_min = 5;
+  google.protobuf.Timestamp time_max = 6;
+}
+
+message InvoiceOverviewItem {
+  string type = 1;
+  string status = 2;
+  int32 invoice_count = 3;
+  int32 item_count = 4;
+  double invoice_total = 5;
+}
+
+message InvoiceOverviewData {
+  repeated InvoiceOverviewItem all = 1;
+  repeated InvoiceOverviewItem common_adjust = 2;
+  repeated InvoiceOverviewItem problem = 3;
+  repeated InvoiceOverviewItem problem_adjust = 4;
+  repeated InvoiceOverviewItem product_adjust = 5;
+  repeated InvoiceOverviewItem product = 6;
+  repeated InvoiceOverviewItem shipping_fee = 7;
+  repeated InvoiceOverviewItem ware_adjust = 8;
+  repeated InvoiceOverviewItem warehouse_fee = 9;
+}
+
+message InvoiceOverviewResponse {
+  string message = 1;
+  InvoiceOverviewData data = 2;
+}

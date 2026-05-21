@@ -46,6 +46,32 @@ func (m *MockRoleBaseServiceClient) EXPECT() *MockRoleBaseServiceClientMockRecor
     return m.recorder
 }
 
+func (m *MockRoleBaseService) Login(ctx context.Context, req *connect.Request[v1.LoginRequest]) (*connect.Response[v1.LoginResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "Login", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.LoginResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockRoleBaseServiceMockRecorder) Login(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Login", reflect.TypeOf((*MockRoleBaseService)(nil).Login), ctx, req)
+}
+
+func (m *MockRoleBaseServiceClient) Login(ctx context.Context, req *connect.Request[v1.LoginRequest]) (*connect.Response[v1.LoginResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "Login", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.LoginResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockRoleBaseServiceClientMockRecorder) Login(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Login", reflect.TypeOf((*MockRoleBaseService)(nil).Login), ctx, req)
+}
+
 func (m *MockRoleBaseService) RequestAccess(ctx context.Context, req *connect.Request[v1.RequestAccessRequest]) (*connect.Response[v1.RequestAccessResponse], error) {
     m.ctrl.T.Helper()
     ret := m.ctrl.Call(m, "RequestAccess", ctx, req)

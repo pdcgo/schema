@@ -252,14 +252,14 @@ type SubmitWithdrawalShopeeRequest struct {
 	// Deprecated: Marked as deprecated in withdrawal_iface/v2/withdrawal.proto.
 	ResourceUri  string   `protobuf:"bytes,5,opt,name=resource_uri,json=resourceUri,proto3" json:"resource_uri,omitempty"`
 	ResourceUris []string `protobuf:"bytes,7,rep,name=resource_uris,json=resourceUris,proto3" json:"resource_uris,omitempty"`
-	//	repeated string resource_uris = 7 [(buf.validate.field).repeated = {
-	//	  min_items: 1
-	//	  max_items: 5
-	//	  unique: true
-	//	  items: {
-	//	    string: {min_len: 1}
-	//	  }
-	//	}];
+	// repeated string resource_uris = 7 [(buf.validate.field).repeated = {
+	//   min_items: 1
+	//   max_items: 5
+	//   unique: true
+	//   items: {
+	//     string: {min_len: 1}
+	//   }
+	// }];
 	MpSubmit      *MpSubmit `protobuf:"bytes,6,opt,name=mp_submit,json=mpSubmit,proto3" json:"mp_submit,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

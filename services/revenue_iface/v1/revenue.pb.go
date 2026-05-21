@@ -2947,12 +2947,11 @@ const file_revenue_iface_v1_revenue_proto_rawDesc = "" +
 	"\x1aPRODUCT_SOURCE_UNSPECIFIED\x10\x00\x12\x18\n" +
 	"\x14PRODUCT_SOURCE_DUMMY\x10\x01\x12\x1c\n" +
 	"\x18PRODUCT_SOURCE_WAREHOUSE\x10\x02\x12\x1b\n" +
-	"\x17PRODUCT_SOURCE_SUPPLIER\x10\x032\xce\v\n" +
+	"\x17PRODUCT_SOURCE_SUPPLIER\x10\x032\x87\n" +
+	"\n" +
 	"\x0eRevenueService\x12N\n" +
 	"\aOnOrder\x12 .revenue_iface.v1.OnOrderRequest\x1a!.revenue_iface.v1.OnOrderResponse\x12Z\n" +
-	"\vOrderCancel\x12$.revenue_iface.v1.OrderCancelRequest\x1a%.revenue_iface.v1.OrderCancelResponse\x12i\n" +
-	"\x10StockReturnAsync\x12).revenue_iface.v1.StockReturnAsyncRequest\x1a*.revenue_iface.v1.StockReturnAsyncResponse\x12Z\n" +
-	"\vStockReturn\x12$.revenue_iface.v1.StockReturnRequest\x1a%.revenue_iface.v1.StockReturnResponse\x12\x8a\x01\n" +
+	"\vOrderCancel\x12$.revenue_iface.v1.OrderCancelRequest\x1a%.revenue_iface.v1.OrderCancelResponse\x12\x8a\x01\n" +
 	"\x1bSellingReceivableAdjustment\x124.revenue_iface.v1.SellingReceivableAdjustmentRequest\x1a5.revenue_iface.v1.SellingReceivableAdjustmentResponse\x12\x87\x01\n" +
 	"\x1aOrderEditSellingReceivable\x123.revenue_iface.v1.OrderEditSellingReceivableRequest\x1a4.revenue_iface.v1.OrderEditSellingReceivableResponse\x12i\n" +
 	"\x10OrderReturnAsync\x12).revenue_iface.v1.OrderReturnAsyncRequest\x1a*.revenue_iface.v1.OrderReturnAsyncResponse\x12_\n" +
@@ -3076,34 +3075,30 @@ var file_revenue_iface_v1_revenue_proto_depIdxs = []int32{
 	44, // 37: revenue_iface.v1.OnOrderRequest.supplier_payment:type_name -> revenue_iface.v1.SupplierPayment
 	45, // 38: revenue_iface.v1.RevenueService.OnOrder:input_type -> revenue_iface.v1.OnOrderRequest
 	36, // 39: revenue_iface.v1.RevenueService.OrderCancel:input_type -> revenue_iface.v1.OrderCancelRequest
-	26, // 40: revenue_iface.v1.RevenueService.StockReturnAsync:input_type -> revenue_iface.v1.StockReturnAsyncRequest
-	28, // 41: revenue_iface.v1.RevenueService.StockReturn:input_type -> revenue_iface.v1.StockReturnRequest
-	9,  // 42: revenue_iface.v1.RevenueService.SellingReceivableAdjustment:input_type -> revenue_iface.v1.SellingReceivableAdjustmentRequest
-	5,  // 43: revenue_iface.v1.RevenueService.OrderEditSellingReceivable:input_type -> revenue_iface.v1.OrderEditSellingReceivableRequest
-	32, // 44: revenue_iface.v1.RevenueService.OrderReturnAsync:input_type -> revenue_iface.v1.OrderReturnAsyncRequest
-	30, // 45: revenue_iface.v1.RevenueService.OrderReturn:input_type -> revenue_iface.v1.OrderReturnRequest
-	24, // 46: revenue_iface.v1.RevenueService.OrderCompleted:input_type -> revenue_iface.v1.OrderCompletedRequest
-	22, // 47: revenue_iface.v1.RevenueService.RevenueAdjustment:input_type -> revenue_iface.v1.RevenueAdjustmentRequest
-	34, // 48: revenue_iface.v1.RevenueService.Withdrawal:input_type -> revenue_iface.v1.WithdrawalRequest
-	20, // 49: revenue_iface.v1.RevenueService.RevenueStream:input_type -> revenue_iface.v1.RevenueStreamRequest
-	11, // 50: revenue_iface.v1.RevenueService.RevenueOther:input_type -> revenue_iface.v1.RevenueOtherRequest
-	7,  // 51: revenue_iface.v1.RevenueService.SellingExpenseOther:input_type -> revenue_iface.v1.SellingExpenseOtherRequest
-	46, // 52: revenue_iface.v1.RevenueService.OnOrder:output_type -> revenue_iface.v1.OnOrderResponse
-	37, // 53: revenue_iface.v1.RevenueService.OrderCancel:output_type -> revenue_iface.v1.OrderCancelResponse
-	27, // 54: revenue_iface.v1.RevenueService.StockReturnAsync:output_type -> revenue_iface.v1.StockReturnAsyncResponse
-	29, // 55: revenue_iface.v1.RevenueService.StockReturn:output_type -> revenue_iface.v1.StockReturnResponse
-	10, // 56: revenue_iface.v1.RevenueService.SellingReceivableAdjustment:output_type -> revenue_iface.v1.SellingReceivableAdjustmentResponse
-	6,  // 57: revenue_iface.v1.RevenueService.OrderEditSellingReceivable:output_type -> revenue_iface.v1.OrderEditSellingReceivableResponse
-	33, // 58: revenue_iface.v1.RevenueService.OrderReturnAsync:output_type -> revenue_iface.v1.OrderReturnAsyncResponse
-	31, // 59: revenue_iface.v1.RevenueService.OrderReturn:output_type -> revenue_iface.v1.OrderReturnResponse
-	25, // 60: revenue_iface.v1.RevenueService.OrderCompleted:output_type -> revenue_iface.v1.OrderCompletedResponse
-	23, // 61: revenue_iface.v1.RevenueService.RevenueAdjustment:output_type -> revenue_iface.v1.RevenueAdjustmentResponse
-	35, // 62: revenue_iface.v1.RevenueService.Withdrawal:output_type -> revenue_iface.v1.WithdrawalResponse
-	21, // 63: revenue_iface.v1.RevenueService.RevenueStream:output_type -> revenue_iface.v1.RevenueStreamResponse
-	12, // 64: revenue_iface.v1.RevenueService.RevenueOther:output_type -> revenue_iface.v1.RevenueOtherResponse
-	8,  // 65: revenue_iface.v1.RevenueService.SellingExpenseOther:output_type -> revenue_iface.v1.SellingExpenseOtherResponse
-	52, // [52:66] is the sub-list for method output_type
-	38, // [38:52] is the sub-list for method input_type
+	9,  // 40: revenue_iface.v1.RevenueService.SellingReceivableAdjustment:input_type -> revenue_iface.v1.SellingReceivableAdjustmentRequest
+	5,  // 41: revenue_iface.v1.RevenueService.OrderEditSellingReceivable:input_type -> revenue_iface.v1.OrderEditSellingReceivableRequest
+	32, // 42: revenue_iface.v1.RevenueService.OrderReturnAsync:input_type -> revenue_iface.v1.OrderReturnAsyncRequest
+	30, // 43: revenue_iface.v1.RevenueService.OrderReturn:input_type -> revenue_iface.v1.OrderReturnRequest
+	24, // 44: revenue_iface.v1.RevenueService.OrderCompleted:input_type -> revenue_iface.v1.OrderCompletedRequest
+	22, // 45: revenue_iface.v1.RevenueService.RevenueAdjustment:input_type -> revenue_iface.v1.RevenueAdjustmentRequest
+	34, // 46: revenue_iface.v1.RevenueService.Withdrawal:input_type -> revenue_iface.v1.WithdrawalRequest
+	20, // 47: revenue_iface.v1.RevenueService.RevenueStream:input_type -> revenue_iface.v1.RevenueStreamRequest
+	11, // 48: revenue_iface.v1.RevenueService.RevenueOther:input_type -> revenue_iface.v1.RevenueOtherRequest
+	7,  // 49: revenue_iface.v1.RevenueService.SellingExpenseOther:input_type -> revenue_iface.v1.SellingExpenseOtherRequest
+	46, // 50: revenue_iface.v1.RevenueService.OnOrder:output_type -> revenue_iface.v1.OnOrderResponse
+	37, // 51: revenue_iface.v1.RevenueService.OrderCancel:output_type -> revenue_iface.v1.OrderCancelResponse
+	10, // 52: revenue_iface.v1.RevenueService.SellingReceivableAdjustment:output_type -> revenue_iface.v1.SellingReceivableAdjustmentResponse
+	6,  // 53: revenue_iface.v1.RevenueService.OrderEditSellingReceivable:output_type -> revenue_iface.v1.OrderEditSellingReceivableResponse
+	33, // 54: revenue_iface.v1.RevenueService.OrderReturnAsync:output_type -> revenue_iface.v1.OrderReturnAsyncResponse
+	31, // 55: revenue_iface.v1.RevenueService.OrderReturn:output_type -> revenue_iface.v1.OrderReturnResponse
+	25, // 56: revenue_iface.v1.RevenueService.OrderCompleted:output_type -> revenue_iface.v1.OrderCompletedResponse
+	23, // 57: revenue_iface.v1.RevenueService.RevenueAdjustment:output_type -> revenue_iface.v1.RevenueAdjustmentResponse
+	35, // 58: revenue_iface.v1.RevenueService.Withdrawal:output_type -> revenue_iface.v1.WithdrawalResponse
+	21, // 59: revenue_iface.v1.RevenueService.RevenueStream:output_type -> revenue_iface.v1.RevenueStreamResponse
+	12, // 60: revenue_iface.v1.RevenueService.RevenueOther:output_type -> revenue_iface.v1.RevenueOtherResponse
+	8,  // 61: revenue_iface.v1.RevenueService.SellingExpenseOther:output_type -> revenue_iface.v1.SellingExpenseOtherResponse
+	50, // [50:62] is the sub-list for method output_type
+	38, // [38:50] is the sub-list for method input_type
 	38, // [38:38] is the sub-list for extension type_name
 	38, // [38:38] is the sub-list for extension extendee
 	0,  // [0:38] is the sub-list for field type_name

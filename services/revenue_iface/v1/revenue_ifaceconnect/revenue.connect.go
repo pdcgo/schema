@@ -38,12 +38,6 @@ const (
 	// RevenueServiceOrderCancelProcedure is the fully-qualified name of the RevenueService's
 	// OrderCancel RPC.
 	RevenueServiceOrderCancelProcedure = "/revenue_iface.v1.RevenueService/OrderCancel"
-	// RevenueServiceStockReturnAsyncProcedure is the fully-qualified name of the RevenueService's
-	// StockReturnAsync RPC.
-	RevenueServiceStockReturnAsyncProcedure = "/revenue_iface.v1.RevenueService/StockReturnAsync"
-	// RevenueServiceStockReturnProcedure is the fully-qualified name of the RevenueService's
-	// StockReturn RPC.
-	RevenueServiceStockReturnProcedure = "/revenue_iface.v1.RevenueService/StockReturn"
 	// RevenueServiceSellingReceivableAdjustmentProcedure is the fully-qualified name of the
 	// RevenueService's SellingReceivableAdjustment RPC.
 	RevenueServiceSellingReceivableAdjustmentProcedure = "/revenue_iface.v1.RevenueService/SellingReceivableAdjustment"
@@ -81,9 +75,6 @@ type RevenueServiceClient interface {
 	// rpc OnOrderAsync(OnOrderAsyncRequest) returns (OnOrderAsyncResponse);
 	OnOrder(context.Context, *connect.Request[v1.OnOrderRequest]) (*connect.Response[v1.OnOrderResponse], error)
 	OrderCancel(context.Context, *connect.Request[v1.OrderCancelRequest]) (*connect.Response[v1.OrderCancelResponse], error)
-	// bagian stock
-	StockReturnAsync(context.Context, *connect.Request[v1.StockReturnAsyncRequest]) (*connect.Response[v1.StockReturnAsyncResponse], error)
-	StockReturn(context.Context, *connect.Request[v1.StockReturnRequest]) (*connect.Response[v1.StockReturnResponse], error)
 	// bagian receivable order
 	SellingReceivableAdjustment(context.Context, *connect.Request[v1.SellingReceivableAdjustmentRequest]) (*connect.Response[v1.SellingReceivableAdjustmentResponse], error)
 	OrderEditSellingReceivable(context.Context, *connect.Request[v1.OrderEditSellingReceivableRequest]) (*connect.Response[v1.OrderEditSellingReceivableResponse], error)
@@ -124,18 +115,6 @@ func NewRevenueServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			httpClient,
 			baseURL+RevenueServiceOrderCancelProcedure,
 			connect.WithSchema(revenueServiceMethods.ByName("OrderCancel")),
-			connect.WithClientOptions(opts...),
-		),
-		stockReturnAsync: connect.NewClient[v1.StockReturnAsyncRequest, v1.StockReturnAsyncResponse](
-			httpClient,
-			baseURL+RevenueServiceStockReturnAsyncProcedure,
-			connect.WithSchema(revenueServiceMethods.ByName("StockReturnAsync")),
-			connect.WithClientOptions(opts...),
-		),
-		stockReturn: connect.NewClient[v1.StockReturnRequest, v1.StockReturnResponse](
-			httpClient,
-			baseURL+RevenueServiceStockReturnProcedure,
-			connect.WithSchema(revenueServiceMethods.ByName("StockReturn")),
 			connect.WithClientOptions(opts...),
 		),
 		sellingReceivableAdjustment: connect.NewClient[v1.SellingReceivableAdjustmentRequest, v1.SellingReceivableAdjustmentResponse](
@@ -205,8 +184,6 @@ func NewRevenueServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 type revenueServiceClient struct {
 	onOrder                     *connect.Client[v1.OnOrderRequest, v1.OnOrderResponse]
 	orderCancel                 *connect.Client[v1.OrderCancelRequest, v1.OrderCancelResponse]
-	stockReturnAsync            *connect.Client[v1.StockReturnAsyncRequest, v1.StockReturnAsyncResponse]
-	stockReturn                 *connect.Client[v1.StockReturnRequest, v1.StockReturnResponse]
 	sellingReceivableAdjustment *connect.Client[v1.SellingReceivableAdjustmentRequest, v1.SellingReceivableAdjustmentResponse]
 	orderEditSellingReceivable  *connect.Client[v1.OrderEditSellingReceivableRequest, v1.OrderEditSellingReceivableResponse]
 	orderReturnAsync            *connect.Client[v1.OrderReturnAsyncRequest, v1.OrderReturnAsyncResponse]
@@ -227,16 +204,6 @@ func (c *revenueServiceClient) OnOrder(ctx context.Context, req *connect.Request
 // OrderCancel calls revenue_iface.v1.RevenueService.OrderCancel.
 func (c *revenueServiceClient) OrderCancel(ctx context.Context, req *connect.Request[v1.OrderCancelRequest]) (*connect.Response[v1.OrderCancelResponse], error) {
 	return c.orderCancel.CallUnary(ctx, req)
-}
-
-// StockReturnAsync calls revenue_iface.v1.RevenueService.StockReturnAsync.
-func (c *revenueServiceClient) StockReturnAsync(ctx context.Context, req *connect.Request[v1.StockReturnAsyncRequest]) (*connect.Response[v1.StockReturnAsyncResponse], error) {
-	return c.stockReturnAsync.CallUnary(ctx, req)
-}
-
-// StockReturn calls revenue_iface.v1.RevenueService.StockReturn.
-func (c *revenueServiceClient) StockReturn(ctx context.Context, req *connect.Request[v1.StockReturnRequest]) (*connect.Response[v1.StockReturnResponse], error) {
-	return c.stockReturn.CallUnary(ctx, req)
 }
 
 // SellingReceivableAdjustment calls revenue_iface.v1.RevenueService.SellingReceivableAdjustment.
@@ -298,9 +265,6 @@ type RevenueServiceHandler interface {
 	// rpc OnOrderAsync(OnOrderAsyncRequest) returns (OnOrderAsyncResponse);
 	OnOrder(context.Context, *connect.Request[v1.OnOrderRequest]) (*connect.Response[v1.OnOrderResponse], error)
 	OrderCancel(context.Context, *connect.Request[v1.OrderCancelRequest]) (*connect.Response[v1.OrderCancelResponse], error)
-	// bagian stock
-	StockReturnAsync(context.Context, *connect.Request[v1.StockReturnAsyncRequest]) (*connect.Response[v1.StockReturnAsyncResponse], error)
-	StockReturn(context.Context, *connect.Request[v1.StockReturnRequest]) (*connect.Response[v1.StockReturnResponse], error)
 	// bagian receivable order
 	SellingReceivableAdjustment(context.Context, *connect.Request[v1.SellingReceivableAdjustmentRequest]) (*connect.Response[v1.SellingReceivableAdjustmentResponse], error)
 	OrderEditSellingReceivable(context.Context, *connect.Request[v1.OrderEditSellingReceivableRequest]) (*connect.Response[v1.OrderEditSellingReceivableResponse], error)
@@ -337,18 +301,6 @@ func NewRevenueServiceHandler(svc RevenueServiceHandler, opts ...connect.Handler
 		RevenueServiceOrderCancelProcedure,
 		svc.OrderCancel,
 		connect.WithSchema(revenueServiceMethods.ByName("OrderCancel")),
-		connect.WithHandlerOptions(opts...),
-	)
-	revenueServiceStockReturnAsyncHandler := connect.NewUnaryHandler(
-		RevenueServiceStockReturnAsyncProcedure,
-		svc.StockReturnAsync,
-		connect.WithSchema(revenueServiceMethods.ByName("StockReturnAsync")),
-		connect.WithHandlerOptions(opts...),
-	)
-	revenueServiceStockReturnHandler := connect.NewUnaryHandler(
-		RevenueServiceStockReturnProcedure,
-		svc.StockReturn,
-		connect.WithSchema(revenueServiceMethods.ByName("StockReturn")),
 		connect.WithHandlerOptions(opts...),
 	)
 	revenueServiceSellingReceivableAdjustmentHandler := connect.NewUnaryHandler(
@@ -417,10 +369,6 @@ func NewRevenueServiceHandler(svc RevenueServiceHandler, opts ...connect.Handler
 			revenueServiceOnOrderHandler.ServeHTTP(w, r)
 		case RevenueServiceOrderCancelProcedure:
 			revenueServiceOrderCancelHandler.ServeHTTP(w, r)
-		case RevenueServiceStockReturnAsyncProcedure:
-			revenueServiceStockReturnAsyncHandler.ServeHTTP(w, r)
-		case RevenueServiceStockReturnProcedure:
-			revenueServiceStockReturnHandler.ServeHTTP(w, r)
 		case RevenueServiceSellingReceivableAdjustmentProcedure:
 			revenueServiceSellingReceivableAdjustmentHandler.ServeHTTP(w, r)
 		case RevenueServiceOrderEditSellingReceivableProcedure:
@@ -456,14 +404,6 @@ func (UnimplementedRevenueServiceHandler) OnOrder(context.Context, *connect.Requ
 
 func (UnimplementedRevenueServiceHandler) OrderCancel(context.Context, *connect.Request[v1.OrderCancelRequest]) (*connect.Response[v1.OrderCancelResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("revenue_iface.v1.RevenueService.OrderCancel is not implemented"))
-}
-
-func (UnimplementedRevenueServiceHandler) StockReturnAsync(context.Context, *connect.Request[v1.StockReturnAsyncRequest]) (*connect.Response[v1.StockReturnAsyncResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("revenue_iface.v1.RevenueService.StockReturnAsync is not implemented"))
-}
-
-func (UnimplementedRevenueServiceHandler) StockReturn(context.Context, *connect.Request[v1.StockReturnRequest]) (*connect.Response[v1.StockReturnResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("revenue_iface.v1.RevenueService.StockReturn is not implemented"))
 }
 
 func (UnimplementedRevenueServiceHandler) SellingReceivableAdjustment(context.Context, *connect.Request[v1.SellingReceivableAdjustmentRequest]) (*connect.Response[v1.SellingReceivableAdjustmentResponse], error) {

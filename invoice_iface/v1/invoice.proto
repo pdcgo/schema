@@ -19,20 +19,12 @@ enum InvoiceLogType {
   INVOICE_LOG_TYPE_PROBLEM_ADJUST = 8;
 }
 
-enum InvoiceLogStatus {
-  INVOICE_LOG_STATUS_UNSPECIFIED = 0;
-  INVOICE_LOG_STATUS_CREATE = 1;
-  INVOICE_LOG_STATUS_PAID = 2;
-  INVOICE_LOG_STATUS_REFUND = 3;
-  INVOICE_LOG_STATUS_REJECT = 4;
-}
-
 message InvoiceLog {
   uint64 id = 1;
   uint64 from_team_id = 2;
   uint64 to_team_id = 3;
   uint64 actor_id = 4;
-  InvoiceLogStatus status = 5;
+  InvoiceLogType log_type = 5;
   double amount = 6;
   double balance = 7;
   google.protobuf.Timestamp created_at = 8;
@@ -40,7 +32,7 @@ message InvoiceLog {
 
 message Balance {
   uint64 id = 1;
-  uint64 from_team_id = 2;
+  uint64 team_id = 2;
   uint64 to_team_id = 3;
   double balance = 4;
   google.protobuf.Timestamp updated_at = 5;
