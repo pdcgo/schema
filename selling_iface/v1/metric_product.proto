@@ -67,7 +67,7 @@ message UnsoldProductItem {
   int64 piece_count = 6;
   // @gotags: gorm:"serializer:timestamptz"
   google.protobuf.Timestamp last_order_time = 7;
-  string warehouse_name = 8;
+  string warehouse_name = 8; 
 }
 
 message TopProductUnsoldMetric {
@@ -83,9 +83,11 @@ enum ProductOrderMetricSort {
   PRODUCT_ORDER_METRIC_SORT_OWN_PIECE_COUNT = 4;
   PRODUCT_ORDER_METRIC_SORT_OWN_ORDER_COUNT = 5;
   PRODUCT_ORDER_METRIC_SORT_OWN_PIECE_AMOUNT = 6;
+  PRODUCT_ORDER_METRIC_SORT_OWN_LAST_ORDER = 10;
   PRODUCT_ORDER_METRIC_SORT_CROSS_PIECE_COUNT = 7;
   PRODUCT_ORDER_METRIC_SORT_CROSS_ORDER_COUNT = 8;
   PRODUCT_ORDER_METRIC_SORT_CROSS_PIECE_AMOUNT = 9;
+  PRODUCT_ORDER_METRIC_SORT_CROSS_LAST_ORDER = 11;
 }
 
 message ProductOrderMetricItem {
@@ -98,10 +100,14 @@ message ProductOrderMetricItem {
   int64 own_piece_count = 5;
   int64 own_order_count = 6;
   double own_piece_amount = 7;
+  // @gotags: gorm:"serializer:timestamptz"
+  google.protobuf.Timestamp own_last_order = 11;
 
   int64 cross_piece_count = 8;
   int64 cross_order_count = 9;
   double cross_piece_amount = 10;
+  // @gotags: gorm:"serializer:timestamptz"
+  google.protobuf.Timestamp cross_last_order = 12;
 }
 
 message ProductOrderMetric {

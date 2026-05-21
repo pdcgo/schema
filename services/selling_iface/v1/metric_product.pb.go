@@ -33,24 +33,28 @@ const (
 	ProductOrderMetricSort_PRODUCT_ORDER_METRIC_SORT_OWN_PIECE_COUNT    ProductOrderMetricSort = 4
 	ProductOrderMetricSort_PRODUCT_ORDER_METRIC_SORT_OWN_ORDER_COUNT    ProductOrderMetricSort = 5
 	ProductOrderMetricSort_PRODUCT_ORDER_METRIC_SORT_OWN_PIECE_AMOUNT   ProductOrderMetricSort = 6
+	ProductOrderMetricSort_PRODUCT_ORDER_METRIC_SORT_OWN_LAST_ORDER     ProductOrderMetricSort = 10
 	ProductOrderMetricSort_PRODUCT_ORDER_METRIC_SORT_CROSS_PIECE_COUNT  ProductOrderMetricSort = 7
 	ProductOrderMetricSort_PRODUCT_ORDER_METRIC_SORT_CROSS_ORDER_COUNT  ProductOrderMetricSort = 8
 	ProductOrderMetricSort_PRODUCT_ORDER_METRIC_SORT_CROSS_PIECE_AMOUNT ProductOrderMetricSort = 9
+	ProductOrderMetricSort_PRODUCT_ORDER_METRIC_SORT_CROSS_LAST_ORDER   ProductOrderMetricSort = 11
 )
 
 // Enum value maps for ProductOrderMetricSort.
 var (
 	ProductOrderMetricSort_name = map[int32]string{
-		0: "PRODUCT_ORDER_METRIC_SORT_UNSPECIFIED",
-		1: "PRODUCT_ORDER_METRIC_SORT_PIECE_COUNT",
-		2: "PRODUCT_ORDER_METRIC_SORT_ORDER_COUNT",
-		3: "PRODUCT_ORDER_METRIC_SORT_PIECE_AMOUNT",
-		4: "PRODUCT_ORDER_METRIC_SORT_OWN_PIECE_COUNT",
-		5: "PRODUCT_ORDER_METRIC_SORT_OWN_ORDER_COUNT",
-		6: "PRODUCT_ORDER_METRIC_SORT_OWN_PIECE_AMOUNT",
-		7: "PRODUCT_ORDER_METRIC_SORT_CROSS_PIECE_COUNT",
-		8: "PRODUCT_ORDER_METRIC_SORT_CROSS_ORDER_COUNT",
-		9: "PRODUCT_ORDER_METRIC_SORT_CROSS_PIECE_AMOUNT",
+		0:  "PRODUCT_ORDER_METRIC_SORT_UNSPECIFIED",
+		1:  "PRODUCT_ORDER_METRIC_SORT_PIECE_COUNT",
+		2:  "PRODUCT_ORDER_METRIC_SORT_ORDER_COUNT",
+		3:  "PRODUCT_ORDER_METRIC_SORT_PIECE_AMOUNT",
+		4:  "PRODUCT_ORDER_METRIC_SORT_OWN_PIECE_COUNT",
+		5:  "PRODUCT_ORDER_METRIC_SORT_OWN_ORDER_COUNT",
+		6:  "PRODUCT_ORDER_METRIC_SORT_OWN_PIECE_AMOUNT",
+		10: "PRODUCT_ORDER_METRIC_SORT_OWN_LAST_ORDER",
+		7:  "PRODUCT_ORDER_METRIC_SORT_CROSS_PIECE_COUNT",
+		8:  "PRODUCT_ORDER_METRIC_SORT_CROSS_ORDER_COUNT",
+		9:  "PRODUCT_ORDER_METRIC_SORT_CROSS_PIECE_AMOUNT",
+		11: "PRODUCT_ORDER_METRIC_SORT_CROSS_LAST_ORDER",
 	}
 	ProductOrderMetricSort_value = map[string]int32{
 		"PRODUCT_ORDER_METRIC_SORT_UNSPECIFIED":        0,
@@ -60,9 +64,11 @@ var (
 		"PRODUCT_ORDER_METRIC_SORT_OWN_PIECE_COUNT":    4,
 		"PRODUCT_ORDER_METRIC_SORT_OWN_ORDER_COUNT":    5,
 		"PRODUCT_ORDER_METRIC_SORT_OWN_PIECE_AMOUNT":   6,
+		"PRODUCT_ORDER_METRIC_SORT_OWN_LAST_ORDER":     10,
 		"PRODUCT_ORDER_METRIC_SORT_CROSS_PIECE_COUNT":  7,
 		"PRODUCT_ORDER_METRIC_SORT_CROSS_ORDER_COUNT":  8,
 		"PRODUCT_ORDER_METRIC_SORT_CROSS_PIECE_AMOUNT": 9,
+		"PRODUCT_ORDER_METRIC_SORT_CROSS_LAST_ORDER":   11,
 	}
 )
 
@@ -668,19 +674,23 @@ func (x *TopProductUnsoldMetric) GetItems() []*UnsoldProductItem {
 }
 
 type ProductOrderMetricItem struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	ProductId        uint64                 `protobuf:"varint,1,opt,name=product_id,json=productId,proto3" json:"product_id,omitempty"`
-	PieceCount       int64                  `protobuf:"varint,2,opt,name=piece_count,json=pieceCount,proto3" json:"piece_count,omitempty"`
-	OrderCount       int64                  `protobuf:"varint,3,opt,name=order_count,json=orderCount,proto3" json:"order_count,omitempty"`
-	PieceAmount      float64                `protobuf:"fixed64,4,opt,name=piece_amount,json=pieceAmount,proto3" json:"piece_amount,omitempty"`
-	OwnPieceCount    int64                  `protobuf:"varint,5,opt,name=own_piece_count,json=ownPieceCount,proto3" json:"own_piece_count,omitempty"`
-	OwnOrderCount    int64                  `protobuf:"varint,6,opt,name=own_order_count,json=ownOrderCount,proto3" json:"own_order_count,omitempty"`
-	OwnPieceAmount   float64                `protobuf:"fixed64,7,opt,name=own_piece_amount,json=ownPieceAmount,proto3" json:"own_piece_amount,omitempty"`
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	ProductId      uint64                 `protobuf:"varint,1,opt,name=product_id,json=productId,proto3" json:"product_id,omitempty"`
+	PieceCount     int64                  `protobuf:"varint,2,opt,name=piece_count,json=pieceCount,proto3" json:"piece_count,omitempty"`
+	OrderCount     int64                  `protobuf:"varint,3,opt,name=order_count,json=orderCount,proto3" json:"order_count,omitempty"`
+	PieceAmount    float64                `protobuf:"fixed64,4,opt,name=piece_amount,json=pieceAmount,proto3" json:"piece_amount,omitempty"`
+	OwnPieceCount  int64                  `protobuf:"varint,5,opt,name=own_piece_count,json=ownPieceCount,proto3" json:"own_piece_count,omitempty"`
+	OwnOrderCount  int64                  `protobuf:"varint,6,opt,name=own_order_count,json=ownOrderCount,proto3" json:"own_order_count,omitempty"`
+	OwnPieceAmount float64                `protobuf:"fixed64,7,opt,name=own_piece_amount,json=ownPieceAmount,proto3" json:"own_piece_amount,omitempty"`
+	// @gotags: gorm:"serializer:timestamptz"
+	OwnLastOrder     *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=own_last_order,json=ownLastOrder,proto3" json:"own_last_order,omitempty" gorm:"serializer:timestamptz"`
 	CrossPieceCount  int64                  `protobuf:"varint,8,opt,name=cross_piece_count,json=crossPieceCount,proto3" json:"cross_piece_count,omitempty"`
 	CrossOrderCount  int64                  `protobuf:"varint,9,opt,name=cross_order_count,json=crossOrderCount,proto3" json:"cross_order_count,omitempty"`
 	CrossPieceAmount float64                `protobuf:"fixed64,10,opt,name=cross_piece_amount,json=crossPieceAmount,proto3" json:"cross_piece_amount,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	// @gotags: gorm:"serializer:timestamptz"
+	CrossLastOrder *timestamppb.Timestamp `protobuf:"bytes,12,opt,name=cross_last_order,json=crossLastOrder,proto3" json:"cross_last_order,omitempty" gorm:"serializer:timestamptz"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *ProductOrderMetricItem) Reset() {
@@ -762,6 +772,13 @@ func (x *ProductOrderMetricItem) GetOwnPieceAmount() float64 {
 	return 0
 }
 
+func (x *ProductOrderMetricItem) GetOwnLastOrder() *timestamppb.Timestamp {
+	if x != nil {
+		return x.OwnLastOrder
+	}
+	return nil
+}
+
 func (x *ProductOrderMetricItem) GetCrossPieceCount() int64 {
 	if x != nil {
 		return x.CrossPieceCount
@@ -781,6 +798,13 @@ func (x *ProductOrderMetricItem) GetCrossPieceAmount() float64 {
 		return x.CrossPieceAmount
 	}
 	return 0
+}
+
+func (x *ProductOrderMetricItem) GetCrossLastOrder() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CrossLastOrder
+	}
+	return nil
 }
 
 type ProductOrderMetric struct {
@@ -888,7 +912,7 @@ const file_selling_iface_v1_metric_product_proto_rawDesc = "" +
 	"\x0ewarehouse_name\x18\b \x01(\tR\rwarehouseName\"\x85\x01\n" +
 	"\x16TopProductUnsoldMetric\x120\n" +
 	"\x04type\x18\x01 \x01(\x0e2\x1c.selling_iface.v1.MetricTypeR\x04type\x129\n" +
-	"\x05items\x18\x02 \x03(\v2#.selling_iface.v1.UnsoldProductItemR\x05items\"\x9c\x03\n" +
+	"\x05items\x18\x02 \x03(\v2#.selling_iface.v1.UnsoldProductItemR\x05items\"\xa4\x04\n" +
 	"\x16ProductOrderMetricItem\x12\x1d\n" +
 	"\n" +
 	"product_id\x18\x01 \x01(\x04R\tproductId\x12\x1f\n" +
@@ -899,16 +923,18 @@ const file_selling_iface_v1_metric_product_proto_rawDesc = "" +
 	"\fpiece_amount\x18\x04 \x01(\x01R\vpieceAmount\x12&\n" +
 	"\x0fown_piece_count\x18\x05 \x01(\x03R\rownPieceCount\x12&\n" +
 	"\x0fown_order_count\x18\x06 \x01(\x03R\rownOrderCount\x12(\n" +
-	"\x10own_piece_amount\x18\a \x01(\x01R\x0eownPieceAmount\x12*\n" +
+	"\x10own_piece_amount\x18\a \x01(\x01R\x0eownPieceAmount\x12@\n" +
+	"\x0eown_last_order\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\fownLastOrder\x12*\n" +
 	"\x11cross_piece_count\x18\b \x01(\x03R\x0fcrossPieceCount\x12*\n" +
 	"\x11cross_order_count\x18\t \x01(\x03R\x0fcrossOrderCount\x12,\n" +
 	"\x12cross_piece_amount\x18\n" +
-	" \x01(\x01R\x10crossPieceAmount\"\xbb\x01\n" +
+	" \x01(\x01R\x10crossPieceAmount\x12D\n" +
+	"\x10cross_last_order\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\x0ecrossLastOrder\"\xbb\x01\n" +
 	"\x12ProductOrderMetric\x12B\n" +
 	"\x04data\x18\x01 \x03(\v2..selling_iface.v1.ProductOrderMetric.DataEntryR\x04data\x1aa\n" +
 	"\tDataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\x04R\x03key\x12>\n" +
-	"\x05value\x18\x02 \x01(\v2(.selling_iface.v1.ProductOrderMetricItemR\x05value:\x028\x01*\xe7\x03\n" +
+	"\x05value\x18\x02 \x01(\v2(.selling_iface.v1.ProductOrderMetricItemR\x05value:\x028\x01*\xc5\x04\n" +
 	"\x16ProductOrderMetricSort\x12)\n" +
 	"%PRODUCT_ORDER_METRIC_SORT_UNSPECIFIED\x10\x00\x12)\n" +
 	"%PRODUCT_ORDER_METRIC_SORT_PIECE_COUNT\x10\x01\x12)\n" +
@@ -916,10 +942,13 @@ const file_selling_iface_v1_metric_product_proto_rawDesc = "" +
 	"&PRODUCT_ORDER_METRIC_SORT_PIECE_AMOUNT\x10\x03\x12-\n" +
 	")PRODUCT_ORDER_METRIC_SORT_OWN_PIECE_COUNT\x10\x04\x12-\n" +
 	")PRODUCT_ORDER_METRIC_SORT_OWN_ORDER_COUNT\x10\x05\x12.\n" +
-	"*PRODUCT_ORDER_METRIC_SORT_OWN_PIECE_AMOUNT\x10\x06\x12/\n" +
+	"*PRODUCT_ORDER_METRIC_SORT_OWN_PIECE_AMOUNT\x10\x06\x12,\n" +
+	"(PRODUCT_ORDER_METRIC_SORT_OWN_LAST_ORDER\x10\n" +
+	"\x12/\n" +
 	"+PRODUCT_ORDER_METRIC_SORT_CROSS_PIECE_COUNT\x10\a\x12/\n" +
 	"+PRODUCT_ORDER_METRIC_SORT_CROSS_ORDER_COUNT\x10\b\x120\n" +
-	",PRODUCT_ORDER_METRIC_SORT_CROSS_PIECE_AMOUNT\x10\tB\xc8\x01\n" +
+	",PRODUCT_ORDER_METRIC_SORT_CROSS_PIECE_AMOUNT\x10\t\x12.\n" +
+	"*PRODUCT_ORDER_METRIC_SORT_CROSS_LAST_ORDER\x10\vB\xc8\x01\n" +
 	"\x14com.selling_iface.v1B\x12MetricProductProtoP\x01Z?github.com/pdcgo/schema/services/selling_iface/v1;selling_iface\xa2\x02\x03SXX\xaa\x02\x0fSellingIface.V1\xca\x02\x0fSellingIface\\V1\xe2\x02\x1bSellingIface\\V1\\GPBMetadata\xea\x02\x10SellingIface::V1b\x06proto3"
 
 var (
@@ -962,13 +991,15 @@ var file_selling_iface_v1_metric_product_proto_depIdxs = []int32{
 	11, // 6: selling_iface.v1.UnsoldProductItem.last_order_time:type_name -> google.protobuf.Timestamp
 	13, // 7: selling_iface.v1.TopProductUnsoldMetric.type:type_name -> selling_iface.v1.MetricType
 	6,  // 8: selling_iface.v1.TopProductUnsoldMetric.items:type_name -> selling_iface.v1.UnsoldProductItem
-	10, // 9: selling_iface.v1.ProductOrderMetric.data:type_name -> selling_iface.v1.ProductOrderMetric.DataEntry
-	8,  // 10: selling_iface.v1.ProductOrderMetric.DataEntry.value:type_name -> selling_iface.v1.ProductOrderMetricItem
-	11, // [11:11] is the sub-list for method output_type
-	11, // [11:11] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	11, // 9: selling_iface.v1.ProductOrderMetricItem.own_last_order:type_name -> google.protobuf.Timestamp
+	11, // 10: selling_iface.v1.ProductOrderMetricItem.cross_last_order:type_name -> google.protobuf.Timestamp
+	10, // 11: selling_iface.v1.ProductOrderMetric.data:type_name -> selling_iface.v1.ProductOrderMetric.DataEntry
+	8,  // 12: selling_iface.v1.ProductOrderMetric.DataEntry.value:type_name -> selling_iface.v1.ProductOrderMetricItem
+	13, // [13:13] is the sub-list for method output_type
+	13, // [13:13] is the sub-list for method input_type
+	13, // [13:13] is the sub-list for extension type_name
+	13, // [13:13] is the sub-list for extension extendee
+	0,  // [0:13] is the sub-list for field type_name
 }
 
 func init() { file_selling_iface_v1_metric_product_proto_init() }
