@@ -295,7 +295,6 @@ func (*ShopMetricSort_ShopProductCostMetricSort) isShopMetricSort_S() {}
 
 type ShopMetric struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	Type  ShopMetricType         `protobuf:"varint,1,opt,name=type,proto3,enum=selling_iface.v1.ShopMetricType" json:"type,omitempty"`
 	// Types that are valid to be assigned to Data:
 	//
 	//	*ShopMetric_ShopOrderMetric
@@ -335,13 +334,6 @@ func (*ShopMetric) Descriptor() ([]byte, []int) {
 	return file_selling_iface_v1_shop_stat_metric_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *ShopMetric) GetType() ShopMetricType {
-	if x != nil {
-		return x.Type
-	}
-	return ShopMetricType_SHOP_METRIC_TYPE_UNSPECIFIED
-}
-
 func (x *ShopMetric) GetData() isShopMetric_Data {
 	if x != nil {
 		return x.Data
@@ -372,11 +364,11 @@ type isShopMetric_Data interface {
 }
 
 type ShopMetric_ShopOrderMetric struct {
-	ShopOrderMetric *v1.ShopOrderMetric `protobuf:"bytes,2,opt,name=shop_order_metric,json=shopOrderMetric,proto3,oneof"`
+	ShopOrderMetric *v1.ShopOrderMetric `protobuf:"bytes,1,opt,name=shop_order_metric,json=shopOrderMetric,proto3,oneof"`
 }
 
 type ShopMetric_ShopProductCostMetric struct {
-	ShopProductCostMetric *v1.ShopProductCostMetric `protobuf:"bytes,3,opt,name=shop_product_cost_metric,json=shopProductCostMetric,proto3,oneof"`
+	ShopProductCostMetric *v1.ShopProductCostMetric `protobuf:"bytes,2,opt,name=shop_product_cost_metric,json=shopProductCostMetric,proto3,oneof"`
 }
 
 func (*ShopMetric_ShopOrderMetric) isShopMetric_Data() {}
@@ -678,12 +670,11 @@ const file_selling_iface_v1_shop_stat_metric_proto_rawDesc = "" +
 	"commonSort\x12k\n" +
 	"\x16shop_order_metric_sort\x18\x03 \x01(\x0e24.selling_iface.v1.shop_metric.v1.ShopOrderMetricSortH\x00R\x13shopOrderMetricSort\x12~\n" +
 	"\x1dshop_product_cost_metric_sort\x18\x04 \x01(\x0e2:.selling_iface.v1.shop_metric.v1.ShopProductCostMetricSortH\x00R\x19shopProductCostMetricSortB\x03\n" +
-	"\x01s\"\x9d\x02\n" +
+	"\x01s\"\xe7\x01\n" +
 	"\n" +
-	"ShopMetric\x124\n" +
-	"\x04type\x18\x01 \x01(\x0e2 .selling_iface.v1.ShopMetricTypeR\x04type\x12^\n" +
-	"\x11shop_order_metric\x18\x02 \x01(\v20.selling_iface.v1.shop_metric.v1.ShopOrderMetricH\x00R\x0fshopOrderMetric\x12q\n" +
-	"\x18shop_product_cost_metric\x18\x03 \x01(\v26.selling_iface.v1.shop_metric.v1.ShopProductCostMetricH\x00R\x15shopProductCostMetricB\x06\n" +
+	"ShopMetric\x12^\n" +
+	"\x11shop_order_metric\x18\x01 \x01(\v20.selling_iface.v1.shop_metric.v1.ShopOrderMetricH\x00R\x0fshopOrderMetric\x12q\n" +
+	"\x18shop_product_cost_metric\x18\x02 \x01(\v26.selling_iface.v1.shop_metric.v1.ShopProductCostMetricH\x00R\x15shopProductCostMetricB\x06\n" +
 	"\x04data\"\x11\n" +
 	"\x0fShopMetricExtra\"\xe3\x01\n" +
 	"\x14ShopStatMetricFilter\x12\x17\n" +
@@ -759,23 +750,22 @@ var file_selling_iface_v1_shop_stat_metric_proto_depIdxs = []int32{
 	2,  // 1: selling_iface.v1.ShopMetricSort.common_sort:type_name -> selling_iface.v1.CommonShopSort
 	10, // 2: selling_iface.v1.ShopMetricSort.shop_order_metric_sort:type_name -> selling_iface.v1.shop_metric.v1.ShopOrderMetricSort
 	11, // 3: selling_iface.v1.ShopMetricSort.shop_product_cost_metric_sort:type_name -> selling_iface.v1.shop_metric.v1.ShopProductCostMetricSort
-	0,  // 4: selling_iface.v1.ShopMetric.type:type_name -> selling_iface.v1.ShopMetricType
-	12, // 5: selling_iface.v1.ShopMetric.shop_order_metric:type_name -> selling_iface.v1.shop_metric.v1.ShopOrderMetric
-	13, // 6: selling_iface.v1.ShopMetric.shop_product_cost_metric:type_name -> selling_iface.v1.shop_metric.v1.ShopProductCostMetric
-	14, // 7: selling_iface.v1.ShopStatMetricFilter.page:type_name -> common.v1.PageFilter
-	7,  // 8: selling_iface.v1.ShopStatMetricFilter.range:type_name -> selling_iface.v1.ShopStatTimeRange
-	15, // 9: selling_iface.v1.ShopStatTimeRange.start:type_name -> google.protobuf.Timestamp
-	15, // 10: selling_iface.v1.ShopStatTimeRange.end:type_name -> google.protobuf.Timestamp
-	6,  // 11: selling_iface.v1.ShopStatMetricRequest.filter:type_name -> selling_iface.v1.ShopStatMetricFilter
-	3,  // 12: selling_iface.v1.ShopStatMetricRequest.sort:type_name -> selling_iface.v1.ShopMetricSort
-	5,  // 13: selling_iface.v1.ShopStatMetricRequest.metric_extras:type_name -> selling_iface.v1.ShopMetricExtra
-	0,  // 14: selling_iface.v1.ShopStatMetricRequest.metric_types:type_name -> selling_iface.v1.ShopMetricType
-	4,  // 15: selling_iface.v1.ShopStatMetricResponse.metrics:type_name -> selling_iface.v1.ShopMetric
-	16, // [16:16] is the sub-list for method output_type
-	16, // [16:16] is the sub-list for method input_type
-	16, // [16:16] is the sub-list for extension type_name
-	16, // [16:16] is the sub-list for extension extendee
-	0,  // [0:16] is the sub-list for field type_name
+	12, // 4: selling_iface.v1.ShopMetric.shop_order_metric:type_name -> selling_iface.v1.shop_metric.v1.ShopOrderMetric
+	13, // 5: selling_iface.v1.ShopMetric.shop_product_cost_metric:type_name -> selling_iface.v1.shop_metric.v1.ShopProductCostMetric
+	14, // 6: selling_iface.v1.ShopStatMetricFilter.page:type_name -> common.v1.PageFilter
+	7,  // 7: selling_iface.v1.ShopStatMetricFilter.range:type_name -> selling_iface.v1.ShopStatTimeRange
+	15, // 8: selling_iface.v1.ShopStatTimeRange.start:type_name -> google.protobuf.Timestamp
+	15, // 9: selling_iface.v1.ShopStatTimeRange.end:type_name -> google.protobuf.Timestamp
+	6,  // 10: selling_iface.v1.ShopStatMetricRequest.filter:type_name -> selling_iface.v1.ShopStatMetricFilter
+	3,  // 11: selling_iface.v1.ShopStatMetricRequest.sort:type_name -> selling_iface.v1.ShopMetricSort
+	5,  // 12: selling_iface.v1.ShopStatMetricRequest.metric_extras:type_name -> selling_iface.v1.ShopMetricExtra
+	0,  // 13: selling_iface.v1.ShopStatMetricRequest.metric_types:type_name -> selling_iface.v1.ShopMetricType
+	4,  // 14: selling_iface.v1.ShopStatMetricResponse.metrics:type_name -> selling_iface.v1.ShopMetric
+	15, // [15:15] is the sub-list for method output_type
+	15, // [15:15] is the sub-list for method input_type
+	15, // [15:15] is the sub-list for extension type_name
+	15, // [15:15] is the sub-list for extension extendee
+	0,  // [0:15] is the sub-list for field type_name
 }
 
 func init() { file_selling_iface_v1_shop_stat_metric_proto_init() }

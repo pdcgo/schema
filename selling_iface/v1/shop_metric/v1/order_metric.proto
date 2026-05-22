@@ -7,10 +7,15 @@ option go_package = "github.com/pdcgo/schema/services/selling_iface/v1/shop_metr
 
 message ShopOrderItem {
   uint64 shop_id = 1;
-  double total_order_amount = 2;
-  int64 transaction_count = 3;
+  int64 transaction_count = 2;
+  int64 piece_count = 3;
+  double piece_amount = 4;
+  float unit_per_transaction = 5;
+  double mp_total_amount = 6;
+  double order_total_amount = 7;
+  double average_transaction_value = 8;
   // @gotags: gorm:"serializer:timestamptz"
-  google.protobuf.Timestamp last_order_created = 4;
+  google.protobuf.Timestamp last_order_created = 9;
 }
 
 message ShopOrderMetric {
@@ -19,9 +24,14 @@ message ShopOrderMetric {
 
 enum ShopOrderMetricSort {
   SHOP_ORDER_METRIC_SORT_UNSPECIFIED = 0;
-  SHOP_ORDER_METRIC_SORT_TOTAL_ORDER_AMOUNT = 1;
-  SHOP_ORDER_METRIC_SORT_TRANSACTION_COUNT = 2;
-  SHOP_ORDER_METRIC_SORT_LAST_ORDER_CREATED = 3;
+  SHOP_ORDER_METRIC_SORT_TRANSACTION_COUNT = 1;
+  SHOP_ORDER_METRIC_SORT_PIECE_COUNT = 2;
+  SHOP_ORDER_METRIC_SORT_PIECE_AMOUNT = 3;
+  SHOP_ORDER_METRIC_SORT_UNIT_PER_TRANSACTION = 4;
+  SHOP_ORDER_METRIC_SORT_MP_TOTAL_AMOUNT = 5;
+  SHOP_ORDER_METRIC_SORT_ORDER_TOTAL_AMOUNT = 6;
+  SHOP_ORDER_METRIC_SORT_AVERAGE_TRANSACTION_VALUE = 7;
+  SHOP_ORDER_METRIC_SORT_LAST_ORDER_CREATED = 8;
 }
 
 message ShopProductCostItem {

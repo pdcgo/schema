@@ -41,10 +41,9 @@ message ShopMetricSort {
 }
 
 message ShopMetric {
-  ShopMetricType type = 1;
   oneof data {
-    selling_iface.v1.shop_metric.v1.ShopOrderMetric shop_order_metric = 2;
-    selling_iface.v1.shop_metric.v1.ShopProductCostMetric shop_product_cost_metric = 3;
+    selling_iface.v1.shop_metric.v1.ShopOrderMetric shop_order_metric = 1;
+    selling_iface.v1.shop_metric.v1.ShopProductCostMetric shop_product_cost_metric = 2;
   }
 }
 

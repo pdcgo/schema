@@ -25,25 +25,40 @@ const (
 type ShopOrderMetricSort int32
 
 const (
-	ShopOrderMetricSort_SHOP_ORDER_METRIC_SORT_UNSPECIFIED        ShopOrderMetricSort = 0
-	ShopOrderMetricSort_SHOP_ORDER_METRIC_SORT_TOTAL_ORDER_AMOUNT ShopOrderMetricSort = 1
-	ShopOrderMetricSort_SHOP_ORDER_METRIC_SORT_TRANSACTION_COUNT  ShopOrderMetricSort = 2
-	ShopOrderMetricSort_SHOP_ORDER_METRIC_SORT_LAST_ORDER_CREATED ShopOrderMetricSort = 3
+	ShopOrderMetricSort_SHOP_ORDER_METRIC_SORT_UNSPECIFIED               ShopOrderMetricSort = 0
+	ShopOrderMetricSort_SHOP_ORDER_METRIC_SORT_TRANSACTION_COUNT         ShopOrderMetricSort = 1
+	ShopOrderMetricSort_SHOP_ORDER_METRIC_SORT_PIECE_COUNT               ShopOrderMetricSort = 2
+	ShopOrderMetricSort_SHOP_ORDER_METRIC_SORT_PIECE_AMOUNT              ShopOrderMetricSort = 3
+	ShopOrderMetricSort_SHOP_ORDER_METRIC_SORT_UNIT_PER_TRANSACTION      ShopOrderMetricSort = 4
+	ShopOrderMetricSort_SHOP_ORDER_METRIC_SORT_MP_TOTAL_AMOUNT           ShopOrderMetricSort = 5
+	ShopOrderMetricSort_SHOP_ORDER_METRIC_SORT_ORDER_TOTAL_AMOUNT        ShopOrderMetricSort = 6
+	ShopOrderMetricSort_SHOP_ORDER_METRIC_SORT_AVERAGE_TRANSACTION_VALUE ShopOrderMetricSort = 7
+	ShopOrderMetricSort_SHOP_ORDER_METRIC_SORT_LAST_ORDER_CREATED        ShopOrderMetricSort = 8
 )
 
 // Enum value maps for ShopOrderMetricSort.
 var (
 	ShopOrderMetricSort_name = map[int32]string{
 		0: "SHOP_ORDER_METRIC_SORT_UNSPECIFIED",
-		1: "SHOP_ORDER_METRIC_SORT_TOTAL_ORDER_AMOUNT",
-		2: "SHOP_ORDER_METRIC_SORT_TRANSACTION_COUNT",
-		3: "SHOP_ORDER_METRIC_SORT_LAST_ORDER_CREATED",
+		1: "SHOP_ORDER_METRIC_SORT_TRANSACTION_COUNT",
+		2: "SHOP_ORDER_METRIC_SORT_PIECE_COUNT",
+		3: "SHOP_ORDER_METRIC_SORT_PIECE_AMOUNT",
+		4: "SHOP_ORDER_METRIC_SORT_UNIT_PER_TRANSACTION",
+		5: "SHOP_ORDER_METRIC_SORT_MP_TOTAL_AMOUNT",
+		6: "SHOP_ORDER_METRIC_SORT_ORDER_TOTAL_AMOUNT",
+		7: "SHOP_ORDER_METRIC_SORT_AVERAGE_TRANSACTION_VALUE",
+		8: "SHOP_ORDER_METRIC_SORT_LAST_ORDER_CREATED",
 	}
 	ShopOrderMetricSort_value = map[string]int32{
-		"SHOP_ORDER_METRIC_SORT_UNSPECIFIED":        0,
-		"SHOP_ORDER_METRIC_SORT_TOTAL_ORDER_AMOUNT": 1,
-		"SHOP_ORDER_METRIC_SORT_TRANSACTION_COUNT":  2,
-		"SHOP_ORDER_METRIC_SORT_LAST_ORDER_CREATED": 3,
+		"SHOP_ORDER_METRIC_SORT_UNSPECIFIED":               0,
+		"SHOP_ORDER_METRIC_SORT_TRANSACTION_COUNT":         1,
+		"SHOP_ORDER_METRIC_SORT_PIECE_COUNT":               2,
+		"SHOP_ORDER_METRIC_SORT_PIECE_AMOUNT":              3,
+		"SHOP_ORDER_METRIC_SORT_UNIT_PER_TRANSACTION":      4,
+		"SHOP_ORDER_METRIC_SORT_MP_TOTAL_AMOUNT":           5,
+		"SHOP_ORDER_METRIC_SORT_ORDER_TOTAL_AMOUNT":        6,
+		"SHOP_ORDER_METRIC_SORT_AVERAGE_TRANSACTION_VALUE": 7,
+		"SHOP_ORDER_METRIC_SORT_LAST_ORDER_CREATED":        8,
 	}
 )
 
@@ -130,12 +145,17 @@ func (ShopProductCostMetricSort) EnumDescriptor() ([]byte, []int) {
 }
 
 type ShopOrderItem struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	ShopId           uint64                 `protobuf:"varint,1,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
-	TotalOrderAmount float64                `protobuf:"fixed64,2,opt,name=total_order_amount,json=totalOrderAmount,proto3" json:"total_order_amount,omitempty"`
-	TransactionCount int64                  `protobuf:"varint,3,opt,name=transaction_count,json=transactionCount,proto3" json:"transaction_count,omitempty"`
+	state                   protoimpl.MessageState `protogen:"open.v1"`
+	ShopId                  uint64                 `protobuf:"varint,1,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
+	TransactionCount        int64                  `protobuf:"varint,2,opt,name=transaction_count,json=transactionCount,proto3" json:"transaction_count,omitempty"`
+	PieceCount              int64                  `protobuf:"varint,3,opt,name=piece_count,json=pieceCount,proto3" json:"piece_count,omitempty"`
+	PieceAmount             float64                `protobuf:"fixed64,4,opt,name=piece_amount,json=pieceAmount,proto3" json:"piece_amount,omitempty"`
+	UnitPerTransaction      float32                `protobuf:"fixed32,5,opt,name=unit_per_transaction,json=unitPerTransaction,proto3" json:"unit_per_transaction,omitempty"`
+	MpTotalAmount           float64                `protobuf:"fixed64,6,opt,name=mp_total_amount,json=mpTotalAmount,proto3" json:"mp_total_amount,omitempty"`
+	OrderTotalAmount        float64                `protobuf:"fixed64,7,opt,name=order_total_amount,json=orderTotalAmount,proto3" json:"order_total_amount,omitempty"`
+	AverageTransactionValue float64                `protobuf:"fixed64,8,opt,name=average_transaction_value,json=averageTransactionValue,proto3" json:"average_transaction_value,omitempty"`
 	// @gotags: gorm:"serializer:timestamptz"
-	LastOrderCreated *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=last_order_created,json=lastOrderCreated,proto3" json:"last_order_created,omitempty" gorm:"serializer:timestamptz"`
+	LastOrderCreated *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=last_order_created,json=lastOrderCreated,proto3" json:"last_order_created,omitempty" gorm:"serializer:timestamptz"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -177,16 +197,51 @@ func (x *ShopOrderItem) GetShopId() uint64 {
 	return 0
 }
 
-func (x *ShopOrderItem) GetTotalOrderAmount() float64 {
+func (x *ShopOrderItem) GetTransactionCount() int64 {
 	if x != nil {
-		return x.TotalOrderAmount
+		return x.TransactionCount
 	}
 	return 0
 }
 
-func (x *ShopOrderItem) GetTransactionCount() int64 {
+func (x *ShopOrderItem) GetPieceCount() int64 {
 	if x != nil {
-		return x.TransactionCount
+		return x.PieceCount
+	}
+	return 0
+}
+
+func (x *ShopOrderItem) GetPieceAmount() float64 {
+	if x != nil {
+		return x.PieceAmount
+	}
+	return 0
+}
+
+func (x *ShopOrderItem) GetUnitPerTransaction() float32 {
+	if x != nil {
+		return x.UnitPerTransaction
+	}
+	return 0
+}
+
+func (x *ShopOrderItem) GetMpTotalAmount() float64 {
+	if x != nil {
+		return x.MpTotalAmount
+	}
+	return 0
+}
+
+func (x *ShopOrderItem) GetOrderTotalAmount() float64 {
+	if x != nil {
+		return x.OrderTotalAmount
+	}
+	return 0
+}
+
+func (x *ShopOrderItem) GetAverageTransactionValue() float64 {
+	if x != nil {
+		return x.AverageTransactionValue
 	}
 	return 0
 }
@@ -366,12 +421,18 @@ var File_selling_iface_v1_shop_metric_v1_order_metric_proto protoreflect.FileDes
 
 const file_selling_iface_v1_shop_metric_v1_order_metric_proto_rawDesc = "" +
 	"\n" +
-	"2selling_iface/v1/shop_metric/v1/order_metric.proto\x12\x1fselling_iface.v1.shop_metric.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xcd\x01\n" +
+	"2selling_iface/v1/shop_metric/v1/order_metric.proto\x12\x1fselling_iface.v1.shop_metric.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xa7\x03\n" +
 	"\rShopOrderItem\x12\x17\n" +
-	"\ashop_id\x18\x01 \x01(\x04R\x06shopId\x12,\n" +
-	"\x12total_order_amount\x18\x02 \x01(\x01R\x10totalOrderAmount\x12+\n" +
-	"\x11transaction_count\x18\x03 \x01(\x03R\x10transactionCount\x12H\n" +
-	"\x12last_order_created\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\x10lastOrderCreated\"\xca\x01\n" +
+	"\ashop_id\x18\x01 \x01(\x04R\x06shopId\x12+\n" +
+	"\x11transaction_count\x18\x02 \x01(\x03R\x10transactionCount\x12\x1f\n" +
+	"\vpiece_count\x18\x03 \x01(\x03R\n" +
+	"pieceCount\x12!\n" +
+	"\fpiece_amount\x18\x04 \x01(\x01R\vpieceAmount\x120\n" +
+	"\x14unit_per_transaction\x18\x05 \x01(\x02R\x12unitPerTransaction\x12&\n" +
+	"\x0fmp_total_amount\x18\x06 \x01(\x01R\rmpTotalAmount\x12,\n" +
+	"\x12order_total_amount\x18\a \x01(\x01R\x10orderTotalAmount\x12:\n" +
+	"\x19average_transaction_value\x18\b \x01(\x01R\x17averageTransactionValue\x12H\n" +
+	"\x12last_order_created\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\x10lastOrderCreated\"\xca\x01\n" +
 	"\x0fShopOrderMetric\x12N\n" +
 	"\x04data\x18\x01 \x03(\v2:.selling_iface.v1.shop_metric.v1.ShopOrderMetric.DataEntryR\x04data\x1ag\n" +
 	"\tDataEntry\x12\x10\n" +
@@ -387,12 +448,17 @@ const file_selling_iface_v1_shop_metric_v1_order_metric_proto_rawDesc = "" +
 	"\x04data\x18\x01 \x03(\v2@.selling_iface.v1.shop_metric.v1.ShopProductCostMetric.DataEntryR\x04data\x1am\n" +
 	"\tDataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\x04R\x03key\x12J\n" +
-	"\x05value\x18\x02 \x01(\v24.selling_iface.v1.shop_metric.v1.ShopProductCostItemR\x05value:\x028\x01*\xc9\x01\n" +
+	"\x05value\x18\x02 \x01(\v24.selling_iface.v1.shop_metric.v1.ShopProductCostItemR\x05value:\x028\x01*\xad\x03\n" +
 	"\x13ShopOrderMetricSort\x12&\n" +
-	"\"SHOP_ORDER_METRIC_SORT_UNSPECIFIED\x10\x00\x12-\n" +
-	")SHOP_ORDER_METRIC_SORT_TOTAL_ORDER_AMOUNT\x10\x01\x12,\n" +
-	"(SHOP_ORDER_METRIC_SORT_TRANSACTION_COUNT\x10\x02\x12-\n" +
-	")SHOP_ORDER_METRIC_SORT_LAST_ORDER_CREATED\x10\x03*\xa4\x02\n" +
+	"\"SHOP_ORDER_METRIC_SORT_UNSPECIFIED\x10\x00\x12,\n" +
+	"(SHOP_ORDER_METRIC_SORT_TRANSACTION_COUNT\x10\x01\x12&\n" +
+	"\"SHOP_ORDER_METRIC_SORT_PIECE_COUNT\x10\x02\x12'\n" +
+	"#SHOP_ORDER_METRIC_SORT_PIECE_AMOUNT\x10\x03\x12/\n" +
+	"+SHOP_ORDER_METRIC_SORT_UNIT_PER_TRANSACTION\x10\x04\x12*\n" +
+	"&SHOP_ORDER_METRIC_SORT_MP_TOTAL_AMOUNT\x10\x05\x12-\n" +
+	")SHOP_ORDER_METRIC_SORT_ORDER_TOTAL_AMOUNT\x10\x06\x124\n" +
+	"0SHOP_ORDER_METRIC_SORT_AVERAGE_TRANSACTION_VALUE\x10\a\x12-\n" +
+	")SHOP_ORDER_METRIC_SORT_LAST_ORDER_CREATED\x10\b*\xa4\x02\n" +
 	"\x19ShopProductCostMetricSort\x12-\n" +
 	")SHOP_PRODUCT_COST_METRIC_SORT_UNSPECIFIED\x10\x00\x123\n" +
 	"/SHOP_PRODUCT_COST_METRIC_SORT_OWN_PRODUCT_COUNT\x10\x01\x124\n" +
