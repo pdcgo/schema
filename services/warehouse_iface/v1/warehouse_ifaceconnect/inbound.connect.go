@@ -48,6 +48,9 @@ const (
 	// InboundServiceInboundCancelProcedure is the fully-qualified name of the InboundService's
 	// InboundCancel RPC.
 	InboundServiceInboundCancelProcedure = "/warehouse_iface.v1.InboundService/InboundCancel"
+	// InboundServiceInboundListProcedure is the fully-qualified name of the InboundService's
+	// InboundList RPC.
+	InboundServiceInboundListProcedure = "/warehouse_iface.v1.InboundService/InboundList"
 )
 
 // InboundServiceClient is a client for the warehouse_iface.v1.InboundService service.
@@ -58,6 +61,7 @@ type InboundServiceClient interface {
 	InboundReject(context.Context, *connect.Request[v1.InboundRejectRequest]) (*connect.Response[v1.InboundRejectResponse], error)
 	InboundDetailSearch(context.Context, *connect.Request[v1.InboundDetailSearchRequest]) (*connect.Response[v1.InboundDetailSearchResponse], error)
 	InboundCancel(context.Context, *connect.Request[v1.InboundCancelRequest]) (*connect.Response[v1.InboundCancelResponse], error)
+	InboundList(context.Context, *connect.Request[v1.InboundListRequest]) (*connect.Response[v1.InboundListResponse], error)
 }
 
 // NewInboundServiceClient constructs a client for the warehouse_iface.v1.InboundService service. By
@@ -101,6 +105,12 @@ func NewInboundServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			connect.WithSchema(inboundServiceMethods.ByName("InboundCancel")),
 			connect.WithClientOptions(opts...),
 		),
+		inboundList: connect.NewClient[v1.InboundListRequest, v1.InboundListResponse](
+			httpClient,
+			baseURL+InboundServiceInboundListProcedure,
+			connect.WithSchema(inboundServiceMethods.ByName("InboundList")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -111,6 +121,7 @@ type inboundServiceClient struct {
 	inboundReject       *connect.Client[v1.InboundRejectRequest, v1.InboundRejectResponse]
 	inboundDetailSearch *connect.Client[v1.InboundDetailSearchRequest, v1.InboundDetailSearchResponse]
 	inboundCancel       *connect.Client[v1.InboundCancelRequest, v1.InboundCancelResponse]
+	inboundList         *connect.Client[v1.InboundListRequest, v1.InboundListResponse]
 }
 
 // InboundCreate calls warehouse_iface.v1.InboundService.InboundCreate.
@@ -138,6 +149,11 @@ func (c *inboundServiceClient) InboundCancel(ctx context.Context, req *connect.R
 	return c.inboundCancel.CallUnary(ctx, req)
 }
 
+// InboundList calls warehouse_iface.v1.InboundService.InboundList.
+func (c *inboundServiceClient) InboundList(ctx context.Context, req *connect.Request[v1.InboundListRequest]) (*connect.Response[v1.InboundListResponse], error) {
+	return c.inboundList.CallUnary(ctx, req)
+}
+
 // InboundServiceHandler is an implementation of the warehouse_iface.v1.InboundService service.
 type InboundServiceHandler interface {
 	// rpc ResyncStockPending(ResyncStockPendingRequest) returns (ResyncStockPendingResponse);
@@ -146,6 +162,7 @@ type InboundServiceHandler interface {
 	InboundReject(context.Context, *connect.Request[v1.InboundRejectRequest]) (*connect.Response[v1.InboundRejectResponse], error)
 	InboundDetailSearch(context.Context, *connect.Request[v1.InboundDetailSearchRequest]) (*connect.Response[v1.InboundDetailSearchResponse], error)
 	InboundCancel(context.Context, *connect.Request[v1.InboundCancelRequest]) (*connect.Response[v1.InboundCancelResponse], error)
+	InboundList(context.Context, *connect.Request[v1.InboundListRequest]) (*connect.Response[v1.InboundListResponse], error)
 }
 
 // NewInboundServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -185,6 +202,12 @@ func NewInboundServiceHandler(svc InboundServiceHandler, opts ...connect.Handler
 		connect.WithSchema(inboundServiceMethods.ByName("InboundCancel")),
 		connect.WithHandlerOptions(opts...),
 	)
+	inboundServiceInboundListHandler := connect.NewUnaryHandler(
+		InboundServiceInboundListProcedure,
+		svc.InboundList,
+		connect.WithSchema(inboundServiceMethods.ByName("InboundList")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/warehouse_iface.v1.InboundService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case InboundServiceInboundCreateProcedure:
@@ -197,6 +220,8 @@ func NewInboundServiceHandler(svc InboundServiceHandler, opts ...connect.Handler
 			inboundServiceInboundDetailSearchHandler.ServeHTTP(w, r)
 		case InboundServiceInboundCancelProcedure:
 			inboundServiceInboundCancelHandler.ServeHTTP(w, r)
+		case InboundServiceInboundListProcedure:
+			inboundServiceInboundListHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -224,4 +249,8 @@ func (UnimplementedInboundServiceHandler) InboundDetailSearch(context.Context, *
 
 func (UnimplementedInboundServiceHandler) InboundCancel(context.Context, *connect.Request[v1.InboundCancelRequest]) (*connect.Response[v1.InboundCancelResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("warehouse_iface.v1.InboundService.InboundCancel is not implemented"))
+}
+
+func (UnimplementedInboundServiceHandler) InboundList(context.Context, *connect.Request[v1.InboundListRequest]) (*connect.Response[v1.InboundListResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("warehouse_iface.v1.InboundService.InboundList is not implemented"))
 }

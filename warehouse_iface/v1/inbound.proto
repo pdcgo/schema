@@ -18,6 +18,8 @@ service InboundService {
     option (mcp_iface.v1.include) = true;
   }
   rpc InboundCancel(InboundCancelRequest) returns (InboundCancelResponse);
+
+  rpc InboundList(InboundListRequest) returns (InboundListResponse);
 }
 
 enum ProblemType {
@@ -41,6 +43,29 @@ enum PaymentType {
   PAYMENT_TYPE_UNSPECIFIED = 0;
   PAYMENT_TYPE_SHOPEEPAY = 1;
   PAYMENT_TYPE_TRANSFER = 2;
+}
+
+message InboundListRequest {
+  // status pengiriman
+  // restock / transfer
+  // teamids
+  // daterange
+  // shipping id
+  // search
+}
+
+message InboundListResponse {
+  // id
+  // cs
+  // tim
+  // sku count & pieces
+  // resi
+  // shipping
+  // status
+  // created
+  // arrived
+  // note
+  // toko
 }
 
 message RestockInfo {

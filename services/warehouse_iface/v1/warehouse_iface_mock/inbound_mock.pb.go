@@ -176,3 +176,29 @@ func (mr *MockInboundServiceClientMockRecorder) InboundCancel(ctx, req interface
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "InboundCancel", reflect.TypeOf((*MockInboundService)(nil).InboundCancel), ctx, req)
 }
 
+func (m *MockInboundService) InboundList(ctx context.Context, req *connect.Request[v1.InboundListRequest]) (*connect.Response[v1.InboundListResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "InboundList", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.InboundListResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInboundServiceMockRecorder) InboundList(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "InboundList", reflect.TypeOf((*MockInboundService)(nil).InboundList), ctx, req)
+}
+
+func (m *MockInboundServiceClient) InboundList(ctx context.Context, req *connect.Request[v1.InboundListRequest]) (*connect.Response[v1.InboundListResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "InboundList", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.InboundListResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInboundServiceClientMockRecorder) InboundList(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "InboundList", reflect.TypeOf((*MockInboundService)(nil).InboundList), ctx, req)
+}
+
