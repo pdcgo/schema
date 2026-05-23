@@ -89,6 +89,140 @@ func (ShopOrderMetricSort) EnumDescriptor() ([]byte, []int) {
 	return file_selling_iface_v1_shop_metric_v1_order_metric_proto_rawDescGZIP(), []int{0}
 }
 
+type ShopOrderCompletedMetricSort int32
+
+const (
+	ShopOrderCompletedMetricSort_SHOP_ORDER_COMPLETED_METRIC_SORT_UNSPECIFIED               ShopOrderCompletedMetricSort = 0
+	ShopOrderCompletedMetricSort_SHOP_ORDER_COMPLETED_METRIC_SORT_TRANSACTION_COUNT         ShopOrderCompletedMetricSort = 1
+	ShopOrderCompletedMetricSort_SHOP_ORDER_COMPLETED_METRIC_SORT_PIECE_COUNT               ShopOrderCompletedMetricSort = 2
+	ShopOrderCompletedMetricSort_SHOP_ORDER_COMPLETED_METRIC_SORT_PIECE_AMOUNT              ShopOrderCompletedMetricSort = 3
+	ShopOrderCompletedMetricSort_SHOP_ORDER_COMPLETED_METRIC_SORT_UNIT_PER_TRANSACTION      ShopOrderCompletedMetricSort = 4
+	ShopOrderCompletedMetricSort_SHOP_ORDER_COMPLETED_METRIC_SORT_MP_TOTAL_AMOUNT           ShopOrderCompletedMetricSort = 5
+	ShopOrderCompletedMetricSort_SHOP_ORDER_COMPLETED_METRIC_SORT_ORDER_TOTAL_AMOUNT        ShopOrderCompletedMetricSort = 6
+	ShopOrderCompletedMetricSort_SHOP_ORDER_COMPLETED_METRIC_SORT_AVERAGE_TRANSACTION_VALUE ShopOrderCompletedMetricSort = 7
+	ShopOrderCompletedMetricSort_SHOP_ORDER_COMPLETED_METRIC_SORT_LAST_ORDER_COMPLETED      ShopOrderCompletedMetricSort = 8
+)
+
+// Enum value maps for ShopOrderCompletedMetricSort.
+var (
+	ShopOrderCompletedMetricSort_name = map[int32]string{
+		0: "SHOP_ORDER_COMPLETED_METRIC_SORT_UNSPECIFIED",
+		1: "SHOP_ORDER_COMPLETED_METRIC_SORT_TRANSACTION_COUNT",
+		2: "SHOP_ORDER_COMPLETED_METRIC_SORT_PIECE_COUNT",
+		3: "SHOP_ORDER_COMPLETED_METRIC_SORT_PIECE_AMOUNT",
+		4: "SHOP_ORDER_COMPLETED_METRIC_SORT_UNIT_PER_TRANSACTION",
+		5: "SHOP_ORDER_COMPLETED_METRIC_SORT_MP_TOTAL_AMOUNT",
+		6: "SHOP_ORDER_COMPLETED_METRIC_SORT_ORDER_TOTAL_AMOUNT",
+		7: "SHOP_ORDER_COMPLETED_METRIC_SORT_AVERAGE_TRANSACTION_VALUE",
+		8: "SHOP_ORDER_COMPLETED_METRIC_SORT_LAST_ORDER_COMPLETED",
+	}
+	ShopOrderCompletedMetricSort_value = map[string]int32{
+		"SHOP_ORDER_COMPLETED_METRIC_SORT_UNSPECIFIED":               0,
+		"SHOP_ORDER_COMPLETED_METRIC_SORT_TRANSACTION_COUNT":         1,
+		"SHOP_ORDER_COMPLETED_METRIC_SORT_PIECE_COUNT":               2,
+		"SHOP_ORDER_COMPLETED_METRIC_SORT_PIECE_AMOUNT":              3,
+		"SHOP_ORDER_COMPLETED_METRIC_SORT_UNIT_PER_TRANSACTION":      4,
+		"SHOP_ORDER_COMPLETED_METRIC_SORT_MP_TOTAL_AMOUNT":           5,
+		"SHOP_ORDER_COMPLETED_METRIC_SORT_ORDER_TOTAL_AMOUNT":        6,
+		"SHOP_ORDER_COMPLETED_METRIC_SORT_AVERAGE_TRANSACTION_VALUE": 7,
+		"SHOP_ORDER_COMPLETED_METRIC_SORT_LAST_ORDER_COMPLETED":      8,
+	}
+)
+
+func (x ShopOrderCompletedMetricSort) Enum() *ShopOrderCompletedMetricSort {
+	p := new(ShopOrderCompletedMetricSort)
+	*p = x
+	return p
+}
+
+func (x ShopOrderCompletedMetricSort) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ShopOrderCompletedMetricSort) Descriptor() protoreflect.EnumDescriptor {
+	return file_selling_iface_v1_shop_metric_v1_order_metric_proto_enumTypes[1].Descriptor()
+}
+
+func (ShopOrderCompletedMetricSort) Type() protoreflect.EnumType {
+	return &file_selling_iface_v1_shop_metric_v1_order_metric_proto_enumTypes[1]
+}
+
+func (x ShopOrderCompletedMetricSort) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ShopOrderCompletedMetricSort.Descriptor instead.
+func (ShopOrderCompletedMetricSort) EnumDescriptor() ([]byte, []int) {
+	return file_selling_iface_v1_shop_metric_v1_order_metric_proto_rawDescGZIP(), []int{1}
+}
+
+type ShopOrderCancelledMetricSort int32
+
+const (
+	ShopOrderCancelledMetricSort_SHOP_ORDER_CANCELLED_METRIC_SORT_UNSPECIFIED               ShopOrderCancelledMetricSort = 0
+	ShopOrderCancelledMetricSort_SHOP_ORDER_CANCELLED_METRIC_SORT_TRANSACTION_COUNT         ShopOrderCancelledMetricSort = 1
+	ShopOrderCancelledMetricSort_SHOP_ORDER_CANCELLED_METRIC_SORT_PIECE_COUNT               ShopOrderCancelledMetricSort = 2
+	ShopOrderCancelledMetricSort_SHOP_ORDER_CANCELLED_METRIC_SORT_PIECE_AMOUNT              ShopOrderCancelledMetricSort = 3
+	ShopOrderCancelledMetricSort_SHOP_ORDER_CANCELLED_METRIC_SORT_UNIT_PER_TRANSACTION      ShopOrderCancelledMetricSort = 4
+	ShopOrderCancelledMetricSort_SHOP_ORDER_CANCELLED_METRIC_SORT_MP_TOTAL_AMOUNT           ShopOrderCancelledMetricSort = 5
+	ShopOrderCancelledMetricSort_SHOP_ORDER_CANCELLED_METRIC_SORT_ORDER_TOTAL_AMOUNT        ShopOrderCancelledMetricSort = 6
+	ShopOrderCancelledMetricSort_SHOP_ORDER_CANCELLED_METRIC_SORT_AVERAGE_TRANSACTION_VALUE ShopOrderCancelledMetricSort = 7
+	ShopOrderCancelledMetricSort_SHOP_ORDER_CANCELLED_METRIC_SORT_LAST_ORDER_CANCELLED      ShopOrderCancelledMetricSort = 8
+)
+
+// Enum value maps for ShopOrderCancelledMetricSort.
+var (
+	ShopOrderCancelledMetricSort_name = map[int32]string{
+		0: "SHOP_ORDER_CANCELLED_METRIC_SORT_UNSPECIFIED",
+		1: "SHOP_ORDER_CANCELLED_METRIC_SORT_TRANSACTION_COUNT",
+		2: "SHOP_ORDER_CANCELLED_METRIC_SORT_PIECE_COUNT",
+		3: "SHOP_ORDER_CANCELLED_METRIC_SORT_PIECE_AMOUNT",
+		4: "SHOP_ORDER_CANCELLED_METRIC_SORT_UNIT_PER_TRANSACTION",
+		5: "SHOP_ORDER_CANCELLED_METRIC_SORT_MP_TOTAL_AMOUNT",
+		6: "SHOP_ORDER_CANCELLED_METRIC_SORT_ORDER_TOTAL_AMOUNT",
+		7: "SHOP_ORDER_CANCELLED_METRIC_SORT_AVERAGE_TRANSACTION_VALUE",
+		8: "SHOP_ORDER_CANCELLED_METRIC_SORT_LAST_ORDER_CANCELLED",
+	}
+	ShopOrderCancelledMetricSort_value = map[string]int32{
+		"SHOP_ORDER_CANCELLED_METRIC_SORT_UNSPECIFIED":               0,
+		"SHOP_ORDER_CANCELLED_METRIC_SORT_TRANSACTION_COUNT":         1,
+		"SHOP_ORDER_CANCELLED_METRIC_SORT_PIECE_COUNT":               2,
+		"SHOP_ORDER_CANCELLED_METRIC_SORT_PIECE_AMOUNT":              3,
+		"SHOP_ORDER_CANCELLED_METRIC_SORT_UNIT_PER_TRANSACTION":      4,
+		"SHOP_ORDER_CANCELLED_METRIC_SORT_MP_TOTAL_AMOUNT":           5,
+		"SHOP_ORDER_CANCELLED_METRIC_SORT_ORDER_TOTAL_AMOUNT":        6,
+		"SHOP_ORDER_CANCELLED_METRIC_SORT_AVERAGE_TRANSACTION_VALUE": 7,
+		"SHOP_ORDER_CANCELLED_METRIC_SORT_LAST_ORDER_CANCELLED":      8,
+	}
+)
+
+func (x ShopOrderCancelledMetricSort) Enum() *ShopOrderCancelledMetricSort {
+	p := new(ShopOrderCancelledMetricSort)
+	*p = x
+	return p
+}
+
+func (x ShopOrderCancelledMetricSort) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ShopOrderCancelledMetricSort) Descriptor() protoreflect.EnumDescriptor {
+	return file_selling_iface_v1_shop_metric_v1_order_metric_proto_enumTypes[2].Descriptor()
+}
+
+func (ShopOrderCancelledMetricSort) Type() protoreflect.EnumType {
+	return &file_selling_iface_v1_shop_metric_v1_order_metric_proto_enumTypes[2]
+}
+
+func (x ShopOrderCancelledMetricSort) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ShopOrderCancelledMetricSort.Descriptor instead.
+func (ShopOrderCancelledMetricSort) EnumDescriptor() ([]byte, []int) {
+	return file_selling_iface_v1_shop_metric_v1_order_metric_proto_rawDescGZIP(), []int{2}
+}
+
 type ShopProductCostMetricSort int32
 
 const (
@@ -128,11 +262,11 @@ func (x ShopProductCostMetricSort) String() string {
 }
 
 func (ShopProductCostMetricSort) Descriptor() protoreflect.EnumDescriptor {
-	return file_selling_iface_v1_shop_metric_v1_order_metric_proto_enumTypes[1].Descriptor()
+	return file_selling_iface_v1_shop_metric_v1_order_metric_proto_enumTypes[3].Descriptor()
 }
 
 func (ShopProductCostMetricSort) Type() protoreflect.EnumType {
-	return &file_selling_iface_v1_shop_metric_v1_order_metric_proto_enumTypes[1]
+	return &file_selling_iface_v1_shop_metric_v1_order_metric_proto_enumTypes[3]
 }
 
 func (x ShopProductCostMetricSort) Number() protoreflect.EnumNumber {
@@ -141,7 +275,276 @@ func (x ShopProductCostMetricSort) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ShopProductCostMetricSort.Descriptor instead.
 func (ShopProductCostMetricSort) EnumDescriptor() ([]byte, []int) {
-	return file_selling_iface_v1_shop_metric_v1_order_metric_proto_rawDescGZIP(), []int{1}
+	return file_selling_iface_v1_shop_metric_v1_order_metric_proto_rawDescGZIP(), []int{3}
+}
+
+type ShopAdsExpenseMetricSort int32
+
+const (
+	ShopAdsExpenseMetricSort_SHOP_ADS_EXPENSE_METRIC_SORT_UNSPECIFIED ShopAdsExpenseMetricSort = 0
+	ShopAdsExpenseMetricSort_SHOP_ADS_EXPENSE_METRIC_SORT_ADS_AMOUNT  ShopAdsExpenseMetricSort = 1
+)
+
+// Enum value maps for ShopAdsExpenseMetricSort.
+var (
+	ShopAdsExpenseMetricSort_name = map[int32]string{
+		0: "SHOP_ADS_EXPENSE_METRIC_SORT_UNSPECIFIED",
+		1: "SHOP_ADS_EXPENSE_METRIC_SORT_ADS_AMOUNT",
+	}
+	ShopAdsExpenseMetricSort_value = map[string]int32{
+		"SHOP_ADS_EXPENSE_METRIC_SORT_UNSPECIFIED": 0,
+		"SHOP_ADS_EXPENSE_METRIC_SORT_ADS_AMOUNT":  1,
+	}
+)
+
+func (x ShopAdsExpenseMetricSort) Enum() *ShopAdsExpenseMetricSort {
+	p := new(ShopAdsExpenseMetricSort)
+	*p = x
+	return p
+}
+
+func (x ShopAdsExpenseMetricSort) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ShopAdsExpenseMetricSort) Descriptor() protoreflect.EnumDescriptor {
+	return file_selling_iface_v1_shop_metric_v1_order_metric_proto_enumTypes[4].Descriptor()
+}
+
+func (ShopAdsExpenseMetricSort) Type() protoreflect.EnumType {
+	return &file_selling_iface_v1_shop_metric_v1_order_metric_proto_enumTypes[4]
+}
+
+func (x ShopAdsExpenseMetricSort) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ShopAdsExpenseMetricSort.Descriptor instead.
+func (ShopAdsExpenseMetricSort) EnumDescriptor() ([]byte, []int) {
+	return file_selling_iface_v1_shop_metric_v1_order_metric_proto_rawDescGZIP(), []int{4}
+}
+
+type ShopHoldAmountMetricSort int32
+
+const (
+	ShopHoldAmountMetricSort_SHOP_HOLD_AMOUNT_METRIC_SORT_UNSPECIFIED       ShopHoldAmountMetricSort = 0
+	ShopHoldAmountMetricSort_SHOP_HOLD_AMOUNT_METRIC_SORT_TRANSACTION_COUNT ShopHoldAmountMetricSort = 1
+	ShopHoldAmountMetricSort_SHOP_HOLD_AMOUNT_METRIC_SORT_HOLD_AMOUNT       ShopHoldAmountMetricSort = 2
+)
+
+// Enum value maps for ShopHoldAmountMetricSort.
+var (
+	ShopHoldAmountMetricSort_name = map[int32]string{
+		0: "SHOP_HOLD_AMOUNT_METRIC_SORT_UNSPECIFIED",
+		1: "SHOP_HOLD_AMOUNT_METRIC_SORT_TRANSACTION_COUNT",
+		2: "SHOP_HOLD_AMOUNT_METRIC_SORT_HOLD_AMOUNT",
+	}
+	ShopHoldAmountMetricSort_value = map[string]int32{
+		"SHOP_HOLD_AMOUNT_METRIC_SORT_UNSPECIFIED":       0,
+		"SHOP_HOLD_AMOUNT_METRIC_SORT_TRANSACTION_COUNT": 1,
+		"SHOP_HOLD_AMOUNT_METRIC_SORT_HOLD_AMOUNT":       2,
+	}
+)
+
+func (x ShopHoldAmountMetricSort) Enum() *ShopHoldAmountMetricSort {
+	p := new(ShopHoldAmountMetricSort)
+	*p = x
+	return p
+}
+
+func (x ShopHoldAmountMetricSort) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ShopHoldAmountMetricSort) Descriptor() protoreflect.EnumDescriptor {
+	return file_selling_iface_v1_shop_metric_v1_order_metric_proto_enumTypes[5].Descriptor()
+}
+
+func (ShopHoldAmountMetricSort) Type() protoreflect.EnumType {
+	return &file_selling_iface_v1_shop_metric_v1_order_metric_proto_enumTypes[5]
+}
+
+func (x ShopHoldAmountMetricSort) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ShopHoldAmountMetricSort.Descriptor instead.
+func (ShopHoldAmountMetricSort) EnumDescriptor() ([]byte, []int) {
+	return file_selling_iface_v1_shop_metric_v1_order_metric_proto_rawDescGZIP(), []int{5}
+}
+
+type ShopReturnMetricSort int32
+
+const (
+	ShopReturnMetricSort_RETURN_METRIC_SORT_UNSPECIFIED        ShopReturnMetricSort = 0
+	ShopReturnMetricSort_RETURN_METRIC_SORT_PIECE_COUNT        ShopReturnMetricSort = 1
+	ShopReturnMetricSort_RETURN_METRIC_SORT_LAST_RETURN        ShopReturnMetricSort = 2
+	ShopReturnMetricSort_RETURN_METRIC_SORT_TOTAL_AMOUNT       ShopReturnMetricSort = 3
+	ShopReturnMetricSort_RETURN_METRIC_SORT_TRANSACTION_COUNT  ShopReturnMetricSort = 4
+	ShopReturnMetricSort_RETURN_METRIC_SORT_TRANSACTION_AMOUNT ShopReturnMetricSort = 5
+)
+
+// Enum value maps for ShopReturnMetricSort.
+var (
+	ShopReturnMetricSort_name = map[int32]string{
+		0: "RETURN_METRIC_SORT_UNSPECIFIED",
+		1: "RETURN_METRIC_SORT_PIECE_COUNT",
+		2: "RETURN_METRIC_SORT_LAST_RETURN",
+		3: "RETURN_METRIC_SORT_TOTAL_AMOUNT",
+		4: "RETURN_METRIC_SORT_TRANSACTION_COUNT",
+		5: "RETURN_METRIC_SORT_TRANSACTION_AMOUNT",
+	}
+	ShopReturnMetricSort_value = map[string]int32{
+		"RETURN_METRIC_SORT_UNSPECIFIED":        0,
+		"RETURN_METRIC_SORT_PIECE_COUNT":        1,
+		"RETURN_METRIC_SORT_LAST_RETURN":        2,
+		"RETURN_METRIC_SORT_TOTAL_AMOUNT":       3,
+		"RETURN_METRIC_SORT_TRANSACTION_COUNT":  4,
+		"RETURN_METRIC_SORT_TRANSACTION_AMOUNT": 5,
+	}
+)
+
+func (x ShopReturnMetricSort) Enum() *ShopReturnMetricSort {
+	p := new(ShopReturnMetricSort)
+	*p = x
+	return p
+}
+
+func (x ShopReturnMetricSort) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ShopReturnMetricSort) Descriptor() protoreflect.EnumDescriptor {
+	return file_selling_iface_v1_shop_metric_v1_order_metric_proto_enumTypes[6].Descriptor()
+}
+
+func (ShopReturnMetricSort) Type() protoreflect.EnumType {
+	return &file_selling_iface_v1_shop_metric_v1_order_metric_proto_enumTypes[6]
+}
+
+func (x ShopReturnMetricSort) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ShopReturnMetricSort.Descriptor instead.
+func (ShopReturnMetricSort) EnumDescriptor() ([]byte, []int) {
+	return file_selling_iface_v1_shop_metric_v1_order_metric_proto_rawDescGZIP(), []int{6}
+}
+
+type ShopReturnArrivedMetricSort int32
+
+const (
+	ShopReturnArrivedMetricSort_RETURN_ARRIVED_METRIC_SORT_UNSPECIFIED        ShopReturnArrivedMetricSort = 0
+	ShopReturnArrivedMetricSort_RETURN_ARRIVED_METRIC_SORT_PIECE_COUNT        ShopReturnArrivedMetricSort = 1
+	ShopReturnArrivedMetricSort_RETURN_ARRIVED_METRIC_SORT_LAST_RETURN        ShopReturnArrivedMetricSort = 2
+	ShopReturnArrivedMetricSort_RETURN_ARRIVED_METRIC_SORT_TOTAL_AMOUNT       ShopReturnArrivedMetricSort = 3
+	ShopReturnArrivedMetricSort_RETURN_ARRIVED_METRIC_SORT_TRANSACTION_COUNT  ShopReturnArrivedMetricSort = 4
+	ShopReturnArrivedMetricSort_RETURN_ARRIVED_METRIC_SORT_TRANSACTION_AMOUNT ShopReturnArrivedMetricSort = 5
+)
+
+// Enum value maps for ShopReturnArrivedMetricSort.
+var (
+	ShopReturnArrivedMetricSort_name = map[int32]string{
+		0: "RETURN_ARRIVED_METRIC_SORT_UNSPECIFIED",
+		1: "RETURN_ARRIVED_METRIC_SORT_PIECE_COUNT",
+		2: "RETURN_ARRIVED_METRIC_SORT_LAST_RETURN",
+		3: "RETURN_ARRIVED_METRIC_SORT_TOTAL_AMOUNT",
+		4: "RETURN_ARRIVED_METRIC_SORT_TRANSACTION_COUNT",
+		5: "RETURN_ARRIVED_METRIC_SORT_TRANSACTION_AMOUNT",
+	}
+	ShopReturnArrivedMetricSort_value = map[string]int32{
+		"RETURN_ARRIVED_METRIC_SORT_UNSPECIFIED":        0,
+		"RETURN_ARRIVED_METRIC_SORT_PIECE_COUNT":        1,
+		"RETURN_ARRIVED_METRIC_SORT_LAST_RETURN":        2,
+		"RETURN_ARRIVED_METRIC_SORT_TOTAL_AMOUNT":       3,
+		"RETURN_ARRIVED_METRIC_SORT_TRANSACTION_COUNT":  4,
+		"RETURN_ARRIVED_METRIC_SORT_TRANSACTION_AMOUNT": 5,
+	}
+)
+
+func (x ShopReturnArrivedMetricSort) Enum() *ShopReturnArrivedMetricSort {
+	p := new(ShopReturnArrivedMetricSort)
+	*p = x
+	return p
+}
+
+func (x ShopReturnArrivedMetricSort) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ShopReturnArrivedMetricSort) Descriptor() protoreflect.EnumDescriptor {
+	return file_selling_iface_v1_shop_metric_v1_order_metric_proto_enumTypes[7].Descriptor()
+}
+
+func (ShopReturnArrivedMetricSort) Type() protoreflect.EnumType {
+	return &file_selling_iface_v1_shop_metric_v1_order_metric_proto_enumTypes[7]
+}
+
+func (x ShopReturnArrivedMetricSort) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ShopReturnArrivedMetricSort.Descriptor instead.
+func (ShopReturnArrivedMetricSort) EnumDescriptor() ([]byte, []int) {
+	return file_selling_iface_v1_shop_metric_v1_order_metric_proto_rawDescGZIP(), []int{7}
+}
+
+type ShopReturnCancelledMetricSort int32
+
+const (
+	ShopReturnCancelledMetricSort_RETURN_CANCELLED_METRIC_SORT_UNSPECIFIED        ShopReturnCancelledMetricSort = 0
+	ShopReturnCancelledMetricSort_RETURN_CANCELLED_METRIC_SORT_PIECE_COUNT        ShopReturnCancelledMetricSort = 1
+	ShopReturnCancelledMetricSort_RETURN_CANCELLED_METRIC_SORT_LAST_CANCELLED     ShopReturnCancelledMetricSort = 2
+	ShopReturnCancelledMetricSort_RETURN_CANCELLED_METRIC_SORT_TOTAL_AMOUNT       ShopReturnCancelledMetricSort = 3
+	ShopReturnCancelledMetricSort_RETURN_CANCELLED_METRIC_SORT_TRANSACTION_COUNT  ShopReturnCancelledMetricSort = 4
+	ShopReturnCancelledMetricSort_RETURN_CANCELLED_METRIC_SORT_TRANSACTION_AMOUNT ShopReturnCancelledMetricSort = 5
+)
+
+// Enum value maps for ShopReturnCancelledMetricSort.
+var (
+	ShopReturnCancelledMetricSort_name = map[int32]string{
+		0: "RETURN_CANCELLED_METRIC_SORT_UNSPECIFIED",
+		1: "RETURN_CANCELLED_METRIC_SORT_PIECE_COUNT",
+		2: "RETURN_CANCELLED_METRIC_SORT_LAST_CANCELLED",
+		3: "RETURN_CANCELLED_METRIC_SORT_TOTAL_AMOUNT",
+		4: "RETURN_CANCELLED_METRIC_SORT_TRANSACTION_COUNT",
+		5: "RETURN_CANCELLED_METRIC_SORT_TRANSACTION_AMOUNT",
+	}
+	ShopReturnCancelledMetricSort_value = map[string]int32{
+		"RETURN_CANCELLED_METRIC_SORT_UNSPECIFIED":        0,
+		"RETURN_CANCELLED_METRIC_SORT_PIECE_COUNT":        1,
+		"RETURN_CANCELLED_METRIC_SORT_LAST_CANCELLED":     2,
+		"RETURN_CANCELLED_METRIC_SORT_TOTAL_AMOUNT":       3,
+		"RETURN_CANCELLED_METRIC_SORT_TRANSACTION_COUNT":  4,
+		"RETURN_CANCELLED_METRIC_SORT_TRANSACTION_AMOUNT": 5,
+	}
+)
+
+func (x ShopReturnCancelledMetricSort) Enum() *ShopReturnCancelledMetricSort {
+	p := new(ShopReturnCancelledMetricSort)
+	*p = x
+	return p
+}
+
+func (x ShopReturnCancelledMetricSort) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ShopReturnCancelledMetricSort) Descriptor() protoreflect.EnumDescriptor {
+	return file_selling_iface_v1_shop_metric_v1_order_metric_proto_enumTypes[8].Descriptor()
+}
+
+func (ShopReturnCancelledMetricSort) Type() protoreflect.EnumType {
+	return &file_selling_iface_v1_shop_metric_v1_order_metric_proto_enumTypes[8]
+}
+
+func (x ShopReturnCancelledMetricSort) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ShopReturnCancelledMetricSort.Descriptor instead.
+func (ShopReturnCancelledMetricSort) EnumDescriptor() ([]byte, []int) {
+	return file_selling_iface_v1_shop_metric_v1_order_metric_proto_rawDescGZIP(), []int{8}
 }
 
 type ShopOrderItem struct {
@@ -297,6 +700,312 @@ func (x *ShopOrderMetric) GetData() map[uint64]*ShopOrderItem {
 	return nil
 }
 
+type ShopOrderCompletedItem struct {
+	state                   protoimpl.MessageState `protogen:"open.v1"`
+	ShopId                  uint64                 `protobuf:"varint,1,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
+	TransactionCount        int64                  `protobuf:"varint,2,opt,name=transaction_count,json=transactionCount,proto3" json:"transaction_count,omitempty"`
+	PieceCount              int64                  `protobuf:"varint,3,opt,name=piece_count,json=pieceCount,proto3" json:"piece_count,omitempty"`
+	PieceAmount             float64                `protobuf:"fixed64,4,opt,name=piece_amount,json=pieceAmount,proto3" json:"piece_amount,omitempty"`
+	UnitPerTransaction      float32                `protobuf:"fixed32,5,opt,name=unit_per_transaction,json=unitPerTransaction,proto3" json:"unit_per_transaction,omitempty"`
+	MpTotalAmount           float64                `protobuf:"fixed64,6,opt,name=mp_total_amount,json=mpTotalAmount,proto3" json:"mp_total_amount,omitempty"`
+	OrderTotalAmount        float64                `protobuf:"fixed64,7,opt,name=order_total_amount,json=orderTotalAmount,proto3" json:"order_total_amount,omitempty"`
+	AverageTransactionValue float64                `protobuf:"fixed64,8,opt,name=average_transaction_value,json=averageTransactionValue,proto3" json:"average_transaction_value,omitempty"`
+	// @gotags: gorm:"serializer:timestamptz"
+	LastOrderCompleted *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=last_order_completed,json=lastOrderCompleted,proto3" json:"last_order_completed,omitempty" gorm:"serializer:timestamptz"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *ShopOrderCompletedItem) Reset() {
+	*x = ShopOrderCompletedItem{}
+	mi := &file_selling_iface_v1_shop_metric_v1_order_metric_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ShopOrderCompletedItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ShopOrderCompletedItem) ProtoMessage() {}
+
+func (x *ShopOrderCompletedItem) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_shop_metric_v1_order_metric_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ShopOrderCompletedItem.ProtoReflect.Descriptor instead.
+func (*ShopOrderCompletedItem) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_shop_metric_v1_order_metric_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *ShopOrderCompletedItem) GetShopId() uint64 {
+	if x != nil {
+		return x.ShopId
+	}
+	return 0
+}
+
+func (x *ShopOrderCompletedItem) GetTransactionCount() int64 {
+	if x != nil {
+		return x.TransactionCount
+	}
+	return 0
+}
+
+func (x *ShopOrderCompletedItem) GetPieceCount() int64 {
+	if x != nil {
+		return x.PieceCount
+	}
+	return 0
+}
+
+func (x *ShopOrderCompletedItem) GetPieceAmount() float64 {
+	if x != nil {
+		return x.PieceAmount
+	}
+	return 0
+}
+
+func (x *ShopOrderCompletedItem) GetUnitPerTransaction() float32 {
+	if x != nil {
+		return x.UnitPerTransaction
+	}
+	return 0
+}
+
+func (x *ShopOrderCompletedItem) GetMpTotalAmount() float64 {
+	if x != nil {
+		return x.MpTotalAmount
+	}
+	return 0
+}
+
+func (x *ShopOrderCompletedItem) GetOrderTotalAmount() float64 {
+	if x != nil {
+		return x.OrderTotalAmount
+	}
+	return 0
+}
+
+func (x *ShopOrderCompletedItem) GetAverageTransactionValue() float64 {
+	if x != nil {
+		return x.AverageTransactionValue
+	}
+	return 0
+}
+
+func (x *ShopOrderCompletedItem) GetLastOrderCompleted() *timestamppb.Timestamp {
+	if x != nil {
+		return x.LastOrderCompleted
+	}
+	return nil
+}
+
+type ShopOrderCompletedMetric struct {
+	state         protoimpl.MessageState             `protogen:"open.v1"`
+	Data          map[uint64]*ShopOrderCompletedItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ShopOrderCompletedMetric) Reset() {
+	*x = ShopOrderCompletedMetric{}
+	mi := &file_selling_iface_v1_shop_metric_v1_order_metric_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ShopOrderCompletedMetric) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ShopOrderCompletedMetric) ProtoMessage() {}
+
+func (x *ShopOrderCompletedMetric) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_shop_metric_v1_order_metric_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ShopOrderCompletedMetric.ProtoReflect.Descriptor instead.
+func (*ShopOrderCompletedMetric) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_shop_metric_v1_order_metric_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *ShopOrderCompletedMetric) GetData() map[uint64]*ShopOrderCompletedItem {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+type ShopOrderCancelledItem struct {
+	state                   protoimpl.MessageState `protogen:"open.v1"`
+	ShopId                  uint64                 `protobuf:"varint,1,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
+	TransactionCount        int64                  `protobuf:"varint,2,opt,name=transaction_count,json=transactionCount,proto3" json:"transaction_count,omitempty"`
+	PieceCount              int64                  `protobuf:"varint,3,opt,name=piece_count,json=pieceCount,proto3" json:"piece_count,omitempty"`
+	PieceAmount             float64                `protobuf:"fixed64,4,opt,name=piece_amount,json=pieceAmount,proto3" json:"piece_amount,omitempty"`
+	UnitPerTransaction      float32                `protobuf:"fixed32,5,opt,name=unit_per_transaction,json=unitPerTransaction,proto3" json:"unit_per_transaction,omitempty"`
+	MpTotalAmount           float64                `protobuf:"fixed64,6,opt,name=mp_total_amount,json=mpTotalAmount,proto3" json:"mp_total_amount,omitempty"`
+	OrderTotalAmount        float64                `protobuf:"fixed64,7,opt,name=order_total_amount,json=orderTotalAmount,proto3" json:"order_total_amount,omitempty"`
+	AverageTransactionValue float64                `protobuf:"fixed64,8,opt,name=average_transaction_value,json=averageTransactionValue,proto3" json:"average_transaction_value,omitempty"`
+	// @gotags: gorm:"serializer:timestamptz"
+	LastOrderCancelled *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=last_order_cancelled,json=lastOrderCancelled,proto3" json:"last_order_cancelled,omitempty" gorm:"serializer:timestamptz"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *ShopOrderCancelledItem) Reset() {
+	*x = ShopOrderCancelledItem{}
+	mi := &file_selling_iface_v1_shop_metric_v1_order_metric_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ShopOrderCancelledItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ShopOrderCancelledItem) ProtoMessage() {}
+
+func (x *ShopOrderCancelledItem) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_shop_metric_v1_order_metric_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ShopOrderCancelledItem.ProtoReflect.Descriptor instead.
+func (*ShopOrderCancelledItem) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_shop_metric_v1_order_metric_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *ShopOrderCancelledItem) GetShopId() uint64 {
+	if x != nil {
+		return x.ShopId
+	}
+	return 0
+}
+
+func (x *ShopOrderCancelledItem) GetTransactionCount() int64 {
+	if x != nil {
+		return x.TransactionCount
+	}
+	return 0
+}
+
+func (x *ShopOrderCancelledItem) GetPieceCount() int64 {
+	if x != nil {
+		return x.PieceCount
+	}
+	return 0
+}
+
+func (x *ShopOrderCancelledItem) GetPieceAmount() float64 {
+	if x != nil {
+		return x.PieceAmount
+	}
+	return 0
+}
+
+func (x *ShopOrderCancelledItem) GetUnitPerTransaction() float32 {
+	if x != nil {
+		return x.UnitPerTransaction
+	}
+	return 0
+}
+
+func (x *ShopOrderCancelledItem) GetMpTotalAmount() float64 {
+	if x != nil {
+		return x.MpTotalAmount
+	}
+	return 0
+}
+
+func (x *ShopOrderCancelledItem) GetOrderTotalAmount() float64 {
+	if x != nil {
+		return x.OrderTotalAmount
+	}
+	return 0
+}
+
+func (x *ShopOrderCancelledItem) GetAverageTransactionValue() float64 {
+	if x != nil {
+		return x.AverageTransactionValue
+	}
+	return 0
+}
+
+func (x *ShopOrderCancelledItem) GetLastOrderCancelled() *timestamppb.Timestamp {
+	if x != nil {
+		return x.LastOrderCancelled
+	}
+	return nil
+}
+
+type ShopOrderCancelledMetric struct {
+	state         protoimpl.MessageState             `protogen:"open.v1"`
+	Data          map[uint64]*ShopOrderCancelledItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ShopOrderCancelledMetric) Reset() {
+	*x = ShopOrderCancelledMetric{}
+	mi := &file_selling_iface_v1_shop_metric_v1_order_metric_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ShopOrderCancelledMetric) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ShopOrderCancelledMetric) ProtoMessage() {}
+
+func (x *ShopOrderCancelledMetric) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_shop_metric_v1_order_metric_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ShopOrderCancelledMetric.ProtoReflect.Descriptor instead.
+func (*ShopOrderCancelledMetric) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_shop_metric_v1_order_metric_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *ShopOrderCancelledMetric) GetData() map[uint64]*ShopOrderCancelledItem {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
 type ShopProductCostItem struct {
 	state              protoimpl.MessageState `protogen:"open.v1"`
 	ShopId             uint64                 `protobuf:"varint,1,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
@@ -310,7 +1019,7 @@ type ShopProductCostItem struct {
 
 func (x *ShopProductCostItem) Reset() {
 	*x = ShopProductCostItem{}
-	mi := &file_selling_iface_v1_shop_metric_v1_order_metric_proto_msgTypes[2]
+	mi := &file_selling_iface_v1_shop_metric_v1_order_metric_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -322,7 +1031,7 @@ func (x *ShopProductCostItem) String() string {
 func (*ShopProductCostItem) ProtoMessage() {}
 
 func (x *ShopProductCostItem) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_shop_metric_v1_order_metric_proto_msgTypes[2]
+	mi := &file_selling_iface_v1_shop_metric_v1_order_metric_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -335,7 +1044,7 @@ func (x *ShopProductCostItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ShopProductCostItem.ProtoReflect.Descriptor instead.
 func (*ShopProductCostItem) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_shop_metric_v1_order_metric_proto_rawDescGZIP(), []int{2}
+	return file_selling_iface_v1_shop_metric_v1_order_metric_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *ShopProductCostItem) GetShopId() uint64 {
@@ -382,7 +1091,7 @@ type ShopProductCostMetric struct {
 
 func (x *ShopProductCostMetric) Reset() {
 	*x = ShopProductCostMetric{}
-	mi := &file_selling_iface_v1_shop_metric_v1_order_metric_proto_msgTypes[3]
+	mi := &file_selling_iface_v1_shop_metric_v1_order_metric_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -394,7 +1103,7 @@ func (x *ShopProductCostMetric) String() string {
 func (*ShopProductCostMetric) ProtoMessage() {}
 
 func (x *ShopProductCostMetric) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_shop_metric_v1_order_metric_proto_msgTypes[3]
+	mi := &file_selling_iface_v1_shop_metric_v1_order_metric_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -407,10 +1116,597 @@ func (x *ShopProductCostMetric) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ShopProductCostMetric.ProtoReflect.Descriptor instead.
 func (*ShopProductCostMetric) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_shop_metric_v1_order_metric_proto_rawDescGZIP(), []int{3}
+	return file_selling_iface_v1_shop_metric_v1_order_metric_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *ShopProductCostMetric) GetData() map[uint64]*ShopProductCostItem {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+type ShopAdsExpenseItem struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ShopId        uint64                 `protobuf:"varint,1,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
+	AdsAmount     float64                `protobuf:"fixed64,2,opt,name=ads_amount,json=adsAmount,proto3" json:"ads_amount,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ShopAdsExpenseItem) Reset() {
+	*x = ShopAdsExpenseItem{}
+	mi := &file_selling_iface_v1_shop_metric_v1_order_metric_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ShopAdsExpenseItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ShopAdsExpenseItem) ProtoMessage() {}
+
+func (x *ShopAdsExpenseItem) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_shop_metric_v1_order_metric_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ShopAdsExpenseItem.ProtoReflect.Descriptor instead.
+func (*ShopAdsExpenseItem) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_shop_metric_v1_order_metric_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *ShopAdsExpenseItem) GetShopId() uint64 {
+	if x != nil {
+		return x.ShopId
+	}
+	return 0
+}
+
+func (x *ShopAdsExpenseItem) GetAdsAmount() float64 {
+	if x != nil {
+		return x.AdsAmount
+	}
+	return 0
+}
+
+type ShopAdsExpenseMetric struct {
+	state         protoimpl.MessageState         `protogen:"open.v1"`
+	Data          map[uint64]*ShopAdsExpenseItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ShopAdsExpenseMetric) Reset() {
+	*x = ShopAdsExpenseMetric{}
+	mi := &file_selling_iface_v1_shop_metric_v1_order_metric_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ShopAdsExpenseMetric) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ShopAdsExpenseMetric) ProtoMessage() {}
+
+func (x *ShopAdsExpenseMetric) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_shop_metric_v1_order_metric_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ShopAdsExpenseMetric.ProtoReflect.Descriptor instead.
+func (*ShopAdsExpenseMetric) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_shop_metric_v1_order_metric_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *ShopAdsExpenseMetric) GetData() map[uint64]*ShopAdsExpenseItem {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+type ShopHoldAmountItem struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	ShopId           uint64                 `protobuf:"varint,1,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
+	TransactionCount uint64                 `protobuf:"varint,2,opt,name=transaction_count,json=transactionCount,proto3" json:"transaction_count,omitempty"`
+	HoldAmount       float64                `protobuf:"fixed64,3,opt,name=hold_amount,json=holdAmount,proto3" json:"hold_amount,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *ShopHoldAmountItem) Reset() {
+	*x = ShopHoldAmountItem{}
+	mi := &file_selling_iface_v1_shop_metric_v1_order_metric_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ShopHoldAmountItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ShopHoldAmountItem) ProtoMessage() {}
+
+func (x *ShopHoldAmountItem) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_shop_metric_v1_order_metric_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ShopHoldAmountItem.ProtoReflect.Descriptor instead.
+func (*ShopHoldAmountItem) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_shop_metric_v1_order_metric_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *ShopHoldAmountItem) GetShopId() uint64 {
+	if x != nil {
+		return x.ShopId
+	}
+	return 0
+}
+
+func (x *ShopHoldAmountItem) GetTransactionCount() uint64 {
+	if x != nil {
+		return x.TransactionCount
+	}
+	return 0
+}
+
+func (x *ShopHoldAmountItem) GetHoldAmount() float64 {
+	if x != nil {
+		return x.HoldAmount
+	}
+	return 0
+}
+
+type ShopHoldAmountMetric struct {
+	state         protoimpl.MessageState         `protogen:"open.v1"`
+	Data          map[uint64]*ShopHoldAmountItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ShopHoldAmountMetric) Reset() {
+	*x = ShopHoldAmountMetric{}
+	mi := &file_selling_iface_v1_shop_metric_v1_order_metric_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ShopHoldAmountMetric) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ShopHoldAmountMetric) ProtoMessage() {}
+
+func (x *ShopHoldAmountMetric) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_shop_metric_v1_order_metric_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ShopHoldAmountMetric.ProtoReflect.Descriptor instead.
+func (*ShopHoldAmountMetric) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_shop_metric_v1_order_metric_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *ShopHoldAmountMetric) GetData() map[uint64]*ShopHoldAmountItem {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+type ShopReturnItem struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	ShopId            uint64                 `protobuf:"varint,1,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
+	TransactionCount  int64                  `protobuf:"varint,2,opt,name=transaction_count,json=transactionCount,proto3" json:"transaction_count,omitempty"`
+	TransactionAmount float64                `protobuf:"fixed64,3,opt,name=transaction_amount,json=transactionAmount,proto3" json:"transaction_amount,omitempty"`
+	PieceCount        int64                  `protobuf:"varint,4,opt,name=piece_count,json=pieceCount,proto3" json:"piece_count,omitempty"`
+	TotalAmount       float64                `protobuf:"fixed64,5,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
+	// @gotags: gorm:"serializer:timestamptz"
+	LastReturn    *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=last_return,json=lastReturn,proto3" json:"last_return,omitempty" gorm:"serializer:timestamptz"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ShopReturnItem) Reset() {
+	*x = ShopReturnItem{}
+	mi := &file_selling_iface_v1_shop_metric_v1_order_metric_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ShopReturnItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ShopReturnItem) ProtoMessage() {}
+
+func (x *ShopReturnItem) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_shop_metric_v1_order_metric_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ShopReturnItem.ProtoReflect.Descriptor instead.
+func (*ShopReturnItem) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_shop_metric_v1_order_metric_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *ShopReturnItem) GetShopId() uint64 {
+	if x != nil {
+		return x.ShopId
+	}
+	return 0
+}
+
+func (x *ShopReturnItem) GetTransactionCount() int64 {
+	if x != nil {
+		return x.TransactionCount
+	}
+	return 0
+}
+
+func (x *ShopReturnItem) GetTransactionAmount() float64 {
+	if x != nil {
+		return x.TransactionAmount
+	}
+	return 0
+}
+
+func (x *ShopReturnItem) GetPieceCount() int64 {
+	if x != nil {
+		return x.PieceCount
+	}
+	return 0
+}
+
+func (x *ShopReturnItem) GetTotalAmount() float64 {
+	if x != nil {
+		return x.TotalAmount
+	}
+	return 0
+}
+
+func (x *ShopReturnItem) GetLastReturn() *timestamppb.Timestamp {
+	if x != nil {
+		return x.LastReturn
+	}
+	return nil
+}
+
+type ShopReturnMetric struct {
+	state         protoimpl.MessageState     `protogen:"open.v1"`
+	Data          map[uint64]*ShopReturnItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ShopReturnMetric) Reset() {
+	*x = ShopReturnMetric{}
+	mi := &file_selling_iface_v1_shop_metric_v1_order_metric_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ShopReturnMetric) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ShopReturnMetric) ProtoMessage() {}
+
+func (x *ShopReturnMetric) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_shop_metric_v1_order_metric_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ShopReturnMetric.ProtoReflect.Descriptor instead.
+func (*ShopReturnMetric) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_shop_metric_v1_order_metric_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *ShopReturnMetric) GetData() map[uint64]*ShopReturnItem {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+type ShopReturnArrivedItem struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	ShopId            uint64                 `protobuf:"varint,1,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
+	TransactionCount  int64                  `protobuf:"varint,2,opt,name=transaction_count,json=transactionCount,proto3" json:"transaction_count,omitempty"`
+	TransactionAmount float64                `protobuf:"fixed64,3,opt,name=transaction_amount,json=transactionAmount,proto3" json:"transaction_amount,omitempty"`
+	PieceCount        int64                  `protobuf:"varint,4,opt,name=piece_count,json=pieceCount,proto3" json:"piece_count,omitempty"`
+	TotalAmount       float64                `protobuf:"fixed64,5,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
+	// @gotags: gorm:"serializer:timestamptz"
+	LastArrived   *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=last_arrived,json=lastArrived,proto3" json:"last_arrived,omitempty" gorm:"serializer:timestamptz"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ShopReturnArrivedItem) Reset() {
+	*x = ShopReturnArrivedItem{}
+	mi := &file_selling_iface_v1_shop_metric_v1_order_metric_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ShopReturnArrivedItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ShopReturnArrivedItem) ProtoMessage() {}
+
+func (x *ShopReturnArrivedItem) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_shop_metric_v1_order_metric_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ShopReturnArrivedItem.ProtoReflect.Descriptor instead.
+func (*ShopReturnArrivedItem) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_shop_metric_v1_order_metric_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *ShopReturnArrivedItem) GetShopId() uint64 {
+	if x != nil {
+		return x.ShopId
+	}
+	return 0
+}
+
+func (x *ShopReturnArrivedItem) GetTransactionCount() int64 {
+	if x != nil {
+		return x.TransactionCount
+	}
+	return 0
+}
+
+func (x *ShopReturnArrivedItem) GetTransactionAmount() float64 {
+	if x != nil {
+		return x.TransactionAmount
+	}
+	return 0
+}
+
+func (x *ShopReturnArrivedItem) GetPieceCount() int64 {
+	if x != nil {
+		return x.PieceCount
+	}
+	return 0
+}
+
+func (x *ShopReturnArrivedItem) GetTotalAmount() float64 {
+	if x != nil {
+		return x.TotalAmount
+	}
+	return 0
+}
+
+func (x *ShopReturnArrivedItem) GetLastArrived() *timestamppb.Timestamp {
+	if x != nil {
+		return x.LastArrived
+	}
+	return nil
+}
+
+type ShopReturnArrivedMetric struct {
+	state         protoimpl.MessageState            `protogen:"open.v1"`
+	Data          map[uint64]*ShopReturnArrivedItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ShopReturnArrivedMetric) Reset() {
+	*x = ShopReturnArrivedMetric{}
+	mi := &file_selling_iface_v1_shop_metric_v1_order_metric_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ShopReturnArrivedMetric) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ShopReturnArrivedMetric) ProtoMessage() {}
+
+func (x *ShopReturnArrivedMetric) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_shop_metric_v1_order_metric_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ShopReturnArrivedMetric.ProtoReflect.Descriptor instead.
+func (*ShopReturnArrivedMetric) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_shop_metric_v1_order_metric_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *ShopReturnArrivedMetric) GetData() map[uint64]*ShopReturnArrivedItem {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+type ShopReturnCancelledItem struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	ShopId            uint64                 `protobuf:"varint,1,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
+	TransactionCount  int64                  `protobuf:"varint,2,opt,name=transaction_count,json=transactionCount,proto3" json:"transaction_count,omitempty"`
+	TransactionAmount float64                `protobuf:"fixed64,3,opt,name=transaction_amount,json=transactionAmount,proto3" json:"transaction_amount,omitempty"`
+	PieceCount        int64                  `protobuf:"varint,4,opt,name=piece_count,json=pieceCount,proto3" json:"piece_count,omitempty"`
+	TotalAmount       float64                `protobuf:"fixed64,5,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
+	// @gotags: gorm:"serializer:timestamptz"
+	LastCancelled *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=last_cancelled,json=lastCancelled,proto3" json:"last_cancelled,omitempty" gorm:"serializer:timestamptz"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ShopReturnCancelledItem) Reset() {
+	*x = ShopReturnCancelledItem{}
+	mi := &file_selling_iface_v1_shop_metric_v1_order_metric_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ShopReturnCancelledItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ShopReturnCancelledItem) ProtoMessage() {}
+
+func (x *ShopReturnCancelledItem) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_shop_metric_v1_order_metric_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ShopReturnCancelledItem.ProtoReflect.Descriptor instead.
+func (*ShopReturnCancelledItem) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_shop_metric_v1_order_metric_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *ShopReturnCancelledItem) GetShopId() uint64 {
+	if x != nil {
+		return x.ShopId
+	}
+	return 0
+}
+
+func (x *ShopReturnCancelledItem) GetTransactionCount() int64 {
+	if x != nil {
+		return x.TransactionCount
+	}
+	return 0
+}
+
+func (x *ShopReturnCancelledItem) GetTransactionAmount() float64 {
+	if x != nil {
+		return x.TransactionAmount
+	}
+	return 0
+}
+
+func (x *ShopReturnCancelledItem) GetPieceCount() int64 {
+	if x != nil {
+		return x.PieceCount
+	}
+	return 0
+}
+
+func (x *ShopReturnCancelledItem) GetTotalAmount() float64 {
+	if x != nil {
+		return x.TotalAmount
+	}
+	return 0
+}
+
+func (x *ShopReturnCancelledItem) GetLastCancelled() *timestamppb.Timestamp {
+	if x != nil {
+		return x.LastCancelled
+	}
+	return nil
+}
+
+type ShopReturnCancelledMetric struct {
+	state         protoimpl.MessageState              `protogen:"open.v1"`
+	Data          map[uint64]*ShopReturnCancelledItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ShopReturnCancelledMetric) Reset() {
+	*x = ShopReturnCancelledMetric{}
+	mi := &file_selling_iface_v1_shop_metric_v1_order_metric_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ShopReturnCancelledMetric) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ShopReturnCancelledMetric) ProtoMessage() {}
+
+func (x *ShopReturnCancelledMetric) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_shop_metric_v1_order_metric_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ShopReturnCancelledMetric.ProtoReflect.Descriptor instead.
+func (*ShopReturnCancelledMetric) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_shop_metric_v1_order_metric_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *ShopReturnCancelledMetric) GetData() map[uint64]*ShopReturnCancelledItem {
 	if x != nil {
 		return x.Data
 	}
@@ -437,7 +1733,39 @@ const file_selling_iface_v1_shop_metric_v1_order_metric_proto_rawDesc = "" +
 	"\x04data\x18\x01 \x03(\v2:.selling_iface.v1.shop_metric.v1.ShopOrderMetric.DataEntryR\x04data\x1ag\n" +
 	"\tDataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\x04R\x03key\x12D\n" +
-	"\x05value\x18\x02 \x01(\v2..selling_iface.v1.shop_metric.v1.ShopOrderItemR\x05value:\x028\x01\"\xea\x01\n" +
+	"\x05value\x18\x02 \x01(\v2..selling_iface.v1.shop_metric.v1.ShopOrderItemR\x05value:\x028\x01\"\xb4\x03\n" +
+	"\x16ShopOrderCompletedItem\x12\x17\n" +
+	"\ashop_id\x18\x01 \x01(\x04R\x06shopId\x12+\n" +
+	"\x11transaction_count\x18\x02 \x01(\x03R\x10transactionCount\x12\x1f\n" +
+	"\vpiece_count\x18\x03 \x01(\x03R\n" +
+	"pieceCount\x12!\n" +
+	"\fpiece_amount\x18\x04 \x01(\x01R\vpieceAmount\x120\n" +
+	"\x14unit_per_transaction\x18\x05 \x01(\x02R\x12unitPerTransaction\x12&\n" +
+	"\x0fmp_total_amount\x18\x06 \x01(\x01R\rmpTotalAmount\x12,\n" +
+	"\x12order_total_amount\x18\a \x01(\x01R\x10orderTotalAmount\x12:\n" +
+	"\x19average_transaction_value\x18\b \x01(\x01R\x17averageTransactionValue\x12L\n" +
+	"\x14last_order_completed\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\x12lastOrderCompleted\"\xe5\x01\n" +
+	"\x18ShopOrderCompletedMetric\x12W\n" +
+	"\x04data\x18\x01 \x03(\v2C.selling_iface.v1.shop_metric.v1.ShopOrderCompletedMetric.DataEntryR\x04data\x1ap\n" +
+	"\tDataEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\x04R\x03key\x12M\n" +
+	"\x05value\x18\x02 \x01(\v27.selling_iface.v1.shop_metric.v1.ShopOrderCompletedItemR\x05value:\x028\x01\"\xb4\x03\n" +
+	"\x16ShopOrderCancelledItem\x12\x17\n" +
+	"\ashop_id\x18\x01 \x01(\x04R\x06shopId\x12+\n" +
+	"\x11transaction_count\x18\x02 \x01(\x03R\x10transactionCount\x12\x1f\n" +
+	"\vpiece_count\x18\x03 \x01(\x03R\n" +
+	"pieceCount\x12!\n" +
+	"\fpiece_amount\x18\x04 \x01(\x01R\vpieceAmount\x120\n" +
+	"\x14unit_per_transaction\x18\x05 \x01(\x02R\x12unitPerTransaction\x12&\n" +
+	"\x0fmp_total_amount\x18\x06 \x01(\x01R\rmpTotalAmount\x12,\n" +
+	"\x12order_total_amount\x18\a \x01(\x01R\x10orderTotalAmount\x12:\n" +
+	"\x19average_transaction_value\x18\b \x01(\x01R\x17averageTransactionValue\x12L\n" +
+	"\x14last_order_cancelled\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\x12lastOrderCancelled\"\xe5\x01\n" +
+	"\x18ShopOrderCancelledMetric\x12W\n" +
+	"\x04data\x18\x01 \x03(\v2C.selling_iface.v1.shop_metric.v1.ShopOrderCancelledMetric.DataEntryR\x04data\x1ap\n" +
+	"\tDataEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\x04R\x03key\x12M\n" +
+	"\x05value\x18\x02 \x01(\v27.selling_iface.v1.shop_metric.v1.ShopOrderCancelledItemR\x05value:\x028\x01\"\xea\x01\n" +
 	"\x13ShopProductCostItem\x12\x17\n" +
 	"\ashop_id\x18\x01 \x01(\x04R\x06shopId\x12*\n" +
 	"\x11own_product_count\x18\x02 \x01(\x03R\x0fownProductCount\x12,\n" +
@@ -448,7 +1776,66 @@ const file_selling_iface_v1_shop_metric_v1_order_metric_proto_rawDesc = "" +
 	"\x04data\x18\x01 \x03(\v2@.selling_iface.v1.shop_metric.v1.ShopProductCostMetric.DataEntryR\x04data\x1am\n" +
 	"\tDataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\x04R\x03key\x12J\n" +
-	"\x05value\x18\x02 \x01(\v24.selling_iface.v1.shop_metric.v1.ShopProductCostItemR\x05value:\x028\x01*\xad\x03\n" +
+	"\x05value\x18\x02 \x01(\v24.selling_iface.v1.shop_metric.v1.ShopProductCostItemR\x05value:\x028\x01\"L\n" +
+	"\x12ShopAdsExpenseItem\x12\x17\n" +
+	"\ashop_id\x18\x01 \x01(\x04R\x06shopId\x12\x1d\n" +
+	"\n" +
+	"ads_amount\x18\x02 \x01(\x01R\tadsAmount\"\xd9\x01\n" +
+	"\x14ShopAdsExpenseMetric\x12S\n" +
+	"\x04data\x18\x01 \x03(\v2?.selling_iface.v1.shop_metric.v1.ShopAdsExpenseMetric.DataEntryR\x04data\x1al\n" +
+	"\tDataEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\x04R\x03key\x12I\n" +
+	"\x05value\x18\x02 \x01(\v23.selling_iface.v1.shop_metric.v1.ShopAdsExpenseItemR\x05value:\x028\x01\"{\n" +
+	"\x12ShopHoldAmountItem\x12\x17\n" +
+	"\ashop_id\x18\x01 \x01(\x04R\x06shopId\x12+\n" +
+	"\x11transaction_count\x18\x02 \x01(\x04R\x10transactionCount\x12\x1f\n" +
+	"\vhold_amount\x18\x03 \x01(\x01R\n" +
+	"holdAmount\"\xd9\x01\n" +
+	"\x14ShopHoldAmountMetric\x12S\n" +
+	"\x04data\x18\x01 \x03(\v2?.selling_iface.v1.shop_metric.v1.ShopHoldAmountMetric.DataEntryR\x04data\x1al\n" +
+	"\tDataEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\x04R\x03key\x12I\n" +
+	"\x05value\x18\x02 \x01(\v23.selling_iface.v1.shop_metric.v1.ShopHoldAmountItemR\x05value:\x028\x01\"\x86\x02\n" +
+	"\x0eShopReturnItem\x12\x17\n" +
+	"\ashop_id\x18\x01 \x01(\x04R\x06shopId\x12+\n" +
+	"\x11transaction_count\x18\x02 \x01(\x03R\x10transactionCount\x12-\n" +
+	"\x12transaction_amount\x18\x03 \x01(\x01R\x11transactionAmount\x12\x1f\n" +
+	"\vpiece_count\x18\x04 \x01(\x03R\n" +
+	"pieceCount\x12!\n" +
+	"\ftotal_amount\x18\x05 \x01(\x01R\vtotalAmount\x12;\n" +
+	"\vlast_return\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\n" +
+	"lastReturn\"\xcd\x01\n" +
+	"\x10ShopReturnMetric\x12O\n" +
+	"\x04data\x18\x01 \x03(\v2;.selling_iface.v1.shop_metric.v1.ShopReturnMetric.DataEntryR\x04data\x1ah\n" +
+	"\tDataEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\x04R\x03key\x12E\n" +
+	"\x05value\x18\x02 \x01(\v2/.selling_iface.v1.shop_metric.v1.ShopReturnItemR\x05value:\x028\x01\"\x8f\x02\n" +
+	"\x15ShopReturnArrivedItem\x12\x17\n" +
+	"\ashop_id\x18\x01 \x01(\x04R\x06shopId\x12+\n" +
+	"\x11transaction_count\x18\x02 \x01(\x03R\x10transactionCount\x12-\n" +
+	"\x12transaction_amount\x18\x03 \x01(\x01R\x11transactionAmount\x12\x1f\n" +
+	"\vpiece_count\x18\x04 \x01(\x03R\n" +
+	"pieceCount\x12!\n" +
+	"\ftotal_amount\x18\x05 \x01(\x01R\vtotalAmount\x12=\n" +
+	"\flast_arrived\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\vlastArrived\"\xe2\x01\n" +
+	"\x17ShopReturnArrivedMetric\x12V\n" +
+	"\x04data\x18\x01 \x03(\v2B.selling_iface.v1.shop_metric.v1.ShopReturnArrivedMetric.DataEntryR\x04data\x1ao\n" +
+	"\tDataEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\x04R\x03key\x12L\n" +
+	"\x05value\x18\x02 \x01(\v26.selling_iface.v1.shop_metric.v1.ShopReturnArrivedItemR\x05value:\x028\x01\"\x95\x02\n" +
+	"\x17ShopReturnCancelledItem\x12\x17\n" +
+	"\ashop_id\x18\x01 \x01(\x04R\x06shopId\x12+\n" +
+	"\x11transaction_count\x18\x02 \x01(\x03R\x10transactionCount\x12-\n" +
+	"\x12transaction_amount\x18\x03 \x01(\x01R\x11transactionAmount\x12\x1f\n" +
+	"\vpiece_count\x18\x04 \x01(\x03R\n" +
+	"pieceCount\x12!\n" +
+	"\ftotal_amount\x18\x05 \x01(\x01R\vtotalAmount\x12A\n" +
+	"\x0elast_cancelled\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\rlastCancelled\"\xe8\x01\n" +
+	"\x19ShopReturnCancelledMetric\x12X\n" +
+	"\x04data\x18\x01 \x03(\v2D.selling_iface.v1.shop_metric.v1.ShopReturnCancelledMetric.DataEntryR\x04data\x1aq\n" +
+	"\tDataEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\x04R\x03key\x12N\n" +
+	"\x05value\x18\x02 \x01(\v28.selling_iface.v1.shop_metric.v1.ShopReturnCancelledItemR\x05value:\x028\x01*\xad\x03\n" +
 	"\x13ShopOrderMetricSort\x12&\n" +
 	"\"SHOP_ORDER_METRIC_SORT_UNSPECIFIED\x10\x00\x12,\n" +
 	"(SHOP_ORDER_METRIC_SORT_TRANSACTION_COUNT\x10\x01\x12&\n" +
@@ -458,13 +1845,61 @@ const file_selling_iface_v1_shop_metric_v1_order_metric_proto_rawDesc = "" +
 	"&SHOP_ORDER_METRIC_SORT_MP_TOTAL_AMOUNT\x10\x05\x12-\n" +
 	")SHOP_ORDER_METRIC_SORT_ORDER_TOTAL_AMOUNT\x10\x06\x124\n" +
 	"0SHOP_ORDER_METRIC_SORT_AVERAGE_TRANSACTION_VALUE\x10\a\x12-\n" +
-	")SHOP_ORDER_METRIC_SORT_LAST_ORDER_CREATED\x10\b*\xa4\x02\n" +
+	")SHOP_ORDER_METRIC_SORT_LAST_ORDER_CREATED\x10\b*\x92\x04\n" +
+	"\x1cShopOrderCompletedMetricSort\x120\n" +
+	",SHOP_ORDER_COMPLETED_METRIC_SORT_UNSPECIFIED\x10\x00\x126\n" +
+	"2SHOP_ORDER_COMPLETED_METRIC_SORT_TRANSACTION_COUNT\x10\x01\x120\n" +
+	",SHOP_ORDER_COMPLETED_METRIC_SORT_PIECE_COUNT\x10\x02\x121\n" +
+	"-SHOP_ORDER_COMPLETED_METRIC_SORT_PIECE_AMOUNT\x10\x03\x129\n" +
+	"5SHOP_ORDER_COMPLETED_METRIC_SORT_UNIT_PER_TRANSACTION\x10\x04\x124\n" +
+	"0SHOP_ORDER_COMPLETED_METRIC_SORT_MP_TOTAL_AMOUNT\x10\x05\x127\n" +
+	"3SHOP_ORDER_COMPLETED_METRIC_SORT_ORDER_TOTAL_AMOUNT\x10\x06\x12>\n" +
+	":SHOP_ORDER_COMPLETED_METRIC_SORT_AVERAGE_TRANSACTION_VALUE\x10\a\x129\n" +
+	"5SHOP_ORDER_COMPLETED_METRIC_SORT_LAST_ORDER_COMPLETED\x10\b*\x92\x04\n" +
+	"\x1cShopOrderCancelledMetricSort\x120\n" +
+	",SHOP_ORDER_CANCELLED_METRIC_SORT_UNSPECIFIED\x10\x00\x126\n" +
+	"2SHOP_ORDER_CANCELLED_METRIC_SORT_TRANSACTION_COUNT\x10\x01\x120\n" +
+	",SHOP_ORDER_CANCELLED_METRIC_SORT_PIECE_COUNT\x10\x02\x121\n" +
+	"-SHOP_ORDER_CANCELLED_METRIC_SORT_PIECE_AMOUNT\x10\x03\x129\n" +
+	"5SHOP_ORDER_CANCELLED_METRIC_SORT_UNIT_PER_TRANSACTION\x10\x04\x124\n" +
+	"0SHOP_ORDER_CANCELLED_METRIC_SORT_MP_TOTAL_AMOUNT\x10\x05\x127\n" +
+	"3SHOP_ORDER_CANCELLED_METRIC_SORT_ORDER_TOTAL_AMOUNT\x10\x06\x12>\n" +
+	":SHOP_ORDER_CANCELLED_METRIC_SORT_AVERAGE_TRANSACTION_VALUE\x10\a\x129\n" +
+	"5SHOP_ORDER_CANCELLED_METRIC_SORT_LAST_ORDER_CANCELLED\x10\b*\xa4\x02\n" +
 	"\x19ShopProductCostMetricSort\x12-\n" +
 	")SHOP_PRODUCT_COST_METRIC_SORT_UNSPECIFIED\x10\x00\x123\n" +
 	"/SHOP_PRODUCT_COST_METRIC_SORT_OWN_PRODUCT_COUNT\x10\x01\x124\n" +
 	"0SHOP_PRODUCT_COST_METRIC_SORT_OWN_PRODUCT_AMOUNT\x10\x02\x125\n" +
 	"1SHOP_PRODUCT_COST_METRIC_SORT_CROSS_PRODUCT_COUNT\x10\x03\x126\n" +
-	"2SHOP_PRODUCT_COST_METRIC_SORT_CROSS_PRODUCT_AMOUNT\x10\x04B\x9c\x02\n" +
+	"2SHOP_PRODUCT_COST_METRIC_SORT_CROSS_PRODUCT_AMOUNT\x10\x04*u\n" +
+	"\x18ShopAdsExpenseMetricSort\x12,\n" +
+	"(SHOP_ADS_EXPENSE_METRIC_SORT_UNSPECIFIED\x10\x00\x12+\n" +
+	"'SHOP_ADS_EXPENSE_METRIC_SORT_ADS_AMOUNT\x10\x01*\xaa\x01\n" +
+	"\x18ShopHoldAmountMetricSort\x12,\n" +
+	"(SHOP_HOLD_AMOUNT_METRIC_SORT_UNSPECIFIED\x10\x00\x122\n" +
+	".SHOP_HOLD_AMOUNT_METRIC_SORT_TRANSACTION_COUNT\x10\x01\x12,\n" +
+	"(SHOP_HOLD_AMOUNT_METRIC_SORT_HOLD_AMOUNT\x10\x02*\xfc\x01\n" +
+	"\x14ShopReturnMetricSort\x12\"\n" +
+	"\x1eRETURN_METRIC_SORT_UNSPECIFIED\x10\x00\x12\"\n" +
+	"\x1eRETURN_METRIC_SORT_PIECE_COUNT\x10\x01\x12\"\n" +
+	"\x1eRETURN_METRIC_SORT_LAST_RETURN\x10\x02\x12#\n" +
+	"\x1fRETURN_METRIC_SORT_TOTAL_AMOUNT\x10\x03\x12(\n" +
+	"$RETURN_METRIC_SORT_TRANSACTION_COUNT\x10\x04\x12)\n" +
+	"%RETURN_METRIC_SORT_TRANSACTION_AMOUNT\x10\x05*\xb3\x02\n" +
+	"\x1bShopReturnArrivedMetricSort\x12*\n" +
+	"&RETURN_ARRIVED_METRIC_SORT_UNSPECIFIED\x10\x00\x12*\n" +
+	"&RETURN_ARRIVED_METRIC_SORT_PIECE_COUNT\x10\x01\x12*\n" +
+	"&RETURN_ARRIVED_METRIC_SORT_LAST_RETURN\x10\x02\x12+\n" +
+	"'RETURN_ARRIVED_METRIC_SORT_TOTAL_AMOUNT\x10\x03\x120\n" +
+	",RETURN_ARRIVED_METRIC_SORT_TRANSACTION_COUNT\x10\x04\x121\n" +
+	"-RETURN_ARRIVED_METRIC_SORT_TRANSACTION_AMOUNT\x10\x05*\xc4\x02\n" +
+	"\x1dShopReturnCancelledMetricSort\x12,\n" +
+	"(RETURN_CANCELLED_METRIC_SORT_UNSPECIFIED\x10\x00\x12,\n" +
+	"(RETURN_CANCELLED_METRIC_SORT_PIECE_COUNT\x10\x01\x12/\n" +
+	"+RETURN_CANCELLED_METRIC_SORT_LAST_CANCELLED\x10\x02\x12-\n" +
+	")RETURN_CANCELLED_METRIC_SORT_TOTAL_AMOUNT\x10\x03\x122\n" +
+	".RETURN_CANCELLED_METRIC_SORT_TRANSACTION_COUNT\x10\x04\x123\n" +
+	"/RETURN_CANCELLED_METRIC_SORT_TRANSACTION_AMOUNT\x10\x05B\x9c\x02\n" +
 	"#com.selling_iface.v1.shop_metric.v1B\x10OrderMetricProtoP\x01ZLgithub.com/pdcgo/schema/services/selling_iface/v1/shop_metric/v1;shop_metric\xa2\x02\x03SVS\xaa\x02\x1dSellingIface.V1.ShopMetric.V1\xca\x02\x1dSellingIface\\V1\\ShopMetric\\V1\xe2\x02)SellingIface\\V1\\ShopMetric\\V1\\GPBMetadata\xea\x02 SellingIface::V1::ShopMetric::V1b\x06proto3"
 
 var (
@@ -479,30 +1914,77 @@ func file_selling_iface_v1_shop_metric_v1_order_metric_proto_rawDescGZIP() []byt
 	return file_selling_iface_v1_shop_metric_v1_order_metric_proto_rawDescData
 }
 
-var file_selling_iface_v1_shop_metric_v1_order_metric_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_selling_iface_v1_shop_metric_v1_order_metric_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_selling_iface_v1_shop_metric_v1_order_metric_proto_enumTypes = make([]protoimpl.EnumInfo, 9)
+var file_selling_iface_v1_shop_metric_v1_order_metric_proto_msgTypes = make([]protoimpl.MessageInfo, 27)
 var file_selling_iface_v1_shop_metric_v1_order_metric_proto_goTypes = []any{
-	(ShopOrderMetricSort)(0),       // 0: selling_iface.v1.shop_metric.v1.ShopOrderMetricSort
-	(ShopProductCostMetricSort)(0), // 1: selling_iface.v1.shop_metric.v1.ShopProductCostMetricSort
-	(*ShopOrderItem)(nil),          // 2: selling_iface.v1.shop_metric.v1.ShopOrderItem
-	(*ShopOrderMetric)(nil),        // 3: selling_iface.v1.shop_metric.v1.ShopOrderMetric
-	(*ShopProductCostItem)(nil),    // 4: selling_iface.v1.shop_metric.v1.ShopProductCostItem
-	(*ShopProductCostMetric)(nil),  // 5: selling_iface.v1.shop_metric.v1.ShopProductCostMetric
-	nil,                            // 6: selling_iface.v1.shop_metric.v1.ShopOrderMetric.DataEntry
-	nil,                            // 7: selling_iface.v1.shop_metric.v1.ShopProductCostMetric.DataEntry
-	(*timestamppb.Timestamp)(nil),  // 8: google.protobuf.Timestamp
+	(ShopOrderMetricSort)(0),           // 0: selling_iface.v1.shop_metric.v1.ShopOrderMetricSort
+	(ShopOrderCompletedMetricSort)(0),  // 1: selling_iface.v1.shop_metric.v1.ShopOrderCompletedMetricSort
+	(ShopOrderCancelledMetricSort)(0),  // 2: selling_iface.v1.shop_metric.v1.ShopOrderCancelledMetricSort
+	(ShopProductCostMetricSort)(0),     // 3: selling_iface.v1.shop_metric.v1.ShopProductCostMetricSort
+	(ShopAdsExpenseMetricSort)(0),      // 4: selling_iface.v1.shop_metric.v1.ShopAdsExpenseMetricSort
+	(ShopHoldAmountMetricSort)(0),      // 5: selling_iface.v1.shop_metric.v1.ShopHoldAmountMetricSort
+	(ShopReturnMetricSort)(0),          // 6: selling_iface.v1.shop_metric.v1.ShopReturnMetricSort
+	(ShopReturnArrivedMetricSort)(0),   // 7: selling_iface.v1.shop_metric.v1.ShopReturnArrivedMetricSort
+	(ShopReturnCancelledMetricSort)(0), // 8: selling_iface.v1.shop_metric.v1.ShopReturnCancelledMetricSort
+	(*ShopOrderItem)(nil),              // 9: selling_iface.v1.shop_metric.v1.ShopOrderItem
+	(*ShopOrderMetric)(nil),            // 10: selling_iface.v1.shop_metric.v1.ShopOrderMetric
+	(*ShopOrderCompletedItem)(nil),     // 11: selling_iface.v1.shop_metric.v1.ShopOrderCompletedItem
+	(*ShopOrderCompletedMetric)(nil),   // 12: selling_iface.v1.shop_metric.v1.ShopOrderCompletedMetric
+	(*ShopOrderCancelledItem)(nil),     // 13: selling_iface.v1.shop_metric.v1.ShopOrderCancelledItem
+	(*ShopOrderCancelledMetric)(nil),   // 14: selling_iface.v1.shop_metric.v1.ShopOrderCancelledMetric
+	(*ShopProductCostItem)(nil),        // 15: selling_iface.v1.shop_metric.v1.ShopProductCostItem
+	(*ShopProductCostMetric)(nil),      // 16: selling_iface.v1.shop_metric.v1.ShopProductCostMetric
+	(*ShopAdsExpenseItem)(nil),         // 17: selling_iface.v1.shop_metric.v1.ShopAdsExpenseItem
+	(*ShopAdsExpenseMetric)(nil),       // 18: selling_iface.v1.shop_metric.v1.ShopAdsExpenseMetric
+	(*ShopHoldAmountItem)(nil),         // 19: selling_iface.v1.shop_metric.v1.ShopHoldAmountItem
+	(*ShopHoldAmountMetric)(nil),       // 20: selling_iface.v1.shop_metric.v1.ShopHoldAmountMetric
+	(*ShopReturnItem)(nil),             // 21: selling_iface.v1.shop_metric.v1.ShopReturnItem
+	(*ShopReturnMetric)(nil),           // 22: selling_iface.v1.shop_metric.v1.ShopReturnMetric
+	(*ShopReturnArrivedItem)(nil),      // 23: selling_iface.v1.shop_metric.v1.ShopReturnArrivedItem
+	(*ShopReturnArrivedMetric)(nil),    // 24: selling_iface.v1.shop_metric.v1.ShopReturnArrivedMetric
+	(*ShopReturnCancelledItem)(nil),    // 25: selling_iface.v1.shop_metric.v1.ShopReturnCancelledItem
+	(*ShopReturnCancelledMetric)(nil),  // 26: selling_iface.v1.shop_metric.v1.ShopReturnCancelledMetric
+	nil,                                // 27: selling_iface.v1.shop_metric.v1.ShopOrderMetric.DataEntry
+	nil,                                // 28: selling_iface.v1.shop_metric.v1.ShopOrderCompletedMetric.DataEntry
+	nil,                                // 29: selling_iface.v1.shop_metric.v1.ShopOrderCancelledMetric.DataEntry
+	nil,                                // 30: selling_iface.v1.shop_metric.v1.ShopProductCostMetric.DataEntry
+	nil,                                // 31: selling_iface.v1.shop_metric.v1.ShopAdsExpenseMetric.DataEntry
+	nil,                                // 32: selling_iface.v1.shop_metric.v1.ShopHoldAmountMetric.DataEntry
+	nil,                                // 33: selling_iface.v1.shop_metric.v1.ShopReturnMetric.DataEntry
+	nil,                                // 34: selling_iface.v1.shop_metric.v1.ShopReturnArrivedMetric.DataEntry
+	nil,                                // 35: selling_iface.v1.shop_metric.v1.ShopReturnCancelledMetric.DataEntry
+	(*timestamppb.Timestamp)(nil),      // 36: google.protobuf.Timestamp
 }
 var file_selling_iface_v1_shop_metric_v1_order_metric_proto_depIdxs = []int32{
-	8, // 0: selling_iface.v1.shop_metric.v1.ShopOrderItem.last_order_created:type_name -> google.protobuf.Timestamp
-	6, // 1: selling_iface.v1.shop_metric.v1.ShopOrderMetric.data:type_name -> selling_iface.v1.shop_metric.v1.ShopOrderMetric.DataEntry
-	7, // 2: selling_iface.v1.shop_metric.v1.ShopProductCostMetric.data:type_name -> selling_iface.v1.shop_metric.v1.ShopProductCostMetric.DataEntry
-	2, // 3: selling_iface.v1.shop_metric.v1.ShopOrderMetric.DataEntry.value:type_name -> selling_iface.v1.shop_metric.v1.ShopOrderItem
-	4, // 4: selling_iface.v1.shop_metric.v1.ShopProductCostMetric.DataEntry.value:type_name -> selling_iface.v1.shop_metric.v1.ShopProductCostItem
-	5, // [5:5] is the sub-list for method output_type
-	5, // [5:5] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	36, // 0: selling_iface.v1.shop_metric.v1.ShopOrderItem.last_order_created:type_name -> google.protobuf.Timestamp
+	27, // 1: selling_iface.v1.shop_metric.v1.ShopOrderMetric.data:type_name -> selling_iface.v1.shop_metric.v1.ShopOrderMetric.DataEntry
+	36, // 2: selling_iface.v1.shop_metric.v1.ShopOrderCompletedItem.last_order_completed:type_name -> google.protobuf.Timestamp
+	28, // 3: selling_iface.v1.shop_metric.v1.ShopOrderCompletedMetric.data:type_name -> selling_iface.v1.shop_metric.v1.ShopOrderCompletedMetric.DataEntry
+	36, // 4: selling_iface.v1.shop_metric.v1.ShopOrderCancelledItem.last_order_cancelled:type_name -> google.protobuf.Timestamp
+	29, // 5: selling_iface.v1.shop_metric.v1.ShopOrderCancelledMetric.data:type_name -> selling_iface.v1.shop_metric.v1.ShopOrderCancelledMetric.DataEntry
+	30, // 6: selling_iface.v1.shop_metric.v1.ShopProductCostMetric.data:type_name -> selling_iface.v1.shop_metric.v1.ShopProductCostMetric.DataEntry
+	31, // 7: selling_iface.v1.shop_metric.v1.ShopAdsExpenseMetric.data:type_name -> selling_iface.v1.shop_metric.v1.ShopAdsExpenseMetric.DataEntry
+	32, // 8: selling_iface.v1.shop_metric.v1.ShopHoldAmountMetric.data:type_name -> selling_iface.v1.shop_metric.v1.ShopHoldAmountMetric.DataEntry
+	36, // 9: selling_iface.v1.shop_metric.v1.ShopReturnItem.last_return:type_name -> google.protobuf.Timestamp
+	33, // 10: selling_iface.v1.shop_metric.v1.ShopReturnMetric.data:type_name -> selling_iface.v1.shop_metric.v1.ShopReturnMetric.DataEntry
+	36, // 11: selling_iface.v1.shop_metric.v1.ShopReturnArrivedItem.last_arrived:type_name -> google.protobuf.Timestamp
+	34, // 12: selling_iface.v1.shop_metric.v1.ShopReturnArrivedMetric.data:type_name -> selling_iface.v1.shop_metric.v1.ShopReturnArrivedMetric.DataEntry
+	36, // 13: selling_iface.v1.shop_metric.v1.ShopReturnCancelledItem.last_cancelled:type_name -> google.protobuf.Timestamp
+	35, // 14: selling_iface.v1.shop_metric.v1.ShopReturnCancelledMetric.data:type_name -> selling_iface.v1.shop_metric.v1.ShopReturnCancelledMetric.DataEntry
+	9,  // 15: selling_iface.v1.shop_metric.v1.ShopOrderMetric.DataEntry.value:type_name -> selling_iface.v1.shop_metric.v1.ShopOrderItem
+	11, // 16: selling_iface.v1.shop_metric.v1.ShopOrderCompletedMetric.DataEntry.value:type_name -> selling_iface.v1.shop_metric.v1.ShopOrderCompletedItem
+	13, // 17: selling_iface.v1.shop_metric.v1.ShopOrderCancelledMetric.DataEntry.value:type_name -> selling_iface.v1.shop_metric.v1.ShopOrderCancelledItem
+	15, // 18: selling_iface.v1.shop_metric.v1.ShopProductCostMetric.DataEntry.value:type_name -> selling_iface.v1.shop_metric.v1.ShopProductCostItem
+	17, // 19: selling_iface.v1.shop_metric.v1.ShopAdsExpenseMetric.DataEntry.value:type_name -> selling_iface.v1.shop_metric.v1.ShopAdsExpenseItem
+	19, // 20: selling_iface.v1.shop_metric.v1.ShopHoldAmountMetric.DataEntry.value:type_name -> selling_iface.v1.shop_metric.v1.ShopHoldAmountItem
+	21, // 21: selling_iface.v1.shop_metric.v1.ShopReturnMetric.DataEntry.value:type_name -> selling_iface.v1.shop_metric.v1.ShopReturnItem
+	23, // 22: selling_iface.v1.shop_metric.v1.ShopReturnArrivedMetric.DataEntry.value:type_name -> selling_iface.v1.shop_metric.v1.ShopReturnArrivedItem
+	25, // 23: selling_iface.v1.shop_metric.v1.ShopReturnCancelledMetric.DataEntry.value:type_name -> selling_iface.v1.shop_metric.v1.ShopReturnCancelledItem
+	24, // [24:24] is the sub-list for method output_type
+	24, // [24:24] is the sub-list for method input_type
+	24, // [24:24] is the sub-list for extension type_name
+	24, // [24:24] is the sub-list for extension extendee
+	0,  // [0:24] is the sub-list for field type_name
 }
 
 func init() { file_selling_iface_v1_shop_metric_v1_order_metric_proto_init() }
@@ -515,8 +1997,8 @@ func file_selling_iface_v1_shop_metric_v1_order_metric_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_selling_iface_v1_shop_metric_v1_order_metric_proto_rawDesc), len(file_selling_iface_v1_shop_metric_v1_order_metric_proto_rawDesc)),
-			NumEnums:      2,
-			NumMessages:   6,
+			NumEnums:      9,
+			NumMessages:   27,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

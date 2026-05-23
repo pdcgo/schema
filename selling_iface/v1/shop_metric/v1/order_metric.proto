@@ -34,6 +34,64 @@ enum ShopOrderMetricSort {
   SHOP_ORDER_METRIC_SORT_LAST_ORDER_CREATED = 8;
 }
 
+message ShopOrderCompletedItem {
+  uint64 shop_id = 1;
+  int64 transaction_count = 2;
+  int64 piece_count = 3;
+  double piece_amount = 4;
+  float unit_per_transaction = 5;
+  double mp_total_amount = 6;
+  double order_total_amount = 7;
+  double average_transaction_value = 8;
+  // @gotags: gorm:"serializer:timestamptz"
+  google.protobuf.Timestamp last_order_completed = 9;
+}
+
+message ShopOrderCompletedMetric {
+  map<uint64, ShopOrderCompletedItem> data = 1;
+}
+
+enum ShopOrderCompletedMetricSort {
+  SHOP_ORDER_COMPLETED_METRIC_SORT_UNSPECIFIED = 0;
+  SHOP_ORDER_COMPLETED_METRIC_SORT_TRANSACTION_COUNT = 1;
+  SHOP_ORDER_COMPLETED_METRIC_SORT_PIECE_COUNT = 2;
+  SHOP_ORDER_COMPLETED_METRIC_SORT_PIECE_AMOUNT = 3;
+  SHOP_ORDER_COMPLETED_METRIC_SORT_UNIT_PER_TRANSACTION = 4;
+  SHOP_ORDER_COMPLETED_METRIC_SORT_MP_TOTAL_AMOUNT = 5;
+  SHOP_ORDER_COMPLETED_METRIC_SORT_ORDER_TOTAL_AMOUNT = 6;
+  SHOP_ORDER_COMPLETED_METRIC_SORT_AVERAGE_TRANSACTION_VALUE = 7;
+  SHOP_ORDER_COMPLETED_METRIC_SORT_LAST_ORDER_COMPLETED = 8;
+}
+
+message ShopOrderCancelledItem {
+  uint64 shop_id = 1;
+  int64 transaction_count = 2;
+  int64 piece_count = 3;
+  double piece_amount = 4;
+  float unit_per_transaction = 5;
+  double mp_total_amount = 6;
+  double order_total_amount = 7;
+  double average_transaction_value = 8;
+  // @gotags: gorm:"serializer:timestamptz"
+  google.protobuf.Timestamp last_order_cancelled = 9;
+}
+
+message ShopOrderCancelledMetric {
+  map<uint64, ShopOrderCancelledItem> data = 1;
+}
+
+enum ShopOrderCancelledMetricSort {
+  SHOP_ORDER_CANCELLED_METRIC_SORT_UNSPECIFIED = 0;
+  SHOP_ORDER_CANCELLED_METRIC_SORT_TRANSACTION_COUNT = 1;
+  SHOP_ORDER_CANCELLED_METRIC_SORT_PIECE_COUNT = 2;
+  SHOP_ORDER_CANCELLED_METRIC_SORT_PIECE_AMOUNT = 3;
+  SHOP_ORDER_CANCELLED_METRIC_SORT_UNIT_PER_TRANSACTION = 4;
+  SHOP_ORDER_CANCELLED_METRIC_SORT_MP_TOTAL_AMOUNT = 5;
+  SHOP_ORDER_CANCELLED_METRIC_SORT_ORDER_TOTAL_AMOUNT = 6;
+  SHOP_ORDER_CANCELLED_METRIC_SORT_AVERAGE_TRANSACTION_VALUE = 7;
+  SHOP_ORDER_CANCELLED_METRIC_SORT_LAST_ORDER_CANCELLED = 8;
+}
+
 message ShopProductCostItem {
   uint64 shop_id = 1;
   int64 own_product_count = 2;
@@ -52,4 +110,106 @@ enum ShopProductCostMetricSort {
   SHOP_PRODUCT_COST_METRIC_SORT_OWN_PRODUCT_AMOUNT = 2;
   SHOP_PRODUCT_COST_METRIC_SORT_CROSS_PRODUCT_COUNT = 3;
   SHOP_PRODUCT_COST_METRIC_SORT_CROSS_PRODUCT_AMOUNT = 4;
+}
+
+message ShopAdsExpenseItem {
+  uint64 shop_id = 1;
+  double ads_amount = 2;
+}
+
+message ShopAdsExpenseMetric {
+  map<uint64, ShopAdsExpenseItem> data = 1;
+}
+
+enum ShopAdsExpenseMetricSort {
+  SHOP_ADS_EXPENSE_METRIC_SORT_UNSPECIFIED = 0;
+  SHOP_ADS_EXPENSE_METRIC_SORT_ADS_AMOUNT = 1;
+}
+
+message ShopHoldAmountItem {
+  uint64 shop_id = 1;
+  uint64 transaction_count = 2;
+  double hold_amount = 3;
+}
+
+message ShopHoldAmountMetric {
+  map<uint64, ShopHoldAmountItem> data = 1;
+}
+
+enum ShopHoldAmountMetricSort {
+  SHOP_HOLD_AMOUNT_METRIC_SORT_UNSPECIFIED = 0;
+  SHOP_HOLD_AMOUNT_METRIC_SORT_TRANSACTION_COUNT = 1;
+  SHOP_HOLD_AMOUNT_METRIC_SORT_HOLD_AMOUNT = 2;
+}
+
+message ShopReturnItem {
+  uint64 shop_id = 1;
+
+  int64 transaction_count = 2;
+  double transaction_amount = 3;
+  int64 piece_count = 4;
+  double total_amount = 5;
+  // @gotags: gorm:"serializer:timestamptz"
+  google.protobuf.Timestamp last_return = 6;
+}
+
+message ShopReturnMetric {
+  map<uint64, ShopReturnItem> data = 1;
+}
+
+enum ShopReturnMetricSort {
+  RETURN_METRIC_SORT_UNSPECIFIED = 0;
+  RETURN_METRIC_SORT_PIECE_COUNT = 1;
+  RETURN_METRIC_SORT_LAST_RETURN = 2;
+  RETURN_METRIC_SORT_TOTAL_AMOUNT = 3;
+  RETURN_METRIC_SORT_TRANSACTION_COUNT = 4;
+  RETURN_METRIC_SORT_TRANSACTION_AMOUNT = 5;
+}
+
+message ShopReturnArrivedItem {
+  uint64 shop_id = 1;
+
+  int64 transaction_count = 2;
+  double transaction_amount = 3;
+  int64 piece_count = 4;
+  double total_amount = 5;
+  // @gotags: gorm:"serializer:timestamptz"
+  google.protobuf.Timestamp last_arrived = 6;
+}
+
+message ShopReturnArrivedMetric {
+  map<uint64, ShopReturnArrivedItem> data = 1;
+}
+
+enum ShopReturnArrivedMetricSort {
+  RETURN_ARRIVED_METRIC_SORT_UNSPECIFIED = 0;
+  RETURN_ARRIVED_METRIC_SORT_PIECE_COUNT = 1;
+  RETURN_ARRIVED_METRIC_SORT_LAST_RETURN = 2;
+  RETURN_ARRIVED_METRIC_SORT_TOTAL_AMOUNT = 3;
+  RETURN_ARRIVED_METRIC_SORT_TRANSACTION_COUNT = 4;
+  RETURN_ARRIVED_METRIC_SORT_TRANSACTION_AMOUNT = 5;
+}
+
+message ShopReturnCancelledItem {
+  uint64 shop_id = 1;
+
+  int64 transaction_count = 2;
+  double transaction_amount = 3;
+  int64 piece_count = 4;
+  double total_amount = 5;
+  // @gotags: gorm:"serializer:timestamptz"
+  google.protobuf.Timestamp last_cancelled = 6;
+}
+
+message ShopReturnCancelledMetric {
+  map<uint64, ShopReturnCancelledItem> data = 1;
+}
+
+enum ShopReturnCancelledMetricSort {
+  RETURN_CANCELLED_METRIC_SORT_UNSPECIFIED = 0;
+  RETURN_CANCELLED_METRIC_SORT_PIECE_COUNT = 1;
+  RETURN_CANCELLED_METRIC_SORT_LAST_CANCELLED = 2;
+  RETURN_CANCELLED_METRIC_SORT_TOTAL_AMOUNT = 3;
+  RETURN_CANCELLED_METRIC_SORT_TRANSACTION_COUNT = 4;
+  RETURN_CANCELLED_METRIC_SORT_TRANSACTION_AMOUNT = 5;
 }

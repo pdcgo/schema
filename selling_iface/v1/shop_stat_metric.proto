@@ -11,6 +11,8 @@ option go_package = "github.com/pdcgo/schema/services/selling_iface/v1;selling_i
 enum ShopMetricType {
   SHOP_METRIC_TYPE_UNSPECIFIED = 0;
   SHOP_METRIC_TYPE_ORDER = 1;
+  SHOP_METRIC_TYPE_ORDER_COMPLETED = 8;
+  SHOP_METRIC_TYPE_ORDER_CANCELLED = 9;
   SHOP_METRIC_TYPE_ADS_EXPENSE = 2;
   SHOP_METRIC_TYPE_RETURN_CREATED = 3;
   SHOP_METRIC_TYPE_HOLD_AMOUNT = 4;
@@ -36,14 +38,28 @@ message ShopMetricSort {
   oneof s {
     CommonShopSort common_sort = 2;
     selling_iface.v1.shop_metric.v1.ShopOrderMetricSort shop_order_metric_sort = 3;
+    selling_iface.v1.shop_metric.v1.ShopOrderCompletedMetricSort shop_order_completed_metric_sort = 7;
+    selling_iface.v1.shop_metric.v1.ShopOrderCancelledMetricSort shop_order_cancelled_metric_sort = 8;
+    selling_iface.v1.shop_metric.v1.ShopReturnMetricSort shop_return_metric_sort = 9;
+    selling_iface.v1.shop_metric.v1.ShopReturnArrivedMetricSort shop_return_arrived_metric_sort = 10;
+    selling_iface.v1.shop_metric.v1.ShopReturnCancelledMetricSort shop_return_cancelled_metric_sort = 11;
     selling_iface.v1.shop_metric.v1.ShopProductCostMetricSort shop_product_cost_metric_sort = 4;
+    selling_iface.v1.shop_metric.v1.ShopAdsExpenseMetricSort shop_ads_expense_metric_sort = 5;
+    selling_iface.v1.shop_metric.v1.ShopHoldAmountMetricSort shop_hold_amount_metric_sort = 6;
   }
 }
 
 message ShopMetric {
   oneof data {
     selling_iface.v1.shop_metric.v1.ShopOrderMetric shop_order_metric = 1;
+    selling_iface.v1.shop_metric.v1.ShopOrderCompletedMetric shop_order_completed_metric = 5;
+    selling_iface.v1.shop_metric.v1.ShopOrderCancelledMetric shop_order_cancelled_metric = 6;
+    selling_iface.v1.shop_metric.v1.ShopReturnMetric shop_return_metric = 7;
+    selling_iface.v1.shop_metric.v1.ShopReturnArrivedMetric shop_return_arrived_metric = 8;
+    selling_iface.v1.shop_metric.v1.ShopReturnCancelledMetric shop_return_cancelled_metric = 9;
     selling_iface.v1.shop_metric.v1.ShopProductCostMetric shop_product_cost_metric = 2;
+    selling_iface.v1.shop_metric.v1.ShopAdsExpenseMetric shop_ads_expense_metric = 3;
+    selling_iface.v1.shop_metric.v1.ShopHoldAmountMetric shop_hold_amount_metric = 4;
   }
 }
 
