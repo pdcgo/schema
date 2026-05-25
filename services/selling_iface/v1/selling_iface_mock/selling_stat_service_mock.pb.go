@@ -98,6 +98,32 @@ func (mr *MockSellingStatServiceClientMockRecorder) ProductStatMetric(ctx, req i
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ProductStatMetric", reflect.TypeOf((*MockSellingStatService)(nil).ProductStatMetric), ctx, req)
 }
 
+func (m *MockSellingStatService) ProductCrossStatMetric(ctx context.Context, req *connect.Request[v1.ProductCrossStatMetricRequest]) (*connect.Response[v1.ProductCrossStatMetricResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "ProductCrossStatMetric", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.ProductCrossStatMetricResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockSellingStatServiceMockRecorder) ProductCrossStatMetric(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ProductCrossStatMetric", reflect.TypeOf((*MockSellingStatService)(nil).ProductCrossStatMetric), ctx, req)
+}
+
+func (m *MockSellingStatServiceClient) ProductCrossStatMetric(ctx context.Context, req *connect.Request[v1.ProductCrossStatMetricRequest]) (*connect.Response[v1.ProductCrossStatMetricResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "ProductCrossStatMetric", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.ProductCrossStatMetricResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockSellingStatServiceClientMockRecorder) ProductCrossStatMetric(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ProductCrossStatMetric", reflect.TypeOf((*MockSellingStatService)(nil).ProductCrossStatMetric), ctx, req)
+}
+
 func (m *MockSellingStatService) ShopStatMetric(ctx context.Context, req *connect.Request[v1.ShopStatMetricRequest]) (*connect.Response[v1.ShopStatMetricResponse], error) {
     m.ctrl.T.Helper()
     ret := m.ctrl.Call(m, "ShopStatMetric", ctx, req)

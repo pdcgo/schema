@@ -38,6 +38,9 @@ const (
 	// SellingStatServiceProductStatMetricProcedure is the fully-qualified name of the
 	// SellingStatService's ProductStatMetric RPC.
 	SellingStatServiceProductStatMetricProcedure = "/selling_iface.v1.SellingStatService/ProductStatMetric"
+	// SellingStatServiceProductCrossStatMetricProcedure is the fully-qualified name of the
+	// SellingStatService's ProductCrossStatMetric RPC.
+	SellingStatServiceProductCrossStatMetricProcedure = "/selling_iface.v1.SellingStatService/ProductCrossStatMetric"
 	// SellingStatServiceShopStatMetricProcedure is the fully-qualified name of the SellingStatService's
 	// ShopStatMetric RPC.
 	SellingStatServiceShopStatMetricProcedure = "/selling_iface.v1.SellingStatService/ShopStatMetric"
@@ -53,6 +56,7 @@ const (
 type SellingStatServiceClient interface {
 	Stat(context.Context, *connect.Request[v1.StatRequest]) (*connect.Response[v1.StatResponse], error)
 	ProductStatMetric(context.Context, *connect.Request[v1.ProductStatMetricRequest]) (*connect.Response[v1.ProductStatMetricResponse], error)
+	ProductCrossStatMetric(context.Context, *connect.Request[v1.ProductCrossStatMetricRequest]) (*connect.Response[v1.ProductCrossStatMetricResponse], error)
 	ShopStatMetric(context.Context, *connect.Request[v1.ShopStatMetricRequest]) (*connect.Response[v1.ShopStatMetricResponse], error)
 	UserStatMetric(context.Context, *connect.Request[v1.UserStatMetricRequest]) (*connect.Response[v1.UserStatMetricResponse], error)
 	CrossProductList(context.Context, *connect.Request[v1.CrossProductListRequest]) (*connect.Response[v1.CrossProductListResponse], error)
@@ -81,6 +85,12 @@ func NewSellingStatServiceClient(httpClient connect.HTTPClient, baseURL string, 
 			connect.WithSchema(sellingStatServiceMethods.ByName("ProductStatMetric")),
 			connect.WithClientOptions(opts...),
 		),
+		productCrossStatMetric: connect.NewClient[v1.ProductCrossStatMetricRequest, v1.ProductCrossStatMetricResponse](
+			httpClient,
+			baseURL+SellingStatServiceProductCrossStatMetricProcedure,
+			connect.WithSchema(sellingStatServiceMethods.ByName("ProductCrossStatMetric")),
+			connect.WithClientOptions(opts...),
+		),
 		shopStatMetric: connect.NewClient[v1.ShopStatMetricRequest, v1.ShopStatMetricResponse](
 			httpClient,
 			baseURL+SellingStatServiceShopStatMetricProcedure,
@@ -104,11 +114,12 @@ func NewSellingStatServiceClient(httpClient connect.HTTPClient, baseURL string, 
 
 // sellingStatServiceClient implements SellingStatServiceClient.
 type sellingStatServiceClient struct {
-	stat              *connect.Client[v1.StatRequest, v1.StatResponse]
-	productStatMetric *connect.Client[v1.ProductStatMetricRequest, v1.ProductStatMetricResponse]
-	shopStatMetric    *connect.Client[v1.ShopStatMetricRequest, v1.ShopStatMetricResponse]
-	userStatMetric    *connect.Client[v1.UserStatMetricRequest, v1.UserStatMetricResponse]
-	crossProductList  *connect.Client[v1.CrossProductListRequest, v1.CrossProductListResponse]
+	stat                   *connect.Client[v1.StatRequest, v1.StatResponse]
+	productStatMetric      *connect.Client[v1.ProductStatMetricRequest, v1.ProductStatMetricResponse]
+	productCrossStatMetric *connect.Client[v1.ProductCrossStatMetricRequest, v1.ProductCrossStatMetricResponse]
+	shopStatMetric         *connect.Client[v1.ShopStatMetricRequest, v1.ShopStatMetricResponse]
+	userStatMetric         *connect.Client[v1.UserStatMetricRequest, v1.UserStatMetricResponse]
+	crossProductList       *connect.Client[v1.CrossProductListRequest, v1.CrossProductListResponse]
 }
 
 // Stat calls selling_iface.v1.SellingStatService.Stat.
@@ -119,6 +130,11 @@ func (c *sellingStatServiceClient) Stat(ctx context.Context, req *connect.Reques
 // ProductStatMetric calls selling_iface.v1.SellingStatService.ProductStatMetric.
 func (c *sellingStatServiceClient) ProductStatMetric(ctx context.Context, req *connect.Request[v1.ProductStatMetricRequest]) (*connect.Response[v1.ProductStatMetricResponse], error) {
 	return c.productStatMetric.CallUnary(ctx, req)
+}
+
+// ProductCrossStatMetric calls selling_iface.v1.SellingStatService.ProductCrossStatMetric.
+func (c *sellingStatServiceClient) ProductCrossStatMetric(ctx context.Context, req *connect.Request[v1.ProductCrossStatMetricRequest]) (*connect.Response[v1.ProductCrossStatMetricResponse], error) {
+	return c.productCrossStatMetric.CallUnary(ctx, req)
 }
 
 // ShopStatMetric calls selling_iface.v1.SellingStatService.ShopStatMetric.
@@ -141,6 +157,7 @@ func (c *sellingStatServiceClient) CrossProductList(ctx context.Context, req *co
 type SellingStatServiceHandler interface {
 	Stat(context.Context, *connect.Request[v1.StatRequest]) (*connect.Response[v1.StatResponse], error)
 	ProductStatMetric(context.Context, *connect.Request[v1.ProductStatMetricRequest]) (*connect.Response[v1.ProductStatMetricResponse], error)
+	ProductCrossStatMetric(context.Context, *connect.Request[v1.ProductCrossStatMetricRequest]) (*connect.Response[v1.ProductCrossStatMetricResponse], error)
 	ShopStatMetric(context.Context, *connect.Request[v1.ShopStatMetricRequest]) (*connect.Response[v1.ShopStatMetricResponse], error)
 	UserStatMetric(context.Context, *connect.Request[v1.UserStatMetricRequest]) (*connect.Response[v1.UserStatMetricResponse], error)
 	CrossProductList(context.Context, *connect.Request[v1.CrossProductListRequest]) (*connect.Response[v1.CrossProductListResponse], error)
@@ -163,6 +180,12 @@ func NewSellingStatServiceHandler(svc SellingStatServiceHandler, opts ...connect
 		SellingStatServiceProductStatMetricProcedure,
 		svc.ProductStatMetric,
 		connect.WithSchema(sellingStatServiceMethods.ByName("ProductStatMetric")),
+		connect.WithHandlerOptions(opts...),
+	)
+	sellingStatServiceProductCrossStatMetricHandler := connect.NewUnaryHandler(
+		SellingStatServiceProductCrossStatMetricProcedure,
+		svc.ProductCrossStatMetric,
+		connect.WithSchema(sellingStatServiceMethods.ByName("ProductCrossStatMetric")),
 		connect.WithHandlerOptions(opts...),
 	)
 	sellingStatServiceShopStatMetricHandler := connect.NewUnaryHandler(
@@ -189,6 +212,8 @@ func NewSellingStatServiceHandler(svc SellingStatServiceHandler, opts ...connect
 			sellingStatServiceStatHandler.ServeHTTP(w, r)
 		case SellingStatServiceProductStatMetricProcedure:
 			sellingStatServiceProductStatMetricHandler.ServeHTTP(w, r)
+		case SellingStatServiceProductCrossStatMetricProcedure:
+			sellingStatServiceProductCrossStatMetricHandler.ServeHTTP(w, r)
 		case SellingStatServiceShopStatMetricProcedure:
 			sellingStatServiceShopStatMetricHandler.ServeHTTP(w, r)
 		case SellingStatServiceUserStatMetricProcedure:
@@ -210,6 +235,10 @@ func (UnimplementedSellingStatServiceHandler) Stat(context.Context, *connect.Req
 
 func (UnimplementedSellingStatServiceHandler) ProductStatMetric(context.Context, *connect.Request[v1.ProductStatMetricRequest]) (*connect.Response[v1.ProductStatMetricResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("selling_iface.v1.SellingStatService.ProductStatMetric is not implemented"))
+}
+
+func (UnimplementedSellingStatServiceHandler) ProductCrossStatMetric(context.Context, *connect.Request[v1.ProductCrossStatMetricRequest]) (*connect.Response[v1.ProductCrossStatMetricResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("selling_iface.v1.SellingStatService.ProductCrossStatMetric is not implemented"))
 }
 
 func (UnimplementedSellingStatServiceHandler) ShopStatMetric(context.Context, *connect.Request[v1.ShopStatMetricRequest]) (*connect.Response[v1.ShopStatMetricResponse], error) {

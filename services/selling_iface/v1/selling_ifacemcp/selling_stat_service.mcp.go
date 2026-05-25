@@ -37,6 +37,17 @@ func RegisterSellingStatServiceMCP(server *mcp.Server, client selling_ifaceconne
 		return &mcp.CallToolResult{}, resp.Msg, nil
 	})
 	mcp.AddTool(server, &mcp.Tool{
+		Name:        "selling_stat_service_product_cross_stat_metric",
+		Description: "ProductCrossStatMetric",
+	}, func(ctx context.Context, req *mcp.CallToolRequest, args *v1.ProductCrossStatMetricRequest) (*mcp.CallToolResult, any, error) {
+		ctx = san_mcp.WithCallToolRequest(ctx, req)
+		resp, err := client.ProductCrossStatMetric(ctx, connect.NewRequest(args))
+		if err != nil {
+			return nil, nil, err
+		}
+		return &mcp.CallToolResult{}, resp.Msg, nil
+	})
+	mcp.AddTool(server, &mcp.Tool{
 		Name:        "selling_stat_service_shop_stat_metric",
 		Description: "ShopStatMetric",
 	}, func(ctx context.Context, req *mcp.CallToolRequest, args *v1.ShopStatMetricRequest) (*mcp.CallToolResult, any, error) {

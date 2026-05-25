@@ -1,0 +1,67 @@
+syntax = "proto3";
+package selling_iface.v1;
+
+import "buf/validate/validate.proto";
+import "common/v1/common.proto";
+import "google/protobuf/timestamp.proto";
+import "selling_iface/v1/product_cross_metric/v1/product_metric.proto";
+
+option go_package = "github.com/pdcgo/schema/services/selling_iface/v1;selling_iface";
+
+enum ProductCrossMetricType {
+  PRODUCT_CROSS_METRIC_TYPE_UNSPECIFIED = 0;
+  PRODUCT_CROSS_METRIC_TYPE_PRODUCT_COST = 1;
+}
+
+enum ProductCrossMetricSortType {
+  PRODUCT_CROSS_METRIC_SORT_TYPE_UNSPECIFIED = 0;
+  PRODUCT_CROSS_METRIC_SORT_TYPE_ASC = 1;
+  PRODUCT_CROSS_METRIC_SORT_TYPE_DESC = 2;
+}
+
+enum CommonProductCrossSort {
+  COMMON_PRODUCT_CROSS_SORT_UNSPECIFIED = 0;
+  COMMON_PRODUCT_CROSS_SORT_NAME = 1;
+  COMMON_PRODUCT_CROSS_SORT_REF_ID = 2;
+}
+
+message ProductCrossMetricSort {
+  ProductCrossMetricSortType sort_type = 1;
+  oneof s {
+    CommonProductCrossSort common_sort = 2;
+    selling_iface.v1.product_cross_metric.v1.CostProductMetricSort cost_product_metric_sort = 3;
+  }
+}
+
+message ProductCrossMetric {
+  oneof data {
+    selling_iface.v1.product_cross_metric.v1.CostProductMetric cost_product_metric = 1;
+  }
+}
+
+message ProductCrossMetricExtra {}
+
+message ProductCrossStatMetricFilter {
+  uint64 team_id = 1;
+  uint64 warehouse_id = 2;
+  string product_name = 3;
+  common.v1.PageFilter page = 4;
+  ProductCrossStatTimeRange range = 5 [(buf.validate.field).required = true];
+}
+
+message ProductCrossStatTimeRange {
+  google.protobuf.Timestamp start = 1 [(buf.validate.field).required = true];
+  google.protobuf.Timestamp end = 2 [(buf.validate.field).required = true];
+}
+
+message ProductCrossStatMetricRequest {
+  ProductCrossStatMetricFilter filter = 2 [(buf.validate.field).required = true];
+  ProductCrossMetricSort sort = 3 [(buf.validate.field).required = true];
+  repeated ProductCrossMetricExtra metric_extras = 4;
+  repeated ProductCrossMetricType metric_types = 5;
+}
+
+message ProductCrossStatMetricResponse {
+  repeated ProductCrossMetric metrics = 1;
+  repeated uint64 ids = 2;
+}

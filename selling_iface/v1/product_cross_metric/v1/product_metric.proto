@@ -1,0 +1,23 @@
+syntax = "proto3";
+package selling_iface.v1.product_cross_metric.v1;
+
+option go_package = "github.com/pdcgo/schema/services/selling_iface/v1/product_cross_metric/v1;product_cross_metric";
+
+message CostProductItem {
+  uint64 product_id = 1;
+
+  int64 transaction_count = 2;
+  int64 piece_count = 4;
+  double cost_amount = 5;
+}
+
+message CostProductMetric {
+  map<uint64, CostProductItem> data = 1;
+}
+
+enum CostProductMetricSort {
+  COST_PRODUCT_METRIC_SORT_UNSPECIFIED = 0;
+  COST_PRODUCT_METRIC_SORT_COST_AMOUNT = 1;
+  COST_PRODUCT_METRIC_SORT_PIECE_COUNT = 2;
+  COST_PRODUCT_METRIC_SORT_TRANSACTION_COUNT = 3;
+}
