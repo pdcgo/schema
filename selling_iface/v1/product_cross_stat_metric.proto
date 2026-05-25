@@ -19,16 +19,10 @@ enum ProductCrossMetricSortType {
   PRODUCT_CROSS_METRIC_SORT_TYPE_DESC = 2;
 }
 
-enum CommonProductCrossSort {
-  COMMON_PRODUCT_CROSS_SORT_UNSPECIFIED = 0;
-  COMMON_PRODUCT_CROSS_SORT_NAME = 1;
-  COMMON_PRODUCT_CROSS_SORT_REF_ID = 2;
-}
-
 message ProductCrossMetricSort {
   ProductCrossMetricSortType sort_type = 1;
   oneof s {
-    CommonProductCrossSort common_sort = 2;
+    selling_iface.v1.product_cross_metric.v1.CommonProductCrossSort common_sort = 2;
     selling_iface.v1.product_cross_metric.v1.CostProductMetricSort cost_product_metric_sort = 3;
   }
 }
@@ -36,6 +30,7 @@ message ProductCrossMetricSort {
 message ProductCrossMetric {
   oneof data {
     selling_iface.v1.product_cross_metric.v1.CostProductMetric cost_product_metric = 1;
+    selling_iface.v1.product_cross_metric.v1.CommonProductCrossMetric common_product_cross_metric = 2;
   }
 }
 
@@ -65,3 +60,9 @@ message ProductCrossStatMetricResponse {
   repeated ProductCrossMetric metrics = 1;
   repeated uint64 ids = 2;
 }
+
+message ProductCrossStatMetricExportRequest {
+  ProductCrossStatMetricRequest req = 1 [(buf.validate.field).required = true];
+}
+
+message ProductCrossStatMetricExportResponse {}

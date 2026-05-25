@@ -29,6 +29,8 @@ service SellingStatService {
     option (mcp_iface.v1.include) = true;
   }
 
+  rpc ProductCrossStatMetricExport(ProductCrossStatMetricExportRequest) returns (stream ProductCrossStatMetricExportResponse);
+
   rpc ShopStatMetric(ShopStatMetricRequest) returns (ShopStatMetricResponse) {
     option (mcp_iface.v1.include) = true;
   }

@@ -124,6 +124,31 @@ func (mr *MockSellingStatServiceClientMockRecorder) ProductCrossStatMetric(ctx, 
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ProductCrossStatMetric", reflect.TypeOf((*MockSellingStatService)(nil).ProductCrossStatMetric), ctx, req)
 }
 
+func (m *MockSellingStatService) ProductCrossStatMetricExport(ctx context.Context, req *connect.Request[v1.ProductCrossStatMetricExportRequest], stream *connect.ServerStream[v1.ProductCrossStatMetricExportResponse]) error {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "ProductCrossStatMetricExport", ctx, req, stream)
+    ret0, _ := ret[0].(error)
+    return ret0
+}
+
+func (mr *MockSellingStatServiceMockRecorder) ProductCrossStatMetricExport(ctx, req, stream interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ProductCrossStatMetricExport", reflect.TypeOf((*MockSellingStatService)(nil).ProductCrossStatMetricExport), ctx, req, stream)
+}
+
+func (m *MockSellingStatServiceClient) ProductCrossStatMetricExport(ctx context.Context, req *connect.Request[v1.ProductCrossStatMetricExportRequest]) (*connect.ServerStreamForClient[v1.ProductCrossStatMetricExportResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "ProductCrossStatMetricExport", ctx, req)
+    ret0, _ := ret[0].(*connect.ServerStreamForClient[v1.ProductCrossStatMetricExportResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockSellingStatServiceClientMockRecorder) ProductCrossStatMetricExport(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ProductCrossStatMetricExport", reflect.TypeOf((*MockSellingStatService)(nil).ProductCrossStatMetricExport), ctx, req)
+}
+
 func (m *MockSellingStatService) ShopStatMetric(ctx context.Context, req *connect.Request[v1.ShopStatMetricRequest]) (*connect.Response[v1.ShopStatMetricResponse], error) {
     m.ctrl.T.Helper()
     ret := m.ctrl.Call(m, "ShopStatMetric", ctx, req)

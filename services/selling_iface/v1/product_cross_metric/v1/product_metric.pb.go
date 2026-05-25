@@ -7,6 +7,7 @@
 package product_cross_metric
 
 import (
+	_ "github.com/pdcgo/schema/services/selling_iface/v1/metric_base/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -20,6 +21,55 @@ const (
 	// Verify that runtime/protoimpl is sufficiently up-to-date.
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
+
+type CommonProductCrossSort int32
+
+const (
+	CommonProductCrossSort_COMMON_PRODUCT_CROSS_SORT_UNSPECIFIED CommonProductCrossSort = 0
+	CommonProductCrossSort_COMMON_PRODUCT_CROSS_SORT_NAME        CommonProductCrossSort = 1
+	CommonProductCrossSort_COMMON_PRODUCT_CROSS_SORT_REF_ID      CommonProductCrossSort = 2
+)
+
+// Enum value maps for CommonProductCrossSort.
+var (
+	CommonProductCrossSort_name = map[int32]string{
+		0: "COMMON_PRODUCT_CROSS_SORT_UNSPECIFIED",
+		1: "COMMON_PRODUCT_CROSS_SORT_NAME",
+		2: "COMMON_PRODUCT_CROSS_SORT_REF_ID",
+	}
+	CommonProductCrossSort_value = map[string]int32{
+		"COMMON_PRODUCT_CROSS_SORT_UNSPECIFIED": 0,
+		"COMMON_PRODUCT_CROSS_SORT_NAME":        1,
+		"COMMON_PRODUCT_CROSS_SORT_REF_ID":      2,
+	}
+)
+
+func (x CommonProductCrossSort) Enum() *CommonProductCrossSort {
+	p := new(CommonProductCrossSort)
+	*p = x
+	return p
+}
+
+func (x CommonProductCrossSort) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (CommonProductCrossSort) Descriptor() protoreflect.EnumDescriptor {
+	return file_selling_iface_v1_product_cross_metric_v1_product_metric_proto_enumTypes[0].Descriptor()
+}
+
+func (CommonProductCrossSort) Type() protoreflect.EnumType {
+	return &file_selling_iface_v1_product_cross_metric_v1_product_metric_proto_enumTypes[0]
+}
+
+func (x CommonProductCrossSort) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use CommonProductCrossSort.Descriptor instead.
+func (CommonProductCrossSort) EnumDescriptor() ([]byte, []int) {
+	return file_selling_iface_v1_product_cross_metric_v1_product_metric_proto_rawDescGZIP(), []int{0}
+}
 
 type CostProductMetricSort int32
 
@@ -57,11 +107,11 @@ func (x CostProductMetricSort) String() string {
 }
 
 func (CostProductMetricSort) Descriptor() protoreflect.EnumDescriptor {
-	return file_selling_iface_v1_product_cross_metric_v1_product_metric_proto_enumTypes[0].Descriptor()
+	return file_selling_iface_v1_product_cross_metric_v1_product_metric_proto_enumTypes[1].Descriptor()
 }
 
 func (CostProductMetricSort) Type() protoreflect.EnumType {
-	return &file_selling_iface_v1_product_cross_metric_v1_product_metric_proto_enumTypes[0]
+	return &file_selling_iface_v1_product_cross_metric_v1_product_metric_proto_enumTypes[1]
 }
 
 func (x CostProductMetricSort) Number() protoreflect.EnumNumber {
@@ -70,7 +120,103 @@ func (x CostProductMetricSort) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use CostProductMetricSort.Descriptor instead.
 func (CostProductMetricSort) EnumDescriptor() ([]byte, []int) {
+	return file_selling_iface_v1_product_cross_metric_v1_product_metric_proto_rawDescGZIP(), []int{1}
+}
+
+type CommonProductCrossItem struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ProductName   string                 `protobuf:"bytes,1,opt,name=product_name,json=productName,proto3" json:"product_name,omitempty"`
+	ProductRefId  string                 `protobuf:"bytes,2,opt,name=product_ref_id,json=productRefId,proto3" json:"product_ref_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CommonProductCrossItem) Reset() {
+	*x = CommonProductCrossItem{}
+	mi := &file_selling_iface_v1_product_cross_metric_v1_product_metric_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CommonProductCrossItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CommonProductCrossItem) ProtoMessage() {}
+
+func (x *CommonProductCrossItem) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_product_cross_metric_v1_product_metric_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CommonProductCrossItem.ProtoReflect.Descriptor instead.
+func (*CommonProductCrossItem) Descriptor() ([]byte, []int) {
 	return file_selling_iface_v1_product_cross_metric_v1_product_metric_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *CommonProductCrossItem) GetProductName() string {
+	if x != nil {
+		return x.ProductName
+	}
+	return ""
+}
+
+func (x *CommonProductCrossItem) GetProductRefId() string {
+	if x != nil {
+		return x.ProductRefId
+	}
+	return ""
+}
+
+type CommonProductCrossMetric struct {
+	state         protoimpl.MessageState             `protogen:"open.v1"`
+	Data          map[uint64]*CommonProductCrossItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CommonProductCrossMetric) Reset() {
+	*x = CommonProductCrossMetric{}
+	mi := &file_selling_iface_v1_product_cross_metric_v1_product_metric_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CommonProductCrossMetric) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CommonProductCrossMetric) ProtoMessage() {}
+
+func (x *CommonProductCrossMetric) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_product_cross_metric_v1_product_metric_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CommonProductCrossMetric.ProtoReflect.Descriptor instead.
+func (*CommonProductCrossMetric) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_product_cross_metric_v1_product_metric_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *CommonProductCrossMetric) GetData() map[uint64]*CommonProductCrossItem {
+	if x != nil {
+		return x.Data
+	}
+	return nil
 }
 
 type CostProductItem struct {
@@ -85,7 +231,7 @@ type CostProductItem struct {
 
 func (x *CostProductItem) Reset() {
 	*x = CostProductItem{}
-	mi := &file_selling_iface_v1_product_cross_metric_v1_product_metric_proto_msgTypes[0]
+	mi := &file_selling_iface_v1_product_cross_metric_v1_product_metric_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -97,7 +243,7 @@ func (x *CostProductItem) String() string {
 func (*CostProductItem) ProtoMessage() {}
 
 func (x *CostProductItem) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_product_cross_metric_v1_product_metric_proto_msgTypes[0]
+	mi := &file_selling_iface_v1_product_cross_metric_v1_product_metric_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -110,7 +256,7 @@ func (x *CostProductItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CostProductItem.ProtoReflect.Descriptor instead.
 func (*CostProductItem) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_product_cross_metric_v1_product_metric_proto_rawDescGZIP(), []int{0}
+	return file_selling_iface_v1_product_cross_metric_v1_product_metric_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *CostProductItem) GetProductId() uint64 {
@@ -150,7 +296,7 @@ type CostProductMetric struct {
 
 func (x *CostProductMetric) Reset() {
 	*x = CostProductMetric{}
-	mi := &file_selling_iface_v1_product_cross_metric_v1_product_metric_proto_msgTypes[1]
+	mi := &file_selling_iface_v1_product_cross_metric_v1_product_metric_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -162,7 +308,7 @@ func (x *CostProductMetric) String() string {
 func (*CostProductMetric) ProtoMessage() {}
 
 func (x *CostProductMetric) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_product_cross_metric_v1_product_metric_proto_msgTypes[1]
+	mi := &file_selling_iface_v1_product_cross_metric_v1_product_metric_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -175,7 +321,7 @@ func (x *CostProductMetric) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CostProductMetric.ProtoReflect.Descriptor instead.
 func (*CostProductMetric) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_product_cross_metric_v1_product_metric_proto_rawDescGZIP(), []int{1}
+	return file_selling_iface_v1_product_cross_metric_v1_product_metric_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *CostProductMetric) GetData() map[uint64]*CostProductItem {
@@ -189,20 +335,34 @@ var File_selling_iface_v1_product_cross_metric_v1_product_metric_proto protorefl
 
 const file_selling_iface_v1_product_cross_metric_v1_product_metric_proto_rawDesc = "" +
 	"\n" +
-	"=selling_iface/v1/product_cross_metric/v1/product_metric.proto\x12(selling_iface.v1.product_cross_metric.v1\"\x9f\x01\n" +
+	"=selling_iface/v1/product_cross_metric/v1/product_metric.proto\x12(selling_iface.v1.product_cross_metric.v1\x1a4selling_iface/v1/metric_base/v1/metric_options.proto\"\x82\x01\n" +
+	"\x16CommonProductCrossItem\x122\n" +
+	"\fproduct_name\x18\x01 \x01(\tB\x0f\x8a\xf9+\vNama ProdukR\vproductName\x124\n" +
+	"\x0eproduct_ref_id\x18\x02 \x01(\tB\x0e\x8a\xf9+\n" +
+	"Sku ProdukR\fproductRefId\"\xf7\x01\n" +
+	"\x18CommonProductCrossMetric\x12`\n" +
+	"\x04data\x18\x01 \x03(\v2L.selling_iface.v1.product_cross_metric.v1.CommonProductCrossMetric.DataEntryR\x04data\x1ay\n" +
+	"\tDataEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\x04R\x03key\x12V\n" +
+	"\x05value\x18\x02 \x01(\v2@.selling_iface.v1.product_cross_metric.v1.CommonProductCrossItemR\x05value:\x028\x01\"\xd6\x01\n" +
 	"\x0fCostProductItem\x12\x1d\n" +
 	"\n" +
-	"product_id\x18\x01 \x01(\x04R\tproductId\x12+\n" +
-	"\x11transaction_count\x18\x02 \x01(\x03R\x10transactionCount\x12\x1f\n" +
-	"\vpiece_count\x18\x04 \x01(\x03R\n" +
-	"pieceCount\x12\x1f\n" +
-	"\vcost_amount\x18\x05 \x01(\x01R\n" +
+	"product_id\x18\x01 \x01(\x04R\tproductId\x12A\n" +
+	"\x11transaction_count\x18\x02 \x01(\x03B\x14\x8a\xf9+\x10Jumlah TransaksiR\x10transactionCount\x12/\n" +
+	"\vpiece_count\x18\x04 \x01(\x03B\x0e\x8a\xf9+\n" +
+	"Jumlah PCSR\n" +
+	"pieceCount\x120\n" +
+	"\vcost_amount\x18\x05 \x01(\x01B\x0f\x8a\xf9+\vTotal ModalR\n" +
 	"costAmount\"\xe2\x01\n" +
 	"\x11CostProductMetric\x12Y\n" +
 	"\x04data\x18\x01 \x03(\v2E.selling_iface.v1.product_cross_metric.v1.CostProductMetric.DataEntryR\x04data\x1ar\n" +
 	"\tDataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\x04R\x03key\x12O\n" +
-	"\x05value\x18\x02 \x01(\v29.selling_iface.v1.product_cross_metric.v1.CostProductItemR\x05value:\x028\x01*\xc5\x01\n" +
+	"\x05value\x18\x02 \x01(\v29.selling_iface.v1.product_cross_metric.v1.CostProductItemR\x05value:\x028\x01*\x8d\x01\n" +
+	"\x16CommonProductCrossSort\x12)\n" +
+	"%COMMON_PRODUCT_CROSS_SORT_UNSPECIFIED\x10\x00\x12\"\n" +
+	"\x1eCOMMON_PRODUCT_CROSS_SORT_NAME\x10\x01\x12$\n" +
+	" COMMON_PRODUCT_CROSS_SORT_REF_ID\x10\x02*\xc5\x01\n" +
 	"\x15CostProductMetricSort\x12(\n" +
 	"$COST_PRODUCT_METRIC_SORT_UNSPECIFIED\x10\x00\x12(\n" +
 	"$COST_PRODUCT_METRIC_SORT_COST_AMOUNT\x10\x01\x12(\n" +
@@ -222,22 +382,28 @@ func file_selling_iface_v1_product_cross_metric_v1_product_metric_proto_rawDescG
 	return file_selling_iface_v1_product_cross_metric_v1_product_metric_proto_rawDescData
 }
 
-var file_selling_iface_v1_product_cross_metric_v1_product_metric_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_selling_iface_v1_product_cross_metric_v1_product_metric_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_selling_iface_v1_product_cross_metric_v1_product_metric_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_selling_iface_v1_product_cross_metric_v1_product_metric_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_selling_iface_v1_product_cross_metric_v1_product_metric_proto_goTypes = []any{
-	(CostProductMetricSort)(0), // 0: selling_iface.v1.product_cross_metric.v1.CostProductMetricSort
-	(*CostProductItem)(nil),    // 1: selling_iface.v1.product_cross_metric.v1.CostProductItem
-	(*CostProductMetric)(nil),  // 2: selling_iface.v1.product_cross_metric.v1.CostProductMetric
-	nil,                        // 3: selling_iface.v1.product_cross_metric.v1.CostProductMetric.DataEntry
+	(CommonProductCrossSort)(0),      // 0: selling_iface.v1.product_cross_metric.v1.CommonProductCrossSort
+	(CostProductMetricSort)(0),       // 1: selling_iface.v1.product_cross_metric.v1.CostProductMetricSort
+	(*CommonProductCrossItem)(nil),   // 2: selling_iface.v1.product_cross_metric.v1.CommonProductCrossItem
+	(*CommonProductCrossMetric)(nil), // 3: selling_iface.v1.product_cross_metric.v1.CommonProductCrossMetric
+	(*CostProductItem)(nil),          // 4: selling_iface.v1.product_cross_metric.v1.CostProductItem
+	(*CostProductMetric)(nil),        // 5: selling_iface.v1.product_cross_metric.v1.CostProductMetric
+	nil,                              // 6: selling_iface.v1.product_cross_metric.v1.CommonProductCrossMetric.DataEntry
+	nil,                              // 7: selling_iface.v1.product_cross_metric.v1.CostProductMetric.DataEntry
 }
 var file_selling_iface_v1_product_cross_metric_v1_product_metric_proto_depIdxs = []int32{
-	3, // 0: selling_iface.v1.product_cross_metric.v1.CostProductMetric.data:type_name -> selling_iface.v1.product_cross_metric.v1.CostProductMetric.DataEntry
-	1, // 1: selling_iface.v1.product_cross_metric.v1.CostProductMetric.DataEntry.value:type_name -> selling_iface.v1.product_cross_metric.v1.CostProductItem
-	2, // [2:2] is the sub-list for method output_type
-	2, // [2:2] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	6, // 0: selling_iface.v1.product_cross_metric.v1.CommonProductCrossMetric.data:type_name -> selling_iface.v1.product_cross_metric.v1.CommonProductCrossMetric.DataEntry
+	7, // 1: selling_iface.v1.product_cross_metric.v1.CostProductMetric.data:type_name -> selling_iface.v1.product_cross_metric.v1.CostProductMetric.DataEntry
+	2, // 2: selling_iface.v1.product_cross_metric.v1.CommonProductCrossMetric.DataEntry.value:type_name -> selling_iface.v1.product_cross_metric.v1.CommonProductCrossItem
+	4, // 3: selling_iface.v1.product_cross_metric.v1.CostProductMetric.DataEntry.value:type_name -> selling_iface.v1.product_cross_metric.v1.CostProductItem
+	4, // [4:4] is the sub-list for method output_type
+	4, // [4:4] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_selling_iface_v1_product_cross_metric_v1_product_metric_proto_init() }
@@ -250,8 +416,8 @@ func file_selling_iface_v1_product_cross_metric_v1_product_metric_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_selling_iface_v1_product_cross_metric_v1_product_metric_proto_rawDesc), len(file_selling_iface_v1_product_cross_metric_v1_product_metric_proto_rawDesc)),
-			NumEnums:      1,
-			NumMessages:   3,
+			NumEnums:      2,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
