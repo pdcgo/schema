@@ -41,9 +41,8 @@ message TeamMetric {
 message TeamMetricExtra {}
 
 message TeamStatMetricFilter {
-  uint64 warehouse_id = 1;
-  common.v1.PageFilter page = 2;
-  TeamStatTimeRange range = 3 [(buf.validate.field).required = true];
+  common.v1.PageFilter page = 1;
+  TeamStatTimeRange range = 2 [(buf.validate.field).required = true];
 }
 message TeamStatTimeRange {
   google.protobuf.Timestamp start = 1 [(buf.validate.field).required = true];

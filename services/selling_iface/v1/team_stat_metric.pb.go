@@ -360,9 +360,8 @@ func (*TeamMetricExtra) Descriptor() ([]byte, []int) {
 
 type TeamStatMetricFilter struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	WarehouseId   uint64                 `protobuf:"varint,1,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
-	Page          *v11.PageFilter        `protobuf:"bytes,2,opt,name=page,proto3" json:"page,omitempty"`
-	Range         *TeamStatTimeRange     `protobuf:"bytes,3,opt,name=range,proto3" json:"range,omitempty"`
+	Page          *v11.PageFilter        `protobuf:"bytes,1,opt,name=page,proto3" json:"page,omitempty"`
+	Range         *TeamStatTimeRange     `protobuf:"bytes,2,opt,name=range,proto3" json:"range,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -395,13 +394,6 @@ func (x *TeamStatMetricFilter) ProtoReflect() protoreflect.Message {
 // Deprecated: Use TeamStatMetricFilter.ProtoReflect.Descriptor instead.
 func (*TeamStatMetricFilter) Descriptor() ([]byte, []int) {
 	return file_selling_iface_v1_team_stat_metric_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *TeamStatMetricFilter) GetWarehouseId() uint64 {
-	if x != nil {
-		return x.WarehouseId
-	}
-	return 0
 }
 
 func (x *TeamStatMetricFilter) GetPage() *v11.PageFilter {
@@ -605,11 +597,10 @@ const file_selling_iface_v1_team_stat_metric_proto_rawDesc = "" +
 	"TeamMetric\x12^\n" +
 	"\x11team_order_metric\x18\x01 \x01(\v20.selling_iface.v1.team_metric.v1.TeamOrderMetricH\x00R\x0fteamOrderMetricB\x06\n" +
 	"\x04data\"\x11\n" +
-	"\x0fTeamMetricExtra\"\xa7\x01\n" +
-	"\x14TeamStatMetricFilter\x12!\n" +
-	"\fwarehouse_id\x18\x01 \x01(\x04R\vwarehouseId\x12)\n" +
-	"\x04page\x18\x02 \x01(\v2\x15.common.v1.PageFilterR\x04page\x12A\n" +
-	"\x05range\x18\x03 \x01(\v2#.selling_iface.v1.TeamStatTimeRangeB\x06\xbaH\x03\xc8\x01\x01R\x05range\"\x83\x01\n" +
+	"\x0fTeamMetricExtra\"\x84\x01\n" +
+	"\x14TeamStatMetricFilter\x12)\n" +
+	"\x04page\x18\x01 \x01(\v2\x15.common.v1.PageFilterR\x04page\x12A\n" +
+	"\x05range\x18\x02 \x01(\v2#.selling_iface.v1.TeamStatTimeRangeB\x06\xbaH\x03\xc8\x01\x01R\x05range\"\x83\x01\n" +
 	"\x11TeamStatTimeRange\x128\n" +
 	"\x05start\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\x05start\x124\n" +
 	"\x03end\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\x03end\"\xaa\x02\n" +
