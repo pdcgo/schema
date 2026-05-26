@@ -1,0 +1,26 @@
+syntax = "proto3";
+package selling_iface.v1.team_metric.v1;
+
+// import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/pdcgo/schema/services/selling_iface/v1/team_metric/v1;team_metric";
+
+message TeamOrderItem {
+  uint64 team_id = 1;
+  int64 transaction_count = 2;
+  int64 piece_count = 3;
+  double total_amount = 4;
+  double average_order_value = 5;
+}
+
+message TeamOrderMetric {
+  map<uint64, TeamOrderItem> data = 1;
+}
+
+enum TeamOrderMetricSort {
+  TEAM_ORDER_METRIC_SORT_UNSPECIFIED = 0;
+  TEAM_ORDER_METRIC_SORT_TRANSACTION_COUNT = 1;
+  TEAM_ORDER_METRIC_SORT_PIECE_COUNT = 2;
+  TEAM_ORDER_METRIC_SORT_TOTAL_AMOUNT = 3;
+  TEAM_ORDER_METRIC_SORT_AVERAGE_ORDER_VALUE = 4;
+}

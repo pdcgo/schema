@@ -12,6 +12,7 @@ import "selling_iface/v1/metric_stock.proto";
 import "selling_iface/v1/product_cross_stat_metric.proto";
 import "selling_iface/v1/product_stat_metric.proto";
 import "selling_iface/v1/shop_stat_metric.proto";
+import "selling_iface/v1/team_stat_metric.proto";
 import "selling_iface/v1/user_stat_metric.proto";
 
 option go_package = "github.com/pdcgo/schema/services/selling_iface/v1;selling_iface";
@@ -36,6 +37,10 @@ service SellingStatService {
   }
 
   rpc UserStatMetric(UserStatMetricRequest) returns (UserStatMetricResponse) {
+    option (mcp_iface.v1.include) = true;
+  }
+
+  rpc TeamStatMetric(TeamStatMetricRequest) returns (TeamStatMetricResponse) {
     option (mcp_iface.v1.include) = true;
   }
 

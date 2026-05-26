@@ -1,9 +1,9 @@
 syntax = "proto3";
-package selling_iface.v1.metric_base.v1;
+package selling_iface.v1.metric_opts.v1;
 
 import "google/protobuf/descriptor.proto";
 
-option go_package = "github.com/pdcgo/schema/services/selling_iface/v1/metric_base/v1;metric_base";
+option go_package = "github.com/pdcgo/schema/services/selling_iface/v1/metric_opts/v1;metric_opts";
 
 extend google.protobuf.FieldOptions {
   optional string csv_name = 90001;

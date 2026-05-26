@@ -1,13 +1,13 @@
 syntax = "proto3";
 package selling_iface.v1.product_cross_metric.v1;
 
-import "selling_iface/v1/metric_base/v1/metric_options.proto";
+import "selling_iface/v1/metric_opts/v1/metric_options.proto";
 
 option go_package = "github.com/pdcgo/schema/services/selling_iface/v1/product_cross_metric/v1;product_cross_metric";
 
 message CommonProductCrossItem {
-  string product_name = 1 [(selling_iface.v1.metric_base.v1.csv_name) = "Nama Produk"];
-  string product_ref_id = 2 [(selling_iface.v1.metric_base.v1.csv_name) = "Sku Produk"];
+  string product_name = 1 [(selling_iface.v1.metric_opts.v1.csv_name) = "Nama Produk"];
+  string product_ref_id = 2 [(selling_iface.v1.metric_opts.v1.csv_name) = "Sku Produk"];
 }
 
 message CommonProductCrossMetric {
@@ -23,9 +23,9 @@ enum CommonProductCrossSort {
 message CostProductItem {
   uint64 product_id = 1;
 
-  int64 transaction_count = 2 [(selling_iface.v1.metric_base.v1.csv_name) = "Jumlah Transaksi"];
-  int64 piece_count = 4 [(selling_iface.v1.metric_base.v1.csv_name) = "Jumlah PCS"];
-  double cost_amount = 5 [(selling_iface.v1.metric_base.v1.csv_name) = "Total Modal"];
+  int64 transaction_count = 2 [(selling_iface.v1.metric_opts.v1.csv_name) = "Jumlah Transaksi"];
+  int64 piece_count = 4 [(selling_iface.v1.metric_opts.v1.csv_name) = "Jumlah PCS"];
+  double cost_amount = 5 [(selling_iface.v1.metric_opts.v1.csv_name) = "Total Modal"];
 }
 
 message CostProductMetric {

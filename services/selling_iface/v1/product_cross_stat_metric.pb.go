@@ -30,6 +30,7 @@ type ProductCrossMetricType int32
 const (
 	ProductCrossMetricType_PRODUCT_CROSS_METRIC_TYPE_UNSPECIFIED  ProductCrossMetricType = 0
 	ProductCrossMetricType_PRODUCT_CROSS_METRIC_TYPE_PRODUCT_COST ProductCrossMetricType = 1
+	ProductCrossMetricType_PRODUCT_CROSS_METRIC_TYPE_COMMON       ProductCrossMetricType = 2
 )
 
 // Enum value maps for ProductCrossMetricType.
@@ -37,10 +38,12 @@ var (
 	ProductCrossMetricType_name = map[int32]string{
 		0: "PRODUCT_CROSS_METRIC_TYPE_UNSPECIFIED",
 		1: "PRODUCT_CROSS_METRIC_TYPE_PRODUCT_COST",
+		2: "PRODUCT_CROSS_METRIC_TYPE_COMMON",
 	}
 	ProductCrossMetricType_value = map[string]int32{
 		"PRODUCT_CROSS_METRIC_TYPE_UNSPECIFIED":  0,
 		"PRODUCT_CROSS_METRIC_TYPE_PRODUCT_COST": 1,
+		"PRODUCT_CROSS_METRIC_TYPE_COMMON":       2,
 	}
 )
 
@@ -622,6 +625,8 @@ func (x *ProductCrossStatMetricExportRequest) GetReq() *ProductCrossStatMetricRe
 
 type ProductCrossStatMetricExportResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Message       string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
+	Data          []byte                 `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -654,6 +659,20 @@ func (x *ProductCrossStatMetricExportResponse) ProtoReflect() protoreflect.Messa
 // Deprecated: Use ProductCrossStatMetricExportResponse.ProtoReflect.Descriptor instead.
 func (*ProductCrossStatMetricExportResponse) Descriptor() ([]byte, []int) {
 	return file_selling_iface_v1_product_cross_stat_metric_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *ProductCrossStatMetricExportResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *ProductCrossStatMetricExportResponse) GetData() []byte {
+	if x != nil {
+		return x.Data
+	}
+	return nil
 }
 
 var File_selling_iface_v1_product_cross_stat_metric_proto protoreflect.FileDescriptor
@@ -690,11 +709,14 @@ const file_selling_iface_v1_product_cross_stat_metric_proto_rawDesc = "" +
 	"\ametrics\x18\x01 \x03(\v2$.selling_iface.v1.ProductCrossMetricR\ametrics\x12\x10\n" +
 	"\x03ids\x18\x02 \x03(\x04R\x03ids\"p\n" +
 	"#ProductCrossStatMetricExportRequest\x12I\n" +
-	"\x03req\x18\x01 \x01(\v2/.selling_iface.v1.ProductCrossStatMetricRequestB\x06\xbaH\x03\xc8\x01\x01R\x03req\"&\n" +
-	"$ProductCrossStatMetricExportResponse*o\n" +
+	"\x03req\x18\x01 \x01(\v2/.selling_iface.v1.ProductCrossStatMetricRequestB\x06\xbaH\x03\xc8\x01\x01R\x03req\"T\n" +
+	"$ProductCrossStatMetricExportResponse\x12\x18\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage\x12\x12\n" +
+	"\x04data\x18\x02 \x01(\fR\x04data*\x95\x01\n" +
 	"\x16ProductCrossMetricType\x12)\n" +
 	"%PRODUCT_CROSS_METRIC_TYPE_UNSPECIFIED\x10\x00\x12*\n" +
-	"&PRODUCT_CROSS_METRIC_TYPE_PRODUCT_COST\x10\x01*\x9d\x01\n" +
+	"&PRODUCT_CROSS_METRIC_TYPE_PRODUCT_COST\x10\x01\x12$\n" +
+	" PRODUCT_CROSS_METRIC_TYPE_COMMON\x10\x02*\x9d\x01\n" +
 	"\x1aProductCrossMetricSortType\x12.\n" +
 	"*PRODUCT_CROSS_METRIC_SORT_TYPE_UNSPECIFIED\x10\x00\x12&\n" +
 	"\"PRODUCT_CROSS_METRIC_SORT_TYPE_ASC\x10\x01\x12'\n" +

@@ -11,6 +11,7 @@ option go_package = "github.com/pdcgo/schema/services/selling_iface/v1;selling_i
 enum ProductCrossMetricType {
   PRODUCT_CROSS_METRIC_TYPE_UNSPECIFIED = 0;
   PRODUCT_CROSS_METRIC_TYPE_PRODUCT_COST = 1;
+  PRODUCT_CROSS_METRIC_TYPE_COMMON = 2;
 }
 
 enum ProductCrossMetricSortType {
@@ -65,4 +66,7 @@ message ProductCrossStatMetricExportRequest {
   ProductCrossStatMetricRequest req = 1 [(buf.validate.field).required = true];
 }
 
-message ProductCrossStatMetricExportResponse {}
+message ProductCrossStatMetricExportResponse {
+  string message = 1;
+  bytes data = 2;
+}

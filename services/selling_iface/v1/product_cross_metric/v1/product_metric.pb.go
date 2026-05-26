@@ -7,7 +7,7 @@
 package product_cross_metric
 
 import (
-	_ "github.com/pdcgo/schema/services/selling_iface/v1/metric_base/v1"
+	_ "github.com/pdcgo/schema/services/selling_iface/v1/metric_opts/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -335,7 +335,7 @@ var File_selling_iface_v1_product_cross_metric_v1_product_metric_proto protorefl
 
 const file_selling_iface_v1_product_cross_metric_v1_product_metric_proto_rawDesc = "" +
 	"\n" +
-	"=selling_iface/v1/product_cross_metric/v1/product_metric.proto\x12(selling_iface.v1.product_cross_metric.v1\x1a4selling_iface/v1/metric_base/v1/metric_options.proto\"\x82\x01\n" +
+	"=selling_iface/v1/product_cross_metric/v1/product_metric.proto\x12(selling_iface.v1.product_cross_metric.v1\x1a4selling_iface/v1/metric_opts/v1/metric_options.proto\"\x82\x01\n" +
 	"\x16CommonProductCrossItem\x122\n" +
 	"\fproduct_name\x18\x01 \x01(\tB\x0f\x8a\xf9+\vNama ProdukR\vproductName\x124\n" +
 	"\x0eproduct_ref_id\x18\x02 \x01(\tB\x0e\x8a\xf9+\n" +

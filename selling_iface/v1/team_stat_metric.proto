@@ -1,0 +1,63 @@
+syntax = "proto3";
+package selling_iface.v1;
+
+import "buf/validate/validate.proto";
+import "common/v1/common.proto";
+import "google/protobuf/timestamp.proto";
+import "selling_iface/v1/team_metric/v1/order_metric.proto";
+
+option go_package = "github.com/pdcgo/schema/services/selling_iface/v1;selling_iface";
+
+enum TeamMetricType {
+  TEAM_METRIC_TYPE_UNSPECIFIED = 0;
+  TEAM_METRIC_TYPE_ORDER = 1;
+}
+
+enum TeamMetricSortType {
+  TEAM_METRIC_SORT_TYPE_UNSPECIFIED = 0;
+  TEAM_METRIC_SORT_TYPE_ASC = 1;
+  TEAM_METRIC_SORT_TYPE_DESC = 2;
+}
+
+enum CommonTeamSort {
+  COMMON_TEAM_SORT_UNSPECIFIED = 0;
+  COMMON_TEAM_SORT_NAME = 1;
+}
+
+message TeamMetricSort {
+  TeamMetricSortType sort_type = 1;
+  oneof s {
+    CommonTeamSort common_sort = 2;
+    selling_iface.v1.team_metric.v1.TeamOrderMetricSort team_order_metric_sort = 3;
+  }
+}
+
+message TeamMetric {
+  oneof data {
+    selling_iface.v1.team_metric.v1.TeamOrderMetric team_order_metric = 1;
+  }
+}
+
+message TeamMetricExtra {}
+
+message TeamStatMetricFilter {
+  uint64 warehouse_id = 1;
+  common.v1.PageFilter page = 2;
+  TeamStatTimeRange range = 3 [(buf.validate.field).required = true];
+}
+message TeamStatTimeRange {
+  google.protobuf.Timestamp start = 1 [(buf.validate.field).required = true];
+  google.protobuf.Timestamp end = 2 [(buf.validate.field).required = true];
+}
+
+message TeamStatMetricRequest {
+  TeamStatMetricFilter filter = 1 [(buf.validate.field).required = true];
+  TeamMetricSort sort = 2 [(buf.validate.field).required = true];
+  repeated TeamMetricExtra metric_extras = 3;
+  repeated TeamMetricType metric_types = 4;
+}
+
+message TeamStatMetricResponse {
+  repeated TeamMetric metrics = 1;
+  repeated uint64 ids = 2;
+}
