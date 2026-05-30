@@ -1,0 +1,12 @@
+syntax = "proto3";
+package selling_iface.v1.stat_logs.v1;
+
+// import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/pdcgo/schema/services/selling_iface/v1/stat_logs/v1;stat_logs";
+
+enum SupplierLogType {
+  SUPPLIER_LOG_TYPE_UNSPECIFIED = 0;
+  SUPPLIER_LOG_TYPE_ORDER = 1;
+  SUPPLIER_LOG_TYPE_ORDER_CANCEL = 2;
+}
