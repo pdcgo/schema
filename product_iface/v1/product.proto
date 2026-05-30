@@ -118,6 +118,7 @@ message ProductIDsData {
   string name = 2;
   string image = 3;
   string ref_id = 4;
+  uint64 team_id = 5;
 }
 
 message ProductByIDsResponse {

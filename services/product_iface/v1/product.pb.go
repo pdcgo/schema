@@ -781,6 +781,7 @@ type ProductIDsData struct {
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Image         string                 `protobuf:"bytes,3,opt,name=image,proto3" json:"image,omitempty"`
 	RefId         string                 `protobuf:"bytes,4,opt,name=ref_id,json=refId,proto3" json:"ref_id,omitempty"`
+	TeamId        uint64                 `protobuf:"varint,5,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -841,6 +842,13 @@ func (x *ProductIDsData) GetRefId() string {
 		return x.RefId
 	}
 	return ""
+}
+
+func (x *ProductIDsData) GetTeamId() uint64 {
+	if x != nil {
+		return x.TeamId
+	}
+	return 0
 }
 
 type ProductByIDsResponse struct {
@@ -1261,12 +1269,13 @@ const file_product_iface_v1_product_proto_rawDesc = "" +
 	"\x13ProductByIDsRequest\x12\"\n" +
 	"\x03ids\x18\x01 \x03(\x04B\x10\xbaH\r\x92\x01\n" +
 	"\b\x01\x10d\"\x042\x02 \x00R\x03ids\x12'\n" +
-	"\x0finclude_variant\x18\x02 \x01(\bR\x0eincludeVariant\"a\n" +
+	"\x0finclude_variant\x18\x02 \x01(\bR\x0eincludeVariant\"z\n" +
 	"\x0eProductIDsData\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x14\n" +
 	"\x05image\x18\x03 \x01(\tR\x05image\x12\x15\n" +
-	"\x06ref_id\x18\x04 \x01(\tR\x05refId\"\xc7\x01\n" +
+	"\x06ref_id\x18\x04 \x01(\tR\x05refId\x12\x17\n" +
+	"\ateam_id\x18\x05 \x01(\x04R\x06teamId\"\xc7\x01\n" +
 	"\x14ProductByIDsResponse\x12P\n" +
 	"\bproducts\x18\x01 \x03(\v24.product_iface.v1.ProductByIDsResponse.ProductsEntryR\bproducts\x1a]\n" +
 	"\rProductsEntry\x12\x10\n" +
