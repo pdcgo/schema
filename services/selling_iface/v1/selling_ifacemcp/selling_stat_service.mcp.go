@@ -80,4 +80,15 @@ func RegisterSellingStatServiceMCP(server *mcp.Server, client selling_ifaceconne
 		}
 		return &mcp.CallToolResult{}, resp.Msg, nil
 	})
+	mcp.AddTool(server, &mcp.Tool{
+		Name:        "selling_stat_service_supplier_stat_metric",
+		Description: "SupplierStatMetric",
+	}, func(ctx context.Context, req *mcp.CallToolRequest, args *v1.SupplierStatMetricRequest) (*mcp.CallToolResult, any, error) {
+		ctx = san_mcp.WithCallToolRequest(ctx, req)
+		resp, err := client.SupplierStatMetric(ctx, connect.NewRequest(args))
+		if err != nil {
+			return nil, nil, err
+		}
+		return &mcp.CallToolResult{}, resp.Msg, nil
+	})
 }

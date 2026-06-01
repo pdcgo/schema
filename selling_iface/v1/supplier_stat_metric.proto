@@ -1,0 +1,70 @@
+syntax = "proto3";
+package selling_iface.v1;
+
+import "buf/validate/validate.proto";
+import "common/v1/common.proto";
+import "google/protobuf/timestamp.proto";
+import "selling_iface/v1/supplier_metric/v1/order_metric.proto";
+
+option go_package = "github.com/pdcgo/schema/services/selling_iface/v1;selling_iface";
+
+enum SupplierMetricType {
+  SUPPLIER_METRIC_TYPE_UNSPECIFIED = 0;
+  SUPPLIER_METRIC_TYPE_SUPPLIER_ORDER = 1;
+  SUPPLIER_METRIC_TYPE_COMMON = 2;
+}
+
+enum SupplierMetricSortType {
+  SUPPLIER_METRIC_SORT_TYPE_UNSPECIFIED = 0;
+  SUPPLIER_METRIC_SORT_TYPE_ASC = 1;
+  SUPPLIER_METRIC_SORT_TYPE_DESC = 2;
+}
+
+message SupplierMetricSort {
+  SupplierMetricSortType sort_type = 1;
+  oneof s {
+    selling_iface.v1.supplier_metric.v1.CommonSupplierSort common_sort = 2;
+    selling_iface.v1.supplier_metric.v1.SupplierOrderMetricSort supplier_order_metric_sort = 3;
+  }
+}
+
+message SupplierMetric {
+  oneof data {
+    selling_iface.v1.supplier_metric.v1.SupplierOrderMetric supplier_order_metric = 1;
+    selling_iface.v1.supplier_metric.v1.CommonSupplierMetric common_supplier_metric = 2;
+  }
+}
+
+message SupplierMetricExtra {}
+
+message SupplierMetricFilter {
+  uint64 team_id = 1;
+  common.v1.PageFilter page = 4;
+  SupplierTimeRange range = 5 [(buf.validate.field).required = true];
+}
+
+message SupplierTimeRange {
+  google.protobuf.Timestamp start = 1 [(buf.validate.field).required = true];
+  google.protobuf.Timestamp end = 2 [(buf.validate.field).required = true];
+}
+
+message SupplierStatMetricRequest {
+  SupplierMetricFilter filter = 2 [(buf.validate.field).required = true];
+  SupplierMetricSort sort = 3 [(buf.validate.field).required = true];
+  repeated SupplierMetricExtra metric_extras = 4;
+  repeated SupplierMetricType metric_types = 5;
+}
+
+message SupplierStatMetricResponse {
+  repeated SupplierMetric metrics = 1;
+  repeated uint64 ids = 2;
+}
+
+message SupplierMetricExportRequest {
+  SupplierStatMetricRequest req = 1 [(buf.validate.field).required = true];
+}
+
+message SupplierMetricExportResponse {
+  string message = 1;
+  bytes data = 2;
+}

@@ -1247,7 +1247,7 @@ var File_selling_iface_v1_selling_stat_service_proto protoreflect.FileDescriptor
 
 const file_selling_iface_v1_selling_stat_service_proto_rawDesc = "" +
 	"\n" +
-	"+selling_iface/v1/selling_stat_service.proto\x12\x10selling_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x14common/v1/stat.proto\x1a\x19mcp_iface/v1/option.proto\x1a\x1dselling_iface/v1/metric.proto\x1a\"selling_iface/v1/metric_cost.proto\x1a#selling_iface/v1/metric_order.proto\x1a%selling_iface/v1/metric_product.proto\x1a#selling_iface/v1/metric_stock.proto\x1a0selling_iface/v1/product_cross_stat_metric.proto\x1a*selling_iface/v1/product_stat_metric.proto\x1a'selling_iface/v1/shop_stat_metric.proto\x1a'selling_iface/v1/team_stat_metric.proto\x1a'selling_iface/v1/user_stat_metric.proto\"\xb0\x01\n" +
+	"+selling_iface/v1/selling_stat_service.proto\x12\x10selling_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x14common/v1/stat.proto\x1a\x19mcp_iface/v1/option.proto\x1a\x1dselling_iface/v1/metric.proto\x1a\"selling_iface/v1/metric_cost.proto\x1a#selling_iface/v1/metric_order.proto\x1a%selling_iface/v1/metric_product.proto\x1a#selling_iface/v1/metric_stock.proto\x1a0selling_iface/v1/product_cross_stat_metric.proto\x1a*selling_iface/v1/product_stat_metric.proto\x1a'selling_iface/v1/shop_stat_metric.proto\x1a+selling_iface/v1/supplier_stat_metric.proto\x1a'selling_iface/v1/team_stat_metric.proto\x1a'selling_iface/v1/user_stat_metric.proto\"\xb0\x01\n" +
 	"\x10TotalStockMetric\x120\n" +
 	"\x04type\x18\x01 \x01(\x0e2\x1c.selling_iface.v1.MetricTypeR\x04type\x12\x1f\n" +
 	"\vtotal_count\x18\x02 \x01(\x04R\n" +
@@ -1346,7 +1346,7 @@ const file_selling_iface_v1_selling_stat_service_proto_rawDesc = "" +
 	"\x17MARKETPLACE_TYPE_LAZADA\x10\x03\x12\x1b\n" +
 	"\x17MARKETPLACE_TYPE_TIKTOK\x10\x04\x12\x1e\n" +
 	"\x1aMARKETPLACE_TYPE_TOKOPEDIA\x10\x05\x12\x1d\n" +
-	"\x19MARKETPLACE_TYPE_MENGATAR\x10\x062\x97\a\n" +
+	"\x19MARKETPLACE_TYPE_MENGATAR\x10\x062\x8e\b\n" +
 	"\x12SellingStatService\x12K\n" +
 	"\x04Stat\x12\x1d.selling_iface.v1.StatRequest\x1a\x1e.selling_iface.v1.StatResponse\"\x04\x88\xa6\x1d\x01\x12r\n" +
 	"\x11ProductStatMetric\x12*.selling_iface.v1.ProductStatMetricRequest\x1a+.selling_iface.v1.ProductStatMetricResponse\"\x04\x88\xa6\x1d\x01\x12\x81\x01\n" +
@@ -1354,7 +1354,8 @@ const file_selling_iface_v1_selling_stat_service_proto_rawDesc = "" +
 	"\x1cProductCrossStatMetricExport\x125.selling_iface.v1.ProductCrossStatMetricExportRequest\x1a6.selling_iface.v1.ProductCrossStatMetricExportResponse0\x01\x12i\n" +
 	"\x0eShopStatMetric\x12'.selling_iface.v1.ShopStatMetricRequest\x1a(.selling_iface.v1.ShopStatMetricResponse\"\x04\x88\xa6\x1d\x01\x12i\n" +
 	"\x0eUserStatMetric\x12'.selling_iface.v1.UserStatMetricRequest\x1a(.selling_iface.v1.UserStatMetricResponse\"\x04\x88\xa6\x1d\x01\x12i\n" +
-	"\x0eTeamStatMetric\x12'.selling_iface.v1.TeamStatMetricRequest\x1a(.selling_iface.v1.TeamStatMetricResponse\"\x04\x88\xa6\x1d\x01\x12i\n" +
+	"\x0eTeamStatMetric\x12'.selling_iface.v1.TeamStatMetricRequest\x1a(.selling_iface.v1.TeamStatMetricResponse\"\x04\x88\xa6\x1d\x01\x12u\n" +
+	"\x12SupplierStatMetric\x12+.selling_iface.v1.SupplierStatMetricRequest\x1a,.selling_iface.v1.SupplierStatMetricResponse\"\x04\x88\xa6\x1d\x01\x12i\n" +
 	"\x10CrossProductList\x12).selling_iface.v1.CrossProductListRequest\x1a*.selling_iface.v1.CrossProductListResponseB\xcd\x01\n" +
 	"\x14com.selling_iface.v1B\x17SellingStatServiceProtoP\x01Z?github.com/pdcgo/schema/services/selling_iface/v1;selling_iface\xa2\x02\x03SXX\xaa\x02\x0fSellingIface.V1\xca\x02\x0fSellingIface\\V1\xe2\x02\x1bSellingIface\\V1\\GPBMetadata\xea\x02\x10SellingIface::V1b\x06proto3"
 
@@ -1412,12 +1413,14 @@ var file_selling_iface_v1_selling_stat_service_proto_goTypes = []any{
 	(*ShopStatMetricRequest)(nil),                // 36: selling_iface.v1.ShopStatMetricRequest
 	(*UserStatMetricRequest)(nil),                // 37: selling_iface.v1.UserStatMetricRequest
 	(*TeamStatMetricRequest)(nil),                // 38: selling_iface.v1.TeamStatMetricRequest
-	(*ProductStatMetricResponse)(nil),            // 39: selling_iface.v1.ProductStatMetricResponse
-	(*ProductCrossStatMetricResponse)(nil),       // 40: selling_iface.v1.ProductCrossStatMetricResponse
-	(*ProductCrossStatMetricExportResponse)(nil), // 41: selling_iface.v1.ProductCrossStatMetricExportResponse
-	(*ShopStatMetricResponse)(nil),               // 42: selling_iface.v1.ShopStatMetricResponse
-	(*UserStatMetricResponse)(nil),               // 43: selling_iface.v1.UserStatMetricResponse
-	(*TeamStatMetricResponse)(nil),               // 44: selling_iface.v1.TeamStatMetricResponse
+	(*SupplierStatMetricRequest)(nil),            // 39: selling_iface.v1.SupplierStatMetricRequest
+	(*ProductStatMetricResponse)(nil),            // 40: selling_iface.v1.ProductStatMetricResponse
+	(*ProductCrossStatMetricResponse)(nil),       // 41: selling_iface.v1.ProductCrossStatMetricResponse
+	(*ProductCrossStatMetricExportResponse)(nil), // 42: selling_iface.v1.ProductCrossStatMetricExportResponse
+	(*ShopStatMetricResponse)(nil),               // 43: selling_iface.v1.ShopStatMetricResponse
+	(*UserStatMetricResponse)(nil),               // 44: selling_iface.v1.UserStatMetricResponse
+	(*TeamStatMetricResponse)(nil),               // 45: selling_iface.v1.TeamStatMetricResponse
+	(*SupplierStatMetricResponse)(nil),           // 46: selling_iface.v1.SupplierStatMetricResponse
 }
 var file_selling_iface_v1_selling_stat_service_proto_depIdxs = []int32{
 	13, // 0: selling_iface.v1.TotalStockMetric.type:type_name -> selling_iface.v1.MetricType
@@ -1461,17 +1464,19 @@ var file_selling_iface_v1_selling_stat_service_proto_depIdxs = []int32{
 	36, // 38: selling_iface.v1.SellingStatService.ShopStatMetric:input_type -> selling_iface.v1.ShopStatMetricRequest
 	37, // 39: selling_iface.v1.SellingStatService.UserStatMetric:input_type -> selling_iface.v1.UserStatMetricRequest
 	38, // 40: selling_iface.v1.SellingStatService.TeamStatMetric:input_type -> selling_iface.v1.TeamStatMetricRequest
-	11, // 41: selling_iface.v1.SellingStatService.CrossProductList:input_type -> selling_iface.v1.CrossProductListRequest
-	10, // 42: selling_iface.v1.SellingStatService.Stat:output_type -> selling_iface.v1.StatResponse
-	39, // 43: selling_iface.v1.SellingStatService.ProductStatMetric:output_type -> selling_iface.v1.ProductStatMetricResponse
-	40, // 44: selling_iface.v1.SellingStatService.ProductCrossStatMetric:output_type -> selling_iface.v1.ProductCrossStatMetricResponse
-	41, // 45: selling_iface.v1.SellingStatService.ProductCrossStatMetricExport:output_type -> selling_iface.v1.ProductCrossStatMetricExportResponse
-	42, // 46: selling_iface.v1.SellingStatService.ShopStatMetric:output_type -> selling_iface.v1.ShopStatMetricResponse
-	43, // 47: selling_iface.v1.SellingStatService.UserStatMetric:output_type -> selling_iface.v1.UserStatMetricResponse
-	44, // 48: selling_iface.v1.SellingStatService.TeamStatMetric:output_type -> selling_iface.v1.TeamStatMetricResponse
-	12, // 49: selling_iface.v1.SellingStatService.CrossProductList:output_type -> selling_iface.v1.CrossProductListResponse
-	42, // [42:50] is the sub-list for method output_type
-	34, // [34:42] is the sub-list for method input_type
+	39, // 41: selling_iface.v1.SellingStatService.SupplierStatMetric:input_type -> selling_iface.v1.SupplierStatMetricRequest
+	11, // 42: selling_iface.v1.SellingStatService.CrossProductList:input_type -> selling_iface.v1.CrossProductListRequest
+	10, // 43: selling_iface.v1.SellingStatService.Stat:output_type -> selling_iface.v1.StatResponse
+	40, // 44: selling_iface.v1.SellingStatService.ProductStatMetric:output_type -> selling_iface.v1.ProductStatMetricResponse
+	41, // 45: selling_iface.v1.SellingStatService.ProductCrossStatMetric:output_type -> selling_iface.v1.ProductCrossStatMetricResponse
+	42, // 46: selling_iface.v1.SellingStatService.ProductCrossStatMetricExport:output_type -> selling_iface.v1.ProductCrossStatMetricExportResponse
+	43, // 47: selling_iface.v1.SellingStatService.ShopStatMetric:output_type -> selling_iface.v1.ShopStatMetricResponse
+	44, // 48: selling_iface.v1.SellingStatService.UserStatMetric:output_type -> selling_iface.v1.UserStatMetricResponse
+	45, // 49: selling_iface.v1.SellingStatService.TeamStatMetric:output_type -> selling_iface.v1.TeamStatMetricResponse
+	46, // 50: selling_iface.v1.SellingStatService.SupplierStatMetric:output_type -> selling_iface.v1.SupplierStatMetricResponse
+	12, // 51: selling_iface.v1.SellingStatService.CrossProductList:output_type -> selling_iface.v1.CrossProductListResponse
+	43, // [43:52] is the sub-list for method output_type
+	34, // [34:43] is the sub-list for method input_type
 	34, // [34:34] is the sub-list for extension type_name
 	34, // [34:34] is the sub-list for extension extendee
 	0,  // [0:34] is the sub-list for field type_name
@@ -1490,6 +1495,7 @@ func file_selling_iface_v1_selling_stat_service_proto_init() {
 	file_selling_iface_v1_product_cross_stat_metric_proto_init()
 	file_selling_iface_v1_product_stat_metric_proto_init()
 	file_selling_iface_v1_shop_stat_metric_proto_init()
+	file_selling_iface_v1_supplier_stat_metric_proto_init()
 	file_selling_iface_v1_team_stat_metric_proto_init()
 	file_selling_iface_v1_user_stat_metric_proto_init()
 	file_selling_iface_v1_selling_stat_service_proto_msgTypes[5].OneofWrappers = []any{

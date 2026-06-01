@@ -12,6 +12,7 @@ import "selling_iface/v1/metric_stock.proto";
 import "selling_iface/v1/product_cross_stat_metric.proto";
 import "selling_iface/v1/product_stat_metric.proto";
 import "selling_iface/v1/shop_stat_metric.proto";
+import "selling_iface/v1/supplier_stat_metric.proto";
 import "selling_iface/v1/team_stat_metric.proto";
 import "selling_iface/v1/user_stat_metric.proto";
 
@@ -41,6 +42,10 @@ service SellingStatService {
   }
 
   rpc TeamStatMetric(TeamStatMetricRequest) returns (TeamStatMetricResponse) {
+    option (mcp_iface.v1.include) = true;
+  }
+
+  rpc SupplierStatMetric(SupplierStatMetricRequest) returns (SupplierStatMetricResponse) {
     option (mcp_iface.v1.include) = true;
   }
 
