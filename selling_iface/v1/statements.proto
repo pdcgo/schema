@@ -1,0 +1,26 @@
+syntax = "proto3";
+package selling_iface.v1;
+
+option go_package = "github.com/pdcgo/schema/services/selling_iface/v1;selling_iface";
+
+message StatementsRequest {}
+
+message RevenueBreakdown {
+  double cross_revenue = 1;
+  double order_revenue = 2;
+}
+
+message CostBreakdown {
+  double cod_cost = 1;
+  double warehouse_cost = 2;
+  double cross_product_cost = 3;
+}
+
+message StatementsResponse {
+  double profit = 1;
+  double revenue = 2;
+  double cost = 3;
+
+  RevenueBreakdown revenue_breakdown = 4;
+  CostBreakdown cost_breakdown = 5;
+}

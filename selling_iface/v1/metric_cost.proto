@@ -18,3 +18,15 @@ message HistoryWarehouseCodCostMetric {
   common.v1.StatTimeType time_type = 1;
   repeated HistoryWarehouseCodCostItem items = 2;
 }
+
+message HistoryWarehouseFeeItem {
+  // @gotags: gorm:"serializer:timestamptz"
+  google.protobuf.Timestamp t = 1;
+  int32 transaction_count = 2;
+  double fee_amount = 3;
+}
+
+message HistoryWarehouseFeeMetric {
+  common.v1.StatTimeType time_type = 1;
+  repeated HistoryWarehouseFeeItem items = 2;
+}

@@ -56,6 +56,9 @@ const (
 	// SellingStatServiceSupplierStatMetricProcedure is the fully-qualified name of the
 	// SellingStatService's SupplierStatMetric RPC.
 	SellingStatServiceSupplierStatMetricProcedure = "/selling_iface.v1.SellingStatService/SupplierStatMetric"
+	// SellingStatServiceStatementsProcedure is the fully-qualified name of the SellingStatService's
+	// Statements RPC.
+	SellingStatServiceStatementsProcedure = "/selling_iface.v1.SellingStatService/Statements"
 	// SellingStatServiceCrossProductListProcedure is the fully-qualified name of the
 	// SellingStatService's CrossProductList RPC.
 	SellingStatServiceCrossProductListProcedure = "/selling_iface.v1.SellingStatService/CrossProductList"
@@ -71,6 +74,7 @@ type SellingStatServiceClient interface {
 	UserStatMetric(context.Context, *connect.Request[v1.UserStatMetricRequest]) (*connect.Response[v1.UserStatMetricResponse], error)
 	TeamStatMetric(context.Context, *connect.Request[v1.TeamStatMetricRequest]) (*connect.Response[v1.TeamStatMetricResponse], error)
 	SupplierStatMetric(context.Context, *connect.Request[v1.SupplierStatMetricRequest]) (*connect.Response[v1.SupplierStatMetricResponse], error)
+	Statements(context.Context, *connect.Request[v1.StatementsRequest]) (*connect.ServerStreamForClient[v1.StatementsResponse], error)
 	CrossProductList(context.Context, *connect.Request[v1.CrossProductListRequest]) (*connect.Response[v1.CrossProductListResponse], error)
 }
 
@@ -133,6 +137,12 @@ func NewSellingStatServiceClient(httpClient connect.HTTPClient, baseURL string, 
 			connect.WithSchema(sellingStatServiceMethods.ByName("SupplierStatMetric")),
 			connect.WithClientOptions(opts...),
 		),
+		statements: connect.NewClient[v1.StatementsRequest, v1.StatementsResponse](
+			httpClient,
+			baseURL+SellingStatServiceStatementsProcedure,
+			connect.WithSchema(sellingStatServiceMethods.ByName("Statements")),
+			connect.WithClientOptions(opts...),
+		),
 		crossProductList: connect.NewClient[v1.CrossProductListRequest, v1.CrossProductListResponse](
 			httpClient,
 			baseURL+SellingStatServiceCrossProductListProcedure,
@@ -152,6 +162,7 @@ type sellingStatServiceClient struct {
 	userStatMetric               *connect.Client[v1.UserStatMetricRequest, v1.UserStatMetricResponse]
 	teamStatMetric               *connect.Client[v1.TeamStatMetricRequest, v1.TeamStatMetricResponse]
 	supplierStatMetric           *connect.Client[v1.SupplierStatMetricRequest, v1.SupplierStatMetricResponse]
+	statements                   *connect.Client[v1.StatementsRequest, v1.StatementsResponse]
 	crossProductList             *connect.Client[v1.CrossProductListRequest, v1.CrossProductListResponse]
 }
 
@@ -196,6 +207,11 @@ func (c *sellingStatServiceClient) SupplierStatMetric(ctx context.Context, req *
 	return c.supplierStatMetric.CallUnary(ctx, req)
 }
 
+// Statements calls selling_iface.v1.SellingStatService.Statements.
+func (c *sellingStatServiceClient) Statements(ctx context.Context, req *connect.Request[v1.StatementsRequest]) (*connect.ServerStreamForClient[v1.StatementsResponse], error) {
+	return c.statements.CallServerStream(ctx, req)
+}
+
 // CrossProductList calls selling_iface.v1.SellingStatService.CrossProductList.
 func (c *sellingStatServiceClient) CrossProductList(ctx context.Context, req *connect.Request[v1.CrossProductListRequest]) (*connect.Response[v1.CrossProductListResponse], error) {
 	return c.crossProductList.CallUnary(ctx, req)
@@ -212,6 +228,7 @@ type SellingStatServiceHandler interface {
 	UserStatMetric(context.Context, *connect.Request[v1.UserStatMetricRequest]) (*connect.Response[v1.UserStatMetricResponse], error)
 	TeamStatMetric(context.Context, *connect.Request[v1.TeamStatMetricRequest]) (*connect.Response[v1.TeamStatMetricResponse], error)
 	SupplierStatMetric(context.Context, *connect.Request[v1.SupplierStatMetricRequest]) (*connect.Response[v1.SupplierStatMetricResponse], error)
+	Statements(context.Context, *connect.Request[v1.StatementsRequest], *connect.ServerStream[v1.StatementsResponse]) error
 	CrossProductList(context.Context, *connect.Request[v1.CrossProductListRequest]) (*connect.Response[v1.CrossProductListResponse], error)
 }
 
@@ -270,6 +287,12 @@ func NewSellingStatServiceHandler(svc SellingStatServiceHandler, opts ...connect
 		connect.WithSchema(sellingStatServiceMethods.ByName("SupplierStatMetric")),
 		connect.WithHandlerOptions(opts...),
 	)
+	sellingStatServiceStatementsHandler := connect.NewServerStreamHandler(
+		SellingStatServiceStatementsProcedure,
+		svc.Statements,
+		connect.WithSchema(sellingStatServiceMethods.ByName("Statements")),
+		connect.WithHandlerOptions(opts...),
+	)
 	sellingStatServiceCrossProductListHandler := connect.NewUnaryHandler(
 		SellingStatServiceCrossProductListProcedure,
 		svc.CrossProductList,
@@ -294,6 +317,8 @@ func NewSellingStatServiceHandler(svc SellingStatServiceHandler, opts ...connect
 			sellingStatServiceTeamStatMetricHandler.ServeHTTP(w, r)
 		case SellingStatServiceSupplierStatMetricProcedure:
 			sellingStatServiceSupplierStatMetricHandler.ServeHTTP(w, r)
+		case SellingStatServiceStatementsProcedure:
+			sellingStatServiceStatementsHandler.ServeHTTP(w, r)
 		case SellingStatServiceCrossProductListProcedure:
 			sellingStatServiceCrossProductListHandler.ServeHTTP(w, r)
 		default:
@@ -335,6 +360,10 @@ func (UnimplementedSellingStatServiceHandler) TeamStatMetric(context.Context, *c
 
 func (UnimplementedSellingStatServiceHandler) SupplierStatMetric(context.Context, *connect.Request[v1.SupplierStatMetricRequest]) (*connect.Response[v1.SupplierStatMetricResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("selling_iface.v1.SellingStatService.SupplierStatMetric is not implemented"))
+}
+
+func (UnimplementedSellingStatServiceHandler) Statements(context.Context, *connect.Request[v1.StatementsRequest], *connect.ServerStream[v1.StatementsResponse]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("selling_iface.v1.SellingStatService.Statements is not implemented"))
 }
 
 func (UnimplementedSellingStatServiceHandler) CrossProductList(context.Context, *connect.Request[v1.CrossProductListRequest]) (*connect.Response[v1.CrossProductListResponse], error) {

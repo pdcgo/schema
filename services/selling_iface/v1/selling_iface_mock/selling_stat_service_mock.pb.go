@@ -253,6 +253,31 @@ func (mr *MockSellingStatServiceClientMockRecorder) SupplierStatMetric(ctx, req 
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SupplierStatMetric", reflect.TypeOf((*MockSellingStatService)(nil).SupplierStatMetric), ctx, req)
 }
 
+func (m *MockSellingStatService) Statements(ctx context.Context, req *connect.Request[v1.StatementsRequest], stream *connect.ServerStream[v1.StatementsResponse]) error {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "Statements", ctx, req, stream)
+    ret0, _ := ret[0].(error)
+    return ret0
+}
+
+func (mr *MockSellingStatServiceMockRecorder) Statements(ctx, req, stream interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Statements", reflect.TypeOf((*MockSellingStatService)(nil).Statements), ctx, req, stream)
+}
+
+func (m *MockSellingStatServiceClient) Statements(ctx context.Context, req *connect.Request[v1.StatementsRequest]) (*connect.ServerStreamForClient[v1.StatementsResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "Statements", ctx, req)
+    ret0, _ := ret[0].(*connect.ServerStreamForClient[v1.StatementsResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockSellingStatServiceClientMockRecorder) Statements(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Statements", reflect.TypeOf((*MockSellingStatService)(nil).Statements), ctx, req)
+}
+
 func (m *MockSellingStatService) CrossProductList(ctx context.Context, req *connect.Request[v1.CrossProductListRequest]) (*connect.Response[v1.CrossProductListResponse], error) {
     m.ctrl.T.Helper()
     ret := m.ctrl.Call(m, "CrossProductList", ctx, req)

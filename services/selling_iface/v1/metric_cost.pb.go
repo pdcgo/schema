@@ -136,6 +136,119 @@ func (x *HistoryWarehouseCodCostMetric) GetItems() []*HistoryWarehouseCodCostIte
 	return nil
 }
 
+type HistoryWarehouseFeeItem struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// @gotags: gorm:"serializer:timestamptz"
+	T                *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=t,proto3" json:"t,omitempty" gorm:"serializer:timestamptz"`
+	TransactionCount int32                  `protobuf:"varint,2,opt,name=transaction_count,json=transactionCount,proto3" json:"transaction_count,omitempty"`
+	FeeAmount        float64                `protobuf:"fixed64,3,opt,name=fee_amount,json=feeAmount,proto3" json:"fee_amount,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *HistoryWarehouseFeeItem) Reset() {
+	*x = HistoryWarehouseFeeItem{}
+	mi := &file_selling_iface_v1_metric_cost_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HistoryWarehouseFeeItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HistoryWarehouseFeeItem) ProtoMessage() {}
+
+func (x *HistoryWarehouseFeeItem) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_metric_cost_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HistoryWarehouseFeeItem.ProtoReflect.Descriptor instead.
+func (*HistoryWarehouseFeeItem) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_metric_cost_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *HistoryWarehouseFeeItem) GetT() *timestamppb.Timestamp {
+	if x != nil {
+		return x.T
+	}
+	return nil
+}
+
+func (x *HistoryWarehouseFeeItem) GetTransactionCount() int32 {
+	if x != nil {
+		return x.TransactionCount
+	}
+	return 0
+}
+
+func (x *HistoryWarehouseFeeItem) GetFeeAmount() float64 {
+	if x != nil {
+		return x.FeeAmount
+	}
+	return 0
+}
+
+type HistoryWarehouseFeeMetric struct {
+	state         protoimpl.MessageState     `protogen:"open.v1"`
+	TimeType      v1.StatTimeType            `protobuf:"varint,1,opt,name=time_type,json=timeType,proto3,enum=common.v1.StatTimeType" json:"time_type,omitempty"`
+	Items         []*HistoryWarehouseFeeItem `protobuf:"bytes,2,rep,name=items,proto3" json:"items,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *HistoryWarehouseFeeMetric) Reset() {
+	*x = HistoryWarehouseFeeMetric{}
+	mi := &file_selling_iface_v1_metric_cost_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HistoryWarehouseFeeMetric) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HistoryWarehouseFeeMetric) ProtoMessage() {}
+
+func (x *HistoryWarehouseFeeMetric) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_metric_cost_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HistoryWarehouseFeeMetric.ProtoReflect.Descriptor instead.
+func (*HistoryWarehouseFeeMetric) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_metric_cost_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *HistoryWarehouseFeeMetric) GetTimeType() v1.StatTimeType {
+	if x != nil {
+		return x.TimeType
+	}
+	return v1.StatTimeType(0)
+}
+
+func (x *HistoryWarehouseFeeMetric) GetItems() []*HistoryWarehouseFeeItem {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
 var File_selling_iface_v1_metric_cost_proto protoreflect.FileDescriptor
 
 const file_selling_iface_v1_metric_cost_proto_rawDesc = "" +
@@ -148,7 +261,15 @@ const file_selling_iface_v1_metric_cost_proto_rawDesc = "" +
 	"costAmount\"\x9a\x01\n" +
 	"\x1dHistoryWarehouseCodCostMetric\x124\n" +
 	"\ttime_type\x18\x01 \x01(\x0e2\x17.common.v1.StatTimeTypeR\btimeType\x12C\n" +
-	"\x05items\x18\x02 \x03(\v2-.selling_iface.v1.HistoryWarehouseCodCostItemR\x05itemsB\xc5\x01\n" +
+	"\x05items\x18\x02 \x03(\v2-.selling_iface.v1.HistoryWarehouseCodCostItemR\x05items\"\x8f\x01\n" +
+	"\x17HistoryWarehouseFeeItem\x12(\n" +
+	"\x01t\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x01t\x12+\n" +
+	"\x11transaction_count\x18\x02 \x01(\x05R\x10transactionCount\x12\x1d\n" +
+	"\n" +
+	"fee_amount\x18\x03 \x01(\x01R\tfeeAmount\"\x92\x01\n" +
+	"\x19HistoryWarehouseFeeMetric\x124\n" +
+	"\ttime_type\x18\x01 \x01(\x0e2\x17.common.v1.StatTimeTypeR\btimeType\x12?\n" +
+	"\x05items\x18\x02 \x03(\v2).selling_iface.v1.HistoryWarehouseFeeItemR\x05itemsB\xc5\x01\n" +
 	"\x14com.selling_iface.v1B\x0fMetricCostProtoP\x01Z?github.com/pdcgo/schema/services/selling_iface/v1;selling_iface\xa2\x02\x03SXX\xaa\x02\x0fSellingIface.V1\xca\x02\x0fSellingIface\\V1\xe2\x02\x1bSellingIface\\V1\\GPBMetadata\xea\x02\x10SellingIface::V1b\x06proto3"
 
 var (
@@ -163,22 +284,27 @@ func file_selling_iface_v1_metric_cost_proto_rawDescGZIP() []byte {
 	return file_selling_iface_v1_metric_cost_proto_rawDescData
 }
 
-var file_selling_iface_v1_metric_cost_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_selling_iface_v1_metric_cost_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_selling_iface_v1_metric_cost_proto_goTypes = []any{
 	(*HistoryWarehouseCodCostItem)(nil),   // 0: selling_iface.v1.HistoryWarehouseCodCostItem
 	(*HistoryWarehouseCodCostMetric)(nil), // 1: selling_iface.v1.HistoryWarehouseCodCostMetric
-	(*timestamppb.Timestamp)(nil),         // 2: google.protobuf.Timestamp
-	(v1.StatTimeType)(0),                  // 3: common.v1.StatTimeType
+	(*HistoryWarehouseFeeItem)(nil),       // 2: selling_iface.v1.HistoryWarehouseFeeItem
+	(*HistoryWarehouseFeeMetric)(nil),     // 3: selling_iface.v1.HistoryWarehouseFeeMetric
+	(*timestamppb.Timestamp)(nil),         // 4: google.protobuf.Timestamp
+	(v1.StatTimeType)(0),                  // 5: common.v1.StatTimeType
 }
 var file_selling_iface_v1_metric_cost_proto_depIdxs = []int32{
-	2, // 0: selling_iface.v1.HistoryWarehouseCodCostItem.t:type_name -> google.protobuf.Timestamp
-	3, // 1: selling_iface.v1.HistoryWarehouseCodCostMetric.time_type:type_name -> common.v1.StatTimeType
+	4, // 0: selling_iface.v1.HistoryWarehouseCodCostItem.t:type_name -> google.protobuf.Timestamp
+	5, // 1: selling_iface.v1.HistoryWarehouseCodCostMetric.time_type:type_name -> common.v1.StatTimeType
 	0, // 2: selling_iface.v1.HistoryWarehouseCodCostMetric.items:type_name -> selling_iface.v1.HistoryWarehouseCodCostItem
-	3, // [3:3] is the sub-list for method output_type
-	3, // [3:3] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	4, // 3: selling_iface.v1.HistoryWarehouseFeeItem.t:type_name -> google.protobuf.Timestamp
+	5, // 4: selling_iface.v1.HistoryWarehouseFeeMetric.time_type:type_name -> common.v1.StatTimeType
+	2, // 5: selling_iface.v1.HistoryWarehouseFeeMetric.items:type_name -> selling_iface.v1.HistoryWarehouseFeeItem
+	6, // [6:6] is the sub-list for method output_type
+	6, // [6:6] is the sub-list for method input_type
+	6, // [6:6] is the sub-list for extension type_name
+	6, // [6:6] is the sub-list for extension extendee
+	0, // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_selling_iface_v1_metric_cost_proto_init() }
@@ -192,7 +318,7 @@ func file_selling_iface_v1_metric_cost_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_selling_iface_v1_metric_cost_proto_rawDesc), len(file_selling_iface_v1_metric_cost_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
