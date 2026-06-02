@@ -4,6 +4,7 @@ package selling_iface.v1;
 import "buf/validate/validate.proto";
 import "common/v1/common.proto";
 import "google/protobuf/timestamp.proto";
+import "selling_iface/v1/user_metric/v1/order_metric.proto";
 
 option go_package = "github.com/pdcgo/schema/services/selling_iface/v1;selling_iface";
 
@@ -34,7 +35,7 @@ message UserMetricSort {
 message UserMetric {
   UserMetricType type = 1;
   oneof data {
-    string user_order_metric = 2;
+    selling_iface.v1.user_metric.v1.UserOrderMetric user_order_metric = 2;
   }
 }
 
