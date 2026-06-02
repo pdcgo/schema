@@ -61,6 +61,7 @@ message ProductListSort {
 
 message ProductListExportRequest {
   uint64 team_id = 1;
+  bool exclude_selected_team_id = 9;
   bool is_locked = 2;
   ProductListSort sort = 3 [(buf.validate.field).required = true];
 

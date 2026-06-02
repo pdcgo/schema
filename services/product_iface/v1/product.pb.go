@@ -356,10 +356,11 @@ func (x *ProductListSort) GetType() v1.SortType {
 }
 
 type ProductListExportRequest struct {
-	state    protoimpl.MessageState `protogen:"open.v1"`
-	TeamId   uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
-	IsLocked bool                   `protobuf:"varint,2,opt,name=is_locked,json=isLocked,proto3" json:"is_locked,omitempty"`
-	Sort     *ProductListSort       `protobuf:"bytes,3,opt,name=sort,proto3" json:"sort,omitempty"`
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	TeamId                uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	ExcludeSelectedTeamId bool                   `protobuf:"varint,9,opt,name=exclude_selected_team_id,json=excludeSelectedTeamId,proto3" json:"exclude_selected_team_id,omitempty"`
+	IsLocked              bool                   `protobuf:"varint,2,opt,name=is_locked,json=isLocked,proto3" json:"is_locked,omitempty"`
+	Sort                  *ProductListSort       `protobuf:"bytes,3,opt,name=sort,proto3" json:"sort,omitempty"`
 	// Types that are valid to be assigned to SoldBy:
 	//
 	//	*ProductListExportRequest_SoldByTeamId
@@ -410,6 +411,13 @@ func (x *ProductListExportRequest) GetTeamId() uint64 {
 		return x.TeamId
 	}
 	return 0
+}
+
+func (x *ProductListExportRequest) GetExcludeSelectedTeamId() bool {
+	if x != nil {
+		return x.ExcludeSelectedTeamId
+	}
+	return false
 }
 
 func (x *ProductListExportRequest) GetIsLocked() bool {
@@ -1227,9 +1235,10 @@ const file_product_iface_v1_product_proto_rawDesc = "" +
 	"\bproducts\x18\x01 \x03(\v2#.product_iface.v1.ProductSearchItemR\bproducts\"x\n" +
 	"\x0fProductListSort\x12<\n" +
 	"\x05field\x18\x01 \x01(\x0e2&.product_iface.v1.ProductListFieldSortR\x05field\x12'\n" +
-	"\x04type\x18\x02 \x01(\x0e2\x13.common.v1.SortTypeR\x04type\"\xf7\x02\n" +
+	"\x04type\x18\x02 \x01(\x0e2\x13.common.v1.SortTypeR\x04type\"\xb0\x03\n" +
 	"\x18ProductListExportRequest\x12\x17\n" +
-	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12\x1b\n" +
+	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x127\n" +
+	"\x18exclude_selected_team_id\x18\t \x01(\bR\x15excludeSelectedTeamId\x12\x1b\n" +
 	"\tis_locked\x18\x02 \x01(\bR\bisLocked\x12=\n" +
 	"\x04sort\x18\x03 \x01(\v2!.product_iface.v1.ProductListSortB\x06\xbaH\x03\xc8\x01\x01R\x04sort\x12'\n" +
 	"\x0fsold_by_team_id\x18\x04 \x01(\x04H\x00R\fsoldByTeamId\x12'\n" +
