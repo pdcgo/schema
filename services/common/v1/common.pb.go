@@ -352,6 +352,7 @@ type User struct {
 	Name           string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Username       string                 `protobuf:"bytes,3,opt,name=username,proto3" json:"username,omitempty"`
 	ProfilePicture string                 `protobuf:"bytes,4,opt,name=profile_picture,json=profilePicture,proto3" json:"profile_picture,omitempty"`
+	TeamId         int64                  `protobuf:"varint,5,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -412,6 +413,13 @@ func (x *User) GetProfilePicture() string {
 		return x.ProfilePicture
 	}
 	return ""
+}
+
+func (x *User) GetTeamId() int64 {
+	if x != nil {
+		return x.TeamId
+	}
+	return 0
 }
 
 type TeamInfo struct {
@@ -886,12 +894,13 @@ const file_common_v1_common_proto_rawDesc = "" +
 	"\x12TimeKeyValueMetric\x12\x12\n" +
 	"\x04time\x18\x01 \x01(\x03R\x04time\x12\x10\n" +
 	"\x03key\x18\x02 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x03 \x01(\x01R\x05value\"o\n" +
+	"\x05value\x18\x03 \x01(\x01R\x05value\"\x88\x01\n" +
 	"\x04User\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1a\n" +
 	"\busername\x18\x03 \x01(\tR\busername\x12'\n" +
-	"\x0fprofile_picture\x18\x04 \x01(\tR\x0eprofilePicture\"\xa0\x01\n" +
+	"\x0fprofile_picture\x18\x04 \x01(\tR\x0eprofilePicture\x12\x17\n" +
+	"\ateam_id\x18\x05 \x01(\x03R\x06teamId\"\xa0\x01\n" +
 	"\bTeamInfo\x12\x17\n" +
 	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12%\n" +
 	"\x0econtact_number\x18\x02 \x01(\tR\rcontactNumber\x12.\n" +
