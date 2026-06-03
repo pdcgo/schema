@@ -29,11 +29,11 @@ message UserMetricSort {
   UserMetricSortType sort_type = 1;
   oneof s {
     CommonUserSort common_sort = 2;
+    selling_iface.v1.user_metric.v1.UserOrderMetricSort user_order_metric_sort = 3;
   }
 }
 
 message UserMetric {
-  UserMetricType type = 1;
   oneof data {
     selling_iface.v1.user_metric.v1.UserOrderMetric user_order_metric = 2;
   }
@@ -43,8 +43,6 @@ message UserMetricExtra {}
 
 message UserStatMetricFilter {
   uint64 team_id = 1;
-  uint64 warehouse_id = 2;
-  string product_name = 3;
   common.v1.PageFilter page = 4;
   UserStatTimeRange range = 5 [(buf.validate.field).required = true];
 }

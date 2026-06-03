@@ -8,7 +8,8 @@ package selling_iface
 
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
-	v1 "github.com/pdcgo/schema/services/common/v1"
+	v11 "github.com/pdcgo/schema/services/common/v1"
+	v1 "github.com/pdcgo/schema/services/selling_iface/v1/user_metric/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -174,6 +175,7 @@ type UserMetricSort struct {
 	// Types that are valid to be assigned to S:
 	//
 	//	*UserMetricSort_CommonSort
+	//	*UserMetricSort_UserOrderMetricSort
 	S             isUserMetricSort_S `protobuf_oneof:"s"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -232,6 +234,15 @@ func (x *UserMetricSort) GetCommonSort() CommonUserSort {
 	return CommonUserSort_COMMON_USER_SORT_UNSPECIFIED
 }
 
+func (x *UserMetricSort) GetUserOrderMetricSort() v1.UserOrderMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*UserMetricSort_UserOrderMetricSort); ok {
+			return x.UserOrderMetricSort
+		}
+	}
+	return v1.UserOrderMetricSort(0)
+}
+
 type isUserMetricSort_S interface {
 	isUserMetricSort_S()
 }
@@ -240,11 +251,16 @@ type UserMetricSort_CommonSort struct {
 	CommonSort CommonUserSort `protobuf:"varint,2,opt,name=common_sort,json=commonSort,proto3,enum=selling_iface.v1.CommonUserSort,oneof"`
 }
 
+type UserMetricSort_UserOrderMetricSort struct {
+	UserOrderMetricSort v1.UserOrderMetricSort `protobuf:"varint,3,opt,name=user_order_metric_sort,json=userOrderMetricSort,proto3,enum=selling_iface.v1.user_metric.v1.UserOrderMetricSort,oneof"`
+}
+
 func (*UserMetricSort_CommonSort) isUserMetricSort_S() {}
+
+func (*UserMetricSort_UserOrderMetricSort) isUserMetricSort_S() {}
 
 type UserMetric struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	Type  UserMetricType         `protobuf:"varint,1,opt,name=type,proto3,enum=selling_iface.v1.UserMetricType" json:"type,omitempty"`
 	// Types that are valid to be assigned to Data:
 	//
 	//	*UserMetric_UserOrderMetric
@@ -283,13 +299,6 @@ func (*UserMetric) Descriptor() ([]byte, []int) {
 	return file_selling_iface_v1_user_stat_metric_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *UserMetric) GetType() UserMetricType {
-	if x != nil {
-		return x.Type
-	}
-	return UserMetricType_USER_METRIC_TYPE_UNSPECIFIED
-}
-
 func (x *UserMetric) GetData() isUserMetric_Data {
 	if x != nil {
 		return x.Data
@@ -297,13 +306,13 @@ func (x *UserMetric) GetData() isUserMetric_Data {
 	return nil
 }
 
-func (x *UserMetric) GetUserOrderMetric() string {
+func (x *UserMetric) GetUserOrderMetric() *v1.UserOrderMetric {
 	if x != nil {
 		if x, ok := x.Data.(*UserMetric_UserOrderMetric); ok {
 			return x.UserOrderMetric
 		}
 	}
-	return ""
+	return nil
 }
 
 type isUserMetric_Data interface {
@@ -311,7 +320,7 @@ type isUserMetric_Data interface {
 }
 
 type UserMetric_UserOrderMetric struct {
-	UserOrderMetric string `protobuf:"bytes,2,opt,name=user_order_metric,json=userOrderMetric,proto3,oneof"`
+	UserOrderMetric *v1.UserOrderMetric `protobuf:"bytes,2,opt,name=user_order_metric,json=userOrderMetric,proto3,oneof"`
 }
 
 func (*UserMetric_UserOrderMetric) isUserMetric_Data() {}
@@ -355,9 +364,7 @@ func (*UserMetricExtra) Descriptor() ([]byte, []int) {
 type UserStatMetricFilter struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
-	WarehouseId   uint64                 `protobuf:"varint,2,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
-	ProductName   string                 `protobuf:"bytes,3,opt,name=product_name,json=productName,proto3" json:"product_name,omitempty"`
-	Page          *v1.PageFilter         `protobuf:"bytes,4,opt,name=page,proto3" json:"page,omitempty"`
+	Page          *v11.PageFilter        `protobuf:"bytes,4,opt,name=page,proto3" json:"page,omitempty"`
 	Range         *UserStatTimeRange     `protobuf:"bytes,5,opt,name=range,proto3" json:"range,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -400,21 +407,7 @@ func (x *UserStatMetricFilter) GetTeamId() uint64 {
 	return 0
 }
 
-func (x *UserStatMetricFilter) GetWarehouseId() uint64 {
-	if x != nil {
-		return x.WarehouseId
-	}
-	return 0
-}
-
-func (x *UserStatMetricFilter) GetProductName() string {
-	if x != nil {
-		return x.ProductName
-	}
-	return ""
-}
-
-func (x *UserStatMetricFilter) GetPage() *v1.PageFilter {
+func (x *UserStatMetricFilter) GetPage() *v11.PageFilter {
 	if x != nil {
 		return x.Page
 	}
@@ -604,22 +597,20 @@ var File_selling_iface_v1_user_stat_metric_proto protoreflect.FileDescriptor
 
 const file_selling_iface_v1_user_stat_metric_proto_rawDesc = "" +
 	"\n" +
-	"'selling_iface/v1/user_stat_metric.proto\x12\x10selling_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x9d\x01\n" +
+	"'selling_iface/v1/user_stat_metric.proto\x12\x10selling_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a2selling_iface/v1/user_metric/v1/order_metric.proto\"\x8a\x02\n" +
 	"\x0eUserMetricSort\x12A\n" +
 	"\tsort_type\x18\x01 \x01(\x0e2$.selling_iface.v1.UserMetricSortTypeR\bsortType\x12C\n" +
 	"\vcommon_sort\x18\x02 \x01(\x0e2 .selling_iface.v1.CommonUserSortH\x00R\n" +
-	"commonSortB\x03\n" +
-	"\x01s\"x\n" +
+	"commonSort\x12k\n" +
+	"\x16user_order_metric_sort\x18\x03 \x01(\x0e24.selling_iface.v1.user_metric.v1.UserOrderMetricSortH\x00R\x13userOrderMetricSortB\x03\n" +
+	"\x01s\"t\n" +
 	"\n" +
-	"UserMetric\x124\n" +
-	"\x04type\x18\x01 \x01(\x0e2 .selling_iface.v1.UserMetricTypeR\x04type\x12,\n" +
-	"\x11user_order_metric\x18\x02 \x01(\tH\x00R\x0fuserOrderMetricB\x06\n" +
+	"UserMetric\x12^\n" +
+	"\x11user_order_metric\x18\x02 \x01(\v20.selling_iface.v1.user_metric.v1.UserOrderMetricH\x00R\x0fuserOrderMetricB\x06\n" +
 	"\x04data\"\x11\n" +
-	"\x0fUserMetricExtra\"\xe3\x01\n" +
+	"\x0fUserMetricExtra\"\x9d\x01\n" +
 	"\x14UserStatMetricFilter\x12\x17\n" +
-	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12!\n" +
-	"\fwarehouse_id\x18\x02 \x01(\x04R\vwarehouseId\x12!\n" +
-	"\fproduct_name\x18\x03 \x01(\tR\vproductName\x12)\n" +
+	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12)\n" +
 	"\x04page\x18\x04 \x01(\v2\x15.common.v1.PageFilterR\x04page\x12A\n" +
 	"\x05range\x18\x05 \x01(\v2#.selling_iface.v1.UserStatTimeRangeB\x06\xbaH\x03\xc8\x01\x01R\x05range\"\x83\x01\n" +
 	"\x11UserStatTimeRange\x128\n" +
@@ -671,27 +662,30 @@ var file_selling_iface_v1_user_stat_metric_proto_goTypes = []any{
 	(*UserStatTimeRange)(nil),      // 7: selling_iface.v1.UserStatTimeRange
 	(*UserStatMetricRequest)(nil),  // 8: selling_iface.v1.UserStatMetricRequest
 	(*UserStatMetricResponse)(nil), // 9: selling_iface.v1.UserStatMetricResponse
-	(*v1.PageFilter)(nil),          // 10: common.v1.PageFilter
-	(*timestamppb.Timestamp)(nil),  // 11: google.protobuf.Timestamp
+	(v1.UserOrderMetricSort)(0),    // 10: selling_iface.v1.user_metric.v1.UserOrderMetricSort
+	(*v1.UserOrderMetric)(nil),     // 11: selling_iface.v1.user_metric.v1.UserOrderMetric
+	(*v11.PageFilter)(nil),         // 12: common.v1.PageFilter
+	(*timestamppb.Timestamp)(nil),  // 13: google.protobuf.Timestamp
 }
 var file_selling_iface_v1_user_stat_metric_proto_depIdxs = []int32{
 	1,  // 0: selling_iface.v1.UserMetricSort.sort_type:type_name -> selling_iface.v1.UserMetricSortType
 	2,  // 1: selling_iface.v1.UserMetricSort.common_sort:type_name -> selling_iface.v1.CommonUserSort
-	0,  // 2: selling_iface.v1.UserMetric.type:type_name -> selling_iface.v1.UserMetricType
-	10, // 3: selling_iface.v1.UserStatMetricFilter.page:type_name -> common.v1.PageFilter
-	7,  // 4: selling_iface.v1.UserStatMetricFilter.range:type_name -> selling_iface.v1.UserStatTimeRange
-	11, // 5: selling_iface.v1.UserStatTimeRange.start:type_name -> google.protobuf.Timestamp
-	11, // 6: selling_iface.v1.UserStatTimeRange.end:type_name -> google.protobuf.Timestamp
-	6,  // 7: selling_iface.v1.UserStatMetricRequest.filter:type_name -> selling_iface.v1.UserStatMetricFilter
-	3,  // 8: selling_iface.v1.UserStatMetricRequest.sort:type_name -> selling_iface.v1.UserMetricSort
-	5,  // 9: selling_iface.v1.UserStatMetricRequest.metric_extras:type_name -> selling_iface.v1.UserMetricExtra
-	0,  // 10: selling_iface.v1.UserStatMetricRequest.metric_types:type_name -> selling_iface.v1.UserMetricType
-	4,  // 11: selling_iface.v1.UserStatMetricResponse.metrics:type_name -> selling_iface.v1.UserMetric
-	12, // [12:12] is the sub-list for method output_type
-	12, // [12:12] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	10, // 2: selling_iface.v1.UserMetricSort.user_order_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserOrderMetricSort
+	11, // 3: selling_iface.v1.UserMetric.user_order_metric:type_name -> selling_iface.v1.user_metric.v1.UserOrderMetric
+	12, // 4: selling_iface.v1.UserStatMetricFilter.page:type_name -> common.v1.PageFilter
+	7,  // 5: selling_iface.v1.UserStatMetricFilter.range:type_name -> selling_iface.v1.UserStatTimeRange
+	13, // 6: selling_iface.v1.UserStatTimeRange.start:type_name -> google.protobuf.Timestamp
+	13, // 7: selling_iface.v1.UserStatTimeRange.end:type_name -> google.protobuf.Timestamp
+	6,  // 8: selling_iface.v1.UserStatMetricRequest.filter:type_name -> selling_iface.v1.UserStatMetricFilter
+	3,  // 9: selling_iface.v1.UserStatMetricRequest.sort:type_name -> selling_iface.v1.UserMetricSort
+	5,  // 10: selling_iface.v1.UserStatMetricRequest.metric_extras:type_name -> selling_iface.v1.UserMetricExtra
+	0,  // 11: selling_iface.v1.UserStatMetricRequest.metric_types:type_name -> selling_iface.v1.UserMetricType
+	4,  // 12: selling_iface.v1.UserStatMetricResponse.metrics:type_name -> selling_iface.v1.UserMetric
+	13, // [13:13] is the sub-list for method output_type
+	13, // [13:13] is the sub-list for method input_type
+	13, // [13:13] is the sub-list for extension type_name
+	13, // [13:13] is the sub-list for extension extendee
+	0,  // [0:13] is the sub-list for field type_name
 }
 
 func init() { file_selling_iface_v1_user_stat_metric_proto_init() }
@@ -701,6 +695,7 @@ func file_selling_iface_v1_user_stat_metric_proto_init() {
 	}
 	file_selling_iface_v1_user_stat_metric_proto_msgTypes[0].OneofWrappers = []any{
 		(*UserMetricSort_CommonSort)(nil),
+		(*UserMetricSort_UserOrderMetricSort)(nil),
 	}
 	file_selling_iface_v1_user_stat_metric_proto_msgTypes[1].OneofWrappers = []any{
 		(*UserMetric_UserOrderMetric)(nil),

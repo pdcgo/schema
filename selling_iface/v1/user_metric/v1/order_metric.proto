@@ -8,9 +8,7 @@ option go_package = "github.com/pdcgo/schema/services/selling_iface/v1/user_metr
 message UserOrderItem {
   uint64 user_id = 1;
   int64 transaction_count = 2;
-  int64 piece_count = 3;
   double total_amount = 4;
-  double average_order_value = 5;
 }
 
 message UserOrderMetric {
@@ -20,7 +18,5 @@ message UserOrderMetric {
 enum UserOrderMetricSort {
   USER_ORDER_METRIC_SORT_UNSPECIFIED = 0;
   USER_ORDER_METRIC_SORT_TRANSACTION_COUNT = 1;
-  USER_ORDER_METRIC_SORT_PIECE_COUNT = 2;
-  USER_ORDER_METRIC_SORT_TOTAL_AMOUNT = 3;
-  USER_ORDER_METRIC_SORT_AVERAGE_ORDER_VALUE = 4;
+  USER_ORDER_METRIC_SORT_TOTAL_AMOUNT = 2;
 }
