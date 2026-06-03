@@ -1,0 +1,43 @@
+syntax = "proto3";
+package product_iface.v1;
+
+// import "accounting_iface/v1/core.proto";
+// import "buf/validate/validate.proto";
+// import "common/v1/common.proto";
+// import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/pdcgo/schema/services/product_iface/v1;product_iface";
+
+service ProductDiscoveryService {
+  rpc ProductDiscovery(ProductDiscoveryRequest) returns (ProductDiscoveryResponse);
+  rpc IndexAdd(IndexAddRequest) returns (IndexAddResponse);
+}
+
+message IndexAddRequest {
+  uint64 product_id = 1;
+  string text = 2;
+  oneof image {
+    string image_storage = 3;
+    bytes image_bytes = 4;
+  }
+}
+
+message IndexAddResponse {}
+
+message ProductDiscoveryRequest {
+  string text = 1;
+  oneof image {
+    bytes image_bytes = 2;
+    string image_url = 3;
+  }
+}
+
+message ProductDiscoveryItem {
+  uint64 product_id = 1;
+  string image_url = 2;
+  string name = 3;
+}
+
+message ProductDiscoveryResponse {
+  repeated ProductDiscoveryItem items = 1;
+}
