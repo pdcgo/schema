@@ -11,6 +11,18 @@ option go_package = "github.com/pdcgo/schema/services/selling_iface/v1;selling_i
 enum UserMetricType {
   USER_METRIC_TYPE_UNSPECIFIED = 0;
   USER_METRIC_TYPE_ORDER = 1;
+  USER_METRIC_TYPE_ORDER_COMPLETED = 4;
+  USER_METRIC_TYPE_ORDER_CANCELLED = 5;
+  USER_METRIC_TYPE_STOCK_ORDER = 2;
+  USER_METRIC_TYPE_STOCK_ORDER_COMPLETED = 6;
+  USER_METRIC_TYPE_STOCK_ORDER_CANCELLED = 7;
+  USER_METRIC_TYPE_AVG_ORDER = 3;
+  USER_METRIC_TYPE_AVG_ORDER_COMPLETED = 8;
+  USER_METRIC_TYPE_AVG_ORDER_CANCELLED = 9;
+  USER_METRIC_TYPE_COST_ORDER = 10;
+  USER_METRIC_TYPE_COST_ORDER_COMPLETED = 11;
+  USER_METRIC_TYPE_COST_ORDER_CANCELLED = 12;
+  USER_METRIC_TYPE_WITHDRAWAL = 13;
 }
 
 enum UserMetricSortType {
@@ -30,12 +42,36 @@ message UserMetricSort {
   oneof s {
     CommonUserSort common_sort = 2;
     selling_iface.v1.user_metric.v1.UserOrderMetricSort user_order_metric_sort = 3;
+    selling_iface.v1.user_metric.v1.UserOrderCompletedMetricSort user_order_completed_metric_sort = 6;
+    selling_iface.v1.user_metric.v1.UserOrderCancelledMetricSort user_order_cancelled_metric_sort = 7;
+    selling_iface.v1.user_metric.v1.UserStockOrderMetricSort user_stock_order_metric_sort = 4;
+    selling_iface.v1.user_metric.v1.UserStockOrderCompletedMetricSort user_stock_order_completed_metric_sort = 8;
+    selling_iface.v1.user_metric.v1.UserStockOrderCancelledMetricSort user_stock_order_cancelled_metric_sort = 9;
+    selling_iface.v1.user_metric.v1.UserAvgOrderMetricSort user_avg_order_metric_sort = 5;
+    selling_iface.v1.user_metric.v1.UserAvgOrderCompletedMetricSort user_avg_order_completed_metric_sort = 10;
+    selling_iface.v1.user_metric.v1.UserAvgOrderCancelledMetricSort user_avg_order_cancelled_metric_sort = 11;
+    selling_iface.v1.user_metric.v1.UserCostOrderMetricSort user_cost_order_metric_sort = 12;
+    selling_iface.v1.user_metric.v1.UserCostOrderCompletedMetricSort user_cost_order_completed_metric_sort = 13;
+    selling_iface.v1.user_metric.v1.UserCostOrderCancelledMetricSort user_cost_order_cancelled_metric_sort = 14;
+    selling_iface.v1.user_metric.v1.UserWithdrawalMetricSort user_withdrawal_metric_sort = 15;
   }
 }
 
 message UserMetric {
   oneof data {
     selling_iface.v1.user_metric.v1.UserOrderMetric user_order_metric = 2;
+    selling_iface.v1.user_metric.v1.UserOrderCompletedMetric user_order_completed_metric = 5;
+    selling_iface.v1.user_metric.v1.UserOrderCancelledMetric user_order_cancelled_metric = 6;
+    selling_iface.v1.user_metric.v1.UserStockOrderMetric user_stock_order_metric = 3;
+    selling_iface.v1.user_metric.v1.UserStockOrderCompletedMetric user_stock_order_completed_metric = 7;
+    selling_iface.v1.user_metric.v1.UserStockOrderCancelledMetric user_stock_order_cancelled_metric = 8;
+    selling_iface.v1.user_metric.v1.UserAvgOrderMetric user_avg_order_metric = 4;
+    selling_iface.v1.user_metric.v1.UserAvgOrderCompletedMetric user_avg_order_completed_metric = 9;
+    selling_iface.v1.user_metric.v1.UserAvgOrderCancelledMetric user_avg_order_cancelled_metric = 10;
+    selling_iface.v1.user_metric.v1.UserCostOrderMetric user_cost_order_metric = 11;
+    selling_iface.v1.user_metric.v1.UserCostOrderCompletedMetric user_cost_order_completed_metric = 12;
+    selling_iface.v1.user_metric.v1.UserCostOrderCancelledMetric user_cost_order_cancelled_metric = 13;
+    selling_iface.v1.user_metric.v1.UserWithdrawalMetric user_withdrawal_metric = 14;
   }
 }
 
