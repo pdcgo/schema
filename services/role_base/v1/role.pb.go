@@ -145,9 +145,9 @@ func (IdentityType) EnumDescriptor() ([]byte, []int) {
 type Identity struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	IdentityId    uint32                 `protobuf:"varint,1,opt,name=identity_id,json=identityId,proto3" json:"identity_id,omitempty"`
-	Role          Role                   `protobuf:"varint,2,opt,name=role,proto3,enum=role_base.v1.Role" json:"role,omitempty"`
 	IdentityType  IdentityType           `protobuf:"varint,3,opt,name=identity_type,json=identityType,proto3,enum=role_base.v1.IdentityType" json:"identity_type,omitempty"`
 	Agent         string                 `protobuf:"bytes,4,opt,name=agent,proto3" json:"agent,omitempty"`
+	AgentVersion  string                 `protobuf:"bytes,7,opt,name=agent_version,json=agentVersion,proto3" json:"agent_version,omitempty"`
 	Username      string                 `protobuf:"bytes,5,opt,name=username,proto3" json:"username,omitempty"`
 	ExpiredAt     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=expired_at,json=expiredAt,proto3" json:"expired_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -191,13 +191,6 @@ func (x *Identity) GetIdentityId() uint32 {
 	return 0
 }
 
-func (x *Identity) GetRole() Role {
-	if x != nil {
-		return x.Role
-	}
-	return Role_ROLE_UNSPECIFIED
-}
-
 func (x *Identity) GetIdentityType() IdentityType {
 	if x != nil {
 		return x.IdentityType
@@ -208,6 +201,13 @@ func (x *Identity) GetIdentityType() IdentityType {
 func (x *Identity) GetAgent() string {
 	if x != nil {
 		return x.Agent
+	}
+	return ""
+}
+
+func (x *Identity) GetAgentVersion() string {
+	if x != nil {
+		return x.AgentVersion
 	}
 	return ""
 }
@@ -287,6 +287,14 @@ var file_role_base_v1_role_proto_extTypes = []protoimpl.ExtensionInfo{
 		Tag:           "bytes,50002,opt,name=request_policy",
 		Filename:      "role_base/v1/role.proto",
 	},
+	{
+		ExtendedType:  (*descriptorpb.FieldOptions)(nil),
+		ExtensionType: (*bool)(nil),
+		Field:         50002,
+		Name:          "role_base.v1.use_scope",
+		Tag:           "varint,50002,opt,name=use_scope",
+		Filename:      "role_base/v1/role.proto",
+	},
 }
 
 // Extension fields to descriptorpb.MessageOptions.
@@ -295,17 +303,23 @@ var (
 	E_RequestPolicy = &file_role_base_v1_role_proto_extTypes[0]
 )
 
+// Extension fields to descriptorpb.FieldOptions.
+var (
+	// optional bool use_scope = 50002;
+	E_UseScope = &file_role_base_v1_role_proto_extTypes[1]
+)
+
 var File_role_base_v1_role_proto protoreflect.FileDescriptor
 
 const file_role_base_v1_role_proto_rawDesc = "" +
 	"\n" +
-	"\x17role_base/v1/role.proto\x12\frole_base.v1\x1a google/protobuf/descriptor.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x81\x02\n" +
+	"\x17role_base/v1/role.proto\x12\frole_base.v1\x1a google/protobuf/descriptor.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xfe\x01\n" +
 	"\bIdentity\x12\x1f\n" +
 	"\videntity_id\x18\x01 \x01(\rR\n" +
-	"identityId\x12&\n" +
-	"\x04role\x18\x02 \x01(\x0e2\x12.role_base.v1.RoleR\x04role\x12?\n" +
+	"identityId\x12?\n" +
 	"\ridentity_type\x18\x03 \x01(\x0e2\x1a.role_base.v1.IdentityTypeR\fidentityType\x12\x14\n" +
-	"\x05agent\x18\x04 \x01(\tR\x05agent\x12\x1a\n" +
+	"\x05agent\x18\x04 \x01(\tR\x05agent\x12#\n" +
+	"\ragent_version\x18\a \x01(\tR\fagentVersion\x12\x1a\n" +
 	"\busername\x18\x05 \x01(\tR\busername\x129\n" +
 	"\n" +
 	"expired_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\texpiredAt\"V\n" +
@@ -328,7 +342,8 @@ const file_role_base_v1_role_proto_rawDesc = "" +
 	"\x14IDENTITY_TYPE_SYSTEM\x10\x01\x12\x1e\n" +
 	"\x1aIDENTITY_TYPE_GENERAL_USER\x10\x02\x12\x1b\n" +
 	"\x17IDENTITY_TYPE_EXTENSION\x10\x03:e\n" +
-	"\x0erequest_policy\x12\x1f.google.protobuf.MessageOptions\x18҆\x03 \x01(\v2\x1b.role_base.v1.RequestPolicyR\rrequestPolicyB\xa3\x01\n" +
+	"\x0erequest_policy\x12\x1f.google.protobuf.MessageOptions\x18҆\x03 \x01(\v2\x1b.role_base.v1.RequestPolicyR\rrequestPolicy:<\n" +
+	"\tuse_scope\x12\x1d.google.protobuf.FieldOptions\x18҆\x03 \x01(\bR\buseScopeB\xa3\x01\n" +
 	"\x10com.role_base.v1B\tRoleProtoP\x01Z7github.com/pdcgo/schema/services/role_base/v1;role_base\xa2\x02\x03RXX\xaa\x02\vRoleBase.V1\xca\x02\vRoleBase\\V1\xe2\x02\x17RoleBase\\V1\\GPBMetadata\xea\x02\fRoleBase::V1b\x06proto3"
 
 var (
@@ -352,19 +367,20 @@ var file_role_base_v1_role_proto_goTypes = []any{
 	(*RequestPolicy)(nil),               // 3: role_base.v1.RequestPolicy
 	(*timestamppb.Timestamp)(nil),       // 4: google.protobuf.Timestamp
 	(*descriptorpb.MessageOptions)(nil), // 5: google.protobuf.MessageOptions
+	(*descriptorpb.FieldOptions)(nil),   // 6: google.protobuf.FieldOptions
 }
 var file_role_base_v1_role_proto_depIdxs = []int32{
-	0, // 0: role_base.v1.Identity.role:type_name -> role_base.v1.Role
-	1, // 1: role_base.v1.Identity.identity_type:type_name -> role_base.v1.IdentityType
-	4, // 2: role_base.v1.Identity.expired_at:type_name -> google.protobuf.Timestamp
-	0, // 3: role_base.v1.RequestPolicy.roles:type_name -> role_base.v1.Role
-	5, // 4: role_base.v1.request_policy:extendee -> google.protobuf.MessageOptions
+	1, // 0: role_base.v1.Identity.identity_type:type_name -> role_base.v1.IdentityType
+	4, // 1: role_base.v1.Identity.expired_at:type_name -> google.protobuf.Timestamp
+	0, // 2: role_base.v1.RequestPolicy.roles:type_name -> role_base.v1.Role
+	5, // 3: role_base.v1.request_policy:extendee -> google.protobuf.MessageOptions
+	6, // 4: role_base.v1.use_scope:extendee -> google.protobuf.FieldOptions
 	3, // 5: role_base.v1.request_policy:type_name -> role_base.v1.RequestPolicy
 	6, // [6:6] is the sub-list for method output_type
 	6, // [6:6] is the sub-list for method input_type
 	5, // [5:6] is the sub-list for extension type_name
-	4, // [4:5] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	3, // [3:5] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_role_base_v1_role_proto_init() }
@@ -379,7 +395,7 @@ func file_role_base_v1_role_proto_init() {
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_role_base_v1_role_proto_rawDesc), len(file_role_base_v1_role_proto_rawDesc)),
 			NumEnums:      2,
 			NumMessages:   2,
-			NumExtensions: 1,
+			NumExtensions: 2,
 			NumServices:   0,
 		},
 		GoTypes:           file_role_base_v1_role_proto_goTypes,

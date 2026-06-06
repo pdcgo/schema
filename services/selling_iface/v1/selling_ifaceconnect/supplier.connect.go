@@ -51,6 +51,15 @@ const (
 	// SupplierServiceSupplierGetChildProcedure is the fully-qualified name of the SupplierService's
 	// SupplierGetChild RPC.
 	SupplierServiceSupplierGetChildProcedure = "/selling_iface.v1.SupplierService/SupplierGetChild"
+	// SupplierServiceSupplierReviewListProcedure is the fully-qualified name of the SupplierService's
+	// SupplierReviewList RPC.
+	SupplierServiceSupplierReviewListProcedure = "/selling_iface.v1.SupplierService/SupplierReviewList"
+	// SupplierServiceSupplierReviewCreateProcedure is the fully-qualified name of the SupplierService's
+	// SupplierReviewCreate RPC.
+	SupplierServiceSupplierReviewCreateProcedure = "/selling_iface.v1.SupplierService/SupplierReviewCreate"
+	// SupplierServiceSupplierReviewDeleteProcedure is the fully-qualified name of the SupplierService's
+	// SupplierReviewDelete RPC.
+	SupplierServiceSupplierReviewDeleteProcedure = "/selling_iface.v1.SupplierService/SupplierReviewDelete"
 )
 
 // SupplierServiceClient is a client for the selling_iface.v1.SupplierService service.
@@ -61,6 +70,9 @@ type SupplierServiceClient interface {
 	SupplierUpdate(context.Context, *connect.Request[v1.SupplierUpdateRequest]) (*connect.Response[v1.SupplierUpdateResponse], error)
 	SupplierGet(context.Context, *connect.Request[v1.SupplierGetRequest]) (*connect.Response[v1.SupplierGetResponse], error)
 	SupplierGetChild(context.Context, *connect.Request[v1.SupplierGetChildRequest]) (*connect.Response[v1.SupplierGetChildResponse], error)
+	SupplierReviewList(context.Context, *connect.Request[v1.SupplierReviewListRequest]) (*connect.Response[v1.SupplierReviewListResponse], error)
+	SupplierReviewCreate(context.Context, *connect.Request[v1.SupplierReviewCreateRequest]) (*connect.Response[v1.SupplierReviewCreateResponse], error)
+	SupplierReviewDelete(context.Context, *connect.Request[v1.SupplierReviewDeleteRequest]) (*connect.Response[v1.SupplierReviewDeleteResponse], error)
 }
 
 // NewSupplierServiceClient constructs a client for the selling_iface.v1.SupplierService service. By
@@ -110,17 +122,38 @@ func NewSupplierServiceClient(httpClient connect.HTTPClient, baseURL string, opt
 			connect.WithSchema(supplierServiceMethods.ByName("SupplierGetChild")),
 			connect.WithClientOptions(opts...),
 		),
+		supplierReviewList: connect.NewClient[v1.SupplierReviewListRequest, v1.SupplierReviewListResponse](
+			httpClient,
+			baseURL+SupplierServiceSupplierReviewListProcedure,
+			connect.WithSchema(supplierServiceMethods.ByName("SupplierReviewList")),
+			connect.WithClientOptions(opts...),
+		),
+		supplierReviewCreate: connect.NewClient[v1.SupplierReviewCreateRequest, v1.SupplierReviewCreateResponse](
+			httpClient,
+			baseURL+SupplierServiceSupplierReviewCreateProcedure,
+			connect.WithSchema(supplierServiceMethods.ByName("SupplierReviewCreate")),
+			connect.WithClientOptions(opts...),
+		),
+		supplierReviewDelete: connect.NewClient[v1.SupplierReviewDeleteRequest, v1.SupplierReviewDeleteResponse](
+			httpClient,
+			baseURL+SupplierServiceSupplierReviewDeleteProcedure,
+			connect.WithSchema(supplierServiceMethods.ByName("SupplierReviewDelete")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // supplierServiceClient implements SupplierServiceClient.
 type supplierServiceClient struct {
-	supplierList     *connect.Client[v1.SupplierListRequest, v1.SupplierListResponse]
-	supplierCreate   *connect.Client[v1.SupplierCreateRequest, v1.SupplierCreateResponse]
-	supplierDelete   *connect.Client[v1.SupplierDeleteRequest, v1.SupplierDeleteResponse]
-	supplierUpdate   *connect.Client[v1.SupplierUpdateRequest, v1.SupplierUpdateResponse]
-	supplierGet      *connect.Client[v1.SupplierGetRequest, v1.SupplierGetResponse]
-	supplierGetChild *connect.Client[v1.SupplierGetChildRequest, v1.SupplierGetChildResponse]
+	supplierList         *connect.Client[v1.SupplierListRequest, v1.SupplierListResponse]
+	supplierCreate       *connect.Client[v1.SupplierCreateRequest, v1.SupplierCreateResponse]
+	supplierDelete       *connect.Client[v1.SupplierDeleteRequest, v1.SupplierDeleteResponse]
+	supplierUpdate       *connect.Client[v1.SupplierUpdateRequest, v1.SupplierUpdateResponse]
+	supplierGet          *connect.Client[v1.SupplierGetRequest, v1.SupplierGetResponse]
+	supplierGetChild     *connect.Client[v1.SupplierGetChildRequest, v1.SupplierGetChildResponse]
+	supplierReviewList   *connect.Client[v1.SupplierReviewListRequest, v1.SupplierReviewListResponse]
+	supplierReviewCreate *connect.Client[v1.SupplierReviewCreateRequest, v1.SupplierReviewCreateResponse]
+	supplierReviewDelete *connect.Client[v1.SupplierReviewDeleteRequest, v1.SupplierReviewDeleteResponse]
 }
 
 // SupplierList calls selling_iface.v1.SupplierService.SupplierList.
@@ -153,6 +186,21 @@ func (c *supplierServiceClient) SupplierGetChild(ctx context.Context, req *conne
 	return c.supplierGetChild.CallUnary(ctx, req)
 }
 
+// SupplierReviewList calls selling_iface.v1.SupplierService.SupplierReviewList.
+func (c *supplierServiceClient) SupplierReviewList(ctx context.Context, req *connect.Request[v1.SupplierReviewListRequest]) (*connect.Response[v1.SupplierReviewListResponse], error) {
+	return c.supplierReviewList.CallUnary(ctx, req)
+}
+
+// SupplierReviewCreate calls selling_iface.v1.SupplierService.SupplierReviewCreate.
+func (c *supplierServiceClient) SupplierReviewCreate(ctx context.Context, req *connect.Request[v1.SupplierReviewCreateRequest]) (*connect.Response[v1.SupplierReviewCreateResponse], error) {
+	return c.supplierReviewCreate.CallUnary(ctx, req)
+}
+
+// SupplierReviewDelete calls selling_iface.v1.SupplierService.SupplierReviewDelete.
+func (c *supplierServiceClient) SupplierReviewDelete(ctx context.Context, req *connect.Request[v1.SupplierReviewDeleteRequest]) (*connect.Response[v1.SupplierReviewDeleteResponse], error) {
+	return c.supplierReviewDelete.CallUnary(ctx, req)
+}
+
 // SupplierServiceHandler is an implementation of the selling_iface.v1.SupplierService service.
 type SupplierServiceHandler interface {
 	SupplierList(context.Context, *connect.Request[v1.SupplierListRequest]) (*connect.Response[v1.SupplierListResponse], error)
@@ -161,6 +209,9 @@ type SupplierServiceHandler interface {
 	SupplierUpdate(context.Context, *connect.Request[v1.SupplierUpdateRequest]) (*connect.Response[v1.SupplierUpdateResponse], error)
 	SupplierGet(context.Context, *connect.Request[v1.SupplierGetRequest]) (*connect.Response[v1.SupplierGetResponse], error)
 	SupplierGetChild(context.Context, *connect.Request[v1.SupplierGetChildRequest]) (*connect.Response[v1.SupplierGetChildResponse], error)
+	SupplierReviewList(context.Context, *connect.Request[v1.SupplierReviewListRequest]) (*connect.Response[v1.SupplierReviewListResponse], error)
+	SupplierReviewCreate(context.Context, *connect.Request[v1.SupplierReviewCreateRequest]) (*connect.Response[v1.SupplierReviewCreateResponse], error)
+	SupplierReviewDelete(context.Context, *connect.Request[v1.SupplierReviewDeleteRequest]) (*connect.Response[v1.SupplierReviewDeleteResponse], error)
 }
 
 // NewSupplierServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -206,6 +257,24 @@ func NewSupplierServiceHandler(svc SupplierServiceHandler, opts ...connect.Handl
 		connect.WithSchema(supplierServiceMethods.ByName("SupplierGetChild")),
 		connect.WithHandlerOptions(opts...),
 	)
+	supplierServiceSupplierReviewListHandler := connect.NewUnaryHandler(
+		SupplierServiceSupplierReviewListProcedure,
+		svc.SupplierReviewList,
+		connect.WithSchema(supplierServiceMethods.ByName("SupplierReviewList")),
+		connect.WithHandlerOptions(opts...),
+	)
+	supplierServiceSupplierReviewCreateHandler := connect.NewUnaryHandler(
+		SupplierServiceSupplierReviewCreateProcedure,
+		svc.SupplierReviewCreate,
+		connect.WithSchema(supplierServiceMethods.ByName("SupplierReviewCreate")),
+		connect.WithHandlerOptions(opts...),
+	)
+	supplierServiceSupplierReviewDeleteHandler := connect.NewUnaryHandler(
+		SupplierServiceSupplierReviewDeleteProcedure,
+		svc.SupplierReviewDelete,
+		connect.WithSchema(supplierServiceMethods.ByName("SupplierReviewDelete")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/selling_iface.v1.SupplierService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case SupplierServiceSupplierListProcedure:
@@ -220,6 +289,12 @@ func NewSupplierServiceHandler(svc SupplierServiceHandler, opts ...connect.Handl
 			supplierServiceSupplierGetHandler.ServeHTTP(w, r)
 		case SupplierServiceSupplierGetChildProcedure:
 			supplierServiceSupplierGetChildHandler.ServeHTTP(w, r)
+		case SupplierServiceSupplierReviewListProcedure:
+			supplierServiceSupplierReviewListHandler.ServeHTTP(w, r)
+		case SupplierServiceSupplierReviewCreateProcedure:
+			supplierServiceSupplierReviewCreateHandler.ServeHTTP(w, r)
+		case SupplierServiceSupplierReviewDeleteProcedure:
+			supplierServiceSupplierReviewDeleteHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -251,4 +326,16 @@ func (UnimplementedSupplierServiceHandler) SupplierGet(context.Context, *connect
 
 func (UnimplementedSupplierServiceHandler) SupplierGetChild(context.Context, *connect.Request[v1.SupplierGetChildRequest]) (*connect.Response[v1.SupplierGetChildResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("selling_iface.v1.SupplierService.SupplierGetChild is not implemented"))
+}
+
+func (UnimplementedSupplierServiceHandler) SupplierReviewList(context.Context, *connect.Request[v1.SupplierReviewListRequest]) (*connect.Response[v1.SupplierReviewListResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("selling_iface.v1.SupplierService.SupplierReviewList is not implemented"))
+}
+
+func (UnimplementedSupplierServiceHandler) SupplierReviewCreate(context.Context, *connect.Request[v1.SupplierReviewCreateRequest]) (*connect.Response[v1.SupplierReviewCreateResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("selling_iface.v1.SupplierService.SupplierReviewCreate is not implemented"))
+}
+
+func (UnimplementedSupplierServiceHandler) SupplierReviewDelete(context.Context, *connect.Request[v1.SupplierReviewDeleteRequest]) (*connect.Response[v1.SupplierReviewDeleteResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("selling_iface.v1.SupplierService.SupplierReviewDelete is not implemented"))
 }

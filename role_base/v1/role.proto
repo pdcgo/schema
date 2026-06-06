@@ -27,9 +27,9 @@ enum IdentityType {
 
 message Identity {
   uint32 identity_id = 1;
-  Role role = 2;
   IdentityType identity_type = 3;
   string agent = 4;
+  string agent_version = 7;
   string username = 5;
   google.protobuf.Timestamp expired_at = 6;
 }
@@ -40,4 +40,8 @@ message RequestPolicy {
 
 extend google.protobuf.MessageOptions {
   RequestPolicy request_policy = 50002;
+}
+
+extend google.protobuf.FieldOptions {
+  bool use_scope = 50002;
 }

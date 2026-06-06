@@ -1,0 +1,153 @@
+syntax = "proto3";
+package user_iface.v2;
+
+import "buf/validate/validate.proto";
+import "role_base/v1/role.proto";
+
+option go_package = "github.com/pdcgo/schema/services/user_iface/v2;user_iface";
+
+service V2UserService {
+  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
+  rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse);
+  rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse);
+  rpc SuspendUser(SuspendUserRequest) returns (SuspendUserResponse);
+  rpc TeamUserList(TeamUserListRequest) returns (TeamUserListResponse);
+  rpc TeamUserUpdate(TeamUserUpdateRequest) returns (TeamUserUpdateResponse);
+}
+
+message SuspendUserRequest {
+  option (role_base.v1.request_policy) = {
+    roles: [
+      ROLE_ROOT,
+      ROLE_ADMIN
+    ]
+  };
+
+  uint64 user_id = 1;
+}
+
+message SuspendUserResponse {}
+
+message TeamUserListRequest {
+  option (role_base.v1.request_policy) = {
+    roles: [
+      ROLE_ROOT,
+      ROLE_ADMIN,
+      ROLE_TEAM_OWNER,
+      ROLE_TEAM_ADMIN
+    ]
+  };
+  uint64 team_id = 1 [(role_base.v1.use_scope) = true];
+  string q = 2;
+  role_base.v1.Role role = 3;
+}
+
+message TeamUserListResponse {
+  repeated User users = 1;
+}
+
+message RemoveUser {
+  uint64 user_id = 1;
+}
+
+message AddUser {
+  uint64 user_id = 1;
+  role_base.v1.Role role = 2;
+}
+
+message TeamUserUpdateRequest {
+  option (role_base.v1.request_policy) = {
+    roles: [
+      ROLE_ROOT,
+      ROLE_ADMIN,
+      ROLE_TEAM_OWNER,
+      ROLE_TEAM_ADMIN
+    ]
+  };
+
+  uint64 team_id = 1 [(role_base.v1.use_scope) = true];
+
+  oneof action {
+    AddUser add = 2;
+    RemoveUser remove = 3;
+  }
+}
+
+message TeamUserUpdateResponse {}
+
+enum UserStatus {
+  USER_STATUS_UNSPECIFIED = 0;
+  USER_STATUS_ACTIVE = 1;
+  USER_STATUS_SUSPENDED = 2;
+}
+
+message User {
+  uint64 id = 1;
+  string email = 2;
+  string username = 3;
+  string password = 4;
+  string name = 5;
+  UserStatus status = 6;
+  role_base.v1.Role role = 7;
+}
+
+message UpdateUserRequest {
+  option (role_base.v1.request_policy) = {
+    roles: [
+      ROLE_ROOT,
+      ROLE_ADMIN,
+      ROLE_TEAM_OWNER,
+      ROLE_TEAM_ADMIN
+    ]
+  };
+
+  uint64 id = 1;
+  string email = 2;
+  string username = 3;
+  string password = 4;
+  string name = 5;
+}
+
+message DeleteUserResponse {}
+
+message DeleteUserRequest {
+  option (role_base.v1.request_policy) = {
+    roles: [
+      ROLE_ROOT,
+      ROLE_ADMIN
+    ]
+  };
+
+  uint64 id = 1;
+}
+
+message UpdateUserResponse {}
+
+message CreateUserRequest {
+  option (role_base.v1.request_policy) = {
+    roles: [
+      ROLE_ROOT,
+      ROLE_ADMIN,
+      ROLE_TEAM_OWNER,
+      ROLE_TEAM_ADMIN
+    ]
+  };
+
+  string email = 1 [(buf.validate.field).string = {
+    email: true
+    max_len: 254
+  }];
+  string username = 2 [(buf.validate.field).string = {pattern: "^[a-zA-Z0-9_]{3,30}$"}];
+  string password = 3 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 200
+  }];
+  string name = 4 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 200
+  }];
+}
+
+message CreateUserResponse {
+  uint64 id = 1;
+}

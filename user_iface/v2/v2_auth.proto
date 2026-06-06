@@ -1,0 +1,58 @@
+syntax = "proto3";
+package user_iface.v2;
+
+import "buf/validate/validate.proto";
+import "role_base/v1/role.proto";
+import "user_iface/v2/v2_user.proto";
+
+option go_package = "github.com/pdcgo/schema/services/user_iface/v2;user_iface";
+
+service V2AuthService {
+  rpc Login(LoginRequest) returns (LoginResponse);
+  rpc Logout(LogoutRequest) returns (LogoutResponse);
+  rpc CheckAccess(CheckAccessRequest) returns (CheckAccessResponse);
+}
+
+message CheckAccessRequest {
+  string token = 1 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 3000
+  }];
+}
+
+message CheckAccessResponse {
+  string token = 1;
+}
+
+message LoginRequest {
+  oneof auth {
+    string email = 1;
+    string username = 2;
+    string phone = 3;
+  }
+  string password = 4 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 200
+  }];
+  string agent = 5 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 200
+  }];
+  string agent_version = 6 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 200
+  }];
+  role_base.v1.IdentityType indentity_type = 7 [(buf.validate.field).enum = {
+    not_in: [0]
+  }];
+}
+
+message LoginResponse {
+  string token = 1;
+  User user = 2;
+  role_base.v1.Identity identity = 3;
+}
+
+message LogoutRequest {}
+
+message LogoutResponse {}

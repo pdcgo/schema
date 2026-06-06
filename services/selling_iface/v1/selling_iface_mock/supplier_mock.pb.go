@@ -202,3 +202,81 @@ func (mr *MockSupplierServiceClientMockRecorder) SupplierGetChild(ctx, req inter
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SupplierGetChild", reflect.TypeOf((*MockSupplierService)(nil).SupplierGetChild), ctx, req)
 }
 
+func (m *MockSupplierService) SupplierReviewList(ctx context.Context, req *connect.Request[v1.SupplierReviewListRequest]) (*connect.Response[v1.SupplierReviewListResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "SupplierReviewList", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.SupplierReviewListResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockSupplierServiceMockRecorder) SupplierReviewList(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SupplierReviewList", reflect.TypeOf((*MockSupplierService)(nil).SupplierReviewList), ctx, req)
+}
+
+func (m *MockSupplierServiceClient) SupplierReviewList(ctx context.Context, req *connect.Request[v1.SupplierReviewListRequest]) (*connect.Response[v1.SupplierReviewListResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "SupplierReviewList", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.SupplierReviewListResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockSupplierServiceClientMockRecorder) SupplierReviewList(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SupplierReviewList", reflect.TypeOf((*MockSupplierService)(nil).SupplierReviewList), ctx, req)
+}
+
+func (m *MockSupplierService) SupplierReviewCreate(ctx context.Context, req *connect.Request[v1.SupplierReviewCreateRequest]) (*connect.Response[v1.SupplierReviewCreateResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "SupplierReviewCreate", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.SupplierReviewCreateResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockSupplierServiceMockRecorder) SupplierReviewCreate(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SupplierReviewCreate", reflect.TypeOf((*MockSupplierService)(nil).SupplierReviewCreate), ctx, req)
+}
+
+func (m *MockSupplierServiceClient) SupplierReviewCreate(ctx context.Context, req *connect.Request[v1.SupplierReviewCreateRequest]) (*connect.Response[v1.SupplierReviewCreateResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "SupplierReviewCreate", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.SupplierReviewCreateResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockSupplierServiceClientMockRecorder) SupplierReviewCreate(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SupplierReviewCreate", reflect.TypeOf((*MockSupplierService)(nil).SupplierReviewCreate), ctx, req)
+}
+
+func (m *MockSupplierService) SupplierReviewDelete(ctx context.Context, req *connect.Request[v1.SupplierReviewDeleteRequest]) (*connect.Response[v1.SupplierReviewDeleteResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "SupplierReviewDelete", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.SupplierReviewDeleteResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockSupplierServiceMockRecorder) SupplierReviewDelete(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SupplierReviewDelete", reflect.TypeOf((*MockSupplierService)(nil).SupplierReviewDelete), ctx, req)
+}
+
+func (m *MockSupplierServiceClient) SupplierReviewDelete(ctx context.Context, req *connect.Request[v1.SupplierReviewDeleteRequest]) (*connect.Response[v1.SupplierReviewDeleteResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "SupplierReviewDelete", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.SupplierReviewDeleteResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockSupplierServiceClientMockRecorder) SupplierReviewDelete(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SupplierReviewDelete", reflect.TypeOf((*MockSupplierService)(nil).SupplierReviewDelete), ctx, req)
+}
+

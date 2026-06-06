@@ -17,6 +17,10 @@ service SupplierService {
   rpc SupplierUpdate(SupplierUpdateRequest) returns (SupplierUpdateResponse);
   rpc SupplierGet(SupplierGetRequest) returns (SupplierGetResponse);
   rpc SupplierGetChild(SupplierGetChildRequest) returns (SupplierGetChildResponse);
+
+  rpc SupplierReviewList(SupplierReviewListRequest) returns (SupplierReviewListResponse);
+  rpc SupplierReviewCreate(SupplierReviewCreateRequest) returns (SupplierReviewCreateResponse);
+  rpc SupplierReviewDelete(SupplierReviewDeleteRequest) returns (SupplierReviewDeleteResponse);
 }
 
 enum SupplierType {
@@ -24,6 +28,54 @@ enum SupplierType {
   SUPPLIER_TYPE_CUSTOM = 1;
   SUPPLIER_TYPE_MARKETPLACE = 2;
 }
+
+message SupplierReviewUser {
+  uint64 id = 1;
+  string name = 2;
+  string username = 3;
+}
+
+message ReviewItem {
+  uint64 id = 1;
+  uint64 supplier_id = 2;
+  uint64 team_id = 3;
+  uint64 user_id = 4;
+  string review = 5;
+  uint64 rating = 6;
+  SupplierReviewUser user = 7;
+}
+
+message SupplierReviewListFilter {
+  string q = 1;
+  uint64 team_id = 2;
+  uint64 supplier_id = 3;
+  uint64 user_id = 4;
+}
+
+message SupplierReviewListRequest {
+  SupplierReviewListFilter filter = 2;
+  common.v1.PageFilter page = 1 [(buf.validate.field).required = true];
+}
+
+message SupplierReviewListResponse {
+  repeated ReviewItem data = 1;
+  common.v1.PageInfo page_info = 2;
+}
+
+message SupplierReviewCreateRequest {
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 supplier_id = 2 [(buf.validate.field).uint64.gt = 0];
+  uint64 user_id = 3 [(buf.validate.field).uint64.gt = 0];
+  string review = 4 [(buf.validate.field).string = {min_len: 1}];
+  uint64 rating = 5 [(buf.validate.field).uint64.gt = 0];
+}
+message SupplierReviewCreateResponse {}
+
+message SupplierReviewDeleteRequest {
+  uint64 id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 team_id = 2 [(buf.validate.field).uint64.gt = 0];
+}
+message SupplierReviewDeleteResponse {}
 
 message SupplierCustom {
   string name = 3 [(buf.validate.field).string = {
