@@ -53,7 +53,7 @@ message UserOrderCancelledItem {
   double total_amount = 4;
   double mp_total_amount = 5;
   // @gotags: gorm:"serializer:timestamptz"
-  google.protobuf.Timestamp last_order_cancelled= 6;
+  google.protobuf.Timestamp last_order_cancelled = 6;
 }
 
 message UserOrderCancelledMetric {
@@ -264,6 +264,6 @@ message UserWithdrawalMetric {
 }
 
 enum UserWithdrawalMetricSort {
-  USER_WITHDRWAL_METRIC_SORT_UNSPECIFIED = 0;
-  USER_WITHDRWAL_METRIC_SORT_WITHDRAWAL_AMOUNT = 1;
+  USER_WITHDRAWAL_METRIC_SORT_UNSPECIFIED = 0;
+  USER_WITHDRAWAL_METRIC_SORT_WITHDRAWAL_AMOUNT = 1;
 }

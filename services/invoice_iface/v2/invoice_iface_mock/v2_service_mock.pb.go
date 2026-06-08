@@ -124,3 +124,133 @@ func (mr *MockInvoiceServiceClientMockRecorder) RejectPayment(ctx, req interface
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RejectPayment", reflect.TypeOf((*MockInvoiceService)(nil).RejectPayment), ctx, req)
 }
 
+func (m *MockInvoiceService) ListPayment(ctx context.Context, req *connect.Request[v2.ListPaymentRequest]) (*connect.Response[v2.ListPaymentResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "ListPayment", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v2.ListPaymentResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInvoiceServiceMockRecorder) ListPayment(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListPayment", reflect.TypeOf((*MockInvoiceService)(nil).ListPayment), ctx, req)
+}
+
+func (m *MockInvoiceServiceClient) ListPayment(ctx context.Context, req *connect.Request[v2.ListPaymentRequest]) (*connect.Response[v2.ListPaymentResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "ListPayment", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v2.ListPaymentResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInvoiceServiceClientMockRecorder) ListPayment(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListPayment", reflect.TypeOf((*MockInvoiceService)(nil).ListPayment), ctx, req)
+}
+
+func (m *MockInvoiceService) ListIncomingPayment(ctx context.Context, req *connect.Request[v2.ListIncomingPaymentRequest]) (*connect.Response[v2.ListIncomingPaymentResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "ListIncomingPayment", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v2.ListIncomingPaymentResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInvoiceServiceMockRecorder) ListIncomingPayment(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListIncomingPayment", reflect.TypeOf((*MockInvoiceService)(nil).ListIncomingPayment), ctx, req)
+}
+
+func (m *MockInvoiceServiceClient) ListIncomingPayment(ctx context.Context, req *connect.Request[v2.ListIncomingPaymentRequest]) (*connect.Response[v2.ListIncomingPaymentResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "ListIncomingPayment", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v2.ListIncomingPaymentResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInvoiceServiceClientMockRecorder) ListIncomingPayment(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListIncomingPayment", reflect.TypeOf((*MockInvoiceService)(nil).ListIncomingPayment), ctx, req)
+}
+
+func (m *MockInvoiceService) ListTeamBalance(ctx context.Context, req *connect.Request[v2.ListTeamBalanceRequest]) (*connect.Response[v2.ListTeamBalanceResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "ListTeamBalance", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v2.ListTeamBalanceResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInvoiceServiceMockRecorder) ListTeamBalance(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListTeamBalance", reflect.TypeOf((*MockInvoiceService)(nil).ListTeamBalance), ctx, req)
+}
+
+func (m *MockInvoiceServiceClient) ListTeamBalance(ctx context.Context, req *connect.Request[v2.ListTeamBalanceRequest]) (*connect.Response[v2.ListTeamBalanceResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "ListTeamBalance", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v2.ListTeamBalanceResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInvoiceServiceClientMockRecorder) ListTeamBalance(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListTeamBalance", reflect.TypeOf((*MockInvoiceService)(nil).ListTeamBalance), ctx, req)
+}
+
+func (m *MockInvoiceService) ListTeamBalanceLog(ctx context.Context, req *connect.Request[v2.ListTeamBalanceLogRequest]) (*connect.Response[v2.ListTeamBalanceLogResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "ListTeamBalanceLog", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v2.ListTeamBalanceLogResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInvoiceServiceMockRecorder) ListTeamBalanceLog(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListTeamBalanceLog", reflect.TypeOf((*MockInvoiceService)(nil).ListTeamBalanceLog), ctx, req)
+}
+
+func (m *MockInvoiceServiceClient) ListTeamBalanceLog(ctx context.Context, req *connect.Request[v2.ListTeamBalanceLogRequest]) (*connect.Response[v2.ListTeamBalanceLogResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "ListTeamBalanceLog", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v2.ListTeamBalanceLogResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInvoiceServiceClientMockRecorder) ListTeamBalanceLog(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListTeamBalanceLog", reflect.TypeOf((*MockInvoiceService)(nil).ListTeamBalanceLog), ctx, req)
+}
+
+func (m *MockInvoiceService) CreateBalanceLog(ctx context.Context, req *connect.Request[v2.CreateBalanceLogRequest]) (*connect.Response[v2.CreateBalanceLogResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "CreateBalanceLog", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v2.CreateBalanceLogResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInvoiceServiceMockRecorder) CreateBalanceLog(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateBalanceLog", reflect.TypeOf((*MockInvoiceService)(nil).CreateBalanceLog), ctx, req)
+}
+
+func (m *MockInvoiceServiceClient) CreateBalanceLog(ctx context.Context, req *connect.Request[v2.CreateBalanceLogRequest]) (*connect.Response[v2.CreateBalanceLogResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "CreateBalanceLog", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v2.CreateBalanceLogResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInvoiceServiceClientMockRecorder) CreateBalanceLog(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateBalanceLog", reflect.TypeOf((*MockInvoiceService)(nil).CreateBalanceLog), ctx, req)
+}
+

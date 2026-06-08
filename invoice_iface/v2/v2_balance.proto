@@ -1,0 +1,56 @@
+syntax = "proto3";
+package invoice_iface.v2;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/pdcgo/schema/services/invoice_iface/v2;invoice_iface";
+
+enum BalanceChangeType {
+  BALANCE_CHANGE_TYPE_UNSPECIFIED = 0;
+  BALANCE_CHANGE_TYPE_ADJUSTMENT = 1;
+  BALANCE_CHANGE_TYPE_WAREHOUSE_FEE = 2;
+  BALANCE_CHANGE_TYPE_COD_FEE = 3;
+  BALANCE_CHANGE_TYPE_PRODUCT_FEE = 4;
+  BALANCE_CHANGE_TYPE_PAYMENT = 5;
+}
+
+enum BalanceType {
+  BALANCE_TYPE_UNSPECIFIED = 0;
+  BALANCE_TYPE_PAYABLE = 1;
+  BALANCE_TYPE_RECEIVABLE = 2;
+}
+
+message BalanceChangeLog {
+  uint64 id = 1;
+  uint64 team_id = 2;
+  uint64 for_team_id = 3;
+  BalanceChangeType change_type = 4;
+  double change_amount = 5;
+  BalanceType balance_type = 6;
+  double balance = 7;
+  string note = 8;
+  google.protobuf.Timestamp created_at = 9;
+}
+
+message TeamBalance {
+  uint64 id = 1;
+  uint64 team_id = 2;
+  uint64 for_team_id = 3;
+  BalanceType balance_type = 4;
+  double balance = 6;
+  double pending_payment_amount = 7;
+  google.protobuf.Timestamp created_at = 8;
+  google.protobuf.Timestamp updated_at = 9;
+}
+
+message TeamBalanceDailyLog {
+  google.protobuf.Timestamp day = 1;
+  uint64 team_id = 2;
+  uint64 for_team_id = 3;
+  BalanceType balance_type = 4;
+  double start_balance = 6;
+  double end_balance = 7;
+  double change_amount = 8;
+  google.protobuf.Timestamp updated_at = 9;
+  google.protobuf.Timestamp created_at = 10;
+}

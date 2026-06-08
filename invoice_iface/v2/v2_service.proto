@@ -1,19 +1,129 @@
 syntax = "proto3";
 package invoice_iface.v2;
 
+import "buf/validate/validate.proto";
+import "common/v1/common.proto";
+import "google/protobuf/timestamp.proto";
+import "invoice_iface/v2/v2_balance.proto";
+import "role_base/v1/role.proto";
+
 option go_package = "github.com/pdcgo/schema/services/invoice_iface/v2;invoice_iface";
 
 service InvoiceService {
   rpc CreatePayment(CreatePaymentRequest) returns (CreatePaymentResponse);
   rpc AcceptPayment(AcceptPaymentRequest) returns (AcceptPaymentResponse);
   rpc RejectPayment(RejectPaymentRequest) returns (RejectPaymentResponse);
+  rpc ListPayment(ListPaymentRequest) returns (ListPaymentResponse);
+  rpc ListIncomingPayment(ListIncomingPaymentRequest) returns (ListIncomingPaymentResponse);
+
+  rpc ListTeamBalance(ListTeamBalanceRequest) returns (ListTeamBalanceResponse);
+  rpc ListTeamBalanceLog(ListTeamBalanceLogRequest) returns (ListTeamBalanceLogResponse);
+
+  rpc CreateBalanceLog(CreateBalanceLogRequest) returns (CreateBalanceLogResponse);
+}
+
+message CreateBalanceLogRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
+  uint64 team_id = 1 [
+    (buf.validate.field).uint64.gt = 0,
+    (role_base.v1.use_scope) = true
+  ];
+  uint64 for_team_id = 2 [(buf.validate.field).uint64.gt = 0];
+  BalanceChangeType change_type = 3 [(buf.validate.field).enum.defined_only = true];
+  double change_amount = 4 [(buf.validate.field).double.gt = 0];
+  BalanceType balance_type = 5 [(buf.validate.field).enum.defined_only = true];
+  string note = 6;
+}
+
+message CreateBalanceLogResponse {}
+
+message ListPaymentRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
+  uint64 team_id = 1 [
+    (buf.validate.field).uint64.gt = 0,
+    (role_base.v1.use_scope) = true
+  ];
+  uint64 for_team_id = 2;
+  PaymentStatus status = 3;
+  common.v1.PageFilter page = 4 [(buf.validate.field).required = true];
+}
+
+message ListPaymentResponse {
+  repeated Payment payments = 1;
+  common.v1.PageInfo page_info = 2;
+}
+
+message ListIncomingPaymentRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
+  uint64 for_team_id = 1 [
+    (buf.validate.field).uint64.gt = 0,
+    (role_base.v1.use_scope) = true
+  ];
+  uint64 team_id = 2;
+  PaymentStatus status = 3;
+  common.v1.PageFilter page = 4 [(buf.validate.field).required = true];
+}
+
+message ListIncomingPaymentResponse {
+  repeated Payment payments = 1;
+  common.v1.PageInfo page_info = 2;
+}
+
+message ListTeamBalanceRequest {
+  uint64 team_id = 1;
+  uint64 for_team_id = 2;
+}
+
+message ListTeamBalanceResponse {}
+
+message ListTeamBalanceLogRequest {
+  uint64 team_id = 1;
+  uint64 for_team_id = 2;
+  int64 from_time = 3;
+  int64 to_time = 4;
+}
+
+message ListTeamBalanceLogResponse {}
+
+enum PaymentStatus {
+  PAYMENT_STATUS_UNSPECIFIED = 0;
+  PAYMENT_STATUS_PENDING = 1;
+  PAYMENT_STATUS_ACCEPTED = 2;
+  PAYMENT_STATUS_REJECTED = 3;
+}
+
+message Payment {
+  uint64 id = 1;
+  uint64 team_id = 2;
+  uint64 for_team_id = 3;
+  double amount = 4;
+  string note = 5;
+  string document_id = 6;
+  PaymentStatus status = 7;
+  uint64 created_by_id = 8;
+  uint64 completed_by_id = 9;
+  google.protobuf.Timestamp created_at = 10;
+  google.protobuf.Timestamp accepted_at = 11;
+  google.protobuf.Timestamp rejected_at = 12;
 }
 
 message CreatePaymentRequest {
-  uint64 from_team_id = 1;
-  uint64 to_team_id = 2;
-  double amount = 3;
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
+  uint64 team_id = 1 [
+    (buf.validate.field).uint64.gt = 0,
+    (role_base.v1.use_scope) = true
+  ];
+  uint64 for_team_id = 2 [(buf.validate.field).uint64.gt = 0];
+  double amount = 3 [(buf.validate.field).double.gt = 0];
   string note = 4;
+  string document_id = 5 [(buf.validate.field).string = {
+    min_len: 0
+    max_len: 100
+  }];
 }
 
 message CreatePaymentResponse {
@@ -21,17 +131,41 @@ message CreatePaymentResponse {
 }
 
 message AcceptPaymentRequest {
-  uint64 from_team_id = 1;
-  uint64 to_team_id = 2;
-  uint64 payment_id = 3;
+  option (role_base.v1.request_policy) = {
+    roles: [
+      ROLE_ROOT,
+      ROLE_ADMIN,
+      ROLE_TEAM_OWNER,
+      ROLE_TEAM_ADMIN
+    ]
+  };
+
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 for_team_id = 2 [
+    (buf.validate.field).uint64.gt = 0,
+    (role_base.v1.use_scope) = true
+  ];
+  uint64 payment_id = 3 [(buf.validate.field).uint64.gt = 0];
 }
 
 message AcceptPaymentResponse {}
 
 message RejectPaymentRequest {
-  uint64 from_team_id = 1;
-  uint64 to_team_id = 2;
-  uint64 payment_id = 3;
+  option (role_base.v1.request_policy) = {
+    roles: [
+      ROLE_ROOT,
+      ROLE_ADMIN,
+      ROLE_TEAM_OWNER,
+      ROLE_TEAM_ADMIN
+    ]
+  };
+
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 for_team_id = 2 [
+    (buf.validate.field).uint64.gt = 0,
+    (role_base.v1.use_scope) = true
+  ];
+  uint64 payment_id = 3 [(buf.validate.field).uint64.gt = 0];
 }
 
 message RejectPaymentResponse {}

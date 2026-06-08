@@ -4,16 +4,18 @@ package selling_iface.v1;
 import "buf/validate/validate.proto";
 import "event_base/v1/event.proto";
 // import "common/v1/common.proto";
-// import "google/protobuf/timestamp.proto";
+import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/pdcgo/schema/services/selling_iface/v1;selling_iface";
 
 message OrderCreated {
   uint64 order_id = 1 [(buf.validate.field).uint64.gt = 0];
+  google.protobuf.Timestamp transaction_time = 2;
 }
 
 message OrderCanceled {
   uint64 order_id = 1 [(buf.validate.field).uint64.gt = 0];
+  google.protobuf.Timestamp transaction_time = 2;
 }
 
 message SellingEvent {

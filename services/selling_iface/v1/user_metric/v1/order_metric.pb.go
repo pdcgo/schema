@@ -694,19 +694,19 @@ func (UserCostOrderCancelledMetricSort) EnumDescriptor() ([]byte, []int) {
 type UserWithdrawalMetricSort int32
 
 const (
-	UserWithdrawalMetricSort_USER_WITHDRWAL_METRIC_SORT_UNSPECIFIED       UserWithdrawalMetricSort = 0
-	UserWithdrawalMetricSort_USER_WITHDRWAL_METRIC_SORT_WITHDRAWAL_AMOUNT UserWithdrawalMetricSort = 1
+	UserWithdrawalMetricSort_USER_WITHDRAWAL_METRIC_SORT_UNSPECIFIED       UserWithdrawalMetricSort = 0
+	UserWithdrawalMetricSort_USER_WITHDRAWAL_METRIC_SORT_WITHDRAWAL_AMOUNT UserWithdrawalMetricSort = 1
 )
 
 // Enum value maps for UserWithdrawalMetricSort.
 var (
 	UserWithdrawalMetricSort_name = map[int32]string{
-		0: "USER_WITHDRWAL_METRIC_SORT_UNSPECIFIED",
-		1: "USER_WITHDRWAL_METRIC_SORT_WITHDRAWAL_AMOUNT",
+		0: "USER_WITHDRAWAL_METRIC_SORT_UNSPECIFIED",
+		1: "USER_WITHDRAWAL_METRIC_SORT_WITHDRAWAL_AMOUNT",
 	}
 	UserWithdrawalMetricSort_value = map[string]int32{
-		"USER_WITHDRWAL_METRIC_SORT_UNSPECIFIED":       0,
-		"USER_WITHDRWAL_METRIC_SORT_WITHDRAWAL_AMOUNT": 1,
+		"USER_WITHDRAWAL_METRIC_SORT_UNSPECIFIED":       0,
+		"USER_WITHDRAWAL_METRIC_SORT_WITHDRAWAL_AMOUNT": 1,
 	}
 )
 
@@ -2525,10 +2525,10 @@ const file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDesc = "" +
 	"8USER_COST_ORDER_CANCELLED_METRIC_SORT_OWN_PRODUCT_AMOUNT\x10\x02\x12>\n" +
 	":USER_COST_ORDER_CANCELLED_METRIC_SORT_CROSS_PRODUCT_AMOUNT\x10\x03\x12:\n" +
 	"6USER_COST_ORDER_CANCELLED_METRIC_SORT_WAREHOUSE_AMOUNT\x10\x04\x126\n" +
-	"2USER_COST_ORDER_CANCELLED_METRIC_SORT_TOTAL_AMOUNT\x10\x05*x\n" +
-	"\x18UserWithdrawalMetricSort\x12*\n" +
-	"&USER_WITHDRWAL_METRIC_SORT_UNSPECIFIED\x10\x00\x120\n" +
-	",USER_WITHDRWAL_METRIC_SORT_WITHDRAWAL_AMOUNT\x10\x01B\x9c\x02\n" +
+	"2USER_COST_ORDER_CANCELLED_METRIC_SORT_TOTAL_AMOUNT\x10\x05*z\n" +
+	"\x18UserWithdrawalMetricSort\x12+\n" +
+	"'USER_WITHDRAWAL_METRIC_SORT_UNSPECIFIED\x10\x00\x121\n" +
+	"-USER_WITHDRAWAL_METRIC_SORT_WITHDRAWAL_AMOUNT\x10\x01B\x9c\x02\n" +
 	"#com.selling_iface.v1.user_metric.v1B\x10OrderMetricProtoP\x01ZLgithub.com/pdcgo/schema/services/selling_iface/v1/user_metric/v1;user_metric\xa2\x02\x03SVU\xaa\x02\x1dSellingIface.V1.UserMetric.V1\xca\x02\x1dSellingIface\\V1\\UserMetric\\V1\xe2\x02)SellingIface\\V1\\UserMetric\\V1\\GPBMetadata\xea\x02 SellingIface::V1::UserMetric::V1b\x06proto3"
 
 var (

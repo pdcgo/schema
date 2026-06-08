@@ -11,6 +11,7 @@ import (
 	_ "github.com/pdcgo/schema/services/event_base/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -24,10 +25,11 @@ const (
 )
 
 type OrderCreated struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	OrderId       uint64                 `protobuf:"varint,1,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	OrderId         uint64                 `protobuf:"varint,1,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	TransactionTime *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=transaction_time,json=transactionTime,proto3" json:"transaction_time,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *OrderCreated) Reset() {
@@ -67,11 +69,19 @@ func (x *OrderCreated) GetOrderId() uint64 {
 	return 0
 }
 
+func (x *OrderCreated) GetTransactionTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.TransactionTime
+	}
+	return nil
+}
+
 type OrderCanceled struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	OrderId       uint64                 `protobuf:"varint,1,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	OrderId         uint64                 `protobuf:"varint,1,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	TransactionTime *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=transaction_time,json=transactionTime,proto3" json:"transaction_time,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *OrderCanceled) Reset() {
@@ -109,6 +119,13 @@ func (x *OrderCanceled) GetOrderId() uint64 {
 		return x.OrderId
 	}
 	return 0
+}
+
+func (x *OrderCanceled) GetTransactionTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.TransactionTime
+	}
+	return nil
 }
 
 type SellingEvent struct {
@@ -197,11 +214,13 @@ var File_selling_iface_v1_event_proto protoreflect.FileDescriptor
 
 const file_selling_iface_v1_event_proto_rawDesc = "" +
 	"\n" +
-	"\x1cselling_iface/v1/event.proto\x12\x10selling_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x19event_base/v1/event.proto\"2\n" +
+	"\x1cselling_iface/v1/event.proto\x12\x10selling_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x19event_base/v1/event.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"y\n" +
 	"\fOrderCreated\x12\"\n" +
-	"\border_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\aorderId\"3\n" +
+	"\border_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\aorderId\x12E\n" +
+	"\x10transaction_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\x0ftransactionTime\"z\n" +
 	"\rOrderCanceled\x12\"\n" +
-	"\border_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\aorderId\"\xbc\x01\n" +
+	"\border_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\aorderId\x12E\n" +
+	"\x10transaction_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\x0ftransactionTime\"\xbc\x01\n" +
 	"\fSellingEvent\x12E\n" +
 	"\rorder_created\x18\x01 \x01(\v2\x1e.selling_iface.v1.OrderCreatedH\x00R\forderCreated\x12H\n" +
 	"\x0eorder_canceled\x18\x02 \x01(\v2\x1f.selling_iface.v1.OrderCanceledH\x00R\rorderCanceled:\x13\x8a\xb5\x18\x0f\n" +
@@ -224,18 +243,21 @@ func file_selling_iface_v1_event_proto_rawDescGZIP() []byte {
 
 var file_selling_iface_v1_event_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_selling_iface_v1_event_proto_goTypes = []any{
-	(*OrderCreated)(nil),  // 0: selling_iface.v1.OrderCreated
-	(*OrderCanceled)(nil), // 1: selling_iface.v1.OrderCanceled
-	(*SellingEvent)(nil),  // 2: selling_iface.v1.SellingEvent
+	(*OrderCreated)(nil),          // 0: selling_iface.v1.OrderCreated
+	(*OrderCanceled)(nil),         // 1: selling_iface.v1.OrderCanceled
+	(*SellingEvent)(nil),          // 2: selling_iface.v1.SellingEvent
+	(*timestamppb.Timestamp)(nil), // 3: google.protobuf.Timestamp
 }
 var file_selling_iface_v1_event_proto_depIdxs = []int32{
-	0, // 0: selling_iface.v1.SellingEvent.order_created:type_name -> selling_iface.v1.OrderCreated
-	1, // 1: selling_iface.v1.SellingEvent.order_canceled:type_name -> selling_iface.v1.OrderCanceled
-	2, // [2:2] is the sub-list for method output_type
-	2, // [2:2] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	3, // 0: selling_iface.v1.OrderCreated.transaction_time:type_name -> google.protobuf.Timestamp
+	3, // 1: selling_iface.v1.OrderCanceled.transaction_time:type_name -> google.protobuf.Timestamp
+	0, // 2: selling_iface.v1.SellingEvent.order_created:type_name -> selling_iface.v1.OrderCreated
+	1, // 3: selling_iface.v1.SellingEvent.order_canceled:type_name -> selling_iface.v1.OrderCanceled
+	4, // [4:4] is the sub-list for method output_type
+	4, // [4:4] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_selling_iface_v1_event_proto_init() }

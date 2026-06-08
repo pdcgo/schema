@@ -227,11 +227,12 @@ func (x *Identity) GetExpiredAt() *timestamppb.Timestamp {
 }
 
 type RequestPolicy struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Roles         []Role                 `protobuf:"varint,1,rep,packed,name=roles,proto3,enum=role_base.v1.Role" json:"roles,omitempty"`
-	AllowAll      bool                   `protobuf:"varint,3,opt,name=allow_all,json=allowAll,proto3" json:"allow_all,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                  protoimpl.MessageState `protogen:"open.v1"`
+	Roles                  []Role                 `protobuf:"varint,1,rep,packed,name=roles,proto3,enum=role_base.v1.Role" json:"roles,omitempty"`
+	AllowAll               bool                   `protobuf:"varint,3,opt,name=allow_all,json=allowAll,proto3" json:"allow_all,omitempty"`
+	AllowOnlyAuthenticated bool                   `protobuf:"varint,4,opt,name=allow_only_authenticated,json=allowOnlyAuthenticated,proto3" json:"allow_only_authenticated,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *RequestPolicy) Reset() {
@@ -274,6 +275,13 @@ func (x *RequestPolicy) GetRoles() []Role {
 func (x *RequestPolicy) GetAllowAll() bool {
 	if x != nil {
 		return x.AllowAll
+	}
+	return false
+}
+
+func (x *RequestPolicy) GetAllowOnlyAuthenticated() bool {
+	if x != nil {
+		return x.AllowOnlyAuthenticated
 	}
 	return false
 }
@@ -322,10 +330,11 @@ const file_role_base_v1_role_proto_rawDesc = "" +
 	"\ragent_version\x18\a \x01(\tR\fagentVersion\x12\x1a\n" +
 	"\busername\x18\x05 \x01(\tR\busername\x129\n" +
 	"\n" +
-	"expired_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\texpiredAt\"V\n" +
+	"expired_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\texpiredAt\"\x90\x01\n" +
 	"\rRequestPolicy\x12(\n" +
 	"\x05roles\x18\x01 \x03(\x0e2\x12.role_base.v1.RoleR\x05roles\x12\x1b\n" +
-	"\tallow_all\x18\x03 \x01(\bR\ballowAll*\xd4\x01\n" +
+	"\tallow_all\x18\x03 \x01(\bR\ballowAll\x128\n" +
+	"\x18allow_only_authenticated\x18\x04 \x01(\bR\x16allowOnlyAuthenticated*\xd4\x01\n" +
 	"\x04Role\x12\x14\n" +
 	"\x10ROLE_UNSPECIFIED\x10\x00\x12\r\n" +
 	"\tROLE_ROOT\x10\x01\x12\x0e\n" +

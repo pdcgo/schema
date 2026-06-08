@@ -150,6 +150,58 @@ func (mr *MockV2UserServiceClientMockRecorder) SuspendUser(ctx, req interface{})
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SuspendUser", reflect.TypeOf((*MockV2UserService)(nil).SuspendUser), ctx, req)
 }
 
+func (m *MockV2UserService) SearchUser(ctx context.Context, req *connect.Request[v2.SearchUserRequest]) (*connect.Response[v2.SearchUserResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "SearchUser", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v2.SearchUserResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockV2UserServiceMockRecorder) SearchUser(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SearchUser", reflect.TypeOf((*MockV2UserService)(nil).SearchUser), ctx, req)
+}
+
+func (m *MockV2UserServiceClient) SearchUser(ctx context.Context, req *connect.Request[v2.SearchUserRequest]) (*connect.Response[v2.SearchUserResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "SearchUser", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v2.SearchUserResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockV2UserServiceClientMockRecorder) SearchUser(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SearchUser", reflect.TypeOf((*MockV2UserService)(nil).SearchUser), ctx, req)
+}
+
+func (m *MockV2UserService) ResetPassword(ctx context.Context, req *connect.Request[v2.ResetPasswordRequest]) (*connect.Response[v2.ResetPasswordResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "ResetPassword", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v2.ResetPasswordResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockV2UserServiceMockRecorder) ResetPassword(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ResetPassword", reflect.TypeOf((*MockV2UserService)(nil).ResetPassword), ctx, req)
+}
+
+func (m *MockV2UserServiceClient) ResetPassword(ctx context.Context, req *connect.Request[v2.ResetPasswordRequest]) (*connect.Response[v2.ResetPasswordResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "ResetPassword", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v2.ResetPasswordResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockV2UserServiceClientMockRecorder) ResetPassword(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ResetPassword", reflect.TypeOf((*MockV2UserService)(nil).ResetPassword), ctx, req)
+}
+
 func (m *MockV2UserService) TeamUserList(ctx context.Context, req *connect.Request[v2.TeamUserListRequest]) (*connect.Response[v2.TeamUserListResponse], error) {
     m.ctrl.T.Helper()
     ret := m.ctrl.Call(m, "TeamUserList", ctx, req)

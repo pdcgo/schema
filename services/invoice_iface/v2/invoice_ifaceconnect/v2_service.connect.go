@@ -42,6 +42,21 @@ const (
 	// InvoiceServiceRejectPaymentProcedure is the fully-qualified name of the InvoiceService's
 	// RejectPayment RPC.
 	InvoiceServiceRejectPaymentProcedure = "/invoice_iface.v2.InvoiceService/RejectPayment"
+	// InvoiceServiceListPaymentProcedure is the fully-qualified name of the InvoiceService's
+	// ListPayment RPC.
+	InvoiceServiceListPaymentProcedure = "/invoice_iface.v2.InvoiceService/ListPayment"
+	// InvoiceServiceListIncomingPaymentProcedure is the fully-qualified name of the InvoiceService's
+	// ListIncomingPayment RPC.
+	InvoiceServiceListIncomingPaymentProcedure = "/invoice_iface.v2.InvoiceService/ListIncomingPayment"
+	// InvoiceServiceListTeamBalanceProcedure is the fully-qualified name of the InvoiceService's
+	// ListTeamBalance RPC.
+	InvoiceServiceListTeamBalanceProcedure = "/invoice_iface.v2.InvoiceService/ListTeamBalance"
+	// InvoiceServiceListTeamBalanceLogProcedure is the fully-qualified name of the InvoiceService's
+	// ListTeamBalanceLog RPC.
+	InvoiceServiceListTeamBalanceLogProcedure = "/invoice_iface.v2.InvoiceService/ListTeamBalanceLog"
+	// InvoiceServiceCreateBalanceLogProcedure is the fully-qualified name of the InvoiceService's
+	// CreateBalanceLog RPC.
+	InvoiceServiceCreateBalanceLogProcedure = "/invoice_iface.v2.InvoiceService/CreateBalanceLog"
 )
 
 // InvoiceServiceClient is a client for the invoice_iface.v2.InvoiceService service.
@@ -49,6 +64,11 @@ type InvoiceServiceClient interface {
 	CreatePayment(context.Context, *connect.Request[v2.CreatePaymentRequest]) (*connect.Response[v2.CreatePaymentResponse], error)
 	AcceptPayment(context.Context, *connect.Request[v2.AcceptPaymentRequest]) (*connect.Response[v2.AcceptPaymentResponse], error)
 	RejectPayment(context.Context, *connect.Request[v2.RejectPaymentRequest]) (*connect.Response[v2.RejectPaymentResponse], error)
+	ListPayment(context.Context, *connect.Request[v2.ListPaymentRequest]) (*connect.Response[v2.ListPaymentResponse], error)
+	ListIncomingPayment(context.Context, *connect.Request[v2.ListIncomingPaymentRequest]) (*connect.Response[v2.ListIncomingPaymentResponse], error)
+	ListTeamBalance(context.Context, *connect.Request[v2.ListTeamBalanceRequest]) (*connect.Response[v2.ListTeamBalanceResponse], error)
+	ListTeamBalanceLog(context.Context, *connect.Request[v2.ListTeamBalanceLogRequest]) (*connect.Response[v2.ListTeamBalanceLogResponse], error)
+	CreateBalanceLog(context.Context, *connect.Request[v2.CreateBalanceLogRequest]) (*connect.Response[v2.CreateBalanceLogResponse], error)
 }
 
 // NewInvoiceServiceClient constructs a client for the invoice_iface.v2.InvoiceService service. By
@@ -80,14 +100,49 @@ func NewInvoiceServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			connect.WithSchema(invoiceServiceMethods.ByName("RejectPayment")),
 			connect.WithClientOptions(opts...),
 		),
+		listPayment: connect.NewClient[v2.ListPaymentRequest, v2.ListPaymentResponse](
+			httpClient,
+			baseURL+InvoiceServiceListPaymentProcedure,
+			connect.WithSchema(invoiceServiceMethods.ByName("ListPayment")),
+			connect.WithClientOptions(opts...),
+		),
+		listIncomingPayment: connect.NewClient[v2.ListIncomingPaymentRequest, v2.ListIncomingPaymentResponse](
+			httpClient,
+			baseURL+InvoiceServiceListIncomingPaymentProcedure,
+			connect.WithSchema(invoiceServiceMethods.ByName("ListIncomingPayment")),
+			connect.WithClientOptions(opts...),
+		),
+		listTeamBalance: connect.NewClient[v2.ListTeamBalanceRequest, v2.ListTeamBalanceResponse](
+			httpClient,
+			baseURL+InvoiceServiceListTeamBalanceProcedure,
+			connect.WithSchema(invoiceServiceMethods.ByName("ListTeamBalance")),
+			connect.WithClientOptions(opts...),
+		),
+		listTeamBalanceLog: connect.NewClient[v2.ListTeamBalanceLogRequest, v2.ListTeamBalanceLogResponse](
+			httpClient,
+			baseURL+InvoiceServiceListTeamBalanceLogProcedure,
+			connect.WithSchema(invoiceServiceMethods.ByName("ListTeamBalanceLog")),
+			connect.WithClientOptions(opts...),
+		),
+		createBalanceLog: connect.NewClient[v2.CreateBalanceLogRequest, v2.CreateBalanceLogResponse](
+			httpClient,
+			baseURL+InvoiceServiceCreateBalanceLogProcedure,
+			connect.WithSchema(invoiceServiceMethods.ByName("CreateBalanceLog")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // invoiceServiceClient implements InvoiceServiceClient.
 type invoiceServiceClient struct {
-	createPayment *connect.Client[v2.CreatePaymentRequest, v2.CreatePaymentResponse]
-	acceptPayment *connect.Client[v2.AcceptPaymentRequest, v2.AcceptPaymentResponse]
-	rejectPayment *connect.Client[v2.RejectPaymentRequest, v2.RejectPaymentResponse]
+	createPayment       *connect.Client[v2.CreatePaymentRequest, v2.CreatePaymentResponse]
+	acceptPayment       *connect.Client[v2.AcceptPaymentRequest, v2.AcceptPaymentResponse]
+	rejectPayment       *connect.Client[v2.RejectPaymentRequest, v2.RejectPaymentResponse]
+	listPayment         *connect.Client[v2.ListPaymentRequest, v2.ListPaymentResponse]
+	listIncomingPayment *connect.Client[v2.ListIncomingPaymentRequest, v2.ListIncomingPaymentResponse]
+	listTeamBalance     *connect.Client[v2.ListTeamBalanceRequest, v2.ListTeamBalanceResponse]
+	listTeamBalanceLog  *connect.Client[v2.ListTeamBalanceLogRequest, v2.ListTeamBalanceLogResponse]
+	createBalanceLog    *connect.Client[v2.CreateBalanceLogRequest, v2.CreateBalanceLogResponse]
 }
 
 // CreatePayment calls invoice_iface.v2.InvoiceService.CreatePayment.
@@ -105,11 +160,41 @@ func (c *invoiceServiceClient) RejectPayment(ctx context.Context, req *connect.R
 	return c.rejectPayment.CallUnary(ctx, req)
 }
 
+// ListPayment calls invoice_iface.v2.InvoiceService.ListPayment.
+func (c *invoiceServiceClient) ListPayment(ctx context.Context, req *connect.Request[v2.ListPaymentRequest]) (*connect.Response[v2.ListPaymentResponse], error) {
+	return c.listPayment.CallUnary(ctx, req)
+}
+
+// ListIncomingPayment calls invoice_iface.v2.InvoiceService.ListIncomingPayment.
+func (c *invoiceServiceClient) ListIncomingPayment(ctx context.Context, req *connect.Request[v2.ListIncomingPaymentRequest]) (*connect.Response[v2.ListIncomingPaymentResponse], error) {
+	return c.listIncomingPayment.CallUnary(ctx, req)
+}
+
+// ListTeamBalance calls invoice_iface.v2.InvoiceService.ListTeamBalance.
+func (c *invoiceServiceClient) ListTeamBalance(ctx context.Context, req *connect.Request[v2.ListTeamBalanceRequest]) (*connect.Response[v2.ListTeamBalanceResponse], error) {
+	return c.listTeamBalance.CallUnary(ctx, req)
+}
+
+// ListTeamBalanceLog calls invoice_iface.v2.InvoiceService.ListTeamBalanceLog.
+func (c *invoiceServiceClient) ListTeamBalanceLog(ctx context.Context, req *connect.Request[v2.ListTeamBalanceLogRequest]) (*connect.Response[v2.ListTeamBalanceLogResponse], error) {
+	return c.listTeamBalanceLog.CallUnary(ctx, req)
+}
+
+// CreateBalanceLog calls invoice_iface.v2.InvoiceService.CreateBalanceLog.
+func (c *invoiceServiceClient) CreateBalanceLog(ctx context.Context, req *connect.Request[v2.CreateBalanceLogRequest]) (*connect.Response[v2.CreateBalanceLogResponse], error) {
+	return c.createBalanceLog.CallUnary(ctx, req)
+}
+
 // InvoiceServiceHandler is an implementation of the invoice_iface.v2.InvoiceService service.
 type InvoiceServiceHandler interface {
 	CreatePayment(context.Context, *connect.Request[v2.CreatePaymentRequest]) (*connect.Response[v2.CreatePaymentResponse], error)
 	AcceptPayment(context.Context, *connect.Request[v2.AcceptPaymentRequest]) (*connect.Response[v2.AcceptPaymentResponse], error)
 	RejectPayment(context.Context, *connect.Request[v2.RejectPaymentRequest]) (*connect.Response[v2.RejectPaymentResponse], error)
+	ListPayment(context.Context, *connect.Request[v2.ListPaymentRequest]) (*connect.Response[v2.ListPaymentResponse], error)
+	ListIncomingPayment(context.Context, *connect.Request[v2.ListIncomingPaymentRequest]) (*connect.Response[v2.ListIncomingPaymentResponse], error)
+	ListTeamBalance(context.Context, *connect.Request[v2.ListTeamBalanceRequest]) (*connect.Response[v2.ListTeamBalanceResponse], error)
+	ListTeamBalanceLog(context.Context, *connect.Request[v2.ListTeamBalanceLogRequest]) (*connect.Response[v2.ListTeamBalanceLogResponse], error)
+	CreateBalanceLog(context.Context, *connect.Request[v2.CreateBalanceLogRequest]) (*connect.Response[v2.CreateBalanceLogResponse], error)
 }
 
 // NewInvoiceServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -137,6 +222,36 @@ func NewInvoiceServiceHandler(svc InvoiceServiceHandler, opts ...connect.Handler
 		connect.WithSchema(invoiceServiceMethods.ByName("RejectPayment")),
 		connect.WithHandlerOptions(opts...),
 	)
+	invoiceServiceListPaymentHandler := connect.NewUnaryHandler(
+		InvoiceServiceListPaymentProcedure,
+		svc.ListPayment,
+		connect.WithSchema(invoiceServiceMethods.ByName("ListPayment")),
+		connect.WithHandlerOptions(opts...),
+	)
+	invoiceServiceListIncomingPaymentHandler := connect.NewUnaryHandler(
+		InvoiceServiceListIncomingPaymentProcedure,
+		svc.ListIncomingPayment,
+		connect.WithSchema(invoiceServiceMethods.ByName("ListIncomingPayment")),
+		connect.WithHandlerOptions(opts...),
+	)
+	invoiceServiceListTeamBalanceHandler := connect.NewUnaryHandler(
+		InvoiceServiceListTeamBalanceProcedure,
+		svc.ListTeamBalance,
+		connect.WithSchema(invoiceServiceMethods.ByName("ListTeamBalance")),
+		connect.WithHandlerOptions(opts...),
+	)
+	invoiceServiceListTeamBalanceLogHandler := connect.NewUnaryHandler(
+		InvoiceServiceListTeamBalanceLogProcedure,
+		svc.ListTeamBalanceLog,
+		connect.WithSchema(invoiceServiceMethods.ByName("ListTeamBalanceLog")),
+		connect.WithHandlerOptions(opts...),
+	)
+	invoiceServiceCreateBalanceLogHandler := connect.NewUnaryHandler(
+		InvoiceServiceCreateBalanceLogProcedure,
+		svc.CreateBalanceLog,
+		connect.WithSchema(invoiceServiceMethods.ByName("CreateBalanceLog")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/invoice_iface.v2.InvoiceService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case InvoiceServiceCreatePaymentProcedure:
@@ -145,6 +260,16 @@ func NewInvoiceServiceHandler(svc InvoiceServiceHandler, opts ...connect.Handler
 			invoiceServiceAcceptPaymentHandler.ServeHTTP(w, r)
 		case InvoiceServiceRejectPaymentProcedure:
 			invoiceServiceRejectPaymentHandler.ServeHTTP(w, r)
+		case InvoiceServiceListPaymentProcedure:
+			invoiceServiceListPaymentHandler.ServeHTTP(w, r)
+		case InvoiceServiceListIncomingPaymentProcedure:
+			invoiceServiceListIncomingPaymentHandler.ServeHTTP(w, r)
+		case InvoiceServiceListTeamBalanceProcedure:
+			invoiceServiceListTeamBalanceHandler.ServeHTTP(w, r)
+		case InvoiceServiceListTeamBalanceLogProcedure:
+			invoiceServiceListTeamBalanceLogHandler.ServeHTTP(w, r)
+		case InvoiceServiceCreateBalanceLogProcedure:
+			invoiceServiceCreateBalanceLogHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -164,4 +289,24 @@ func (UnimplementedInvoiceServiceHandler) AcceptPayment(context.Context, *connec
 
 func (UnimplementedInvoiceServiceHandler) RejectPayment(context.Context, *connect.Request[v2.RejectPaymentRequest]) (*connect.Response[v2.RejectPaymentResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("invoice_iface.v2.InvoiceService.RejectPayment is not implemented"))
+}
+
+func (UnimplementedInvoiceServiceHandler) ListPayment(context.Context, *connect.Request[v2.ListPaymentRequest]) (*connect.Response[v2.ListPaymentResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("invoice_iface.v2.InvoiceService.ListPayment is not implemented"))
+}
+
+func (UnimplementedInvoiceServiceHandler) ListIncomingPayment(context.Context, *connect.Request[v2.ListIncomingPaymentRequest]) (*connect.Response[v2.ListIncomingPaymentResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("invoice_iface.v2.InvoiceService.ListIncomingPayment is not implemented"))
+}
+
+func (UnimplementedInvoiceServiceHandler) ListTeamBalance(context.Context, *connect.Request[v2.ListTeamBalanceRequest]) (*connect.Response[v2.ListTeamBalanceResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("invoice_iface.v2.InvoiceService.ListTeamBalance is not implemented"))
+}
+
+func (UnimplementedInvoiceServiceHandler) ListTeamBalanceLog(context.Context, *connect.Request[v2.ListTeamBalanceLogRequest]) (*connect.Response[v2.ListTeamBalanceLogResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("invoice_iface.v2.InvoiceService.ListTeamBalanceLog is not implemented"))
+}
+
+func (UnimplementedInvoiceServiceHandler) CreateBalanceLog(context.Context, *connect.Request[v2.CreateBalanceLogRequest]) (*connect.Response[v2.CreateBalanceLogResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("invoice_iface.v2.InvoiceService.CreateBalanceLog is not implemented"))
 }

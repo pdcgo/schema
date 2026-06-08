@@ -36,6 +36,7 @@ message Identity {
 message RequestPolicy {
   repeated Role roles = 1;
   bool allow_all = 3;
+  bool allow_only_authenticated = 4;
 }
 
 extend google.protobuf.MessageOptions {

@@ -11,8 +11,59 @@ service V2UserService {
   rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse);
   rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse);
   rpc SuspendUser(SuspendUserRequest) returns (SuspendUserResponse);
+  rpc SearchUser(SearchUserRequest) returns (SearchUserResponse);
+
+  rpc ResetPassword(ResetPasswordRequest) returns (ResetPasswordResponse);
+
   rpc TeamUserList(TeamUserListRequest) returns (TeamUserListResponse);
   rpc TeamUserUpdate(TeamUserUpdateRequest) returns (TeamUserUpdateResponse);
+}
+
+message ResetPasswordRequest {
+  option (role_base.v1.request_policy) = {
+    allow_only_authenticated: true
+  };
+
+  uint64 user_id = 1;
+  string old_password = 2;
+  string new_password = 3;
+}
+
+message ResetPasswordResponse {}
+
+message SearchUserItem {
+  uint64 id = 1;
+  string email = 2;
+  string username = 3;
+  string phone_number = 5;
+  string name = 6;
+}
+
+message SearchUserByKeyword {
+  string q = 1;
+  uint64 team_id = 2;
+}
+
+message SearchUserByIds {
+  repeated uint64 ids = 1;
+}
+
+message SearchUserRequest {
+  option (role_base.v1.request_policy) = {
+    allow_only_authenticated: true
+  };
+
+  oneof filter {
+    SearchUserByKeyword keyword = 1;
+    SearchUserByIds ids = 2;
+  }
+
+  int64 page = 3;
+  int64 page_size = 4;
+}
+
+message SearchUserResponse {
+  repeated SearchUserItem users = 1;
 }
 
 message SuspendUserRequest {
@@ -85,10 +136,10 @@ message User {
   uint64 id = 1;
   string email = 2;
   string username = 3;
-  string password = 4;
-  string name = 5;
-  UserStatus status = 6;
-  role_base.v1.Role role = 7;
+  string phone_number = 5;
+  string name = 6;
+  UserStatus status = 7;
+  role_base.v1.Role role = 8;
 }
 
 message UpdateUserRequest {
@@ -104,8 +155,8 @@ message UpdateUserRequest {
   uint64 id = 1;
   string email = 2;
   string username = 3;
-  string password = 4;
-  string name = 5;
+  string phone_number = 5;
+  string name = 6;
 }
 
 message DeleteUserResponse {}
@@ -146,6 +197,7 @@ message CreateUserRequest {
     min_len: 1
     max_len: 200
   }];
+  string phone_number = 5;
 }
 
 message CreateUserResponse {
