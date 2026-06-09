@@ -11,18 +11,26 @@ option go_package = "github.com/pdcgo/schema/services/selling_iface/v1;selling_i
 enum UserMetricType {
   USER_METRIC_TYPE_UNSPECIFIED = 0;
   USER_METRIC_TYPE_ORDER = 1;
-  USER_METRIC_TYPE_ORDER_COMPLETED = 4;
+  USER_METRIC_TYPE_ORDER_WITHDRAWAL = 4;
   USER_METRIC_TYPE_ORDER_CANCELLED = 5;
+  USER_METRIC_TYPE_ORDER_LOST = 21;
   USER_METRIC_TYPE_STOCK_ORDER = 2;
-  USER_METRIC_TYPE_STOCK_ORDER_COMPLETED = 6;
+  USER_METRIC_TYPE_STOCK_ORDER_WITHDRAWAL = 6;
   USER_METRIC_TYPE_STOCK_ORDER_CANCELLED = 7;
+  USER_METRIC_TYPE_STOCK_ORDER_LOST = 18;
   USER_METRIC_TYPE_AVG_ORDER = 3;
-  USER_METRIC_TYPE_AVG_ORDER_COMPLETED = 8;
+  USER_METRIC_TYPE_AVG_ORDER_WITHDRAWAL = 8;
   USER_METRIC_TYPE_AVG_ORDER_CANCELLED = 9;
+  USER_METRIC_TYPE_AVG_ORDER_LOST = 19;
   USER_METRIC_TYPE_COST_ORDER = 10;
-  USER_METRIC_TYPE_COST_ORDER_COMPLETED = 11;
+  USER_METRIC_TYPE_COST_ORDER_WITHDRAWAL = 11;
   USER_METRIC_TYPE_COST_ORDER_CANCELLED = 12;
+  USER_METRIC_TYPE_COST_ORDER_LOST = 20;
   USER_METRIC_TYPE_WITHDRAWAL = 13;
+  USER_METRIC_TYPE_PROFIT_ORDER_CREATED = 14;
+  USER_METRIC_TYPE_PROFIT_ORDER_WITHDRAWAL = 16;
+  USER_METRIC_TYPE_LOST_PROFIT_ORDER = 17;
+  USER_METRIC_TYPE_ADS_EXPENSE = 22;
 }
 
 enum UserMetricSortType {
@@ -42,36 +50,52 @@ message UserMetricSort {
   oneof s {
     CommonUserSort common_sort = 2;
     selling_iface.v1.user_metric.v1.UserOrderMetricSort user_order_metric_sort = 3;
-    selling_iface.v1.user_metric.v1.UserOrderCompletedMetricSort user_order_completed_metric_sort = 6;
+    selling_iface.v1.user_metric.v1.UserOrderWithdrawalMetricSort user_order_withdrawal_metric_sort = 6;
     selling_iface.v1.user_metric.v1.UserOrderCancelledMetricSort user_order_cancelled_metric_sort = 7;
+    selling_iface.v1.user_metric.v1.UserOrderLostMetricSort user_order_lost_metric_sort = 19;
     selling_iface.v1.user_metric.v1.UserStockOrderMetricSort user_stock_order_metric_sort = 4;
-    selling_iface.v1.user_metric.v1.UserStockOrderCompletedMetricSort user_stock_order_completed_metric_sort = 8;
+    selling_iface.v1.user_metric.v1.UserStockOrderWithdrawalMetricSort user_stock_order_withdrawal_metric_sort = 8;
     selling_iface.v1.user_metric.v1.UserStockOrderCancelledMetricSort user_stock_order_cancelled_metric_sort = 9;
+    selling_iface.v1.user_metric.v1.UserStockOrderLostMetricSort user_stock_order_lost_metric_sort = 20;
     selling_iface.v1.user_metric.v1.UserAvgOrderMetricSort user_avg_order_metric_sort = 5;
-    selling_iface.v1.user_metric.v1.UserAvgOrderCompletedMetricSort user_avg_order_completed_metric_sort = 10;
+    selling_iface.v1.user_metric.v1.UserAvgOrderWithdrawalMetricSort user_avg_order_withdrawal_metric_sort = 10;
     selling_iface.v1.user_metric.v1.UserAvgOrderCancelledMetricSort user_avg_order_cancelled_metric_sort = 11;
+    selling_iface.v1.user_metric.v1.UserAvgOrderLostMetricSort user_avg_order_lost_metric_sort = 21;
     selling_iface.v1.user_metric.v1.UserCostOrderMetricSort user_cost_order_metric_sort = 12;
-    selling_iface.v1.user_metric.v1.UserCostOrderCompletedMetricSort user_cost_order_completed_metric_sort = 13;
+    selling_iface.v1.user_metric.v1.UserCostOrderWithdrawalMetricSort user_cost_order_withdrawal_metric_sort = 13;
     selling_iface.v1.user_metric.v1.UserCostOrderCancelledMetricSort user_cost_order_cancelled_metric_sort = 14;
+    selling_iface.v1.user_metric.v1.UserCostOrderLostMetricSort user_cost_order_lost_metric_sort = 22;
     selling_iface.v1.user_metric.v1.UserWithdrawalMetricSort user_withdrawal_metric_sort = 15;
+    selling_iface.v1.user_metric.v1.UserProfitOrderCreatedMetricSort user_profit_order_created_metric_sort = 16;
+    selling_iface.v1.user_metric.v1.UserProfitOrderWithdrawalMetricSort user_profit_order_withdrawal_metric_sort = 17;
+    selling_iface.v1.user_metric.v1.UserLostProfitOrderMetricSort user_lost_profit_order_metric_sort = 18;
+    selling_iface.v1.user_metric.v1.UserAdsExpenseMetricSort user_ads_expense_metric_sort = 23;
   }
 }
 
 message UserMetric {
   oneof data {
     selling_iface.v1.user_metric.v1.UserOrderMetric user_order_metric = 2;
-    selling_iface.v1.user_metric.v1.UserOrderCompletedMetric user_order_completed_metric = 5;
+    selling_iface.v1.user_metric.v1.UserOrderWithdrawalMetric user_order_withdrawal_metric = 5;
     selling_iface.v1.user_metric.v1.UserOrderCancelledMetric user_order_cancelled_metric = 6;
+    selling_iface.v1.user_metric.v1.UserOrderLostMetric user_order_lost_metric = 18;
     selling_iface.v1.user_metric.v1.UserStockOrderMetric user_stock_order_metric = 3;
-    selling_iface.v1.user_metric.v1.UserStockOrderCompletedMetric user_stock_order_completed_metric = 7;
+    selling_iface.v1.user_metric.v1.UserStockOrderWithdrawalMetric user_stock_order_withdrawal_metric = 7;
     selling_iface.v1.user_metric.v1.UserStockOrderCancelledMetric user_stock_order_cancelled_metric = 8;
+    selling_iface.v1.user_metric.v1.UserStockOrderLostMetric user_stock_order_lost_metric = 19;
     selling_iface.v1.user_metric.v1.UserAvgOrderMetric user_avg_order_metric = 4;
-    selling_iface.v1.user_metric.v1.UserAvgOrderCompletedMetric user_avg_order_completed_metric = 9;
+    selling_iface.v1.user_metric.v1.UserAvgOrderWithdrawalMetric user_avg_order_withdrawal_metric = 9;
     selling_iface.v1.user_metric.v1.UserAvgOrderCancelledMetric user_avg_order_cancelled_metric = 10;
+    selling_iface.v1.user_metric.v1.UserAvgOrderLostMetric user_avg_order_lost_metric = 20;
     selling_iface.v1.user_metric.v1.UserCostOrderMetric user_cost_order_metric = 11;
-    selling_iface.v1.user_metric.v1.UserCostOrderCompletedMetric user_cost_order_completed_metric = 12;
+    selling_iface.v1.user_metric.v1.UserCostOrderWithdrawalMetric user_cost_order_withdrawal_metric = 12;
     selling_iface.v1.user_metric.v1.UserCostOrderCancelledMetric user_cost_order_cancelled_metric = 13;
+    selling_iface.v1.user_metric.v1.UserCostOrderLostMetric user_cost_order_lost_metric = 21;
     selling_iface.v1.user_metric.v1.UserWithdrawalMetric user_withdrawal_metric = 14;
+    selling_iface.v1.user_metric.v1.UserProfitOrderCreatedMetric user_profit_order_created_metric = 15;
+    selling_iface.v1.user_metric.v1.UserProfitOrderWithdrawalMetric user_profit_order_withdrawal_metric = 16;
+    selling_iface.v1.user_metric.v1.UserLostProfitOrderMetric user_lost_profit_order_metric = 17;
+    selling_iface.v1.user_metric.v1.UserAdsExpenseMetric user_ads_expense_metric = 22;
   }
 }
 
