@@ -17,6 +17,7 @@ service InvoiceService {
   rpc ListIncomingPayment(ListIncomingPaymentRequest) returns (ListIncomingPaymentResponse);
 
   rpc ListTeamBalance(ListTeamBalanceRequest) returns (ListTeamBalanceResponse);
+  rpc TeamBalanceMap(TeamBalanceMapRequest) returns (TeamBalanceMapResponse);
   rpc ListTeamBalanceLog(ListTeamBalanceLogRequest) returns (ListTeamBalanceLogResponse);
 
   rpc CreateBalanceLog(CreateBalanceLogRequest) returns (CreateBalanceLogResponse);
@@ -73,20 +74,50 @@ message ListIncomingPaymentResponse {
 }
 
 message ListTeamBalanceRequest {
-  uint64 team_id = 1;
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+  uint64 team_id = 1 [
+    (buf.validate.field).uint64.gt = 0,
+    (role_base.v1.use_scope) = true
+  ];
   uint64 for_team_id = 2;
+  BalanceType balance_type = 3 [(buf.validate.field).enum.defined_only = true];
 }
 
-message ListTeamBalanceResponse {}
+message ListTeamBalanceResponse {
+  repeated TeamBalance balances = 1;
+}
+
+message TeamBalanceMapRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+  uint64 team_id = 1 [
+    (buf.validate.field).uint64.gt = 0,
+    (role_base.v1.use_scope) = true
+  ];
+  repeated uint64 for_team_ids = 2;
+  BalanceType balance_type = 3 [(buf.validate.field).enum.defined_only = true];
+}
+
+message TeamBalanceMapResponse {
+  map<uint64, TeamBalance> balances = 1;
+}
 
 message ListTeamBalanceLogRequest {
-  uint64 team_id = 1;
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+  uint64 team_id = 1 [
+    (buf.validate.field).uint64.gt = 0,
+    (role_base.v1.use_scope) = true
+  ];
   uint64 for_team_id = 2;
-  int64 from_time = 3;
-  int64 to_time = 4;
+  google.protobuf.Timestamp from_time = 3;
+  google.protobuf.Timestamp to_time = 4;
+  BalanceType balance_type = 5 [(buf.validate.field).enum.defined_only = true];
+  common.v1.PageFilter page = 6 [(buf.validate.field).required = true];
 }
 
-message ListTeamBalanceLogResponse {}
+message ListTeamBalanceLogResponse {
+  repeated BalanceChangeLog logs = 1;
+  common.v1.PageInfo page_info = 2;
+}
 
 enum PaymentStatus {
   PAYMENT_STATUS_UNSPECIFIED = 0;

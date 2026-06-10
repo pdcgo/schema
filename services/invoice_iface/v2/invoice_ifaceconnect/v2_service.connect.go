@@ -51,6 +51,9 @@ const (
 	// InvoiceServiceListTeamBalanceProcedure is the fully-qualified name of the InvoiceService's
 	// ListTeamBalance RPC.
 	InvoiceServiceListTeamBalanceProcedure = "/invoice_iface.v2.InvoiceService/ListTeamBalance"
+	// InvoiceServiceTeamBalanceMapProcedure is the fully-qualified name of the InvoiceService's
+	// TeamBalanceMap RPC.
+	InvoiceServiceTeamBalanceMapProcedure = "/invoice_iface.v2.InvoiceService/TeamBalanceMap"
 	// InvoiceServiceListTeamBalanceLogProcedure is the fully-qualified name of the InvoiceService's
 	// ListTeamBalanceLog RPC.
 	InvoiceServiceListTeamBalanceLogProcedure = "/invoice_iface.v2.InvoiceService/ListTeamBalanceLog"
@@ -67,6 +70,7 @@ type InvoiceServiceClient interface {
 	ListPayment(context.Context, *connect.Request[v2.ListPaymentRequest]) (*connect.Response[v2.ListPaymentResponse], error)
 	ListIncomingPayment(context.Context, *connect.Request[v2.ListIncomingPaymentRequest]) (*connect.Response[v2.ListIncomingPaymentResponse], error)
 	ListTeamBalance(context.Context, *connect.Request[v2.ListTeamBalanceRequest]) (*connect.Response[v2.ListTeamBalanceResponse], error)
+	TeamBalanceMap(context.Context, *connect.Request[v2.TeamBalanceMapRequest]) (*connect.Response[v2.TeamBalanceMapResponse], error)
 	ListTeamBalanceLog(context.Context, *connect.Request[v2.ListTeamBalanceLogRequest]) (*connect.Response[v2.ListTeamBalanceLogResponse], error)
 	CreateBalanceLog(context.Context, *connect.Request[v2.CreateBalanceLogRequest]) (*connect.Response[v2.CreateBalanceLogResponse], error)
 }
@@ -118,6 +122,12 @@ func NewInvoiceServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			connect.WithSchema(invoiceServiceMethods.ByName("ListTeamBalance")),
 			connect.WithClientOptions(opts...),
 		),
+		teamBalanceMap: connect.NewClient[v2.TeamBalanceMapRequest, v2.TeamBalanceMapResponse](
+			httpClient,
+			baseURL+InvoiceServiceTeamBalanceMapProcedure,
+			connect.WithSchema(invoiceServiceMethods.ByName("TeamBalanceMap")),
+			connect.WithClientOptions(opts...),
+		),
 		listTeamBalanceLog: connect.NewClient[v2.ListTeamBalanceLogRequest, v2.ListTeamBalanceLogResponse](
 			httpClient,
 			baseURL+InvoiceServiceListTeamBalanceLogProcedure,
@@ -141,6 +151,7 @@ type invoiceServiceClient struct {
 	listPayment         *connect.Client[v2.ListPaymentRequest, v2.ListPaymentResponse]
 	listIncomingPayment *connect.Client[v2.ListIncomingPaymentRequest, v2.ListIncomingPaymentResponse]
 	listTeamBalance     *connect.Client[v2.ListTeamBalanceRequest, v2.ListTeamBalanceResponse]
+	teamBalanceMap      *connect.Client[v2.TeamBalanceMapRequest, v2.TeamBalanceMapResponse]
 	listTeamBalanceLog  *connect.Client[v2.ListTeamBalanceLogRequest, v2.ListTeamBalanceLogResponse]
 	createBalanceLog    *connect.Client[v2.CreateBalanceLogRequest, v2.CreateBalanceLogResponse]
 }
@@ -175,6 +186,11 @@ func (c *invoiceServiceClient) ListTeamBalance(ctx context.Context, req *connect
 	return c.listTeamBalance.CallUnary(ctx, req)
 }
 
+// TeamBalanceMap calls invoice_iface.v2.InvoiceService.TeamBalanceMap.
+func (c *invoiceServiceClient) TeamBalanceMap(ctx context.Context, req *connect.Request[v2.TeamBalanceMapRequest]) (*connect.Response[v2.TeamBalanceMapResponse], error) {
+	return c.teamBalanceMap.CallUnary(ctx, req)
+}
+
 // ListTeamBalanceLog calls invoice_iface.v2.InvoiceService.ListTeamBalanceLog.
 func (c *invoiceServiceClient) ListTeamBalanceLog(ctx context.Context, req *connect.Request[v2.ListTeamBalanceLogRequest]) (*connect.Response[v2.ListTeamBalanceLogResponse], error) {
 	return c.listTeamBalanceLog.CallUnary(ctx, req)
@@ -193,6 +209,7 @@ type InvoiceServiceHandler interface {
 	ListPayment(context.Context, *connect.Request[v2.ListPaymentRequest]) (*connect.Response[v2.ListPaymentResponse], error)
 	ListIncomingPayment(context.Context, *connect.Request[v2.ListIncomingPaymentRequest]) (*connect.Response[v2.ListIncomingPaymentResponse], error)
 	ListTeamBalance(context.Context, *connect.Request[v2.ListTeamBalanceRequest]) (*connect.Response[v2.ListTeamBalanceResponse], error)
+	TeamBalanceMap(context.Context, *connect.Request[v2.TeamBalanceMapRequest]) (*connect.Response[v2.TeamBalanceMapResponse], error)
 	ListTeamBalanceLog(context.Context, *connect.Request[v2.ListTeamBalanceLogRequest]) (*connect.Response[v2.ListTeamBalanceLogResponse], error)
 	CreateBalanceLog(context.Context, *connect.Request[v2.CreateBalanceLogRequest]) (*connect.Response[v2.CreateBalanceLogResponse], error)
 }
@@ -240,6 +257,12 @@ func NewInvoiceServiceHandler(svc InvoiceServiceHandler, opts ...connect.Handler
 		connect.WithSchema(invoiceServiceMethods.ByName("ListTeamBalance")),
 		connect.WithHandlerOptions(opts...),
 	)
+	invoiceServiceTeamBalanceMapHandler := connect.NewUnaryHandler(
+		InvoiceServiceTeamBalanceMapProcedure,
+		svc.TeamBalanceMap,
+		connect.WithSchema(invoiceServiceMethods.ByName("TeamBalanceMap")),
+		connect.WithHandlerOptions(opts...),
+	)
 	invoiceServiceListTeamBalanceLogHandler := connect.NewUnaryHandler(
 		InvoiceServiceListTeamBalanceLogProcedure,
 		svc.ListTeamBalanceLog,
@@ -266,6 +289,8 @@ func NewInvoiceServiceHandler(svc InvoiceServiceHandler, opts ...connect.Handler
 			invoiceServiceListIncomingPaymentHandler.ServeHTTP(w, r)
 		case InvoiceServiceListTeamBalanceProcedure:
 			invoiceServiceListTeamBalanceHandler.ServeHTTP(w, r)
+		case InvoiceServiceTeamBalanceMapProcedure:
+			invoiceServiceTeamBalanceMapHandler.ServeHTTP(w, r)
 		case InvoiceServiceListTeamBalanceLogProcedure:
 			invoiceServiceListTeamBalanceLogHandler.ServeHTTP(w, r)
 		case InvoiceServiceCreateBalanceLogProcedure:
@@ -301,6 +326,10 @@ func (UnimplementedInvoiceServiceHandler) ListIncomingPayment(context.Context, *
 
 func (UnimplementedInvoiceServiceHandler) ListTeamBalance(context.Context, *connect.Request[v2.ListTeamBalanceRequest]) (*connect.Response[v2.ListTeamBalanceResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("invoice_iface.v2.InvoiceService.ListTeamBalance is not implemented"))
+}
+
+func (UnimplementedInvoiceServiceHandler) TeamBalanceMap(context.Context, *connect.Request[v2.TeamBalanceMapRequest]) (*connect.Response[v2.TeamBalanceMapResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("invoice_iface.v2.InvoiceService.TeamBalanceMap is not implemented"))
 }
 
 func (UnimplementedInvoiceServiceHandler) ListTeamBalanceLog(context.Context, *connect.Request[v2.ListTeamBalanceLogRequest]) (*connect.Response[v2.ListTeamBalanceLogResponse], error) {
