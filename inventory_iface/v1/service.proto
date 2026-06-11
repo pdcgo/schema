@@ -1,0 +1,11 @@
+syntax = "proto3";
+package inventory_iface.v1;
+
+option go_package = "github.com/pdcgo/schema/services/inventory_iface/v1;inventory_iface";
+
+service InventoryService {
+  rpc Hello(HelloRequest) returns (HelloResponse);
+}
+
+message HelloRequest {}
+message HelloResponse {}
