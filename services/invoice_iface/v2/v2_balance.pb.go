@@ -31,6 +31,7 @@ const (
 	BalanceChangeType_BALANCE_CHANGE_TYPE_COD_FEE       BalanceChangeType = 3
 	BalanceChangeType_BALANCE_CHANGE_TYPE_PRODUCT_FEE   BalanceChangeType = 4
 	BalanceChangeType_BALANCE_CHANGE_TYPE_PAYMENT       BalanceChangeType = 5
+	BalanceChangeType_BALANCE_CHANGE_TYPE_STOCK_PROBLEM BalanceChangeType = 6
 )
 
 // Enum value maps for BalanceChangeType.
@@ -42,6 +43,7 @@ var (
 		3: "BALANCE_CHANGE_TYPE_COD_FEE",
 		4: "BALANCE_CHANGE_TYPE_PRODUCT_FEE",
 		5: "BALANCE_CHANGE_TYPE_PAYMENT",
+		6: "BALANCE_CHANGE_TYPE_STOCK_PROBLEM",
 	}
 	BalanceChangeType_value = map[string]int32{
 		"BALANCE_CHANGE_TYPE_UNSPECIFIED":   0,
@@ -50,6 +52,7 @@ var (
 		"BALANCE_CHANGE_TYPE_COD_FEE":       3,
 		"BALANCE_CHANGE_TYPE_PRODUCT_FEE":   4,
 		"BALANCE_CHANGE_TYPE_PAYMENT":       5,
+		"BALANCE_CHANGE_TYPE_STOCK_PROBLEM": 6,
 	}
 )
 
@@ -486,14 +489,15 @@ const file_invoice_iface_v2_v2_balance_proto_rawDesc = "" +
 	"updated_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x129\n" +
 	"\n" +
 	"created_at\x18\n" +
-	" \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt*\xea\x01\n" +
+	" \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt*\x91\x02\n" +
 	"\x11BalanceChangeType\x12#\n" +
 	"\x1fBALANCE_CHANGE_TYPE_UNSPECIFIED\x10\x00\x12\"\n" +
 	"\x1eBALANCE_CHANGE_TYPE_ADJUSTMENT\x10\x01\x12%\n" +
 	"!BALANCE_CHANGE_TYPE_WAREHOUSE_FEE\x10\x02\x12\x1f\n" +
 	"\x1bBALANCE_CHANGE_TYPE_COD_FEE\x10\x03\x12#\n" +
 	"\x1fBALANCE_CHANGE_TYPE_PRODUCT_FEE\x10\x04\x12\x1f\n" +
-	"\x1bBALANCE_CHANGE_TYPE_PAYMENT\x10\x05*b\n" +
+	"\x1bBALANCE_CHANGE_TYPE_PAYMENT\x10\x05\x12%\n" +
+	"!BALANCE_CHANGE_TYPE_STOCK_PROBLEM\x10\x06*b\n" +
 	"\vBalanceType\x12\x1c\n" +
 	"\x18BALANCE_TYPE_UNSPECIFIED\x10\x00\x12\x18\n" +
 	"\x14BALANCE_TYPE_PAYABLE\x10\x01\x12\x1b\n" +
