@@ -31,6 +31,7 @@ enum UserMetricType {
   USER_METRIC_TYPE_PROFIT_ORDER_WITHDRAWAL = 16;
   USER_METRIC_TYPE_LOST_PROFIT_ORDER = 17;
   USER_METRIC_TYPE_ADS_EXPENSE = 22;
+  USER_METRIC_TYPE_PROFIT_OR_LOSS = 23;
 }
 
 enum UserMetricSortType {
@@ -70,6 +71,7 @@ message UserMetricSort {
     selling_iface.v1.user_metric.v1.UserProfitOrderWithdrawalMetricSort user_profit_order_withdrawal_metric_sort = 17;
     selling_iface.v1.user_metric.v1.UserLostProfitOrderMetricSort user_lost_profit_order_metric_sort = 18;
     selling_iface.v1.user_metric.v1.UserAdsExpenseMetricSort user_ads_expense_metric_sort = 23;
+    selling_iface.v1.user_metric.v1.UserProfitOrLossMetricSort user_profit_or_loss_metric_sort = 24;
   }
 }
 
@@ -96,6 +98,7 @@ message UserMetric {
     selling_iface.v1.user_metric.v1.UserProfitOrderWithdrawalMetric user_profit_order_withdrawal_metric = 16;
     selling_iface.v1.user_metric.v1.UserLostProfitOrderMetric user_lost_profit_order_metric = 17;
     selling_iface.v1.user_metric.v1.UserAdsExpenseMetric user_ads_expense_metric = 22;
+    selling_iface.v1.user_metric.v1.UserProfitOrLossMetric user_profit_or_loss_metric = 23;
   }
 }
 

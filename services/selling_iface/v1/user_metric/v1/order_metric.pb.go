@@ -1119,19 +1119,19 @@ func (UserLostProfitOrderMetricSort) EnumDescriptor() ([]byte, []int) {
 type UserAdsExpenseMetricSort int32
 
 const (
-	UserAdsExpenseMetricSort_USER_ADS_EXPNESE_METRIC_SORT_UNSPECIFIED UserAdsExpenseMetricSort = 0
-	UserAdsExpenseMetricSort_USER_ADS_EXPNESE_METRIC_SORT_ADS_AMOUNT  UserAdsExpenseMetricSort = 1
+	UserAdsExpenseMetricSort_USER_ADS_EXPENSE_METRIC_SORT_UNSPECIFIED UserAdsExpenseMetricSort = 0
+	UserAdsExpenseMetricSort_USER_ADS_EXPENSE_METRIC_SORT_ADS_AMOUNT  UserAdsExpenseMetricSort = 1
 )
 
 // Enum value maps for UserAdsExpenseMetricSort.
 var (
 	UserAdsExpenseMetricSort_name = map[int32]string{
-		0: "USER_ADS_EXPNESE_METRIC_SORT_UNSPECIFIED",
-		1: "USER_ADS_EXPNESE_METRIC_SORT_ADS_AMOUNT",
+		0: "USER_ADS_EXPENSE_METRIC_SORT_UNSPECIFIED",
+		1: "USER_ADS_EXPENSE_METRIC_SORT_ADS_AMOUNT",
 	}
 	UserAdsExpenseMetricSort_value = map[string]int32{
-		"USER_ADS_EXPNESE_METRIC_SORT_UNSPECIFIED": 0,
-		"USER_ADS_EXPNESE_METRIC_SORT_ADS_AMOUNT":  1,
+		"USER_ADS_EXPENSE_METRIC_SORT_UNSPECIFIED": 0,
+		"USER_ADS_EXPENSE_METRIC_SORT_ADS_AMOUNT":  1,
 	}
 )
 
@@ -1160,6 +1160,52 @@ func (x UserAdsExpenseMetricSort) Number() protoreflect.EnumNumber {
 // Deprecated: Use UserAdsExpenseMetricSort.Descriptor instead.
 func (UserAdsExpenseMetricSort) EnumDescriptor() ([]byte, []int) {
 	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{20}
+}
+
+type UserProfitOrLossMetricSort int32
+
+const (
+	UserProfitOrLossMetricSort_USER_PROFIT_OR_LOSS_METRIC_SORT_UNSPECIFIED           UserProfitOrLossMetricSort = 0
+	UserProfitOrLossMetricSort_USER_PROFIT_OR_LOSS_METRIC_SORT_PROFIT_OR_LOSS_AMOUNT UserProfitOrLossMetricSort = 1
+)
+
+// Enum value maps for UserProfitOrLossMetricSort.
+var (
+	UserProfitOrLossMetricSort_name = map[int32]string{
+		0: "USER_PROFIT_OR_LOSS_METRIC_SORT_UNSPECIFIED",
+		1: "USER_PROFIT_OR_LOSS_METRIC_SORT_PROFIT_OR_LOSS_AMOUNT",
+	}
+	UserProfitOrLossMetricSort_value = map[string]int32{
+		"USER_PROFIT_OR_LOSS_METRIC_SORT_UNSPECIFIED":           0,
+		"USER_PROFIT_OR_LOSS_METRIC_SORT_PROFIT_OR_LOSS_AMOUNT": 1,
+	}
+)
+
+func (x UserProfitOrLossMetricSort) Enum() *UserProfitOrLossMetricSort {
+	p := new(UserProfitOrLossMetricSort)
+	*p = x
+	return p
+}
+
+func (x UserProfitOrLossMetricSort) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (UserProfitOrLossMetricSort) Descriptor() protoreflect.EnumDescriptor {
+	return file_selling_iface_v1_user_metric_v1_order_metric_proto_enumTypes[21].Descriptor()
+}
+
+func (UserProfitOrLossMetricSort) Type() protoreflect.EnumType {
+	return &file_selling_iface_v1_user_metric_v1_order_metric_proto_enumTypes[21]
+}
+
+func (x UserProfitOrLossMetricSort) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use UserProfitOrLossMetricSort.Descriptor instead.
+func (UserProfitOrLossMetricSort) EnumDescriptor() ([]byte, []int) {
+	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{21}
 }
 
 type UserOrderItem struct {
@@ -3646,6 +3692,102 @@ func (x *UserAdsExpenseMetric) GetData() map[uint64]*UserAdsExpenseItem {
 	return nil
 }
 
+type UserProfitOrLossItem struct {
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	UserId             uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	ProfitOrLossAmount float64                `protobuf:"fixed64,2,opt,name=profit_or_loss_amount,json=profitOrLossAmount,proto3" json:"profit_or_loss_amount,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *UserProfitOrLossItem) Reset() {
+	*x = UserProfitOrLossItem{}
+	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[42]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserProfitOrLossItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserProfitOrLossItem) ProtoMessage() {}
+
+func (x *UserProfitOrLossItem) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[42]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserProfitOrLossItem.ProtoReflect.Descriptor instead.
+func (*UserProfitOrLossItem) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{42}
+}
+
+func (x *UserProfitOrLossItem) GetUserId() uint64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *UserProfitOrLossItem) GetProfitOrLossAmount() float64 {
+	if x != nil {
+		return x.ProfitOrLossAmount
+	}
+	return 0
+}
+
+type UserProfitOrLossMetric struct {
+	state         protoimpl.MessageState           `protogen:"open.v1"`
+	Data          map[uint64]*UserProfitOrLossItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UserProfitOrLossMetric) Reset() {
+	*x = UserProfitOrLossMetric{}
+	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[43]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserProfitOrLossMetric) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserProfitOrLossMetric) ProtoMessage() {}
+
+func (x *UserProfitOrLossMetric) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[43]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserProfitOrLossMetric.ProtoReflect.Descriptor instead.
+func (*UserProfitOrLossMetric) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{43}
+}
+
+func (x *UserProfitOrLossMetric) GetData() map[uint64]*UserProfitOrLossItem {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
 var File_selling_iface_v1_user_metric_v1_order_metric_proto protoreflect.FileDescriptor
 
 const file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDesc = "" +
@@ -3881,7 +4023,15 @@ const file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDesc = "" +
 	"\x04data\x18\x01 \x03(\v2?.selling_iface.v1.user_metric.v1.UserAdsExpenseMetric.DataEntryR\x04data\x1al\n" +
 	"\tDataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\x04R\x03key\x12I\n" +
-	"\x05value\x18\x02 \x01(\v23.selling_iface.v1.user_metric.v1.UserAdsExpenseItemR\x05value:\x028\x01*\xef\x01\n" +
+	"\x05value\x18\x02 \x01(\v23.selling_iface.v1.user_metric.v1.UserAdsExpenseItemR\x05value:\x028\x01\"b\n" +
+	"\x14UserProfitOrLossItem\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x04R\x06userId\x121\n" +
+	"\x15profit_or_loss_amount\x18\x02 \x01(\x01R\x12profitOrLossAmount\"\xdf\x01\n" +
+	"\x16UserProfitOrLossMetric\x12U\n" +
+	"\x04data\x18\x01 \x03(\v2A.selling_iface.v1.user_metric.v1.UserProfitOrLossMetric.DataEntryR\x04data\x1an\n" +
+	"\tDataEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\x04R\x03key\x12K\n" +
+	"\x05value\x18\x02 \x01(\v25.selling_iface.v1.user_metric.v1.UserProfitOrLossItemR\x05value:\x028\x01*\xef\x01\n" +
 	"\x13UserOrderMetricSort\x12&\n" +
 	"\"USER_ORDER_METRIC_SORT_UNSPECIFIED\x10\x00\x12,\n" +
 	"(USER_ORDER_METRIC_SORT_TRANSACTION_COUNT\x10\x01\x12'\n" +
@@ -4001,8 +4151,11 @@ const file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDesc = "" +
 	".USER_LOST_PROFIT_ORDER_METRIC_SORT_UNSPECIFIED\x10\x00\x129\n" +
 	"5USER_LOST_PROFIT_ORDER_METRIC_SORT_LOST_PROFIT_AMOUNT\x10\x01*u\n" +
 	"\x18UserAdsExpenseMetricSort\x12,\n" +
-	"(USER_ADS_EXPNESE_METRIC_SORT_UNSPECIFIED\x10\x00\x12+\n" +
-	"'USER_ADS_EXPNESE_METRIC_SORT_ADS_AMOUNT\x10\x01B\x9c\x02\n" +
+	"(USER_ADS_EXPENSE_METRIC_SORT_UNSPECIFIED\x10\x00\x12+\n" +
+	"'USER_ADS_EXPENSE_METRIC_SORT_ADS_AMOUNT\x10\x01*\x88\x01\n" +
+	"\x1aUserProfitOrLossMetricSort\x12/\n" +
+	"+USER_PROFIT_OR_LOSS_METRIC_SORT_UNSPECIFIED\x10\x00\x129\n" +
+	"5USER_PROFIT_OR_LOSS_METRIC_SORT_PROFIT_OR_LOSS_AMOUNT\x10\x01B\x9c\x02\n" +
 	"#com.selling_iface.v1.user_metric.v1B\x10OrderMetricProtoP\x01ZLgithub.com/pdcgo/schema/services/selling_iface/v1/user_metric/v1;user_metric\xa2\x02\x03SVU\xaa\x02\x1dSellingIface.V1.UserMetric.V1\xca\x02\x1dSellingIface\\V1\\UserMetric\\V1\xe2\x02)SellingIface\\V1\\UserMetric\\V1\\GPBMetadata\xea\x02 SellingIface::V1::UserMetric::V1b\x06proto3"
 
 var (
@@ -4017,8 +4170,8 @@ func file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP() []byt
 	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescData
 }
 
-var file_selling_iface_v1_user_metric_v1_order_metric_proto_enumTypes = make([]protoimpl.EnumInfo, 21)
-var file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes = make([]protoimpl.MessageInfo, 63)
+var file_selling_iface_v1_user_metric_v1_order_metric_proto_enumTypes = make([]protoimpl.EnumInfo, 22)
+var file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes = make([]protoimpl.MessageInfo, 66)
 var file_selling_iface_v1_user_metric_v1_order_metric_proto_goTypes = []any{
 	(UserOrderMetricSort)(0),                 // 0: selling_iface.v1.user_metric.v1.UserOrderMetricSort
 	(UserOrderWithdrawalMetricSort)(0),       // 1: selling_iface.v1.user_metric.v1.UserOrderWithdrawalMetricSort
@@ -4041,123 +4194,129 @@ var file_selling_iface_v1_user_metric_v1_order_metric_proto_goTypes = []any{
 	(UserProfitOrderWithdrawalMetricSort)(0), // 18: selling_iface.v1.user_metric.v1.UserProfitOrderWithdrawalMetricSort
 	(UserLostProfitOrderMetricSort)(0),       // 19: selling_iface.v1.user_metric.v1.UserLostProfitOrderMetricSort
 	(UserAdsExpenseMetricSort)(0),            // 20: selling_iface.v1.user_metric.v1.UserAdsExpenseMetricSort
-	(*UserOrderItem)(nil),                    // 21: selling_iface.v1.user_metric.v1.UserOrderItem
-	(*UserOrderMetric)(nil),                  // 22: selling_iface.v1.user_metric.v1.UserOrderMetric
-	(*UserOrderWithdrawalItem)(nil),          // 23: selling_iface.v1.user_metric.v1.UserOrderWithdrawalItem
-	(*UserOrderWithdrawalMetric)(nil),        // 24: selling_iface.v1.user_metric.v1.UserOrderWithdrawalMetric
-	(*UserOrderCancelledItem)(nil),           // 25: selling_iface.v1.user_metric.v1.UserOrderCancelledItem
-	(*UserOrderCancelledMetric)(nil),         // 26: selling_iface.v1.user_metric.v1.UserOrderCancelledMetric
-	(*UserOrderLostItem)(nil),                // 27: selling_iface.v1.user_metric.v1.UserOrderLostItem
-	(*UserOrderLostMetric)(nil),              // 28: selling_iface.v1.user_metric.v1.UserOrderLostMetric
-	(*UserStockOrderItem)(nil),               // 29: selling_iface.v1.user_metric.v1.UserStockOrderItem
-	(*UserStockOrderMetric)(nil),             // 30: selling_iface.v1.user_metric.v1.UserStockOrderMetric
-	(*UserStockOrderWithdrawalItem)(nil),     // 31: selling_iface.v1.user_metric.v1.UserStockOrderWithdrawalItem
-	(*UserStockOrderWithdrawalMetric)(nil),   // 32: selling_iface.v1.user_metric.v1.UserStockOrderWithdrawalMetric
-	(*UserStockOrderCancelledItem)(nil),      // 33: selling_iface.v1.user_metric.v1.UserStockOrderCancelledItem
-	(*UserStockOrderCancelledMetric)(nil),    // 34: selling_iface.v1.user_metric.v1.UserStockOrderCancelledMetric
-	(*UserStockOrderLostItem)(nil),           // 35: selling_iface.v1.user_metric.v1.UserStockOrderLostItem
-	(*UserStockOrderLostMetric)(nil),         // 36: selling_iface.v1.user_metric.v1.UserStockOrderLostMetric
-	(*UserAvgOrderItem)(nil),                 // 37: selling_iface.v1.user_metric.v1.UserAvgOrderItem
-	(*UserAvgOrderMetric)(nil),               // 38: selling_iface.v1.user_metric.v1.UserAvgOrderMetric
-	(*UserAvgOrderWithdrawalItem)(nil),       // 39: selling_iface.v1.user_metric.v1.UserAvgOrderWithdrawalItem
-	(*UserAvgOrderWithdrawalMetric)(nil),     // 40: selling_iface.v1.user_metric.v1.UserAvgOrderWithdrawalMetric
-	(*UserAvgOrderCancelledItem)(nil),        // 41: selling_iface.v1.user_metric.v1.UserAvgOrderCancelledItem
-	(*UserAvgOrderCancelledMetric)(nil),      // 42: selling_iface.v1.user_metric.v1.UserAvgOrderCancelledMetric
-	(*UserAvgOrderLostItem)(nil),             // 43: selling_iface.v1.user_metric.v1.UserAvgOrderLostItem
-	(*UserAvgOrderLostMetric)(nil),           // 44: selling_iface.v1.user_metric.v1.UserAvgOrderLostMetric
-	(*UserCostOrderItem)(nil),                // 45: selling_iface.v1.user_metric.v1.UserCostOrderItem
-	(*UserCostOrderMetric)(nil),              // 46: selling_iface.v1.user_metric.v1.UserCostOrderMetric
-	(*UserCostOrderWithdrawalItem)(nil),      // 47: selling_iface.v1.user_metric.v1.UserCostOrderWithdrawalItem
-	(*UserCostOrderWithdrawalMetric)(nil),    // 48: selling_iface.v1.user_metric.v1.UserCostOrderWithdrawalMetric
-	(*UserCostOrderCancelledItem)(nil),       // 49: selling_iface.v1.user_metric.v1.UserCostOrderCancelledItem
-	(*UserCostOrderCancelledMetric)(nil),     // 50: selling_iface.v1.user_metric.v1.UserCostOrderCancelledMetric
-	(*UserCostOrderLostItem)(nil),            // 51: selling_iface.v1.user_metric.v1.UserCostOrderLostItem
-	(*UserCostOrderLostMetric)(nil),          // 52: selling_iface.v1.user_metric.v1.UserCostOrderLostMetric
-	(*UserWithdrawalItem)(nil),               // 53: selling_iface.v1.user_metric.v1.UserWithdrawalItem
-	(*UserWithdrawalMetric)(nil),             // 54: selling_iface.v1.user_metric.v1.UserWithdrawalMetric
-	(*UserProfitOrderCreatedItem)(nil),       // 55: selling_iface.v1.user_metric.v1.UserProfitOrderCreatedItem
-	(*UserProfitOrderCreatedMetric)(nil),     // 56: selling_iface.v1.user_metric.v1.UserProfitOrderCreatedMetric
-	(*UserProfitOrderWithdrawalItem)(nil),    // 57: selling_iface.v1.user_metric.v1.UserProfitOrderWithdrawalItem
-	(*UserProfitOrderWithdrawalMetric)(nil),  // 58: selling_iface.v1.user_metric.v1.UserProfitOrderWithdrawalMetric
-	(*UserLostProfitOrderItem)(nil),          // 59: selling_iface.v1.user_metric.v1.UserLostProfitOrderItem
-	(*UserLostProfitOrderMetric)(nil),        // 60: selling_iface.v1.user_metric.v1.UserLostProfitOrderMetric
-	(*UserAdsExpenseItem)(nil),               // 61: selling_iface.v1.user_metric.v1.UserAdsExpenseItem
-	(*UserAdsExpenseMetric)(nil),             // 62: selling_iface.v1.user_metric.v1.UserAdsExpenseMetric
-	nil,                                      // 63: selling_iface.v1.user_metric.v1.UserOrderMetric.DataEntry
-	nil,                                      // 64: selling_iface.v1.user_metric.v1.UserOrderWithdrawalMetric.DataEntry
-	nil,                                      // 65: selling_iface.v1.user_metric.v1.UserOrderCancelledMetric.DataEntry
-	nil,                                      // 66: selling_iface.v1.user_metric.v1.UserOrderLostMetric.DataEntry
-	nil,                                      // 67: selling_iface.v1.user_metric.v1.UserStockOrderMetric.DataEntry
-	nil,                                      // 68: selling_iface.v1.user_metric.v1.UserStockOrderWithdrawalMetric.DataEntry
-	nil,                                      // 69: selling_iface.v1.user_metric.v1.UserStockOrderCancelledMetric.DataEntry
-	nil,                                      // 70: selling_iface.v1.user_metric.v1.UserStockOrderLostMetric.DataEntry
-	nil,                                      // 71: selling_iface.v1.user_metric.v1.UserAvgOrderMetric.DataEntry
-	nil,                                      // 72: selling_iface.v1.user_metric.v1.UserAvgOrderWithdrawalMetric.DataEntry
-	nil,                                      // 73: selling_iface.v1.user_metric.v1.UserAvgOrderCancelledMetric.DataEntry
-	nil,                                      // 74: selling_iface.v1.user_metric.v1.UserAvgOrderLostMetric.DataEntry
-	nil,                                      // 75: selling_iface.v1.user_metric.v1.UserCostOrderMetric.DataEntry
-	nil,                                      // 76: selling_iface.v1.user_metric.v1.UserCostOrderWithdrawalMetric.DataEntry
-	nil,                                      // 77: selling_iface.v1.user_metric.v1.UserCostOrderCancelledMetric.DataEntry
-	nil,                                      // 78: selling_iface.v1.user_metric.v1.UserCostOrderLostMetric.DataEntry
-	nil,                                      // 79: selling_iface.v1.user_metric.v1.UserWithdrawalMetric.DataEntry
-	nil,                                      // 80: selling_iface.v1.user_metric.v1.UserProfitOrderCreatedMetric.DataEntry
-	nil,                                      // 81: selling_iface.v1.user_metric.v1.UserProfitOrderWithdrawalMetric.DataEntry
-	nil,                                      // 82: selling_iface.v1.user_metric.v1.UserLostProfitOrderMetric.DataEntry
-	nil,                                      // 83: selling_iface.v1.user_metric.v1.UserAdsExpenseMetric.DataEntry
-	(*timestamppb.Timestamp)(nil),            // 84: google.protobuf.Timestamp
+	(UserProfitOrLossMetricSort)(0),          // 21: selling_iface.v1.user_metric.v1.UserProfitOrLossMetricSort
+	(*UserOrderItem)(nil),                    // 22: selling_iface.v1.user_metric.v1.UserOrderItem
+	(*UserOrderMetric)(nil),                  // 23: selling_iface.v1.user_metric.v1.UserOrderMetric
+	(*UserOrderWithdrawalItem)(nil),          // 24: selling_iface.v1.user_metric.v1.UserOrderWithdrawalItem
+	(*UserOrderWithdrawalMetric)(nil),        // 25: selling_iface.v1.user_metric.v1.UserOrderWithdrawalMetric
+	(*UserOrderCancelledItem)(nil),           // 26: selling_iface.v1.user_metric.v1.UserOrderCancelledItem
+	(*UserOrderCancelledMetric)(nil),         // 27: selling_iface.v1.user_metric.v1.UserOrderCancelledMetric
+	(*UserOrderLostItem)(nil),                // 28: selling_iface.v1.user_metric.v1.UserOrderLostItem
+	(*UserOrderLostMetric)(nil),              // 29: selling_iface.v1.user_metric.v1.UserOrderLostMetric
+	(*UserStockOrderItem)(nil),               // 30: selling_iface.v1.user_metric.v1.UserStockOrderItem
+	(*UserStockOrderMetric)(nil),             // 31: selling_iface.v1.user_metric.v1.UserStockOrderMetric
+	(*UserStockOrderWithdrawalItem)(nil),     // 32: selling_iface.v1.user_metric.v1.UserStockOrderWithdrawalItem
+	(*UserStockOrderWithdrawalMetric)(nil),   // 33: selling_iface.v1.user_metric.v1.UserStockOrderWithdrawalMetric
+	(*UserStockOrderCancelledItem)(nil),      // 34: selling_iface.v1.user_metric.v1.UserStockOrderCancelledItem
+	(*UserStockOrderCancelledMetric)(nil),    // 35: selling_iface.v1.user_metric.v1.UserStockOrderCancelledMetric
+	(*UserStockOrderLostItem)(nil),           // 36: selling_iface.v1.user_metric.v1.UserStockOrderLostItem
+	(*UserStockOrderLostMetric)(nil),         // 37: selling_iface.v1.user_metric.v1.UserStockOrderLostMetric
+	(*UserAvgOrderItem)(nil),                 // 38: selling_iface.v1.user_metric.v1.UserAvgOrderItem
+	(*UserAvgOrderMetric)(nil),               // 39: selling_iface.v1.user_metric.v1.UserAvgOrderMetric
+	(*UserAvgOrderWithdrawalItem)(nil),       // 40: selling_iface.v1.user_metric.v1.UserAvgOrderWithdrawalItem
+	(*UserAvgOrderWithdrawalMetric)(nil),     // 41: selling_iface.v1.user_metric.v1.UserAvgOrderWithdrawalMetric
+	(*UserAvgOrderCancelledItem)(nil),        // 42: selling_iface.v1.user_metric.v1.UserAvgOrderCancelledItem
+	(*UserAvgOrderCancelledMetric)(nil),      // 43: selling_iface.v1.user_metric.v1.UserAvgOrderCancelledMetric
+	(*UserAvgOrderLostItem)(nil),             // 44: selling_iface.v1.user_metric.v1.UserAvgOrderLostItem
+	(*UserAvgOrderLostMetric)(nil),           // 45: selling_iface.v1.user_metric.v1.UserAvgOrderLostMetric
+	(*UserCostOrderItem)(nil),                // 46: selling_iface.v1.user_metric.v1.UserCostOrderItem
+	(*UserCostOrderMetric)(nil),              // 47: selling_iface.v1.user_metric.v1.UserCostOrderMetric
+	(*UserCostOrderWithdrawalItem)(nil),      // 48: selling_iface.v1.user_metric.v1.UserCostOrderWithdrawalItem
+	(*UserCostOrderWithdrawalMetric)(nil),    // 49: selling_iface.v1.user_metric.v1.UserCostOrderWithdrawalMetric
+	(*UserCostOrderCancelledItem)(nil),       // 50: selling_iface.v1.user_metric.v1.UserCostOrderCancelledItem
+	(*UserCostOrderCancelledMetric)(nil),     // 51: selling_iface.v1.user_metric.v1.UserCostOrderCancelledMetric
+	(*UserCostOrderLostItem)(nil),            // 52: selling_iface.v1.user_metric.v1.UserCostOrderLostItem
+	(*UserCostOrderLostMetric)(nil),          // 53: selling_iface.v1.user_metric.v1.UserCostOrderLostMetric
+	(*UserWithdrawalItem)(nil),               // 54: selling_iface.v1.user_metric.v1.UserWithdrawalItem
+	(*UserWithdrawalMetric)(nil),             // 55: selling_iface.v1.user_metric.v1.UserWithdrawalMetric
+	(*UserProfitOrderCreatedItem)(nil),       // 56: selling_iface.v1.user_metric.v1.UserProfitOrderCreatedItem
+	(*UserProfitOrderCreatedMetric)(nil),     // 57: selling_iface.v1.user_metric.v1.UserProfitOrderCreatedMetric
+	(*UserProfitOrderWithdrawalItem)(nil),    // 58: selling_iface.v1.user_metric.v1.UserProfitOrderWithdrawalItem
+	(*UserProfitOrderWithdrawalMetric)(nil),  // 59: selling_iface.v1.user_metric.v1.UserProfitOrderWithdrawalMetric
+	(*UserLostProfitOrderItem)(nil),          // 60: selling_iface.v1.user_metric.v1.UserLostProfitOrderItem
+	(*UserLostProfitOrderMetric)(nil),        // 61: selling_iface.v1.user_metric.v1.UserLostProfitOrderMetric
+	(*UserAdsExpenseItem)(nil),               // 62: selling_iface.v1.user_metric.v1.UserAdsExpenseItem
+	(*UserAdsExpenseMetric)(nil),             // 63: selling_iface.v1.user_metric.v1.UserAdsExpenseMetric
+	(*UserProfitOrLossItem)(nil),             // 64: selling_iface.v1.user_metric.v1.UserProfitOrLossItem
+	(*UserProfitOrLossMetric)(nil),           // 65: selling_iface.v1.user_metric.v1.UserProfitOrLossMetric
+	nil,                                      // 66: selling_iface.v1.user_metric.v1.UserOrderMetric.DataEntry
+	nil,                                      // 67: selling_iface.v1.user_metric.v1.UserOrderWithdrawalMetric.DataEntry
+	nil,                                      // 68: selling_iface.v1.user_metric.v1.UserOrderCancelledMetric.DataEntry
+	nil,                                      // 69: selling_iface.v1.user_metric.v1.UserOrderLostMetric.DataEntry
+	nil,                                      // 70: selling_iface.v1.user_metric.v1.UserStockOrderMetric.DataEntry
+	nil,                                      // 71: selling_iface.v1.user_metric.v1.UserStockOrderWithdrawalMetric.DataEntry
+	nil,                                      // 72: selling_iface.v1.user_metric.v1.UserStockOrderCancelledMetric.DataEntry
+	nil,                                      // 73: selling_iface.v1.user_metric.v1.UserStockOrderLostMetric.DataEntry
+	nil,                                      // 74: selling_iface.v1.user_metric.v1.UserAvgOrderMetric.DataEntry
+	nil,                                      // 75: selling_iface.v1.user_metric.v1.UserAvgOrderWithdrawalMetric.DataEntry
+	nil,                                      // 76: selling_iface.v1.user_metric.v1.UserAvgOrderCancelledMetric.DataEntry
+	nil,                                      // 77: selling_iface.v1.user_metric.v1.UserAvgOrderLostMetric.DataEntry
+	nil,                                      // 78: selling_iface.v1.user_metric.v1.UserCostOrderMetric.DataEntry
+	nil,                                      // 79: selling_iface.v1.user_metric.v1.UserCostOrderWithdrawalMetric.DataEntry
+	nil,                                      // 80: selling_iface.v1.user_metric.v1.UserCostOrderCancelledMetric.DataEntry
+	nil,                                      // 81: selling_iface.v1.user_metric.v1.UserCostOrderLostMetric.DataEntry
+	nil,                                      // 82: selling_iface.v1.user_metric.v1.UserWithdrawalMetric.DataEntry
+	nil,                                      // 83: selling_iface.v1.user_metric.v1.UserProfitOrderCreatedMetric.DataEntry
+	nil,                                      // 84: selling_iface.v1.user_metric.v1.UserProfitOrderWithdrawalMetric.DataEntry
+	nil,                                      // 85: selling_iface.v1.user_metric.v1.UserLostProfitOrderMetric.DataEntry
+	nil,                                      // 86: selling_iface.v1.user_metric.v1.UserAdsExpenseMetric.DataEntry
+	nil,                                      // 87: selling_iface.v1.user_metric.v1.UserProfitOrLossMetric.DataEntry
+	(*timestamppb.Timestamp)(nil),            // 88: google.protobuf.Timestamp
 }
 var file_selling_iface_v1_user_metric_v1_order_metric_proto_depIdxs = []int32{
-	84, // 0: selling_iface.v1.user_metric.v1.UserOrderItem.last_order_created:type_name -> google.protobuf.Timestamp
-	63, // 1: selling_iface.v1.user_metric.v1.UserOrderMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserOrderMetric.DataEntry
-	84, // 2: selling_iface.v1.user_metric.v1.UserOrderWithdrawalItem.last_order_withdrawal:type_name -> google.protobuf.Timestamp
-	64, // 3: selling_iface.v1.user_metric.v1.UserOrderWithdrawalMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserOrderWithdrawalMetric.DataEntry
-	84, // 4: selling_iface.v1.user_metric.v1.UserOrderCancelledItem.last_order_cancelled:type_name -> google.protobuf.Timestamp
-	65, // 5: selling_iface.v1.user_metric.v1.UserOrderCancelledMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserOrderCancelledMetric.DataEntry
-	84, // 6: selling_iface.v1.user_metric.v1.UserOrderLostItem.last_order_lost:type_name -> google.protobuf.Timestamp
-	66, // 7: selling_iface.v1.user_metric.v1.UserOrderLostMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserOrderLostMetric.DataEntry
-	67, // 8: selling_iface.v1.user_metric.v1.UserStockOrderMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderMetric.DataEntry
-	68, // 9: selling_iface.v1.user_metric.v1.UserStockOrderWithdrawalMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderWithdrawalMetric.DataEntry
-	69, // 10: selling_iface.v1.user_metric.v1.UserStockOrderCancelledMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderCancelledMetric.DataEntry
-	70, // 11: selling_iface.v1.user_metric.v1.UserStockOrderLostMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderLostMetric.DataEntry
-	71, // 12: selling_iface.v1.user_metric.v1.UserAvgOrderMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderMetric.DataEntry
-	72, // 13: selling_iface.v1.user_metric.v1.UserAvgOrderWithdrawalMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderWithdrawalMetric.DataEntry
-	73, // 14: selling_iface.v1.user_metric.v1.UserAvgOrderCancelledMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderCancelledMetric.DataEntry
-	74, // 15: selling_iface.v1.user_metric.v1.UserAvgOrderLostMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderLostMetric.DataEntry
-	75, // 16: selling_iface.v1.user_metric.v1.UserCostOrderMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderMetric.DataEntry
-	76, // 17: selling_iface.v1.user_metric.v1.UserCostOrderWithdrawalMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderWithdrawalMetric.DataEntry
-	77, // 18: selling_iface.v1.user_metric.v1.UserCostOrderCancelledMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderCancelledMetric.DataEntry
-	78, // 19: selling_iface.v1.user_metric.v1.UserCostOrderLostMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderLostMetric.DataEntry
-	79, // 20: selling_iface.v1.user_metric.v1.UserWithdrawalMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserWithdrawalMetric.DataEntry
-	80, // 21: selling_iface.v1.user_metric.v1.UserProfitOrderCreatedMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserProfitOrderCreatedMetric.DataEntry
-	81, // 22: selling_iface.v1.user_metric.v1.UserProfitOrderWithdrawalMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserProfitOrderWithdrawalMetric.DataEntry
-	82, // 23: selling_iface.v1.user_metric.v1.UserLostProfitOrderMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserLostProfitOrderMetric.DataEntry
-	83, // 24: selling_iface.v1.user_metric.v1.UserAdsExpenseMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserAdsExpenseMetric.DataEntry
-	21, // 25: selling_iface.v1.user_metric.v1.UserOrderMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserOrderItem
-	23, // 26: selling_iface.v1.user_metric.v1.UserOrderWithdrawalMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserOrderWithdrawalItem
-	25, // 27: selling_iface.v1.user_metric.v1.UserOrderCancelledMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserOrderCancelledItem
-	27, // 28: selling_iface.v1.user_metric.v1.UserOrderLostMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserOrderLostItem
-	29, // 29: selling_iface.v1.user_metric.v1.UserStockOrderMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderItem
-	31, // 30: selling_iface.v1.user_metric.v1.UserStockOrderWithdrawalMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderWithdrawalItem
-	33, // 31: selling_iface.v1.user_metric.v1.UserStockOrderCancelledMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderCancelledItem
-	35, // 32: selling_iface.v1.user_metric.v1.UserStockOrderLostMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderLostItem
-	37, // 33: selling_iface.v1.user_metric.v1.UserAvgOrderMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderItem
-	39, // 34: selling_iface.v1.user_metric.v1.UserAvgOrderWithdrawalMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderWithdrawalItem
-	41, // 35: selling_iface.v1.user_metric.v1.UserAvgOrderCancelledMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderCancelledItem
-	43, // 36: selling_iface.v1.user_metric.v1.UserAvgOrderLostMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderLostItem
-	45, // 37: selling_iface.v1.user_metric.v1.UserCostOrderMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderItem
-	47, // 38: selling_iface.v1.user_metric.v1.UserCostOrderWithdrawalMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderWithdrawalItem
-	49, // 39: selling_iface.v1.user_metric.v1.UserCostOrderCancelledMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderCancelledItem
-	51, // 40: selling_iface.v1.user_metric.v1.UserCostOrderLostMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderLostItem
-	53, // 41: selling_iface.v1.user_metric.v1.UserWithdrawalMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserWithdrawalItem
-	55, // 42: selling_iface.v1.user_metric.v1.UserProfitOrderCreatedMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserProfitOrderCreatedItem
-	57, // 43: selling_iface.v1.user_metric.v1.UserProfitOrderWithdrawalMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserProfitOrderWithdrawalItem
-	59, // 44: selling_iface.v1.user_metric.v1.UserLostProfitOrderMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserLostProfitOrderItem
-	61, // 45: selling_iface.v1.user_metric.v1.UserAdsExpenseMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserAdsExpenseItem
-	46, // [46:46] is the sub-list for method output_type
-	46, // [46:46] is the sub-list for method input_type
-	46, // [46:46] is the sub-list for extension type_name
-	46, // [46:46] is the sub-list for extension extendee
-	0,  // [0:46] is the sub-list for field type_name
+	88, // 0: selling_iface.v1.user_metric.v1.UserOrderItem.last_order_created:type_name -> google.protobuf.Timestamp
+	66, // 1: selling_iface.v1.user_metric.v1.UserOrderMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserOrderMetric.DataEntry
+	88, // 2: selling_iface.v1.user_metric.v1.UserOrderWithdrawalItem.last_order_withdrawal:type_name -> google.protobuf.Timestamp
+	67, // 3: selling_iface.v1.user_metric.v1.UserOrderWithdrawalMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserOrderWithdrawalMetric.DataEntry
+	88, // 4: selling_iface.v1.user_metric.v1.UserOrderCancelledItem.last_order_cancelled:type_name -> google.protobuf.Timestamp
+	68, // 5: selling_iface.v1.user_metric.v1.UserOrderCancelledMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserOrderCancelledMetric.DataEntry
+	88, // 6: selling_iface.v1.user_metric.v1.UserOrderLostItem.last_order_lost:type_name -> google.protobuf.Timestamp
+	69, // 7: selling_iface.v1.user_metric.v1.UserOrderLostMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserOrderLostMetric.DataEntry
+	70, // 8: selling_iface.v1.user_metric.v1.UserStockOrderMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderMetric.DataEntry
+	71, // 9: selling_iface.v1.user_metric.v1.UserStockOrderWithdrawalMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderWithdrawalMetric.DataEntry
+	72, // 10: selling_iface.v1.user_metric.v1.UserStockOrderCancelledMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderCancelledMetric.DataEntry
+	73, // 11: selling_iface.v1.user_metric.v1.UserStockOrderLostMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderLostMetric.DataEntry
+	74, // 12: selling_iface.v1.user_metric.v1.UserAvgOrderMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderMetric.DataEntry
+	75, // 13: selling_iface.v1.user_metric.v1.UserAvgOrderWithdrawalMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderWithdrawalMetric.DataEntry
+	76, // 14: selling_iface.v1.user_metric.v1.UserAvgOrderCancelledMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderCancelledMetric.DataEntry
+	77, // 15: selling_iface.v1.user_metric.v1.UserAvgOrderLostMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderLostMetric.DataEntry
+	78, // 16: selling_iface.v1.user_metric.v1.UserCostOrderMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderMetric.DataEntry
+	79, // 17: selling_iface.v1.user_metric.v1.UserCostOrderWithdrawalMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderWithdrawalMetric.DataEntry
+	80, // 18: selling_iface.v1.user_metric.v1.UserCostOrderCancelledMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderCancelledMetric.DataEntry
+	81, // 19: selling_iface.v1.user_metric.v1.UserCostOrderLostMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderLostMetric.DataEntry
+	82, // 20: selling_iface.v1.user_metric.v1.UserWithdrawalMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserWithdrawalMetric.DataEntry
+	83, // 21: selling_iface.v1.user_metric.v1.UserProfitOrderCreatedMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserProfitOrderCreatedMetric.DataEntry
+	84, // 22: selling_iface.v1.user_metric.v1.UserProfitOrderWithdrawalMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserProfitOrderWithdrawalMetric.DataEntry
+	85, // 23: selling_iface.v1.user_metric.v1.UserLostProfitOrderMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserLostProfitOrderMetric.DataEntry
+	86, // 24: selling_iface.v1.user_metric.v1.UserAdsExpenseMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserAdsExpenseMetric.DataEntry
+	87, // 25: selling_iface.v1.user_metric.v1.UserProfitOrLossMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserProfitOrLossMetric.DataEntry
+	22, // 26: selling_iface.v1.user_metric.v1.UserOrderMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserOrderItem
+	24, // 27: selling_iface.v1.user_metric.v1.UserOrderWithdrawalMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserOrderWithdrawalItem
+	26, // 28: selling_iface.v1.user_metric.v1.UserOrderCancelledMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserOrderCancelledItem
+	28, // 29: selling_iface.v1.user_metric.v1.UserOrderLostMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserOrderLostItem
+	30, // 30: selling_iface.v1.user_metric.v1.UserStockOrderMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderItem
+	32, // 31: selling_iface.v1.user_metric.v1.UserStockOrderWithdrawalMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderWithdrawalItem
+	34, // 32: selling_iface.v1.user_metric.v1.UserStockOrderCancelledMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderCancelledItem
+	36, // 33: selling_iface.v1.user_metric.v1.UserStockOrderLostMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderLostItem
+	38, // 34: selling_iface.v1.user_metric.v1.UserAvgOrderMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderItem
+	40, // 35: selling_iface.v1.user_metric.v1.UserAvgOrderWithdrawalMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderWithdrawalItem
+	42, // 36: selling_iface.v1.user_metric.v1.UserAvgOrderCancelledMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderCancelledItem
+	44, // 37: selling_iface.v1.user_metric.v1.UserAvgOrderLostMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderLostItem
+	46, // 38: selling_iface.v1.user_metric.v1.UserCostOrderMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderItem
+	48, // 39: selling_iface.v1.user_metric.v1.UserCostOrderWithdrawalMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderWithdrawalItem
+	50, // 40: selling_iface.v1.user_metric.v1.UserCostOrderCancelledMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderCancelledItem
+	52, // 41: selling_iface.v1.user_metric.v1.UserCostOrderLostMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderLostItem
+	54, // 42: selling_iface.v1.user_metric.v1.UserWithdrawalMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserWithdrawalItem
+	56, // 43: selling_iface.v1.user_metric.v1.UserProfitOrderCreatedMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserProfitOrderCreatedItem
+	58, // 44: selling_iface.v1.user_metric.v1.UserProfitOrderWithdrawalMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserProfitOrderWithdrawalItem
+	60, // 45: selling_iface.v1.user_metric.v1.UserLostProfitOrderMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserLostProfitOrderItem
+	62, // 46: selling_iface.v1.user_metric.v1.UserAdsExpenseMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserAdsExpenseItem
+	64, // 47: selling_iface.v1.user_metric.v1.UserProfitOrLossMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserProfitOrLossItem
+	48, // [48:48] is the sub-list for method output_type
+	48, // [48:48] is the sub-list for method input_type
+	48, // [48:48] is the sub-list for extension type_name
+	48, // [48:48] is the sub-list for extension extendee
+	0,  // [0:48] is the sub-list for field type_name
 }
 
 func init() { file_selling_iface_v1_user_metric_v1_order_metric_proto_init() }
@@ -4170,8 +4329,8 @@ func file_selling_iface_v1_user_metric_v1_order_metric_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDesc), len(file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDesc)),
-			NumEnums:      21,
-			NumMessages:   63,
+			NumEnums:      22,
+			NumMessages:   66,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

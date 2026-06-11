@@ -415,6 +415,20 @@ message UserAdsExpenseMetric {
 }
 
 enum UserAdsExpenseMetricSort {
-  USER_ADS_EXPNESE_METRIC_SORT_UNSPECIFIED = 0;
-  USER_ADS_EXPNESE_METRIC_SORT_ADS_AMOUNT = 1;
+  USER_ADS_EXPENSE_METRIC_SORT_UNSPECIFIED = 0;
+  USER_ADS_EXPENSE_METRIC_SORT_ADS_AMOUNT = 1;
+}
+
+message UserProfitOrLossItem {
+  uint64 user_id = 1;
+  double profit_or_loss_amount = 2;
+}
+
+message UserProfitOrLossMetric {
+  map<uint64, UserProfitOrLossItem> data = 1;
+}
+
+enum UserProfitOrLossMetricSort {
+  USER_PROFIT_OR_LOSS_METRIC_SORT_UNSPECIFIED = 0;
+  USER_PROFIT_OR_LOSS_METRIC_SORT_PROFIT_OR_LOSS_AMOUNT = 1;
 }
