@@ -1,4 +1,44 @@
 syntax = "proto3";
 package inventory_iface.v1;
 
+import "google/protobuf/timestamp.proto";
+
 option go_package = "github.com/pdcgo/schema/services/inventory_iface/v1;inventory_iface";
+
+enum StockChangeType {
+  STOCK_CHANGE_TYPE_UNSPECIFIED = 0;
+  STOCK_CHANGE_TYPE_ORDER_CREATED = 1;
+  STOCK_CHANGE_TYPE_ORDER_CANCELED = 2;
+  STOCK_CHANGE_TYPE_RESTOCK_IN = 3;
+  STOCK_CHANGE_TYPE_RETURN_IN = 4;
+  STOCK_CHANGE_TYPE_PROBLEM = 5;
+  STOCK_CHANGE_TYPE_FOUND_BACK = 6;
+  STOCK_CHANGE_TYPE_ADJUSTMENT = 7;
+  STOCK_CHANGE_TYPE_TRANSFER_IN = 8;
+  STOCK_CHANGE_TYPE_TRANSFER_OUT = 9;
+}
+
+message OrderCreated {
+  uint64 order_id = 1;
+}
+
+message OrderCanceled {
+  uint64 order_id = 1;
+}
+
+message ChangeItem {
+  uint64 product_id = 1;
+  double amount = 2;
+}
+
+message StockChange {
+  google.protobuf.Timestamp at = 1;
+  uint64 warehouse_id = 2;
+  uint64 user_id = 3;
+
+  repeated ChangeItem changes = 4;
+  oneof change {
+    OrderCreated order_created = 5;
+    OrderCanceled order_canceled = 6;
+  }
+}
