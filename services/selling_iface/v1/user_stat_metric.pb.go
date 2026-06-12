@@ -28,29 +28,52 @@ const (
 type UserMetricType int32
 
 const (
-	UserMetricType_USER_METRIC_TYPE_UNSPECIFIED             UserMetricType = 0
-	UserMetricType_USER_METRIC_TYPE_ORDER                   UserMetricType = 1
-	UserMetricType_USER_METRIC_TYPE_ORDER_WITHDRAWAL        UserMetricType = 4
-	UserMetricType_USER_METRIC_TYPE_ORDER_CANCELLED         UserMetricType = 5
-	UserMetricType_USER_METRIC_TYPE_ORDER_LOST              UserMetricType = 21
-	UserMetricType_USER_METRIC_TYPE_STOCK_ORDER             UserMetricType = 2
-	UserMetricType_USER_METRIC_TYPE_STOCK_ORDER_WITHDRAWAL  UserMetricType = 6
-	UserMetricType_USER_METRIC_TYPE_STOCK_ORDER_CANCELLED   UserMetricType = 7
-	UserMetricType_USER_METRIC_TYPE_STOCK_ORDER_LOST        UserMetricType = 18
-	UserMetricType_USER_METRIC_TYPE_AVG_ORDER               UserMetricType = 3
-	UserMetricType_USER_METRIC_TYPE_AVG_ORDER_WITHDRAWAL    UserMetricType = 8
-	UserMetricType_USER_METRIC_TYPE_AVG_ORDER_CANCELLED     UserMetricType = 9
-	UserMetricType_USER_METRIC_TYPE_AVG_ORDER_LOST          UserMetricType = 19
-	UserMetricType_USER_METRIC_TYPE_COST_ORDER              UserMetricType = 10
-	UserMetricType_USER_METRIC_TYPE_COST_ORDER_WITHDRAWAL   UserMetricType = 11
-	UserMetricType_USER_METRIC_TYPE_COST_ORDER_CANCELLED    UserMetricType = 12
-	UserMetricType_USER_METRIC_TYPE_COST_ORDER_LOST         UserMetricType = 20
-	UserMetricType_USER_METRIC_TYPE_WITHDRAWAL              UserMetricType = 13
+	UserMetricType_USER_METRIC_TYPE_UNSPECIFIED UserMetricType = 0
+	// order ↓↓↓
+	UserMetricType_USER_METRIC_TYPE_ORDER                  UserMetricType = 1
+	UserMetricType_USER_METRIC_TYPE_ORDER_WITHDRAWAL       UserMetricType = 4
+	UserMetricType_USER_METRIC_TYPE_ORDER_CANCELLED        UserMetricType = 5
+	UserMetricType_USER_METRIC_TYPE_ORDER_LOST             UserMetricType = 21
+	UserMetricType_USER_METRIC_TYPE_ORDER_COMPLETED        UserMetricType = 24
+	UserMetricType_USER_METRIC_TYPE_ORDER_RETURN           UserMetricType = 28
+	UserMetricType_USER_METRIC_TYPE_ORDER_RETURN_COMPLETED UserMetricType = 29
+	UserMetricType_USER_METRIC_TYPE_ORDER_ONGOING          UserMetricType = 36
+	// stock order ↓↓↓
+	UserMetricType_USER_METRIC_TYPE_STOCK_ORDER                  UserMetricType = 2
+	UserMetricType_USER_METRIC_TYPE_STOCK_ORDER_WITHDRAWAL       UserMetricType = 6
+	UserMetricType_USER_METRIC_TYPE_STOCK_ORDER_CANCELLED        UserMetricType = 7
+	UserMetricType_USER_METRIC_TYPE_STOCK_ORDER_LOST             UserMetricType = 18
+	UserMetricType_USER_METRIC_TYPE_STOCK_ORDER_COMPLETED        UserMetricType = 25
+	UserMetricType_USER_METRIC_TYPE_STOCK_ORDER_RETURN           UserMetricType = 30
+	UserMetricType_USER_METRIC_TYPE_STOCK_ORDER_RETURN_COMPLETED UserMetricType = 31
+	UserMetricType_USER_METRIC_TYPE_STOCK_ORDER_ONGOING          UserMetricType = 37
+	// avg order ↓↓↓
+	UserMetricType_USER_METRIC_TYPE_AVG_ORDER                  UserMetricType = 3
+	UserMetricType_USER_METRIC_TYPE_AVG_ORDER_WITHDRAWAL       UserMetricType = 8
+	UserMetricType_USER_METRIC_TYPE_AVG_ORDER_CANCELLED        UserMetricType = 9
+	UserMetricType_USER_METRIC_TYPE_AVG_ORDER_LOST             UserMetricType = 19
+	UserMetricType_USER_METRIC_TYPE_AVG_ORDER_COMPLETED        UserMetricType = 26
+	UserMetricType_USER_METRIC_TYPE_AVG_ORDER_RETURN           UserMetricType = 32
+	UserMetricType_USER_METRIC_TYPE_AVG_ORDER_RETURN_COMPLETED UserMetricType = 33
+	UserMetricType_USER_METRIC_TYPE_AVG_ORDER_ONGOING          UserMetricType = 38
+	// cost order ↓↓↓
+	UserMetricType_USER_METRIC_TYPE_COST_ORDER                  UserMetricType = 10
+	UserMetricType_USER_METRIC_TYPE_COST_ORDER_WITHDRAWAL       UserMetricType = 11
+	UserMetricType_USER_METRIC_TYPE_COST_ORDER_CANCELLED        UserMetricType = 12
+	UserMetricType_USER_METRIC_TYPE_COST_ORDER_LOST             UserMetricType = 20
+	UserMetricType_USER_METRIC_TYPE_COST_ORDER_COMPLETED        UserMetricType = 27
+	UserMetricType_USER_METRIC_TYPE_COST_ORDER_RETURN           UserMetricType = 34
+	UserMetricType_USER_METRIC_TYPE_COST_ORDER_RETURN_COMPLETED UserMetricType = 35
+	UserMetricType_USER_METRIC_TYPE_COST_ORDER_ONGOING          UserMetricType = 39
+	// profit ↓↓↓
 	UserMetricType_USER_METRIC_TYPE_PROFIT_ORDER_CREATED    UserMetricType = 14
 	UserMetricType_USER_METRIC_TYPE_PROFIT_ORDER_WITHDRAWAL UserMetricType = 16
 	UserMetricType_USER_METRIC_TYPE_LOST_PROFIT_ORDER       UserMetricType = 17
-	UserMetricType_USER_METRIC_TYPE_ADS_EXPENSE             UserMetricType = 22
 	UserMetricType_USER_METRIC_TYPE_PROFIT_OR_LOSS          UserMetricType = 23
+	// etc ↓↓↓
+	UserMetricType_USER_METRIC_TYPE_WITHDRAWAL           UserMetricType = 13
+	UserMetricType_USER_METRIC_TYPE_WITHDRAWAL_BREAKDOWN UserMetricType = 40
+	UserMetricType_USER_METRIC_TYPE_ADS_EXPENSE          UserMetricType = 22
 )
 
 // Enum value maps for UserMetricType.
@@ -61,49 +84,83 @@ var (
 		4:  "USER_METRIC_TYPE_ORDER_WITHDRAWAL",
 		5:  "USER_METRIC_TYPE_ORDER_CANCELLED",
 		21: "USER_METRIC_TYPE_ORDER_LOST",
+		24: "USER_METRIC_TYPE_ORDER_COMPLETED",
+		28: "USER_METRIC_TYPE_ORDER_RETURN",
+		29: "USER_METRIC_TYPE_ORDER_RETURN_COMPLETED",
+		36: "USER_METRIC_TYPE_ORDER_ONGOING",
 		2:  "USER_METRIC_TYPE_STOCK_ORDER",
 		6:  "USER_METRIC_TYPE_STOCK_ORDER_WITHDRAWAL",
 		7:  "USER_METRIC_TYPE_STOCK_ORDER_CANCELLED",
 		18: "USER_METRIC_TYPE_STOCK_ORDER_LOST",
+		25: "USER_METRIC_TYPE_STOCK_ORDER_COMPLETED",
+		30: "USER_METRIC_TYPE_STOCK_ORDER_RETURN",
+		31: "USER_METRIC_TYPE_STOCK_ORDER_RETURN_COMPLETED",
+		37: "USER_METRIC_TYPE_STOCK_ORDER_ONGOING",
 		3:  "USER_METRIC_TYPE_AVG_ORDER",
 		8:  "USER_METRIC_TYPE_AVG_ORDER_WITHDRAWAL",
 		9:  "USER_METRIC_TYPE_AVG_ORDER_CANCELLED",
 		19: "USER_METRIC_TYPE_AVG_ORDER_LOST",
+		26: "USER_METRIC_TYPE_AVG_ORDER_COMPLETED",
+		32: "USER_METRIC_TYPE_AVG_ORDER_RETURN",
+		33: "USER_METRIC_TYPE_AVG_ORDER_RETURN_COMPLETED",
+		38: "USER_METRIC_TYPE_AVG_ORDER_ONGOING",
 		10: "USER_METRIC_TYPE_COST_ORDER",
 		11: "USER_METRIC_TYPE_COST_ORDER_WITHDRAWAL",
 		12: "USER_METRIC_TYPE_COST_ORDER_CANCELLED",
 		20: "USER_METRIC_TYPE_COST_ORDER_LOST",
-		13: "USER_METRIC_TYPE_WITHDRAWAL",
+		27: "USER_METRIC_TYPE_COST_ORDER_COMPLETED",
+		34: "USER_METRIC_TYPE_COST_ORDER_RETURN",
+		35: "USER_METRIC_TYPE_COST_ORDER_RETURN_COMPLETED",
+		39: "USER_METRIC_TYPE_COST_ORDER_ONGOING",
 		14: "USER_METRIC_TYPE_PROFIT_ORDER_CREATED",
 		16: "USER_METRIC_TYPE_PROFIT_ORDER_WITHDRAWAL",
 		17: "USER_METRIC_TYPE_LOST_PROFIT_ORDER",
-		22: "USER_METRIC_TYPE_ADS_EXPENSE",
 		23: "USER_METRIC_TYPE_PROFIT_OR_LOSS",
+		13: "USER_METRIC_TYPE_WITHDRAWAL",
+		40: "USER_METRIC_TYPE_WITHDRAWAL_BREAKDOWN",
+		22: "USER_METRIC_TYPE_ADS_EXPENSE",
 	}
 	UserMetricType_value = map[string]int32{
-		"USER_METRIC_TYPE_UNSPECIFIED":             0,
-		"USER_METRIC_TYPE_ORDER":                   1,
-		"USER_METRIC_TYPE_ORDER_WITHDRAWAL":        4,
-		"USER_METRIC_TYPE_ORDER_CANCELLED":         5,
-		"USER_METRIC_TYPE_ORDER_LOST":              21,
-		"USER_METRIC_TYPE_STOCK_ORDER":             2,
-		"USER_METRIC_TYPE_STOCK_ORDER_WITHDRAWAL":  6,
-		"USER_METRIC_TYPE_STOCK_ORDER_CANCELLED":   7,
-		"USER_METRIC_TYPE_STOCK_ORDER_LOST":        18,
-		"USER_METRIC_TYPE_AVG_ORDER":               3,
-		"USER_METRIC_TYPE_AVG_ORDER_WITHDRAWAL":    8,
-		"USER_METRIC_TYPE_AVG_ORDER_CANCELLED":     9,
-		"USER_METRIC_TYPE_AVG_ORDER_LOST":          19,
-		"USER_METRIC_TYPE_COST_ORDER":              10,
-		"USER_METRIC_TYPE_COST_ORDER_WITHDRAWAL":   11,
-		"USER_METRIC_TYPE_COST_ORDER_CANCELLED":    12,
-		"USER_METRIC_TYPE_COST_ORDER_LOST":         20,
-		"USER_METRIC_TYPE_WITHDRAWAL":              13,
-		"USER_METRIC_TYPE_PROFIT_ORDER_CREATED":    14,
-		"USER_METRIC_TYPE_PROFIT_ORDER_WITHDRAWAL": 16,
-		"USER_METRIC_TYPE_LOST_PROFIT_ORDER":       17,
-		"USER_METRIC_TYPE_ADS_EXPENSE":             22,
-		"USER_METRIC_TYPE_PROFIT_OR_LOSS":          23,
+		"USER_METRIC_TYPE_UNSPECIFIED":                  0,
+		"USER_METRIC_TYPE_ORDER":                        1,
+		"USER_METRIC_TYPE_ORDER_WITHDRAWAL":             4,
+		"USER_METRIC_TYPE_ORDER_CANCELLED":              5,
+		"USER_METRIC_TYPE_ORDER_LOST":                   21,
+		"USER_METRIC_TYPE_ORDER_COMPLETED":              24,
+		"USER_METRIC_TYPE_ORDER_RETURN":                 28,
+		"USER_METRIC_TYPE_ORDER_RETURN_COMPLETED":       29,
+		"USER_METRIC_TYPE_ORDER_ONGOING":                36,
+		"USER_METRIC_TYPE_STOCK_ORDER":                  2,
+		"USER_METRIC_TYPE_STOCK_ORDER_WITHDRAWAL":       6,
+		"USER_METRIC_TYPE_STOCK_ORDER_CANCELLED":        7,
+		"USER_METRIC_TYPE_STOCK_ORDER_LOST":             18,
+		"USER_METRIC_TYPE_STOCK_ORDER_COMPLETED":        25,
+		"USER_METRIC_TYPE_STOCK_ORDER_RETURN":           30,
+		"USER_METRIC_TYPE_STOCK_ORDER_RETURN_COMPLETED": 31,
+		"USER_METRIC_TYPE_STOCK_ORDER_ONGOING":          37,
+		"USER_METRIC_TYPE_AVG_ORDER":                    3,
+		"USER_METRIC_TYPE_AVG_ORDER_WITHDRAWAL":         8,
+		"USER_METRIC_TYPE_AVG_ORDER_CANCELLED":          9,
+		"USER_METRIC_TYPE_AVG_ORDER_LOST":               19,
+		"USER_METRIC_TYPE_AVG_ORDER_COMPLETED":          26,
+		"USER_METRIC_TYPE_AVG_ORDER_RETURN":             32,
+		"USER_METRIC_TYPE_AVG_ORDER_RETURN_COMPLETED":   33,
+		"USER_METRIC_TYPE_AVG_ORDER_ONGOING":            38,
+		"USER_METRIC_TYPE_COST_ORDER":                   10,
+		"USER_METRIC_TYPE_COST_ORDER_WITHDRAWAL":        11,
+		"USER_METRIC_TYPE_COST_ORDER_CANCELLED":         12,
+		"USER_METRIC_TYPE_COST_ORDER_LOST":              20,
+		"USER_METRIC_TYPE_COST_ORDER_COMPLETED":         27,
+		"USER_METRIC_TYPE_COST_ORDER_RETURN":            34,
+		"USER_METRIC_TYPE_COST_ORDER_RETURN_COMPLETED":  35,
+		"USER_METRIC_TYPE_COST_ORDER_ONGOING":           39,
+		"USER_METRIC_TYPE_PROFIT_ORDER_CREATED":         14,
+		"USER_METRIC_TYPE_PROFIT_ORDER_WITHDRAWAL":      16,
+		"USER_METRIC_TYPE_LOST_PROFIT_ORDER":            17,
+		"USER_METRIC_TYPE_PROFIT_OR_LOSS":               23,
+		"USER_METRIC_TYPE_WITHDRAWAL":                   13,
+		"USER_METRIC_TYPE_WITHDRAWAL_BREAKDOWN":         40,
+		"USER_METRIC_TYPE_ADS_EXPENSE":                  22,
 	}
 )
 
@@ -242,24 +299,41 @@ type UserMetricSort struct {
 	//	*UserMetricSort_UserOrderWithdrawalMetricSort
 	//	*UserMetricSort_UserOrderCancelledMetricSort
 	//	*UserMetricSort_UserOrderLostMetricSort
+	//	*UserMetricSort_UserOrderCompletedMetricSort
+	//	*UserMetricSort_UserOrderReturnMetricSort
+	//	*UserMetricSort_UserOrderReturnCompletedMetricSort
+	//	*UserMetricSort_UserOrderOngoingMetricSort
 	//	*UserMetricSort_UserStockOrderMetricSort
 	//	*UserMetricSort_UserStockOrderWithdrawalMetricSort
 	//	*UserMetricSort_UserStockOrderCancelledMetricSort
 	//	*UserMetricSort_UserStockOrderLostMetricSort
+	//	*UserMetricSort_UserStockOrderCompletedMetricSort
+	//	*UserMetricSort_UserStockOrderReturnMetricSort
+	//	*UserMetricSort_UserStockOrderReturnCompletedMetricSort
+	//	*UserMetricSort_UserStockOrderOngoingMetricSort
 	//	*UserMetricSort_UserAvgOrderMetricSort
 	//	*UserMetricSort_UserAvgOrderWithdrawalMetricSort
 	//	*UserMetricSort_UserAvgOrderCancelledMetricSort
 	//	*UserMetricSort_UserAvgOrderLostMetricSort
+	//	*UserMetricSort_UserAvgOrderCompletedMetricSort
+	//	*UserMetricSort_UserAvgOrderReturnMetricSort
+	//	*UserMetricSort_UserAvgOrderReturnCompletedMetricSort
+	//	*UserMetricSort_UserAvgOrderOngoingMetricSort
 	//	*UserMetricSort_UserCostOrderMetricSort
 	//	*UserMetricSort_UserCostOrderWithdrawalMetricSort
 	//	*UserMetricSort_UserCostOrderCancelledMetricSort
 	//	*UserMetricSort_UserCostOrderLostMetricSort
-	//	*UserMetricSort_UserWithdrawalMetricSort
+	//	*UserMetricSort_UserCostOrderCompletedMetricSort
+	//	*UserMetricSort_UserCostOrderReturnMetricSort
+	//	*UserMetricSort_UserCostOrderReturnCompletedMetricSort
+	//	*UserMetricSort_UserCostOrderOngoingMetricSort
 	//	*UserMetricSort_UserProfitOrderCreatedMetricSort
 	//	*UserMetricSort_UserProfitOrderWithdrawalMetricSort
 	//	*UserMetricSort_UserLostProfitOrderMetricSort
-	//	*UserMetricSort_UserAdsExpenseMetricSort
 	//	*UserMetricSort_UserProfitOrLossMetricSort
+	//	*UserMetricSort_UserAdsExpenseMetricSort
+	//	*UserMetricSort_UserWithdrawalMetricSort
+	//	*UserMetricSort_UserWithdrawalBreakdownMetricSort
 	S             isUserMetricSort_S `protobuf_oneof:"s"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -354,6 +428,42 @@ func (x *UserMetricSort) GetUserOrderLostMetricSort() v1.UserOrderLostMetricSort
 	return v1.UserOrderLostMetricSort(0)
 }
 
+func (x *UserMetricSort) GetUserOrderCompletedMetricSort() v1.UserOrderCompletedMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*UserMetricSort_UserOrderCompletedMetricSort); ok {
+			return x.UserOrderCompletedMetricSort
+		}
+	}
+	return v1.UserOrderCompletedMetricSort(0)
+}
+
+func (x *UserMetricSort) GetUserOrderReturnMetricSort() v1.UserOrderReturnMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*UserMetricSort_UserOrderReturnMetricSort); ok {
+			return x.UserOrderReturnMetricSort
+		}
+	}
+	return v1.UserOrderReturnMetricSort(0)
+}
+
+func (x *UserMetricSort) GetUserOrderReturnCompletedMetricSort() v1.UserOrderReturnCompletedMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*UserMetricSort_UserOrderReturnCompletedMetricSort); ok {
+			return x.UserOrderReturnCompletedMetricSort
+		}
+	}
+	return v1.UserOrderReturnCompletedMetricSort(0)
+}
+
+func (x *UserMetricSort) GetUserOrderOngoingMetricSort() v1.UserOrderOngoingMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*UserMetricSort_UserOrderOngoingMetricSort); ok {
+			return x.UserOrderOngoingMetricSort
+		}
+	}
+	return v1.UserOrderOngoingMetricSort(0)
+}
+
 func (x *UserMetricSort) GetUserStockOrderMetricSort() v1.UserStockOrderMetricSort {
 	if x != nil {
 		if x, ok := x.S.(*UserMetricSort_UserStockOrderMetricSort); ok {
@@ -388,6 +498,42 @@ func (x *UserMetricSort) GetUserStockOrderLostMetricSort() v1.UserStockOrderLost
 		}
 	}
 	return v1.UserStockOrderLostMetricSort(0)
+}
+
+func (x *UserMetricSort) GetUserStockOrderCompletedMetricSort() v1.UserStockOrderCompletedMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*UserMetricSort_UserStockOrderCompletedMetricSort); ok {
+			return x.UserStockOrderCompletedMetricSort
+		}
+	}
+	return v1.UserStockOrderCompletedMetricSort(0)
+}
+
+func (x *UserMetricSort) GetUserStockOrderReturnMetricSort() v1.UserStockOrderReturnMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*UserMetricSort_UserStockOrderReturnMetricSort); ok {
+			return x.UserStockOrderReturnMetricSort
+		}
+	}
+	return v1.UserStockOrderReturnMetricSort(0)
+}
+
+func (x *UserMetricSort) GetUserStockOrderReturnCompletedMetricSort() v1.UserStockOrderReturnCompletedMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*UserMetricSort_UserStockOrderReturnCompletedMetricSort); ok {
+			return x.UserStockOrderReturnCompletedMetricSort
+		}
+	}
+	return v1.UserStockOrderReturnCompletedMetricSort(0)
+}
+
+func (x *UserMetricSort) GetUserStockOrderOngoingMetricSort() v1.UserStockOrderOngoingMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*UserMetricSort_UserStockOrderOngoingMetricSort); ok {
+			return x.UserStockOrderOngoingMetricSort
+		}
+	}
+	return v1.UserStockOrderOngoingMetricSort(0)
 }
 
 func (x *UserMetricSort) GetUserAvgOrderMetricSort() v1.UserAvgOrderMetricSort {
@@ -426,6 +572,42 @@ func (x *UserMetricSort) GetUserAvgOrderLostMetricSort() v1.UserAvgOrderLostMetr
 	return v1.UserAvgOrderLostMetricSort(0)
 }
 
+func (x *UserMetricSort) GetUserAvgOrderCompletedMetricSort() v1.UserAvgOrderCompletedMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*UserMetricSort_UserAvgOrderCompletedMetricSort); ok {
+			return x.UserAvgOrderCompletedMetricSort
+		}
+	}
+	return v1.UserAvgOrderCompletedMetricSort(0)
+}
+
+func (x *UserMetricSort) GetUserAvgOrderReturnMetricSort() v1.UserAvgOrderReturnMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*UserMetricSort_UserAvgOrderReturnMetricSort); ok {
+			return x.UserAvgOrderReturnMetricSort
+		}
+	}
+	return v1.UserAvgOrderReturnMetricSort(0)
+}
+
+func (x *UserMetricSort) GetUserAvgOrderReturnCompletedMetricSort() v1.UserAvgOrderReturnCompletedMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*UserMetricSort_UserAvgOrderReturnCompletedMetricSort); ok {
+			return x.UserAvgOrderReturnCompletedMetricSort
+		}
+	}
+	return v1.UserAvgOrderReturnCompletedMetricSort(0)
+}
+
+func (x *UserMetricSort) GetUserAvgOrderOngoingMetricSort() v1.UserAvgOrderOngoingMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*UserMetricSort_UserAvgOrderOngoingMetricSort); ok {
+			return x.UserAvgOrderOngoingMetricSort
+		}
+	}
+	return v1.UserAvgOrderOngoingMetricSort(0)
+}
+
 func (x *UserMetricSort) GetUserCostOrderMetricSort() v1.UserCostOrderMetricSort {
 	if x != nil {
 		if x, ok := x.S.(*UserMetricSort_UserCostOrderMetricSort); ok {
@@ -462,13 +644,40 @@ func (x *UserMetricSort) GetUserCostOrderLostMetricSort() v1.UserCostOrderLostMe
 	return v1.UserCostOrderLostMetricSort(0)
 }
 
-func (x *UserMetricSort) GetUserWithdrawalMetricSort() v1.UserWithdrawalMetricSort {
+func (x *UserMetricSort) GetUserCostOrderCompletedMetricSort() v1.UserCostOrderCompletedMetricSort {
 	if x != nil {
-		if x, ok := x.S.(*UserMetricSort_UserWithdrawalMetricSort); ok {
-			return x.UserWithdrawalMetricSort
+		if x, ok := x.S.(*UserMetricSort_UserCostOrderCompletedMetricSort); ok {
+			return x.UserCostOrderCompletedMetricSort
 		}
 	}
-	return v1.UserWithdrawalMetricSort(0)
+	return v1.UserCostOrderCompletedMetricSort(0)
+}
+
+func (x *UserMetricSort) GetUserCostOrderReturnMetricSort() v1.UserCostOrderReturnMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*UserMetricSort_UserCostOrderReturnMetricSort); ok {
+			return x.UserCostOrderReturnMetricSort
+		}
+	}
+	return v1.UserCostOrderReturnMetricSort(0)
+}
+
+func (x *UserMetricSort) GetUserCostOrderReturnCompletedMetricSort() v1.UserCostOrderReturnCompletedMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*UserMetricSort_UserCostOrderReturnCompletedMetricSort); ok {
+			return x.UserCostOrderReturnCompletedMetricSort
+		}
+	}
+	return v1.UserCostOrderReturnCompletedMetricSort(0)
+}
+
+func (x *UserMetricSort) GetUserCostOrderOngoingMetricSort() v1.UserCostOrderOngoingMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*UserMetricSort_UserCostOrderOngoingMetricSort); ok {
+			return x.UserCostOrderOngoingMetricSort
+		}
+	}
+	return v1.UserCostOrderOngoingMetricSort(0)
 }
 
 func (x *UserMetricSort) GetUserProfitOrderCreatedMetricSort() v1.UserProfitOrderCreatedMetricSort {
@@ -498,6 +707,15 @@ func (x *UserMetricSort) GetUserLostProfitOrderMetricSort() v1.UserLostProfitOrd
 	return v1.UserLostProfitOrderMetricSort(0)
 }
 
+func (x *UserMetricSort) GetUserProfitOrLossMetricSort() v1.UserProfitOrLossMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*UserMetricSort_UserProfitOrLossMetricSort); ok {
+			return x.UserProfitOrLossMetricSort
+		}
+	}
+	return v1.UserProfitOrLossMetricSort(0)
+}
+
 func (x *UserMetricSort) GetUserAdsExpenseMetricSort() v1.UserAdsExpenseMetricSort {
 	if x != nil {
 		if x, ok := x.S.(*UserMetricSort_UserAdsExpenseMetricSort); ok {
@@ -507,13 +725,22 @@ func (x *UserMetricSort) GetUserAdsExpenseMetricSort() v1.UserAdsExpenseMetricSo
 	return v1.UserAdsExpenseMetricSort(0)
 }
 
-func (x *UserMetricSort) GetUserProfitOrLossMetricSort() v1.UserProfitOrLossMetricSort {
+func (x *UserMetricSort) GetUserWithdrawalMetricSort() v1.UserWithdrawalMetricSort {
 	if x != nil {
-		if x, ok := x.S.(*UserMetricSort_UserProfitOrLossMetricSort); ok {
-			return x.UserProfitOrLossMetricSort
+		if x, ok := x.S.(*UserMetricSort_UserWithdrawalMetricSort); ok {
+			return x.UserWithdrawalMetricSort
 		}
 	}
-	return v1.UserProfitOrLossMetricSort(0)
+	return v1.UserWithdrawalMetricSort(0)
+}
+
+func (x *UserMetricSort) GetUserWithdrawalBreakdownMetricSort() v1.UserWithdrawalBreakdownMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*UserMetricSort_UserWithdrawalBreakdownMetricSort); ok {
+			return x.UserWithdrawalBreakdownMetricSort
+		}
+	}
+	return v1.UserWithdrawalBreakdownMetricSort(0)
 }
 
 type isUserMetricSort_S interface {
@@ -525,6 +752,7 @@ type UserMetricSort_CommonSort struct {
 }
 
 type UserMetricSort_UserOrderMetricSort struct {
+	// order ↓↓↓
 	UserOrderMetricSort v1.UserOrderMetricSort `protobuf:"varint,3,opt,name=user_order_metric_sort,json=userOrderMetricSort,proto3,enum=selling_iface.v1.user_metric.v1.UserOrderMetricSort,oneof"`
 }
 
@@ -540,7 +768,24 @@ type UserMetricSort_UserOrderLostMetricSort struct {
 	UserOrderLostMetricSort v1.UserOrderLostMetricSort `protobuf:"varint,19,opt,name=user_order_lost_metric_sort,json=userOrderLostMetricSort,proto3,enum=selling_iface.v1.user_metric.v1.UserOrderLostMetricSort,oneof"`
 }
 
+type UserMetricSort_UserOrderCompletedMetricSort struct {
+	UserOrderCompletedMetricSort v1.UserOrderCompletedMetricSort `protobuf:"varint,25,opt,name=user_order_completed_metric_sort,json=userOrderCompletedMetricSort,proto3,enum=selling_iface.v1.user_metric.v1.UserOrderCompletedMetricSort,oneof"`
+}
+
+type UserMetricSort_UserOrderReturnMetricSort struct {
+	UserOrderReturnMetricSort v1.UserOrderReturnMetricSort `protobuf:"varint,29,opt,name=user_order_return_metric_sort,json=userOrderReturnMetricSort,proto3,enum=selling_iface.v1.user_metric.v1.UserOrderReturnMetricSort,oneof"`
+}
+
+type UserMetricSort_UserOrderReturnCompletedMetricSort struct {
+	UserOrderReturnCompletedMetricSort v1.UserOrderReturnCompletedMetricSort `protobuf:"varint,30,opt,name=user_order_return_completed_metric_sort,json=userOrderReturnCompletedMetricSort,proto3,enum=selling_iface.v1.user_metric.v1.UserOrderReturnCompletedMetricSort,oneof"`
+}
+
+type UserMetricSort_UserOrderOngoingMetricSort struct {
+	UserOrderOngoingMetricSort v1.UserOrderOngoingMetricSort `protobuf:"varint,37,opt,name=user_order_ongoing_metric_sort,json=userOrderOngoingMetricSort,proto3,enum=selling_iface.v1.user_metric.v1.UserOrderOngoingMetricSort,oneof"`
+}
+
 type UserMetricSort_UserStockOrderMetricSort struct {
+	// stock order ↓↓↓
 	UserStockOrderMetricSort v1.UserStockOrderMetricSort `protobuf:"varint,4,opt,name=user_stock_order_metric_sort,json=userStockOrderMetricSort,proto3,enum=selling_iface.v1.user_metric.v1.UserStockOrderMetricSort,oneof"`
 }
 
@@ -556,7 +801,24 @@ type UserMetricSort_UserStockOrderLostMetricSort struct {
 	UserStockOrderLostMetricSort v1.UserStockOrderLostMetricSort `protobuf:"varint,20,opt,name=user_stock_order_lost_metric_sort,json=userStockOrderLostMetricSort,proto3,enum=selling_iface.v1.user_metric.v1.UserStockOrderLostMetricSort,oneof"`
 }
 
+type UserMetricSort_UserStockOrderCompletedMetricSort struct {
+	UserStockOrderCompletedMetricSort v1.UserStockOrderCompletedMetricSort `protobuf:"varint,26,opt,name=user_stock_order_completed_metric_sort,json=userStockOrderCompletedMetricSort,proto3,enum=selling_iface.v1.user_metric.v1.UserStockOrderCompletedMetricSort,oneof"`
+}
+
+type UserMetricSort_UserStockOrderReturnMetricSort struct {
+	UserStockOrderReturnMetricSort v1.UserStockOrderReturnMetricSort `protobuf:"varint,31,opt,name=user_stock_order_return_metric_sort,json=userStockOrderReturnMetricSort,proto3,enum=selling_iface.v1.user_metric.v1.UserStockOrderReturnMetricSort,oneof"`
+}
+
+type UserMetricSort_UserStockOrderReturnCompletedMetricSort struct {
+	UserStockOrderReturnCompletedMetricSort v1.UserStockOrderReturnCompletedMetricSort `protobuf:"varint,32,opt,name=user_stock_order_return_completed_metric_sort,json=userStockOrderReturnCompletedMetricSort,proto3,enum=selling_iface.v1.user_metric.v1.UserStockOrderReturnCompletedMetricSort,oneof"`
+}
+
+type UserMetricSort_UserStockOrderOngoingMetricSort struct {
+	UserStockOrderOngoingMetricSort v1.UserStockOrderOngoingMetricSort `protobuf:"varint,38,opt,name=user_stock_order_ongoing_metric_sort,json=userStockOrderOngoingMetricSort,proto3,enum=selling_iface.v1.user_metric.v1.UserStockOrderOngoingMetricSort,oneof"`
+}
+
 type UserMetricSort_UserAvgOrderMetricSort struct {
+	// avg order ↓↓↓
 	UserAvgOrderMetricSort v1.UserAvgOrderMetricSort `protobuf:"varint,5,opt,name=user_avg_order_metric_sort,json=userAvgOrderMetricSort,proto3,enum=selling_iface.v1.user_metric.v1.UserAvgOrderMetricSort,oneof"`
 }
 
@@ -572,7 +834,24 @@ type UserMetricSort_UserAvgOrderLostMetricSort struct {
 	UserAvgOrderLostMetricSort v1.UserAvgOrderLostMetricSort `protobuf:"varint,21,opt,name=user_avg_order_lost_metric_sort,json=userAvgOrderLostMetricSort,proto3,enum=selling_iface.v1.user_metric.v1.UserAvgOrderLostMetricSort,oneof"`
 }
 
+type UserMetricSort_UserAvgOrderCompletedMetricSort struct {
+	UserAvgOrderCompletedMetricSort v1.UserAvgOrderCompletedMetricSort `protobuf:"varint,27,opt,name=user_avg_order_completed_metric_sort,json=userAvgOrderCompletedMetricSort,proto3,enum=selling_iface.v1.user_metric.v1.UserAvgOrderCompletedMetricSort,oneof"`
+}
+
+type UserMetricSort_UserAvgOrderReturnMetricSort struct {
+	UserAvgOrderReturnMetricSort v1.UserAvgOrderReturnMetricSort `protobuf:"varint,33,opt,name=user_avg_order_return_metric_sort,json=userAvgOrderReturnMetricSort,proto3,enum=selling_iface.v1.user_metric.v1.UserAvgOrderReturnMetricSort,oneof"`
+}
+
+type UserMetricSort_UserAvgOrderReturnCompletedMetricSort struct {
+	UserAvgOrderReturnCompletedMetricSort v1.UserAvgOrderReturnCompletedMetricSort `protobuf:"varint,34,opt,name=user_avg_order_return_completed_metric_sort,json=userAvgOrderReturnCompletedMetricSort,proto3,enum=selling_iface.v1.user_metric.v1.UserAvgOrderReturnCompletedMetricSort,oneof"`
+}
+
+type UserMetricSort_UserAvgOrderOngoingMetricSort struct {
+	UserAvgOrderOngoingMetricSort v1.UserAvgOrderOngoingMetricSort `protobuf:"varint,39,opt,name=user_avg_order_ongoing_metric_sort,json=userAvgOrderOngoingMetricSort,proto3,enum=selling_iface.v1.user_metric.v1.UserAvgOrderOngoingMetricSort,oneof"`
+}
+
 type UserMetricSort_UserCostOrderMetricSort struct {
+	// cost order ↓↓↓
 	UserCostOrderMetricSort v1.UserCostOrderMetricSort `protobuf:"varint,12,opt,name=user_cost_order_metric_sort,json=userCostOrderMetricSort,proto3,enum=selling_iface.v1.user_metric.v1.UserCostOrderMetricSort,oneof"`
 }
 
@@ -588,11 +867,24 @@ type UserMetricSort_UserCostOrderLostMetricSort struct {
 	UserCostOrderLostMetricSort v1.UserCostOrderLostMetricSort `protobuf:"varint,22,opt,name=user_cost_order_lost_metric_sort,json=userCostOrderLostMetricSort,proto3,enum=selling_iface.v1.user_metric.v1.UserCostOrderLostMetricSort,oneof"`
 }
 
-type UserMetricSort_UserWithdrawalMetricSort struct {
-	UserWithdrawalMetricSort v1.UserWithdrawalMetricSort `protobuf:"varint,15,opt,name=user_withdrawal_metric_sort,json=userWithdrawalMetricSort,proto3,enum=selling_iface.v1.user_metric.v1.UserWithdrawalMetricSort,oneof"`
+type UserMetricSort_UserCostOrderCompletedMetricSort struct {
+	UserCostOrderCompletedMetricSort v1.UserCostOrderCompletedMetricSort `protobuf:"varint,28,opt,name=user_cost_order_completed_metric_sort,json=userCostOrderCompletedMetricSort,proto3,enum=selling_iface.v1.user_metric.v1.UserCostOrderCompletedMetricSort,oneof"`
+}
+
+type UserMetricSort_UserCostOrderReturnMetricSort struct {
+	UserCostOrderReturnMetricSort v1.UserCostOrderReturnMetricSort `protobuf:"varint,35,opt,name=user_cost_order_return_metric_sort,json=userCostOrderReturnMetricSort,proto3,enum=selling_iface.v1.user_metric.v1.UserCostOrderReturnMetricSort,oneof"`
+}
+
+type UserMetricSort_UserCostOrderReturnCompletedMetricSort struct {
+	UserCostOrderReturnCompletedMetricSort v1.UserCostOrderReturnCompletedMetricSort `protobuf:"varint,36,opt,name=user_cost_order_return_completed_metric_sort,json=userCostOrderReturnCompletedMetricSort,proto3,enum=selling_iface.v1.user_metric.v1.UserCostOrderReturnCompletedMetricSort,oneof"`
+}
+
+type UserMetricSort_UserCostOrderOngoingMetricSort struct {
+	UserCostOrderOngoingMetricSort v1.UserCostOrderOngoingMetricSort `protobuf:"varint,40,opt,name=user_cost_order_ongoing_metric_sort,json=userCostOrderOngoingMetricSort,proto3,enum=selling_iface.v1.user_metric.v1.UserCostOrderOngoingMetricSort,oneof"`
 }
 
 type UserMetricSort_UserProfitOrderCreatedMetricSort struct {
+	// profit order ↓↓↓
 	UserProfitOrderCreatedMetricSort v1.UserProfitOrderCreatedMetricSort `protobuf:"varint,16,opt,name=user_profit_order_created_metric_sort,json=userProfitOrderCreatedMetricSort,proto3,enum=selling_iface.v1.user_metric.v1.UserProfitOrderCreatedMetricSort,oneof"`
 }
 
@@ -604,12 +896,21 @@ type UserMetricSort_UserLostProfitOrderMetricSort struct {
 	UserLostProfitOrderMetricSort v1.UserLostProfitOrderMetricSort `protobuf:"varint,18,opt,name=user_lost_profit_order_metric_sort,json=userLostProfitOrderMetricSort,proto3,enum=selling_iface.v1.user_metric.v1.UserLostProfitOrderMetricSort,oneof"`
 }
 
+type UserMetricSort_UserProfitOrLossMetricSort struct {
+	UserProfitOrLossMetricSort v1.UserProfitOrLossMetricSort `protobuf:"varint,24,opt,name=user_profit_or_loss_metric_sort,json=userProfitOrLossMetricSort,proto3,enum=selling_iface.v1.user_metric.v1.UserProfitOrLossMetricSort,oneof"`
+}
+
 type UserMetricSort_UserAdsExpenseMetricSort struct {
+	// etc ↓↓↓
 	UserAdsExpenseMetricSort v1.UserAdsExpenseMetricSort `protobuf:"varint,23,opt,name=user_ads_expense_metric_sort,json=userAdsExpenseMetricSort,proto3,enum=selling_iface.v1.user_metric.v1.UserAdsExpenseMetricSort,oneof"`
 }
 
-type UserMetricSort_UserProfitOrLossMetricSort struct {
-	UserProfitOrLossMetricSort v1.UserProfitOrLossMetricSort `protobuf:"varint,24,opt,name=user_profit_or_loss_metric_sort,json=userProfitOrLossMetricSort,proto3,enum=selling_iface.v1.user_metric.v1.UserProfitOrLossMetricSort,oneof"`
+type UserMetricSort_UserWithdrawalMetricSort struct {
+	UserWithdrawalMetricSort v1.UserWithdrawalMetricSort `protobuf:"varint,15,opt,name=user_withdrawal_metric_sort,json=userWithdrawalMetricSort,proto3,enum=selling_iface.v1.user_metric.v1.UserWithdrawalMetricSort,oneof"`
+}
+
+type UserMetricSort_UserWithdrawalBreakdownMetricSort struct {
+	UserWithdrawalBreakdownMetricSort v1.UserWithdrawalBreakdownMetricSort `protobuf:"varint,41,opt,name=user_withdrawal_breakdown_metric_sort,json=userWithdrawalBreakdownMetricSort,proto3,enum=selling_iface.v1.user_metric.v1.UserWithdrawalBreakdownMetricSort,oneof"`
 }
 
 func (*UserMetricSort_CommonSort) isUserMetricSort_S() {}
@@ -622,6 +923,14 @@ func (*UserMetricSort_UserOrderCancelledMetricSort) isUserMetricSort_S() {}
 
 func (*UserMetricSort_UserOrderLostMetricSort) isUserMetricSort_S() {}
 
+func (*UserMetricSort_UserOrderCompletedMetricSort) isUserMetricSort_S() {}
+
+func (*UserMetricSort_UserOrderReturnMetricSort) isUserMetricSort_S() {}
+
+func (*UserMetricSort_UserOrderReturnCompletedMetricSort) isUserMetricSort_S() {}
+
+func (*UserMetricSort_UserOrderOngoingMetricSort) isUserMetricSort_S() {}
+
 func (*UserMetricSort_UserStockOrderMetricSort) isUserMetricSort_S() {}
 
 func (*UserMetricSort_UserStockOrderWithdrawalMetricSort) isUserMetricSort_S() {}
@@ -629,6 +938,14 @@ func (*UserMetricSort_UserStockOrderWithdrawalMetricSort) isUserMetricSort_S() {
 func (*UserMetricSort_UserStockOrderCancelledMetricSort) isUserMetricSort_S() {}
 
 func (*UserMetricSort_UserStockOrderLostMetricSort) isUserMetricSort_S() {}
+
+func (*UserMetricSort_UserStockOrderCompletedMetricSort) isUserMetricSort_S() {}
+
+func (*UserMetricSort_UserStockOrderReturnMetricSort) isUserMetricSort_S() {}
+
+func (*UserMetricSort_UserStockOrderReturnCompletedMetricSort) isUserMetricSort_S() {}
+
+func (*UserMetricSort_UserStockOrderOngoingMetricSort) isUserMetricSort_S() {}
 
 func (*UserMetricSort_UserAvgOrderMetricSort) isUserMetricSort_S() {}
 
@@ -638,6 +955,14 @@ func (*UserMetricSort_UserAvgOrderCancelledMetricSort) isUserMetricSort_S() {}
 
 func (*UserMetricSort_UserAvgOrderLostMetricSort) isUserMetricSort_S() {}
 
+func (*UserMetricSort_UserAvgOrderCompletedMetricSort) isUserMetricSort_S() {}
+
+func (*UserMetricSort_UserAvgOrderReturnMetricSort) isUserMetricSort_S() {}
+
+func (*UserMetricSort_UserAvgOrderReturnCompletedMetricSort) isUserMetricSort_S() {}
+
+func (*UserMetricSort_UserAvgOrderOngoingMetricSort) isUserMetricSort_S() {}
+
 func (*UserMetricSort_UserCostOrderMetricSort) isUserMetricSort_S() {}
 
 func (*UserMetricSort_UserCostOrderWithdrawalMetricSort) isUserMetricSort_S() {}
@@ -646,7 +971,13 @@ func (*UserMetricSort_UserCostOrderCancelledMetricSort) isUserMetricSort_S() {}
 
 func (*UserMetricSort_UserCostOrderLostMetricSort) isUserMetricSort_S() {}
 
-func (*UserMetricSort_UserWithdrawalMetricSort) isUserMetricSort_S() {}
+func (*UserMetricSort_UserCostOrderCompletedMetricSort) isUserMetricSort_S() {}
+
+func (*UserMetricSort_UserCostOrderReturnMetricSort) isUserMetricSort_S() {}
+
+func (*UserMetricSort_UserCostOrderReturnCompletedMetricSort) isUserMetricSort_S() {}
+
+func (*UserMetricSort_UserCostOrderOngoingMetricSort) isUserMetricSort_S() {}
 
 func (*UserMetricSort_UserProfitOrderCreatedMetricSort) isUserMetricSort_S() {}
 
@@ -654,9 +985,13 @@ func (*UserMetricSort_UserProfitOrderWithdrawalMetricSort) isUserMetricSort_S() 
 
 func (*UserMetricSort_UserLostProfitOrderMetricSort) isUserMetricSort_S() {}
 
+func (*UserMetricSort_UserProfitOrLossMetricSort) isUserMetricSort_S() {}
+
 func (*UserMetricSort_UserAdsExpenseMetricSort) isUserMetricSort_S() {}
 
-func (*UserMetricSort_UserProfitOrLossMetricSort) isUserMetricSort_S() {}
+func (*UserMetricSort_UserWithdrawalMetricSort) isUserMetricSort_S() {}
+
+func (*UserMetricSort_UserWithdrawalBreakdownMetricSort) isUserMetricSort_S() {}
 
 type UserMetric struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -666,24 +1001,41 @@ type UserMetric struct {
 	//	*UserMetric_UserOrderWithdrawalMetric
 	//	*UserMetric_UserOrderCancelledMetric
 	//	*UserMetric_UserOrderLostMetric
+	//	*UserMetric_UserOrderCompletedMetric
+	//	*UserMetric_UserOrderReturnMetric
+	//	*UserMetric_UserOrderReturnCompletedMetric
+	//	*UserMetric_UserOrderOngoingMetric
 	//	*UserMetric_UserStockOrderMetric
 	//	*UserMetric_UserStockOrderWithdrawalMetric
 	//	*UserMetric_UserStockOrderCancelledMetric
 	//	*UserMetric_UserStockOrderLostMetric
+	//	*UserMetric_UserStockOrderCompletedMetric
+	//	*UserMetric_UserStockOrderReturnMetric
+	//	*UserMetric_UserStockOrderReturnCompletedMetric
+	//	*UserMetric_UserStockOrderOngoingMetric
 	//	*UserMetric_UserAvgOrderMetric
 	//	*UserMetric_UserAvgOrderWithdrawalMetric
 	//	*UserMetric_UserAvgOrderCancelledMetric
 	//	*UserMetric_UserAvgOrderLostMetric
+	//	*UserMetric_UserAvgOrderCompletedMetric
+	//	*UserMetric_UserAvgOrderReturnMetric
+	//	*UserMetric_UserAvgOrderReturnCompletedMetric
+	//	*UserMetric_UserAvgOrderOngoingMetric
 	//	*UserMetric_UserCostOrderMetric
 	//	*UserMetric_UserCostOrderWithdrawalMetric
 	//	*UserMetric_UserCostOrderCancelledMetric
 	//	*UserMetric_UserCostOrderLostMetric
-	//	*UserMetric_UserWithdrawalMetric
+	//	*UserMetric_UserCostOrderCompletedMetric
+	//	*UserMetric_UserCostOrderReturnMetric
+	//	*UserMetric_UserCostOrderReturnCompletedMetric
+	//	*UserMetric_UserCostOrderOngoingMetric
 	//	*UserMetric_UserProfitOrderCreatedMetric
 	//	*UserMetric_UserProfitOrderWithdrawalMetric
 	//	*UserMetric_UserLostProfitOrderMetric
-	//	*UserMetric_UserAdsExpenseMetric
 	//	*UserMetric_UserProfitOrLossMetric
+	//	*UserMetric_UserWithdrawalMetric
+	//	*UserMetric_UserWithdrawalBreakdownMetric
+	//	*UserMetric_UserAdsExpenseMetric
 	Data          isUserMetric_Data `protobuf_oneof:"data"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -762,6 +1114,42 @@ func (x *UserMetric) GetUserOrderLostMetric() *v1.UserOrderLostMetric {
 	return nil
 }
 
+func (x *UserMetric) GetUserOrderCompletedMetric() *v1.UserOrderCompletedMetric {
+	if x != nil {
+		if x, ok := x.Data.(*UserMetric_UserOrderCompletedMetric); ok {
+			return x.UserOrderCompletedMetric
+		}
+	}
+	return nil
+}
+
+func (x *UserMetric) GetUserOrderReturnMetric() *v1.UserOrderReturnMetric {
+	if x != nil {
+		if x, ok := x.Data.(*UserMetric_UserOrderReturnMetric); ok {
+			return x.UserOrderReturnMetric
+		}
+	}
+	return nil
+}
+
+func (x *UserMetric) GetUserOrderReturnCompletedMetric() *v1.UserOrderReturnCompletedMetric {
+	if x != nil {
+		if x, ok := x.Data.(*UserMetric_UserOrderReturnCompletedMetric); ok {
+			return x.UserOrderReturnCompletedMetric
+		}
+	}
+	return nil
+}
+
+func (x *UserMetric) GetUserOrderOngoingMetric() *v1.UserOrderOngoingMetric {
+	if x != nil {
+		if x, ok := x.Data.(*UserMetric_UserOrderOngoingMetric); ok {
+			return x.UserOrderOngoingMetric
+		}
+	}
+	return nil
+}
+
 func (x *UserMetric) GetUserStockOrderMetric() *v1.UserStockOrderMetric {
 	if x != nil {
 		if x, ok := x.Data.(*UserMetric_UserStockOrderMetric); ok {
@@ -793,6 +1181,42 @@ func (x *UserMetric) GetUserStockOrderLostMetric() *v1.UserStockOrderLostMetric 
 	if x != nil {
 		if x, ok := x.Data.(*UserMetric_UserStockOrderLostMetric); ok {
 			return x.UserStockOrderLostMetric
+		}
+	}
+	return nil
+}
+
+func (x *UserMetric) GetUserStockOrderCompletedMetric() *v1.UserStockOrderCompletedMetric {
+	if x != nil {
+		if x, ok := x.Data.(*UserMetric_UserStockOrderCompletedMetric); ok {
+			return x.UserStockOrderCompletedMetric
+		}
+	}
+	return nil
+}
+
+func (x *UserMetric) GetUserStockOrderReturnMetric() *v1.UserStockOrderReturnMetric {
+	if x != nil {
+		if x, ok := x.Data.(*UserMetric_UserStockOrderReturnMetric); ok {
+			return x.UserStockOrderReturnMetric
+		}
+	}
+	return nil
+}
+
+func (x *UserMetric) GetUserStockOrderReturnCompletedMetric() *v1.UserStockOrderReturnCompletedMetric {
+	if x != nil {
+		if x, ok := x.Data.(*UserMetric_UserStockOrderReturnCompletedMetric); ok {
+			return x.UserStockOrderReturnCompletedMetric
+		}
+	}
+	return nil
+}
+
+func (x *UserMetric) GetUserStockOrderOngoingMetric() *v1.UserStockOrderOngoingMetric {
+	if x != nil {
+		if x, ok := x.Data.(*UserMetric_UserStockOrderOngoingMetric); ok {
+			return x.UserStockOrderOngoingMetric
 		}
 	}
 	return nil
@@ -834,6 +1258,42 @@ func (x *UserMetric) GetUserAvgOrderLostMetric() *v1.UserAvgOrderLostMetric {
 	return nil
 }
 
+func (x *UserMetric) GetUserAvgOrderCompletedMetric() *v1.UserAvgOrderCompletedMetric {
+	if x != nil {
+		if x, ok := x.Data.(*UserMetric_UserAvgOrderCompletedMetric); ok {
+			return x.UserAvgOrderCompletedMetric
+		}
+	}
+	return nil
+}
+
+func (x *UserMetric) GetUserAvgOrderReturnMetric() *v1.UserAvgOrderReturnMetric {
+	if x != nil {
+		if x, ok := x.Data.(*UserMetric_UserAvgOrderReturnMetric); ok {
+			return x.UserAvgOrderReturnMetric
+		}
+	}
+	return nil
+}
+
+func (x *UserMetric) GetUserAvgOrderReturnCompletedMetric() *v1.UserAvgOrderReturnCompletedMetric {
+	if x != nil {
+		if x, ok := x.Data.(*UserMetric_UserAvgOrderReturnCompletedMetric); ok {
+			return x.UserAvgOrderReturnCompletedMetric
+		}
+	}
+	return nil
+}
+
+func (x *UserMetric) GetUserAvgOrderOngoingMetric() *v1.UserAvgOrderOngoingMetric {
+	if x != nil {
+		if x, ok := x.Data.(*UserMetric_UserAvgOrderOngoingMetric); ok {
+			return x.UserAvgOrderOngoingMetric
+		}
+	}
+	return nil
+}
+
 func (x *UserMetric) GetUserCostOrderMetric() *v1.UserCostOrderMetric {
 	if x != nil {
 		if x, ok := x.Data.(*UserMetric_UserCostOrderMetric); ok {
@@ -870,10 +1330,37 @@ func (x *UserMetric) GetUserCostOrderLostMetric() *v1.UserCostOrderLostMetric {
 	return nil
 }
 
-func (x *UserMetric) GetUserWithdrawalMetric() *v1.UserWithdrawalMetric {
+func (x *UserMetric) GetUserCostOrderCompletedMetric() *v1.UserCostOrderCompletedMetric {
 	if x != nil {
-		if x, ok := x.Data.(*UserMetric_UserWithdrawalMetric); ok {
-			return x.UserWithdrawalMetric
+		if x, ok := x.Data.(*UserMetric_UserCostOrderCompletedMetric); ok {
+			return x.UserCostOrderCompletedMetric
+		}
+	}
+	return nil
+}
+
+func (x *UserMetric) GetUserCostOrderReturnMetric() *v1.UserCostOrderReturnMetric {
+	if x != nil {
+		if x, ok := x.Data.(*UserMetric_UserCostOrderReturnMetric); ok {
+			return x.UserCostOrderReturnMetric
+		}
+	}
+	return nil
+}
+
+func (x *UserMetric) GetUserCostOrderReturnCompletedMetric() *v1.UserCostOrderReturnCompletedMetric {
+	if x != nil {
+		if x, ok := x.Data.(*UserMetric_UserCostOrderReturnCompletedMetric); ok {
+			return x.UserCostOrderReturnCompletedMetric
+		}
+	}
+	return nil
+}
+
+func (x *UserMetric) GetUserCostOrderOngoingMetric() *v1.UserCostOrderOngoingMetric {
+	if x != nil {
+		if x, ok := x.Data.(*UserMetric_UserCostOrderOngoingMetric); ok {
+			return x.UserCostOrderOngoingMetric
 		}
 	}
 	return nil
@@ -906,19 +1393,37 @@ func (x *UserMetric) GetUserLostProfitOrderMetric() *v1.UserLostProfitOrderMetri
 	return nil
 }
 
-func (x *UserMetric) GetUserAdsExpenseMetric() *v1.UserAdsExpenseMetric {
+func (x *UserMetric) GetUserProfitOrLossMetric() *v1.UserProfitOrLossMetric {
 	if x != nil {
-		if x, ok := x.Data.(*UserMetric_UserAdsExpenseMetric); ok {
-			return x.UserAdsExpenseMetric
+		if x, ok := x.Data.(*UserMetric_UserProfitOrLossMetric); ok {
+			return x.UserProfitOrLossMetric
 		}
 	}
 	return nil
 }
 
-func (x *UserMetric) GetUserProfitOrLossMetric() *v1.UserProfitOrLossMetric {
+func (x *UserMetric) GetUserWithdrawalMetric() *v1.UserWithdrawalMetric {
 	if x != nil {
-		if x, ok := x.Data.(*UserMetric_UserProfitOrLossMetric); ok {
-			return x.UserProfitOrLossMetric
+		if x, ok := x.Data.(*UserMetric_UserWithdrawalMetric); ok {
+			return x.UserWithdrawalMetric
+		}
+	}
+	return nil
+}
+
+func (x *UserMetric) GetUserWithdrawalBreakdownMetric() *v1.UserWithdrawalBreakdownMetric {
+	if x != nil {
+		if x, ok := x.Data.(*UserMetric_UserWithdrawalBreakdownMetric); ok {
+			return x.UserWithdrawalBreakdownMetric
+		}
+	}
+	return nil
+}
+
+func (x *UserMetric) GetUserAdsExpenseMetric() *v1.UserAdsExpenseMetric {
+	if x != nil {
+		if x, ok := x.Data.(*UserMetric_UserAdsExpenseMetric); ok {
+			return x.UserAdsExpenseMetric
 		}
 	}
 	return nil
@@ -929,6 +1434,7 @@ type isUserMetric_Data interface {
 }
 
 type UserMetric_UserOrderMetric struct {
+	// order ↓↓↓
 	UserOrderMetric *v1.UserOrderMetric `protobuf:"bytes,2,opt,name=user_order_metric,json=userOrderMetric,proto3,oneof"`
 }
 
@@ -944,7 +1450,24 @@ type UserMetric_UserOrderLostMetric struct {
 	UserOrderLostMetric *v1.UserOrderLostMetric `protobuf:"bytes,18,opt,name=user_order_lost_metric,json=userOrderLostMetric,proto3,oneof"`
 }
 
+type UserMetric_UserOrderCompletedMetric struct {
+	UserOrderCompletedMetric *v1.UserOrderCompletedMetric `protobuf:"bytes,24,opt,name=user_order_completed_metric,json=userOrderCompletedMetric,proto3,oneof"`
+}
+
+type UserMetric_UserOrderReturnMetric struct {
+	UserOrderReturnMetric *v1.UserOrderReturnMetric `protobuf:"bytes,28,opt,name=user_order_return_metric,json=userOrderReturnMetric,proto3,oneof"`
+}
+
+type UserMetric_UserOrderReturnCompletedMetric struct {
+	UserOrderReturnCompletedMetric *v1.UserOrderReturnCompletedMetric `protobuf:"bytes,29,opt,name=user_order_return_completed_metric,json=userOrderReturnCompletedMetric,proto3,oneof"`
+}
+
+type UserMetric_UserOrderOngoingMetric struct {
+	UserOrderOngoingMetric *v1.UserOrderOngoingMetric `protobuf:"bytes,36,opt,name=user_order_ongoing_metric,json=userOrderOngoingMetric,proto3,oneof"`
+}
+
 type UserMetric_UserStockOrderMetric struct {
+	// stock order ↓↓↓
 	UserStockOrderMetric *v1.UserStockOrderMetric `protobuf:"bytes,3,opt,name=user_stock_order_metric,json=userStockOrderMetric,proto3,oneof"`
 }
 
@@ -960,7 +1483,24 @@ type UserMetric_UserStockOrderLostMetric struct {
 	UserStockOrderLostMetric *v1.UserStockOrderLostMetric `protobuf:"bytes,19,opt,name=user_stock_order_lost_metric,json=userStockOrderLostMetric,proto3,oneof"`
 }
 
+type UserMetric_UserStockOrderCompletedMetric struct {
+	UserStockOrderCompletedMetric *v1.UserStockOrderCompletedMetric `protobuf:"bytes,25,opt,name=user_stock_order_completed_metric,json=userStockOrderCompletedMetric,proto3,oneof"`
+}
+
+type UserMetric_UserStockOrderReturnMetric struct {
+	UserStockOrderReturnMetric *v1.UserStockOrderReturnMetric `protobuf:"bytes,30,opt,name=user_stock_order_return_metric,json=userStockOrderReturnMetric,proto3,oneof"`
+}
+
+type UserMetric_UserStockOrderReturnCompletedMetric struct {
+	UserStockOrderReturnCompletedMetric *v1.UserStockOrderReturnCompletedMetric `protobuf:"bytes,31,opt,name=user_stock_order_return_completed_metric,json=userStockOrderReturnCompletedMetric,proto3,oneof"`
+}
+
+type UserMetric_UserStockOrderOngoingMetric struct {
+	UserStockOrderOngoingMetric *v1.UserStockOrderOngoingMetric `protobuf:"bytes,37,opt,name=user_stock_order_ongoing_metric,json=userStockOrderOngoingMetric,proto3,oneof"`
+}
+
 type UserMetric_UserAvgOrderMetric struct {
+	// avg order ↓↓↓
 	UserAvgOrderMetric *v1.UserAvgOrderMetric `protobuf:"bytes,4,opt,name=user_avg_order_metric,json=userAvgOrderMetric,proto3,oneof"`
 }
 
@@ -976,7 +1516,24 @@ type UserMetric_UserAvgOrderLostMetric struct {
 	UserAvgOrderLostMetric *v1.UserAvgOrderLostMetric `protobuf:"bytes,20,opt,name=user_avg_order_lost_metric,json=userAvgOrderLostMetric,proto3,oneof"`
 }
 
+type UserMetric_UserAvgOrderCompletedMetric struct {
+	UserAvgOrderCompletedMetric *v1.UserAvgOrderCompletedMetric `protobuf:"bytes,26,opt,name=user_avg_order_completed_metric,json=userAvgOrderCompletedMetric,proto3,oneof"`
+}
+
+type UserMetric_UserAvgOrderReturnMetric struct {
+	UserAvgOrderReturnMetric *v1.UserAvgOrderReturnMetric `protobuf:"bytes,32,opt,name=user_avg_order_return_metric,json=userAvgOrderReturnMetric,proto3,oneof"`
+}
+
+type UserMetric_UserAvgOrderReturnCompletedMetric struct {
+	UserAvgOrderReturnCompletedMetric *v1.UserAvgOrderReturnCompletedMetric `protobuf:"bytes,33,opt,name=user_avg_order_return_completed_metric,json=userAvgOrderReturnCompletedMetric,proto3,oneof"`
+}
+
+type UserMetric_UserAvgOrderOngoingMetric struct {
+	UserAvgOrderOngoingMetric *v1.UserAvgOrderOngoingMetric `protobuf:"bytes,38,opt,name=user_avg_order_ongoing_metric,json=userAvgOrderOngoingMetric,proto3,oneof"`
+}
+
 type UserMetric_UserCostOrderMetric struct {
+	// cost order ↓↓↓
 	UserCostOrderMetric *v1.UserCostOrderMetric `protobuf:"bytes,11,opt,name=user_cost_order_metric,json=userCostOrderMetric,proto3,oneof"`
 }
 
@@ -992,11 +1549,24 @@ type UserMetric_UserCostOrderLostMetric struct {
 	UserCostOrderLostMetric *v1.UserCostOrderLostMetric `protobuf:"bytes,21,opt,name=user_cost_order_lost_metric,json=userCostOrderLostMetric,proto3,oneof"`
 }
 
-type UserMetric_UserWithdrawalMetric struct {
-	UserWithdrawalMetric *v1.UserWithdrawalMetric `protobuf:"bytes,14,opt,name=user_withdrawal_metric,json=userWithdrawalMetric,proto3,oneof"`
+type UserMetric_UserCostOrderCompletedMetric struct {
+	UserCostOrderCompletedMetric *v1.UserCostOrderCompletedMetric `protobuf:"bytes,27,opt,name=user_cost_order_completed_metric,json=userCostOrderCompletedMetric,proto3,oneof"`
+}
+
+type UserMetric_UserCostOrderReturnMetric struct {
+	UserCostOrderReturnMetric *v1.UserCostOrderReturnMetric `protobuf:"bytes,34,opt,name=user_cost_order_return_metric,json=userCostOrderReturnMetric,proto3,oneof"`
+}
+
+type UserMetric_UserCostOrderReturnCompletedMetric struct {
+	UserCostOrderReturnCompletedMetric *v1.UserCostOrderReturnCompletedMetric `protobuf:"bytes,35,opt,name=user_cost_order_return_completed_metric,json=userCostOrderReturnCompletedMetric,proto3,oneof"`
+}
+
+type UserMetric_UserCostOrderOngoingMetric struct {
+	UserCostOrderOngoingMetric *v1.UserCostOrderOngoingMetric `protobuf:"bytes,39,opt,name=user_cost_order_ongoing_metric,json=userCostOrderOngoingMetric,proto3,oneof"`
 }
 
 type UserMetric_UserProfitOrderCreatedMetric struct {
+	// profit ↓↓↓
 	UserProfitOrderCreatedMetric *v1.UserProfitOrderCreatedMetric `protobuf:"bytes,15,opt,name=user_profit_order_created_metric,json=userProfitOrderCreatedMetric,proto3,oneof"`
 }
 
@@ -1008,12 +1578,21 @@ type UserMetric_UserLostProfitOrderMetric struct {
 	UserLostProfitOrderMetric *v1.UserLostProfitOrderMetric `protobuf:"bytes,17,opt,name=user_lost_profit_order_metric,json=userLostProfitOrderMetric,proto3,oneof"`
 }
 
-type UserMetric_UserAdsExpenseMetric struct {
-	UserAdsExpenseMetric *v1.UserAdsExpenseMetric `protobuf:"bytes,22,opt,name=user_ads_expense_metric,json=userAdsExpenseMetric,proto3,oneof"`
-}
-
 type UserMetric_UserProfitOrLossMetric struct {
 	UserProfitOrLossMetric *v1.UserProfitOrLossMetric `protobuf:"bytes,23,opt,name=user_profit_or_loss_metric,json=userProfitOrLossMetric,proto3,oneof"`
+}
+
+type UserMetric_UserWithdrawalMetric struct {
+	// etc ↓↓↓
+	UserWithdrawalMetric *v1.UserWithdrawalMetric `protobuf:"bytes,14,opt,name=user_withdrawal_metric,json=userWithdrawalMetric,proto3,oneof"`
+}
+
+type UserMetric_UserWithdrawalBreakdownMetric struct {
+	UserWithdrawalBreakdownMetric *v1.UserWithdrawalBreakdownMetric `protobuf:"bytes,40,opt,name=user_withdrawal_breakdown_metric,json=userWithdrawalBreakdownMetric,proto3,oneof"`
+}
+
+type UserMetric_UserAdsExpenseMetric struct {
+	UserAdsExpenseMetric *v1.UserAdsExpenseMetric `protobuf:"bytes,22,opt,name=user_ads_expense_metric,json=userAdsExpenseMetric,proto3,oneof"`
 }
 
 func (*UserMetric_UserOrderMetric) isUserMetric_Data() {}
@@ -1024,6 +1603,14 @@ func (*UserMetric_UserOrderCancelledMetric) isUserMetric_Data() {}
 
 func (*UserMetric_UserOrderLostMetric) isUserMetric_Data() {}
 
+func (*UserMetric_UserOrderCompletedMetric) isUserMetric_Data() {}
+
+func (*UserMetric_UserOrderReturnMetric) isUserMetric_Data() {}
+
+func (*UserMetric_UserOrderReturnCompletedMetric) isUserMetric_Data() {}
+
+func (*UserMetric_UserOrderOngoingMetric) isUserMetric_Data() {}
+
 func (*UserMetric_UserStockOrderMetric) isUserMetric_Data() {}
 
 func (*UserMetric_UserStockOrderWithdrawalMetric) isUserMetric_Data() {}
@@ -1031,6 +1618,14 @@ func (*UserMetric_UserStockOrderWithdrawalMetric) isUserMetric_Data() {}
 func (*UserMetric_UserStockOrderCancelledMetric) isUserMetric_Data() {}
 
 func (*UserMetric_UserStockOrderLostMetric) isUserMetric_Data() {}
+
+func (*UserMetric_UserStockOrderCompletedMetric) isUserMetric_Data() {}
+
+func (*UserMetric_UserStockOrderReturnMetric) isUserMetric_Data() {}
+
+func (*UserMetric_UserStockOrderReturnCompletedMetric) isUserMetric_Data() {}
+
+func (*UserMetric_UserStockOrderOngoingMetric) isUserMetric_Data() {}
 
 func (*UserMetric_UserAvgOrderMetric) isUserMetric_Data() {}
 
@@ -1040,6 +1635,14 @@ func (*UserMetric_UserAvgOrderCancelledMetric) isUserMetric_Data() {}
 
 func (*UserMetric_UserAvgOrderLostMetric) isUserMetric_Data() {}
 
+func (*UserMetric_UserAvgOrderCompletedMetric) isUserMetric_Data() {}
+
+func (*UserMetric_UserAvgOrderReturnMetric) isUserMetric_Data() {}
+
+func (*UserMetric_UserAvgOrderReturnCompletedMetric) isUserMetric_Data() {}
+
+func (*UserMetric_UserAvgOrderOngoingMetric) isUserMetric_Data() {}
+
 func (*UserMetric_UserCostOrderMetric) isUserMetric_Data() {}
 
 func (*UserMetric_UserCostOrderWithdrawalMetric) isUserMetric_Data() {}
@@ -1048,7 +1651,13 @@ func (*UserMetric_UserCostOrderCancelledMetric) isUserMetric_Data() {}
 
 func (*UserMetric_UserCostOrderLostMetric) isUserMetric_Data() {}
 
-func (*UserMetric_UserWithdrawalMetric) isUserMetric_Data() {}
+func (*UserMetric_UserCostOrderCompletedMetric) isUserMetric_Data() {}
+
+func (*UserMetric_UserCostOrderReturnMetric) isUserMetric_Data() {}
+
+func (*UserMetric_UserCostOrderReturnCompletedMetric) isUserMetric_Data() {}
+
+func (*UserMetric_UserCostOrderOngoingMetric) isUserMetric_Data() {}
 
 func (*UserMetric_UserProfitOrderCreatedMetric) isUserMetric_Data() {}
 
@@ -1056,9 +1665,13 @@ func (*UserMetric_UserProfitOrderWithdrawalMetric) isUserMetric_Data() {}
 
 func (*UserMetric_UserLostProfitOrderMetric) isUserMetric_Data() {}
 
-func (*UserMetric_UserAdsExpenseMetric) isUserMetric_Data() {}
-
 func (*UserMetric_UserProfitOrLossMetric) isUserMetric_Data() {}
+
+func (*UserMetric_UserWithdrawalMetric) isUserMetric_Data() {}
+
+func (*UserMetric_UserWithdrawalBreakdownMetric) isUserMetric_Data() {}
+
+func (*UserMetric_UserAdsExpenseMetric) isUserMetric_Data() {}
 
 type UserMetricExtra struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -1332,7 +1945,7 @@ var File_selling_iface_v1_user_stat_metric_proto protoreflect.FileDescriptor
 
 const file_selling_iface_v1_user_stat_metric_proto_rawDesc = "" +
 	"\n" +
-	"'selling_iface/v1/user_stat_metric.proto\x12\x10selling_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a2selling_iface/v1/user_metric/v1/order_metric.proto\"\xf7\x18\n" +
+	"'selling_iface/v1/user_stat_metric.proto\x12\x10selling_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a2selling_iface/v1/user_metric/v1/order_metric.proto\x1a2selling_iface/v1/user_metric/v1/stock_metric.proto\x1a1selling_iface/v1/user_metric/v1/cost_metric.proto\x1a4selling_iface/v1/user_metric/v1/revenue_metric.proto\x1a3selling_iface/v1/user_metric/v1/profit_metric.proto\"\xdb,\n" +
 	"\x0eUserMetricSort\x12A\n" +
 	"\tsort_type\x18\x01 \x01(\x0e2$.selling_iface.v1.UserMetricSortTypeR\bsortType\x12C\n" +
 	"\vcommon_sort\x18\x02 \x01(\x0e2 .selling_iface.v1.CommonUserSortH\x00R\n" +
@@ -1340,52 +1953,86 @@ const file_selling_iface_v1_user_stat_metric_proto_rawDesc = "" +
 	"\x16user_order_metric_sort\x18\x03 \x01(\x0e24.selling_iface.v1.user_metric.v1.UserOrderMetricSortH\x00R\x13userOrderMetricSort\x12\x8a\x01\n" +
 	"!user_order_withdrawal_metric_sort\x18\x06 \x01(\x0e2>.selling_iface.v1.user_metric.v1.UserOrderWithdrawalMetricSortH\x00R\x1duserOrderWithdrawalMetricSort\x12\x87\x01\n" +
 	" user_order_cancelled_metric_sort\x18\a \x01(\x0e2=.selling_iface.v1.user_metric.v1.UserOrderCancelledMetricSortH\x00R\x1cuserOrderCancelledMetricSort\x12x\n" +
-	"\x1buser_order_lost_metric_sort\x18\x13 \x01(\x0e28.selling_iface.v1.user_metric.v1.UserOrderLostMetricSortH\x00R\x17userOrderLostMetricSort\x12{\n" +
+	"\x1buser_order_lost_metric_sort\x18\x13 \x01(\x0e28.selling_iface.v1.user_metric.v1.UserOrderLostMetricSortH\x00R\x17userOrderLostMetricSort\x12\x87\x01\n" +
+	" user_order_completed_metric_sort\x18\x19 \x01(\x0e2=.selling_iface.v1.user_metric.v1.UserOrderCompletedMetricSortH\x00R\x1cuserOrderCompletedMetricSort\x12~\n" +
+	"\x1duser_order_return_metric_sort\x18\x1d \x01(\x0e2:.selling_iface.v1.user_metric.v1.UserOrderReturnMetricSortH\x00R\x19userOrderReturnMetricSort\x12\x9a\x01\n" +
+	"'user_order_return_completed_metric_sort\x18\x1e \x01(\x0e2C.selling_iface.v1.user_metric.v1.UserOrderReturnCompletedMetricSortH\x00R\"userOrderReturnCompletedMetricSort\x12\x81\x01\n" +
+	"\x1euser_order_ongoing_metric_sort\x18% \x01(\x0e2;.selling_iface.v1.user_metric.v1.UserOrderOngoingMetricSortH\x00R\x1auserOrderOngoingMetricSort\x12{\n" +
 	"\x1cuser_stock_order_metric_sort\x18\x04 \x01(\x0e29.selling_iface.v1.user_metric.v1.UserStockOrderMetricSortH\x00R\x18userStockOrderMetricSort\x12\x9a\x01\n" +
 	"'user_stock_order_withdrawal_metric_sort\x18\b \x01(\x0e2C.selling_iface.v1.user_metric.v1.UserStockOrderWithdrawalMetricSortH\x00R\"userStockOrderWithdrawalMetricSort\x12\x97\x01\n" +
 	"&user_stock_order_cancelled_metric_sort\x18\t \x01(\x0e2B.selling_iface.v1.user_metric.v1.UserStockOrderCancelledMetricSortH\x00R!userStockOrderCancelledMetricSort\x12\x88\x01\n" +
-	"!user_stock_order_lost_metric_sort\x18\x14 \x01(\x0e2=.selling_iface.v1.user_metric.v1.UserStockOrderLostMetricSortH\x00R\x1cuserStockOrderLostMetricSort\x12u\n" +
+	"!user_stock_order_lost_metric_sort\x18\x14 \x01(\x0e2=.selling_iface.v1.user_metric.v1.UserStockOrderLostMetricSortH\x00R\x1cuserStockOrderLostMetricSort\x12\x97\x01\n" +
+	"&user_stock_order_completed_metric_sort\x18\x1a \x01(\x0e2B.selling_iface.v1.user_metric.v1.UserStockOrderCompletedMetricSortH\x00R!userStockOrderCompletedMetricSort\x12\x8e\x01\n" +
+	"#user_stock_order_return_metric_sort\x18\x1f \x01(\x0e2?.selling_iface.v1.user_metric.v1.UserStockOrderReturnMetricSortH\x00R\x1euserStockOrderReturnMetricSort\x12\xaa\x01\n" +
+	"-user_stock_order_return_completed_metric_sort\x18  \x01(\x0e2H.selling_iface.v1.user_metric.v1.UserStockOrderReturnCompletedMetricSortH\x00R'userStockOrderReturnCompletedMetricSort\x12\x91\x01\n" +
+	"$user_stock_order_ongoing_metric_sort\x18& \x01(\x0e2@.selling_iface.v1.user_metric.v1.UserStockOrderOngoingMetricSortH\x00R\x1fuserStockOrderOngoingMetricSort\x12u\n" +
 	"\x1auser_avg_order_metric_sort\x18\x05 \x01(\x0e27.selling_iface.v1.user_metric.v1.UserAvgOrderMetricSortH\x00R\x16userAvgOrderMetricSort\x12\x94\x01\n" +
 	"%user_avg_order_withdrawal_metric_sort\x18\n" +
 	" \x01(\x0e2A.selling_iface.v1.user_metric.v1.UserAvgOrderWithdrawalMetricSortH\x00R userAvgOrderWithdrawalMetricSort\x12\x91\x01\n" +
 	"$user_avg_order_cancelled_metric_sort\x18\v \x01(\x0e2@.selling_iface.v1.user_metric.v1.UserAvgOrderCancelledMetricSortH\x00R\x1fuserAvgOrderCancelledMetricSort\x12\x82\x01\n" +
-	"\x1fuser_avg_order_lost_metric_sort\x18\x15 \x01(\x0e2;.selling_iface.v1.user_metric.v1.UserAvgOrderLostMetricSortH\x00R\x1auserAvgOrderLostMetricSort\x12x\n" +
+	"\x1fuser_avg_order_lost_metric_sort\x18\x15 \x01(\x0e2;.selling_iface.v1.user_metric.v1.UserAvgOrderLostMetricSortH\x00R\x1auserAvgOrderLostMetricSort\x12\x91\x01\n" +
+	"$user_avg_order_completed_metric_sort\x18\x1b \x01(\x0e2@.selling_iface.v1.user_metric.v1.UserAvgOrderCompletedMetricSortH\x00R\x1fuserAvgOrderCompletedMetricSort\x12\x88\x01\n" +
+	"!user_avg_order_return_metric_sort\x18! \x01(\x0e2=.selling_iface.v1.user_metric.v1.UserAvgOrderReturnMetricSortH\x00R\x1cuserAvgOrderReturnMetricSort\x12\xa4\x01\n" +
+	"+user_avg_order_return_completed_metric_sort\x18\" \x01(\x0e2F.selling_iface.v1.user_metric.v1.UserAvgOrderReturnCompletedMetricSortH\x00R%userAvgOrderReturnCompletedMetricSort\x12\x8b\x01\n" +
+	"\"user_avg_order_ongoing_metric_sort\x18' \x01(\x0e2>.selling_iface.v1.user_metric.v1.UserAvgOrderOngoingMetricSortH\x00R\x1duserAvgOrderOngoingMetricSort\x12x\n" +
 	"\x1buser_cost_order_metric_sort\x18\f \x01(\x0e28.selling_iface.v1.user_metric.v1.UserCostOrderMetricSortH\x00R\x17userCostOrderMetricSort\x12\x97\x01\n" +
 	"&user_cost_order_withdrawal_metric_sort\x18\r \x01(\x0e2B.selling_iface.v1.user_metric.v1.UserCostOrderWithdrawalMetricSortH\x00R!userCostOrderWithdrawalMetricSort\x12\x94\x01\n" +
 	"%user_cost_order_cancelled_metric_sort\x18\x0e \x01(\x0e2A.selling_iface.v1.user_metric.v1.UserCostOrderCancelledMetricSortH\x00R userCostOrderCancelledMetricSort\x12\x85\x01\n" +
-	" user_cost_order_lost_metric_sort\x18\x16 \x01(\x0e2<.selling_iface.v1.user_metric.v1.UserCostOrderLostMetricSortH\x00R\x1buserCostOrderLostMetricSort\x12z\n" +
-	"\x1buser_withdrawal_metric_sort\x18\x0f \x01(\x0e29.selling_iface.v1.user_metric.v1.UserWithdrawalMetricSortH\x00R\x18userWithdrawalMetricSort\x12\x94\x01\n" +
+	" user_cost_order_lost_metric_sort\x18\x16 \x01(\x0e2<.selling_iface.v1.user_metric.v1.UserCostOrderLostMetricSortH\x00R\x1buserCostOrderLostMetricSort\x12\x94\x01\n" +
+	"%user_cost_order_completed_metric_sort\x18\x1c \x01(\x0e2A.selling_iface.v1.user_metric.v1.UserCostOrderCompletedMetricSortH\x00R userCostOrderCompletedMetricSort\x12\x8b\x01\n" +
+	"\"user_cost_order_return_metric_sort\x18# \x01(\x0e2>.selling_iface.v1.user_metric.v1.UserCostOrderReturnMetricSortH\x00R\x1duserCostOrderReturnMetricSort\x12\xa7\x01\n" +
+	",user_cost_order_return_completed_metric_sort\x18$ \x01(\x0e2G.selling_iface.v1.user_metric.v1.UserCostOrderReturnCompletedMetricSortH\x00R&userCostOrderReturnCompletedMetricSort\x12\x8e\x01\n" +
+	"#user_cost_order_ongoing_metric_sort\x18( \x01(\x0e2?.selling_iface.v1.user_metric.v1.UserCostOrderOngoingMetricSortH\x00R\x1euserCostOrderOngoingMetricSort\x12\x94\x01\n" +
 	"%user_profit_order_created_metric_sort\x18\x10 \x01(\x0e2A.selling_iface.v1.user_metric.v1.UserProfitOrderCreatedMetricSortH\x00R userProfitOrderCreatedMetricSort\x12\x9d\x01\n" +
 	"(user_profit_order_withdrawal_metric_sort\x18\x11 \x01(\x0e2D.selling_iface.v1.user_metric.v1.UserProfitOrderWithdrawalMetricSortH\x00R#userProfitOrderWithdrawalMetricSort\x12\x8b\x01\n" +
-	"\"user_lost_profit_order_metric_sort\x18\x12 \x01(\x0e2>.selling_iface.v1.user_metric.v1.UserLostProfitOrderMetricSortH\x00R\x1duserLostProfitOrderMetricSort\x12{\n" +
-	"\x1cuser_ads_expense_metric_sort\x18\x17 \x01(\x0e29.selling_iface.v1.user_metric.v1.UserAdsExpenseMetricSortH\x00R\x18userAdsExpenseMetricSort\x12\x82\x01\n" +
-	"\x1fuser_profit_or_loss_metric_sort\x18\x18 \x01(\x0e2;.selling_iface.v1.user_metric.v1.UserProfitOrLossMetricSortH\x00R\x1auserProfitOrLossMetricSortB\x03\n" +
-	"\x01s\"\xc9\x15\n" +
+	"\"user_lost_profit_order_metric_sort\x18\x12 \x01(\x0e2>.selling_iface.v1.user_metric.v1.UserLostProfitOrderMetricSortH\x00R\x1duserLostProfitOrderMetricSort\x12\x82\x01\n" +
+	"\x1fuser_profit_or_loss_metric_sort\x18\x18 \x01(\x0e2;.selling_iface.v1.user_metric.v1.UserProfitOrLossMetricSortH\x00R\x1auserProfitOrLossMetricSort\x12{\n" +
+	"\x1cuser_ads_expense_metric_sort\x18\x17 \x01(\x0e29.selling_iface.v1.user_metric.v1.UserAdsExpenseMetricSortH\x00R\x18userAdsExpenseMetricSort\x12z\n" +
+	"\x1buser_withdrawal_metric_sort\x18\x0f \x01(\x0e29.selling_iface.v1.user_metric.v1.UserWithdrawalMetricSortH\x00R\x18userWithdrawalMetricSort\x12\x96\x01\n" +
+	"%user_withdrawal_breakdown_metric_sort\x18) \x01(\x0e2B.selling_iface.v1.user_metric.v1.UserWithdrawalBreakdownMetricSortH\x00R!userWithdrawalBreakdownMetricSortB\x03\n" +
+	"\x01s\"\xcb'\n" +
 	"\n" +
 	"UserMetric\x12^\n" +
 	"\x11user_order_metric\x18\x02 \x01(\v20.selling_iface.v1.user_metric.v1.UserOrderMetricH\x00R\x0fuserOrderMetric\x12}\n" +
 	"\x1cuser_order_withdrawal_metric\x18\x05 \x01(\v2:.selling_iface.v1.user_metric.v1.UserOrderWithdrawalMetricH\x00R\x19userOrderWithdrawalMetric\x12z\n" +
 	"\x1buser_order_cancelled_metric\x18\x06 \x01(\v29.selling_iface.v1.user_metric.v1.UserOrderCancelledMetricH\x00R\x18userOrderCancelledMetric\x12k\n" +
-	"\x16user_order_lost_metric\x18\x12 \x01(\v24.selling_iface.v1.user_metric.v1.UserOrderLostMetricH\x00R\x13userOrderLostMetric\x12n\n" +
+	"\x16user_order_lost_metric\x18\x12 \x01(\v24.selling_iface.v1.user_metric.v1.UserOrderLostMetricH\x00R\x13userOrderLostMetric\x12z\n" +
+	"\x1buser_order_completed_metric\x18\x18 \x01(\v29.selling_iface.v1.user_metric.v1.UserOrderCompletedMetricH\x00R\x18userOrderCompletedMetric\x12q\n" +
+	"\x18user_order_return_metric\x18\x1c \x01(\v26.selling_iface.v1.user_metric.v1.UserOrderReturnMetricH\x00R\x15userOrderReturnMetric\x12\x8d\x01\n" +
+	"\"user_order_return_completed_metric\x18\x1d \x01(\v2?.selling_iface.v1.user_metric.v1.UserOrderReturnCompletedMetricH\x00R\x1euserOrderReturnCompletedMetric\x12t\n" +
+	"\x19user_order_ongoing_metric\x18$ \x01(\v27.selling_iface.v1.user_metric.v1.UserOrderOngoingMetricH\x00R\x16userOrderOngoingMetric\x12n\n" +
 	"\x17user_stock_order_metric\x18\x03 \x01(\v25.selling_iface.v1.user_metric.v1.UserStockOrderMetricH\x00R\x14userStockOrderMetric\x12\x8d\x01\n" +
 	"\"user_stock_order_withdrawal_metric\x18\a \x01(\v2?.selling_iface.v1.user_metric.v1.UserStockOrderWithdrawalMetricH\x00R\x1euserStockOrderWithdrawalMetric\x12\x8a\x01\n" +
 	"!user_stock_order_cancelled_metric\x18\b \x01(\v2>.selling_iface.v1.user_metric.v1.UserStockOrderCancelledMetricH\x00R\x1duserStockOrderCancelledMetric\x12{\n" +
-	"\x1cuser_stock_order_lost_metric\x18\x13 \x01(\v29.selling_iface.v1.user_metric.v1.UserStockOrderLostMetricH\x00R\x18userStockOrderLostMetric\x12h\n" +
+	"\x1cuser_stock_order_lost_metric\x18\x13 \x01(\v29.selling_iface.v1.user_metric.v1.UserStockOrderLostMetricH\x00R\x18userStockOrderLostMetric\x12\x8a\x01\n" +
+	"!user_stock_order_completed_metric\x18\x19 \x01(\v2>.selling_iface.v1.user_metric.v1.UserStockOrderCompletedMetricH\x00R\x1duserStockOrderCompletedMetric\x12\x81\x01\n" +
+	"\x1euser_stock_order_return_metric\x18\x1e \x01(\v2;.selling_iface.v1.user_metric.v1.UserStockOrderReturnMetricH\x00R\x1auserStockOrderReturnMetric\x12\x9d\x01\n" +
+	"(user_stock_order_return_completed_metric\x18\x1f \x01(\v2D.selling_iface.v1.user_metric.v1.UserStockOrderReturnCompletedMetricH\x00R#userStockOrderReturnCompletedMetric\x12\x84\x01\n" +
+	"\x1fuser_stock_order_ongoing_metric\x18% \x01(\v2<.selling_iface.v1.user_metric.v1.UserStockOrderOngoingMetricH\x00R\x1buserStockOrderOngoingMetric\x12h\n" +
 	"\x15user_avg_order_metric\x18\x04 \x01(\v23.selling_iface.v1.user_metric.v1.UserAvgOrderMetricH\x00R\x12userAvgOrderMetric\x12\x87\x01\n" +
 	" user_avg_order_withdrawal_metric\x18\t \x01(\v2=.selling_iface.v1.user_metric.v1.UserAvgOrderWithdrawalMetricH\x00R\x1cuserAvgOrderWithdrawalMetric\x12\x84\x01\n" +
 	"\x1fuser_avg_order_cancelled_metric\x18\n" +
 	" \x01(\v2<.selling_iface.v1.user_metric.v1.UserAvgOrderCancelledMetricH\x00R\x1buserAvgOrderCancelledMetric\x12u\n" +
-	"\x1auser_avg_order_lost_metric\x18\x14 \x01(\v27.selling_iface.v1.user_metric.v1.UserAvgOrderLostMetricH\x00R\x16userAvgOrderLostMetric\x12k\n" +
+	"\x1auser_avg_order_lost_metric\x18\x14 \x01(\v27.selling_iface.v1.user_metric.v1.UserAvgOrderLostMetricH\x00R\x16userAvgOrderLostMetric\x12\x84\x01\n" +
+	"\x1fuser_avg_order_completed_metric\x18\x1a \x01(\v2<.selling_iface.v1.user_metric.v1.UserAvgOrderCompletedMetricH\x00R\x1buserAvgOrderCompletedMetric\x12{\n" +
+	"\x1cuser_avg_order_return_metric\x18  \x01(\v29.selling_iface.v1.user_metric.v1.UserAvgOrderReturnMetricH\x00R\x18userAvgOrderReturnMetric\x12\x97\x01\n" +
+	"&user_avg_order_return_completed_metric\x18! \x01(\v2B.selling_iface.v1.user_metric.v1.UserAvgOrderReturnCompletedMetricH\x00R!userAvgOrderReturnCompletedMetric\x12~\n" +
+	"\x1duser_avg_order_ongoing_metric\x18& \x01(\v2:.selling_iface.v1.user_metric.v1.UserAvgOrderOngoingMetricH\x00R\x19userAvgOrderOngoingMetric\x12k\n" +
 	"\x16user_cost_order_metric\x18\v \x01(\v24.selling_iface.v1.user_metric.v1.UserCostOrderMetricH\x00R\x13userCostOrderMetric\x12\x8a\x01\n" +
 	"!user_cost_order_withdrawal_metric\x18\f \x01(\v2>.selling_iface.v1.user_metric.v1.UserCostOrderWithdrawalMetricH\x00R\x1duserCostOrderWithdrawalMetric\x12\x87\x01\n" +
 	" user_cost_order_cancelled_metric\x18\r \x01(\v2=.selling_iface.v1.user_metric.v1.UserCostOrderCancelledMetricH\x00R\x1cuserCostOrderCancelledMetric\x12x\n" +
-	"\x1buser_cost_order_lost_metric\x18\x15 \x01(\v28.selling_iface.v1.user_metric.v1.UserCostOrderLostMetricH\x00R\x17userCostOrderLostMetric\x12m\n" +
-	"\x16user_withdrawal_metric\x18\x0e \x01(\v25.selling_iface.v1.user_metric.v1.UserWithdrawalMetricH\x00R\x14userWithdrawalMetric\x12\x87\x01\n" +
+	"\x1buser_cost_order_lost_metric\x18\x15 \x01(\v28.selling_iface.v1.user_metric.v1.UserCostOrderLostMetricH\x00R\x17userCostOrderLostMetric\x12\x87\x01\n" +
+	" user_cost_order_completed_metric\x18\x1b \x01(\v2=.selling_iface.v1.user_metric.v1.UserCostOrderCompletedMetricH\x00R\x1cuserCostOrderCompletedMetric\x12~\n" +
+	"\x1duser_cost_order_return_metric\x18\" \x01(\v2:.selling_iface.v1.user_metric.v1.UserCostOrderReturnMetricH\x00R\x19userCostOrderReturnMetric\x12\x9a\x01\n" +
+	"'user_cost_order_return_completed_metric\x18# \x01(\v2C.selling_iface.v1.user_metric.v1.UserCostOrderReturnCompletedMetricH\x00R\"userCostOrderReturnCompletedMetric\x12\x81\x01\n" +
+	"\x1euser_cost_order_ongoing_metric\x18' \x01(\v2;.selling_iface.v1.user_metric.v1.UserCostOrderOngoingMetricH\x00R\x1auserCostOrderOngoingMetric\x12\x87\x01\n" +
 	" user_profit_order_created_metric\x18\x0f \x01(\v2=.selling_iface.v1.user_metric.v1.UserProfitOrderCreatedMetricH\x00R\x1cuserProfitOrderCreatedMetric\x12\x90\x01\n" +
 	"#user_profit_order_withdrawal_metric\x18\x10 \x01(\v2@.selling_iface.v1.user_metric.v1.UserProfitOrderWithdrawalMetricH\x00R\x1fuserProfitOrderWithdrawalMetric\x12~\n" +
-	"\x1duser_lost_profit_order_metric\x18\x11 \x01(\v2:.selling_iface.v1.user_metric.v1.UserLostProfitOrderMetricH\x00R\x19userLostProfitOrderMetric\x12n\n" +
-	"\x17user_ads_expense_metric\x18\x16 \x01(\v25.selling_iface.v1.user_metric.v1.UserAdsExpenseMetricH\x00R\x14userAdsExpenseMetric\x12u\n" +
-	"\x1auser_profit_or_loss_metric\x18\x17 \x01(\v27.selling_iface.v1.user_metric.v1.UserProfitOrLossMetricH\x00R\x16userProfitOrLossMetricB\x06\n" +
+	"\x1duser_lost_profit_order_metric\x18\x11 \x01(\v2:.selling_iface.v1.user_metric.v1.UserLostProfitOrderMetricH\x00R\x19userLostProfitOrderMetric\x12u\n" +
+	"\x1auser_profit_or_loss_metric\x18\x17 \x01(\v27.selling_iface.v1.user_metric.v1.UserProfitOrLossMetricH\x00R\x16userProfitOrLossMetric\x12m\n" +
+	"\x16user_withdrawal_metric\x18\x0e \x01(\v25.selling_iface.v1.user_metric.v1.UserWithdrawalMetricH\x00R\x14userWithdrawalMetric\x12\x89\x01\n" +
+	" user_withdrawal_breakdown_metric\x18( \x01(\v2>.selling_iface.v1.user_metric.v1.UserWithdrawalBreakdownMetricH\x00R\x1duserWithdrawalBreakdownMetric\x12n\n" +
+	"\x17user_ads_expense_metric\x18\x16 \x01(\v25.selling_iface.v1.user_metric.v1.UserAdsExpenseMetricH\x00R\x14userAdsExpenseMetricB\x06\n" +
 	"\x04data\"\x11\n" +
 	"\x0fUserMetricExtra\"\x9d\x01\n" +
 	"\x14UserStatMetricFilter\x12\x17\n" +
@@ -1402,32 +2049,49 @@ const file_selling_iface_v1_user_stat_metric_proto_rawDesc = "" +
 	"\fmetric_types\x18\x04 \x03(\x0e2 .selling_iface.v1.UserMetricTypeR\vmetricTypes\"b\n" +
 	"\x16UserStatMetricResponse\x126\n" +
 	"\ametrics\x18\x01 \x03(\v2\x1c.selling_iface.v1.UserMetricR\ametrics\x12\x10\n" +
-	"\x03ids\x18\x02 \x03(\x04R\x03ids*\xff\x06\n" +
+	"\x03ids\x18\x02 \x03(\x04R\x03ids*\xce\f\n" +
 	"\x0eUserMetricType\x12 \n" +
 	"\x1cUSER_METRIC_TYPE_UNSPECIFIED\x10\x00\x12\x1a\n" +
 	"\x16USER_METRIC_TYPE_ORDER\x10\x01\x12%\n" +
 	"!USER_METRIC_TYPE_ORDER_WITHDRAWAL\x10\x04\x12$\n" +
 	" USER_METRIC_TYPE_ORDER_CANCELLED\x10\x05\x12\x1f\n" +
-	"\x1bUSER_METRIC_TYPE_ORDER_LOST\x10\x15\x12 \n" +
+	"\x1bUSER_METRIC_TYPE_ORDER_LOST\x10\x15\x12$\n" +
+	" USER_METRIC_TYPE_ORDER_COMPLETED\x10\x18\x12!\n" +
+	"\x1dUSER_METRIC_TYPE_ORDER_RETURN\x10\x1c\x12+\n" +
+	"'USER_METRIC_TYPE_ORDER_RETURN_COMPLETED\x10\x1d\x12\"\n" +
+	"\x1eUSER_METRIC_TYPE_ORDER_ONGOING\x10$\x12 \n" +
 	"\x1cUSER_METRIC_TYPE_STOCK_ORDER\x10\x02\x12+\n" +
 	"'USER_METRIC_TYPE_STOCK_ORDER_WITHDRAWAL\x10\x06\x12*\n" +
 	"&USER_METRIC_TYPE_STOCK_ORDER_CANCELLED\x10\a\x12%\n" +
-	"!USER_METRIC_TYPE_STOCK_ORDER_LOST\x10\x12\x12\x1e\n" +
+	"!USER_METRIC_TYPE_STOCK_ORDER_LOST\x10\x12\x12*\n" +
+	"&USER_METRIC_TYPE_STOCK_ORDER_COMPLETED\x10\x19\x12'\n" +
+	"#USER_METRIC_TYPE_STOCK_ORDER_RETURN\x10\x1e\x121\n" +
+	"-USER_METRIC_TYPE_STOCK_ORDER_RETURN_COMPLETED\x10\x1f\x12(\n" +
+	"$USER_METRIC_TYPE_STOCK_ORDER_ONGOING\x10%\x12\x1e\n" +
 	"\x1aUSER_METRIC_TYPE_AVG_ORDER\x10\x03\x12)\n" +
 	"%USER_METRIC_TYPE_AVG_ORDER_WITHDRAWAL\x10\b\x12(\n" +
 	"$USER_METRIC_TYPE_AVG_ORDER_CANCELLED\x10\t\x12#\n" +
-	"\x1fUSER_METRIC_TYPE_AVG_ORDER_LOST\x10\x13\x12\x1f\n" +
+	"\x1fUSER_METRIC_TYPE_AVG_ORDER_LOST\x10\x13\x12(\n" +
+	"$USER_METRIC_TYPE_AVG_ORDER_COMPLETED\x10\x1a\x12%\n" +
+	"!USER_METRIC_TYPE_AVG_ORDER_RETURN\x10 \x12/\n" +
+	"+USER_METRIC_TYPE_AVG_ORDER_RETURN_COMPLETED\x10!\x12&\n" +
+	"\"USER_METRIC_TYPE_AVG_ORDER_ONGOING\x10&\x12\x1f\n" +
 	"\x1bUSER_METRIC_TYPE_COST_ORDER\x10\n" +
 	"\x12*\n" +
 	"&USER_METRIC_TYPE_COST_ORDER_WITHDRAWAL\x10\v\x12)\n" +
 	"%USER_METRIC_TYPE_COST_ORDER_CANCELLED\x10\f\x12$\n" +
-	" USER_METRIC_TYPE_COST_ORDER_LOST\x10\x14\x12\x1f\n" +
-	"\x1bUSER_METRIC_TYPE_WITHDRAWAL\x10\r\x12)\n" +
+	" USER_METRIC_TYPE_COST_ORDER_LOST\x10\x14\x12)\n" +
+	"%USER_METRIC_TYPE_COST_ORDER_COMPLETED\x10\x1b\x12&\n" +
+	"\"USER_METRIC_TYPE_COST_ORDER_RETURN\x10\"\x120\n" +
+	",USER_METRIC_TYPE_COST_ORDER_RETURN_COMPLETED\x10#\x12'\n" +
+	"#USER_METRIC_TYPE_COST_ORDER_ONGOING\x10'\x12)\n" +
 	"%USER_METRIC_TYPE_PROFIT_ORDER_CREATED\x10\x0e\x12,\n" +
 	"(USER_METRIC_TYPE_PROFIT_ORDER_WITHDRAWAL\x10\x10\x12&\n" +
-	"\"USER_METRIC_TYPE_LOST_PROFIT_ORDER\x10\x11\x12 \n" +
-	"\x1cUSER_METRIC_TYPE_ADS_EXPENSE\x10\x16\x12#\n" +
-	"\x1fUSER_METRIC_TYPE_PROFIT_OR_LOSS\x10\x17*z\n" +
+	"\"USER_METRIC_TYPE_LOST_PROFIT_ORDER\x10\x11\x12#\n" +
+	"\x1fUSER_METRIC_TYPE_PROFIT_OR_LOSS\x10\x17\x12\x1f\n" +
+	"\x1bUSER_METRIC_TYPE_WITHDRAWAL\x10\r\x12)\n" +
+	"%USER_METRIC_TYPE_WITHDRAWAL_BREAKDOWN\x10(\x12 \n" +
+	"\x1cUSER_METRIC_TYPE_ADS_EXPENSE\x10\x16*z\n" +
 	"\x12UserMetricSortType\x12%\n" +
 	"!USER_METRIC_SORT_TYPE_UNSPECIFIED\x10\x00\x12\x1d\n" +
 	"\x19USER_METRIC_SORT_TYPE_ASC\x10\x01\x12\x1e\n" +
@@ -1453,62 +2117,96 @@ func file_selling_iface_v1_user_stat_metric_proto_rawDescGZIP() []byte {
 var file_selling_iface_v1_user_stat_metric_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
 var file_selling_iface_v1_user_stat_metric_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_selling_iface_v1_user_stat_metric_proto_goTypes = []any{
-	(UserMetricType)(0),                         // 0: selling_iface.v1.UserMetricType
-	(UserMetricSortType)(0),                     // 1: selling_iface.v1.UserMetricSortType
-	(CommonUserSort)(0),                         // 2: selling_iface.v1.CommonUserSort
-	(*UserMetricSort)(nil),                      // 3: selling_iface.v1.UserMetricSort
-	(*UserMetric)(nil),                          // 4: selling_iface.v1.UserMetric
-	(*UserMetricExtra)(nil),                     // 5: selling_iface.v1.UserMetricExtra
-	(*UserStatMetricFilter)(nil),                // 6: selling_iface.v1.UserStatMetricFilter
-	(*UserStatTimeRange)(nil),                   // 7: selling_iface.v1.UserStatTimeRange
-	(*UserStatMetricRequest)(nil),               // 8: selling_iface.v1.UserStatMetricRequest
-	(*UserStatMetricResponse)(nil),              // 9: selling_iface.v1.UserStatMetricResponse
-	(v1.UserOrderMetricSort)(0),                 // 10: selling_iface.v1.user_metric.v1.UserOrderMetricSort
-	(v1.UserOrderWithdrawalMetricSort)(0),       // 11: selling_iface.v1.user_metric.v1.UserOrderWithdrawalMetricSort
-	(v1.UserOrderCancelledMetricSort)(0),        // 12: selling_iface.v1.user_metric.v1.UserOrderCancelledMetricSort
-	(v1.UserOrderLostMetricSort)(0),             // 13: selling_iface.v1.user_metric.v1.UserOrderLostMetricSort
-	(v1.UserStockOrderMetricSort)(0),            // 14: selling_iface.v1.user_metric.v1.UserStockOrderMetricSort
-	(v1.UserStockOrderWithdrawalMetricSort)(0),  // 15: selling_iface.v1.user_metric.v1.UserStockOrderWithdrawalMetricSort
-	(v1.UserStockOrderCancelledMetricSort)(0),   // 16: selling_iface.v1.user_metric.v1.UserStockOrderCancelledMetricSort
-	(v1.UserStockOrderLostMetricSort)(0),        // 17: selling_iface.v1.user_metric.v1.UserStockOrderLostMetricSort
-	(v1.UserAvgOrderMetricSort)(0),              // 18: selling_iface.v1.user_metric.v1.UserAvgOrderMetricSort
-	(v1.UserAvgOrderWithdrawalMetricSort)(0),    // 19: selling_iface.v1.user_metric.v1.UserAvgOrderWithdrawalMetricSort
-	(v1.UserAvgOrderCancelledMetricSort)(0),     // 20: selling_iface.v1.user_metric.v1.UserAvgOrderCancelledMetricSort
-	(v1.UserAvgOrderLostMetricSort)(0),          // 21: selling_iface.v1.user_metric.v1.UserAvgOrderLostMetricSort
-	(v1.UserCostOrderMetricSort)(0),             // 22: selling_iface.v1.user_metric.v1.UserCostOrderMetricSort
-	(v1.UserCostOrderWithdrawalMetricSort)(0),   // 23: selling_iface.v1.user_metric.v1.UserCostOrderWithdrawalMetricSort
-	(v1.UserCostOrderCancelledMetricSort)(0),    // 24: selling_iface.v1.user_metric.v1.UserCostOrderCancelledMetricSort
-	(v1.UserCostOrderLostMetricSort)(0),         // 25: selling_iface.v1.user_metric.v1.UserCostOrderLostMetricSort
-	(v1.UserWithdrawalMetricSort)(0),            // 26: selling_iface.v1.user_metric.v1.UserWithdrawalMetricSort
-	(v1.UserProfitOrderCreatedMetricSort)(0),    // 27: selling_iface.v1.user_metric.v1.UserProfitOrderCreatedMetricSort
-	(v1.UserProfitOrderWithdrawalMetricSort)(0), // 28: selling_iface.v1.user_metric.v1.UserProfitOrderWithdrawalMetricSort
-	(v1.UserLostProfitOrderMetricSort)(0),       // 29: selling_iface.v1.user_metric.v1.UserLostProfitOrderMetricSort
-	(v1.UserAdsExpenseMetricSort)(0),            // 30: selling_iface.v1.user_metric.v1.UserAdsExpenseMetricSort
-	(v1.UserProfitOrLossMetricSort)(0),          // 31: selling_iface.v1.user_metric.v1.UserProfitOrLossMetricSort
-	(*v1.UserOrderMetric)(nil),                  // 32: selling_iface.v1.user_metric.v1.UserOrderMetric
-	(*v1.UserOrderWithdrawalMetric)(nil),        // 33: selling_iface.v1.user_metric.v1.UserOrderWithdrawalMetric
-	(*v1.UserOrderCancelledMetric)(nil),         // 34: selling_iface.v1.user_metric.v1.UserOrderCancelledMetric
-	(*v1.UserOrderLostMetric)(nil),              // 35: selling_iface.v1.user_metric.v1.UserOrderLostMetric
-	(*v1.UserStockOrderMetric)(nil),             // 36: selling_iface.v1.user_metric.v1.UserStockOrderMetric
-	(*v1.UserStockOrderWithdrawalMetric)(nil),   // 37: selling_iface.v1.user_metric.v1.UserStockOrderWithdrawalMetric
-	(*v1.UserStockOrderCancelledMetric)(nil),    // 38: selling_iface.v1.user_metric.v1.UserStockOrderCancelledMetric
-	(*v1.UserStockOrderLostMetric)(nil),         // 39: selling_iface.v1.user_metric.v1.UserStockOrderLostMetric
-	(*v1.UserAvgOrderMetric)(nil),               // 40: selling_iface.v1.user_metric.v1.UserAvgOrderMetric
-	(*v1.UserAvgOrderWithdrawalMetric)(nil),     // 41: selling_iface.v1.user_metric.v1.UserAvgOrderWithdrawalMetric
-	(*v1.UserAvgOrderCancelledMetric)(nil),      // 42: selling_iface.v1.user_metric.v1.UserAvgOrderCancelledMetric
-	(*v1.UserAvgOrderLostMetric)(nil),           // 43: selling_iface.v1.user_metric.v1.UserAvgOrderLostMetric
-	(*v1.UserCostOrderMetric)(nil),              // 44: selling_iface.v1.user_metric.v1.UserCostOrderMetric
-	(*v1.UserCostOrderWithdrawalMetric)(nil),    // 45: selling_iface.v1.user_metric.v1.UserCostOrderWithdrawalMetric
-	(*v1.UserCostOrderCancelledMetric)(nil),     // 46: selling_iface.v1.user_metric.v1.UserCostOrderCancelledMetric
-	(*v1.UserCostOrderLostMetric)(nil),          // 47: selling_iface.v1.user_metric.v1.UserCostOrderLostMetric
-	(*v1.UserWithdrawalMetric)(nil),             // 48: selling_iface.v1.user_metric.v1.UserWithdrawalMetric
-	(*v1.UserProfitOrderCreatedMetric)(nil),     // 49: selling_iface.v1.user_metric.v1.UserProfitOrderCreatedMetric
-	(*v1.UserProfitOrderWithdrawalMetric)(nil),  // 50: selling_iface.v1.user_metric.v1.UserProfitOrderWithdrawalMetric
-	(*v1.UserLostProfitOrderMetric)(nil),        // 51: selling_iface.v1.user_metric.v1.UserLostProfitOrderMetric
-	(*v1.UserAdsExpenseMetric)(nil),             // 52: selling_iface.v1.user_metric.v1.UserAdsExpenseMetric
-	(*v1.UserProfitOrLossMetric)(nil),           // 53: selling_iface.v1.user_metric.v1.UserProfitOrLossMetric
-	(*v11.PageFilter)(nil),                      // 54: common.v1.PageFilter
-	(*timestamppb.Timestamp)(nil),               // 55: google.protobuf.Timestamp
+	(UserMetricType)(0),                             // 0: selling_iface.v1.UserMetricType
+	(UserMetricSortType)(0),                         // 1: selling_iface.v1.UserMetricSortType
+	(CommonUserSort)(0),                             // 2: selling_iface.v1.CommonUserSort
+	(*UserMetricSort)(nil),                          // 3: selling_iface.v1.UserMetricSort
+	(*UserMetric)(nil),                              // 4: selling_iface.v1.UserMetric
+	(*UserMetricExtra)(nil),                         // 5: selling_iface.v1.UserMetricExtra
+	(*UserStatMetricFilter)(nil),                    // 6: selling_iface.v1.UserStatMetricFilter
+	(*UserStatTimeRange)(nil),                       // 7: selling_iface.v1.UserStatTimeRange
+	(*UserStatMetricRequest)(nil),                   // 8: selling_iface.v1.UserStatMetricRequest
+	(*UserStatMetricResponse)(nil),                  // 9: selling_iface.v1.UserStatMetricResponse
+	(v1.UserOrderMetricSort)(0),                     // 10: selling_iface.v1.user_metric.v1.UserOrderMetricSort
+	(v1.UserOrderWithdrawalMetricSort)(0),           // 11: selling_iface.v1.user_metric.v1.UserOrderWithdrawalMetricSort
+	(v1.UserOrderCancelledMetricSort)(0),            // 12: selling_iface.v1.user_metric.v1.UserOrderCancelledMetricSort
+	(v1.UserOrderLostMetricSort)(0),                 // 13: selling_iface.v1.user_metric.v1.UserOrderLostMetricSort
+	(v1.UserOrderCompletedMetricSort)(0),            // 14: selling_iface.v1.user_metric.v1.UserOrderCompletedMetricSort
+	(v1.UserOrderReturnMetricSort)(0),               // 15: selling_iface.v1.user_metric.v1.UserOrderReturnMetricSort
+	(v1.UserOrderReturnCompletedMetricSort)(0),      // 16: selling_iface.v1.user_metric.v1.UserOrderReturnCompletedMetricSort
+	(v1.UserOrderOngoingMetricSort)(0),              // 17: selling_iface.v1.user_metric.v1.UserOrderOngoingMetricSort
+	(v1.UserStockOrderMetricSort)(0),                // 18: selling_iface.v1.user_metric.v1.UserStockOrderMetricSort
+	(v1.UserStockOrderWithdrawalMetricSort)(0),      // 19: selling_iface.v1.user_metric.v1.UserStockOrderWithdrawalMetricSort
+	(v1.UserStockOrderCancelledMetricSort)(0),       // 20: selling_iface.v1.user_metric.v1.UserStockOrderCancelledMetricSort
+	(v1.UserStockOrderLostMetricSort)(0),            // 21: selling_iface.v1.user_metric.v1.UserStockOrderLostMetricSort
+	(v1.UserStockOrderCompletedMetricSort)(0),       // 22: selling_iface.v1.user_metric.v1.UserStockOrderCompletedMetricSort
+	(v1.UserStockOrderReturnMetricSort)(0),          // 23: selling_iface.v1.user_metric.v1.UserStockOrderReturnMetricSort
+	(v1.UserStockOrderReturnCompletedMetricSort)(0), // 24: selling_iface.v1.user_metric.v1.UserStockOrderReturnCompletedMetricSort
+	(v1.UserStockOrderOngoingMetricSort)(0),         // 25: selling_iface.v1.user_metric.v1.UserStockOrderOngoingMetricSort
+	(v1.UserAvgOrderMetricSort)(0),                  // 26: selling_iface.v1.user_metric.v1.UserAvgOrderMetricSort
+	(v1.UserAvgOrderWithdrawalMetricSort)(0),        // 27: selling_iface.v1.user_metric.v1.UserAvgOrderWithdrawalMetricSort
+	(v1.UserAvgOrderCancelledMetricSort)(0),         // 28: selling_iface.v1.user_metric.v1.UserAvgOrderCancelledMetricSort
+	(v1.UserAvgOrderLostMetricSort)(0),              // 29: selling_iface.v1.user_metric.v1.UserAvgOrderLostMetricSort
+	(v1.UserAvgOrderCompletedMetricSort)(0),         // 30: selling_iface.v1.user_metric.v1.UserAvgOrderCompletedMetricSort
+	(v1.UserAvgOrderReturnMetricSort)(0),            // 31: selling_iface.v1.user_metric.v1.UserAvgOrderReturnMetricSort
+	(v1.UserAvgOrderReturnCompletedMetricSort)(0),   // 32: selling_iface.v1.user_metric.v1.UserAvgOrderReturnCompletedMetricSort
+	(v1.UserAvgOrderOngoingMetricSort)(0),           // 33: selling_iface.v1.user_metric.v1.UserAvgOrderOngoingMetricSort
+	(v1.UserCostOrderMetricSort)(0),                 // 34: selling_iface.v1.user_metric.v1.UserCostOrderMetricSort
+	(v1.UserCostOrderWithdrawalMetricSort)(0),       // 35: selling_iface.v1.user_metric.v1.UserCostOrderWithdrawalMetricSort
+	(v1.UserCostOrderCancelledMetricSort)(0),        // 36: selling_iface.v1.user_metric.v1.UserCostOrderCancelledMetricSort
+	(v1.UserCostOrderLostMetricSort)(0),             // 37: selling_iface.v1.user_metric.v1.UserCostOrderLostMetricSort
+	(v1.UserCostOrderCompletedMetricSort)(0),        // 38: selling_iface.v1.user_metric.v1.UserCostOrderCompletedMetricSort
+	(v1.UserCostOrderReturnMetricSort)(0),           // 39: selling_iface.v1.user_metric.v1.UserCostOrderReturnMetricSort
+	(v1.UserCostOrderReturnCompletedMetricSort)(0),  // 40: selling_iface.v1.user_metric.v1.UserCostOrderReturnCompletedMetricSort
+	(v1.UserCostOrderOngoingMetricSort)(0),          // 41: selling_iface.v1.user_metric.v1.UserCostOrderOngoingMetricSort
+	(v1.UserProfitOrderCreatedMetricSort)(0),        // 42: selling_iface.v1.user_metric.v1.UserProfitOrderCreatedMetricSort
+	(v1.UserProfitOrderWithdrawalMetricSort)(0),     // 43: selling_iface.v1.user_metric.v1.UserProfitOrderWithdrawalMetricSort
+	(v1.UserLostProfitOrderMetricSort)(0),           // 44: selling_iface.v1.user_metric.v1.UserLostProfitOrderMetricSort
+	(v1.UserProfitOrLossMetricSort)(0),              // 45: selling_iface.v1.user_metric.v1.UserProfitOrLossMetricSort
+	(v1.UserAdsExpenseMetricSort)(0),                // 46: selling_iface.v1.user_metric.v1.UserAdsExpenseMetricSort
+	(v1.UserWithdrawalMetricSort)(0),                // 47: selling_iface.v1.user_metric.v1.UserWithdrawalMetricSort
+	(v1.UserWithdrawalBreakdownMetricSort)(0),       // 48: selling_iface.v1.user_metric.v1.UserWithdrawalBreakdownMetricSort
+	(*v1.UserOrderMetric)(nil),                      // 49: selling_iface.v1.user_metric.v1.UserOrderMetric
+	(*v1.UserOrderWithdrawalMetric)(nil),            // 50: selling_iface.v1.user_metric.v1.UserOrderWithdrawalMetric
+	(*v1.UserOrderCancelledMetric)(nil),             // 51: selling_iface.v1.user_metric.v1.UserOrderCancelledMetric
+	(*v1.UserOrderLostMetric)(nil),                  // 52: selling_iface.v1.user_metric.v1.UserOrderLostMetric
+	(*v1.UserOrderCompletedMetric)(nil),             // 53: selling_iface.v1.user_metric.v1.UserOrderCompletedMetric
+	(*v1.UserOrderReturnMetric)(nil),                // 54: selling_iface.v1.user_metric.v1.UserOrderReturnMetric
+	(*v1.UserOrderReturnCompletedMetric)(nil),       // 55: selling_iface.v1.user_metric.v1.UserOrderReturnCompletedMetric
+	(*v1.UserOrderOngoingMetric)(nil),               // 56: selling_iface.v1.user_metric.v1.UserOrderOngoingMetric
+	(*v1.UserStockOrderMetric)(nil),                 // 57: selling_iface.v1.user_metric.v1.UserStockOrderMetric
+	(*v1.UserStockOrderWithdrawalMetric)(nil),       // 58: selling_iface.v1.user_metric.v1.UserStockOrderWithdrawalMetric
+	(*v1.UserStockOrderCancelledMetric)(nil),        // 59: selling_iface.v1.user_metric.v1.UserStockOrderCancelledMetric
+	(*v1.UserStockOrderLostMetric)(nil),             // 60: selling_iface.v1.user_metric.v1.UserStockOrderLostMetric
+	(*v1.UserStockOrderCompletedMetric)(nil),        // 61: selling_iface.v1.user_metric.v1.UserStockOrderCompletedMetric
+	(*v1.UserStockOrderReturnMetric)(nil),           // 62: selling_iface.v1.user_metric.v1.UserStockOrderReturnMetric
+	(*v1.UserStockOrderReturnCompletedMetric)(nil),  // 63: selling_iface.v1.user_metric.v1.UserStockOrderReturnCompletedMetric
+	(*v1.UserStockOrderOngoingMetric)(nil),          // 64: selling_iface.v1.user_metric.v1.UserStockOrderOngoingMetric
+	(*v1.UserAvgOrderMetric)(nil),                   // 65: selling_iface.v1.user_metric.v1.UserAvgOrderMetric
+	(*v1.UserAvgOrderWithdrawalMetric)(nil),         // 66: selling_iface.v1.user_metric.v1.UserAvgOrderWithdrawalMetric
+	(*v1.UserAvgOrderCancelledMetric)(nil),          // 67: selling_iface.v1.user_metric.v1.UserAvgOrderCancelledMetric
+	(*v1.UserAvgOrderLostMetric)(nil),               // 68: selling_iface.v1.user_metric.v1.UserAvgOrderLostMetric
+	(*v1.UserAvgOrderCompletedMetric)(nil),          // 69: selling_iface.v1.user_metric.v1.UserAvgOrderCompletedMetric
+	(*v1.UserAvgOrderReturnMetric)(nil),             // 70: selling_iface.v1.user_metric.v1.UserAvgOrderReturnMetric
+	(*v1.UserAvgOrderReturnCompletedMetric)(nil),    // 71: selling_iface.v1.user_metric.v1.UserAvgOrderReturnCompletedMetric
+	(*v1.UserAvgOrderOngoingMetric)(nil),            // 72: selling_iface.v1.user_metric.v1.UserAvgOrderOngoingMetric
+	(*v1.UserCostOrderMetric)(nil),                  // 73: selling_iface.v1.user_metric.v1.UserCostOrderMetric
+	(*v1.UserCostOrderWithdrawalMetric)(nil),        // 74: selling_iface.v1.user_metric.v1.UserCostOrderWithdrawalMetric
+	(*v1.UserCostOrderCancelledMetric)(nil),         // 75: selling_iface.v1.user_metric.v1.UserCostOrderCancelledMetric
+	(*v1.UserCostOrderLostMetric)(nil),              // 76: selling_iface.v1.user_metric.v1.UserCostOrderLostMetric
+	(*v1.UserCostOrderCompletedMetric)(nil),         // 77: selling_iface.v1.user_metric.v1.UserCostOrderCompletedMetric
+	(*v1.UserCostOrderReturnMetric)(nil),            // 78: selling_iface.v1.user_metric.v1.UserCostOrderReturnMetric
+	(*v1.UserCostOrderReturnCompletedMetric)(nil),   // 79: selling_iface.v1.user_metric.v1.UserCostOrderReturnCompletedMetric
+	(*v1.UserCostOrderOngoingMetric)(nil),           // 80: selling_iface.v1.user_metric.v1.UserCostOrderOngoingMetric
+	(*v1.UserProfitOrderCreatedMetric)(nil),         // 81: selling_iface.v1.user_metric.v1.UserProfitOrderCreatedMetric
+	(*v1.UserProfitOrderWithdrawalMetric)(nil),      // 82: selling_iface.v1.user_metric.v1.UserProfitOrderWithdrawalMetric
+	(*v1.UserLostProfitOrderMetric)(nil),            // 83: selling_iface.v1.user_metric.v1.UserLostProfitOrderMetric
+	(*v1.UserProfitOrLossMetric)(nil),               // 84: selling_iface.v1.user_metric.v1.UserProfitOrLossMetric
+	(*v1.UserWithdrawalMetric)(nil),                 // 85: selling_iface.v1.user_metric.v1.UserWithdrawalMetric
+	(*v1.UserWithdrawalBreakdownMetric)(nil),        // 86: selling_iface.v1.user_metric.v1.UserWithdrawalBreakdownMetric
+	(*v1.UserAdsExpenseMetric)(nil),                 // 87: selling_iface.v1.user_metric.v1.UserAdsExpenseMetric
+	(*v11.PageFilter)(nil),                          // 88: common.v1.PageFilter
+	(*timestamppb.Timestamp)(nil),                   // 89: google.protobuf.Timestamp
 }
 var file_selling_iface_v1_user_stat_metric_proto_depIdxs = []int32{
 	1,  // 0: selling_iface.v1.UserMetricSort.sort_type:type_name -> selling_iface.v1.UserMetricSortType
@@ -1517,60 +2215,94 @@ var file_selling_iface_v1_user_stat_metric_proto_depIdxs = []int32{
 	11, // 3: selling_iface.v1.UserMetricSort.user_order_withdrawal_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserOrderWithdrawalMetricSort
 	12, // 4: selling_iface.v1.UserMetricSort.user_order_cancelled_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserOrderCancelledMetricSort
 	13, // 5: selling_iface.v1.UserMetricSort.user_order_lost_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserOrderLostMetricSort
-	14, // 6: selling_iface.v1.UserMetricSort.user_stock_order_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderMetricSort
-	15, // 7: selling_iface.v1.UserMetricSort.user_stock_order_withdrawal_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderWithdrawalMetricSort
-	16, // 8: selling_iface.v1.UserMetricSort.user_stock_order_cancelled_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderCancelledMetricSort
-	17, // 9: selling_iface.v1.UserMetricSort.user_stock_order_lost_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderLostMetricSort
-	18, // 10: selling_iface.v1.UserMetricSort.user_avg_order_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderMetricSort
-	19, // 11: selling_iface.v1.UserMetricSort.user_avg_order_withdrawal_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderWithdrawalMetricSort
-	20, // 12: selling_iface.v1.UserMetricSort.user_avg_order_cancelled_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderCancelledMetricSort
-	21, // 13: selling_iface.v1.UserMetricSort.user_avg_order_lost_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderLostMetricSort
-	22, // 14: selling_iface.v1.UserMetricSort.user_cost_order_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderMetricSort
-	23, // 15: selling_iface.v1.UserMetricSort.user_cost_order_withdrawal_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderWithdrawalMetricSort
-	24, // 16: selling_iface.v1.UserMetricSort.user_cost_order_cancelled_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderCancelledMetricSort
-	25, // 17: selling_iface.v1.UserMetricSort.user_cost_order_lost_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderLostMetricSort
-	26, // 18: selling_iface.v1.UserMetricSort.user_withdrawal_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserWithdrawalMetricSort
-	27, // 19: selling_iface.v1.UserMetricSort.user_profit_order_created_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserProfitOrderCreatedMetricSort
-	28, // 20: selling_iface.v1.UserMetricSort.user_profit_order_withdrawal_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserProfitOrderWithdrawalMetricSort
-	29, // 21: selling_iface.v1.UserMetricSort.user_lost_profit_order_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserLostProfitOrderMetricSort
-	30, // 22: selling_iface.v1.UserMetricSort.user_ads_expense_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserAdsExpenseMetricSort
-	31, // 23: selling_iface.v1.UserMetricSort.user_profit_or_loss_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserProfitOrLossMetricSort
-	32, // 24: selling_iface.v1.UserMetric.user_order_metric:type_name -> selling_iface.v1.user_metric.v1.UserOrderMetric
-	33, // 25: selling_iface.v1.UserMetric.user_order_withdrawal_metric:type_name -> selling_iface.v1.user_metric.v1.UserOrderWithdrawalMetric
-	34, // 26: selling_iface.v1.UserMetric.user_order_cancelled_metric:type_name -> selling_iface.v1.user_metric.v1.UserOrderCancelledMetric
-	35, // 27: selling_iface.v1.UserMetric.user_order_lost_metric:type_name -> selling_iface.v1.user_metric.v1.UserOrderLostMetric
-	36, // 28: selling_iface.v1.UserMetric.user_stock_order_metric:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderMetric
-	37, // 29: selling_iface.v1.UserMetric.user_stock_order_withdrawal_metric:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderWithdrawalMetric
-	38, // 30: selling_iface.v1.UserMetric.user_stock_order_cancelled_metric:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderCancelledMetric
-	39, // 31: selling_iface.v1.UserMetric.user_stock_order_lost_metric:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderLostMetric
-	40, // 32: selling_iface.v1.UserMetric.user_avg_order_metric:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderMetric
-	41, // 33: selling_iface.v1.UserMetric.user_avg_order_withdrawal_metric:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderWithdrawalMetric
-	42, // 34: selling_iface.v1.UserMetric.user_avg_order_cancelled_metric:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderCancelledMetric
-	43, // 35: selling_iface.v1.UserMetric.user_avg_order_lost_metric:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderLostMetric
-	44, // 36: selling_iface.v1.UserMetric.user_cost_order_metric:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderMetric
-	45, // 37: selling_iface.v1.UserMetric.user_cost_order_withdrawal_metric:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderWithdrawalMetric
-	46, // 38: selling_iface.v1.UserMetric.user_cost_order_cancelled_metric:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderCancelledMetric
-	47, // 39: selling_iface.v1.UserMetric.user_cost_order_lost_metric:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderLostMetric
-	48, // 40: selling_iface.v1.UserMetric.user_withdrawal_metric:type_name -> selling_iface.v1.user_metric.v1.UserWithdrawalMetric
-	49, // 41: selling_iface.v1.UserMetric.user_profit_order_created_metric:type_name -> selling_iface.v1.user_metric.v1.UserProfitOrderCreatedMetric
-	50, // 42: selling_iface.v1.UserMetric.user_profit_order_withdrawal_metric:type_name -> selling_iface.v1.user_metric.v1.UserProfitOrderWithdrawalMetric
-	51, // 43: selling_iface.v1.UserMetric.user_lost_profit_order_metric:type_name -> selling_iface.v1.user_metric.v1.UserLostProfitOrderMetric
-	52, // 44: selling_iface.v1.UserMetric.user_ads_expense_metric:type_name -> selling_iface.v1.user_metric.v1.UserAdsExpenseMetric
-	53, // 45: selling_iface.v1.UserMetric.user_profit_or_loss_metric:type_name -> selling_iface.v1.user_metric.v1.UserProfitOrLossMetric
-	54, // 46: selling_iface.v1.UserStatMetricFilter.page:type_name -> common.v1.PageFilter
-	7,  // 47: selling_iface.v1.UserStatMetricFilter.range:type_name -> selling_iface.v1.UserStatTimeRange
-	55, // 48: selling_iface.v1.UserStatTimeRange.start:type_name -> google.protobuf.Timestamp
-	55, // 49: selling_iface.v1.UserStatTimeRange.end:type_name -> google.protobuf.Timestamp
-	6,  // 50: selling_iface.v1.UserStatMetricRequest.filter:type_name -> selling_iface.v1.UserStatMetricFilter
-	3,  // 51: selling_iface.v1.UserStatMetricRequest.sort:type_name -> selling_iface.v1.UserMetricSort
-	5,  // 52: selling_iface.v1.UserStatMetricRequest.metric_extras:type_name -> selling_iface.v1.UserMetricExtra
-	0,  // 53: selling_iface.v1.UserStatMetricRequest.metric_types:type_name -> selling_iface.v1.UserMetricType
-	4,  // 54: selling_iface.v1.UserStatMetricResponse.metrics:type_name -> selling_iface.v1.UserMetric
-	55, // [55:55] is the sub-list for method output_type
-	55, // [55:55] is the sub-list for method input_type
-	55, // [55:55] is the sub-list for extension type_name
-	55, // [55:55] is the sub-list for extension extendee
-	0,  // [0:55] is the sub-list for field type_name
+	14, // 6: selling_iface.v1.UserMetricSort.user_order_completed_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserOrderCompletedMetricSort
+	15, // 7: selling_iface.v1.UserMetricSort.user_order_return_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserOrderReturnMetricSort
+	16, // 8: selling_iface.v1.UserMetricSort.user_order_return_completed_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserOrderReturnCompletedMetricSort
+	17, // 9: selling_iface.v1.UserMetricSort.user_order_ongoing_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserOrderOngoingMetricSort
+	18, // 10: selling_iface.v1.UserMetricSort.user_stock_order_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderMetricSort
+	19, // 11: selling_iface.v1.UserMetricSort.user_stock_order_withdrawal_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderWithdrawalMetricSort
+	20, // 12: selling_iface.v1.UserMetricSort.user_stock_order_cancelled_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderCancelledMetricSort
+	21, // 13: selling_iface.v1.UserMetricSort.user_stock_order_lost_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderLostMetricSort
+	22, // 14: selling_iface.v1.UserMetricSort.user_stock_order_completed_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderCompletedMetricSort
+	23, // 15: selling_iface.v1.UserMetricSort.user_stock_order_return_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderReturnMetricSort
+	24, // 16: selling_iface.v1.UserMetricSort.user_stock_order_return_completed_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderReturnCompletedMetricSort
+	25, // 17: selling_iface.v1.UserMetricSort.user_stock_order_ongoing_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderOngoingMetricSort
+	26, // 18: selling_iface.v1.UserMetricSort.user_avg_order_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderMetricSort
+	27, // 19: selling_iface.v1.UserMetricSort.user_avg_order_withdrawal_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderWithdrawalMetricSort
+	28, // 20: selling_iface.v1.UserMetricSort.user_avg_order_cancelled_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderCancelledMetricSort
+	29, // 21: selling_iface.v1.UserMetricSort.user_avg_order_lost_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderLostMetricSort
+	30, // 22: selling_iface.v1.UserMetricSort.user_avg_order_completed_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderCompletedMetricSort
+	31, // 23: selling_iface.v1.UserMetricSort.user_avg_order_return_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderReturnMetricSort
+	32, // 24: selling_iface.v1.UserMetricSort.user_avg_order_return_completed_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderReturnCompletedMetricSort
+	33, // 25: selling_iface.v1.UserMetricSort.user_avg_order_ongoing_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderOngoingMetricSort
+	34, // 26: selling_iface.v1.UserMetricSort.user_cost_order_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderMetricSort
+	35, // 27: selling_iface.v1.UserMetricSort.user_cost_order_withdrawal_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderWithdrawalMetricSort
+	36, // 28: selling_iface.v1.UserMetricSort.user_cost_order_cancelled_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderCancelledMetricSort
+	37, // 29: selling_iface.v1.UserMetricSort.user_cost_order_lost_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderLostMetricSort
+	38, // 30: selling_iface.v1.UserMetricSort.user_cost_order_completed_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderCompletedMetricSort
+	39, // 31: selling_iface.v1.UserMetricSort.user_cost_order_return_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderReturnMetricSort
+	40, // 32: selling_iface.v1.UserMetricSort.user_cost_order_return_completed_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderReturnCompletedMetricSort
+	41, // 33: selling_iface.v1.UserMetricSort.user_cost_order_ongoing_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderOngoingMetricSort
+	42, // 34: selling_iface.v1.UserMetricSort.user_profit_order_created_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserProfitOrderCreatedMetricSort
+	43, // 35: selling_iface.v1.UserMetricSort.user_profit_order_withdrawal_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserProfitOrderWithdrawalMetricSort
+	44, // 36: selling_iface.v1.UserMetricSort.user_lost_profit_order_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserLostProfitOrderMetricSort
+	45, // 37: selling_iface.v1.UserMetricSort.user_profit_or_loss_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserProfitOrLossMetricSort
+	46, // 38: selling_iface.v1.UserMetricSort.user_ads_expense_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserAdsExpenseMetricSort
+	47, // 39: selling_iface.v1.UserMetricSort.user_withdrawal_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserWithdrawalMetricSort
+	48, // 40: selling_iface.v1.UserMetricSort.user_withdrawal_breakdown_metric_sort:type_name -> selling_iface.v1.user_metric.v1.UserWithdrawalBreakdownMetricSort
+	49, // 41: selling_iface.v1.UserMetric.user_order_metric:type_name -> selling_iface.v1.user_metric.v1.UserOrderMetric
+	50, // 42: selling_iface.v1.UserMetric.user_order_withdrawal_metric:type_name -> selling_iface.v1.user_metric.v1.UserOrderWithdrawalMetric
+	51, // 43: selling_iface.v1.UserMetric.user_order_cancelled_metric:type_name -> selling_iface.v1.user_metric.v1.UserOrderCancelledMetric
+	52, // 44: selling_iface.v1.UserMetric.user_order_lost_metric:type_name -> selling_iface.v1.user_metric.v1.UserOrderLostMetric
+	53, // 45: selling_iface.v1.UserMetric.user_order_completed_metric:type_name -> selling_iface.v1.user_metric.v1.UserOrderCompletedMetric
+	54, // 46: selling_iface.v1.UserMetric.user_order_return_metric:type_name -> selling_iface.v1.user_metric.v1.UserOrderReturnMetric
+	55, // 47: selling_iface.v1.UserMetric.user_order_return_completed_metric:type_name -> selling_iface.v1.user_metric.v1.UserOrderReturnCompletedMetric
+	56, // 48: selling_iface.v1.UserMetric.user_order_ongoing_metric:type_name -> selling_iface.v1.user_metric.v1.UserOrderOngoingMetric
+	57, // 49: selling_iface.v1.UserMetric.user_stock_order_metric:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderMetric
+	58, // 50: selling_iface.v1.UserMetric.user_stock_order_withdrawal_metric:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderWithdrawalMetric
+	59, // 51: selling_iface.v1.UserMetric.user_stock_order_cancelled_metric:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderCancelledMetric
+	60, // 52: selling_iface.v1.UserMetric.user_stock_order_lost_metric:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderLostMetric
+	61, // 53: selling_iface.v1.UserMetric.user_stock_order_completed_metric:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderCompletedMetric
+	62, // 54: selling_iface.v1.UserMetric.user_stock_order_return_metric:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderReturnMetric
+	63, // 55: selling_iface.v1.UserMetric.user_stock_order_return_completed_metric:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderReturnCompletedMetric
+	64, // 56: selling_iface.v1.UserMetric.user_stock_order_ongoing_metric:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderOngoingMetric
+	65, // 57: selling_iface.v1.UserMetric.user_avg_order_metric:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderMetric
+	66, // 58: selling_iface.v1.UserMetric.user_avg_order_withdrawal_metric:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderWithdrawalMetric
+	67, // 59: selling_iface.v1.UserMetric.user_avg_order_cancelled_metric:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderCancelledMetric
+	68, // 60: selling_iface.v1.UserMetric.user_avg_order_lost_metric:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderLostMetric
+	69, // 61: selling_iface.v1.UserMetric.user_avg_order_completed_metric:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderCompletedMetric
+	70, // 62: selling_iface.v1.UserMetric.user_avg_order_return_metric:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderReturnMetric
+	71, // 63: selling_iface.v1.UserMetric.user_avg_order_return_completed_metric:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderReturnCompletedMetric
+	72, // 64: selling_iface.v1.UserMetric.user_avg_order_ongoing_metric:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderOngoingMetric
+	73, // 65: selling_iface.v1.UserMetric.user_cost_order_metric:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderMetric
+	74, // 66: selling_iface.v1.UserMetric.user_cost_order_withdrawal_metric:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderWithdrawalMetric
+	75, // 67: selling_iface.v1.UserMetric.user_cost_order_cancelled_metric:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderCancelledMetric
+	76, // 68: selling_iface.v1.UserMetric.user_cost_order_lost_metric:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderLostMetric
+	77, // 69: selling_iface.v1.UserMetric.user_cost_order_completed_metric:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderCompletedMetric
+	78, // 70: selling_iface.v1.UserMetric.user_cost_order_return_metric:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderReturnMetric
+	79, // 71: selling_iface.v1.UserMetric.user_cost_order_return_completed_metric:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderReturnCompletedMetric
+	80, // 72: selling_iface.v1.UserMetric.user_cost_order_ongoing_metric:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderOngoingMetric
+	81, // 73: selling_iface.v1.UserMetric.user_profit_order_created_metric:type_name -> selling_iface.v1.user_metric.v1.UserProfitOrderCreatedMetric
+	82, // 74: selling_iface.v1.UserMetric.user_profit_order_withdrawal_metric:type_name -> selling_iface.v1.user_metric.v1.UserProfitOrderWithdrawalMetric
+	83, // 75: selling_iface.v1.UserMetric.user_lost_profit_order_metric:type_name -> selling_iface.v1.user_metric.v1.UserLostProfitOrderMetric
+	84, // 76: selling_iface.v1.UserMetric.user_profit_or_loss_metric:type_name -> selling_iface.v1.user_metric.v1.UserProfitOrLossMetric
+	85, // 77: selling_iface.v1.UserMetric.user_withdrawal_metric:type_name -> selling_iface.v1.user_metric.v1.UserWithdrawalMetric
+	86, // 78: selling_iface.v1.UserMetric.user_withdrawal_breakdown_metric:type_name -> selling_iface.v1.user_metric.v1.UserWithdrawalBreakdownMetric
+	87, // 79: selling_iface.v1.UserMetric.user_ads_expense_metric:type_name -> selling_iface.v1.user_metric.v1.UserAdsExpenseMetric
+	88, // 80: selling_iface.v1.UserStatMetricFilter.page:type_name -> common.v1.PageFilter
+	7,  // 81: selling_iface.v1.UserStatMetricFilter.range:type_name -> selling_iface.v1.UserStatTimeRange
+	89, // 82: selling_iface.v1.UserStatTimeRange.start:type_name -> google.protobuf.Timestamp
+	89, // 83: selling_iface.v1.UserStatTimeRange.end:type_name -> google.protobuf.Timestamp
+	6,  // 84: selling_iface.v1.UserStatMetricRequest.filter:type_name -> selling_iface.v1.UserStatMetricFilter
+	3,  // 85: selling_iface.v1.UserStatMetricRequest.sort:type_name -> selling_iface.v1.UserMetricSort
+	5,  // 86: selling_iface.v1.UserStatMetricRequest.metric_extras:type_name -> selling_iface.v1.UserMetricExtra
+	0,  // 87: selling_iface.v1.UserStatMetricRequest.metric_types:type_name -> selling_iface.v1.UserMetricType
+	4,  // 88: selling_iface.v1.UserStatMetricResponse.metrics:type_name -> selling_iface.v1.UserMetric
+	89, // [89:89] is the sub-list for method output_type
+	89, // [89:89] is the sub-list for method input_type
+	89, // [89:89] is the sub-list for extension type_name
+	89, // [89:89] is the sub-list for extension extendee
+	0,  // [0:89] is the sub-list for field type_name
 }
 
 func init() { file_selling_iface_v1_user_stat_metric_proto_init() }
@@ -1584,48 +2316,82 @@ func file_selling_iface_v1_user_stat_metric_proto_init() {
 		(*UserMetricSort_UserOrderWithdrawalMetricSort)(nil),
 		(*UserMetricSort_UserOrderCancelledMetricSort)(nil),
 		(*UserMetricSort_UserOrderLostMetricSort)(nil),
+		(*UserMetricSort_UserOrderCompletedMetricSort)(nil),
+		(*UserMetricSort_UserOrderReturnMetricSort)(nil),
+		(*UserMetricSort_UserOrderReturnCompletedMetricSort)(nil),
+		(*UserMetricSort_UserOrderOngoingMetricSort)(nil),
 		(*UserMetricSort_UserStockOrderMetricSort)(nil),
 		(*UserMetricSort_UserStockOrderWithdrawalMetricSort)(nil),
 		(*UserMetricSort_UserStockOrderCancelledMetricSort)(nil),
 		(*UserMetricSort_UserStockOrderLostMetricSort)(nil),
+		(*UserMetricSort_UserStockOrderCompletedMetricSort)(nil),
+		(*UserMetricSort_UserStockOrderReturnMetricSort)(nil),
+		(*UserMetricSort_UserStockOrderReturnCompletedMetricSort)(nil),
+		(*UserMetricSort_UserStockOrderOngoingMetricSort)(nil),
 		(*UserMetricSort_UserAvgOrderMetricSort)(nil),
 		(*UserMetricSort_UserAvgOrderWithdrawalMetricSort)(nil),
 		(*UserMetricSort_UserAvgOrderCancelledMetricSort)(nil),
 		(*UserMetricSort_UserAvgOrderLostMetricSort)(nil),
+		(*UserMetricSort_UserAvgOrderCompletedMetricSort)(nil),
+		(*UserMetricSort_UserAvgOrderReturnMetricSort)(nil),
+		(*UserMetricSort_UserAvgOrderReturnCompletedMetricSort)(nil),
+		(*UserMetricSort_UserAvgOrderOngoingMetricSort)(nil),
 		(*UserMetricSort_UserCostOrderMetricSort)(nil),
 		(*UserMetricSort_UserCostOrderWithdrawalMetricSort)(nil),
 		(*UserMetricSort_UserCostOrderCancelledMetricSort)(nil),
 		(*UserMetricSort_UserCostOrderLostMetricSort)(nil),
-		(*UserMetricSort_UserWithdrawalMetricSort)(nil),
+		(*UserMetricSort_UserCostOrderCompletedMetricSort)(nil),
+		(*UserMetricSort_UserCostOrderReturnMetricSort)(nil),
+		(*UserMetricSort_UserCostOrderReturnCompletedMetricSort)(nil),
+		(*UserMetricSort_UserCostOrderOngoingMetricSort)(nil),
 		(*UserMetricSort_UserProfitOrderCreatedMetricSort)(nil),
 		(*UserMetricSort_UserProfitOrderWithdrawalMetricSort)(nil),
 		(*UserMetricSort_UserLostProfitOrderMetricSort)(nil),
-		(*UserMetricSort_UserAdsExpenseMetricSort)(nil),
 		(*UserMetricSort_UserProfitOrLossMetricSort)(nil),
+		(*UserMetricSort_UserAdsExpenseMetricSort)(nil),
+		(*UserMetricSort_UserWithdrawalMetricSort)(nil),
+		(*UserMetricSort_UserWithdrawalBreakdownMetricSort)(nil),
 	}
 	file_selling_iface_v1_user_stat_metric_proto_msgTypes[1].OneofWrappers = []any{
 		(*UserMetric_UserOrderMetric)(nil),
 		(*UserMetric_UserOrderWithdrawalMetric)(nil),
 		(*UserMetric_UserOrderCancelledMetric)(nil),
 		(*UserMetric_UserOrderLostMetric)(nil),
+		(*UserMetric_UserOrderCompletedMetric)(nil),
+		(*UserMetric_UserOrderReturnMetric)(nil),
+		(*UserMetric_UserOrderReturnCompletedMetric)(nil),
+		(*UserMetric_UserOrderOngoingMetric)(nil),
 		(*UserMetric_UserStockOrderMetric)(nil),
 		(*UserMetric_UserStockOrderWithdrawalMetric)(nil),
 		(*UserMetric_UserStockOrderCancelledMetric)(nil),
 		(*UserMetric_UserStockOrderLostMetric)(nil),
+		(*UserMetric_UserStockOrderCompletedMetric)(nil),
+		(*UserMetric_UserStockOrderReturnMetric)(nil),
+		(*UserMetric_UserStockOrderReturnCompletedMetric)(nil),
+		(*UserMetric_UserStockOrderOngoingMetric)(nil),
 		(*UserMetric_UserAvgOrderMetric)(nil),
 		(*UserMetric_UserAvgOrderWithdrawalMetric)(nil),
 		(*UserMetric_UserAvgOrderCancelledMetric)(nil),
 		(*UserMetric_UserAvgOrderLostMetric)(nil),
+		(*UserMetric_UserAvgOrderCompletedMetric)(nil),
+		(*UserMetric_UserAvgOrderReturnMetric)(nil),
+		(*UserMetric_UserAvgOrderReturnCompletedMetric)(nil),
+		(*UserMetric_UserAvgOrderOngoingMetric)(nil),
 		(*UserMetric_UserCostOrderMetric)(nil),
 		(*UserMetric_UserCostOrderWithdrawalMetric)(nil),
 		(*UserMetric_UserCostOrderCancelledMetric)(nil),
 		(*UserMetric_UserCostOrderLostMetric)(nil),
-		(*UserMetric_UserWithdrawalMetric)(nil),
+		(*UserMetric_UserCostOrderCompletedMetric)(nil),
+		(*UserMetric_UserCostOrderReturnMetric)(nil),
+		(*UserMetric_UserCostOrderReturnCompletedMetric)(nil),
+		(*UserMetric_UserCostOrderOngoingMetric)(nil),
 		(*UserMetric_UserProfitOrderCreatedMetric)(nil),
 		(*UserMetric_UserProfitOrderWithdrawalMetric)(nil),
 		(*UserMetric_UserLostProfitOrderMetric)(nil),
-		(*UserMetric_UserAdsExpenseMetric)(nil),
 		(*UserMetric_UserProfitOrLossMetric)(nil),
+		(*UserMetric_UserWithdrawalMetric)(nil),
+		(*UserMetric_UserWithdrawalBreakdownMetric)(nil),
+		(*UserMetric_UserAdsExpenseMetric)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

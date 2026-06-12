@@ -1,0 +1,56 @@
+syntax = "proto3";
+package selling_iface.v1.user_metric.v1;
+
+option go_package = "github.com/pdcgo/schema/services/selling_iface/v1/user_metric/v1;user_metric";
+
+message UserWithdrawalItem {
+  uint64 user_id = 1;
+  double withdrawal_fund_amount = 2;
+  double withdrawal_adjustment_amount = 3;
+  double withdrawal_total_amount = 4;
+}
+
+message UserWithdrawalMetric {
+  map<uint64, UserWithdrawalItem> data = 1;
+}
+
+enum UserWithdrawalMetricSort {
+  USER_WITHDRAWAL_METRIC_SORT_UNSPECIFIED = 0;
+  USER_WITHDRAWAL_METRIC_SORT_WITHDRAWAL_FUND_AMOUNT = 1;
+  USER_WITHDRAWAL_METRIC_SORT_WITHDRAWAL_ADJUSTMENT_AMOUNT = 2;
+  USER_WITHDRAWAL_METRIC_SORT_WITHDRAWAL_TOTAL_AMOUNT = 3;
+}
+
+message UserWithdrawalBreakdownItem {
+  uint64 user_id = 1;
+  double aff_commission_amount = 2;
+  double premi_amount = 3;
+  double packaging_amount = 4;
+  double return_adj_amount = 5;
+  double shipping_adj_amount = 6;
+  double compensation_amount = 7;
+  double lost_compensation_amount = 8;
+  double unknown_amount = 9;
+  double order_fund_amount = 10;
+  double unknown_adj_amount = 11;
+  double total_amount = 12;
+}
+
+message UserWithdrawalBreakdownMetric {
+  map<uint64, UserWithdrawalBreakdownItem> data = 1;
+}
+
+enum UserWithdrawalBreakdownMetricSort {
+  USER_WITHDRAWAL_BREAKDOWN_METRIC_SORT_UNSPECIFIED = 0;
+  USER_WITHDRAWAL_BREAKDOWN_METRIC_SORT_AFF_COMMISSION_AMOUNT = 1;
+  USER_WITHDRAWAL_BREAKDOWN_METRIC_SORT_PREMI_AMOUNT = 2;
+  USER_WITHDRAWAL_BREAKDOWN_METRIC_SORT_PACKAGING_AMOUNT = 3;
+  USER_WITHDRAWAL_BREAKDOWN_METRIC_SORT_RETURN_ADJ_AMOUNT = 4;
+  USER_WITHDRAWAL_BREAKDOWN_METRIC_SORT_SHIPPING_ADJ_AMOUNT = 5;
+  USER_WITHDRAWAL_BREAKDOWN_METRIC_SORT_COMPENSATION_AMOUNT = 6;
+  USER_WITHDRAWAL_BREAKDOWN_METRIC_SORT_LOST_COMPENSATION_AMOUNT = 7;
+  USER_WITHDRAWAL_BREAKDOWN_METRIC_SORT_UNKNOWN_AMOUNT = 8;
+  USER_WITHDRAWAL_BREAKDOWN_METRIC_SORT_ORDER_FUND_AMOUNT = 9;
+  USER_WITHDRAWAL_BREAKDOWN_METRIC_SORT_UNKNOWN_ADJ_AMOUNT = 10;
+  USER_WITHDRAWAL_BREAKDOWN_METRIC_SORT_TOTAL_AMOUNT = 11;
+}

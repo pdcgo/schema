@@ -89,100 +89,88 @@ enum UserOrderLostMetricSort {
   USER_ORDER_LOST_METRIC_SORT_LAST_ORDER_LOST = 4;
 }
 
-message UserStockOrderItem {
+message UserOrderCompletedItem {
   uint64 user_id = 1;
-  int64 piece_count = 2;
-  int64 own_piece_count = 4;
-  int64 cross_piece_count = 5;
-  double piece_amount = 3;
-  double own_piece_amount = 6;
-  double cross_piece_amount = 7;
+  int64 transaction_count = 2;
+  double total_amount = 4;
+  double mp_total_amount = 5;
+  // @gotags: gorm:"serializer:timestamptz"
+  google.protobuf.Timestamp last_order_completed = 6;
 }
 
-message UserStockOrderMetric {
-  map<uint64, UserStockOrderItem> data = 1;
+message UserOrderCompletedMetric {
+  map<uint64, UserOrderCompletedItem> data = 1;
 }
 
-enum UserStockOrderMetricSort {
-  USER_STOCK_ORDER_METRIC_SORT_UNSPECIFIED = 0;
-  USER_STOCK_ORDER_METRIC_SORT_PIECE_COUNT = 1;
-  USER_STOCK_ORDER_METRIC_SORT_OWN_PIECE_COUNT = 3;
-  USER_STOCK_ORDER_METRIC_SORT_CROSS_PIECE_COUNT = 4;
-  USER_STOCK_ORDER_METRIC_SORT_PIECE_AMOUNT = 2;
-  USER_STOCK_ORDER_METRIC_SORT_OWN_PIECE_AMOUNT = 5;
-  USER_STOCK_ORDER_METRIC_SORT_CROSS_PIECE_AMOUNT = 6;
+enum UserOrderCompletedMetricSort {
+  USER_ORDER_COMPLETED_METRIC_SORT_UNSPECIFIED = 0;
+  USER_ORDER_COMPLETED_METRIC_SORT_TRANSACTION_COUNT = 1;
+  USER_ORDER_COMPLETED_METRIC_SORT_TOTAL_AMOUNT = 2;
+  USER_ORDER_COMPLETED_METRIC_SORT_MP_TOTAL_AMOUNT = 3;
+  USER_ORDER_COMPLETED_METRIC_SORT_LAST_ORDER_LOST = 4;
 }
 
-message UserStockOrderWithdrawalItem {
+message UserOrderReturnItem {
   uint64 user_id = 1;
-  int64 piece_count = 2;
-  int64 own_piece_count = 4;
-  int64 cross_piece_count = 5;
-  double piece_amount = 3;
-  double own_piece_amount = 6;
-  double cross_piece_amount = 7;
+  int64 transaction_count = 2;
+  double total_amount = 4;
+  double mp_total_amount = 5;
+  // @gotags: gorm:"serializer:timestamptz"
+  google.protobuf.Timestamp last_order_return = 6;
 }
 
-message UserStockOrderWithdrawalMetric {
-  map<uint64, UserStockOrderWithdrawalItem> data = 1;
+message UserOrderReturnMetric {
+  map<uint64, UserOrderReturnItem> data = 1;
 }
 
-enum UserStockOrderWithdrawalMetricSort {
-  USER_STOCK_ORDER_WITHDRAWAL_METRIC_SORT_UNSPECIFIED = 0;
-  USER_STOCK_ORDER_WITHDRAWAL_METRIC_SORT_PIECE_COUNT = 1;
-  USER_STOCK_ORDER_WITHDRAWAL_METRIC_SORT_OWN_PIECE_COUNT = 3;
-  USER_STOCK_ORDER_WITHDRAWAL_METRIC_SORT_CROSS_PIECE_COUNT = 4;
-  USER_STOCK_ORDER_WITHDRAWAL_METRIC_SORT_PIECE_AMOUNT = 2;
-  USER_STOCK_ORDER_WITHDRAWAL_METRIC_SORT_OWN_PIECE_AMOUNT = 5;
-  USER_STOCK_ORDER_WITHDRAWAL_METRIC_SORT_CROSS_PIECE_AMOUNT = 6;
+enum UserOrderReturnMetricSort {
+  USER_ORDER_RETURN_METRIC_SORT_UNSPECIFIED = 0;
+  USER_ORDER_RETURN_METRIC_SORT_TRANSACTION_COUNT = 1;
+  USER_ORDER_RETURN_METRIC_SORT_TOTAL_AMOUNT = 2;
+  USER_ORDER_RETURN_METRIC_SORT_MP_TOTAL_AMOUNT = 3;
+  USER_ORDER_RETURN_METRIC_SORT_LAST_ORDER_RETURN = 4;
 }
 
-message UserStockOrderCancelledItem {
+message UserOrderReturnCompletedItem {
   uint64 user_id = 1;
-  int64 piece_count = 2;
-  int64 own_piece_count = 4;
-  int64 cross_piece_count = 5;
-  double piece_amount = 3;
-  double own_piece_amount = 6;
-  double cross_piece_amount = 7;
+  int64 transaction_count = 2;
+  double total_amount = 4;
+  double mp_total_amount = 5;
+  // @gotags: gorm:"serializer:timestamptz"
+  google.protobuf.Timestamp last_order_return_completed = 6;
 }
 
-message UserStockOrderCancelledMetric {
-  map<uint64, UserStockOrderCancelledItem> data = 1;
+message UserOrderReturnCompletedMetric {
+  map<uint64, UserOrderReturnCompletedItem> data = 1;
 }
 
-enum UserStockOrderCancelledMetricSort {
-  USER_STOCK_ORDER_CANCELLED_METRIC_SORT_UNSPECIFIED = 0;
-  USER_STOCK_ORDER_CANCELLED_METRIC_SORT_PIECE_COUNT = 1;
-  USER_STOCK_ORDER_CANCELLED_METRIC_SORT_OWN_PIECE_COUNT = 3;
-  USER_STOCK_ORDER_CANCELLED_METRIC_SORT_CROSS_PIECE_COUNT = 4;
-  USER_STOCK_ORDER_CANCELLED_METRIC_SORT_PIECE_AMOUNT = 2;
-  USER_STOCK_ORDER_CANCELLED_METRIC_SORT_OWN_PIECE_AMOUNT = 5;
-  USER_STOCK_ORDER_CANCELLED_METRIC_SORT_CROSS_PIECE_AMOUNT = 6;
+enum UserOrderReturnCompletedMetricSort {
+  USER_ORDER_RETURN_COMPLETED_METRIC_SORT_UNSPECIFIED = 0;
+  USER_ORDER_RETURN_COMPLETED_METRIC_SORT_TRANSACTION_COUNT = 1;
+  USER_ORDER_RETURN_COMPLETED_METRIC_SORT_TOTAL_AMOUNT = 2;
+  USER_ORDER_RETURN_COMPLETED_METRIC_SORT_MP_TOTAL_AMOUNT = 3;
+  USER_ORDER_RETURN_COMPLETED_METRIC_SORT_LAST_ORDER_RETURN_COMPLETED = 4;
 }
 
-message UserStockOrderLostItem {
+message UserOrderOngoingItem {
   uint64 user_id = 1;
-  int64 piece_count = 2;
-  int64 own_piece_count = 4;
-  int64 cross_piece_count = 5;
-  double piece_amount = 3;
-  double own_piece_amount = 6;
-  double cross_piece_amount = 7;
+  int64 transaction_count = 2;
+  double total_amount = 4;
+  double mp_total_amount = 5;
+  // @gotags: gorm:"serializer:timestamptz"
+  google.protobuf.Timestamp last_order_ongoing = 6;
 }
 
-message UserStockOrderLostMetric {
-  map<uint64, UserStockOrderLostItem> data = 1;
+message UserOrderOngoingMetric {
+  map<uint64, UserOrderOngoingItem> data = 1;
 }
 
-enum UserStockOrderLostMetricSort {
-  USER_STOCK_ORDER_LOST_METRIC_SORT_UNSPECIFIED = 0;
-  USER_STOCK_ORDER_LOST_METRIC_SORT_PIECE_COUNT = 1;
-  USER_STOCK_ORDER_LOST_METRIC_SORT_OWN_PIECE_COUNT = 3;
-  USER_STOCK_ORDER_LOST_METRIC_SORT_CROSS_PIECE_COUNT = 4;
-  USER_STOCK_ORDER_LOST_METRIC_SORT_PIECE_AMOUNT = 2;
-  USER_STOCK_ORDER_LOST_METRIC_SORT_OWN_PIECE_AMOUNT = 5;
-  USER_STOCK_ORDER_LOST_METRIC_SORT_CROSS_PIECE_AMOUNT = 6;
+enum UserOrderOngoingMetricSort {
+  USER_ORDER_ONGOING_METRIC_SORT_UNSPECIFIED = 0;
+  USER_ORDER_ONGOING_METRIC_SORT_TRANSACTION_COUNT = 1;
+  USER_ORDER_ONGOING_METRIC_SORT_TOTAL_AMOUNT = 2;
+  USER_ORDER_ONGOING_METRIC_SORT_MP_TOTAL_AMOUNT = 3;
+  USER_ORDER_ONGOING_METRIC_SORT_LAST_ORDER_ONGOING = 4;
 }
 
 message UserAvgOrderItem {
@@ -249,186 +237,66 @@ enum UserAvgOrderLostMetricSort {
   USER_AVG_ORDER_LOST_METRIC_SORT_TOTAL_PER_TRANSACTION = 2;
 }
 
-message UserCostOrderItem {
+message UserAvgOrderCompletedItem {
   uint64 user_id = 1;
-  double product_amount = 2;
-  double own_product_amount = 3;
-  double cross_product_amount = 4;
-  double warehouse_amount = 5;
-  double total_amount = 6;
+  double piece_per_transaction = 2;
+  double total_per_transaction = 3;
 }
 
-message UserCostOrderMetric {
-  map<uint64, UserCostOrderItem> data = 1;
+message UserAvgOrderCompletedMetric {
+  map<uint64, UserAvgOrderCompletedItem> data = 1;
 }
 
-enum UserCostOrderMetricSort {
-  USER_COST_ORDER_METRIC_SORT_UNSPECIFIED = 0;
-  USER_COST_ORDER_METRIC_SORT_PRODUCT_AMOUNT = 1;
-  USER_COST_ORDER_METRIC_SORT_OWN_PRODUCT_AMOUNT = 2;
-  USER_COST_ORDER_METRIC_SORT_CROSS_PRODUCT_AMOUNT = 3;
-  USER_COST_ORDER_METRIC_SORT_WAREHOUSE_AMOUNT = 4;
-  USER_COST_ORDER_METRIC_SORT_TOTAL_AMOUNT = 5;
+enum UserAvgOrderCompletedMetricSort {
+  USER_AVG_ORDER_COMPLETED_METRIC_SORT_UNSPECIFIED = 0;
+  USER_AVG_ORDER_COMPLETED_METRIC_SORT_PIECE_PER_TRANSACTION = 1;
+  USER_AVG_ORDER_COMPLETED_METRIC_SORT_TOTAL_PER_TRANSACTION = 2;
 }
 
-message UserCostOrderWithdrawalItem {
+message UserAvgOrderReturnItem {
   uint64 user_id = 1;
-  double product_amount = 2;
-  double own_product_amount = 3;
-  double cross_product_amount = 4;
-  double warehouse_amount = 5;
-  double total_amount = 6;
+  double piece_per_transaction = 2;
+  double total_per_transaction = 3;
 }
 
-message UserCostOrderWithdrawalMetric {
-  map<uint64, UserCostOrderWithdrawalItem> data = 1;
+message UserAvgOrderReturnMetric {
+  map<uint64, UserAvgOrderReturnItem> data = 1;
 }
 
-enum UserCostOrderWithdrawalMetricSort {
-  USER_COST_ORDER_WITHDRAWAL_METRIC_SORT_UNSPECIFIED = 0;
-  USER_COST_ORDER_WITHDRAWAL_METRIC_SORT_PRODUCT_AMOUNT = 1;
-  USER_COST_ORDER_WITHDRAWAL_METRIC_SORT_OWN_PRODUCT_AMOUNT = 2;
-  USER_COST_ORDER_WITHDRAWAL_METRIC_SORT_CROSS_PRODUCT_AMOUNT = 3;
-  USER_COST_ORDER_WITHDRAWAL_METRIC_SORT_WAREHOUSE_AMOUNT = 4;
-  USER_COST_ORDER_WITHDRAWAL_METRIC_SORT_TOTAL_AMOUNT = 5;
+enum UserAvgOrderReturnMetricSort {
+  USER_AVG_ORDER_RETURN_METRIC_SORT_UNSPECIFIED = 0;
+  USER_AVG_ORDER_RETURN_METRIC_SORT_PIECE_PER_TRANSACTION = 1;
+  USER_AVG_ORDER_RETURN_METRIC_SORT_TOTAL_PER_TRANSACTION = 2;
 }
 
-message UserCostOrderCancelledItem {
+message UserAvgOrderReturnCompletedItem {
   uint64 user_id = 1;
-  double product_amount = 2;
-  double own_product_amount = 3;
-  double cross_product_amount = 4;
-  double warehouse_amount = 5;
-  double total_amount = 6;
+  double piece_per_transaction = 2;
+  double total_per_transaction = 3;
 }
 
-message UserCostOrderCancelledMetric {
-  map<uint64, UserCostOrderCancelledItem> data = 1;
+message UserAvgOrderReturnCompletedMetric {
+  map<uint64, UserAvgOrderReturnCompletedItem> data = 1;
 }
 
-enum UserCostOrderCancelledMetricSort {
-  USER_COST_ORDER_CANCELLED_METRIC_SORT_UNSPECIFIED = 0;
-  USER_COST_ORDER_CANCELLED_METRIC_SORT_PRODUCT_AMOUNT = 1;
-  USER_COST_ORDER_CANCELLED_METRIC_SORT_OWN_PRODUCT_AMOUNT = 2;
-  USER_COST_ORDER_CANCELLED_METRIC_SORT_CROSS_PRODUCT_AMOUNT = 3;
-  USER_COST_ORDER_CANCELLED_METRIC_SORT_WAREHOUSE_AMOUNT = 4;
-  USER_COST_ORDER_CANCELLED_METRIC_SORT_TOTAL_AMOUNT = 5;
+enum UserAvgOrderReturnCompletedMetricSort {
+  USER_AVG_ORDER_RETURN_COMPLETED_METRIC_SORT_UNSPECIFIED = 0;
+  USER_AVG_ORDER_RETURN_COMPLETED_METRIC_SORT_PIECE_PER_TRANSACTION = 1;
+  USER_AVG_ORDER_RETURN_COMPLETED_METRIC_SORT_TOTAL_PER_TRANSACTION = 2;
 }
 
-message UserCostOrderLostItem {
+message UserAvgOrderOngoingItem {
   uint64 user_id = 1;
-  double product_amount = 2;
-  double own_product_amount = 3;
-  double cross_product_amount = 4;
-  double warehouse_amount = 5;
-  double total_amount = 6;
+  double piece_per_transaction = 2;
+  double total_per_transaction = 3;
 }
 
-message UserCostOrderLostMetric {
-  map<uint64, UserCostOrderLostItem> data = 1;
+message UserAvgOrderOngoingMetric {
+  map<uint64, UserAvgOrderOngoingItem> data = 1;
 }
 
-enum UserCostOrderLostMetricSort {
-  USER_COST_ORDER_LOST_METRIC_SORT_UNSPECIFIED = 0;
-  USER_COST_ORDER_LOST_METRIC_SORT_PRODUCT_AMOUNT = 1;
-  USER_COST_ORDER_LOST_METRIC_SORT_OWN_PRODUCT_AMOUNT = 2;
-  USER_COST_ORDER_LOST_METRIC_SORT_CROSS_PRODUCT_AMOUNT = 3;
-  USER_COST_ORDER_LOST_METRIC_SORT_WAREHOUSE_AMOUNT = 4;
-  USER_COST_ORDER_LOST_METRIC_SORT_TOTAL_AMOUNT = 5;
-}
-
-message UserWithdrawalItem {
-  uint64 user_id = 1;
-  double withdrawal_fund_amount = 2;
-  double withdrawal_adjustment_amount = 3;
-  double withdrawal_total_amount = 4;
-}
-
-message UserWithdrawalMetric {
-  map<uint64, UserWithdrawalItem> data = 1;
-}
-
-enum UserWithdrawalMetricSort {
-  USER_WITHDRAWAL_METRIC_SORT_UNSPECIFIED = 0;
-  USER_WITHDRAWAL_METRIC_SORT_WITHDRAWAL_FUND_AMOUNT = 1;
-  USER_WITHDRAWAL_METRIC_SORT_WITHDRAWAL_ADJUSTMENT_AMOUNT = 2;
-  USER_WITHDRAWAL_METRIC_SORT_WITHDRAWAL_TOTAL_AMOUNT = 3;
-}
-
-message UserProfitOrderCreatedItem {
-  uint64 user_id = 1;
-  double profit_created_amount = 2;
-  double profit_created_percent = 3;
-}
-
-message UserProfitOrderCreatedMetric {
-  map<uint64, UserProfitOrderCreatedItem> data = 1;
-}
-
-enum UserProfitOrderCreatedMetricSort {
-  USER_PROFIT_ORDER_CREATED_METRIC_SORT_UNSPECIFIED = 0;
-  USER_PROFIT_ORDER_CREATED_METRIC_SORT_PROFIT_CREATED_AMOUNT = 1;
-  USER_PROFIT_ORDER_CREATED_METRIC_SORT_PROFIT_CREATED_PERCENT = 2;
-}
-
-message UserProfitOrderWithdrawalItem {
-  uint64 user_id = 1;
-  double profit_withdrawal_amount = 2;
-  double profit_withdrawal_percent = 3;
-  double profit_withdrawal_adjustment_amount = 4;
-  double profit_withdrawal_adjustment_percent = 5;
-}
-
-message UserProfitOrderWithdrawalMetric {
-  map<uint64, UserProfitOrderWithdrawalItem> data = 1;
-}
-
-enum UserProfitOrderWithdrawalMetricSort {
-  USER_PROFIT_ORDER_WITHDRAWAL_METRIC_SORT_UNSPECIFIED = 0;
-  USER_PROFIT_ORDER_WITHDRAWAL_METRIC_SORT_PROFIT_WITHDRAWAL_AMOUNT = 1;
-  USER_PROFIT_ORDER_WITHDRAWAL_METRIC_SORT_PROFIT_WITHDRAWAL_PERCENT = 2;
-  USER_PROFIT_ORDER_WITHDRAWAL_METRIC_SORT_PROFIT_WITHDRAWAL_ADJUSTMENT_AMOUNT = 3;
-  USER_PROFIT_ORDER_WITHDRAWAL_METRIC_SORT_PROFIT_WITHDRAWAL_ADJUSTMENT_PERCENT = 4;
-}
-
-message UserLostProfitOrderItem {
-  uint64 user_id = 1;
-  double lost_profit_amount = 2;
-}
-
-message UserLostProfitOrderMetric {
-  map<uint64, UserLostProfitOrderItem> data = 1;
-}
-
-enum UserLostProfitOrderMetricSort {
-  USER_LOST_PROFIT_ORDER_METRIC_SORT_UNSPECIFIED = 0;
-  USER_LOST_PROFIT_ORDER_METRIC_SORT_LOST_PROFIT_AMOUNT = 1;
-}
-
-message UserAdsExpenseItem {
-  uint64 user_id = 1;
-  double ads_amount = 2;
-}
-
-message UserAdsExpenseMetric {
-  map<uint64, UserAdsExpenseItem> data = 1;
-}
-
-enum UserAdsExpenseMetricSort {
-  USER_ADS_EXPENSE_METRIC_SORT_UNSPECIFIED = 0;
-  USER_ADS_EXPENSE_METRIC_SORT_ADS_AMOUNT = 1;
-}
-
-message UserProfitOrLossItem {
-  uint64 user_id = 1;
-  double profit_or_loss_amount = 2;
-}
-
-message UserProfitOrLossMetric {
-  map<uint64, UserProfitOrLossItem> data = 1;
-}
-
-enum UserProfitOrLossMetricSort {
-  USER_PROFIT_OR_LOSS_METRIC_SORT_UNSPECIFIED = 0;
-  USER_PROFIT_OR_LOSS_METRIC_SORT_PROFIT_OR_LOSS_AMOUNT = 1;
+enum UserAvgOrderOngoingMetricSort {
+  USER_AVG_ORDER_ONGOING_METRIC_SORT_UNSPECIFIED = 0;
+  USER_AVG_ORDER_ONGOING_METRIC_SORT_PIECE_PER_TRANSACTION = 1;
+  USER_AVG_ORDER_ONGOING_METRIC_SORT_TOTAL_PER_TRANSACTION = 2;
 }

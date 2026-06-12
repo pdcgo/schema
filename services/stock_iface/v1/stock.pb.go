@@ -353,10 +353,10 @@ type VariantProblemItem struct {
 	VariantId       uint64                 `protobuf:"varint,1,opt,name=variant_id,json=variantId,proto3" json:"variant_id,omitempty"` // must be > 0
 	Count           int64                  `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`                          // must be > 0
 	ChargeWarehouse bool                   `protobuf:"varint,3,opt,name=charge_warehouse,json=chargeWarehouse,proto3" json:"charge_warehouse,omitempty"`
-	// ProblemType problem_type = 4 [(buf.validate.field).enum = {
-	//   defined_only: true
-	//   not_in: [0]
-	// }];
+	//	ProblemType problem_type = 4 [(buf.validate.field).enum = {
+	//	  defined_only: true
+	//	  not_in: [0]
+	//	}];
 	ItemPrice     float64 `protobuf:"fixed64,5,opt,name=item_price,json=itemPrice,proto3" json:"item_price,omitempty"` // non-negative
 	Reason        string  `protobuf:"bytes,6,opt,name=reason,proto3" json:"reason,omitempty"`                          // required, not empty
 	unknownFields protoimpl.UnknownFields

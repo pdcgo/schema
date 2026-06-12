@@ -242,247 +242,223 @@ func (UserOrderLostMetricSort) EnumDescriptor() ([]byte, []int) {
 	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{3}
 }
 
-type UserStockOrderMetricSort int32
+type UserOrderCompletedMetricSort int32
 
 const (
-	UserStockOrderMetricSort_USER_STOCK_ORDER_METRIC_SORT_UNSPECIFIED        UserStockOrderMetricSort = 0
-	UserStockOrderMetricSort_USER_STOCK_ORDER_METRIC_SORT_PIECE_COUNT        UserStockOrderMetricSort = 1
-	UserStockOrderMetricSort_USER_STOCK_ORDER_METRIC_SORT_OWN_PIECE_COUNT    UserStockOrderMetricSort = 3
-	UserStockOrderMetricSort_USER_STOCK_ORDER_METRIC_SORT_CROSS_PIECE_COUNT  UserStockOrderMetricSort = 4
-	UserStockOrderMetricSort_USER_STOCK_ORDER_METRIC_SORT_PIECE_AMOUNT       UserStockOrderMetricSort = 2
-	UserStockOrderMetricSort_USER_STOCK_ORDER_METRIC_SORT_OWN_PIECE_AMOUNT   UserStockOrderMetricSort = 5
-	UserStockOrderMetricSort_USER_STOCK_ORDER_METRIC_SORT_CROSS_PIECE_AMOUNT UserStockOrderMetricSort = 6
+	UserOrderCompletedMetricSort_USER_ORDER_COMPLETED_METRIC_SORT_UNSPECIFIED       UserOrderCompletedMetricSort = 0
+	UserOrderCompletedMetricSort_USER_ORDER_COMPLETED_METRIC_SORT_TRANSACTION_COUNT UserOrderCompletedMetricSort = 1
+	UserOrderCompletedMetricSort_USER_ORDER_COMPLETED_METRIC_SORT_TOTAL_AMOUNT      UserOrderCompletedMetricSort = 2
+	UserOrderCompletedMetricSort_USER_ORDER_COMPLETED_METRIC_SORT_MP_TOTAL_AMOUNT   UserOrderCompletedMetricSort = 3
+	UserOrderCompletedMetricSort_USER_ORDER_COMPLETED_METRIC_SORT_LAST_ORDER_LOST   UserOrderCompletedMetricSort = 4
 )
 
-// Enum value maps for UserStockOrderMetricSort.
+// Enum value maps for UserOrderCompletedMetricSort.
 var (
-	UserStockOrderMetricSort_name = map[int32]string{
-		0: "USER_STOCK_ORDER_METRIC_SORT_UNSPECIFIED",
-		1: "USER_STOCK_ORDER_METRIC_SORT_PIECE_COUNT",
-		3: "USER_STOCK_ORDER_METRIC_SORT_OWN_PIECE_COUNT",
-		4: "USER_STOCK_ORDER_METRIC_SORT_CROSS_PIECE_COUNT",
-		2: "USER_STOCK_ORDER_METRIC_SORT_PIECE_AMOUNT",
-		5: "USER_STOCK_ORDER_METRIC_SORT_OWN_PIECE_AMOUNT",
-		6: "USER_STOCK_ORDER_METRIC_SORT_CROSS_PIECE_AMOUNT",
+	UserOrderCompletedMetricSort_name = map[int32]string{
+		0: "USER_ORDER_COMPLETED_METRIC_SORT_UNSPECIFIED",
+		1: "USER_ORDER_COMPLETED_METRIC_SORT_TRANSACTION_COUNT",
+		2: "USER_ORDER_COMPLETED_METRIC_SORT_TOTAL_AMOUNT",
+		3: "USER_ORDER_COMPLETED_METRIC_SORT_MP_TOTAL_AMOUNT",
+		4: "USER_ORDER_COMPLETED_METRIC_SORT_LAST_ORDER_LOST",
 	}
-	UserStockOrderMetricSort_value = map[string]int32{
-		"USER_STOCK_ORDER_METRIC_SORT_UNSPECIFIED":        0,
-		"USER_STOCK_ORDER_METRIC_SORT_PIECE_COUNT":        1,
-		"USER_STOCK_ORDER_METRIC_SORT_OWN_PIECE_COUNT":    3,
-		"USER_STOCK_ORDER_METRIC_SORT_CROSS_PIECE_COUNT":  4,
-		"USER_STOCK_ORDER_METRIC_SORT_PIECE_AMOUNT":       2,
-		"USER_STOCK_ORDER_METRIC_SORT_OWN_PIECE_AMOUNT":   5,
-		"USER_STOCK_ORDER_METRIC_SORT_CROSS_PIECE_AMOUNT": 6,
+	UserOrderCompletedMetricSort_value = map[string]int32{
+		"USER_ORDER_COMPLETED_METRIC_SORT_UNSPECIFIED":       0,
+		"USER_ORDER_COMPLETED_METRIC_SORT_TRANSACTION_COUNT": 1,
+		"USER_ORDER_COMPLETED_METRIC_SORT_TOTAL_AMOUNT":      2,
+		"USER_ORDER_COMPLETED_METRIC_SORT_MP_TOTAL_AMOUNT":   3,
+		"USER_ORDER_COMPLETED_METRIC_SORT_LAST_ORDER_LOST":   4,
 	}
 )
 
-func (x UserStockOrderMetricSort) Enum() *UserStockOrderMetricSort {
-	p := new(UserStockOrderMetricSort)
+func (x UserOrderCompletedMetricSort) Enum() *UserOrderCompletedMetricSort {
+	p := new(UserOrderCompletedMetricSort)
 	*p = x
 	return p
 }
 
-func (x UserStockOrderMetricSort) String() string {
+func (x UserOrderCompletedMetricSort) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (UserStockOrderMetricSort) Descriptor() protoreflect.EnumDescriptor {
+func (UserOrderCompletedMetricSort) Descriptor() protoreflect.EnumDescriptor {
 	return file_selling_iface_v1_user_metric_v1_order_metric_proto_enumTypes[4].Descriptor()
 }
 
-func (UserStockOrderMetricSort) Type() protoreflect.EnumType {
+func (UserOrderCompletedMetricSort) Type() protoreflect.EnumType {
 	return &file_selling_iface_v1_user_metric_v1_order_metric_proto_enumTypes[4]
 }
 
-func (x UserStockOrderMetricSort) Number() protoreflect.EnumNumber {
+func (x UserOrderCompletedMetricSort) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use UserStockOrderMetricSort.Descriptor instead.
-func (UserStockOrderMetricSort) EnumDescriptor() ([]byte, []int) {
+// Deprecated: Use UserOrderCompletedMetricSort.Descriptor instead.
+func (UserOrderCompletedMetricSort) EnumDescriptor() ([]byte, []int) {
 	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{4}
 }
 
-type UserStockOrderWithdrawalMetricSort int32
+type UserOrderReturnMetricSort int32
 
 const (
-	UserStockOrderWithdrawalMetricSort_USER_STOCK_ORDER_WITHDRAWAL_METRIC_SORT_UNSPECIFIED        UserStockOrderWithdrawalMetricSort = 0
-	UserStockOrderWithdrawalMetricSort_USER_STOCK_ORDER_WITHDRAWAL_METRIC_SORT_PIECE_COUNT        UserStockOrderWithdrawalMetricSort = 1
-	UserStockOrderWithdrawalMetricSort_USER_STOCK_ORDER_WITHDRAWAL_METRIC_SORT_OWN_PIECE_COUNT    UserStockOrderWithdrawalMetricSort = 3
-	UserStockOrderWithdrawalMetricSort_USER_STOCK_ORDER_WITHDRAWAL_METRIC_SORT_CROSS_PIECE_COUNT  UserStockOrderWithdrawalMetricSort = 4
-	UserStockOrderWithdrawalMetricSort_USER_STOCK_ORDER_WITHDRAWAL_METRIC_SORT_PIECE_AMOUNT       UserStockOrderWithdrawalMetricSort = 2
-	UserStockOrderWithdrawalMetricSort_USER_STOCK_ORDER_WITHDRAWAL_METRIC_SORT_OWN_PIECE_AMOUNT   UserStockOrderWithdrawalMetricSort = 5
-	UserStockOrderWithdrawalMetricSort_USER_STOCK_ORDER_WITHDRAWAL_METRIC_SORT_CROSS_PIECE_AMOUNT UserStockOrderWithdrawalMetricSort = 6
+	UserOrderReturnMetricSort_USER_ORDER_RETURN_METRIC_SORT_UNSPECIFIED       UserOrderReturnMetricSort = 0
+	UserOrderReturnMetricSort_USER_ORDER_RETURN_METRIC_SORT_TRANSACTION_COUNT UserOrderReturnMetricSort = 1
+	UserOrderReturnMetricSort_USER_ORDER_RETURN_METRIC_SORT_TOTAL_AMOUNT      UserOrderReturnMetricSort = 2
+	UserOrderReturnMetricSort_USER_ORDER_RETURN_METRIC_SORT_MP_TOTAL_AMOUNT   UserOrderReturnMetricSort = 3
+	UserOrderReturnMetricSort_USER_ORDER_RETURN_METRIC_SORT_LAST_ORDER_RETURN UserOrderReturnMetricSort = 4
 )
 
-// Enum value maps for UserStockOrderWithdrawalMetricSort.
+// Enum value maps for UserOrderReturnMetricSort.
 var (
-	UserStockOrderWithdrawalMetricSort_name = map[int32]string{
-		0: "USER_STOCK_ORDER_WITHDRAWAL_METRIC_SORT_UNSPECIFIED",
-		1: "USER_STOCK_ORDER_WITHDRAWAL_METRIC_SORT_PIECE_COUNT",
-		3: "USER_STOCK_ORDER_WITHDRAWAL_METRIC_SORT_OWN_PIECE_COUNT",
-		4: "USER_STOCK_ORDER_WITHDRAWAL_METRIC_SORT_CROSS_PIECE_COUNT",
-		2: "USER_STOCK_ORDER_WITHDRAWAL_METRIC_SORT_PIECE_AMOUNT",
-		5: "USER_STOCK_ORDER_WITHDRAWAL_METRIC_SORT_OWN_PIECE_AMOUNT",
-		6: "USER_STOCK_ORDER_WITHDRAWAL_METRIC_SORT_CROSS_PIECE_AMOUNT",
+	UserOrderReturnMetricSort_name = map[int32]string{
+		0: "USER_ORDER_RETURN_METRIC_SORT_UNSPECIFIED",
+		1: "USER_ORDER_RETURN_METRIC_SORT_TRANSACTION_COUNT",
+		2: "USER_ORDER_RETURN_METRIC_SORT_TOTAL_AMOUNT",
+		3: "USER_ORDER_RETURN_METRIC_SORT_MP_TOTAL_AMOUNT",
+		4: "USER_ORDER_RETURN_METRIC_SORT_LAST_ORDER_RETURN",
 	}
-	UserStockOrderWithdrawalMetricSort_value = map[string]int32{
-		"USER_STOCK_ORDER_WITHDRAWAL_METRIC_SORT_UNSPECIFIED":        0,
-		"USER_STOCK_ORDER_WITHDRAWAL_METRIC_SORT_PIECE_COUNT":        1,
-		"USER_STOCK_ORDER_WITHDRAWAL_METRIC_SORT_OWN_PIECE_COUNT":    3,
-		"USER_STOCK_ORDER_WITHDRAWAL_METRIC_SORT_CROSS_PIECE_COUNT":  4,
-		"USER_STOCK_ORDER_WITHDRAWAL_METRIC_SORT_PIECE_AMOUNT":       2,
-		"USER_STOCK_ORDER_WITHDRAWAL_METRIC_SORT_OWN_PIECE_AMOUNT":   5,
-		"USER_STOCK_ORDER_WITHDRAWAL_METRIC_SORT_CROSS_PIECE_AMOUNT": 6,
+	UserOrderReturnMetricSort_value = map[string]int32{
+		"USER_ORDER_RETURN_METRIC_SORT_UNSPECIFIED":       0,
+		"USER_ORDER_RETURN_METRIC_SORT_TRANSACTION_COUNT": 1,
+		"USER_ORDER_RETURN_METRIC_SORT_TOTAL_AMOUNT":      2,
+		"USER_ORDER_RETURN_METRIC_SORT_MP_TOTAL_AMOUNT":   3,
+		"USER_ORDER_RETURN_METRIC_SORT_LAST_ORDER_RETURN": 4,
 	}
 )
 
-func (x UserStockOrderWithdrawalMetricSort) Enum() *UserStockOrderWithdrawalMetricSort {
-	p := new(UserStockOrderWithdrawalMetricSort)
+func (x UserOrderReturnMetricSort) Enum() *UserOrderReturnMetricSort {
+	p := new(UserOrderReturnMetricSort)
 	*p = x
 	return p
 }
 
-func (x UserStockOrderWithdrawalMetricSort) String() string {
+func (x UserOrderReturnMetricSort) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (UserStockOrderWithdrawalMetricSort) Descriptor() protoreflect.EnumDescriptor {
+func (UserOrderReturnMetricSort) Descriptor() protoreflect.EnumDescriptor {
 	return file_selling_iface_v1_user_metric_v1_order_metric_proto_enumTypes[5].Descriptor()
 }
 
-func (UserStockOrderWithdrawalMetricSort) Type() protoreflect.EnumType {
+func (UserOrderReturnMetricSort) Type() protoreflect.EnumType {
 	return &file_selling_iface_v1_user_metric_v1_order_metric_proto_enumTypes[5]
 }
 
-func (x UserStockOrderWithdrawalMetricSort) Number() protoreflect.EnumNumber {
+func (x UserOrderReturnMetricSort) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use UserStockOrderWithdrawalMetricSort.Descriptor instead.
-func (UserStockOrderWithdrawalMetricSort) EnumDescriptor() ([]byte, []int) {
+// Deprecated: Use UserOrderReturnMetricSort.Descriptor instead.
+func (UserOrderReturnMetricSort) EnumDescriptor() ([]byte, []int) {
 	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{5}
 }
 
-type UserStockOrderCancelledMetricSort int32
+type UserOrderReturnCompletedMetricSort int32
 
 const (
-	UserStockOrderCancelledMetricSort_USER_STOCK_ORDER_CANCELLED_METRIC_SORT_UNSPECIFIED        UserStockOrderCancelledMetricSort = 0
-	UserStockOrderCancelledMetricSort_USER_STOCK_ORDER_CANCELLED_METRIC_SORT_PIECE_COUNT        UserStockOrderCancelledMetricSort = 1
-	UserStockOrderCancelledMetricSort_USER_STOCK_ORDER_CANCELLED_METRIC_SORT_OWN_PIECE_COUNT    UserStockOrderCancelledMetricSort = 3
-	UserStockOrderCancelledMetricSort_USER_STOCK_ORDER_CANCELLED_METRIC_SORT_CROSS_PIECE_COUNT  UserStockOrderCancelledMetricSort = 4
-	UserStockOrderCancelledMetricSort_USER_STOCK_ORDER_CANCELLED_METRIC_SORT_PIECE_AMOUNT       UserStockOrderCancelledMetricSort = 2
-	UserStockOrderCancelledMetricSort_USER_STOCK_ORDER_CANCELLED_METRIC_SORT_OWN_PIECE_AMOUNT   UserStockOrderCancelledMetricSort = 5
-	UserStockOrderCancelledMetricSort_USER_STOCK_ORDER_CANCELLED_METRIC_SORT_CROSS_PIECE_AMOUNT UserStockOrderCancelledMetricSort = 6
+	UserOrderReturnCompletedMetricSort_USER_ORDER_RETURN_COMPLETED_METRIC_SORT_UNSPECIFIED                 UserOrderReturnCompletedMetricSort = 0
+	UserOrderReturnCompletedMetricSort_USER_ORDER_RETURN_COMPLETED_METRIC_SORT_TRANSACTION_COUNT           UserOrderReturnCompletedMetricSort = 1
+	UserOrderReturnCompletedMetricSort_USER_ORDER_RETURN_COMPLETED_METRIC_SORT_TOTAL_AMOUNT                UserOrderReturnCompletedMetricSort = 2
+	UserOrderReturnCompletedMetricSort_USER_ORDER_RETURN_COMPLETED_METRIC_SORT_MP_TOTAL_AMOUNT             UserOrderReturnCompletedMetricSort = 3
+	UserOrderReturnCompletedMetricSort_USER_ORDER_RETURN_COMPLETED_METRIC_SORT_LAST_ORDER_RETURN_COMPLETED UserOrderReturnCompletedMetricSort = 4
 )
 
-// Enum value maps for UserStockOrderCancelledMetricSort.
+// Enum value maps for UserOrderReturnCompletedMetricSort.
 var (
-	UserStockOrderCancelledMetricSort_name = map[int32]string{
-		0: "USER_STOCK_ORDER_CANCELLED_METRIC_SORT_UNSPECIFIED",
-		1: "USER_STOCK_ORDER_CANCELLED_METRIC_SORT_PIECE_COUNT",
-		3: "USER_STOCK_ORDER_CANCELLED_METRIC_SORT_OWN_PIECE_COUNT",
-		4: "USER_STOCK_ORDER_CANCELLED_METRIC_SORT_CROSS_PIECE_COUNT",
-		2: "USER_STOCK_ORDER_CANCELLED_METRIC_SORT_PIECE_AMOUNT",
-		5: "USER_STOCK_ORDER_CANCELLED_METRIC_SORT_OWN_PIECE_AMOUNT",
-		6: "USER_STOCK_ORDER_CANCELLED_METRIC_SORT_CROSS_PIECE_AMOUNT",
+	UserOrderReturnCompletedMetricSort_name = map[int32]string{
+		0: "USER_ORDER_RETURN_COMPLETED_METRIC_SORT_UNSPECIFIED",
+		1: "USER_ORDER_RETURN_COMPLETED_METRIC_SORT_TRANSACTION_COUNT",
+		2: "USER_ORDER_RETURN_COMPLETED_METRIC_SORT_TOTAL_AMOUNT",
+		3: "USER_ORDER_RETURN_COMPLETED_METRIC_SORT_MP_TOTAL_AMOUNT",
+		4: "USER_ORDER_RETURN_COMPLETED_METRIC_SORT_LAST_ORDER_RETURN_COMPLETED",
 	}
-	UserStockOrderCancelledMetricSort_value = map[string]int32{
-		"USER_STOCK_ORDER_CANCELLED_METRIC_SORT_UNSPECIFIED":        0,
-		"USER_STOCK_ORDER_CANCELLED_METRIC_SORT_PIECE_COUNT":        1,
-		"USER_STOCK_ORDER_CANCELLED_METRIC_SORT_OWN_PIECE_COUNT":    3,
-		"USER_STOCK_ORDER_CANCELLED_METRIC_SORT_CROSS_PIECE_COUNT":  4,
-		"USER_STOCK_ORDER_CANCELLED_METRIC_SORT_PIECE_AMOUNT":       2,
-		"USER_STOCK_ORDER_CANCELLED_METRIC_SORT_OWN_PIECE_AMOUNT":   5,
-		"USER_STOCK_ORDER_CANCELLED_METRIC_SORT_CROSS_PIECE_AMOUNT": 6,
+	UserOrderReturnCompletedMetricSort_value = map[string]int32{
+		"USER_ORDER_RETURN_COMPLETED_METRIC_SORT_UNSPECIFIED":                 0,
+		"USER_ORDER_RETURN_COMPLETED_METRIC_SORT_TRANSACTION_COUNT":           1,
+		"USER_ORDER_RETURN_COMPLETED_METRIC_SORT_TOTAL_AMOUNT":                2,
+		"USER_ORDER_RETURN_COMPLETED_METRIC_SORT_MP_TOTAL_AMOUNT":             3,
+		"USER_ORDER_RETURN_COMPLETED_METRIC_SORT_LAST_ORDER_RETURN_COMPLETED": 4,
 	}
 )
 
-func (x UserStockOrderCancelledMetricSort) Enum() *UserStockOrderCancelledMetricSort {
-	p := new(UserStockOrderCancelledMetricSort)
+func (x UserOrderReturnCompletedMetricSort) Enum() *UserOrderReturnCompletedMetricSort {
+	p := new(UserOrderReturnCompletedMetricSort)
 	*p = x
 	return p
 }
 
-func (x UserStockOrderCancelledMetricSort) String() string {
+func (x UserOrderReturnCompletedMetricSort) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (UserStockOrderCancelledMetricSort) Descriptor() protoreflect.EnumDescriptor {
+func (UserOrderReturnCompletedMetricSort) Descriptor() protoreflect.EnumDescriptor {
 	return file_selling_iface_v1_user_metric_v1_order_metric_proto_enumTypes[6].Descriptor()
 }
 
-func (UserStockOrderCancelledMetricSort) Type() protoreflect.EnumType {
+func (UserOrderReturnCompletedMetricSort) Type() protoreflect.EnumType {
 	return &file_selling_iface_v1_user_metric_v1_order_metric_proto_enumTypes[6]
 }
 
-func (x UserStockOrderCancelledMetricSort) Number() protoreflect.EnumNumber {
+func (x UserOrderReturnCompletedMetricSort) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use UserStockOrderCancelledMetricSort.Descriptor instead.
-func (UserStockOrderCancelledMetricSort) EnumDescriptor() ([]byte, []int) {
+// Deprecated: Use UserOrderReturnCompletedMetricSort.Descriptor instead.
+func (UserOrderReturnCompletedMetricSort) EnumDescriptor() ([]byte, []int) {
 	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{6}
 }
 
-type UserStockOrderLostMetricSort int32
+type UserOrderOngoingMetricSort int32
 
 const (
-	UserStockOrderLostMetricSort_USER_STOCK_ORDER_LOST_METRIC_SORT_UNSPECIFIED        UserStockOrderLostMetricSort = 0
-	UserStockOrderLostMetricSort_USER_STOCK_ORDER_LOST_METRIC_SORT_PIECE_COUNT        UserStockOrderLostMetricSort = 1
-	UserStockOrderLostMetricSort_USER_STOCK_ORDER_LOST_METRIC_SORT_OWN_PIECE_COUNT    UserStockOrderLostMetricSort = 3
-	UserStockOrderLostMetricSort_USER_STOCK_ORDER_LOST_METRIC_SORT_CROSS_PIECE_COUNT  UserStockOrderLostMetricSort = 4
-	UserStockOrderLostMetricSort_USER_STOCK_ORDER_LOST_METRIC_SORT_PIECE_AMOUNT       UserStockOrderLostMetricSort = 2
-	UserStockOrderLostMetricSort_USER_STOCK_ORDER_LOST_METRIC_SORT_OWN_PIECE_AMOUNT   UserStockOrderLostMetricSort = 5
-	UserStockOrderLostMetricSort_USER_STOCK_ORDER_LOST_METRIC_SORT_CROSS_PIECE_AMOUNT UserStockOrderLostMetricSort = 6
+	UserOrderOngoingMetricSort_USER_ORDER_ONGOING_METRIC_SORT_UNSPECIFIED        UserOrderOngoingMetricSort = 0
+	UserOrderOngoingMetricSort_USER_ORDER_ONGOING_METRIC_SORT_TRANSACTION_COUNT  UserOrderOngoingMetricSort = 1
+	UserOrderOngoingMetricSort_USER_ORDER_ONGOING_METRIC_SORT_TOTAL_AMOUNT       UserOrderOngoingMetricSort = 2
+	UserOrderOngoingMetricSort_USER_ORDER_ONGOING_METRIC_SORT_MP_TOTAL_AMOUNT    UserOrderOngoingMetricSort = 3
+	UserOrderOngoingMetricSort_USER_ORDER_ONGOING_METRIC_SORT_LAST_ORDER_ONGOING UserOrderOngoingMetricSort = 4
 )
 
-// Enum value maps for UserStockOrderLostMetricSort.
+// Enum value maps for UserOrderOngoingMetricSort.
 var (
-	UserStockOrderLostMetricSort_name = map[int32]string{
-		0: "USER_STOCK_ORDER_LOST_METRIC_SORT_UNSPECIFIED",
-		1: "USER_STOCK_ORDER_LOST_METRIC_SORT_PIECE_COUNT",
-		3: "USER_STOCK_ORDER_LOST_METRIC_SORT_OWN_PIECE_COUNT",
-		4: "USER_STOCK_ORDER_LOST_METRIC_SORT_CROSS_PIECE_COUNT",
-		2: "USER_STOCK_ORDER_LOST_METRIC_SORT_PIECE_AMOUNT",
-		5: "USER_STOCK_ORDER_LOST_METRIC_SORT_OWN_PIECE_AMOUNT",
-		6: "USER_STOCK_ORDER_LOST_METRIC_SORT_CROSS_PIECE_AMOUNT",
+	UserOrderOngoingMetricSort_name = map[int32]string{
+		0: "USER_ORDER_ONGOING_METRIC_SORT_UNSPECIFIED",
+		1: "USER_ORDER_ONGOING_METRIC_SORT_TRANSACTION_COUNT",
+		2: "USER_ORDER_ONGOING_METRIC_SORT_TOTAL_AMOUNT",
+		3: "USER_ORDER_ONGOING_METRIC_SORT_MP_TOTAL_AMOUNT",
+		4: "USER_ORDER_ONGOING_METRIC_SORT_LAST_ORDER_ONGOING",
 	}
-	UserStockOrderLostMetricSort_value = map[string]int32{
-		"USER_STOCK_ORDER_LOST_METRIC_SORT_UNSPECIFIED":        0,
-		"USER_STOCK_ORDER_LOST_METRIC_SORT_PIECE_COUNT":        1,
-		"USER_STOCK_ORDER_LOST_METRIC_SORT_OWN_PIECE_COUNT":    3,
-		"USER_STOCK_ORDER_LOST_METRIC_SORT_CROSS_PIECE_COUNT":  4,
-		"USER_STOCK_ORDER_LOST_METRIC_SORT_PIECE_AMOUNT":       2,
-		"USER_STOCK_ORDER_LOST_METRIC_SORT_OWN_PIECE_AMOUNT":   5,
-		"USER_STOCK_ORDER_LOST_METRIC_SORT_CROSS_PIECE_AMOUNT": 6,
+	UserOrderOngoingMetricSort_value = map[string]int32{
+		"USER_ORDER_ONGOING_METRIC_SORT_UNSPECIFIED":        0,
+		"USER_ORDER_ONGOING_METRIC_SORT_TRANSACTION_COUNT":  1,
+		"USER_ORDER_ONGOING_METRIC_SORT_TOTAL_AMOUNT":       2,
+		"USER_ORDER_ONGOING_METRIC_SORT_MP_TOTAL_AMOUNT":    3,
+		"USER_ORDER_ONGOING_METRIC_SORT_LAST_ORDER_ONGOING": 4,
 	}
 )
 
-func (x UserStockOrderLostMetricSort) Enum() *UserStockOrderLostMetricSort {
-	p := new(UserStockOrderLostMetricSort)
+func (x UserOrderOngoingMetricSort) Enum() *UserOrderOngoingMetricSort {
+	p := new(UserOrderOngoingMetricSort)
 	*p = x
 	return p
 }
 
-func (x UserStockOrderLostMetricSort) String() string {
+func (x UserOrderOngoingMetricSort) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (UserStockOrderLostMetricSort) Descriptor() protoreflect.EnumDescriptor {
+func (UserOrderOngoingMetricSort) Descriptor() protoreflect.EnumDescriptor {
 	return file_selling_iface_v1_user_metric_v1_order_metric_proto_enumTypes[7].Descriptor()
 }
 
-func (UserStockOrderLostMetricSort) Type() protoreflect.EnumType {
+func (UserOrderOngoingMetricSort) Type() protoreflect.EnumType {
 	return &file_selling_iface_v1_user_metric_v1_order_metric_proto_enumTypes[7]
 }
 
-func (x UserStockOrderLostMetricSort) Number() protoreflect.EnumNumber {
+func (x UserOrderOngoingMetricSort) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use UserStockOrderLostMetricSort.Descriptor instead.
-func (UserStockOrderLostMetricSort) EnumDescriptor() ([]byte, []int) {
+// Deprecated: Use UserOrderOngoingMetricSort.Descriptor instead.
+func (UserOrderOngoingMetricSort) EnumDescriptor() ([]byte, []int) {
 	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{7}
 }
 
@@ -682,530 +658,200 @@ func (UserAvgOrderLostMetricSort) EnumDescriptor() ([]byte, []int) {
 	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{11}
 }
 
-type UserCostOrderMetricSort int32
+type UserAvgOrderCompletedMetricSort int32
 
 const (
-	UserCostOrderMetricSort_USER_COST_ORDER_METRIC_SORT_UNSPECIFIED          UserCostOrderMetricSort = 0
-	UserCostOrderMetricSort_USER_COST_ORDER_METRIC_SORT_PRODUCT_AMOUNT       UserCostOrderMetricSort = 1
-	UserCostOrderMetricSort_USER_COST_ORDER_METRIC_SORT_OWN_PRODUCT_AMOUNT   UserCostOrderMetricSort = 2
-	UserCostOrderMetricSort_USER_COST_ORDER_METRIC_SORT_CROSS_PRODUCT_AMOUNT UserCostOrderMetricSort = 3
-	UserCostOrderMetricSort_USER_COST_ORDER_METRIC_SORT_WAREHOUSE_AMOUNT     UserCostOrderMetricSort = 4
-	UserCostOrderMetricSort_USER_COST_ORDER_METRIC_SORT_TOTAL_AMOUNT         UserCostOrderMetricSort = 5
+	UserAvgOrderCompletedMetricSort_USER_AVG_ORDER_COMPLETED_METRIC_SORT_UNSPECIFIED           UserAvgOrderCompletedMetricSort = 0
+	UserAvgOrderCompletedMetricSort_USER_AVG_ORDER_COMPLETED_METRIC_SORT_PIECE_PER_TRANSACTION UserAvgOrderCompletedMetricSort = 1
+	UserAvgOrderCompletedMetricSort_USER_AVG_ORDER_COMPLETED_METRIC_SORT_TOTAL_PER_TRANSACTION UserAvgOrderCompletedMetricSort = 2
 )
 
-// Enum value maps for UserCostOrderMetricSort.
+// Enum value maps for UserAvgOrderCompletedMetricSort.
 var (
-	UserCostOrderMetricSort_name = map[int32]string{
-		0: "USER_COST_ORDER_METRIC_SORT_UNSPECIFIED",
-		1: "USER_COST_ORDER_METRIC_SORT_PRODUCT_AMOUNT",
-		2: "USER_COST_ORDER_METRIC_SORT_OWN_PRODUCT_AMOUNT",
-		3: "USER_COST_ORDER_METRIC_SORT_CROSS_PRODUCT_AMOUNT",
-		4: "USER_COST_ORDER_METRIC_SORT_WAREHOUSE_AMOUNT",
-		5: "USER_COST_ORDER_METRIC_SORT_TOTAL_AMOUNT",
+	UserAvgOrderCompletedMetricSort_name = map[int32]string{
+		0: "USER_AVG_ORDER_COMPLETED_METRIC_SORT_UNSPECIFIED",
+		1: "USER_AVG_ORDER_COMPLETED_METRIC_SORT_PIECE_PER_TRANSACTION",
+		2: "USER_AVG_ORDER_COMPLETED_METRIC_SORT_TOTAL_PER_TRANSACTION",
 	}
-	UserCostOrderMetricSort_value = map[string]int32{
-		"USER_COST_ORDER_METRIC_SORT_UNSPECIFIED":          0,
-		"USER_COST_ORDER_METRIC_SORT_PRODUCT_AMOUNT":       1,
-		"USER_COST_ORDER_METRIC_SORT_OWN_PRODUCT_AMOUNT":   2,
-		"USER_COST_ORDER_METRIC_SORT_CROSS_PRODUCT_AMOUNT": 3,
-		"USER_COST_ORDER_METRIC_SORT_WAREHOUSE_AMOUNT":     4,
-		"USER_COST_ORDER_METRIC_SORT_TOTAL_AMOUNT":         5,
+	UserAvgOrderCompletedMetricSort_value = map[string]int32{
+		"USER_AVG_ORDER_COMPLETED_METRIC_SORT_UNSPECIFIED":           0,
+		"USER_AVG_ORDER_COMPLETED_METRIC_SORT_PIECE_PER_TRANSACTION": 1,
+		"USER_AVG_ORDER_COMPLETED_METRIC_SORT_TOTAL_PER_TRANSACTION": 2,
 	}
 )
 
-func (x UserCostOrderMetricSort) Enum() *UserCostOrderMetricSort {
-	p := new(UserCostOrderMetricSort)
+func (x UserAvgOrderCompletedMetricSort) Enum() *UserAvgOrderCompletedMetricSort {
+	p := new(UserAvgOrderCompletedMetricSort)
 	*p = x
 	return p
 }
 
-func (x UserCostOrderMetricSort) String() string {
+func (x UserAvgOrderCompletedMetricSort) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (UserCostOrderMetricSort) Descriptor() protoreflect.EnumDescriptor {
+func (UserAvgOrderCompletedMetricSort) Descriptor() protoreflect.EnumDescriptor {
 	return file_selling_iface_v1_user_metric_v1_order_metric_proto_enumTypes[12].Descriptor()
 }
 
-func (UserCostOrderMetricSort) Type() protoreflect.EnumType {
+func (UserAvgOrderCompletedMetricSort) Type() protoreflect.EnumType {
 	return &file_selling_iface_v1_user_metric_v1_order_metric_proto_enumTypes[12]
 }
 
-func (x UserCostOrderMetricSort) Number() protoreflect.EnumNumber {
+func (x UserAvgOrderCompletedMetricSort) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use UserCostOrderMetricSort.Descriptor instead.
-func (UserCostOrderMetricSort) EnumDescriptor() ([]byte, []int) {
+// Deprecated: Use UserAvgOrderCompletedMetricSort.Descriptor instead.
+func (UserAvgOrderCompletedMetricSort) EnumDescriptor() ([]byte, []int) {
 	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{12}
 }
 
-type UserCostOrderWithdrawalMetricSort int32
+type UserAvgOrderReturnMetricSort int32
 
 const (
-	UserCostOrderWithdrawalMetricSort_USER_COST_ORDER_WITHDRAWAL_METRIC_SORT_UNSPECIFIED          UserCostOrderWithdrawalMetricSort = 0
-	UserCostOrderWithdrawalMetricSort_USER_COST_ORDER_WITHDRAWAL_METRIC_SORT_PRODUCT_AMOUNT       UserCostOrderWithdrawalMetricSort = 1
-	UserCostOrderWithdrawalMetricSort_USER_COST_ORDER_WITHDRAWAL_METRIC_SORT_OWN_PRODUCT_AMOUNT   UserCostOrderWithdrawalMetricSort = 2
-	UserCostOrderWithdrawalMetricSort_USER_COST_ORDER_WITHDRAWAL_METRIC_SORT_CROSS_PRODUCT_AMOUNT UserCostOrderWithdrawalMetricSort = 3
-	UserCostOrderWithdrawalMetricSort_USER_COST_ORDER_WITHDRAWAL_METRIC_SORT_WAREHOUSE_AMOUNT     UserCostOrderWithdrawalMetricSort = 4
-	UserCostOrderWithdrawalMetricSort_USER_COST_ORDER_WITHDRAWAL_METRIC_SORT_TOTAL_AMOUNT         UserCostOrderWithdrawalMetricSort = 5
+	UserAvgOrderReturnMetricSort_USER_AVG_ORDER_RETURN_METRIC_SORT_UNSPECIFIED           UserAvgOrderReturnMetricSort = 0
+	UserAvgOrderReturnMetricSort_USER_AVG_ORDER_RETURN_METRIC_SORT_PIECE_PER_TRANSACTION UserAvgOrderReturnMetricSort = 1
+	UserAvgOrderReturnMetricSort_USER_AVG_ORDER_RETURN_METRIC_SORT_TOTAL_PER_TRANSACTION UserAvgOrderReturnMetricSort = 2
 )
 
-// Enum value maps for UserCostOrderWithdrawalMetricSort.
+// Enum value maps for UserAvgOrderReturnMetricSort.
 var (
-	UserCostOrderWithdrawalMetricSort_name = map[int32]string{
-		0: "USER_COST_ORDER_WITHDRAWAL_METRIC_SORT_UNSPECIFIED",
-		1: "USER_COST_ORDER_WITHDRAWAL_METRIC_SORT_PRODUCT_AMOUNT",
-		2: "USER_COST_ORDER_WITHDRAWAL_METRIC_SORT_OWN_PRODUCT_AMOUNT",
-		3: "USER_COST_ORDER_WITHDRAWAL_METRIC_SORT_CROSS_PRODUCT_AMOUNT",
-		4: "USER_COST_ORDER_WITHDRAWAL_METRIC_SORT_WAREHOUSE_AMOUNT",
-		5: "USER_COST_ORDER_WITHDRAWAL_METRIC_SORT_TOTAL_AMOUNT",
+	UserAvgOrderReturnMetricSort_name = map[int32]string{
+		0: "USER_AVG_ORDER_RETURN_METRIC_SORT_UNSPECIFIED",
+		1: "USER_AVG_ORDER_RETURN_METRIC_SORT_PIECE_PER_TRANSACTION",
+		2: "USER_AVG_ORDER_RETURN_METRIC_SORT_TOTAL_PER_TRANSACTION",
 	}
-	UserCostOrderWithdrawalMetricSort_value = map[string]int32{
-		"USER_COST_ORDER_WITHDRAWAL_METRIC_SORT_UNSPECIFIED":          0,
-		"USER_COST_ORDER_WITHDRAWAL_METRIC_SORT_PRODUCT_AMOUNT":       1,
-		"USER_COST_ORDER_WITHDRAWAL_METRIC_SORT_OWN_PRODUCT_AMOUNT":   2,
-		"USER_COST_ORDER_WITHDRAWAL_METRIC_SORT_CROSS_PRODUCT_AMOUNT": 3,
-		"USER_COST_ORDER_WITHDRAWAL_METRIC_SORT_WAREHOUSE_AMOUNT":     4,
-		"USER_COST_ORDER_WITHDRAWAL_METRIC_SORT_TOTAL_AMOUNT":         5,
+	UserAvgOrderReturnMetricSort_value = map[string]int32{
+		"USER_AVG_ORDER_RETURN_METRIC_SORT_UNSPECIFIED":           0,
+		"USER_AVG_ORDER_RETURN_METRIC_SORT_PIECE_PER_TRANSACTION": 1,
+		"USER_AVG_ORDER_RETURN_METRIC_SORT_TOTAL_PER_TRANSACTION": 2,
 	}
 )
 
-func (x UserCostOrderWithdrawalMetricSort) Enum() *UserCostOrderWithdrawalMetricSort {
-	p := new(UserCostOrderWithdrawalMetricSort)
+func (x UserAvgOrderReturnMetricSort) Enum() *UserAvgOrderReturnMetricSort {
+	p := new(UserAvgOrderReturnMetricSort)
 	*p = x
 	return p
 }
 
-func (x UserCostOrderWithdrawalMetricSort) String() string {
+func (x UserAvgOrderReturnMetricSort) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (UserCostOrderWithdrawalMetricSort) Descriptor() protoreflect.EnumDescriptor {
+func (UserAvgOrderReturnMetricSort) Descriptor() protoreflect.EnumDescriptor {
 	return file_selling_iface_v1_user_metric_v1_order_metric_proto_enumTypes[13].Descriptor()
 }
 
-func (UserCostOrderWithdrawalMetricSort) Type() protoreflect.EnumType {
+func (UserAvgOrderReturnMetricSort) Type() protoreflect.EnumType {
 	return &file_selling_iface_v1_user_metric_v1_order_metric_proto_enumTypes[13]
 }
 
-func (x UserCostOrderWithdrawalMetricSort) Number() protoreflect.EnumNumber {
+func (x UserAvgOrderReturnMetricSort) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use UserCostOrderWithdrawalMetricSort.Descriptor instead.
-func (UserCostOrderWithdrawalMetricSort) EnumDescriptor() ([]byte, []int) {
+// Deprecated: Use UserAvgOrderReturnMetricSort.Descriptor instead.
+func (UserAvgOrderReturnMetricSort) EnumDescriptor() ([]byte, []int) {
 	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{13}
 }
 
-type UserCostOrderCancelledMetricSort int32
+type UserAvgOrderReturnCompletedMetricSort int32
 
 const (
-	UserCostOrderCancelledMetricSort_USER_COST_ORDER_CANCELLED_METRIC_SORT_UNSPECIFIED          UserCostOrderCancelledMetricSort = 0
-	UserCostOrderCancelledMetricSort_USER_COST_ORDER_CANCELLED_METRIC_SORT_PRODUCT_AMOUNT       UserCostOrderCancelledMetricSort = 1
-	UserCostOrderCancelledMetricSort_USER_COST_ORDER_CANCELLED_METRIC_SORT_OWN_PRODUCT_AMOUNT   UserCostOrderCancelledMetricSort = 2
-	UserCostOrderCancelledMetricSort_USER_COST_ORDER_CANCELLED_METRIC_SORT_CROSS_PRODUCT_AMOUNT UserCostOrderCancelledMetricSort = 3
-	UserCostOrderCancelledMetricSort_USER_COST_ORDER_CANCELLED_METRIC_SORT_WAREHOUSE_AMOUNT     UserCostOrderCancelledMetricSort = 4
-	UserCostOrderCancelledMetricSort_USER_COST_ORDER_CANCELLED_METRIC_SORT_TOTAL_AMOUNT         UserCostOrderCancelledMetricSort = 5
+	UserAvgOrderReturnCompletedMetricSort_USER_AVG_ORDER_RETURN_COMPLETED_METRIC_SORT_UNSPECIFIED           UserAvgOrderReturnCompletedMetricSort = 0
+	UserAvgOrderReturnCompletedMetricSort_USER_AVG_ORDER_RETURN_COMPLETED_METRIC_SORT_PIECE_PER_TRANSACTION UserAvgOrderReturnCompletedMetricSort = 1
+	UserAvgOrderReturnCompletedMetricSort_USER_AVG_ORDER_RETURN_COMPLETED_METRIC_SORT_TOTAL_PER_TRANSACTION UserAvgOrderReturnCompletedMetricSort = 2
 )
 
-// Enum value maps for UserCostOrderCancelledMetricSort.
+// Enum value maps for UserAvgOrderReturnCompletedMetricSort.
 var (
-	UserCostOrderCancelledMetricSort_name = map[int32]string{
-		0: "USER_COST_ORDER_CANCELLED_METRIC_SORT_UNSPECIFIED",
-		1: "USER_COST_ORDER_CANCELLED_METRIC_SORT_PRODUCT_AMOUNT",
-		2: "USER_COST_ORDER_CANCELLED_METRIC_SORT_OWN_PRODUCT_AMOUNT",
-		3: "USER_COST_ORDER_CANCELLED_METRIC_SORT_CROSS_PRODUCT_AMOUNT",
-		4: "USER_COST_ORDER_CANCELLED_METRIC_SORT_WAREHOUSE_AMOUNT",
-		5: "USER_COST_ORDER_CANCELLED_METRIC_SORT_TOTAL_AMOUNT",
+	UserAvgOrderReturnCompletedMetricSort_name = map[int32]string{
+		0: "USER_AVG_ORDER_RETURN_COMPLETED_METRIC_SORT_UNSPECIFIED",
+		1: "USER_AVG_ORDER_RETURN_COMPLETED_METRIC_SORT_PIECE_PER_TRANSACTION",
+		2: "USER_AVG_ORDER_RETURN_COMPLETED_METRIC_SORT_TOTAL_PER_TRANSACTION",
 	}
-	UserCostOrderCancelledMetricSort_value = map[string]int32{
-		"USER_COST_ORDER_CANCELLED_METRIC_SORT_UNSPECIFIED":          0,
-		"USER_COST_ORDER_CANCELLED_METRIC_SORT_PRODUCT_AMOUNT":       1,
-		"USER_COST_ORDER_CANCELLED_METRIC_SORT_OWN_PRODUCT_AMOUNT":   2,
-		"USER_COST_ORDER_CANCELLED_METRIC_SORT_CROSS_PRODUCT_AMOUNT": 3,
-		"USER_COST_ORDER_CANCELLED_METRIC_SORT_WAREHOUSE_AMOUNT":     4,
-		"USER_COST_ORDER_CANCELLED_METRIC_SORT_TOTAL_AMOUNT":         5,
+	UserAvgOrderReturnCompletedMetricSort_value = map[string]int32{
+		"USER_AVG_ORDER_RETURN_COMPLETED_METRIC_SORT_UNSPECIFIED":           0,
+		"USER_AVG_ORDER_RETURN_COMPLETED_METRIC_SORT_PIECE_PER_TRANSACTION": 1,
+		"USER_AVG_ORDER_RETURN_COMPLETED_METRIC_SORT_TOTAL_PER_TRANSACTION": 2,
 	}
 )
 
-func (x UserCostOrderCancelledMetricSort) Enum() *UserCostOrderCancelledMetricSort {
-	p := new(UserCostOrderCancelledMetricSort)
+func (x UserAvgOrderReturnCompletedMetricSort) Enum() *UserAvgOrderReturnCompletedMetricSort {
+	p := new(UserAvgOrderReturnCompletedMetricSort)
 	*p = x
 	return p
 }
 
-func (x UserCostOrderCancelledMetricSort) String() string {
+func (x UserAvgOrderReturnCompletedMetricSort) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (UserCostOrderCancelledMetricSort) Descriptor() protoreflect.EnumDescriptor {
+func (UserAvgOrderReturnCompletedMetricSort) Descriptor() protoreflect.EnumDescriptor {
 	return file_selling_iface_v1_user_metric_v1_order_metric_proto_enumTypes[14].Descriptor()
 }
 
-func (UserCostOrderCancelledMetricSort) Type() protoreflect.EnumType {
+func (UserAvgOrderReturnCompletedMetricSort) Type() protoreflect.EnumType {
 	return &file_selling_iface_v1_user_metric_v1_order_metric_proto_enumTypes[14]
 }
 
-func (x UserCostOrderCancelledMetricSort) Number() protoreflect.EnumNumber {
+func (x UserAvgOrderReturnCompletedMetricSort) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use UserCostOrderCancelledMetricSort.Descriptor instead.
-func (UserCostOrderCancelledMetricSort) EnumDescriptor() ([]byte, []int) {
+// Deprecated: Use UserAvgOrderReturnCompletedMetricSort.Descriptor instead.
+func (UserAvgOrderReturnCompletedMetricSort) EnumDescriptor() ([]byte, []int) {
 	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{14}
 }
 
-type UserCostOrderLostMetricSort int32
+type UserAvgOrderOngoingMetricSort int32
 
 const (
-	UserCostOrderLostMetricSort_USER_COST_ORDER_LOST_METRIC_SORT_UNSPECIFIED          UserCostOrderLostMetricSort = 0
-	UserCostOrderLostMetricSort_USER_COST_ORDER_LOST_METRIC_SORT_PRODUCT_AMOUNT       UserCostOrderLostMetricSort = 1
-	UserCostOrderLostMetricSort_USER_COST_ORDER_LOST_METRIC_SORT_OWN_PRODUCT_AMOUNT   UserCostOrderLostMetricSort = 2
-	UserCostOrderLostMetricSort_USER_COST_ORDER_LOST_METRIC_SORT_CROSS_PRODUCT_AMOUNT UserCostOrderLostMetricSort = 3
-	UserCostOrderLostMetricSort_USER_COST_ORDER_LOST_METRIC_SORT_WAREHOUSE_AMOUNT     UserCostOrderLostMetricSort = 4
-	UserCostOrderLostMetricSort_USER_COST_ORDER_LOST_METRIC_SORT_TOTAL_AMOUNT         UserCostOrderLostMetricSort = 5
+	UserAvgOrderOngoingMetricSort_USER_AVG_ORDER_ONGOING_METRIC_SORT_UNSPECIFIED           UserAvgOrderOngoingMetricSort = 0
+	UserAvgOrderOngoingMetricSort_USER_AVG_ORDER_ONGOING_METRIC_SORT_PIECE_PER_TRANSACTION UserAvgOrderOngoingMetricSort = 1
+	UserAvgOrderOngoingMetricSort_USER_AVG_ORDER_ONGOING_METRIC_SORT_TOTAL_PER_TRANSACTION UserAvgOrderOngoingMetricSort = 2
 )
 
-// Enum value maps for UserCostOrderLostMetricSort.
+// Enum value maps for UserAvgOrderOngoingMetricSort.
 var (
-	UserCostOrderLostMetricSort_name = map[int32]string{
-		0: "USER_COST_ORDER_LOST_METRIC_SORT_UNSPECIFIED",
-		1: "USER_COST_ORDER_LOST_METRIC_SORT_PRODUCT_AMOUNT",
-		2: "USER_COST_ORDER_LOST_METRIC_SORT_OWN_PRODUCT_AMOUNT",
-		3: "USER_COST_ORDER_LOST_METRIC_SORT_CROSS_PRODUCT_AMOUNT",
-		4: "USER_COST_ORDER_LOST_METRIC_SORT_WAREHOUSE_AMOUNT",
-		5: "USER_COST_ORDER_LOST_METRIC_SORT_TOTAL_AMOUNT",
+	UserAvgOrderOngoingMetricSort_name = map[int32]string{
+		0: "USER_AVG_ORDER_ONGOING_METRIC_SORT_UNSPECIFIED",
+		1: "USER_AVG_ORDER_ONGOING_METRIC_SORT_PIECE_PER_TRANSACTION",
+		2: "USER_AVG_ORDER_ONGOING_METRIC_SORT_TOTAL_PER_TRANSACTION",
 	}
-	UserCostOrderLostMetricSort_value = map[string]int32{
-		"USER_COST_ORDER_LOST_METRIC_SORT_UNSPECIFIED":          0,
-		"USER_COST_ORDER_LOST_METRIC_SORT_PRODUCT_AMOUNT":       1,
-		"USER_COST_ORDER_LOST_METRIC_SORT_OWN_PRODUCT_AMOUNT":   2,
-		"USER_COST_ORDER_LOST_METRIC_SORT_CROSS_PRODUCT_AMOUNT": 3,
-		"USER_COST_ORDER_LOST_METRIC_SORT_WAREHOUSE_AMOUNT":     4,
-		"USER_COST_ORDER_LOST_METRIC_SORT_TOTAL_AMOUNT":         5,
+	UserAvgOrderOngoingMetricSort_value = map[string]int32{
+		"USER_AVG_ORDER_ONGOING_METRIC_SORT_UNSPECIFIED":           0,
+		"USER_AVG_ORDER_ONGOING_METRIC_SORT_PIECE_PER_TRANSACTION": 1,
+		"USER_AVG_ORDER_ONGOING_METRIC_SORT_TOTAL_PER_TRANSACTION": 2,
 	}
 )
 
-func (x UserCostOrderLostMetricSort) Enum() *UserCostOrderLostMetricSort {
-	p := new(UserCostOrderLostMetricSort)
+func (x UserAvgOrderOngoingMetricSort) Enum() *UserAvgOrderOngoingMetricSort {
+	p := new(UserAvgOrderOngoingMetricSort)
 	*p = x
 	return p
 }
 
-func (x UserCostOrderLostMetricSort) String() string {
+func (x UserAvgOrderOngoingMetricSort) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (UserCostOrderLostMetricSort) Descriptor() protoreflect.EnumDescriptor {
+func (UserAvgOrderOngoingMetricSort) Descriptor() protoreflect.EnumDescriptor {
 	return file_selling_iface_v1_user_metric_v1_order_metric_proto_enumTypes[15].Descriptor()
 }
 
-func (UserCostOrderLostMetricSort) Type() protoreflect.EnumType {
+func (UserAvgOrderOngoingMetricSort) Type() protoreflect.EnumType {
 	return &file_selling_iface_v1_user_metric_v1_order_metric_proto_enumTypes[15]
 }
 
-func (x UserCostOrderLostMetricSort) Number() protoreflect.EnumNumber {
+func (x UserAvgOrderOngoingMetricSort) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use UserCostOrderLostMetricSort.Descriptor instead.
-func (UserCostOrderLostMetricSort) EnumDescriptor() ([]byte, []int) {
+// Deprecated: Use UserAvgOrderOngoingMetricSort.Descriptor instead.
+func (UserAvgOrderOngoingMetricSort) EnumDescriptor() ([]byte, []int) {
 	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{15}
-}
-
-type UserWithdrawalMetricSort int32
-
-const (
-	UserWithdrawalMetricSort_USER_WITHDRAWAL_METRIC_SORT_UNSPECIFIED                  UserWithdrawalMetricSort = 0
-	UserWithdrawalMetricSort_USER_WITHDRAWAL_METRIC_SORT_WITHDRAWAL_FUND_AMOUNT       UserWithdrawalMetricSort = 1
-	UserWithdrawalMetricSort_USER_WITHDRAWAL_METRIC_SORT_WITHDRAWAL_ADJUSTMENT_AMOUNT UserWithdrawalMetricSort = 2
-	UserWithdrawalMetricSort_USER_WITHDRAWAL_METRIC_SORT_WITHDRAWAL_TOTAL_AMOUNT      UserWithdrawalMetricSort = 3
-)
-
-// Enum value maps for UserWithdrawalMetricSort.
-var (
-	UserWithdrawalMetricSort_name = map[int32]string{
-		0: "USER_WITHDRAWAL_METRIC_SORT_UNSPECIFIED",
-		1: "USER_WITHDRAWAL_METRIC_SORT_WITHDRAWAL_FUND_AMOUNT",
-		2: "USER_WITHDRAWAL_METRIC_SORT_WITHDRAWAL_ADJUSTMENT_AMOUNT",
-		3: "USER_WITHDRAWAL_METRIC_SORT_WITHDRAWAL_TOTAL_AMOUNT",
-	}
-	UserWithdrawalMetricSort_value = map[string]int32{
-		"USER_WITHDRAWAL_METRIC_SORT_UNSPECIFIED":                  0,
-		"USER_WITHDRAWAL_METRIC_SORT_WITHDRAWAL_FUND_AMOUNT":       1,
-		"USER_WITHDRAWAL_METRIC_SORT_WITHDRAWAL_ADJUSTMENT_AMOUNT": 2,
-		"USER_WITHDRAWAL_METRIC_SORT_WITHDRAWAL_TOTAL_AMOUNT":      3,
-	}
-)
-
-func (x UserWithdrawalMetricSort) Enum() *UserWithdrawalMetricSort {
-	p := new(UserWithdrawalMetricSort)
-	*p = x
-	return p
-}
-
-func (x UserWithdrawalMetricSort) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (UserWithdrawalMetricSort) Descriptor() protoreflect.EnumDescriptor {
-	return file_selling_iface_v1_user_metric_v1_order_metric_proto_enumTypes[16].Descriptor()
-}
-
-func (UserWithdrawalMetricSort) Type() protoreflect.EnumType {
-	return &file_selling_iface_v1_user_metric_v1_order_metric_proto_enumTypes[16]
-}
-
-func (x UserWithdrawalMetricSort) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use UserWithdrawalMetricSort.Descriptor instead.
-func (UserWithdrawalMetricSort) EnumDescriptor() ([]byte, []int) {
-	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{16}
-}
-
-type UserProfitOrderCreatedMetricSort int32
-
-const (
-	UserProfitOrderCreatedMetricSort_USER_PROFIT_ORDER_CREATED_METRIC_SORT_UNSPECIFIED            UserProfitOrderCreatedMetricSort = 0
-	UserProfitOrderCreatedMetricSort_USER_PROFIT_ORDER_CREATED_METRIC_SORT_PROFIT_CREATED_AMOUNT  UserProfitOrderCreatedMetricSort = 1
-	UserProfitOrderCreatedMetricSort_USER_PROFIT_ORDER_CREATED_METRIC_SORT_PROFIT_CREATED_PERCENT UserProfitOrderCreatedMetricSort = 2
-)
-
-// Enum value maps for UserProfitOrderCreatedMetricSort.
-var (
-	UserProfitOrderCreatedMetricSort_name = map[int32]string{
-		0: "USER_PROFIT_ORDER_CREATED_METRIC_SORT_UNSPECIFIED",
-		1: "USER_PROFIT_ORDER_CREATED_METRIC_SORT_PROFIT_CREATED_AMOUNT",
-		2: "USER_PROFIT_ORDER_CREATED_METRIC_SORT_PROFIT_CREATED_PERCENT",
-	}
-	UserProfitOrderCreatedMetricSort_value = map[string]int32{
-		"USER_PROFIT_ORDER_CREATED_METRIC_SORT_UNSPECIFIED":            0,
-		"USER_PROFIT_ORDER_CREATED_METRIC_SORT_PROFIT_CREATED_AMOUNT":  1,
-		"USER_PROFIT_ORDER_CREATED_METRIC_SORT_PROFIT_CREATED_PERCENT": 2,
-	}
-)
-
-func (x UserProfitOrderCreatedMetricSort) Enum() *UserProfitOrderCreatedMetricSort {
-	p := new(UserProfitOrderCreatedMetricSort)
-	*p = x
-	return p
-}
-
-func (x UserProfitOrderCreatedMetricSort) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (UserProfitOrderCreatedMetricSort) Descriptor() protoreflect.EnumDescriptor {
-	return file_selling_iface_v1_user_metric_v1_order_metric_proto_enumTypes[17].Descriptor()
-}
-
-func (UserProfitOrderCreatedMetricSort) Type() protoreflect.EnumType {
-	return &file_selling_iface_v1_user_metric_v1_order_metric_proto_enumTypes[17]
-}
-
-func (x UserProfitOrderCreatedMetricSort) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use UserProfitOrderCreatedMetricSort.Descriptor instead.
-func (UserProfitOrderCreatedMetricSort) EnumDescriptor() ([]byte, []int) {
-	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{17}
-}
-
-type UserProfitOrderWithdrawalMetricSort int32
-
-const (
-	UserProfitOrderWithdrawalMetricSort_USER_PROFIT_ORDER_WITHDRAWAL_METRIC_SORT_UNSPECIFIED                          UserProfitOrderWithdrawalMetricSort = 0
-	UserProfitOrderWithdrawalMetricSort_USER_PROFIT_ORDER_WITHDRAWAL_METRIC_SORT_PROFIT_WITHDRAWAL_AMOUNT             UserProfitOrderWithdrawalMetricSort = 1
-	UserProfitOrderWithdrawalMetricSort_USER_PROFIT_ORDER_WITHDRAWAL_METRIC_SORT_PROFIT_WITHDRAWAL_PERCENT            UserProfitOrderWithdrawalMetricSort = 2
-	UserProfitOrderWithdrawalMetricSort_USER_PROFIT_ORDER_WITHDRAWAL_METRIC_SORT_PROFIT_WITHDRAWAL_ADJUSTMENT_AMOUNT  UserProfitOrderWithdrawalMetricSort = 3
-	UserProfitOrderWithdrawalMetricSort_USER_PROFIT_ORDER_WITHDRAWAL_METRIC_SORT_PROFIT_WITHDRAWAL_ADJUSTMENT_PERCENT UserProfitOrderWithdrawalMetricSort = 4
-)
-
-// Enum value maps for UserProfitOrderWithdrawalMetricSort.
-var (
-	UserProfitOrderWithdrawalMetricSort_name = map[int32]string{
-		0: "USER_PROFIT_ORDER_WITHDRAWAL_METRIC_SORT_UNSPECIFIED",
-		1: "USER_PROFIT_ORDER_WITHDRAWAL_METRIC_SORT_PROFIT_WITHDRAWAL_AMOUNT",
-		2: "USER_PROFIT_ORDER_WITHDRAWAL_METRIC_SORT_PROFIT_WITHDRAWAL_PERCENT",
-		3: "USER_PROFIT_ORDER_WITHDRAWAL_METRIC_SORT_PROFIT_WITHDRAWAL_ADJUSTMENT_AMOUNT",
-		4: "USER_PROFIT_ORDER_WITHDRAWAL_METRIC_SORT_PROFIT_WITHDRAWAL_ADJUSTMENT_PERCENT",
-	}
-	UserProfitOrderWithdrawalMetricSort_value = map[string]int32{
-		"USER_PROFIT_ORDER_WITHDRAWAL_METRIC_SORT_UNSPECIFIED":                          0,
-		"USER_PROFIT_ORDER_WITHDRAWAL_METRIC_SORT_PROFIT_WITHDRAWAL_AMOUNT":             1,
-		"USER_PROFIT_ORDER_WITHDRAWAL_METRIC_SORT_PROFIT_WITHDRAWAL_PERCENT":            2,
-		"USER_PROFIT_ORDER_WITHDRAWAL_METRIC_SORT_PROFIT_WITHDRAWAL_ADJUSTMENT_AMOUNT":  3,
-		"USER_PROFIT_ORDER_WITHDRAWAL_METRIC_SORT_PROFIT_WITHDRAWAL_ADJUSTMENT_PERCENT": 4,
-	}
-)
-
-func (x UserProfitOrderWithdrawalMetricSort) Enum() *UserProfitOrderWithdrawalMetricSort {
-	p := new(UserProfitOrderWithdrawalMetricSort)
-	*p = x
-	return p
-}
-
-func (x UserProfitOrderWithdrawalMetricSort) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (UserProfitOrderWithdrawalMetricSort) Descriptor() protoreflect.EnumDescriptor {
-	return file_selling_iface_v1_user_metric_v1_order_metric_proto_enumTypes[18].Descriptor()
-}
-
-func (UserProfitOrderWithdrawalMetricSort) Type() protoreflect.EnumType {
-	return &file_selling_iface_v1_user_metric_v1_order_metric_proto_enumTypes[18]
-}
-
-func (x UserProfitOrderWithdrawalMetricSort) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use UserProfitOrderWithdrawalMetricSort.Descriptor instead.
-func (UserProfitOrderWithdrawalMetricSort) EnumDescriptor() ([]byte, []int) {
-	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{18}
-}
-
-type UserLostProfitOrderMetricSort int32
-
-const (
-	UserLostProfitOrderMetricSort_USER_LOST_PROFIT_ORDER_METRIC_SORT_UNSPECIFIED        UserLostProfitOrderMetricSort = 0
-	UserLostProfitOrderMetricSort_USER_LOST_PROFIT_ORDER_METRIC_SORT_LOST_PROFIT_AMOUNT UserLostProfitOrderMetricSort = 1
-)
-
-// Enum value maps for UserLostProfitOrderMetricSort.
-var (
-	UserLostProfitOrderMetricSort_name = map[int32]string{
-		0: "USER_LOST_PROFIT_ORDER_METRIC_SORT_UNSPECIFIED",
-		1: "USER_LOST_PROFIT_ORDER_METRIC_SORT_LOST_PROFIT_AMOUNT",
-	}
-	UserLostProfitOrderMetricSort_value = map[string]int32{
-		"USER_LOST_PROFIT_ORDER_METRIC_SORT_UNSPECIFIED":        0,
-		"USER_LOST_PROFIT_ORDER_METRIC_SORT_LOST_PROFIT_AMOUNT": 1,
-	}
-)
-
-func (x UserLostProfitOrderMetricSort) Enum() *UserLostProfitOrderMetricSort {
-	p := new(UserLostProfitOrderMetricSort)
-	*p = x
-	return p
-}
-
-func (x UserLostProfitOrderMetricSort) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (UserLostProfitOrderMetricSort) Descriptor() protoreflect.EnumDescriptor {
-	return file_selling_iface_v1_user_metric_v1_order_metric_proto_enumTypes[19].Descriptor()
-}
-
-func (UserLostProfitOrderMetricSort) Type() protoreflect.EnumType {
-	return &file_selling_iface_v1_user_metric_v1_order_metric_proto_enumTypes[19]
-}
-
-func (x UserLostProfitOrderMetricSort) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use UserLostProfitOrderMetricSort.Descriptor instead.
-func (UserLostProfitOrderMetricSort) EnumDescriptor() ([]byte, []int) {
-	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{19}
-}
-
-type UserAdsExpenseMetricSort int32
-
-const (
-	UserAdsExpenseMetricSort_USER_ADS_EXPENSE_METRIC_SORT_UNSPECIFIED UserAdsExpenseMetricSort = 0
-	UserAdsExpenseMetricSort_USER_ADS_EXPENSE_METRIC_SORT_ADS_AMOUNT  UserAdsExpenseMetricSort = 1
-)
-
-// Enum value maps for UserAdsExpenseMetricSort.
-var (
-	UserAdsExpenseMetricSort_name = map[int32]string{
-		0: "USER_ADS_EXPENSE_METRIC_SORT_UNSPECIFIED",
-		1: "USER_ADS_EXPENSE_METRIC_SORT_ADS_AMOUNT",
-	}
-	UserAdsExpenseMetricSort_value = map[string]int32{
-		"USER_ADS_EXPENSE_METRIC_SORT_UNSPECIFIED": 0,
-		"USER_ADS_EXPENSE_METRIC_SORT_ADS_AMOUNT":  1,
-	}
-)
-
-func (x UserAdsExpenseMetricSort) Enum() *UserAdsExpenseMetricSort {
-	p := new(UserAdsExpenseMetricSort)
-	*p = x
-	return p
-}
-
-func (x UserAdsExpenseMetricSort) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (UserAdsExpenseMetricSort) Descriptor() protoreflect.EnumDescriptor {
-	return file_selling_iface_v1_user_metric_v1_order_metric_proto_enumTypes[20].Descriptor()
-}
-
-func (UserAdsExpenseMetricSort) Type() protoreflect.EnumType {
-	return &file_selling_iface_v1_user_metric_v1_order_metric_proto_enumTypes[20]
-}
-
-func (x UserAdsExpenseMetricSort) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use UserAdsExpenseMetricSort.Descriptor instead.
-func (UserAdsExpenseMetricSort) EnumDescriptor() ([]byte, []int) {
-	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{20}
-}
-
-type UserProfitOrLossMetricSort int32
-
-const (
-	UserProfitOrLossMetricSort_USER_PROFIT_OR_LOSS_METRIC_SORT_UNSPECIFIED           UserProfitOrLossMetricSort = 0
-	UserProfitOrLossMetricSort_USER_PROFIT_OR_LOSS_METRIC_SORT_PROFIT_OR_LOSS_AMOUNT UserProfitOrLossMetricSort = 1
-)
-
-// Enum value maps for UserProfitOrLossMetricSort.
-var (
-	UserProfitOrLossMetricSort_name = map[int32]string{
-		0: "USER_PROFIT_OR_LOSS_METRIC_SORT_UNSPECIFIED",
-		1: "USER_PROFIT_OR_LOSS_METRIC_SORT_PROFIT_OR_LOSS_AMOUNT",
-	}
-	UserProfitOrLossMetricSort_value = map[string]int32{
-		"USER_PROFIT_OR_LOSS_METRIC_SORT_UNSPECIFIED":           0,
-		"USER_PROFIT_OR_LOSS_METRIC_SORT_PROFIT_OR_LOSS_AMOUNT": 1,
-	}
-)
-
-func (x UserProfitOrLossMetricSort) Enum() *UserProfitOrLossMetricSort {
-	p := new(UserProfitOrLossMetricSort)
-	*p = x
-	return p
-}
-
-func (x UserProfitOrLossMetricSort) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (UserProfitOrLossMetricSort) Descriptor() protoreflect.EnumDescriptor {
-	return file_selling_iface_v1_user_metric_v1_order_metric_proto_enumTypes[21].Descriptor()
-}
-
-func (UserProfitOrLossMetricSort) Type() protoreflect.EnumType {
-	return &file_selling_iface_v1_user_metric_v1_order_metric_proto_enumTypes[21]
-}
-
-func (x UserProfitOrLossMetricSort) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use UserProfitOrLossMetricSort.Descriptor instead.
-func (UserProfitOrLossMetricSort) EnumDescriptor() ([]byte, []int) {
-	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{21}
 }
 
 type UserOrderItem struct {
@@ -1692,33 +1338,32 @@ func (x *UserOrderLostMetric) GetData() map[uint64]*UserOrderLostItem {
 	return nil
 }
 
-type UserStockOrderItem struct {
+type UserOrderCompletedItem struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
 	UserId           uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	PieceCount       int64                  `protobuf:"varint,2,opt,name=piece_count,json=pieceCount,proto3" json:"piece_count,omitempty"`
-	OwnPieceCount    int64                  `protobuf:"varint,4,opt,name=own_piece_count,json=ownPieceCount,proto3" json:"own_piece_count,omitempty"`
-	CrossPieceCount  int64                  `protobuf:"varint,5,opt,name=cross_piece_count,json=crossPieceCount,proto3" json:"cross_piece_count,omitempty"`
-	PieceAmount      float64                `protobuf:"fixed64,3,opt,name=piece_amount,json=pieceAmount,proto3" json:"piece_amount,omitempty"`
-	OwnPieceAmount   float64                `protobuf:"fixed64,6,opt,name=own_piece_amount,json=ownPieceAmount,proto3" json:"own_piece_amount,omitempty"`
-	CrossPieceAmount float64                `protobuf:"fixed64,7,opt,name=cross_piece_amount,json=crossPieceAmount,proto3" json:"cross_piece_amount,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	TransactionCount int64                  `protobuf:"varint,2,opt,name=transaction_count,json=transactionCount,proto3" json:"transaction_count,omitempty"`
+	TotalAmount      float64                `protobuf:"fixed64,4,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
+	MpTotalAmount    float64                `protobuf:"fixed64,5,opt,name=mp_total_amount,json=mpTotalAmount,proto3" json:"mp_total_amount,omitempty"`
+	// @gotags: gorm:"serializer:timestamptz"
+	LastOrderCompleted *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=last_order_completed,json=lastOrderCompleted,proto3" json:"last_order_completed,omitempty" gorm:"serializer:timestamptz"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
-func (x *UserStockOrderItem) Reset() {
-	*x = UserStockOrderItem{}
+func (x *UserOrderCompletedItem) Reset() {
+	*x = UserOrderCompletedItem{}
 	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UserStockOrderItem) String() string {
+func (x *UserOrderCompletedItem) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UserStockOrderItem) ProtoMessage() {}
+func (*UserOrderCompletedItem) ProtoMessage() {}
 
-func (x *UserStockOrderItem) ProtoReflect() protoreflect.Message {
+func (x *UserOrderCompletedItem) ProtoReflect() protoreflect.Message {
 	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1730,81 +1375,67 @@ func (x *UserStockOrderItem) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UserStockOrderItem.ProtoReflect.Descriptor instead.
-func (*UserStockOrderItem) Descriptor() ([]byte, []int) {
+// Deprecated: Use UserOrderCompletedItem.ProtoReflect.Descriptor instead.
+func (*UserOrderCompletedItem) Descriptor() ([]byte, []int) {
 	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *UserStockOrderItem) GetUserId() uint64 {
+func (x *UserOrderCompletedItem) GetUserId() uint64 {
 	if x != nil {
 		return x.UserId
 	}
 	return 0
 }
 
-func (x *UserStockOrderItem) GetPieceCount() int64 {
+func (x *UserOrderCompletedItem) GetTransactionCount() int64 {
 	if x != nil {
-		return x.PieceCount
+		return x.TransactionCount
 	}
 	return 0
 }
 
-func (x *UserStockOrderItem) GetOwnPieceCount() int64 {
+func (x *UserOrderCompletedItem) GetTotalAmount() float64 {
 	if x != nil {
-		return x.OwnPieceCount
+		return x.TotalAmount
 	}
 	return 0
 }
 
-func (x *UserStockOrderItem) GetCrossPieceCount() int64 {
+func (x *UserOrderCompletedItem) GetMpTotalAmount() float64 {
 	if x != nil {
-		return x.CrossPieceCount
+		return x.MpTotalAmount
 	}
 	return 0
 }
 
-func (x *UserStockOrderItem) GetPieceAmount() float64 {
+func (x *UserOrderCompletedItem) GetLastOrderCompleted() *timestamppb.Timestamp {
 	if x != nil {
-		return x.PieceAmount
+		return x.LastOrderCompleted
 	}
-	return 0
+	return nil
 }
 
-func (x *UserStockOrderItem) GetOwnPieceAmount() float64 {
-	if x != nil {
-		return x.OwnPieceAmount
-	}
-	return 0
-}
-
-func (x *UserStockOrderItem) GetCrossPieceAmount() float64 {
-	if x != nil {
-		return x.CrossPieceAmount
-	}
-	return 0
-}
-
-type UserStockOrderMetric struct {
-	state         protoimpl.MessageState         `protogen:"open.v1"`
-	Data          map[uint64]*UserStockOrderItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+type UserOrderCompletedMetric struct {
+	state         protoimpl.MessageState             `protogen:"open.v1"`
+	Data          map[uint64]*UserOrderCompletedItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *UserStockOrderMetric) Reset() {
-	*x = UserStockOrderMetric{}
+func (x *UserOrderCompletedMetric) Reset() {
+	*x = UserOrderCompletedMetric{}
 	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UserStockOrderMetric) String() string {
+func (x *UserOrderCompletedMetric) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UserStockOrderMetric) ProtoMessage() {}
+func (*UserOrderCompletedMetric) ProtoMessage() {}
 
-func (x *UserStockOrderMetric) ProtoReflect() protoreflect.Message {
+func (x *UserOrderCompletedMetric) ProtoReflect() protoreflect.Message {
 	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1816,45 +1447,44 @@ func (x *UserStockOrderMetric) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UserStockOrderMetric.ProtoReflect.Descriptor instead.
-func (*UserStockOrderMetric) Descriptor() ([]byte, []int) {
+// Deprecated: Use UserOrderCompletedMetric.ProtoReflect.Descriptor instead.
+func (*UserOrderCompletedMetric) Descriptor() ([]byte, []int) {
 	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{9}
 }
 
-func (x *UserStockOrderMetric) GetData() map[uint64]*UserStockOrderItem {
+func (x *UserOrderCompletedMetric) GetData() map[uint64]*UserOrderCompletedItem {
 	if x != nil {
 		return x.Data
 	}
 	return nil
 }
 
-type UserStockOrderWithdrawalItem struct {
+type UserOrderReturnItem struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
 	UserId           uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	PieceCount       int64                  `protobuf:"varint,2,opt,name=piece_count,json=pieceCount,proto3" json:"piece_count,omitempty"`
-	OwnPieceCount    int64                  `protobuf:"varint,4,opt,name=own_piece_count,json=ownPieceCount,proto3" json:"own_piece_count,omitempty"`
-	CrossPieceCount  int64                  `protobuf:"varint,5,opt,name=cross_piece_count,json=crossPieceCount,proto3" json:"cross_piece_count,omitempty"`
-	PieceAmount      float64                `protobuf:"fixed64,3,opt,name=piece_amount,json=pieceAmount,proto3" json:"piece_amount,omitempty"`
-	OwnPieceAmount   float64                `protobuf:"fixed64,6,opt,name=own_piece_amount,json=ownPieceAmount,proto3" json:"own_piece_amount,omitempty"`
-	CrossPieceAmount float64                `protobuf:"fixed64,7,opt,name=cross_piece_amount,json=crossPieceAmount,proto3" json:"cross_piece_amount,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	TransactionCount int64                  `protobuf:"varint,2,opt,name=transaction_count,json=transactionCount,proto3" json:"transaction_count,omitempty"`
+	TotalAmount      float64                `protobuf:"fixed64,4,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
+	MpTotalAmount    float64                `protobuf:"fixed64,5,opt,name=mp_total_amount,json=mpTotalAmount,proto3" json:"mp_total_amount,omitempty"`
+	// @gotags: gorm:"serializer:timestamptz"
+	LastOrderReturn *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=last_order_return,json=lastOrderReturn,proto3" json:"last_order_return,omitempty" gorm:"serializer:timestamptz"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
-func (x *UserStockOrderWithdrawalItem) Reset() {
-	*x = UserStockOrderWithdrawalItem{}
+func (x *UserOrderReturnItem) Reset() {
+	*x = UserOrderReturnItem{}
 	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UserStockOrderWithdrawalItem) String() string {
+func (x *UserOrderReturnItem) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UserStockOrderWithdrawalItem) ProtoMessage() {}
+func (*UserOrderReturnItem) ProtoMessage() {}
 
-func (x *UserStockOrderWithdrawalItem) ProtoReflect() protoreflect.Message {
+func (x *UserOrderReturnItem) ProtoReflect() protoreflect.Message {
 	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1866,81 +1496,67 @@ func (x *UserStockOrderWithdrawalItem) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UserStockOrderWithdrawalItem.ProtoReflect.Descriptor instead.
-func (*UserStockOrderWithdrawalItem) Descriptor() ([]byte, []int) {
+// Deprecated: Use UserOrderReturnItem.ProtoReflect.Descriptor instead.
+func (*UserOrderReturnItem) Descriptor() ([]byte, []int) {
 	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{10}
 }
 
-func (x *UserStockOrderWithdrawalItem) GetUserId() uint64 {
+func (x *UserOrderReturnItem) GetUserId() uint64 {
 	if x != nil {
 		return x.UserId
 	}
 	return 0
 }
 
-func (x *UserStockOrderWithdrawalItem) GetPieceCount() int64 {
+func (x *UserOrderReturnItem) GetTransactionCount() int64 {
 	if x != nil {
-		return x.PieceCount
+		return x.TransactionCount
 	}
 	return 0
 }
 
-func (x *UserStockOrderWithdrawalItem) GetOwnPieceCount() int64 {
+func (x *UserOrderReturnItem) GetTotalAmount() float64 {
 	if x != nil {
-		return x.OwnPieceCount
+		return x.TotalAmount
 	}
 	return 0
 }
 
-func (x *UserStockOrderWithdrawalItem) GetCrossPieceCount() int64 {
+func (x *UserOrderReturnItem) GetMpTotalAmount() float64 {
 	if x != nil {
-		return x.CrossPieceCount
+		return x.MpTotalAmount
 	}
 	return 0
 }
 
-func (x *UserStockOrderWithdrawalItem) GetPieceAmount() float64 {
+func (x *UserOrderReturnItem) GetLastOrderReturn() *timestamppb.Timestamp {
 	if x != nil {
-		return x.PieceAmount
+		return x.LastOrderReturn
 	}
-	return 0
+	return nil
 }
 
-func (x *UserStockOrderWithdrawalItem) GetOwnPieceAmount() float64 {
-	if x != nil {
-		return x.OwnPieceAmount
-	}
-	return 0
-}
-
-func (x *UserStockOrderWithdrawalItem) GetCrossPieceAmount() float64 {
-	if x != nil {
-		return x.CrossPieceAmount
-	}
-	return 0
-}
-
-type UserStockOrderWithdrawalMetric struct {
-	state         protoimpl.MessageState                   `protogen:"open.v1"`
-	Data          map[uint64]*UserStockOrderWithdrawalItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+type UserOrderReturnMetric struct {
+	state         protoimpl.MessageState          `protogen:"open.v1"`
+	Data          map[uint64]*UserOrderReturnItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *UserStockOrderWithdrawalMetric) Reset() {
-	*x = UserStockOrderWithdrawalMetric{}
+func (x *UserOrderReturnMetric) Reset() {
+	*x = UserOrderReturnMetric{}
 	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UserStockOrderWithdrawalMetric) String() string {
+func (x *UserOrderReturnMetric) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UserStockOrderWithdrawalMetric) ProtoMessage() {}
+func (*UserOrderReturnMetric) ProtoMessage() {}
 
-func (x *UserStockOrderWithdrawalMetric) ProtoReflect() protoreflect.Message {
+func (x *UserOrderReturnMetric) ProtoReflect() protoreflect.Message {
 	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1952,45 +1568,44 @@ func (x *UserStockOrderWithdrawalMetric) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UserStockOrderWithdrawalMetric.ProtoReflect.Descriptor instead.
-func (*UserStockOrderWithdrawalMetric) Descriptor() ([]byte, []int) {
+// Deprecated: Use UserOrderReturnMetric.ProtoReflect.Descriptor instead.
+func (*UserOrderReturnMetric) Descriptor() ([]byte, []int) {
 	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{11}
 }
 
-func (x *UserStockOrderWithdrawalMetric) GetData() map[uint64]*UserStockOrderWithdrawalItem {
+func (x *UserOrderReturnMetric) GetData() map[uint64]*UserOrderReturnItem {
 	if x != nil {
 		return x.Data
 	}
 	return nil
 }
 
-type UserStockOrderCancelledItem struct {
+type UserOrderReturnCompletedItem struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
 	UserId           uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	PieceCount       int64                  `protobuf:"varint,2,opt,name=piece_count,json=pieceCount,proto3" json:"piece_count,omitempty"`
-	OwnPieceCount    int64                  `protobuf:"varint,4,opt,name=own_piece_count,json=ownPieceCount,proto3" json:"own_piece_count,omitempty"`
-	CrossPieceCount  int64                  `protobuf:"varint,5,opt,name=cross_piece_count,json=crossPieceCount,proto3" json:"cross_piece_count,omitempty"`
-	PieceAmount      float64                `protobuf:"fixed64,3,opt,name=piece_amount,json=pieceAmount,proto3" json:"piece_amount,omitempty"`
-	OwnPieceAmount   float64                `protobuf:"fixed64,6,opt,name=own_piece_amount,json=ownPieceAmount,proto3" json:"own_piece_amount,omitempty"`
-	CrossPieceAmount float64                `protobuf:"fixed64,7,opt,name=cross_piece_amount,json=crossPieceAmount,proto3" json:"cross_piece_amount,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	TransactionCount int64                  `protobuf:"varint,2,opt,name=transaction_count,json=transactionCount,proto3" json:"transaction_count,omitempty"`
+	TotalAmount      float64                `protobuf:"fixed64,4,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
+	MpTotalAmount    float64                `protobuf:"fixed64,5,opt,name=mp_total_amount,json=mpTotalAmount,proto3" json:"mp_total_amount,omitempty"`
+	// @gotags: gorm:"serializer:timestamptz"
+	LastOrderReturnCompleted *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=last_order_return_completed,json=lastOrderReturnCompleted,proto3" json:"last_order_return_completed,omitempty" gorm:"serializer:timestamptz"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
-func (x *UserStockOrderCancelledItem) Reset() {
-	*x = UserStockOrderCancelledItem{}
+func (x *UserOrderReturnCompletedItem) Reset() {
+	*x = UserOrderReturnCompletedItem{}
 	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UserStockOrderCancelledItem) String() string {
+func (x *UserOrderReturnCompletedItem) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UserStockOrderCancelledItem) ProtoMessage() {}
+func (*UserOrderReturnCompletedItem) ProtoMessage() {}
 
-func (x *UserStockOrderCancelledItem) ProtoReflect() protoreflect.Message {
+func (x *UserOrderReturnCompletedItem) ProtoReflect() protoreflect.Message {
 	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2002,81 +1617,67 @@ func (x *UserStockOrderCancelledItem) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UserStockOrderCancelledItem.ProtoReflect.Descriptor instead.
-func (*UserStockOrderCancelledItem) Descriptor() ([]byte, []int) {
+// Deprecated: Use UserOrderReturnCompletedItem.ProtoReflect.Descriptor instead.
+func (*UserOrderReturnCompletedItem) Descriptor() ([]byte, []int) {
 	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{12}
 }
 
-func (x *UserStockOrderCancelledItem) GetUserId() uint64 {
+func (x *UserOrderReturnCompletedItem) GetUserId() uint64 {
 	if x != nil {
 		return x.UserId
 	}
 	return 0
 }
 
-func (x *UserStockOrderCancelledItem) GetPieceCount() int64 {
+func (x *UserOrderReturnCompletedItem) GetTransactionCount() int64 {
 	if x != nil {
-		return x.PieceCount
+		return x.TransactionCount
 	}
 	return 0
 }
 
-func (x *UserStockOrderCancelledItem) GetOwnPieceCount() int64 {
+func (x *UserOrderReturnCompletedItem) GetTotalAmount() float64 {
 	if x != nil {
-		return x.OwnPieceCount
+		return x.TotalAmount
 	}
 	return 0
 }
 
-func (x *UserStockOrderCancelledItem) GetCrossPieceCount() int64 {
+func (x *UserOrderReturnCompletedItem) GetMpTotalAmount() float64 {
 	if x != nil {
-		return x.CrossPieceCount
+		return x.MpTotalAmount
 	}
 	return 0
 }
 
-func (x *UserStockOrderCancelledItem) GetPieceAmount() float64 {
+func (x *UserOrderReturnCompletedItem) GetLastOrderReturnCompleted() *timestamppb.Timestamp {
 	if x != nil {
-		return x.PieceAmount
+		return x.LastOrderReturnCompleted
 	}
-	return 0
+	return nil
 }
 
-func (x *UserStockOrderCancelledItem) GetOwnPieceAmount() float64 {
-	if x != nil {
-		return x.OwnPieceAmount
-	}
-	return 0
-}
-
-func (x *UserStockOrderCancelledItem) GetCrossPieceAmount() float64 {
-	if x != nil {
-		return x.CrossPieceAmount
-	}
-	return 0
-}
-
-type UserStockOrderCancelledMetric struct {
-	state         protoimpl.MessageState                  `protogen:"open.v1"`
-	Data          map[uint64]*UserStockOrderCancelledItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+type UserOrderReturnCompletedMetric struct {
+	state         protoimpl.MessageState                   `protogen:"open.v1"`
+	Data          map[uint64]*UserOrderReturnCompletedItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *UserStockOrderCancelledMetric) Reset() {
-	*x = UserStockOrderCancelledMetric{}
+func (x *UserOrderReturnCompletedMetric) Reset() {
+	*x = UserOrderReturnCompletedMetric{}
 	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UserStockOrderCancelledMetric) String() string {
+func (x *UserOrderReturnCompletedMetric) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UserStockOrderCancelledMetric) ProtoMessage() {}
+func (*UserOrderReturnCompletedMetric) ProtoMessage() {}
 
-func (x *UserStockOrderCancelledMetric) ProtoReflect() protoreflect.Message {
+func (x *UserOrderReturnCompletedMetric) ProtoReflect() protoreflect.Message {
 	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2088,45 +1689,44 @@ func (x *UserStockOrderCancelledMetric) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UserStockOrderCancelledMetric.ProtoReflect.Descriptor instead.
-func (*UserStockOrderCancelledMetric) Descriptor() ([]byte, []int) {
+// Deprecated: Use UserOrderReturnCompletedMetric.ProtoReflect.Descriptor instead.
+func (*UserOrderReturnCompletedMetric) Descriptor() ([]byte, []int) {
 	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{13}
 }
 
-func (x *UserStockOrderCancelledMetric) GetData() map[uint64]*UserStockOrderCancelledItem {
+func (x *UserOrderReturnCompletedMetric) GetData() map[uint64]*UserOrderReturnCompletedItem {
 	if x != nil {
 		return x.Data
 	}
 	return nil
 }
 
-type UserStockOrderLostItem struct {
+type UserOrderOngoingItem struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
 	UserId           uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	PieceCount       int64                  `protobuf:"varint,2,opt,name=piece_count,json=pieceCount,proto3" json:"piece_count,omitempty"`
-	OwnPieceCount    int64                  `protobuf:"varint,4,opt,name=own_piece_count,json=ownPieceCount,proto3" json:"own_piece_count,omitempty"`
-	CrossPieceCount  int64                  `protobuf:"varint,5,opt,name=cross_piece_count,json=crossPieceCount,proto3" json:"cross_piece_count,omitempty"`
-	PieceAmount      float64                `protobuf:"fixed64,3,opt,name=piece_amount,json=pieceAmount,proto3" json:"piece_amount,omitempty"`
-	OwnPieceAmount   float64                `protobuf:"fixed64,6,opt,name=own_piece_amount,json=ownPieceAmount,proto3" json:"own_piece_amount,omitempty"`
-	CrossPieceAmount float64                `protobuf:"fixed64,7,opt,name=cross_piece_amount,json=crossPieceAmount,proto3" json:"cross_piece_amount,omitempty"`
+	TransactionCount int64                  `protobuf:"varint,2,opt,name=transaction_count,json=transactionCount,proto3" json:"transaction_count,omitempty"`
+	TotalAmount      float64                `protobuf:"fixed64,4,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
+	MpTotalAmount    float64                `protobuf:"fixed64,5,opt,name=mp_total_amount,json=mpTotalAmount,proto3" json:"mp_total_amount,omitempty"`
+	// @gotags: gorm:"serializer:timestamptz"
+	LastOrderOngoing *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=last_order_ongoing,json=lastOrderOngoing,proto3" json:"last_order_ongoing,omitempty" gorm:"serializer:timestamptz"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
 
-func (x *UserStockOrderLostItem) Reset() {
-	*x = UserStockOrderLostItem{}
+func (x *UserOrderOngoingItem) Reset() {
+	*x = UserOrderOngoingItem{}
 	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UserStockOrderLostItem) String() string {
+func (x *UserOrderOngoingItem) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UserStockOrderLostItem) ProtoMessage() {}
+func (*UserOrderOngoingItem) ProtoMessage() {}
 
-func (x *UserStockOrderLostItem) ProtoReflect() protoreflect.Message {
+func (x *UserOrderOngoingItem) ProtoReflect() protoreflect.Message {
 	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2138,81 +1738,67 @@ func (x *UserStockOrderLostItem) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UserStockOrderLostItem.ProtoReflect.Descriptor instead.
-func (*UserStockOrderLostItem) Descriptor() ([]byte, []int) {
+// Deprecated: Use UserOrderOngoingItem.ProtoReflect.Descriptor instead.
+func (*UserOrderOngoingItem) Descriptor() ([]byte, []int) {
 	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{14}
 }
 
-func (x *UserStockOrderLostItem) GetUserId() uint64 {
+func (x *UserOrderOngoingItem) GetUserId() uint64 {
 	if x != nil {
 		return x.UserId
 	}
 	return 0
 }
 
-func (x *UserStockOrderLostItem) GetPieceCount() int64 {
+func (x *UserOrderOngoingItem) GetTransactionCount() int64 {
 	if x != nil {
-		return x.PieceCount
+		return x.TransactionCount
 	}
 	return 0
 }
 
-func (x *UserStockOrderLostItem) GetOwnPieceCount() int64 {
+func (x *UserOrderOngoingItem) GetTotalAmount() float64 {
 	if x != nil {
-		return x.OwnPieceCount
+		return x.TotalAmount
 	}
 	return 0
 }
 
-func (x *UserStockOrderLostItem) GetCrossPieceCount() int64 {
+func (x *UserOrderOngoingItem) GetMpTotalAmount() float64 {
 	if x != nil {
-		return x.CrossPieceCount
+		return x.MpTotalAmount
 	}
 	return 0
 }
 
-func (x *UserStockOrderLostItem) GetPieceAmount() float64 {
+func (x *UserOrderOngoingItem) GetLastOrderOngoing() *timestamppb.Timestamp {
 	if x != nil {
-		return x.PieceAmount
+		return x.LastOrderOngoing
 	}
-	return 0
+	return nil
 }
 
-func (x *UserStockOrderLostItem) GetOwnPieceAmount() float64 {
-	if x != nil {
-		return x.OwnPieceAmount
-	}
-	return 0
-}
-
-func (x *UserStockOrderLostItem) GetCrossPieceAmount() float64 {
-	if x != nil {
-		return x.CrossPieceAmount
-	}
-	return 0
-}
-
-type UserStockOrderLostMetric struct {
-	state         protoimpl.MessageState             `protogen:"open.v1"`
-	Data          map[uint64]*UserStockOrderLostItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+type UserOrderOngoingMetric struct {
+	state         protoimpl.MessageState           `protogen:"open.v1"`
+	Data          map[uint64]*UserOrderOngoingItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *UserStockOrderLostMetric) Reset() {
-	*x = UserStockOrderLostMetric{}
+func (x *UserOrderOngoingMetric) Reset() {
+	*x = UserOrderOngoingMetric{}
 	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UserStockOrderLostMetric) String() string {
+func (x *UserOrderOngoingMetric) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UserStockOrderLostMetric) ProtoMessage() {}
+func (*UserOrderOngoingMetric) ProtoMessage() {}
 
-func (x *UserStockOrderLostMetric) ProtoReflect() protoreflect.Message {
+func (x *UserOrderOngoingMetric) ProtoReflect() protoreflect.Message {
 	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2224,12 +1810,12 @@ func (x *UserStockOrderLostMetric) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UserStockOrderLostMetric.ProtoReflect.Descriptor instead.
-func (*UserStockOrderLostMetric) Descriptor() ([]byte, []int) {
+// Deprecated: Use UserOrderOngoingMetric.ProtoReflect.Descriptor instead.
+func (*UserOrderOngoingMetric) Descriptor() ([]byte, []int) {
 	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{15}
 }
 
-func (x *UserStockOrderLostMetric) GetData() map[uint64]*UserStockOrderLostItem {
+func (x *UserOrderOngoingMetric) GetData() map[uint64]*UserOrderOngoingItem {
 	if x != nil {
 		return x.Data
 	}
@@ -2652,32 +2238,29 @@ func (x *UserAvgOrderLostMetric) GetData() map[uint64]*UserAvgOrderLostItem {
 	return nil
 }
 
-type UserCostOrderItem struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	UserId             uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	ProductAmount      float64                `protobuf:"fixed64,2,opt,name=product_amount,json=productAmount,proto3" json:"product_amount,omitempty"`
-	OwnProductAmount   float64                `protobuf:"fixed64,3,opt,name=own_product_amount,json=ownProductAmount,proto3" json:"own_product_amount,omitempty"`
-	CrossProductAmount float64                `protobuf:"fixed64,4,opt,name=cross_product_amount,json=crossProductAmount,proto3" json:"cross_product_amount,omitempty"`
-	WarehouseAmount    float64                `protobuf:"fixed64,5,opt,name=warehouse_amount,json=warehouseAmount,proto3" json:"warehouse_amount,omitempty"`
-	TotalAmount        float64                `protobuf:"fixed64,6,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+type UserAvgOrderCompletedItem struct {
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	UserId              uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	PiecePerTransaction float64                `protobuf:"fixed64,2,opt,name=piece_per_transaction,json=piecePerTransaction,proto3" json:"piece_per_transaction,omitempty"`
+	TotalPerTransaction float64                `protobuf:"fixed64,3,opt,name=total_per_transaction,json=totalPerTransaction,proto3" json:"total_per_transaction,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
-func (x *UserCostOrderItem) Reset() {
-	*x = UserCostOrderItem{}
+func (x *UserAvgOrderCompletedItem) Reset() {
+	*x = UserAvgOrderCompletedItem{}
 	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UserCostOrderItem) String() string {
+func (x *UserAvgOrderCompletedItem) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UserCostOrderItem) ProtoMessage() {}
+func (*UserAvgOrderCompletedItem) ProtoMessage() {}
 
-func (x *UserCostOrderItem) ProtoReflect() protoreflect.Message {
+func (x *UserAvgOrderCompletedItem) ProtoReflect() protoreflect.Message {
 	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2689,74 +2272,53 @@ func (x *UserCostOrderItem) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UserCostOrderItem.ProtoReflect.Descriptor instead.
-func (*UserCostOrderItem) Descriptor() ([]byte, []int) {
+// Deprecated: Use UserAvgOrderCompletedItem.ProtoReflect.Descriptor instead.
+func (*UserAvgOrderCompletedItem) Descriptor() ([]byte, []int) {
 	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{24}
 }
 
-func (x *UserCostOrderItem) GetUserId() uint64 {
+func (x *UserAvgOrderCompletedItem) GetUserId() uint64 {
 	if x != nil {
 		return x.UserId
 	}
 	return 0
 }
 
-func (x *UserCostOrderItem) GetProductAmount() float64 {
+func (x *UserAvgOrderCompletedItem) GetPiecePerTransaction() float64 {
 	if x != nil {
-		return x.ProductAmount
+		return x.PiecePerTransaction
 	}
 	return 0
 }
 
-func (x *UserCostOrderItem) GetOwnProductAmount() float64 {
+func (x *UserAvgOrderCompletedItem) GetTotalPerTransaction() float64 {
 	if x != nil {
-		return x.OwnProductAmount
+		return x.TotalPerTransaction
 	}
 	return 0
 }
 
-func (x *UserCostOrderItem) GetCrossProductAmount() float64 {
-	if x != nil {
-		return x.CrossProductAmount
-	}
-	return 0
-}
-
-func (x *UserCostOrderItem) GetWarehouseAmount() float64 {
-	if x != nil {
-		return x.WarehouseAmount
-	}
-	return 0
-}
-
-func (x *UserCostOrderItem) GetTotalAmount() float64 {
-	if x != nil {
-		return x.TotalAmount
-	}
-	return 0
-}
-
-type UserCostOrderMetric struct {
-	state         protoimpl.MessageState        `protogen:"open.v1"`
-	Data          map[uint64]*UserCostOrderItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+type UserAvgOrderCompletedMetric struct {
+	state         protoimpl.MessageState                `protogen:"open.v1"`
+	Data          map[uint64]*UserAvgOrderCompletedItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *UserCostOrderMetric) Reset() {
-	*x = UserCostOrderMetric{}
+func (x *UserAvgOrderCompletedMetric) Reset() {
+	*x = UserAvgOrderCompletedMetric{}
 	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UserCostOrderMetric) String() string {
+func (x *UserAvgOrderCompletedMetric) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UserCostOrderMetric) ProtoMessage() {}
+func (*UserAvgOrderCompletedMetric) ProtoMessage() {}
 
-func (x *UserCostOrderMetric) ProtoReflect() protoreflect.Message {
+func (x *UserAvgOrderCompletedMetric) ProtoReflect() protoreflect.Message {
 	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2768,44 +2330,41 @@ func (x *UserCostOrderMetric) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UserCostOrderMetric.ProtoReflect.Descriptor instead.
-func (*UserCostOrderMetric) Descriptor() ([]byte, []int) {
+// Deprecated: Use UserAvgOrderCompletedMetric.ProtoReflect.Descriptor instead.
+func (*UserAvgOrderCompletedMetric) Descriptor() ([]byte, []int) {
 	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{25}
 }
 
-func (x *UserCostOrderMetric) GetData() map[uint64]*UserCostOrderItem {
+func (x *UserAvgOrderCompletedMetric) GetData() map[uint64]*UserAvgOrderCompletedItem {
 	if x != nil {
 		return x.Data
 	}
 	return nil
 }
 
-type UserCostOrderWithdrawalItem struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	UserId             uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	ProductAmount      float64                `protobuf:"fixed64,2,opt,name=product_amount,json=productAmount,proto3" json:"product_amount,omitempty"`
-	OwnProductAmount   float64                `protobuf:"fixed64,3,opt,name=own_product_amount,json=ownProductAmount,proto3" json:"own_product_amount,omitempty"`
-	CrossProductAmount float64                `protobuf:"fixed64,4,opt,name=cross_product_amount,json=crossProductAmount,proto3" json:"cross_product_amount,omitempty"`
-	WarehouseAmount    float64                `protobuf:"fixed64,5,opt,name=warehouse_amount,json=warehouseAmount,proto3" json:"warehouse_amount,omitempty"`
-	TotalAmount        float64                `protobuf:"fixed64,6,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+type UserAvgOrderReturnItem struct {
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	UserId              uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	PiecePerTransaction float64                `protobuf:"fixed64,2,opt,name=piece_per_transaction,json=piecePerTransaction,proto3" json:"piece_per_transaction,omitempty"`
+	TotalPerTransaction float64                `protobuf:"fixed64,3,opt,name=total_per_transaction,json=totalPerTransaction,proto3" json:"total_per_transaction,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
-func (x *UserCostOrderWithdrawalItem) Reset() {
-	*x = UserCostOrderWithdrawalItem{}
+func (x *UserAvgOrderReturnItem) Reset() {
+	*x = UserAvgOrderReturnItem{}
 	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UserCostOrderWithdrawalItem) String() string {
+func (x *UserAvgOrderReturnItem) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UserCostOrderWithdrawalItem) ProtoMessage() {}
+func (*UserAvgOrderReturnItem) ProtoMessage() {}
 
-func (x *UserCostOrderWithdrawalItem) ProtoReflect() protoreflect.Message {
+func (x *UserAvgOrderReturnItem) ProtoReflect() protoreflect.Message {
 	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2817,74 +2376,53 @@ func (x *UserCostOrderWithdrawalItem) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UserCostOrderWithdrawalItem.ProtoReflect.Descriptor instead.
-func (*UserCostOrderWithdrawalItem) Descriptor() ([]byte, []int) {
+// Deprecated: Use UserAvgOrderReturnItem.ProtoReflect.Descriptor instead.
+func (*UserAvgOrderReturnItem) Descriptor() ([]byte, []int) {
 	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{26}
 }
 
-func (x *UserCostOrderWithdrawalItem) GetUserId() uint64 {
+func (x *UserAvgOrderReturnItem) GetUserId() uint64 {
 	if x != nil {
 		return x.UserId
 	}
 	return 0
 }
 
-func (x *UserCostOrderWithdrawalItem) GetProductAmount() float64 {
+func (x *UserAvgOrderReturnItem) GetPiecePerTransaction() float64 {
 	if x != nil {
-		return x.ProductAmount
+		return x.PiecePerTransaction
 	}
 	return 0
 }
 
-func (x *UserCostOrderWithdrawalItem) GetOwnProductAmount() float64 {
+func (x *UserAvgOrderReturnItem) GetTotalPerTransaction() float64 {
 	if x != nil {
-		return x.OwnProductAmount
+		return x.TotalPerTransaction
 	}
 	return 0
 }
 
-func (x *UserCostOrderWithdrawalItem) GetCrossProductAmount() float64 {
-	if x != nil {
-		return x.CrossProductAmount
-	}
-	return 0
-}
-
-func (x *UserCostOrderWithdrawalItem) GetWarehouseAmount() float64 {
-	if x != nil {
-		return x.WarehouseAmount
-	}
-	return 0
-}
-
-func (x *UserCostOrderWithdrawalItem) GetTotalAmount() float64 {
-	if x != nil {
-		return x.TotalAmount
-	}
-	return 0
-}
-
-type UserCostOrderWithdrawalMetric struct {
-	state         protoimpl.MessageState                  `protogen:"open.v1"`
-	Data          map[uint64]*UserCostOrderWithdrawalItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+type UserAvgOrderReturnMetric struct {
+	state         protoimpl.MessageState             `protogen:"open.v1"`
+	Data          map[uint64]*UserAvgOrderReturnItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *UserCostOrderWithdrawalMetric) Reset() {
-	*x = UserCostOrderWithdrawalMetric{}
+func (x *UserAvgOrderReturnMetric) Reset() {
+	*x = UserAvgOrderReturnMetric{}
 	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UserCostOrderWithdrawalMetric) String() string {
+func (x *UserAvgOrderReturnMetric) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UserCostOrderWithdrawalMetric) ProtoMessage() {}
+func (*UserAvgOrderReturnMetric) ProtoMessage() {}
 
-func (x *UserCostOrderWithdrawalMetric) ProtoReflect() protoreflect.Message {
+func (x *UserAvgOrderReturnMetric) ProtoReflect() protoreflect.Message {
 	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2896,44 +2434,41 @@ func (x *UserCostOrderWithdrawalMetric) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UserCostOrderWithdrawalMetric.ProtoReflect.Descriptor instead.
-func (*UserCostOrderWithdrawalMetric) Descriptor() ([]byte, []int) {
+// Deprecated: Use UserAvgOrderReturnMetric.ProtoReflect.Descriptor instead.
+func (*UserAvgOrderReturnMetric) Descriptor() ([]byte, []int) {
 	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{27}
 }
 
-func (x *UserCostOrderWithdrawalMetric) GetData() map[uint64]*UserCostOrderWithdrawalItem {
+func (x *UserAvgOrderReturnMetric) GetData() map[uint64]*UserAvgOrderReturnItem {
 	if x != nil {
 		return x.Data
 	}
 	return nil
 }
 
-type UserCostOrderCancelledItem struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	UserId             uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	ProductAmount      float64                `protobuf:"fixed64,2,opt,name=product_amount,json=productAmount,proto3" json:"product_amount,omitempty"`
-	OwnProductAmount   float64                `protobuf:"fixed64,3,opt,name=own_product_amount,json=ownProductAmount,proto3" json:"own_product_amount,omitempty"`
-	CrossProductAmount float64                `protobuf:"fixed64,4,opt,name=cross_product_amount,json=crossProductAmount,proto3" json:"cross_product_amount,omitempty"`
-	WarehouseAmount    float64                `protobuf:"fixed64,5,opt,name=warehouse_amount,json=warehouseAmount,proto3" json:"warehouse_amount,omitempty"`
-	TotalAmount        float64                `protobuf:"fixed64,6,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+type UserAvgOrderReturnCompletedItem struct {
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	UserId              uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	PiecePerTransaction float64                `protobuf:"fixed64,2,opt,name=piece_per_transaction,json=piecePerTransaction,proto3" json:"piece_per_transaction,omitempty"`
+	TotalPerTransaction float64                `protobuf:"fixed64,3,opt,name=total_per_transaction,json=totalPerTransaction,proto3" json:"total_per_transaction,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
-func (x *UserCostOrderCancelledItem) Reset() {
-	*x = UserCostOrderCancelledItem{}
+func (x *UserAvgOrderReturnCompletedItem) Reset() {
+	*x = UserAvgOrderReturnCompletedItem{}
 	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UserCostOrderCancelledItem) String() string {
+func (x *UserAvgOrderReturnCompletedItem) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UserCostOrderCancelledItem) ProtoMessage() {}
+func (*UserAvgOrderReturnCompletedItem) ProtoMessage() {}
 
-func (x *UserCostOrderCancelledItem) ProtoReflect() protoreflect.Message {
+func (x *UserAvgOrderReturnCompletedItem) ProtoReflect() protoreflect.Message {
 	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2945,74 +2480,53 @@ func (x *UserCostOrderCancelledItem) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UserCostOrderCancelledItem.ProtoReflect.Descriptor instead.
-func (*UserCostOrderCancelledItem) Descriptor() ([]byte, []int) {
+// Deprecated: Use UserAvgOrderReturnCompletedItem.ProtoReflect.Descriptor instead.
+func (*UserAvgOrderReturnCompletedItem) Descriptor() ([]byte, []int) {
 	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{28}
 }
 
-func (x *UserCostOrderCancelledItem) GetUserId() uint64 {
+func (x *UserAvgOrderReturnCompletedItem) GetUserId() uint64 {
 	if x != nil {
 		return x.UserId
 	}
 	return 0
 }
 
-func (x *UserCostOrderCancelledItem) GetProductAmount() float64 {
+func (x *UserAvgOrderReturnCompletedItem) GetPiecePerTransaction() float64 {
 	if x != nil {
-		return x.ProductAmount
+		return x.PiecePerTransaction
 	}
 	return 0
 }
 
-func (x *UserCostOrderCancelledItem) GetOwnProductAmount() float64 {
+func (x *UserAvgOrderReturnCompletedItem) GetTotalPerTransaction() float64 {
 	if x != nil {
-		return x.OwnProductAmount
+		return x.TotalPerTransaction
 	}
 	return 0
 }
 
-func (x *UserCostOrderCancelledItem) GetCrossProductAmount() float64 {
-	if x != nil {
-		return x.CrossProductAmount
-	}
-	return 0
-}
-
-func (x *UserCostOrderCancelledItem) GetWarehouseAmount() float64 {
-	if x != nil {
-		return x.WarehouseAmount
-	}
-	return 0
-}
-
-func (x *UserCostOrderCancelledItem) GetTotalAmount() float64 {
-	if x != nil {
-		return x.TotalAmount
-	}
-	return 0
-}
-
-type UserCostOrderCancelledMetric struct {
-	state         protoimpl.MessageState                 `protogen:"open.v1"`
-	Data          map[uint64]*UserCostOrderCancelledItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+type UserAvgOrderReturnCompletedMetric struct {
+	state         protoimpl.MessageState                      `protogen:"open.v1"`
+	Data          map[uint64]*UserAvgOrderReturnCompletedItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *UserCostOrderCancelledMetric) Reset() {
-	*x = UserCostOrderCancelledMetric{}
+func (x *UserAvgOrderReturnCompletedMetric) Reset() {
+	*x = UserAvgOrderReturnCompletedMetric{}
 	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UserCostOrderCancelledMetric) String() string {
+func (x *UserAvgOrderReturnCompletedMetric) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UserCostOrderCancelledMetric) ProtoMessage() {}
+func (*UserAvgOrderReturnCompletedMetric) ProtoMessage() {}
 
-func (x *UserCostOrderCancelledMetric) ProtoReflect() protoreflect.Message {
+func (x *UserAvgOrderReturnCompletedMetric) ProtoReflect() protoreflect.Message {
 	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -3024,44 +2538,41 @@ func (x *UserCostOrderCancelledMetric) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UserCostOrderCancelledMetric.ProtoReflect.Descriptor instead.
-func (*UserCostOrderCancelledMetric) Descriptor() ([]byte, []int) {
+// Deprecated: Use UserAvgOrderReturnCompletedMetric.ProtoReflect.Descriptor instead.
+func (*UserAvgOrderReturnCompletedMetric) Descriptor() ([]byte, []int) {
 	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{29}
 }
 
-func (x *UserCostOrderCancelledMetric) GetData() map[uint64]*UserCostOrderCancelledItem {
+func (x *UserAvgOrderReturnCompletedMetric) GetData() map[uint64]*UserAvgOrderReturnCompletedItem {
 	if x != nil {
 		return x.Data
 	}
 	return nil
 }
 
-type UserCostOrderLostItem struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	UserId             uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	ProductAmount      float64                `protobuf:"fixed64,2,opt,name=product_amount,json=productAmount,proto3" json:"product_amount,omitempty"`
-	OwnProductAmount   float64                `protobuf:"fixed64,3,opt,name=own_product_amount,json=ownProductAmount,proto3" json:"own_product_amount,omitempty"`
-	CrossProductAmount float64                `protobuf:"fixed64,4,opt,name=cross_product_amount,json=crossProductAmount,proto3" json:"cross_product_amount,omitempty"`
-	WarehouseAmount    float64                `protobuf:"fixed64,5,opt,name=warehouse_amount,json=warehouseAmount,proto3" json:"warehouse_amount,omitempty"`
-	TotalAmount        float64                `protobuf:"fixed64,6,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+type UserAvgOrderOngoingItem struct {
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	UserId              uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	PiecePerTransaction float64                `protobuf:"fixed64,2,opt,name=piece_per_transaction,json=piecePerTransaction,proto3" json:"piece_per_transaction,omitempty"`
+	TotalPerTransaction float64                `protobuf:"fixed64,3,opt,name=total_per_transaction,json=totalPerTransaction,proto3" json:"total_per_transaction,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
-func (x *UserCostOrderLostItem) Reset() {
-	*x = UserCostOrderLostItem{}
+func (x *UserAvgOrderOngoingItem) Reset() {
+	*x = UserAvgOrderOngoingItem{}
 	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UserCostOrderLostItem) String() string {
+func (x *UserAvgOrderOngoingItem) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UserCostOrderLostItem) ProtoMessage() {}
+func (*UserAvgOrderOngoingItem) ProtoMessage() {}
 
-func (x *UserCostOrderLostItem) ProtoReflect() protoreflect.Message {
+func (x *UserAvgOrderOngoingItem) ProtoReflect() protoreflect.Message {
 	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -3073,74 +2584,53 @@ func (x *UserCostOrderLostItem) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UserCostOrderLostItem.ProtoReflect.Descriptor instead.
-func (*UserCostOrderLostItem) Descriptor() ([]byte, []int) {
+// Deprecated: Use UserAvgOrderOngoingItem.ProtoReflect.Descriptor instead.
+func (*UserAvgOrderOngoingItem) Descriptor() ([]byte, []int) {
 	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{30}
 }
 
-func (x *UserCostOrderLostItem) GetUserId() uint64 {
+func (x *UserAvgOrderOngoingItem) GetUserId() uint64 {
 	if x != nil {
 		return x.UserId
 	}
 	return 0
 }
 
-func (x *UserCostOrderLostItem) GetProductAmount() float64 {
+func (x *UserAvgOrderOngoingItem) GetPiecePerTransaction() float64 {
 	if x != nil {
-		return x.ProductAmount
+		return x.PiecePerTransaction
 	}
 	return 0
 }
 
-func (x *UserCostOrderLostItem) GetOwnProductAmount() float64 {
+func (x *UserAvgOrderOngoingItem) GetTotalPerTransaction() float64 {
 	if x != nil {
-		return x.OwnProductAmount
+		return x.TotalPerTransaction
 	}
 	return 0
 }
 
-func (x *UserCostOrderLostItem) GetCrossProductAmount() float64 {
-	if x != nil {
-		return x.CrossProductAmount
-	}
-	return 0
-}
-
-func (x *UserCostOrderLostItem) GetWarehouseAmount() float64 {
-	if x != nil {
-		return x.WarehouseAmount
-	}
-	return 0
-}
-
-func (x *UserCostOrderLostItem) GetTotalAmount() float64 {
-	if x != nil {
-		return x.TotalAmount
-	}
-	return 0
-}
-
-type UserCostOrderLostMetric struct {
-	state         protoimpl.MessageState            `protogen:"open.v1"`
-	Data          map[uint64]*UserCostOrderLostItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+type UserAvgOrderOngoingMetric struct {
+	state         protoimpl.MessageState              `protogen:"open.v1"`
+	Data          map[uint64]*UserAvgOrderOngoingItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *UserCostOrderLostMetric) Reset() {
-	*x = UserCostOrderLostMetric{}
+func (x *UserAvgOrderOngoingMetric) Reset() {
+	*x = UserAvgOrderOngoingMetric{}
 	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UserCostOrderLostMetric) String() string {
+func (x *UserAvgOrderOngoingMetric) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UserCostOrderLostMetric) ProtoMessage() {}
+func (*UserAvgOrderOngoingMetric) ProtoMessage() {}
 
-func (x *UserCostOrderLostMetric) ProtoReflect() protoreflect.Message {
+func (x *UserAvgOrderOngoingMetric) ProtoReflect() protoreflect.Message {
 	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -3152,636 +2642,12 @@ func (x *UserCostOrderLostMetric) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UserCostOrderLostMetric.ProtoReflect.Descriptor instead.
-func (*UserCostOrderLostMetric) Descriptor() ([]byte, []int) {
+// Deprecated: Use UserAvgOrderOngoingMetric.ProtoReflect.Descriptor instead.
+func (*UserAvgOrderOngoingMetric) Descriptor() ([]byte, []int) {
 	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{31}
 }
 
-func (x *UserCostOrderLostMetric) GetData() map[uint64]*UserCostOrderLostItem {
-	if x != nil {
-		return x.Data
-	}
-	return nil
-}
-
-type UserWithdrawalItem struct {
-	state                      protoimpl.MessageState `protogen:"open.v1"`
-	UserId                     uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	WithdrawalFundAmount       float64                `protobuf:"fixed64,2,opt,name=withdrawal_fund_amount,json=withdrawalFundAmount,proto3" json:"withdrawal_fund_amount,omitempty"`
-	WithdrawalAdjustmentAmount float64                `protobuf:"fixed64,3,opt,name=withdrawal_adjustment_amount,json=withdrawalAdjustmentAmount,proto3" json:"withdrawal_adjustment_amount,omitempty"`
-	WithdrawalTotalAmount      float64                `protobuf:"fixed64,4,opt,name=withdrawal_total_amount,json=withdrawalTotalAmount,proto3" json:"withdrawal_total_amount,omitempty"`
-	unknownFields              protoimpl.UnknownFields
-	sizeCache                  protoimpl.SizeCache
-}
-
-func (x *UserWithdrawalItem) Reset() {
-	*x = UserWithdrawalItem{}
-	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[32]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UserWithdrawalItem) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UserWithdrawalItem) ProtoMessage() {}
-
-func (x *UserWithdrawalItem) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[32]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UserWithdrawalItem.ProtoReflect.Descriptor instead.
-func (*UserWithdrawalItem) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{32}
-}
-
-func (x *UserWithdrawalItem) GetUserId() uint64 {
-	if x != nil {
-		return x.UserId
-	}
-	return 0
-}
-
-func (x *UserWithdrawalItem) GetWithdrawalFundAmount() float64 {
-	if x != nil {
-		return x.WithdrawalFundAmount
-	}
-	return 0
-}
-
-func (x *UserWithdrawalItem) GetWithdrawalAdjustmentAmount() float64 {
-	if x != nil {
-		return x.WithdrawalAdjustmentAmount
-	}
-	return 0
-}
-
-func (x *UserWithdrawalItem) GetWithdrawalTotalAmount() float64 {
-	if x != nil {
-		return x.WithdrawalTotalAmount
-	}
-	return 0
-}
-
-type UserWithdrawalMetric struct {
-	state         protoimpl.MessageState         `protogen:"open.v1"`
-	Data          map[uint64]*UserWithdrawalItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *UserWithdrawalMetric) Reset() {
-	*x = UserWithdrawalMetric{}
-	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[33]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UserWithdrawalMetric) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UserWithdrawalMetric) ProtoMessage() {}
-
-func (x *UserWithdrawalMetric) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[33]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UserWithdrawalMetric.ProtoReflect.Descriptor instead.
-func (*UserWithdrawalMetric) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{33}
-}
-
-func (x *UserWithdrawalMetric) GetData() map[uint64]*UserWithdrawalItem {
-	if x != nil {
-		return x.Data
-	}
-	return nil
-}
-
-type UserProfitOrderCreatedItem struct {
-	state                protoimpl.MessageState `protogen:"open.v1"`
-	UserId               uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	ProfitCreatedAmount  float64                `protobuf:"fixed64,2,opt,name=profit_created_amount,json=profitCreatedAmount,proto3" json:"profit_created_amount,omitempty"`
-	ProfitCreatedPercent float64                `protobuf:"fixed64,3,opt,name=profit_created_percent,json=profitCreatedPercent,proto3" json:"profit_created_percent,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
-}
-
-func (x *UserProfitOrderCreatedItem) Reset() {
-	*x = UserProfitOrderCreatedItem{}
-	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[34]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UserProfitOrderCreatedItem) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UserProfitOrderCreatedItem) ProtoMessage() {}
-
-func (x *UserProfitOrderCreatedItem) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[34]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UserProfitOrderCreatedItem.ProtoReflect.Descriptor instead.
-func (*UserProfitOrderCreatedItem) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{34}
-}
-
-func (x *UserProfitOrderCreatedItem) GetUserId() uint64 {
-	if x != nil {
-		return x.UserId
-	}
-	return 0
-}
-
-func (x *UserProfitOrderCreatedItem) GetProfitCreatedAmount() float64 {
-	if x != nil {
-		return x.ProfitCreatedAmount
-	}
-	return 0
-}
-
-func (x *UserProfitOrderCreatedItem) GetProfitCreatedPercent() float64 {
-	if x != nil {
-		return x.ProfitCreatedPercent
-	}
-	return 0
-}
-
-type UserProfitOrderCreatedMetric struct {
-	state         protoimpl.MessageState                 `protogen:"open.v1"`
-	Data          map[uint64]*UserProfitOrderCreatedItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *UserProfitOrderCreatedMetric) Reset() {
-	*x = UserProfitOrderCreatedMetric{}
-	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[35]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UserProfitOrderCreatedMetric) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UserProfitOrderCreatedMetric) ProtoMessage() {}
-
-func (x *UserProfitOrderCreatedMetric) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[35]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UserProfitOrderCreatedMetric.ProtoReflect.Descriptor instead.
-func (*UserProfitOrderCreatedMetric) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{35}
-}
-
-func (x *UserProfitOrderCreatedMetric) GetData() map[uint64]*UserProfitOrderCreatedItem {
-	if x != nil {
-		return x.Data
-	}
-	return nil
-}
-
-type UserProfitOrderWithdrawalItem struct {
-	state                             protoimpl.MessageState `protogen:"open.v1"`
-	UserId                            uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	ProfitWithdrawalAmount            float64                `protobuf:"fixed64,2,opt,name=profit_withdrawal_amount,json=profitWithdrawalAmount,proto3" json:"profit_withdrawal_amount,omitempty"`
-	ProfitWithdrawalPercent           float64                `protobuf:"fixed64,3,opt,name=profit_withdrawal_percent,json=profitWithdrawalPercent,proto3" json:"profit_withdrawal_percent,omitempty"`
-	ProfitWithdrawalAdjustmentAmount  float64                `protobuf:"fixed64,4,opt,name=profit_withdrawal_adjustment_amount,json=profitWithdrawalAdjustmentAmount,proto3" json:"profit_withdrawal_adjustment_amount,omitempty"`
-	ProfitWithdrawalAdjustmentPercent float64                `protobuf:"fixed64,5,opt,name=profit_withdrawal_adjustment_percent,json=profitWithdrawalAdjustmentPercent,proto3" json:"profit_withdrawal_adjustment_percent,omitempty"`
-	unknownFields                     protoimpl.UnknownFields
-	sizeCache                         protoimpl.SizeCache
-}
-
-func (x *UserProfitOrderWithdrawalItem) Reset() {
-	*x = UserProfitOrderWithdrawalItem{}
-	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[36]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UserProfitOrderWithdrawalItem) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UserProfitOrderWithdrawalItem) ProtoMessage() {}
-
-func (x *UserProfitOrderWithdrawalItem) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[36]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UserProfitOrderWithdrawalItem.ProtoReflect.Descriptor instead.
-func (*UserProfitOrderWithdrawalItem) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{36}
-}
-
-func (x *UserProfitOrderWithdrawalItem) GetUserId() uint64 {
-	if x != nil {
-		return x.UserId
-	}
-	return 0
-}
-
-func (x *UserProfitOrderWithdrawalItem) GetProfitWithdrawalAmount() float64 {
-	if x != nil {
-		return x.ProfitWithdrawalAmount
-	}
-	return 0
-}
-
-func (x *UserProfitOrderWithdrawalItem) GetProfitWithdrawalPercent() float64 {
-	if x != nil {
-		return x.ProfitWithdrawalPercent
-	}
-	return 0
-}
-
-func (x *UserProfitOrderWithdrawalItem) GetProfitWithdrawalAdjustmentAmount() float64 {
-	if x != nil {
-		return x.ProfitWithdrawalAdjustmentAmount
-	}
-	return 0
-}
-
-func (x *UserProfitOrderWithdrawalItem) GetProfitWithdrawalAdjustmentPercent() float64 {
-	if x != nil {
-		return x.ProfitWithdrawalAdjustmentPercent
-	}
-	return 0
-}
-
-type UserProfitOrderWithdrawalMetric struct {
-	state         protoimpl.MessageState                    `protogen:"open.v1"`
-	Data          map[uint64]*UserProfitOrderWithdrawalItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *UserProfitOrderWithdrawalMetric) Reset() {
-	*x = UserProfitOrderWithdrawalMetric{}
-	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[37]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UserProfitOrderWithdrawalMetric) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UserProfitOrderWithdrawalMetric) ProtoMessage() {}
-
-func (x *UserProfitOrderWithdrawalMetric) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[37]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UserProfitOrderWithdrawalMetric.ProtoReflect.Descriptor instead.
-func (*UserProfitOrderWithdrawalMetric) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{37}
-}
-
-func (x *UserProfitOrderWithdrawalMetric) GetData() map[uint64]*UserProfitOrderWithdrawalItem {
-	if x != nil {
-		return x.Data
-	}
-	return nil
-}
-
-type UserLostProfitOrderItem struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	UserId           uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	LostProfitAmount float64                `protobuf:"fixed64,2,opt,name=lost_profit_amount,json=lostProfitAmount,proto3" json:"lost_profit_amount,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
-}
-
-func (x *UserLostProfitOrderItem) Reset() {
-	*x = UserLostProfitOrderItem{}
-	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[38]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UserLostProfitOrderItem) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UserLostProfitOrderItem) ProtoMessage() {}
-
-func (x *UserLostProfitOrderItem) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[38]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UserLostProfitOrderItem.ProtoReflect.Descriptor instead.
-func (*UserLostProfitOrderItem) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{38}
-}
-
-func (x *UserLostProfitOrderItem) GetUserId() uint64 {
-	if x != nil {
-		return x.UserId
-	}
-	return 0
-}
-
-func (x *UserLostProfitOrderItem) GetLostProfitAmount() float64 {
-	if x != nil {
-		return x.LostProfitAmount
-	}
-	return 0
-}
-
-type UserLostProfitOrderMetric struct {
-	state         protoimpl.MessageState              `protogen:"open.v1"`
-	Data          map[uint64]*UserLostProfitOrderItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *UserLostProfitOrderMetric) Reset() {
-	*x = UserLostProfitOrderMetric{}
-	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[39]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UserLostProfitOrderMetric) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UserLostProfitOrderMetric) ProtoMessage() {}
-
-func (x *UserLostProfitOrderMetric) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[39]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UserLostProfitOrderMetric.ProtoReflect.Descriptor instead.
-func (*UserLostProfitOrderMetric) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{39}
-}
-
-func (x *UserLostProfitOrderMetric) GetData() map[uint64]*UserLostProfitOrderItem {
-	if x != nil {
-		return x.Data
-	}
-	return nil
-}
-
-type UserAdsExpenseItem struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	AdsAmount     float64                `protobuf:"fixed64,2,opt,name=ads_amount,json=adsAmount,proto3" json:"ads_amount,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *UserAdsExpenseItem) Reset() {
-	*x = UserAdsExpenseItem{}
-	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[40]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UserAdsExpenseItem) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UserAdsExpenseItem) ProtoMessage() {}
-
-func (x *UserAdsExpenseItem) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[40]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UserAdsExpenseItem.ProtoReflect.Descriptor instead.
-func (*UserAdsExpenseItem) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{40}
-}
-
-func (x *UserAdsExpenseItem) GetUserId() uint64 {
-	if x != nil {
-		return x.UserId
-	}
-	return 0
-}
-
-func (x *UserAdsExpenseItem) GetAdsAmount() float64 {
-	if x != nil {
-		return x.AdsAmount
-	}
-	return 0
-}
-
-type UserAdsExpenseMetric struct {
-	state         protoimpl.MessageState         `protogen:"open.v1"`
-	Data          map[uint64]*UserAdsExpenseItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *UserAdsExpenseMetric) Reset() {
-	*x = UserAdsExpenseMetric{}
-	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[41]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UserAdsExpenseMetric) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UserAdsExpenseMetric) ProtoMessage() {}
-
-func (x *UserAdsExpenseMetric) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[41]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UserAdsExpenseMetric.ProtoReflect.Descriptor instead.
-func (*UserAdsExpenseMetric) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{41}
-}
-
-func (x *UserAdsExpenseMetric) GetData() map[uint64]*UserAdsExpenseItem {
-	if x != nil {
-		return x.Data
-	}
-	return nil
-}
-
-type UserProfitOrLossItem struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	UserId             uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	ProfitOrLossAmount float64                `protobuf:"fixed64,2,opt,name=profit_or_loss_amount,json=profitOrLossAmount,proto3" json:"profit_or_loss_amount,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
-}
-
-func (x *UserProfitOrLossItem) Reset() {
-	*x = UserProfitOrLossItem{}
-	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[42]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UserProfitOrLossItem) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UserProfitOrLossItem) ProtoMessage() {}
-
-func (x *UserProfitOrLossItem) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[42]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UserProfitOrLossItem.ProtoReflect.Descriptor instead.
-func (*UserProfitOrLossItem) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{42}
-}
-
-func (x *UserProfitOrLossItem) GetUserId() uint64 {
-	if x != nil {
-		return x.UserId
-	}
-	return 0
-}
-
-func (x *UserProfitOrLossItem) GetProfitOrLossAmount() float64 {
-	if x != nil {
-		return x.ProfitOrLossAmount
-	}
-	return 0
-}
-
-type UserProfitOrLossMetric struct {
-	state         protoimpl.MessageState           `protogen:"open.v1"`
-	Data          map[uint64]*UserProfitOrLossItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *UserProfitOrLossMetric) Reset() {
-	*x = UserProfitOrLossMetric{}
-	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[43]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UserProfitOrLossMetric) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UserProfitOrLossMetric) ProtoMessage() {}
-
-func (x *UserProfitOrLossMetric) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes[43]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UserProfitOrLossMetric.ProtoReflect.Descriptor instead.
-func (*UserProfitOrLossMetric) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP(), []int{43}
-}
-
-func (x *UserProfitOrLossMetric) GetData() map[uint64]*UserProfitOrLossItem {
+func (x *UserAvgOrderOngoingMetric) GetData() map[uint64]*UserAvgOrderOngoingItem {
 	if x != nil {
 		return x.Data
 	}
@@ -3836,63 +2702,51 @@ const file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDesc = "" +
 	"\x04data\x18\x01 \x03(\v2>.selling_iface.v1.user_metric.v1.UserOrderLostMetric.DataEntryR\x04data\x1ak\n" +
 	"\tDataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\x04R\x03key\x12H\n" +
-	"\x05value\x18\x02 \x01(\v22.selling_iface.v1.user_metric.v1.UserOrderLostItemR\x05value:\x028\x01\"\x9d\x02\n" +
-	"\x12UserStockOrderItem\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x04R\x06userId\x12\x1f\n" +
-	"\vpiece_count\x18\x02 \x01(\x03R\n" +
-	"pieceCount\x12&\n" +
-	"\x0fown_piece_count\x18\x04 \x01(\x03R\rownPieceCount\x12*\n" +
-	"\x11cross_piece_count\x18\x05 \x01(\x03R\x0fcrossPieceCount\x12!\n" +
-	"\fpiece_amount\x18\x03 \x01(\x01R\vpieceAmount\x12(\n" +
-	"\x10own_piece_amount\x18\x06 \x01(\x01R\x0eownPieceAmount\x12,\n" +
-	"\x12cross_piece_amount\x18\a \x01(\x01R\x10crossPieceAmount\"\xd9\x01\n" +
-	"\x14UserStockOrderMetric\x12S\n" +
-	"\x04data\x18\x01 \x03(\v2?.selling_iface.v1.user_metric.v1.UserStockOrderMetric.DataEntryR\x04data\x1al\n" +
-	"\tDataEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\x04R\x03key\x12I\n" +
-	"\x05value\x18\x02 \x01(\v23.selling_iface.v1.user_metric.v1.UserStockOrderItemR\x05value:\x028\x01\"\xa7\x02\n" +
-	"\x1cUserStockOrderWithdrawalItem\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x04R\x06userId\x12\x1f\n" +
-	"\vpiece_count\x18\x02 \x01(\x03R\n" +
-	"pieceCount\x12&\n" +
-	"\x0fown_piece_count\x18\x04 \x01(\x03R\rownPieceCount\x12*\n" +
-	"\x11cross_piece_count\x18\x05 \x01(\x03R\x0fcrossPieceCount\x12!\n" +
-	"\fpiece_amount\x18\x03 \x01(\x01R\vpieceAmount\x12(\n" +
-	"\x10own_piece_amount\x18\x06 \x01(\x01R\x0eownPieceAmount\x12,\n" +
-	"\x12cross_piece_amount\x18\a \x01(\x01R\x10crossPieceAmount\"\xf7\x01\n" +
-	"\x1eUserStockOrderWithdrawalMetric\x12]\n" +
-	"\x04data\x18\x01 \x03(\v2I.selling_iface.v1.user_metric.v1.UserStockOrderWithdrawalMetric.DataEntryR\x04data\x1av\n" +
-	"\tDataEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\x04R\x03key\x12S\n" +
-	"\x05value\x18\x02 \x01(\v2=.selling_iface.v1.user_metric.v1.UserStockOrderWithdrawalItemR\x05value:\x028\x01\"\xa6\x02\n" +
-	"\x1bUserStockOrderCancelledItem\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x04R\x06userId\x12\x1f\n" +
-	"\vpiece_count\x18\x02 \x01(\x03R\n" +
-	"pieceCount\x12&\n" +
-	"\x0fown_piece_count\x18\x04 \x01(\x03R\rownPieceCount\x12*\n" +
-	"\x11cross_piece_count\x18\x05 \x01(\x03R\x0fcrossPieceCount\x12!\n" +
-	"\fpiece_amount\x18\x03 \x01(\x01R\vpieceAmount\x12(\n" +
-	"\x10own_piece_amount\x18\x06 \x01(\x01R\x0eownPieceAmount\x12,\n" +
-	"\x12cross_piece_amount\x18\a \x01(\x01R\x10crossPieceAmount\"\xf4\x01\n" +
-	"\x1dUserStockOrderCancelledMetric\x12\\\n" +
-	"\x04data\x18\x01 \x03(\v2H.selling_iface.v1.user_metric.v1.UserStockOrderCancelledMetric.DataEntryR\x04data\x1au\n" +
-	"\tDataEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\x04R\x03key\x12R\n" +
-	"\x05value\x18\x02 \x01(\v2<.selling_iface.v1.user_metric.v1.UserStockOrderCancelledItemR\x05value:\x028\x01\"\xa1\x02\n" +
-	"\x16UserStockOrderLostItem\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x04R\x06userId\x12\x1f\n" +
-	"\vpiece_count\x18\x02 \x01(\x03R\n" +
-	"pieceCount\x12&\n" +
-	"\x0fown_piece_count\x18\x04 \x01(\x03R\rownPieceCount\x12*\n" +
-	"\x11cross_piece_count\x18\x05 \x01(\x03R\x0fcrossPieceCount\x12!\n" +
-	"\fpiece_amount\x18\x03 \x01(\x01R\vpieceAmount\x12(\n" +
-	"\x10own_piece_amount\x18\x06 \x01(\x01R\x0eownPieceAmount\x12,\n" +
-	"\x12cross_piece_amount\x18\a \x01(\x01R\x10crossPieceAmount\"\xe5\x01\n" +
-	"\x18UserStockOrderLostMetric\x12W\n" +
-	"\x04data\x18\x01 \x03(\v2C.selling_iface.v1.user_metric.v1.UserStockOrderLostMetric.DataEntryR\x04data\x1ap\n" +
+	"\x05value\x18\x02 \x01(\v22.selling_iface.v1.user_metric.v1.UserOrderLostItemR\x05value:\x028\x01\"\xf7\x01\n" +
+	"\x16UserOrderCompletedItem\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x04R\x06userId\x12+\n" +
+	"\x11transaction_count\x18\x02 \x01(\x03R\x10transactionCount\x12!\n" +
+	"\ftotal_amount\x18\x04 \x01(\x01R\vtotalAmount\x12&\n" +
+	"\x0fmp_total_amount\x18\x05 \x01(\x01R\rmpTotalAmount\x12L\n" +
+	"\x14last_order_completed\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\x12lastOrderCompleted\"\xe5\x01\n" +
+	"\x18UserOrderCompletedMetric\x12W\n" +
+	"\x04data\x18\x01 \x03(\v2C.selling_iface.v1.user_metric.v1.UserOrderCompletedMetric.DataEntryR\x04data\x1ap\n" +
 	"\tDataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\x04R\x03key\x12M\n" +
-	"\x05value\x18\x02 \x01(\v27.selling_iface.v1.user_metric.v1.UserStockOrderLostItemR\x05value:\x028\x01\"\x93\x01\n" +
+	"\x05value\x18\x02 \x01(\v27.selling_iface.v1.user_metric.v1.UserOrderCompletedItemR\x05value:\x028\x01\"\xee\x01\n" +
+	"\x13UserOrderReturnItem\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x04R\x06userId\x12+\n" +
+	"\x11transaction_count\x18\x02 \x01(\x03R\x10transactionCount\x12!\n" +
+	"\ftotal_amount\x18\x04 \x01(\x01R\vtotalAmount\x12&\n" +
+	"\x0fmp_total_amount\x18\x05 \x01(\x01R\rmpTotalAmount\x12F\n" +
+	"\x11last_order_return\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\x0flastOrderReturn\"\xdc\x01\n" +
+	"\x15UserOrderReturnMetric\x12T\n" +
+	"\x04data\x18\x01 \x03(\v2@.selling_iface.v1.user_metric.v1.UserOrderReturnMetric.DataEntryR\x04data\x1am\n" +
+	"\tDataEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\x04R\x03key\x12J\n" +
+	"\x05value\x18\x02 \x01(\v24.selling_iface.v1.user_metric.v1.UserOrderReturnItemR\x05value:\x028\x01\"\x8a\x02\n" +
+	"\x1cUserOrderReturnCompletedItem\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x04R\x06userId\x12+\n" +
+	"\x11transaction_count\x18\x02 \x01(\x03R\x10transactionCount\x12!\n" +
+	"\ftotal_amount\x18\x04 \x01(\x01R\vtotalAmount\x12&\n" +
+	"\x0fmp_total_amount\x18\x05 \x01(\x01R\rmpTotalAmount\x12Y\n" +
+	"\x1blast_order_return_completed\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\x18lastOrderReturnCompleted\"\xf7\x01\n" +
+	"\x1eUserOrderReturnCompletedMetric\x12]\n" +
+	"\x04data\x18\x01 \x03(\v2I.selling_iface.v1.user_metric.v1.UserOrderReturnCompletedMetric.DataEntryR\x04data\x1av\n" +
+	"\tDataEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\x04R\x03key\x12S\n" +
+	"\x05value\x18\x02 \x01(\v2=.selling_iface.v1.user_metric.v1.UserOrderReturnCompletedItemR\x05value:\x028\x01\"\xf1\x01\n" +
+	"\x14UserOrderOngoingItem\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x04R\x06userId\x12+\n" +
+	"\x11transaction_count\x18\x02 \x01(\x03R\x10transactionCount\x12!\n" +
+	"\ftotal_amount\x18\x04 \x01(\x01R\vtotalAmount\x12&\n" +
+	"\x0fmp_total_amount\x18\x05 \x01(\x01R\rmpTotalAmount\x12H\n" +
+	"\x12last_order_ongoing\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\x10lastOrderOngoing\"\xdf\x01\n" +
+	"\x16UserOrderOngoingMetric\x12U\n" +
+	"\x04data\x18\x01 \x03(\v2A.selling_iface.v1.user_metric.v1.UserOrderOngoingMetric.DataEntryR\x04data\x1an\n" +
+	"\tDataEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\x04R\x03key\x12K\n" +
+	"\x05value\x18\x02 \x01(\v25.selling_iface.v1.user_metric.v1.UserOrderOngoingItemR\x05value:\x028\x01\"\x93\x01\n" +
 	"\x10UserAvgOrderItem\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x04R\x06userId\x122\n" +
 	"\x15piece_per_transaction\x18\x02 \x01(\x01R\x13piecePerTransaction\x122\n" +
@@ -3928,110 +2782,43 @@ const file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDesc = "" +
 	"\x04data\x18\x01 \x03(\v2A.selling_iface.v1.user_metric.v1.UserAvgOrderLostMetric.DataEntryR\x04data\x1an\n" +
 	"\tDataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\x04R\x03key\x12K\n" +
-	"\x05value\x18\x02 \x01(\v25.selling_iface.v1.user_metric.v1.UserAvgOrderLostItemR\x05value:\x028\x01\"\x81\x02\n" +
-	"\x11UserCostOrderItem\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x04R\x06userId\x12%\n" +
-	"\x0eproduct_amount\x18\x02 \x01(\x01R\rproductAmount\x12,\n" +
-	"\x12own_product_amount\x18\x03 \x01(\x01R\x10ownProductAmount\x120\n" +
-	"\x14cross_product_amount\x18\x04 \x01(\x01R\x12crossProductAmount\x12)\n" +
-	"\x10warehouse_amount\x18\x05 \x01(\x01R\x0fwarehouseAmount\x12!\n" +
-	"\ftotal_amount\x18\x06 \x01(\x01R\vtotalAmount\"\xd6\x01\n" +
-	"\x13UserCostOrderMetric\x12R\n" +
-	"\x04data\x18\x01 \x03(\v2>.selling_iface.v1.user_metric.v1.UserCostOrderMetric.DataEntryR\x04data\x1ak\n" +
-	"\tDataEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\x04R\x03key\x12H\n" +
-	"\x05value\x18\x02 \x01(\v22.selling_iface.v1.user_metric.v1.UserCostOrderItemR\x05value:\x028\x01\"\x8b\x02\n" +
-	"\x1bUserCostOrderWithdrawalItem\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x04R\x06userId\x12%\n" +
-	"\x0eproduct_amount\x18\x02 \x01(\x01R\rproductAmount\x12,\n" +
-	"\x12own_product_amount\x18\x03 \x01(\x01R\x10ownProductAmount\x120\n" +
-	"\x14cross_product_amount\x18\x04 \x01(\x01R\x12crossProductAmount\x12)\n" +
-	"\x10warehouse_amount\x18\x05 \x01(\x01R\x0fwarehouseAmount\x12!\n" +
-	"\ftotal_amount\x18\x06 \x01(\x01R\vtotalAmount\"\xf4\x01\n" +
-	"\x1dUserCostOrderWithdrawalMetric\x12\\\n" +
-	"\x04data\x18\x01 \x03(\v2H.selling_iface.v1.user_metric.v1.UserCostOrderWithdrawalMetric.DataEntryR\x04data\x1au\n" +
-	"\tDataEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\x04R\x03key\x12R\n" +
-	"\x05value\x18\x02 \x01(\v2<.selling_iface.v1.user_metric.v1.UserCostOrderWithdrawalItemR\x05value:\x028\x01\"\x8a\x02\n" +
-	"\x1aUserCostOrderCancelledItem\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x04R\x06userId\x12%\n" +
-	"\x0eproduct_amount\x18\x02 \x01(\x01R\rproductAmount\x12,\n" +
-	"\x12own_product_amount\x18\x03 \x01(\x01R\x10ownProductAmount\x120\n" +
-	"\x14cross_product_amount\x18\x04 \x01(\x01R\x12crossProductAmount\x12)\n" +
-	"\x10warehouse_amount\x18\x05 \x01(\x01R\x0fwarehouseAmount\x12!\n" +
-	"\ftotal_amount\x18\x06 \x01(\x01R\vtotalAmount\"\xf1\x01\n" +
-	"\x1cUserCostOrderCancelledMetric\x12[\n" +
-	"\x04data\x18\x01 \x03(\v2G.selling_iface.v1.user_metric.v1.UserCostOrderCancelledMetric.DataEntryR\x04data\x1at\n" +
-	"\tDataEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\x04R\x03key\x12Q\n" +
-	"\x05value\x18\x02 \x01(\v2;.selling_iface.v1.user_metric.v1.UserCostOrderCancelledItemR\x05value:\x028\x01\"\x85\x02\n" +
-	"\x15UserCostOrderLostItem\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x04R\x06userId\x12%\n" +
-	"\x0eproduct_amount\x18\x02 \x01(\x01R\rproductAmount\x12,\n" +
-	"\x12own_product_amount\x18\x03 \x01(\x01R\x10ownProductAmount\x120\n" +
-	"\x14cross_product_amount\x18\x04 \x01(\x01R\x12crossProductAmount\x12)\n" +
-	"\x10warehouse_amount\x18\x05 \x01(\x01R\x0fwarehouseAmount\x12!\n" +
-	"\ftotal_amount\x18\x06 \x01(\x01R\vtotalAmount\"\xe2\x01\n" +
-	"\x17UserCostOrderLostMetric\x12V\n" +
-	"\x04data\x18\x01 \x03(\v2B.selling_iface.v1.user_metric.v1.UserCostOrderLostMetric.DataEntryR\x04data\x1ao\n" +
-	"\tDataEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\x04R\x03key\x12L\n" +
-	"\x05value\x18\x02 \x01(\v26.selling_iface.v1.user_metric.v1.UserCostOrderLostItemR\x05value:\x028\x01\"\xdd\x01\n" +
-	"\x12UserWithdrawalItem\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x04R\x06userId\x124\n" +
-	"\x16withdrawal_fund_amount\x18\x02 \x01(\x01R\x14withdrawalFundAmount\x12@\n" +
-	"\x1cwithdrawal_adjustment_amount\x18\x03 \x01(\x01R\x1awithdrawalAdjustmentAmount\x126\n" +
-	"\x17withdrawal_total_amount\x18\x04 \x01(\x01R\x15withdrawalTotalAmount\"\xd9\x01\n" +
-	"\x14UserWithdrawalMetric\x12S\n" +
-	"\x04data\x18\x01 \x03(\v2?.selling_iface.v1.user_metric.v1.UserWithdrawalMetric.DataEntryR\x04data\x1al\n" +
-	"\tDataEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\x04R\x03key\x12I\n" +
-	"\x05value\x18\x02 \x01(\v23.selling_iface.v1.user_metric.v1.UserWithdrawalItemR\x05value:\x028\x01\"\x9f\x01\n" +
-	"\x1aUserProfitOrderCreatedItem\x12\x17\n" +
+	"\x05value\x18\x02 \x01(\v25.selling_iface.v1.user_metric.v1.UserAvgOrderLostItemR\x05value:\x028\x01\"\x9c\x01\n" +
+	"\x19UserAvgOrderCompletedItem\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x04R\x06userId\x122\n" +
-	"\x15profit_created_amount\x18\x02 \x01(\x01R\x13profitCreatedAmount\x124\n" +
-	"\x16profit_created_percent\x18\x03 \x01(\x01R\x14profitCreatedPercent\"\xf1\x01\n" +
-	"\x1cUserProfitOrderCreatedMetric\x12[\n" +
-	"\x04data\x18\x01 \x03(\v2G.selling_iface.v1.user_metric.v1.UserProfitOrderCreatedMetric.DataEntryR\x04data\x1at\n" +
+	"\x15piece_per_transaction\x18\x02 \x01(\x01R\x13piecePerTransaction\x122\n" +
+	"\x15total_per_transaction\x18\x03 \x01(\x01R\x13totalPerTransaction\"\xee\x01\n" +
+	"\x1bUserAvgOrderCompletedMetric\x12Z\n" +
+	"\x04data\x18\x01 \x03(\v2F.selling_iface.v1.user_metric.v1.UserAvgOrderCompletedMetric.DataEntryR\x04data\x1as\n" +
 	"\tDataEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\x04R\x03key\x12Q\n" +
-	"\x05value\x18\x02 \x01(\v2;.selling_iface.v1.user_metric.v1.UserProfitOrderCreatedItemR\x05value:\x028\x01\"\xce\x02\n" +
-	"\x1dUserProfitOrderWithdrawalItem\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x04R\x06userId\x128\n" +
-	"\x18profit_withdrawal_amount\x18\x02 \x01(\x01R\x16profitWithdrawalAmount\x12:\n" +
-	"\x19profit_withdrawal_percent\x18\x03 \x01(\x01R\x17profitWithdrawalPercent\x12M\n" +
-	"#profit_withdrawal_adjustment_amount\x18\x04 \x01(\x01R profitWithdrawalAdjustmentAmount\x12O\n" +
-	"$profit_withdrawal_adjustment_percent\x18\x05 \x01(\x01R!profitWithdrawalAdjustmentPercent\"\xfa\x01\n" +
-	"\x1fUserProfitOrderWithdrawalMetric\x12^\n" +
-	"\x04data\x18\x01 \x03(\v2J.selling_iface.v1.user_metric.v1.UserProfitOrderWithdrawalMetric.DataEntryR\x04data\x1aw\n" +
+	"\x03key\x18\x01 \x01(\x04R\x03key\x12P\n" +
+	"\x05value\x18\x02 \x01(\v2:.selling_iface.v1.user_metric.v1.UserAvgOrderCompletedItemR\x05value:\x028\x01\"\x99\x01\n" +
+	"\x16UserAvgOrderReturnItem\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x04R\x06userId\x122\n" +
+	"\x15piece_per_transaction\x18\x02 \x01(\x01R\x13piecePerTransaction\x122\n" +
+	"\x15total_per_transaction\x18\x03 \x01(\x01R\x13totalPerTransaction\"\xe5\x01\n" +
+	"\x18UserAvgOrderReturnMetric\x12W\n" +
+	"\x04data\x18\x01 \x03(\v2C.selling_iface.v1.user_metric.v1.UserAvgOrderReturnMetric.DataEntryR\x04data\x1ap\n" +
 	"\tDataEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\x04R\x03key\x12T\n" +
-	"\x05value\x18\x02 \x01(\v2>.selling_iface.v1.user_metric.v1.UserProfitOrderWithdrawalItemR\x05value:\x028\x01\"`\n" +
-	"\x17UserLostProfitOrderItem\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x04R\x06userId\x12,\n" +
-	"\x12lost_profit_amount\x18\x02 \x01(\x01R\x10lostProfitAmount\"\xe8\x01\n" +
-	"\x19UserLostProfitOrderMetric\x12X\n" +
-	"\x04data\x18\x01 \x03(\v2D.selling_iface.v1.user_metric.v1.UserLostProfitOrderMetric.DataEntryR\x04data\x1aq\n" +
+	"\x03key\x18\x01 \x01(\x04R\x03key\x12M\n" +
+	"\x05value\x18\x02 \x01(\v27.selling_iface.v1.user_metric.v1.UserAvgOrderReturnItemR\x05value:\x028\x01\"\xa2\x01\n" +
+	"\x1fUserAvgOrderReturnCompletedItem\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x04R\x06userId\x122\n" +
+	"\x15piece_per_transaction\x18\x02 \x01(\x01R\x13piecePerTransaction\x122\n" +
+	"\x15total_per_transaction\x18\x03 \x01(\x01R\x13totalPerTransaction\"\x80\x02\n" +
+	"!UserAvgOrderReturnCompletedMetric\x12`\n" +
+	"\x04data\x18\x01 \x03(\v2L.selling_iface.v1.user_metric.v1.UserAvgOrderReturnCompletedMetric.DataEntryR\x04data\x1ay\n" +
+	"\tDataEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\x04R\x03key\x12V\n" +
+	"\x05value\x18\x02 \x01(\v2@.selling_iface.v1.user_metric.v1.UserAvgOrderReturnCompletedItemR\x05value:\x028\x01\"\x9a\x01\n" +
+	"\x17UserAvgOrderOngoingItem\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x04R\x06userId\x122\n" +
+	"\x15piece_per_transaction\x18\x02 \x01(\x01R\x13piecePerTransaction\x122\n" +
+	"\x15total_per_transaction\x18\x03 \x01(\x01R\x13totalPerTransaction\"\xe8\x01\n" +
+	"\x19UserAvgOrderOngoingMetric\x12X\n" +
+	"\x04data\x18\x01 \x03(\v2D.selling_iface.v1.user_metric.v1.UserAvgOrderOngoingMetric.DataEntryR\x04data\x1aq\n" +
 	"\tDataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\x04R\x03key\x12N\n" +
-	"\x05value\x18\x02 \x01(\v28.selling_iface.v1.user_metric.v1.UserLostProfitOrderItemR\x05value:\x028\x01\"L\n" +
-	"\x12UserAdsExpenseItem\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x04R\x06userId\x12\x1d\n" +
-	"\n" +
-	"ads_amount\x18\x02 \x01(\x01R\tadsAmount\"\xd9\x01\n" +
-	"\x14UserAdsExpenseMetric\x12S\n" +
-	"\x04data\x18\x01 \x03(\v2?.selling_iface.v1.user_metric.v1.UserAdsExpenseMetric.DataEntryR\x04data\x1al\n" +
-	"\tDataEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\x04R\x03key\x12I\n" +
-	"\x05value\x18\x02 \x01(\v23.selling_iface.v1.user_metric.v1.UserAdsExpenseItemR\x05value:\x028\x01\"b\n" +
-	"\x14UserProfitOrLossItem\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x04R\x06userId\x121\n" +
-	"\x15profit_or_loss_amount\x18\x02 \x01(\x01R\x12profitOrLossAmount\"\xdf\x01\n" +
-	"\x16UserProfitOrLossMetric\x12U\n" +
-	"\x04data\x18\x01 \x03(\v2A.selling_iface.v1.user_metric.v1.UserProfitOrLossMetric.DataEntryR\x04data\x1an\n" +
-	"\tDataEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\x04R\x03key\x12K\n" +
-	"\x05value\x18\x02 \x01(\v25.selling_iface.v1.user_metric.v1.UserProfitOrLossItemR\x05value:\x028\x01*\xef\x01\n" +
+	"\x05value\x18\x02 \x01(\v28.selling_iface.v1.user_metric.v1.UserAvgOrderOngoingItemR\x05value:\x028\x01*\xef\x01\n" +
 	"\x13UserOrderMetricSort\x12&\n" +
 	"\"USER_ORDER_METRIC_SORT_UNSPECIFIED\x10\x00\x12,\n" +
 	"(USER_ORDER_METRIC_SORT_TRANSACTION_COUNT\x10\x01\x12'\n" +
@@ -4055,39 +2842,31 @@ const file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDesc = "" +
 	"-USER_ORDER_LOST_METRIC_SORT_TRANSACTION_COUNT\x10\x01\x12,\n" +
 	"(USER_ORDER_LOST_METRIC_SORT_TOTAL_AMOUNT\x10\x02\x12/\n" +
 	"+USER_ORDER_LOST_METRIC_SORT_MP_TOTAL_AMOUNT\x10\x03\x12/\n" +
-	"+USER_ORDER_LOST_METRIC_SORT_LAST_ORDER_LOST\x10\x04*\xf3\x02\n" +
-	"\x18UserStockOrderMetricSort\x12,\n" +
-	"(USER_STOCK_ORDER_METRIC_SORT_UNSPECIFIED\x10\x00\x12,\n" +
-	"(USER_STOCK_ORDER_METRIC_SORT_PIECE_COUNT\x10\x01\x120\n" +
-	",USER_STOCK_ORDER_METRIC_SORT_OWN_PIECE_COUNT\x10\x03\x122\n" +
-	".USER_STOCK_ORDER_METRIC_SORT_CROSS_PIECE_COUNT\x10\x04\x12-\n" +
-	")USER_STOCK_ORDER_METRIC_SORT_PIECE_AMOUNT\x10\x02\x121\n" +
-	"-USER_STOCK_ORDER_METRIC_SORT_OWN_PIECE_AMOUNT\x10\x05\x123\n" +
-	"/USER_STOCK_ORDER_METRIC_SORT_CROSS_PIECE_AMOUNT\x10\x06*\xca\x03\n" +
-	"\"UserStockOrderWithdrawalMetricSort\x127\n" +
-	"3USER_STOCK_ORDER_WITHDRAWAL_METRIC_SORT_UNSPECIFIED\x10\x00\x127\n" +
-	"3USER_STOCK_ORDER_WITHDRAWAL_METRIC_SORT_PIECE_COUNT\x10\x01\x12;\n" +
-	"7USER_STOCK_ORDER_WITHDRAWAL_METRIC_SORT_OWN_PIECE_COUNT\x10\x03\x12=\n" +
-	"9USER_STOCK_ORDER_WITHDRAWAL_METRIC_SORT_CROSS_PIECE_COUNT\x10\x04\x128\n" +
-	"4USER_STOCK_ORDER_WITHDRAWAL_METRIC_SORT_PIECE_AMOUNT\x10\x02\x12<\n" +
-	"8USER_STOCK_ORDER_WITHDRAWAL_METRIC_SORT_OWN_PIECE_AMOUNT\x10\x05\x12>\n" +
-	":USER_STOCK_ORDER_WITHDRAWAL_METRIC_SORT_CROSS_PIECE_AMOUNT\x10\x06*\xc2\x03\n" +
-	"!UserStockOrderCancelledMetricSort\x126\n" +
-	"2USER_STOCK_ORDER_CANCELLED_METRIC_SORT_UNSPECIFIED\x10\x00\x126\n" +
-	"2USER_STOCK_ORDER_CANCELLED_METRIC_SORT_PIECE_COUNT\x10\x01\x12:\n" +
-	"6USER_STOCK_ORDER_CANCELLED_METRIC_SORT_OWN_PIECE_COUNT\x10\x03\x12<\n" +
-	"8USER_STOCK_ORDER_CANCELLED_METRIC_SORT_CROSS_PIECE_COUNT\x10\x04\x127\n" +
-	"3USER_STOCK_ORDER_CANCELLED_METRIC_SORT_PIECE_AMOUNT\x10\x02\x12;\n" +
-	"7USER_STOCK_ORDER_CANCELLED_METRIC_SORT_OWN_PIECE_AMOUNT\x10\x05\x12=\n" +
-	"9USER_STOCK_ORDER_CANCELLED_METRIC_SORT_CROSS_PIECE_AMOUNT\x10\x06*\x9a\x03\n" +
-	"\x1cUserStockOrderLostMetricSort\x121\n" +
-	"-USER_STOCK_ORDER_LOST_METRIC_SORT_UNSPECIFIED\x10\x00\x121\n" +
-	"-USER_STOCK_ORDER_LOST_METRIC_SORT_PIECE_COUNT\x10\x01\x125\n" +
-	"1USER_STOCK_ORDER_LOST_METRIC_SORT_OWN_PIECE_COUNT\x10\x03\x127\n" +
-	"3USER_STOCK_ORDER_LOST_METRIC_SORT_CROSS_PIECE_COUNT\x10\x04\x122\n" +
-	".USER_STOCK_ORDER_LOST_METRIC_SORT_PIECE_AMOUNT\x10\x02\x126\n" +
-	"2USER_STOCK_ORDER_LOST_METRIC_SORT_OWN_PIECE_AMOUNT\x10\x05\x128\n" +
-	"4USER_STOCK_ORDER_LOST_METRIC_SORT_CROSS_PIECE_AMOUNT\x10\x06*\xb0\x01\n" +
+	"+USER_ORDER_LOST_METRIC_SORT_LAST_ORDER_LOST\x10\x04*\xa7\x02\n" +
+	"\x1cUserOrderCompletedMetricSort\x120\n" +
+	",USER_ORDER_COMPLETED_METRIC_SORT_UNSPECIFIED\x10\x00\x126\n" +
+	"2USER_ORDER_COMPLETED_METRIC_SORT_TRANSACTION_COUNT\x10\x01\x121\n" +
+	"-USER_ORDER_COMPLETED_METRIC_SORT_TOTAL_AMOUNT\x10\x02\x124\n" +
+	"0USER_ORDER_COMPLETED_METRIC_SORT_MP_TOTAL_AMOUNT\x10\x03\x124\n" +
+	"0USER_ORDER_COMPLETED_METRIC_SORT_LAST_ORDER_LOST\x10\x04*\x97\x02\n" +
+	"\x19UserOrderReturnMetricSort\x12-\n" +
+	")USER_ORDER_RETURN_METRIC_SORT_UNSPECIFIED\x10\x00\x123\n" +
+	"/USER_ORDER_RETURN_METRIC_SORT_TRANSACTION_COUNT\x10\x01\x12.\n" +
+	"*USER_ORDER_RETURN_METRIC_SORT_TOTAL_AMOUNT\x10\x02\x121\n" +
+	"-USER_ORDER_RETURN_METRIC_SORT_MP_TOTAL_AMOUNT\x10\x03\x123\n" +
+	"/USER_ORDER_RETURN_METRIC_SORT_LAST_ORDER_RETURN\x10\x04*\xdc\x02\n" +
+	"\"UserOrderReturnCompletedMetricSort\x127\n" +
+	"3USER_ORDER_RETURN_COMPLETED_METRIC_SORT_UNSPECIFIED\x10\x00\x12=\n" +
+	"9USER_ORDER_RETURN_COMPLETED_METRIC_SORT_TRANSACTION_COUNT\x10\x01\x128\n" +
+	"4USER_ORDER_RETURN_COMPLETED_METRIC_SORT_TOTAL_AMOUNT\x10\x02\x12;\n" +
+	"7USER_ORDER_RETURN_COMPLETED_METRIC_SORT_MP_TOTAL_AMOUNT\x10\x03\x12G\n" +
+	"CUSER_ORDER_RETURN_COMPLETED_METRIC_SORT_LAST_ORDER_RETURN_COMPLETED\x10\x04*\x9e\x02\n" +
+	"\x1aUserOrderOngoingMetricSort\x12.\n" +
+	"*USER_ORDER_ONGOING_METRIC_SORT_UNSPECIFIED\x10\x00\x124\n" +
+	"0USER_ORDER_ONGOING_METRIC_SORT_TRANSACTION_COUNT\x10\x01\x12/\n" +
+	"+USER_ORDER_ONGOING_METRIC_SORT_TOTAL_AMOUNT\x10\x02\x122\n" +
+	".USER_ORDER_ONGOING_METRIC_SORT_MP_TOTAL_AMOUNT\x10\x03\x125\n" +
+	"1USER_ORDER_ONGOING_METRIC_SORT_LAST_ORDER_ONGOING\x10\x04*\xb0\x01\n" +
 	"\x16UserAvgOrderMetricSort\x12*\n" +
 	"&USER_AVG_ORDER_METRIC_SORT_UNSPECIFIED\x10\x00\x124\n" +
 	"0USER_AVG_ORDER_METRIC_SORT_PIECE_PER_TRANSACTION\x10\x01\x124\n" +
@@ -4103,59 +2882,23 @@ const file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDesc = "" +
 	"\x1aUserAvgOrderLostMetricSort\x12/\n" +
 	"+USER_AVG_ORDER_LOST_METRIC_SORT_UNSPECIFIED\x10\x00\x129\n" +
 	"5USER_AVG_ORDER_LOST_METRIC_SORT_PIECE_PER_TRANSACTION\x10\x01\x129\n" +
-	"5USER_AVG_ORDER_LOST_METRIC_SORT_TOTAL_PER_TRANSACTION\x10\x02*\xc0\x02\n" +
-	"\x17UserCostOrderMetricSort\x12+\n" +
-	"'USER_COST_ORDER_METRIC_SORT_UNSPECIFIED\x10\x00\x12.\n" +
-	"*USER_COST_ORDER_METRIC_SORT_PRODUCT_AMOUNT\x10\x01\x122\n" +
-	".USER_COST_ORDER_METRIC_SORT_OWN_PRODUCT_AMOUNT\x10\x02\x124\n" +
-	"0USER_COST_ORDER_METRIC_SORT_CROSS_PRODUCT_AMOUNT\x10\x03\x120\n" +
-	",USER_COST_ORDER_METRIC_SORT_WAREHOUSE_AMOUNT\x10\x04\x12,\n" +
-	"(USER_COST_ORDER_METRIC_SORT_TOTAL_AMOUNT\x10\x05*\x8c\x03\n" +
-	"!UserCostOrderWithdrawalMetricSort\x126\n" +
-	"2USER_COST_ORDER_WITHDRAWAL_METRIC_SORT_UNSPECIFIED\x10\x00\x129\n" +
-	"5USER_COST_ORDER_WITHDRAWAL_METRIC_SORT_PRODUCT_AMOUNT\x10\x01\x12=\n" +
-	"9USER_COST_ORDER_WITHDRAWAL_METRIC_SORT_OWN_PRODUCT_AMOUNT\x10\x02\x12?\n" +
-	";USER_COST_ORDER_WITHDRAWAL_METRIC_SORT_CROSS_PRODUCT_AMOUNT\x10\x03\x12;\n" +
-	"7USER_COST_ORDER_WITHDRAWAL_METRIC_SORT_WAREHOUSE_AMOUNT\x10\x04\x127\n" +
-	"3USER_COST_ORDER_WITHDRAWAL_METRIC_SORT_TOTAL_AMOUNT\x10\x05*\x85\x03\n" +
-	" UserCostOrderCancelledMetricSort\x125\n" +
-	"1USER_COST_ORDER_CANCELLED_METRIC_SORT_UNSPECIFIED\x10\x00\x128\n" +
-	"4USER_COST_ORDER_CANCELLED_METRIC_SORT_PRODUCT_AMOUNT\x10\x01\x12<\n" +
-	"8USER_COST_ORDER_CANCELLED_METRIC_SORT_OWN_PRODUCT_AMOUNT\x10\x02\x12>\n" +
-	":USER_COST_ORDER_CANCELLED_METRIC_SORT_CROSS_PRODUCT_AMOUNT\x10\x03\x12:\n" +
-	"6USER_COST_ORDER_CANCELLED_METRIC_SORT_WAREHOUSE_AMOUNT\x10\x04\x126\n" +
-	"2USER_COST_ORDER_CANCELLED_METRIC_SORT_TOTAL_AMOUNT\x10\x05*\xe2\x02\n" +
-	"\x1bUserCostOrderLostMetricSort\x120\n" +
-	",USER_COST_ORDER_LOST_METRIC_SORT_UNSPECIFIED\x10\x00\x123\n" +
-	"/USER_COST_ORDER_LOST_METRIC_SORT_PRODUCT_AMOUNT\x10\x01\x127\n" +
-	"3USER_COST_ORDER_LOST_METRIC_SORT_OWN_PRODUCT_AMOUNT\x10\x02\x129\n" +
-	"5USER_COST_ORDER_LOST_METRIC_SORT_CROSS_PRODUCT_AMOUNT\x10\x03\x125\n" +
-	"1USER_COST_ORDER_LOST_METRIC_SORT_WAREHOUSE_AMOUNT\x10\x04\x121\n" +
-	"-USER_COST_ORDER_LOST_METRIC_SORT_TOTAL_AMOUNT\x10\x05*\xf6\x01\n" +
-	"\x18UserWithdrawalMetricSort\x12+\n" +
-	"'USER_WITHDRAWAL_METRIC_SORT_UNSPECIFIED\x10\x00\x126\n" +
-	"2USER_WITHDRAWAL_METRIC_SORT_WITHDRAWAL_FUND_AMOUNT\x10\x01\x12<\n" +
-	"8USER_WITHDRAWAL_METRIC_SORT_WITHDRAWAL_ADJUSTMENT_AMOUNT\x10\x02\x127\n" +
-	"3USER_WITHDRAWAL_METRIC_SORT_WITHDRAWAL_TOTAL_AMOUNT\x10\x03*\xdc\x01\n" +
-	" UserProfitOrderCreatedMetricSort\x125\n" +
-	"1USER_PROFIT_ORDER_CREATED_METRIC_SORT_UNSPECIFIED\x10\x00\x12?\n" +
-	";USER_PROFIT_ORDER_CREATED_METRIC_SORT_PROFIT_CREATED_AMOUNT\x10\x01\x12@\n" +
-	"<USER_PROFIT_ORDER_CREATED_METRIC_SORT_PROFIT_CREATED_PERCENT\x10\x02*\x93\x03\n" +
-	"#UserProfitOrderWithdrawalMetricSort\x128\n" +
-	"4USER_PROFIT_ORDER_WITHDRAWAL_METRIC_SORT_UNSPECIFIED\x10\x00\x12E\n" +
-	"AUSER_PROFIT_ORDER_WITHDRAWAL_METRIC_SORT_PROFIT_WITHDRAWAL_AMOUNT\x10\x01\x12F\n" +
-	"BUSER_PROFIT_ORDER_WITHDRAWAL_METRIC_SORT_PROFIT_WITHDRAWAL_PERCENT\x10\x02\x12P\n" +
-	"LUSER_PROFIT_ORDER_WITHDRAWAL_METRIC_SORT_PROFIT_WITHDRAWAL_ADJUSTMENT_AMOUNT\x10\x03\x12Q\n" +
-	"MUSER_PROFIT_ORDER_WITHDRAWAL_METRIC_SORT_PROFIT_WITHDRAWAL_ADJUSTMENT_PERCENT\x10\x04*\x8e\x01\n" +
-	"\x1dUserLostProfitOrderMetricSort\x122\n" +
-	".USER_LOST_PROFIT_ORDER_METRIC_SORT_UNSPECIFIED\x10\x00\x129\n" +
-	"5USER_LOST_PROFIT_ORDER_METRIC_SORT_LOST_PROFIT_AMOUNT\x10\x01*u\n" +
-	"\x18UserAdsExpenseMetricSort\x12,\n" +
-	"(USER_ADS_EXPENSE_METRIC_SORT_UNSPECIFIED\x10\x00\x12+\n" +
-	"'USER_ADS_EXPENSE_METRIC_SORT_ADS_AMOUNT\x10\x01*\x88\x01\n" +
-	"\x1aUserProfitOrLossMetricSort\x12/\n" +
-	"+USER_PROFIT_OR_LOSS_METRIC_SORT_UNSPECIFIED\x10\x00\x129\n" +
-	"5USER_PROFIT_OR_LOSS_METRIC_SORT_PROFIT_OR_LOSS_AMOUNT\x10\x01B\x9c\x02\n" +
+	"5USER_AVG_ORDER_LOST_METRIC_SORT_TOTAL_PER_TRANSACTION\x10\x02*\xd7\x01\n" +
+	"\x1fUserAvgOrderCompletedMetricSort\x124\n" +
+	"0USER_AVG_ORDER_COMPLETED_METRIC_SORT_UNSPECIFIED\x10\x00\x12>\n" +
+	":USER_AVG_ORDER_COMPLETED_METRIC_SORT_PIECE_PER_TRANSACTION\x10\x01\x12>\n" +
+	":USER_AVG_ORDER_COMPLETED_METRIC_SORT_TOTAL_PER_TRANSACTION\x10\x02*\xcb\x01\n" +
+	"\x1cUserAvgOrderReturnMetricSort\x121\n" +
+	"-USER_AVG_ORDER_RETURN_METRIC_SORT_UNSPECIFIED\x10\x00\x12;\n" +
+	"7USER_AVG_ORDER_RETURN_METRIC_SORT_PIECE_PER_TRANSACTION\x10\x01\x12;\n" +
+	"7USER_AVG_ORDER_RETURN_METRIC_SORT_TOTAL_PER_TRANSACTION\x10\x02*\xf2\x01\n" +
+	"%UserAvgOrderReturnCompletedMetricSort\x12;\n" +
+	"7USER_AVG_ORDER_RETURN_COMPLETED_METRIC_SORT_UNSPECIFIED\x10\x00\x12E\n" +
+	"AUSER_AVG_ORDER_RETURN_COMPLETED_METRIC_SORT_PIECE_PER_TRANSACTION\x10\x01\x12E\n" +
+	"AUSER_AVG_ORDER_RETURN_COMPLETED_METRIC_SORT_TOTAL_PER_TRANSACTION\x10\x02*\xcf\x01\n" +
+	"\x1dUserAvgOrderOngoingMetricSort\x122\n" +
+	".USER_AVG_ORDER_ONGOING_METRIC_SORT_UNSPECIFIED\x10\x00\x12<\n" +
+	"8USER_AVG_ORDER_ONGOING_METRIC_SORT_PIECE_PER_TRANSACTION\x10\x01\x12<\n" +
+	"8USER_AVG_ORDER_ONGOING_METRIC_SORT_TOTAL_PER_TRANSACTION\x10\x02B\x9c\x02\n" +
 	"#com.selling_iface.v1.user_metric.v1B\x10OrderMetricProtoP\x01ZLgithub.com/pdcgo/schema/services/selling_iface/v1/user_metric/v1;user_metric\xa2\x02\x03SVU\xaa\x02\x1dSellingIface.V1.UserMetric.V1\xca\x02\x1dSellingIface\\V1\\UserMetric\\V1\xe2\x02)SellingIface\\V1\\UserMetric\\V1\\GPBMetadata\xea\x02 SellingIface::V1::UserMetric::V1b\x06proto3"
 
 var (
@@ -4170,153 +2913,121 @@ func file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescGZIP() []byt
 	return file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDescData
 }
 
-var file_selling_iface_v1_user_metric_v1_order_metric_proto_enumTypes = make([]protoimpl.EnumInfo, 22)
-var file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes = make([]protoimpl.MessageInfo, 66)
+var file_selling_iface_v1_user_metric_v1_order_metric_proto_enumTypes = make([]protoimpl.EnumInfo, 16)
+var file_selling_iface_v1_user_metric_v1_order_metric_proto_msgTypes = make([]protoimpl.MessageInfo, 48)
 var file_selling_iface_v1_user_metric_v1_order_metric_proto_goTypes = []any{
-	(UserOrderMetricSort)(0),                 // 0: selling_iface.v1.user_metric.v1.UserOrderMetricSort
-	(UserOrderWithdrawalMetricSort)(0),       // 1: selling_iface.v1.user_metric.v1.UserOrderWithdrawalMetricSort
-	(UserOrderCancelledMetricSort)(0),        // 2: selling_iface.v1.user_metric.v1.UserOrderCancelledMetricSort
-	(UserOrderLostMetricSort)(0),             // 3: selling_iface.v1.user_metric.v1.UserOrderLostMetricSort
-	(UserStockOrderMetricSort)(0),            // 4: selling_iface.v1.user_metric.v1.UserStockOrderMetricSort
-	(UserStockOrderWithdrawalMetricSort)(0),  // 5: selling_iface.v1.user_metric.v1.UserStockOrderWithdrawalMetricSort
-	(UserStockOrderCancelledMetricSort)(0),   // 6: selling_iface.v1.user_metric.v1.UserStockOrderCancelledMetricSort
-	(UserStockOrderLostMetricSort)(0),        // 7: selling_iface.v1.user_metric.v1.UserStockOrderLostMetricSort
-	(UserAvgOrderMetricSort)(0),              // 8: selling_iface.v1.user_metric.v1.UserAvgOrderMetricSort
-	(UserAvgOrderWithdrawalMetricSort)(0),    // 9: selling_iface.v1.user_metric.v1.UserAvgOrderWithdrawalMetricSort
-	(UserAvgOrderCancelledMetricSort)(0),     // 10: selling_iface.v1.user_metric.v1.UserAvgOrderCancelledMetricSort
-	(UserAvgOrderLostMetricSort)(0),          // 11: selling_iface.v1.user_metric.v1.UserAvgOrderLostMetricSort
-	(UserCostOrderMetricSort)(0),             // 12: selling_iface.v1.user_metric.v1.UserCostOrderMetricSort
-	(UserCostOrderWithdrawalMetricSort)(0),   // 13: selling_iface.v1.user_metric.v1.UserCostOrderWithdrawalMetricSort
-	(UserCostOrderCancelledMetricSort)(0),    // 14: selling_iface.v1.user_metric.v1.UserCostOrderCancelledMetricSort
-	(UserCostOrderLostMetricSort)(0),         // 15: selling_iface.v1.user_metric.v1.UserCostOrderLostMetricSort
-	(UserWithdrawalMetricSort)(0),            // 16: selling_iface.v1.user_metric.v1.UserWithdrawalMetricSort
-	(UserProfitOrderCreatedMetricSort)(0),    // 17: selling_iface.v1.user_metric.v1.UserProfitOrderCreatedMetricSort
-	(UserProfitOrderWithdrawalMetricSort)(0), // 18: selling_iface.v1.user_metric.v1.UserProfitOrderWithdrawalMetricSort
-	(UserLostProfitOrderMetricSort)(0),       // 19: selling_iface.v1.user_metric.v1.UserLostProfitOrderMetricSort
-	(UserAdsExpenseMetricSort)(0),            // 20: selling_iface.v1.user_metric.v1.UserAdsExpenseMetricSort
-	(UserProfitOrLossMetricSort)(0),          // 21: selling_iface.v1.user_metric.v1.UserProfitOrLossMetricSort
-	(*UserOrderItem)(nil),                    // 22: selling_iface.v1.user_metric.v1.UserOrderItem
-	(*UserOrderMetric)(nil),                  // 23: selling_iface.v1.user_metric.v1.UserOrderMetric
-	(*UserOrderWithdrawalItem)(nil),          // 24: selling_iface.v1.user_metric.v1.UserOrderWithdrawalItem
-	(*UserOrderWithdrawalMetric)(nil),        // 25: selling_iface.v1.user_metric.v1.UserOrderWithdrawalMetric
-	(*UserOrderCancelledItem)(nil),           // 26: selling_iface.v1.user_metric.v1.UserOrderCancelledItem
-	(*UserOrderCancelledMetric)(nil),         // 27: selling_iface.v1.user_metric.v1.UserOrderCancelledMetric
-	(*UserOrderLostItem)(nil),                // 28: selling_iface.v1.user_metric.v1.UserOrderLostItem
-	(*UserOrderLostMetric)(nil),              // 29: selling_iface.v1.user_metric.v1.UserOrderLostMetric
-	(*UserStockOrderItem)(nil),               // 30: selling_iface.v1.user_metric.v1.UserStockOrderItem
-	(*UserStockOrderMetric)(nil),             // 31: selling_iface.v1.user_metric.v1.UserStockOrderMetric
-	(*UserStockOrderWithdrawalItem)(nil),     // 32: selling_iface.v1.user_metric.v1.UserStockOrderWithdrawalItem
-	(*UserStockOrderWithdrawalMetric)(nil),   // 33: selling_iface.v1.user_metric.v1.UserStockOrderWithdrawalMetric
-	(*UserStockOrderCancelledItem)(nil),      // 34: selling_iface.v1.user_metric.v1.UserStockOrderCancelledItem
-	(*UserStockOrderCancelledMetric)(nil),    // 35: selling_iface.v1.user_metric.v1.UserStockOrderCancelledMetric
-	(*UserStockOrderLostItem)(nil),           // 36: selling_iface.v1.user_metric.v1.UserStockOrderLostItem
-	(*UserStockOrderLostMetric)(nil),         // 37: selling_iface.v1.user_metric.v1.UserStockOrderLostMetric
-	(*UserAvgOrderItem)(nil),                 // 38: selling_iface.v1.user_metric.v1.UserAvgOrderItem
-	(*UserAvgOrderMetric)(nil),               // 39: selling_iface.v1.user_metric.v1.UserAvgOrderMetric
-	(*UserAvgOrderWithdrawalItem)(nil),       // 40: selling_iface.v1.user_metric.v1.UserAvgOrderWithdrawalItem
-	(*UserAvgOrderWithdrawalMetric)(nil),     // 41: selling_iface.v1.user_metric.v1.UserAvgOrderWithdrawalMetric
-	(*UserAvgOrderCancelledItem)(nil),        // 42: selling_iface.v1.user_metric.v1.UserAvgOrderCancelledItem
-	(*UserAvgOrderCancelledMetric)(nil),      // 43: selling_iface.v1.user_metric.v1.UserAvgOrderCancelledMetric
-	(*UserAvgOrderLostItem)(nil),             // 44: selling_iface.v1.user_metric.v1.UserAvgOrderLostItem
-	(*UserAvgOrderLostMetric)(nil),           // 45: selling_iface.v1.user_metric.v1.UserAvgOrderLostMetric
-	(*UserCostOrderItem)(nil),                // 46: selling_iface.v1.user_metric.v1.UserCostOrderItem
-	(*UserCostOrderMetric)(nil),              // 47: selling_iface.v1.user_metric.v1.UserCostOrderMetric
-	(*UserCostOrderWithdrawalItem)(nil),      // 48: selling_iface.v1.user_metric.v1.UserCostOrderWithdrawalItem
-	(*UserCostOrderWithdrawalMetric)(nil),    // 49: selling_iface.v1.user_metric.v1.UserCostOrderWithdrawalMetric
-	(*UserCostOrderCancelledItem)(nil),       // 50: selling_iface.v1.user_metric.v1.UserCostOrderCancelledItem
-	(*UserCostOrderCancelledMetric)(nil),     // 51: selling_iface.v1.user_metric.v1.UserCostOrderCancelledMetric
-	(*UserCostOrderLostItem)(nil),            // 52: selling_iface.v1.user_metric.v1.UserCostOrderLostItem
-	(*UserCostOrderLostMetric)(nil),          // 53: selling_iface.v1.user_metric.v1.UserCostOrderLostMetric
-	(*UserWithdrawalItem)(nil),               // 54: selling_iface.v1.user_metric.v1.UserWithdrawalItem
-	(*UserWithdrawalMetric)(nil),             // 55: selling_iface.v1.user_metric.v1.UserWithdrawalMetric
-	(*UserProfitOrderCreatedItem)(nil),       // 56: selling_iface.v1.user_metric.v1.UserProfitOrderCreatedItem
-	(*UserProfitOrderCreatedMetric)(nil),     // 57: selling_iface.v1.user_metric.v1.UserProfitOrderCreatedMetric
-	(*UserProfitOrderWithdrawalItem)(nil),    // 58: selling_iface.v1.user_metric.v1.UserProfitOrderWithdrawalItem
-	(*UserProfitOrderWithdrawalMetric)(nil),  // 59: selling_iface.v1.user_metric.v1.UserProfitOrderWithdrawalMetric
-	(*UserLostProfitOrderItem)(nil),          // 60: selling_iface.v1.user_metric.v1.UserLostProfitOrderItem
-	(*UserLostProfitOrderMetric)(nil),        // 61: selling_iface.v1.user_metric.v1.UserLostProfitOrderMetric
-	(*UserAdsExpenseItem)(nil),               // 62: selling_iface.v1.user_metric.v1.UserAdsExpenseItem
-	(*UserAdsExpenseMetric)(nil),             // 63: selling_iface.v1.user_metric.v1.UserAdsExpenseMetric
-	(*UserProfitOrLossItem)(nil),             // 64: selling_iface.v1.user_metric.v1.UserProfitOrLossItem
-	(*UserProfitOrLossMetric)(nil),           // 65: selling_iface.v1.user_metric.v1.UserProfitOrLossMetric
-	nil,                                      // 66: selling_iface.v1.user_metric.v1.UserOrderMetric.DataEntry
-	nil,                                      // 67: selling_iface.v1.user_metric.v1.UserOrderWithdrawalMetric.DataEntry
-	nil,                                      // 68: selling_iface.v1.user_metric.v1.UserOrderCancelledMetric.DataEntry
-	nil,                                      // 69: selling_iface.v1.user_metric.v1.UserOrderLostMetric.DataEntry
-	nil,                                      // 70: selling_iface.v1.user_metric.v1.UserStockOrderMetric.DataEntry
-	nil,                                      // 71: selling_iface.v1.user_metric.v1.UserStockOrderWithdrawalMetric.DataEntry
-	nil,                                      // 72: selling_iface.v1.user_metric.v1.UserStockOrderCancelledMetric.DataEntry
-	nil,                                      // 73: selling_iface.v1.user_metric.v1.UserStockOrderLostMetric.DataEntry
-	nil,                                      // 74: selling_iface.v1.user_metric.v1.UserAvgOrderMetric.DataEntry
-	nil,                                      // 75: selling_iface.v1.user_metric.v1.UserAvgOrderWithdrawalMetric.DataEntry
-	nil,                                      // 76: selling_iface.v1.user_metric.v1.UserAvgOrderCancelledMetric.DataEntry
-	nil,                                      // 77: selling_iface.v1.user_metric.v1.UserAvgOrderLostMetric.DataEntry
-	nil,                                      // 78: selling_iface.v1.user_metric.v1.UserCostOrderMetric.DataEntry
-	nil,                                      // 79: selling_iface.v1.user_metric.v1.UserCostOrderWithdrawalMetric.DataEntry
-	nil,                                      // 80: selling_iface.v1.user_metric.v1.UserCostOrderCancelledMetric.DataEntry
-	nil,                                      // 81: selling_iface.v1.user_metric.v1.UserCostOrderLostMetric.DataEntry
-	nil,                                      // 82: selling_iface.v1.user_metric.v1.UserWithdrawalMetric.DataEntry
-	nil,                                      // 83: selling_iface.v1.user_metric.v1.UserProfitOrderCreatedMetric.DataEntry
-	nil,                                      // 84: selling_iface.v1.user_metric.v1.UserProfitOrderWithdrawalMetric.DataEntry
-	nil,                                      // 85: selling_iface.v1.user_metric.v1.UserLostProfitOrderMetric.DataEntry
-	nil,                                      // 86: selling_iface.v1.user_metric.v1.UserAdsExpenseMetric.DataEntry
-	nil,                                      // 87: selling_iface.v1.user_metric.v1.UserProfitOrLossMetric.DataEntry
-	(*timestamppb.Timestamp)(nil),            // 88: google.protobuf.Timestamp
+	(UserOrderMetricSort)(0),                   // 0: selling_iface.v1.user_metric.v1.UserOrderMetricSort
+	(UserOrderWithdrawalMetricSort)(0),         // 1: selling_iface.v1.user_metric.v1.UserOrderWithdrawalMetricSort
+	(UserOrderCancelledMetricSort)(0),          // 2: selling_iface.v1.user_metric.v1.UserOrderCancelledMetricSort
+	(UserOrderLostMetricSort)(0),               // 3: selling_iface.v1.user_metric.v1.UserOrderLostMetricSort
+	(UserOrderCompletedMetricSort)(0),          // 4: selling_iface.v1.user_metric.v1.UserOrderCompletedMetricSort
+	(UserOrderReturnMetricSort)(0),             // 5: selling_iface.v1.user_metric.v1.UserOrderReturnMetricSort
+	(UserOrderReturnCompletedMetricSort)(0),    // 6: selling_iface.v1.user_metric.v1.UserOrderReturnCompletedMetricSort
+	(UserOrderOngoingMetricSort)(0),            // 7: selling_iface.v1.user_metric.v1.UserOrderOngoingMetricSort
+	(UserAvgOrderMetricSort)(0),                // 8: selling_iface.v1.user_metric.v1.UserAvgOrderMetricSort
+	(UserAvgOrderWithdrawalMetricSort)(0),      // 9: selling_iface.v1.user_metric.v1.UserAvgOrderWithdrawalMetricSort
+	(UserAvgOrderCancelledMetricSort)(0),       // 10: selling_iface.v1.user_metric.v1.UserAvgOrderCancelledMetricSort
+	(UserAvgOrderLostMetricSort)(0),            // 11: selling_iface.v1.user_metric.v1.UserAvgOrderLostMetricSort
+	(UserAvgOrderCompletedMetricSort)(0),       // 12: selling_iface.v1.user_metric.v1.UserAvgOrderCompletedMetricSort
+	(UserAvgOrderReturnMetricSort)(0),          // 13: selling_iface.v1.user_metric.v1.UserAvgOrderReturnMetricSort
+	(UserAvgOrderReturnCompletedMetricSort)(0), // 14: selling_iface.v1.user_metric.v1.UserAvgOrderReturnCompletedMetricSort
+	(UserAvgOrderOngoingMetricSort)(0),         // 15: selling_iface.v1.user_metric.v1.UserAvgOrderOngoingMetricSort
+	(*UserOrderItem)(nil),                      // 16: selling_iface.v1.user_metric.v1.UserOrderItem
+	(*UserOrderMetric)(nil),                    // 17: selling_iface.v1.user_metric.v1.UserOrderMetric
+	(*UserOrderWithdrawalItem)(nil),            // 18: selling_iface.v1.user_metric.v1.UserOrderWithdrawalItem
+	(*UserOrderWithdrawalMetric)(nil),          // 19: selling_iface.v1.user_metric.v1.UserOrderWithdrawalMetric
+	(*UserOrderCancelledItem)(nil),             // 20: selling_iface.v1.user_metric.v1.UserOrderCancelledItem
+	(*UserOrderCancelledMetric)(nil),           // 21: selling_iface.v1.user_metric.v1.UserOrderCancelledMetric
+	(*UserOrderLostItem)(nil),                  // 22: selling_iface.v1.user_metric.v1.UserOrderLostItem
+	(*UserOrderLostMetric)(nil),                // 23: selling_iface.v1.user_metric.v1.UserOrderLostMetric
+	(*UserOrderCompletedItem)(nil),             // 24: selling_iface.v1.user_metric.v1.UserOrderCompletedItem
+	(*UserOrderCompletedMetric)(nil),           // 25: selling_iface.v1.user_metric.v1.UserOrderCompletedMetric
+	(*UserOrderReturnItem)(nil),                // 26: selling_iface.v1.user_metric.v1.UserOrderReturnItem
+	(*UserOrderReturnMetric)(nil),              // 27: selling_iface.v1.user_metric.v1.UserOrderReturnMetric
+	(*UserOrderReturnCompletedItem)(nil),       // 28: selling_iface.v1.user_metric.v1.UserOrderReturnCompletedItem
+	(*UserOrderReturnCompletedMetric)(nil),     // 29: selling_iface.v1.user_metric.v1.UserOrderReturnCompletedMetric
+	(*UserOrderOngoingItem)(nil),               // 30: selling_iface.v1.user_metric.v1.UserOrderOngoingItem
+	(*UserOrderOngoingMetric)(nil),             // 31: selling_iface.v1.user_metric.v1.UserOrderOngoingMetric
+	(*UserAvgOrderItem)(nil),                   // 32: selling_iface.v1.user_metric.v1.UserAvgOrderItem
+	(*UserAvgOrderMetric)(nil),                 // 33: selling_iface.v1.user_metric.v1.UserAvgOrderMetric
+	(*UserAvgOrderWithdrawalItem)(nil),         // 34: selling_iface.v1.user_metric.v1.UserAvgOrderWithdrawalItem
+	(*UserAvgOrderWithdrawalMetric)(nil),       // 35: selling_iface.v1.user_metric.v1.UserAvgOrderWithdrawalMetric
+	(*UserAvgOrderCancelledItem)(nil),          // 36: selling_iface.v1.user_metric.v1.UserAvgOrderCancelledItem
+	(*UserAvgOrderCancelledMetric)(nil),        // 37: selling_iface.v1.user_metric.v1.UserAvgOrderCancelledMetric
+	(*UserAvgOrderLostItem)(nil),               // 38: selling_iface.v1.user_metric.v1.UserAvgOrderLostItem
+	(*UserAvgOrderLostMetric)(nil),             // 39: selling_iface.v1.user_metric.v1.UserAvgOrderLostMetric
+	(*UserAvgOrderCompletedItem)(nil),          // 40: selling_iface.v1.user_metric.v1.UserAvgOrderCompletedItem
+	(*UserAvgOrderCompletedMetric)(nil),        // 41: selling_iface.v1.user_metric.v1.UserAvgOrderCompletedMetric
+	(*UserAvgOrderReturnItem)(nil),             // 42: selling_iface.v1.user_metric.v1.UserAvgOrderReturnItem
+	(*UserAvgOrderReturnMetric)(nil),           // 43: selling_iface.v1.user_metric.v1.UserAvgOrderReturnMetric
+	(*UserAvgOrderReturnCompletedItem)(nil),    // 44: selling_iface.v1.user_metric.v1.UserAvgOrderReturnCompletedItem
+	(*UserAvgOrderReturnCompletedMetric)(nil),  // 45: selling_iface.v1.user_metric.v1.UserAvgOrderReturnCompletedMetric
+	(*UserAvgOrderOngoingItem)(nil),            // 46: selling_iface.v1.user_metric.v1.UserAvgOrderOngoingItem
+	(*UserAvgOrderOngoingMetric)(nil),          // 47: selling_iface.v1.user_metric.v1.UserAvgOrderOngoingMetric
+	nil,                                        // 48: selling_iface.v1.user_metric.v1.UserOrderMetric.DataEntry
+	nil,                                        // 49: selling_iface.v1.user_metric.v1.UserOrderWithdrawalMetric.DataEntry
+	nil,                                        // 50: selling_iface.v1.user_metric.v1.UserOrderCancelledMetric.DataEntry
+	nil,                                        // 51: selling_iface.v1.user_metric.v1.UserOrderLostMetric.DataEntry
+	nil,                                        // 52: selling_iface.v1.user_metric.v1.UserOrderCompletedMetric.DataEntry
+	nil,                                        // 53: selling_iface.v1.user_metric.v1.UserOrderReturnMetric.DataEntry
+	nil,                                        // 54: selling_iface.v1.user_metric.v1.UserOrderReturnCompletedMetric.DataEntry
+	nil,                                        // 55: selling_iface.v1.user_metric.v1.UserOrderOngoingMetric.DataEntry
+	nil,                                        // 56: selling_iface.v1.user_metric.v1.UserAvgOrderMetric.DataEntry
+	nil,                                        // 57: selling_iface.v1.user_metric.v1.UserAvgOrderWithdrawalMetric.DataEntry
+	nil,                                        // 58: selling_iface.v1.user_metric.v1.UserAvgOrderCancelledMetric.DataEntry
+	nil,                                        // 59: selling_iface.v1.user_metric.v1.UserAvgOrderLostMetric.DataEntry
+	nil,                                        // 60: selling_iface.v1.user_metric.v1.UserAvgOrderCompletedMetric.DataEntry
+	nil,                                        // 61: selling_iface.v1.user_metric.v1.UserAvgOrderReturnMetric.DataEntry
+	nil,                                        // 62: selling_iface.v1.user_metric.v1.UserAvgOrderReturnCompletedMetric.DataEntry
+	nil,                                        // 63: selling_iface.v1.user_metric.v1.UserAvgOrderOngoingMetric.DataEntry
+	(*timestamppb.Timestamp)(nil),              // 64: google.protobuf.Timestamp
 }
 var file_selling_iface_v1_user_metric_v1_order_metric_proto_depIdxs = []int32{
-	88, // 0: selling_iface.v1.user_metric.v1.UserOrderItem.last_order_created:type_name -> google.protobuf.Timestamp
-	66, // 1: selling_iface.v1.user_metric.v1.UserOrderMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserOrderMetric.DataEntry
-	88, // 2: selling_iface.v1.user_metric.v1.UserOrderWithdrawalItem.last_order_withdrawal:type_name -> google.protobuf.Timestamp
-	67, // 3: selling_iface.v1.user_metric.v1.UserOrderWithdrawalMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserOrderWithdrawalMetric.DataEntry
-	88, // 4: selling_iface.v1.user_metric.v1.UserOrderCancelledItem.last_order_cancelled:type_name -> google.protobuf.Timestamp
-	68, // 5: selling_iface.v1.user_metric.v1.UserOrderCancelledMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserOrderCancelledMetric.DataEntry
-	88, // 6: selling_iface.v1.user_metric.v1.UserOrderLostItem.last_order_lost:type_name -> google.protobuf.Timestamp
-	69, // 7: selling_iface.v1.user_metric.v1.UserOrderLostMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserOrderLostMetric.DataEntry
-	70, // 8: selling_iface.v1.user_metric.v1.UserStockOrderMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderMetric.DataEntry
-	71, // 9: selling_iface.v1.user_metric.v1.UserStockOrderWithdrawalMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderWithdrawalMetric.DataEntry
-	72, // 10: selling_iface.v1.user_metric.v1.UserStockOrderCancelledMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderCancelledMetric.DataEntry
-	73, // 11: selling_iface.v1.user_metric.v1.UserStockOrderLostMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderLostMetric.DataEntry
-	74, // 12: selling_iface.v1.user_metric.v1.UserAvgOrderMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderMetric.DataEntry
-	75, // 13: selling_iface.v1.user_metric.v1.UserAvgOrderWithdrawalMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderWithdrawalMetric.DataEntry
-	76, // 14: selling_iface.v1.user_metric.v1.UserAvgOrderCancelledMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderCancelledMetric.DataEntry
-	77, // 15: selling_iface.v1.user_metric.v1.UserAvgOrderLostMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderLostMetric.DataEntry
-	78, // 16: selling_iface.v1.user_metric.v1.UserCostOrderMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderMetric.DataEntry
-	79, // 17: selling_iface.v1.user_metric.v1.UserCostOrderWithdrawalMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderWithdrawalMetric.DataEntry
-	80, // 18: selling_iface.v1.user_metric.v1.UserCostOrderCancelledMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderCancelledMetric.DataEntry
-	81, // 19: selling_iface.v1.user_metric.v1.UserCostOrderLostMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderLostMetric.DataEntry
-	82, // 20: selling_iface.v1.user_metric.v1.UserWithdrawalMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserWithdrawalMetric.DataEntry
-	83, // 21: selling_iface.v1.user_metric.v1.UserProfitOrderCreatedMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserProfitOrderCreatedMetric.DataEntry
-	84, // 22: selling_iface.v1.user_metric.v1.UserProfitOrderWithdrawalMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserProfitOrderWithdrawalMetric.DataEntry
-	85, // 23: selling_iface.v1.user_metric.v1.UserLostProfitOrderMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserLostProfitOrderMetric.DataEntry
-	86, // 24: selling_iface.v1.user_metric.v1.UserAdsExpenseMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserAdsExpenseMetric.DataEntry
-	87, // 25: selling_iface.v1.user_metric.v1.UserProfitOrLossMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserProfitOrLossMetric.DataEntry
-	22, // 26: selling_iface.v1.user_metric.v1.UserOrderMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserOrderItem
-	24, // 27: selling_iface.v1.user_metric.v1.UserOrderWithdrawalMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserOrderWithdrawalItem
-	26, // 28: selling_iface.v1.user_metric.v1.UserOrderCancelledMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserOrderCancelledItem
-	28, // 29: selling_iface.v1.user_metric.v1.UserOrderLostMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserOrderLostItem
-	30, // 30: selling_iface.v1.user_metric.v1.UserStockOrderMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderItem
-	32, // 31: selling_iface.v1.user_metric.v1.UserStockOrderWithdrawalMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderWithdrawalItem
-	34, // 32: selling_iface.v1.user_metric.v1.UserStockOrderCancelledMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderCancelledItem
-	36, // 33: selling_iface.v1.user_metric.v1.UserStockOrderLostMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserStockOrderLostItem
-	38, // 34: selling_iface.v1.user_metric.v1.UserAvgOrderMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderItem
-	40, // 35: selling_iface.v1.user_metric.v1.UserAvgOrderWithdrawalMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderWithdrawalItem
-	42, // 36: selling_iface.v1.user_metric.v1.UserAvgOrderCancelledMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderCancelledItem
-	44, // 37: selling_iface.v1.user_metric.v1.UserAvgOrderLostMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderLostItem
-	46, // 38: selling_iface.v1.user_metric.v1.UserCostOrderMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderItem
-	48, // 39: selling_iface.v1.user_metric.v1.UserCostOrderWithdrawalMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderWithdrawalItem
-	50, // 40: selling_iface.v1.user_metric.v1.UserCostOrderCancelledMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderCancelledItem
-	52, // 41: selling_iface.v1.user_metric.v1.UserCostOrderLostMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserCostOrderLostItem
-	54, // 42: selling_iface.v1.user_metric.v1.UserWithdrawalMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserWithdrawalItem
-	56, // 43: selling_iface.v1.user_metric.v1.UserProfitOrderCreatedMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserProfitOrderCreatedItem
-	58, // 44: selling_iface.v1.user_metric.v1.UserProfitOrderWithdrawalMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserProfitOrderWithdrawalItem
-	60, // 45: selling_iface.v1.user_metric.v1.UserLostProfitOrderMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserLostProfitOrderItem
-	62, // 46: selling_iface.v1.user_metric.v1.UserAdsExpenseMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserAdsExpenseItem
-	64, // 47: selling_iface.v1.user_metric.v1.UserProfitOrLossMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserProfitOrLossItem
-	48, // [48:48] is the sub-list for method output_type
-	48, // [48:48] is the sub-list for method input_type
-	48, // [48:48] is the sub-list for extension type_name
-	48, // [48:48] is the sub-list for extension extendee
-	0,  // [0:48] is the sub-list for field type_name
+	64, // 0: selling_iface.v1.user_metric.v1.UserOrderItem.last_order_created:type_name -> google.protobuf.Timestamp
+	48, // 1: selling_iface.v1.user_metric.v1.UserOrderMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserOrderMetric.DataEntry
+	64, // 2: selling_iface.v1.user_metric.v1.UserOrderWithdrawalItem.last_order_withdrawal:type_name -> google.protobuf.Timestamp
+	49, // 3: selling_iface.v1.user_metric.v1.UserOrderWithdrawalMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserOrderWithdrawalMetric.DataEntry
+	64, // 4: selling_iface.v1.user_metric.v1.UserOrderCancelledItem.last_order_cancelled:type_name -> google.protobuf.Timestamp
+	50, // 5: selling_iface.v1.user_metric.v1.UserOrderCancelledMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserOrderCancelledMetric.DataEntry
+	64, // 6: selling_iface.v1.user_metric.v1.UserOrderLostItem.last_order_lost:type_name -> google.protobuf.Timestamp
+	51, // 7: selling_iface.v1.user_metric.v1.UserOrderLostMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserOrderLostMetric.DataEntry
+	64, // 8: selling_iface.v1.user_metric.v1.UserOrderCompletedItem.last_order_completed:type_name -> google.protobuf.Timestamp
+	52, // 9: selling_iface.v1.user_metric.v1.UserOrderCompletedMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserOrderCompletedMetric.DataEntry
+	64, // 10: selling_iface.v1.user_metric.v1.UserOrderReturnItem.last_order_return:type_name -> google.protobuf.Timestamp
+	53, // 11: selling_iface.v1.user_metric.v1.UserOrderReturnMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserOrderReturnMetric.DataEntry
+	64, // 12: selling_iface.v1.user_metric.v1.UserOrderReturnCompletedItem.last_order_return_completed:type_name -> google.protobuf.Timestamp
+	54, // 13: selling_iface.v1.user_metric.v1.UserOrderReturnCompletedMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserOrderReturnCompletedMetric.DataEntry
+	64, // 14: selling_iface.v1.user_metric.v1.UserOrderOngoingItem.last_order_ongoing:type_name -> google.protobuf.Timestamp
+	55, // 15: selling_iface.v1.user_metric.v1.UserOrderOngoingMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserOrderOngoingMetric.DataEntry
+	56, // 16: selling_iface.v1.user_metric.v1.UserAvgOrderMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderMetric.DataEntry
+	57, // 17: selling_iface.v1.user_metric.v1.UserAvgOrderWithdrawalMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderWithdrawalMetric.DataEntry
+	58, // 18: selling_iface.v1.user_metric.v1.UserAvgOrderCancelledMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderCancelledMetric.DataEntry
+	59, // 19: selling_iface.v1.user_metric.v1.UserAvgOrderLostMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderLostMetric.DataEntry
+	60, // 20: selling_iface.v1.user_metric.v1.UserAvgOrderCompletedMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderCompletedMetric.DataEntry
+	61, // 21: selling_iface.v1.user_metric.v1.UserAvgOrderReturnMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderReturnMetric.DataEntry
+	62, // 22: selling_iface.v1.user_metric.v1.UserAvgOrderReturnCompletedMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderReturnCompletedMetric.DataEntry
+	63, // 23: selling_iface.v1.user_metric.v1.UserAvgOrderOngoingMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderOngoingMetric.DataEntry
+	16, // 24: selling_iface.v1.user_metric.v1.UserOrderMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserOrderItem
+	18, // 25: selling_iface.v1.user_metric.v1.UserOrderWithdrawalMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserOrderWithdrawalItem
+	20, // 26: selling_iface.v1.user_metric.v1.UserOrderCancelledMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserOrderCancelledItem
+	22, // 27: selling_iface.v1.user_metric.v1.UserOrderLostMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserOrderLostItem
+	24, // 28: selling_iface.v1.user_metric.v1.UserOrderCompletedMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserOrderCompletedItem
+	26, // 29: selling_iface.v1.user_metric.v1.UserOrderReturnMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserOrderReturnItem
+	28, // 30: selling_iface.v1.user_metric.v1.UserOrderReturnCompletedMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserOrderReturnCompletedItem
+	30, // 31: selling_iface.v1.user_metric.v1.UserOrderOngoingMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserOrderOngoingItem
+	32, // 32: selling_iface.v1.user_metric.v1.UserAvgOrderMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderItem
+	34, // 33: selling_iface.v1.user_metric.v1.UserAvgOrderWithdrawalMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderWithdrawalItem
+	36, // 34: selling_iface.v1.user_metric.v1.UserAvgOrderCancelledMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderCancelledItem
+	38, // 35: selling_iface.v1.user_metric.v1.UserAvgOrderLostMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderLostItem
+	40, // 36: selling_iface.v1.user_metric.v1.UserAvgOrderCompletedMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderCompletedItem
+	42, // 37: selling_iface.v1.user_metric.v1.UserAvgOrderReturnMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderReturnItem
+	44, // 38: selling_iface.v1.user_metric.v1.UserAvgOrderReturnCompletedMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderReturnCompletedItem
+	46, // 39: selling_iface.v1.user_metric.v1.UserAvgOrderOngoingMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserAvgOrderOngoingItem
+	40, // [40:40] is the sub-list for method output_type
+	40, // [40:40] is the sub-list for method input_type
+	40, // [40:40] is the sub-list for extension type_name
+	40, // [40:40] is the sub-list for extension extendee
+	0,  // [0:40] is the sub-list for field type_name
 }
 
 func init() { file_selling_iface_v1_user_metric_v1_order_metric_proto_init() }
@@ -4329,8 +3040,8 @@ func file_selling_iface_v1_user_metric_v1_order_metric_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDesc), len(file_selling_iface_v1_user_metric_v1_order_metric_proto_rawDesc)),
-			NumEnums:      22,
-			NumMessages:   66,
+			NumEnums:      16,
+			NumMessages:   48,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
