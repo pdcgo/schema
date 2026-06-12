@@ -4,7 +4,37 @@ package inventory_iface.v1;
 option go_package = "github.com/pdcgo/schema/services/inventory_iface/v1;inventory_iface";
 
 service InventoryService {
-  rpc Hello(HelloRequest) returns (HelloResponse);
+  rpc Order(OrderRequest) returns (OrderResponse);
+}
+
+enum QueueType {
+  QUEUE_TYPE_UNSPECIFIED = 0;
+  QUEUE_TYPE_FIFO = 1;
+  QUEUE_TYPE_LIFO = 2;
+}
+
+message ProvisionItem {
+  uint64 product_id = 1;
+  int64 count = 2;
+}
+
+message OrderRequest {
+  uint64 team_id = 1;
+  uint64 warehouse_id = 2;
+  QueueType queue_type = 3;
+  repeated ProvisionItem provisions = 4;
+}
+
+message ProvisionItemRes {
+  uint64 product_id = 1;
+  int64 count = 2;
+  double price = 3;
+  double amount = 4;
+}
+
+message OrderResponse {
+  repeated ProvisionItemRes provisions = 3;
+  double total = 5;
 }
 
 message HelloRequest {}

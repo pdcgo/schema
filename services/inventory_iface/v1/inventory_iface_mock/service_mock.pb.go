@@ -46,29 +46,29 @@ func (m *MockInventoryServiceClient) EXPECT() *MockInventoryServiceClientMockRec
     return m.recorder
 }
 
-func (m *MockInventoryService) Hello(ctx context.Context, req *connect.Request[v1.HelloRequest]) (*connect.Response[v1.HelloResponse], error) {
+func (m *MockInventoryService) Order(ctx context.Context, req *connect.Request[v1.OrderRequest]) (*connect.Response[v1.OrderResponse], error) {
     m.ctrl.T.Helper()
-    ret := m.ctrl.Call(m, "Hello", ctx, req)
-    ret0, _ := ret[0].(*connect.Response[v1.HelloResponse])
+    ret := m.ctrl.Call(m, "Order", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.OrderResponse])
     ret1, _ := ret[1].(error)
     return ret0, ret1
 }
 
-func (mr *MockInventoryServiceMockRecorder) Hello(ctx, req interface{}) *gomock.Call {
+func (mr *MockInventoryServiceMockRecorder) Order(ctx, req interface{}) *gomock.Call {
     mr.mock.ctrl.T.Helper()
-    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Hello", reflect.TypeOf((*MockInventoryService)(nil).Hello), ctx, req)
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Order", reflect.TypeOf((*MockInventoryService)(nil).Order), ctx, req)
 }
 
-func (m *MockInventoryServiceClient) Hello(ctx context.Context, req *connect.Request[v1.HelloRequest]) (*connect.Response[v1.HelloResponse], error) {
+func (m *MockInventoryServiceClient) Order(ctx context.Context, req *connect.Request[v1.OrderRequest]) (*connect.Response[v1.OrderResponse], error) {
     m.ctrl.T.Helper()
-    ret := m.ctrl.Call(m, "Hello", ctx, req)
-    ret0, _ := ret[0].(*connect.Response[v1.HelloResponse])
+    ret := m.ctrl.Call(m, "Order", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.OrderResponse])
     ret1, _ := ret[1].(error)
     return ret0, ret1
 }
 
-func (mr *MockInventoryServiceClientMockRecorder) Hello(ctx, req interface{}) *gomock.Call {
+func (mr *MockInventoryServiceClientMockRecorder) Order(ctx, req interface{}) *gomock.Call {
     mr.mock.ctrl.T.Helper()
-    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Hello", reflect.TypeOf((*MockInventoryService)(nil).Hello), ctx, req)
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Order", reflect.TypeOf((*MockInventoryService)(nil).Order), ctx, req)
 }
 

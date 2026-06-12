@@ -33,13 +33,13 @@ const (
 // reflection-formatted method names, remove the leading slash and convert the remaining slash to a
 // period.
 const (
-	// InventoryServiceHelloProcedure is the fully-qualified name of the InventoryService's Hello RPC.
-	InventoryServiceHelloProcedure = "/inventory_iface.v1.InventoryService/Hello"
+	// InventoryServiceOrderProcedure is the fully-qualified name of the InventoryService's Order RPC.
+	InventoryServiceOrderProcedure = "/inventory_iface.v1.InventoryService/Order"
 )
 
 // InventoryServiceClient is a client for the inventory_iface.v1.InventoryService service.
 type InventoryServiceClient interface {
-	Hello(context.Context, *connect.Request[v1.HelloRequest]) (*connect.Response[v1.HelloResponse], error)
+	Order(context.Context, *connect.Request[v1.OrderRequest]) (*connect.Response[v1.OrderResponse], error)
 }
 
 // NewInventoryServiceClient constructs a client for the inventory_iface.v1.InventoryService
@@ -53,10 +53,10 @@ func NewInventoryServiceClient(httpClient connect.HTTPClient, baseURL string, op
 	baseURL = strings.TrimRight(baseURL, "/")
 	inventoryServiceMethods := v1.File_inventory_iface_v1_service_proto.Services().ByName("InventoryService").Methods()
 	return &inventoryServiceClient{
-		hello: connect.NewClient[v1.HelloRequest, v1.HelloResponse](
+		order: connect.NewClient[v1.OrderRequest, v1.OrderResponse](
 			httpClient,
-			baseURL+InventoryServiceHelloProcedure,
-			connect.WithSchema(inventoryServiceMethods.ByName("Hello")),
+			baseURL+InventoryServiceOrderProcedure,
+			connect.WithSchema(inventoryServiceMethods.ByName("Order")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -64,17 +64,17 @@ func NewInventoryServiceClient(httpClient connect.HTTPClient, baseURL string, op
 
 // inventoryServiceClient implements InventoryServiceClient.
 type inventoryServiceClient struct {
-	hello *connect.Client[v1.HelloRequest, v1.HelloResponse]
+	order *connect.Client[v1.OrderRequest, v1.OrderResponse]
 }
 
-// Hello calls inventory_iface.v1.InventoryService.Hello.
-func (c *inventoryServiceClient) Hello(ctx context.Context, req *connect.Request[v1.HelloRequest]) (*connect.Response[v1.HelloResponse], error) {
-	return c.hello.CallUnary(ctx, req)
+// Order calls inventory_iface.v1.InventoryService.Order.
+func (c *inventoryServiceClient) Order(ctx context.Context, req *connect.Request[v1.OrderRequest]) (*connect.Response[v1.OrderResponse], error) {
+	return c.order.CallUnary(ctx, req)
 }
 
 // InventoryServiceHandler is an implementation of the inventory_iface.v1.InventoryService service.
 type InventoryServiceHandler interface {
-	Hello(context.Context, *connect.Request[v1.HelloRequest]) (*connect.Response[v1.HelloResponse], error)
+	Order(context.Context, *connect.Request[v1.OrderRequest]) (*connect.Response[v1.OrderResponse], error)
 }
 
 // NewInventoryServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -84,16 +84,16 @@ type InventoryServiceHandler interface {
 // and JSON codecs. They also support gzip compression.
 func NewInventoryServiceHandler(svc InventoryServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
 	inventoryServiceMethods := v1.File_inventory_iface_v1_service_proto.Services().ByName("InventoryService").Methods()
-	inventoryServiceHelloHandler := connect.NewUnaryHandler(
-		InventoryServiceHelloProcedure,
-		svc.Hello,
-		connect.WithSchema(inventoryServiceMethods.ByName("Hello")),
+	inventoryServiceOrderHandler := connect.NewUnaryHandler(
+		InventoryServiceOrderProcedure,
+		svc.Order,
+		connect.WithSchema(inventoryServiceMethods.ByName("Order")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/inventory_iface.v1.InventoryService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
-		case InventoryServiceHelloProcedure:
-			inventoryServiceHelloHandler.ServeHTTP(w, r)
+		case InventoryServiceOrderProcedure:
+			inventoryServiceOrderHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -103,6 +103,6 @@ func NewInventoryServiceHandler(svc InventoryServiceHandler, opts ...connect.Han
 // UnimplementedInventoryServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedInventoryServiceHandler struct{}
 
-func (UnimplementedInventoryServiceHandler) Hello(context.Context, *connect.Request[v1.HelloRequest]) (*connect.Response[v1.HelloResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory_iface.v1.InventoryService.Hello is not implemented"))
+func (UnimplementedInventoryServiceHandler) Order(context.Context, *connect.Request[v1.OrderRequest]) (*connect.Response[v1.OrderResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory_iface.v1.InventoryService.Order is not implemented"))
 }
