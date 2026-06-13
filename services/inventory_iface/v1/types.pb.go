@@ -7,6 +7,7 @@
 package inventory_iface
 
 import (
+	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -28,13 +29,12 @@ const (
 	StockChangeType_STOCK_CHANGE_TYPE_UNSPECIFIED    StockChangeType = 0
 	StockChangeType_STOCK_CHANGE_TYPE_ORDER_CREATED  StockChangeType = 1
 	StockChangeType_STOCK_CHANGE_TYPE_ORDER_CANCELED StockChangeType = 2
-	StockChangeType_STOCK_CHANGE_TYPE_RESTOCK_IN     StockChangeType = 3
-	StockChangeType_STOCK_CHANGE_TYPE_RETURN_IN      StockChangeType = 4
+	StockChangeType_STOCK_CHANGE_TYPE_RESTOCK        StockChangeType = 3
+	StockChangeType_STOCK_CHANGE_TYPE_RETURN         StockChangeType = 4
 	StockChangeType_STOCK_CHANGE_TYPE_PROBLEM        StockChangeType = 5
 	StockChangeType_STOCK_CHANGE_TYPE_FOUND_BACK     StockChangeType = 6
 	StockChangeType_STOCK_CHANGE_TYPE_ADJUSTMENT     StockChangeType = 7
-	StockChangeType_STOCK_CHANGE_TYPE_TRANSFER_IN    StockChangeType = 8
-	StockChangeType_STOCK_CHANGE_TYPE_TRANSFER_OUT   StockChangeType = 9
+	StockChangeType_STOCK_CHANGE_TYPE_TRANSFER       StockChangeType = 8
 )
 
 // Enum value maps for StockChangeType.
@@ -43,25 +43,23 @@ var (
 		0: "STOCK_CHANGE_TYPE_UNSPECIFIED",
 		1: "STOCK_CHANGE_TYPE_ORDER_CREATED",
 		2: "STOCK_CHANGE_TYPE_ORDER_CANCELED",
-		3: "STOCK_CHANGE_TYPE_RESTOCK_IN",
-		4: "STOCK_CHANGE_TYPE_RETURN_IN",
+		3: "STOCK_CHANGE_TYPE_RESTOCK",
+		4: "STOCK_CHANGE_TYPE_RETURN",
 		5: "STOCK_CHANGE_TYPE_PROBLEM",
 		6: "STOCK_CHANGE_TYPE_FOUND_BACK",
 		7: "STOCK_CHANGE_TYPE_ADJUSTMENT",
-		8: "STOCK_CHANGE_TYPE_TRANSFER_IN",
-		9: "STOCK_CHANGE_TYPE_TRANSFER_OUT",
+		8: "STOCK_CHANGE_TYPE_TRANSFER",
 	}
 	StockChangeType_value = map[string]int32{
 		"STOCK_CHANGE_TYPE_UNSPECIFIED":    0,
 		"STOCK_CHANGE_TYPE_ORDER_CREATED":  1,
 		"STOCK_CHANGE_TYPE_ORDER_CANCELED": 2,
-		"STOCK_CHANGE_TYPE_RESTOCK_IN":     3,
-		"STOCK_CHANGE_TYPE_RETURN_IN":      4,
+		"STOCK_CHANGE_TYPE_RESTOCK":        3,
+		"STOCK_CHANGE_TYPE_RETURN":         4,
 		"STOCK_CHANGE_TYPE_PROBLEM":        5,
 		"STOCK_CHANGE_TYPE_FOUND_BACK":     6,
 		"STOCK_CHANGE_TYPE_ADJUSTMENT":     7,
-		"STOCK_CHANGE_TYPE_TRANSFER_IN":    8,
-		"STOCK_CHANGE_TYPE_TRANSFER_OUT":   9,
+		"STOCK_CHANGE_TYPE_TRANSFER":       8,
 	}
 )
 
@@ -180,6 +178,230 @@ func (x *OrderCanceled) GetOrderId() uint64 {
 	return 0
 }
 
+type Restock struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Restock) Reset() {
+	*x = Restock{}
+	mi := &file_inventory_iface_v1_types_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Restock) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Restock) ProtoMessage() {}
+
+func (x *Restock) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_types_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Restock.ProtoReflect.Descriptor instead.
+func (*Restock) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_types_proto_rawDescGZIP(), []int{2}
+}
+
+type Return struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Return) Reset() {
+	*x = Return{}
+	mi := &file_inventory_iface_v1_types_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Return) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Return) ProtoMessage() {}
+
+func (x *Return) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_types_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Return.ProtoReflect.Descriptor instead.
+func (*Return) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_types_proto_rawDescGZIP(), []int{3}
+}
+
+type Problem struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Problem) Reset() {
+	*x = Problem{}
+	mi := &file_inventory_iface_v1_types_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Problem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Problem) ProtoMessage() {}
+
+func (x *Problem) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_types_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Problem.ProtoReflect.Descriptor instead.
+func (*Problem) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_types_proto_rawDescGZIP(), []int{4}
+}
+
+type FoundBack struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *FoundBack) Reset() {
+	*x = FoundBack{}
+	mi := &file_inventory_iface_v1_types_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *FoundBack) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FoundBack) ProtoMessage() {}
+
+func (x *FoundBack) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_types_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FoundBack.ProtoReflect.Descriptor instead.
+func (*FoundBack) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_types_proto_rawDescGZIP(), []int{5}
+}
+
+type Adjustment struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Adjustment) Reset() {
+	*x = Adjustment{}
+	mi := &file_inventory_iface_v1_types_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Adjustment) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Adjustment) ProtoMessage() {}
+
+func (x *Adjustment) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_types_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Adjustment.ProtoReflect.Descriptor instead.
+func (*Adjustment) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_types_proto_rawDescGZIP(), []int{6}
+}
+
+type Transfer struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TransferId    uint64                 `protobuf:"varint,1,opt,name=transfer_id,json=transferId,proto3" json:"transfer_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Transfer) Reset() {
+	*x = Transfer{}
+	mi := &file_inventory_iface_v1_types_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Transfer) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Transfer) ProtoMessage() {}
+
+func (x *Transfer) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_types_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Transfer.ProtoReflect.Descriptor instead.
+func (*Transfer) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_types_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *Transfer) GetTransferId() uint64 {
+	if x != nil {
+		return x.TransferId
+	}
+	return 0
+}
+
 type ChangeItem struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ProductId     uint64                 `protobuf:"varint,1,opt,name=product_id,json=productId,proto3" json:"product_id,omitempty"`
@@ -190,7 +412,7 @@ type ChangeItem struct {
 
 func (x *ChangeItem) Reset() {
 	*x = ChangeItem{}
-	mi := &file_inventory_iface_v1_types_proto_msgTypes[2]
+	mi := &file_inventory_iface_v1_types_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -202,7 +424,7 @@ func (x *ChangeItem) String() string {
 func (*ChangeItem) ProtoMessage() {}
 
 func (x *ChangeItem) ProtoReflect() protoreflect.Message {
-	mi := &file_inventory_iface_v1_types_proto_msgTypes[2]
+	mi := &file_inventory_iface_v1_types_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -215,7 +437,7 @@ func (x *ChangeItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChangeItem.ProtoReflect.Descriptor instead.
 func (*ChangeItem) Descriptor() ([]byte, []int) {
-	return file_inventory_iface_v1_types_proto_rawDescGZIP(), []int{2}
+	return file_inventory_iface_v1_types_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *ChangeItem) GetProductId() uint64 {
@@ -233,15 +455,22 @@ func (x *ChangeItem) GetAmount() float64 {
 }
 
 type StockChange struct {
-	state       protoimpl.MessageState `protogen:"open.v1"`
-	At          *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=at,proto3" json:"at,omitempty"`
-	WarehouseId uint64                 `protobuf:"varint,2,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
-	UserId      uint64                 `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Changes     []*ChangeItem          `protobuf:"bytes,4,rep,name=changes,proto3" json:"changes,omitempty"`
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	At            *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=at,proto3" json:"at,omitempty"`
+	WarehouseId   uint64                 `protobuf:"varint,2,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
+	UserId        uint64                 `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	TransactionId uint64                 `protobuf:"varint,13,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	Changes       []*ChangeItem          `protobuf:"bytes,4,rep,name=changes,proto3" json:"changes,omitempty"`
 	// Types that are valid to be assigned to Change:
 	//
 	//	*StockChange_OrderCreated
 	//	*StockChange_OrderCanceled
+	//	*StockChange_Restock
+	//	*StockChange_Return
+	//	*StockChange_Problem
+	//	*StockChange_FoundBack
+	//	*StockChange_Adjustment
+	//	*StockChange_Transfer
 	Change        isStockChange_Change `protobuf_oneof:"change"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -249,7 +478,7 @@ type StockChange struct {
 
 func (x *StockChange) Reset() {
 	*x = StockChange{}
-	mi := &file_inventory_iface_v1_types_proto_msgTypes[3]
+	mi := &file_inventory_iface_v1_types_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -261,7 +490,7 @@ func (x *StockChange) String() string {
 func (*StockChange) ProtoMessage() {}
 
 func (x *StockChange) ProtoReflect() protoreflect.Message {
-	mi := &file_inventory_iface_v1_types_proto_msgTypes[3]
+	mi := &file_inventory_iface_v1_types_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -274,7 +503,7 @@ func (x *StockChange) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StockChange.ProtoReflect.Descriptor instead.
 func (*StockChange) Descriptor() ([]byte, []int) {
-	return file_inventory_iface_v1_types_proto_rawDescGZIP(), []int{3}
+	return file_inventory_iface_v1_types_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *StockChange) GetAt() *timestamppb.Timestamp {
@@ -294,6 +523,13 @@ func (x *StockChange) GetWarehouseId() uint64 {
 func (x *StockChange) GetUserId() uint64 {
 	if x != nil {
 		return x.UserId
+	}
+	return 0
+}
+
+func (x *StockChange) GetTransactionId() uint64 {
+	if x != nil {
+		return x.TransactionId
 	}
 	return 0
 }
@@ -330,6 +566,60 @@ func (x *StockChange) GetOrderCanceled() *OrderCanceled {
 	return nil
 }
 
+func (x *StockChange) GetRestock() *Restock {
+	if x != nil {
+		if x, ok := x.Change.(*StockChange_Restock); ok {
+			return x.Restock
+		}
+	}
+	return nil
+}
+
+func (x *StockChange) GetReturn() *Return {
+	if x != nil {
+		if x, ok := x.Change.(*StockChange_Return); ok {
+			return x.Return
+		}
+	}
+	return nil
+}
+
+func (x *StockChange) GetProblem() *Problem {
+	if x != nil {
+		if x, ok := x.Change.(*StockChange_Problem); ok {
+			return x.Problem
+		}
+	}
+	return nil
+}
+
+func (x *StockChange) GetFoundBack() *FoundBack {
+	if x != nil {
+		if x, ok := x.Change.(*StockChange_FoundBack); ok {
+			return x.FoundBack
+		}
+	}
+	return nil
+}
+
+func (x *StockChange) GetAdjustment() *Adjustment {
+	if x != nil {
+		if x, ok := x.Change.(*StockChange_Adjustment); ok {
+			return x.Adjustment
+		}
+	}
+	return nil
+}
+
+func (x *StockChange) GetTransfer() *Transfer {
+	if x != nil {
+		if x, ok := x.Change.(*StockChange_Transfer); ok {
+			return x.Transfer
+		}
+	}
+	return nil
+}
+
 type isStockChange_Change interface {
 	isStockChange_Change()
 }
@@ -342,43 +632,98 @@ type StockChange_OrderCanceled struct {
 	OrderCanceled *OrderCanceled `protobuf:"bytes,6,opt,name=order_canceled,json=orderCanceled,proto3,oneof"`
 }
 
+type StockChange_Restock struct {
+	Restock *Restock `protobuf:"bytes,7,opt,name=restock,proto3,oneof"`
+}
+
+type StockChange_Return struct {
+	Return *Return `protobuf:"bytes,8,opt,name=return,proto3,oneof"`
+}
+
+type StockChange_Problem struct {
+	Problem *Problem `protobuf:"bytes,9,opt,name=problem,proto3,oneof"`
+}
+
+type StockChange_FoundBack struct {
+	FoundBack *FoundBack `protobuf:"bytes,10,opt,name=found_back,json=foundBack,proto3,oneof"`
+}
+
+type StockChange_Adjustment struct {
+	Adjustment *Adjustment `protobuf:"bytes,11,opt,name=adjustment,proto3,oneof"`
+}
+
+type StockChange_Transfer struct {
+	Transfer *Transfer `protobuf:"bytes,12,opt,name=transfer,proto3,oneof"`
+}
+
 func (*StockChange_OrderCreated) isStockChange_Change() {}
 
 func (*StockChange_OrderCanceled) isStockChange_Change() {}
+
+func (*StockChange_Restock) isStockChange_Change() {}
+
+func (*StockChange_Return) isStockChange_Change() {}
+
+func (*StockChange_Problem) isStockChange_Change() {}
+
+func (*StockChange_FoundBack) isStockChange_Change() {}
+
+func (*StockChange_Adjustment) isStockChange_Change() {}
+
+func (*StockChange_Transfer) isStockChange_Change() {}
 
 var File_inventory_iface_v1_types_proto protoreflect.FileDescriptor
 
 const file_inventory_iface_v1_types_proto_rawDesc = "" +
 	"\n" +
-	"\x1einventory_iface/v1/types.proto\x12\x12inventory_iface.v1\x1a\x1fgoogle/protobuf/timestamp.proto\")\n" +
-	"\fOrderCreated\x12\x19\n" +
-	"\border_id\x18\x01 \x01(\x04R\aorderId\"*\n" +
-	"\rOrderCanceled\x12\x19\n" +
-	"\border_id\x18\x01 \x01(\x04R\aorderId\"C\n" +
+	"\x1einventory_iface/v1/types.proto\x12\x12inventory_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"2\n" +
+	"\fOrderCreated\x12\"\n" +
+	"\border_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\aorderId\"3\n" +
+	"\rOrderCanceled\x12\"\n" +
+	"\border_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\aorderId\"\t\n" +
+	"\aRestock\"\b\n" +
+	"\x06Return\"\t\n" +
+	"\aProblem\"\v\n" +
+	"\tFoundBack\"\f\n" +
 	"\n" +
-	"ChangeItem\x12\x1d\n" +
+	"Adjustment\"4\n" +
+	"\bTransfer\x12(\n" +
+	"\vtransfer_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\n" +
+	"transferId\"L\n" +
 	"\n" +
-	"product_id\x18\x01 \x01(\x04R\tproductId\x12\x16\n" +
-	"\x06amount\x18\x02 \x01(\x01R\x06amount\"\xce\x02\n" +
+	"ChangeItem\x12&\n" +
+	"\n" +
+	"product_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\tproductId\x12\x16\n" +
+	"\x06amount\x18\x02 \x01(\x01R\x06amount\"\xee\x05\n" +
 	"\vStockChange\x12*\n" +
-	"\x02at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x02at\x12!\n" +
-	"\fwarehouse_id\x18\x02 \x01(\x04R\vwarehouseId\x12\x17\n" +
-	"\auser_id\x18\x03 \x01(\x04R\x06userId\x128\n" +
-	"\achanges\x18\x04 \x03(\v2\x1e.inventory_iface.v1.ChangeItemR\achanges\x12G\n" +
+	"\x02at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x02at\x12*\n" +
+	"\fwarehouse_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\vwarehouseId\x12\x17\n" +
+	"\auser_id\x18\x03 \x01(\x04R\x06userId\x12%\n" +
+	"\x0etransaction_id\x18\r \x01(\x04R\rtransactionId\x12B\n" +
+	"\achanges\x18\x04 \x03(\v2\x1e.inventory_iface.v1.ChangeItemB\b\xbaH\x05\x92\x01\x02\b\x01R\achanges\x12G\n" +
 	"\rorder_created\x18\x05 \x01(\v2 .inventory_iface.v1.OrderCreatedH\x00R\forderCreated\x12J\n" +
-	"\x0eorder_canceled\x18\x06 \x01(\v2!.inventory_iface.v1.OrderCanceledH\x00R\rorderCanceledB\b\n" +
-	"\x06change*\xec\x02\n" +
+	"\x0eorder_canceled\x18\x06 \x01(\v2!.inventory_iface.v1.OrderCanceledH\x00R\rorderCanceled\x127\n" +
+	"\arestock\x18\a \x01(\v2\x1b.inventory_iface.v1.RestockH\x00R\arestock\x124\n" +
+	"\x06return\x18\b \x01(\v2\x1a.inventory_iface.v1.ReturnH\x00R\x06return\x127\n" +
+	"\aproblem\x18\t \x01(\v2\x1b.inventory_iface.v1.ProblemH\x00R\aproblem\x12>\n" +
+	"\n" +
+	"found_back\x18\n" +
+	" \x01(\v2\x1d.inventory_iface.v1.FoundBackH\x00R\tfoundBack\x12@\n" +
+	"\n" +
+	"adjustment\x18\v \x01(\v2\x1e.inventory_iface.v1.AdjustmentH\x00R\n" +
+	"adjustment\x12:\n" +
+	"\btransfer\x18\f \x01(\v2\x1c.inventory_iface.v1.TransferH\x00R\btransferB\b\n" +
+	"\x06change*\xbf\x02\n" +
 	"\x0fStockChangeType\x12!\n" +
 	"\x1dSTOCK_CHANGE_TYPE_UNSPECIFIED\x10\x00\x12#\n" +
 	"\x1fSTOCK_CHANGE_TYPE_ORDER_CREATED\x10\x01\x12$\n" +
-	" STOCK_CHANGE_TYPE_ORDER_CANCELED\x10\x02\x12 \n" +
-	"\x1cSTOCK_CHANGE_TYPE_RESTOCK_IN\x10\x03\x12\x1f\n" +
-	"\x1bSTOCK_CHANGE_TYPE_RETURN_IN\x10\x04\x12\x1d\n" +
+	" STOCK_CHANGE_TYPE_ORDER_CANCELED\x10\x02\x12\x1d\n" +
+	"\x19STOCK_CHANGE_TYPE_RESTOCK\x10\x03\x12\x1c\n" +
+	"\x18STOCK_CHANGE_TYPE_RETURN\x10\x04\x12\x1d\n" +
 	"\x19STOCK_CHANGE_TYPE_PROBLEM\x10\x05\x12 \n" +
 	"\x1cSTOCK_CHANGE_TYPE_FOUND_BACK\x10\x06\x12 \n" +
-	"\x1cSTOCK_CHANGE_TYPE_ADJUSTMENT\x10\a\x12!\n" +
-	"\x1dSTOCK_CHANGE_TYPE_TRANSFER_IN\x10\b\x12\"\n" +
-	"\x1eSTOCK_CHANGE_TYPE_TRANSFER_OUT\x10\tB\xce\x01\n" +
+	"\x1cSTOCK_CHANGE_TYPE_ADJUSTMENT\x10\a\x12\x1e\n" +
+	"\x1aSTOCK_CHANGE_TYPE_TRANSFER\x10\bB\xce\x01\n" +
 	"\x16com.inventory_iface.v1B\n" +
 	"TypesProtoP\x01ZCgithub.com/pdcgo/schema/services/inventory_iface/v1;inventory_iface\xa2\x02\x03IXX\xaa\x02\x11InventoryIface.V1\xca\x02\x11InventoryIface\\V1\xe2\x02\x1dInventoryIface\\V1\\GPBMetadata\xea\x02\x12InventoryIface::V1b\x06proto3"
 
@@ -395,25 +740,37 @@ func file_inventory_iface_v1_types_proto_rawDescGZIP() []byte {
 }
 
 var file_inventory_iface_v1_types_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_inventory_iface_v1_types_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_inventory_iface_v1_types_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_inventory_iface_v1_types_proto_goTypes = []any{
 	(StockChangeType)(0),          // 0: inventory_iface.v1.StockChangeType
 	(*OrderCreated)(nil),          // 1: inventory_iface.v1.OrderCreated
 	(*OrderCanceled)(nil),         // 2: inventory_iface.v1.OrderCanceled
-	(*ChangeItem)(nil),            // 3: inventory_iface.v1.ChangeItem
-	(*StockChange)(nil),           // 4: inventory_iface.v1.StockChange
-	(*timestamppb.Timestamp)(nil), // 5: google.protobuf.Timestamp
+	(*Restock)(nil),               // 3: inventory_iface.v1.Restock
+	(*Return)(nil),                // 4: inventory_iface.v1.Return
+	(*Problem)(nil),               // 5: inventory_iface.v1.Problem
+	(*FoundBack)(nil),             // 6: inventory_iface.v1.FoundBack
+	(*Adjustment)(nil),            // 7: inventory_iface.v1.Adjustment
+	(*Transfer)(nil),              // 8: inventory_iface.v1.Transfer
+	(*ChangeItem)(nil),            // 9: inventory_iface.v1.ChangeItem
+	(*StockChange)(nil),           // 10: inventory_iface.v1.StockChange
+	(*timestamppb.Timestamp)(nil), // 11: google.protobuf.Timestamp
 }
 var file_inventory_iface_v1_types_proto_depIdxs = []int32{
-	5, // 0: inventory_iface.v1.StockChange.at:type_name -> google.protobuf.Timestamp
-	3, // 1: inventory_iface.v1.StockChange.changes:type_name -> inventory_iface.v1.ChangeItem
-	1, // 2: inventory_iface.v1.StockChange.order_created:type_name -> inventory_iface.v1.OrderCreated
-	2, // 3: inventory_iface.v1.StockChange.order_canceled:type_name -> inventory_iface.v1.OrderCanceled
-	4, // [4:4] is the sub-list for method output_type
-	4, // [4:4] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	11, // 0: inventory_iface.v1.StockChange.at:type_name -> google.protobuf.Timestamp
+	9,  // 1: inventory_iface.v1.StockChange.changes:type_name -> inventory_iface.v1.ChangeItem
+	1,  // 2: inventory_iface.v1.StockChange.order_created:type_name -> inventory_iface.v1.OrderCreated
+	2,  // 3: inventory_iface.v1.StockChange.order_canceled:type_name -> inventory_iface.v1.OrderCanceled
+	3,  // 4: inventory_iface.v1.StockChange.restock:type_name -> inventory_iface.v1.Restock
+	4,  // 5: inventory_iface.v1.StockChange.return:type_name -> inventory_iface.v1.Return
+	5,  // 6: inventory_iface.v1.StockChange.problem:type_name -> inventory_iface.v1.Problem
+	6,  // 7: inventory_iface.v1.StockChange.found_back:type_name -> inventory_iface.v1.FoundBack
+	7,  // 8: inventory_iface.v1.StockChange.adjustment:type_name -> inventory_iface.v1.Adjustment
+	8,  // 9: inventory_iface.v1.StockChange.transfer:type_name -> inventory_iface.v1.Transfer
+	10, // [10:10] is the sub-list for method output_type
+	10, // [10:10] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_inventory_iface_v1_types_proto_init() }
@@ -421,9 +778,15 @@ func file_inventory_iface_v1_types_proto_init() {
 	if File_inventory_iface_v1_types_proto != nil {
 		return
 	}
-	file_inventory_iface_v1_types_proto_msgTypes[3].OneofWrappers = []any{
+	file_inventory_iface_v1_types_proto_msgTypes[9].OneofWrappers = []any{
 		(*StockChange_OrderCreated)(nil),
 		(*StockChange_OrderCanceled)(nil),
+		(*StockChange_Restock)(nil),
+		(*StockChange_Return)(nil),
+		(*StockChange_Problem)(nil),
+		(*StockChange_FoundBack)(nil),
+		(*StockChange_Adjustment)(nil),
+		(*StockChange_Transfer)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -431,7 +794,7 @@ func file_inventory_iface_v1_types_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_inventory_iface_v1_types_proto_rawDesc), len(file_inventory_iface_v1_types_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   4,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
