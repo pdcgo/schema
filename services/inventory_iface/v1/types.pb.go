@@ -405,7 +405,8 @@ func (x *Transfer) GetTransferId() uint64 {
 type ChangeItem struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ProductId     uint64                 `protobuf:"varint,1,opt,name=product_id,json=productId,proto3" json:"product_id,omitempty"`
-	Amount        float64                `protobuf:"fixed64,2,opt,name=amount,proto3" json:"amount,omitempty"`
+	ChangeCount   int64                  `protobuf:"varint,2,opt,name=change_count,json=changeCount,proto3" json:"change_count,omitempty"`
+	ChangeAmount  float64                `protobuf:"fixed64,3,opt,name=change_amount,json=changeAmount,proto3" json:"change_amount,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -447,9 +448,16 @@ func (x *ChangeItem) GetProductId() uint64 {
 	return 0
 }
 
-func (x *ChangeItem) GetAmount() float64 {
+func (x *ChangeItem) GetChangeCount() int64 {
 	if x != nil {
-		return x.Amount
+		return x.ChangeCount
+	}
+	return 0
+}
+
+func (x *ChangeItem) GetChangeAmount() float64 {
+	if x != nil {
+		return x.ChangeAmount
 	}
 	return 0
 }
@@ -689,12 +697,13 @@ const file_inventory_iface_v1_types_proto_rawDesc = "" +
 	"Adjustment\"4\n" +
 	"\bTransfer\x12(\n" +
 	"\vtransfer_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\n" +
-	"transferId\"L\n" +
+	"transferId\"|\n" +
 	"\n" +
 	"ChangeItem\x12&\n" +
 	"\n" +
-	"product_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\tproductId\x12\x16\n" +
-	"\x06amount\x18\x02 \x01(\x01R\x06amount\"\xee\x05\n" +
+	"product_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\tproductId\x12!\n" +
+	"\fchange_count\x18\x02 \x01(\x03R\vchangeCount\x12#\n" +
+	"\rchange_amount\x18\x03 \x01(\x01R\fchangeAmount\"\xee\x05\n" +
 	"\vStockChange\x12*\n" +
 	"\x02at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x02at\x12*\n" +
 	"\fwarehouse_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\vwarehouseId\x12\x17\n" +

@@ -42,7 +42,8 @@ message Transfer {
 
 message ChangeItem {
   uint64 product_id = 1 [(buf.validate.field).uint64.gt = 0];
-  double amount = 2;
+  int64 change_count = 2;
+  double change_amount = 3;
 }
 
 message StockChange {
