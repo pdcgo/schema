@@ -38,12 +38,30 @@ const (
 	// InventoryServiceStockMovementProcedure is the fully-qualified name of the InventoryService's
 	// StockMovement RPC.
 	InventoryServiceStockMovementProcedure = "/inventory_iface.v1.InventoryService/StockMovement"
+	// InventoryServicePushStockEventProcedure is the fully-qualified name of the InventoryService's
+	// PushStockEvent RPC.
+	InventoryServicePushStockEventProcedure = "/inventory_iface.v1.InventoryService/PushStockEvent"
+	// InventoryServiceProductPlacementListProcedure is the fully-qualified name of the
+	// InventoryService's ProductPlacementList RPC.
+	InventoryServiceProductPlacementListProcedure = "/inventory_iface.v1.InventoryService/ProductPlacementList"
+	// InventoryServiceProductPlacementLogProcedure is the fully-qualified name of the
+	// InventoryService's ProductPlacementLog RPC.
+	InventoryServiceProductPlacementLogProcedure = "/inventory_iface.v1.InventoryService/ProductPlacementLog"
+	// InventoryServiceProductBatchListProcedure is the fully-qualified name of the InventoryService's
+	// ProductBatchList RPC.
+	InventoryServiceProductBatchListProcedure = "/inventory_iface.v1.InventoryService/ProductBatchList"
 )
 
 // InventoryServiceClient is a client for the inventory_iface.v1.InventoryService service.
 type InventoryServiceClient interface {
 	Order(context.Context, *connect.Request[v1.OrderRequest]) (*connect.Response[v1.OrderResponse], error)
 	StockMovement(context.Context, *connect.Request[v1.StockMovementRequest]) (*connect.Response[v1.StockMovementResponse], error)
+	// PushStockEvent ingests a warehouse StockEvent (the RPC counterpart of the
+	// Pub/Sub push handler) and applies it to inventory state in one transaction.
+	PushStockEvent(context.Context, *connect.Request[v1.PushStockEventRequest]) (*connect.Response[v1.PushStockEventResponse], error)
+	ProductPlacementList(context.Context, *connect.Request[v1.ProductPlacementListRequest]) (*connect.Response[v1.ProductPlacementListResponse], error)
+	ProductPlacementLog(context.Context, *connect.Request[v1.ProductPlacementLogRequest]) (*connect.Response[v1.ProductPlacementLogResponse], error)
+	ProductBatchList(context.Context, *connect.Request[v1.ProductBatchListRequest]) (*connect.Response[v1.ProductBatchListResponse], error)
 }
 
 // NewInventoryServiceClient constructs a client for the inventory_iface.v1.InventoryService
@@ -69,13 +87,41 @@ func NewInventoryServiceClient(httpClient connect.HTTPClient, baseURL string, op
 			connect.WithSchema(inventoryServiceMethods.ByName("StockMovement")),
 			connect.WithClientOptions(opts...),
 		),
+		pushStockEvent: connect.NewClient[v1.PushStockEventRequest, v1.PushStockEventResponse](
+			httpClient,
+			baseURL+InventoryServicePushStockEventProcedure,
+			connect.WithSchema(inventoryServiceMethods.ByName("PushStockEvent")),
+			connect.WithClientOptions(opts...),
+		),
+		productPlacementList: connect.NewClient[v1.ProductPlacementListRequest, v1.ProductPlacementListResponse](
+			httpClient,
+			baseURL+InventoryServiceProductPlacementListProcedure,
+			connect.WithSchema(inventoryServiceMethods.ByName("ProductPlacementList")),
+			connect.WithClientOptions(opts...),
+		),
+		productPlacementLog: connect.NewClient[v1.ProductPlacementLogRequest, v1.ProductPlacementLogResponse](
+			httpClient,
+			baseURL+InventoryServiceProductPlacementLogProcedure,
+			connect.WithSchema(inventoryServiceMethods.ByName("ProductPlacementLog")),
+			connect.WithClientOptions(opts...),
+		),
+		productBatchList: connect.NewClient[v1.ProductBatchListRequest, v1.ProductBatchListResponse](
+			httpClient,
+			baseURL+InventoryServiceProductBatchListProcedure,
+			connect.WithSchema(inventoryServiceMethods.ByName("ProductBatchList")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // inventoryServiceClient implements InventoryServiceClient.
 type inventoryServiceClient struct {
-	order         *connect.Client[v1.OrderRequest, v1.OrderResponse]
-	stockMovement *connect.Client[v1.StockMovementRequest, v1.StockMovementResponse]
+	order                *connect.Client[v1.OrderRequest, v1.OrderResponse]
+	stockMovement        *connect.Client[v1.StockMovementRequest, v1.StockMovementResponse]
+	pushStockEvent       *connect.Client[v1.PushStockEventRequest, v1.PushStockEventResponse]
+	productPlacementList *connect.Client[v1.ProductPlacementListRequest, v1.ProductPlacementListResponse]
+	productPlacementLog  *connect.Client[v1.ProductPlacementLogRequest, v1.ProductPlacementLogResponse]
+	productBatchList     *connect.Client[v1.ProductBatchListRequest, v1.ProductBatchListResponse]
 }
 
 // Order calls inventory_iface.v1.InventoryService.Order.
@@ -88,10 +134,36 @@ func (c *inventoryServiceClient) StockMovement(ctx context.Context, req *connect
 	return c.stockMovement.CallUnary(ctx, req)
 }
 
+// PushStockEvent calls inventory_iface.v1.InventoryService.PushStockEvent.
+func (c *inventoryServiceClient) PushStockEvent(ctx context.Context, req *connect.Request[v1.PushStockEventRequest]) (*connect.Response[v1.PushStockEventResponse], error) {
+	return c.pushStockEvent.CallUnary(ctx, req)
+}
+
+// ProductPlacementList calls inventory_iface.v1.InventoryService.ProductPlacementList.
+func (c *inventoryServiceClient) ProductPlacementList(ctx context.Context, req *connect.Request[v1.ProductPlacementListRequest]) (*connect.Response[v1.ProductPlacementListResponse], error) {
+	return c.productPlacementList.CallUnary(ctx, req)
+}
+
+// ProductPlacementLog calls inventory_iface.v1.InventoryService.ProductPlacementLog.
+func (c *inventoryServiceClient) ProductPlacementLog(ctx context.Context, req *connect.Request[v1.ProductPlacementLogRequest]) (*connect.Response[v1.ProductPlacementLogResponse], error) {
+	return c.productPlacementLog.CallUnary(ctx, req)
+}
+
+// ProductBatchList calls inventory_iface.v1.InventoryService.ProductBatchList.
+func (c *inventoryServiceClient) ProductBatchList(ctx context.Context, req *connect.Request[v1.ProductBatchListRequest]) (*connect.Response[v1.ProductBatchListResponse], error) {
+	return c.productBatchList.CallUnary(ctx, req)
+}
+
 // InventoryServiceHandler is an implementation of the inventory_iface.v1.InventoryService service.
 type InventoryServiceHandler interface {
 	Order(context.Context, *connect.Request[v1.OrderRequest]) (*connect.Response[v1.OrderResponse], error)
 	StockMovement(context.Context, *connect.Request[v1.StockMovementRequest]) (*connect.Response[v1.StockMovementResponse], error)
+	// PushStockEvent ingests a warehouse StockEvent (the RPC counterpart of the
+	// Pub/Sub push handler) and applies it to inventory state in one transaction.
+	PushStockEvent(context.Context, *connect.Request[v1.PushStockEventRequest]) (*connect.Response[v1.PushStockEventResponse], error)
+	ProductPlacementList(context.Context, *connect.Request[v1.ProductPlacementListRequest]) (*connect.Response[v1.ProductPlacementListResponse], error)
+	ProductPlacementLog(context.Context, *connect.Request[v1.ProductPlacementLogRequest]) (*connect.Response[v1.ProductPlacementLogResponse], error)
+	ProductBatchList(context.Context, *connect.Request[v1.ProductBatchListRequest]) (*connect.Response[v1.ProductBatchListResponse], error)
 }
 
 // NewInventoryServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -113,12 +185,44 @@ func NewInventoryServiceHandler(svc InventoryServiceHandler, opts ...connect.Han
 		connect.WithSchema(inventoryServiceMethods.ByName("StockMovement")),
 		connect.WithHandlerOptions(opts...),
 	)
+	inventoryServicePushStockEventHandler := connect.NewUnaryHandler(
+		InventoryServicePushStockEventProcedure,
+		svc.PushStockEvent,
+		connect.WithSchema(inventoryServiceMethods.ByName("PushStockEvent")),
+		connect.WithHandlerOptions(opts...),
+	)
+	inventoryServiceProductPlacementListHandler := connect.NewUnaryHandler(
+		InventoryServiceProductPlacementListProcedure,
+		svc.ProductPlacementList,
+		connect.WithSchema(inventoryServiceMethods.ByName("ProductPlacementList")),
+		connect.WithHandlerOptions(opts...),
+	)
+	inventoryServiceProductPlacementLogHandler := connect.NewUnaryHandler(
+		InventoryServiceProductPlacementLogProcedure,
+		svc.ProductPlacementLog,
+		connect.WithSchema(inventoryServiceMethods.ByName("ProductPlacementLog")),
+		connect.WithHandlerOptions(opts...),
+	)
+	inventoryServiceProductBatchListHandler := connect.NewUnaryHandler(
+		InventoryServiceProductBatchListProcedure,
+		svc.ProductBatchList,
+		connect.WithSchema(inventoryServiceMethods.ByName("ProductBatchList")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/inventory_iface.v1.InventoryService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case InventoryServiceOrderProcedure:
 			inventoryServiceOrderHandler.ServeHTTP(w, r)
 		case InventoryServiceStockMovementProcedure:
 			inventoryServiceStockMovementHandler.ServeHTTP(w, r)
+		case InventoryServicePushStockEventProcedure:
+			inventoryServicePushStockEventHandler.ServeHTTP(w, r)
+		case InventoryServiceProductPlacementListProcedure:
+			inventoryServiceProductPlacementListHandler.ServeHTTP(w, r)
+		case InventoryServiceProductPlacementLogProcedure:
+			inventoryServiceProductPlacementLogHandler.ServeHTTP(w, r)
+		case InventoryServiceProductBatchListProcedure:
+			inventoryServiceProductBatchListHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -134,4 +238,20 @@ func (UnimplementedInventoryServiceHandler) Order(context.Context, *connect.Requ
 
 func (UnimplementedInventoryServiceHandler) StockMovement(context.Context, *connect.Request[v1.StockMovementRequest]) (*connect.Response[v1.StockMovementResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory_iface.v1.InventoryService.StockMovement is not implemented"))
+}
+
+func (UnimplementedInventoryServiceHandler) PushStockEvent(context.Context, *connect.Request[v1.PushStockEventRequest]) (*connect.Response[v1.PushStockEventResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory_iface.v1.InventoryService.PushStockEvent is not implemented"))
+}
+
+func (UnimplementedInventoryServiceHandler) ProductPlacementList(context.Context, *connect.Request[v1.ProductPlacementListRequest]) (*connect.Response[v1.ProductPlacementListResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory_iface.v1.InventoryService.ProductPlacementList is not implemented"))
+}
+
+func (UnimplementedInventoryServiceHandler) ProductPlacementLog(context.Context, *connect.Request[v1.ProductPlacementLogRequest]) (*connect.Response[v1.ProductPlacementLogResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory_iface.v1.InventoryService.ProductPlacementLog is not implemented"))
+}
+
+func (UnimplementedInventoryServiceHandler) ProductBatchList(context.Context, *connect.Request[v1.ProductBatchListRequest]) (*connect.Response[v1.ProductBatchListResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory_iface.v1.InventoryService.ProductBatchList is not implemented"))
 }

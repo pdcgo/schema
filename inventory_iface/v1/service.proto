@@ -5,6 +5,7 @@ import "buf/validate/validate.proto";
 import "common/v1/common.proto";
 import "google/protobuf/timestamp.proto";
 import "inventory_iface/v1/types.proto";
+import "warehouse_iface/v1/event.proto";
 
 option go_package = "github.com/pdcgo/schema/services/inventory_iface/v1;inventory_iface";
 
@@ -12,7 +13,31 @@ service InventoryService {
   rpc Order(OrderRequest) returns (OrderResponse);
 
   rpc StockMovement(StockMovementRequest) returns (StockMovementResponse);
+
+  // PushStockEvent ingests a warehouse StockEvent (the RPC counterpart of the
+  // Pub/Sub push handler) and applies it to inventory state in one transaction.
+  rpc PushStockEvent(PushStockEventRequest) returns (PushStockEventResponse);
+
+  rpc ProductPlacementList(ProductPlacementListRequest) returns (ProductPlacementListResponse);
+  rpc ProductPlacementLog(ProductPlacementLogRequest) returns (ProductPlacementLogResponse);
+  rpc ProductBatchList(ProductBatchListRequest) returns (ProductBatchListResponse);
 }
+
+message ProductPlacementListRequest {}
+
+message ProductPlacementListResponse {}
+
+message ProductPlacementLogRequest {}
+
+message ProductPlacementLogResponse {}
+message ProductBatchListRequest {}
+message ProductBatchListResponse {}
+
+message PushStockEventRequest {
+  warehouse_iface.v1.StockEvent event = 1 [(buf.validate.field).required = true];
+}
+
+message PushStockEventResponse {}
 
 message StockMovementRequest {
   uint64 product_id = 1 [(buf.validate.field).uint64.gt = 0];
@@ -22,8 +47,9 @@ message StockMovementRequest {
 }
 
 message MovementTransactionInfo {
-  string receipt = 1;
-  string team_name = 2;
+  uint64 transaction_id = 1;
+  string receipt = 2;
+  string team_name = 3;
 }
 
 message MovementItem {
