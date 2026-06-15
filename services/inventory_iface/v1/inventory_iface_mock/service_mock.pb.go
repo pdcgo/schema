@@ -72,3 +72,29 @@ func (mr *MockInventoryServiceClientMockRecorder) Order(ctx, req interface{}) *g
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Order", reflect.TypeOf((*MockInventoryService)(nil).Order), ctx, req)
 }
 
+func (m *MockInventoryService) StockMovement(ctx context.Context, req *connect.Request[v1.StockMovementRequest]) (*connect.Response[v1.StockMovementResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "StockMovement", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.StockMovementResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInventoryServiceMockRecorder) StockMovement(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StockMovement", reflect.TypeOf((*MockInventoryService)(nil).StockMovement), ctx, req)
+}
+
+func (m *MockInventoryServiceClient) StockMovement(ctx context.Context, req *connect.Request[v1.StockMovementRequest]) (*connect.Response[v1.StockMovementResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "StockMovement", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.StockMovementResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInventoryServiceClientMockRecorder) StockMovement(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StockMovement", reflect.TypeOf((*MockInventoryService)(nil).StockMovement), ctx, req)
+}
+

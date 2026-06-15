@@ -85,6 +85,10 @@ message PageInfo {
   int64 total_items = 3;
 }
 
+message PageInfoWithoutCount {
+  int64 current_page = 1;
+}
+
 enum SortType {
   SORT_TYPE_UNSPECIFIED = 0;
   SORT_TYPE_DESC = 1;

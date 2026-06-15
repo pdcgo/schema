@@ -23,6 +23,55 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type QueueType int32
+
+const (
+	QueueType_QUEUE_TYPE_UNSPECIFIED QueueType = 0
+	QueueType_QUEUE_TYPE_FIFO        QueueType = 1
+	QueueType_QUEUE_TYPE_LIFO        QueueType = 2
+)
+
+// Enum value maps for QueueType.
+var (
+	QueueType_name = map[int32]string{
+		0: "QUEUE_TYPE_UNSPECIFIED",
+		1: "QUEUE_TYPE_FIFO",
+		2: "QUEUE_TYPE_LIFO",
+	}
+	QueueType_value = map[string]int32{
+		"QUEUE_TYPE_UNSPECIFIED": 0,
+		"QUEUE_TYPE_FIFO":        1,
+		"QUEUE_TYPE_LIFO":        2,
+	}
+)
+
+func (x QueueType) Enum() *QueueType {
+	p := new(QueueType)
+	*p = x
+	return p
+}
+
+func (x QueueType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (QueueType) Descriptor() protoreflect.EnumDescriptor {
+	return file_inventory_iface_v1_types_proto_enumTypes[0].Descriptor()
+}
+
+func (QueueType) Type() protoreflect.EnumType {
+	return &file_inventory_iface_v1_types_proto_enumTypes[0]
+}
+
+func (x QueueType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use QueueType.Descriptor instead.
+func (QueueType) EnumDescriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_types_proto_rawDescGZIP(), []int{0}
+}
+
 type StockChangeType int32
 
 const (
@@ -74,11 +123,11 @@ func (x StockChangeType) String() string {
 }
 
 func (StockChangeType) Descriptor() protoreflect.EnumDescriptor {
-	return file_inventory_iface_v1_types_proto_enumTypes[0].Descriptor()
+	return file_inventory_iface_v1_types_proto_enumTypes[1].Descriptor()
 }
 
 func (StockChangeType) Type() protoreflect.EnumType {
-	return &file_inventory_iface_v1_types_proto_enumTypes[0]
+	return &file_inventory_iface_v1_types_proto_enumTypes[1]
 }
 
 func (x StockChangeType) Number() protoreflect.EnumNumber {
@@ -87,7 +136,7 @@ func (x StockChangeType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use StockChangeType.Descriptor instead.
 func (StockChangeType) EnumDescriptor() ([]byte, []int) {
-	return file_inventory_iface_v1_types_proto_rawDescGZIP(), []int{0}
+	return file_inventory_iface_v1_types_proto_rawDescGZIP(), []int{1}
 }
 
 type OrderCreated struct {
@@ -722,7 +771,11 @@ const file_inventory_iface_v1_types_proto_rawDesc = "" +
 	"adjustment\x18\v \x01(\v2\x1e.inventory_iface.v1.AdjustmentH\x00R\n" +
 	"adjustment\x12:\n" +
 	"\btransfer\x18\f \x01(\v2\x1c.inventory_iface.v1.TransferH\x00R\btransferB\b\n" +
-	"\x06change*\xbf\x02\n" +
+	"\x06change*Q\n" +
+	"\tQueueType\x12\x1a\n" +
+	"\x16QUEUE_TYPE_UNSPECIFIED\x10\x00\x12\x13\n" +
+	"\x0fQUEUE_TYPE_FIFO\x10\x01\x12\x13\n" +
+	"\x0fQUEUE_TYPE_LIFO\x10\x02*\xbf\x02\n" +
 	"\x0fStockChangeType\x12!\n" +
 	"\x1dSTOCK_CHANGE_TYPE_UNSPECIFIED\x10\x00\x12#\n" +
 	"\x1fSTOCK_CHANGE_TYPE_ORDER_CREATED\x10\x01\x12$\n" +
@@ -748,33 +801,34 @@ func file_inventory_iface_v1_types_proto_rawDescGZIP() []byte {
 	return file_inventory_iface_v1_types_proto_rawDescData
 }
 
-var file_inventory_iface_v1_types_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_inventory_iface_v1_types_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
 var file_inventory_iface_v1_types_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_inventory_iface_v1_types_proto_goTypes = []any{
-	(StockChangeType)(0),          // 0: inventory_iface.v1.StockChangeType
-	(*OrderCreated)(nil),          // 1: inventory_iface.v1.OrderCreated
-	(*OrderCanceled)(nil),         // 2: inventory_iface.v1.OrderCanceled
-	(*Restock)(nil),               // 3: inventory_iface.v1.Restock
-	(*Return)(nil),                // 4: inventory_iface.v1.Return
-	(*Problem)(nil),               // 5: inventory_iface.v1.Problem
-	(*FoundBack)(nil),             // 6: inventory_iface.v1.FoundBack
-	(*Adjustment)(nil),            // 7: inventory_iface.v1.Adjustment
-	(*Transfer)(nil),              // 8: inventory_iface.v1.Transfer
-	(*ChangeItem)(nil),            // 9: inventory_iface.v1.ChangeItem
-	(*StockChange)(nil),           // 10: inventory_iface.v1.StockChange
-	(*timestamppb.Timestamp)(nil), // 11: google.protobuf.Timestamp
+	(QueueType)(0),                // 0: inventory_iface.v1.QueueType
+	(StockChangeType)(0),          // 1: inventory_iface.v1.StockChangeType
+	(*OrderCreated)(nil),          // 2: inventory_iface.v1.OrderCreated
+	(*OrderCanceled)(nil),         // 3: inventory_iface.v1.OrderCanceled
+	(*Restock)(nil),               // 4: inventory_iface.v1.Restock
+	(*Return)(nil),                // 5: inventory_iface.v1.Return
+	(*Problem)(nil),               // 6: inventory_iface.v1.Problem
+	(*FoundBack)(nil),             // 7: inventory_iface.v1.FoundBack
+	(*Adjustment)(nil),            // 8: inventory_iface.v1.Adjustment
+	(*Transfer)(nil),              // 9: inventory_iface.v1.Transfer
+	(*ChangeItem)(nil),            // 10: inventory_iface.v1.ChangeItem
+	(*StockChange)(nil),           // 11: inventory_iface.v1.StockChange
+	(*timestamppb.Timestamp)(nil), // 12: google.protobuf.Timestamp
 }
 var file_inventory_iface_v1_types_proto_depIdxs = []int32{
-	11, // 0: inventory_iface.v1.StockChange.at:type_name -> google.protobuf.Timestamp
-	9,  // 1: inventory_iface.v1.StockChange.changes:type_name -> inventory_iface.v1.ChangeItem
-	1,  // 2: inventory_iface.v1.StockChange.order_created:type_name -> inventory_iface.v1.OrderCreated
-	2,  // 3: inventory_iface.v1.StockChange.order_canceled:type_name -> inventory_iface.v1.OrderCanceled
-	3,  // 4: inventory_iface.v1.StockChange.restock:type_name -> inventory_iface.v1.Restock
-	4,  // 5: inventory_iface.v1.StockChange.return:type_name -> inventory_iface.v1.Return
-	5,  // 6: inventory_iface.v1.StockChange.problem:type_name -> inventory_iface.v1.Problem
-	6,  // 7: inventory_iface.v1.StockChange.found_back:type_name -> inventory_iface.v1.FoundBack
-	7,  // 8: inventory_iface.v1.StockChange.adjustment:type_name -> inventory_iface.v1.Adjustment
-	8,  // 9: inventory_iface.v1.StockChange.transfer:type_name -> inventory_iface.v1.Transfer
+	12, // 0: inventory_iface.v1.StockChange.at:type_name -> google.protobuf.Timestamp
+	10, // 1: inventory_iface.v1.StockChange.changes:type_name -> inventory_iface.v1.ChangeItem
+	2,  // 2: inventory_iface.v1.StockChange.order_created:type_name -> inventory_iface.v1.OrderCreated
+	3,  // 3: inventory_iface.v1.StockChange.order_canceled:type_name -> inventory_iface.v1.OrderCanceled
+	4,  // 4: inventory_iface.v1.StockChange.restock:type_name -> inventory_iface.v1.Restock
+	5,  // 5: inventory_iface.v1.StockChange.return:type_name -> inventory_iface.v1.Return
+	6,  // 6: inventory_iface.v1.StockChange.problem:type_name -> inventory_iface.v1.Problem
+	7,  // 7: inventory_iface.v1.StockChange.found_back:type_name -> inventory_iface.v1.FoundBack
+	8,  // 8: inventory_iface.v1.StockChange.adjustment:type_name -> inventory_iface.v1.Adjustment
+	9,  // 9: inventory_iface.v1.StockChange.transfer:type_name -> inventory_iface.v1.Transfer
 	10, // [10:10] is the sub-list for method output_type
 	10, // [10:10] is the sub-list for method input_type
 	10, // [10:10] is the sub-list for extension type_name
@@ -802,7 +856,7 @@ func file_inventory_iface_v1_types_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_inventory_iface_v1_types_proto_rawDesc), len(file_inventory_iface_v1_types_proto_rawDesc)),
-			NumEnums:      1,
+			NumEnums:      2,
 			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   0,

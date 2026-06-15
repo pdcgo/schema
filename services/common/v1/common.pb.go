@@ -886,6 +886,50 @@ func (x *PageInfo) GetTotalItems() int64 {
 	return 0
 }
 
+type PageInfoWithoutCount struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	CurrentPage   int64                  `protobuf:"varint,1,opt,name=current_page,json=currentPage,proto3" json:"current_page,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PageInfoWithoutCount) Reset() {
+	*x = PageInfoWithoutCount{}
+	mi := &file_common_v1_common_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PageInfoWithoutCount) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PageInfoWithoutCount) ProtoMessage() {}
+
+func (x *PageInfoWithoutCount) ProtoReflect() protoreflect.Message {
+	mi := &file_common_v1_common_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PageInfoWithoutCount.ProtoReflect.Descriptor instead.
+func (*PageInfoWithoutCount) Descriptor() ([]byte, []int) {
+	return file_common_v1_common_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *PageInfoWithoutCount) GetCurrentPage() int64 {
+	if x != nil {
+		return x.CurrentPage
+	}
+	return 0
+}
+
 var File_common_v1_common_proto protoreflect.FileDescriptor
 
 const file_common_v1_common_proto_rawDesc = "" +
@@ -939,7 +983,9 @@ const file_common_v1_common_proto_rawDesc = "" +
 	"\n" +
 	"total_page\x18\x02 \x01(\x03R\ttotalPage\x12\x1f\n" +
 	"\vtotal_items\x18\x03 \x01(\x03R\n" +
-	"totalItems*g\n" +
+	"totalItems\"9\n" +
+	"\x14PageInfoWithoutCount\x12!\n" +
+	"\fcurrent_page\x18\x01 \x01(\x03R\vcurrentPage*g\n" +
 	"\bTimeType\x12\x19\n" +
 	"\x15TIME_TYPE_UNSPECIFIED\x10\x00\x12\x13\n" +
 	"\x0fTIME_TYPE_DAILY\x10\x01\x12\x15\n" +
@@ -982,7 +1028,7 @@ func file_common_v1_common_proto_rawDescGZIP() []byte {
 }
 
 var file_common_v1_common_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
-var file_common_v1_common_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_common_v1_common_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_common_v1_common_proto_goTypes = []any{
 	(TimeType)(0),                 // 0: common.v1.TimeType
 	(SortType)(0),                 // 1: common.v1.SortType
@@ -999,12 +1045,13 @@ var file_common_v1_common_proto_goTypes = []any{
 	(*TimeFilterRangeType)(nil),   // 12: common.v1.TimeFilterRangeType
 	(*PageFilter)(nil),            // 13: common.v1.PageFilter
 	(*PageInfo)(nil),              // 14: common.v1.PageInfo
-	(*timestamppb.Timestamp)(nil), // 15: google.protobuf.Timestamp
+	(*PageInfoWithoutCount)(nil),  // 15: common.v1.PageInfoWithoutCount
+	(*timestamppb.Timestamp)(nil), // 16: google.protobuf.Timestamp
 }
 var file_common_v1_common_proto_depIdxs = []int32{
 	7,  // 0: common.v1.Team.info:type_name -> common.v1.TeamInfo
-	15, // 1: common.v1.TimeFilterRange.start_date:type_name -> google.protobuf.Timestamp
-	15, // 2: common.v1.TimeFilterRange.end_date:type_name -> google.protobuf.Timestamp
+	16, // 1: common.v1.TimeFilterRange.start_date:type_name -> google.protobuf.Timestamp
+	16, // 2: common.v1.TimeFilterRange.end_date:type_name -> google.protobuf.Timestamp
 	11, // 3: common.v1.TimeFilterRangeType.range:type_name -> common.v1.TimeFilterRange
 	0,  // 4: common.v1.TimeFilterRangeType.type:type_name -> common.v1.TimeType
 	5,  // [5:5] is the sub-list for method output_type
@@ -1025,7 +1072,7 @@ func file_common_v1_common_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_common_v1_common_proto_rawDesc), len(file_common_v1_common_proto_rawDesc)),
 			NumEnums:      5,
-			NumMessages:   10,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

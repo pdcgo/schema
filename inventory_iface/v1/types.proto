@@ -6,6 +6,12 @@ import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/pdcgo/schema/services/inventory_iface/v1;inventory_iface";
 
+enum QueueType {
+  QUEUE_TYPE_UNSPECIFIED = 0;
+  QUEUE_TYPE_FIFO = 1;
+  QUEUE_TYPE_LIFO = 2;
+}
+
 enum StockChangeType {
   STOCK_CHANGE_TYPE_UNSPECIFIED = 0;
   STOCK_CHANGE_TYPE_ORDER_CREATED = 1;

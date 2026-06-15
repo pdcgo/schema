@@ -35,11 +35,15 @@ const (
 const (
 	// InventoryServiceOrderProcedure is the fully-qualified name of the InventoryService's Order RPC.
 	InventoryServiceOrderProcedure = "/inventory_iface.v1.InventoryService/Order"
+	// InventoryServiceStockMovementProcedure is the fully-qualified name of the InventoryService's
+	// StockMovement RPC.
+	InventoryServiceStockMovementProcedure = "/inventory_iface.v1.InventoryService/StockMovement"
 )
 
 // InventoryServiceClient is a client for the inventory_iface.v1.InventoryService service.
 type InventoryServiceClient interface {
 	Order(context.Context, *connect.Request[v1.OrderRequest]) (*connect.Response[v1.OrderResponse], error)
+	StockMovement(context.Context, *connect.Request[v1.StockMovementRequest]) (*connect.Response[v1.StockMovementResponse], error)
 }
 
 // NewInventoryServiceClient constructs a client for the inventory_iface.v1.InventoryService
@@ -59,12 +63,19 @@ func NewInventoryServiceClient(httpClient connect.HTTPClient, baseURL string, op
 			connect.WithSchema(inventoryServiceMethods.ByName("Order")),
 			connect.WithClientOptions(opts...),
 		),
+		stockMovement: connect.NewClient[v1.StockMovementRequest, v1.StockMovementResponse](
+			httpClient,
+			baseURL+InventoryServiceStockMovementProcedure,
+			connect.WithSchema(inventoryServiceMethods.ByName("StockMovement")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // inventoryServiceClient implements InventoryServiceClient.
 type inventoryServiceClient struct {
-	order *connect.Client[v1.OrderRequest, v1.OrderResponse]
+	order         *connect.Client[v1.OrderRequest, v1.OrderResponse]
+	stockMovement *connect.Client[v1.StockMovementRequest, v1.StockMovementResponse]
 }
 
 // Order calls inventory_iface.v1.InventoryService.Order.
@@ -72,9 +83,15 @@ func (c *inventoryServiceClient) Order(ctx context.Context, req *connect.Request
 	return c.order.CallUnary(ctx, req)
 }
 
+// StockMovement calls inventory_iface.v1.InventoryService.StockMovement.
+func (c *inventoryServiceClient) StockMovement(ctx context.Context, req *connect.Request[v1.StockMovementRequest]) (*connect.Response[v1.StockMovementResponse], error) {
+	return c.stockMovement.CallUnary(ctx, req)
+}
+
 // InventoryServiceHandler is an implementation of the inventory_iface.v1.InventoryService service.
 type InventoryServiceHandler interface {
 	Order(context.Context, *connect.Request[v1.OrderRequest]) (*connect.Response[v1.OrderResponse], error)
+	StockMovement(context.Context, *connect.Request[v1.StockMovementRequest]) (*connect.Response[v1.StockMovementResponse], error)
 }
 
 // NewInventoryServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -90,10 +107,18 @@ func NewInventoryServiceHandler(svc InventoryServiceHandler, opts ...connect.Han
 		connect.WithSchema(inventoryServiceMethods.ByName("Order")),
 		connect.WithHandlerOptions(opts...),
 	)
+	inventoryServiceStockMovementHandler := connect.NewUnaryHandler(
+		InventoryServiceStockMovementProcedure,
+		svc.StockMovement,
+		connect.WithSchema(inventoryServiceMethods.ByName("StockMovement")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/inventory_iface.v1.InventoryService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case InventoryServiceOrderProcedure:
 			inventoryServiceOrderHandler.ServeHTTP(w, r)
+		case InventoryServiceStockMovementProcedure:
+			inventoryServiceStockMovementHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -105,4 +130,8 @@ type UnimplementedInventoryServiceHandler struct{}
 
 func (UnimplementedInventoryServiceHandler) Order(context.Context, *connect.Request[v1.OrderRequest]) (*connect.Response[v1.OrderResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory_iface.v1.InventoryService.Order is not implemented"))
+}
+
+func (UnimplementedInventoryServiceHandler) StockMovement(context.Context, *connect.Request[v1.StockMovementRequest]) (*connect.Response[v1.StockMovementResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory_iface.v1.InventoryService.StockMovement is not implemented"))
 }

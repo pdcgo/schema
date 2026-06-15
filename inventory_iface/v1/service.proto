@@ -1,16 +1,51 @@
 syntax = "proto3";
 package inventory_iface.v1;
 
+import "buf/validate/validate.proto";
+import "common/v1/common.proto";
+import "google/protobuf/timestamp.proto";
+import "inventory_iface/v1/types.proto";
+
 option go_package = "github.com/pdcgo/schema/services/inventory_iface/v1;inventory_iface";
 
 service InventoryService {
   rpc Order(OrderRequest) returns (OrderResponse);
+
+  rpc StockMovement(StockMovementRequest) returns (StockMovementResponse);
 }
 
-enum QueueType {
-  QUEUE_TYPE_UNSPECIFIED = 0;
-  QUEUE_TYPE_FIFO = 1;
-  QUEUE_TYPE_LIFO = 2;
+message StockMovementRequest {
+  uint64 product_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 warehouse_id = 2 [(buf.validate.field).uint64.gt = 0];
+  common.v1.TimeFilter time_range = 5 [(buf.validate.field).required = true];
+  common.v1.PageFilter page = 6 [(buf.validate.field).required = true];
+}
+
+message MovementTransactionInfo {
+  string receipt = 1;
+  string team_name = 2;
+}
+
+message MovementItem {
+  uint64 id = 1;
+  uint64 product_id = 2;
+  uint64 warehouse_id = 3;
+  uint64 user_id = 4;
+  uint64 transaction_id = 5;
+  StockChangeType change_type = 6;
+  int64 change = 7;
+  double price = 8;
+  int64 balance_count = 9;
+  double balance_amount = 10;
+  // @gotags: gorm:"serializer:timestamptz"
+  google.protobuf.Timestamp created_at = 11;
+
+  MovementTransactionInfo transaction_info = 12;
+}
+
+message StockMovementResponse {
+  repeated MovementItem movements = 1;
+  common.v1.PageInfoWithoutCount page_info = 2;
 }
 
 message ProvisionItem {
