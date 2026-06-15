@@ -462,8 +462,9 @@ type MovementItem struct {
 	BalanceCount  int64                  `protobuf:"varint,9,opt,name=balance_count,json=balanceCount,proto3" json:"balance_count,omitempty"`
 	BalanceAmount float64                `protobuf:"fixed64,10,opt,name=balance_amount,json=balanceAmount,proto3" json:"balance_amount,omitempty"`
 	// @gotags: gorm:"serializer:timestamptz"
-	CreatedAt       *timestamppb.Timestamp   `protobuf:"bytes,11,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty" gorm:"serializer:timestamptz"`
-	TransactionInfo *MovementTransactionInfo `protobuf:"bytes,12,opt,name=transaction_info,json=transactionInfo,proto3" json:"transaction_info,omitempty"`
+	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty" gorm:"serializer:timestamptz"`
+	// @gotags: gorm:"-"
+	TransactionInfo *MovementTransactionInfo `protobuf:"bytes,12,opt,name=transaction_info,json=transactionInfo,proto3" json:"transaction_info,omitempty" gorm:"-"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }

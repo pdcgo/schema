@@ -65,7 +65,7 @@ message MovementItem {
   double balance_amount = 10;
   // @gotags: gorm:"serializer:timestamptz"
   google.protobuf.Timestamp created_at = 11;
-
+  // @gotags: gorm:"-"
   MovementTransactionInfo transaction_info = 12;
 }
 
