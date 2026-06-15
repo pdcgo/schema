@@ -21,6 +21,48 @@ enum UserWithdrawalMetricSort {
   USER_WITHDRAWAL_METRIC_SORT_WITHDRAWAL_TOTAL_AMOUNT = 3;
 }
 
+message UserRevenueOrderItem {
+  uint64 user_id = 1;
+  double revenue_amount = 2;
+}
+
+message UserRevenueOrderMetric {
+  map<uint64, UserRevenueOrderItem> data = 1;
+}
+
+enum UserRevenueOrderMetricSort {
+  USER_REVENUE_ORDER_METRIC_SORT_UNSPECIFIED = 0;
+  USER_REVENUE_ORDER_METRIC_SORT_REVENUE_AMOUNT = 1;
+}
+
+message UserRevenueWarehouseAdjustmentItem {
+  uint64 user_id = 1;
+  double warehouse_adjustment_amount = 2;
+}
+
+message UserRevenueWarehouseAdjustmentMetric {
+  map<uint64, UserRevenueWarehouseAdjustmentItem> data = 1;
+}
+
+enum UserRevenueWarehouseAdjustmentMetricSort {
+  USER_REVENUE_WAREHOUSE_ADJUSTMENT_METRIC_SORT_UNSPECIFIED = 0;
+  USER_REVENUE_WAREHOUSE_ADJUSTMENT_METRIC_SORT_WAREHOUSE_ADJUSTMENT_AMOUNT = 1;
+}
+
+message UserRevenueProductAdjustmentItem {
+  uint64 user_id = 1;
+  double product_adjustment_amount = 2;
+}
+
+message UserRevenueProductAdjustmentMetric {
+  map<uint64, UserRevenueProductAdjustmentItem> data = 1;
+}
+
+enum UserRevenueProductAdjustmentMetricSort {
+  USER_REVENUE_PRODUCT_ADJUSTMENT_METRIC_SORT_UNSPECIFIED = 0;
+  USER_REVENUE_PRODUCT_ADJUSTMENT_METRIC_SORT_PRODUCT_ADJUSTMENT_AMOUNT = 1;
+}
+
 message UserWithdrawalBreakdownItem {
   uint64 user_id = 1;
   double aff_commission_amount = 2;

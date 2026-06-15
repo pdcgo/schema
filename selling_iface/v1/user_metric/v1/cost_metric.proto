@@ -3,180 +3,46 @@ package selling_iface.v1.user_metric.v1;
 
 option go_package = "github.com/pdcgo/schema/services/selling_iface/v1/user_metric/v1;user_metric";
 
-message UserCostOrderItem {
+message UserCostWarehouseItem {
   uint64 user_id = 1;
-  double product_amount = 2;
-  double own_product_amount = 3;
-  double cross_product_amount = 4;
-  double warehouse_amount = 5;
-  double total_amount = 6;
+  double warehouse_amount = 2;
 }
 
-message UserCostOrderMetric {
-  map<uint64, UserCostOrderItem> data = 1;
+message UserCostWarehouseMetric {
+  map<uint64, UserCostWarehouseItem> data = 1;
 }
 
-enum UserCostOrderMetricSort {
-  USER_COST_ORDER_METRIC_SORT_UNSPECIFIED = 0;
-  USER_COST_ORDER_METRIC_SORT_PRODUCT_AMOUNT = 1;
-  USER_COST_ORDER_METRIC_SORT_OWN_PRODUCT_AMOUNT = 2;
-  USER_COST_ORDER_METRIC_SORT_CROSS_PRODUCT_AMOUNT = 3;
-  USER_COST_ORDER_METRIC_SORT_WAREHOUSE_AMOUNT = 4;
-  USER_COST_ORDER_METRIC_SORT_TOTAL_AMOUNT = 5;
+enum UserCostWarehouseMetricSort {
+  USER_COST_WAREHOUSE_METRIC_SORT_UNSPECIFIED = 0;
+  USER_COST_WAREHOUSE_METRIC_SORT_WAREHOUSE_AMOUNT = 1;
 }
 
-message UserCostOrderWithdrawalItem {
+message UserCostProductOwnItem {
   uint64 user_id = 1;
-  double product_amount = 2;
-  double own_product_amount = 3;
-  double cross_product_amount = 4;
-  double warehouse_amount = 5;
-  double total_amount = 6;
+  double product_own_amount = 2;
 }
 
-message UserCostOrderWithdrawalMetric {
-  map<uint64, UserCostOrderWithdrawalItem> data = 1;
+message UserCostProductOwnMetric {
+  map<uint64, UserCostProductOwnItem> data = 1;
 }
 
-enum UserCostOrderWithdrawalMetricSort {
-  USER_COST_ORDER_WITHDRAWAL_METRIC_SORT_UNSPECIFIED = 0;
-  USER_COST_ORDER_WITHDRAWAL_METRIC_SORT_PRODUCT_AMOUNT = 1;
-  USER_COST_ORDER_WITHDRAWAL_METRIC_SORT_OWN_PRODUCT_AMOUNT = 2;
-  USER_COST_ORDER_WITHDRAWAL_METRIC_SORT_CROSS_PRODUCT_AMOUNT = 3;
-  USER_COST_ORDER_WITHDRAWAL_METRIC_SORT_WAREHOUSE_AMOUNT = 4;
-  USER_COST_ORDER_WITHDRAWAL_METRIC_SORT_TOTAL_AMOUNT = 5;
+enum UserCostProductOwnMetricSort {
+  USER_COST_PRODUCT_OWN_METRIC_SORT_UNSPECIFIED = 0;
+  USER_COST_PRODUCT_OWN_METRIC_SORT_PRODUCT_OWN_AMOUNT = 1;
 }
 
-message UserCostOrderCancelledItem {
+message UserCostProductCrossItem {
   uint64 user_id = 1;
-  double product_amount = 2;
-  double own_product_amount = 3;
-  double cross_product_amount = 4;
-  double warehouse_amount = 5;
-  double total_amount = 6;
+  double product_cross_amount = 2;
 }
 
-message UserCostOrderCancelledMetric {
-  map<uint64, UserCostOrderCancelledItem> data = 1;
+message UserCostProductCrossMetric {
+  map<uint64, UserCostProductCrossItem> data = 1;
 }
 
-enum UserCostOrderCancelledMetricSort {
-  USER_COST_ORDER_CANCELLED_METRIC_SORT_UNSPECIFIED = 0;
-  USER_COST_ORDER_CANCELLED_METRIC_SORT_PRODUCT_AMOUNT = 1;
-  USER_COST_ORDER_CANCELLED_METRIC_SORT_OWN_PRODUCT_AMOUNT = 2;
-  USER_COST_ORDER_CANCELLED_METRIC_SORT_CROSS_PRODUCT_AMOUNT = 3;
-  USER_COST_ORDER_CANCELLED_METRIC_SORT_WAREHOUSE_AMOUNT = 4;
-  USER_COST_ORDER_CANCELLED_METRIC_SORT_TOTAL_AMOUNT = 5;
-}
-
-message UserCostOrderLostItem {
-  uint64 user_id = 1;
-  double product_amount = 2;
-  double own_product_amount = 3;
-  double cross_product_amount = 4;
-  double warehouse_amount = 5;
-  double total_amount = 6;
-}
-
-message UserCostOrderLostMetric {
-  map<uint64, UserCostOrderLostItem> data = 1;
-}
-
-enum UserCostOrderLostMetricSort {
-  USER_COST_ORDER_LOST_METRIC_SORT_UNSPECIFIED = 0;
-  USER_COST_ORDER_LOST_METRIC_SORT_PRODUCT_AMOUNT = 1;
-  USER_COST_ORDER_LOST_METRIC_SORT_OWN_PRODUCT_AMOUNT = 2;
-  USER_COST_ORDER_LOST_METRIC_SORT_CROSS_PRODUCT_AMOUNT = 3;
-  USER_COST_ORDER_LOST_METRIC_SORT_WAREHOUSE_AMOUNT = 4;
-  USER_COST_ORDER_LOST_METRIC_SORT_TOTAL_AMOUNT = 5;
-}
-
-message UserCostOrderCompletedItem {
-  uint64 user_id = 1;
-  double product_amount = 2;
-  double own_product_amount = 3;
-  double cross_product_amount = 4;
-  double warehouse_amount = 5;
-  double total_amount = 6;
-}
-
-message UserCostOrderCompletedMetric {
-  map<uint64, UserCostOrderCompletedItem> data = 1;
-}
-
-enum UserCostOrderCompletedMetricSort {
-  USER_COST_ORDER_COMPLETED_METRIC_SORT_UNSPECIFIED = 0;
-  USER_COST_ORDER_COMPLETED_METRIC_SORT_PRODUCT_AMOUNT = 1;
-  USER_COST_ORDER_COMPLETED_METRIC_SORT_OWN_PRODUCT_AMOUNT = 2;
-  USER_COST_ORDER_COMPLETED_METRIC_SORT_CROSS_PRODUCT_AMOUNT = 3;
-  USER_COST_ORDER_COMPLETED_METRIC_SORT_WAREHOUSE_AMOUNT = 4;
-  USER_COST_ORDER_COMPLETED_METRIC_SORT_TOTAL_AMOUNT = 5;
-}
-
-message UserCostOrderReturnItem {
-  uint64 user_id = 1;
-  double product_amount = 2;
-  double own_product_amount = 3;
-  double cross_product_amount = 4;
-  double warehouse_amount = 5;
-  double total_amount = 6;
-}
-
-message UserCostOrderReturnMetric {
-  map<uint64, UserCostOrderReturnItem> data = 1;
-}
-
-enum UserCostOrderReturnMetricSort {
-  USER_COST_ORDER_RETURN_METRIC_SORT_UNSPECIFIED = 0;
-  USER_COST_ORDER_RETURN_METRIC_SORT_PRODUCT_AMOUNT = 1;
-  USER_COST_ORDER_RETURN_METRIC_SORT_OWN_PRODUCT_AMOUNT = 2;
-  USER_COST_ORDER_RETURN_METRIC_SORT_CROSS_PRODUCT_AMOUNT = 3;
-  USER_COST_ORDER_RETURN_METRIC_SORT_WAREHOUSE_AMOUNT = 4;
-  USER_COST_ORDER_RETURN_METRIC_SORT_TOTAL_AMOUNT = 5;
-}
-
-message UserCostOrderReturnCompletedItem {
-  uint64 user_id = 1;
-  double product_amount = 2;
-  double own_product_amount = 3;
-  double cross_product_amount = 4;
-  double warehouse_amount = 5;
-  double total_amount = 6;
-}
-
-message UserCostOrderReturnCompletedMetric {
-  map<uint64, UserCostOrderReturnCompletedItem> data = 1;
-}
-
-enum UserCostOrderReturnCompletedMetricSort {
-  USER_COST_ORDER_RETURN_COMPLETED_METRIC_SORT_UNSPECIFIED = 0;
-  USER_COST_ORDER_RETURN_COMPLETED_METRIC_SORT_PRODUCT_AMOUNT = 1;
-  USER_COST_ORDER_RETURN_COMPLETED_METRIC_SORT_OWN_PRODUCT_AMOUNT = 2;
-  USER_COST_ORDER_RETURN_COMPLETED_METRIC_SORT_CROSS_PRODUCT_AMOUNT = 3;
-  USER_COST_ORDER_RETURN_COMPLETED_METRIC_SORT_WAREHOUSE_AMOUNT = 4;
-  USER_COST_ORDER_RETURN_COMPLETED_METRIC_SORT_TOTAL_AMOUNT = 5;
-}
-
-message UserCostOrderOngoingItem {
-  uint64 user_id = 1;
-  double product_amount = 2;
-  double own_product_amount = 3;
-  double cross_product_amount = 4;
-  double warehouse_amount = 5;
-  double total_amount = 6;
-}
-
-message UserCostOrderOngoingMetric {
-  map<uint64, UserCostOrderOngoingItem> data = 1;
-}
-
-enum UserCostOrderOngoingMetricSort {
-  USER_COST_ORDER_ONGOING_METRIC_SORT_UNSPECIFIED = 0;
-  USER_COST_ORDER_ONGOING_METRIC_SORT_PRODUCT_AMOUNT = 1;
-  USER_COST_ORDER_ONGOING_METRIC_SORT_OWN_PRODUCT_AMOUNT = 2;
-  USER_COST_ORDER_ONGOING_METRIC_SORT_CROSS_PRODUCT_AMOUNT = 3;
-  USER_COST_ORDER_ONGOING_METRIC_SORT_WAREHOUSE_AMOUNT = 4;
-  USER_COST_ORDER_ONGOING_METRIC_SORT_TOTAL_AMOUNT = 5;
+enum UserCostProductCrossMetricSort {
+  USER_COST_PRODUCT_CROSS_METRIC_SORT_UNSPECIFIED = 0;
+  USER_COST_PRODUCT_CROSS_METRIC_SORT_PRODUCT_CROSS_AMOUNT = 1;
 }
 
 message UserAdsExpenseItem {

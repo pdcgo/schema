@@ -73,6 +73,144 @@ func (UserWithdrawalMetricSort) EnumDescriptor() ([]byte, []int) {
 	return file_selling_iface_v1_user_metric_v1_revenue_metric_proto_rawDescGZIP(), []int{0}
 }
 
+type UserRevenueOrderMetricSort int32
+
+const (
+	UserRevenueOrderMetricSort_USER_REVENUE_ORDER_METRIC_SORT_UNSPECIFIED    UserRevenueOrderMetricSort = 0
+	UserRevenueOrderMetricSort_USER_REVENUE_ORDER_METRIC_SORT_REVENUE_AMOUNT UserRevenueOrderMetricSort = 1
+)
+
+// Enum value maps for UserRevenueOrderMetricSort.
+var (
+	UserRevenueOrderMetricSort_name = map[int32]string{
+		0: "USER_REVENUE_ORDER_METRIC_SORT_UNSPECIFIED",
+		1: "USER_REVENUE_ORDER_METRIC_SORT_REVENUE_AMOUNT",
+	}
+	UserRevenueOrderMetricSort_value = map[string]int32{
+		"USER_REVENUE_ORDER_METRIC_SORT_UNSPECIFIED":    0,
+		"USER_REVENUE_ORDER_METRIC_SORT_REVENUE_AMOUNT": 1,
+	}
+)
+
+func (x UserRevenueOrderMetricSort) Enum() *UserRevenueOrderMetricSort {
+	p := new(UserRevenueOrderMetricSort)
+	*p = x
+	return p
+}
+
+func (x UserRevenueOrderMetricSort) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (UserRevenueOrderMetricSort) Descriptor() protoreflect.EnumDescriptor {
+	return file_selling_iface_v1_user_metric_v1_revenue_metric_proto_enumTypes[1].Descriptor()
+}
+
+func (UserRevenueOrderMetricSort) Type() protoreflect.EnumType {
+	return &file_selling_iface_v1_user_metric_v1_revenue_metric_proto_enumTypes[1]
+}
+
+func (x UserRevenueOrderMetricSort) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use UserRevenueOrderMetricSort.Descriptor instead.
+func (UserRevenueOrderMetricSort) EnumDescriptor() ([]byte, []int) {
+	return file_selling_iface_v1_user_metric_v1_revenue_metric_proto_rawDescGZIP(), []int{1}
+}
+
+type UserRevenueWarehouseAdjustmentMetricSort int32
+
+const (
+	UserRevenueWarehouseAdjustmentMetricSort_USER_REVENUE_WAREHOUSE_ADJUSTMENT_METRIC_SORT_UNSPECIFIED                 UserRevenueWarehouseAdjustmentMetricSort = 0
+	UserRevenueWarehouseAdjustmentMetricSort_USER_REVENUE_WAREHOUSE_ADJUSTMENT_METRIC_SORT_WAREHOUSE_ADJUSTMENT_AMOUNT UserRevenueWarehouseAdjustmentMetricSort = 1
+)
+
+// Enum value maps for UserRevenueWarehouseAdjustmentMetricSort.
+var (
+	UserRevenueWarehouseAdjustmentMetricSort_name = map[int32]string{
+		0: "USER_REVENUE_WAREHOUSE_ADJUSTMENT_METRIC_SORT_UNSPECIFIED",
+		1: "USER_REVENUE_WAREHOUSE_ADJUSTMENT_METRIC_SORT_WAREHOUSE_ADJUSTMENT_AMOUNT",
+	}
+	UserRevenueWarehouseAdjustmentMetricSort_value = map[string]int32{
+		"USER_REVENUE_WAREHOUSE_ADJUSTMENT_METRIC_SORT_UNSPECIFIED":                 0,
+		"USER_REVENUE_WAREHOUSE_ADJUSTMENT_METRIC_SORT_WAREHOUSE_ADJUSTMENT_AMOUNT": 1,
+	}
+)
+
+func (x UserRevenueWarehouseAdjustmentMetricSort) Enum() *UserRevenueWarehouseAdjustmentMetricSort {
+	p := new(UserRevenueWarehouseAdjustmentMetricSort)
+	*p = x
+	return p
+}
+
+func (x UserRevenueWarehouseAdjustmentMetricSort) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (UserRevenueWarehouseAdjustmentMetricSort) Descriptor() protoreflect.EnumDescriptor {
+	return file_selling_iface_v1_user_metric_v1_revenue_metric_proto_enumTypes[2].Descriptor()
+}
+
+func (UserRevenueWarehouseAdjustmentMetricSort) Type() protoreflect.EnumType {
+	return &file_selling_iface_v1_user_metric_v1_revenue_metric_proto_enumTypes[2]
+}
+
+func (x UserRevenueWarehouseAdjustmentMetricSort) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use UserRevenueWarehouseAdjustmentMetricSort.Descriptor instead.
+func (UserRevenueWarehouseAdjustmentMetricSort) EnumDescriptor() ([]byte, []int) {
+	return file_selling_iface_v1_user_metric_v1_revenue_metric_proto_rawDescGZIP(), []int{2}
+}
+
+type UserRevenueProductAdjustmentMetricSort int32
+
+const (
+	UserRevenueProductAdjustmentMetricSort_USER_REVENUE_PRODUCT_ADJUSTMENT_METRIC_SORT_UNSPECIFIED               UserRevenueProductAdjustmentMetricSort = 0
+	UserRevenueProductAdjustmentMetricSort_USER_REVENUE_PRODUCT_ADJUSTMENT_METRIC_SORT_PRODUCT_ADJUSTMENT_AMOUNT UserRevenueProductAdjustmentMetricSort = 1
+)
+
+// Enum value maps for UserRevenueProductAdjustmentMetricSort.
+var (
+	UserRevenueProductAdjustmentMetricSort_name = map[int32]string{
+		0: "USER_REVENUE_PRODUCT_ADJUSTMENT_METRIC_SORT_UNSPECIFIED",
+		1: "USER_REVENUE_PRODUCT_ADJUSTMENT_METRIC_SORT_PRODUCT_ADJUSTMENT_AMOUNT",
+	}
+	UserRevenueProductAdjustmentMetricSort_value = map[string]int32{
+		"USER_REVENUE_PRODUCT_ADJUSTMENT_METRIC_SORT_UNSPECIFIED":               0,
+		"USER_REVENUE_PRODUCT_ADJUSTMENT_METRIC_SORT_PRODUCT_ADJUSTMENT_AMOUNT": 1,
+	}
+)
+
+func (x UserRevenueProductAdjustmentMetricSort) Enum() *UserRevenueProductAdjustmentMetricSort {
+	p := new(UserRevenueProductAdjustmentMetricSort)
+	*p = x
+	return p
+}
+
+func (x UserRevenueProductAdjustmentMetricSort) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (UserRevenueProductAdjustmentMetricSort) Descriptor() protoreflect.EnumDescriptor {
+	return file_selling_iface_v1_user_metric_v1_revenue_metric_proto_enumTypes[3].Descriptor()
+}
+
+func (UserRevenueProductAdjustmentMetricSort) Type() protoreflect.EnumType {
+	return &file_selling_iface_v1_user_metric_v1_revenue_metric_proto_enumTypes[3]
+}
+
+func (x UserRevenueProductAdjustmentMetricSort) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use UserRevenueProductAdjustmentMetricSort.Descriptor instead.
+func (UserRevenueProductAdjustmentMetricSort) EnumDescriptor() ([]byte, []int) {
+	return file_selling_iface_v1_user_metric_v1_revenue_metric_proto_rawDescGZIP(), []int{3}
+}
+
 type UserWithdrawalBreakdownMetricSort int32
 
 const (
@@ -133,11 +271,11 @@ func (x UserWithdrawalBreakdownMetricSort) String() string {
 }
 
 func (UserWithdrawalBreakdownMetricSort) Descriptor() protoreflect.EnumDescriptor {
-	return file_selling_iface_v1_user_metric_v1_revenue_metric_proto_enumTypes[1].Descriptor()
+	return file_selling_iface_v1_user_metric_v1_revenue_metric_proto_enumTypes[4].Descriptor()
 }
 
 func (UserWithdrawalBreakdownMetricSort) Type() protoreflect.EnumType {
-	return &file_selling_iface_v1_user_metric_v1_revenue_metric_proto_enumTypes[1]
+	return &file_selling_iface_v1_user_metric_v1_revenue_metric_proto_enumTypes[4]
 }
 
 func (x UserWithdrawalBreakdownMetricSort) Number() protoreflect.EnumNumber {
@@ -146,7 +284,7 @@ func (x UserWithdrawalBreakdownMetricSort) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use UserWithdrawalBreakdownMetricSort.Descriptor instead.
 func (UserWithdrawalBreakdownMetricSort) EnumDescriptor() ([]byte, []int) {
-	return file_selling_iface_v1_user_metric_v1_revenue_metric_proto_rawDescGZIP(), []int{1}
+	return file_selling_iface_v1_user_metric_v1_revenue_metric_proto_rawDescGZIP(), []int{4}
 }
 
 type UserWithdrawalItem struct {
@@ -261,6 +399,294 @@ func (x *UserWithdrawalMetric) GetData() map[uint64]*UserWithdrawalItem {
 	return nil
 }
 
+type UserRevenueOrderItem struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	RevenueAmount float64                `protobuf:"fixed64,2,opt,name=revenue_amount,json=revenueAmount,proto3" json:"revenue_amount,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UserRevenueOrderItem) Reset() {
+	*x = UserRevenueOrderItem{}
+	mi := &file_selling_iface_v1_user_metric_v1_revenue_metric_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserRevenueOrderItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserRevenueOrderItem) ProtoMessage() {}
+
+func (x *UserRevenueOrderItem) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_user_metric_v1_revenue_metric_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserRevenueOrderItem.ProtoReflect.Descriptor instead.
+func (*UserRevenueOrderItem) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_user_metric_v1_revenue_metric_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *UserRevenueOrderItem) GetUserId() uint64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *UserRevenueOrderItem) GetRevenueAmount() float64 {
+	if x != nil {
+		return x.RevenueAmount
+	}
+	return 0
+}
+
+type UserRevenueOrderMetric struct {
+	state         protoimpl.MessageState           `protogen:"open.v1"`
+	Data          map[uint64]*UserRevenueOrderItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UserRevenueOrderMetric) Reset() {
+	*x = UserRevenueOrderMetric{}
+	mi := &file_selling_iface_v1_user_metric_v1_revenue_metric_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserRevenueOrderMetric) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserRevenueOrderMetric) ProtoMessage() {}
+
+func (x *UserRevenueOrderMetric) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_user_metric_v1_revenue_metric_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserRevenueOrderMetric.ProtoReflect.Descriptor instead.
+func (*UserRevenueOrderMetric) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_user_metric_v1_revenue_metric_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *UserRevenueOrderMetric) GetData() map[uint64]*UserRevenueOrderItem {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+type UserRevenueWarehouseAdjustmentItem struct {
+	state                     protoimpl.MessageState `protogen:"open.v1"`
+	UserId                    uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	WarehouseAdjustmentAmount float64                `protobuf:"fixed64,2,opt,name=warehouse_adjustment_amount,json=warehouseAdjustmentAmount,proto3" json:"warehouse_adjustment_amount,omitempty"`
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
+}
+
+func (x *UserRevenueWarehouseAdjustmentItem) Reset() {
+	*x = UserRevenueWarehouseAdjustmentItem{}
+	mi := &file_selling_iface_v1_user_metric_v1_revenue_metric_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserRevenueWarehouseAdjustmentItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserRevenueWarehouseAdjustmentItem) ProtoMessage() {}
+
+func (x *UserRevenueWarehouseAdjustmentItem) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_user_metric_v1_revenue_metric_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserRevenueWarehouseAdjustmentItem.ProtoReflect.Descriptor instead.
+func (*UserRevenueWarehouseAdjustmentItem) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_user_metric_v1_revenue_metric_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *UserRevenueWarehouseAdjustmentItem) GetUserId() uint64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *UserRevenueWarehouseAdjustmentItem) GetWarehouseAdjustmentAmount() float64 {
+	if x != nil {
+		return x.WarehouseAdjustmentAmount
+	}
+	return 0
+}
+
+type UserRevenueWarehouseAdjustmentMetric struct {
+	state         protoimpl.MessageState                         `protogen:"open.v1"`
+	Data          map[uint64]*UserRevenueWarehouseAdjustmentItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UserRevenueWarehouseAdjustmentMetric) Reset() {
+	*x = UserRevenueWarehouseAdjustmentMetric{}
+	mi := &file_selling_iface_v1_user_metric_v1_revenue_metric_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserRevenueWarehouseAdjustmentMetric) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserRevenueWarehouseAdjustmentMetric) ProtoMessage() {}
+
+func (x *UserRevenueWarehouseAdjustmentMetric) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_user_metric_v1_revenue_metric_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserRevenueWarehouseAdjustmentMetric.ProtoReflect.Descriptor instead.
+func (*UserRevenueWarehouseAdjustmentMetric) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_user_metric_v1_revenue_metric_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *UserRevenueWarehouseAdjustmentMetric) GetData() map[uint64]*UserRevenueWarehouseAdjustmentItem {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+type UserRevenueProductAdjustmentItem struct {
+	state                   protoimpl.MessageState `protogen:"open.v1"`
+	UserId                  uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	ProductAdjustmentAmount float64                `protobuf:"fixed64,2,opt,name=product_adjustment_amount,json=productAdjustmentAmount,proto3" json:"product_adjustment_amount,omitempty"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
+}
+
+func (x *UserRevenueProductAdjustmentItem) Reset() {
+	*x = UserRevenueProductAdjustmentItem{}
+	mi := &file_selling_iface_v1_user_metric_v1_revenue_metric_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserRevenueProductAdjustmentItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserRevenueProductAdjustmentItem) ProtoMessage() {}
+
+func (x *UserRevenueProductAdjustmentItem) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_user_metric_v1_revenue_metric_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserRevenueProductAdjustmentItem.ProtoReflect.Descriptor instead.
+func (*UserRevenueProductAdjustmentItem) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_user_metric_v1_revenue_metric_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *UserRevenueProductAdjustmentItem) GetUserId() uint64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *UserRevenueProductAdjustmentItem) GetProductAdjustmentAmount() float64 {
+	if x != nil {
+		return x.ProductAdjustmentAmount
+	}
+	return 0
+}
+
+type UserRevenueProductAdjustmentMetric struct {
+	state         protoimpl.MessageState                       `protogen:"open.v1"`
+	Data          map[uint64]*UserRevenueProductAdjustmentItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UserRevenueProductAdjustmentMetric) Reset() {
+	*x = UserRevenueProductAdjustmentMetric{}
+	mi := &file_selling_iface_v1_user_metric_v1_revenue_metric_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserRevenueProductAdjustmentMetric) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserRevenueProductAdjustmentMetric) ProtoMessage() {}
+
+func (x *UserRevenueProductAdjustmentMetric) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_user_metric_v1_revenue_metric_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserRevenueProductAdjustmentMetric.ProtoReflect.Descriptor instead.
+func (*UserRevenueProductAdjustmentMetric) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_user_metric_v1_revenue_metric_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *UserRevenueProductAdjustmentMetric) GetData() map[uint64]*UserRevenueProductAdjustmentItem {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
 type UserWithdrawalBreakdownItem struct {
 	state                  protoimpl.MessageState `protogen:"open.v1"`
 	UserId                 uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
@@ -281,7 +707,7 @@ type UserWithdrawalBreakdownItem struct {
 
 func (x *UserWithdrawalBreakdownItem) Reset() {
 	*x = UserWithdrawalBreakdownItem{}
-	mi := &file_selling_iface_v1_user_metric_v1_revenue_metric_proto_msgTypes[2]
+	mi := &file_selling_iface_v1_user_metric_v1_revenue_metric_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -293,7 +719,7 @@ func (x *UserWithdrawalBreakdownItem) String() string {
 func (*UserWithdrawalBreakdownItem) ProtoMessage() {}
 
 func (x *UserWithdrawalBreakdownItem) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_user_metric_v1_revenue_metric_proto_msgTypes[2]
+	mi := &file_selling_iface_v1_user_metric_v1_revenue_metric_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -306,7 +732,7 @@ func (x *UserWithdrawalBreakdownItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserWithdrawalBreakdownItem.ProtoReflect.Descriptor instead.
 func (*UserWithdrawalBreakdownItem) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_user_metric_v1_revenue_metric_proto_rawDescGZIP(), []int{2}
+	return file_selling_iface_v1_user_metric_v1_revenue_metric_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *UserWithdrawalBreakdownItem) GetUserId() uint64 {
@@ -402,7 +828,7 @@ type UserWithdrawalBreakdownMetric struct {
 
 func (x *UserWithdrawalBreakdownMetric) Reset() {
 	*x = UserWithdrawalBreakdownMetric{}
-	mi := &file_selling_iface_v1_user_metric_v1_revenue_metric_proto_msgTypes[3]
+	mi := &file_selling_iface_v1_user_metric_v1_revenue_metric_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -414,7 +840,7 @@ func (x *UserWithdrawalBreakdownMetric) String() string {
 func (*UserWithdrawalBreakdownMetric) ProtoMessage() {}
 
 func (x *UserWithdrawalBreakdownMetric) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_user_metric_v1_revenue_metric_proto_msgTypes[3]
+	mi := &file_selling_iface_v1_user_metric_v1_revenue_metric_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -427,7 +853,7 @@ func (x *UserWithdrawalBreakdownMetric) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserWithdrawalBreakdownMetric.ProtoReflect.Descriptor instead.
 func (*UserWithdrawalBreakdownMetric) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_user_metric_v1_revenue_metric_proto_rawDescGZIP(), []int{3}
+	return file_selling_iface_v1_user_metric_v1_revenue_metric_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *UserWithdrawalBreakdownMetric) GetData() map[uint64]*UserWithdrawalBreakdownItem {
@@ -451,7 +877,31 @@ const file_selling_iface_v1_user_metric_v1_revenue_metric_proto_rawDesc = "" +
 	"\x04data\x18\x01 \x03(\v2?.selling_iface.v1.user_metric.v1.UserWithdrawalMetric.DataEntryR\x04data\x1al\n" +
 	"\tDataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\x04R\x03key\x12I\n" +
-	"\x05value\x18\x02 \x01(\v23.selling_iface.v1.user_metric.v1.UserWithdrawalItemR\x05value:\x028\x01\"\xa3\x04\n" +
+	"\x05value\x18\x02 \x01(\v23.selling_iface.v1.user_metric.v1.UserWithdrawalItemR\x05value:\x028\x01\"V\n" +
+	"\x14UserRevenueOrderItem\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x04R\x06userId\x12%\n" +
+	"\x0erevenue_amount\x18\x02 \x01(\x01R\rrevenueAmount\"\xdf\x01\n" +
+	"\x16UserRevenueOrderMetric\x12U\n" +
+	"\x04data\x18\x01 \x03(\v2A.selling_iface.v1.user_metric.v1.UserRevenueOrderMetric.DataEntryR\x04data\x1an\n" +
+	"\tDataEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\x04R\x03key\x12K\n" +
+	"\x05value\x18\x02 \x01(\v25.selling_iface.v1.user_metric.v1.UserRevenueOrderItemR\x05value:\x028\x01\"}\n" +
+	"\"UserRevenueWarehouseAdjustmentItem\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x04R\x06userId\x12>\n" +
+	"\x1bwarehouse_adjustment_amount\x18\x02 \x01(\x01R\x19warehouseAdjustmentAmount\"\x89\x02\n" +
+	"$UserRevenueWarehouseAdjustmentMetric\x12c\n" +
+	"\x04data\x18\x01 \x03(\v2O.selling_iface.v1.user_metric.v1.UserRevenueWarehouseAdjustmentMetric.DataEntryR\x04data\x1a|\n" +
+	"\tDataEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\x04R\x03key\x12Y\n" +
+	"\x05value\x18\x02 \x01(\v2C.selling_iface.v1.user_metric.v1.UserRevenueWarehouseAdjustmentItemR\x05value:\x028\x01\"w\n" +
+	" UserRevenueProductAdjustmentItem\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x04R\x06userId\x12:\n" +
+	"\x19product_adjustment_amount\x18\x02 \x01(\x01R\x17productAdjustmentAmount\"\x83\x02\n" +
+	"\"UserRevenueProductAdjustmentMetric\x12a\n" +
+	"\x04data\x18\x01 \x03(\v2M.selling_iface.v1.user_metric.v1.UserRevenueProductAdjustmentMetric.DataEntryR\x04data\x1az\n" +
+	"\tDataEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\x04R\x03key\x12W\n" +
+	"\x05value\x18\x02 \x01(\v2A.selling_iface.v1.user_metric.v1.UserRevenueProductAdjustmentItemR\x05value:\x028\x01\"\xa3\x04\n" +
 	"\x1bUserWithdrawalBreakdownItem\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x04R\x06userId\x122\n" +
 	"\x15aff_commission_amount\x18\x02 \x01(\x01R\x13affCommissionAmount\x12!\n" +
@@ -475,7 +925,16 @@ const file_selling_iface_v1_user_metric_v1_revenue_metric_proto_rawDesc = "" +
 	"'USER_WITHDRAWAL_METRIC_SORT_UNSPECIFIED\x10\x00\x126\n" +
 	"2USER_WITHDRAWAL_METRIC_SORT_WITHDRAWAL_FUND_AMOUNT\x10\x01\x12<\n" +
 	"8USER_WITHDRAWAL_METRIC_SORT_WITHDRAWAL_ADJUSTMENT_AMOUNT\x10\x02\x127\n" +
-	"3USER_WITHDRAWAL_METRIC_SORT_WITHDRAWAL_TOTAL_AMOUNT\x10\x03*\xfb\x05\n" +
+	"3USER_WITHDRAWAL_METRIC_SORT_WITHDRAWAL_TOTAL_AMOUNT\x10\x03*\x7f\n" +
+	"\x1aUserRevenueOrderMetricSort\x12.\n" +
+	"*USER_REVENUE_ORDER_METRIC_SORT_UNSPECIFIED\x10\x00\x121\n" +
+	"-USER_REVENUE_ORDER_METRIC_SORT_REVENUE_AMOUNT\x10\x01*\xb8\x01\n" +
+	"(UserRevenueWarehouseAdjustmentMetricSort\x12=\n" +
+	"9USER_REVENUE_WAREHOUSE_ADJUSTMENT_METRIC_SORT_UNSPECIFIED\x10\x00\x12M\n" +
+	"IUSER_REVENUE_WAREHOUSE_ADJUSTMENT_METRIC_SORT_WAREHOUSE_ADJUSTMENT_AMOUNT\x10\x01*\xb0\x01\n" +
+	"&UserRevenueProductAdjustmentMetricSort\x12;\n" +
+	"7USER_REVENUE_PRODUCT_ADJUSTMENT_METRIC_SORT_UNSPECIFIED\x10\x00\x12I\n" +
+	"EUSER_REVENUE_PRODUCT_ADJUSTMENT_METRIC_SORT_PRODUCT_ADJUSTMENT_AMOUNT\x10\x01*\xfb\x05\n" +
 	"!UserWithdrawalBreakdownMetricSort\x125\n" +
 	"1USER_WITHDRAWAL_BREAKDOWN_METRIC_SORT_UNSPECIFIED\x10\x00\x12?\n" +
 	";USER_WITHDRAWAL_BREAKDOWN_METRIC_SORT_AFF_COMMISSION_AMOUNT\x10\x01\x126\n" +
@@ -504,28 +963,46 @@ func file_selling_iface_v1_user_metric_v1_revenue_metric_proto_rawDescGZIP() []b
 	return file_selling_iface_v1_user_metric_v1_revenue_metric_proto_rawDescData
 }
 
-var file_selling_iface_v1_user_metric_v1_revenue_metric_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_selling_iface_v1_user_metric_v1_revenue_metric_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_selling_iface_v1_user_metric_v1_revenue_metric_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
+var file_selling_iface_v1_user_metric_v1_revenue_metric_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
 var file_selling_iface_v1_user_metric_v1_revenue_metric_proto_goTypes = []any{
-	(UserWithdrawalMetricSort)(0),          // 0: selling_iface.v1.user_metric.v1.UserWithdrawalMetricSort
-	(UserWithdrawalBreakdownMetricSort)(0), // 1: selling_iface.v1.user_metric.v1.UserWithdrawalBreakdownMetricSort
-	(*UserWithdrawalItem)(nil),             // 2: selling_iface.v1.user_metric.v1.UserWithdrawalItem
-	(*UserWithdrawalMetric)(nil),           // 3: selling_iface.v1.user_metric.v1.UserWithdrawalMetric
-	(*UserWithdrawalBreakdownItem)(nil),    // 4: selling_iface.v1.user_metric.v1.UserWithdrawalBreakdownItem
-	(*UserWithdrawalBreakdownMetric)(nil),  // 5: selling_iface.v1.user_metric.v1.UserWithdrawalBreakdownMetric
-	nil,                                    // 6: selling_iface.v1.user_metric.v1.UserWithdrawalMetric.DataEntry
-	nil,                                    // 7: selling_iface.v1.user_metric.v1.UserWithdrawalBreakdownMetric.DataEntry
+	(UserWithdrawalMetricSort)(0),                 // 0: selling_iface.v1.user_metric.v1.UserWithdrawalMetricSort
+	(UserRevenueOrderMetricSort)(0),               // 1: selling_iface.v1.user_metric.v1.UserRevenueOrderMetricSort
+	(UserRevenueWarehouseAdjustmentMetricSort)(0), // 2: selling_iface.v1.user_metric.v1.UserRevenueWarehouseAdjustmentMetricSort
+	(UserRevenueProductAdjustmentMetricSort)(0),   // 3: selling_iface.v1.user_metric.v1.UserRevenueProductAdjustmentMetricSort
+	(UserWithdrawalBreakdownMetricSort)(0),        // 4: selling_iface.v1.user_metric.v1.UserWithdrawalBreakdownMetricSort
+	(*UserWithdrawalItem)(nil),                    // 5: selling_iface.v1.user_metric.v1.UserWithdrawalItem
+	(*UserWithdrawalMetric)(nil),                  // 6: selling_iface.v1.user_metric.v1.UserWithdrawalMetric
+	(*UserRevenueOrderItem)(nil),                  // 7: selling_iface.v1.user_metric.v1.UserRevenueOrderItem
+	(*UserRevenueOrderMetric)(nil),                // 8: selling_iface.v1.user_metric.v1.UserRevenueOrderMetric
+	(*UserRevenueWarehouseAdjustmentItem)(nil),    // 9: selling_iface.v1.user_metric.v1.UserRevenueWarehouseAdjustmentItem
+	(*UserRevenueWarehouseAdjustmentMetric)(nil),  // 10: selling_iface.v1.user_metric.v1.UserRevenueWarehouseAdjustmentMetric
+	(*UserRevenueProductAdjustmentItem)(nil),      // 11: selling_iface.v1.user_metric.v1.UserRevenueProductAdjustmentItem
+	(*UserRevenueProductAdjustmentMetric)(nil),    // 12: selling_iface.v1.user_metric.v1.UserRevenueProductAdjustmentMetric
+	(*UserWithdrawalBreakdownItem)(nil),           // 13: selling_iface.v1.user_metric.v1.UserWithdrawalBreakdownItem
+	(*UserWithdrawalBreakdownMetric)(nil),         // 14: selling_iface.v1.user_metric.v1.UserWithdrawalBreakdownMetric
+	nil,                                           // 15: selling_iface.v1.user_metric.v1.UserWithdrawalMetric.DataEntry
+	nil,                                           // 16: selling_iface.v1.user_metric.v1.UserRevenueOrderMetric.DataEntry
+	nil,                                           // 17: selling_iface.v1.user_metric.v1.UserRevenueWarehouseAdjustmentMetric.DataEntry
+	nil,                                           // 18: selling_iface.v1.user_metric.v1.UserRevenueProductAdjustmentMetric.DataEntry
+	nil,                                           // 19: selling_iface.v1.user_metric.v1.UserWithdrawalBreakdownMetric.DataEntry
 }
 var file_selling_iface_v1_user_metric_v1_revenue_metric_proto_depIdxs = []int32{
-	6, // 0: selling_iface.v1.user_metric.v1.UserWithdrawalMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserWithdrawalMetric.DataEntry
-	7, // 1: selling_iface.v1.user_metric.v1.UserWithdrawalBreakdownMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserWithdrawalBreakdownMetric.DataEntry
-	2, // 2: selling_iface.v1.user_metric.v1.UserWithdrawalMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserWithdrawalItem
-	4, // 3: selling_iface.v1.user_metric.v1.UserWithdrawalBreakdownMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserWithdrawalBreakdownItem
-	4, // [4:4] is the sub-list for method output_type
-	4, // [4:4] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	15, // 0: selling_iface.v1.user_metric.v1.UserWithdrawalMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserWithdrawalMetric.DataEntry
+	16, // 1: selling_iface.v1.user_metric.v1.UserRevenueOrderMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserRevenueOrderMetric.DataEntry
+	17, // 2: selling_iface.v1.user_metric.v1.UserRevenueWarehouseAdjustmentMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserRevenueWarehouseAdjustmentMetric.DataEntry
+	18, // 3: selling_iface.v1.user_metric.v1.UserRevenueProductAdjustmentMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserRevenueProductAdjustmentMetric.DataEntry
+	19, // 4: selling_iface.v1.user_metric.v1.UserWithdrawalBreakdownMetric.data:type_name -> selling_iface.v1.user_metric.v1.UserWithdrawalBreakdownMetric.DataEntry
+	5,  // 5: selling_iface.v1.user_metric.v1.UserWithdrawalMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserWithdrawalItem
+	7,  // 6: selling_iface.v1.user_metric.v1.UserRevenueOrderMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserRevenueOrderItem
+	9,  // 7: selling_iface.v1.user_metric.v1.UserRevenueWarehouseAdjustmentMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserRevenueWarehouseAdjustmentItem
+	11, // 8: selling_iface.v1.user_metric.v1.UserRevenueProductAdjustmentMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserRevenueProductAdjustmentItem
+	13, // 9: selling_iface.v1.user_metric.v1.UserWithdrawalBreakdownMetric.DataEntry.value:type_name -> selling_iface.v1.user_metric.v1.UserWithdrawalBreakdownItem
+	10, // [10:10] is the sub-list for method output_type
+	10, // [10:10] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_selling_iface_v1_user_metric_v1_revenue_metric_proto_init() }
@@ -538,8 +1015,8 @@ func file_selling_iface_v1_user_metric_v1_revenue_metric_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_selling_iface_v1_user_metric_v1_revenue_metric_proto_rawDesc), len(file_selling_iface_v1_user_metric_v1_revenue_metric_proto_rawDesc)),
-			NumEnums:      2,
-			NumMessages:   6,
+			NumEnums:      5,
+			NumMessages:   15,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
