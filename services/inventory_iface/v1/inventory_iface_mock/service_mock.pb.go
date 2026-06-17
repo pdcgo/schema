@@ -202,3 +202,29 @@ func (mr *MockInventoryServiceClientMockRecorder) ProductBatchList(ctx, req inte
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ProductBatchList", reflect.TypeOf((*MockInventoryService)(nil).ProductBatchList), ctx, req)
 }
 
+func (m *MockInventoryService) ProductReconcile(ctx context.Context, req *connect.Request[v1.ProductReconcileRequest]) (*connect.Response[v1.ProductReconcileResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "ProductReconcile", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.ProductReconcileResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInventoryServiceMockRecorder) ProductReconcile(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ProductReconcile", reflect.TypeOf((*MockInventoryService)(nil).ProductReconcile), ctx, req)
+}
+
+func (m *MockInventoryServiceClient) ProductReconcile(ctx context.Context, req *connect.Request[v1.ProductReconcileRequest]) (*connect.Response[v1.ProductReconcileResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "ProductReconcile", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.ProductReconcileResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInventoryServiceClientMockRecorder) ProductReconcile(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ProductReconcile", reflect.TypeOf((*MockInventoryService)(nil).ProductReconcile), ctx, req)
+}
+

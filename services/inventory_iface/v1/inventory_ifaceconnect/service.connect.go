@@ -50,6 +50,9 @@ const (
 	// InventoryServiceProductBatchListProcedure is the fully-qualified name of the InventoryService's
 	// ProductBatchList RPC.
 	InventoryServiceProductBatchListProcedure = "/inventory_iface.v1.InventoryService/ProductBatchList"
+	// InventoryServiceProductReconcileProcedure is the fully-qualified name of the InventoryService's
+	// ProductReconcile RPC.
+	InventoryServiceProductReconcileProcedure = "/inventory_iface.v1.InventoryService/ProductReconcile"
 )
 
 // InventoryServiceClient is a client for the inventory_iface.v1.InventoryService service.
@@ -62,6 +65,8 @@ type InventoryServiceClient interface {
 	ProductPlacementList(context.Context, *connect.Request[v1.ProductPlacementListRequest]) (*connect.Response[v1.ProductPlacementListResponse], error)
 	ProductPlacementLog(context.Context, *connect.Request[v1.ProductPlacementLogRequest]) (*connect.Response[v1.ProductPlacementLogResponse], error)
 	ProductBatchList(context.Context, *connect.Request[v1.ProductBatchListRequest]) (*connect.Response[v1.ProductBatchListResponse], error)
+	// untuk rekonsiliasi legacy
+	ProductReconcile(context.Context, *connect.Request[v1.ProductReconcileRequest]) (*connect.Response[v1.ProductReconcileResponse], error)
 }
 
 // NewInventoryServiceClient constructs a client for the inventory_iface.v1.InventoryService
@@ -111,6 +116,12 @@ func NewInventoryServiceClient(httpClient connect.HTTPClient, baseURL string, op
 			connect.WithSchema(inventoryServiceMethods.ByName("ProductBatchList")),
 			connect.WithClientOptions(opts...),
 		),
+		productReconcile: connect.NewClient[v1.ProductReconcileRequest, v1.ProductReconcileResponse](
+			httpClient,
+			baseURL+InventoryServiceProductReconcileProcedure,
+			connect.WithSchema(inventoryServiceMethods.ByName("ProductReconcile")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -122,6 +133,7 @@ type inventoryServiceClient struct {
 	productPlacementList *connect.Client[v1.ProductPlacementListRequest, v1.ProductPlacementListResponse]
 	productPlacementLog  *connect.Client[v1.ProductPlacementLogRequest, v1.ProductPlacementLogResponse]
 	productBatchList     *connect.Client[v1.ProductBatchListRequest, v1.ProductBatchListResponse]
+	productReconcile     *connect.Client[v1.ProductReconcileRequest, v1.ProductReconcileResponse]
 }
 
 // Order calls inventory_iface.v1.InventoryService.Order.
@@ -154,6 +166,11 @@ func (c *inventoryServiceClient) ProductBatchList(ctx context.Context, req *conn
 	return c.productBatchList.CallUnary(ctx, req)
 }
 
+// ProductReconcile calls inventory_iface.v1.InventoryService.ProductReconcile.
+func (c *inventoryServiceClient) ProductReconcile(ctx context.Context, req *connect.Request[v1.ProductReconcileRequest]) (*connect.Response[v1.ProductReconcileResponse], error) {
+	return c.productReconcile.CallUnary(ctx, req)
+}
+
 // InventoryServiceHandler is an implementation of the inventory_iface.v1.InventoryService service.
 type InventoryServiceHandler interface {
 	Order(context.Context, *connect.Request[v1.OrderRequest]) (*connect.Response[v1.OrderResponse], error)
@@ -164,6 +181,8 @@ type InventoryServiceHandler interface {
 	ProductPlacementList(context.Context, *connect.Request[v1.ProductPlacementListRequest]) (*connect.Response[v1.ProductPlacementListResponse], error)
 	ProductPlacementLog(context.Context, *connect.Request[v1.ProductPlacementLogRequest]) (*connect.Response[v1.ProductPlacementLogResponse], error)
 	ProductBatchList(context.Context, *connect.Request[v1.ProductBatchListRequest]) (*connect.Response[v1.ProductBatchListResponse], error)
+	// untuk rekonsiliasi legacy
+	ProductReconcile(context.Context, *connect.Request[v1.ProductReconcileRequest]) (*connect.Response[v1.ProductReconcileResponse], error)
 }
 
 // NewInventoryServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -209,6 +228,12 @@ func NewInventoryServiceHandler(svc InventoryServiceHandler, opts ...connect.Han
 		connect.WithSchema(inventoryServiceMethods.ByName("ProductBatchList")),
 		connect.WithHandlerOptions(opts...),
 	)
+	inventoryServiceProductReconcileHandler := connect.NewUnaryHandler(
+		InventoryServiceProductReconcileProcedure,
+		svc.ProductReconcile,
+		connect.WithSchema(inventoryServiceMethods.ByName("ProductReconcile")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/inventory_iface.v1.InventoryService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case InventoryServiceOrderProcedure:
@@ -223,6 +248,8 @@ func NewInventoryServiceHandler(svc InventoryServiceHandler, opts ...connect.Han
 			inventoryServiceProductPlacementLogHandler.ServeHTTP(w, r)
 		case InventoryServiceProductBatchListProcedure:
 			inventoryServiceProductBatchListHandler.ServeHTTP(w, r)
+		case InventoryServiceProductReconcileProcedure:
+			inventoryServiceProductReconcileHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -254,4 +281,8 @@ func (UnimplementedInventoryServiceHandler) ProductPlacementLog(context.Context,
 
 func (UnimplementedInventoryServiceHandler) ProductBatchList(context.Context, *connect.Request[v1.ProductBatchListRequest]) (*connect.Response[v1.ProductBatchListResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory_iface.v1.InventoryService.ProductBatchList is not implemented"))
+}
+
+func (UnimplementedInventoryServiceHandler) ProductReconcile(context.Context, *connect.Request[v1.ProductReconcileRequest]) (*connect.Response[v1.ProductReconcileResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory_iface.v1.InventoryService.ProductReconcile is not implemented"))
 }

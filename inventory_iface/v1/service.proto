@@ -21,7 +21,16 @@ service InventoryService {
   rpc ProductPlacementList(ProductPlacementListRequest) returns (ProductPlacementListResponse);
   rpc ProductPlacementLog(ProductPlacementLogRequest) returns (ProductPlacementLogResponse);
   rpc ProductBatchList(ProductBatchListRequest) returns (ProductBatchListResponse);
+
+  // untuk rekonsiliasi legacy
+  rpc ProductReconcile(ProductReconcileRequest) returns (ProductReconcileResponse);
 }
+
+message ProductReconcileRequest {
+  uint64 product_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 warehouse_id = 2 [(buf.validate.field).uint64.gt = 0];
+}
+message ProductReconcileResponse {}
 
 message ProductPlacementListRequest {}
 
