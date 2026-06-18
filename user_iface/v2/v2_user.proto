@@ -17,12 +17,24 @@ service V2UserService {
 
   rpc TeamUserList(TeamUserListRequest) returns (TeamUserListResponse);
   rpc TeamUserUpdate(TeamUserUpdateRequest) returns (TeamUserUpdateResponse);
+
+  rpc TeamSynclegacy(TeamSynclegacyRequest) returns (stream TeamSynclegacyResponse);
 }
 
-message ResetPasswordRequest {
+message TeamSynclegacyRequest {
   option (role_base.v1.request_policy) = {
-    allow_only_authenticated: true
+    roles: [
+      ROLE_ROOT,
+      ROLE_ADMIN
+    ]
   };
+
+  uint64 team_id = 1;
+}
+message TeamSynclegacyResponse {}
+
+message ResetPasswordRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
 
   uint64 user_id = 1;
   string old_password = 2;
@@ -49,9 +61,7 @@ message SearchUserByIds {
 }
 
 message SearchUserRequest {
-  option (role_base.v1.request_policy) = {
-    allow_only_authenticated: true
-  };
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
 
   oneof filter {
     SearchUserByKeyword keyword = 1;

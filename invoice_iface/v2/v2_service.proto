@@ -21,7 +21,14 @@ service InvoiceService {
   rpc ListTeamBalanceLog(ListTeamBalanceLogRequest) returns (ListTeamBalanceLogResponse);
 
   rpc CreateBalanceLog(CreateBalanceLogRequest) returns (CreateBalanceLogResponse);
+
+  rpc TeamReconcile(TeamReconcileRequest) returns (TeamReconcileResponse);
 }
+
+message TeamReconcileRequest {
+  uint64 team_id = 1;
+}
+message TeamReconcileResponse {}
 
 message CreateBalanceLogRequest {
   option (role_base.v1.request_policy) = {allow_only_authenticated: true};

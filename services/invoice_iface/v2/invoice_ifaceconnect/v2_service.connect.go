@@ -60,6 +60,9 @@ const (
 	// InvoiceServiceCreateBalanceLogProcedure is the fully-qualified name of the InvoiceService's
 	// CreateBalanceLog RPC.
 	InvoiceServiceCreateBalanceLogProcedure = "/invoice_iface.v2.InvoiceService/CreateBalanceLog"
+	// InvoiceServiceTeamReconcileProcedure is the fully-qualified name of the InvoiceService's
+	// TeamReconcile RPC.
+	InvoiceServiceTeamReconcileProcedure = "/invoice_iface.v2.InvoiceService/TeamReconcile"
 )
 
 // InvoiceServiceClient is a client for the invoice_iface.v2.InvoiceService service.
@@ -73,6 +76,7 @@ type InvoiceServiceClient interface {
 	TeamBalanceMap(context.Context, *connect.Request[v2.TeamBalanceMapRequest]) (*connect.Response[v2.TeamBalanceMapResponse], error)
 	ListTeamBalanceLog(context.Context, *connect.Request[v2.ListTeamBalanceLogRequest]) (*connect.Response[v2.ListTeamBalanceLogResponse], error)
 	CreateBalanceLog(context.Context, *connect.Request[v2.CreateBalanceLogRequest]) (*connect.Response[v2.CreateBalanceLogResponse], error)
+	TeamReconcile(context.Context, *connect.Request[v2.TeamReconcileRequest]) (*connect.Response[v2.TeamReconcileResponse], error)
 }
 
 // NewInvoiceServiceClient constructs a client for the invoice_iface.v2.InvoiceService service. By
@@ -140,6 +144,12 @@ func NewInvoiceServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			connect.WithSchema(invoiceServiceMethods.ByName("CreateBalanceLog")),
 			connect.WithClientOptions(opts...),
 		),
+		teamReconcile: connect.NewClient[v2.TeamReconcileRequest, v2.TeamReconcileResponse](
+			httpClient,
+			baseURL+InvoiceServiceTeamReconcileProcedure,
+			connect.WithSchema(invoiceServiceMethods.ByName("TeamReconcile")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -154,6 +164,7 @@ type invoiceServiceClient struct {
 	teamBalanceMap      *connect.Client[v2.TeamBalanceMapRequest, v2.TeamBalanceMapResponse]
 	listTeamBalanceLog  *connect.Client[v2.ListTeamBalanceLogRequest, v2.ListTeamBalanceLogResponse]
 	createBalanceLog    *connect.Client[v2.CreateBalanceLogRequest, v2.CreateBalanceLogResponse]
+	teamReconcile       *connect.Client[v2.TeamReconcileRequest, v2.TeamReconcileResponse]
 }
 
 // CreatePayment calls invoice_iface.v2.InvoiceService.CreatePayment.
@@ -201,6 +212,11 @@ func (c *invoiceServiceClient) CreateBalanceLog(ctx context.Context, req *connec
 	return c.createBalanceLog.CallUnary(ctx, req)
 }
 
+// TeamReconcile calls invoice_iface.v2.InvoiceService.TeamReconcile.
+func (c *invoiceServiceClient) TeamReconcile(ctx context.Context, req *connect.Request[v2.TeamReconcileRequest]) (*connect.Response[v2.TeamReconcileResponse], error) {
+	return c.teamReconcile.CallUnary(ctx, req)
+}
+
 // InvoiceServiceHandler is an implementation of the invoice_iface.v2.InvoiceService service.
 type InvoiceServiceHandler interface {
 	CreatePayment(context.Context, *connect.Request[v2.CreatePaymentRequest]) (*connect.Response[v2.CreatePaymentResponse], error)
@@ -212,6 +228,7 @@ type InvoiceServiceHandler interface {
 	TeamBalanceMap(context.Context, *connect.Request[v2.TeamBalanceMapRequest]) (*connect.Response[v2.TeamBalanceMapResponse], error)
 	ListTeamBalanceLog(context.Context, *connect.Request[v2.ListTeamBalanceLogRequest]) (*connect.Response[v2.ListTeamBalanceLogResponse], error)
 	CreateBalanceLog(context.Context, *connect.Request[v2.CreateBalanceLogRequest]) (*connect.Response[v2.CreateBalanceLogResponse], error)
+	TeamReconcile(context.Context, *connect.Request[v2.TeamReconcileRequest]) (*connect.Response[v2.TeamReconcileResponse], error)
 }
 
 // NewInvoiceServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -275,6 +292,12 @@ func NewInvoiceServiceHandler(svc InvoiceServiceHandler, opts ...connect.Handler
 		connect.WithSchema(invoiceServiceMethods.ByName("CreateBalanceLog")),
 		connect.WithHandlerOptions(opts...),
 	)
+	invoiceServiceTeamReconcileHandler := connect.NewUnaryHandler(
+		InvoiceServiceTeamReconcileProcedure,
+		svc.TeamReconcile,
+		connect.WithSchema(invoiceServiceMethods.ByName("TeamReconcile")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/invoice_iface.v2.InvoiceService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case InvoiceServiceCreatePaymentProcedure:
@@ -295,6 +318,8 @@ func NewInvoiceServiceHandler(svc InvoiceServiceHandler, opts ...connect.Handler
 			invoiceServiceListTeamBalanceLogHandler.ServeHTTP(w, r)
 		case InvoiceServiceCreateBalanceLogProcedure:
 			invoiceServiceCreateBalanceLogHandler.ServeHTTP(w, r)
+		case InvoiceServiceTeamReconcileProcedure:
+			invoiceServiceTeamReconcileHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -338,4 +363,8 @@ func (UnimplementedInvoiceServiceHandler) ListTeamBalanceLog(context.Context, *c
 
 func (UnimplementedInvoiceServiceHandler) CreateBalanceLog(context.Context, *connect.Request[v2.CreateBalanceLogRequest]) (*connect.Response[v2.CreateBalanceLogResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("invoice_iface.v2.InvoiceService.CreateBalanceLog is not implemented"))
+}
+
+func (UnimplementedInvoiceServiceHandler) TeamReconcile(context.Context, *connect.Request[v2.TeamReconcileRequest]) (*connect.Response[v2.TeamReconcileResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("invoice_iface.v2.InvoiceService.TeamReconcile is not implemented"))
 }

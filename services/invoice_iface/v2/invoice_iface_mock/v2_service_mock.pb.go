@@ -280,3 +280,29 @@ func (mr *MockInvoiceServiceClientMockRecorder) CreateBalanceLog(ctx, req interf
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateBalanceLog", reflect.TypeOf((*MockInvoiceService)(nil).CreateBalanceLog), ctx, req)
 }
 
+func (m *MockInvoiceService) TeamReconcile(ctx context.Context, req *connect.Request[v2.TeamReconcileRequest]) (*connect.Response[v2.TeamReconcileResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "TeamReconcile", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v2.TeamReconcileResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInvoiceServiceMockRecorder) TeamReconcile(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "TeamReconcile", reflect.TypeOf((*MockInvoiceService)(nil).TeamReconcile), ctx, req)
+}
+
+func (m *MockInvoiceServiceClient) TeamReconcile(ctx context.Context, req *connect.Request[v2.TeamReconcileRequest]) (*connect.Response[v2.TeamReconcileResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "TeamReconcile", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v2.TeamReconcileResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInvoiceServiceClientMockRecorder) TeamReconcile(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "TeamReconcile", reflect.TypeOf((*MockInvoiceService)(nil).TeamReconcile), ctx, req)
+}
+

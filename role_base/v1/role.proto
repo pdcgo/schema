@@ -7,6 +7,10 @@ import "google/protobuf/timestamp.proto";
 option go_package = "github.com/pdcgo/schema/services/role_base/v1;role_base";
 
 enum Role {
+  // 7 was ROLE_WAREHOUSE_LEADER, replaced by ROLE_WAREHOUSE_ADMIN (9).
+  reserved 7;
+  reserved "ROLE_WAREHOUSE_LEADER";
+
   ROLE_UNSPECIFIED = 0;
   ROLE_ROOT = 1;
   ROLE_ADMIN = 2;
@@ -14,8 +18,9 @@ enum Role {
   ROLE_TEAM_ADMIN = 4;
   ROLE_TEAM_CUSTOMER_SERVICE = 5;
   ROLE_WAREHOUSE_OWNER = 6;
-  ROLE_WAREHOUSE_LEADER = 7;
   ROLE_WAREHOUSE_STAFF = 8;
+  ROLE_WAREHOUSE_ADMIN = 9;
+  ROLE_SYSTEM = 10;
 }
 
 enum IdentityType {

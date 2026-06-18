@@ -254,3 +254,28 @@ func (mr *MockV2UserServiceClientMockRecorder) TeamUserUpdate(ctx, req interface
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "TeamUserUpdate", reflect.TypeOf((*MockV2UserService)(nil).TeamUserUpdate), ctx, req)
 }
 
+func (m *MockV2UserService) TeamSynclegacy(ctx context.Context, req *connect.Request[v2.TeamSynclegacyRequest], stream *connect.ServerStream[v2.TeamSynclegacyResponse]) error {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "TeamSynclegacy", ctx, req, stream)
+    ret0, _ := ret[0].(error)
+    return ret0
+}
+
+func (mr *MockV2UserServiceMockRecorder) TeamSynclegacy(ctx, req, stream interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "TeamSynclegacy", reflect.TypeOf((*MockV2UserService)(nil).TeamSynclegacy), ctx, req, stream)
+}
+
+func (m *MockV2UserServiceClient) TeamSynclegacy(ctx context.Context, req *connect.Request[v2.TeamSynclegacyRequest]) (*connect.ServerStreamForClient[v2.TeamSynclegacyResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "TeamSynclegacy", ctx, req)
+    ret0, _ := ret[0].(*connect.ServerStreamForClient[v2.TeamSynclegacyResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockV2UserServiceClientMockRecorder) TeamSynclegacy(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "TeamSynclegacy", reflect.TypeOf((*MockV2UserService)(nil).TeamSynclegacy), ctx, req)
+}
+

@@ -57,6 +57,9 @@ const (
 	// V2UserServiceTeamUserUpdateProcedure is the fully-qualified name of the V2UserService's
 	// TeamUserUpdate RPC.
 	V2UserServiceTeamUserUpdateProcedure = "/user_iface.v2.V2UserService/TeamUserUpdate"
+	// V2UserServiceTeamSynclegacyProcedure is the fully-qualified name of the V2UserService's
+	// TeamSynclegacy RPC.
+	V2UserServiceTeamSynclegacyProcedure = "/user_iface.v2.V2UserService/TeamSynclegacy"
 )
 
 // V2UserServiceClient is a client for the user_iface.v2.V2UserService service.
@@ -69,6 +72,7 @@ type V2UserServiceClient interface {
 	ResetPassword(context.Context, *connect.Request[v2.ResetPasswordRequest]) (*connect.Response[v2.ResetPasswordResponse], error)
 	TeamUserList(context.Context, *connect.Request[v2.TeamUserListRequest]) (*connect.Response[v2.TeamUserListResponse], error)
 	TeamUserUpdate(context.Context, *connect.Request[v2.TeamUserUpdateRequest]) (*connect.Response[v2.TeamUserUpdateResponse], error)
+	TeamSynclegacy(context.Context, *connect.Request[v2.TeamSynclegacyRequest]) (*connect.ServerStreamForClient[v2.TeamSynclegacyResponse], error)
 }
 
 // NewV2UserServiceClient constructs a client for the user_iface.v2.V2UserService service. By
@@ -130,6 +134,12 @@ func NewV2UserServiceClient(httpClient connect.HTTPClient, baseURL string, opts 
 			connect.WithSchema(v2UserServiceMethods.ByName("TeamUserUpdate")),
 			connect.WithClientOptions(opts...),
 		),
+		teamSynclegacy: connect.NewClient[v2.TeamSynclegacyRequest, v2.TeamSynclegacyResponse](
+			httpClient,
+			baseURL+V2UserServiceTeamSynclegacyProcedure,
+			connect.WithSchema(v2UserServiceMethods.ByName("TeamSynclegacy")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -143,6 +153,7 @@ type v2UserServiceClient struct {
 	resetPassword  *connect.Client[v2.ResetPasswordRequest, v2.ResetPasswordResponse]
 	teamUserList   *connect.Client[v2.TeamUserListRequest, v2.TeamUserListResponse]
 	teamUserUpdate *connect.Client[v2.TeamUserUpdateRequest, v2.TeamUserUpdateResponse]
+	teamSynclegacy *connect.Client[v2.TeamSynclegacyRequest, v2.TeamSynclegacyResponse]
 }
 
 // CreateUser calls user_iface.v2.V2UserService.CreateUser.
@@ -185,6 +196,11 @@ func (c *v2UserServiceClient) TeamUserUpdate(ctx context.Context, req *connect.R
 	return c.teamUserUpdate.CallUnary(ctx, req)
 }
 
+// TeamSynclegacy calls user_iface.v2.V2UserService.TeamSynclegacy.
+func (c *v2UserServiceClient) TeamSynclegacy(ctx context.Context, req *connect.Request[v2.TeamSynclegacyRequest]) (*connect.ServerStreamForClient[v2.TeamSynclegacyResponse], error) {
+	return c.teamSynclegacy.CallServerStream(ctx, req)
+}
+
 // V2UserServiceHandler is an implementation of the user_iface.v2.V2UserService service.
 type V2UserServiceHandler interface {
 	CreateUser(context.Context, *connect.Request[v2.CreateUserRequest]) (*connect.Response[v2.CreateUserResponse], error)
@@ -195,6 +211,7 @@ type V2UserServiceHandler interface {
 	ResetPassword(context.Context, *connect.Request[v2.ResetPasswordRequest]) (*connect.Response[v2.ResetPasswordResponse], error)
 	TeamUserList(context.Context, *connect.Request[v2.TeamUserListRequest]) (*connect.Response[v2.TeamUserListResponse], error)
 	TeamUserUpdate(context.Context, *connect.Request[v2.TeamUserUpdateRequest]) (*connect.Response[v2.TeamUserUpdateResponse], error)
+	TeamSynclegacy(context.Context, *connect.Request[v2.TeamSynclegacyRequest], *connect.ServerStream[v2.TeamSynclegacyResponse]) error
 }
 
 // NewV2UserServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -252,6 +269,12 @@ func NewV2UserServiceHandler(svc V2UserServiceHandler, opts ...connect.HandlerOp
 		connect.WithSchema(v2UserServiceMethods.ByName("TeamUserUpdate")),
 		connect.WithHandlerOptions(opts...),
 	)
+	v2UserServiceTeamSynclegacyHandler := connect.NewServerStreamHandler(
+		V2UserServiceTeamSynclegacyProcedure,
+		svc.TeamSynclegacy,
+		connect.WithSchema(v2UserServiceMethods.ByName("TeamSynclegacy")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/user_iface.v2.V2UserService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case V2UserServiceCreateUserProcedure:
@@ -270,6 +293,8 @@ func NewV2UserServiceHandler(svc V2UserServiceHandler, opts ...connect.HandlerOp
 			v2UserServiceTeamUserListHandler.ServeHTTP(w, r)
 		case V2UserServiceTeamUserUpdateProcedure:
 			v2UserServiceTeamUserUpdateHandler.ServeHTTP(w, r)
+		case V2UserServiceTeamSynclegacyProcedure:
+			v2UserServiceTeamSynclegacyHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -309,4 +334,8 @@ func (UnimplementedV2UserServiceHandler) TeamUserList(context.Context, *connect.
 
 func (UnimplementedV2UserServiceHandler) TeamUserUpdate(context.Context, *connect.Request[v2.TeamUserUpdateRequest]) (*connect.Response[v2.TeamUserUpdateResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("user_iface.v2.V2UserService.TeamUserUpdate is not implemented"))
+}
+
+func (UnimplementedV2UserServiceHandler) TeamSynclegacy(context.Context, *connect.Request[v2.TeamSynclegacyRequest], *connect.ServerStream[v2.TeamSynclegacyResponse]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("user_iface.v2.V2UserService.TeamSynclegacy is not implemented"))
 }

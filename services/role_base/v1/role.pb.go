@@ -33,22 +33,24 @@ const (
 	Role_ROLE_TEAM_ADMIN            Role = 4
 	Role_ROLE_TEAM_CUSTOMER_SERVICE Role = 5
 	Role_ROLE_WAREHOUSE_OWNER       Role = 6
-	Role_ROLE_WAREHOUSE_LEADER      Role = 7
 	Role_ROLE_WAREHOUSE_STAFF       Role = 8
+	Role_ROLE_WAREHOUSE_ADMIN       Role = 9
+	Role_ROLE_SYSTEM                Role = 10
 )
 
 // Enum value maps for Role.
 var (
 	Role_name = map[int32]string{
-		0: "ROLE_UNSPECIFIED",
-		1: "ROLE_ROOT",
-		2: "ROLE_ADMIN",
-		3: "ROLE_TEAM_OWNER",
-		4: "ROLE_TEAM_ADMIN",
-		5: "ROLE_TEAM_CUSTOMER_SERVICE",
-		6: "ROLE_WAREHOUSE_OWNER",
-		7: "ROLE_WAREHOUSE_LEADER",
-		8: "ROLE_WAREHOUSE_STAFF",
+		0:  "ROLE_UNSPECIFIED",
+		1:  "ROLE_ROOT",
+		2:  "ROLE_ADMIN",
+		3:  "ROLE_TEAM_OWNER",
+		4:  "ROLE_TEAM_ADMIN",
+		5:  "ROLE_TEAM_CUSTOMER_SERVICE",
+		6:  "ROLE_WAREHOUSE_OWNER",
+		8:  "ROLE_WAREHOUSE_STAFF",
+		9:  "ROLE_WAREHOUSE_ADMIN",
+		10: "ROLE_SYSTEM",
 	}
 	Role_value = map[string]int32{
 		"ROLE_UNSPECIFIED":           0,
@@ -58,8 +60,9 @@ var (
 		"ROLE_TEAM_ADMIN":            4,
 		"ROLE_TEAM_CUSTOMER_SERVICE": 5,
 		"ROLE_WAREHOUSE_OWNER":       6,
-		"ROLE_WAREHOUSE_LEADER":      7,
 		"ROLE_WAREHOUSE_STAFF":       8,
+		"ROLE_WAREHOUSE_ADMIN":       9,
+		"ROLE_SYSTEM":                10,
 	}
 )
 
@@ -334,7 +337,7 @@ const file_role_base_v1_role_proto_rawDesc = "" +
 	"\rRequestPolicy\x12(\n" +
 	"\x05roles\x18\x01 \x03(\x0e2\x12.role_base.v1.RoleR\x05roles\x12\x1b\n" +
 	"\tallow_all\x18\x03 \x01(\bR\ballowAll\x128\n" +
-	"\x18allow_only_authenticated\x18\x04 \x01(\bR\x16allowOnlyAuthenticated*\xd4\x01\n" +
+	"\x18allow_only_authenticated\x18\x04 \x01(\bR\x16allowOnlyAuthenticated*\x81\x02\n" +
 	"\x04Role\x12\x14\n" +
 	"\x10ROLE_UNSPECIFIED\x10\x00\x12\r\n" +
 	"\tROLE_ROOT\x10\x01\x12\x0e\n" +
@@ -343,9 +346,11 @@ const file_role_base_v1_role_proto_rawDesc = "" +
 	"\x0fROLE_TEAM_OWNER\x10\x03\x12\x13\n" +
 	"\x0fROLE_TEAM_ADMIN\x10\x04\x12\x1e\n" +
 	"\x1aROLE_TEAM_CUSTOMER_SERVICE\x10\x05\x12\x18\n" +
-	"\x14ROLE_WAREHOUSE_OWNER\x10\x06\x12\x19\n" +
-	"\x15ROLE_WAREHOUSE_LEADER\x10\a\x12\x18\n" +
-	"\x14ROLE_WAREHOUSE_STAFF\x10\b*\x84\x01\n" +
+	"\x14ROLE_WAREHOUSE_OWNER\x10\x06\x12\x18\n" +
+	"\x14ROLE_WAREHOUSE_STAFF\x10\b\x12\x18\n" +
+	"\x14ROLE_WAREHOUSE_ADMIN\x10\t\x12\x0f\n" +
+	"\vROLE_SYSTEM\x10\n" +
+	"\"\x04\b\a\x10\a*\x15ROLE_WAREHOUSE_LEADER*\x84\x01\n" +
 	"\fIdentityType\x12\x1d\n" +
 	"\x19IDENTITY_TYPE_UNSPECIFIED\x10\x00\x12\x18\n" +
 	"\x14IDENTITY_TYPE_SYSTEM\x10\x01\x12\x1e\n" +
