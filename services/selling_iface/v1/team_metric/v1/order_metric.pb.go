@@ -9,6 +9,7 @@ package team_metric
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -24,11 +25,11 @@ const (
 type TeamOrderMetricSort int32
 
 const (
-	TeamOrderMetricSort_TEAM_ORDER_METRIC_SORT_UNSPECIFIED         TeamOrderMetricSort = 0
-	TeamOrderMetricSort_TEAM_ORDER_METRIC_SORT_TRANSACTION_COUNT   TeamOrderMetricSort = 1
-	TeamOrderMetricSort_TEAM_ORDER_METRIC_SORT_PIECE_COUNT         TeamOrderMetricSort = 2
-	TeamOrderMetricSort_TEAM_ORDER_METRIC_SORT_TOTAL_AMOUNT        TeamOrderMetricSort = 3
-	TeamOrderMetricSort_TEAM_ORDER_METRIC_SORT_AVERAGE_ORDER_VALUE TeamOrderMetricSort = 4
+	TeamOrderMetricSort_TEAM_ORDER_METRIC_SORT_UNSPECIFIED        TeamOrderMetricSort = 0
+	TeamOrderMetricSort_TEAM_ORDER_METRIC_SORT_TRANSACTION_COUNT  TeamOrderMetricSort = 1
+	TeamOrderMetricSort_TEAM_ORDER_METRIC_SORT_TOTAL_AMOUNT       TeamOrderMetricSort = 2
+	TeamOrderMetricSort_TEAM_ORDER_METRIC_SORT_MP_TOTAL_AMOUNT    TeamOrderMetricSort = 3
+	TeamOrderMetricSort_TEAM_ORDER_METRIC_SORT_LAST_ORDER_CREATED TeamOrderMetricSort = 4
 )
 
 // Enum value maps for TeamOrderMetricSort.
@@ -36,16 +37,16 @@ var (
 	TeamOrderMetricSort_name = map[int32]string{
 		0: "TEAM_ORDER_METRIC_SORT_UNSPECIFIED",
 		1: "TEAM_ORDER_METRIC_SORT_TRANSACTION_COUNT",
-		2: "TEAM_ORDER_METRIC_SORT_PIECE_COUNT",
-		3: "TEAM_ORDER_METRIC_SORT_TOTAL_AMOUNT",
-		4: "TEAM_ORDER_METRIC_SORT_AVERAGE_ORDER_VALUE",
+		2: "TEAM_ORDER_METRIC_SORT_TOTAL_AMOUNT",
+		3: "TEAM_ORDER_METRIC_SORT_MP_TOTAL_AMOUNT",
+		4: "TEAM_ORDER_METRIC_SORT_LAST_ORDER_CREATED",
 	}
 	TeamOrderMetricSort_value = map[string]int32{
-		"TEAM_ORDER_METRIC_SORT_UNSPECIFIED":         0,
-		"TEAM_ORDER_METRIC_SORT_TRANSACTION_COUNT":   1,
-		"TEAM_ORDER_METRIC_SORT_PIECE_COUNT":         2,
-		"TEAM_ORDER_METRIC_SORT_TOTAL_AMOUNT":        3,
-		"TEAM_ORDER_METRIC_SORT_AVERAGE_ORDER_VALUE": 4,
+		"TEAM_ORDER_METRIC_SORT_UNSPECIFIED":        0,
+		"TEAM_ORDER_METRIC_SORT_TRANSACTION_COUNT":  1,
+		"TEAM_ORDER_METRIC_SORT_TOTAL_AMOUNT":       2,
+		"TEAM_ORDER_METRIC_SORT_MP_TOTAL_AMOUNT":    3,
+		"TEAM_ORDER_METRIC_SORT_LAST_ORDER_CREATED": 4,
 	}
 )
 
@@ -76,15 +77,401 @@ func (TeamOrderMetricSort) EnumDescriptor() ([]byte, []int) {
 	return file_selling_iface_v1_team_metric_v1_order_metric_proto_rawDescGZIP(), []int{0}
 }
 
+type TeamOrderWithdrawalMetricSort int32
+
+const (
+	TeamOrderWithdrawalMetricSort_TEAM_ORDER_WITHDRAWAL_METRIC_SORT_UNSPECIFIED           TeamOrderWithdrawalMetricSort = 0
+	TeamOrderWithdrawalMetricSort_TEAM_ORDER_WITHDRAWAL_METRIC_SORT_TRANSACTION_COUNT     TeamOrderWithdrawalMetricSort = 1
+	TeamOrderWithdrawalMetricSort_TEAM_ORDER_WITHDRAWAL_METRIC_SORT_TOTAL_AMOUNT          TeamOrderWithdrawalMetricSort = 2
+	TeamOrderWithdrawalMetricSort_TEAM_ORDER_WITHDRAWAL_METRIC_SORT_MP_TOTAL_AMOUNT       TeamOrderWithdrawalMetricSort = 3
+	TeamOrderWithdrawalMetricSort_TEAM_ORDER_WITHDRAWAL_METRIC_SORT_LAST_ORDER_WITHDRAWAL TeamOrderWithdrawalMetricSort = 4
+)
+
+// Enum value maps for TeamOrderWithdrawalMetricSort.
+var (
+	TeamOrderWithdrawalMetricSort_name = map[int32]string{
+		0: "TEAM_ORDER_WITHDRAWAL_METRIC_SORT_UNSPECIFIED",
+		1: "TEAM_ORDER_WITHDRAWAL_METRIC_SORT_TRANSACTION_COUNT",
+		2: "TEAM_ORDER_WITHDRAWAL_METRIC_SORT_TOTAL_AMOUNT",
+		3: "TEAM_ORDER_WITHDRAWAL_METRIC_SORT_MP_TOTAL_AMOUNT",
+		4: "TEAM_ORDER_WITHDRAWAL_METRIC_SORT_LAST_ORDER_WITHDRAWAL",
+	}
+	TeamOrderWithdrawalMetricSort_value = map[string]int32{
+		"TEAM_ORDER_WITHDRAWAL_METRIC_SORT_UNSPECIFIED":           0,
+		"TEAM_ORDER_WITHDRAWAL_METRIC_SORT_TRANSACTION_COUNT":     1,
+		"TEAM_ORDER_WITHDRAWAL_METRIC_SORT_TOTAL_AMOUNT":          2,
+		"TEAM_ORDER_WITHDRAWAL_METRIC_SORT_MP_TOTAL_AMOUNT":       3,
+		"TEAM_ORDER_WITHDRAWAL_METRIC_SORT_LAST_ORDER_WITHDRAWAL": 4,
+	}
+)
+
+func (x TeamOrderWithdrawalMetricSort) Enum() *TeamOrderWithdrawalMetricSort {
+	p := new(TeamOrderWithdrawalMetricSort)
+	*p = x
+	return p
+}
+
+func (x TeamOrderWithdrawalMetricSort) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (TeamOrderWithdrawalMetricSort) Descriptor() protoreflect.EnumDescriptor {
+	return file_selling_iface_v1_team_metric_v1_order_metric_proto_enumTypes[1].Descriptor()
+}
+
+func (TeamOrderWithdrawalMetricSort) Type() protoreflect.EnumType {
+	return &file_selling_iface_v1_team_metric_v1_order_metric_proto_enumTypes[1]
+}
+
+func (x TeamOrderWithdrawalMetricSort) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use TeamOrderWithdrawalMetricSort.Descriptor instead.
+func (TeamOrderWithdrawalMetricSort) EnumDescriptor() ([]byte, []int) {
+	return file_selling_iface_v1_team_metric_v1_order_metric_proto_rawDescGZIP(), []int{1}
+}
+
+type TeamOrderCancelledMetricSort int32
+
+const (
+	TeamOrderCancelledMetricSort_TEAM_ORDER_CANCELLED_METRIC_SORT_UNSPECIFIED          TeamOrderCancelledMetricSort = 0
+	TeamOrderCancelledMetricSort_TEAM_ORDER_CANCELLED_METRIC_SORT_TRANSACTION_COUNT    TeamOrderCancelledMetricSort = 1
+	TeamOrderCancelledMetricSort_TEAM_ORDER_CANCELLED_METRIC_SORT_TOTAL_AMOUNT         TeamOrderCancelledMetricSort = 2
+	TeamOrderCancelledMetricSort_TEAM_ORDER_CANCELLED_METRIC_SORT_MP_TOTAL_AMOUNT      TeamOrderCancelledMetricSort = 3
+	TeamOrderCancelledMetricSort_TEAM_ORDER_CANCELLED_METRIC_SORT_LAST_ORDER_CANCELLED TeamOrderCancelledMetricSort = 4
+)
+
+// Enum value maps for TeamOrderCancelledMetricSort.
+var (
+	TeamOrderCancelledMetricSort_name = map[int32]string{
+		0: "TEAM_ORDER_CANCELLED_METRIC_SORT_UNSPECIFIED",
+		1: "TEAM_ORDER_CANCELLED_METRIC_SORT_TRANSACTION_COUNT",
+		2: "TEAM_ORDER_CANCELLED_METRIC_SORT_TOTAL_AMOUNT",
+		3: "TEAM_ORDER_CANCELLED_METRIC_SORT_MP_TOTAL_AMOUNT",
+		4: "TEAM_ORDER_CANCELLED_METRIC_SORT_LAST_ORDER_CANCELLED",
+	}
+	TeamOrderCancelledMetricSort_value = map[string]int32{
+		"TEAM_ORDER_CANCELLED_METRIC_SORT_UNSPECIFIED":          0,
+		"TEAM_ORDER_CANCELLED_METRIC_SORT_TRANSACTION_COUNT":    1,
+		"TEAM_ORDER_CANCELLED_METRIC_SORT_TOTAL_AMOUNT":         2,
+		"TEAM_ORDER_CANCELLED_METRIC_SORT_MP_TOTAL_AMOUNT":      3,
+		"TEAM_ORDER_CANCELLED_METRIC_SORT_LAST_ORDER_CANCELLED": 4,
+	}
+)
+
+func (x TeamOrderCancelledMetricSort) Enum() *TeamOrderCancelledMetricSort {
+	p := new(TeamOrderCancelledMetricSort)
+	*p = x
+	return p
+}
+
+func (x TeamOrderCancelledMetricSort) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (TeamOrderCancelledMetricSort) Descriptor() protoreflect.EnumDescriptor {
+	return file_selling_iface_v1_team_metric_v1_order_metric_proto_enumTypes[2].Descriptor()
+}
+
+func (TeamOrderCancelledMetricSort) Type() protoreflect.EnumType {
+	return &file_selling_iface_v1_team_metric_v1_order_metric_proto_enumTypes[2]
+}
+
+func (x TeamOrderCancelledMetricSort) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use TeamOrderCancelledMetricSort.Descriptor instead.
+func (TeamOrderCancelledMetricSort) EnumDescriptor() ([]byte, []int) {
+	return file_selling_iface_v1_team_metric_v1_order_metric_proto_rawDescGZIP(), []int{2}
+}
+
+type TeamOrderLostMetricSort int32
+
+const (
+	TeamOrderLostMetricSort_TEAM_ORDER_LOST_METRIC_SORT_UNSPECIFIED       TeamOrderLostMetricSort = 0
+	TeamOrderLostMetricSort_TEAM_ORDER_LOST_METRIC_SORT_TRANSACTION_COUNT TeamOrderLostMetricSort = 1
+	TeamOrderLostMetricSort_TEAM_ORDER_LOST_METRIC_SORT_TOTAL_AMOUNT      TeamOrderLostMetricSort = 2
+	TeamOrderLostMetricSort_TEAM_ORDER_LOST_METRIC_SORT_MP_TOTAL_AMOUNT   TeamOrderLostMetricSort = 3
+	TeamOrderLostMetricSort_TEAM_ORDER_LOST_METRIC_SORT_LAST_ORDER_LOST   TeamOrderLostMetricSort = 4
+)
+
+// Enum value maps for TeamOrderLostMetricSort.
+var (
+	TeamOrderLostMetricSort_name = map[int32]string{
+		0: "TEAM_ORDER_LOST_METRIC_SORT_UNSPECIFIED",
+		1: "TEAM_ORDER_LOST_METRIC_SORT_TRANSACTION_COUNT",
+		2: "TEAM_ORDER_LOST_METRIC_SORT_TOTAL_AMOUNT",
+		3: "TEAM_ORDER_LOST_METRIC_SORT_MP_TOTAL_AMOUNT",
+		4: "TEAM_ORDER_LOST_METRIC_SORT_LAST_ORDER_LOST",
+	}
+	TeamOrderLostMetricSort_value = map[string]int32{
+		"TEAM_ORDER_LOST_METRIC_SORT_UNSPECIFIED":       0,
+		"TEAM_ORDER_LOST_METRIC_SORT_TRANSACTION_COUNT": 1,
+		"TEAM_ORDER_LOST_METRIC_SORT_TOTAL_AMOUNT":      2,
+		"TEAM_ORDER_LOST_METRIC_SORT_MP_TOTAL_AMOUNT":   3,
+		"TEAM_ORDER_LOST_METRIC_SORT_LAST_ORDER_LOST":   4,
+	}
+)
+
+func (x TeamOrderLostMetricSort) Enum() *TeamOrderLostMetricSort {
+	p := new(TeamOrderLostMetricSort)
+	*p = x
+	return p
+}
+
+func (x TeamOrderLostMetricSort) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (TeamOrderLostMetricSort) Descriptor() protoreflect.EnumDescriptor {
+	return file_selling_iface_v1_team_metric_v1_order_metric_proto_enumTypes[3].Descriptor()
+}
+
+func (TeamOrderLostMetricSort) Type() protoreflect.EnumType {
+	return &file_selling_iface_v1_team_metric_v1_order_metric_proto_enumTypes[3]
+}
+
+func (x TeamOrderLostMetricSort) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use TeamOrderLostMetricSort.Descriptor instead.
+func (TeamOrderLostMetricSort) EnumDescriptor() ([]byte, []int) {
+	return file_selling_iface_v1_team_metric_v1_order_metric_proto_rawDescGZIP(), []int{3}
+}
+
+type TeamOrderCompletedMetricSort int32
+
+const (
+	TeamOrderCompletedMetricSort_TEAM_ORDER_COMPLETED_METRIC_SORT_UNSPECIFIED          TeamOrderCompletedMetricSort = 0
+	TeamOrderCompletedMetricSort_TEAM_ORDER_COMPLETED_METRIC_SORT_TRANSACTION_COUNT    TeamOrderCompletedMetricSort = 1
+	TeamOrderCompletedMetricSort_TEAM_ORDER_COMPLETED_METRIC_SORT_TOTAL_AMOUNT         TeamOrderCompletedMetricSort = 2
+	TeamOrderCompletedMetricSort_TEAM_ORDER_COMPLETED_METRIC_SORT_MP_TOTAL_AMOUNT      TeamOrderCompletedMetricSort = 3
+	TeamOrderCompletedMetricSort_TEAM_ORDER_COMPLETED_METRIC_SORT_LAST_ORDER_COMPLETED TeamOrderCompletedMetricSort = 4
+)
+
+// Enum value maps for TeamOrderCompletedMetricSort.
+var (
+	TeamOrderCompletedMetricSort_name = map[int32]string{
+		0: "TEAM_ORDER_COMPLETED_METRIC_SORT_UNSPECIFIED",
+		1: "TEAM_ORDER_COMPLETED_METRIC_SORT_TRANSACTION_COUNT",
+		2: "TEAM_ORDER_COMPLETED_METRIC_SORT_TOTAL_AMOUNT",
+		3: "TEAM_ORDER_COMPLETED_METRIC_SORT_MP_TOTAL_AMOUNT",
+		4: "TEAM_ORDER_COMPLETED_METRIC_SORT_LAST_ORDER_COMPLETED",
+	}
+	TeamOrderCompletedMetricSort_value = map[string]int32{
+		"TEAM_ORDER_COMPLETED_METRIC_SORT_UNSPECIFIED":          0,
+		"TEAM_ORDER_COMPLETED_METRIC_SORT_TRANSACTION_COUNT":    1,
+		"TEAM_ORDER_COMPLETED_METRIC_SORT_TOTAL_AMOUNT":         2,
+		"TEAM_ORDER_COMPLETED_METRIC_SORT_MP_TOTAL_AMOUNT":      3,
+		"TEAM_ORDER_COMPLETED_METRIC_SORT_LAST_ORDER_COMPLETED": 4,
+	}
+)
+
+func (x TeamOrderCompletedMetricSort) Enum() *TeamOrderCompletedMetricSort {
+	p := new(TeamOrderCompletedMetricSort)
+	*p = x
+	return p
+}
+
+func (x TeamOrderCompletedMetricSort) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (TeamOrderCompletedMetricSort) Descriptor() protoreflect.EnumDescriptor {
+	return file_selling_iface_v1_team_metric_v1_order_metric_proto_enumTypes[4].Descriptor()
+}
+
+func (TeamOrderCompletedMetricSort) Type() protoreflect.EnumType {
+	return &file_selling_iface_v1_team_metric_v1_order_metric_proto_enumTypes[4]
+}
+
+func (x TeamOrderCompletedMetricSort) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use TeamOrderCompletedMetricSort.Descriptor instead.
+func (TeamOrderCompletedMetricSort) EnumDescriptor() ([]byte, []int) {
+	return file_selling_iface_v1_team_metric_v1_order_metric_proto_rawDescGZIP(), []int{4}
+}
+
+type TeamOrderReturnMetricSort int32
+
+const (
+	TeamOrderReturnMetricSort_TEAM_ORDER_RETURN_METRIC_SORT_UNSPECIFIED       TeamOrderReturnMetricSort = 0
+	TeamOrderReturnMetricSort_TEAM_ORDER_RETURN_METRIC_SORT_TRANSACTION_COUNT TeamOrderReturnMetricSort = 1
+	TeamOrderReturnMetricSort_TEAM_ORDER_RETURN_METRIC_SORT_TOTAL_AMOUNT      TeamOrderReturnMetricSort = 2
+	TeamOrderReturnMetricSort_TEAM_ORDER_RETURN_METRIC_SORT_MP_TOTAL_AMOUNT   TeamOrderReturnMetricSort = 3
+	TeamOrderReturnMetricSort_TEAM_ORDER_RETURN_METRIC_SORT_LAST_ORDER_RETURN TeamOrderReturnMetricSort = 4
+)
+
+// Enum value maps for TeamOrderReturnMetricSort.
+var (
+	TeamOrderReturnMetricSort_name = map[int32]string{
+		0: "TEAM_ORDER_RETURN_METRIC_SORT_UNSPECIFIED",
+		1: "TEAM_ORDER_RETURN_METRIC_SORT_TRANSACTION_COUNT",
+		2: "TEAM_ORDER_RETURN_METRIC_SORT_TOTAL_AMOUNT",
+		3: "TEAM_ORDER_RETURN_METRIC_SORT_MP_TOTAL_AMOUNT",
+		4: "TEAM_ORDER_RETURN_METRIC_SORT_LAST_ORDER_RETURN",
+	}
+	TeamOrderReturnMetricSort_value = map[string]int32{
+		"TEAM_ORDER_RETURN_METRIC_SORT_UNSPECIFIED":       0,
+		"TEAM_ORDER_RETURN_METRIC_SORT_TRANSACTION_COUNT": 1,
+		"TEAM_ORDER_RETURN_METRIC_SORT_TOTAL_AMOUNT":      2,
+		"TEAM_ORDER_RETURN_METRIC_SORT_MP_TOTAL_AMOUNT":   3,
+		"TEAM_ORDER_RETURN_METRIC_SORT_LAST_ORDER_RETURN": 4,
+	}
+)
+
+func (x TeamOrderReturnMetricSort) Enum() *TeamOrderReturnMetricSort {
+	p := new(TeamOrderReturnMetricSort)
+	*p = x
+	return p
+}
+
+func (x TeamOrderReturnMetricSort) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (TeamOrderReturnMetricSort) Descriptor() protoreflect.EnumDescriptor {
+	return file_selling_iface_v1_team_metric_v1_order_metric_proto_enumTypes[5].Descriptor()
+}
+
+func (TeamOrderReturnMetricSort) Type() protoreflect.EnumType {
+	return &file_selling_iface_v1_team_metric_v1_order_metric_proto_enumTypes[5]
+}
+
+func (x TeamOrderReturnMetricSort) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use TeamOrderReturnMetricSort.Descriptor instead.
+func (TeamOrderReturnMetricSort) EnumDescriptor() ([]byte, []int) {
+	return file_selling_iface_v1_team_metric_v1_order_metric_proto_rawDescGZIP(), []int{5}
+}
+
+type TeamOrderReturnCompletedMetricSort int32
+
+const (
+	TeamOrderReturnCompletedMetricSort_TEAM_ORDER_RETURN_COMPLETED_METRIC_SORT_UNSPECIFIED                 TeamOrderReturnCompletedMetricSort = 0
+	TeamOrderReturnCompletedMetricSort_TEAM_ORDER_RETURN_COMPLETED_METRIC_SORT_TRANSACTION_COUNT           TeamOrderReturnCompletedMetricSort = 1
+	TeamOrderReturnCompletedMetricSort_TEAM_ORDER_RETURN_COMPLETED_METRIC_SORT_TOTAL_AMOUNT                TeamOrderReturnCompletedMetricSort = 2
+	TeamOrderReturnCompletedMetricSort_TEAM_ORDER_RETURN_COMPLETED_METRIC_SORT_MP_TOTAL_AMOUNT             TeamOrderReturnCompletedMetricSort = 3
+	TeamOrderReturnCompletedMetricSort_TEAM_ORDER_RETURN_COMPLETED_METRIC_SORT_LAST_ORDER_RETURN_COMPLETED TeamOrderReturnCompletedMetricSort = 4
+)
+
+// Enum value maps for TeamOrderReturnCompletedMetricSort.
+var (
+	TeamOrderReturnCompletedMetricSort_name = map[int32]string{
+		0: "TEAM_ORDER_RETURN_COMPLETED_METRIC_SORT_UNSPECIFIED",
+		1: "TEAM_ORDER_RETURN_COMPLETED_METRIC_SORT_TRANSACTION_COUNT",
+		2: "TEAM_ORDER_RETURN_COMPLETED_METRIC_SORT_TOTAL_AMOUNT",
+		3: "TEAM_ORDER_RETURN_COMPLETED_METRIC_SORT_MP_TOTAL_AMOUNT",
+		4: "TEAM_ORDER_RETURN_COMPLETED_METRIC_SORT_LAST_ORDER_RETURN_COMPLETED",
+	}
+	TeamOrderReturnCompletedMetricSort_value = map[string]int32{
+		"TEAM_ORDER_RETURN_COMPLETED_METRIC_SORT_UNSPECIFIED":                 0,
+		"TEAM_ORDER_RETURN_COMPLETED_METRIC_SORT_TRANSACTION_COUNT":           1,
+		"TEAM_ORDER_RETURN_COMPLETED_METRIC_SORT_TOTAL_AMOUNT":                2,
+		"TEAM_ORDER_RETURN_COMPLETED_METRIC_SORT_MP_TOTAL_AMOUNT":             3,
+		"TEAM_ORDER_RETURN_COMPLETED_METRIC_SORT_LAST_ORDER_RETURN_COMPLETED": 4,
+	}
+)
+
+func (x TeamOrderReturnCompletedMetricSort) Enum() *TeamOrderReturnCompletedMetricSort {
+	p := new(TeamOrderReturnCompletedMetricSort)
+	*p = x
+	return p
+}
+
+func (x TeamOrderReturnCompletedMetricSort) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (TeamOrderReturnCompletedMetricSort) Descriptor() protoreflect.EnumDescriptor {
+	return file_selling_iface_v1_team_metric_v1_order_metric_proto_enumTypes[6].Descriptor()
+}
+
+func (TeamOrderReturnCompletedMetricSort) Type() protoreflect.EnumType {
+	return &file_selling_iface_v1_team_metric_v1_order_metric_proto_enumTypes[6]
+}
+
+func (x TeamOrderReturnCompletedMetricSort) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use TeamOrderReturnCompletedMetricSort.Descriptor instead.
+func (TeamOrderReturnCompletedMetricSort) EnumDescriptor() ([]byte, []int) {
+	return file_selling_iface_v1_team_metric_v1_order_metric_proto_rawDescGZIP(), []int{6}
+}
+
+type TeamOrderOngoingMetricSort int32
+
+const (
+	TeamOrderOngoingMetricSort_TEAM_ORDER_ONGOING_METRIC_SORT_UNSPECIFIED        TeamOrderOngoingMetricSort = 0
+	TeamOrderOngoingMetricSort_TEAM_ORDER_ONGOING_METRIC_SORT_TRANSACTION_COUNT  TeamOrderOngoingMetricSort = 1
+	TeamOrderOngoingMetricSort_TEAM_ORDER_ONGOING_METRIC_SORT_TOTAL_AMOUNT       TeamOrderOngoingMetricSort = 2
+	TeamOrderOngoingMetricSort_TEAM_ORDER_ONGOING_METRIC_SORT_MP_TOTAL_AMOUNT    TeamOrderOngoingMetricSort = 3
+	TeamOrderOngoingMetricSort_TEAM_ORDER_ONGOING_METRIC_SORT_LAST_ORDER_ONGOING TeamOrderOngoingMetricSort = 4
+)
+
+// Enum value maps for TeamOrderOngoingMetricSort.
+var (
+	TeamOrderOngoingMetricSort_name = map[int32]string{
+		0: "TEAM_ORDER_ONGOING_METRIC_SORT_UNSPECIFIED",
+		1: "TEAM_ORDER_ONGOING_METRIC_SORT_TRANSACTION_COUNT",
+		2: "TEAM_ORDER_ONGOING_METRIC_SORT_TOTAL_AMOUNT",
+		3: "TEAM_ORDER_ONGOING_METRIC_SORT_MP_TOTAL_AMOUNT",
+		4: "TEAM_ORDER_ONGOING_METRIC_SORT_LAST_ORDER_ONGOING",
+	}
+	TeamOrderOngoingMetricSort_value = map[string]int32{
+		"TEAM_ORDER_ONGOING_METRIC_SORT_UNSPECIFIED":        0,
+		"TEAM_ORDER_ONGOING_METRIC_SORT_TRANSACTION_COUNT":  1,
+		"TEAM_ORDER_ONGOING_METRIC_SORT_TOTAL_AMOUNT":       2,
+		"TEAM_ORDER_ONGOING_METRIC_SORT_MP_TOTAL_AMOUNT":    3,
+		"TEAM_ORDER_ONGOING_METRIC_SORT_LAST_ORDER_ONGOING": 4,
+	}
+)
+
+func (x TeamOrderOngoingMetricSort) Enum() *TeamOrderOngoingMetricSort {
+	p := new(TeamOrderOngoingMetricSort)
+	*p = x
+	return p
+}
+
+func (x TeamOrderOngoingMetricSort) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (TeamOrderOngoingMetricSort) Descriptor() protoreflect.EnumDescriptor {
+	return file_selling_iface_v1_team_metric_v1_order_metric_proto_enumTypes[7].Descriptor()
+}
+
+func (TeamOrderOngoingMetricSort) Type() protoreflect.EnumType {
+	return &file_selling_iface_v1_team_metric_v1_order_metric_proto_enumTypes[7]
+}
+
+func (x TeamOrderOngoingMetricSort) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use TeamOrderOngoingMetricSort.Descriptor instead.
+func (TeamOrderOngoingMetricSort) EnumDescriptor() ([]byte, []int) {
+	return file_selling_iface_v1_team_metric_v1_order_metric_proto_rawDescGZIP(), []int{7}
+}
+
 type TeamOrderItem struct {
-	state             protoimpl.MessageState `protogen:"open.v1"`
-	TeamId            uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
-	TransactionCount  int64                  `protobuf:"varint,2,opt,name=transaction_count,json=transactionCount,proto3" json:"transaction_count,omitempty"`
-	PieceCount        int64                  `protobuf:"varint,3,opt,name=piece_count,json=pieceCount,proto3" json:"piece_count,omitempty"`
-	TotalAmount       float64                `protobuf:"fixed64,4,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
-	AverageOrderValue float64                `protobuf:"fixed64,5,opt,name=average_order_value,json=averageOrderValue,proto3" json:"average_order_value,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	TeamId           uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	TransactionCount int64                  `protobuf:"varint,2,opt,name=transaction_count,json=transactionCount,proto3" json:"transaction_count,omitempty"`
+	TotalAmount      float64                `protobuf:"fixed64,4,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
+	MpTotalAmount    float64                `protobuf:"fixed64,5,opt,name=mp_total_amount,json=mpTotalAmount,proto3" json:"mp_total_amount,omitempty"`
+	// @gotags: gorm:"serializer:timestamptz"
+	LastOrderCreated *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=last_order_created,json=lastOrderCreated,proto3" json:"last_order_created,omitempty" gorm:"serializer:timestamptz"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *TeamOrderItem) Reset() {
@@ -131,13 +518,6 @@ func (x *TeamOrderItem) GetTransactionCount() int64 {
 	return 0
 }
 
-func (x *TeamOrderItem) GetPieceCount() int64 {
-	if x != nil {
-		return x.PieceCount
-	}
-	return 0
-}
-
 func (x *TeamOrderItem) GetTotalAmount() float64 {
 	if x != nil {
 		return x.TotalAmount
@@ -145,11 +525,18 @@ func (x *TeamOrderItem) GetTotalAmount() float64 {
 	return 0
 }
 
-func (x *TeamOrderItem) GetAverageOrderValue() float64 {
+func (x *TeamOrderItem) GetMpTotalAmount() float64 {
 	if x != nil {
-		return x.AverageOrderValue
+		return x.MpTotalAmount
 	}
 	return 0
+}
+
+func (x *TeamOrderItem) GetLastOrderCreated() *timestamppb.Timestamp {
+	if x != nil {
+		return x.LastOrderCreated
+	}
+	return nil
 }
 
 type TeamOrderMetric struct {
@@ -196,29 +583,994 @@ func (x *TeamOrderMetric) GetData() map[uint64]*TeamOrderItem {
 	return nil
 }
 
+type TeamOrderWithdrawalItem struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	TeamId           uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	TransactionCount int64                  `protobuf:"varint,2,opt,name=transaction_count,json=transactionCount,proto3" json:"transaction_count,omitempty"`
+	TotalAmount      float64                `protobuf:"fixed64,4,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
+	MpTotalAmount    float64                `protobuf:"fixed64,5,opt,name=mp_total_amount,json=mpTotalAmount,proto3" json:"mp_total_amount,omitempty"`
+	// @gotags: gorm:"serializer:timestamptz"
+	LastOrderWithdrawal *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=last_order_withdrawal,json=lastOrderWithdrawal,proto3" json:"last_order_withdrawal,omitempty" gorm:"serializer:timestamptz"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
+}
+
+func (x *TeamOrderWithdrawalItem) Reset() {
+	*x = TeamOrderWithdrawalItem{}
+	mi := &file_selling_iface_v1_team_metric_v1_order_metric_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TeamOrderWithdrawalItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TeamOrderWithdrawalItem) ProtoMessage() {}
+
+func (x *TeamOrderWithdrawalItem) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_team_metric_v1_order_metric_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TeamOrderWithdrawalItem.ProtoReflect.Descriptor instead.
+func (*TeamOrderWithdrawalItem) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_team_metric_v1_order_metric_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *TeamOrderWithdrawalItem) GetTeamId() uint64 {
+	if x != nil {
+		return x.TeamId
+	}
+	return 0
+}
+
+func (x *TeamOrderWithdrawalItem) GetTransactionCount() int64 {
+	if x != nil {
+		return x.TransactionCount
+	}
+	return 0
+}
+
+func (x *TeamOrderWithdrawalItem) GetTotalAmount() float64 {
+	if x != nil {
+		return x.TotalAmount
+	}
+	return 0
+}
+
+func (x *TeamOrderWithdrawalItem) GetMpTotalAmount() float64 {
+	if x != nil {
+		return x.MpTotalAmount
+	}
+	return 0
+}
+
+func (x *TeamOrderWithdrawalItem) GetLastOrderWithdrawal() *timestamppb.Timestamp {
+	if x != nil {
+		return x.LastOrderWithdrawal
+	}
+	return nil
+}
+
+type TeamOrderWithdrawalMetric struct {
+	state         protoimpl.MessageState              `protogen:"open.v1"`
+	Data          map[uint64]*TeamOrderWithdrawalItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TeamOrderWithdrawalMetric) Reset() {
+	*x = TeamOrderWithdrawalMetric{}
+	mi := &file_selling_iface_v1_team_metric_v1_order_metric_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TeamOrderWithdrawalMetric) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TeamOrderWithdrawalMetric) ProtoMessage() {}
+
+func (x *TeamOrderWithdrawalMetric) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_team_metric_v1_order_metric_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TeamOrderWithdrawalMetric.ProtoReflect.Descriptor instead.
+func (*TeamOrderWithdrawalMetric) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_team_metric_v1_order_metric_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *TeamOrderWithdrawalMetric) GetData() map[uint64]*TeamOrderWithdrawalItem {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+type TeamOrderCancelledItem struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	TeamId           uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	TransactionCount int64                  `protobuf:"varint,2,opt,name=transaction_count,json=transactionCount,proto3" json:"transaction_count,omitempty"`
+	TotalAmount      float64                `protobuf:"fixed64,4,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
+	MpTotalAmount    float64                `protobuf:"fixed64,5,opt,name=mp_total_amount,json=mpTotalAmount,proto3" json:"mp_total_amount,omitempty"`
+	// @gotags: gorm:"serializer:timestamptz"
+	LastOrderCancelled *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=last_order_cancelled,json=lastOrderCancelled,proto3" json:"last_order_cancelled,omitempty" gorm:"serializer:timestamptz"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *TeamOrderCancelledItem) Reset() {
+	*x = TeamOrderCancelledItem{}
+	mi := &file_selling_iface_v1_team_metric_v1_order_metric_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TeamOrderCancelledItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TeamOrderCancelledItem) ProtoMessage() {}
+
+func (x *TeamOrderCancelledItem) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_team_metric_v1_order_metric_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TeamOrderCancelledItem.ProtoReflect.Descriptor instead.
+func (*TeamOrderCancelledItem) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_team_metric_v1_order_metric_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *TeamOrderCancelledItem) GetTeamId() uint64 {
+	if x != nil {
+		return x.TeamId
+	}
+	return 0
+}
+
+func (x *TeamOrderCancelledItem) GetTransactionCount() int64 {
+	if x != nil {
+		return x.TransactionCount
+	}
+	return 0
+}
+
+func (x *TeamOrderCancelledItem) GetTotalAmount() float64 {
+	if x != nil {
+		return x.TotalAmount
+	}
+	return 0
+}
+
+func (x *TeamOrderCancelledItem) GetMpTotalAmount() float64 {
+	if x != nil {
+		return x.MpTotalAmount
+	}
+	return 0
+}
+
+func (x *TeamOrderCancelledItem) GetLastOrderCancelled() *timestamppb.Timestamp {
+	if x != nil {
+		return x.LastOrderCancelled
+	}
+	return nil
+}
+
+type TeamOrderCancelledMetric struct {
+	state         protoimpl.MessageState             `protogen:"open.v1"`
+	Data          map[uint64]*TeamOrderCancelledItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TeamOrderCancelledMetric) Reset() {
+	*x = TeamOrderCancelledMetric{}
+	mi := &file_selling_iface_v1_team_metric_v1_order_metric_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TeamOrderCancelledMetric) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TeamOrderCancelledMetric) ProtoMessage() {}
+
+func (x *TeamOrderCancelledMetric) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_team_metric_v1_order_metric_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TeamOrderCancelledMetric.ProtoReflect.Descriptor instead.
+func (*TeamOrderCancelledMetric) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_team_metric_v1_order_metric_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *TeamOrderCancelledMetric) GetData() map[uint64]*TeamOrderCancelledItem {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+type TeamOrderLostItem struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	TeamId           uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	TransactionCount int64                  `protobuf:"varint,2,opt,name=transaction_count,json=transactionCount,proto3" json:"transaction_count,omitempty"`
+	TotalAmount      float64                `protobuf:"fixed64,4,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
+	MpTotalAmount    float64                `protobuf:"fixed64,5,opt,name=mp_total_amount,json=mpTotalAmount,proto3" json:"mp_total_amount,omitempty"`
+	// @gotags: gorm:"serializer:timestamptz"
+	LastOrderLost *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=last_order_lost,json=lastOrderLost,proto3" json:"last_order_lost,omitempty" gorm:"serializer:timestamptz"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TeamOrderLostItem) Reset() {
+	*x = TeamOrderLostItem{}
+	mi := &file_selling_iface_v1_team_metric_v1_order_metric_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TeamOrderLostItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TeamOrderLostItem) ProtoMessage() {}
+
+func (x *TeamOrderLostItem) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_team_metric_v1_order_metric_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TeamOrderLostItem.ProtoReflect.Descriptor instead.
+func (*TeamOrderLostItem) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_team_metric_v1_order_metric_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *TeamOrderLostItem) GetTeamId() uint64 {
+	if x != nil {
+		return x.TeamId
+	}
+	return 0
+}
+
+func (x *TeamOrderLostItem) GetTransactionCount() int64 {
+	if x != nil {
+		return x.TransactionCount
+	}
+	return 0
+}
+
+func (x *TeamOrderLostItem) GetTotalAmount() float64 {
+	if x != nil {
+		return x.TotalAmount
+	}
+	return 0
+}
+
+func (x *TeamOrderLostItem) GetMpTotalAmount() float64 {
+	if x != nil {
+		return x.MpTotalAmount
+	}
+	return 0
+}
+
+func (x *TeamOrderLostItem) GetLastOrderLost() *timestamppb.Timestamp {
+	if x != nil {
+		return x.LastOrderLost
+	}
+	return nil
+}
+
+type TeamOrderLostMetric struct {
+	state         protoimpl.MessageState        `protogen:"open.v1"`
+	Data          map[uint64]*TeamOrderLostItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TeamOrderLostMetric) Reset() {
+	*x = TeamOrderLostMetric{}
+	mi := &file_selling_iface_v1_team_metric_v1_order_metric_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TeamOrderLostMetric) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TeamOrderLostMetric) ProtoMessage() {}
+
+func (x *TeamOrderLostMetric) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_team_metric_v1_order_metric_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TeamOrderLostMetric.ProtoReflect.Descriptor instead.
+func (*TeamOrderLostMetric) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_team_metric_v1_order_metric_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *TeamOrderLostMetric) GetData() map[uint64]*TeamOrderLostItem {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+type TeamOrderCompletedItem struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	TeamId           uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	TransactionCount int64                  `protobuf:"varint,2,opt,name=transaction_count,json=transactionCount,proto3" json:"transaction_count,omitempty"`
+	TotalAmount      float64                `protobuf:"fixed64,4,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
+	MpTotalAmount    float64                `protobuf:"fixed64,5,opt,name=mp_total_amount,json=mpTotalAmount,proto3" json:"mp_total_amount,omitempty"`
+	// @gotags: gorm:"serializer:timestamptz"
+	LastOrderCompleted *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=last_order_completed,json=lastOrderCompleted,proto3" json:"last_order_completed,omitempty" gorm:"serializer:timestamptz"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *TeamOrderCompletedItem) Reset() {
+	*x = TeamOrderCompletedItem{}
+	mi := &file_selling_iface_v1_team_metric_v1_order_metric_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TeamOrderCompletedItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TeamOrderCompletedItem) ProtoMessage() {}
+
+func (x *TeamOrderCompletedItem) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_team_metric_v1_order_metric_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TeamOrderCompletedItem.ProtoReflect.Descriptor instead.
+func (*TeamOrderCompletedItem) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_team_metric_v1_order_metric_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *TeamOrderCompletedItem) GetTeamId() uint64 {
+	if x != nil {
+		return x.TeamId
+	}
+	return 0
+}
+
+func (x *TeamOrderCompletedItem) GetTransactionCount() int64 {
+	if x != nil {
+		return x.TransactionCount
+	}
+	return 0
+}
+
+func (x *TeamOrderCompletedItem) GetTotalAmount() float64 {
+	if x != nil {
+		return x.TotalAmount
+	}
+	return 0
+}
+
+func (x *TeamOrderCompletedItem) GetMpTotalAmount() float64 {
+	if x != nil {
+		return x.MpTotalAmount
+	}
+	return 0
+}
+
+func (x *TeamOrderCompletedItem) GetLastOrderCompleted() *timestamppb.Timestamp {
+	if x != nil {
+		return x.LastOrderCompleted
+	}
+	return nil
+}
+
+type TeamOrderCompletedMetric struct {
+	state         protoimpl.MessageState             `protogen:"open.v1"`
+	Data          map[uint64]*TeamOrderCompletedItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TeamOrderCompletedMetric) Reset() {
+	*x = TeamOrderCompletedMetric{}
+	mi := &file_selling_iface_v1_team_metric_v1_order_metric_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TeamOrderCompletedMetric) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TeamOrderCompletedMetric) ProtoMessage() {}
+
+func (x *TeamOrderCompletedMetric) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_team_metric_v1_order_metric_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TeamOrderCompletedMetric.ProtoReflect.Descriptor instead.
+func (*TeamOrderCompletedMetric) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_team_metric_v1_order_metric_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *TeamOrderCompletedMetric) GetData() map[uint64]*TeamOrderCompletedItem {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+type TeamOrderReturnItem struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	TeamId           uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	TransactionCount int64                  `protobuf:"varint,2,opt,name=transaction_count,json=transactionCount,proto3" json:"transaction_count,omitempty"`
+	TotalAmount      float64                `protobuf:"fixed64,4,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
+	MpTotalAmount    float64                `protobuf:"fixed64,5,opt,name=mp_total_amount,json=mpTotalAmount,proto3" json:"mp_total_amount,omitempty"`
+	// @gotags: gorm:"serializer:timestamptz"
+	LastOrderReturn *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=last_order_return,json=lastOrderReturn,proto3" json:"last_order_return,omitempty" gorm:"serializer:timestamptz"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *TeamOrderReturnItem) Reset() {
+	*x = TeamOrderReturnItem{}
+	mi := &file_selling_iface_v1_team_metric_v1_order_metric_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TeamOrderReturnItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TeamOrderReturnItem) ProtoMessage() {}
+
+func (x *TeamOrderReturnItem) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_team_metric_v1_order_metric_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TeamOrderReturnItem.ProtoReflect.Descriptor instead.
+func (*TeamOrderReturnItem) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_team_metric_v1_order_metric_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *TeamOrderReturnItem) GetTeamId() uint64 {
+	if x != nil {
+		return x.TeamId
+	}
+	return 0
+}
+
+func (x *TeamOrderReturnItem) GetTransactionCount() int64 {
+	if x != nil {
+		return x.TransactionCount
+	}
+	return 0
+}
+
+func (x *TeamOrderReturnItem) GetTotalAmount() float64 {
+	if x != nil {
+		return x.TotalAmount
+	}
+	return 0
+}
+
+func (x *TeamOrderReturnItem) GetMpTotalAmount() float64 {
+	if x != nil {
+		return x.MpTotalAmount
+	}
+	return 0
+}
+
+func (x *TeamOrderReturnItem) GetLastOrderReturn() *timestamppb.Timestamp {
+	if x != nil {
+		return x.LastOrderReturn
+	}
+	return nil
+}
+
+type TeamOrderReturnMetric struct {
+	state         protoimpl.MessageState          `protogen:"open.v1"`
+	Data          map[uint64]*TeamOrderReturnItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TeamOrderReturnMetric) Reset() {
+	*x = TeamOrderReturnMetric{}
+	mi := &file_selling_iface_v1_team_metric_v1_order_metric_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TeamOrderReturnMetric) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TeamOrderReturnMetric) ProtoMessage() {}
+
+func (x *TeamOrderReturnMetric) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_team_metric_v1_order_metric_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TeamOrderReturnMetric.ProtoReflect.Descriptor instead.
+func (*TeamOrderReturnMetric) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_team_metric_v1_order_metric_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *TeamOrderReturnMetric) GetData() map[uint64]*TeamOrderReturnItem {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+type TeamOrderReturnCompletedItem struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	TeamId           uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	TransactionCount int64                  `protobuf:"varint,2,opt,name=transaction_count,json=transactionCount,proto3" json:"transaction_count,omitempty"`
+	TotalAmount      float64                `protobuf:"fixed64,4,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
+	MpTotalAmount    float64                `protobuf:"fixed64,5,opt,name=mp_total_amount,json=mpTotalAmount,proto3" json:"mp_total_amount,omitempty"`
+	// @gotags: gorm:"serializer:timestamptz"
+	LastOrderReturnCompleted *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=last_order_return_completed,json=lastOrderReturnCompleted,proto3" json:"last_order_return_completed,omitempty" gorm:"serializer:timestamptz"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
+}
+
+func (x *TeamOrderReturnCompletedItem) Reset() {
+	*x = TeamOrderReturnCompletedItem{}
+	mi := &file_selling_iface_v1_team_metric_v1_order_metric_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TeamOrderReturnCompletedItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TeamOrderReturnCompletedItem) ProtoMessage() {}
+
+func (x *TeamOrderReturnCompletedItem) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_team_metric_v1_order_metric_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TeamOrderReturnCompletedItem.ProtoReflect.Descriptor instead.
+func (*TeamOrderReturnCompletedItem) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_team_metric_v1_order_metric_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *TeamOrderReturnCompletedItem) GetTeamId() uint64 {
+	if x != nil {
+		return x.TeamId
+	}
+	return 0
+}
+
+func (x *TeamOrderReturnCompletedItem) GetTransactionCount() int64 {
+	if x != nil {
+		return x.TransactionCount
+	}
+	return 0
+}
+
+func (x *TeamOrderReturnCompletedItem) GetTotalAmount() float64 {
+	if x != nil {
+		return x.TotalAmount
+	}
+	return 0
+}
+
+func (x *TeamOrderReturnCompletedItem) GetMpTotalAmount() float64 {
+	if x != nil {
+		return x.MpTotalAmount
+	}
+	return 0
+}
+
+func (x *TeamOrderReturnCompletedItem) GetLastOrderReturnCompleted() *timestamppb.Timestamp {
+	if x != nil {
+		return x.LastOrderReturnCompleted
+	}
+	return nil
+}
+
+type TeamOrderReturnCompletedMetric struct {
+	state         protoimpl.MessageState                   `protogen:"open.v1"`
+	Data          map[uint64]*TeamOrderReturnCompletedItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TeamOrderReturnCompletedMetric) Reset() {
+	*x = TeamOrderReturnCompletedMetric{}
+	mi := &file_selling_iface_v1_team_metric_v1_order_metric_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TeamOrderReturnCompletedMetric) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TeamOrderReturnCompletedMetric) ProtoMessage() {}
+
+func (x *TeamOrderReturnCompletedMetric) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_team_metric_v1_order_metric_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TeamOrderReturnCompletedMetric.ProtoReflect.Descriptor instead.
+func (*TeamOrderReturnCompletedMetric) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_team_metric_v1_order_metric_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *TeamOrderReturnCompletedMetric) GetData() map[uint64]*TeamOrderReturnCompletedItem {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+type TeamOrderOngoingItem struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	TeamId           uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	TransactionCount int64                  `protobuf:"varint,2,opt,name=transaction_count,json=transactionCount,proto3" json:"transaction_count,omitempty"`
+	TotalAmount      float64                `protobuf:"fixed64,4,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
+	MpTotalAmount    float64                `protobuf:"fixed64,5,opt,name=mp_total_amount,json=mpTotalAmount,proto3" json:"mp_total_amount,omitempty"`
+	// @gotags: gorm:"serializer:timestamptz"
+	LastOrderOngoing *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=last_order_ongoing,json=lastOrderOngoing,proto3" json:"last_order_ongoing,omitempty" gorm:"serializer:timestamptz"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *TeamOrderOngoingItem) Reset() {
+	*x = TeamOrderOngoingItem{}
+	mi := &file_selling_iface_v1_team_metric_v1_order_metric_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TeamOrderOngoingItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TeamOrderOngoingItem) ProtoMessage() {}
+
+func (x *TeamOrderOngoingItem) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_team_metric_v1_order_metric_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TeamOrderOngoingItem.ProtoReflect.Descriptor instead.
+func (*TeamOrderOngoingItem) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_team_metric_v1_order_metric_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *TeamOrderOngoingItem) GetTeamId() uint64 {
+	if x != nil {
+		return x.TeamId
+	}
+	return 0
+}
+
+func (x *TeamOrderOngoingItem) GetTransactionCount() int64 {
+	if x != nil {
+		return x.TransactionCount
+	}
+	return 0
+}
+
+func (x *TeamOrderOngoingItem) GetTotalAmount() float64 {
+	if x != nil {
+		return x.TotalAmount
+	}
+	return 0
+}
+
+func (x *TeamOrderOngoingItem) GetMpTotalAmount() float64 {
+	if x != nil {
+		return x.MpTotalAmount
+	}
+	return 0
+}
+
+func (x *TeamOrderOngoingItem) GetLastOrderOngoing() *timestamppb.Timestamp {
+	if x != nil {
+		return x.LastOrderOngoing
+	}
+	return nil
+}
+
+type TeamOrderOngoingMetric struct {
+	state         protoimpl.MessageState           `protogen:"open.v1"`
+	Data          map[uint64]*TeamOrderOngoingItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TeamOrderOngoingMetric) Reset() {
+	*x = TeamOrderOngoingMetric{}
+	mi := &file_selling_iface_v1_team_metric_v1_order_metric_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TeamOrderOngoingMetric) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TeamOrderOngoingMetric) ProtoMessage() {}
+
+func (x *TeamOrderOngoingMetric) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_team_metric_v1_order_metric_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TeamOrderOngoingMetric.ProtoReflect.Descriptor instead.
+func (*TeamOrderOngoingMetric) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_team_metric_v1_order_metric_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *TeamOrderOngoingMetric) GetData() map[uint64]*TeamOrderOngoingItem {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
 var File_selling_iface_v1_team_metric_v1_order_metric_proto protoreflect.FileDescriptor
 
 const file_selling_iface_v1_team_metric_v1_order_metric_proto_rawDesc = "" +
 	"\n" +
-	"2selling_iface/v1/team_metric/v1/order_metric.proto\x12\x1fselling_iface.v1.team_metric.v1\"\xc9\x01\n" +
+	"2selling_iface/v1/team_metric/v1/order_metric.proto\x12\x1fselling_iface.v1.team_metric.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xea\x01\n" +
 	"\rTeamOrderItem\x12\x17\n" +
 	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12+\n" +
-	"\x11transaction_count\x18\x02 \x01(\x03R\x10transactionCount\x12\x1f\n" +
-	"\vpiece_count\x18\x03 \x01(\x03R\n" +
-	"pieceCount\x12!\n" +
-	"\ftotal_amount\x18\x04 \x01(\x01R\vtotalAmount\x12.\n" +
-	"\x13average_order_value\x18\x05 \x01(\x01R\x11averageOrderValue\"\xca\x01\n" +
+	"\x11transaction_count\x18\x02 \x01(\x03R\x10transactionCount\x12!\n" +
+	"\ftotal_amount\x18\x04 \x01(\x01R\vtotalAmount\x12&\n" +
+	"\x0fmp_total_amount\x18\x05 \x01(\x01R\rmpTotalAmount\x12H\n" +
+	"\x12last_order_created\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\x10lastOrderCreated\"\xca\x01\n" +
 	"\x0fTeamOrderMetric\x12N\n" +
 	"\x04data\x18\x01 \x03(\v2:.selling_iface.v1.team_metric.v1.TeamOrderMetric.DataEntryR\x04data\x1ag\n" +
 	"\tDataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\x04R\x03key\x12D\n" +
-	"\x05value\x18\x02 \x01(\v2..selling_iface.v1.team_metric.v1.TeamOrderItemR\x05value:\x028\x01*\xec\x01\n" +
+	"\x05value\x18\x02 \x01(\v2..selling_iface.v1.team_metric.v1.TeamOrderItemR\x05value:\x028\x01\"\xfa\x01\n" +
+	"\x17TeamOrderWithdrawalItem\x12\x17\n" +
+	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12+\n" +
+	"\x11transaction_count\x18\x02 \x01(\x03R\x10transactionCount\x12!\n" +
+	"\ftotal_amount\x18\x04 \x01(\x01R\vtotalAmount\x12&\n" +
+	"\x0fmp_total_amount\x18\x05 \x01(\x01R\rmpTotalAmount\x12N\n" +
+	"\x15last_order_withdrawal\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\x13lastOrderWithdrawal\"\xe8\x01\n" +
+	"\x19TeamOrderWithdrawalMetric\x12X\n" +
+	"\x04data\x18\x01 \x03(\v2D.selling_iface.v1.team_metric.v1.TeamOrderWithdrawalMetric.DataEntryR\x04data\x1aq\n" +
+	"\tDataEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\x04R\x03key\x12N\n" +
+	"\x05value\x18\x02 \x01(\v28.selling_iface.v1.team_metric.v1.TeamOrderWithdrawalItemR\x05value:\x028\x01\"\xf7\x01\n" +
+	"\x16TeamOrderCancelledItem\x12\x17\n" +
+	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12+\n" +
+	"\x11transaction_count\x18\x02 \x01(\x03R\x10transactionCount\x12!\n" +
+	"\ftotal_amount\x18\x04 \x01(\x01R\vtotalAmount\x12&\n" +
+	"\x0fmp_total_amount\x18\x05 \x01(\x01R\rmpTotalAmount\x12L\n" +
+	"\x14last_order_cancelled\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\x12lastOrderCancelled\"\xe5\x01\n" +
+	"\x18TeamOrderCancelledMetric\x12W\n" +
+	"\x04data\x18\x01 \x03(\v2C.selling_iface.v1.team_metric.v1.TeamOrderCancelledMetric.DataEntryR\x04data\x1ap\n" +
+	"\tDataEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\x04R\x03key\x12M\n" +
+	"\x05value\x18\x02 \x01(\v27.selling_iface.v1.team_metric.v1.TeamOrderCancelledItemR\x05value:\x028\x01\"\xe8\x01\n" +
+	"\x11TeamOrderLostItem\x12\x17\n" +
+	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12+\n" +
+	"\x11transaction_count\x18\x02 \x01(\x03R\x10transactionCount\x12!\n" +
+	"\ftotal_amount\x18\x04 \x01(\x01R\vtotalAmount\x12&\n" +
+	"\x0fmp_total_amount\x18\x05 \x01(\x01R\rmpTotalAmount\x12B\n" +
+	"\x0flast_order_lost\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\rlastOrderLost\"\xd6\x01\n" +
+	"\x13TeamOrderLostMetric\x12R\n" +
+	"\x04data\x18\x01 \x03(\v2>.selling_iface.v1.team_metric.v1.TeamOrderLostMetric.DataEntryR\x04data\x1ak\n" +
+	"\tDataEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\x04R\x03key\x12H\n" +
+	"\x05value\x18\x02 \x01(\v22.selling_iface.v1.team_metric.v1.TeamOrderLostItemR\x05value:\x028\x01\"\xf7\x01\n" +
+	"\x16TeamOrderCompletedItem\x12\x17\n" +
+	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12+\n" +
+	"\x11transaction_count\x18\x02 \x01(\x03R\x10transactionCount\x12!\n" +
+	"\ftotal_amount\x18\x04 \x01(\x01R\vtotalAmount\x12&\n" +
+	"\x0fmp_total_amount\x18\x05 \x01(\x01R\rmpTotalAmount\x12L\n" +
+	"\x14last_order_completed\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\x12lastOrderCompleted\"\xe5\x01\n" +
+	"\x18TeamOrderCompletedMetric\x12W\n" +
+	"\x04data\x18\x01 \x03(\v2C.selling_iface.v1.team_metric.v1.TeamOrderCompletedMetric.DataEntryR\x04data\x1ap\n" +
+	"\tDataEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\x04R\x03key\x12M\n" +
+	"\x05value\x18\x02 \x01(\v27.selling_iface.v1.team_metric.v1.TeamOrderCompletedItemR\x05value:\x028\x01\"\xee\x01\n" +
+	"\x13TeamOrderReturnItem\x12\x17\n" +
+	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12+\n" +
+	"\x11transaction_count\x18\x02 \x01(\x03R\x10transactionCount\x12!\n" +
+	"\ftotal_amount\x18\x04 \x01(\x01R\vtotalAmount\x12&\n" +
+	"\x0fmp_total_amount\x18\x05 \x01(\x01R\rmpTotalAmount\x12F\n" +
+	"\x11last_order_return\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\x0flastOrderReturn\"\xdc\x01\n" +
+	"\x15TeamOrderReturnMetric\x12T\n" +
+	"\x04data\x18\x01 \x03(\v2@.selling_iface.v1.team_metric.v1.TeamOrderReturnMetric.DataEntryR\x04data\x1am\n" +
+	"\tDataEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\x04R\x03key\x12J\n" +
+	"\x05value\x18\x02 \x01(\v24.selling_iface.v1.team_metric.v1.TeamOrderReturnItemR\x05value:\x028\x01\"\x8a\x02\n" +
+	"\x1cTeamOrderReturnCompletedItem\x12\x17\n" +
+	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12+\n" +
+	"\x11transaction_count\x18\x02 \x01(\x03R\x10transactionCount\x12!\n" +
+	"\ftotal_amount\x18\x04 \x01(\x01R\vtotalAmount\x12&\n" +
+	"\x0fmp_total_amount\x18\x05 \x01(\x01R\rmpTotalAmount\x12Y\n" +
+	"\x1blast_order_return_completed\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\x18lastOrderReturnCompleted\"\xf7\x01\n" +
+	"\x1eTeamOrderReturnCompletedMetric\x12]\n" +
+	"\x04data\x18\x01 \x03(\v2I.selling_iface.v1.team_metric.v1.TeamOrderReturnCompletedMetric.DataEntryR\x04data\x1av\n" +
+	"\tDataEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\x04R\x03key\x12S\n" +
+	"\x05value\x18\x02 \x01(\v2=.selling_iface.v1.team_metric.v1.TeamOrderReturnCompletedItemR\x05value:\x028\x01\"\xf1\x01\n" +
+	"\x14TeamOrderOngoingItem\x12\x17\n" +
+	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12+\n" +
+	"\x11transaction_count\x18\x02 \x01(\x03R\x10transactionCount\x12!\n" +
+	"\ftotal_amount\x18\x04 \x01(\x01R\vtotalAmount\x12&\n" +
+	"\x0fmp_total_amount\x18\x05 \x01(\x01R\rmpTotalAmount\x12H\n" +
+	"\x12last_order_ongoing\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\x10lastOrderOngoing\"\xdf\x01\n" +
+	"\x16TeamOrderOngoingMetric\x12U\n" +
+	"\x04data\x18\x01 \x03(\v2A.selling_iface.v1.team_metric.v1.TeamOrderOngoingMetric.DataEntryR\x04data\x1an\n" +
+	"\tDataEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\x04R\x03key\x12K\n" +
+	"\x05value\x18\x02 \x01(\v25.selling_iface.v1.team_metric.v1.TeamOrderOngoingItemR\x05value:\x028\x01*\xef\x01\n" +
 	"\x13TeamOrderMetricSort\x12&\n" +
 	"\"TEAM_ORDER_METRIC_SORT_UNSPECIFIED\x10\x00\x12,\n" +
-	"(TEAM_ORDER_METRIC_SORT_TRANSACTION_COUNT\x10\x01\x12&\n" +
-	"\"TEAM_ORDER_METRIC_SORT_PIECE_COUNT\x10\x02\x12'\n" +
-	"#TEAM_ORDER_METRIC_SORT_TOTAL_AMOUNT\x10\x03\x12.\n" +
-	"*TEAM_ORDER_METRIC_SORT_AVERAGE_ORDER_VALUE\x10\x04B\x9c\x02\n" +
+	"(TEAM_ORDER_METRIC_SORT_TRANSACTION_COUNT\x10\x01\x12'\n" +
+	"#TEAM_ORDER_METRIC_SORT_TOTAL_AMOUNT\x10\x02\x12*\n" +
+	"&TEAM_ORDER_METRIC_SORT_MP_TOTAL_AMOUNT\x10\x03\x12-\n" +
+	")TEAM_ORDER_METRIC_SORT_LAST_ORDER_CREATED\x10\x04*\xb3\x02\n" +
+	"\x1dTeamOrderWithdrawalMetricSort\x121\n" +
+	"-TEAM_ORDER_WITHDRAWAL_METRIC_SORT_UNSPECIFIED\x10\x00\x127\n" +
+	"3TEAM_ORDER_WITHDRAWAL_METRIC_SORT_TRANSACTION_COUNT\x10\x01\x122\n" +
+	".TEAM_ORDER_WITHDRAWAL_METRIC_SORT_TOTAL_AMOUNT\x10\x02\x125\n" +
+	"1TEAM_ORDER_WITHDRAWAL_METRIC_SORT_MP_TOTAL_AMOUNT\x10\x03\x12;\n" +
+	"7TEAM_ORDER_WITHDRAWAL_METRIC_SORT_LAST_ORDER_WITHDRAWAL\x10\x04*\xac\x02\n" +
+	"\x1cTeamOrderCancelledMetricSort\x120\n" +
+	",TEAM_ORDER_CANCELLED_METRIC_SORT_UNSPECIFIED\x10\x00\x126\n" +
+	"2TEAM_ORDER_CANCELLED_METRIC_SORT_TRANSACTION_COUNT\x10\x01\x121\n" +
+	"-TEAM_ORDER_CANCELLED_METRIC_SORT_TOTAL_AMOUNT\x10\x02\x124\n" +
+	"0TEAM_ORDER_CANCELLED_METRIC_SORT_MP_TOTAL_AMOUNT\x10\x03\x129\n" +
+	"5TEAM_ORDER_CANCELLED_METRIC_SORT_LAST_ORDER_CANCELLED\x10\x04*\x89\x02\n" +
+	"\x17TeamOrderLostMetricSort\x12+\n" +
+	"'TEAM_ORDER_LOST_METRIC_SORT_UNSPECIFIED\x10\x00\x121\n" +
+	"-TEAM_ORDER_LOST_METRIC_SORT_TRANSACTION_COUNT\x10\x01\x12,\n" +
+	"(TEAM_ORDER_LOST_METRIC_SORT_TOTAL_AMOUNT\x10\x02\x12/\n" +
+	"+TEAM_ORDER_LOST_METRIC_SORT_MP_TOTAL_AMOUNT\x10\x03\x12/\n" +
+	"+TEAM_ORDER_LOST_METRIC_SORT_LAST_ORDER_LOST\x10\x04*\xac\x02\n" +
+	"\x1cTeamOrderCompletedMetricSort\x120\n" +
+	",TEAM_ORDER_COMPLETED_METRIC_SORT_UNSPECIFIED\x10\x00\x126\n" +
+	"2TEAM_ORDER_COMPLETED_METRIC_SORT_TRANSACTION_COUNT\x10\x01\x121\n" +
+	"-TEAM_ORDER_COMPLETED_METRIC_SORT_TOTAL_AMOUNT\x10\x02\x124\n" +
+	"0TEAM_ORDER_COMPLETED_METRIC_SORT_MP_TOTAL_AMOUNT\x10\x03\x129\n" +
+	"5TEAM_ORDER_COMPLETED_METRIC_SORT_LAST_ORDER_COMPLETED\x10\x04*\x97\x02\n" +
+	"\x19TeamOrderReturnMetricSort\x12-\n" +
+	")TEAM_ORDER_RETURN_METRIC_SORT_UNSPECIFIED\x10\x00\x123\n" +
+	"/TEAM_ORDER_RETURN_METRIC_SORT_TRANSACTION_COUNT\x10\x01\x12.\n" +
+	"*TEAM_ORDER_RETURN_METRIC_SORT_TOTAL_AMOUNT\x10\x02\x121\n" +
+	"-TEAM_ORDER_RETURN_METRIC_SORT_MP_TOTAL_AMOUNT\x10\x03\x123\n" +
+	"/TEAM_ORDER_RETURN_METRIC_SORT_LAST_ORDER_RETURN\x10\x04*\xdc\x02\n" +
+	"\"TeamOrderReturnCompletedMetricSort\x127\n" +
+	"3TEAM_ORDER_RETURN_COMPLETED_METRIC_SORT_UNSPECIFIED\x10\x00\x12=\n" +
+	"9TEAM_ORDER_RETURN_COMPLETED_METRIC_SORT_TRANSACTION_COUNT\x10\x01\x128\n" +
+	"4TEAM_ORDER_RETURN_COMPLETED_METRIC_SORT_TOTAL_AMOUNT\x10\x02\x12;\n" +
+	"7TEAM_ORDER_RETURN_COMPLETED_METRIC_SORT_MP_TOTAL_AMOUNT\x10\x03\x12G\n" +
+	"CTEAM_ORDER_RETURN_COMPLETED_METRIC_SORT_LAST_ORDER_RETURN_COMPLETED\x10\x04*\x9e\x02\n" +
+	"\x1aTeamOrderOngoingMetricSort\x12.\n" +
+	"*TEAM_ORDER_ONGOING_METRIC_SORT_UNSPECIFIED\x10\x00\x124\n" +
+	"0TEAM_ORDER_ONGOING_METRIC_SORT_TRANSACTION_COUNT\x10\x01\x12/\n" +
+	"+TEAM_ORDER_ONGOING_METRIC_SORT_TOTAL_AMOUNT\x10\x02\x122\n" +
+	".TEAM_ORDER_ONGOING_METRIC_SORT_MP_TOTAL_AMOUNT\x10\x03\x125\n" +
+	"1TEAM_ORDER_ONGOING_METRIC_SORT_LAST_ORDER_ONGOING\x10\x04B\x9c\x02\n" +
 	"#com.selling_iface.v1.team_metric.v1B\x10OrderMetricProtoP\x01ZLgithub.com/pdcgo/schema/services/selling_iface/v1/team_metric/v1;team_metric\xa2\x02\x03SVT\xaa\x02\x1dSellingIface.V1.TeamMetric.V1\xca\x02\x1dSellingIface\\V1\\TeamMetric\\V1\xe2\x02)SellingIface\\V1\\TeamMetric\\V1\\GPBMetadata\xea\x02 SellingIface::V1::TeamMetric::V1b\x06proto3"
 
 var (
@@ -233,22 +1585,73 @@ func file_selling_iface_v1_team_metric_v1_order_metric_proto_rawDescGZIP() []byt
 	return file_selling_iface_v1_team_metric_v1_order_metric_proto_rawDescData
 }
 
-var file_selling_iface_v1_team_metric_v1_order_metric_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_selling_iface_v1_team_metric_v1_order_metric_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_selling_iface_v1_team_metric_v1_order_metric_proto_enumTypes = make([]protoimpl.EnumInfo, 8)
+var file_selling_iface_v1_team_metric_v1_order_metric_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
 var file_selling_iface_v1_team_metric_v1_order_metric_proto_goTypes = []any{
-	(TeamOrderMetricSort)(0), // 0: selling_iface.v1.team_metric.v1.TeamOrderMetricSort
-	(*TeamOrderItem)(nil),    // 1: selling_iface.v1.team_metric.v1.TeamOrderItem
-	(*TeamOrderMetric)(nil),  // 2: selling_iface.v1.team_metric.v1.TeamOrderMetric
-	nil,                      // 3: selling_iface.v1.team_metric.v1.TeamOrderMetric.DataEntry
+	(TeamOrderMetricSort)(0),                // 0: selling_iface.v1.team_metric.v1.TeamOrderMetricSort
+	(TeamOrderWithdrawalMetricSort)(0),      // 1: selling_iface.v1.team_metric.v1.TeamOrderWithdrawalMetricSort
+	(TeamOrderCancelledMetricSort)(0),       // 2: selling_iface.v1.team_metric.v1.TeamOrderCancelledMetricSort
+	(TeamOrderLostMetricSort)(0),            // 3: selling_iface.v1.team_metric.v1.TeamOrderLostMetricSort
+	(TeamOrderCompletedMetricSort)(0),       // 4: selling_iface.v1.team_metric.v1.TeamOrderCompletedMetricSort
+	(TeamOrderReturnMetricSort)(0),          // 5: selling_iface.v1.team_metric.v1.TeamOrderReturnMetricSort
+	(TeamOrderReturnCompletedMetricSort)(0), // 6: selling_iface.v1.team_metric.v1.TeamOrderReturnCompletedMetricSort
+	(TeamOrderOngoingMetricSort)(0),         // 7: selling_iface.v1.team_metric.v1.TeamOrderOngoingMetricSort
+	(*TeamOrderItem)(nil),                   // 8: selling_iface.v1.team_metric.v1.TeamOrderItem
+	(*TeamOrderMetric)(nil),                 // 9: selling_iface.v1.team_metric.v1.TeamOrderMetric
+	(*TeamOrderWithdrawalItem)(nil),         // 10: selling_iface.v1.team_metric.v1.TeamOrderWithdrawalItem
+	(*TeamOrderWithdrawalMetric)(nil),       // 11: selling_iface.v1.team_metric.v1.TeamOrderWithdrawalMetric
+	(*TeamOrderCancelledItem)(nil),          // 12: selling_iface.v1.team_metric.v1.TeamOrderCancelledItem
+	(*TeamOrderCancelledMetric)(nil),        // 13: selling_iface.v1.team_metric.v1.TeamOrderCancelledMetric
+	(*TeamOrderLostItem)(nil),               // 14: selling_iface.v1.team_metric.v1.TeamOrderLostItem
+	(*TeamOrderLostMetric)(nil),             // 15: selling_iface.v1.team_metric.v1.TeamOrderLostMetric
+	(*TeamOrderCompletedItem)(nil),          // 16: selling_iface.v1.team_metric.v1.TeamOrderCompletedItem
+	(*TeamOrderCompletedMetric)(nil),        // 17: selling_iface.v1.team_metric.v1.TeamOrderCompletedMetric
+	(*TeamOrderReturnItem)(nil),             // 18: selling_iface.v1.team_metric.v1.TeamOrderReturnItem
+	(*TeamOrderReturnMetric)(nil),           // 19: selling_iface.v1.team_metric.v1.TeamOrderReturnMetric
+	(*TeamOrderReturnCompletedItem)(nil),    // 20: selling_iface.v1.team_metric.v1.TeamOrderReturnCompletedItem
+	(*TeamOrderReturnCompletedMetric)(nil),  // 21: selling_iface.v1.team_metric.v1.TeamOrderReturnCompletedMetric
+	(*TeamOrderOngoingItem)(nil),            // 22: selling_iface.v1.team_metric.v1.TeamOrderOngoingItem
+	(*TeamOrderOngoingMetric)(nil),          // 23: selling_iface.v1.team_metric.v1.TeamOrderOngoingMetric
+	nil,                                     // 24: selling_iface.v1.team_metric.v1.TeamOrderMetric.DataEntry
+	nil,                                     // 25: selling_iface.v1.team_metric.v1.TeamOrderWithdrawalMetric.DataEntry
+	nil,                                     // 26: selling_iface.v1.team_metric.v1.TeamOrderCancelledMetric.DataEntry
+	nil,                                     // 27: selling_iface.v1.team_metric.v1.TeamOrderLostMetric.DataEntry
+	nil,                                     // 28: selling_iface.v1.team_metric.v1.TeamOrderCompletedMetric.DataEntry
+	nil,                                     // 29: selling_iface.v1.team_metric.v1.TeamOrderReturnMetric.DataEntry
+	nil,                                     // 30: selling_iface.v1.team_metric.v1.TeamOrderReturnCompletedMetric.DataEntry
+	nil,                                     // 31: selling_iface.v1.team_metric.v1.TeamOrderOngoingMetric.DataEntry
+	(*timestamppb.Timestamp)(nil),           // 32: google.protobuf.Timestamp
 }
 var file_selling_iface_v1_team_metric_v1_order_metric_proto_depIdxs = []int32{
-	3, // 0: selling_iface.v1.team_metric.v1.TeamOrderMetric.data:type_name -> selling_iface.v1.team_metric.v1.TeamOrderMetric.DataEntry
-	1, // 1: selling_iface.v1.team_metric.v1.TeamOrderMetric.DataEntry.value:type_name -> selling_iface.v1.team_metric.v1.TeamOrderItem
-	2, // [2:2] is the sub-list for method output_type
-	2, // [2:2] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	32, // 0: selling_iface.v1.team_metric.v1.TeamOrderItem.last_order_created:type_name -> google.protobuf.Timestamp
+	24, // 1: selling_iface.v1.team_metric.v1.TeamOrderMetric.data:type_name -> selling_iface.v1.team_metric.v1.TeamOrderMetric.DataEntry
+	32, // 2: selling_iface.v1.team_metric.v1.TeamOrderWithdrawalItem.last_order_withdrawal:type_name -> google.protobuf.Timestamp
+	25, // 3: selling_iface.v1.team_metric.v1.TeamOrderWithdrawalMetric.data:type_name -> selling_iface.v1.team_metric.v1.TeamOrderWithdrawalMetric.DataEntry
+	32, // 4: selling_iface.v1.team_metric.v1.TeamOrderCancelledItem.last_order_cancelled:type_name -> google.protobuf.Timestamp
+	26, // 5: selling_iface.v1.team_metric.v1.TeamOrderCancelledMetric.data:type_name -> selling_iface.v1.team_metric.v1.TeamOrderCancelledMetric.DataEntry
+	32, // 6: selling_iface.v1.team_metric.v1.TeamOrderLostItem.last_order_lost:type_name -> google.protobuf.Timestamp
+	27, // 7: selling_iface.v1.team_metric.v1.TeamOrderLostMetric.data:type_name -> selling_iface.v1.team_metric.v1.TeamOrderLostMetric.DataEntry
+	32, // 8: selling_iface.v1.team_metric.v1.TeamOrderCompletedItem.last_order_completed:type_name -> google.protobuf.Timestamp
+	28, // 9: selling_iface.v1.team_metric.v1.TeamOrderCompletedMetric.data:type_name -> selling_iface.v1.team_metric.v1.TeamOrderCompletedMetric.DataEntry
+	32, // 10: selling_iface.v1.team_metric.v1.TeamOrderReturnItem.last_order_return:type_name -> google.protobuf.Timestamp
+	29, // 11: selling_iface.v1.team_metric.v1.TeamOrderReturnMetric.data:type_name -> selling_iface.v1.team_metric.v1.TeamOrderReturnMetric.DataEntry
+	32, // 12: selling_iface.v1.team_metric.v1.TeamOrderReturnCompletedItem.last_order_return_completed:type_name -> google.protobuf.Timestamp
+	30, // 13: selling_iface.v1.team_metric.v1.TeamOrderReturnCompletedMetric.data:type_name -> selling_iface.v1.team_metric.v1.TeamOrderReturnCompletedMetric.DataEntry
+	32, // 14: selling_iface.v1.team_metric.v1.TeamOrderOngoingItem.last_order_ongoing:type_name -> google.protobuf.Timestamp
+	31, // 15: selling_iface.v1.team_metric.v1.TeamOrderOngoingMetric.data:type_name -> selling_iface.v1.team_metric.v1.TeamOrderOngoingMetric.DataEntry
+	8,  // 16: selling_iface.v1.team_metric.v1.TeamOrderMetric.DataEntry.value:type_name -> selling_iface.v1.team_metric.v1.TeamOrderItem
+	10, // 17: selling_iface.v1.team_metric.v1.TeamOrderWithdrawalMetric.DataEntry.value:type_name -> selling_iface.v1.team_metric.v1.TeamOrderWithdrawalItem
+	12, // 18: selling_iface.v1.team_metric.v1.TeamOrderCancelledMetric.DataEntry.value:type_name -> selling_iface.v1.team_metric.v1.TeamOrderCancelledItem
+	14, // 19: selling_iface.v1.team_metric.v1.TeamOrderLostMetric.DataEntry.value:type_name -> selling_iface.v1.team_metric.v1.TeamOrderLostItem
+	16, // 20: selling_iface.v1.team_metric.v1.TeamOrderCompletedMetric.DataEntry.value:type_name -> selling_iface.v1.team_metric.v1.TeamOrderCompletedItem
+	18, // 21: selling_iface.v1.team_metric.v1.TeamOrderReturnMetric.DataEntry.value:type_name -> selling_iface.v1.team_metric.v1.TeamOrderReturnItem
+	20, // 22: selling_iface.v1.team_metric.v1.TeamOrderReturnCompletedMetric.DataEntry.value:type_name -> selling_iface.v1.team_metric.v1.TeamOrderReturnCompletedItem
+	22, // 23: selling_iface.v1.team_metric.v1.TeamOrderOngoingMetric.DataEntry.value:type_name -> selling_iface.v1.team_metric.v1.TeamOrderOngoingItem
+	24, // [24:24] is the sub-list for method output_type
+	24, // [24:24] is the sub-list for method input_type
+	24, // [24:24] is the sub-list for extension type_name
+	24, // [24:24] is the sub-list for extension extendee
+	0,  // [0:24] is the sub-list for field type_name
 }
 
 func init() { file_selling_iface_v1_team_metric_v1_order_metric_proto_init() }
@@ -261,8 +1664,8 @@ func file_selling_iface_v1_team_metric_v1_order_metric_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_selling_iface_v1_team_metric_v1_order_metric_proto_rawDesc), len(file_selling_iface_v1_team_metric_v1_order_metric_proto_rawDesc)),
-			NumEnums:      1,
-			NumMessages:   3,
+			NumEnums:      8,
+			NumMessages:   24,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

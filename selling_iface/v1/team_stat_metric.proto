@@ -5,12 +5,51 @@ import "buf/validate/validate.proto";
 import "common/v1/common.proto";
 import "google/protobuf/timestamp.proto";
 import "selling_iface/v1/team_metric/v1/order_metric.proto";
+import "selling_iface/v1/team_metric/v1/avg_metric.proto";
+import "selling_iface/v1/team_metric/v1/stock_metric.proto";
+import "selling_iface/v1/team_metric/v1/cost_metric.proto";
+import "selling_iface/v1/team_metric/v1/revenue_metric.proto";
+import "selling_iface/v1/team_metric/v1/profit_metric.proto";
 
 option go_package = "github.com/pdcgo/schema/services/selling_iface/v1;selling_iface";
 
 enum TeamMetricType {
   TEAM_METRIC_TYPE_UNSPECIFIED = 0;
   TEAM_METRIC_TYPE_ORDER = 1;
+  TEAM_METRIC_TYPE_ORDER_WITHDRAWAL = 2;
+  TEAM_METRIC_TYPE_ORDER_CANCELLED = 3;
+  TEAM_METRIC_TYPE_ORDER_LOST = 4;
+  TEAM_METRIC_TYPE_ORDER_COMPLETED = 5;
+  TEAM_METRIC_TYPE_ORDER_RETURN = 6;
+  TEAM_METRIC_TYPE_ORDER_RETURN_COMPLETED = 7;
+  TEAM_METRIC_TYPE_ORDER_ONGOING = 8;
+  // avg order
+  TEAM_METRIC_TYPE_AVG_ORDER = 9;
+  TEAM_METRIC_TYPE_AVG_ORDER_WITHDRAWAL = 10;
+  TEAM_METRIC_TYPE_AVG_ORDER_CANCELLED = 11;
+  TEAM_METRIC_TYPE_AVG_ORDER_LOST = 12;
+  TEAM_METRIC_TYPE_AVG_ORDER_COMPLETED = 13;
+  TEAM_METRIC_TYPE_AVG_ORDER_RETURN = 14;
+  TEAM_METRIC_TYPE_AVG_ORDER_RETURN_COMPLETED = 15;
+  TEAM_METRIC_TYPE_AVG_ORDER_ONGOING = 16;
+  // stock order
+  TEAM_METRIC_TYPE_STOCK_ORDER = 17;
+  // cost order
+  TEAM_METRIC_TYPE_COST_WAREHOUSE = 18;
+  TEAM_METRIC_TYPE_COST_PRODUCT_OWN = 19;
+  TEAM_METRIC_TYPE_COST_PRODUCT_CROSS = 20;
+  TEAM_METRIC_TYPE_ADS_EXPENSE = 21;
+  // revenue
+  TEAM_METRIC_TYPE_WITHDRAWAL = 22;
+  TEAM_METRIC_TYPE_WITHDRAWAL_BREAKDOWN = 23;
+  TEAM_METRIC_TYPE_REVENUE_ORDER = 24;
+  TEAM_METRIC_TYPE_REVENUE_WAREHOUSE_ADJUSTMENT = 25;
+  TEAM_METRIC_TYPE_REVENUE_PRODUCT_ADJUSTMENT = 26;
+  // profit
+  TEAM_METRIC_TYPE_PROFIT_ORDER_CREATED = 27;
+  TEAM_METRIC_TYPE_PROFIT_ORDER_WITHDRAWAL = 28;
+  TEAM_METRIC_TYPE_LOST_PROFIT_ORDER = 29;
+  TEAM_METRIC_TYPE_PROFIT_OR_LOSS = 30;
 }
 
 enum TeamMetricSortType {
@@ -29,12 +68,80 @@ message TeamMetricSort {
   oneof s {
     CommonTeamSort common_sort = 2;
     selling_iface.v1.team_metric.v1.TeamOrderMetricSort team_order_metric_sort = 3;
+    selling_iface.v1.team_metric.v1.TeamOrderWithdrawalMetricSort team_order_withdrawal_metric_sort = 4;
+    selling_iface.v1.team_metric.v1.TeamOrderCancelledMetricSort team_order_cancelled_metric_sort = 5;
+    selling_iface.v1.team_metric.v1.TeamOrderLostMetricSort team_order_lost_metric_sort = 6;
+    selling_iface.v1.team_metric.v1.TeamOrderCompletedMetricSort team_order_completed_metric_sort = 7;
+    selling_iface.v1.team_metric.v1.TeamOrderReturnMetricSort team_order_return_metric_sort = 8;
+    selling_iface.v1.team_metric.v1.TeamOrderReturnCompletedMetricSort team_order_return_completed_metric_sort = 9;
+    selling_iface.v1.team_metric.v1.TeamOrderOngoingMetricSort team_order_ongoing_metric_sort = 10;
+    // avg order
+    selling_iface.v1.team_metric.v1.TeamAvgOrderMetricSort team_avg_order_metric_sort = 11;
+    selling_iface.v1.team_metric.v1.TeamAvgOrderWithdrawalMetricSort team_avg_order_withdrawal_metric_sort = 12;
+    selling_iface.v1.team_metric.v1.TeamAvgOrderCancelledMetricSort team_avg_order_cancelled_metric_sort = 13;
+    selling_iface.v1.team_metric.v1.TeamAvgOrderLostMetricSort team_avg_order_lost_metric_sort = 14;
+    selling_iface.v1.team_metric.v1.TeamAvgOrderCompletedMetricSort team_avg_order_completed_metric_sort = 15;
+    selling_iface.v1.team_metric.v1.TeamAvgOrderReturnMetricSort team_avg_order_return_metric_sort = 16;
+    selling_iface.v1.team_metric.v1.TeamAvgOrderReturnCompletedMetricSort team_avg_order_return_completed_metric_sort = 17;
+    selling_iface.v1.team_metric.v1.TeamAvgOrderOngoingMetricSort team_avg_order_ongoing_metric_sort = 18;
+    // stock order
+    selling_iface.v1.team_metric.v1.TeamStockOrderMetricSort team_stock_order_metric_sort = 19;
+    // cost order
+    selling_iface.v1.team_metric.v1.TeamCostWarehouseMetricSort team_cost_warehouse_metric_sort = 20;
+    selling_iface.v1.team_metric.v1.TeamCostProductOwnMetricSort team_cost_product_own_metric_sort = 21;
+    selling_iface.v1.team_metric.v1.TeamCostProductCrossMetricSort team_cost_product_cross_metric_sort = 22;
+    selling_iface.v1.team_metric.v1.TeamAdsExpenseMetricSort team_ads_expense_metric_sort = 23;
+    // revenue
+    selling_iface.v1.team_metric.v1.TeamWithdrawalMetricSort team_withdrawal_metric_sort = 24;
+    selling_iface.v1.team_metric.v1.TeamWithdrawalBreakdownMetricSort team_withdrawal_breakdown_metric_sort = 25;
+    selling_iface.v1.team_metric.v1.TeamRevenueOrderMetricSort team_revenue_order_metric_sort = 26;
+    selling_iface.v1.team_metric.v1.TeamRevenueWarehouseAdjustmentMetricSort team_revenue_warehouse_adjustment_metric_sort = 27;
+    selling_iface.v1.team_metric.v1.TeamRevenueProductAdjustmentMetricSort team_revenue_product_adjustment_metric_sort = 28;
+    // profit
+    selling_iface.v1.team_metric.v1.TeamProfitOrderCreatedMetricSort team_profit_order_created_metric_sort = 29;
+    selling_iface.v1.team_metric.v1.TeamProfitOrderWithdrawalMetricSort team_profit_order_withdrawal_metric_sort = 30;
+    selling_iface.v1.team_metric.v1.TeamLostProfitOrderMetricSort team_lost_profit_order_metric_sort = 31;
+    selling_iface.v1.team_metric.v1.TeamProfitOrLossMetricSort team_profit_or_loss_metric_sort = 32;
   }
 }
 
 message TeamMetric {
   oneof data {
     selling_iface.v1.team_metric.v1.TeamOrderMetric team_order_metric = 1;
+    selling_iface.v1.team_metric.v1.TeamOrderWithdrawalMetric team_order_withdrawal_metric = 2;
+    selling_iface.v1.team_metric.v1.TeamOrderCancelledMetric team_order_cancelled_metric = 3;
+    selling_iface.v1.team_metric.v1.TeamOrderLostMetric team_order_lost_metric = 4;
+    selling_iface.v1.team_metric.v1.TeamOrderCompletedMetric team_order_completed_metric = 5;
+    selling_iface.v1.team_metric.v1.TeamOrderReturnMetric team_order_return_metric = 6;
+    selling_iface.v1.team_metric.v1.TeamOrderReturnCompletedMetric team_order_return_completed_metric = 7;
+    selling_iface.v1.team_metric.v1.TeamOrderOngoingMetric team_order_ongoing_metric = 8;
+    // avg order
+    selling_iface.v1.team_metric.v1.TeamAvgOrderMetric team_avg_order_metric = 9;
+    selling_iface.v1.team_metric.v1.TeamAvgOrderWithdrawalMetric team_avg_order_withdrawal_metric = 10;
+    selling_iface.v1.team_metric.v1.TeamAvgOrderCancelledMetric team_avg_order_cancelled_metric = 11;
+    selling_iface.v1.team_metric.v1.TeamAvgOrderLostMetric team_avg_order_lost_metric = 12;
+    selling_iface.v1.team_metric.v1.TeamAvgOrderCompletedMetric team_avg_order_completed_metric = 13;
+    selling_iface.v1.team_metric.v1.TeamAvgOrderReturnMetric team_avg_order_return_metric = 14;
+    selling_iface.v1.team_metric.v1.TeamAvgOrderReturnCompletedMetric team_avg_order_return_completed_metric = 15;
+    selling_iface.v1.team_metric.v1.TeamAvgOrderOngoingMetric team_avg_order_ongoing_metric = 16;
+    // stock order
+    selling_iface.v1.team_metric.v1.TeamStockOrderMetric team_stock_order_metric = 17;
+    // cost order
+    selling_iface.v1.team_metric.v1.TeamCostWarehouseMetric team_cost_warehouse_metric = 18;
+    selling_iface.v1.team_metric.v1.TeamCostProductOwnMetric team_cost_product_own_metric = 19;
+    selling_iface.v1.team_metric.v1.TeamCostProductCrossMetric team_cost_product_cross_metric = 20;
+    selling_iface.v1.team_metric.v1.TeamAdsExpenseMetric team_ads_expense_metric = 21;
+    // revenue
+    selling_iface.v1.team_metric.v1.TeamWithdrawalMetric team_withdrawal_metric = 22;
+    selling_iface.v1.team_metric.v1.TeamWithdrawalBreakdownMetric team_withdrawal_breakdown_metric = 23;
+    selling_iface.v1.team_metric.v1.TeamRevenueOrderMetric team_revenue_order_metric = 24;
+    selling_iface.v1.team_metric.v1.TeamRevenueWarehouseAdjustmentMetric team_revenue_warehouse_adjustment_metric = 25;
+    selling_iface.v1.team_metric.v1.TeamRevenueProductAdjustmentMetric team_revenue_product_adjustment_metric = 26;
+    // profit
+    selling_iface.v1.team_metric.v1.TeamProfitOrderCreatedMetric team_profit_order_created_metric = 27;
+    selling_iface.v1.team_metric.v1.TeamProfitOrderWithdrawalMetric team_profit_order_withdrawal_metric = 28;
+    selling_iface.v1.team_metric.v1.TeamLostProfitOrderMetric team_lost_profit_order_metric = 29;
+    selling_iface.v1.team_metric.v1.TeamProfitOrLossMetric team_profit_or_loss_metric = 30;
   }
 }
 

@@ -28,19 +28,111 @@ const (
 type TeamMetricType int32
 
 const (
-	TeamMetricType_TEAM_METRIC_TYPE_UNSPECIFIED TeamMetricType = 0
-	TeamMetricType_TEAM_METRIC_TYPE_ORDER       TeamMetricType = 1
+	TeamMetricType_TEAM_METRIC_TYPE_UNSPECIFIED            TeamMetricType = 0
+	TeamMetricType_TEAM_METRIC_TYPE_ORDER                  TeamMetricType = 1
+	TeamMetricType_TEAM_METRIC_TYPE_ORDER_WITHDRAWAL       TeamMetricType = 2
+	TeamMetricType_TEAM_METRIC_TYPE_ORDER_CANCELLED        TeamMetricType = 3
+	TeamMetricType_TEAM_METRIC_TYPE_ORDER_LOST             TeamMetricType = 4
+	TeamMetricType_TEAM_METRIC_TYPE_ORDER_COMPLETED        TeamMetricType = 5
+	TeamMetricType_TEAM_METRIC_TYPE_ORDER_RETURN           TeamMetricType = 6
+	TeamMetricType_TEAM_METRIC_TYPE_ORDER_RETURN_COMPLETED TeamMetricType = 7
+	TeamMetricType_TEAM_METRIC_TYPE_ORDER_ONGOING          TeamMetricType = 8
+	// avg order
+	TeamMetricType_TEAM_METRIC_TYPE_AVG_ORDER                  TeamMetricType = 9
+	TeamMetricType_TEAM_METRIC_TYPE_AVG_ORDER_WITHDRAWAL       TeamMetricType = 10
+	TeamMetricType_TEAM_METRIC_TYPE_AVG_ORDER_CANCELLED        TeamMetricType = 11
+	TeamMetricType_TEAM_METRIC_TYPE_AVG_ORDER_LOST             TeamMetricType = 12
+	TeamMetricType_TEAM_METRIC_TYPE_AVG_ORDER_COMPLETED        TeamMetricType = 13
+	TeamMetricType_TEAM_METRIC_TYPE_AVG_ORDER_RETURN           TeamMetricType = 14
+	TeamMetricType_TEAM_METRIC_TYPE_AVG_ORDER_RETURN_COMPLETED TeamMetricType = 15
+	TeamMetricType_TEAM_METRIC_TYPE_AVG_ORDER_ONGOING          TeamMetricType = 16
+	// stock order
+	TeamMetricType_TEAM_METRIC_TYPE_STOCK_ORDER TeamMetricType = 17
+	// cost order
+	TeamMetricType_TEAM_METRIC_TYPE_COST_WAREHOUSE     TeamMetricType = 18
+	TeamMetricType_TEAM_METRIC_TYPE_COST_PRODUCT_OWN   TeamMetricType = 19
+	TeamMetricType_TEAM_METRIC_TYPE_COST_PRODUCT_CROSS TeamMetricType = 20
+	TeamMetricType_TEAM_METRIC_TYPE_ADS_EXPENSE        TeamMetricType = 21
+	// revenue
+	TeamMetricType_TEAM_METRIC_TYPE_WITHDRAWAL                   TeamMetricType = 22
+	TeamMetricType_TEAM_METRIC_TYPE_WITHDRAWAL_BREAKDOWN         TeamMetricType = 23
+	TeamMetricType_TEAM_METRIC_TYPE_REVENUE_ORDER                TeamMetricType = 24
+	TeamMetricType_TEAM_METRIC_TYPE_REVENUE_WAREHOUSE_ADJUSTMENT TeamMetricType = 25
+	TeamMetricType_TEAM_METRIC_TYPE_REVENUE_PRODUCT_ADJUSTMENT   TeamMetricType = 26
+	// profit
+	TeamMetricType_TEAM_METRIC_TYPE_PROFIT_ORDER_CREATED    TeamMetricType = 27
+	TeamMetricType_TEAM_METRIC_TYPE_PROFIT_ORDER_WITHDRAWAL TeamMetricType = 28
+	TeamMetricType_TEAM_METRIC_TYPE_LOST_PROFIT_ORDER       TeamMetricType = 29
+	TeamMetricType_TEAM_METRIC_TYPE_PROFIT_OR_LOSS          TeamMetricType = 30
 )
 
 // Enum value maps for TeamMetricType.
 var (
 	TeamMetricType_name = map[int32]string{
-		0: "TEAM_METRIC_TYPE_UNSPECIFIED",
-		1: "TEAM_METRIC_TYPE_ORDER",
+		0:  "TEAM_METRIC_TYPE_UNSPECIFIED",
+		1:  "TEAM_METRIC_TYPE_ORDER",
+		2:  "TEAM_METRIC_TYPE_ORDER_WITHDRAWAL",
+		3:  "TEAM_METRIC_TYPE_ORDER_CANCELLED",
+		4:  "TEAM_METRIC_TYPE_ORDER_LOST",
+		5:  "TEAM_METRIC_TYPE_ORDER_COMPLETED",
+		6:  "TEAM_METRIC_TYPE_ORDER_RETURN",
+		7:  "TEAM_METRIC_TYPE_ORDER_RETURN_COMPLETED",
+		8:  "TEAM_METRIC_TYPE_ORDER_ONGOING",
+		9:  "TEAM_METRIC_TYPE_AVG_ORDER",
+		10: "TEAM_METRIC_TYPE_AVG_ORDER_WITHDRAWAL",
+		11: "TEAM_METRIC_TYPE_AVG_ORDER_CANCELLED",
+		12: "TEAM_METRIC_TYPE_AVG_ORDER_LOST",
+		13: "TEAM_METRIC_TYPE_AVG_ORDER_COMPLETED",
+		14: "TEAM_METRIC_TYPE_AVG_ORDER_RETURN",
+		15: "TEAM_METRIC_TYPE_AVG_ORDER_RETURN_COMPLETED",
+		16: "TEAM_METRIC_TYPE_AVG_ORDER_ONGOING",
+		17: "TEAM_METRIC_TYPE_STOCK_ORDER",
+		18: "TEAM_METRIC_TYPE_COST_WAREHOUSE",
+		19: "TEAM_METRIC_TYPE_COST_PRODUCT_OWN",
+		20: "TEAM_METRIC_TYPE_COST_PRODUCT_CROSS",
+		21: "TEAM_METRIC_TYPE_ADS_EXPENSE",
+		22: "TEAM_METRIC_TYPE_WITHDRAWAL",
+		23: "TEAM_METRIC_TYPE_WITHDRAWAL_BREAKDOWN",
+		24: "TEAM_METRIC_TYPE_REVENUE_ORDER",
+		25: "TEAM_METRIC_TYPE_REVENUE_WAREHOUSE_ADJUSTMENT",
+		26: "TEAM_METRIC_TYPE_REVENUE_PRODUCT_ADJUSTMENT",
+		27: "TEAM_METRIC_TYPE_PROFIT_ORDER_CREATED",
+		28: "TEAM_METRIC_TYPE_PROFIT_ORDER_WITHDRAWAL",
+		29: "TEAM_METRIC_TYPE_LOST_PROFIT_ORDER",
+		30: "TEAM_METRIC_TYPE_PROFIT_OR_LOSS",
 	}
 	TeamMetricType_value = map[string]int32{
-		"TEAM_METRIC_TYPE_UNSPECIFIED": 0,
-		"TEAM_METRIC_TYPE_ORDER":       1,
+		"TEAM_METRIC_TYPE_UNSPECIFIED":                  0,
+		"TEAM_METRIC_TYPE_ORDER":                        1,
+		"TEAM_METRIC_TYPE_ORDER_WITHDRAWAL":             2,
+		"TEAM_METRIC_TYPE_ORDER_CANCELLED":              3,
+		"TEAM_METRIC_TYPE_ORDER_LOST":                   4,
+		"TEAM_METRIC_TYPE_ORDER_COMPLETED":              5,
+		"TEAM_METRIC_TYPE_ORDER_RETURN":                 6,
+		"TEAM_METRIC_TYPE_ORDER_RETURN_COMPLETED":       7,
+		"TEAM_METRIC_TYPE_ORDER_ONGOING":                8,
+		"TEAM_METRIC_TYPE_AVG_ORDER":                    9,
+		"TEAM_METRIC_TYPE_AVG_ORDER_WITHDRAWAL":         10,
+		"TEAM_METRIC_TYPE_AVG_ORDER_CANCELLED":          11,
+		"TEAM_METRIC_TYPE_AVG_ORDER_LOST":               12,
+		"TEAM_METRIC_TYPE_AVG_ORDER_COMPLETED":          13,
+		"TEAM_METRIC_TYPE_AVG_ORDER_RETURN":             14,
+		"TEAM_METRIC_TYPE_AVG_ORDER_RETURN_COMPLETED":   15,
+		"TEAM_METRIC_TYPE_AVG_ORDER_ONGOING":            16,
+		"TEAM_METRIC_TYPE_STOCK_ORDER":                  17,
+		"TEAM_METRIC_TYPE_COST_WAREHOUSE":               18,
+		"TEAM_METRIC_TYPE_COST_PRODUCT_OWN":             19,
+		"TEAM_METRIC_TYPE_COST_PRODUCT_CROSS":           20,
+		"TEAM_METRIC_TYPE_ADS_EXPENSE":                  21,
+		"TEAM_METRIC_TYPE_WITHDRAWAL":                   22,
+		"TEAM_METRIC_TYPE_WITHDRAWAL_BREAKDOWN":         23,
+		"TEAM_METRIC_TYPE_REVENUE_ORDER":                24,
+		"TEAM_METRIC_TYPE_REVENUE_WAREHOUSE_ADJUSTMENT": 25,
+		"TEAM_METRIC_TYPE_REVENUE_PRODUCT_ADJUSTMENT":   26,
+		"TEAM_METRIC_TYPE_PROFIT_ORDER_CREATED":         27,
+		"TEAM_METRIC_TYPE_PROFIT_ORDER_WITHDRAWAL":      28,
+		"TEAM_METRIC_TYPE_LOST_PROFIT_ORDER":            29,
+		"TEAM_METRIC_TYPE_PROFIT_OR_LOSS":               30,
 	}
 )
 
@@ -173,6 +265,35 @@ type TeamMetricSort struct {
 	//
 	//	*TeamMetricSort_CommonSort
 	//	*TeamMetricSort_TeamOrderMetricSort
+	//	*TeamMetricSort_TeamOrderWithdrawalMetricSort
+	//	*TeamMetricSort_TeamOrderCancelledMetricSort
+	//	*TeamMetricSort_TeamOrderLostMetricSort
+	//	*TeamMetricSort_TeamOrderCompletedMetricSort
+	//	*TeamMetricSort_TeamOrderReturnMetricSort
+	//	*TeamMetricSort_TeamOrderReturnCompletedMetricSort
+	//	*TeamMetricSort_TeamOrderOngoingMetricSort
+	//	*TeamMetricSort_TeamAvgOrderMetricSort
+	//	*TeamMetricSort_TeamAvgOrderWithdrawalMetricSort
+	//	*TeamMetricSort_TeamAvgOrderCancelledMetricSort
+	//	*TeamMetricSort_TeamAvgOrderLostMetricSort
+	//	*TeamMetricSort_TeamAvgOrderCompletedMetricSort
+	//	*TeamMetricSort_TeamAvgOrderReturnMetricSort
+	//	*TeamMetricSort_TeamAvgOrderReturnCompletedMetricSort
+	//	*TeamMetricSort_TeamAvgOrderOngoingMetricSort
+	//	*TeamMetricSort_TeamStockOrderMetricSort
+	//	*TeamMetricSort_TeamCostWarehouseMetricSort
+	//	*TeamMetricSort_TeamCostProductOwnMetricSort
+	//	*TeamMetricSort_TeamCostProductCrossMetricSort
+	//	*TeamMetricSort_TeamAdsExpenseMetricSort
+	//	*TeamMetricSort_TeamWithdrawalMetricSort
+	//	*TeamMetricSort_TeamWithdrawalBreakdownMetricSort
+	//	*TeamMetricSort_TeamRevenueOrderMetricSort
+	//	*TeamMetricSort_TeamRevenueWarehouseAdjustmentMetricSort
+	//	*TeamMetricSort_TeamRevenueProductAdjustmentMetricSort
+	//	*TeamMetricSort_TeamProfitOrderCreatedMetricSort
+	//	*TeamMetricSort_TeamProfitOrderWithdrawalMetricSort
+	//	*TeamMetricSort_TeamLostProfitOrderMetricSort
+	//	*TeamMetricSort_TeamProfitOrLossMetricSort
 	S             isTeamMetricSort_S `protobuf_oneof:"s"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -240,6 +361,267 @@ func (x *TeamMetricSort) GetTeamOrderMetricSort() v1.TeamOrderMetricSort {
 	return v1.TeamOrderMetricSort(0)
 }
 
+func (x *TeamMetricSort) GetTeamOrderWithdrawalMetricSort() v1.TeamOrderWithdrawalMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*TeamMetricSort_TeamOrderWithdrawalMetricSort); ok {
+			return x.TeamOrderWithdrawalMetricSort
+		}
+	}
+	return v1.TeamOrderWithdrawalMetricSort(0)
+}
+
+func (x *TeamMetricSort) GetTeamOrderCancelledMetricSort() v1.TeamOrderCancelledMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*TeamMetricSort_TeamOrderCancelledMetricSort); ok {
+			return x.TeamOrderCancelledMetricSort
+		}
+	}
+	return v1.TeamOrderCancelledMetricSort(0)
+}
+
+func (x *TeamMetricSort) GetTeamOrderLostMetricSort() v1.TeamOrderLostMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*TeamMetricSort_TeamOrderLostMetricSort); ok {
+			return x.TeamOrderLostMetricSort
+		}
+	}
+	return v1.TeamOrderLostMetricSort(0)
+}
+
+func (x *TeamMetricSort) GetTeamOrderCompletedMetricSort() v1.TeamOrderCompletedMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*TeamMetricSort_TeamOrderCompletedMetricSort); ok {
+			return x.TeamOrderCompletedMetricSort
+		}
+	}
+	return v1.TeamOrderCompletedMetricSort(0)
+}
+
+func (x *TeamMetricSort) GetTeamOrderReturnMetricSort() v1.TeamOrderReturnMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*TeamMetricSort_TeamOrderReturnMetricSort); ok {
+			return x.TeamOrderReturnMetricSort
+		}
+	}
+	return v1.TeamOrderReturnMetricSort(0)
+}
+
+func (x *TeamMetricSort) GetTeamOrderReturnCompletedMetricSort() v1.TeamOrderReturnCompletedMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*TeamMetricSort_TeamOrderReturnCompletedMetricSort); ok {
+			return x.TeamOrderReturnCompletedMetricSort
+		}
+	}
+	return v1.TeamOrderReturnCompletedMetricSort(0)
+}
+
+func (x *TeamMetricSort) GetTeamOrderOngoingMetricSort() v1.TeamOrderOngoingMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*TeamMetricSort_TeamOrderOngoingMetricSort); ok {
+			return x.TeamOrderOngoingMetricSort
+		}
+	}
+	return v1.TeamOrderOngoingMetricSort(0)
+}
+
+func (x *TeamMetricSort) GetTeamAvgOrderMetricSort() v1.TeamAvgOrderMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*TeamMetricSort_TeamAvgOrderMetricSort); ok {
+			return x.TeamAvgOrderMetricSort
+		}
+	}
+	return v1.TeamAvgOrderMetricSort(0)
+}
+
+func (x *TeamMetricSort) GetTeamAvgOrderWithdrawalMetricSort() v1.TeamAvgOrderWithdrawalMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*TeamMetricSort_TeamAvgOrderWithdrawalMetricSort); ok {
+			return x.TeamAvgOrderWithdrawalMetricSort
+		}
+	}
+	return v1.TeamAvgOrderWithdrawalMetricSort(0)
+}
+
+func (x *TeamMetricSort) GetTeamAvgOrderCancelledMetricSort() v1.TeamAvgOrderCancelledMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*TeamMetricSort_TeamAvgOrderCancelledMetricSort); ok {
+			return x.TeamAvgOrderCancelledMetricSort
+		}
+	}
+	return v1.TeamAvgOrderCancelledMetricSort(0)
+}
+
+func (x *TeamMetricSort) GetTeamAvgOrderLostMetricSort() v1.TeamAvgOrderLostMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*TeamMetricSort_TeamAvgOrderLostMetricSort); ok {
+			return x.TeamAvgOrderLostMetricSort
+		}
+	}
+	return v1.TeamAvgOrderLostMetricSort(0)
+}
+
+func (x *TeamMetricSort) GetTeamAvgOrderCompletedMetricSort() v1.TeamAvgOrderCompletedMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*TeamMetricSort_TeamAvgOrderCompletedMetricSort); ok {
+			return x.TeamAvgOrderCompletedMetricSort
+		}
+	}
+	return v1.TeamAvgOrderCompletedMetricSort(0)
+}
+
+func (x *TeamMetricSort) GetTeamAvgOrderReturnMetricSort() v1.TeamAvgOrderReturnMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*TeamMetricSort_TeamAvgOrderReturnMetricSort); ok {
+			return x.TeamAvgOrderReturnMetricSort
+		}
+	}
+	return v1.TeamAvgOrderReturnMetricSort(0)
+}
+
+func (x *TeamMetricSort) GetTeamAvgOrderReturnCompletedMetricSort() v1.TeamAvgOrderReturnCompletedMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*TeamMetricSort_TeamAvgOrderReturnCompletedMetricSort); ok {
+			return x.TeamAvgOrderReturnCompletedMetricSort
+		}
+	}
+	return v1.TeamAvgOrderReturnCompletedMetricSort(0)
+}
+
+func (x *TeamMetricSort) GetTeamAvgOrderOngoingMetricSort() v1.TeamAvgOrderOngoingMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*TeamMetricSort_TeamAvgOrderOngoingMetricSort); ok {
+			return x.TeamAvgOrderOngoingMetricSort
+		}
+	}
+	return v1.TeamAvgOrderOngoingMetricSort(0)
+}
+
+func (x *TeamMetricSort) GetTeamStockOrderMetricSort() v1.TeamStockOrderMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*TeamMetricSort_TeamStockOrderMetricSort); ok {
+			return x.TeamStockOrderMetricSort
+		}
+	}
+	return v1.TeamStockOrderMetricSort(0)
+}
+
+func (x *TeamMetricSort) GetTeamCostWarehouseMetricSort() v1.TeamCostWarehouseMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*TeamMetricSort_TeamCostWarehouseMetricSort); ok {
+			return x.TeamCostWarehouseMetricSort
+		}
+	}
+	return v1.TeamCostWarehouseMetricSort(0)
+}
+
+func (x *TeamMetricSort) GetTeamCostProductOwnMetricSort() v1.TeamCostProductOwnMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*TeamMetricSort_TeamCostProductOwnMetricSort); ok {
+			return x.TeamCostProductOwnMetricSort
+		}
+	}
+	return v1.TeamCostProductOwnMetricSort(0)
+}
+
+func (x *TeamMetricSort) GetTeamCostProductCrossMetricSort() v1.TeamCostProductCrossMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*TeamMetricSort_TeamCostProductCrossMetricSort); ok {
+			return x.TeamCostProductCrossMetricSort
+		}
+	}
+	return v1.TeamCostProductCrossMetricSort(0)
+}
+
+func (x *TeamMetricSort) GetTeamAdsExpenseMetricSort() v1.TeamAdsExpenseMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*TeamMetricSort_TeamAdsExpenseMetricSort); ok {
+			return x.TeamAdsExpenseMetricSort
+		}
+	}
+	return v1.TeamAdsExpenseMetricSort(0)
+}
+
+func (x *TeamMetricSort) GetTeamWithdrawalMetricSort() v1.TeamWithdrawalMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*TeamMetricSort_TeamWithdrawalMetricSort); ok {
+			return x.TeamWithdrawalMetricSort
+		}
+	}
+	return v1.TeamWithdrawalMetricSort(0)
+}
+
+func (x *TeamMetricSort) GetTeamWithdrawalBreakdownMetricSort() v1.TeamWithdrawalBreakdownMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*TeamMetricSort_TeamWithdrawalBreakdownMetricSort); ok {
+			return x.TeamWithdrawalBreakdownMetricSort
+		}
+	}
+	return v1.TeamWithdrawalBreakdownMetricSort(0)
+}
+
+func (x *TeamMetricSort) GetTeamRevenueOrderMetricSort() v1.TeamRevenueOrderMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*TeamMetricSort_TeamRevenueOrderMetricSort); ok {
+			return x.TeamRevenueOrderMetricSort
+		}
+	}
+	return v1.TeamRevenueOrderMetricSort(0)
+}
+
+func (x *TeamMetricSort) GetTeamRevenueWarehouseAdjustmentMetricSort() v1.TeamRevenueWarehouseAdjustmentMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*TeamMetricSort_TeamRevenueWarehouseAdjustmentMetricSort); ok {
+			return x.TeamRevenueWarehouseAdjustmentMetricSort
+		}
+	}
+	return v1.TeamRevenueWarehouseAdjustmentMetricSort(0)
+}
+
+func (x *TeamMetricSort) GetTeamRevenueProductAdjustmentMetricSort() v1.TeamRevenueProductAdjustmentMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*TeamMetricSort_TeamRevenueProductAdjustmentMetricSort); ok {
+			return x.TeamRevenueProductAdjustmentMetricSort
+		}
+	}
+	return v1.TeamRevenueProductAdjustmentMetricSort(0)
+}
+
+func (x *TeamMetricSort) GetTeamProfitOrderCreatedMetricSort() v1.TeamProfitOrderCreatedMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*TeamMetricSort_TeamProfitOrderCreatedMetricSort); ok {
+			return x.TeamProfitOrderCreatedMetricSort
+		}
+	}
+	return v1.TeamProfitOrderCreatedMetricSort(0)
+}
+
+func (x *TeamMetricSort) GetTeamProfitOrderWithdrawalMetricSort() v1.TeamProfitOrderWithdrawalMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*TeamMetricSort_TeamProfitOrderWithdrawalMetricSort); ok {
+			return x.TeamProfitOrderWithdrawalMetricSort
+		}
+	}
+	return v1.TeamProfitOrderWithdrawalMetricSort(0)
+}
+
+func (x *TeamMetricSort) GetTeamLostProfitOrderMetricSort() v1.TeamLostProfitOrderMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*TeamMetricSort_TeamLostProfitOrderMetricSort); ok {
+			return x.TeamLostProfitOrderMetricSort
+		}
+	}
+	return v1.TeamLostProfitOrderMetricSort(0)
+}
+
+func (x *TeamMetricSort) GetTeamProfitOrLossMetricSort() v1.TeamProfitOrLossMetricSort {
+	if x != nil {
+		if x, ok := x.S.(*TeamMetricSort_TeamProfitOrLossMetricSort); ok {
+			return x.TeamProfitOrLossMetricSort
+		}
+	}
+	return v1.TeamProfitOrLossMetricSort(0)
+}
+
 type isTeamMetricSort_S interface {
 	isTeamMetricSort_S()
 }
@@ -252,15 +634,223 @@ type TeamMetricSort_TeamOrderMetricSort struct {
 	TeamOrderMetricSort v1.TeamOrderMetricSort `protobuf:"varint,3,opt,name=team_order_metric_sort,json=teamOrderMetricSort,proto3,enum=selling_iface.v1.team_metric.v1.TeamOrderMetricSort,oneof"`
 }
 
+type TeamMetricSort_TeamOrderWithdrawalMetricSort struct {
+	TeamOrderWithdrawalMetricSort v1.TeamOrderWithdrawalMetricSort `protobuf:"varint,4,opt,name=team_order_withdrawal_metric_sort,json=teamOrderWithdrawalMetricSort,proto3,enum=selling_iface.v1.team_metric.v1.TeamOrderWithdrawalMetricSort,oneof"`
+}
+
+type TeamMetricSort_TeamOrderCancelledMetricSort struct {
+	TeamOrderCancelledMetricSort v1.TeamOrderCancelledMetricSort `protobuf:"varint,5,opt,name=team_order_cancelled_metric_sort,json=teamOrderCancelledMetricSort,proto3,enum=selling_iface.v1.team_metric.v1.TeamOrderCancelledMetricSort,oneof"`
+}
+
+type TeamMetricSort_TeamOrderLostMetricSort struct {
+	TeamOrderLostMetricSort v1.TeamOrderLostMetricSort `protobuf:"varint,6,opt,name=team_order_lost_metric_sort,json=teamOrderLostMetricSort,proto3,enum=selling_iface.v1.team_metric.v1.TeamOrderLostMetricSort,oneof"`
+}
+
+type TeamMetricSort_TeamOrderCompletedMetricSort struct {
+	TeamOrderCompletedMetricSort v1.TeamOrderCompletedMetricSort `protobuf:"varint,7,opt,name=team_order_completed_metric_sort,json=teamOrderCompletedMetricSort,proto3,enum=selling_iface.v1.team_metric.v1.TeamOrderCompletedMetricSort,oneof"`
+}
+
+type TeamMetricSort_TeamOrderReturnMetricSort struct {
+	TeamOrderReturnMetricSort v1.TeamOrderReturnMetricSort `protobuf:"varint,8,opt,name=team_order_return_metric_sort,json=teamOrderReturnMetricSort,proto3,enum=selling_iface.v1.team_metric.v1.TeamOrderReturnMetricSort,oneof"`
+}
+
+type TeamMetricSort_TeamOrderReturnCompletedMetricSort struct {
+	TeamOrderReturnCompletedMetricSort v1.TeamOrderReturnCompletedMetricSort `protobuf:"varint,9,opt,name=team_order_return_completed_metric_sort,json=teamOrderReturnCompletedMetricSort,proto3,enum=selling_iface.v1.team_metric.v1.TeamOrderReturnCompletedMetricSort,oneof"`
+}
+
+type TeamMetricSort_TeamOrderOngoingMetricSort struct {
+	TeamOrderOngoingMetricSort v1.TeamOrderOngoingMetricSort `protobuf:"varint,10,opt,name=team_order_ongoing_metric_sort,json=teamOrderOngoingMetricSort,proto3,enum=selling_iface.v1.team_metric.v1.TeamOrderOngoingMetricSort,oneof"`
+}
+
+type TeamMetricSort_TeamAvgOrderMetricSort struct {
+	// avg order
+	TeamAvgOrderMetricSort v1.TeamAvgOrderMetricSort `protobuf:"varint,11,opt,name=team_avg_order_metric_sort,json=teamAvgOrderMetricSort,proto3,enum=selling_iface.v1.team_metric.v1.TeamAvgOrderMetricSort,oneof"`
+}
+
+type TeamMetricSort_TeamAvgOrderWithdrawalMetricSort struct {
+	TeamAvgOrderWithdrawalMetricSort v1.TeamAvgOrderWithdrawalMetricSort `protobuf:"varint,12,opt,name=team_avg_order_withdrawal_metric_sort,json=teamAvgOrderWithdrawalMetricSort,proto3,enum=selling_iface.v1.team_metric.v1.TeamAvgOrderWithdrawalMetricSort,oneof"`
+}
+
+type TeamMetricSort_TeamAvgOrderCancelledMetricSort struct {
+	TeamAvgOrderCancelledMetricSort v1.TeamAvgOrderCancelledMetricSort `protobuf:"varint,13,opt,name=team_avg_order_cancelled_metric_sort,json=teamAvgOrderCancelledMetricSort,proto3,enum=selling_iface.v1.team_metric.v1.TeamAvgOrderCancelledMetricSort,oneof"`
+}
+
+type TeamMetricSort_TeamAvgOrderLostMetricSort struct {
+	TeamAvgOrderLostMetricSort v1.TeamAvgOrderLostMetricSort `protobuf:"varint,14,opt,name=team_avg_order_lost_metric_sort,json=teamAvgOrderLostMetricSort,proto3,enum=selling_iface.v1.team_metric.v1.TeamAvgOrderLostMetricSort,oneof"`
+}
+
+type TeamMetricSort_TeamAvgOrderCompletedMetricSort struct {
+	TeamAvgOrderCompletedMetricSort v1.TeamAvgOrderCompletedMetricSort `protobuf:"varint,15,opt,name=team_avg_order_completed_metric_sort,json=teamAvgOrderCompletedMetricSort,proto3,enum=selling_iface.v1.team_metric.v1.TeamAvgOrderCompletedMetricSort,oneof"`
+}
+
+type TeamMetricSort_TeamAvgOrderReturnMetricSort struct {
+	TeamAvgOrderReturnMetricSort v1.TeamAvgOrderReturnMetricSort `protobuf:"varint,16,opt,name=team_avg_order_return_metric_sort,json=teamAvgOrderReturnMetricSort,proto3,enum=selling_iface.v1.team_metric.v1.TeamAvgOrderReturnMetricSort,oneof"`
+}
+
+type TeamMetricSort_TeamAvgOrderReturnCompletedMetricSort struct {
+	TeamAvgOrderReturnCompletedMetricSort v1.TeamAvgOrderReturnCompletedMetricSort `protobuf:"varint,17,opt,name=team_avg_order_return_completed_metric_sort,json=teamAvgOrderReturnCompletedMetricSort,proto3,enum=selling_iface.v1.team_metric.v1.TeamAvgOrderReturnCompletedMetricSort,oneof"`
+}
+
+type TeamMetricSort_TeamAvgOrderOngoingMetricSort struct {
+	TeamAvgOrderOngoingMetricSort v1.TeamAvgOrderOngoingMetricSort `protobuf:"varint,18,opt,name=team_avg_order_ongoing_metric_sort,json=teamAvgOrderOngoingMetricSort,proto3,enum=selling_iface.v1.team_metric.v1.TeamAvgOrderOngoingMetricSort,oneof"`
+}
+
+type TeamMetricSort_TeamStockOrderMetricSort struct {
+	// stock order
+	TeamStockOrderMetricSort v1.TeamStockOrderMetricSort `protobuf:"varint,19,opt,name=team_stock_order_metric_sort,json=teamStockOrderMetricSort,proto3,enum=selling_iface.v1.team_metric.v1.TeamStockOrderMetricSort,oneof"`
+}
+
+type TeamMetricSort_TeamCostWarehouseMetricSort struct {
+	// cost order
+	TeamCostWarehouseMetricSort v1.TeamCostWarehouseMetricSort `protobuf:"varint,20,opt,name=team_cost_warehouse_metric_sort,json=teamCostWarehouseMetricSort,proto3,enum=selling_iface.v1.team_metric.v1.TeamCostWarehouseMetricSort,oneof"`
+}
+
+type TeamMetricSort_TeamCostProductOwnMetricSort struct {
+	TeamCostProductOwnMetricSort v1.TeamCostProductOwnMetricSort `protobuf:"varint,21,opt,name=team_cost_product_own_metric_sort,json=teamCostProductOwnMetricSort,proto3,enum=selling_iface.v1.team_metric.v1.TeamCostProductOwnMetricSort,oneof"`
+}
+
+type TeamMetricSort_TeamCostProductCrossMetricSort struct {
+	TeamCostProductCrossMetricSort v1.TeamCostProductCrossMetricSort `protobuf:"varint,22,opt,name=team_cost_product_cross_metric_sort,json=teamCostProductCrossMetricSort,proto3,enum=selling_iface.v1.team_metric.v1.TeamCostProductCrossMetricSort,oneof"`
+}
+
+type TeamMetricSort_TeamAdsExpenseMetricSort struct {
+	TeamAdsExpenseMetricSort v1.TeamAdsExpenseMetricSort `protobuf:"varint,23,opt,name=team_ads_expense_metric_sort,json=teamAdsExpenseMetricSort,proto3,enum=selling_iface.v1.team_metric.v1.TeamAdsExpenseMetricSort,oneof"`
+}
+
+type TeamMetricSort_TeamWithdrawalMetricSort struct {
+	// revenue
+	TeamWithdrawalMetricSort v1.TeamWithdrawalMetricSort `protobuf:"varint,24,opt,name=team_withdrawal_metric_sort,json=teamWithdrawalMetricSort,proto3,enum=selling_iface.v1.team_metric.v1.TeamWithdrawalMetricSort,oneof"`
+}
+
+type TeamMetricSort_TeamWithdrawalBreakdownMetricSort struct {
+	TeamWithdrawalBreakdownMetricSort v1.TeamWithdrawalBreakdownMetricSort `protobuf:"varint,25,opt,name=team_withdrawal_breakdown_metric_sort,json=teamWithdrawalBreakdownMetricSort,proto3,enum=selling_iface.v1.team_metric.v1.TeamWithdrawalBreakdownMetricSort,oneof"`
+}
+
+type TeamMetricSort_TeamRevenueOrderMetricSort struct {
+	TeamRevenueOrderMetricSort v1.TeamRevenueOrderMetricSort `protobuf:"varint,26,opt,name=team_revenue_order_metric_sort,json=teamRevenueOrderMetricSort,proto3,enum=selling_iface.v1.team_metric.v1.TeamRevenueOrderMetricSort,oneof"`
+}
+
+type TeamMetricSort_TeamRevenueWarehouseAdjustmentMetricSort struct {
+	TeamRevenueWarehouseAdjustmentMetricSort v1.TeamRevenueWarehouseAdjustmentMetricSort `protobuf:"varint,27,opt,name=team_revenue_warehouse_adjustment_metric_sort,json=teamRevenueWarehouseAdjustmentMetricSort,proto3,enum=selling_iface.v1.team_metric.v1.TeamRevenueWarehouseAdjustmentMetricSort,oneof"`
+}
+
+type TeamMetricSort_TeamRevenueProductAdjustmentMetricSort struct {
+	TeamRevenueProductAdjustmentMetricSort v1.TeamRevenueProductAdjustmentMetricSort `protobuf:"varint,28,opt,name=team_revenue_product_adjustment_metric_sort,json=teamRevenueProductAdjustmentMetricSort,proto3,enum=selling_iface.v1.team_metric.v1.TeamRevenueProductAdjustmentMetricSort,oneof"`
+}
+
+type TeamMetricSort_TeamProfitOrderCreatedMetricSort struct {
+	// profit
+	TeamProfitOrderCreatedMetricSort v1.TeamProfitOrderCreatedMetricSort `protobuf:"varint,29,opt,name=team_profit_order_created_metric_sort,json=teamProfitOrderCreatedMetricSort,proto3,enum=selling_iface.v1.team_metric.v1.TeamProfitOrderCreatedMetricSort,oneof"`
+}
+
+type TeamMetricSort_TeamProfitOrderWithdrawalMetricSort struct {
+	TeamProfitOrderWithdrawalMetricSort v1.TeamProfitOrderWithdrawalMetricSort `protobuf:"varint,30,opt,name=team_profit_order_withdrawal_metric_sort,json=teamProfitOrderWithdrawalMetricSort,proto3,enum=selling_iface.v1.team_metric.v1.TeamProfitOrderWithdrawalMetricSort,oneof"`
+}
+
+type TeamMetricSort_TeamLostProfitOrderMetricSort struct {
+	TeamLostProfitOrderMetricSort v1.TeamLostProfitOrderMetricSort `protobuf:"varint,31,opt,name=team_lost_profit_order_metric_sort,json=teamLostProfitOrderMetricSort,proto3,enum=selling_iface.v1.team_metric.v1.TeamLostProfitOrderMetricSort,oneof"`
+}
+
+type TeamMetricSort_TeamProfitOrLossMetricSort struct {
+	TeamProfitOrLossMetricSort v1.TeamProfitOrLossMetricSort `protobuf:"varint,32,opt,name=team_profit_or_loss_metric_sort,json=teamProfitOrLossMetricSort,proto3,enum=selling_iface.v1.team_metric.v1.TeamProfitOrLossMetricSort,oneof"`
+}
+
 func (*TeamMetricSort_CommonSort) isTeamMetricSort_S() {}
 
 func (*TeamMetricSort_TeamOrderMetricSort) isTeamMetricSort_S() {}
+
+func (*TeamMetricSort_TeamOrderWithdrawalMetricSort) isTeamMetricSort_S() {}
+
+func (*TeamMetricSort_TeamOrderCancelledMetricSort) isTeamMetricSort_S() {}
+
+func (*TeamMetricSort_TeamOrderLostMetricSort) isTeamMetricSort_S() {}
+
+func (*TeamMetricSort_TeamOrderCompletedMetricSort) isTeamMetricSort_S() {}
+
+func (*TeamMetricSort_TeamOrderReturnMetricSort) isTeamMetricSort_S() {}
+
+func (*TeamMetricSort_TeamOrderReturnCompletedMetricSort) isTeamMetricSort_S() {}
+
+func (*TeamMetricSort_TeamOrderOngoingMetricSort) isTeamMetricSort_S() {}
+
+func (*TeamMetricSort_TeamAvgOrderMetricSort) isTeamMetricSort_S() {}
+
+func (*TeamMetricSort_TeamAvgOrderWithdrawalMetricSort) isTeamMetricSort_S() {}
+
+func (*TeamMetricSort_TeamAvgOrderCancelledMetricSort) isTeamMetricSort_S() {}
+
+func (*TeamMetricSort_TeamAvgOrderLostMetricSort) isTeamMetricSort_S() {}
+
+func (*TeamMetricSort_TeamAvgOrderCompletedMetricSort) isTeamMetricSort_S() {}
+
+func (*TeamMetricSort_TeamAvgOrderReturnMetricSort) isTeamMetricSort_S() {}
+
+func (*TeamMetricSort_TeamAvgOrderReturnCompletedMetricSort) isTeamMetricSort_S() {}
+
+func (*TeamMetricSort_TeamAvgOrderOngoingMetricSort) isTeamMetricSort_S() {}
+
+func (*TeamMetricSort_TeamStockOrderMetricSort) isTeamMetricSort_S() {}
+
+func (*TeamMetricSort_TeamCostWarehouseMetricSort) isTeamMetricSort_S() {}
+
+func (*TeamMetricSort_TeamCostProductOwnMetricSort) isTeamMetricSort_S() {}
+
+func (*TeamMetricSort_TeamCostProductCrossMetricSort) isTeamMetricSort_S() {}
+
+func (*TeamMetricSort_TeamAdsExpenseMetricSort) isTeamMetricSort_S() {}
+
+func (*TeamMetricSort_TeamWithdrawalMetricSort) isTeamMetricSort_S() {}
+
+func (*TeamMetricSort_TeamWithdrawalBreakdownMetricSort) isTeamMetricSort_S() {}
+
+func (*TeamMetricSort_TeamRevenueOrderMetricSort) isTeamMetricSort_S() {}
+
+func (*TeamMetricSort_TeamRevenueWarehouseAdjustmentMetricSort) isTeamMetricSort_S() {}
+
+func (*TeamMetricSort_TeamRevenueProductAdjustmentMetricSort) isTeamMetricSort_S() {}
+
+func (*TeamMetricSort_TeamProfitOrderCreatedMetricSort) isTeamMetricSort_S() {}
+
+func (*TeamMetricSort_TeamProfitOrderWithdrawalMetricSort) isTeamMetricSort_S() {}
+
+func (*TeamMetricSort_TeamLostProfitOrderMetricSort) isTeamMetricSort_S() {}
+
+func (*TeamMetricSort_TeamProfitOrLossMetricSort) isTeamMetricSort_S() {}
 
 type TeamMetric struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Types that are valid to be assigned to Data:
 	//
 	//	*TeamMetric_TeamOrderMetric
+	//	*TeamMetric_TeamOrderWithdrawalMetric
+	//	*TeamMetric_TeamOrderCancelledMetric
+	//	*TeamMetric_TeamOrderLostMetric
+	//	*TeamMetric_TeamOrderCompletedMetric
+	//	*TeamMetric_TeamOrderReturnMetric
+	//	*TeamMetric_TeamOrderReturnCompletedMetric
+	//	*TeamMetric_TeamOrderOngoingMetric
+	//	*TeamMetric_TeamAvgOrderMetric
+	//	*TeamMetric_TeamAvgOrderWithdrawalMetric
+	//	*TeamMetric_TeamAvgOrderCancelledMetric
+	//	*TeamMetric_TeamAvgOrderLostMetric
+	//	*TeamMetric_TeamAvgOrderCompletedMetric
+	//	*TeamMetric_TeamAvgOrderReturnMetric
+	//	*TeamMetric_TeamAvgOrderReturnCompletedMetric
+	//	*TeamMetric_TeamAvgOrderOngoingMetric
+	//	*TeamMetric_TeamStockOrderMetric
+	//	*TeamMetric_TeamCostWarehouseMetric
+	//	*TeamMetric_TeamCostProductOwnMetric
+	//	*TeamMetric_TeamCostProductCrossMetric
+	//	*TeamMetric_TeamAdsExpenseMetric
+	//	*TeamMetric_TeamWithdrawalMetric
+	//	*TeamMetric_TeamWithdrawalBreakdownMetric
+	//	*TeamMetric_TeamRevenueOrderMetric
+	//	*TeamMetric_TeamRevenueWarehouseAdjustmentMetric
+	//	*TeamMetric_TeamRevenueProductAdjustmentMetric
+	//	*TeamMetric_TeamProfitOrderCreatedMetric
+	//	*TeamMetric_TeamProfitOrderWithdrawalMetric
+	//	*TeamMetric_TeamLostProfitOrderMetric
+	//	*TeamMetric_TeamProfitOrLossMetric
 	Data          isTeamMetric_Data `protobuf_oneof:"data"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -312,6 +902,267 @@ func (x *TeamMetric) GetTeamOrderMetric() *v1.TeamOrderMetric {
 	return nil
 }
 
+func (x *TeamMetric) GetTeamOrderWithdrawalMetric() *v1.TeamOrderWithdrawalMetric {
+	if x != nil {
+		if x, ok := x.Data.(*TeamMetric_TeamOrderWithdrawalMetric); ok {
+			return x.TeamOrderWithdrawalMetric
+		}
+	}
+	return nil
+}
+
+func (x *TeamMetric) GetTeamOrderCancelledMetric() *v1.TeamOrderCancelledMetric {
+	if x != nil {
+		if x, ok := x.Data.(*TeamMetric_TeamOrderCancelledMetric); ok {
+			return x.TeamOrderCancelledMetric
+		}
+	}
+	return nil
+}
+
+func (x *TeamMetric) GetTeamOrderLostMetric() *v1.TeamOrderLostMetric {
+	if x != nil {
+		if x, ok := x.Data.(*TeamMetric_TeamOrderLostMetric); ok {
+			return x.TeamOrderLostMetric
+		}
+	}
+	return nil
+}
+
+func (x *TeamMetric) GetTeamOrderCompletedMetric() *v1.TeamOrderCompletedMetric {
+	if x != nil {
+		if x, ok := x.Data.(*TeamMetric_TeamOrderCompletedMetric); ok {
+			return x.TeamOrderCompletedMetric
+		}
+	}
+	return nil
+}
+
+func (x *TeamMetric) GetTeamOrderReturnMetric() *v1.TeamOrderReturnMetric {
+	if x != nil {
+		if x, ok := x.Data.(*TeamMetric_TeamOrderReturnMetric); ok {
+			return x.TeamOrderReturnMetric
+		}
+	}
+	return nil
+}
+
+func (x *TeamMetric) GetTeamOrderReturnCompletedMetric() *v1.TeamOrderReturnCompletedMetric {
+	if x != nil {
+		if x, ok := x.Data.(*TeamMetric_TeamOrderReturnCompletedMetric); ok {
+			return x.TeamOrderReturnCompletedMetric
+		}
+	}
+	return nil
+}
+
+func (x *TeamMetric) GetTeamOrderOngoingMetric() *v1.TeamOrderOngoingMetric {
+	if x != nil {
+		if x, ok := x.Data.(*TeamMetric_TeamOrderOngoingMetric); ok {
+			return x.TeamOrderOngoingMetric
+		}
+	}
+	return nil
+}
+
+func (x *TeamMetric) GetTeamAvgOrderMetric() *v1.TeamAvgOrderMetric {
+	if x != nil {
+		if x, ok := x.Data.(*TeamMetric_TeamAvgOrderMetric); ok {
+			return x.TeamAvgOrderMetric
+		}
+	}
+	return nil
+}
+
+func (x *TeamMetric) GetTeamAvgOrderWithdrawalMetric() *v1.TeamAvgOrderWithdrawalMetric {
+	if x != nil {
+		if x, ok := x.Data.(*TeamMetric_TeamAvgOrderWithdrawalMetric); ok {
+			return x.TeamAvgOrderWithdrawalMetric
+		}
+	}
+	return nil
+}
+
+func (x *TeamMetric) GetTeamAvgOrderCancelledMetric() *v1.TeamAvgOrderCancelledMetric {
+	if x != nil {
+		if x, ok := x.Data.(*TeamMetric_TeamAvgOrderCancelledMetric); ok {
+			return x.TeamAvgOrderCancelledMetric
+		}
+	}
+	return nil
+}
+
+func (x *TeamMetric) GetTeamAvgOrderLostMetric() *v1.TeamAvgOrderLostMetric {
+	if x != nil {
+		if x, ok := x.Data.(*TeamMetric_TeamAvgOrderLostMetric); ok {
+			return x.TeamAvgOrderLostMetric
+		}
+	}
+	return nil
+}
+
+func (x *TeamMetric) GetTeamAvgOrderCompletedMetric() *v1.TeamAvgOrderCompletedMetric {
+	if x != nil {
+		if x, ok := x.Data.(*TeamMetric_TeamAvgOrderCompletedMetric); ok {
+			return x.TeamAvgOrderCompletedMetric
+		}
+	}
+	return nil
+}
+
+func (x *TeamMetric) GetTeamAvgOrderReturnMetric() *v1.TeamAvgOrderReturnMetric {
+	if x != nil {
+		if x, ok := x.Data.(*TeamMetric_TeamAvgOrderReturnMetric); ok {
+			return x.TeamAvgOrderReturnMetric
+		}
+	}
+	return nil
+}
+
+func (x *TeamMetric) GetTeamAvgOrderReturnCompletedMetric() *v1.TeamAvgOrderReturnCompletedMetric {
+	if x != nil {
+		if x, ok := x.Data.(*TeamMetric_TeamAvgOrderReturnCompletedMetric); ok {
+			return x.TeamAvgOrderReturnCompletedMetric
+		}
+	}
+	return nil
+}
+
+func (x *TeamMetric) GetTeamAvgOrderOngoingMetric() *v1.TeamAvgOrderOngoingMetric {
+	if x != nil {
+		if x, ok := x.Data.(*TeamMetric_TeamAvgOrderOngoingMetric); ok {
+			return x.TeamAvgOrderOngoingMetric
+		}
+	}
+	return nil
+}
+
+func (x *TeamMetric) GetTeamStockOrderMetric() *v1.TeamStockOrderMetric {
+	if x != nil {
+		if x, ok := x.Data.(*TeamMetric_TeamStockOrderMetric); ok {
+			return x.TeamStockOrderMetric
+		}
+	}
+	return nil
+}
+
+func (x *TeamMetric) GetTeamCostWarehouseMetric() *v1.TeamCostWarehouseMetric {
+	if x != nil {
+		if x, ok := x.Data.(*TeamMetric_TeamCostWarehouseMetric); ok {
+			return x.TeamCostWarehouseMetric
+		}
+	}
+	return nil
+}
+
+func (x *TeamMetric) GetTeamCostProductOwnMetric() *v1.TeamCostProductOwnMetric {
+	if x != nil {
+		if x, ok := x.Data.(*TeamMetric_TeamCostProductOwnMetric); ok {
+			return x.TeamCostProductOwnMetric
+		}
+	}
+	return nil
+}
+
+func (x *TeamMetric) GetTeamCostProductCrossMetric() *v1.TeamCostProductCrossMetric {
+	if x != nil {
+		if x, ok := x.Data.(*TeamMetric_TeamCostProductCrossMetric); ok {
+			return x.TeamCostProductCrossMetric
+		}
+	}
+	return nil
+}
+
+func (x *TeamMetric) GetTeamAdsExpenseMetric() *v1.TeamAdsExpenseMetric {
+	if x != nil {
+		if x, ok := x.Data.(*TeamMetric_TeamAdsExpenseMetric); ok {
+			return x.TeamAdsExpenseMetric
+		}
+	}
+	return nil
+}
+
+func (x *TeamMetric) GetTeamWithdrawalMetric() *v1.TeamWithdrawalMetric {
+	if x != nil {
+		if x, ok := x.Data.(*TeamMetric_TeamWithdrawalMetric); ok {
+			return x.TeamWithdrawalMetric
+		}
+	}
+	return nil
+}
+
+func (x *TeamMetric) GetTeamWithdrawalBreakdownMetric() *v1.TeamWithdrawalBreakdownMetric {
+	if x != nil {
+		if x, ok := x.Data.(*TeamMetric_TeamWithdrawalBreakdownMetric); ok {
+			return x.TeamWithdrawalBreakdownMetric
+		}
+	}
+	return nil
+}
+
+func (x *TeamMetric) GetTeamRevenueOrderMetric() *v1.TeamRevenueOrderMetric {
+	if x != nil {
+		if x, ok := x.Data.(*TeamMetric_TeamRevenueOrderMetric); ok {
+			return x.TeamRevenueOrderMetric
+		}
+	}
+	return nil
+}
+
+func (x *TeamMetric) GetTeamRevenueWarehouseAdjustmentMetric() *v1.TeamRevenueWarehouseAdjustmentMetric {
+	if x != nil {
+		if x, ok := x.Data.(*TeamMetric_TeamRevenueWarehouseAdjustmentMetric); ok {
+			return x.TeamRevenueWarehouseAdjustmentMetric
+		}
+	}
+	return nil
+}
+
+func (x *TeamMetric) GetTeamRevenueProductAdjustmentMetric() *v1.TeamRevenueProductAdjustmentMetric {
+	if x != nil {
+		if x, ok := x.Data.(*TeamMetric_TeamRevenueProductAdjustmentMetric); ok {
+			return x.TeamRevenueProductAdjustmentMetric
+		}
+	}
+	return nil
+}
+
+func (x *TeamMetric) GetTeamProfitOrderCreatedMetric() *v1.TeamProfitOrderCreatedMetric {
+	if x != nil {
+		if x, ok := x.Data.(*TeamMetric_TeamProfitOrderCreatedMetric); ok {
+			return x.TeamProfitOrderCreatedMetric
+		}
+	}
+	return nil
+}
+
+func (x *TeamMetric) GetTeamProfitOrderWithdrawalMetric() *v1.TeamProfitOrderWithdrawalMetric {
+	if x != nil {
+		if x, ok := x.Data.(*TeamMetric_TeamProfitOrderWithdrawalMetric); ok {
+			return x.TeamProfitOrderWithdrawalMetric
+		}
+	}
+	return nil
+}
+
+func (x *TeamMetric) GetTeamLostProfitOrderMetric() *v1.TeamLostProfitOrderMetric {
+	if x != nil {
+		if x, ok := x.Data.(*TeamMetric_TeamLostProfitOrderMetric); ok {
+			return x.TeamLostProfitOrderMetric
+		}
+	}
+	return nil
+}
+
+func (x *TeamMetric) GetTeamProfitOrLossMetric() *v1.TeamProfitOrLossMetric {
+	if x != nil {
+		if x, ok := x.Data.(*TeamMetric_TeamProfitOrLossMetric); ok {
+			return x.TeamProfitOrLossMetric
+		}
+	}
+	return nil
+}
+
 type isTeamMetric_Data interface {
 	isTeamMetric_Data()
 }
@@ -320,7 +1171,186 @@ type TeamMetric_TeamOrderMetric struct {
 	TeamOrderMetric *v1.TeamOrderMetric `protobuf:"bytes,1,opt,name=team_order_metric,json=teamOrderMetric,proto3,oneof"`
 }
 
+type TeamMetric_TeamOrderWithdrawalMetric struct {
+	TeamOrderWithdrawalMetric *v1.TeamOrderWithdrawalMetric `protobuf:"bytes,2,opt,name=team_order_withdrawal_metric,json=teamOrderWithdrawalMetric,proto3,oneof"`
+}
+
+type TeamMetric_TeamOrderCancelledMetric struct {
+	TeamOrderCancelledMetric *v1.TeamOrderCancelledMetric `protobuf:"bytes,3,opt,name=team_order_cancelled_metric,json=teamOrderCancelledMetric,proto3,oneof"`
+}
+
+type TeamMetric_TeamOrderLostMetric struct {
+	TeamOrderLostMetric *v1.TeamOrderLostMetric `protobuf:"bytes,4,opt,name=team_order_lost_metric,json=teamOrderLostMetric,proto3,oneof"`
+}
+
+type TeamMetric_TeamOrderCompletedMetric struct {
+	TeamOrderCompletedMetric *v1.TeamOrderCompletedMetric `protobuf:"bytes,5,opt,name=team_order_completed_metric,json=teamOrderCompletedMetric,proto3,oneof"`
+}
+
+type TeamMetric_TeamOrderReturnMetric struct {
+	TeamOrderReturnMetric *v1.TeamOrderReturnMetric `protobuf:"bytes,6,opt,name=team_order_return_metric,json=teamOrderReturnMetric,proto3,oneof"`
+}
+
+type TeamMetric_TeamOrderReturnCompletedMetric struct {
+	TeamOrderReturnCompletedMetric *v1.TeamOrderReturnCompletedMetric `protobuf:"bytes,7,opt,name=team_order_return_completed_metric,json=teamOrderReturnCompletedMetric,proto3,oneof"`
+}
+
+type TeamMetric_TeamOrderOngoingMetric struct {
+	TeamOrderOngoingMetric *v1.TeamOrderOngoingMetric `protobuf:"bytes,8,opt,name=team_order_ongoing_metric,json=teamOrderOngoingMetric,proto3,oneof"`
+}
+
+type TeamMetric_TeamAvgOrderMetric struct {
+	// avg order
+	TeamAvgOrderMetric *v1.TeamAvgOrderMetric `protobuf:"bytes,9,opt,name=team_avg_order_metric,json=teamAvgOrderMetric,proto3,oneof"`
+}
+
+type TeamMetric_TeamAvgOrderWithdrawalMetric struct {
+	TeamAvgOrderWithdrawalMetric *v1.TeamAvgOrderWithdrawalMetric `protobuf:"bytes,10,opt,name=team_avg_order_withdrawal_metric,json=teamAvgOrderWithdrawalMetric,proto3,oneof"`
+}
+
+type TeamMetric_TeamAvgOrderCancelledMetric struct {
+	TeamAvgOrderCancelledMetric *v1.TeamAvgOrderCancelledMetric `protobuf:"bytes,11,opt,name=team_avg_order_cancelled_metric,json=teamAvgOrderCancelledMetric,proto3,oneof"`
+}
+
+type TeamMetric_TeamAvgOrderLostMetric struct {
+	TeamAvgOrderLostMetric *v1.TeamAvgOrderLostMetric `protobuf:"bytes,12,opt,name=team_avg_order_lost_metric,json=teamAvgOrderLostMetric,proto3,oneof"`
+}
+
+type TeamMetric_TeamAvgOrderCompletedMetric struct {
+	TeamAvgOrderCompletedMetric *v1.TeamAvgOrderCompletedMetric `protobuf:"bytes,13,opt,name=team_avg_order_completed_metric,json=teamAvgOrderCompletedMetric,proto3,oneof"`
+}
+
+type TeamMetric_TeamAvgOrderReturnMetric struct {
+	TeamAvgOrderReturnMetric *v1.TeamAvgOrderReturnMetric `protobuf:"bytes,14,opt,name=team_avg_order_return_metric,json=teamAvgOrderReturnMetric,proto3,oneof"`
+}
+
+type TeamMetric_TeamAvgOrderReturnCompletedMetric struct {
+	TeamAvgOrderReturnCompletedMetric *v1.TeamAvgOrderReturnCompletedMetric `protobuf:"bytes,15,opt,name=team_avg_order_return_completed_metric,json=teamAvgOrderReturnCompletedMetric,proto3,oneof"`
+}
+
+type TeamMetric_TeamAvgOrderOngoingMetric struct {
+	TeamAvgOrderOngoingMetric *v1.TeamAvgOrderOngoingMetric `protobuf:"bytes,16,opt,name=team_avg_order_ongoing_metric,json=teamAvgOrderOngoingMetric,proto3,oneof"`
+}
+
+type TeamMetric_TeamStockOrderMetric struct {
+	// stock order
+	TeamStockOrderMetric *v1.TeamStockOrderMetric `protobuf:"bytes,17,opt,name=team_stock_order_metric,json=teamStockOrderMetric,proto3,oneof"`
+}
+
+type TeamMetric_TeamCostWarehouseMetric struct {
+	// cost order
+	TeamCostWarehouseMetric *v1.TeamCostWarehouseMetric `protobuf:"bytes,18,opt,name=team_cost_warehouse_metric,json=teamCostWarehouseMetric,proto3,oneof"`
+}
+
+type TeamMetric_TeamCostProductOwnMetric struct {
+	TeamCostProductOwnMetric *v1.TeamCostProductOwnMetric `protobuf:"bytes,19,opt,name=team_cost_product_own_metric,json=teamCostProductOwnMetric,proto3,oneof"`
+}
+
+type TeamMetric_TeamCostProductCrossMetric struct {
+	TeamCostProductCrossMetric *v1.TeamCostProductCrossMetric `protobuf:"bytes,20,opt,name=team_cost_product_cross_metric,json=teamCostProductCrossMetric,proto3,oneof"`
+}
+
+type TeamMetric_TeamAdsExpenseMetric struct {
+	TeamAdsExpenseMetric *v1.TeamAdsExpenseMetric `protobuf:"bytes,21,opt,name=team_ads_expense_metric,json=teamAdsExpenseMetric,proto3,oneof"`
+}
+
+type TeamMetric_TeamWithdrawalMetric struct {
+	// revenue
+	TeamWithdrawalMetric *v1.TeamWithdrawalMetric `protobuf:"bytes,22,opt,name=team_withdrawal_metric,json=teamWithdrawalMetric,proto3,oneof"`
+}
+
+type TeamMetric_TeamWithdrawalBreakdownMetric struct {
+	TeamWithdrawalBreakdownMetric *v1.TeamWithdrawalBreakdownMetric `protobuf:"bytes,23,opt,name=team_withdrawal_breakdown_metric,json=teamWithdrawalBreakdownMetric,proto3,oneof"`
+}
+
+type TeamMetric_TeamRevenueOrderMetric struct {
+	TeamRevenueOrderMetric *v1.TeamRevenueOrderMetric `protobuf:"bytes,24,opt,name=team_revenue_order_metric,json=teamRevenueOrderMetric,proto3,oneof"`
+}
+
+type TeamMetric_TeamRevenueWarehouseAdjustmentMetric struct {
+	TeamRevenueWarehouseAdjustmentMetric *v1.TeamRevenueWarehouseAdjustmentMetric `protobuf:"bytes,25,opt,name=team_revenue_warehouse_adjustment_metric,json=teamRevenueWarehouseAdjustmentMetric,proto3,oneof"`
+}
+
+type TeamMetric_TeamRevenueProductAdjustmentMetric struct {
+	TeamRevenueProductAdjustmentMetric *v1.TeamRevenueProductAdjustmentMetric `protobuf:"bytes,26,opt,name=team_revenue_product_adjustment_metric,json=teamRevenueProductAdjustmentMetric,proto3,oneof"`
+}
+
+type TeamMetric_TeamProfitOrderCreatedMetric struct {
+	// profit
+	TeamProfitOrderCreatedMetric *v1.TeamProfitOrderCreatedMetric `protobuf:"bytes,27,opt,name=team_profit_order_created_metric,json=teamProfitOrderCreatedMetric,proto3,oneof"`
+}
+
+type TeamMetric_TeamProfitOrderWithdrawalMetric struct {
+	TeamProfitOrderWithdrawalMetric *v1.TeamProfitOrderWithdrawalMetric `protobuf:"bytes,28,opt,name=team_profit_order_withdrawal_metric,json=teamProfitOrderWithdrawalMetric,proto3,oneof"`
+}
+
+type TeamMetric_TeamLostProfitOrderMetric struct {
+	TeamLostProfitOrderMetric *v1.TeamLostProfitOrderMetric `protobuf:"bytes,29,opt,name=team_lost_profit_order_metric,json=teamLostProfitOrderMetric,proto3,oneof"`
+}
+
+type TeamMetric_TeamProfitOrLossMetric struct {
+	TeamProfitOrLossMetric *v1.TeamProfitOrLossMetric `protobuf:"bytes,30,opt,name=team_profit_or_loss_metric,json=teamProfitOrLossMetric,proto3,oneof"`
+}
+
 func (*TeamMetric_TeamOrderMetric) isTeamMetric_Data() {}
+
+func (*TeamMetric_TeamOrderWithdrawalMetric) isTeamMetric_Data() {}
+
+func (*TeamMetric_TeamOrderCancelledMetric) isTeamMetric_Data() {}
+
+func (*TeamMetric_TeamOrderLostMetric) isTeamMetric_Data() {}
+
+func (*TeamMetric_TeamOrderCompletedMetric) isTeamMetric_Data() {}
+
+func (*TeamMetric_TeamOrderReturnMetric) isTeamMetric_Data() {}
+
+func (*TeamMetric_TeamOrderReturnCompletedMetric) isTeamMetric_Data() {}
+
+func (*TeamMetric_TeamOrderOngoingMetric) isTeamMetric_Data() {}
+
+func (*TeamMetric_TeamAvgOrderMetric) isTeamMetric_Data() {}
+
+func (*TeamMetric_TeamAvgOrderWithdrawalMetric) isTeamMetric_Data() {}
+
+func (*TeamMetric_TeamAvgOrderCancelledMetric) isTeamMetric_Data() {}
+
+func (*TeamMetric_TeamAvgOrderLostMetric) isTeamMetric_Data() {}
+
+func (*TeamMetric_TeamAvgOrderCompletedMetric) isTeamMetric_Data() {}
+
+func (*TeamMetric_TeamAvgOrderReturnMetric) isTeamMetric_Data() {}
+
+func (*TeamMetric_TeamAvgOrderReturnCompletedMetric) isTeamMetric_Data() {}
+
+func (*TeamMetric_TeamAvgOrderOngoingMetric) isTeamMetric_Data() {}
+
+func (*TeamMetric_TeamStockOrderMetric) isTeamMetric_Data() {}
+
+func (*TeamMetric_TeamCostWarehouseMetric) isTeamMetric_Data() {}
+
+func (*TeamMetric_TeamCostProductOwnMetric) isTeamMetric_Data() {}
+
+func (*TeamMetric_TeamCostProductCrossMetric) isTeamMetric_Data() {}
+
+func (*TeamMetric_TeamAdsExpenseMetric) isTeamMetric_Data() {}
+
+func (*TeamMetric_TeamWithdrawalMetric) isTeamMetric_Data() {}
+
+func (*TeamMetric_TeamWithdrawalBreakdownMetric) isTeamMetric_Data() {}
+
+func (*TeamMetric_TeamRevenueOrderMetric) isTeamMetric_Data() {}
+
+func (*TeamMetric_TeamRevenueWarehouseAdjustmentMetric) isTeamMetric_Data() {}
+
+func (*TeamMetric_TeamRevenueProductAdjustmentMetric) isTeamMetric_Data() {}
+
+func (*TeamMetric_TeamProfitOrderCreatedMetric) isTeamMetric_Data() {}
+
+func (*TeamMetric_TeamProfitOrderWithdrawalMetric) isTeamMetric_Data() {}
+
+func (*TeamMetric_TeamLostProfitOrderMetric) isTeamMetric_Data() {}
+
+func (*TeamMetric_TeamProfitOrLossMetric) isTeamMetric_Data() {}
 
 type TeamMetricExtra struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -586,16 +1616,76 @@ var File_selling_iface_v1_team_stat_metric_proto protoreflect.FileDescriptor
 
 const file_selling_iface_v1_team_stat_metric_proto_rawDesc = "" +
 	"\n" +
-	"'selling_iface/v1/team_stat_metric.proto\x12\x10selling_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a2selling_iface/v1/team_metric/v1/order_metric.proto\"\x8a\x02\n" +
+	"'selling_iface/v1/team_stat_metric.proto\x12\x10selling_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a2selling_iface/v1/team_metric/v1/order_metric.proto\x1a0selling_iface/v1/team_metric/v1/avg_metric.proto\x1a2selling_iface/v1/team_metric/v1/stock_metric.proto\x1a1selling_iface/v1/team_metric/v1/cost_metric.proto\x1a4selling_iface/v1/team_metric/v1/revenue_metric.proto\x1a3selling_iface/v1/team_metric/v1/profit_metric.proto\"\x99\"\n" +
 	"\x0eTeamMetricSort\x12A\n" +
 	"\tsort_type\x18\x01 \x01(\x0e2$.selling_iface.v1.TeamMetricSortTypeR\bsortType\x12C\n" +
 	"\vcommon_sort\x18\x02 \x01(\x0e2 .selling_iface.v1.CommonTeamSortH\x00R\n" +
 	"commonSort\x12k\n" +
-	"\x16team_order_metric_sort\x18\x03 \x01(\x0e24.selling_iface.v1.team_metric.v1.TeamOrderMetricSortH\x00R\x13teamOrderMetricSortB\x03\n" +
-	"\x01s\"t\n" +
+	"\x16team_order_metric_sort\x18\x03 \x01(\x0e24.selling_iface.v1.team_metric.v1.TeamOrderMetricSortH\x00R\x13teamOrderMetricSort\x12\x8a\x01\n" +
+	"!team_order_withdrawal_metric_sort\x18\x04 \x01(\x0e2>.selling_iface.v1.team_metric.v1.TeamOrderWithdrawalMetricSortH\x00R\x1dteamOrderWithdrawalMetricSort\x12\x87\x01\n" +
+	" team_order_cancelled_metric_sort\x18\x05 \x01(\x0e2=.selling_iface.v1.team_metric.v1.TeamOrderCancelledMetricSortH\x00R\x1cteamOrderCancelledMetricSort\x12x\n" +
+	"\x1bteam_order_lost_metric_sort\x18\x06 \x01(\x0e28.selling_iface.v1.team_metric.v1.TeamOrderLostMetricSortH\x00R\x17teamOrderLostMetricSort\x12\x87\x01\n" +
+	" team_order_completed_metric_sort\x18\a \x01(\x0e2=.selling_iface.v1.team_metric.v1.TeamOrderCompletedMetricSortH\x00R\x1cteamOrderCompletedMetricSort\x12~\n" +
+	"\x1dteam_order_return_metric_sort\x18\b \x01(\x0e2:.selling_iface.v1.team_metric.v1.TeamOrderReturnMetricSortH\x00R\x19teamOrderReturnMetricSort\x12\x9a\x01\n" +
+	"'team_order_return_completed_metric_sort\x18\t \x01(\x0e2C.selling_iface.v1.team_metric.v1.TeamOrderReturnCompletedMetricSortH\x00R\"teamOrderReturnCompletedMetricSort\x12\x81\x01\n" +
+	"\x1eteam_order_ongoing_metric_sort\x18\n" +
+	" \x01(\x0e2;.selling_iface.v1.team_metric.v1.TeamOrderOngoingMetricSortH\x00R\x1ateamOrderOngoingMetricSort\x12u\n" +
+	"\x1ateam_avg_order_metric_sort\x18\v \x01(\x0e27.selling_iface.v1.team_metric.v1.TeamAvgOrderMetricSortH\x00R\x16teamAvgOrderMetricSort\x12\x94\x01\n" +
+	"%team_avg_order_withdrawal_metric_sort\x18\f \x01(\x0e2A.selling_iface.v1.team_metric.v1.TeamAvgOrderWithdrawalMetricSortH\x00R teamAvgOrderWithdrawalMetricSort\x12\x91\x01\n" +
+	"$team_avg_order_cancelled_metric_sort\x18\r \x01(\x0e2@.selling_iface.v1.team_metric.v1.TeamAvgOrderCancelledMetricSortH\x00R\x1fteamAvgOrderCancelledMetricSort\x12\x82\x01\n" +
+	"\x1fteam_avg_order_lost_metric_sort\x18\x0e \x01(\x0e2;.selling_iface.v1.team_metric.v1.TeamAvgOrderLostMetricSortH\x00R\x1ateamAvgOrderLostMetricSort\x12\x91\x01\n" +
+	"$team_avg_order_completed_metric_sort\x18\x0f \x01(\x0e2@.selling_iface.v1.team_metric.v1.TeamAvgOrderCompletedMetricSortH\x00R\x1fteamAvgOrderCompletedMetricSort\x12\x88\x01\n" +
+	"!team_avg_order_return_metric_sort\x18\x10 \x01(\x0e2=.selling_iface.v1.team_metric.v1.TeamAvgOrderReturnMetricSortH\x00R\x1cteamAvgOrderReturnMetricSort\x12\xa4\x01\n" +
+	"+team_avg_order_return_completed_metric_sort\x18\x11 \x01(\x0e2F.selling_iface.v1.team_metric.v1.TeamAvgOrderReturnCompletedMetricSortH\x00R%teamAvgOrderReturnCompletedMetricSort\x12\x8b\x01\n" +
+	"\"team_avg_order_ongoing_metric_sort\x18\x12 \x01(\x0e2>.selling_iface.v1.team_metric.v1.TeamAvgOrderOngoingMetricSortH\x00R\x1dteamAvgOrderOngoingMetricSort\x12{\n" +
+	"\x1cteam_stock_order_metric_sort\x18\x13 \x01(\x0e29.selling_iface.v1.team_metric.v1.TeamStockOrderMetricSortH\x00R\x18teamStockOrderMetricSort\x12\x84\x01\n" +
+	"\x1fteam_cost_warehouse_metric_sort\x18\x14 \x01(\x0e2<.selling_iface.v1.team_metric.v1.TeamCostWarehouseMetricSortH\x00R\x1bteamCostWarehouseMetricSort\x12\x88\x01\n" +
+	"!team_cost_product_own_metric_sort\x18\x15 \x01(\x0e2=.selling_iface.v1.team_metric.v1.TeamCostProductOwnMetricSortH\x00R\x1cteamCostProductOwnMetricSort\x12\x8e\x01\n" +
+	"#team_cost_product_cross_metric_sort\x18\x16 \x01(\x0e2?.selling_iface.v1.team_metric.v1.TeamCostProductCrossMetricSortH\x00R\x1eteamCostProductCrossMetricSort\x12{\n" +
+	"\x1cteam_ads_expense_metric_sort\x18\x17 \x01(\x0e29.selling_iface.v1.team_metric.v1.TeamAdsExpenseMetricSortH\x00R\x18teamAdsExpenseMetricSort\x12z\n" +
+	"\x1bteam_withdrawal_metric_sort\x18\x18 \x01(\x0e29.selling_iface.v1.team_metric.v1.TeamWithdrawalMetricSortH\x00R\x18teamWithdrawalMetricSort\x12\x96\x01\n" +
+	"%team_withdrawal_breakdown_metric_sort\x18\x19 \x01(\x0e2B.selling_iface.v1.team_metric.v1.TeamWithdrawalBreakdownMetricSortH\x00R!teamWithdrawalBreakdownMetricSort\x12\x81\x01\n" +
+	"\x1eteam_revenue_order_metric_sort\x18\x1a \x01(\x0e2;.selling_iface.v1.team_metric.v1.TeamRevenueOrderMetricSortH\x00R\x1ateamRevenueOrderMetricSort\x12\xac\x01\n" +
+	"-team_revenue_warehouse_adjustment_metric_sort\x18\x1b \x01(\x0e2I.selling_iface.v1.team_metric.v1.TeamRevenueWarehouseAdjustmentMetricSortH\x00R(teamRevenueWarehouseAdjustmentMetricSort\x12\xa6\x01\n" +
+	"+team_revenue_product_adjustment_metric_sort\x18\x1c \x01(\x0e2G.selling_iface.v1.team_metric.v1.TeamRevenueProductAdjustmentMetricSortH\x00R&teamRevenueProductAdjustmentMetricSort\x12\x94\x01\n" +
+	"%team_profit_order_created_metric_sort\x18\x1d \x01(\x0e2A.selling_iface.v1.team_metric.v1.TeamProfitOrderCreatedMetricSortH\x00R teamProfitOrderCreatedMetricSort\x12\x9d\x01\n" +
+	"(team_profit_order_withdrawal_metric_sort\x18\x1e \x01(\x0e2D.selling_iface.v1.team_metric.v1.TeamProfitOrderWithdrawalMetricSortH\x00R#teamProfitOrderWithdrawalMetricSort\x12\x8b\x01\n" +
+	"\"team_lost_profit_order_metric_sort\x18\x1f \x01(\x0e2>.selling_iface.v1.team_metric.v1.TeamLostProfitOrderMetricSortH\x00R\x1dteamLostProfitOrderMetricSort\x12\x82\x01\n" +
+	"\x1fteam_profit_or_loss_metric_sort\x18  \x01(\x0e2;.selling_iface.v1.team_metric.v1.TeamProfitOrLossMetricSortH\x00R\x1ateamProfitOrLossMetricSortB\x03\n" +
+	"\x01s\"\xfe\x1d\n" +
 	"\n" +
 	"TeamMetric\x12^\n" +
-	"\x11team_order_metric\x18\x01 \x01(\v20.selling_iface.v1.team_metric.v1.TeamOrderMetricH\x00R\x0fteamOrderMetricB\x06\n" +
+	"\x11team_order_metric\x18\x01 \x01(\v20.selling_iface.v1.team_metric.v1.TeamOrderMetricH\x00R\x0fteamOrderMetric\x12}\n" +
+	"\x1cteam_order_withdrawal_metric\x18\x02 \x01(\v2:.selling_iface.v1.team_metric.v1.TeamOrderWithdrawalMetricH\x00R\x19teamOrderWithdrawalMetric\x12z\n" +
+	"\x1bteam_order_cancelled_metric\x18\x03 \x01(\v29.selling_iface.v1.team_metric.v1.TeamOrderCancelledMetricH\x00R\x18teamOrderCancelledMetric\x12k\n" +
+	"\x16team_order_lost_metric\x18\x04 \x01(\v24.selling_iface.v1.team_metric.v1.TeamOrderLostMetricH\x00R\x13teamOrderLostMetric\x12z\n" +
+	"\x1bteam_order_completed_metric\x18\x05 \x01(\v29.selling_iface.v1.team_metric.v1.TeamOrderCompletedMetricH\x00R\x18teamOrderCompletedMetric\x12q\n" +
+	"\x18team_order_return_metric\x18\x06 \x01(\v26.selling_iface.v1.team_metric.v1.TeamOrderReturnMetricH\x00R\x15teamOrderReturnMetric\x12\x8d\x01\n" +
+	"\"team_order_return_completed_metric\x18\a \x01(\v2?.selling_iface.v1.team_metric.v1.TeamOrderReturnCompletedMetricH\x00R\x1eteamOrderReturnCompletedMetric\x12t\n" +
+	"\x19team_order_ongoing_metric\x18\b \x01(\v27.selling_iface.v1.team_metric.v1.TeamOrderOngoingMetricH\x00R\x16teamOrderOngoingMetric\x12h\n" +
+	"\x15team_avg_order_metric\x18\t \x01(\v23.selling_iface.v1.team_metric.v1.TeamAvgOrderMetricH\x00R\x12teamAvgOrderMetric\x12\x87\x01\n" +
+	" team_avg_order_withdrawal_metric\x18\n" +
+	" \x01(\v2=.selling_iface.v1.team_metric.v1.TeamAvgOrderWithdrawalMetricH\x00R\x1cteamAvgOrderWithdrawalMetric\x12\x84\x01\n" +
+	"\x1fteam_avg_order_cancelled_metric\x18\v \x01(\v2<.selling_iface.v1.team_metric.v1.TeamAvgOrderCancelledMetricH\x00R\x1bteamAvgOrderCancelledMetric\x12u\n" +
+	"\x1ateam_avg_order_lost_metric\x18\f \x01(\v27.selling_iface.v1.team_metric.v1.TeamAvgOrderLostMetricH\x00R\x16teamAvgOrderLostMetric\x12\x84\x01\n" +
+	"\x1fteam_avg_order_completed_metric\x18\r \x01(\v2<.selling_iface.v1.team_metric.v1.TeamAvgOrderCompletedMetricH\x00R\x1bteamAvgOrderCompletedMetric\x12{\n" +
+	"\x1cteam_avg_order_return_metric\x18\x0e \x01(\v29.selling_iface.v1.team_metric.v1.TeamAvgOrderReturnMetricH\x00R\x18teamAvgOrderReturnMetric\x12\x97\x01\n" +
+	"&team_avg_order_return_completed_metric\x18\x0f \x01(\v2B.selling_iface.v1.team_metric.v1.TeamAvgOrderReturnCompletedMetricH\x00R!teamAvgOrderReturnCompletedMetric\x12~\n" +
+	"\x1dteam_avg_order_ongoing_metric\x18\x10 \x01(\v2:.selling_iface.v1.team_metric.v1.TeamAvgOrderOngoingMetricH\x00R\x19teamAvgOrderOngoingMetric\x12n\n" +
+	"\x17team_stock_order_metric\x18\x11 \x01(\v25.selling_iface.v1.team_metric.v1.TeamStockOrderMetricH\x00R\x14teamStockOrderMetric\x12w\n" +
+	"\x1ateam_cost_warehouse_metric\x18\x12 \x01(\v28.selling_iface.v1.team_metric.v1.TeamCostWarehouseMetricH\x00R\x17teamCostWarehouseMetric\x12{\n" +
+	"\x1cteam_cost_product_own_metric\x18\x13 \x01(\v29.selling_iface.v1.team_metric.v1.TeamCostProductOwnMetricH\x00R\x18teamCostProductOwnMetric\x12\x81\x01\n" +
+	"\x1eteam_cost_product_cross_metric\x18\x14 \x01(\v2;.selling_iface.v1.team_metric.v1.TeamCostProductCrossMetricH\x00R\x1ateamCostProductCrossMetric\x12n\n" +
+	"\x17team_ads_expense_metric\x18\x15 \x01(\v25.selling_iface.v1.team_metric.v1.TeamAdsExpenseMetricH\x00R\x14teamAdsExpenseMetric\x12m\n" +
+	"\x16team_withdrawal_metric\x18\x16 \x01(\v25.selling_iface.v1.team_metric.v1.TeamWithdrawalMetricH\x00R\x14teamWithdrawalMetric\x12\x89\x01\n" +
+	" team_withdrawal_breakdown_metric\x18\x17 \x01(\v2>.selling_iface.v1.team_metric.v1.TeamWithdrawalBreakdownMetricH\x00R\x1dteamWithdrawalBreakdownMetric\x12t\n" +
+	"\x19team_revenue_order_metric\x18\x18 \x01(\v27.selling_iface.v1.team_metric.v1.TeamRevenueOrderMetricH\x00R\x16teamRevenueOrderMetric\x12\x9f\x01\n" +
+	"(team_revenue_warehouse_adjustment_metric\x18\x19 \x01(\v2E.selling_iface.v1.team_metric.v1.TeamRevenueWarehouseAdjustmentMetricH\x00R$teamRevenueWarehouseAdjustmentMetric\x12\x99\x01\n" +
+	"&team_revenue_product_adjustment_metric\x18\x1a \x01(\v2C.selling_iface.v1.team_metric.v1.TeamRevenueProductAdjustmentMetricH\x00R\"teamRevenueProductAdjustmentMetric\x12\x87\x01\n" +
+	" team_profit_order_created_metric\x18\x1b \x01(\v2=.selling_iface.v1.team_metric.v1.TeamProfitOrderCreatedMetricH\x00R\x1cteamProfitOrderCreatedMetric\x12\x90\x01\n" +
+	"#team_profit_order_withdrawal_metric\x18\x1c \x01(\v2@.selling_iface.v1.team_metric.v1.TeamProfitOrderWithdrawalMetricH\x00R\x1fteamProfitOrderWithdrawalMetric\x12~\n" +
+	"\x1dteam_lost_profit_order_metric\x18\x1d \x01(\v2:.selling_iface.v1.team_metric.v1.TeamLostProfitOrderMetricH\x00R\x19teamLostProfitOrderMetric\x12u\n" +
+	"\x1ateam_profit_or_loss_metric\x18\x1e \x01(\v27.selling_iface.v1.team_metric.v1.TeamProfitOrLossMetricH\x00R\x16teamProfitOrLossMetricB\x06\n" +
 	"\x04data\"\x11\n" +
 	"\x0fTeamMetricExtra\"\x84\x01\n" +
 	"\x14TeamStatMetricFilter\x12)\n" +
@@ -611,10 +1701,40 @@ const file_selling_iface_v1_team_stat_metric_proto_rawDesc = "" +
 	"\fmetric_types\x18\x04 \x03(\x0e2 .selling_iface.v1.TeamMetricTypeR\vmetricTypes\"b\n" +
 	"\x16TeamStatMetricResponse\x126\n" +
 	"\ametrics\x18\x01 \x03(\v2\x1c.selling_iface.v1.TeamMetricR\ametrics\x12\x10\n" +
-	"\x03ids\x18\x02 \x03(\x04R\x03ids*N\n" +
+	"\x03ids\x18\x02 \x03(\x04R\x03ids*\xcd\t\n" +
 	"\x0eTeamMetricType\x12 \n" +
 	"\x1cTEAM_METRIC_TYPE_UNSPECIFIED\x10\x00\x12\x1a\n" +
-	"\x16TEAM_METRIC_TYPE_ORDER\x10\x01*z\n" +
+	"\x16TEAM_METRIC_TYPE_ORDER\x10\x01\x12%\n" +
+	"!TEAM_METRIC_TYPE_ORDER_WITHDRAWAL\x10\x02\x12$\n" +
+	" TEAM_METRIC_TYPE_ORDER_CANCELLED\x10\x03\x12\x1f\n" +
+	"\x1bTEAM_METRIC_TYPE_ORDER_LOST\x10\x04\x12$\n" +
+	" TEAM_METRIC_TYPE_ORDER_COMPLETED\x10\x05\x12!\n" +
+	"\x1dTEAM_METRIC_TYPE_ORDER_RETURN\x10\x06\x12+\n" +
+	"'TEAM_METRIC_TYPE_ORDER_RETURN_COMPLETED\x10\a\x12\"\n" +
+	"\x1eTEAM_METRIC_TYPE_ORDER_ONGOING\x10\b\x12\x1e\n" +
+	"\x1aTEAM_METRIC_TYPE_AVG_ORDER\x10\t\x12)\n" +
+	"%TEAM_METRIC_TYPE_AVG_ORDER_WITHDRAWAL\x10\n" +
+	"\x12(\n" +
+	"$TEAM_METRIC_TYPE_AVG_ORDER_CANCELLED\x10\v\x12#\n" +
+	"\x1fTEAM_METRIC_TYPE_AVG_ORDER_LOST\x10\f\x12(\n" +
+	"$TEAM_METRIC_TYPE_AVG_ORDER_COMPLETED\x10\r\x12%\n" +
+	"!TEAM_METRIC_TYPE_AVG_ORDER_RETURN\x10\x0e\x12/\n" +
+	"+TEAM_METRIC_TYPE_AVG_ORDER_RETURN_COMPLETED\x10\x0f\x12&\n" +
+	"\"TEAM_METRIC_TYPE_AVG_ORDER_ONGOING\x10\x10\x12 \n" +
+	"\x1cTEAM_METRIC_TYPE_STOCK_ORDER\x10\x11\x12#\n" +
+	"\x1fTEAM_METRIC_TYPE_COST_WAREHOUSE\x10\x12\x12%\n" +
+	"!TEAM_METRIC_TYPE_COST_PRODUCT_OWN\x10\x13\x12'\n" +
+	"#TEAM_METRIC_TYPE_COST_PRODUCT_CROSS\x10\x14\x12 \n" +
+	"\x1cTEAM_METRIC_TYPE_ADS_EXPENSE\x10\x15\x12\x1f\n" +
+	"\x1bTEAM_METRIC_TYPE_WITHDRAWAL\x10\x16\x12)\n" +
+	"%TEAM_METRIC_TYPE_WITHDRAWAL_BREAKDOWN\x10\x17\x12\"\n" +
+	"\x1eTEAM_METRIC_TYPE_REVENUE_ORDER\x10\x18\x121\n" +
+	"-TEAM_METRIC_TYPE_REVENUE_WAREHOUSE_ADJUSTMENT\x10\x19\x12/\n" +
+	"+TEAM_METRIC_TYPE_REVENUE_PRODUCT_ADJUSTMENT\x10\x1a\x12)\n" +
+	"%TEAM_METRIC_TYPE_PROFIT_ORDER_CREATED\x10\x1b\x12,\n" +
+	"(TEAM_METRIC_TYPE_PROFIT_ORDER_WITHDRAWAL\x10\x1c\x12&\n" +
+	"\"TEAM_METRIC_TYPE_LOST_PROFIT_ORDER\x10\x1d\x12#\n" +
+	"\x1fTEAM_METRIC_TYPE_PROFIT_OR_LOSS\x10\x1e*z\n" +
 	"\x12TeamMetricSortType\x12%\n" +
 	"!TEAM_METRIC_SORT_TYPE_UNSPECIFIED\x10\x00\x12\x1d\n" +
 	"\x19TEAM_METRIC_SORT_TYPE_ASC\x10\x01\x12\x1e\n" +
@@ -639,40 +1759,156 @@ func file_selling_iface_v1_team_stat_metric_proto_rawDescGZIP() []byte {
 var file_selling_iface_v1_team_stat_metric_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
 var file_selling_iface_v1_team_stat_metric_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_selling_iface_v1_team_stat_metric_proto_goTypes = []any{
-	(TeamMetricType)(0),            // 0: selling_iface.v1.TeamMetricType
-	(TeamMetricSortType)(0),        // 1: selling_iface.v1.TeamMetricSortType
-	(CommonTeamSort)(0),            // 2: selling_iface.v1.CommonTeamSort
-	(*TeamMetricSort)(nil),         // 3: selling_iface.v1.TeamMetricSort
-	(*TeamMetric)(nil),             // 4: selling_iface.v1.TeamMetric
-	(*TeamMetricExtra)(nil),        // 5: selling_iface.v1.TeamMetricExtra
-	(*TeamStatMetricFilter)(nil),   // 6: selling_iface.v1.TeamStatMetricFilter
-	(*TeamStatTimeRange)(nil),      // 7: selling_iface.v1.TeamStatTimeRange
-	(*TeamStatMetricRequest)(nil),  // 8: selling_iface.v1.TeamStatMetricRequest
-	(*TeamStatMetricResponse)(nil), // 9: selling_iface.v1.TeamStatMetricResponse
-	(v1.TeamOrderMetricSort)(0),    // 10: selling_iface.v1.team_metric.v1.TeamOrderMetricSort
-	(*v1.TeamOrderMetric)(nil),     // 11: selling_iface.v1.team_metric.v1.TeamOrderMetric
-	(*v11.PageFilter)(nil),         // 12: common.v1.PageFilter
-	(*timestamppb.Timestamp)(nil),  // 13: google.protobuf.Timestamp
+	(TeamMetricType)(0),                              // 0: selling_iface.v1.TeamMetricType
+	(TeamMetricSortType)(0),                          // 1: selling_iface.v1.TeamMetricSortType
+	(CommonTeamSort)(0),                              // 2: selling_iface.v1.CommonTeamSort
+	(*TeamMetricSort)(nil),                           // 3: selling_iface.v1.TeamMetricSort
+	(*TeamMetric)(nil),                               // 4: selling_iface.v1.TeamMetric
+	(*TeamMetricExtra)(nil),                          // 5: selling_iface.v1.TeamMetricExtra
+	(*TeamStatMetricFilter)(nil),                     // 6: selling_iface.v1.TeamStatMetricFilter
+	(*TeamStatTimeRange)(nil),                        // 7: selling_iface.v1.TeamStatTimeRange
+	(*TeamStatMetricRequest)(nil),                    // 8: selling_iface.v1.TeamStatMetricRequest
+	(*TeamStatMetricResponse)(nil),                   // 9: selling_iface.v1.TeamStatMetricResponse
+	(v1.TeamOrderMetricSort)(0),                      // 10: selling_iface.v1.team_metric.v1.TeamOrderMetricSort
+	(v1.TeamOrderWithdrawalMetricSort)(0),            // 11: selling_iface.v1.team_metric.v1.TeamOrderWithdrawalMetricSort
+	(v1.TeamOrderCancelledMetricSort)(0),             // 12: selling_iface.v1.team_metric.v1.TeamOrderCancelledMetricSort
+	(v1.TeamOrderLostMetricSort)(0),                  // 13: selling_iface.v1.team_metric.v1.TeamOrderLostMetricSort
+	(v1.TeamOrderCompletedMetricSort)(0),             // 14: selling_iface.v1.team_metric.v1.TeamOrderCompletedMetricSort
+	(v1.TeamOrderReturnMetricSort)(0),                // 15: selling_iface.v1.team_metric.v1.TeamOrderReturnMetricSort
+	(v1.TeamOrderReturnCompletedMetricSort)(0),       // 16: selling_iface.v1.team_metric.v1.TeamOrderReturnCompletedMetricSort
+	(v1.TeamOrderOngoingMetricSort)(0),               // 17: selling_iface.v1.team_metric.v1.TeamOrderOngoingMetricSort
+	(v1.TeamAvgOrderMetricSort)(0),                   // 18: selling_iface.v1.team_metric.v1.TeamAvgOrderMetricSort
+	(v1.TeamAvgOrderWithdrawalMetricSort)(0),         // 19: selling_iface.v1.team_metric.v1.TeamAvgOrderWithdrawalMetricSort
+	(v1.TeamAvgOrderCancelledMetricSort)(0),          // 20: selling_iface.v1.team_metric.v1.TeamAvgOrderCancelledMetricSort
+	(v1.TeamAvgOrderLostMetricSort)(0),               // 21: selling_iface.v1.team_metric.v1.TeamAvgOrderLostMetricSort
+	(v1.TeamAvgOrderCompletedMetricSort)(0),          // 22: selling_iface.v1.team_metric.v1.TeamAvgOrderCompletedMetricSort
+	(v1.TeamAvgOrderReturnMetricSort)(0),             // 23: selling_iface.v1.team_metric.v1.TeamAvgOrderReturnMetricSort
+	(v1.TeamAvgOrderReturnCompletedMetricSort)(0),    // 24: selling_iface.v1.team_metric.v1.TeamAvgOrderReturnCompletedMetricSort
+	(v1.TeamAvgOrderOngoingMetricSort)(0),            // 25: selling_iface.v1.team_metric.v1.TeamAvgOrderOngoingMetricSort
+	(v1.TeamStockOrderMetricSort)(0),                 // 26: selling_iface.v1.team_metric.v1.TeamStockOrderMetricSort
+	(v1.TeamCostWarehouseMetricSort)(0),              // 27: selling_iface.v1.team_metric.v1.TeamCostWarehouseMetricSort
+	(v1.TeamCostProductOwnMetricSort)(0),             // 28: selling_iface.v1.team_metric.v1.TeamCostProductOwnMetricSort
+	(v1.TeamCostProductCrossMetricSort)(0),           // 29: selling_iface.v1.team_metric.v1.TeamCostProductCrossMetricSort
+	(v1.TeamAdsExpenseMetricSort)(0),                 // 30: selling_iface.v1.team_metric.v1.TeamAdsExpenseMetricSort
+	(v1.TeamWithdrawalMetricSort)(0),                 // 31: selling_iface.v1.team_metric.v1.TeamWithdrawalMetricSort
+	(v1.TeamWithdrawalBreakdownMetricSort)(0),        // 32: selling_iface.v1.team_metric.v1.TeamWithdrawalBreakdownMetricSort
+	(v1.TeamRevenueOrderMetricSort)(0),               // 33: selling_iface.v1.team_metric.v1.TeamRevenueOrderMetricSort
+	(v1.TeamRevenueWarehouseAdjustmentMetricSort)(0), // 34: selling_iface.v1.team_metric.v1.TeamRevenueWarehouseAdjustmentMetricSort
+	(v1.TeamRevenueProductAdjustmentMetricSort)(0),   // 35: selling_iface.v1.team_metric.v1.TeamRevenueProductAdjustmentMetricSort
+	(v1.TeamProfitOrderCreatedMetricSort)(0),         // 36: selling_iface.v1.team_metric.v1.TeamProfitOrderCreatedMetricSort
+	(v1.TeamProfitOrderWithdrawalMetricSort)(0),      // 37: selling_iface.v1.team_metric.v1.TeamProfitOrderWithdrawalMetricSort
+	(v1.TeamLostProfitOrderMetricSort)(0),            // 38: selling_iface.v1.team_metric.v1.TeamLostProfitOrderMetricSort
+	(v1.TeamProfitOrLossMetricSort)(0),               // 39: selling_iface.v1.team_metric.v1.TeamProfitOrLossMetricSort
+	(*v1.TeamOrderMetric)(nil),                       // 40: selling_iface.v1.team_metric.v1.TeamOrderMetric
+	(*v1.TeamOrderWithdrawalMetric)(nil),             // 41: selling_iface.v1.team_metric.v1.TeamOrderWithdrawalMetric
+	(*v1.TeamOrderCancelledMetric)(nil),              // 42: selling_iface.v1.team_metric.v1.TeamOrderCancelledMetric
+	(*v1.TeamOrderLostMetric)(nil),                   // 43: selling_iface.v1.team_metric.v1.TeamOrderLostMetric
+	(*v1.TeamOrderCompletedMetric)(nil),              // 44: selling_iface.v1.team_metric.v1.TeamOrderCompletedMetric
+	(*v1.TeamOrderReturnMetric)(nil),                 // 45: selling_iface.v1.team_metric.v1.TeamOrderReturnMetric
+	(*v1.TeamOrderReturnCompletedMetric)(nil),        // 46: selling_iface.v1.team_metric.v1.TeamOrderReturnCompletedMetric
+	(*v1.TeamOrderOngoingMetric)(nil),                // 47: selling_iface.v1.team_metric.v1.TeamOrderOngoingMetric
+	(*v1.TeamAvgOrderMetric)(nil),                    // 48: selling_iface.v1.team_metric.v1.TeamAvgOrderMetric
+	(*v1.TeamAvgOrderWithdrawalMetric)(nil),          // 49: selling_iface.v1.team_metric.v1.TeamAvgOrderWithdrawalMetric
+	(*v1.TeamAvgOrderCancelledMetric)(nil),           // 50: selling_iface.v1.team_metric.v1.TeamAvgOrderCancelledMetric
+	(*v1.TeamAvgOrderLostMetric)(nil),                // 51: selling_iface.v1.team_metric.v1.TeamAvgOrderLostMetric
+	(*v1.TeamAvgOrderCompletedMetric)(nil),           // 52: selling_iface.v1.team_metric.v1.TeamAvgOrderCompletedMetric
+	(*v1.TeamAvgOrderReturnMetric)(nil),              // 53: selling_iface.v1.team_metric.v1.TeamAvgOrderReturnMetric
+	(*v1.TeamAvgOrderReturnCompletedMetric)(nil),     // 54: selling_iface.v1.team_metric.v1.TeamAvgOrderReturnCompletedMetric
+	(*v1.TeamAvgOrderOngoingMetric)(nil),             // 55: selling_iface.v1.team_metric.v1.TeamAvgOrderOngoingMetric
+	(*v1.TeamStockOrderMetric)(nil),                  // 56: selling_iface.v1.team_metric.v1.TeamStockOrderMetric
+	(*v1.TeamCostWarehouseMetric)(nil),               // 57: selling_iface.v1.team_metric.v1.TeamCostWarehouseMetric
+	(*v1.TeamCostProductOwnMetric)(nil),              // 58: selling_iface.v1.team_metric.v1.TeamCostProductOwnMetric
+	(*v1.TeamCostProductCrossMetric)(nil),            // 59: selling_iface.v1.team_metric.v1.TeamCostProductCrossMetric
+	(*v1.TeamAdsExpenseMetric)(nil),                  // 60: selling_iface.v1.team_metric.v1.TeamAdsExpenseMetric
+	(*v1.TeamWithdrawalMetric)(nil),                  // 61: selling_iface.v1.team_metric.v1.TeamWithdrawalMetric
+	(*v1.TeamWithdrawalBreakdownMetric)(nil),         // 62: selling_iface.v1.team_metric.v1.TeamWithdrawalBreakdownMetric
+	(*v1.TeamRevenueOrderMetric)(nil),                // 63: selling_iface.v1.team_metric.v1.TeamRevenueOrderMetric
+	(*v1.TeamRevenueWarehouseAdjustmentMetric)(nil),  // 64: selling_iface.v1.team_metric.v1.TeamRevenueWarehouseAdjustmentMetric
+	(*v1.TeamRevenueProductAdjustmentMetric)(nil),    // 65: selling_iface.v1.team_metric.v1.TeamRevenueProductAdjustmentMetric
+	(*v1.TeamProfitOrderCreatedMetric)(nil),          // 66: selling_iface.v1.team_metric.v1.TeamProfitOrderCreatedMetric
+	(*v1.TeamProfitOrderWithdrawalMetric)(nil),       // 67: selling_iface.v1.team_metric.v1.TeamProfitOrderWithdrawalMetric
+	(*v1.TeamLostProfitOrderMetric)(nil),             // 68: selling_iface.v1.team_metric.v1.TeamLostProfitOrderMetric
+	(*v1.TeamProfitOrLossMetric)(nil),                // 69: selling_iface.v1.team_metric.v1.TeamProfitOrLossMetric
+	(*v11.PageFilter)(nil),                           // 70: common.v1.PageFilter
+	(*timestamppb.Timestamp)(nil),                    // 71: google.protobuf.Timestamp
 }
 var file_selling_iface_v1_team_stat_metric_proto_depIdxs = []int32{
 	1,  // 0: selling_iface.v1.TeamMetricSort.sort_type:type_name -> selling_iface.v1.TeamMetricSortType
 	2,  // 1: selling_iface.v1.TeamMetricSort.common_sort:type_name -> selling_iface.v1.CommonTeamSort
 	10, // 2: selling_iface.v1.TeamMetricSort.team_order_metric_sort:type_name -> selling_iface.v1.team_metric.v1.TeamOrderMetricSort
-	11, // 3: selling_iface.v1.TeamMetric.team_order_metric:type_name -> selling_iface.v1.team_metric.v1.TeamOrderMetric
-	12, // 4: selling_iface.v1.TeamStatMetricFilter.page:type_name -> common.v1.PageFilter
-	7,  // 5: selling_iface.v1.TeamStatMetricFilter.range:type_name -> selling_iface.v1.TeamStatTimeRange
-	13, // 6: selling_iface.v1.TeamStatTimeRange.start:type_name -> google.protobuf.Timestamp
-	13, // 7: selling_iface.v1.TeamStatTimeRange.end:type_name -> google.protobuf.Timestamp
-	6,  // 8: selling_iface.v1.TeamStatMetricRequest.filter:type_name -> selling_iface.v1.TeamStatMetricFilter
-	3,  // 9: selling_iface.v1.TeamStatMetricRequest.sort:type_name -> selling_iface.v1.TeamMetricSort
-	5,  // 10: selling_iface.v1.TeamStatMetricRequest.metric_extras:type_name -> selling_iface.v1.TeamMetricExtra
-	0,  // 11: selling_iface.v1.TeamStatMetricRequest.metric_types:type_name -> selling_iface.v1.TeamMetricType
-	4,  // 12: selling_iface.v1.TeamStatMetricResponse.metrics:type_name -> selling_iface.v1.TeamMetric
-	13, // [13:13] is the sub-list for method output_type
-	13, // [13:13] is the sub-list for method input_type
-	13, // [13:13] is the sub-list for extension type_name
-	13, // [13:13] is the sub-list for extension extendee
-	0,  // [0:13] is the sub-list for field type_name
+	11, // 3: selling_iface.v1.TeamMetricSort.team_order_withdrawal_metric_sort:type_name -> selling_iface.v1.team_metric.v1.TeamOrderWithdrawalMetricSort
+	12, // 4: selling_iface.v1.TeamMetricSort.team_order_cancelled_metric_sort:type_name -> selling_iface.v1.team_metric.v1.TeamOrderCancelledMetricSort
+	13, // 5: selling_iface.v1.TeamMetricSort.team_order_lost_metric_sort:type_name -> selling_iface.v1.team_metric.v1.TeamOrderLostMetricSort
+	14, // 6: selling_iface.v1.TeamMetricSort.team_order_completed_metric_sort:type_name -> selling_iface.v1.team_metric.v1.TeamOrderCompletedMetricSort
+	15, // 7: selling_iface.v1.TeamMetricSort.team_order_return_metric_sort:type_name -> selling_iface.v1.team_metric.v1.TeamOrderReturnMetricSort
+	16, // 8: selling_iface.v1.TeamMetricSort.team_order_return_completed_metric_sort:type_name -> selling_iface.v1.team_metric.v1.TeamOrderReturnCompletedMetricSort
+	17, // 9: selling_iface.v1.TeamMetricSort.team_order_ongoing_metric_sort:type_name -> selling_iface.v1.team_metric.v1.TeamOrderOngoingMetricSort
+	18, // 10: selling_iface.v1.TeamMetricSort.team_avg_order_metric_sort:type_name -> selling_iface.v1.team_metric.v1.TeamAvgOrderMetricSort
+	19, // 11: selling_iface.v1.TeamMetricSort.team_avg_order_withdrawal_metric_sort:type_name -> selling_iface.v1.team_metric.v1.TeamAvgOrderWithdrawalMetricSort
+	20, // 12: selling_iface.v1.TeamMetricSort.team_avg_order_cancelled_metric_sort:type_name -> selling_iface.v1.team_metric.v1.TeamAvgOrderCancelledMetricSort
+	21, // 13: selling_iface.v1.TeamMetricSort.team_avg_order_lost_metric_sort:type_name -> selling_iface.v1.team_metric.v1.TeamAvgOrderLostMetricSort
+	22, // 14: selling_iface.v1.TeamMetricSort.team_avg_order_completed_metric_sort:type_name -> selling_iface.v1.team_metric.v1.TeamAvgOrderCompletedMetricSort
+	23, // 15: selling_iface.v1.TeamMetricSort.team_avg_order_return_metric_sort:type_name -> selling_iface.v1.team_metric.v1.TeamAvgOrderReturnMetricSort
+	24, // 16: selling_iface.v1.TeamMetricSort.team_avg_order_return_completed_metric_sort:type_name -> selling_iface.v1.team_metric.v1.TeamAvgOrderReturnCompletedMetricSort
+	25, // 17: selling_iface.v1.TeamMetricSort.team_avg_order_ongoing_metric_sort:type_name -> selling_iface.v1.team_metric.v1.TeamAvgOrderOngoingMetricSort
+	26, // 18: selling_iface.v1.TeamMetricSort.team_stock_order_metric_sort:type_name -> selling_iface.v1.team_metric.v1.TeamStockOrderMetricSort
+	27, // 19: selling_iface.v1.TeamMetricSort.team_cost_warehouse_metric_sort:type_name -> selling_iface.v1.team_metric.v1.TeamCostWarehouseMetricSort
+	28, // 20: selling_iface.v1.TeamMetricSort.team_cost_product_own_metric_sort:type_name -> selling_iface.v1.team_metric.v1.TeamCostProductOwnMetricSort
+	29, // 21: selling_iface.v1.TeamMetricSort.team_cost_product_cross_metric_sort:type_name -> selling_iface.v1.team_metric.v1.TeamCostProductCrossMetricSort
+	30, // 22: selling_iface.v1.TeamMetricSort.team_ads_expense_metric_sort:type_name -> selling_iface.v1.team_metric.v1.TeamAdsExpenseMetricSort
+	31, // 23: selling_iface.v1.TeamMetricSort.team_withdrawal_metric_sort:type_name -> selling_iface.v1.team_metric.v1.TeamWithdrawalMetricSort
+	32, // 24: selling_iface.v1.TeamMetricSort.team_withdrawal_breakdown_metric_sort:type_name -> selling_iface.v1.team_metric.v1.TeamWithdrawalBreakdownMetricSort
+	33, // 25: selling_iface.v1.TeamMetricSort.team_revenue_order_metric_sort:type_name -> selling_iface.v1.team_metric.v1.TeamRevenueOrderMetricSort
+	34, // 26: selling_iface.v1.TeamMetricSort.team_revenue_warehouse_adjustment_metric_sort:type_name -> selling_iface.v1.team_metric.v1.TeamRevenueWarehouseAdjustmentMetricSort
+	35, // 27: selling_iface.v1.TeamMetricSort.team_revenue_product_adjustment_metric_sort:type_name -> selling_iface.v1.team_metric.v1.TeamRevenueProductAdjustmentMetricSort
+	36, // 28: selling_iface.v1.TeamMetricSort.team_profit_order_created_metric_sort:type_name -> selling_iface.v1.team_metric.v1.TeamProfitOrderCreatedMetricSort
+	37, // 29: selling_iface.v1.TeamMetricSort.team_profit_order_withdrawal_metric_sort:type_name -> selling_iface.v1.team_metric.v1.TeamProfitOrderWithdrawalMetricSort
+	38, // 30: selling_iface.v1.TeamMetricSort.team_lost_profit_order_metric_sort:type_name -> selling_iface.v1.team_metric.v1.TeamLostProfitOrderMetricSort
+	39, // 31: selling_iface.v1.TeamMetricSort.team_profit_or_loss_metric_sort:type_name -> selling_iface.v1.team_metric.v1.TeamProfitOrLossMetricSort
+	40, // 32: selling_iface.v1.TeamMetric.team_order_metric:type_name -> selling_iface.v1.team_metric.v1.TeamOrderMetric
+	41, // 33: selling_iface.v1.TeamMetric.team_order_withdrawal_metric:type_name -> selling_iface.v1.team_metric.v1.TeamOrderWithdrawalMetric
+	42, // 34: selling_iface.v1.TeamMetric.team_order_cancelled_metric:type_name -> selling_iface.v1.team_metric.v1.TeamOrderCancelledMetric
+	43, // 35: selling_iface.v1.TeamMetric.team_order_lost_metric:type_name -> selling_iface.v1.team_metric.v1.TeamOrderLostMetric
+	44, // 36: selling_iface.v1.TeamMetric.team_order_completed_metric:type_name -> selling_iface.v1.team_metric.v1.TeamOrderCompletedMetric
+	45, // 37: selling_iface.v1.TeamMetric.team_order_return_metric:type_name -> selling_iface.v1.team_metric.v1.TeamOrderReturnMetric
+	46, // 38: selling_iface.v1.TeamMetric.team_order_return_completed_metric:type_name -> selling_iface.v1.team_metric.v1.TeamOrderReturnCompletedMetric
+	47, // 39: selling_iface.v1.TeamMetric.team_order_ongoing_metric:type_name -> selling_iface.v1.team_metric.v1.TeamOrderOngoingMetric
+	48, // 40: selling_iface.v1.TeamMetric.team_avg_order_metric:type_name -> selling_iface.v1.team_metric.v1.TeamAvgOrderMetric
+	49, // 41: selling_iface.v1.TeamMetric.team_avg_order_withdrawal_metric:type_name -> selling_iface.v1.team_metric.v1.TeamAvgOrderWithdrawalMetric
+	50, // 42: selling_iface.v1.TeamMetric.team_avg_order_cancelled_metric:type_name -> selling_iface.v1.team_metric.v1.TeamAvgOrderCancelledMetric
+	51, // 43: selling_iface.v1.TeamMetric.team_avg_order_lost_metric:type_name -> selling_iface.v1.team_metric.v1.TeamAvgOrderLostMetric
+	52, // 44: selling_iface.v1.TeamMetric.team_avg_order_completed_metric:type_name -> selling_iface.v1.team_metric.v1.TeamAvgOrderCompletedMetric
+	53, // 45: selling_iface.v1.TeamMetric.team_avg_order_return_metric:type_name -> selling_iface.v1.team_metric.v1.TeamAvgOrderReturnMetric
+	54, // 46: selling_iface.v1.TeamMetric.team_avg_order_return_completed_metric:type_name -> selling_iface.v1.team_metric.v1.TeamAvgOrderReturnCompletedMetric
+	55, // 47: selling_iface.v1.TeamMetric.team_avg_order_ongoing_metric:type_name -> selling_iface.v1.team_metric.v1.TeamAvgOrderOngoingMetric
+	56, // 48: selling_iface.v1.TeamMetric.team_stock_order_metric:type_name -> selling_iface.v1.team_metric.v1.TeamStockOrderMetric
+	57, // 49: selling_iface.v1.TeamMetric.team_cost_warehouse_metric:type_name -> selling_iface.v1.team_metric.v1.TeamCostWarehouseMetric
+	58, // 50: selling_iface.v1.TeamMetric.team_cost_product_own_metric:type_name -> selling_iface.v1.team_metric.v1.TeamCostProductOwnMetric
+	59, // 51: selling_iface.v1.TeamMetric.team_cost_product_cross_metric:type_name -> selling_iface.v1.team_metric.v1.TeamCostProductCrossMetric
+	60, // 52: selling_iface.v1.TeamMetric.team_ads_expense_metric:type_name -> selling_iface.v1.team_metric.v1.TeamAdsExpenseMetric
+	61, // 53: selling_iface.v1.TeamMetric.team_withdrawal_metric:type_name -> selling_iface.v1.team_metric.v1.TeamWithdrawalMetric
+	62, // 54: selling_iface.v1.TeamMetric.team_withdrawal_breakdown_metric:type_name -> selling_iface.v1.team_metric.v1.TeamWithdrawalBreakdownMetric
+	63, // 55: selling_iface.v1.TeamMetric.team_revenue_order_metric:type_name -> selling_iface.v1.team_metric.v1.TeamRevenueOrderMetric
+	64, // 56: selling_iface.v1.TeamMetric.team_revenue_warehouse_adjustment_metric:type_name -> selling_iface.v1.team_metric.v1.TeamRevenueWarehouseAdjustmentMetric
+	65, // 57: selling_iface.v1.TeamMetric.team_revenue_product_adjustment_metric:type_name -> selling_iface.v1.team_metric.v1.TeamRevenueProductAdjustmentMetric
+	66, // 58: selling_iface.v1.TeamMetric.team_profit_order_created_metric:type_name -> selling_iface.v1.team_metric.v1.TeamProfitOrderCreatedMetric
+	67, // 59: selling_iface.v1.TeamMetric.team_profit_order_withdrawal_metric:type_name -> selling_iface.v1.team_metric.v1.TeamProfitOrderWithdrawalMetric
+	68, // 60: selling_iface.v1.TeamMetric.team_lost_profit_order_metric:type_name -> selling_iface.v1.team_metric.v1.TeamLostProfitOrderMetric
+	69, // 61: selling_iface.v1.TeamMetric.team_profit_or_loss_metric:type_name -> selling_iface.v1.team_metric.v1.TeamProfitOrLossMetric
+	70, // 62: selling_iface.v1.TeamStatMetricFilter.page:type_name -> common.v1.PageFilter
+	7,  // 63: selling_iface.v1.TeamStatMetricFilter.range:type_name -> selling_iface.v1.TeamStatTimeRange
+	71, // 64: selling_iface.v1.TeamStatTimeRange.start:type_name -> google.protobuf.Timestamp
+	71, // 65: selling_iface.v1.TeamStatTimeRange.end:type_name -> google.protobuf.Timestamp
+	6,  // 66: selling_iface.v1.TeamStatMetricRequest.filter:type_name -> selling_iface.v1.TeamStatMetricFilter
+	3,  // 67: selling_iface.v1.TeamStatMetricRequest.sort:type_name -> selling_iface.v1.TeamMetricSort
+	5,  // 68: selling_iface.v1.TeamStatMetricRequest.metric_extras:type_name -> selling_iface.v1.TeamMetricExtra
+	0,  // 69: selling_iface.v1.TeamStatMetricRequest.metric_types:type_name -> selling_iface.v1.TeamMetricType
+	4,  // 70: selling_iface.v1.TeamStatMetricResponse.metrics:type_name -> selling_iface.v1.TeamMetric
+	71, // [71:71] is the sub-list for method output_type
+	71, // [71:71] is the sub-list for method input_type
+	71, // [71:71] is the sub-list for extension type_name
+	71, // [71:71] is the sub-list for extension extendee
+	0,  // [0:71] is the sub-list for field type_name
 }
 
 func init() { file_selling_iface_v1_team_stat_metric_proto_init() }
@@ -683,9 +1919,67 @@ func file_selling_iface_v1_team_stat_metric_proto_init() {
 	file_selling_iface_v1_team_stat_metric_proto_msgTypes[0].OneofWrappers = []any{
 		(*TeamMetricSort_CommonSort)(nil),
 		(*TeamMetricSort_TeamOrderMetricSort)(nil),
+		(*TeamMetricSort_TeamOrderWithdrawalMetricSort)(nil),
+		(*TeamMetricSort_TeamOrderCancelledMetricSort)(nil),
+		(*TeamMetricSort_TeamOrderLostMetricSort)(nil),
+		(*TeamMetricSort_TeamOrderCompletedMetricSort)(nil),
+		(*TeamMetricSort_TeamOrderReturnMetricSort)(nil),
+		(*TeamMetricSort_TeamOrderReturnCompletedMetricSort)(nil),
+		(*TeamMetricSort_TeamOrderOngoingMetricSort)(nil),
+		(*TeamMetricSort_TeamAvgOrderMetricSort)(nil),
+		(*TeamMetricSort_TeamAvgOrderWithdrawalMetricSort)(nil),
+		(*TeamMetricSort_TeamAvgOrderCancelledMetricSort)(nil),
+		(*TeamMetricSort_TeamAvgOrderLostMetricSort)(nil),
+		(*TeamMetricSort_TeamAvgOrderCompletedMetricSort)(nil),
+		(*TeamMetricSort_TeamAvgOrderReturnMetricSort)(nil),
+		(*TeamMetricSort_TeamAvgOrderReturnCompletedMetricSort)(nil),
+		(*TeamMetricSort_TeamAvgOrderOngoingMetricSort)(nil),
+		(*TeamMetricSort_TeamStockOrderMetricSort)(nil),
+		(*TeamMetricSort_TeamCostWarehouseMetricSort)(nil),
+		(*TeamMetricSort_TeamCostProductOwnMetricSort)(nil),
+		(*TeamMetricSort_TeamCostProductCrossMetricSort)(nil),
+		(*TeamMetricSort_TeamAdsExpenseMetricSort)(nil),
+		(*TeamMetricSort_TeamWithdrawalMetricSort)(nil),
+		(*TeamMetricSort_TeamWithdrawalBreakdownMetricSort)(nil),
+		(*TeamMetricSort_TeamRevenueOrderMetricSort)(nil),
+		(*TeamMetricSort_TeamRevenueWarehouseAdjustmentMetricSort)(nil),
+		(*TeamMetricSort_TeamRevenueProductAdjustmentMetricSort)(nil),
+		(*TeamMetricSort_TeamProfitOrderCreatedMetricSort)(nil),
+		(*TeamMetricSort_TeamProfitOrderWithdrawalMetricSort)(nil),
+		(*TeamMetricSort_TeamLostProfitOrderMetricSort)(nil),
+		(*TeamMetricSort_TeamProfitOrLossMetricSort)(nil),
 	}
 	file_selling_iface_v1_team_stat_metric_proto_msgTypes[1].OneofWrappers = []any{
 		(*TeamMetric_TeamOrderMetric)(nil),
+		(*TeamMetric_TeamOrderWithdrawalMetric)(nil),
+		(*TeamMetric_TeamOrderCancelledMetric)(nil),
+		(*TeamMetric_TeamOrderLostMetric)(nil),
+		(*TeamMetric_TeamOrderCompletedMetric)(nil),
+		(*TeamMetric_TeamOrderReturnMetric)(nil),
+		(*TeamMetric_TeamOrderReturnCompletedMetric)(nil),
+		(*TeamMetric_TeamOrderOngoingMetric)(nil),
+		(*TeamMetric_TeamAvgOrderMetric)(nil),
+		(*TeamMetric_TeamAvgOrderWithdrawalMetric)(nil),
+		(*TeamMetric_TeamAvgOrderCancelledMetric)(nil),
+		(*TeamMetric_TeamAvgOrderLostMetric)(nil),
+		(*TeamMetric_TeamAvgOrderCompletedMetric)(nil),
+		(*TeamMetric_TeamAvgOrderReturnMetric)(nil),
+		(*TeamMetric_TeamAvgOrderReturnCompletedMetric)(nil),
+		(*TeamMetric_TeamAvgOrderOngoingMetric)(nil),
+		(*TeamMetric_TeamStockOrderMetric)(nil),
+		(*TeamMetric_TeamCostWarehouseMetric)(nil),
+		(*TeamMetric_TeamCostProductOwnMetric)(nil),
+		(*TeamMetric_TeamCostProductCrossMetric)(nil),
+		(*TeamMetric_TeamAdsExpenseMetric)(nil),
+		(*TeamMetric_TeamWithdrawalMetric)(nil),
+		(*TeamMetric_TeamWithdrawalBreakdownMetric)(nil),
+		(*TeamMetric_TeamRevenueOrderMetric)(nil),
+		(*TeamMetric_TeamRevenueWarehouseAdjustmentMetric)(nil),
+		(*TeamMetric_TeamRevenueProductAdjustmentMetric)(nil),
+		(*TeamMetric_TeamProfitOrderCreatedMetric)(nil),
+		(*TeamMetric_TeamProfitOrderWithdrawalMetric)(nil),
+		(*TeamMetric_TeamLostProfitOrderMetric)(nil),
+		(*TeamMetric_TeamProfitOrLossMetric)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

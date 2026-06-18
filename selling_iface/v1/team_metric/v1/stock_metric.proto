@@ -1,0 +1,28 @@
+syntax = "proto3";
+package selling_iface.v1.team_metric.v1;
+
+option go_package = "github.com/pdcgo/schema/services/selling_iface/v1/team_metric/v1;team_metric";
+
+message TeamStockOrderItem {
+  uint64 team_id = 1;
+  int64 piece_count = 2;
+  int64 own_piece_count = 4;
+  int64 cross_piece_count = 5;
+  double piece_amount = 3;
+  double own_piece_amount = 6;
+  double cross_piece_amount = 7;
+}
+
+message TeamStockOrderMetric {
+  map<uint64, TeamStockOrderItem> data = 1;
+}
+
+enum TeamStockOrderMetricSort {
+  TEAM_STOCK_ORDER_METRIC_SORT_UNSPECIFIED = 0;
+  TEAM_STOCK_ORDER_METRIC_SORT_PIECE_COUNT = 1;
+  TEAM_STOCK_ORDER_METRIC_SORT_OWN_PIECE_COUNT = 3;
+  TEAM_STOCK_ORDER_METRIC_SORT_CROSS_PIECE_COUNT = 4;
+  TEAM_STOCK_ORDER_METRIC_SORT_PIECE_AMOUNT = 2;
+  TEAM_STOCK_ORDER_METRIC_SORT_OWN_PIECE_AMOUNT = 5;
+  TEAM_STOCK_ORDER_METRIC_SORT_CROSS_PIECE_AMOUNT = 6;
+}

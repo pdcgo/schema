@@ -1,0 +1,132 @@
+syntax = "proto3";
+package selling_iface.v1.team_metric.v1;
+
+option go_package = "github.com/pdcgo/schema/services/selling_iface/v1/team_metric/v1;team_metric";
+
+message TeamAvgOrderItem {
+  uint64 team_id = 1;
+  double piece_per_transaction = 2;
+  double total_per_transaction = 3;
+}
+
+message TeamAvgOrderMetric {
+  map<uint64, TeamAvgOrderItem> data = 1;
+}
+
+enum TeamAvgOrderMetricSort {
+  TEAM_AVG_ORDER_METRIC_SORT_UNSPECIFIED = 0;
+  TEAM_AVG_ORDER_METRIC_SORT_PIECE_PER_TRANSACTION = 1;
+  TEAM_AVG_ORDER_METRIC_SORT_TOTAL_PER_TRANSACTION = 2;
+}
+
+message TeamAvgOrderWithdrawalItem {
+  uint64 team_id = 1;
+  double piece_per_transaction = 2;
+  double total_per_transaction = 3;
+}
+
+message TeamAvgOrderWithdrawalMetric {
+  map<uint64, TeamAvgOrderWithdrawalItem> data = 1;
+}
+
+enum TeamAvgOrderWithdrawalMetricSort {
+  TEAM_AVG_ORDER_WITHDRAWAL_METRIC_SORT_UNSPECIFIED = 0;
+  TEAM_AVG_ORDER_WITHDRAWAL_METRIC_SORT_PIECE_PER_TRANSACTION = 1;
+  TEAM_AVG_ORDER_WITHDRAWAL_METRIC_SORT_TOTAL_PER_TRANSACTION = 2;
+}
+
+message TeamAvgOrderCancelledItem {
+  uint64 team_id = 1;
+  double piece_per_transaction = 2;
+  double total_per_transaction = 3;
+}
+
+message TeamAvgOrderCancelledMetric {
+  map<uint64, TeamAvgOrderCancelledItem> data = 1;
+}
+
+enum TeamAvgOrderCancelledMetricSort {
+  TEAM_AVG_ORDER_CANCELLED_METRIC_SORT_UNSPECIFIED = 0;
+  TEAM_AVG_ORDER_CANCELLED_METRIC_SORT_PIECE_PER_TRANSACTION = 1;
+  TEAM_AVG_ORDER_CANCELLED_METRIC_SORT_TOTAL_PER_TRANSACTION = 2;
+}
+
+message TeamAvgOrderLostItem {
+  uint64 team_id = 1;
+  double piece_per_transaction = 2;
+  double total_per_transaction = 3;
+}
+
+message TeamAvgOrderLostMetric {
+  map<uint64, TeamAvgOrderLostItem> data = 1;
+}
+
+enum TeamAvgOrderLostMetricSort {
+  TEAM_AVG_ORDER_LOST_METRIC_SORT_UNSPECIFIED = 0;
+  TEAM_AVG_ORDER_LOST_METRIC_SORT_PIECE_PER_TRANSACTION = 1;
+  TEAM_AVG_ORDER_LOST_METRIC_SORT_TOTAL_PER_TRANSACTION = 2;
+}
+
+message TeamAvgOrderCompletedItem {
+  uint64 team_id = 1;
+  double piece_per_transaction = 2;
+  double total_per_transaction = 3;
+}
+
+message TeamAvgOrderCompletedMetric {
+  map<uint64, TeamAvgOrderCompletedItem> data = 1;
+}
+
+enum TeamAvgOrderCompletedMetricSort {
+  TEAM_AVG_ORDER_COMPLETED_METRIC_SORT_UNSPECIFIED = 0;
+  TEAM_AVG_ORDER_COMPLETED_METRIC_SORT_PIECE_PER_TRANSACTION = 1;
+  TEAM_AVG_ORDER_COMPLETED_METRIC_SORT_TOTAL_PER_TRANSACTION = 2;
+}
+
+message TeamAvgOrderReturnItem {
+  uint64 team_id = 1;
+  double piece_per_transaction = 2;
+  double total_per_transaction = 3;
+}
+
+message TeamAvgOrderReturnMetric {
+  map<uint64, TeamAvgOrderReturnItem> data = 1;
+}
+
+enum TeamAvgOrderReturnMetricSort {
+  TEAM_AVG_ORDER_RETURN_METRIC_SORT_UNSPECIFIED = 0;
+  TEAM_AVG_ORDER_RETURN_METRIC_SORT_PIECE_PER_TRANSACTION = 1;
+  TEAM_AVG_ORDER_RETURN_METRIC_SORT_TOTAL_PER_TRANSACTION = 2;
+}
+
+message TeamAvgOrderReturnCompletedItem {
+  uint64 team_id = 1;
+  double piece_per_transaction = 2;
+  double total_per_transaction = 3;
+}
+
+message TeamAvgOrderReturnCompletedMetric {
+  map<uint64, TeamAvgOrderReturnCompletedItem> data = 1;
+}
+
+enum TeamAvgOrderReturnCompletedMetricSort {
+  TEAM_AVG_ORDER_RETURN_COMPLETED_METRIC_SORT_UNSPECIFIED = 0;
+  TEAM_AVG_ORDER_RETURN_COMPLETED_METRIC_SORT_PIECE_PER_TRANSACTION = 1;
+  TEAM_AVG_ORDER_RETURN_COMPLETED_METRIC_SORT_TOTAL_PER_TRANSACTION = 2;
+}
+
+message TeamAvgOrderOngoingItem {
+  uint64 team_id = 1;
+  double piece_per_transaction = 2;
+  double total_per_transaction = 3;
+}
+
+message TeamAvgOrderOngoingMetric {
+  map<uint64, TeamAvgOrderOngoingItem> data = 1;
+}
+
+enum TeamAvgOrderOngoingMetricSort {
+  TEAM_AVG_ORDER_ONGOING_METRIC_SORT_UNSPECIFIED = 0;
+  TEAM_AVG_ORDER_ONGOING_METRIC_SORT_PIECE_PER_TRANSACTION = 1;
+  TEAM_AVG_ORDER_ONGOING_METRIC_SORT_TOTAL_PER_TRANSACTION = 2;
+}

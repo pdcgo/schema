@@ -1,0 +1,60 @@
+syntax = "proto3";
+package selling_iface.v1.team_metric.v1;
+
+option go_package = "github.com/pdcgo/schema/services/selling_iface/v1/team_metric/v1;team_metric";
+
+message TeamCostWarehouseItem {
+  uint64 team_id = 1;
+  double warehouse_amount = 2;
+}
+
+message TeamCostWarehouseMetric {
+  map<uint64, TeamCostWarehouseItem> data = 1;
+}
+
+enum TeamCostWarehouseMetricSort {
+  TEAM_COST_WAREHOUSE_METRIC_SORT_UNSPECIFIED = 0;
+  TEAM_COST_WAREHOUSE_METRIC_SORT_WAREHOUSE_AMOUNT = 1;
+}
+
+message TeamCostProductOwnItem {
+  uint64 team_id = 1;
+  double product_own_amount = 2;
+}
+
+message TeamCostProductOwnMetric {
+  map<uint64, TeamCostProductOwnItem> data = 1;
+}
+
+enum TeamCostProductOwnMetricSort {
+  TEAM_COST_PRODUCT_OWN_METRIC_SORT_UNSPECIFIED = 0;
+  TEAM_COST_PRODUCT_OWN_METRIC_SORT_PRODUCT_OWN_AMOUNT = 1;
+}
+
+message TeamCostProductCrossItem {
+  uint64 team_id = 1;
+  double product_cross_amount = 2;
+}
+
+message TeamCostProductCrossMetric {
+  map<uint64, TeamCostProductCrossItem> data = 1;
+}
+
+enum TeamCostProductCrossMetricSort {
+  TEAM_COST_PRODUCT_CROSS_METRIC_SORT_UNSPECIFIED = 0;
+  TEAM_COST_PRODUCT_CROSS_METRIC_SORT_PRODUCT_CROSS_AMOUNT = 1;
+}
+
+message TeamAdsExpenseItem {
+  uint64 team_id = 1;
+  double ads_amount = 2;
+}
+
+message TeamAdsExpenseMetric {
+  map<uint64, TeamAdsExpenseItem> data = 1;
+}
+
+enum TeamAdsExpenseMetricSort {
+  TEAM_ADS_EXPENSE_METRIC_SORT_UNSPECIFIED = 0;
+  TEAM_ADS_EXPENSE_METRIC_SORT_ADS_AMOUNT = 1;
+}

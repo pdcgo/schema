@@ -1,0 +1,68 @@
+syntax = "proto3";
+package selling_iface.v1.team_metric.v1;
+
+option go_package = "github.com/pdcgo/schema/services/selling_iface/v1/team_metric/v1;team_metric";
+
+message TeamProfitOrderCreatedItem {
+  uint64 team_id = 1;
+  double profit_created_amount = 2;
+  double profit_created_percent = 3;
+}
+
+message TeamProfitOrderCreatedMetric {
+  map<uint64, TeamProfitOrderCreatedItem> data = 1;
+}
+
+enum TeamProfitOrderCreatedMetricSort {
+  TEAM_PROFIT_ORDER_CREATED_METRIC_SORT_UNSPECIFIED = 0;
+  TEAM_PROFIT_ORDER_CREATED_METRIC_SORT_PROFIT_CREATED_AMOUNT = 1;
+  TEAM_PROFIT_ORDER_CREATED_METRIC_SORT_PROFIT_CREATED_PERCENT = 2;
+}
+
+message TeamProfitOrderWithdrawalItem {
+  uint64 team_id = 1;
+  double profit_withdrawal_amount = 2;
+  double profit_withdrawal_percent = 3;
+  double profit_withdrawal_adjustment_amount = 4;
+  double profit_withdrawal_adjustment_percent = 5;
+}
+
+message TeamProfitOrderWithdrawalMetric {
+  map<uint64, TeamProfitOrderWithdrawalItem> data = 1;
+}
+
+enum TeamProfitOrderWithdrawalMetricSort {
+  TEAM_PROFIT_ORDER_WITHDRAWAL_METRIC_SORT_UNSPECIFIED = 0;
+  TEAM_PROFIT_ORDER_WITHDRAWAL_METRIC_SORT_PROFIT_WITHDRAWAL_AMOUNT = 1;
+  TEAM_PROFIT_ORDER_WITHDRAWAL_METRIC_SORT_PROFIT_WITHDRAWAL_PERCENT = 2;
+  TEAM_PROFIT_ORDER_WITHDRAWAL_METRIC_SORT_PROFIT_WITHDRAWAL_ADJUSTMENT_AMOUNT = 3;
+  TEAM_PROFIT_ORDER_WITHDRAWAL_METRIC_SORT_PROFIT_WITHDRAWAL_ADJUSTMENT_PERCENT = 4;
+}
+
+message TeamLostProfitOrderItem {
+  uint64 team_id = 1;
+  double lost_profit_amount = 2;
+}
+
+message TeamLostProfitOrderMetric {
+  map<uint64, TeamLostProfitOrderItem> data = 1;
+}
+
+enum TeamLostProfitOrderMetricSort {
+  TEAM_LOST_PROFIT_ORDER_METRIC_SORT_UNSPECIFIED = 0;
+  TEAM_LOST_PROFIT_ORDER_METRIC_SORT_LOST_PROFIT_AMOUNT = 1;
+}
+
+message TeamProfitOrLossItem {
+  uint64 team_id = 1;
+  double profit_or_loss_amount = 2;
+}
+
+message TeamProfitOrLossMetric {
+  map<uint64, TeamProfitOrLossItem> data = 1;
+}
+
+enum TeamProfitOrLossMetricSort {
+  TEAM_PROFIT_OR_LOSS_METRIC_SORT_UNSPECIFIED = 0;
+  TEAM_PROFIT_OR_LOSS_METRIC_SORT_PROFIT_OR_LOSS_AMOUNT = 1;
+}

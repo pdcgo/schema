@@ -1,16 +1,17 @@
 syntax = "proto3";
 package selling_iface.v1.team_metric.v1;
 
-// import "google/protobuf/timestamp.proto";
+import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/pdcgo/schema/services/selling_iface/v1/team_metric/v1;team_metric";
 
 message TeamOrderItem {
   uint64 team_id = 1;
   int64 transaction_count = 2;
-  int64 piece_count = 3;
   double total_amount = 4;
-  double average_order_value = 5;
+  double mp_total_amount = 5;
+  // @gotags: gorm:"serializer:timestamptz"
+  google.protobuf.Timestamp last_order_created = 6;
 }
 
 message TeamOrderMetric {
@@ -20,7 +21,154 @@ message TeamOrderMetric {
 enum TeamOrderMetricSort {
   TEAM_ORDER_METRIC_SORT_UNSPECIFIED = 0;
   TEAM_ORDER_METRIC_SORT_TRANSACTION_COUNT = 1;
-  TEAM_ORDER_METRIC_SORT_PIECE_COUNT = 2;
-  TEAM_ORDER_METRIC_SORT_TOTAL_AMOUNT = 3;
-  TEAM_ORDER_METRIC_SORT_AVERAGE_ORDER_VALUE = 4;
+  TEAM_ORDER_METRIC_SORT_TOTAL_AMOUNT = 2;
+  TEAM_ORDER_METRIC_SORT_MP_TOTAL_AMOUNT = 3;
+  TEAM_ORDER_METRIC_SORT_LAST_ORDER_CREATED = 4;
+}
+
+message TeamOrderWithdrawalItem {
+  uint64 team_id = 1;
+  int64 transaction_count = 2;
+  double total_amount = 4;
+  double mp_total_amount = 5;
+  // @gotags: gorm:"serializer:timestamptz"
+  google.protobuf.Timestamp last_order_withdrawal = 6;
+}
+
+message TeamOrderWithdrawalMetric {
+  map<uint64, TeamOrderWithdrawalItem> data = 1;
+}
+
+enum TeamOrderWithdrawalMetricSort {
+  TEAM_ORDER_WITHDRAWAL_METRIC_SORT_UNSPECIFIED = 0;
+  TEAM_ORDER_WITHDRAWAL_METRIC_SORT_TRANSACTION_COUNT = 1;
+  TEAM_ORDER_WITHDRAWAL_METRIC_SORT_TOTAL_AMOUNT = 2;
+  TEAM_ORDER_WITHDRAWAL_METRIC_SORT_MP_TOTAL_AMOUNT = 3;
+  TEAM_ORDER_WITHDRAWAL_METRIC_SORT_LAST_ORDER_WITHDRAWAL = 4;
+}
+
+message TeamOrderCancelledItem {
+  uint64 team_id = 1;
+  int64 transaction_count = 2;
+  double total_amount = 4;
+  double mp_total_amount = 5;
+  // @gotags: gorm:"serializer:timestamptz"
+  google.protobuf.Timestamp last_order_cancelled = 6;
+}
+
+message TeamOrderCancelledMetric {
+  map<uint64, TeamOrderCancelledItem> data = 1;
+}
+
+enum TeamOrderCancelledMetricSort {
+  TEAM_ORDER_CANCELLED_METRIC_SORT_UNSPECIFIED = 0;
+  TEAM_ORDER_CANCELLED_METRIC_SORT_TRANSACTION_COUNT = 1;
+  TEAM_ORDER_CANCELLED_METRIC_SORT_TOTAL_AMOUNT = 2;
+  TEAM_ORDER_CANCELLED_METRIC_SORT_MP_TOTAL_AMOUNT = 3;
+  TEAM_ORDER_CANCELLED_METRIC_SORT_LAST_ORDER_CANCELLED = 4;
+}
+
+message TeamOrderLostItem {
+  uint64 team_id = 1;
+  int64 transaction_count = 2;
+  double total_amount = 4;
+  double mp_total_amount = 5;
+  // @gotags: gorm:"serializer:timestamptz"
+  google.protobuf.Timestamp last_order_lost = 6;
+}
+
+message TeamOrderLostMetric {
+  map<uint64, TeamOrderLostItem> data = 1;
+}
+
+enum TeamOrderLostMetricSort {
+  TEAM_ORDER_LOST_METRIC_SORT_UNSPECIFIED = 0;
+  TEAM_ORDER_LOST_METRIC_SORT_TRANSACTION_COUNT = 1;
+  TEAM_ORDER_LOST_METRIC_SORT_TOTAL_AMOUNT = 2;
+  TEAM_ORDER_LOST_METRIC_SORT_MP_TOTAL_AMOUNT = 3;
+  TEAM_ORDER_LOST_METRIC_SORT_LAST_ORDER_LOST = 4;
+}
+
+message TeamOrderCompletedItem {
+  uint64 team_id = 1;
+  int64 transaction_count = 2;
+  double total_amount = 4;
+  double mp_total_amount = 5;
+  // @gotags: gorm:"serializer:timestamptz"
+  google.protobuf.Timestamp last_order_completed = 6;
+}
+
+message TeamOrderCompletedMetric {
+  map<uint64, TeamOrderCompletedItem> data = 1;
+}
+
+enum TeamOrderCompletedMetricSort {
+  TEAM_ORDER_COMPLETED_METRIC_SORT_UNSPECIFIED = 0;
+  TEAM_ORDER_COMPLETED_METRIC_SORT_TRANSACTION_COUNT = 1;
+  TEAM_ORDER_COMPLETED_METRIC_SORT_TOTAL_AMOUNT = 2;
+  TEAM_ORDER_COMPLETED_METRIC_SORT_MP_TOTAL_AMOUNT = 3;
+  TEAM_ORDER_COMPLETED_METRIC_SORT_LAST_ORDER_COMPLETED = 4;
+}
+
+message TeamOrderReturnItem {
+  uint64 team_id = 1;
+  int64 transaction_count = 2;
+  double total_amount = 4;
+  double mp_total_amount = 5;
+  // @gotags: gorm:"serializer:timestamptz"
+  google.protobuf.Timestamp last_order_return = 6;
+}
+
+message TeamOrderReturnMetric {
+  map<uint64, TeamOrderReturnItem> data = 1;
+}
+
+enum TeamOrderReturnMetricSort {
+  TEAM_ORDER_RETURN_METRIC_SORT_UNSPECIFIED = 0;
+  TEAM_ORDER_RETURN_METRIC_SORT_TRANSACTION_COUNT = 1;
+  TEAM_ORDER_RETURN_METRIC_SORT_TOTAL_AMOUNT = 2;
+  TEAM_ORDER_RETURN_METRIC_SORT_MP_TOTAL_AMOUNT = 3;
+  TEAM_ORDER_RETURN_METRIC_SORT_LAST_ORDER_RETURN = 4;
+}
+
+message TeamOrderReturnCompletedItem {
+  uint64 team_id = 1;
+  int64 transaction_count = 2;
+  double total_amount = 4;
+  double mp_total_amount = 5;
+  // @gotags: gorm:"serializer:timestamptz"
+  google.protobuf.Timestamp last_order_return_completed = 6;
+}
+
+message TeamOrderReturnCompletedMetric {
+  map<uint64, TeamOrderReturnCompletedItem> data = 1;
+}
+
+enum TeamOrderReturnCompletedMetricSort {
+  TEAM_ORDER_RETURN_COMPLETED_METRIC_SORT_UNSPECIFIED = 0;
+  TEAM_ORDER_RETURN_COMPLETED_METRIC_SORT_TRANSACTION_COUNT = 1;
+  TEAM_ORDER_RETURN_COMPLETED_METRIC_SORT_TOTAL_AMOUNT = 2;
+  TEAM_ORDER_RETURN_COMPLETED_METRIC_SORT_MP_TOTAL_AMOUNT = 3;
+  TEAM_ORDER_RETURN_COMPLETED_METRIC_SORT_LAST_ORDER_RETURN_COMPLETED = 4;
+}
+
+message TeamOrderOngoingItem {
+  uint64 team_id = 1;
+  int64 transaction_count = 2;
+  double total_amount = 4;
+  double mp_total_amount = 5;
+  // @gotags: gorm:"serializer:timestamptz"
+  google.protobuf.Timestamp last_order_ongoing = 6;
+}
+
+message TeamOrderOngoingMetric {
+  map<uint64, TeamOrderOngoingItem> data = 1;
+}
+
+enum TeamOrderOngoingMetricSort {
+  TEAM_ORDER_ONGOING_METRIC_SORT_UNSPECIFIED = 0;
+  TEAM_ORDER_ONGOING_METRIC_SORT_TRANSACTION_COUNT = 1;
+  TEAM_ORDER_ONGOING_METRIC_SORT_TOTAL_AMOUNT = 2;
+  TEAM_ORDER_ONGOING_METRIC_SORT_MP_TOTAL_AMOUNT = 3;
+  TEAM_ORDER_ONGOING_METRIC_SORT_LAST_ORDER_ONGOING = 4;
 }
