@@ -1309,9 +1309,9 @@ var File_invoice_iface_v2_v2_service_proto protoreflect.FileDescriptor
 
 const file_invoice_iface_v2_v2_service_proto_rawDesc = "" +
 	"\n" +
-	"!invoice_iface/v2/v2_service.proto\x12\x10invoice_iface.v2\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!invoice_iface/v2/v2_balance.proto\x1a\x17role_base/v1/role.proto\"/\n" +
+	"!invoice_iface/v2/v2_service.proto\x12\x10invoice_iface.v2\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!invoice_iface/v2/v2_balance.proto\x1a\x17role_base/v1/role.proto\"7\n" +
 	"\x14TeamReconcileRequest\x12\x17\n" +
-	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\"\x17\n" +
+	"\ateam_id\x18\x01 \x01(\x04R\x06teamId:\x06\x92\xb5\x18\x02 \x01\"\x17\n" +
 	"\x15TeamReconcileResponse\"\xd5\x02\n" +
 	"\x17CreateBalanceLogRequest\x12$\n" +
 	"\ateam_id\x18\x01 \x01(\x04B\v\xbaH\x042\x02 \x00\x90\xb5\x18\x01R\x06teamId\x12'\n" +

@@ -26,6 +26,8 @@ service InvoiceService {
 }
 
 message TeamReconcileRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
   uint64 team_id = 1;
 }
 message TeamReconcileResponse {}
