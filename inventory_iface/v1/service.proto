@@ -59,6 +59,9 @@ message MovementTransactionInfo {
   uint64 transaction_id = 1;
   string receipt = 2;
   string team_name = 3;
+  string team_code = 4;
+  string user_username = 5;
+  string user_name = 6;
 }
 
 message MovementItem {

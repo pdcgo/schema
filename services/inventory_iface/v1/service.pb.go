@@ -482,6 +482,9 @@ type MovementTransactionInfo struct {
 	TransactionId uint64                 `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
 	Receipt       string                 `protobuf:"bytes,2,opt,name=receipt,proto3" json:"receipt,omitempty"`
 	TeamName      string                 `protobuf:"bytes,3,opt,name=team_name,json=teamName,proto3" json:"team_name,omitempty"`
+	TeamCode      string                 `protobuf:"bytes,4,opt,name=team_code,json=teamCode,proto3" json:"team_code,omitempty"`
+	UserUsername  string                 `protobuf:"bytes,5,opt,name=user_username,json=userUsername,proto3" json:"user_username,omitempty"`
+	UserName      string                 `protobuf:"bytes,6,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -533,6 +536,27 @@ func (x *MovementTransactionInfo) GetReceipt() string {
 func (x *MovementTransactionInfo) GetTeamName() string {
 	if x != nil {
 		return x.TeamName
+	}
+	return ""
+}
+
+func (x *MovementTransactionInfo) GetTeamCode() string {
+	if x != nil {
+		return x.TeamCode
+	}
+	return ""
+}
+
+func (x *MovementTransactionInfo) GetUserUsername() string {
+	if x != nil {
+		return x.UserUsername
+	}
+	return ""
+}
+
+func (x *MovementTransactionInfo) GetUserName() string {
+	if x != nil {
+		return x.UserName
 	}
 	return ""
 }
@@ -1060,11 +1084,14 @@ const file_inventory_iface_v1_service_proto_rawDesc = "" +
 	"\fwarehouse_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\vwarehouseId\x12<\n" +
 	"\n" +
 	"time_range\x18\x05 \x01(\v2\x15.common.v1.TimeFilterB\x06\xbaH\x03\xc8\x01\x01R\ttimeRange\x121\n" +
-	"\x04page\x18\x06 \x01(\v2\x15.common.v1.PageFilterB\x06\xbaH\x03\xc8\x01\x01R\x04page\"w\n" +
+	"\x04page\x18\x06 \x01(\v2\x15.common.v1.PageFilterB\x06\xbaH\x03\xc8\x01\x01R\x04page\"\xd6\x01\n" +
 	"\x17MovementTransactionInfo\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x04R\rtransactionId\x12\x18\n" +
 	"\areceipt\x18\x02 \x01(\tR\areceipt\x12\x1b\n" +
-	"\tteam_name\x18\x03 \x01(\tR\bteamName\"\xf3\x03\n" +
+	"\tteam_name\x18\x03 \x01(\tR\bteamName\x12\x1b\n" +
+	"\tteam_code\x18\x04 \x01(\tR\bteamCode\x12#\n" +
+	"\ruser_username\x18\x05 \x01(\tR\fuserUsername\x12\x1b\n" +
+	"\tuser_name\x18\x06 \x01(\tR\buserName\"\xf3\x03\n" +
 	"\fMovementItem\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x1d\n" +
 	"\n" +
