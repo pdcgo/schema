@@ -47,6 +47,7 @@ message SearchUserItem {
   uint64 id = 1;
   string email = 2;
   string username = 3;
+  string profile_picture = 7;
   string phone_number = 5;
   string name = 6;
 }
@@ -150,6 +151,7 @@ message User {
   string name = 6;
   UserStatus status = 7;
   role_base.v1.Role role = 8;
+  string profile_picture = 9;
 }
 
 message UpdateUserRequest {

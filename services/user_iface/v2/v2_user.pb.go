@@ -249,14 +249,15 @@ func (*ResetPasswordResponse) Descriptor() ([]byte, []int) {
 }
 
 type SearchUserItem struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Email         string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
-	Username      string                 `protobuf:"bytes,3,opt,name=username,proto3" json:"username,omitempty"`
-	PhoneNumber   string                 `protobuf:"bytes,5,opt,name=phone_number,json=phoneNumber,proto3" json:"phone_number,omitempty"`
-	Name          string                 `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	Id             uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Email          string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
+	Username       string                 `protobuf:"bytes,3,opt,name=username,proto3" json:"username,omitempty"`
+	ProfilePicture string                 `protobuf:"bytes,7,opt,name=profile_picture,json=profilePicture,proto3" json:"profile_picture,omitempty"`
+	PhoneNumber    string                 `protobuf:"bytes,5,opt,name=phone_number,json=phoneNumber,proto3" json:"phone_number,omitempty"`
+	Name           string                 `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *SearchUserItem) Reset() {
@@ -306,6 +307,13 @@ func (x *SearchUserItem) GetEmail() string {
 func (x *SearchUserItem) GetUsername() string {
 	if x != nil {
 		return x.Username
+	}
+	return ""
+}
+
+func (x *SearchUserItem) GetProfilePicture() string {
+	if x != nil {
+		return x.ProfilePicture
 	}
 	return ""
 }
@@ -969,16 +977,17 @@ func (*TeamUserUpdateResponse) Descriptor() ([]byte, []int) {
 }
 
 type User struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Email         string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
-	Username      string                 `protobuf:"bytes,3,opt,name=username,proto3" json:"username,omitempty"`
-	PhoneNumber   string                 `protobuf:"bytes,5,opt,name=phone_number,json=phoneNumber,proto3" json:"phone_number,omitempty"`
-	Name          string                 `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`
-	Status        UserStatus             `protobuf:"varint,7,opt,name=status,proto3,enum=user_iface.v2.UserStatus" json:"status,omitempty"`
-	Role          v1.Role                `protobuf:"varint,8,opt,name=role,proto3,enum=role_base.v1.Role" json:"role,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	Id             uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Email          string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
+	Username       string                 `protobuf:"bytes,3,opt,name=username,proto3" json:"username,omitempty"`
+	PhoneNumber    string                 `protobuf:"bytes,5,opt,name=phone_number,json=phoneNumber,proto3" json:"phone_number,omitempty"`
+	Name           string                 `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`
+	Status         UserStatus             `protobuf:"varint,7,opt,name=status,proto3,enum=user_iface.v2.UserStatus" json:"status,omitempty"`
+	Role           v1.Role                `protobuf:"varint,8,opt,name=role,proto3,enum=role_base.v1.Role" json:"role,omitempty"`
+	ProfilePicture string                 `protobuf:"bytes,9,opt,name=profile_picture,json=profilePicture,proto3" json:"profile_picture,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *User) Reset() {
@@ -1058,6 +1067,13 @@ func (x *User) GetRole() v1.Role {
 		return x.Role
 	}
 	return v1.Role(0)
+}
+
+func (x *User) GetProfilePicture() string {
+	if x != nil {
+		return x.ProfilePicture
+	}
+	return ""
 }
 
 type UpdateUserRequest struct {
@@ -1385,11 +1401,12 @@ const file_user_iface_v2_v2_user_proto_rawDesc = "" +
 	"\auser_id\x18\x01 \x01(\x04R\x06userId\x12!\n" +
 	"\fold_password\x18\x02 \x01(\tR\voldPassword\x12!\n" +
 	"\fnew_password\x18\x03 \x01(\tR\vnewPassword:\x06\x92\xb5\x18\x02 \x01\"\x17\n" +
-	"\x15ResetPasswordResponse\"\x89\x01\n" +
+	"\x15ResetPasswordResponse\"\xb2\x01\n" +
 	"\x0eSearchUserItem\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12\x1a\n" +
-	"\busername\x18\x03 \x01(\tR\busername\x12!\n" +
+	"\busername\x18\x03 \x01(\tR\busername\x12'\n" +
+	"\x0fprofile_picture\x18\a \x01(\tR\x0eprofilePicture\x12!\n" +
 	"\fphone_number\x18\x05 \x01(\tR\vphoneNumber\x12\x12\n" +
 	"\x04name\x18\x06 \x01(\tR\x04name\"<\n" +
 	"\x13SearchUserByKeyword\x12\f\n" +
@@ -1430,7 +1447,7 @@ const file_user_iface_v2_v2_user_proto_rawDesc = "" +
 	"\x92\xb5\x18\x06\n" +
 	"\x04\x01\x02\x03\x04B\b\n" +
 	"\x06action\"\x18\n" +
-	"\x16TeamUserUpdateResponse\"\xda\x01\n" +
+	"\x16TeamUserUpdateResponse\"\x83\x02\n" +
 	"\x04User\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12\x1a\n" +
@@ -1438,7 +1455,8 @@ const file_user_iface_v2_v2_user_proto_rawDesc = "" +
 	"\fphone_number\x18\x05 \x01(\tR\vphoneNumber\x12\x12\n" +
 	"\x04name\x18\x06 \x01(\tR\x04name\x121\n" +
 	"\x06status\x18\a \x01(\x0e2\x19.user_iface.v2.UserStatusR\x06status\x12&\n" +
-	"\x04role\x18\b \x01(\x0e2\x12.role_base.v1.RoleR\x04role\"\x98\x01\n" +
+	"\x04role\x18\b \x01(\x0e2\x12.role_base.v1.RoleR\x04role\x12'\n" +
+	"\x0fprofile_picture\x18\t \x01(\tR\x0eprofilePicture\"\x98\x01\n" +
 	"\x11UpdateUserRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12\x1a\n" +

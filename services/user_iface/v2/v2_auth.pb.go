@@ -25,6 +25,7 @@ const (
 
 type CheckAccessRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	TeamId        uint64                 `protobuf:"varint,2,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
 	Token         string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -60,6 +61,13 @@ func (*CheckAccessRequest) Descriptor() ([]byte, []int) {
 	return file_user_iface_v2_v2_auth_proto_rawDescGZIP(), []int{0}
 }
 
+func (x *CheckAccessRequest) GetTeamId() uint64 {
+	if x != nil {
+		return x.TeamId
+	}
+	return 0
+}
+
 func (x *CheckAccessRequest) GetToken() string {
 	if x != nil {
 		return x.Token
@@ -70,6 +78,7 @@ func (x *CheckAccessRequest) GetToken() string {
 type CheckAccessResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Token         string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
+	Role          v1.Role                `protobuf:"varint,2,opt,name=role,proto3,enum=role_base.v1.Role" json:"role,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -109,6 +118,13 @@ func (x *CheckAccessResponse) GetToken() string {
 		return x.Token
 	}
 	return ""
+}
+
+func (x *CheckAccessResponse) GetRole() v1.Role {
+	if x != nil {
+		return x.Role
+	}
+	return v1.Role(0)
 }
 
 type LoginRequest struct {
@@ -377,12 +393,14 @@ var File_user_iface_v2_v2_auth_proto protoreflect.FileDescriptor
 
 const file_user_iface_v2_v2_auth_proto_rawDesc = "" +
 	"\n" +
-	"\x1buser_iface/v2/v2_auth.proto\x12\ruser_iface.v2\x1a\x1bbuf/validate/validate.proto\x1a\x17role_base/v1/role.proto\x1a\x1buser_iface/v2/v2_user.proto\"6\n" +
-	"\x12CheckAccessRequest\x12 \n" +
+	"\x1buser_iface/v2/v2_auth.proto\x12\ruser_iface.v2\x1a\x1bbuf/validate/validate.proto\x1a\x17role_base/v1/role.proto\x1a\x1buser_iface/v2/v2_user.proto\"O\n" +
+	"\x12CheckAccessRequest\x12\x17\n" +
+	"\ateam_id\x18\x02 \x01(\x04R\x06teamId\x12 \n" +
 	"\x05token\x18\x01 \x01(\tB\n" +
-	"\xbaH\ar\x05\x10\x01\x18\xb8\x17R\x05token\"+\n" +
+	"\xbaH\ar\x05\x10\x01\x18\xb8\x17R\x05token\"S\n" +
 	"\x13CheckAccessResponse\x12\x14\n" +
-	"\x05token\x18\x01 \x01(\tR\x05token\"\xac\x02\n" +
+	"\x05token\x18\x01 \x01(\tR\x05token\x12&\n" +
+	"\x04role\x18\x02 \x01(\x0e2\x12.role_base.v1.RoleR\x04role\"\xac\x02\n" +
 	"\fLoginRequest\x12\x16\n" +
 	"\x05email\x18\x01 \x01(\tH\x00R\x05email\x12\x1c\n" +
 	"\busername\x18\x02 \x01(\tH\x00R\busername\x12\x16\n" +
@@ -427,25 +445,27 @@ var file_user_iface_v2_v2_auth_proto_goTypes = []any{
 	(*LoginResponse)(nil),       // 3: user_iface.v2.LoginResponse
 	(*LogoutRequest)(nil),       // 4: user_iface.v2.LogoutRequest
 	(*LogoutResponse)(nil),      // 5: user_iface.v2.LogoutResponse
-	(v1.IdentityType)(0),        // 6: role_base.v1.IdentityType
-	(*User)(nil),                // 7: user_iface.v2.User
-	(*v1.Identity)(nil),         // 8: role_base.v1.Identity
+	(v1.Role)(0),                // 6: role_base.v1.Role
+	(v1.IdentityType)(0),        // 7: role_base.v1.IdentityType
+	(*User)(nil),                // 8: user_iface.v2.User
+	(*v1.Identity)(nil),         // 9: role_base.v1.Identity
 }
 var file_user_iface_v2_v2_auth_proto_depIdxs = []int32{
-	6, // 0: user_iface.v2.LoginRequest.indentity_type:type_name -> role_base.v1.IdentityType
-	7, // 1: user_iface.v2.LoginResponse.user:type_name -> user_iface.v2.User
-	8, // 2: user_iface.v2.LoginResponse.identity:type_name -> role_base.v1.Identity
-	2, // 3: user_iface.v2.V2AuthService.Login:input_type -> user_iface.v2.LoginRequest
-	4, // 4: user_iface.v2.V2AuthService.Logout:input_type -> user_iface.v2.LogoutRequest
-	0, // 5: user_iface.v2.V2AuthService.CheckAccess:input_type -> user_iface.v2.CheckAccessRequest
-	3, // 6: user_iface.v2.V2AuthService.Login:output_type -> user_iface.v2.LoginResponse
-	5, // 7: user_iface.v2.V2AuthService.Logout:output_type -> user_iface.v2.LogoutResponse
-	1, // 8: user_iface.v2.V2AuthService.CheckAccess:output_type -> user_iface.v2.CheckAccessResponse
-	6, // [6:9] is the sub-list for method output_type
-	3, // [3:6] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	6, // 0: user_iface.v2.CheckAccessResponse.role:type_name -> role_base.v1.Role
+	7, // 1: user_iface.v2.LoginRequest.indentity_type:type_name -> role_base.v1.IdentityType
+	8, // 2: user_iface.v2.LoginResponse.user:type_name -> user_iface.v2.User
+	9, // 3: user_iface.v2.LoginResponse.identity:type_name -> role_base.v1.Identity
+	2, // 4: user_iface.v2.V2AuthService.Login:input_type -> user_iface.v2.LoginRequest
+	4, // 5: user_iface.v2.V2AuthService.Logout:input_type -> user_iface.v2.LogoutRequest
+	0, // 6: user_iface.v2.V2AuthService.CheckAccess:input_type -> user_iface.v2.CheckAccessRequest
+	3, // 7: user_iface.v2.V2AuthService.Login:output_type -> user_iface.v2.LoginResponse
+	5, // 8: user_iface.v2.V2AuthService.Logout:output_type -> user_iface.v2.LogoutResponse
+	1, // 9: user_iface.v2.V2AuthService.CheckAccess:output_type -> user_iface.v2.CheckAccessResponse
+	7, // [7:10] is the sub-list for method output_type
+	4, // [4:7] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_user_iface_v2_v2_auth_proto_init() }

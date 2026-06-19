@@ -14,6 +14,7 @@ service V2AuthService {
 }
 
 message CheckAccessRequest {
+  uint64 team_id = 2;
   string token = 1 [(buf.validate.field).string = {
     min_len: 1
     max_len: 3000
@@ -22,6 +23,7 @@ message CheckAccessRequest {
 
 message CheckAccessResponse {
   string token = 1;
+  role_base.v1.Role role = 2;
 }
 
 message LoginRequest {
