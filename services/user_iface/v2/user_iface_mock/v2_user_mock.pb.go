@@ -176,6 +176,32 @@ func (mr *MockV2UserServiceClientMockRecorder) SearchUser(ctx, req interface{}) 
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SearchUser", reflect.TypeOf((*MockV2UserService)(nil).SearchUser), ctx, req)
 }
 
+func (m *MockV2UserService) UserByIDs(ctx context.Context, req *connect.Request[v2.UserByIDsRequest]) (*connect.Response[v2.UserByIDsResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "UserByIDs", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v2.UserByIDsResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockV2UserServiceMockRecorder) UserByIDs(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UserByIDs", reflect.TypeOf((*MockV2UserService)(nil).UserByIDs), ctx, req)
+}
+
+func (m *MockV2UserServiceClient) UserByIDs(ctx context.Context, req *connect.Request[v2.UserByIDsRequest]) (*connect.Response[v2.UserByIDsResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "UserByIDs", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v2.UserByIDsResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockV2UserServiceClientMockRecorder) UserByIDs(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UserByIDs", reflect.TypeOf((*MockV2UserService)(nil).UserByIDs), ctx, req)
+}
+
 func (m *MockV2UserService) ResetPassword(ctx context.Context, req *connect.Request[v2.ResetPasswordRequest]) (*connect.Response[v2.ResetPasswordResponse], error) {
     m.ctrl.T.Helper()
     ret := m.ctrl.Call(m, "ResetPassword", ctx, req)

@@ -12,6 +12,7 @@ service V2UserService {
   rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse);
   rpc SuspendUser(SuspendUserRequest) returns (SuspendUserResponse);
   rpc SearchUser(SearchUserRequest) returns (SearchUserResponse);
+  rpc UserByIDs(UserByIDsRequest) returns (UserByIDsResponse);
 
   rpc ResetPassword(ResetPasswordRequest) returns (ResetPasswordResponse);
 
@@ -19,6 +20,38 @@ service V2UserService {
   rpc TeamUserUpdate(TeamUserUpdateRequest) returns (TeamUserUpdateResponse);
 
   rpc TeamSynclegacy(TeamSynclegacyRequest) returns (stream TeamSynclegacyResponse);
+}
+
+message UserAlias {
+  uint64 team_id = 1;
+  string alias = 2;
+  role_base.v1.Role role = 3;
+}
+
+message UserInfo {
+  uint64 id = 1;
+  string email = 2;
+  string username = 3;
+  string phone_number = 5;
+  string name = 6;
+  UserStatus status = 7;
+  string profile_picture = 9;
+}
+
+message UserMapItem {
+  UserInfo user = 1;
+  UserAlias alias = 2;
+}
+
+message UserByIDsRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
+  repeated uint64 ids = 1;
+  uint64 team_id = 2;
+}
+
+message UserByIDsResponse {
+  map<uint64, UserMapItem> users = 1;
 }
 
 message TeamSynclegacyRequest {
@@ -115,6 +148,7 @@ message RemoveUser {
 message AddUser {
   uint64 user_id = 1;
   role_base.v1.Role role = 2;
+  string alias = 3;
 }
 
 message TeamUserUpdateRequest {
