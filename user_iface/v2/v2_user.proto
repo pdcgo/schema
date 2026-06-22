@@ -13,10 +13,10 @@ service V2UserService {
   rpc SuspendUser(SuspendUserRequest) returns (SuspendUserResponse);
   rpc SearchUser(SearchUserRequest) returns (SearchUserResponse);
   rpc UserByIDs(UserByIDsRequest) returns (UserByIDsResponse);
+  rpc UserList(UserListRequest) returns (UserListResponse);
 
   rpc ResetPassword(ResetPasswordRequest) returns (ResetPasswordResponse);
 
-  rpc TeamUserList(TeamUserListRequest) returns (TeamUserListResponse);
   rpc TeamUserUpdate(TeamUserUpdateRequest) returns (TeamUserUpdateResponse);
 
   rpc TeamSynclegacy(TeamSynclegacyRequest) returns (stream TeamSynclegacyResponse);
@@ -40,7 +40,7 @@ message UserInfo {
 
 message UserMapItem {
   UserInfo user = 1;
-  UserAlias alias = 2;
+  repeated UserAlias alias = 2;
 }
 
 message UserByIDsRequest {
@@ -123,7 +123,7 @@ message SuspendUserRequest {
 
 message SuspendUserResponse {}
 
-message TeamUserListRequest {
+message UserListRequest {
   option (role_base.v1.request_policy) = {
     roles: [
       ROLE_ROOT,
@@ -137,8 +137,8 @@ message TeamUserListRequest {
   role_base.v1.Role role = 3;
 }
 
-message TeamUserListResponse {
-  repeated User users = 1;
+message UserListResponse {
+  repeated UserMapItem users = 1;
 }
 
 message RemoveUser {
@@ -151,6 +151,25 @@ message AddUser {
   string alias = 3;
 }
 
+message CreateUser {
+  string email = 1 [(buf.validate.field).string = {
+    email: true
+    max_len: 254
+  }];
+  string username = 2 [(buf.validate.field).string = {pattern: "^[a-zA-Z0-9_]{3,30}$"}];
+  string password = 3 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 200
+  }];
+  string name = 4 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 200
+  }];
+  string phone_number = 5;
+  role_base.v1.Role role = 6 [(buf.validate.field).required = true];
+  string alias = 7;
+}
+
 message TeamUserUpdateRequest {
   option (role_base.v1.request_policy) = {
     roles: [
@@ -161,11 +180,15 @@ message TeamUserUpdateRequest {
     ]
   };
 
-  uint64 team_id = 1 [(role_base.v1.use_scope) = true];
+  uint64 team_id = 1 [
+    (role_base.v1.use_scope) = true,
+    (buf.validate.field).uint64.gt = 0
+  ];
 
   oneof action {
     AddUser add = 2;
     RemoveUser remove = 3;
+    CreateUser create = 4;
   }
 }
 
