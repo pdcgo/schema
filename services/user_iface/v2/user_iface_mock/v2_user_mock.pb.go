@@ -280,6 +280,32 @@ func (mr *MockV2UserServiceClientMockRecorder) TeamUserUpdate(ctx, req interface
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "TeamUserUpdate", reflect.TypeOf((*MockV2UserService)(nil).TeamUserUpdate), ctx, req)
 }
 
+func (m *MockV2UserService) TeamAccessList(ctx context.Context, req *connect.Request[v2.TeamAccessListRequest]) (*connect.Response[v2.TeamAccessListResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "TeamAccessList", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v2.TeamAccessListResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockV2UserServiceMockRecorder) TeamAccessList(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "TeamAccessList", reflect.TypeOf((*MockV2UserService)(nil).TeamAccessList), ctx, req)
+}
+
+func (m *MockV2UserServiceClient) TeamAccessList(ctx context.Context, req *connect.Request[v2.TeamAccessListRequest]) (*connect.Response[v2.TeamAccessListResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "TeamAccessList", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v2.TeamAccessListResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockV2UserServiceClientMockRecorder) TeamAccessList(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "TeamAccessList", reflect.TypeOf((*MockV2UserService)(nil).TeamAccessList), ctx, req)
+}
+
 func (m *MockV2UserService) TeamSynclegacy(ctx context.Context, req *connect.Request[v2.TeamSynclegacyRequest], stream *connect.ServerStream[v2.TeamSynclegacyResponse]) error {
     m.ctrl.T.Helper()
     ret := m.ctrl.Call(m, "TeamSynclegacy", ctx, req, stream)

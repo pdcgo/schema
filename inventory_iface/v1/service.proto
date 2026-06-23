@@ -32,15 +32,75 @@ message ProductReconcileRequest {
 }
 message ProductReconcileResponse {}
 
-message ProductPlacementListRequest {}
+message ProductPlacementListRequest {
+  uint64 product_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 warehouse_id = 2 [(buf.validate.field).uint64.gt = 0];
+  uint64 rack_id = 3;
+  common.v1.PageFilter page = 4 [(buf.validate.field).required = true];
+}
 
-message ProductPlacementListResponse {}
+message ProductPlacementItem {
+  uint64 id = 1;
+  uint64 product_id = 2;
+  uint64 warehouse_id = 3;
+  uint64 rack_id = 4;
+  int64 count = 5;
+  google.protobuf.Timestamp created_at = 6;
+  google.protobuf.Timestamp updated_at = 7;
+}
 
-message ProductPlacementLogRequest {}
+message ProductPlacementListResponse {
+  repeated ProductPlacementItem placements = 1;
+  common.v1.PageInfo page_info = 2;
+}
 
-message ProductPlacementLogResponse {}
-message ProductBatchListRequest {}
-message ProductBatchListResponse {}
+message ProductPlacementLogRequest {
+  uint64 product_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 warehouse_id = 2 [(buf.validate.field).uint64.gt = 0];
+  uint64 rack_id = 3;
+  common.v1.PageFilter page = 4 [(buf.validate.field).required = true];
+}
+
+message ProductPlacementLogItem {
+  uint64 id = 1;
+  uint64 product_id = 2;
+  uint64 warehouse_id = 3;
+  uint64 rack_id = 4;
+  uint64 transaction_id = 5;
+  uint64 user_id = 6;
+  StockChangeType change_type = 7;
+  int64 change = 8;
+  int64 balance_count = 9;
+  google.protobuf.Timestamp created_at = 10;
+}
+
+message ProductPlacementLogResponse {
+  repeated ProductPlacementLogItem logs = 1;
+  common.v1.PageInfo page_info = 2;
+}
+
+message ProductBatchListRequest {
+  uint64 product_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 warehouse_id = 2 [(buf.validate.field).uint64.gt = 0];
+  common.v1.PageFilter page = 3 [(buf.validate.field).required = true];
+}
+
+message ProductBatchItem {
+  uint64 id = 1;
+  uint64 product_id = 2;
+  uint64 warehouse_id = 3;
+  uint64 inbound_id = 4;
+  int64 start_count = 5;
+  int64 end_count = 6;
+  double price = 7;
+  google.protobuf.Timestamp created_at = 8;
+  google.protobuf.Timestamp updated_at = 9;
+}
+
+message ProductBatchListResponse {
+  repeated ProductBatchItem batches = 1;
+  common.v1.PageInfo page_info = 2;
+}
 
 message PushStockEventRequest {
   warehouse_iface.v1.StockEvent event = 1 [(buf.validate.field).required = true];

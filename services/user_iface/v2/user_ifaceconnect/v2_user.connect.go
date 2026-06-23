@@ -58,6 +58,9 @@ const (
 	// V2UserServiceTeamUserUpdateProcedure is the fully-qualified name of the V2UserService's
 	// TeamUserUpdate RPC.
 	V2UserServiceTeamUserUpdateProcedure = "/user_iface.v2.V2UserService/TeamUserUpdate"
+	// V2UserServiceTeamAccessListProcedure is the fully-qualified name of the V2UserService's
+	// TeamAccessList RPC.
+	V2UserServiceTeamAccessListProcedure = "/user_iface.v2.V2UserService/TeamAccessList"
 	// V2UserServiceTeamSynclegacyProcedure is the fully-qualified name of the V2UserService's
 	// TeamSynclegacy RPC.
 	V2UserServiceTeamSynclegacyProcedure = "/user_iface.v2.V2UserService/TeamSynclegacy"
@@ -74,6 +77,7 @@ type V2UserServiceClient interface {
 	UserList(context.Context, *connect.Request[v2.UserListRequest]) (*connect.Response[v2.UserListResponse], error)
 	ResetPassword(context.Context, *connect.Request[v2.ResetPasswordRequest]) (*connect.Response[v2.ResetPasswordResponse], error)
 	TeamUserUpdate(context.Context, *connect.Request[v2.TeamUserUpdateRequest]) (*connect.Response[v2.TeamUserUpdateResponse], error)
+	TeamAccessList(context.Context, *connect.Request[v2.TeamAccessListRequest]) (*connect.Response[v2.TeamAccessListResponse], error)
 	TeamSynclegacy(context.Context, *connect.Request[v2.TeamSynclegacyRequest]) (*connect.ServerStreamForClient[v2.TeamSynclegacyResponse], error)
 }
 
@@ -142,6 +146,12 @@ func NewV2UserServiceClient(httpClient connect.HTTPClient, baseURL string, opts 
 			connect.WithSchema(v2UserServiceMethods.ByName("TeamUserUpdate")),
 			connect.WithClientOptions(opts...),
 		),
+		teamAccessList: connect.NewClient[v2.TeamAccessListRequest, v2.TeamAccessListResponse](
+			httpClient,
+			baseURL+V2UserServiceTeamAccessListProcedure,
+			connect.WithSchema(v2UserServiceMethods.ByName("TeamAccessList")),
+			connect.WithClientOptions(opts...),
+		),
 		teamSynclegacy: connect.NewClient[v2.TeamSynclegacyRequest, v2.TeamSynclegacyResponse](
 			httpClient,
 			baseURL+V2UserServiceTeamSynclegacyProcedure,
@@ -162,6 +172,7 @@ type v2UserServiceClient struct {
 	userList       *connect.Client[v2.UserListRequest, v2.UserListResponse]
 	resetPassword  *connect.Client[v2.ResetPasswordRequest, v2.ResetPasswordResponse]
 	teamUserUpdate *connect.Client[v2.TeamUserUpdateRequest, v2.TeamUserUpdateResponse]
+	teamAccessList *connect.Client[v2.TeamAccessListRequest, v2.TeamAccessListResponse]
 	teamSynclegacy *connect.Client[v2.TeamSynclegacyRequest, v2.TeamSynclegacyResponse]
 }
 
@@ -210,6 +221,11 @@ func (c *v2UserServiceClient) TeamUserUpdate(ctx context.Context, req *connect.R
 	return c.teamUserUpdate.CallUnary(ctx, req)
 }
 
+// TeamAccessList calls user_iface.v2.V2UserService.TeamAccessList.
+func (c *v2UserServiceClient) TeamAccessList(ctx context.Context, req *connect.Request[v2.TeamAccessListRequest]) (*connect.Response[v2.TeamAccessListResponse], error) {
+	return c.teamAccessList.CallUnary(ctx, req)
+}
+
 // TeamSynclegacy calls user_iface.v2.V2UserService.TeamSynclegacy.
 func (c *v2UserServiceClient) TeamSynclegacy(ctx context.Context, req *connect.Request[v2.TeamSynclegacyRequest]) (*connect.ServerStreamForClient[v2.TeamSynclegacyResponse], error) {
 	return c.teamSynclegacy.CallServerStream(ctx, req)
@@ -226,6 +242,7 @@ type V2UserServiceHandler interface {
 	UserList(context.Context, *connect.Request[v2.UserListRequest]) (*connect.Response[v2.UserListResponse], error)
 	ResetPassword(context.Context, *connect.Request[v2.ResetPasswordRequest]) (*connect.Response[v2.ResetPasswordResponse], error)
 	TeamUserUpdate(context.Context, *connect.Request[v2.TeamUserUpdateRequest]) (*connect.Response[v2.TeamUserUpdateResponse], error)
+	TeamAccessList(context.Context, *connect.Request[v2.TeamAccessListRequest]) (*connect.Response[v2.TeamAccessListResponse], error)
 	TeamSynclegacy(context.Context, *connect.Request[v2.TeamSynclegacyRequest], *connect.ServerStream[v2.TeamSynclegacyResponse]) error
 }
 
@@ -290,6 +307,12 @@ func NewV2UserServiceHandler(svc V2UserServiceHandler, opts ...connect.HandlerOp
 		connect.WithSchema(v2UserServiceMethods.ByName("TeamUserUpdate")),
 		connect.WithHandlerOptions(opts...),
 	)
+	v2UserServiceTeamAccessListHandler := connect.NewUnaryHandler(
+		V2UserServiceTeamAccessListProcedure,
+		svc.TeamAccessList,
+		connect.WithSchema(v2UserServiceMethods.ByName("TeamAccessList")),
+		connect.WithHandlerOptions(opts...),
+	)
 	v2UserServiceTeamSynclegacyHandler := connect.NewServerStreamHandler(
 		V2UserServiceTeamSynclegacyProcedure,
 		svc.TeamSynclegacy,
@@ -316,6 +339,8 @@ func NewV2UserServiceHandler(svc V2UserServiceHandler, opts ...connect.HandlerOp
 			v2UserServiceResetPasswordHandler.ServeHTTP(w, r)
 		case V2UserServiceTeamUserUpdateProcedure:
 			v2UserServiceTeamUserUpdateHandler.ServeHTTP(w, r)
+		case V2UserServiceTeamAccessListProcedure:
+			v2UserServiceTeamAccessListHandler.ServeHTTP(w, r)
 		case V2UserServiceTeamSynclegacyProcedure:
 			v2UserServiceTeamSynclegacyHandler.ServeHTTP(w, r)
 		default:
@@ -361,6 +386,10 @@ func (UnimplementedV2UserServiceHandler) ResetPassword(context.Context, *connect
 
 func (UnimplementedV2UserServiceHandler) TeamUserUpdate(context.Context, *connect.Request[v2.TeamUserUpdateRequest]) (*connect.Response[v2.TeamUserUpdateResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("user_iface.v2.V2UserService.TeamUserUpdate is not implemented"))
+}
+
+func (UnimplementedV2UserServiceHandler) TeamAccessList(context.Context, *connect.Request[v2.TeamAccessListRequest]) (*connect.Response[v2.TeamAccessListResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("user_iface.v2.V2UserService.TeamAccessList is not implemented"))
 }
 
 func (UnimplementedV2UserServiceHandler) TeamSynclegacy(context.Context, *connect.Request[v2.TeamSynclegacyRequest], *connect.ServerStream[v2.TeamSynclegacyResponse]) error {

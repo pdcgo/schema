@@ -18,8 +18,34 @@ service V2UserService {
   rpc ResetPassword(ResetPasswordRequest) returns (ResetPasswordResponse);
 
   rpc TeamUserUpdate(TeamUserUpdateRequest) returns (TeamUserUpdateResponse);
+  rpc TeamAccessList(TeamAccessListRequest) returns (TeamAccessListResponse);
 
   rpc TeamSynclegacy(TeamSynclegacyRequest) returns (stream TeamSynclegacyResponse);
+}
+
+enum TeamType {
+  TEAM_TYPE_UNSPECIFIED = 0;
+  TEAM_TYPE_WAREHOUSE = 1;
+  TEAM_TYPE_SELLING = 2;
+  TEAM_TYPE_ADMIN = 3;
+}
+
+message TeamAccessListRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
+  uint64 user_id = 1;
+}
+
+message TeamAccessItem {
+  uint64 team_id = 1;
+  string team_name = 2;
+  TeamType team_type = 3;
+  string alias = 4;
+  role_base.v1.Role role = 5;
+}
+
+message TeamAccessListResponse {
+  repeated TeamAccessItem access = 1;
 }
 
 message UserAlias {
