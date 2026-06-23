@@ -2,6 +2,7 @@ syntax = "proto3";
 package user_iface.v2;
 
 import "buf/validate/validate.proto";
+import "common/v1/common.proto";
 import "role_base/v1/role.proto";
 
 option go_package = "github.com/pdcgo/schema/services/user_iface/v2;user_iface";
@@ -161,10 +162,12 @@ message UserListRequest {
   uint64 team_id = 1 [(role_base.v1.use_scope) = true];
   string q = 2;
   role_base.v1.Role role = 3;
+  common.v1.PageFilter page = 4 [(buf.validate.field).required = true];
 }
 
 message UserListResponse {
   repeated UserMapItem users = 1;
+  common.v1.PageInfo page_info = 2;
 }
 
 message RemoveUser {

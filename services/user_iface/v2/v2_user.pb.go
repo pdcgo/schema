@@ -8,6 +8,7 @@ package user_iface
 
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
+	v11 "github.com/pdcgo/schema/services/common/v1"
 	v1 "github.com/pdcgo/schema/services/role_base/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -1171,6 +1172,7 @@ type UserListRequest struct {
 	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
 	Q             string                 `protobuf:"bytes,2,opt,name=q,proto3" json:"q,omitempty"`
 	Role          v1.Role                `protobuf:"varint,3,opt,name=role,proto3,enum=role_base.v1.Role" json:"role,omitempty"`
+	Page          *v11.PageFilter        `protobuf:"bytes,4,opt,name=page,proto3" json:"page,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1226,9 +1228,17 @@ func (x *UserListRequest) GetRole() v1.Role {
 	return v1.Role(0)
 }
 
+func (x *UserListRequest) GetPage() *v11.PageFilter {
+	if x != nil {
+		return x.Page
+	}
+	return nil
+}
+
 type UserListResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Users         []*UserMapItem         `protobuf:"bytes,1,rep,name=users,proto3" json:"users,omitempty"`
+	PageInfo      *v11.PageInfo          `protobuf:"bytes,2,opt,name=page_info,json=pageInfo,proto3" json:"page_info,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1266,6 +1276,13 @@ func (*UserListResponse) Descriptor() ([]byte, []int) {
 func (x *UserListResponse) GetUsers() []*UserMapItem {
 	if x != nil {
 		return x.Users
+	}
+	return nil
+}
+
+func (x *UserListResponse) GetPageInfo() *v11.PageInfo {
+	if x != nil {
+		return x.PageInfo
 	}
 	return nil
 }
@@ -2024,7 +2041,7 @@ var File_user_iface_v2_v2_user_proto protoreflect.FileDescriptor
 
 const file_user_iface_v2_v2_user_proto_rawDesc = "" +
 	"\n" +
-	"\x1buser_iface/v2/v2_user.proto\x12\ruser_iface.v2\x1a\x1bbuf/validate/validate.proto\x1a\x17role_base/v1/role.proto\"8\n" +
+	"\x1buser_iface/v2/v2_user.proto\x12\ruser_iface.v2\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x17role_base/v1/role.proto\"8\n" +
 	"\x15TeamAccessListRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x04R\x06userId:\x06\x92\xb5\x18\x02 \x01\"\xba\x01\n" +
 	"\x0eTeamAccessItem\x12\x17\n" +
@@ -2091,15 +2108,17 @@ const file_user_iface_v2_v2_user_proto_rawDesc = "" +
 	"\x12SuspendUserRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x04R\x06userId:\b\x92\xb5\x18\x04\n" +
 	"\x02\x01\x02\"\x15\n" +
-	"\x13SuspendUserResponse\"r\n" +
+	"\x13SuspendUserResponse\"\xa5\x01\n" +
 	"\x0fUserListRequest\x12\x1d\n" +
 	"\ateam_id\x18\x01 \x01(\x04B\x04\x90\xb5\x18\x01R\x06teamId\x12\f\n" +
 	"\x01q\x18\x02 \x01(\tR\x01q\x12&\n" +
-	"\x04role\x18\x03 \x01(\x0e2\x12.role_base.v1.RoleR\x04role:\n" +
+	"\x04role\x18\x03 \x01(\x0e2\x12.role_base.v1.RoleR\x04role\x121\n" +
+	"\x04page\x18\x04 \x01(\v2\x15.common.v1.PageFilterB\x06\xbaH\x03\xc8\x01\x01R\x04page:\n" +
 	"\x92\xb5\x18\x06\n" +
-	"\x04\x01\x02\x03\x04\"D\n" +
+	"\x04\x01\x02\x03\x04\"v\n" +
 	"\x10UserListResponse\x120\n" +
-	"\x05users\x18\x01 \x03(\v2\x1a.user_iface.v2.UserMapItemR\x05users\"%\n" +
+	"\x05users\x18\x01 \x03(\v2\x1a.user_iface.v2.UserMapItemR\x05users\x120\n" +
+	"\tpage_info\x18\x02 \x01(\v2\x13.common.v1.PageInfoR\bpageInfo\"%\n" +
 	"\n" +
 	"RemoveUser\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x04R\x06userId\"`\n" +
@@ -2243,6 +2262,8 @@ var file_user_iface_v2_v2_user_proto_goTypes = []any{
 	(*CreateUserResponse)(nil),     // 34: user_iface.v2.CreateUserResponse
 	nil,                            // 35: user_iface.v2.UserByIDsResponse.UsersEntry
 	(v1.Role)(0),                   // 36: role_base.v1.Role
+	(*v11.PageFilter)(nil),         // 37: common.v1.PageFilter
+	(*v11.PageInfo)(nil),           // 38: common.v1.PageInfo
 }
 var file_user_iface_v2_v2_user_proto_depIdxs = []int32{
 	0,  // 0: user_iface.v2.TeamAccessItem.team_type:type_name -> user_iface.v2.TeamType
@@ -2257,42 +2278,44 @@ var file_user_iface_v2_v2_user_proto_depIdxs = []int32{
 	16, // 9: user_iface.v2.SearchUserRequest.ids:type_name -> user_iface.v2.SearchUserByIds
 	14, // 10: user_iface.v2.SearchUserResponse.users:type_name -> user_iface.v2.SearchUserItem
 	36, // 11: user_iface.v2.UserListRequest.role:type_name -> role_base.v1.Role
-	7,  // 12: user_iface.v2.UserListResponse.users:type_name -> user_iface.v2.UserMapItem
-	36, // 13: user_iface.v2.AddUser.role:type_name -> role_base.v1.Role
-	36, // 14: user_iface.v2.CreateUser.role:type_name -> role_base.v1.Role
-	24, // 15: user_iface.v2.TeamUserUpdateRequest.add:type_name -> user_iface.v2.AddUser
-	23, // 16: user_iface.v2.TeamUserUpdateRequest.remove:type_name -> user_iface.v2.RemoveUser
-	25, // 17: user_iface.v2.TeamUserUpdateRequest.create:type_name -> user_iface.v2.CreateUser
-	1,  // 18: user_iface.v2.User.status:type_name -> user_iface.v2.UserStatus
-	36, // 19: user_iface.v2.User.role:type_name -> role_base.v1.Role
-	7,  // 20: user_iface.v2.UserByIDsResponse.UsersEntry.value:type_name -> user_iface.v2.UserMapItem
-	33, // 21: user_iface.v2.V2UserService.CreateUser:input_type -> user_iface.v2.CreateUserRequest
-	29, // 22: user_iface.v2.V2UserService.UpdateUser:input_type -> user_iface.v2.UpdateUserRequest
-	31, // 23: user_iface.v2.V2UserService.DeleteUser:input_type -> user_iface.v2.DeleteUserRequest
-	19, // 24: user_iface.v2.V2UserService.SuspendUser:input_type -> user_iface.v2.SuspendUserRequest
-	17, // 25: user_iface.v2.V2UserService.SearchUser:input_type -> user_iface.v2.SearchUserRequest
-	8,  // 26: user_iface.v2.V2UserService.UserByIDs:input_type -> user_iface.v2.UserByIDsRequest
-	21, // 27: user_iface.v2.V2UserService.UserList:input_type -> user_iface.v2.UserListRequest
-	12, // 28: user_iface.v2.V2UserService.ResetPassword:input_type -> user_iface.v2.ResetPasswordRequest
-	26, // 29: user_iface.v2.V2UserService.TeamUserUpdate:input_type -> user_iface.v2.TeamUserUpdateRequest
-	2,  // 30: user_iface.v2.V2UserService.TeamAccessList:input_type -> user_iface.v2.TeamAccessListRequest
-	10, // 31: user_iface.v2.V2UserService.TeamSynclegacy:input_type -> user_iface.v2.TeamSynclegacyRequest
-	34, // 32: user_iface.v2.V2UserService.CreateUser:output_type -> user_iface.v2.CreateUserResponse
-	32, // 33: user_iface.v2.V2UserService.UpdateUser:output_type -> user_iface.v2.UpdateUserResponse
-	30, // 34: user_iface.v2.V2UserService.DeleteUser:output_type -> user_iface.v2.DeleteUserResponse
-	20, // 35: user_iface.v2.V2UserService.SuspendUser:output_type -> user_iface.v2.SuspendUserResponse
-	18, // 36: user_iface.v2.V2UserService.SearchUser:output_type -> user_iface.v2.SearchUserResponse
-	9,  // 37: user_iface.v2.V2UserService.UserByIDs:output_type -> user_iface.v2.UserByIDsResponse
-	22, // 38: user_iface.v2.V2UserService.UserList:output_type -> user_iface.v2.UserListResponse
-	13, // 39: user_iface.v2.V2UserService.ResetPassword:output_type -> user_iface.v2.ResetPasswordResponse
-	27, // 40: user_iface.v2.V2UserService.TeamUserUpdate:output_type -> user_iface.v2.TeamUserUpdateResponse
-	4,  // 41: user_iface.v2.V2UserService.TeamAccessList:output_type -> user_iface.v2.TeamAccessListResponse
-	11, // 42: user_iface.v2.V2UserService.TeamSynclegacy:output_type -> user_iface.v2.TeamSynclegacyResponse
-	32, // [32:43] is the sub-list for method output_type
-	21, // [21:32] is the sub-list for method input_type
-	21, // [21:21] is the sub-list for extension type_name
-	21, // [21:21] is the sub-list for extension extendee
-	0,  // [0:21] is the sub-list for field type_name
+	37, // 12: user_iface.v2.UserListRequest.page:type_name -> common.v1.PageFilter
+	7,  // 13: user_iface.v2.UserListResponse.users:type_name -> user_iface.v2.UserMapItem
+	38, // 14: user_iface.v2.UserListResponse.page_info:type_name -> common.v1.PageInfo
+	36, // 15: user_iface.v2.AddUser.role:type_name -> role_base.v1.Role
+	36, // 16: user_iface.v2.CreateUser.role:type_name -> role_base.v1.Role
+	24, // 17: user_iface.v2.TeamUserUpdateRequest.add:type_name -> user_iface.v2.AddUser
+	23, // 18: user_iface.v2.TeamUserUpdateRequest.remove:type_name -> user_iface.v2.RemoveUser
+	25, // 19: user_iface.v2.TeamUserUpdateRequest.create:type_name -> user_iface.v2.CreateUser
+	1,  // 20: user_iface.v2.User.status:type_name -> user_iface.v2.UserStatus
+	36, // 21: user_iface.v2.User.role:type_name -> role_base.v1.Role
+	7,  // 22: user_iface.v2.UserByIDsResponse.UsersEntry.value:type_name -> user_iface.v2.UserMapItem
+	33, // 23: user_iface.v2.V2UserService.CreateUser:input_type -> user_iface.v2.CreateUserRequest
+	29, // 24: user_iface.v2.V2UserService.UpdateUser:input_type -> user_iface.v2.UpdateUserRequest
+	31, // 25: user_iface.v2.V2UserService.DeleteUser:input_type -> user_iface.v2.DeleteUserRequest
+	19, // 26: user_iface.v2.V2UserService.SuspendUser:input_type -> user_iface.v2.SuspendUserRequest
+	17, // 27: user_iface.v2.V2UserService.SearchUser:input_type -> user_iface.v2.SearchUserRequest
+	8,  // 28: user_iface.v2.V2UserService.UserByIDs:input_type -> user_iface.v2.UserByIDsRequest
+	21, // 29: user_iface.v2.V2UserService.UserList:input_type -> user_iface.v2.UserListRequest
+	12, // 30: user_iface.v2.V2UserService.ResetPassword:input_type -> user_iface.v2.ResetPasswordRequest
+	26, // 31: user_iface.v2.V2UserService.TeamUserUpdate:input_type -> user_iface.v2.TeamUserUpdateRequest
+	2,  // 32: user_iface.v2.V2UserService.TeamAccessList:input_type -> user_iface.v2.TeamAccessListRequest
+	10, // 33: user_iface.v2.V2UserService.TeamSynclegacy:input_type -> user_iface.v2.TeamSynclegacyRequest
+	34, // 34: user_iface.v2.V2UserService.CreateUser:output_type -> user_iface.v2.CreateUserResponse
+	32, // 35: user_iface.v2.V2UserService.UpdateUser:output_type -> user_iface.v2.UpdateUserResponse
+	30, // 36: user_iface.v2.V2UserService.DeleteUser:output_type -> user_iface.v2.DeleteUserResponse
+	20, // 37: user_iface.v2.V2UserService.SuspendUser:output_type -> user_iface.v2.SuspendUserResponse
+	18, // 38: user_iface.v2.V2UserService.SearchUser:output_type -> user_iface.v2.SearchUserResponse
+	9,  // 39: user_iface.v2.V2UserService.UserByIDs:output_type -> user_iface.v2.UserByIDsResponse
+	22, // 40: user_iface.v2.V2UserService.UserList:output_type -> user_iface.v2.UserListResponse
+	13, // 41: user_iface.v2.V2UserService.ResetPassword:output_type -> user_iface.v2.ResetPasswordResponse
+	27, // 42: user_iface.v2.V2UserService.TeamUserUpdate:output_type -> user_iface.v2.TeamUserUpdateResponse
+	4,  // 43: user_iface.v2.V2UserService.TeamAccessList:output_type -> user_iface.v2.TeamAccessListResponse
+	11, // 44: user_iface.v2.V2UserService.TeamSynclegacy:output_type -> user_iface.v2.TeamSynclegacyResponse
+	34, // [34:45] is the sub-list for method output_type
+	23, // [23:34] is the sub-list for method input_type
+	23, // [23:23] is the sub-list for extension type_name
+	23, // [23:23] is the sub-list for extension extendee
+	0,  // [0:23] is the sub-list for field type_name
 }
 
 func init() { file_user_iface_v2_v2_user_proto_init() }
