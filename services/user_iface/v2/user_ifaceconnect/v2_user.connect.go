@@ -52,6 +52,9 @@ const (
 	V2UserServiceUserByIDsProcedure = "/user_iface.v2.V2UserService/UserByIDs"
 	// V2UserServiceUserListProcedure is the fully-qualified name of the V2UserService's UserList RPC.
 	V2UserServiceUserListProcedure = "/user_iface.v2.V2UserService/UserList"
+	// V2UserServiceUserChangePhoneNumberProcedure is the fully-qualified name of the V2UserService's
+	// UserChangePhoneNumber RPC.
+	V2UserServiceUserChangePhoneNumberProcedure = "/user_iface.v2.V2UserService/UserChangePhoneNumber"
 	// V2UserServiceResetPasswordProcedure is the fully-qualified name of the V2UserService's
 	// ResetPassword RPC.
 	V2UserServiceResetPasswordProcedure = "/user_iface.v2.V2UserService/ResetPassword"
@@ -75,6 +78,7 @@ type V2UserServiceClient interface {
 	SearchUser(context.Context, *connect.Request[v2.SearchUserRequest]) (*connect.Response[v2.SearchUserResponse], error)
 	UserByIDs(context.Context, *connect.Request[v2.UserByIDsRequest]) (*connect.Response[v2.UserByIDsResponse], error)
 	UserList(context.Context, *connect.Request[v2.UserListRequest]) (*connect.Response[v2.UserListResponse], error)
+	UserChangePhoneNumber(context.Context, *connect.Request[v2.UserChangePhoneNumberRequest]) (*connect.Response[v2.UserChangePhoneNumberResponse], error)
 	ResetPassword(context.Context, *connect.Request[v2.ResetPasswordRequest]) (*connect.Response[v2.ResetPasswordResponse], error)
 	TeamUserUpdate(context.Context, *connect.Request[v2.TeamUserUpdateRequest]) (*connect.Response[v2.TeamUserUpdateResponse], error)
 	TeamAccessList(context.Context, *connect.Request[v2.TeamAccessListRequest]) (*connect.Response[v2.TeamAccessListResponse], error)
@@ -134,6 +138,12 @@ func NewV2UserServiceClient(httpClient connect.HTTPClient, baseURL string, opts 
 			connect.WithSchema(v2UserServiceMethods.ByName("UserList")),
 			connect.WithClientOptions(opts...),
 		),
+		userChangePhoneNumber: connect.NewClient[v2.UserChangePhoneNumberRequest, v2.UserChangePhoneNumberResponse](
+			httpClient,
+			baseURL+V2UserServiceUserChangePhoneNumberProcedure,
+			connect.WithSchema(v2UserServiceMethods.ByName("UserChangePhoneNumber")),
+			connect.WithClientOptions(opts...),
+		),
 		resetPassword: connect.NewClient[v2.ResetPasswordRequest, v2.ResetPasswordResponse](
 			httpClient,
 			baseURL+V2UserServiceResetPasswordProcedure,
@@ -163,17 +173,18 @@ func NewV2UserServiceClient(httpClient connect.HTTPClient, baseURL string, opts 
 
 // v2UserServiceClient implements V2UserServiceClient.
 type v2UserServiceClient struct {
-	createUser     *connect.Client[v2.CreateUserRequest, v2.CreateUserResponse]
-	updateUser     *connect.Client[v2.UpdateUserRequest, v2.UpdateUserResponse]
-	deleteUser     *connect.Client[v2.DeleteUserRequest, v2.DeleteUserResponse]
-	suspendUser    *connect.Client[v2.SuspendUserRequest, v2.SuspendUserResponse]
-	searchUser     *connect.Client[v2.SearchUserRequest, v2.SearchUserResponse]
-	userByIDs      *connect.Client[v2.UserByIDsRequest, v2.UserByIDsResponse]
-	userList       *connect.Client[v2.UserListRequest, v2.UserListResponse]
-	resetPassword  *connect.Client[v2.ResetPasswordRequest, v2.ResetPasswordResponse]
-	teamUserUpdate *connect.Client[v2.TeamUserUpdateRequest, v2.TeamUserUpdateResponse]
-	teamAccessList *connect.Client[v2.TeamAccessListRequest, v2.TeamAccessListResponse]
-	teamSynclegacy *connect.Client[v2.TeamSynclegacyRequest, v2.TeamSynclegacyResponse]
+	createUser            *connect.Client[v2.CreateUserRequest, v2.CreateUserResponse]
+	updateUser            *connect.Client[v2.UpdateUserRequest, v2.UpdateUserResponse]
+	deleteUser            *connect.Client[v2.DeleteUserRequest, v2.DeleteUserResponse]
+	suspendUser           *connect.Client[v2.SuspendUserRequest, v2.SuspendUserResponse]
+	searchUser            *connect.Client[v2.SearchUserRequest, v2.SearchUserResponse]
+	userByIDs             *connect.Client[v2.UserByIDsRequest, v2.UserByIDsResponse]
+	userList              *connect.Client[v2.UserListRequest, v2.UserListResponse]
+	userChangePhoneNumber *connect.Client[v2.UserChangePhoneNumberRequest, v2.UserChangePhoneNumberResponse]
+	resetPassword         *connect.Client[v2.ResetPasswordRequest, v2.ResetPasswordResponse]
+	teamUserUpdate        *connect.Client[v2.TeamUserUpdateRequest, v2.TeamUserUpdateResponse]
+	teamAccessList        *connect.Client[v2.TeamAccessListRequest, v2.TeamAccessListResponse]
+	teamSynclegacy        *connect.Client[v2.TeamSynclegacyRequest, v2.TeamSynclegacyResponse]
 }
 
 // CreateUser calls user_iface.v2.V2UserService.CreateUser.
@@ -211,6 +222,11 @@ func (c *v2UserServiceClient) UserList(ctx context.Context, req *connect.Request
 	return c.userList.CallUnary(ctx, req)
 }
 
+// UserChangePhoneNumber calls user_iface.v2.V2UserService.UserChangePhoneNumber.
+func (c *v2UserServiceClient) UserChangePhoneNumber(ctx context.Context, req *connect.Request[v2.UserChangePhoneNumberRequest]) (*connect.Response[v2.UserChangePhoneNumberResponse], error) {
+	return c.userChangePhoneNumber.CallUnary(ctx, req)
+}
+
 // ResetPassword calls user_iface.v2.V2UserService.ResetPassword.
 func (c *v2UserServiceClient) ResetPassword(ctx context.Context, req *connect.Request[v2.ResetPasswordRequest]) (*connect.Response[v2.ResetPasswordResponse], error) {
 	return c.resetPassword.CallUnary(ctx, req)
@@ -240,6 +256,7 @@ type V2UserServiceHandler interface {
 	SearchUser(context.Context, *connect.Request[v2.SearchUserRequest]) (*connect.Response[v2.SearchUserResponse], error)
 	UserByIDs(context.Context, *connect.Request[v2.UserByIDsRequest]) (*connect.Response[v2.UserByIDsResponse], error)
 	UserList(context.Context, *connect.Request[v2.UserListRequest]) (*connect.Response[v2.UserListResponse], error)
+	UserChangePhoneNumber(context.Context, *connect.Request[v2.UserChangePhoneNumberRequest]) (*connect.Response[v2.UserChangePhoneNumberResponse], error)
 	ResetPassword(context.Context, *connect.Request[v2.ResetPasswordRequest]) (*connect.Response[v2.ResetPasswordResponse], error)
 	TeamUserUpdate(context.Context, *connect.Request[v2.TeamUserUpdateRequest]) (*connect.Response[v2.TeamUserUpdateResponse], error)
 	TeamAccessList(context.Context, *connect.Request[v2.TeamAccessListRequest]) (*connect.Response[v2.TeamAccessListResponse], error)
@@ -295,6 +312,12 @@ func NewV2UserServiceHandler(svc V2UserServiceHandler, opts ...connect.HandlerOp
 		connect.WithSchema(v2UserServiceMethods.ByName("UserList")),
 		connect.WithHandlerOptions(opts...),
 	)
+	v2UserServiceUserChangePhoneNumberHandler := connect.NewUnaryHandler(
+		V2UserServiceUserChangePhoneNumberProcedure,
+		svc.UserChangePhoneNumber,
+		connect.WithSchema(v2UserServiceMethods.ByName("UserChangePhoneNumber")),
+		connect.WithHandlerOptions(opts...),
+	)
 	v2UserServiceResetPasswordHandler := connect.NewUnaryHandler(
 		V2UserServiceResetPasswordProcedure,
 		svc.ResetPassword,
@@ -335,6 +358,8 @@ func NewV2UserServiceHandler(svc V2UserServiceHandler, opts ...connect.HandlerOp
 			v2UserServiceUserByIDsHandler.ServeHTTP(w, r)
 		case V2UserServiceUserListProcedure:
 			v2UserServiceUserListHandler.ServeHTTP(w, r)
+		case V2UserServiceUserChangePhoneNumberProcedure:
+			v2UserServiceUserChangePhoneNumberHandler.ServeHTTP(w, r)
 		case V2UserServiceResetPasswordProcedure:
 			v2UserServiceResetPasswordHandler.ServeHTTP(w, r)
 		case V2UserServiceTeamUserUpdateProcedure:
@@ -378,6 +403,10 @@ func (UnimplementedV2UserServiceHandler) UserByIDs(context.Context, *connect.Req
 
 func (UnimplementedV2UserServiceHandler) UserList(context.Context, *connect.Request[v2.UserListRequest]) (*connect.Response[v2.UserListResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("user_iface.v2.V2UserService.UserList is not implemented"))
+}
+
+func (UnimplementedV2UserServiceHandler) UserChangePhoneNumber(context.Context, *connect.Request[v2.UserChangePhoneNumberRequest]) (*connect.Response[v2.UserChangePhoneNumberResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("user_iface.v2.V2UserService.UserChangePhoneNumber is not implemented"))
 }
 
 func (UnimplementedV2UserServiceHandler) ResetPassword(context.Context, *connect.Request[v2.ResetPasswordRequest]) (*connect.Response[v2.ResetPasswordResponse], error) {

@@ -15,6 +15,7 @@ service V2UserService {
   rpc SearchUser(SearchUserRequest) returns (SearchUserResponse);
   rpc UserByIDs(UserByIDsRequest) returns (UserByIDsResponse);
   rpc UserList(UserListRequest) returns (UserListResponse);
+  rpc UserChangePhoneNumber(UserChangePhoneNumberRequest) returns (UserChangePhoneNumberResponse);
 
   rpc ResetPassword(ResetPasswordRequest) returns (ResetPasswordResponse);
 
@@ -23,6 +24,27 @@ service V2UserService {
 
   rpc TeamSynclegacy(TeamSynclegacyRequest) returns (stream TeamSynclegacyResponse);
 }
+
+message UserChangePhoneNumberSendOtp {
+  string phone = 1;
+}
+
+message UserChangePhoneNumberSendUpdate {
+  string phone = 1;
+  string otp = 2;
+}
+
+message UserChangePhoneNumberRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
+  uint64 user_id = 1;
+  oneof action {
+    UserChangePhoneNumberSendOtp otp = 2;
+    UserChangePhoneNumberSendUpdate update = 3;
+  }
+}
+
+message UserChangePhoneNumberResponse {}
 
 enum TeamType {
   TEAM_TYPE_UNSPECIFIED = 0;
@@ -146,6 +168,7 @@ message SuspendUserRequest {
   };
 
   uint64 user_id = 1;
+  bool suspend = 2;
 }
 
 message SuspendUserResponse {}
@@ -252,8 +275,6 @@ message UpdateUserRequest {
 
   uint64 id = 1;
   string email = 2;
-  string username = 3;
-  string phone_number = 5;
   string name = 6;
 }
 

@@ -228,6 +228,32 @@ func (mr *MockV2UserServiceClientMockRecorder) UserList(ctx, req interface{}) *g
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UserList", reflect.TypeOf((*MockV2UserService)(nil).UserList), ctx, req)
 }
 
+func (m *MockV2UserService) UserChangePhoneNumber(ctx context.Context, req *connect.Request[v2.UserChangePhoneNumberRequest]) (*connect.Response[v2.UserChangePhoneNumberResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "UserChangePhoneNumber", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v2.UserChangePhoneNumberResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockV2UserServiceMockRecorder) UserChangePhoneNumber(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UserChangePhoneNumber", reflect.TypeOf((*MockV2UserService)(nil).UserChangePhoneNumber), ctx, req)
+}
+
+func (m *MockV2UserServiceClient) UserChangePhoneNumber(ctx context.Context, req *connect.Request[v2.UserChangePhoneNumberRequest]) (*connect.Response[v2.UserChangePhoneNumberResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "UserChangePhoneNumber", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v2.UserChangePhoneNumberResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockV2UserServiceClientMockRecorder) UserChangePhoneNumber(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UserChangePhoneNumber", reflect.TypeOf((*MockV2UserService)(nil).UserChangePhoneNumber), ctx, req)
+}
+
 func (m *MockV2UserService) ResetPassword(ctx context.Context, req *connect.Request[v2.ResetPasswordRequest]) (*connect.Response[v2.ResetPasswordResponse], error) {
     m.ctrl.T.Helper()
     ret := m.ctrl.Call(m, "ResetPassword", ctx, req)

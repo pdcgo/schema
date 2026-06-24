@@ -125,6 +125,228 @@ func (UserStatus) EnumDescriptor() ([]byte, []int) {
 	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{1}
 }
 
+type UserChangePhoneNumberSendOtp struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Phone         string                 `protobuf:"bytes,1,opt,name=phone,proto3" json:"phone,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UserChangePhoneNumberSendOtp) Reset() {
+	*x = UserChangePhoneNumberSendOtp{}
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserChangePhoneNumberSendOtp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserChangePhoneNumberSendOtp) ProtoMessage() {}
+
+func (x *UserChangePhoneNumberSendOtp) ProtoReflect() protoreflect.Message {
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserChangePhoneNumberSendOtp.ProtoReflect.Descriptor instead.
+func (*UserChangePhoneNumberSendOtp) Descriptor() ([]byte, []int) {
+	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *UserChangePhoneNumberSendOtp) GetPhone() string {
+	if x != nil {
+		return x.Phone
+	}
+	return ""
+}
+
+type UserChangePhoneNumberSendUpdate struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Phone         string                 `protobuf:"bytes,1,opt,name=phone,proto3" json:"phone,omitempty"`
+	Otp           string                 `protobuf:"bytes,2,opt,name=otp,proto3" json:"otp,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UserChangePhoneNumberSendUpdate) Reset() {
+	*x = UserChangePhoneNumberSendUpdate{}
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserChangePhoneNumberSendUpdate) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserChangePhoneNumberSendUpdate) ProtoMessage() {}
+
+func (x *UserChangePhoneNumberSendUpdate) ProtoReflect() protoreflect.Message {
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserChangePhoneNumberSendUpdate.ProtoReflect.Descriptor instead.
+func (*UserChangePhoneNumberSendUpdate) Descriptor() ([]byte, []int) {
+	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *UserChangePhoneNumberSendUpdate) GetPhone() string {
+	if x != nil {
+		return x.Phone
+	}
+	return ""
+}
+
+func (x *UserChangePhoneNumberSendUpdate) GetOtp() string {
+	if x != nil {
+		return x.Otp
+	}
+	return ""
+}
+
+type UserChangePhoneNumberRequest struct {
+	state  protoimpl.MessageState `protogen:"open.v1"`
+	UserId uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	// Types that are valid to be assigned to Action:
+	//
+	//	*UserChangePhoneNumberRequest_Otp
+	//	*UserChangePhoneNumberRequest_Update
+	Action        isUserChangePhoneNumberRequest_Action `protobuf_oneof:"action"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UserChangePhoneNumberRequest) Reset() {
+	*x = UserChangePhoneNumberRequest{}
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserChangePhoneNumberRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserChangePhoneNumberRequest) ProtoMessage() {}
+
+func (x *UserChangePhoneNumberRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserChangePhoneNumberRequest.ProtoReflect.Descriptor instead.
+func (*UserChangePhoneNumberRequest) Descriptor() ([]byte, []int) {
+	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *UserChangePhoneNumberRequest) GetUserId() uint64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *UserChangePhoneNumberRequest) GetAction() isUserChangePhoneNumberRequest_Action {
+	if x != nil {
+		return x.Action
+	}
+	return nil
+}
+
+func (x *UserChangePhoneNumberRequest) GetOtp() *UserChangePhoneNumberSendOtp {
+	if x != nil {
+		if x, ok := x.Action.(*UserChangePhoneNumberRequest_Otp); ok {
+			return x.Otp
+		}
+	}
+	return nil
+}
+
+func (x *UserChangePhoneNumberRequest) GetUpdate() *UserChangePhoneNumberSendUpdate {
+	if x != nil {
+		if x, ok := x.Action.(*UserChangePhoneNumberRequest_Update); ok {
+			return x.Update
+		}
+	}
+	return nil
+}
+
+type isUserChangePhoneNumberRequest_Action interface {
+	isUserChangePhoneNumberRequest_Action()
+}
+
+type UserChangePhoneNumberRequest_Otp struct {
+	Otp *UserChangePhoneNumberSendOtp `protobuf:"bytes,2,opt,name=otp,proto3,oneof"`
+}
+
+type UserChangePhoneNumberRequest_Update struct {
+	Update *UserChangePhoneNumberSendUpdate `protobuf:"bytes,3,opt,name=update,proto3,oneof"`
+}
+
+func (*UserChangePhoneNumberRequest_Otp) isUserChangePhoneNumberRequest_Action() {}
+
+func (*UserChangePhoneNumberRequest_Update) isUserChangePhoneNumberRequest_Action() {}
+
+type UserChangePhoneNumberResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UserChangePhoneNumberResponse) Reset() {
+	*x = UserChangePhoneNumberResponse{}
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserChangePhoneNumberResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserChangePhoneNumberResponse) ProtoMessage() {}
+
+func (x *UserChangePhoneNumberResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserChangePhoneNumberResponse.ProtoReflect.Descriptor instead.
+func (*UserChangePhoneNumberResponse) Descriptor() ([]byte, []int) {
+	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{3}
+}
+
 type TeamAccessListRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
@@ -134,7 +356,7 @@ type TeamAccessListRequest struct {
 
 func (x *TeamAccessListRequest) Reset() {
 	*x = TeamAccessListRequest{}
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[0]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -146,7 +368,7 @@ func (x *TeamAccessListRequest) String() string {
 func (*TeamAccessListRequest) ProtoMessage() {}
 
 func (x *TeamAccessListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[0]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -159,7 +381,7 @@ func (x *TeamAccessListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TeamAccessListRequest.ProtoReflect.Descriptor instead.
 func (*TeamAccessListRequest) Descriptor() ([]byte, []int) {
-	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{0}
+	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *TeamAccessListRequest) GetUserId() uint64 {
@@ -182,7 +404,7 @@ type TeamAccessItem struct {
 
 func (x *TeamAccessItem) Reset() {
 	*x = TeamAccessItem{}
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[1]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -194,7 +416,7 @@ func (x *TeamAccessItem) String() string {
 func (*TeamAccessItem) ProtoMessage() {}
 
 func (x *TeamAccessItem) ProtoReflect() protoreflect.Message {
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[1]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -207,7 +429,7 @@ func (x *TeamAccessItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TeamAccessItem.ProtoReflect.Descriptor instead.
 func (*TeamAccessItem) Descriptor() ([]byte, []int) {
-	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{1}
+	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *TeamAccessItem) GetTeamId() uint64 {
@@ -254,7 +476,7 @@ type TeamAccessListResponse struct {
 
 func (x *TeamAccessListResponse) Reset() {
 	*x = TeamAccessListResponse{}
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[2]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -266,7 +488,7 @@ func (x *TeamAccessListResponse) String() string {
 func (*TeamAccessListResponse) ProtoMessage() {}
 
 func (x *TeamAccessListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[2]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -279,7 +501,7 @@ func (x *TeamAccessListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TeamAccessListResponse.ProtoReflect.Descriptor instead.
 func (*TeamAccessListResponse) Descriptor() ([]byte, []int) {
-	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{2}
+	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *TeamAccessListResponse) GetAccess() []*TeamAccessItem {
@@ -300,7 +522,7 @@ type UserAlias struct {
 
 func (x *UserAlias) Reset() {
 	*x = UserAlias{}
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[3]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -312,7 +534,7 @@ func (x *UserAlias) String() string {
 func (*UserAlias) ProtoMessage() {}
 
 func (x *UserAlias) ProtoReflect() protoreflect.Message {
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[3]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -325,7 +547,7 @@ func (x *UserAlias) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserAlias.ProtoReflect.Descriptor instead.
 func (*UserAlias) Descriptor() ([]byte, []int) {
-	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{3}
+	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *UserAlias) GetTeamId() uint64 {
@@ -364,7 +586,7 @@ type UserInfo struct {
 
 func (x *UserInfo) Reset() {
 	*x = UserInfo{}
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[4]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -376,7 +598,7 @@ func (x *UserInfo) String() string {
 func (*UserInfo) ProtoMessage() {}
 
 func (x *UserInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[4]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -389,7 +611,7 @@ func (x *UserInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserInfo.ProtoReflect.Descriptor instead.
 func (*UserInfo) Descriptor() ([]byte, []int) {
-	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{4}
+	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *UserInfo) GetId() uint64 {
@@ -451,7 +673,7 @@ type UserMapItem struct {
 
 func (x *UserMapItem) Reset() {
 	*x = UserMapItem{}
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[5]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -463,7 +685,7 @@ func (x *UserMapItem) String() string {
 func (*UserMapItem) ProtoMessage() {}
 
 func (x *UserMapItem) ProtoReflect() protoreflect.Message {
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[5]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -476,7 +698,7 @@ func (x *UserMapItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserMapItem.ProtoReflect.Descriptor instead.
 func (*UserMapItem) Descriptor() ([]byte, []int) {
-	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{5}
+	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *UserMapItem) GetUser() *UserInfo {
@@ -503,7 +725,7 @@ type UserByIDsRequest struct {
 
 func (x *UserByIDsRequest) Reset() {
 	*x = UserByIDsRequest{}
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[6]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -515,7 +737,7 @@ func (x *UserByIDsRequest) String() string {
 func (*UserByIDsRequest) ProtoMessage() {}
 
 func (x *UserByIDsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[6]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -528,7 +750,7 @@ func (x *UserByIDsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserByIDsRequest.ProtoReflect.Descriptor instead.
 func (*UserByIDsRequest) Descriptor() ([]byte, []int) {
-	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{6}
+	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *UserByIDsRequest) GetIds() []uint64 {
@@ -554,7 +776,7 @@ type UserByIDsResponse struct {
 
 func (x *UserByIDsResponse) Reset() {
 	*x = UserByIDsResponse{}
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[7]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -566,7 +788,7 @@ func (x *UserByIDsResponse) String() string {
 func (*UserByIDsResponse) ProtoMessage() {}
 
 func (x *UserByIDsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[7]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -579,7 +801,7 @@ func (x *UserByIDsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserByIDsResponse.ProtoReflect.Descriptor instead.
 func (*UserByIDsResponse) Descriptor() ([]byte, []int) {
-	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{7}
+	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *UserByIDsResponse) GetUsers() map[uint64]*UserMapItem {
@@ -598,7 +820,7 @@ type TeamSynclegacyRequest struct {
 
 func (x *TeamSynclegacyRequest) Reset() {
 	*x = TeamSynclegacyRequest{}
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[8]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -610,7 +832,7 @@ func (x *TeamSynclegacyRequest) String() string {
 func (*TeamSynclegacyRequest) ProtoMessage() {}
 
 func (x *TeamSynclegacyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[8]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -623,7 +845,7 @@ func (x *TeamSynclegacyRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TeamSynclegacyRequest.ProtoReflect.Descriptor instead.
 func (*TeamSynclegacyRequest) Descriptor() ([]byte, []int) {
-	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{8}
+	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *TeamSynclegacyRequest) GetTeamId() uint64 {
@@ -641,7 +863,7 @@ type TeamSynclegacyResponse struct {
 
 func (x *TeamSynclegacyResponse) Reset() {
 	*x = TeamSynclegacyResponse{}
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[9]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -653,7 +875,7 @@ func (x *TeamSynclegacyResponse) String() string {
 func (*TeamSynclegacyResponse) ProtoMessage() {}
 
 func (x *TeamSynclegacyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[9]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -666,7 +888,7 @@ func (x *TeamSynclegacyResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TeamSynclegacyResponse.ProtoReflect.Descriptor instead.
 func (*TeamSynclegacyResponse) Descriptor() ([]byte, []int) {
-	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{9}
+	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{13}
 }
 
 type ResetPasswordRequest struct {
@@ -680,7 +902,7 @@ type ResetPasswordRequest struct {
 
 func (x *ResetPasswordRequest) Reset() {
 	*x = ResetPasswordRequest{}
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[10]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -692,7 +914,7 @@ func (x *ResetPasswordRequest) String() string {
 func (*ResetPasswordRequest) ProtoMessage() {}
 
 func (x *ResetPasswordRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[10]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -705,7 +927,7 @@ func (x *ResetPasswordRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResetPasswordRequest.ProtoReflect.Descriptor instead.
 func (*ResetPasswordRequest) Descriptor() ([]byte, []int) {
-	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{10}
+	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *ResetPasswordRequest) GetUserId() uint64 {
@@ -737,7 +959,7 @@ type ResetPasswordResponse struct {
 
 func (x *ResetPasswordResponse) Reset() {
 	*x = ResetPasswordResponse{}
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[11]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -749,7 +971,7 @@ func (x *ResetPasswordResponse) String() string {
 func (*ResetPasswordResponse) ProtoMessage() {}
 
 func (x *ResetPasswordResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[11]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -762,7 +984,7 @@ func (x *ResetPasswordResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResetPasswordResponse.ProtoReflect.Descriptor instead.
 func (*ResetPasswordResponse) Descriptor() ([]byte, []int) {
-	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{11}
+	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{15}
 }
 
 type SearchUserItem struct {
@@ -779,7 +1001,7 @@ type SearchUserItem struct {
 
 func (x *SearchUserItem) Reset() {
 	*x = SearchUserItem{}
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[12]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -791,7 +1013,7 @@ func (x *SearchUserItem) String() string {
 func (*SearchUserItem) ProtoMessage() {}
 
 func (x *SearchUserItem) ProtoReflect() protoreflect.Message {
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[12]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -804,7 +1026,7 @@ func (x *SearchUserItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchUserItem.ProtoReflect.Descriptor instead.
 func (*SearchUserItem) Descriptor() ([]byte, []int) {
-	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{12}
+	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *SearchUserItem) GetId() uint64 {
@@ -859,7 +1081,7 @@ type SearchUserByKeyword struct {
 
 func (x *SearchUserByKeyword) Reset() {
 	*x = SearchUserByKeyword{}
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[13]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -871,7 +1093,7 @@ func (x *SearchUserByKeyword) String() string {
 func (*SearchUserByKeyword) ProtoMessage() {}
 
 func (x *SearchUserByKeyword) ProtoReflect() protoreflect.Message {
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[13]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -884,7 +1106,7 @@ func (x *SearchUserByKeyword) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchUserByKeyword.ProtoReflect.Descriptor instead.
 func (*SearchUserByKeyword) Descriptor() ([]byte, []int) {
-	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{13}
+	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *SearchUserByKeyword) GetQ() string {
@@ -910,7 +1132,7 @@ type SearchUserByIds struct {
 
 func (x *SearchUserByIds) Reset() {
 	*x = SearchUserByIds{}
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[14]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -922,7 +1144,7 @@ func (x *SearchUserByIds) String() string {
 func (*SearchUserByIds) ProtoMessage() {}
 
 func (x *SearchUserByIds) ProtoReflect() protoreflect.Message {
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[14]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -935,7 +1157,7 @@ func (x *SearchUserByIds) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchUserByIds.ProtoReflect.Descriptor instead.
 func (*SearchUserByIds) Descriptor() ([]byte, []int) {
-	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{14}
+	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *SearchUserByIds) GetIds() []uint64 {
@@ -960,7 +1182,7 @@ type SearchUserRequest struct {
 
 func (x *SearchUserRequest) Reset() {
 	*x = SearchUserRequest{}
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[15]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -972,7 +1194,7 @@ func (x *SearchUserRequest) String() string {
 func (*SearchUserRequest) ProtoMessage() {}
 
 func (x *SearchUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[15]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -985,7 +1207,7 @@ func (x *SearchUserRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchUserRequest.ProtoReflect.Descriptor instead.
 func (*SearchUserRequest) Descriptor() ([]byte, []int) {
-	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{15}
+	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *SearchUserRequest) GetFilter() isSearchUserRequest_Filter {
@@ -1052,7 +1274,7 @@ type SearchUserResponse struct {
 
 func (x *SearchUserResponse) Reset() {
 	*x = SearchUserResponse{}
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[16]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1064,7 +1286,7 @@ func (x *SearchUserResponse) String() string {
 func (*SearchUserResponse) ProtoMessage() {}
 
 func (x *SearchUserResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[16]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1077,7 +1299,7 @@ func (x *SearchUserResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchUserResponse.ProtoReflect.Descriptor instead.
 func (*SearchUserResponse) Descriptor() ([]byte, []int) {
-	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{16}
+	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *SearchUserResponse) GetUsers() []*SearchUserItem {
@@ -1090,13 +1312,14 @@ func (x *SearchUserResponse) GetUsers() []*SearchUserItem {
 type SuspendUserRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Suspend       bool                   `protobuf:"varint,2,opt,name=suspend,proto3" json:"suspend,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *SuspendUserRequest) Reset() {
 	*x = SuspendUserRequest{}
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[17]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1108,7 +1331,7 @@ func (x *SuspendUserRequest) String() string {
 func (*SuspendUserRequest) ProtoMessage() {}
 
 func (x *SuspendUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[17]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1121,7 +1344,7 @@ func (x *SuspendUserRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SuspendUserRequest.ProtoReflect.Descriptor instead.
 func (*SuspendUserRequest) Descriptor() ([]byte, []int) {
-	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{17}
+	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *SuspendUserRequest) GetUserId() uint64 {
@@ -1129,6 +1352,13 @@ func (x *SuspendUserRequest) GetUserId() uint64 {
 		return x.UserId
 	}
 	return 0
+}
+
+func (x *SuspendUserRequest) GetSuspend() bool {
+	if x != nil {
+		return x.Suspend
+	}
+	return false
 }
 
 type SuspendUserResponse struct {
@@ -1139,7 +1369,7 @@ type SuspendUserResponse struct {
 
 func (x *SuspendUserResponse) Reset() {
 	*x = SuspendUserResponse{}
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[18]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1151,7 +1381,7 @@ func (x *SuspendUserResponse) String() string {
 func (*SuspendUserResponse) ProtoMessage() {}
 
 func (x *SuspendUserResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[18]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1164,7 +1394,7 @@ func (x *SuspendUserResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SuspendUserResponse.ProtoReflect.Descriptor instead.
 func (*SuspendUserResponse) Descriptor() ([]byte, []int) {
-	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{18}
+	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{22}
 }
 
 type UserListRequest struct {
@@ -1179,7 +1409,7 @@ type UserListRequest struct {
 
 func (x *UserListRequest) Reset() {
 	*x = UserListRequest{}
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[19]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1191,7 +1421,7 @@ func (x *UserListRequest) String() string {
 func (*UserListRequest) ProtoMessage() {}
 
 func (x *UserListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[19]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1204,7 +1434,7 @@ func (x *UserListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserListRequest.ProtoReflect.Descriptor instead.
 func (*UserListRequest) Descriptor() ([]byte, []int) {
-	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{19}
+	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *UserListRequest) GetTeamId() uint64 {
@@ -1245,7 +1475,7 @@ type UserListResponse struct {
 
 func (x *UserListResponse) Reset() {
 	*x = UserListResponse{}
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[20]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1257,7 +1487,7 @@ func (x *UserListResponse) String() string {
 func (*UserListResponse) ProtoMessage() {}
 
 func (x *UserListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[20]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1270,7 +1500,7 @@ func (x *UserListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserListResponse.ProtoReflect.Descriptor instead.
 func (*UserListResponse) Descriptor() ([]byte, []int) {
-	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{20}
+	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *UserListResponse) GetUsers() []*UserMapItem {
@@ -1296,7 +1526,7 @@ type RemoveUser struct {
 
 func (x *RemoveUser) Reset() {
 	*x = RemoveUser{}
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[21]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1308,7 +1538,7 @@ func (x *RemoveUser) String() string {
 func (*RemoveUser) ProtoMessage() {}
 
 func (x *RemoveUser) ProtoReflect() protoreflect.Message {
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[21]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1321,7 +1551,7 @@ func (x *RemoveUser) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemoveUser.ProtoReflect.Descriptor instead.
 func (*RemoveUser) Descriptor() ([]byte, []int) {
-	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{21}
+	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *RemoveUser) GetUserId() uint64 {
@@ -1342,7 +1572,7 @@ type AddUser struct {
 
 func (x *AddUser) Reset() {
 	*x = AddUser{}
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[22]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1354,7 +1584,7 @@ func (x *AddUser) String() string {
 func (*AddUser) ProtoMessage() {}
 
 func (x *AddUser) ProtoReflect() protoreflect.Message {
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[22]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1367,7 +1597,7 @@ func (x *AddUser) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddUser.ProtoReflect.Descriptor instead.
 func (*AddUser) Descriptor() ([]byte, []int) {
-	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{22}
+	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *AddUser) GetUserId() uint64 {
@@ -1406,7 +1636,7 @@ type CreateUser struct {
 
 func (x *CreateUser) Reset() {
 	*x = CreateUser{}
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[23]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1418,7 +1648,7 @@ func (x *CreateUser) String() string {
 func (*CreateUser) ProtoMessage() {}
 
 func (x *CreateUser) ProtoReflect() protoreflect.Message {
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[23]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1431,7 +1661,7 @@ func (x *CreateUser) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateUser.ProtoReflect.Descriptor instead.
 func (*CreateUser) Descriptor() ([]byte, []int) {
-	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{23}
+	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *CreateUser) GetEmail() string {
@@ -1498,7 +1728,7 @@ type TeamUserUpdateRequest struct {
 
 func (x *TeamUserUpdateRequest) Reset() {
 	*x = TeamUserUpdateRequest{}
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[24]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1510,7 +1740,7 @@ func (x *TeamUserUpdateRequest) String() string {
 func (*TeamUserUpdateRequest) ProtoMessage() {}
 
 func (x *TeamUserUpdateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[24]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1523,7 +1753,7 @@ func (x *TeamUserUpdateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TeamUserUpdateRequest.ProtoReflect.Descriptor instead.
 func (*TeamUserUpdateRequest) Descriptor() ([]byte, []int) {
-	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{24}
+	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *TeamUserUpdateRequest) GetTeamId() uint64 {
@@ -1597,7 +1827,7 @@ type TeamUserUpdateResponse struct {
 
 func (x *TeamUserUpdateResponse) Reset() {
 	*x = TeamUserUpdateResponse{}
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[25]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1609,7 +1839,7 @@ func (x *TeamUserUpdateResponse) String() string {
 func (*TeamUserUpdateResponse) ProtoMessage() {}
 
 func (x *TeamUserUpdateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[25]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1622,7 +1852,7 @@ func (x *TeamUserUpdateResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TeamUserUpdateResponse.ProtoReflect.Descriptor instead.
 func (*TeamUserUpdateResponse) Descriptor() ([]byte, []int) {
-	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{25}
+	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{29}
 }
 
 type User struct {
@@ -1641,7 +1871,7 @@ type User struct {
 
 func (x *User) Reset() {
 	*x = User{}
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[26]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1653,7 +1883,7 @@ func (x *User) String() string {
 func (*User) ProtoMessage() {}
 
 func (x *User) ProtoReflect() protoreflect.Message {
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[26]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1666,7 +1896,7 @@ func (x *User) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use User.ProtoReflect.Descriptor instead.
 func (*User) Descriptor() ([]byte, []int) {
-	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{26}
+	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *User) GetId() uint64 {
@@ -1729,8 +1959,6 @@ type UpdateUserRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Email         string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
-	Username      string                 `protobuf:"bytes,3,opt,name=username,proto3" json:"username,omitempty"`
-	PhoneNumber   string                 `protobuf:"bytes,5,opt,name=phone_number,json=phoneNumber,proto3" json:"phone_number,omitempty"`
 	Name          string                 `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1738,7 +1966,7 @@ type UpdateUserRequest struct {
 
 func (x *UpdateUserRequest) Reset() {
 	*x = UpdateUserRequest{}
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[27]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1750,7 +1978,7 @@ func (x *UpdateUserRequest) String() string {
 func (*UpdateUserRequest) ProtoMessage() {}
 
 func (x *UpdateUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[27]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1763,7 +1991,7 @@ func (x *UpdateUserRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateUserRequest.ProtoReflect.Descriptor instead.
 func (*UpdateUserRequest) Descriptor() ([]byte, []int) {
-	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{27}
+	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *UpdateUserRequest) GetId() uint64 {
@@ -1776,20 +2004,6 @@ func (x *UpdateUserRequest) GetId() uint64 {
 func (x *UpdateUserRequest) GetEmail() string {
 	if x != nil {
 		return x.Email
-	}
-	return ""
-}
-
-func (x *UpdateUserRequest) GetUsername() string {
-	if x != nil {
-		return x.Username
-	}
-	return ""
-}
-
-func (x *UpdateUserRequest) GetPhoneNumber() string {
-	if x != nil {
-		return x.PhoneNumber
 	}
 	return ""
 }
@@ -1809,7 +2023,7 @@ type DeleteUserResponse struct {
 
 func (x *DeleteUserResponse) Reset() {
 	*x = DeleteUserResponse{}
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[28]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1821,7 +2035,7 @@ func (x *DeleteUserResponse) String() string {
 func (*DeleteUserResponse) ProtoMessage() {}
 
 func (x *DeleteUserResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[28]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1834,7 +2048,7 @@ func (x *DeleteUserResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteUserResponse.ProtoReflect.Descriptor instead.
 func (*DeleteUserResponse) Descriptor() ([]byte, []int) {
-	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{28}
+	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{32}
 }
 
 type DeleteUserRequest struct {
@@ -1846,7 +2060,7 @@ type DeleteUserRequest struct {
 
 func (x *DeleteUserRequest) Reset() {
 	*x = DeleteUserRequest{}
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[29]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1858,7 +2072,7 @@ func (x *DeleteUserRequest) String() string {
 func (*DeleteUserRequest) ProtoMessage() {}
 
 func (x *DeleteUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[29]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1871,7 +2085,7 @@ func (x *DeleteUserRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteUserRequest.ProtoReflect.Descriptor instead.
 func (*DeleteUserRequest) Descriptor() ([]byte, []int) {
-	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{29}
+	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *DeleteUserRequest) GetId() uint64 {
@@ -1889,7 +2103,7 @@ type UpdateUserResponse struct {
 
 func (x *UpdateUserResponse) Reset() {
 	*x = UpdateUserResponse{}
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[30]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1901,7 +2115,7 @@ func (x *UpdateUserResponse) String() string {
 func (*UpdateUserResponse) ProtoMessage() {}
 
 func (x *UpdateUserResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[30]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1914,7 +2128,7 @@ func (x *UpdateUserResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateUserResponse.ProtoReflect.Descriptor instead.
 func (*UpdateUserResponse) Descriptor() ([]byte, []int) {
-	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{30}
+	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{34}
 }
 
 type CreateUserRequest struct {
@@ -1930,7 +2144,7 @@ type CreateUserRequest struct {
 
 func (x *CreateUserRequest) Reset() {
 	*x = CreateUserRequest{}
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[31]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1942,7 +2156,7 @@ func (x *CreateUserRequest) String() string {
 func (*CreateUserRequest) ProtoMessage() {}
 
 func (x *CreateUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[31]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1955,7 +2169,7 @@ func (x *CreateUserRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateUserRequest.ProtoReflect.Descriptor instead.
 func (*CreateUserRequest) Descriptor() ([]byte, []int) {
-	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{31}
+	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *CreateUserRequest) GetEmail() string {
@@ -2002,7 +2216,7 @@ type CreateUserResponse struct {
 
 func (x *CreateUserResponse) Reset() {
 	*x = CreateUserResponse{}
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[32]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2014,7 +2228,7 @@ func (x *CreateUserResponse) String() string {
 func (*CreateUserResponse) ProtoMessage() {}
 
 func (x *CreateUserResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_iface_v2_v2_user_proto_msgTypes[32]
+	mi := &file_user_iface_v2_v2_user_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2027,7 +2241,7 @@ func (x *CreateUserResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateUserResponse.ProtoReflect.Descriptor instead.
 func (*CreateUserResponse) Descriptor() ([]byte, []int) {
-	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{32}
+	return file_user_iface_v2_v2_user_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *CreateUserResponse) GetId() uint64 {
@@ -2041,7 +2255,18 @@ var File_user_iface_v2_v2_user_proto protoreflect.FileDescriptor
 
 const file_user_iface_v2_v2_user_proto_rawDesc = "" +
 	"\n" +
-	"\x1buser_iface/v2/v2_user.proto\x12\ruser_iface.v2\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x17role_base/v1/role.proto\"8\n" +
+	"\x1buser_iface/v2/v2_user.proto\x12\ruser_iface.v2\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x17role_base/v1/role.proto\"4\n" +
+	"\x1cUserChangePhoneNumberSendOtp\x12\x14\n" +
+	"\x05phone\x18\x01 \x01(\tR\x05phone\"I\n" +
+	"\x1fUserChangePhoneNumberSendUpdate\x12\x14\n" +
+	"\x05phone\x18\x01 \x01(\tR\x05phone\x12\x10\n" +
+	"\x03otp\x18\x02 \x01(\tR\x03otp\"\xd4\x01\n" +
+	"\x1cUserChangePhoneNumberRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x04R\x06userId\x12?\n" +
+	"\x03otp\x18\x02 \x01(\v2+.user_iface.v2.UserChangePhoneNumberSendOtpH\x00R\x03otp\x12H\n" +
+	"\x06update\x18\x03 \x01(\v2..user_iface.v2.UserChangePhoneNumberSendUpdateH\x00R\x06update:\x06\x92\xb5\x18\x02 \x01B\b\n" +
+	"\x06action\"\x1f\n" +
+	"\x1dUserChangePhoneNumberResponse\"8\n" +
 	"\x15TeamAccessListRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x04R\x06userId:\x06\x92\xb5\x18\x02 \x01\"\xba\x01\n" +
 	"\x0eTeamAccessItem\x12\x17\n" +
@@ -2104,9 +2329,10 @@ const file_user_iface_v2_v2_user_proto_rawDesc = "" +
 	"\tpage_size\x18\x04 \x01(\x03R\bpageSize:\x06\x92\xb5\x18\x02 \x01B\b\n" +
 	"\x06filter\"I\n" +
 	"\x12SearchUserResponse\x123\n" +
-	"\x05users\x18\x01 \x03(\v2\x1d.user_iface.v2.SearchUserItemR\x05users\"7\n" +
+	"\x05users\x18\x01 \x03(\v2\x1d.user_iface.v2.SearchUserItemR\x05users\"Q\n" +
 	"\x12SuspendUserRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x04R\x06userId:\b\x92\xb5\x18\x04\n" +
+	"\auser_id\x18\x01 \x01(\x04R\x06userId\x12\x18\n" +
+	"\asuspend\x18\x02 \x01(\bR\asuspend:\b\x92\xb5\x18\x04\n" +
 	"\x02\x01\x02\"\x15\n" +
 	"\x13SuspendUserResponse\"\xa5\x01\n" +
 	"\x0fUserListRequest\x12\x1d\n" +
@@ -2155,12 +2381,10 @@ const file_user_iface_v2_v2_user_proto_rawDesc = "" +
 	"\x04name\x18\x06 \x01(\tR\x04name\x121\n" +
 	"\x06status\x18\a \x01(\x0e2\x19.user_iface.v2.UserStatusR\x06status\x12&\n" +
 	"\x04role\x18\b \x01(\x0e2\x12.role_base.v1.RoleR\x04role\x12'\n" +
-	"\x0fprofile_picture\x18\t \x01(\tR\x0eprofilePicture\"\x98\x01\n" +
+	"\x0fprofile_picture\x18\t \x01(\tR\x0eprofilePicture\"Y\n" +
 	"\x11UpdateUserRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x14\n" +
-	"\x05email\x18\x02 \x01(\tR\x05email\x12\x1a\n" +
-	"\busername\x18\x03 \x01(\tR\busername\x12!\n" +
-	"\fphone_number\x18\x05 \x01(\tR\vphoneNumber\x12\x12\n" +
+	"\x05email\x18\x02 \x01(\tR\x05email\x12\x12\n" +
 	"\x04name\x18\x06 \x01(\tR\x04name:\n" +
 	"\x92\xb5\x18\x06\n" +
 	"\x04\x01\x02\x03\x04\"\x14\n" +
@@ -2191,7 +2415,7 @@ const file_user_iface_v2_v2_user_proto_rawDesc = "" +
 	"UserStatus\x12\x1b\n" +
 	"\x17USER_STATUS_UNSPECIFIED\x10\x00\x12\x16\n" +
 	"\x12USER_STATUS_ACTIVE\x10\x01\x12\x19\n" +
-	"\x15USER_STATUS_SUSPENDED\x10\x022\xc9\a\n" +
+	"\x15USER_STATUS_SUSPENDED\x10\x022\xbd\b\n" +
 	"\rV2UserService\x12Q\n" +
 	"\n" +
 	"CreateUser\x12 .user_iface.v2.CreateUserRequest\x1a!.user_iface.v2.CreateUserResponse\x12Q\n" +
@@ -2203,7 +2427,8 @@ const file_user_iface_v2_v2_user_proto_rawDesc = "" +
 	"\n" +
 	"SearchUser\x12 .user_iface.v2.SearchUserRequest\x1a!.user_iface.v2.SearchUserResponse\x12N\n" +
 	"\tUserByIDs\x12\x1f.user_iface.v2.UserByIDsRequest\x1a .user_iface.v2.UserByIDsResponse\x12K\n" +
-	"\bUserList\x12\x1e.user_iface.v2.UserListRequest\x1a\x1f.user_iface.v2.UserListResponse\x12Z\n" +
+	"\bUserList\x12\x1e.user_iface.v2.UserListRequest\x1a\x1f.user_iface.v2.UserListResponse\x12r\n" +
+	"\x15UserChangePhoneNumber\x12+.user_iface.v2.UserChangePhoneNumberRequest\x1a,.user_iface.v2.UserChangePhoneNumberResponse\x12Z\n" +
 	"\rResetPassword\x12#.user_iface.v2.ResetPasswordRequest\x1a$.user_iface.v2.ResetPasswordResponse\x12]\n" +
 	"\x0eTeamUserUpdate\x12$.user_iface.v2.TeamUserUpdateRequest\x1a%.user_iface.v2.TeamUserUpdateResponse\x12]\n" +
 	"\x0eTeamAccessList\x12$.user_iface.v2.TeamAccessListRequest\x1a%.user_iface.v2.TeamAccessListResponse\x12_\n" +
@@ -2223,99 +2448,107 @@ func file_user_iface_v2_v2_user_proto_rawDescGZIP() []byte {
 }
 
 var file_user_iface_v2_v2_user_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_user_iface_v2_v2_user_proto_msgTypes = make([]protoimpl.MessageInfo, 34)
+var file_user_iface_v2_v2_user_proto_msgTypes = make([]protoimpl.MessageInfo, 38)
 var file_user_iface_v2_v2_user_proto_goTypes = []any{
-	(TeamType)(0),                  // 0: user_iface.v2.TeamType
-	(UserStatus)(0),                // 1: user_iface.v2.UserStatus
-	(*TeamAccessListRequest)(nil),  // 2: user_iface.v2.TeamAccessListRequest
-	(*TeamAccessItem)(nil),         // 3: user_iface.v2.TeamAccessItem
-	(*TeamAccessListResponse)(nil), // 4: user_iface.v2.TeamAccessListResponse
-	(*UserAlias)(nil),              // 5: user_iface.v2.UserAlias
-	(*UserInfo)(nil),               // 6: user_iface.v2.UserInfo
-	(*UserMapItem)(nil),            // 7: user_iface.v2.UserMapItem
-	(*UserByIDsRequest)(nil),       // 8: user_iface.v2.UserByIDsRequest
-	(*UserByIDsResponse)(nil),      // 9: user_iface.v2.UserByIDsResponse
-	(*TeamSynclegacyRequest)(nil),  // 10: user_iface.v2.TeamSynclegacyRequest
-	(*TeamSynclegacyResponse)(nil), // 11: user_iface.v2.TeamSynclegacyResponse
-	(*ResetPasswordRequest)(nil),   // 12: user_iface.v2.ResetPasswordRequest
-	(*ResetPasswordResponse)(nil),  // 13: user_iface.v2.ResetPasswordResponse
-	(*SearchUserItem)(nil),         // 14: user_iface.v2.SearchUserItem
-	(*SearchUserByKeyword)(nil),    // 15: user_iface.v2.SearchUserByKeyword
-	(*SearchUserByIds)(nil),        // 16: user_iface.v2.SearchUserByIds
-	(*SearchUserRequest)(nil),      // 17: user_iface.v2.SearchUserRequest
-	(*SearchUserResponse)(nil),     // 18: user_iface.v2.SearchUserResponse
-	(*SuspendUserRequest)(nil),     // 19: user_iface.v2.SuspendUserRequest
-	(*SuspendUserResponse)(nil),    // 20: user_iface.v2.SuspendUserResponse
-	(*UserListRequest)(nil),        // 21: user_iface.v2.UserListRequest
-	(*UserListResponse)(nil),       // 22: user_iface.v2.UserListResponse
-	(*RemoveUser)(nil),             // 23: user_iface.v2.RemoveUser
-	(*AddUser)(nil),                // 24: user_iface.v2.AddUser
-	(*CreateUser)(nil),             // 25: user_iface.v2.CreateUser
-	(*TeamUserUpdateRequest)(nil),  // 26: user_iface.v2.TeamUserUpdateRequest
-	(*TeamUserUpdateResponse)(nil), // 27: user_iface.v2.TeamUserUpdateResponse
-	(*User)(nil),                   // 28: user_iface.v2.User
-	(*UpdateUserRequest)(nil),      // 29: user_iface.v2.UpdateUserRequest
-	(*DeleteUserResponse)(nil),     // 30: user_iface.v2.DeleteUserResponse
-	(*DeleteUserRequest)(nil),      // 31: user_iface.v2.DeleteUserRequest
-	(*UpdateUserResponse)(nil),     // 32: user_iface.v2.UpdateUserResponse
-	(*CreateUserRequest)(nil),      // 33: user_iface.v2.CreateUserRequest
-	(*CreateUserResponse)(nil),     // 34: user_iface.v2.CreateUserResponse
-	nil,                            // 35: user_iface.v2.UserByIDsResponse.UsersEntry
-	(v1.Role)(0),                   // 36: role_base.v1.Role
-	(*v11.PageFilter)(nil),         // 37: common.v1.PageFilter
-	(*v11.PageInfo)(nil),           // 38: common.v1.PageInfo
+	(TeamType)(0),                           // 0: user_iface.v2.TeamType
+	(UserStatus)(0),                         // 1: user_iface.v2.UserStatus
+	(*UserChangePhoneNumberSendOtp)(nil),    // 2: user_iface.v2.UserChangePhoneNumberSendOtp
+	(*UserChangePhoneNumberSendUpdate)(nil), // 3: user_iface.v2.UserChangePhoneNumberSendUpdate
+	(*UserChangePhoneNumberRequest)(nil),    // 4: user_iface.v2.UserChangePhoneNumberRequest
+	(*UserChangePhoneNumberResponse)(nil),   // 5: user_iface.v2.UserChangePhoneNumberResponse
+	(*TeamAccessListRequest)(nil),           // 6: user_iface.v2.TeamAccessListRequest
+	(*TeamAccessItem)(nil),                  // 7: user_iface.v2.TeamAccessItem
+	(*TeamAccessListResponse)(nil),          // 8: user_iface.v2.TeamAccessListResponse
+	(*UserAlias)(nil),                       // 9: user_iface.v2.UserAlias
+	(*UserInfo)(nil),                        // 10: user_iface.v2.UserInfo
+	(*UserMapItem)(nil),                     // 11: user_iface.v2.UserMapItem
+	(*UserByIDsRequest)(nil),                // 12: user_iface.v2.UserByIDsRequest
+	(*UserByIDsResponse)(nil),               // 13: user_iface.v2.UserByIDsResponse
+	(*TeamSynclegacyRequest)(nil),           // 14: user_iface.v2.TeamSynclegacyRequest
+	(*TeamSynclegacyResponse)(nil),          // 15: user_iface.v2.TeamSynclegacyResponse
+	(*ResetPasswordRequest)(nil),            // 16: user_iface.v2.ResetPasswordRequest
+	(*ResetPasswordResponse)(nil),           // 17: user_iface.v2.ResetPasswordResponse
+	(*SearchUserItem)(nil),                  // 18: user_iface.v2.SearchUserItem
+	(*SearchUserByKeyword)(nil),             // 19: user_iface.v2.SearchUserByKeyword
+	(*SearchUserByIds)(nil),                 // 20: user_iface.v2.SearchUserByIds
+	(*SearchUserRequest)(nil),               // 21: user_iface.v2.SearchUserRequest
+	(*SearchUserResponse)(nil),              // 22: user_iface.v2.SearchUserResponse
+	(*SuspendUserRequest)(nil),              // 23: user_iface.v2.SuspendUserRequest
+	(*SuspendUserResponse)(nil),             // 24: user_iface.v2.SuspendUserResponse
+	(*UserListRequest)(nil),                 // 25: user_iface.v2.UserListRequest
+	(*UserListResponse)(nil),                // 26: user_iface.v2.UserListResponse
+	(*RemoveUser)(nil),                      // 27: user_iface.v2.RemoveUser
+	(*AddUser)(nil),                         // 28: user_iface.v2.AddUser
+	(*CreateUser)(nil),                      // 29: user_iface.v2.CreateUser
+	(*TeamUserUpdateRequest)(nil),           // 30: user_iface.v2.TeamUserUpdateRequest
+	(*TeamUserUpdateResponse)(nil),          // 31: user_iface.v2.TeamUserUpdateResponse
+	(*User)(nil),                            // 32: user_iface.v2.User
+	(*UpdateUserRequest)(nil),               // 33: user_iface.v2.UpdateUserRequest
+	(*DeleteUserResponse)(nil),              // 34: user_iface.v2.DeleteUserResponse
+	(*DeleteUserRequest)(nil),               // 35: user_iface.v2.DeleteUserRequest
+	(*UpdateUserResponse)(nil),              // 36: user_iface.v2.UpdateUserResponse
+	(*CreateUserRequest)(nil),               // 37: user_iface.v2.CreateUserRequest
+	(*CreateUserResponse)(nil),              // 38: user_iface.v2.CreateUserResponse
+	nil,                                     // 39: user_iface.v2.UserByIDsResponse.UsersEntry
+	(v1.Role)(0),                            // 40: role_base.v1.Role
+	(*v11.PageFilter)(nil),                  // 41: common.v1.PageFilter
+	(*v11.PageInfo)(nil),                    // 42: common.v1.PageInfo
 }
 var file_user_iface_v2_v2_user_proto_depIdxs = []int32{
-	0,  // 0: user_iface.v2.TeamAccessItem.team_type:type_name -> user_iface.v2.TeamType
-	36, // 1: user_iface.v2.TeamAccessItem.role:type_name -> role_base.v1.Role
-	3,  // 2: user_iface.v2.TeamAccessListResponse.access:type_name -> user_iface.v2.TeamAccessItem
-	36, // 3: user_iface.v2.UserAlias.role:type_name -> role_base.v1.Role
-	1,  // 4: user_iface.v2.UserInfo.status:type_name -> user_iface.v2.UserStatus
-	6,  // 5: user_iface.v2.UserMapItem.user:type_name -> user_iface.v2.UserInfo
-	5,  // 6: user_iface.v2.UserMapItem.alias:type_name -> user_iface.v2.UserAlias
-	35, // 7: user_iface.v2.UserByIDsResponse.users:type_name -> user_iface.v2.UserByIDsResponse.UsersEntry
-	15, // 8: user_iface.v2.SearchUserRequest.keyword:type_name -> user_iface.v2.SearchUserByKeyword
-	16, // 9: user_iface.v2.SearchUserRequest.ids:type_name -> user_iface.v2.SearchUserByIds
-	14, // 10: user_iface.v2.SearchUserResponse.users:type_name -> user_iface.v2.SearchUserItem
-	36, // 11: user_iface.v2.UserListRequest.role:type_name -> role_base.v1.Role
-	37, // 12: user_iface.v2.UserListRequest.page:type_name -> common.v1.PageFilter
-	7,  // 13: user_iface.v2.UserListResponse.users:type_name -> user_iface.v2.UserMapItem
-	38, // 14: user_iface.v2.UserListResponse.page_info:type_name -> common.v1.PageInfo
-	36, // 15: user_iface.v2.AddUser.role:type_name -> role_base.v1.Role
-	36, // 16: user_iface.v2.CreateUser.role:type_name -> role_base.v1.Role
-	24, // 17: user_iface.v2.TeamUserUpdateRequest.add:type_name -> user_iface.v2.AddUser
-	23, // 18: user_iface.v2.TeamUserUpdateRequest.remove:type_name -> user_iface.v2.RemoveUser
-	25, // 19: user_iface.v2.TeamUserUpdateRequest.create:type_name -> user_iface.v2.CreateUser
-	1,  // 20: user_iface.v2.User.status:type_name -> user_iface.v2.UserStatus
-	36, // 21: user_iface.v2.User.role:type_name -> role_base.v1.Role
-	7,  // 22: user_iface.v2.UserByIDsResponse.UsersEntry.value:type_name -> user_iface.v2.UserMapItem
-	33, // 23: user_iface.v2.V2UserService.CreateUser:input_type -> user_iface.v2.CreateUserRequest
-	29, // 24: user_iface.v2.V2UserService.UpdateUser:input_type -> user_iface.v2.UpdateUserRequest
-	31, // 25: user_iface.v2.V2UserService.DeleteUser:input_type -> user_iface.v2.DeleteUserRequest
-	19, // 26: user_iface.v2.V2UserService.SuspendUser:input_type -> user_iface.v2.SuspendUserRequest
-	17, // 27: user_iface.v2.V2UserService.SearchUser:input_type -> user_iface.v2.SearchUserRequest
-	8,  // 28: user_iface.v2.V2UserService.UserByIDs:input_type -> user_iface.v2.UserByIDsRequest
-	21, // 29: user_iface.v2.V2UserService.UserList:input_type -> user_iface.v2.UserListRequest
-	12, // 30: user_iface.v2.V2UserService.ResetPassword:input_type -> user_iface.v2.ResetPasswordRequest
-	26, // 31: user_iface.v2.V2UserService.TeamUserUpdate:input_type -> user_iface.v2.TeamUserUpdateRequest
-	2,  // 32: user_iface.v2.V2UserService.TeamAccessList:input_type -> user_iface.v2.TeamAccessListRequest
-	10, // 33: user_iface.v2.V2UserService.TeamSynclegacy:input_type -> user_iface.v2.TeamSynclegacyRequest
-	34, // 34: user_iface.v2.V2UserService.CreateUser:output_type -> user_iface.v2.CreateUserResponse
-	32, // 35: user_iface.v2.V2UserService.UpdateUser:output_type -> user_iface.v2.UpdateUserResponse
-	30, // 36: user_iface.v2.V2UserService.DeleteUser:output_type -> user_iface.v2.DeleteUserResponse
-	20, // 37: user_iface.v2.V2UserService.SuspendUser:output_type -> user_iface.v2.SuspendUserResponse
-	18, // 38: user_iface.v2.V2UserService.SearchUser:output_type -> user_iface.v2.SearchUserResponse
-	9,  // 39: user_iface.v2.V2UserService.UserByIDs:output_type -> user_iface.v2.UserByIDsResponse
-	22, // 40: user_iface.v2.V2UserService.UserList:output_type -> user_iface.v2.UserListResponse
-	13, // 41: user_iface.v2.V2UserService.ResetPassword:output_type -> user_iface.v2.ResetPasswordResponse
-	27, // 42: user_iface.v2.V2UserService.TeamUserUpdate:output_type -> user_iface.v2.TeamUserUpdateResponse
-	4,  // 43: user_iface.v2.V2UserService.TeamAccessList:output_type -> user_iface.v2.TeamAccessListResponse
-	11, // 44: user_iface.v2.V2UserService.TeamSynclegacy:output_type -> user_iface.v2.TeamSynclegacyResponse
-	34, // [34:45] is the sub-list for method output_type
-	23, // [23:34] is the sub-list for method input_type
-	23, // [23:23] is the sub-list for extension type_name
-	23, // [23:23] is the sub-list for extension extendee
-	0,  // [0:23] is the sub-list for field type_name
+	2,  // 0: user_iface.v2.UserChangePhoneNumberRequest.otp:type_name -> user_iface.v2.UserChangePhoneNumberSendOtp
+	3,  // 1: user_iface.v2.UserChangePhoneNumberRequest.update:type_name -> user_iface.v2.UserChangePhoneNumberSendUpdate
+	0,  // 2: user_iface.v2.TeamAccessItem.team_type:type_name -> user_iface.v2.TeamType
+	40, // 3: user_iface.v2.TeamAccessItem.role:type_name -> role_base.v1.Role
+	7,  // 4: user_iface.v2.TeamAccessListResponse.access:type_name -> user_iface.v2.TeamAccessItem
+	40, // 5: user_iface.v2.UserAlias.role:type_name -> role_base.v1.Role
+	1,  // 6: user_iface.v2.UserInfo.status:type_name -> user_iface.v2.UserStatus
+	10, // 7: user_iface.v2.UserMapItem.user:type_name -> user_iface.v2.UserInfo
+	9,  // 8: user_iface.v2.UserMapItem.alias:type_name -> user_iface.v2.UserAlias
+	39, // 9: user_iface.v2.UserByIDsResponse.users:type_name -> user_iface.v2.UserByIDsResponse.UsersEntry
+	19, // 10: user_iface.v2.SearchUserRequest.keyword:type_name -> user_iface.v2.SearchUserByKeyword
+	20, // 11: user_iface.v2.SearchUserRequest.ids:type_name -> user_iface.v2.SearchUserByIds
+	18, // 12: user_iface.v2.SearchUserResponse.users:type_name -> user_iface.v2.SearchUserItem
+	40, // 13: user_iface.v2.UserListRequest.role:type_name -> role_base.v1.Role
+	41, // 14: user_iface.v2.UserListRequest.page:type_name -> common.v1.PageFilter
+	11, // 15: user_iface.v2.UserListResponse.users:type_name -> user_iface.v2.UserMapItem
+	42, // 16: user_iface.v2.UserListResponse.page_info:type_name -> common.v1.PageInfo
+	40, // 17: user_iface.v2.AddUser.role:type_name -> role_base.v1.Role
+	40, // 18: user_iface.v2.CreateUser.role:type_name -> role_base.v1.Role
+	28, // 19: user_iface.v2.TeamUserUpdateRequest.add:type_name -> user_iface.v2.AddUser
+	27, // 20: user_iface.v2.TeamUserUpdateRequest.remove:type_name -> user_iface.v2.RemoveUser
+	29, // 21: user_iface.v2.TeamUserUpdateRequest.create:type_name -> user_iface.v2.CreateUser
+	1,  // 22: user_iface.v2.User.status:type_name -> user_iface.v2.UserStatus
+	40, // 23: user_iface.v2.User.role:type_name -> role_base.v1.Role
+	11, // 24: user_iface.v2.UserByIDsResponse.UsersEntry.value:type_name -> user_iface.v2.UserMapItem
+	37, // 25: user_iface.v2.V2UserService.CreateUser:input_type -> user_iface.v2.CreateUserRequest
+	33, // 26: user_iface.v2.V2UserService.UpdateUser:input_type -> user_iface.v2.UpdateUserRequest
+	35, // 27: user_iface.v2.V2UserService.DeleteUser:input_type -> user_iface.v2.DeleteUserRequest
+	23, // 28: user_iface.v2.V2UserService.SuspendUser:input_type -> user_iface.v2.SuspendUserRequest
+	21, // 29: user_iface.v2.V2UserService.SearchUser:input_type -> user_iface.v2.SearchUserRequest
+	12, // 30: user_iface.v2.V2UserService.UserByIDs:input_type -> user_iface.v2.UserByIDsRequest
+	25, // 31: user_iface.v2.V2UserService.UserList:input_type -> user_iface.v2.UserListRequest
+	4,  // 32: user_iface.v2.V2UserService.UserChangePhoneNumber:input_type -> user_iface.v2.UserChangePhoneNumberRequest
+	16, // 33: user_iface.v2.V2UserService.ResetPassword:input_type -> user_iface.v2.ResetPasswordRequest
+	30, // 34: user_iface.v2.V2UserService.TeamUserUpdate:input_type -> user_iface.v2.TeamUserUpdateRequest
+	6,  // 35: user_iface.v2.V2UserService.TeamAccessList:input_type -> user_iface.v2.TeamAccessListRequest
+	14, // 36: user_iface.v2.V2UserService.TeamSynclegacy:input_type -> user_iface.v2.TeamSynclegacyRequest
+	38, // 37: user_iface.v2.V2UserService.CreateUser:output_type -> user_iface.v2.CreateUserResponse
+	36, // 38: user_iface.v2.V2UserService.UpdateUser:output_type -> user_iface.v2.UpdateUserResponse
+	34, // 39: user_iface.v2.V2UserService.DeleteUser:output_type -> user_iface.v2.DeleteUserResponse
+	24, // 40: user_iface.v2.V2UserService.SuspendUser:output_type -> user_iface.v2.SuspendUserResponse
+	22, // 41: user_iface.v2.V2UserService.SearchUser:output_type -> user_iface.v2.SearchUserResponse
+	13, // 42: user_iface.v2.V2UserService.UserByIDs:output_type -> user_iface.v2.UserByIDsResponse
+	26, // 43: user_iface.v2.V2UserService.UserList:output_type -> user_iface.v2.UserListResponse
+	5,  // 44: user_iface.v2.V2UserService.UserChangePhoneNumber:output_type -> user_iface.v2.UserChangePhoneNumberResponse
+	17, // 45: user_iface.v2.V2UserService.ResetPassword:output_type -> user_iface.v2.ResetPasswordResponse
+	31, // 46: user_iface.v2.V2UserService.TeamUserUpdate:output_type -> user_iface.v2.TeamUserUpdateResponse
+	8,  // 47: user_iface.v2.V2UserService.TeamAccessList:output_type -> user_iface.v2.TeamAccessListResponse
+	15, // 48: user_iface.v2.V2UserService.TeamSynclegacy:output_type -> user_iface.v2.TeamSynclegacyResponse
+	37, // [37:49] is the sub-list for method output_type
+	25, // [25:37] is the sub-list for method input_type
+	25, // [25:25] is the sub-list for extension type_name
+	25, // [25:25] is the sub-list for extension extendee
+	0,  // [0:25] is the sub-list for field type_name
 }
 
 func init() { file_user_iface_v2_v2_user_proto_init() }
@@ -2323,11 +2556,15 @@ func file_user_iface_v2_v2_user_proto_init() {
 	if File_user_iface_v2_v2_user_proto != nil {
 		return
 	}
-	file_user_iface_v2_v2_user_proto_msgTypes[15].OneofWrappers = []any{
+	file_user_iface_v2_v2_user_proto_msgTypes[2].OneofWrappers = []any{
+		(*UserChangePhoneNumberRequest_Otp)(nil),
+		(*UserChangePhoneNumberRequest_Update)(nil),
+	}
+	file_user_iface_v2_v2_user_proto_msgTypes[19].OneofWrappers = []any{
 		(*SearchUserRequest_Keyword)(nil),
 		(*SearchUserRequest_Ids)(nil),
 	}
-	file_user_iface_v2_v2_user_proto_msgTypes[24].OneofWrappers = []any{
+	file_user_iface_v2_v2_user_proto_msgTypes[28].OneofWrappers = []any{
 		(*TeamUserUpdateRequest_Add)(nil),
 		(*TeamUserUpdateRequest_Remove)(nil),
 		(*TeamUserUpdateRequest_Create)(nil),
@@ -2338,7 +2575,7 @@ func file_user_iface_v2_v2_user_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_user_iface_v2_v2_user_proto_rawDesc), len(file_user_iface_v2_v2_user_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   34,
+			NumMessages:   38,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
