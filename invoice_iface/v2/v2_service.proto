@@ -7,6 +7,7 @@ import "google/protobuf/timestamp.proto";
 import "invoice_iface/v2/v2_balance.proto";
 import "invoice_iface/v2/v2_overview.proto";
 import "invoice_iface/v2/v2_team_balance_list.proto";
+import "invoice_iface/v2/v2_team_balance_timeline.proto";
 import "invoice_iface/v2/v2_types.proto";
 import "role_base/v1/role.proto";
 
@@ -15,6 +16,7 @@ option go_package = "github.com/pdcgo/schema/services/invoice_iface/v2;invoice_i
 service InvoiceService {
   rpc Overview(OverviewRequest) returns (OverviewResponse);
   rpc TeamBalanceList(TeamBalanceListRequest) returns (TeamBalanceListResponse);
+  rpc TeamBalanceTimeline(TeamBalanceTimelineRequest) returns (TeamBalanceTimelineResponse);
 
   rpc CreatePayment(CreatePaymentRequest) returns (CreatePaymentResponse);
   rpc AcceptPayment(AcceptPaymentRequest) returns (AcceptPaymentResponse);

@@ -38,6 +38,9 @@ const (
 	// InvoiceServiceTeamBalanceListProcedure is the fully-qualified name of the InvoiceService's
 	// TeamBalanceList RPC.
 	InvoiceServiceTeamBalanceListProcedure = "/invoice_iface.v2.InvoiceService/TeamBalanceList"
+	// InvoiceServiceTeamBalanceTimelineProcedure is the fully-qualified name of the InvoiceService's
+	// TeamBalanceTimeline RPC.
+	InvoiceServiceTeamBalanceTimelineProcedure = "/invoice_iface.v2.InvoiceService/TeamBalanceTimeline"
 	// InvoiceServiceCreatePaymentProcedure is the fully-qualified name of the InvoiceService's
 	// CreatePayment RPC.
 	InvoiceServiceCreatePaymentProcedure = "/invoice_iface.v2.InvoiceService/CreatePayment"
@@ -68,6 +71,7 @@ const (
 type InvoiceServiceClient interface {
 	Overview(context.Context, *connect.Request[v2.OverviewRequest]) (*connect.Response[v2.OverviewResponse], error)
 	TeamBalanceList(context.Context, *connect.Request[v2.TeamBalanceListRequest]) (*connect.Response[v2.TeamBalanceListResponse], error)
+	TeamBalanceTimeline(context.Context, *connect.Request[v2.TeamBalanceTimelineRequest]) (*connect.Response[v2.TeamBalanceTimelineResponse], error)
 	CreatePayment(context.Context, *connect.Request[v2.CreatePaymentRequest]) (*connect.Response[v2.CreatePaymentResponse], error)
 	AcceptPayment(context.Context, *connect.Request[v2.AcceptPaymentRequest]) (*connect.Response[v2.AcceptPaymentResponse], error)
 	RejectPayment(context.Context, *connect.Request[v2.RejectPaymentRequest]) (*connect.Response[v2.RejectPaymentResponse], error)
@@ -99,6 +103,12 @@ func NewInvoiceServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			httpClient,
 			baseURL+InvoiceServiceTeamBalanceListProcedure,
 			connect.WithSchema(invoiceServiceMethods.ByName("TeamBalanceList")),
+			connect.WithClientOptions(opts...),
+		),
+		teamBalanceTimeline: connect.NewClient[v2.TeamBalanceTimelineRequest, v2.TeamBalanceTimelineResponse](
+			httpClient,
+			baseURL+InvoiceServiceTeamBalanceTimelineProcedure,
+			connect.WithSchema(invoiceServiceMethods.ByName("TeamBalanceTimeline")),
 			connect.WithClientOptions(opts...),
 		),
 		createPayment: connect.NewClient[v2.CreatePaymentRequest, v2.CreatePaymentResponse](
@@ -156,6 +166,7 @@ func NewInvoiceServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 type invoiceServiceClient struct {
 	overview            *connect.Client[v2.OverviewRequest, v2.OverviewResponse]
 	teamBalanceList     *connect.Client[v2.TeamBalanceListRequest, v2.TeamBalanceListResponse]
+	teamBalanceTimeline *connect.Client[v2.TeamBalanceTimelineRequest, v2.TeamBalanceTimelineResponse]
 	createPayment       *connect.Client[v2.CreatePaymentRequest, v2.CreatePaymentResponse]
 	acceptPayment       *connect.Client[v2.AcceptPaymentRequest, v2.AcceptPaymentResponse]
 	rejectPayment       *connect.Client[v2.RejectPaymentRequest, v2.RejectPaymentResponse]
@@ -174,6 +185,11 @@ func (c *invoiceServiceClient) Overview(ctx context.Context, req *connect.Reques
 // TeamBalanceList calls invoice_iface.v2.InvoiceService.TeamBalanceList.
 func (c *invoiceServiceClient) TeamBalanceList(ctx context.Context, req *connect.Request[v2.TeamBalanceListRequest]) (*connect.Response[v2.TeamBalanceListResponse], error) {
 	return c.teamBalanceList.CallUnary(ctx, req)
+}
+
+// TeamBalanceTimeline calls invoice_iface.v2.InvoiceService.TeamBalanceTimeline.
+func (c *invoiceServiceClient) TeamBalanceTimeline(ctx context.Context, req *connect.Request[v2.TeamBalanceTimelineRequest]) (*connect.Response[v2.TeamBalanceTimelineResponse], error) {
+	return c.teamBalanceTimeline.CallUnary(ctx, req)
 }
 
 // CreatePayment calls invoice_iface.v2.InvoiceService.CreatePayment.
@@ -220,6 +236,7 @@ func (c *invoiceServiceClient) TeamReconcile(ctx context.Context, req *connect.R
 type InvoiceServiceHandler interface {
 	Overview(context.Context, *connect.Request[v2.OverviewRequest]) (*connect.Response[v2.OverviewResponse], error)
 	TeamBalanceList(context.Context, *connect.Request[v2.TeamBalanceListRequest]) (*connect.Response[v2.TeamBalanceListResponse], error)
+	TeamBalanceTimeline(context.Context, *connect.Request[v2.TeamBalanceTimelineRequest]) (*connect.Response[v2.TeamBalanceTimelineResponse], error)
 	CreatePayment(context.Context, *connect.Request[v2.CreatePaymentRequest]) (*connect.Response[v2.CreatePaymentResponse], error)
 	AcceptPayment(context.Context, *connect.Request[v2.AcceptPaymentRequest]) (*connect.Response[v2.AcceptPaymentResponse], error)
 	RejectPayment(context.Context, *connect.Request[v2.RejectPaymentRequest]) (*connect.Response[v2.RejectPaymentResponse], error)
@@ -247,6 +264,12 @@ func NewInvoiceServiceHandler(svc InvoiceServiceHandler, opts ...connect.Handler
 		InvoiceServiceTeamBalanceListProcedure,
 		svc.TeamBalanceList,
 		connect.WithSchema(invoiceServiceMethods.ByName("TeamBalanceList")),
+		connect.WithHandlerOptions(opts...),
+	)
+	invoiceServiceTeamBalanceTimelineHandler := connect.NewUnaryHandler(
+		InvoiceServiceTeamBalanceTimelineProcedure,
+		svc.TeamBalanceTimeline,
+		connect.WithSchema(invoiceServiceMethods.ByName("TeamBalanceTimeline")),
 		connect.WithHandlerOptions(opts...),
 	)
 	invoiceServiceCreatePaymentHandler := connect.NewUnaryHandler(
@@ -303,6 +326,8 @@ func NewInvoiceServiceHandler(svc InvoiceServiceHandler, opts ...connect.Handler
 			invoiceServiceOverviewHandler.ServeHTTP(w, r)
 		case InvoiceServiceTeamBalanceListProcedure:
 			invoiceServiceTeamBalanceListHandler.ServeHTTP(w, r)
+		case InvoiceServiceTeamBalanceTimelineProcedure:
+			invoiceServiceTeamBalanceTimelineHandler.ServeHTTP(w, r)
 		case InvoiceServiceCreatePaymentProcedure:
 			invoiceServiceCreatePaymentHandler.ServeHTTP(w, r)
 		case InvoiceServiceAcceptPaymentProcedure:
@@ -334,6 +359,10 @@ func (UnimplementedInvoiceServiceHandler) Overview(context.Context, *connect.Req
 
 func (UnimplementedInvoiceServiceHandler) TeamBalanceList(context.Context, *connect.Request[v2.TeamBalanceListRequest]) (*connect.Response[v2.TeamBalanceListResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("invoice_iface.v2.InvoiceService.TeamBalanceList is not implemented"))
+}
+
+func (UnimplementedInvoiceServiceHandler) TeamBalanceTimeline(context.Context, *connect.Request[v2.TeamBalanceTimelineRequest]) (*connect.Response[v2.TeamBalanceTimelineResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("invoice_iface.v2.InvoiceService.TeamBalanceTimeline is not implemented"))
 }
 
 func (UnimplementedInvoiceServiceHandler) CreatePayment(context.Context, *connect.Request[v2.CreatePaymentRequest]) (*connect.Response[v2.CreatePaymentResponse], error) {

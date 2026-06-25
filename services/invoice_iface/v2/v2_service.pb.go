@@ -1101,7 +1101,7 @@ var File_invoice_iface_v2_v2_service_proto protoreflect.FileDescriptor
 
 const file_invoice_iface_v2_v2_service_proto_rawDesc = "" +
 	"\n" +
-	"!invoice_iface/v2/v2_service.proto\x12\x10invoice_iface.v2\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!invoice_iface/v2/v2_balance.proto\x1a\"invoice_iface/v2/v2_overview.proto\x1a+invoice_iface/v2/v2_team_balance_list.proto\x1a\x1finvoice_iface/v2/v2_types.proto\x1a\x17role_base/v1/role.proto\"7\n" +
+	"!invoice_iface/v2/v2_service.proto\x12\x10invoice_iface.v2\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!invoice_iface/v2/v2_balance.proto\x1a\"invoice_iface/v2/v2_overview.proto\x1a+invoice_iface/v2/v2_team_balance_list.proto\x1a/invoice_iface/v2/v2_team_balance_timeline.proto\x1a\x1finvoice_iface/v2/v2_types.proto\x1a\x17role_base/v1/role.proto\"7\n" +
 	"\x14TeamReconcileRequest\x12\x17\n" +
 	"\ateam_id\x18\x01 \x01(\x04R\x06teamId:\x06\x92\xb5\x18\x02 \x01\"\x17\n" +
 	"\x15TeamReconcileResponse\"\xd5\x02\n" +
@@ -1187,10 +1187,11 @@ const file_invoice_iface_v2_v2_service_proto_rawDesc = "" +
 	"\x1aPAYMENT_STATUS_UNSPECIFIED\x10\x00\x12\x1a\n" +
 	"\x16PAYMENT_STATUS_PENDING\x10\x01\x12\x1b\n" +
 	"\x17PAYMENT_STATUS_ACCEPTED\x10\x02\x12\x1b\n" +
-	"\x17PAYMENT_STATUS_REJECTED\x10\x032\xff\a\n" +
+	"\x17PAYMENT_STATUS_REJECTED\x10\x032\xf3\b\n" +
 	"\x0eInvoiceService\x12Q\n" +
 	"\bOverview\x12!.invoice_iface.v2.OverviewRequest\x1a\".invoice_iface.v2.OverviewResponse\x12f\n" +
-	"\x0fTeamBalanceList\x12(.invoice_iface.v2.TeamBalanceListRequest\x1a).invoice_iface.v2.TeamBalanceListResponse\x12`\n" +
+	"\x0fTeamBalanceList\x12(.invoice_iface.v2.TeamBalanceListRequest\x1a).invoice_iface.v2.TeamBalanceListResponse\x12r\n" +
+	"\x13TeamBalanceTimeline\x12,.invoice_iface.v2.TeamBalanceTimelineRequest\x1a-.invoice_iface.v2.TeamBalanceTimelineResponse\x12`\n" +
 	"\rCreatePayment\x12&.invoice_iface.v2.CreatePaymentRequest\x1a'.invoice_iface.v2.CreatePaymentResponse\x12`\n" +
 	"\rAcceptPayment\x12&.invoice_iface.v2.AcceptPaymentRequest\x1a'.invoice_iface.v2.AcceptPaymentResponse\x12`\n" +
 	"\rRejectPayment\x12&.invoice_iface.v2.RejectPaymentRequest\x1a'.invoice_iface.v2.RejectPaymentResponse\x12Z\n" +
@@ -1242,8 +1243,10 @@ var file_invoice_iface_v2_v2_service_proto_goTypes = []any{
 	(*BalanceChangeLog)(nil),            // 23: invoice_iface.v2.BalanceChangeLog
 	(*OverviewRequest)(nil),             // 24: invoice_iface.v2.OverviewRequest
 	(*TeamBalanceListRequest)(nil),      // 25: invoice_iface.v2.TeamBalanceListRequest
-	(*OverviewResponse)(nil),            // 26: invoice_iface.v2.OverviewResponse
-	(*TeamBalanceListResponse)(nil),     // 27: invoice_iface.v2.TeamBalanceListResponse
+	(*TeamBalanceTimelineRequest)(nil),  // 26: invoice_iface.v2.TeamBalanceTimelineRequest
+	(*OverviewResponse)(nil),            // 27: invoice_iface.v2.OverviewResponse
+	(*TeamBalanceListResponse)(nil),     // 28: invoice_iface.v2.TeamBalanceListResponse
+	(*TeamBalanceTimelineResponse)(nil), // 29: invoice_iface.v2.TeamBalanceTimelineResponse
 }
 var file_invoice_iface_v2_v2_service_proto_depIdxs = []int32{
 	18, // 0: invoice_iface.v2.CreateBalanceLogRequest.change_type:type_name -> invoice_iface.v2.BalanceChangeType
@@ -1268,26 +1271,28 @@ var file_invoice_iface_v2_v2_service_proto_depIdxs = []int32{
 	22, // 19: invoice_iface.v2.Payment.rejected_at:type_name -> google.protobuf.Timestamp
 	24, // 20: invoice_iface.v2.InvoiceService.Overview:input_type -> invoice_iface.v2.OverviewRequest
 	25, // 21: invoice_iface.v2.InvoiceService.TeamBalanceList:input_type -> invoice_iface.v2.TeamBalanceListRequest
-	12, // 22: invoice_iface.v2.InvoiceService.CreatePayment:input_type -> invoice_iface.v2.CreatePaymentRequest
-	14, // 23: invoice_iface.v2.InvoiceService.AcceptPayment:input_type -> invoice_iface.v2.AcceptPaymentRequest
-	16, // 24: invoice_iface.v2.InvoiceService.RejectPayment:input_type -> invoice_iface.v2.RejectPaymentRequest
-	5,  // 25: invoice_iface.v2.InvoiceService.ListPayment:input_type -> invoice_iface.v2.ListPaymentRequest
-	7,  // 26: invoice_iface.v2.InvoiceService.ListIncomingPayment:input_type -> invoice_iface.v2.ListIncomingPaymentRequest
-	9,  // 27: invoice_iface.v2.InvoiceService.ListTeamBalanceLog:input_type -> invoice_iface.v2.ListTeamBalanceLogRequest
-	3,  // 28: invoice_iface.v2.InvoiceService.CreateBalanceLog:input_type -> invoice_iface.v2.CreateBalanceLogRequest
-	1,  // 29: invoice_iface.v2.InvoiceService.TeamReconcile:input_type -> invoice_iface.v2.TeamReconcileRequest
-	26, // 30: invoice_iface.v2.InvoiceService.Overview:output_type -> invoice_iface.v2.OverviewResponse
-	27, // 31: invoice_iface.v2.InvoiceService.TeamBalanceList:output_type -> invoice_iface.v2.TeamBalanceListResponse
-	13, // 32: invoice_iface.v2.InvoiceService.CreatePayment:output_type -> invoice_iface.v2.CreatePaymentResponse
-	15, // 33: invoice_iface.v2.InvoiceService.AcceptPayment:output_type -> invoice_iface.v2.AcceptPaymentResponse
-	17, // 34: invoice_iface.v2.InvoiceService.RejectPayment:output_type -> invoice_iface.v2.RejectPaymentResponse
-	6,  // 35: invoice_iface.v2.InvoiceService.ListPayment:output_type -> invoice_iface.v2.ListPaymentResponse
-	8,  // 36: invoice_iface.v2.InvoiceService.ListIncomingPayment:output_type -> invoice_iface.v2.ListIncomingPaymentResponse
-	10, // 37: invoice_iface.v2.InvoiceService.ListTeamBalanceLog:output_type -> invoice_iface.v2.ListTeamBalanceLogResponse
-	4,  // 38: invoice_iface.v2.InvoiceService.CreateBalanceLog:output_type -> invoice_iface.v2.CreateBalanceLogResponse
-	2,  // 39: invoice_iface.v2.InvoiceService.TeamReconcile:output_type -> invoice_iface.v2.TeamReconcileResponse
-	30, // [30:40] is the sub-list for method output_type
-	20, // [20:30] is the sub-list for method input_type
+	26, // 22: invoice_iface.v2.InvoiceService.TeamBalanceTimeline:input_type -> invoice_iface.v2.TeamBalanceTimelineRequest
+	12, // 23: invoice_iface.v2.InvoiceService.CreatePayment:input_type -> invoice_iface.v2.CreatePaymentRequest
+	14, // 24: invoice_iface.v2.InvoiceService.AcceptPayment:input_type -> invoice_iface.v2.AcceptPaymentRequest
+	16, // 25: invoice_iface.v2.InvoiceService.RejectPayment:input_type -> invoice_iface.v2.RejectPaymentRequest
+	5,  // 26: invoice_iface.v2.InvoiceService.ListPayment:input_type -> invoice_iface.v2.ListPaymentRequest
+	7,  // 27: invoice_iface.v2.InvoiceService.ListIncomingPayment:input_type -> invoice_iface.v2.ListIncomingPaymentRequest
+	9,  // 28: invoice_iface.v2.InvoiceService.ListTeamBalanceLog:input_type -> invoice_iface.v2.ListTeamBalanceLogRequest
+	3,  // 29: invoice_iface.v2.InvoiceService.CreateBalanceLog:input_type -> invoice_iface.v2.CreateBalanceLogRequest
+	1,  // 30: invoice_iface.v2.InvoiceService.TeamReconcile:input_type -> invoice_iface.v2.TeamReconcileRequest
+	27, // 31: invoice_iface.v2.InvoiceService.Overview:output_type -> invoice_iface.v2.OverviewResponse
+	28, // 32: invoice_iface.v2.InvoiceService.TeamBalanceList:output_type -> invoice_iface.v2.TeamBalanceListResponse
+	29, // 33: invoice_iface.v2.InvoiceService.TeamBalanceTimeline:output_type -> invoice_iface.v2.TeamBalanceTimelineResponse
+	13, // 34: invoice_iface.v2.InvoiceService.CreatePayment:output_type -> invoice_iface.v2.CreatePaymentResponse
+	15, // 35: invoice_iface.v2.InvoiceService.AcceptPayment:output_type -> invoice_iface.v2.AcceptPaymentResponse
+	17, // 36: invoice_iface.v2.InvoiceService.RejectPayment:output_type -> invoice_iface.v2.RejectPaymentResponse
+	6,  // 37: invoice_iface.v2.InvoiceService.ListPayment:output_type -> invoice_iface.v2.ListPaymentResponse
+	8,  // 38: invoice_iface.v2.InvoiceService.ListIncomingPayment:output_type -> invoice_iface.v2.ListIncomingPaymentResponse
+	10, // 39: invoice_iface.v2.InvoiceService.ListTeamBalanceLog:output_type -> invoice_iface.v2.ListTeamBalanceLogResponse
+	4,  // 40: invoice_iface.v2.InvoiceService.CreateBalanceLog:output_type -> invoice_iface.v2.CreateBalanceLogResponse
+	2,  // 41: invoice_iface.v2.InvoiceService.TeamReconcile:output_type -> invoice_iface.v2.TeamReconcileResponse
+	31, // [31:42] is the sub-list for method output_type
+	20, // [20:31] is the sub-list for method input_type
 	20, // [20:20] is the sub-list for extension type_name
 	20, // [20:20] is the sub-list for extension extendee
 	0,  // [0:20] is the sub-list for field type_name
@@ -1301,6 +1306,7 @@ func file_invoice_iface_v2_v2_service_proto_init() {
 	file_invoice_iface_v2_v2_balance_proto_init()
 	file_invoice_iface_v2_v2_overview_proto_init()
 	file_invoice_iface_v2_v2_team_balance_list_proto_init()
+	file_invoice_iface_v2_v2_team_balance_timeline_proto_init()
 	file_invoice_iface_v2_v2_types_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{

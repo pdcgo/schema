@@ -1,0 +1,52 @@
+syntax = "proto3";
+package invoice_iface.v2;
+
+import "buf/validate/validate.proto";
+import "google/protobuf/timestamp.proto";
+import "role_base/v1/role.proto";
+
+option go_package = "github.com/pdcgo/schema/services/invoice_iface/v2;invoice_iface";
+
+enum TimeGranularity {
+  TIME_GRANULARITY_UNSPECIFIED = 0;
+  TIME_GRANULARITY_DAILY = 1;
+  TIME_GRANULARITY_MONTHLY = 2;
+  TIME_GRANULARITY_YEARLY = 3;
+}
+
+message TeamBalanceTimelineTimeFilter {
+  google.protobuf.Timestamp start = 1 [(buf.validate.field).required = true];
+  google.protobuf.Timestamp end = 2 [(buf.validate.field).required = true];
+}
+
+message TeamBalanceTimelineFilter {
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 for_team_id = 2; // optional; omit to aggregate across all counterparties
+}
+
+message TeamBalanceTimePoint {
+  google.protobuf.Timestamp period_start = 1; // bucket start (day/month/year)
+  // end-of-period balance snapshot (from TeamBalanceDailyLog.end_balance)
+  double payable_balance = 2;
+  double receivable_balance = 3;
+  // in-period net flow (from TeamBalanceDailyLog.change_amount per type)
+  double payable_change = 4;
+  double receivable_change = 5;
+  // payments accepted within the period (from InvoicePayment)
+  double total_payment = 6;
+}
+
+message TeamBalanceTimelineRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
+  TeamBalanceTimelineTimeFilter time_range = 1 [(buf.validate.field).required = true];
+  TeamBalanceTimelineFilter filter = 2 [(buf.validate.field).required = true];
+  TimeGranularity granularity = 3 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+}
+
+message TeamBalanceTimelineResponse {
+  repeated TeamBalanceTimePoint points = 1; // ordered by period_start
+}
