@@ -5,19 +5,23 @@ import "buf/validate/validate.proto";
 import "common/v1/common.proto";
 import "google/protobuf/timestamp.proto";
 import "invoice_iface/v2/v2_balance.proto";
+import "invoice_iface/v2/v2_overview.proto";
+import "invoice_iface/v2/v2_team_balance_list.proto";
+import "invoice_iface/v2/v2_types.proto";
 import "role_base/v1/role.proto";
 
 option go_package = "github.com/pdcgo/schema/services/invoice_iface/v2;invoice_iface";
 
 service InvoiceService {
+  rpc Overview(OverviewRequest) returns (OverviewResponse);
+  rpc TeamBalanceList(TeamBalanceListRequest) returns (TeamBalanceListResponse);
+
   rpc CreatePayment(CreatePaymentRequest) returns (CreatePaymentResponse);
   rpc AcceptPayment(AcceptPaymentRequest) returns (AcceptPaymentResponse);
   rpc RejectPayment(RejectPaymentRequest) returns (RejectPaymentResponse);
   rpc ListPayment(ListPaymentRequest) returns (ListPaymentResponse);
   rpc ListIncomingPayment(ListIncomingPaymentRequest) returns (ListIncomingPaymentResponse);
 
-  rpc ListTeamBalance(ListTeamBalanceRequest) returns (ListTeamBalanceResponse);
-  rpc TeamBalanceMap(TeamBalanceMapRequest) returns (TeamBalanceMapResponse);
   rpc ListTeamBalanceLog(ListTeamBalanceLogRequest) returns (ListTeamBalanceLogResponse);
 
   rpc CreateBalanceLog(CreateBalanceLogRequest) returns (CreateBalanceLogResponse);
@@ -80,34 +84,6 @@ message ListIncomingPaymentRequest {
 message ListIncomingPaymentResponse {
   repeated Payment payments = 1;
   common.v1.PageInfo page_info = 2;
-}
-
-message ListTeamBalanceRequest {
-  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
-  uint64 team_id = 1 [
-    (buf.validate.field).uint64.gt = 0,
-    (role_base.v1.use_scope) = true
-  ];
-  uint64 for_team_id = 2;
-  BalanceType balance_type = 3 [(buf.validate.field).enum.defined_only = true];
-}
-
-message ListTeamBalanceResponse {
-  repeated TeamBalance balances = 1;
-}
-
-message TeamBalanceMapRequest {
-  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
-  uint64 team_id = 1 [
-    (buf.validate.field).uint64.gt = 0,
-    (role_base.v1.use_scope) = true
-  ];
-  repeated uint64 for_team_ids = 2;
-  BalanceType balance_type = 3 [(buf.validate.field).enum.defined_only = true];
-}
-
-message TeamBalanceMapResponse {
-  map<uint64, TeamBalance> balances = 1;
 }
 
 message ListTeamBalanceLogRequest {

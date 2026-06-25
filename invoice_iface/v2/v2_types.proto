@@ -1,0 +1,32 @@
+syntax = "proto3";
+package invoice_iface.v2;
+
+// import "buf/validate/validate.proto";
+// import "common/v1/common.proto";
+// import "google/protobuf/timestamp.proto";
+// import "invoice_iface/v2/v2_balance.proto";
+// import "role_base/v1/role.proto";
+
+option go_package = "github.com/pdcgo/schema/services/invoice_iface/v2;invoice_iface";
+
+enum BalanceType {
+  BALANCE_TYPE_UNSPECIFIED = 0;
+  BALANCE_TYPE_PAYABLE = 1;
+  BALANCE_TYPE_RECEIVABLE = 2;
+}
+
+enum SortType {
+  SORT_TYPE_UNSPECIFIED = 0;
+  SORT_TYPE_ASC = 1;
+  SORT_TYPE_DESC = 2;
+}
+
+enum BalanceChangeType {
+  BALANCE_CHANGE_TYPE_UNSPECIFIED = 0;
+  BALANCE_CHANGE_TYPE_ADJUSTMENT = 1;
+  BALANCE_CHANGE_TYPE_WAREHOUSE_FEE = 2;
+  BALANCE_CHANGE_TYPE_COD_FEE = 3;
+  BALANCE_CHANGE_TYPE_PRODUCT_FEE = 4;
+  BALANCE_CHANGE_TYPE_PAYMENT = 5;
+  BALANCE_CHANGE_TYPE_STOCK_PROBLEM = 6;
+}

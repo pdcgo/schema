@@ -22,116 +22,6 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type BalanceChangeType int32
-
-const (
-	BalanceChangeType_BALANCE_CHANGE_TYPE_UNSPECIFIED   BalanceChangeType = 0
-	BalanceChangeType_BALANCE_CHANGE_TYPE_ADJUSTMENT    BalanceChangeType = 1
-	BalanceChangeType_BALANCE_CHANGE_TYPE_WAREHOUSE_FEE BalanceChangeType = 2
-	BalanceChangeType_BALANCE_CHANGE_TYPE_COD_FEE       BalanceChangeType = 3
-	BalanceChangeType_BALANCE_CHANGE_TYPE_PRODUCT_FEE   BalanceChangeType = 4
-	BalanceChangeType_BALANCE_CHANGE_TYPE_PAYMENT       BalanceChangeType = 5
-	BalanceChangeType_BALANCE_CHANGE_TYPE_STOCK_PROBLEM BalanceChangeType = 6
-)
-
-// Enum value maps for BalanceChangeType.
-var (
-	BalanceChangeType_name = map[int32]string{
-		0: "BALANCE_CHANGE_TYPE_UNSPECIFIED",
-		1: "BALANCE_CHANGE_TYPE_ADJUSTMENT",
-		2: "BALANCE_CHANGE_TYPE_WAREHOUSE_FEE",
-		3: "BALANCE_CHANGE_TYPE_COD_FEE",
-		4: "BALANCE_CHANGE_TYPE_PRODUCT_FEE",
-		5: "BALANCE_CHANGE_TYPE_PAYMENT",
-		6: "BALANCE_CHANGE_TYPE_STOCK_PROBLEM",
-	}
-	BalanceChangeType_value = map[string]int32{
-		"BALANCE_CHANGE_TYPE_UNSPECIFIED":   0,
-		"BALANCE_CHANGE_TYPE_ADJUSTMENT":    1,
-		"BALANCE_CHANGE_TYPE_WAREHOUSE_FEE": 2,
-		"BALANCE_CHANGE_TYPE_COD_FEE":       3,
-		"BALANCE_CHANGE_TYPE_PRODUCT_FEE":   4,
-		"BALANCE_CHANGE_TYPE_PAYMENT":       5,
-		"BALANCE_CHANGE_TYPE_STOCK_PROBLEM": 6,
-	}
-)
-
-func (x BalanceChangeType) Enum() *BalanceChangeType {
-	p := new(BalanceChangeType)
-	*p = x
-	return p
-}
-
-func (x BalanceChangeType) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (BalanceChangeType) Descriptor() protoreflect.EnumDescriptor {
-	return file_invoice_iface_v2_v2_balance_proto_enumTypes[0].Descriptor()
-}
-
-func (BalanceChangeType) Type() protoreflect.EnumType {
-	return &file_invoice_iface_v2_v2_balance_proto_enumTypes[0]
-}
-
-func (x BalanceChangeType) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use BalanceChangeType.Descriptor instead.
-func (BalanceChangeType) EnumDescriptor() ([]byte, []int) {
-	return file_invoice_iface_v2_v2_balance_proto_rawDescGZIP(), []int{0}
-}
-
-type BalanceType int32
-
-const (
-	BalanceType_BALANCE_TYPE_UNSPECIFIED BalanceType = 0
-	BalanceType_BALANCE_TYPE_PAYABLE     BalanceType = 1
-	BalanceType_BALANCE_TYPE_RECEIVABLE  BalanceType = 2
-)
-
-// Enum value maps for BalanceType.
-var (
-	BalanceType_name = map[int32]string{
-		0: "BALANCE_TYPE_UNSPECIFIED",
-		1: "BALANCE_TYPE_PAYABLE",
-		2: "BALANCE_TYPE_RECEIVABLE",
-	}
-	BalanceType_value = map[string]int32{
-		"BALANCE_TYPE_UNSPECIFIED": 0,
-		"BALANCE_TYPE_PAYABLE":     1,
-		"BALANCE_TYPE_RECEIVABLE":  2,
-	}
-)
-
-func (x BalanceType) Enum() *BalanceType {
-	p := new(BalanceType)
-	*p = x
-	return p
-}
-
-func (x BalanceType) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (BalanceType) Descriptor() protoreflect.EnumDescriptor {
-	return file_invoice_iface_v2_v2_balance_proto_enumTypes[1].Descriptor()
-}
-
-func (BalanceType) Type() protoreflect.EnumType {
-	return &file_invoice_iface_v2_v2_balance_proto_enumTypes[1]
-}
-
-func (x BalanceType) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use BalanceType.Descriptor instead.
-func (BalanceType) EnumDescriptor() ([]byte, []int) {
-	return file_invoice_iface_v2_v2_balance_proto_rawDescGZIP(), []int{1}
-}
-
 type BalanceChangeLog struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -452,7 +342,7 @@ var File_invoice_iface_v2_v2_balance_proto protoreflect.FileDescriptor
 
 const file_invoice_iface_v2_v2_balance_proto_rawDesc = "" +
 	"\n" +
-	"!invoice_iface/v2/v2_balance.proto\x12\x10invoice_iface.v2\x1a\x1fgoogle/protobuf/timestamp.proto\"\xf1\x02\n" +
+	"!invoice_iface/v2/v2_balance.proto\x12\x10invoice_iface.v2\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1finvoice_iface/v2/v2_types.proto\"\xf1\x02\n" +
 	"\x10BalanceChangeLog\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x17\n" +
 	"\ateam_id\x18\x02 \x01(\x04R\x06teamId\x12\x1e\n" +
@@ -489,19 +379,7 @@ const file_invoice_iface_v2_v2_balance_proto_rawDesc = "" +
 	"updated_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x129\n" +
 	"\n" +
 	"created_at\x18\n" +
-	" \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt*\x91\x02\n" +
-	"\x11BalanceChangeType\x12#\n" +
-	"\x1fBALANCE_CHANGE_TYPE_UNSPECIFIED\x10\x00\x12\"\n" +
-	"\x1eBALANCE_CHANGE_TYPE_ADJUSTMENT\x10\x01\x12%\n" +
-	"!BALANCE_CHANGE_TYPE_WAREHOUSE_FEE\x10\x02\x12\x1f\n" +
-	"\x1bBALANCE_CHANGE_TYPE_COD_FEE\x10\x03\x12#\n" +
-	"\x1fBALANCE_CHANGE_TYPE_PRODUCT_FEE\x10\x04\x12\x1f\n" +
-	"\x1bBALANCE_CHANGE_TYPE_PAYMENT\x10\x05\x12%\n" +
-	"!BALANCE_CHANGE_TYPE_STOCK_PROBLEM\x10\x06*b\n" +
-	"\vBalanceType\x12\x1c\n" +
-	"\x18BALANCE_TYPE_UNSPECIFIED\x10\x00\x12\x18\n" +
-	"\x14BALANCE_TYPE_PAYABLE\x10\x01\x12\x1b\n" +
-	"\x17BALANCE_TYPE_RECEIVABLE\x10\x02B\xc4\x01\n" +
+	" \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAtB\xc4\x01\n" +
 	"\x14com.invoice_iface.v2B\x0eV2BalanceProtoP\x01Z?github.com/pdcgo/schema/services/invoice_iface/v2;invoice_iface\xa2\x02\x03IXX\xaa\x02\x0fInvoiceIface.V2\xca\x02\x0fInvoiceIface\\V2\xe2\x02\x1bInvoiceIface\\V2\\GPBMetadata\xea\x02\x10InvoiceIface::V2b\x06proto3"
 
 var (
@@ -516,25 +394,24 @@ func file_invoice_iface_v2_v2_balance_proto_rawDescGZIP() []byte {
 	return file_invoice_iface_v2_v2_balance_proto_rawDescData
 }
 
-var file_invoice_iface_v2_v2_balance_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
 var file_invoice_iface_v2_v2_balance_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_invoice_iface_v2_v2_balance_proto_goTypes = []any{
-	(BalanceChangeType)(0),        // 0: invoice_iface.v2.BalanceChangeType
-	(BalanceType)(0),              // 1: invoice_iface.v2.BalanceType
-	(*BalanceChangeLog)(nil),      // 2: invoice_iface.v2.BalanceChangeLog
-	(*TeamBalance)(nil),           // 3: invoice_iface.v2.TeamBalance
-	(*TeamBalanceDailyLog)(nil),   // 4: invoice_iface.v2.TeamBalanceDailyLog
+	(*BalanceChangeLog)(nil),      // 0: invoice_iface.v2.BalanceChangeLog
+	(*TeamBalance)(nil),           // 1: invoice_iface.v2.TeamBalance
+	(*TeamBalanceDailyLog)(nil),   // 2: invoice_iface.v2.TeamBalanceDailyLog
+	(BalanceChangeType)(0),        // 3: invoice_iface.v2.BalanceChangeType
+	(BalanceType)(0),              // 4: invoice_iface.v2.BalanceType
 	(*timestamppb.Timestamp)(nil), // 5: google.protobuf.Timestamp
 }
 var file_invoice_iface_v2_v2_balance_proto_depIdxs = []int32{
-	0,  // 0: invoice_iface.v2.BalanceChangeLog.change_type:type_name -> invoice_iface.v2.BalanceChangeType
-	1,  // 1: invoice_iface.v2.BalanceChangeLog.balance_type:type_name -> invoice_iface.v2.BalanceType
+	3,  // 0: invoice_iface.v2.BalanceChangeLog.change_type:type_name -> invoice_iface.v2.BalanceChangeType
+	4,  // 1: invoice_iface.v2.BalanceChangeLog.balance_type:type_name -> invoice_iface.v2.BalanceType
 	5,  // 2: invoice_iface.v2.BalanceChangeLog.created_at:type_name -> google.protobuf.Timestamp
-	1,  // 3: invoice_iface.v2.TeamBalance.balance_type:type_name -> invoice_iface.v2.BalanceType
+	4,  // 3: invoice_iface.v2.TeamBalance.balance_type:type_name -> invoice_iface.v2.BalanceType
 	5,  // 4: invoice_iface.v2.TeamBalance.created_at:type_name -> google.protobuf.Timestamp
 	5,  // 5: invoice_iface.v2.TeamBalance.updated_at:type_name -> google.protobuf.Timestamp
 	5,  // 6: invoice_iface.v2.TeamBalanceDailyLog.day:type_name -> google.protobuf.Timestamp
-	1,  // 7: invoice_iface.v2.TeamBalanceDailyLog.balance_type:type_name -> invoice_iface.v2.BalanceType
+	4,  // 7: invoice_iface.v2.TeamBalanceDailyLog.balance_type:type_name -> invoice_iface.v2.BalanceType
 	5,  // 8: invoice_iface.v2.TeamBalanceDailyLog.updated_at:type_name -> google.protobuf.Timestamp
 	5,  // 9: invoice_iface.v2.TeamBalanceDailyLog.created_at:type_name -> google.protobuf.Timestamp
 	10, // [10:10] is the sub-list for method output_type
@@ -549,19 +426,19 @@ func file_invoice_iface_v2_v2_balance_proto_init() {
 	if File_invoice_iface_v2_v2_balance_proto != nil {
 		return
 	}
+	file_invoice_iface_v2_v2_types_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_invoice_iface_v2_v2_balance_proto_rawDesc), len(file_invoice_iface_v2_v2_balance_proto_rawDesc)),
-			NumEnums:      2,
+			NumEnums:      0,
 			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_invoice_iface_v2_v2_balance_proto_goTypes,
 		DependencyIndexes: file_invoice_iface_v2_v2_balance_proto_depIdxs,
-		EnumInfos:         file_invoice_iface_v2_v2_balance_proto_enumTypes,
 		MessageInfos:      file_invoice_iface_v2_v2_balance_proto_msgTypes,
 	}.Build()
 	File_invoice_iface_v2_v2_balance_proto = out.File

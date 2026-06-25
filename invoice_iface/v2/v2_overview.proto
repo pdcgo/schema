@@ -1,0 +1,64 @@
+syntax = "proto3";
+package invoice_iface.v2;
+
+import "buf/validate/validate.proto";
+import "common/v1/team.proto";
+// import "common/v1/common.proto";
+import "google/protobuf/timestamp.proto";
+// import "invoice_iface/v2/v2_balance.proto";
+import "role_base/v1/role.proto";
+// import "invoice_iface/v2/v2_types.proto";
+
+option go_package = "github.com/pdcgo/schema/services/invoice_iface/v2;invoice_iface";
+
+message OverviewTimeFilter {
+  google.protobuf.Timestamp start = 1 [(buf.validate.field).required = true];
+  google.protobuf.Timestamp end = 2 [(buf.validate.field).required = true];
+}
+
+message OverviewFilter {
+  uint64 team_id = 2;
+  uint64 for_team_id = 3;
+  common.v1.TeamType team_type = 4;
+}
+
+enum OverviewMetricType {
+  OVERVIEW_METRIC_TYPE_UNSPECIFIED = 0;
+  OVERVIEW_METRIC_TYPE_PAYABLE = 1;
+  OVERVIEW_METRIC_TYPE_RECEIVABLE = 2;
+  OVERVIEW_METRIC_TYPE_PENDING_PAYMENT = 3;
+  OVERVIEW_METRIC_TYPE_TOTAL_PAYMENT = 4;
+  OVERVIEW_METRIC_TYPE_TOTAL_PAYABLE = 5;
+  OVERVIEW_METRIC_TYPE_TOTAL_RECEIVABLE = 6;
+}
+
+message OverviewRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
+  OverviewTimeFilter time_range = 1 [(buf.validate.field).required = true];
+  OverviewFilter filter = 2 [(buf.validate.field).required = true];
+  repeated OverviewMetricType metric_type = 3 [(buf.validate.field).repeated = {
+    min_items: 1
+    items: {
+      enum: {
+        defined_only: true
+        not_in: [0]
+      }
+    }
+  }];
+}
+
+message OverviewDataItem {
+  oneof data {
+    double payable = 1;
+    double receivable = 2;
+    double pending_payment = 3;
+    double total_payment = 4;
+    double total_payable = 5;
+    double total_receivable = 6;
+  }
+}
+
+message OverviewResponse {
+  repeated OverviewDataItem data = 1;
+}

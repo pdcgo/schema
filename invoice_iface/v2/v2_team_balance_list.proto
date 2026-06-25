@@ -1,0 +1,185 @@
+syntax = "proto3";
+package invoice_iface.v2;
+
+import "buf/validate/validate.proto";
+import "common/v1/common.proto";
+import "common/v1/team.proto";
+import "google/protobuf/timestamp.proto";
+import "invoice_iface/v2/v2_types.proto";
+// import "invoice_iface/v2/v2_balance.proto";
+// import "invoice_iface/v2/v2_overview.proto";
+import "role_base/v1/role.proto";
+
+option go_package = "github.com/pdcgo/schema/services/invoice_iface/v2;invoice_iface";
+
+message TeamBalanceListTimeFilter {
+  google.protobuf.Timestamp start = 1 [(buf.validate.field).required = true];
+  google.protobuf.Timestamp end = 2 [(buf.validate.field).required = true];
+}
+
+message TeamBalanceListFilter {
+  uint64 team_id = 2;
+  uint64 for_team_id = 3;
+  common.v1.TeamType team_type = 4;
+  common.v1.PageFilter page = 5;
+}
+
+enum TeamBalanceCommonSort {
+  TEAM_BALANCE_COMMON_SORT_UNSPECIFIED = 0;
+  TEAM_BALANCE_COMMON_SORT_TEAM_NAME = 1;
+  TEAM_BALANCE_COMMON_SORT_TEAM_TYPE = 2;
+}
+
+enum TeamBalancePayableSort {
+  TEAM_BALANCE_PAYABLE_SORT_UNSPECIFIED = 0;
+  TEAM_BALANCE_PAYABLE_SORT_BALANCE = 1;
+}
+
+enum TeamBalanceReceivableSort {
+  TEAM_BALANCE_RECEIVABLE_SORT_UNSPECIFIED = 0;
+  TEAM_BALANCE_RECEIVABLE_SORT_BALANCE = 1;
+}
+
+enum TeamBalancePendingPaymentSort {
+  TEAM_BALANCE_PENDING_PAYMENT_SORT_UNSPECIFIED = 0;
+  TEAM_BALANCE_PENDING_PAYMENT_SORT_AMOUNT = 1;
+}
+
+enum TeamBalanceTotalPaymentSort {
+  TEAM_BALANCE_TOTAL_PAYMENT_SORT_UNSPECIFIED = 0;
+  TEAM_BALANCE_TOTAL_PAYMENT_SORT_AMOUNT = 1;
+}
+
+enum TeamBalanceTotalPayableSort {
+  TEAM_BALANCE_TOTAL_PAYABLE_SORT_UNSPECIFIED = 0;
+  TEAM_BALANCE_TOTAL_PAYABLE_SORT_TOTAL_AMOUNT = 1;
+}
+
+enum TeamBalanceTotalReceivableSort {
+  TEAM_BALANCE_TOTAL_RECEIVABLE_SORT_UNSPECIFIED = 0;
+  TEAM_BALANCE_TOTAL_RECEIVABLE_SORT_TOTAL_AMOUNT = 1;
+}
+
+message TeamBalanceListSort {
+  SortType sort_type = 1;
+  oneof s {
+    TeamBalanceCommonSort common = 2;
+    TeamBalancePayableSort payable = 3;
+    TeamBalanceReceivableSort receivable = 4;
+    TeamBalancePendingPaymentSort pending_payment = 5;
+    TeamBalanceTotalPaymentSort total_payment = 6;
+    TeamBalanceTotalPayableSort total_payable = 7;
+    TeamBalanceTotalReceivableSort total_receivable = 8;
+  }
+}
+
+enum TeamBalanceListDataType {
+  TEAM_BALANCE_LIST_DATA_TYPE_UNSPECIFIED = 0;
+  TEAM_BALANCE_LIST_DATA_TYPE_COMMON = 1;
+  TEAM_BALANCE_LIST_DATA_TYPE_PAYABLE = 2;
+  TEAM_BALANCE_LIST_DATA_TYPE_RECEIVABLE = 3;
+  TEAM_BALANCE_LIST_DATA_TYPE_PENDING_PAYMENT = 4;
+  TEAM_BALANCE_LIST_DATA_TYPE_TOTAL_PAYMENT = 5;
+  TEAM_BALANCE_LIST_DATA_TYPE_TOTAL_PAYABLE = 6;
+  TEAM_BALANCE_LIST_DATA_TYPE_TOTAL_RECEIVABLE = 7;
+}
+
+message TeamBalanceListRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
+  TeamBalanceListTimeFilter time_range = 1 [(buf.validate.field).required = true];
+  TeamBalanceListFilter filter = 2 [(buf.validate.field).required = true];
+  TeamBalanceListSort sort = 3 [(buf.validate.field).required = true];
+  repeated TeamBalanceListDataType data_types = 4 [(buf.validate.field).repeated = {
+    min_items: 1
+    items: {
+      enum: {
+        defined_only: true
+        not_in: [0]
+      }
+    }
+  }];
+}
+
+message TeamBalanceCommonItem {
+  uint64 id = 1;
+  string name = 2;
+  common.v1.TeamType type = 3;
+}
+
+message TeamBalanceCommonData {
+  map<uint64, TeamBalanceCommonItem> data = 1;
+}
+
+message TeamBalancePayableItem {
+  double balance = 1;
+}
+
+message TeamBalancePayableData {
+  map<uint64, TeamBalancePayableItem> data = 1;
+}
+
+message TeamBalanceReceivableItem {
+  double balance = 1;
+}
+
+message TeamBalanceReceivableData {
+  map<uint64, TeamBalanceReceivableItem> data = 1;
+}
+
+message TeamBalancePendingPaymentItem {
+  double amount = 1;
+}
+
+message TeamBalancePendingPaymentData {
+  map<uint64, TeamBalancePendingPaymentItem> data = 1;
+}
+
+message TeamBalanceTotalPaymentItem {
+  double amount = 1;
+}
+
+message TeamBalanceTotalPaymentData {
+  map<uint64, TeamBalanceTotalPaymentItem> data = 1;
+}
+
+message ChangeSumAmount {
+  BalanceChangeType change_type = 1;
+  double amount = 2;
+  int64 transaction_count = 3;
+}
+
+message TeamBalanceTotalPayableItem {
+  double total_amount = 1;
+  repeated ChangeSumAmount change = 2;
+}
+
+message TeamBalanceTotalPayableData {
+  map<uint64, TeamBalanceTotalPayableItem> data = 1;
+}
+
+message TeamBalanceTotalReceivableItem {
+  double total_amount = 1;
+  repeated ChangeSumAmount change = 2;
+}
+
+message TeamBalanceTotalReceivableData {
+  map<uint64, TeamBalanceTotalReceivableItem> data = 1;
+}
+
+message TeamBalanceData {
+  oneof data {
+    TeamBalanceCommonData common = 1;
+    TeamBalancePayableData payable = 2;
+    TeamBalanceReceivableData receivable = 3;
+    TeamBalancePendingPaymentData pending_payment = 4;
+    TeamBalanceTotalPaymentData total_payment = 5;
+    TeamBalanceTotalPayableData total_payable = 6;
+    TeamBalanceTotalReceivableData total_receivable = 7;
+  }
+}
+
+message TeamBalanceListResponse {
+  repeated TeamBalanceData data = 1;
+  repeated uint64 ids = 2; // sorted ids
+}

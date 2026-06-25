@@ -46,6 +46,58 @@ func (m *MockInvoiceServiceClient) EXPECT() *MockInvoiceServiceClientMockRecorde
     return m.recorder
 }
 
+func (m *MockInvoiceService) Overview(ctx context.Context, req *connect.Request[v2.OverviewRequest]) (*connect.Response[v2.OverviewResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "Overview", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v2.OverviewResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInvoiceServiceMockRecorder) Overview(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Overview", reflect.TypeOf((*MockInvoiceService)(nil).Overview), ctx, req)
+}
+
+func (m *MockInvoiceServiceClient) Overview(ctx context.Context, req *connect.Request[v2.OverviewRequest]) (*connect.Response[v2.OverviewResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "Overview", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v2.OverviewResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInvoiceServiceClientMockRecorder) Overview(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Overview", reflect.TypeOf((*MockInvoiceService)(nil).Overview), ctx, req)
+}
+
+func (m *MockInvoiceService) TeamBalanceList(ctx context.Context, req *connect.Request[v2.TeamBalanceListRequest]) (*connect.Response[v2.TeamBalanceListResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "TeamBalanceList", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v2.TeamBalanceListResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInvoiceServiceMockRecorder) TeamBalanceList(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "TeamBalanceList", reflect.TypeOf((*MockInvoiceService)(nil).TeamBalanceList), ctx, req)
+}
+
+func (m *MockInvoiceServiceClient) TeamBalanceList(ctx context.Context, req *connect.Request[v2.TeamBalanceListRequest]) (*connect.Response[v2.TeamBalanceListResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "TeamBalanceList", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v2.TeamBalanceListResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInvoiceServiceClientMockRecorder) TeamBalanceList(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "TeamBalanceList", reflect.TypeOf((*MockInvoiceService)(nil).TeamBalanceList), ctx, req)
+}
+
 func (m *MockInvoiceService) CreatePayment(ctx context.Context, req *connect.Request[v2.CreatePaymentRequest]) (*connect.Response[v2.CreatePaymentResponse], error) {
     m.ctrl.T.Helper()
     ret := m.ctrl.Call(m, "CreatePayment", ctx, req)
@@ -174,58 +226,6 @@ func (m *MockInvoiceServiceClient) ListIncomingPayment(ctx context.Context, req 
 func (mr *MockInvoiceServiceClientMockRecorder) ListIncomingPayment(ctx, req interface{}) *gomock.Call {
     mr.mock.ctrl.T.Helper()
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListIncomingPayment", reflect.TypeOf((*MockInvoiceService)(nil).ListIncomingPayment), ctx, req)
-}
-
-func (m *MockInvoiceService) ListTeamBalance(ctx context.Context, req *connect.Request[v2.ListTeamBalanceRequest]) (*connect.Response[v2.ListTeamBalanceResponse], error) {
-    m.ctrl.T.Helper()
-    ret := m.ctrl.Call(m, "ListTeamBalance", ctx, req)
-    ret0, _ := ret[0].(*connect.Response[v2.ListTeamBalanceResponse])
-    ret1, _ := ret[1].(error)
-    return ret0, ret1
-}
-
-func (mr *MockInvoiceServiceMockRecorder) ListTeamBalance(ctx, req interface{}) *gomock.Call {
-    mr.mock.ctrl.T.Helper()
-    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListTeamBalance", reflect.TypeOf((*MockInvoiceService)(nil).ListTeamBalance), ctx, req)
-}
-
-func (m *MockInvoiceServiceClient) ListTeamBalance(ctx context.Context, req *connect.Request[v2.ListTeamBalanceRequest]) (*connect.Response[v2.ListTeamBalanceResponse], error) {
-    m.ctrl.T.Helper()
-    ret := m.ctrl.Call(m, "ListTeamBalance", ctx, req)
-    ret0, _ := ret[0].(*connect.Response[v2.ListTeamBalanceResponse])
-    ret1, _ := ret[1].(error)
-    return ret0, ret1
-}
-
-func (mr *MockInvoiceServiceClientMockRecorder) ListTeamBalance(ctx, req interface{}) *gomock.Call {
-    mr.mock.ctrl.T.Helper()
-    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListTeamBalance", reflect.TypeOf((*MockInvoiceService)(nil).ListTeamBalance), ctx, req)
-}
-
-func (m *MockInvoiceService) TeamBalanceMap(ctx context.Context, req *connect.Request[v2.TeamBalanceMapRequest]) (*connect.Response[v2.TeamBalanceMapResponse], error) {
-    m.ctrl.T.Helper()
-    ret := m.ctrl.Call(m, "TeamBalanceMap", ctx, req)
-    ret0, _ := ret[0].(*connect.Response[v2.TeamBalanceMapResponse])
-    ret1, _ := ret[1].(error)
-    return ret0, ret1
-}
-
-func (mr *MockInvoiceServiceMockRecorder) TeamBalanceMap(ctx, req interface{}) *gomock.Call {
-    mr.mock.ctrl.T.Helper()
-    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "TeamBalanceMap", reflect.TypeOf((*MockInvoiceService)(nil).TeamBalanceMap), ctx, req)
-}
-
-func (m *MockInvoiceServiceClient) TeamBalanceMap(ctx context.Context, req *connect.Request[v2.TeamBalanceMapRequest]) (*connect.Response[v2.TeamBalanceMapResponse], error) {
-    m.ctrl.T.Helper()
-    ret := m.ctrl.Call(m, "TeamBalanceMap", ctx, req)
-    ret0, _ := ret[0].(*connect.Response[v2.TeamBalanceMapResponse])
-    ret1, _ := ret[1].(error)
-    return ret0, ret1
-}
-
-func (mr *MockInvoiceServiceClientMockRecorder) TeamBalanceMap(ctx, req interface{}) *gomock.Call {
-    mr.mock.ctrl.T.Helper()
-    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "TeamBalanceMap", reflect.TypeOf((*MockInvoiceService)(nil).TeamBalanceMap), ctx, req)
 }
 
 func (m *MockInvoiceService) ListTeamBalanceLog(ctx context.Context, req *connect.Request[v2.ListTeamBalanceLogRequest]) (*connect.Response[v2.ListTeamBalanceLogResponse], error) {

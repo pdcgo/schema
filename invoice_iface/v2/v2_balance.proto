@@ -2,24 +2,11 @@ syntax = "proto3";
 package invoice_iface.v2;
 
 import "google/protobuf/timestamp.proto";
+import "invoice_iface/v2/v2_types.proto";
 
 option go_package = "github.com/pdcgo/schema/services/invoice_iface/v2;invoice_iface";
 
-enum BalanceChangeType {
-  BALANCE_CHANGE_TYPE_UNSPECIFIED = 0;
-  BALANCE_CHANGE_TYPE_ADJUSTMENT = 1;
-  BALANCE_CHANGE_TYPE_WAREHOUSE_FEE = 2;
-  BALANCE_CHANGE_TYPE_COD_FEE = 3;
-  BALANCE_CHANGE_TYPE_PRODUCT_FEE = 4;
-  BALANCE_CHANGE_TYPE_PAYMENT = 5;
-  BALANCE_CHANGE_TYPE_STOCK_PROBLEM = 6;
-}
 
-enum BalanceType {
-  BALANCE_TYPE_UNSPECIFIED = 0;
-  BALANCE_TYPE_PAYABLE = 1;
-  BALANCE_TYPE_RECEIVABLE = 2;
-}
 
 message BalanceChangeLog {
   uint64 id = 1;
