@@ -1,0 +1,77 @@
+syntax = "proto3";
+package document_iface.v1;
+
+import "buf/validate/validate.proto";
+import "google/protobuf/timestamp.proto";
+import "role_base/v1/role.proto";
+
+option go_package = "github.com/pdcgo/schema/services/document_iface/v1;document_iface";
+
+// DocumentService issues V4 signed URLs for direct-to-GCS uploads (the bytes never
+// transit the backend) and records each confirmed upload as a team-owned asset that
+// business entities reference by document_id (media-library model).
+service DocumentService {
+  // RequestUpload authorizes the team, derives a server-side object key, and returns a
+  // short-lived signed PUT URL the client uploads the file to directly.
+  rpc RequestUpload(RequestUploadRequest) returns (RequestUploadResponse);
+  // ConfirmUpload validates the uploaded object (size/content-type) and marks the asset
+  // active; un-confirmed uploads are reaped by the bucket's incoming/ lifecycle TTL.
+  rpc ConfirmUpload(ConfirmUploadRequest) returns (ConfirmUploadResponse);
+  // GetDownloadUrl returns a short-lived signed GET URL for a document the caller's team owns.
+  rpc GetDownloadUrl(GetDownloadUrlRequest) returns (GetDownloadUrlResponse);
+}
+
+enum DocumentResourceType {
+  DOCUMENT_RESOURCE_TYPE_UNSPECIFIED = 0;
+  DOCUMENT_RESOURCE_TYPE_PRODUCT = 1;
+  DOCUMENT_RESOURCE_TYPE_TRANSACTION = 2;
+  DOCUMENT_RESOURCE_TYPE_PROFILE_PICTURE = 3;
+  DOCUMENT_RESOURCE_TYPE_WAREHOUSE = 4;
+  DOCUMENT_RESOURCE_TYPE_INVOICE = 5;
+  DOCUMENT_RESOURCE_TYPE_GENERAL = 6;
+}
+
+message RequestUploadRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
+  uint64 team_id = 1 [
+    (buf.validate.field).uint64.gt = 0,
+    (role_base.v1.use_scope) = true
+  ];
+  DocumentResourceType resource_type = 2 [(buf.validate.field).enum.defined_only = true];
+  string content_type = 3 [(buf.validate.field).string.min_len = 1];
+  int64 size_bytes = 4 [(buf.validate.field).int64.gt = 0];
+  string filename = 5;
+}
+
+message RequestUploadResponse {
+  string upload_url = 1;
+  // HTTP method the client must use for the signed URL (PUT).
+  string method = 2;
+  // Headers the client must echo on the upload (e.g. Content-Type) for the signature to match.
+  map<string, string> headers = 3;
+  // Opaque token (HMAC of object key + team + expiry) the client passes to ConfirmUpload.
+  string upload_token = 4;
+  google.protobuf.Timestamp expires_at = 5;
+}
+
+message ConfirmUploadRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
+  string upload_token = 1 [(buf.validate.field).string.min_len = 1];
+}
+
+message ConfirmUploadResponse {
+  string document_id = 1;
+}
+
+message GetDownloadUrlRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
+  string document_id = 1 [(buf.validate.field).string.min_len = 1];
+}
+
+message GetDownloadUrlResponse {
+  string url = 1;
+  google.protobuf.Timestamp expires_at = 2;
+}

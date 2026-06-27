@@ -24,6 +24,8 @@ enum TeamType {
 message PublicTeamListRequest {
   string q = 1;
   common.v1.PageFilter page = 2 [(buf.validate.field).required = true];
+  // Filter teams by type; TEAM_TYPE_UNSPECIFIED (default) returns all types.
+  TeamType team_type = 3;
 }
 
 message PublicTeamListResponse {

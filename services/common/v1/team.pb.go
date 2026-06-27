@@ -75,9 +75,11 @@ func (TeamType) EnumDescriptor() ([]byte, []int) {
 }
 
 type PublicTeamListRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Q             string                 `protobuf:"bytes,1,opt,name=q,proto3" json:"q,omitempty"`
-	Page          *PageFilter            `protobuf:"bytes,2,opt,name=page,proto3" json:"page,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	Q     string                 `protobuf:"bytes,1,opt,name=q,proto3" json:"q,omitempty"`
+	Page  *PageFilter            `protobuf:"bytes,2,opt,name=page,proto3" json:"page,omitempty"`
+	// Filter teams by type; TEAM_TYPE_UNSPECIFIED (default) returns all types.
+	TeamType      TeamType `protobuf:"varint,3,opt,name=team_type,json=teamType,proto3,enum=common.v1.TeamType" json:"team_type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -124,6 +126,13 @@ func (x *PublicTeamListRequest) GetPage() *PageFilter {
 		return x.Page
 	}
 	return nil
+}
+
+func (x *PublicTeamListRequest) GetTeamType() TeamType {
+	if x != nil {
+		return x.TeamType
+	}
+	return TeamType_TEAM_TYPE_UNSPECIFIED
 }
 
 type PublicTeamListResponse struct {
@@ -270,10 +279,11 @@ var File_common_v1_team_proto protoreflect.FileDescriptor
 
 const file_common_v1_team_proto_rawDesc = "" +
 	"\n" +
-	"\x14common/v1/team.proto\x12\tcommon.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\"X\n" +
+	"\x14common/v1/team.proto\x12\tcommon.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\"\x8a\x01\n" +
 	"\x15PublicTeamListRequest\x12\f\n" +
 	"\x01q\x18\x01 \x01(\tR\x01q\x121\n" +
-	"\x04page\x18\x02 \x01(\v2\x15.common.v1.PageFilterB\x06\xbaH\x03\xc8\x01\x01R\x04page\"q\n" +
+	"\x04page\x18\x02 \x01(\v2\x15.common.v1.PageFilterB\x06\xbaH\x03\xc8\x01\x01R\x04page\x120\n" +
+	"\tteam_type\x18\x03 \x01(\x0e2\x13.common.v1.TeamTypeR\bteamType\"q\n" +
 	"\x16PublicTeamListResponse\x12%\n" +
 	"\x05datas\x18\x01 \x03(\v2\x0f.common.v1.TeamR\x05datas\x120\n" +
 	"\tpage_info\x18\x02 \x01(\v2\x13.common.v1.PageInfoR\bpageInfo\"=\n" +
@@ -322,19 +332,20 @@ var file_common_v1_team_proto_goTypes = []any{
 }
 var file_common_v1_team_proto_depIdxs = []int32{
 	6, // 0: common.v1.PublicTeamListRequest.page:type_name -> common.v1.PageFilter
-	7, // 1: common.v1.PublicTeamListResponse.datas:type_name -> common.v1.Team
-	8, // 2: common.v1.PublicTeamListResponse.page_info:type_name -> common.v1.PageInfo
-	5, // 3: common.v1.PublicTeamIDsResponse.data:type_name -> common.v1.PublicTeamIDsResponse.DataEntry
-	7, // 4: common.v1.PublicTeamIDsResponse.DataEntry.value:type_name -> common.v1.Team
-	3, // 5: common.v1.TeamService.PublicTeamIDs:input_type -> common.v1.PublicTeamIDsRequest
-	1, // 6: common.v1.TeamService.PublicTeamList:input_type -> common.v1.PublicTeamListRequest
-	4, // 7: common.v1.TeamService.PublicTeamIDs:output_type -> common.v1.PublicTeamIDsResponse
-	2, // 8: common.v1.TeamService.PublicTeamList:output_type -> common.v1.PublicTeamListResponse
-	7, // [7:9] is the sub-list for method output_type
-	5, // [5:7] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	0, // 1: common.v1.PublicTeamListRequest.team_type:type_name -> common.v1.TeamType
+	7, // 2: common.v1.PublicTeamListResponse.datas:type_name -> common.v1.Team
+	8, // 3: common.v1.PublicTeamListResponse.page_info:type_name -> common.v1.PageInfo
+	5, // 4: common.v1.PublicTeamIDsResponse.data:type_name -> common.v1.PublicTeamIDsResponse.DataEntry
+	7, // 5: common.v1.PublicTeamIDsResponse.DataEntry.value:type_name -> common.v1.Team
+	3, // 6: common.v1.TeamService.PublicTeamIDs:input_type -> common.v1.PublicTeamIDsRequest
+	1, // 7: common.v1.TeamService.PublicTeamList:input_type -> common.v1.PublicTeamListRequest
+	4, // 8: common.v1.TeamService.PublicTeamIDs:output_type -> common.v1.PublicTeamIDsResponse
+	2, // 9: common.v1.TeamService.PublicTeamList:output_type -> common.v1.PublicTeamListResponse
+	8, // [8:10] is the sub-list for method output_type
+	6, // [6:8] is the sub-list for method input_type
+	6, // [6:6] is the sub-list for extension type_name
+	6, // [6:6] is the sub-list for extension extendee
+	0, // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_common_v1_team_proto_init() }
