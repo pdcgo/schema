@@ -285,8 +285,11 @@ func (x *ConfirmUploadRequest) GetUploadToken() string {
 }
 
 type ConfirmUploadResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	DocumentId    string                 `protobuf:"bytes,1,opt,name=document_id,json=documentId,proto3" json:"document_id,omitempty"`
+	state      protoimpl.MessageState `protogen:"open.v1"`
+	DocumentId string                 `protobuf:"bytes,1,opt,name=document_id,json=documentId,proto3" json:"document_id,omitempty"`
+	// Stable, non-expiring public URL — populated only for public resource types
+	// (product/profile_picture/warehouse); empty for private types served via signed URLs.
+	PublicUrl     string `protobuf:"bytes,2,opt,name=public_url,json=publicUrl,proto3" json:"public_url,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -324,6 +327,13 @@ func (*ConfirmUploadResponse) Descriptor() ([]byte, []int) {
 func (x *ConfirmUploadResponse) GetDocumentId() string {
 	if x != nil {
 		return x.DocumentId
+	}
+	return ""
+}
+
+func (x *ConfirmUploadResponse) GetPublicUrl() string {
+	if x != nil {
+		return x.PublicUrl
 	}
 	return ""
 }
@@ -373,9 +383,11 @@ func (x *GetDownloadUrlRequest) GetDocumentId() string {
 }
 
 type GetDownloadUrlResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Url           string                 `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
-	ExpiresAt     *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
+	state     protoimpl.MessageState `protogen:"open.v1"`
+	Url       string                 `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
+	ExpiresAt *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
+	// True when url is a stable public URL (no expires_at); false when url is a short-lived signed URL.
+	Public        bool `protobuf:"varint,3,opt,name=public,proto3" json:"public,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -424,6 +436,13 @@ func (x *GetDownloadUrlResponse) GetExpiresAt() *timestamppb.Timestamp {
 	return nil
 }
 
+func (x *GetDownloadUrlResponse) GetPublic() bool {
+	if x != nil {
+		return x.Public
+	}
+	return false
+}
+
 var File_document_iface_v1_document_proto protoreflect.FileDescriptor
 
 const file_document_iface_v1_document_proto_rawDesc = "" +
@@ -448,17 +467,20 @@ const file_document_iface_v1_document_proto_rawDesc = "" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"J\n" +
 	"\x14ConfirmUploadRequest\x12*\n" +
-	"\fupload_token\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\vuploadToken:\x06\x92\xb5\x18\x02 \x01\"8\n" +
+	"\fupload_token\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\vuploadToken:\x06\x92\xb5\x18\x02 \x01\"W\n" +
 	"\x15ConfirmUploadResponse\x12\x1f\n" +
 	"\vdocument_id\x18\x01 \x01(\tR\n" +
-	"documentId\"I\n" +
+	"documentId\x12\x1d\n" +
+	"\n" +
+	"public_url\x18\x02 \x01(\tR\tpublicUrl\"I\n" +
 	"\x15GetDownloadUrlRequest\x12(\n" +
 	"\vdocument_id\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\n" +
-	"documentId:\x06\x92\xb5\x18\x02 \x01\"e\n" +
+	"documentId:\x06\x92\xb5\x18\x02 \x01\"}\n" +
 	"\x16GetDownloadUrlResponse\x12\x10\n" +
 	"\x03url\x18\x01 \x01(\tR\x03url\x129\n" +
 	"\n" +
-	"expires_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt*\xa4\x02\n" +
+	"expires_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\x12\x16\n" +
+	"\x06public\x18\x03 \x01(\bR\x06public*\xa4\x02\n" +
 	"\x14DocumentResourceType\x12&\n" +
 	"\"DOCUMENT_RESOURCE_TYPE_UNSPECIFIED\x10\x00\x12\"\n" +
 	"\x1eDOCUMENT_RESOURCE_TYPE_PRODUCT\x10\x01\x12&\n" +

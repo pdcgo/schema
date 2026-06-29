@@ -63,6 +63,9 @@ message ConfirmUploadRequest {
 
 message ConfirmUploadResponse {
   string document_id = 1;
+  // Stable, non-expiring public URL — populated only for public resource types
+  // (product/profile_picture/warehouse); empty for private types served via signed URLs.
+  string public_url = 2;
 }
 
 message GetDownloadUrlRequest {
@@ -74,4 +77,6 @@ message GetDownloadUrlRequest {
 message GetDownloadUrlResponse {
   string url = 1;
   google.protobuf.Timestamp expires_at = 2;
+  // True when url is a stable public URL (no expires_at); false when url is a short-lived signed URL.
+  bool public = 3;
 }
