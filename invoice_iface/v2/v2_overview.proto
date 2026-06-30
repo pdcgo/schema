@@ -30,6 +30,8 @@ enum OverviewMetricType {
   OVERVIEW_METRIC_TYPE_TOTAL_PAYMENT = 4;
   OVERVIEW_METRIC_TYPE_TOTAL_PAYABLE = 5;
   OVERVIEW_METRIC_TYPE_TOTAL_RECEIVABLE = 6;
+  // Incoming in-flight payments (receivable-side pending_payment_amount).
+  OVERVIEW_METRIC_TYPE_INCOMING_PAYMENT = 7;
 }
 
 message OverviewRequest {
@@ -56,6 +58,7 @@ message OverviewDataItem {
     double total_payment = 4;
     double total_payable = 5;
     double total_receivable = 6;
+    double incoming_payment = 7;
   }
 }
 

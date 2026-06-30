@@ -128,12 +128,57 @@ func (x *OrderCanceled) GetTransactionTime() *timestamppb.Timestamp {
 	return nil
 }
 
+type PaymentAccept struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	SubmissionId  uint64                 `protobuf:"varint,1,opt,name=submission_id,json=submissionId,proto3" json:"submission_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PaymentAccept) Reset() {
+	*x = PaymentAccept{}
+	mi := &file_selling_iface_v1_event_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PaymentAccept) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PaymentAccept) ProtoMessage() {}
+
+func (x *PaymentAccept) ProtoReflect() protoreflect.Message {
+	mi := &file_selling_iface_v1_event_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PaymentAccept.ProtoReflect.Descriptor instead.
+func (*PaymentAccept) Descriptor() ([]byte, []int) {
+	return file_selling_iface_v1_event_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *PaymentAccept) GetSubmissionId() uint64 {
+	if x != nil {
+		return x.SubmissionId
+	}
+	return 0
+}
+
 type SellingEvent struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Types that are valid to be assigned to Data:
 	//
 	//	*SellingEvent_OrderCreated
 	//	*SellingEvent_OrderCanceled
+	//	*SellingEvent_PaymentAccept
 	Data          isSellingEvent_Data `protobuf_oneof:"data"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -141,7 +186,7 @@ type SellingEvent struct {
 
 func (x *SellingEvent) Reset() {
 	*x = SellingEvent{}
-	mi := &file_selling_iface_v1_event_proto_msgTypes[2]
+	mi := &file_selling_iface_v1_event_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -153,7 +198,7 @@ func (x *SellingEvent) String() string {
 func (*SellingEvent) ProtoMessage() {}
 
 func (x *SellingEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_selling_iface_v1_event_proto_msgTypes[2]
+	mi := &file_selling_iface_v1_event_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -166,7 +211,7 @@ func (x *SellingEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SellingEvent.ProtoReflect.Descriptor instead.
 func (*SellingEvent) Descriptor() ([]byte, []int) {
-	return file_selling_iface_v1_event_proto_rawDescGZIP(), []int{2}
+	return file_selling_iface_v1_event_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *SellingEvent) GetData() isSellingEvent_Data {
@@ -194,6 +239,15 @@ func (x *SellingEvent) GetOrderCanceled() *OrderCanceled {
 	return nil
 }
 
+func (x *SellingEvent) GetPaymentAccept() *PaymentAccept {
+	if x != nil {
+		if x, ok := x.Data.(*SellingEvent_PaymentAccept); ok {
+			return x.PaymentAccept
+		}
+	}
+	return nil
+}
+
 type isSellingEvent_Data interface {
 	isSellingEvent_Data()
 }
@@ -206,9 +260,15 @@ type SellingEvent_OrderCanceled struct {
 	OrderCanceled *OrderCanceled `protobuf:"bytes,2,opt,name=order_canceled,json=orderCanceled,proto3,oneof"`
 }
 
+type SellingEvent_PaymentAccept struct {
+	PaymentAccept *PaymentAccept `protobuf:"bytes,3,opt,name=payment_accept,json=paymentAccept,proto3,oneof"`
+}
+
 func (*SellingEvent_OrderCreated) isSellingEvent_Data() {}
 
 func (*SellingEvent_OrderCanceled) isSellingEvent_Data() {}
+
+func (*SellingEvent_PaymentAccept) isSellingEvent_Data() {}
 
 var File_selling_iface_v1_event_proto protoreflect.FileDescriptor
 
@@ -220,10 +280,13 @@ const file_selling_iface_v1_event_proto_rawDesc = "" +
 	"\x10transaction_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\x0ftransactionTime\"z\n" +
 	"\rOrderCanceled\x12\"\n" +
 	"\border_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\aorderId\x12E\n" +
-	"\x10transaction_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\x0ftransactionTime\"\xbc\x01\n" +
+	"\x10transaction_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\x0ftransactionTime\"=\n" +
+	"\rPaymentAccept\x12,\n" +
+	"\rsubmission_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\fsubmissionId\"\x86\x02\n" +
 	"\fSellingEvent\x12E\n" +
 	"\rorder_created\x18\x01 \x01(\v2\x1e.selling_iface.v1.OrderCreatedH\x00R\forderCreated\x12H\n" +
-	"\x0eorder_canceled\x18\x02 \x01(\v2\x1f.selling_iface.v1.OrderCanceledH\x00R\rorderCanceled:\x13\x8a\xb5\x18\x0f\n" +
+	"\x0eorder_canceled\x18\x02 \x01(\v2\x1f.selling_iface.v1.OrderCanceledH\x00R\rorderCanceled\x12H\n" +
+	"\x0epayment_accept\x18\x03 \x01(\v2\x1f.selling_iface.v1.PaymentAcceptH\x00R\rpaymentAccept:\x13\x8a\xb5\x18\x0f\n" +
 	"\rselling-topicB\x06\n" +
 	"\x04dataB\xc0\x01\n" +
 	"\x14com.selling_iface.v1B\n" +
@@ -241,23 +304,25 @@ func file_selling_iface_v1_event_proto_rawDescGZIP() []byte {
 	return file_selling_iface_v1_event_proto_rawDescData
 }
 
-var file_selling_iface_v1_event_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_selling_iface_v1_event_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_selling_iface_v1_event_proto_goTypes = []any{
 	(*OrderCreated)(nil),          // 0: selling_iface.v1.OrderCreated
 	(*OrderCanceled)(nil),         // 1: selling_iface.v1.OrderCanceled
-	(*SellingEvent)(nil),          // 2: selling_iface.v1.SellingEvent
-	(*timestamppb.Timestamp)(nil), // 3: google.protobuf.Timestamp
+	(*PaymentAccept)(nil),         // 2: selling_iface.v1.PaymentAccept
+	(*SellingEvent)(nil),          // 3: selling_iface.v1.SellingEvent
+	(*timestamppb.Timestamp)(nil), // 4: google.protobuf.Timestamp
 }
 var file_selling_iface_v1_event_proto_depIdxs = []int32{
-	3, // 0: selling_iface.v1.OrderCreated.transaction_time:type_name -> google.protobuf.Timestamp
-	3, // 1: selling_iface.v1.OrderCanceled.transaction_time:type_name -> google.protobuf.Timestamp
+	4, // 0: selling_iface.v1.OrderCreated.transaction_time:type_name -> google.protobuf.Timestamp
+	4, // 1: selling_iface.v1.OrderCanceled.transaction_time:type_name -> google.protobuf.Timestamp
 	0, // 2: selling_iface.v1.SellingEvent.order_created:type_name -> selling_iface.v1.OrderCreated
 	1, // 3: selling_iface.v1.SellingEvent.order_canceled:type_name -> selling_iface.v1.OrderCanceled
-	4, // [4:4] is the sub-list for method output_type
-	4, // [4:4] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	2, // 4: selling_iface.v1.SellingEvent.payment_accept:type_name -> selling_iface.v1.PaymentAccept
+	5, // [5:5] is the sub-list for method output_type
+	5, // [5:5] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_selling_iface_v1_event_proto_init() }
@@ -265,9 +330,10 @@ func file_selling_iface_v1_event_proto_init() {
 	if File_selling_iface_v1_event_proto != nil {
 		return
 	}
-	file_selling_iface_v1_event_proto_msgTypes[2].OneofWrappers = []any{
+	file_selling_iface_v1_event_proto_msgTypes[3].OneofWrappers = []any{
 		(*SellingEvent_OrderCreated)(nil),
 		(*SellingEvent_OrderCanceled)(nil),
+		(*SellingEvent_PaymentAccept)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -275,7 +341,7 @@ func file_selling_iface_v1_event_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_selling_iface_v1_event_proto_rawDesc), len(file_selling_iface_v1_event_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

@@ -18,11 +18,15 @@ message OrderCanceled {
   google.protobuf.Timestamp transaction_time = 2;
 }
 
+message PaymentAccept {
+  uint64 submission_id = 1 [(buf.validate.field).uint64.gt = 0];
+}
+
 message SellingEvent {
   option (event_base.v1.event_config).event_topic = "selling-topic";
   oneof data {
     OrderCreated order_created = 1;
     OrderCanceled order_canceled = 2;
+    PaymentAccept payment_accept = 3;
   }
 }
- 

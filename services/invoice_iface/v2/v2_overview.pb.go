@@ -35,6 +35,8 @@ const (
 	OverviewMetricType_OVERVIEW_METRIC_TYPE_TOTAL_PAYMENT    OverviewMetricType = 4
 	OverviewMetricType_OVERVIEW_METRIC_TYPE_TOTAL_PAYABLE    OverviewMetricType = 5
 	OverviewMetricType_OVERVIEW_METRIC_TYPE_TOTAL_RECEIVABLE OverviewMetricType = 6
+	// Incoming in-flight payments (receivable-side pending_payment_amount).
+	OverviewMetricType_OVERVIEW_METRIC_TYPE_INCOMING_PAYMENT OverviewMetricType = 7
 )
 
 // Enum value maps for OverviewMetricType.
@@ -47,6 +49,7 @@ var (
 		4: "OVERVIEW_METRIC_TYPE_TOTAL_PAYMENT",
 		5: "OVERVIEW_METRIC_TYPE_TOTAL_PAYABLE",
 		6: "OVERVIEW_METRIC_TYPE_TOTAL_RECEIVABLE",
+		7: "OVERVIEW_METRIC_TYPE_INCOMING_PAYMENT",
 	}
 	OverviewMetricType_value = map[string]int32{
 		"OVERVIEW_METRIC_TYPE_UNSPECIFIED":      0,
@@ -56,6 +59,7 @@ var (
 		"OVERVIEW_METRIC_TYPE_TOTAL_PAYMENT":    4,
 		"OVERVIEW_METRIC_TYPE_TOTAL_PAYABLE":    5,
 		"OVERVIEW_METRIC_TYPE_TOTAL_RECEIVABLE": 6,
+		"OVERVIEW_METRIC_TYPE_INCOMING_PAYMENT": 7,
 	}
 )
 
@@ -268,6 +272,7 @@ type OverviewDataItem struct {
 	//	*OverviewDataItem_TotalPayment
 	//	*OverviewDataItem_TotalPayable
 	//	*OverviewDataItem_TotalReceivable
+	//	*OverviewDataItem_IncomingPayment
 	Data          isOverviewDataItem_Data `protobuf_oneof:"data"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -364,6 +369,15 @@ func (x *OverviewDataItem) GetTotalReceivable() float64 {
 	return 0
 }
 
+func (x *OverviewDataItem) GetIncomingPayment() float64 {
+	if x != nil {
+		if x, ok := x.Data.(*OverviewDataItem_IncomingPayment); ok {
+			return x.IncomingPayment
+		}
+	}
+	return 0
+}
+
 type isOverviewDataItem_Data interface {
 	isOverviewDataItem_Data()
 }
@@ -392,6 +406,10 @@ type OverviewDataItem_TotalReceivable struct {
 	TotalReceivable float64 `protobuf:"fixed64,6,opt,name=total_receivable,json=totalReceivable,proto3,oneof"`
 }
 
+type OverviewDataItem_IncomingPayment struct {
+	IncomingPayment float64 `protobuf:"fixed64,7,opt,name=incoming_payment,json=incomingPayment,proto3,oneof"`
+}
+
 func (*OverviewDataItem_Payable) isOverviewDataItem_Data() {}
 
 func (*OverviewDataItem_Receivable) isOverviewDataItem_Data() {}
@@ -403,6 +421,8 @@ func (*OverviewDataItem_TotalPayment) isOverviewDataItem_Data() {}
 func (*OverviewDataItem_TotalPayable) isOverviewDataItem_Data() {}
 
 func (*OverviewDataItem_TotalReceivable) isOverviewDataItem_Data() {}
+
+func (*OverviewDataItem_IncomingPayment) isOverviewDataItem_Data() {}
 
 type OverviewResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -465,7 +485,7 @@ const file_invoice_iface_v2_v2_overview_proto_rawDesc = "" +
 	"time_range\x18\x01 \x01(\v2$.invoice_iface.v2.OverviewTimeFilterB\x06\xbaH\x03\xc8\x01\x01R\ttimeRange\x12@\n" +
 	"\x06filter\x18\x02 \x01(\v2 .invoice_iface.v2.OverviewFilterB\x06\xbaH\x03\xc8\x01\x01R\x06filter\x12X\n" +
 	"\vmetric_type\x18\x03 \x03(\x0e2$.invoice_iface.v2.OverviewMetricTypeB\x11\xbaH\x0e\x92\x01\v\b\x01\"\a\x82\x01\x04\x10\x01 \x00R\n" +
-	"metricType:\x06\x92\xb5\x18\x02 \x01\"\xfe\x01\n" +
+	"metricType:\x06\x92\xb5\x18\x02 \x01\"\xab\x02\n" +
 	"\x10OverviewDataItem\x12\x1a\n" +
 	"\apayable\x18\x01 \x01(\x01H\x00R\apayable\x12 \n" +
 	"\n" +
@@ -474,10 +494,11 @@ const file_invoice_iface_v2_v2_overview_proto_rawDesc = "" +
 	"\x0fpending_payment\x18\x03 \x01(\x01H\x00R\x0ependingPayment\x12%\n" +
 	"\rtotal_payment\x18\x04 \x01(\x01H\x00R\ftotalPayment\x12%\n" +
 	"\rtotal_payable\x18\x05 \x01(\x01H\x00R\ftotalPayable\x12+\n" +
-	"\x10total_receivable\x18\x06 \x01(\x01H\x00R\x0ftotalReceivableB\x06\n" +
+	"\x10total_receivable\x18\x06 \x01(\x01H\x00R\x0ftotalReceivable\x12+\n" +
+	"\x10incoming_payment\x18\a \x01(\x01H\x00R\x0fincomingPaymentB\x06\n" +
 	"\x04data\"J\n" +
 	"\x10OverviewResponse\x126\n" +
-	"\x04data\x18\x01 \x03(\v2\".invoice_iface.v2.OverviewDataItemR\x04data*\xa6\x02\n" +
+	"\x04data\x18\x01 \x03(\v2\".invoice_iface.v2.OverviewDataItemR\x04data*\xd1\x02\n" +
 	"\x12OverviewMetricType\x12$\n" +
 	" OVERVIEW_METRIC_TYPE_UNSPECIFIED\x10\x00\x12 \n" +
 	"\x1cOVERVIEW_METRIC_TYPE_PAYABLE\x10\x01\x12#\n" +
@@ -485,7 +506,8 @@ const file_invoice_iface_v2_v2_overview_proto_rawDesc = "" +
 	"$OVERVIEW_METRIC_TYPE_PENDING_PAYMENT\x10\x03\x12&\n" +
 	"\"OVERVIEW_METRIC_TYPE_TOTAL_PAYMENT\x10\x04\x12&\n" +
 	"\"OVERVIEW_METRIC_TYPE_TOTAL_PAYABLE\x10\x05\x12)\n" +
-	"%OVERVIEW_METRIC_TYPE_TOTAL_RECEIVABLE\x10\x06B\xc5\x01\n" +
+	"%OVERVIEW_METRIC_TYPE_TOTAL_RECEIVABLE\x10\x06\x12)\n" +
+	"%OVERVIEW_METRIC_TYPE_INCOMING_PAYMENT\x10\aB\xc5\x01\n" +
 	"\x14com.invoice_iface.v2B\x0fV2OverviewProtoP\x01Z?github.com/pdcgo/schema/services/invoice_iface/v2;invoice_iface\xa2\x02\x03IXX\xaa\x02\x0fInvoiceIface.V2\xca\x02\x0fInvoiceIface\\V2\xe2\x02\x1bInvoiceIface\\V2\\GPBMetadata\xea\x02\x10InvoiceIface::V2b\x06proto3"
 
 var (
@@ -539,6 +561,7 @@ func file_invoice_iface_v2_v2_overview_proto_init() {
 		(*OverviewDataItem_TotalPayment)(nil),
 		(*OverviewDataItem_TotalPayable)(nil),
 		(*OverviewDataItem_TotalReceivable)(nil),
+		(*OverviewDataItem_IncomingPayment)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

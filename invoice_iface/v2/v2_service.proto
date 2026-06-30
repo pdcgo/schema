@@ -64,6 +64,8 @@ message ListPaymentRequest {
   uint64 for_team_id = 2;
   PaymentStatus status = 3;
   common.v1.PageFilter page = 4 [(buf.validate.field).required = true];
+  google.protobuf.Timestamp from_time = 5;
+  google.protobuf.Timestamp to_time = 6;
 }
 
 message ListPaymentResponse {
@@ -81,6 +83,8 @@ message ListIncomingPaymentRequest {
   uint64 team_id = 2;
   PaymentStatus status = 3;
   common.v1.PageFilter page = 4 [(buf.validate.field).required = true];
+  google.protobuf.Timestamp from_time = 5;
+  google.protobuf.Timestamp to_time = 6;
 }
 
 message ListIncomingPaymentResponse {
