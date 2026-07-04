@@ -9,6 +9,7 @@ package product_iface
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	v1 "github.com/pdcgo/schema/services/common/v1"
+	_ "github.com/pdcgo/schema/services/role_base/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -1215,16 +1216,1330 @@ func (*ProductMapConnectResponse) Descriptor() ([]byte, []int) {
 	return file_product_iface_v1_product_proto_rawDescGZIP(), []int{15}
 }
 
+type ProductCreateRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	RefId         string                 `protobuf:"bytes,3,opt,name=ref_id,json=refId,proto3" json:"ref_id,omitempty"` // ignored when the server can auto-generate the product code
+	Images        []string               `protobuf:"bytes,4,rep,name=images,proto3" json:"images,omitempty"`
+	Description   string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
+	MarkupPercent float64                `protobuf:"fixed64,6,opt,name=markup_percent,json=markupPercent,proto3" json:"markup_percent,omitempty"`
+	CrossLocked   bool                   `protobuf:"varint,7,opt,name=cross_locked,json=crossLocked,proto3" json:"cross_locked,omitempty"`
+	CategoryId    uint64                 `protobuf:"varint,8,opt,name=category_id,json=categoryId,proto3" json:"category_id,omitempty"` // optional (UI requires it); attaches a product_category row
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ProductCreateRequest) Reset() {
+	*x = ProductCreateRequest{}
+	mi := &file_product_iface_v1_product_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProductCreateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProductCreateRequest) ProtoMessage() {}
+
+func (x *ProductCreateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_product_iface_v1_product_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProductCreateRequest.ProtoReflect.Descriptor instead.
+func (*ProductCreateRequest) Descriptor() ([]byte, []int) {
+	return file_product_iface_v1_product_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *ProductCreateRequest) GetTeamId() uint64 {
+	if x != nil {
+		return x.TeamId
+	}
+	return 0
+}
+
+func (x *ProductCreateRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *ProductCreateRequest) GetRefId() string {
+	if x != nil {
+		return x.RefId
+	}
+	return ""
+}
+
+func (x *ProductCreateRequest) GetImages() []string {
+	if x != nil {
+		return x.Images
+	}
+	return nil
+}
+
+func (x *ProductCreateRequest) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *ProductCreateRequest) GetMarkupPercent() float64 {
+	if x != nil {
+		return x.MarkupPercent
+	}
+	return 0
+}
+
+func (x *ProductCreateRequest) GetCrossLocked() bool {
+	if x != nil {
+		return x.CrossLocked
+	}
+	return false
+}
+
+func (x *ProductCreateRequest) GetCategoryId() uint64 {
+	if x != nil {
+		return x.CategoryId
+	}
+	return 0
+}
+
+type ProductCreateResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	ProductCode   string                 `protobuf:"bytes,2,opt,name=product_code,json=productCode,proto3" json:"product_code,omitempty"` // the ref_id assigned to the new product
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ProductCreateResponse) Reset() {
+	*x = ProductCreateResponse{}
+	mi := &file_product_iface_v1_product_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProductCreateResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProductCreateResponse) ProtoMessage() {}
+
+func (x *ProductCreateResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_product_iface_v1_product_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProductCreateResponse.ProtoReflect.Descriptor instead.
+func (*ProductCreateResponse) Descriptor() ([]byte, []int) {
+	return file_product_iface_v1_product_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *ProductCreateResponse) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *ProductCreateResponse) GetProductCode() string {
+	if x != nil {
+		return x.ProductCode
+	}
+	return ""
+}
+
+type ProductUpdateRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	TeamId        uint64                 `protobuf:"varint,2,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	RefId         string                 `protobuf:"bytes,4,opt,name=ref_id,json=refId,proto3" json:"ref_id,omitempty"`
+	Images        []string               `protobuf:"bytes,5,rep,name=images,proto3" json:"images,omitempty"`
+	Description   string                 `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"`
+	MarkupPercent float64                `protobuf:"fixed64,7,opt,name=markup_percent,json=markupPercent,proto3" json:"markup_percent,omitempty"`
+	CrossLocked   bool                   `protobuf:"varint,8,opt,name=cross_locked,json=crossLocked,proto3" json:"cross_locked,omitempty"`
+	CategoryId    uint64                 `protobuf:"varint,9,opt,name=category_id,json=categoryId,proto3" json:"category_id,omitempty"` // when > 0, replaces the product's category association
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ProductUpdateRequest) Reset() {
+	*x = ProductUpdateRequest{}
+	mi := &file_product_iface_v1_product_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProductUpdateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProductUpdateRequest) ProtoMessage() {}
+
+func (x *ProductUpdateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_product_iface_v1_product_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProductUpdateRequest.ProtoReflect.Descriptor instead.
+func (*ProductUpdateRequest) Descriptor() ([]byte, []int) {
+	return file_product_iface_v1_product_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *ProductUpdateRequest) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *ProductUpdateRequest) GetTeamId() uint64 {
+	if x != nil {
+		return x.TeamId
+	}
+	return 0
+}
+
+func (x *ProductUpdateRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *ProductUpdateRequest) GetRefId() string {
+	if x != nil {
+		return x.RefId
+	}
+	return ""
+}
+
+func (x *ProductUpdateRequest) GetImages() []string {
+	if x != nil {
+		return x.Images
+	}
+	return nil
+}
+
+func (x *ProductUpdateRequest) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *ProductUpdateRequest) GetMarkupPercent() float64 {
+	if x != nil {
+		return x.MarkupPercent
+	}
+	return 0
+}
+
+func (x *ProductUpdateRequest) GetCrossLocked() bool {
+	if x != nil {
+		return x.CrossLocked
+	}
+	return false
+}
+
+func (x *ProductUpdateRequest) GetCategoryId() uint64 {
+	if x != nil {
+		return x.CategoryId
+	}
+	return 0
+}
+
+type ProductUpdateResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ProductUpdateResponse) Reset() {
+	*x = ProductUpdateResponse{}
+	mi := &file_product_iface_v1_product_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProductUpdateResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProductUpdateResponse) ProtoMessage() {}
+
+func (x *ProductUpdateResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_product_iface_v1_product_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProductUpdateResponse.ProtoReflect.Descriptor instead.
+func (*ProductUpdateResponse) Descriptor() ([]byte, []int) {
+	return file_product_iface_v1_product_proto_rawDescGZIP(), []int{19}
+}
+
+type ProductDeleteRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	TeamId        uint64                 `protobuf:"varint,2,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ProductDeleteRequest) Reset() {
+	*x = ProductDeleteRequest{}
+	mi := &file_product_iface_v1_product_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProductDeleteRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProductDeleteRequest) ProtoMessage() {}
+
+func (x *ProductDeleteRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_product_iface_v1_product_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProductDeleteRequest.ProtoReflect.Descriptor instead.
+func (*ProductDeleteRequest) Descriptor() ([]byte, []int) {
+	return file_product_iface_v1_product_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *ProductDeleteRequest) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *ProductDeleteRequest) GetTeamId() uint64 {
+	if x != nil {
+		return x.TeamId
+	}
+	return 0
+}
+
+type ProductDeleteResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ProductDeleteResponse) Reset() {
+	*x = ProductDeleteResponse{}
+	mi := &file_product_iface_v1_product_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProductDeleteResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProductDeleteResponse) ProtoMessage() {}
+
+func (x *ProductDeleteResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_product_iface_v1_product_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProductDeleteResponse.ProtoReflect.Descriptor instead.
+func (*ProductDeleteResponse) Descriptor() ([]byte, []int) {
+	return file_product_iface_v1_product_proto_rawDescGZIP(), []int{21}
+}
+
+type ProductListRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	Search        string                 `protobuf:"bytes,2,opt,name=search,proto3" json:"search,omitempty"` // name ILIKE (optional)
+	Page          *v1.PageFilter         `protobuf:"bytes,3,opt,name=page,proto3" json:"page,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ProductListRequest) Reset() {
+	*x = ProductListRequest{}
+	mi := &file_product_iface_v1_product_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProductListRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProductListRequest) ProtoMessage() {}
+
+func (x *ProductListRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_product_iface_v1_product_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProductListRequest.ProtoReflect.Descriptor instead.
+func (*ProductListRequest) Descriptor() ([]byte, []int) {
+	return file_product_iface_v1_product_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *ProductListRequest) GetTeamId() uint64 {
+	if x != nil {
+		return x.TeamId
+	}
+	return 0
+}
+
+func (x *ProductListRequest) GetSearch() string {
+	if x != nil {
+		return x.Search
+	}
+	return ""
+}
+
+func (x *ProductListRequest) GetPage() *v1.PageFilter {
+	if x != nil {
+		return x.Page
+	}
+	return nil
+}
+
+type ProductListItem struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	RefId         string                 `protobuf:"bytes,3,opt,name=ref_id,json=refId,proto3" json:"ref_id,omitempty"`
+	Image         string                 `protobuf:"bytes,4,opt,name=image,proto3" json:"image,omitempty"` // first image (image ->> 0)
+	MarkupPercent float64                `protobuf:"fixed64,5,opt,name=markup_percent,json=markupPercent,proto3" json:"markup_percent,omitempty"`
+	CrossLocked   bool                   `protobuf:"varint,6,opt,name=cross_locked,json=crossLocked,proto3" json:"cross_locked,omitempty"`
+	TeamId        uint64                 `protobuf:"varint,7,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	TeamName      string                 `protobuf:"bytes,8,opt,name=team_name,json=teamName,proto3" json:"team_name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ProductListItem) Reset() {
+	*x = ProductListItem{}
+	mi := &file_product_iface_v1_product_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProductListItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProductListItem) ProtoMessage() {}
+
+func (x *ProductListItem) ProtoReflect() protoreflect.Message {
+	mi := &file_product_iface_v1_product_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProductListItem.ProtoReflect.Descriptor instead.
+func (*ProductListItem) Descriptor() ([]byte, []int) {
+	return file_product_iface_v1_product_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *ProductListItem) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *ProductListItem) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *ProductListItem) GetRefId() string {
+	if x != nil {
+		return x.RefId
+	}
+	return ""
+}
+
+func (x *ProductListItem) GetImage() string {
+	if x != nil {
+		return x.Image
+	}
+	return ""
+}
+
+func (x *ProductListItem) GetMarkupPercent() float64 {
+	if x != nil {
+		return x.MarkupPercent
+	}
+	return 0
+}
+
+func (x *ProductListItem) GetCrossLocked() bool {
+	if x != nil {
+		return x.CrossLocked
+	}
+	return false
+}
+
+func (x *ProductListItem) GetTeamId() uint64 {
+	if x != nil {
+		return x.TeamId
+	}
+	return 0
+}
+
+func (x *ProductListItem) GetTeamName() string {
+	if x != nil {
+		return x.TeamName
+	}
+	return ""
+}
+
+type ProductListResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Products      []*ProductListItem     `protobuf:"bytes,1,rep,name=products,proto3" json:"products,omitempty"`
+	PageInfo      *v1.PageInfo           `protobuf:"bytes,2,opt,name=page_info,json=pageInfo,proto3" json:"page_info,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ProductListResponse) Reset() {
+	*x = ProductListResponse{}
+	mi := &file_product_iface_v1_product_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProductListResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProductListResponse) ProtoMessage() {}
+
+func (x *ProductListResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_product_iface_v1_product_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProductListResponse.ProtoReflect.Descriptor instead.
+func (*ProductListResponse) Descriptor() ([]byte, []int) {
+	return file_product_iface_v1_product_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *ProductListResponse) GetProducts() []*ProductListItem {
+	if x != nil {
+		return x.Products
+	}
+	return nil
+}
+
+func (x *ProductListResponse) GetPageInfo() *v1.PageInfo {
+	if x != nil {
+		return x.PageInfo
+	}
+	return nil
+}
+
+type ProductDetailRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	TeamId        uint64                 `protobuf:"varint,2,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ProductDetailRequest) Reset() {
+	*x = ProductDetailRequest{}
+	mi := &file_product_iface_v1_product_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProductDetailRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProductDetailRequest) ProtoMessage() {}
+
+func (x *ProductDetailRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_product_iface_v1_product_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProductDetailRequest.ProtoReflect.Descriptor instead.
+func (*ProductDetailRequest) Descriptor() ([]byte, []int) {
+	return file_product_iface_v1_product_proto_rawDescGZIP(), []int{25}
+}
+
+func (x *ProductDetailRequest) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *ProductDetailRequest) GetTeamId() uint64 {
+	if x != nil {
+		return x.TeamId
+	}
+	return 0
+}
+
+type ProductDetailResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	TeamId        uint64                 `protobuf:"varint,2,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	TeamName      string                 `protobuf:"bytes,3,opt,name=team_name,json=teamName,proto3" json:"team_name,omitempty"`
+	Name          string                 `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
+	RefId         string                 `protobuf:"bytes,5,opt,name=ref_id,json=refId,proto3" json:"ref_id,omitempty"`
+	Images        []string               `protobuf:"bytes,6,rep,name=images,proto3" json:"images,omitempty"`
+	Description   string                 `protobuf:"bytes,7,opt,name=description,proto3" json:"description,omitempty"`
+	MarkupPercent float64                `protobuf:"fixed64,8,opt,name=markup_percent,json=markupPercent,proto3" json:"markup_percent,omitempty"`
+	CrossLocked   bool                   `protobuf:"varint,9,opt,name=cross_locked,json=crossLocked,proto3" json:"cross_locked,omitempty"`
+	CategoryId    uint64                 `protobuf:"varint,10,opt,name=category_id,json=categoryId,proto3" json:"category_id,omitempty"` // 0 = none
+	CategoryName  string                 `protobuf:"bytes,11,opt,name=category_name,json=categoryName,proto3" json:"category_name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ProductDetailResponse) Reset() {
+	*x = ProductDetailResponse{}
+	mi := &file_product_iface_v1_product_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProductDetailResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProductDetailResponse) ProtoMessage() {}
+
+func (x *ProductDetailResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_product_iface_v1_product_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProductDetailResponse.ProtoReflect.Descriptor instead.
+func (*ProductDetailResponse) Descriptor() ([]byte, []int) {
+	return file_product_iface_v1_product_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *ProductDetailResponse) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *ProductDetailResponse) GetTeamId() uint64 {
+	if x != nil {
+		return x.TeamId
+	}
+	return 0
+}
+
+func (x *ProductDetailResponse) GetTeamName() string {
+	if x != nil {
+		return x.TeamName
+	}
+	return ""
+}
+
+func (x *ProductDetailResponse) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *ProductDetailResponse) GetRefId() string {
+	if x != nil {
+		return x.RefId
+	}
+	return ""
+}
+
+func (x *ProductDetailResponse) GetImages() []string {
+	if x != nil {
+		return x.Images
+	}
+	return nil
+}
+
+func (x *ProductDetailResponse) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *ProductDetailResponse) GetMarkupPercent() float64 {
+	if x != nil {
+		return x.MarkupPercent
+	}
+	return 0
+}
+
+func (x *ProductDetailResponse) GetCrossLocked() bool {
+	if x != nil {
+		return x.CrossLocked
+	}
+	return false
+}
+
+func (x *ProductDetailResponse) GetCategoryId() uint64 {
+	if x != nil {
+		return x.CategoryId
+	}
+	return 0
+}
+
+func (x *ProductDetailResponse) GetCategoryName() string {
+	if x != nil {
+		return x.CategoryName
+	}
+	return ""
+}
+
+type ProductCodeGenerateRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ProductCodeGenerateRequest) Reset() {
+	*x = ProductCodeGenerateRequest{}
+	mi := &file_product_iface_v1_product_proto_msgTypes[27]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProductCodeGenerateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProductCodeGenerateRequest) ProtoMessage() {}
+
+func (x *ProductCodeGenerateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_product_iface_v1_product_proto_msgTypes[27]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProductCodeGenerateRequest.ProtoReflect.Descriptor instead.
+func (*ProductCodeGenerateRequest) Descriptor() ([]byte, []int) {
+	return file_product_iface_v1_product_proto_rawDescGZIP(), []int{27}
+}
+
+func (x *ProductCodeGenerateRequest) GetTeamId() uint64 {
+	if x != nil {
+		return x.TeamId
+	}
+	return 0
+}
+
+type ProductCodeGenerateResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ProductCode   string                 `protobuf:"bytes,1,opt,name=product_code,json=productCode,proto3" json:"product_code,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ProductCodeGenerateResponse) Reset() {
+	*x = ProductCodeGenerateResponse{}
+	mi := &file_product_iface_v1_product_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProductCodeGenerateResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProductCodeGenerateResponse) ProtoMessage() {}
+
+func (x *ProductCodeGenerateResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_product_iface_v1_product_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProductCodeGenerateResponse.ProtoReflect.Descriptor instead.
+func (*ProductCodeGenerateResponse) Descriptor() ([]byte, []int) {
+	return file_product_iface_v1_product_proto_rawDescGZIP(), []int{28}
+}
+
+func (x *ProductCodeGenerateResponse) GetProductCode() string {
+	if x != nil {
+		return x.ProductCode
+	}
+	return ""
+}
+
+// Category — one node of the category tree. `children` is populated by
+// CategoryList (nested); it is empty on the write responses.
+type Category struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	ParentId      uint64                 `protobuf:"varint,3,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"` // 0 = root
+	Level         int32                  `protobuf:"varint,4,opt,name=level,proto3" json:"level,omitempty"`
+	IsLast        bool                   `protobuf:"varint,5,opt,name=is_last,json=isLast,proto3" json:"is_last,omitempty"` // leaf (no children)
+	Children      []*Category            `protobuf:"bytes,6,rep,name=children,proto3" json:"children,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Category) Reset() {
+	*x = Category{}
+	mi := &file_product_iface_v1_product_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Category) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Category) ProtoMessage() {}
+
+func (x *Category) ProtoReflect() protoreflect.Message {
+	mi := &file_product_iface_v1_product_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Category.ProtoReflect.Descriptor instead.
+func (*Category) Descriptor() ([]byte, []int) {
+	return file_product_iface_v1_product_proto_rawDescGZIP(), []int{29}
+}
+
+func (x *Category) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *Category) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *Category) GetParentId() uint64 {
+	if x != nil {
+		return x.ParentId
+	}
+	return 0
+}
+
+func (x *Category) GetLevel() int32 {
+	if x != nil {
+		return x.Level
+	}
+	return 0
+}
+
+func (x *Category) GetIsLast() bool {
+	if x != nil {
+		return x.IsLast
+	}
+	return false
+}
+
+func (x *Category) GetChildren() []*Category {
+	if x != nil {
+		return x.Children
+	}
+	return nil
+}
+
+type CategoryCreateRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	ParentId      uint64                 `protobuf:"varint,2,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"` // 0 = root
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CategoryCreateRequest) Reset() {
+	*x = CategoryCreateRequest{}
+	mi := &file_product_iface_v1_product_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CategoryCreateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CategoryCreateRequest) ProtoMessage() {}
+
+func (x *CategoryCreateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_product_iface_v1_product_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CategoryCreateRequest.ProtoReflect.Descriptor instead.
+func (*CategoryCreateRequest) Descriptor() ([]byte, []int) {
+	return file_product_iface_v1_product_proto_rawDescGZIP(), []int{30}
+}
+
+func (x *CategoryCreateRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *CategoryCreateRequest) GetParentId() uint64 {
+	if x != nil {
+		return x.ParentId
+	}
+	return 0
+}
+
+type CategoryCreateResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CategoryCreateResponse) Reset() {
+	*x = CategoryCreateResponse{}
+	mi := &file_product_iface_v1_product_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CategoryCreateResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CategoryCreateResponse) ProtoMessage() {}
+
+func (x *CategoryCreateResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_product_iface_v1_product_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CategoryCreateResponse.ProtoReflect.Descriptor instead.
+func (*CategoryCreateResponse) Descriptor() ([]byte, []int) {
+	return file_product_iface_v1_product_proto_rawDescGZIP(), []int{31}
+}
+
+func (x *CategoryCreateResponse) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type CategoryUpdateRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	ParentId      uint64                 `protobuf:"varint,3,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"` // reparent target (0 = root)
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CategoryUpdateRequest) Reset() {
+	*x = CategoryUpdateRequest{}
+	mi := &file_product_iface_v1_product_proto_msgTypes[32]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CategoryUpdateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CategoryUpdateRequest) ProtoMessage() {}
+
+func (x *CategoryUpdateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_product_iface_v1_product_proto_msgTypes[32]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CategoryUpdateRequest.ProtoReflect.Descriptor instead.
+func (*CategoryUpdateRequest) Descriptor() ([]byte, []int) {
+	return file_product_iface_v1_product_proto_rawDescGZIP(), []int{32}
+}
+
+func (x *CategoryUpdateRequest) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *CategoryUpdateRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *CategoryUpdateRequest) GetParentId() uint64 {
+	if x != nil {
+		return x.ParentId
+	}
+	return 0
+}
+
+type CategoryUpdateResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CategoryUpdateResponse) Reset() {
+	*x = CategoryUpdateResponse{}
+	mi := &file_product_iface_v1_product_proto_msgTypes[33]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CategoryUpdateResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CategoryUpdateResponse) ProtoMessage() {}
+
+func (x *CategoryUpdateResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_product_iface_v1_product_proto_msgTypes[33]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CategoryUpdateResponse.ProtoReflect.Descriptor instead.
+func (*CategoryUpdateResponse) Descriptor() ([]byte, []int) {
+	return file_product_iface_v1_product_proto_rawDescGZIP(), []int{33}
+}
+
+type CategoryDeleteRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CategoryDeleteRequest) Reset() {
+	*x = CategoryDeleteRequest{}
+	mi := &file_product_iface_v1_product_proto_msgTypes[34]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CategoryDeleteRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CategoryDeleteRequest) ProtoMessage() {}
+
+func (x *CategoryDeleteRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_product_iface_v1_product_proto_msgTypes[34]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CategoryDeleteRequest.ProtoReflect.Descriptor instead.
+func (*CategoryDeleteRequest) Descriptor() ([]byte, []int) {
+	return file_product_iface_v1_product_proto_rawDescGZIP(), []int{34}
+}
+
+func (x *CategoryDeleteRequest) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type CategoryDeleteResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CategoryDeleteResponse) Reset() {
+	*x = CategoryDeleteResponse{}
+	mi := &file_product_iface_v1_product_proto_msgTypes[35]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CategoryDeleteResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CategoryDeleteResponse) ProtoMessage() {}
+
+func (x *CategoryDeleteResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_product_iface_v1_product_proto_msgTypes[35]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CategoryDeleteResponse.ProtoReflect.Descriptor instead.
+func (*CategoryDeleteResponse) Descriptor() ([]byte, []int) {
+	return file_product_iface_v1_product_proto_rawDescGZIP(), []int{35}
+}
+
+type CategoryListRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Search        string                 `protobuf:"bytes,1,opt,name=search,proto3" json:"search,omitempty"`                      // optional name ILIKE
+	ParentId      uint64                 `protobuf:"varint,2,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"` // optional subtree root (0 = whole tree)
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CategoryListRequest) Reset() {
+	*x = CategoryListRequest{}
+	mi := &file_product_iface_v1_product_proto_msgTypes[36]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CategoryListRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CategoryListRequest) ProtoMessage() {}
+
+func (x *CategoryListRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_product_iface_v1_product_proto_msgTypes[36]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CategoryListRequest.ProtoReflect.Descriptor instead.
+func (*CategoryListRequest) Descriptor() ([]byte, []int) {
+	return file_product_iface_v1_product_proto_rawDescGZIP(), []int{36}
+}
+
+func (x *CategoryListRequest) GetSearch() string {
+	if x != nil {
+		return x.Search
+	}
+	return ""
+}
+
+func (x *CategoryListRequest) GetParentId() uint64 {
+	if x != nil {
+		return x.ParentId
+	}
+	return 0
+}
+
+type CategoryListResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Data          []*Category            `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"` // roots (or the parent_id node's children), nested
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CategoryListResponse) Reset() {
+	*x = CategoryListResponse{}
+	mi := &file_product_iface_v1_product_proto_msgTypes[37]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CategoryListResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CategoryListResponse) ProtoMessage() {}
+
+func (x *CategoryListResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_product_iface_v1_product_proto_msgTypes[37]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CategoryListResponse.ProtoReflect.Descriptor instead.
+func (*CategoryListResponse) Descriptor() ([]byte, []int) {
+	return file_product_iface_v1_product_proto_rawDescGZIP(), []int{37}
+}
+
+func (x *CategoryListResponse) GetData() []*Category {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
 var File_product_iface_v1_product_proto protoreflect.FileDescriptor
 
 const file_product_iface_v1_product_proto_rawDesc = "" +
 	"\n" +
-	"\x1eproduct_iface/v1/product.proto\x12\x10product_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\"\x87\x01\n" +
+	"\x1eproduct_iface/v1/product.proto\x12\x10product_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x17role_base/v1/role.proto\"\x8f\x01\n" +
 	"\x14ProductSearchRequest\x12\x17\n" +
 	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12\x14\n" +
 	"\x04name\x18\x02 \x01(\tH\x00R\x04name\x12\x17\n" +
 	"\x06ref_id\x18\x03 \x01(\tH\x00R\x05refId\x12\x1d\n" +
-	"\x05limit\x18\x04 \x01(\x05B\a\xbaH\x04\x1a\x02 \x00R\x05limitB\b\n" +
+	"\x05limit\x18\x04 \x01(\x05B\a\xbaH\x04\x1a\x02 \x00R\x05limit:\x06\x92\xb5\x18\x02\x18\x01B\b\n" +
 	"\x06search\"d\n" +
 	"\x11ProductSearchItem\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x12\n" +
@@ -1235,7 +2550,7 @@ const file_product_iface_v1_product_proto_rawDesc = "" +
 	"\bproducts\x18\x01 \x03(\v2#.product_iface.v1.ProductSearchItemR\bproducts\"x\n" +
 	"\x0fProductListSort\x12<\n" +
 	"\x05field\x18\x01 \x01(\x0e2&.product_iface.v1.ProductListFieldSortR\x05field\x12'\n" +
-	"\x04type\x18\x02 \x01(\x0e2\x13.common.v1.SortTypeR\x04type\"\xb0\x03\n" +
+	"\x04type\x18\x02 \x01(\x0e2\x13.common.v1.SortTypeR\x04type\"\xb8\x03\n" +
 	"\x18ProductListExportRequest\x12\x17\n" +
 	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x127\n" +
 	"\x18exclude_selected_team_id\x18\t \x01(\bR\x15excludeSelectedTeamId\x12\x1b\n" +
@@ -1246,7 +2561,7 @@ const file_product_iface_v1_product_proto_rawDesc = "" +
 	"\fproduct_name\x18\x06 \x01(\tH\x01R\vproductName\x12\x17\n" +
 	"\x06sku_id\x18\a \x01(\tH\x01R\x05skuId\x12A\n" +
 	"\n" +
-	"time_range\x18\b \x01(\v2\x1a.common.v1.TimeFilterRangeB\x06\xbaH\x03\xc8\x01\x01R\ttimeRangeB\t\n" +
+	"time_range\x18\b \x01(\v2\x1a.common.v1.TimeFilterRangeB\x06\xbaH\x03\xc8\x01\x01R\ttimeRange:\x06\x92\xb5\x18\x02\x18\x01B\t\n" +
 	"\asold_byB\b\n" +
 	"\x06search\"\xa5\x03\n" +
 	"\vProductItem\x12\x0e\n" +
@@ -1274,11 +2589,11 @@ const file_product_iface_v1_product_proto_rawDesc = "" +
 	"\amessage\x18\x01 \x01(\tR\amessage\x12\x16\n" +
 	"\x06offset\x18\x02 \x01(\x03R\x06offset\x12\x14\n" +
 	"\x05total\x18\x03 \x01(\x03R\x05total\x12\x12\n" +
-	"\x04data\x18\x04 \x01(\fR\x04data\"b\n" +
+	"\x04data\x18\x04 \x01(\fR\x04data\"j\n" +
 	"\x13ProductByIDsRequest\x12\"\n" +
 	"\x03ids\x18\x01 \x03(\x04B\x10\xbaH\r\x92\x01\n" +
 	"\b\x01\x10d\"\x042\x02 \x00R\x03ids\x12'\n" +
-	"\x0finclude_variant\x18\x02 \x01(\bR\x0eincludeVariant\"z\n" +
+	"\x0finclude_variant\x18\x02 \x01(\bR\x0eincludeVariant:\x06\x92\xb5\x18\x02\x18\x01\"z\n" +
 	"\x0eProductIDsData\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x14\n" +
@@ -1289,26 +2604,117 @@ const file_product_iface_v1_product_proto_rawDesc = "" +
 	"\bproducts\x18\x01 \x03(\v24.product_iface.v1.ProductByIDsResponse.ProductsEntryR\bproducts\x1a]\n" +
 	"\rProductsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\x04R\x03key\x126\n" +
-	"\x05value\x18\x02 \x01(\v2 .product_iface.v1.ProductIDsDataR\x05value:\x028\x01\"g\n" +
+	"\x05value\x18\x02 \x01(\v2 .product_iface.v1.ProductIDsDataR\x05value:\x028\x01\"o\n" +
 	"\x17ProductDuplicateRequest\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12*\n" +
-	"\fvariation_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\vvariationId\"j\n" +
+	"\fvariation_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\vvariationId:\x06\x92\xb5\x18\x02\x18\x01\"j\n" +
 	"\x18ProductDuplicateResponse\x12$\n" +
 	"\x0enew_product_id\x18\x01 \x01(\x04R\fnewProductId\x12(\n" +
-	"\x10new_variation_id\x18\x02 \x01(\x04R\x0enewVariationId\"d\n" +
+	"\x10new_variation_id\x18\x02 \x01(\x04R\x0enewVariationId\"l\n" +
 	"\x14ProductMapGetRequest\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12*\n" +
-	"\fvariation_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\vvariationId\"r\n" +
+	"\fvariation_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\vvariationId:\x06\x92\xb5\x18\x02\x18\x01\"r\n" +
 	"\x15ProductMapGetResponse\x12\x1d\n" +
 	"\n" +
 	"product_id\x18\x01 \x01(\x04R\tproductId\x12!\n" +
 	"\fvariation_id\x18\x02 \x01(\x04R\vvariationId\x12\x17\n" +
-	"\ateam_id\x18\x03 \x01(\x04R\x06teamId\"\x99\x01\n" +
+	"\ateam_id\x18\x03 \x01(\x04R\x06teamId\"\xa1\x01\n" +
 	"\x18ProductMapConnectRequest\x12 \n" +
 	"\ateam_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12*\n" +
 	"\fvariation_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\vvariationId\x12/\n" +
-	"\x0fto_variation_id\x18\x03 \x01(\x04B\a\xbaH\x042\x02 \x00R\rtoVariationId\"\x1b\n" +
-	"\x19ProductMapConnectResponse*\xb6\x03\n" +
+	"\x0fto_variation_id\x18\x03 \x01(\x04B\a\xbaH\x042\x02 \x00R\rtoVariationId:\x06\x92\xb5\x18\x02\x18\x01\"\x1b\n" +
+	"\x19ProductMapConnectResponse\"\x9d\x02\n" +
+	"\x14ProductCreateRequest\x12$\n" +
+	"\ateam_id\x18\x01 \x01(\x04B\v\xbaH\x042\x02 \x00\x90\xb5\x18\x01R\x06teamId\x12\x1b\n" +
+	"\x04name\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12\x15\n" +
+	"\x06ref_id\x18\x03 \x01(\tR\x05refId\x12\x16\n" +
+	"\x06images\x18\x04 \x03(\tR\x06images\x12 \n" +
+	"\vdescription\x18\x05 \x01(\tR\vdescription\x12%\n" +
+	"\x0emarkup_percent\x18\x06 \x01(\x01R\rmarkupPercent\x12!\n" +
+	"\fcross_locked\x18\a \x01(\bR\vcrossLocked\x12\x1f\n" +
+	"\vcategory_id\x18\b \x01(\x04R\n" +
+	"categoryId:\x06\x92\xb5\x18\x02 \x01\"J\n" +
+	"\x15ProductCreateResponse\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\x12!\n" +
+	"\fproduct_code\x18\x02 \x01(\tR\vproductCode\"\xb6\x02\n" +
+	"\x14ProductUpdateRequest\x12\x17\n" +
+	"\x02id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12$\n" +
+	"\ateam_id\x18\x02 \x01(\x04B\v\xbaH\x042\x02 \x00\x90\xb5\x18\x01R\x06teamId\x12\x1b\n" +
+	"\x04name\x18\x03 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12\x15\n" +
+	"\x06ref_id\x18\x04 \x01(\tR\x05refId\x12\x16\n" +
+	"\x06images\x18\x05 \x03(\tR\x06images\x12 \n" +
+	"\vdescription\x18\x06 \x01(\tR\vdescription\x12%\n" +
+	"\x0emarkup_percent\x18\a \x01(\x01R\rmarkupPercent\x12!\n" +
+	"\fcross_locked\x18\b \x01(\bR\vcrossLocked\x12\x1f\n" +
+	"\vcategory_id\x18\t \x01(\x04R\n" +
+	"categoryId:\x06\x92\xb5\x18\x02 \x01\"\x17\n" +
+	"\x15ProductUpdateResponse\"]\n" +
+	"\x14ProductDeleteRequest\x12\x17\n" +
+	"\x02id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12$\n" +
+	"\ateam_id\x18\x02 \x01(\x04B\v\xbaH\x042\x02 \x00\x90\xb5\x18\x01R\x06teamId:\x06\x92\xb5\x18\x02 \x01\"\x17\n" +
+	"\x15ProductDeleteResponse\"\x8d\x01\n" +
+	"\x12ProductListRequest\x12$\n" +
+	"\ateam_id\x18\x01 \x01(\x04B\v\xbaH\x042\x02 \x00\x90\xb5\x18\x01R\x06teamId\x12\x16\n" +
+	"\x06search\x18\x02 \x01(\tR\x06search\x121\n" +
+	"\x04page\x18\x03 \x01(\v2\x15.common.v1.PageFilterB\x06\xbaH\x03\xc8\x01\x01R\x04page:\x06\x92\xb5\x18\x02 \x01\"\xe2\x01\n" +
+	"\x0fProductListItem\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x15\n" +
+	"\x06ref_id\x18\x03 \x01(\tR\x05refId\x12\x14\n" +
+	"\x05image\x18\x04 \x01(\tR\x05image\x12%\n" +
+	"\x0emarkup_percent\x18\x05 \x01(\x01R\rmarkupPercent\x12!\n" +
+	"\fcross_locked\x18\x06 \x01(\bR\vcrossLocked\x12\x17\n" +
+	"\ateam_id\x18\a \x01(\x04R\x06teamId\x12\x1b\n" +
+	"\tteam_name\x18\b \x01(\tR\bteamName\"\x86\x01\n" +
+	"\x13ProductListResponse\x12=\n" +
+	"\bproducts\x18\x01 \x03(\v2!.product_iface.v1.ProductListItemR\bproducts\x120\n" +
+	"\tpage_info\x18\x02 \x01(\v2\x13.common.v1.PageInfoR\bpageInfo\"]\n" +
+	"\x14ProductDetailRequest\x12\x17\n" +
+	"\x02id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12$\n" +
+	"\ateam_id\x18\x02 \x01(\x04B\v\xbaH\x042\x02 \x00\x90\xb5\x18\x01R\x06teamId:\x06\x92\xb5\x18\x02 \x01\"\xd2\x02\n" +
+	"\x15ProductDetailResponse\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x17\n" +
+	"\ateam_id\x18\x02 \x01(\x04R\x06teamId\x12\x1b\n" +
+	"\tteam_name\x18\x03 \x01(\tR\bteamName\x12\x12\n" +
+	"\x04name\x18\x04 \x01(\tR\x04name\x12\x15\n" +
+	"\x06ref_id\x18\x05 \x01(\tR\x05refId\x12\x16\n" +
+	"\x06images\x18\x06 \x03(\tR\x06images\x12 \n" +
+	"\vdescription\x18\a \x01(\tR\vdescription\x12%\n" +
+	"\x0emarkup_percent\x18\b \x01(\x01R\rmarkupPercent\x12!\n" +
+	"\fcross_locked\x18\t \x01(\bR\vcrossLocked\x12\x1f\n" +
+	"\vcategory_id\x18\n" +
+	" \x01(\x04R\n" +
+	"categoryId\x12#\n" +
+	"\rcategory_name\x18\v \x01(\tR\fcategoryName\"J\n" +
+	"\x1aProductCodeGenerateRequest\x12$\n" +
+	"\ateam_id\x18\x01 \x01(\x04B\v\xbaH\x042\x02 \x00\x90\xb5\x18\x01R\x06teamId:\x06\x92\xb5\x18\x02 \x01\"@\n" +
+	"\x1bProductCodeGenerateResponse\x12!\n" +
+	"\fproduct_code\x18\x01 \x01(\tR\vproductCode\"\xb2\x01\n" +
+	"\bCategory\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1b\n" +
+	"\tparent_id\x18\x03 \x01(\x04R\bparentId\x12\x14\n" +
+	"\x05level\x18\x04 \x01(\x05R\x05level\x12\x17\n" +
+	"\ais_last\x18\x05 \x01(\bR\x06isLast\x126\n" +
+	"\bchildren\x18\x06 \x03(\v2\x1a.product_iface.v1.CategoryR\bchildren\"Y\n" +
+	"\x15CategoryCreateRequest\x12\x1b\n" +
+	"\x04name\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12\x1b\n" +
+	"\tparent_id\x18\x02 \x01(\x04R\bparentId:\x06\x92\xb5\x18\x02 \x01\"(\n" +
+	"\x16CategoryCreateResponse\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\"r\n" +
+	"\x15CategoryUpdateRequest\x12\x17\n" +
+	"\x02id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12\x1b\n" +
+	"\x04name\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12\x1b\n" +
+	"\tparent_id\x18\x03 \x01(\x04R\bparentId:\x06\x92\xb5\x18\x02 \x01\"\x18\n" +
+	"\x16CategoryUpdateResponse\"8\n" +
+	"\x15CategoryDeleteRequest\x12\x17\n" +
+	"\x02id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id:\x06\x92\xb5\x18\x02 \x01\"\x18\n" +
+	"\x16CategoryDeleteResponse\"R\n" +
+	"\x13CategoryListRequest\x12\x16\n" +
+	"\x06search\x18\x01 \x01(\tR\x06search\x12\x1b\n" +
+	"\tparent_id\x18\x02 \x01(\x04R\bparentId:\x06\x92\xb5\x18\x02 \x01\"F\n" +
+	"\x14CategoryListResponse\x12.\n" +
+	"\x04data\x18\x01 \x03(\v2\x1a.product_iface.v1.CategoryR\x04data*\xb6\x03\n" +
 	"\x14ProductListFieldSort\x12'\n" +
 	"#PRODUCT_LIST_FIELD_SORT_UNSPECIFIED\x10\x00\x12'\n" +
 	"#PRODUCT_LIST_FIELD_SORT_PIECE_COUNT\x10\x01\x12*\n" +
@@ -1319,14 +2725,25 @@ const file_product_iface_v1_product_proto_rawDesc = "" +
 	"%PRODUCT_LIST_FIELD_SORT_ONGOING_STOCK\x10\x06\x12'\n" +
 	"#PRODUCT_LIST_FIELD_SORT_READY_STOCK\x10\a\x12'\n" +
 	"#PRODUCT_LIST_FIELD_SORT_TOTAL_STOCK\x10\b\x12*\n" +
-	"&PRODUCT_LIST_FIELD_SORT_RESERVED_STOCK\x10\t2\xfc\x04\n" +
+	"&PRODUCT_LIST_FIELD_SORT_RESERVED_STOCK\x10\t2\xd4\t\n" +
 	"\x0eProductService\x12i\n" +
 	"\x10ProductDuplicate\x12).product_iface.v1.ProductDuplicateRequest\x1a*.product_iface.v1.ProductDuplicateResponse\x12`\n" +
 	"\rProductMapGet\x12&.product_iface.v1.ProductMapGetRequest\x1a'.product_iface.v1.ProductMapGetResponse\x12l\n" +
 	"\x11ProductMapConnect\x12*.product_iface.v1.ProductMapConnectRequest\x1a+.product_iface.v1.ProductMapConnectResponse\x12]\n" +
 	"\fProductByIDs\x12%.product_iface.v1.ProductByIDsRequest\x1a&.product_iface.v1.ProductByIDsResponse\x12n\n" +
 	"\x11ProductListExport\x12*.product_iface.v1.ProductListExportRequest\x1a+.product_iface.v1.ProductListExportResponse0\x01\x12`\n" +
-	"\rProductSearch\x12&.product_iface.v1.ProductSearchRequest\x1a'.product_iface.v1.ProductSearchResponseB\xc2\x01\n" +
+	"\rProductSearch\x12&.product_iface.v1.ProductSearchRequest\x1a'.product_iface.v1.ProductSearchResponse\x12`\n" +
+	"\rProductCreate\x12&.product_iface.v1.ProductCreateRequest\x1a'.product_iface.v1.ProductCreateResponse\x12`\n" +
+	"\rProductUpdate\x12&.product_iface.v1.ProductUpdateRequest\x1a'.product_iface.v1.ProductUpdateResponse\x12`\n" +
+	"\rProductDelete\x12&.product_iface.v1.ProductDeleteRequest\x1a'.product_iface.v1.ProductDeleteResponse\x12Z\n" +
+	"\vProductList\x12$.product_iface.v1.ProductListRequest\x1a%.product_iface.v1.ProductListResponse\x12`\n" +
+	"\rProductDetail\x12&.product_iface.v1.ProductDetailRequest\x1a'.product_iface.v1.ProductDetailResponse\x12r\n" +
+	"\x13ProductCodeGenerate\x12,.product_iface.v1.ProductCodeGenerateRequest\x1a-.product_iface.v1.ProductCodeGenerateResponse2\x9f\x03\n" +
+	"\x0fCategoryService\x12c\n" +
+	"\x0eCategoryCreate\x12'.product_iface.v1.CategoryCreateRequest\x1a(.product_iface.v1.CategoryCreateResponse\x12c\n" +
+	"\x0eCategoryUpdate\x12'.product_iface.v1.CategoryUpdateRequest\x1a(.product_iface.v1.CategoryUpdateResponse\x12c\n" +
+	"\x0eCategoryDelete\x12'.product_iface.v1.CategoryDeleteRequest\x1a(.product_iface.v1.CategoryDeleteResponse\x12]\n" +
+	"\fCategoryList\x12%.product_iface.v1.CategoryListRequest\x1a&.product_iface.v1.CategoryListResponseB\xc2\x01\n" +
 	"\x14com.product_iface.v1B\fProductProtoP\x01Z?github.com/pdcgo/schema/services/product_iface/v1;product_iface\xa2\x02\x03PXX\xaa\x02\x0fProductIface.V1\xca\x02\x0fProductIface\\V1\xe2\x02\x1bProductIface\\V1\\GPBMetadata\xea\x02\x10ProductIface::V1b\x06proto3"
 
 var (
@@ -1342,54 +2759,103 @@ func file_product_iface_v1_product_proto_rawDescGZIP() []byte {
 }
 
 var file_product_iface_v1_product_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_product_iface_v1_product_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
+var file_product_iface_v1_product_proto_msgTypes = make([]protoimpl.MessageInfo, 39)
 var file_product_iface_v1_product_proto_goTypes = []any{
-	(ProductListFieldSort)(0),         // 0: product_iface.v1.ProductListFieldSort
-	(*ProductSearchRequest)(nil),      // 1: product_iface.v1.ProductSearchRequest
-	(*ProductSearchItem)(nil),         // 2: product_iface.v1.ProductSearchItem
-	(*ProductSearchResponse)(nil),     // 3: product_iface.v1.ProductSearchResponse
-	(*ProductListSort)(nil),           // 4: product_iface.v1.ProductListSort
-	(*ProductListExportRequest)(nil),  // 5: product_iface.v1.ProductListExportRequest
-	(*ProductItem)(nil),               // 6: product_iface.v1.ProductItem
-	(*ProductListExportResponse)(nil), // 7: product_iface.v1.ProductListExportResponse
-	(*ProductByIDsRequest)(nil),       // 8: product_iface.v1.ProductByIDsRequest
-	(*ProductIDsData)(nil),            // 9: product_iface.v1.ProductIDsData
-	(*ProductByIDsResponse)(nil),      // 10: product_iface.v1.ProductByIDsResponse
-	(*ProductDuplicateRequest)(nil),   // 11: product_iface.v1.ProductDuplicateRequest
-	(*ProductDuplicateResponse)(nil),  // 12: product_iface.v1.ProductDuplicateResponse
-	(*ProductMapGetRequest)(nil),      // 13: product_iface.v1.ProductMapGetRequest
-	(*ProductMapGetResponse)(nil),     // 14: product_iface.v1.ProductMapGetResponse
-	(*ProductMapConnectRequest)(nil),  // 15: product_iface.v1.ProductMapConnectRequest
-	(*ProductMapConnectResponse)(nil), // 16: product_iface.v1.ProductMapConnectResponse
-	nil,                               // 17: product_iface.v1.ProductByIDsResponse.ProductsEntry
-	(v1.SortType)(0),                  // 18: common.v1.SortType
-	(*v1.TimeFilterRange)(nil),        // 19: common.v1.TimeFilterRange
+	(ProductListFieldSort)(0),           // 0: product_iface.v1.ProductListFieldSort
+	(*ProductSearchRequest)(nil),        // 1: product_iface.v1.ProductSearchRequest
+	(*ProductSearchItem)(nil),           // 2: product_iface.v1.ProductSearchItem
+	(*ProductSearchResponse)(nil),       // 3: product_iface.v1.ProductSearchResponse
+	(*ProductListSort)(nil),             // 4: product_iface.v1.ProductListSort
+	(*ProductListExportRequest)(nil),    // 5: product_iface.v1.ProductListExportRequest
+	(*ProductItem)(nil),                 // 6: product_iface.v1.ProductItem
+	(*ProductListExportResponse)(nil),   // 7: product_iface.v1.ProductListExportResponse
+	(*ProductByIDsRequest)(nil),         // 8: product_iface.v1.ProductByIDsRequest
+	(*ProductIDsData)(nil),              // 9: product_iface.v1.ProductIDsData
+	(*ProductByIDsResponse)(nil),        // 10: product_iface.v1.ProductByIDsResponse
+	(*ProductDuplicateRequest)(nil),     // 11: product_iface.v1.ProductDuplicateRequest
+	(*ProductDuplicateResponse)(nil),    // 12: product_iface.v1.ProductDuplicateResponse
+	(*ProductMapGetRequest)(nil),        // 13: product_iface.v1.ProductMapGetRequest
+	(*ProductMapGetResponse)(nil),       // 14: product_iface.v1.ProductMapGetResponse
+	(*ProductMapConnectRequest)(nil),    // 15: product_iface.v1.ProductMapConnectRequest
+	(*ProductMapConnectResponse)(nil),   // 16: product_iface.v1.ProductMapConnectResponse
+	(*ProductCreateRequest)(nil),        // 17: product_iface.v1.ProductCreateRequest
+	(*ProductCreateResponse)(nil),       // 18: product_iface.v1.ProductCreateResponse
+	(*ProductUpdateRequest)(nil),        // 19: product_iface.v1.ProductUpdateRequest
+	(*ProductUpdateResponse)(nil),       // 20: product_iface.v1.ProductUpdateResponse
+	(*ProductDeleteRequest)(nil),        // 21: product_iface.v1.ProductDeleteRequest
+	(*ProductDeleteResponse)(nil),       // 22: product_iface.v1.ProductDeleteResponse
+	(*ProductListRequest)(nil),          // 23: product_iface.v1.ProductListRequest
+	(*ProductListItem)(nil),             // 24: product_iface.v1.ProductListItem
+	(*ProductListResponse)(nil),         // 25: product_iface.v1.ProductListResponse
+	(*ProductDetailRequest)(nil),        // 26: product_iface.v1.ProductDetailRequest
+	(*ProductDetailResponse)(nil),       // 27: product_iface.v1.ProductDetailResponse
+	(*ProductCodeGenerateRequest)(nil),  // 28: product_iface.v1.ProductCodeGenerateRequest
+	(*ProductCodeGenerateResponse)(nil), // 29: product_iface.v1.ProductCodeGenerateResponse
+	(*Category)(nil),                    // 30: product_iface.v1.Category
+	(*CategoryCreateRequest)(nil),       // 31: product_iface.v1.CategoryCreateRequest
+	(*CategoryCreateResponse)(nil),      // 32: product_iface.v1.CategoryCreateResponse
+	(*CategoryUpdateRequest)(nil),       // 33: product_iface.v1.CategoryUpdateRequest
+	(*CategoryUpdateResponse)(nil),      // 34: product_iface.v1.CategoryUpdateResponse
+	(*CategoryDeleteRequest)(nil),       // 35: product_iface.v1.CategoryDeleteRequest
+	(*CategoryDeleteResponse)(nil),      // 36: product_iface.v1.CategoryDeleteResponse
+	(*CategoryListRequest)(nil),         // 37: product_iface.v1.CategoryListRequest
+	(*CategoryListResponse)(nil),        // 38: product_iface.v1.CategoryListResponse
+	nil,                                 // 39: product_iface.v1.ProductByIDsResponse.ProductsEntry
+	(v1.SortType)(0),                    // 40: common.v1.SortType
+	(*v1.TimeFilterRange)(nil),          // 41: common.v1.TimeFilterRange
+	(*v1.PageFilter)(nil),               // 42: common.v1.PageFilter
+	(*v1.PageInfo)(nil),                 // 43: common.v1.PageInfo
 }
 var file_product_iface_v1_product_proto_depIdxs = []int32{
 	2,  // 0: product_iface.v1.ProductSearchResponse.products:type_name -> product_iface.v1.ProductSearchItem
 	0,  // 1: product_iface.v1.ProductListSort.field:type_name -> product_iface.v1.ProductListFieldSort
-	18, // 2: product_iface.v1.ProductListSort.type:type_name -> common.v1.SortType
+	40, // 2: product_iface.v1.ProductListSort.type:type_name -> common.v1.SortType
 	4,  // 3: product_iface.v1.ProductListExportRequest.sort:type_name -> product_iface.v1.ProductListSort
-	19, // 4: product_iface.v1.ProductListExportRequest.time_range:type_name -> common.v1.TimeFilterRange
-	17, // 5: product_iface.v1.ProductByIDsResponse.products:type_name -> product_iface.v1.ProductByIDsResponse.ProductsEntry
-	9,  // 6: product_iface.v1.ProductByIDsResponse.ProductsEntry.value:type_name -> product_iface.v1.ProductIDsData
-	11, // 7: product_iface.v1.ProductService.ProductDuplicate:input_type -> product_iface.v1.ProductDuplicateRequest
-	13, // 8: product_iface.v1.ProductService.ProductMapGet:input_type -> product_iface.v1.ProductMapGetRequest
-	15, // 9: product_iface.v1.ProductService.ProductMapConnect:input_type -> product_iface.v1.ProductMapConnectRequest
-	8,  // 10: product_iface.v1.ProductService.ProductByIDs:input_type -> product_iface.v1.ProductByIDsRequest
-	5,  // 11: product_iface.v1.ProductService.ProductListExport:input_type -> product_iface.v1.ProductListExportRequest
-	1,  // 12: product_iface.v1.ProductService.ProductSearch:input_type -> product_iface.v1.ProductSearchRequest
-	12, // 13: product_iface.v1.ProductService.ProductDuplicate:output_type -> product_iface.v1.ProductDuplicateResponse
-	14, // 14: product_iface.v1.ProductService.ProductMapGet:output_type -> product_iface.v1.ProductMapGetResponse
-	16, // 15: product_iface.v1.ProductService.ProductMapConnect:output_type -> product_iface.v1.ProductMapConnectResponse
-	10, // 16: product_iface.v1.ProductService.ProductByIDs:output_type -> product_iface.v1.ProductByIDsResponse
-	7,  // 17: product_iface.v1.ProductService.ProductListExport:output_type -> product_iface.v1.ProductListExportResponse
-	3,  // 18: product_iface.v1.ProductService.ProductSearch:output_type -> product_iface.v1.ProductSearchResponse
-	13, // [13:19] is the sub-list for method output_type
-	7,  // [7:13] is the sub-list for method input_type
-	7,  // [7:7] is the sub-list for extension type_name
-	7,  // [7:7] is the sub-list for extension extendee
-	0,  // [0:7] is the sub-list for field type_name
+	41, // 4: product_iface.v1.ProductListExportRequest.time_range:type_name -> common.v1.TimeFilterRange
+	39, // 5: product_iface.v1.ProductByIDsResponse.products:type_name -> product_iface.v1.ProductByIDsResponse.ProductsEntry
+	42, // 6: product_iface.v1.ProductListRequest.page:type_name -> common.v1.PageFilter
+	24, // 7: product_iface.v1.ProductListResponse.products:type_name -> product_iface.v1.ProductListItem
+	43, // 8: product_iface.v1.ProductListResponse.page_info:type_name -> common.v1.PageInfo
+	30, // 9: product_iface.v1.Category.children:type_name -> product_iface.v1.Category
+	30, // 10: product_iface.v1.CategoryListResponse.data:type_name -> product_iface.v1.Category
+	9,  // 11: product_iface.v1.ProductByIDsResponse.ProductsEntry.value:type_name -> product_iface.v1.ProductIDsData
+	11, // 12: product_iface.v1.ProductService.ProductDuplicate:input_type -> product_iface.v1.ProductDuplicateRequest
+	13, // 13: product_iface.v1.ProductService.ProductMapGet:input_type -> product_iface.v1.ProductMapGetRequest
+	15, // 14: product_iface.v1.ProductService.ProductMapConnect:input_type -> product_iface.v1.ProductMapConnectRequest
+	8,  // 15: product_iface.v1.ProductService.ProductByIDs:input_type -> product_iface.v1.ProductByIDsRequest
+	5,  // 16: product_iface.v1.ProductService.ProductListExport:input_type -> product_iface.v1.ProductListExportRequest
+	1,  // 17: product_iface.v1.ProductService.ProductSearch:input_type -> product_iface.v1.ProductSearchRequest
+	17, // 18: product_iface.v1.ProductService.ProductCreate:input_type -> product_iface.v1.ProductCreateRequest
+	19, // 19: product_iface.v1.ProductService.ProductUpdate:input_type -> product_iface.v1.ProductUpdateRequest
+	21, // 20: product_iface.v1.ProductService.ProductDelete:input_type -> product_iface.v1.ProductDeleteRequest
+	23, // 21: product_iface.v1.ProductService.ProductList:input_type -> product_iface.v1.ProductListRequest
+	26, // 22: product_iface.v1.ProductService.ProductDetail:input_type -> product_iface.v1.ProductDetailRequest
+	28, // 23: product_iface.v1.ProductService.ProductCodeGenerate:input_type -> product_iface.v1.ProductCodeGenerateRequest
+	31, // 24: product_iface.v1.CategoryService.CategoryCreate:input_type -> product_iface.v1.CategoryCreateRequest
+	33, // 25: product_iface.v1.CategoryService.CategoryUpdate:input_type -> product_iface.v1.CategoryUpdateRequest
+	35, // 26: product_iface.v1.CategoryService.CategoryDelete:input_type -> product_iface.v1.CategoryDeleteRequest
+	37, // 27: product_iface.v1.CategoryService.CategoryList:input_type -> product_iface.v1.CategoryListRequest
+	12, // 28: product_iface.v1.ProductService.ProductDuplicate:output_type -> product_iface.v1.ProductDuplicateResponse
+	14, // 29: product_iface.v1.ProductService.ProductMapGet:output_type -> product_iface.v1.ProductMapGetResponse
+	16, // 30: product_iface.v1.ProductService.ProductMapConnect:output_type -> product_iface.v1.ProductMapConnectResponse
+	10, // 31: product_iface.v1.ProductService.ProductByIDs:output_type -> product_iface.v1.ProductByIDsResponse
+	7,  // 32: product_iface.v1.ProductService.ProductListExport:output_type -> product_iface.v1.ProductListExportResponse
+	3,  // 33: product_iface.v1.ProductService.ProductSearch:output_type -> product_iface.v1.ProductSearchResponse
+	18, // 34: product_iface.v1.ProductService.ProductCreate:output_type -> product_iface.v1.ProductCreateResponse
+	20, // 35: product_iface.v1.ProductService.ProductUpdate:output_type -> product_iface.v1.ProductUpdateResponse
+	22, // 36: product_iface.v1.ProductService.ProductDelete:output_type -> product_iface.v1.ProductDeleteResponse
+	25, // 37: product_iface.v1.ProductService.ProductList:output_type -> product_iface.v1.ProductListResponse
+	27, // 38: product_iface.v1.ProductService.ProductDetail:output_type -> product_iface.v1.ProductDetailResponse
+	29, // 39: product_iface.v1.ProductService.ProductCodeGenerate:output_type -> product_iface.v1.ProductCodeGenerateResponse
+	32, // 40: product_iface.v1.CategoryService.CategoryCreate:output_type -> product_iface.v1.CategoryCreateResponse
+	34, // 41: product_iface.v1.CategoryService.CategoryUpdate:output_type -> product_iface.v1.CategoryUpdateResponse
+	36, // 42: product_iface.v1.CategoryService.CategoryDelete:output_type -> product_iface.v1.CategoryDeleteResponse
+	38, // 43: product_iface.v1.CategoryService.CategoryList:output_type -> product_iface.v1.CategoryListResponse
+	28, // [28:44] is the sub-list for method output_type
+	12, // [12:28] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_product_iface_v1_product_proto_init() }
@@ -1413,9 +2879,9 @@ func file_product_iface_v1_product_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_product_iface_v1_product_proto_rawDesc), len(file_product_iface_v1_product_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   17,
+			NumMessages:   39,
 			NumExtensions: 0,
-			NumServices:   1,
+			NumServices:   2,
 		},
 		GoTypes:           file_product_iface_v1_product_proto_goTypes,
 		DependencyIndexes: file_product_iface_v1_product_proto_depIdxs,

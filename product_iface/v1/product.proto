@@ -4,6 +4,7 @@ package product_iface.v1;
 // import "accounting_iface/v1/core.proto";
 import "buf/validate/validate.proto";
 import "common/v1/common.proto";
+import "role_base/v1/role.proto";
 // import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/pdcgo/schema/services/product_iface/v1;product_iface";
@@ -18,9 +19,20 @@ service ProductService {
 
   rpc ProductListExport(ProductListExportRequest) returns (stream ProductListExportResponse);
   rpc ProductSearch(ProductSearchRequest) returns (ProductSearchResponse);
+
+  // Product Management (CRUD) — operates on the legacy `products` table.
+  rpc ProductCreate(ProductCreateRequest) returns (ProductCreateResponse);
+  rpc ProductUpdate(ProductUpdateRequest) returns (ProductUpdateResponse);
+  rpc ProductDelete(ProductDeleteRequest) returns (ProductDeleteResponse);
+  rpc ProductList(ProductListRequest) returns (ProductListResponse);
+  rpc ProductDetail(ProductDetailRequest) returns (ProductDetailResponse);
+
+  // Previews the product code (legacy RefID) the next created product would get.
+  rpc ProductCodeGenerate(ProductCodeGenerateRequest) returns (ProductCodeGenerateResponse);
 }
 
 message ProductSearchRequest {
+  option (role_base.v1.request_policy) = {allow_all: true};
   uint64 team_id = 1;
   oneof search {
     string name = 2;
@@ -60,6 +72,7 @@ message ProductListSort {
 }
 
 message ProductListExportRequest {
+  option (role_base.v1.request_policy) = {allow_all: true};
   uint64 team_id = 1;
   bool exclude_selected_team_id = 9;
   bool is_locked = 2;
@@ -103,6 +116,7 @@ message ProductListExportResponse {
 }
 
 message ProductByIDsRequest {
+  option (role_base.v1.request_policy) = {allow_all: true};
   repeated uint64 ids = 1 [(buf.validate.field).repeated = {
     min_items: 1
     max_items: 100
@@ -127,6 +141,7 @@ message ProductByIDsResponse {
 }
 
 message ProductDuplicateRequest {
+  option (role_base.v1.request_policy) = {allow_all: true};
   uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
   uint64 variation_id = 2 [(buf.validate.field).uint64.gt = 0];
 }
@@ -136,6 +151,7 @@ message ProductDuplicateResponse {
 }
 
 message ProductMapGetRequest {
+  option (role_base.v1.request_policy) = {allow_all: true};
   uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
   uint64 variation_id = 2 [(buf.validate.field).uint64.gt = 0];
 }
@@ -147,9 +163,185 @@ message ProductMapGetResponse {
 }
 
 message ProductMapConnectRequest {
+  option (role_base.v1.request_policy) = {allow_all: true};
   uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
   uint64 variation_id = 2 [(buf.validate.field).uint64.gt = 0];
   uint64 to_variation_id = 3 [(buf.validate.field).uint64.gt = 0];
 }
 
 message ProductMapConnectResponse {}
+
+// ---------------------------------------------------------------------------
+// Product Management (CRUD). Backed by the legacy `products` table; a product
+// is owned by a team (team_id) and soft-deleted via the `deleted` column.
+// ---------------------------------------------------------------------------
+
+message ProductCreateRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+  uint64 team_id = 1 [
+    (buf.validate.field).uint64.gt = 0,
+    (role_base.v1.use_scope) = true
+  ];
+  string name = 2 [(buf.validate.field).string = {min_len: 1}];
+  string ref_id = 3; // ignored when the server can auto-generate the product code
+  repeated string images = 4;
+  string description = 5;
+  double markup_percent = 6;
+  bool cross_locked = 7;
+  uint64 category_id = 8; // optional (UI requires it); attaches a product_category row
+}
+
+message ProductCreateResponse {
+  uint64 id = 1;
+  string product_code = 2; // the ref_id assigned to the new product
+}
+
+message ProductUpdateRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+  uint64 id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 team_id = 2 [
+    (buf.validate.field).uint64.gt = 0,
+    (role_base.v1.use_scope) = true
+  ];
+  string name = 3 [(buf.validate.field).string = {min_len: 1}];
+  string ref_id = 4;
+  repeated string images = 5;
+  string description = 6;
+  double markup_percent = 7;
+  bool cross_locked = 8;
+  uint64 category_id = 9; // when > 0, replaces the product's category association
+}
+
+message ProductUpdateResponse {}
+
+message ProductDeleteRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+  uint64 id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 team_id = 2 [
+    (buf.validate.field).uint64.gt = 0,
+    (role_base.v1.use_scope) = true
+  ];
+}
+
+message ProductDeleteResponse {}
+
+message ProductListRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+  uint64 team_id = 1 [
+    (buf.validate.field).uint64.gt = 0,
+    (role_base.v1.use_scope) = true
+  ];
+  string search = 2; // name ILIKE (optional)
+  common.v1.PageFilter page = 3 [(buf.validate.field).required = true];
+}
+
+message ProductListItem {
+  uint64 id = 1;
+  string name = 2;
+  string ref_id = 3;
+  string image = 4; // first image (image ->> 0)
+  double markup_percent = 5;
+  bool cross_locked = 6;
+  uint64 team_id = 7;
+  string team_name = 8;
+}
+
+message ProductListResponse {
+  repeated ProductListItem products = 1;
+  common.v1.PageInfo page_info = 2;
+}
+
+message ProductDetailRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+  uint64 id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 team_id = 2 [
+    (buf.validate.field).uint64.gt = 0,
+    (role_base.v1.use_scope) = true
+  ];
+}
+
+message ProductDetailResponse {
+  uint64 id = 1;
+  uint64 team_id = 2;
+  string team_name = 3;
+  string name = 4;
+  string ref_id = 5;
+  repeated string images = 6;
+  string description = 7;
+  double markup_percent = 8;
+  bool cross_locked = 9;
+  uint64 category_id = 10; // 0 = none
+  string category_name = 11;
+}
+
+message ProductCodeGenerateRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+  uint64 team_id = 1 [
+    (buf.validate.field).uint64.gt = 0,
+    (role_base.v1.use_scope) = true
+  ];
+}
+
+message ProductCodeGenerateResponse {
+  string product_code = 1;
+}
+
+// ---------------------------------------------------------------------------
+// Category Management. Categories are GLOBAL (no team ownership) hierarchical
+// master data on the legacy `categories` table. CategoryList is cross-team and
+// requires only a valid authenticated identity (see docs/readme.md).
+// ---------------------------------------------------------------------------
+
+service CategoryService {
+  rpc CategoryCreate(CategoryCreateRequest) returns (CategoryCreateResponse);
+  rpc CategoryUpdate(CategoryUpdateRequest) returns (CategoryUpdateResponse);
+  rpc CategoryDelete(CategoryDeleteRequest) returns (CategoryDeleteResponse);
+  rpc CategoryList(CategoryListRequest) returns (CategoryListResponse);
+}
+
+// Category — one node of the category tree. `children` is populated by
+// CategoryList (nested); it is empty on the write responses.
+message Category {
+  uint64 id = 1;
+  string name = 2;
+  uint64 parent_id = 3; // 0 = root
+  int32 level = 4;
+  bool is_last = 5; // leaf (no children)
+  repeated Category children = 6;
+}
+
+message CategoryCreateRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+  string name = 1 [(buf.validate.field).string = {min_len: 1}];
+  uint64 parent_id = 2; // 0 = root
+}
+
+message CategoryCreateResponse {
+  uint64 id = 1;
+}
+
+message CategoryUpdateRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+  uint64 id = 1 [(buf.validate.field).uint64.gt = 0];
+  string name = 2 [(buf.validate.field).string = {min_len: 1}];
+  uint64 parent_id = 3; // reparent target (0 = root)
+}
+
+message CategoryUpdateResponse {}
+
+message CategoryDeleteRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+  uint64 id = 1 [(buf.validate.field).uint64.gt = 0];
+}
+
+message CategoryDeleteResponse {}
+
+message CategoryListRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+  string search = 1; // optional name ILIKE
+  uint64 parent_id = 2; // optional subtree root (0 = whole tree)
+}
+
+message CategoryListResponse {
+  repeated Category data = 1; // roots (or the parent_id node's children), nested
+}

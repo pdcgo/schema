@@ -26,9 +26,10 @@ const (
 type QueueType int32
 
 const (
-	QueueType_QUEUE_TYPE_UNSPECIFIED QueueType = 0
-	QueueType_QUEUE_TYPE_FIFO        QueueType = 1
-	QueueType_QUEUE_TYPE_LIFO        QueueType = 2
+	QueueType_QUEUE_TYPE_UNSPECIFIED      QueueType = 0
+	QueueType_QUEUE_TYPE_FIFO             QueueType = 1
+	QueueType_QUEUE_TYPE_LIFO             QueueType = 2
+	QueueType_QUEUE_TYPE_BY_EXPIRING_DATE QueueType = 3
 )
 
 // Enum value maps for QueueType.
@@ -37,11 +38,13 @@ var (
 		0: "QUEUE_TYPE_UNSPECIFIED",
 		1: "QUEUE_TYPE_FIFO",
 		2: "QUEUE_TYPE_LIFO",
+		3: "QUEUE_TYPE_BY_EXPIRING_DATE",
 	}
 	QueueType_value = map[string]int32{
-		"QUEUE_TYPE_UNSPECIFIED": 0,
-		"QUEUE_TYPE_FIFO":        1,
-		"QUEUE_TYPE_LIFO":        2,
+		"QUEUE_TYPE_UNSPECIFIED":      0,
+		"QUEUE_TYPE_FIFO":             1,
+		"QUEUE_TYPE_LIFO":             2,
+		"QUEUE_TYPE_BY_EXPIRING_DATE": 3,
 	}
 )
 
@@ -70,6 +73,57 @@ func (x QueueType) Number() protoreflect.EnumNumber {
 // Deprecated: Use QueueType.Descriptor instead.
 func (QueueType) EnumDescriptor() ([]byte, []int) {
 	return file_inventory_iface_v1_types_proto_rawDescGZIP(), []int{0}
+}
+
+// PlacementPickingType — pick goods from the rack holding the smaller vs bigger
+// quantity of the product first.
+type PlacementPickingType int32
+
+const (
+	PlacementPickingType_PLACEMENT_PICKING_TYPE_UNSPECIFIED PlacementPickingType = 0
+	PlacementPickingType_PLACEMENT_PICKING_TYPE_SMALLER     PlacementPickingType = 1
+	PlacementPickingType_PLACEMENT_PICKING_TYPE_BIGGER      PlacementPickingType = 2
+)
+
+// Enum value maps for PlacementPickingType.
+var (
+	PlacementPickingType_name = map[int32]string{
+		0: "PLACEMENT_PICKING_TYPE_UNSPECIFIED",
+		1: "PLACEMENT_PICKING_TYPE_SMALLER",
+		2: "PLACEMENT_PICKING_TYPE_BIGGER",
+	}
+	PlacementPickingType_value = map[string]int32{
+		"PLACEMENT_PICKING_TYPE_UNSPECIFIED": 0,
+		"PLACEMENT_PICKING_TYPE_SMALLER":     1,
+		"PLACEMENT_PICKING_TYPE_BIGGER":      2,
+	}
+)
+
+func (x PlacementPickingType) Enum() *PlacementPickingType {
+	p := new(PlacementPickingType)
+	*p = x
+	return p
+}
+
+func (x PlacementPickingType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (PlacementPickingType) Descriptor() protoreflect.EnumDescriptor {
+	return file_inventory_iface_v1_types_proto_enumTypes[1].Descriptor()
+}
+
+func (PlacementPickingType) Type() protoreflect.EnumType {
+	return &file_inventory_iface_v1_types_proto_enumTypes[1]
+}
+
+func (x PlacementPickingType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use PlacementPickingType.Descriptor instead.
+func (PlacementPickingType) EnumDescriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_types_proto_rawDescGZIP(), []int{1}
 }
 
 type StockChangeType int32
@@ -123,11 +177,11 @@ func (x StockChangeType) String() string {
 }
 
 func (StockChangeType) Descriptor() protoreflect.EnumDescriptor {
-	return file_inventory_iface_v1_types_proto_enumTypes[1].Descriptor()
+	return file_inventory_iface_v1_types_proto_enumTypes[2].Descriptor()
 }
 
 func (StockChangeType) Type() protoreflect.EnumType {
-	return &file_inventory_iface_v1_types_proto_enumTypes[1]
+	return &file_inventory_iface_v1_types_proto_enumTypes[2]
 }
 
 func (x StockChangeType) Number() protoreflect.EnumNumber {
@@ -136,7 +190,7 @@ func (x StockChangeType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use StockChangeType.Descriptor instead.
 func (StockChangeType) EnumDescriptor() ([]byte, []int) {
-	return file_inventory_iface_v1_types_proto_rawDescGZIP(), []int{1}
+	return file_inventory_iface_v1_types_proto_rawDescGZIP(), []int{2}
 }
 
 type OrderCreated struct {
@@ -771,11 +825,16 @@ const file_inventory_iface_v1_types_proto_rawDesc = "" +
 	"adjustment\x18\v \x01(\v2\x1e.inventory_iface.v1.AdjustmentH\x00R\n" +
 	"adjustment\x12:\n" +
 	"\btransfer\x18\f \x01(\v2\x1c.inventory_iface.v1.TransferH\x00R\btransferB\b\n" +
-	"\x06change*Q\n" +
+	"\x06change*r\n" +
 	"\tQueueType\x12\x1a\n" +
 	"\x16QUEUE_TYPE_UNSPECIFIED\x10\x00\x12\x13\n" +
 	"\x0fQUEUE_TYPE_FIFO\x10\x01\x12\x13\n" +
-	"\x0fQUEUE_TYPE_LIFO\x10\x02*\xbf\x02\n" +
+	"\x0fQUEUE_TYPE_LIFO\x10\x02\x12\x1f\n" +
+	"\x1bQUEUE_TYPE_BY_EXPIRING_DATE\x10\x03*\x85\x01\n" +
+	"\x14PlacementPickingType\x12&\n" +
+	"\"PLACEMENT_PICKING_TYPE_UNSPECIFIED\x10\x00\x12\"\n" +
+	"\x1ePLACEMENT_PICKING_TYPE_SMALLER\x10\x01\x12!\n" +
+	"\x1dPLACEMENT_PICKING_TYPE_BIGGER\x10\x02*\xbf\x02\n" +
 	"\x0fStockChangeType\x12!\n" +
 	"\x1dSTOCK_CHANGE_TYPE_UNSPECIFIED\x10\x00\x12#\n" +
 	"\x1fSTOCK_CHANGE_TYPE_ORDER_CREATED\x10\x01\x12$\n" +
@@ -801,34 +860,35 @@ func file_inventory_iface_v1_types_proto_rawDescGZIP() []byte {
 	return file_inventory_iface_v1_types_proto_rawDescData
 }
 
-var file_inventory_iface_v1_types_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_inventory_iface_v1_types_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
 var file_inventory_iface_v1_types_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_inventory_iface_v1_types_proto_goTypes = []any{
 	(QueueType)(0),                // 0: inventory_iface.v1.QueueType
-	(StockChangeType)(0),          // 1: inventory_iface.v1.StockChangeType
-	(*OrderCreated)(nil),          // 2: inventory_iface.v1.OrderCreated
-	(*OrderCanceled)(nil),         // 3: inventory_iface.v1.OrderCanceled
-	(*Restock)(nil),               // 4: inventory_iface.v1.Restock
-	(*Return)(nil),                // 5: inventory_iface.v1.Return
-	(*Problem)(nil),               // 6: inventory_iface.v1.Problem
-	(*FoundBack)(nil),             // 7: inventory_iface.v1.FoundBack
-	(*Adjustment)(nil),            // 8: inventory_iface.v1.Adjustment
-	(*Transfer)(nil),              // 9: inventory_iface.v1.Transfer
-	(*ChangeItem)(nil),            // 10: inventory_iface.v1.ChangeItem
-	(*StockChange)(nil),           // 11: inventory_iface.v1.StockChange
-	(*timestamppb.Timestamp)(nil), // 12: google.protobuf.Timestamp
+	(PlacementPickingType)(0),     // 1: inventory_iface.v1.PlacementPickingType
+	(StockChangeType)(0),          // 2: inventory_iface.v1.StockChangeType
+	(*OrderCreated)(nil),          // 3: inventory_iface.v1.OrderCreated
+	(*OrderCanceled)(nil),         // 4: inventory_iface.v1.OrderCanceled
+	(*Restock)(nil),               // 5: inventory_iface.v1.Restock
+	(*Return)(nil),                // 6: inventory_iface.v1.Return
+	(*Problem)(nil),               // 7: inventory_iface.v1.Problem
+	(*FoundBack)(nil),             // 8: inventory_iface.v1.FoundBack
+	(*Adjustment)(nil),            // 9: inventory_iface.v1.Adjustment
+	(*Transfer)(nil),              // 10: inventory_iface.v1.Transfer
+	(*ChangeItem)(nil),            // 11: inventory_iface.v1.ChangeItem
+	(*StockChange)(nil),           // 12: inventory_iface.v1.StockChange
+	(*timestamppb.Timestamp)(nil), // 13: google.protobuf.Timestamp
 }
 var file_inventory_iface_v1_types_proto_depIdxs = []int32{
-	12, // 0: inventory_iface.v1.StockChange.at:type_name -> google.protobuf.Timestamp
-	10, // 1: inventory_iface.v1.StockChange.changes:type_name -> inventory_iface.v1.ChangeItem
-	2,  // 2: inventory_iface.v1.StockChange.order_created:type_name -> inventory_iface.v1.OrderCreated
-	3,  // 3: inventory_iface.v1.StockChange.order_canceled:type_name -> inventory_iface.v1.OrderCanceled
-	4,  // 4: inventory_iface.v1.StockChange.restock:type_name -> inventory_iface.v1.Restock
-	5,  // 5: inventory_iface.v1.StockChange.return:type_name -> inventory_iface.v1.Return
-	6,  // 6: inventory_iface.v1.StockChange.problem:type_name -> inventory_iface.v1.Problem
-	7,  // 7: inventory_iface.v1.StockChange.found_back:type_name -> inventory_iface.v1.FoundBack
-	8,  // 8: inventory_iface.v1.StockChange.adjustment:type_name -> inventory_iface.v1.Adjustment
-	9,  // 9: inventory_iface.v1.StockChange.transfer:type_name -> inventory_iface.v1.Transfer
+	13, // 0: inventory_iface.v1.StockChange.at:type_name -> google.protobuf.Timestamp
+	11, // 1: inventory_iface.v1.StockChange.changes:type_name -> inventory_iface.v1.ChangeItem
+	3,  // 2: inventory_iface.v1.StockChange.order_created:type_name -> inventory_iface.v1.OrderCreated
+	4,  // 3: inventory_iface.v1.StockChange.order_canceled:type_name -> inventory_iface.v1.OrderCanceled
+	5,  // 4: inventory_iface.v1.StockChange.restock:type_name -> inventory_iface.v1.Restock
+	6,  // 5: inventory_iface.v1.StockChange.return:type_name -> inventory_iface.v1.Return
+	7,  // 6: inventory_iface.v1.StockChange.problem:type_name -> inventory_iface.v1.Problem
+	8,  // 7: inventory_iface.v1.StockChange.found_back:type_name -> inventory_iface.v1.FoundBack
+	9,  // 8: inventory_iface.v1.StockChange.adjustment:type_name -> inventory_iface.v1.Adjustment
+	10, // 9: inventory_iface.v1.StockChange.transfer:type_name -> inventory_iface.v1.Transfer
 	10, // [10:10] is the sub-list for method output_type
 	10, // [10:10] is the sub-list for method input_type
 	10, // [10:10] is the sub-list for extension type_name
@@ -856,7 +916,7 @@ func file_inventory_iface_v1_types_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_inventory_iface_v1_types_proto_rawDesc), len(file_inventory_iface_v1_types_proto_rawDesc)),
-			NumEnums:      2,
+			NumEnums:      3,
 			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   0,

@@ -3,6 +3,8 @@ package invoice_iface.v2;
 
 import "buf/validate/validate.proto";
 import "google/protobuf/timestamp.proto";
+import "invoice_iface/v2/v2_team_balance_list.proto";
+import "invoice_iface/v2/v2_types.proto";
 import "role_base/v1/role.proto";
 
 option go_package = "github.com/pdcgo/schema/services/invoice_iface/v2;invoice_iface";
@@ -24,16 +26,30 @@ message TeamBalanceTimelineFilter {
   uint64 for_team_id = 2; // optional; omit to aggregate across all counterparties
 }
 
-message TeamBalanceTimePoint {
-  google.protobuf.Timestamp period_start = 1; // bucket start (day/month/year)
-  // end-of-period balance snapshot (from TeamBalanceDailyLog.end_balance)
-  double payable_balance = 2;
-  double receivable_balance = 3;
-  // in-period net flow (from TeamBalanceDailyLog.change_amount per type)
-  double payable_change = 4;
-  double receivable_change = 5;
-  // payments accepted within the period (from InvoicePayment)
-  double total_payment = 6;
+// Sort follows the list guideline (ListFilterSort). A timeline is naturally ordered by
+// period, so the only variant is the common (period) sort; sort_type flips the direction.
+enum TeamBalanceTimelineCommonSort {
+  TEAM_BALANCE_TIMELINE_COMMON_SORT_UNSPECIFIED = 0;
+  TEAM_BALANCE_TIMELINE_COMMON_SORT_PERIOD = 1;
+}
+
+message TeamBalanceTimelineSort {
+  SortType sort_type = 1;
+  oneof s {
+    TeamBalanceTimelineCommonSort common = 2;
+  }
+}
+
+// The metrics a caller can request per bucket. COMMON carries the period_start; the rest
+// are the end-of-period balance snapshot, the in-period net flow, and accepted payments.
+enum TeamBalanceTimelineDataType {
+  TEAM_BALANCE_TIMELINE_DATA_TYPE_UNSPECIFIED = 0;
+  TEAM_BALANCE_TIMELINE_DATA_TYPE_COMMON = 1;
+  TEAM_BALANCE_TIMELINE_DATA_TYPE_PAYABLE_BALANCE = 2;
+  TEAM_BALANCE_TIMELINE_DATA_TYPE_RECEIVABLE_BALANCE = 3;
+  TEAM_BALANCE_TIMELINE_DATA_TYPE_PAYABLE_CHANGE = 4;
+  TEAM_BALANCE_TIMELINE_DATA_TYPE_RECEIVABLE_CHANGE = 5;
+  TEAM_BALANCE_TIMELINE_DATA_TYPE_TOTAL_PAYMENT = 6;
 }
 
 message TeamBalanceTimelineRequest {
@@ -45,8 +61,82 @@ message TeamBalanceTimelineRequest {
     defined_only: true
     not_in: [0]
   }];
+  // Optional; defaults to period ascending.
+  TeamBalanceTimelineSort sort = 4;
+  repeated TeamBalanceTimelineDataType data_types = 5 [(buf.validate.field).repeated = {
+    min_items: 1
+    items: {
+      enum: {
+        defined_only: true
+        not_in: [0]
+      }
+    }
+  }];
+}
+
+// Per-data-type item + keyed map (bucket key = period_start unix seconds).
+message TeamBalanceTimelineCommonItem {
+  google.protobuf.Timestamp period_start = 1; // bucket start (day/month/year)
+}
+
+message TeamBalanceTimelineCommonData {
+  map<uint64, TeamBalanceTimelineCommonItem> data = 1;
+}
+
+message TeamBalanceTimelinePayableBalanceItem {
+  double balance = 1; // end-of-period payable balance snapshot
+}
+
+message TeamBalanceTimelinePayableBalanceData {
+  map<uint64, TeamBalanceTimelinePayableBalanceItem> data = 1;
+}
+
+message TeamBalanceTimelineReceivableBalanceItem {
+  double balance = 1; // end-of-period receivable balance snapshot
+}
+
+message TeamBalanceTimelineReceivableBalanceData {
+  map<uint64, TeamBalanceTimelineReceivableBalanceItem> data = 1;
+}
+
+message TeamBalanceTimelinePayableChangeItem {
+  double amount = 1; // in-period payable net flow (sum of `change`)
+  repeated ChangeSumAmount change = 2; // per-BalanceChangeType breakdown
+}
+
+message TeamBalanceTimelinePayableChangeData {
+  map<uint64, TeamBalanceTimelinePayableChangeItem> data = 1;
+}
+
+message TeamBalanceTimelineReceivableChangeItem {
+  double amount = 1; // in-period receivable net flow (sum of `change`)
+  repeated ChangeSumAmount change = 2; // per-BalanceChangeType breakdown
+}
+
+message TeamBalanceTimelineReceivableChangeData {
+  map<uint64, TeamBalanceTimelineReceivableChangeItem> data = 1;
+}
+
+message TeamBalanceTimelineTotalPaymentItem {
+  double amount = 1; // payments accepted within the period
+}
+
+message TeamBalanceTimelineTotalPaymentData {
+  map<uint64, TeamBalanceTimelineTotalPaymentItem> data = 1;
+}
+
+message TeamBalanceTimelineData {
+  oneof data {
+    TeamBalanceTimelineCommonData common = 1;
+    TeamBalanceTimelinePayableBalanceData payable_balance = 2;
+    TeamBalanceTimelineReceivableBalanceData receivable_balance = 3;
+    TeamBalanceTimelinePayableChangeData payable_change = 4;
+    TeamBalanceTimelineReceivableChangeData receivable_change = 5;
+    TeamBalanceTimelineTotalPaymentData total_payment = 6;
+  }
 }
 
 message TeamBalanceTimelineResponse {
-  repeated TeamBalanceTimePoint points = 1; // ordered by period_start
+  repeated TeamBalanceTimelineData data = 1;
+  repeated uint64 ids = 2; // sorted period keys (period_start unix seconds)
 }

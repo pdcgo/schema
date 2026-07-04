@@ -9,6 +9,7 @@ package warehouse_iface
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	v1 "github.com/pdcgo/schema/services/common/v1"
+	_ "github.com/pdcgo/schema/services/role_base/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -363,7 +364,7 @@ var File_warehouse_iface_v1_stat_proto protoreflect.FileDescriptor
 
 const file_warehouse_iface_v1_stat_proto_rawDesc = "" +
 	"\n" +
-	"\x1dwarehouse_iface/v1/stat.proto\x12\x12warehouse_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x14common/v1/stat.proto\"e\n" +
+	"\x1dwarehouse_iface/v1/stat.proto\x12\x12warehouse_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x14common/v1/stat.proto\x1a\x17role_base/v1/role.proto\"e\n" +
 	"\x1eProductHistoryReadyStockMetric\x12\x1d\n" +
 	"\n" +
 	"product_id\x18\x02 \x01(\x04R\tproductId\x12\x10\n" +
@@ -376,12 +377,12 @@ const file_warehouse_iface_v1_stat_proto_rawDesc = "" +
 	"StatFilter\x12\x17\n" +
 	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12\x13\n" +
 	"\x05top_n\x18\x02 \x01(\x05R\x04topN\x12!\n" +
-	"\fwarehouse_id\x18\x03 \x01(\x04R\vwarehouseId\"\xce\x01\n" +
+	"\fwarehouse_id\x18\x03 \x01(\x04R\vwarehouseId\"\xd6\x01\n" +
 	"\vStatRequest\x126\n" +
 	"\x05range\x18\x01 \x01(\v2\x18.common.v1.StatTimeRangeB\x06\xbaH\x03\xc8\x01\x01R\x05range\x126\n" +
 	"\x06filter\x18\x02 \x01(\v2\x1e.warehouse_iface.v1.StatFilterR\x06filter\x12O\n" +
 	"\fmetric_types\x18\x03 \x03(\x0e2\x1e.warehouse_iface.v1.MetricTypeB\f\xbaH\t\x92\x01\x06\b\x01\x10\n" +
-	"\x18\x01R\vmetricTypes\"D\n" +
+	"\x18\x01R\vmetricTypes:\x06\x92\xb5\x18\x02 \x01\"D\n" +
 	"\fStatResponse\x124\n" +
 	"\ametrics\x18\x01 \x03(\v2\x1a.warehouse_iface.v1.MetricR\ametrics*V\n" +
 	"\n" +

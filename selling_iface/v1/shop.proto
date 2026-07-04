@@ -1,0 +1,170 @@
+syntax = "proto3";
+package selling_iface.v1;
+
+import "buf/validate/validate.proto";
+import "common/v1/common.proto";
+import "role_base/v1/role.proto";
+
+option go_package = "github.com/pdcgo/schema/services/selling_iface/v1;selling_iface";
+
+// ShopService — team-scoped marketplace-shop management for a selling team.
+// Authorization is the User v2 role system, declared on each request via
+// (role_base.v1.request_policy) + (role_base.v1.use_scope) on team_id and
+// enforced by user_service access interceptor (no imperative checks in handlers).
+service ShopService {
+  rpc ShopList(ShopListRequest) returns (ShopListResponse);
+  rpc ShopCreate(ShopCreateRequest) returns (ShopCreateResponse);
+  rpc ShopUpdate(ShopUpdateRequest) returns (ShopUpdateResponse);
+  rpc ShopDelete(ShopDeleteRequest) returns (ShopDeleteResponse);
+
+  // Users who can access a shop.
+  rpc ShopUserList(ShopUserListRequest) returns (ShopUserListResponse);
+  rpc ShopUserUpdate(ShopUserUpdateRequest) returns (ShopUserUpdateResponse);
+}
+
+message ShopListItem {
+  uint64 id = 1;
+  uint64 team_id = 2;
+  string shop_name = 3;
+  string shop_username = 4;
+  common.v1.MarketplaceType marketplace_type = 5;
+  string uri = 6;
+}
+
+message ShopListRequest {
+  // Any member with a role in the team may view shops.
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
+  string q = 1;
+  uint64 team_id = 2 [(role_base.v1.use_scope) = true];
+  common.v1.MarketplaceType marketplace_type = 3;
+  common.v1.PageFilter page = 4 [(buf.validate.field).required = true];
+}
+
+message ShopListResponse {
+  repeated ShopListItem data = 1;
+  common.v1.PageInfo page_info = 2;
+}
+
+message ShopCreateRequest {
+  option (role_base.v1.request_policy) = {
+    roles: [
+      ROLE_ROOT,
+      ROLE_ADMIN,
+      ROLE_TEAM_OWNER,
+      ROLE_TEAM_ADMIN
+    ]
+  };
+
+  uint64 team_id = 1 [
+    (buf.validate.field).uint64.gt = 0,
+    (role_base.v1.use_scope) = true
+  ];
+  string shop_name = 2 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 200
+  }];
+  string shop_username = 3 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 200
+  }];
+  common.v1.MarketplaceType marketplace_type = 4;
+  string uri = 5 [(buf.validate.field).string = {max_len: 500}];
+}
+
+message ShopCreateResponse {
+  uint64 id = 1;
+}
+
+message ShopUpdateRequest {
+  option (role_base.v1.request_policy) = {
+    roles: [
+      ROLE_ROOT,
+      ROLE_ADMIN,
+      ROLE_TEAM_OWNER,
+      ROLE_TEAM_ADMIN
+    ]
+  };
+
+  uint64 id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 team_id = 2 [
+    (buf.validate.field).uint64.gt = 0,
+    (role_base.v1.use_scope) = true
+  ];
+  string shop_name = 3 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 200
+  }];
+  string shop_username = 4 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 200
+  }];
+  common.v1.MarketplaceType marketplace_type = 5;
+  string uri = 6 [(buf.validate.field).string = {max_len: 500}];
+}
+message ShopUpdateResponse {}
+
+message ShopDeleteRequest {
+  option (role_base.v1.request_policy) = {
+    roles: [
+      ROLE_ROOT,
+      ROLE_ADMIN,
+      ROLE_TEAM_OWNER,
+      ROLE_TEAM_ADMIN
+    ]
+  };
+
+  uint64 id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 team_id = 2 [
+    (buf.validate.field).uint64.gt = 0,
+    (role_base.v1.use_scope) = true
+  ];
+}
+message ShopDeleteResponse {}
+
+message ShopUser {
+  uint64 id = 1;
+  uint64 shop_id = 2;
+  uint64 user_id = 3;
+}
+
+message ShopUserListRequest {
+  option (role_base.v1.request_policy) = {
+    roles: [
+      ROLE_ROOT,
+      ROLE_ADMIN,
+      ROLE_TEAM_OWNER,
+      ROLE_TEAM_ADMIN
+    ]
+  };
+
+  uint64 shop_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 team_id = 2 [
+    (buf.validate.field).uint64.gt = 0,
+    (role_base.v1.use_scope) = true
+  ];
+}
+
+message ShopUserListResponse {
+  repeated ShopUser data = 1;
+}
+
+message ShopUserUpdateRequest {
+  option (role_base.v1.request_policy) = {
+    roles: [
+      ROLE_ROOT,
+      ROLE_ADMIN,
+      ROLE_TEAM_OWNER,
+      ROLE_TEAM_ADMIN
+    ]
+  };
+
+  uint64 shop_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 team_id = 2 [
+    (buf.validate.field).uint64.gt = 0,
+    (role_base.v1.use_scope) = true
+  ];
+  repeated uint64 added_user_ids = 3;
+  repeated uint64 removed_user_ids = 4;
+}
+message ShopUserUpdateResponse {}

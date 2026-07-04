@@ -10,6 +10,7 @@ import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	v1 "github.com/pdcgo/schema/services/common/v1"
 	_ "github.com/pdcgo/schema/services/mcp_iface/v1"
+	_ "github.com/pdcgo/schema/services/role_base/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -870,6 +871,718 @@ func (x *WarehouseListResponse) GetList() []*Warehouse {
 	return nil
 }
 
+// Rich, read-only warehouse detail (management form + detail page).
+type WarehouseDetail struct {
+	state       protoimpl.MessageState `protogen:"open.v1"`
+	Id          uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name        string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Desc        string                 `protobuf:"bytes,3,opt,name=desc,proto3" json:"desc,omitempty"`
+	Address     string                 `protobuf:"bytes,4,opt,name=address,proto3" json:"address,omitempty"`
+	IsFull      bool                   `protobuf:"varint,5,opt,name=is_full,json=isFull,proto3" json:"is_full,omitempty"`
+	IsClosed    bool                   `protobuf:"varint,6,opt,name=is_closed,json=isClosed,proto3" json:"is_closed,omitempty"`
+	UseFixedFee bool                   `protobuf:"varint,7,opt,name=use_fixed_fee,json=useFixedFee,proto3" json:"use_fixed_fee,omitempty"`
+	FeeFix      float64                `protobuf:"fixed64,8,opt,name=fee_fix,json=feeFix,proto3" json:"fee_fix,omitempty"`
+	FeePercent  float32                `protobuf:"fixed32,9,opt,name=fee_percent,json=feePercent,proto3" json:"fee_percent,omitempty"`
+	MaxFee      float64                `protobuf:"fixed64,10,opt,name=max_fee,json=maxFee,proto3" json:"max_fee,omitempty"`
+	// Time-of-day, "HH:MM" (empty = unset).
+	OpenTime   string `protobuf:"bytes,11,opt,name=open_time,json=openTime,proto3" json:"open_time,omitempty"`
+	CloseTime  string `protobuf:"bytes,12,opt,name=close_time,json=closeTime,proto3" json:"close_time,omitempty"`
+	CloseOrder string `protobuf:"bytes,13,opt,name=close_order,json=closeOrder,proto3" json:"close_order,omitempty"`
+	// read-only stats
+	RackCount     uint64 `protobuf:"varint,14,opt,name=rack_count,json=rackCount,proto3" json:"rack_count,omitempty"`
+	OrderCount    uint64 `protobuf:"varint,15,opt,name=order_count,json=orderCount,proto3" json:"order_count,omitempty"`
+	Capacity      uint64 `protobuf:"varint,16,opt,name=capacity,proto3" json:"capacity,omitempty"`
+	MaxCapacity   uint64 `protobuf:"varint,17,opt,name=max_capacity,json=maxCapacity,proto3" json:"max_capacity,omitempty"`
+	ProductCount  uint64 `protobuf:"varint,18,opt,name=product_count,json=productCount,proto3" json:"product_count,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WarehouseDetail) Reset() {
+	*x = WarehouseDetail{}
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WarehouseDetail) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WarehouseDetail) ProtoMessage() {}
+
+func (x *WarehouseDetail) ProtoReflect() protoreflect.Message {
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WarehouseDetail.ProtoReflect.Descriptor instead.
+func (*WarehouseDetail) Descriptor() ([]byte, []int) {
+	return file_warehouse_iface_v1_warehouse_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *WarehouseDetail) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *WarehouseDetail) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *WarehouseDetail) GetDesc() string {
+	if x != nil {
+		return x.Desc
+	}
+	return ""
+}
+
+func (x *WarehouseDetail) GetAddress() string {
+	if x != nil {
+		return x.Address
+	}
+	return ""
+}
+
+func (x *WarehouseDetail) GetIsFull() bool {
+	if x != nil {
+		return x.IsFull
+	}
+	return false
+}
+
+func (x *WarehouseDetail) GetIsClosed() bool {
+	if x != nil {
+		return x.IsClosed
+	}
+	return false
+}
+
+func (x *WarehouseDetail) GetUseFixedFee() bool {
+	if x != nil {
+		return x.UseFixedFee
+	}
+	return false
+}
+
+func (x *WarehouseDetail) GetFeeFix() float64 {
+	if x != nil {
+		return x.FeeFix
+	}
+	return 0
+}
+
+func (x *WarehouseDetail) GetFeePercent() float32 {
+	if x != nil {
+		return x.FeePercent
+	}
+	return 0
+}
+
+func (x *WarehouseDetail) GetMaxFee() float64 {
+	if x != nil {
+		return x.MaxFee
+	}
+	return 0
+}
+
+func (x *WarehouseDetail) GetOpenTime() string {
+	if x != nil {
+		return x.OpenTime
+	}
+	return ""
+}
+
+func (x *WarehouseDetail) GetCloseTime() string {
+	if x != nil {
+		return x.CloseTime
+	}
+	return ""
+}
+
+func (x *WarehouseDetail) GetCloseOrder() string {
+	if x != nil {
+		return x.CloseOrder
+	}
+	return ""
+}
+
+func (x *WarehouseDetail) GetRackCount() uint64 {
+	if x != nil {
+		return x.RackCount
+	}
+	return 0
+}
+
+func (x *WarehouseDetail) GetOrderCount() uint64 {
+	if x != nil {
+		return x.OrderCount
+	}
+	return 0
+}
+
+func (x *WarehouseDetail) GetCapacity() uint64 {
+	if x != nil {
+		return x.Capacity
+	}
+	return 0
+}
+
+func (x *WarehouseDetail) GetMaxCapacity() uint64 {
+	if x != nil {
+		return x.MaxCapacity
+	}
+	return 0
+}
+
+func (x *WarehouseDetail) GetProductCount() uint64 {
+	if x != nil {
+		return x.ProductCount
+	}
+	return 0
+}
+
+type WarehouseDetailRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WarehouseDetailRequest) Reset() {
+	*x = WarehouseDetailRequest{}
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WarehouseDetailRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WarehouseDetailRequest) ProtoMessage() {}
+
+func (x *WarehouseDetailRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WarehouseDetailRequest.ProtoReflect.Descriptor instead.
+func (*WarehouseDetailRequest) Descriptor() ([]byte, []int) {
+	return file_warehouse_iface_v1_warehouse_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *WarehouseDetailRequest) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type WarehouseDetailResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Data          *WarehouseDetail       `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WarehouseDetailResponse) Reset() {
+	*x = WarehouseDetailResponse{}
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WarehouseDetailResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WarehouseDetailResponse) ProtoMessage() {}
+
+func (x *WarehouseDetailResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WarehouseDetailResponse.ProtoReflect.Descriptor instead.
+func (*WarehouseDetailResponse) Descriptor() ([]byte, []int) {
+	return file_warehouse_iface_v1_warehouse_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *WarehouseDetailResponse) GetData() *WarehouseDetail {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+type WarehouseCreateRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Client-supplied id (warehouses.id is not auto-increment).
+	Id            uint64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name          string  `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Desc          string  `protobuf:"bytes,3,opt,name=desc,proto3" json:"desc,omitempty"`
+	Address       string  `protobuf:"bytes,4,opt,name=address,proto3" json:"address,omitempty"`
+	IsFull        bool    `protobuf:"varint,5,opt,name=is_full,json=isFull,proto3" json:"is_full,omitempty"`
+	IsClosed      bool    `protobuf:"varint,6,opt,name=is_closed,json=isClosed,proto3" json:"is_closed,omitempty"`
+	UseFixedFee   bool    `protobuf:"varint,7,opt,name=use_fixed_fee,json=useFixedFee,proto3" json:"use_fixed_fee,omitempty"`
+	FeeFix        float64 `protobuf:"fixed64,8,opt,name=fee_fix,json=feeFix,proto3" json:"fee_fix,omitempty"`
+	FeePercent    float32 `protobuf:"fixed32,9,opt,name=fee_percent,json=feePercent,proto3" json:"fee_percent,omitempty"`
+	MaxFee        float64 `protobuf:"fixed64,10,opt,name=max_fee,json=maxFee,proto3" json:"max_fee,omitempty"`
+	OpenTime      string  `protobuf:"bytes,11,opt,name=open_time,json=openTime,proto3" json:"open_time,omitempty"`
+	CloseTime     string  `protobuf:"bytes,12,opt,name=close_time,json=closeTime,proto3" json:"close_time,omitempty"`
+	CloseOrder    string  `protobuf:"bytes,13,opt,name=close_order,json=closeOrder,proto3" json:"close_order,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WarehouseCreateRequest) Reset() {
+	*x = WarehouseCreateRequest{}
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WarehouseCreateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WarehouseCreateRequest) ProtoMessage() {}
+
+func (x *WarehouseCreateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WarehouseCreateRequest.ProtoReflect.Descriptor instead.
+func (*WarehouseCreateRequest) Descriptor() ([]byte, []int) {
+	return file_warehouse_iface_v1_warehouse_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *WarehouseCreateRequest) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *WarehouseCreateRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *WarehouseCreateRequest) GetDesc() string {
+	if x != nil {
+		return x.Desc
+	}
+	return ""
+}
+
+func (x *WarehouseCreateRequest) GetAddress() string {
+	if x != nil {
+		return x.Address
+	}
+	return ""
+}
+
+func (x *WarehouseCreateRequest) GetIsFull() bool {
+	if x != nil {
+		return x.IsFull
+	}
+	return false
+}
+
+func (x *WarehouseCreateRequest) GetIsClosed() bool {
+	if x != nil {
+		return x.IsClosed
+	}
+	return false
+}
+
+func (x *WarehouseCreateRequest) GetUseFixedFee() bool {
+	if x != nil {
+		return x.UseFixedFee
+	}
+	return false
+}
+
+func (x *WarehouseCreateRequest) GetFeeFix() float64 {
+	if x != nil {
+		return x.FeeFix
+	}
+	return 0
+}
+
+func (x *WarehouseCreateRequest) GetFeePercent() float32 {
+	if x != nil {
+		return x.FeePercent
+	}
+	return 0
+}
+
+func (x *WarehouseCreateRequest) GetMaxFee() float64 {
+	if x != nil {
+		return x.MaxFee
+	}
+	return 0
+}
+
+func (x *WarehouseCreateRequest) GetOpenTime() string {
+	if x != nil {
+		return x.OpenTime
+	}
+	return ""
+}
+
+func (x *WarehouseCreateRequest) GetCloseTime() string {
+	if x != nil {
+		return x.CloseTime
+	}
+	return ""
+}
+
+func (x *WarehouseCreateRequest) GetCloseOrder() string {
+	if x != nil {
+		return x.CloseOrder
+	}
+	return ""
+}
+
+type WarehouseCreateResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WarehouseCreateResponse) Reset() {
+	*x = WarehouseCreateResponse{}
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WarehouseCreateResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WarehouseCreateResponse) ProtoMessage() {}
+
+func (x *WarehouseCreateResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WarehouseCreateResponse.ProtoReflect.Descriptor instead.
+func (*WarehouseCreateResponse) Descriptor() ([]byte, []int) {
+	return file_warehouse_iface_v1_warehouse_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *WarehouseCreateResponse) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type WarehouseUpdateRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Desc          string                 `protobuf:"bytes,3,opt,name=desc,proto3" json:"desc,omitempty"`
+	Address       string                 `protobuf:"bytes,4,opt,name=address,proto3" json:"address,omitempty"`
+	IsFull        bool                   `protobuf:"varint,5,opt,name=is_full,json=isFull,proto3" json:"is_full,omitempty"`
+	IsClosed      bool                   `protobuf:"varint,6,opt,name=is_closed,json=isClosed,proto3" json:"is_closed,omitempty"`
+	UseFixedFee   bool                   `protobuf:"varint,7,opt,name=use_fixed_fee,json=useFixedFee,proto3" json:"use_fixed_fee,omitempty"`
+	FeeFix        float64                `protobuf:"fixed64,8,opt,name=fee_fix,json=feeFix,proto3" json:"fee_fix,omitempty"`
+	FeePercent    float32                `protobuf:"fixed32,9,opt,name=fee_percent,json=feePercent,proto3" json:"fee_percent,omitempty"`
+	MaxFee        float64                `protobuf:"fixed64,10,opt,name=max_fee,json=maxFee,proto3" json:"max_fee,omitempty"`
+	OpenTime      string                 `protobuf:"bytes,11,opt,name=open_time,json=openTime,proto3" json:"open_time,omitempty"`
+	CloseTime     string                 `protobuf:"bytes,12,opt,name=close_time,json=closeTime,proto3" json:"close_time,omitempty"`
+	CloseOrder    string                 `protobuf:"bytes,13,opt,name=close_order,json=closeOrder,proto3" json:"close_order,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WarehouseUpdateRequest) Reset() {
+	*x = WarehouseUpdateRequest{}
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WarehouseUpdateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WarehouseUpdateRequest) ProtoMessage() {}
+
+func (x *WarehouseUpdateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WarehouseUpdateRequest.ProtoReflect.Descriptor instead.
+func (*WarehouseUpdateRequest) Descriptor() ([]byte, []int) {
+	return file_warehouse_iface_v1_warehouse_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *WarehouseUpdateRequest) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *WarehouseUpdateRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *WarehouseUpdateRequest) GetDesc() string {
+	if x != nil {
+		return x.Desc
+	}
+	return ""
+}
+
+func (x *WarehouseUpdateRequest) GetAddress() string {
+	if x != nil {
+		return x.Address
+	}
+	return ""
+}
+
+func (x *WarehouseUpdateRequest) GetIsFull() bool {
+	if x != nil {
+		return x.IsFull
+	}
+	return false
+}
+
+func (x *WarehouseUpdateRequest) GetIsClosed() bool {
+	if x != nil {
+		return x.IsClosed
+	}
+	return false
+}
+
+func (x *WarehouseUpdateRequest) GetUseFixedFee() bool {
+	if x != nil {
+		return x.UseFixedFee
+	}
+	return false
+}
+
+func (x *WarehouseUpdateRequest) GetFeeFix() float64 {
+	if x != nil {
+		return x.FeeFix
+	}
+	return 0
+}
+
+func (x *WarehouseUpdateRequest) GetFeePercent() float32 {
+	if x != nil {
+		return x.FeePercent
+	}
+	return 0
+}
+
+func (x *WarehouseUpdateRequest) GetMaxFee() float64 {
+	if x != nil {
+		return x.MaxFee
+	}
+	return 0
+}
+
+func (x *WarehouseUpdateRequest) GetOpenTime() string {
+	if x != nil {
+		return x.OpenTime
+	}
+	return ""
+}
+
+func (x *WarehouseUpdateRequest) GetCloseTime() string {
+	if x != nil {
+		return x.CloseTime
+	}
+	return ""
+}
+
+func (x *WarehouseUpdateRequest) GetCloseOrder() string {
+	if x != nil {
+		return x.CloseOrder
+	}
+	return ""
+}
+
+type WarehouseUpdateResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WarehouseUpdateResponse) Reset() {
+	*x = WarehouseUpdateResponse{}
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WarehouseUpdateResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WarehouseUpdateResponse) ProtoMessage() {}
+
+func (x *WarehouseUpdateResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WarehouseUpdateResponse.ProtoReflect.Descriptor instead.
+func (*WarehouseUpdateResponse) Descriptor() ([]byte, []int) {
+	return file_warehouse_iface_v1_warehouse_proto_rawDescGZIP(), []int{21}
+}
+
+type WarehouseDeleteRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WarehouseDeleteRequest) Reset() {
+	*x = WarehouseDeleteRequest{}
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WarehouseDeleteRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WarehouseDeleteRequest) ProtoMessage() {}
+
+func (x *WarehouseDeleteRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WarehouseDeleteRequest.ProtoReflect.Descriptor instead.
+func (*WarehouseDeleteRequest) Descriptor() ([]byte, []int) {
+	return file_warehouse_iface_v1_warehouse_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *WarehouseDeleteRequest) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type WarehouseDeleteResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WarehouseDeleteResponse) Reset() {
+	*x = WarehouseDeleteResponse{}
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WarehouseDeleteResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WarehouseDeleteResponse) ProtoMessage() {}
+
+func (x *WarehouseDeleteResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WarehouseDeleteResponse.ProtoReflect.Descriptor instead.
+func (*WarehouseDeleteResponse) Descriptor() ([]byte, []int) {
+	return file_warehouse_iface_v1_warehouse_proto_rawDescGZIP(), []int{23}
+}
+
 type TeamWarehouseReturnInfoRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
@@ -879,7 +1592,7 @@ type TeamWarehouseReturnInfoRequest struct {
 
 func (x *TeamWarehouseReturnInfoRequest) Reset() {
 	*x = TeamWarehouseReturnInfoRequest{}
-	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[15]
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -891,7 +1604,7 @@ func (x *TeamWarehouseReturnInfoRequest) String() string {
 func (*TeamWarehouseReturnInfoRequest) ProtoMessage() {}
 
 func (x *TeamWarehouseReturnInfoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[15]
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -904,7 +1617,7 @@ func (x *TeamWarehouseReturnInfoRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TeamWarehouseReturnInfoRequest.ProtoReflect.Descriptor instead.
 func (*TeamWarehouseReturnInfoRequest) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_warehouse_proto_rawDescGZIP(), []int{15}
+	return file_warehouse_iface_v1_warehouse_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *TeamWarehouseReturnInfoRequest) GetTeamId() uint64 {
@@ -924,7 +1637,7 @@ type TeamWarehouseReturnInfoResponse struct {
 
 func (x *TeamWarehouseReturnInfoResponse) Reset() {
 	*x = TeamWarehouseReturnInfoResponse{}
-	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[16]
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -936,7 +1649,7 @@ func (x *TeamWarehouseReturnInfoResponse) String() string {
 func (*TeamWarehouseReturnInfoResponse) ProtoMessage() {}
 
 func (x *TeamWarehouseReturnInfoResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[16]
+	mi := &file_warehouse_iface_v1_warehouse_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -949,7 +1662,7 @@ func (x *TeamWarehouseReturnInfoResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TeamWarehouseReturnInfoResponse.ProtoReflect.Descriptor instead.
 func (*TeamWarehouseReturnInfoResponse) Descriptor() ([]byte, []int) {
-	return file_warehouse_iface_v1_warehouse_proto_rawDescGZIP(), []int{16}
+	return file_warehouse_iface_v1_warehouse_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *TeamWarehouseReturnInfoResponse) GetWarehouseReturn() *Warehouse {
@@ -970,58 +1683,132 @@ var File_warehouse_iface_v1_warehouse_proto protoreflect.FileDescriptor
 
 const file_warehouse_iface_v1_warehouse_proto_rawDesc = "" +
 	"\n" +
-	"\"warehouse_iface/v1/warehouse.proto\x12\x12warehouse_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x19mcp_iface/v1/option.proto\x1a\x1dwarehouse_iface/v1/stat.proto\"@\n" +
+	"\"warehouse_iface/v1/warehouse.proto\x12\x12warehouse_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x19mcp_iface/v1/option.proto\x1a\x1dwarehouse_iface/v1/stat.proto\x1a\x17role_base/v1/role.proto\"@\n" +
 	"\x04Rack\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x12\n" +
 	"\x04name\x18\x03 \x01(\tR\x04name\x12\x14\n" +
-	"\x05count\x18\x04 \x01(\x05R\x05count\"}\n" +
+	"\x05count\x18\x04 \x01(\x05R\x05count\"\x85\x01\n" +
 	"\x13TeamRackListRequest\x12*\n" +
 	"\fwarehouse_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\vwarehouseId\x12,\n" +
 	"\bteam_ids\x18\x02 \x03(\x04B\x11\xbaH\x0e\x92\x01\v\b\x01\x10\xc8\x01\"\x042\x02 \x00R\ateamIds\x12\f\n" +
-	"\x01q\x18\x03 \x01(\tR\x01q\"D\n" +
+	"\x01q\x18\x03 \x01(\tR\x01q:\x06\x92\xb5\x18\x02 \x01\"D\n" +
 	"\x14TeamRackListResponse\x12,\n" +
-	"\x04list\x18\x01 \x03(\v2\x18.warehouse_iface.v1.RackR\x04list\"}\n" +
+	"\x04list\x18\x01 \x03(\v2\x18.warehouse_iface.v1.RackR\x04list\"\x85\x01\n" +
 	"\x16SellingTeamListRequest\x12\f\n" +
 	"\x01q\x18\x01 \x01(\tR\x01q\x12*\n" +
 	"\fwarehouse_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\vwarehouseId\x12)\n" +
-	"\x04page\x18\x03 \x01(\v2\x15.common.v1.PageFilterR\x04page\"p\n" +
+	"\x04page\x18\x03 \x01(\v2\x15.common.v1.PageFilterR\x04page:\x06\x92\xb5\x18\x02 \x01\"p\n" +
 	"\x17SellingTeamListResponse\x12#\n" +
 	"\x04list\x18\x01 \x03(\v2\x0f.common.v1.TeamR\x04list\x120\n" +
 	"\tpage_info\x18\x02 \x01(\v2\x13.common.v1.PageInfoR\bpageInfo\"`\n" +
 	"\x04Note\x12;\n" +
 	"\x04type\x18\x05 \x01(\x0e2'.warehouse_iface.v1.TransactionNoteTypeR\x04type\x12\x1b\n" +
-	"\tnote_text\x18\x06 \x01(\tR\bnoteText\"\xb3\x01\n" +
+	"\tnote_text\x18\x06 \x01(\tR\bnoteText\"\xbb\x01\n" +
 	"\x1cTransactionNoteCreateRequest\x12\x1c\n" +
 	"\x05tx_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x04txId\x12 \n" +
 	"\ateam_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12\x19\n" +
 	"\border_id\x18\x03 \x01(\x04R\aorderId\x128\n" +
-	"\x05notes\x18\x04 \x03(\v2\x18.warehouse_iface.v1.NoteB\b\xbaH\x05\x92\x01\x02\x10\x05R\x05notes\"1\n" +
+	"\x05notes\x18\x04 \x03(\v2\x18.warehouse_iface.v1.NoteB\b\xbaH\x05\x92\x01\x02\x10\x05R\x05notes:\x06\x92\xb5\x18\x02 \x01\"1\n" +
 	"\x1dTransactionNoteCreateResponse\x12\x10\n" +
-	"\x03ids\x18\x01 \x03(\x04R\x03ids\"w\n" +
+	"\x03ids\x18\x01 \x03(\x04R\x03ids\"\x7f\n" +
 	"\x1aTransactionNoteListRequest\x12\x1c\n" +
 	"\x05tx_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x04txId\x12 \n" +
 	"\ateam_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\x06teamId\x12\x19\n" +
-	"\border_id\x18\x03 \x01(\x04R\aorderId\"K\n" +
+	"\border_id\x18\x03 \x01(\x04R\aorderId:\x06\x92\xb5\x18\x02 \x01\"K\n" +
 	"\x1bTransactionNoteListResponse\x12,\n" +
 	"\x04list\x18\x01 \x03(\v2\x18.warehouse_iface.v1.NoteR\x04list\"]\n" +
 	"\tWarehouse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x12\n" +
 	"\x04desc\x18\x03 \x01(\tR\x04desc\x12\x18\n" +
-	"\aaddress\x18\x04 \x01(\tR\aaddress\"<\n" +
+	"\aaddress\x18\x04 \x01(\tR\aaddress\"D\n" +
 	"\x13WarehouseIDsRequest\x12%\n" +
-	"\x03ids\x18\x01 \x03(\x04B\x13\xbaH\x10\x92\x01\r\b\x01\x10\xc8\x01\x18\x01\"\x042\x02 \x00R\x03ids\"\xb6\x01\n" +
+	"\x03ids\x18\x01 \x03(\x04B\x13\xbaH\x10\x92\x01\r\b\x01\x10\xc8\x01\x18\x01\"\x042\x02 \x00R\x03ids:\x06\x92\xb5\x18\x02\x18\x01\"\xb6\x01\n" +
 	"\x14WarehouseIDsResponse\x12F\n" +
 	"\x04data\x18\x01 \x03(\v22.warehouse_iface.v1.WarehouseIDsResponse.DataEntryR\x04data\x1aV\n" +
 	"\tDataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\x04R\x03key\x123\n" +
-	"\x05value\x18\x02 \x01(\v2\x1d.warehouse_iface.v1.WarehouseR\x05value:\x028\x01\"$\n" +
+	"\x05value\x18\x02 \x01(\v2\x1d.warehouse_iface.v1.WarehouseR\x05value:\x028\x01\",\n" +
 	"\x14WarehouseListRequest\x12\f\n" +
-	"\x01q\x18\x01 \x01(\tR\x01q\"J\n" +
+	"\x01q\x18\x01 \x01(\tR\x01q:\x06\x92\xb5\x18\x02 \x01\"J\n" +
 	"\x15WarehouseListResponse\x121\n" +
-	"\x04list\x18\x01 \x03(\v2\x1d.warehouse_iface.v1.WarehouseR\x04list\"9\n" +
+	"\x04list\x18\x01 \x03(\v2\x1d.warehouse_iface.v1.WarehouseR\x04list\"\x91\x04\n" +
+	"\x0fWarehouseDetail\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x12\n" +
+	"\x04desc\x18\x03 \x01(\tR\x04desc\x12\x18\n" +
+	"\aaddress\x18\x04 \x01(\tR\aaddress\x12\x17\n" +
+	"\ais_full\x18\x05 \x01(\bR\x06isFull\x12\x1b\n" +
+	"\tis_closed\x18\x06 \x01(\bR\bisClosed\x12\"\n" +
+	"\ruse_fixed_fee\x18\a \x01(\bR\vuseFixedFee\x12\x17\n" +
+	"\afee_fix\x18\b \x01(\x01R\x06feeFix\x12\x1f\n" +
+	"\vfee_percent\x18\t \x01(\x02R\n" +
+	"feePercent\x12\x17\n" +
+	"\amax_fee\x18\n" +
+	" \x01(\x01R\x06maxFee\x12\x1b\n" +
+	"\topen_time\x18\v \x01(\tR\bopenTime\x12\x1d\n" +
+	"\n" +
+	"close_time\x18\f \x01(\tR\tcloseTime\x12\x1f\n" +
+	"\vclose_order\x18\r \x01(\tR\n" +
+	"closeOrder\x12\x1d\n" +
+	"\n" +
+	"rack_count\x18\x0e \x01(\x04R\trackCount\x12\x1f\n" +
+	"\vorder_count\x18\x0f \x01(\x04R\n" +
+	"orderCount\x12\x1a\n" +
+	"\bcapacity\x18\x10 \x01(\x04R\bcapacity\x12!\n" +
+	"\fmax_capacity\x18\x11 \x01(\x04R\vmaxCapacity\x12#\n" +
+	"\rproduct_count\x18\x12 \x01(\x04R\fproductCount\"9\n" +
+	"\x16WarehouseDetailRequest\x12\x17\n" +
+	"\x02id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id:\x06\x92\xb5\x18\x02 \x01\"R\n" +
+	"\x17WarehouseDetailResponse\x127\n" +
+	"\x04data\x18\x01 \x01(\v2#.warehouse_iface.v1.WarehouseDetailR\x04data\"\x90\x03\n" +
+	"\x16WarehouseCreateRequest\x12\x17\n" +
+	"\x02id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12\x1b\n" +
+	"\x04name\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12\x12\n" +
+	"\x04desc\x18\x03 \x01(\tR\x04desc\x12\x18\n" +
+	"\aaddress\x18\x04 \x01(\tR\aaddress\x12\x17\n" +
+	"\ais_full\x18\x05 \x01(\bR\x06isFull\x12\x1b\n" +
+	"\tis_closed\x18\x06 \x01(\bR\bisClosed\x12\"\n" +
+	"\ruse_fixed_fee\x18\a \x01(\bR\vuseFixedFee\x12\x17\n" +
+	"\afee_fix\x18\b \x01(\x01R\x06feeFix\x12\x1f\n" +
+	"\vfee_percent\x18\t \x01(\x02R\n" +
+	"feePercent\x12\x17\n" +
+	"\amax_fee\x18\n" +
+	" \x01(\x01R\x06maxFee\x12\x1b\n" +
+	"\topen_time\x18\v \x01(\tR\bopenTime\x12\x1d\n" +
+	"\n" +
+	"close_time\x18\f \x01(\tR\tcloseTime\x12\x1f\n" +
+	"\vclose_order\x18\r \x01(\tR\n" +
+	"closeOrder:\b\x92\xb5\x18\x04\n" +
+	"\x02\x01\x02\")\n" +
+	"\x17WarehouseCreateResponse\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\"\x90\x03\n" +
+	"\x16WarehouseUpdateRequest\x12\x17\n" +
+	"\x02id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12\x1b\n" +
+	"\x04name\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12\x12\n" +
+	"\x04desc\x18\x03 \x01(\tR\x04desc\x12\x18\n" +
+	"\aaddress\x18\x04 \x01(\tR\aaddress\x12\x17\n" +
+	"\ais_full\x18\x05 \x01(\bR\x06isFull\x12\x1b\n" +
+	"\tis_closed\x18\x06 \x01(\bR\bisClosed\x12\"\n" +
+	"\ruse_fixed_fee\x18\a \x01(\bR\vuseFixedFee\x12\x17\n" +
+	"\afee_fix\x18\b \x01(\x01R\x06feeFix\x12\x1f\n" +
+	"\vfee_percent\x18\t \x01(\x02R\n" +
+	"feePercent\x12\x17\n" +
+	"\amax_fee\x18\n" +
+	" \x01(\x01R\x06maxFee\x12\x1b\n" +
+	"\topen_time\x18\v \x01(\tR\bopenTime\x12\x1d\n" +
+	"\n" +
+	"close_time\x18\f \x01(\tR\tcloseTime\x12\x1f\n" +
+	"\vclose_order\x18\r \x01(\tR\n" +
+	"closeOrder:\b\x92\xb5\x18\x04\n" +
+	"\x02\x01\x02\"\x19\n" +
+	"\x17WarehouseUpdateResponse\";\n" +
+	"\x16WarehouseDeleteRequest\x12\x17\n" +
+	"\x02id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id:\b\x92\xb5\x18\x04\n" +
+	"\x02\x01\x02\"\x19\n" +
+	"\x17WarehouseDeleteResponse\"A\n" +
 	"\x1eTeamWarehouseReturnInfoRequest\x12\x17\n" +
-	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\"\x9d\x01\n" +
+	"\ateam_id\x18\x01 \x01(\x04R\x06teamId:\x06\x92\xb5\x18\x02 \x01\"\x9d\x01\n" +
 	"\x1fTeamWarehouseReturnInfoResponse\x12H\n" +
 	"\x10warehouse_return\x18\x01 \x01(\v2\x1d.warehouse_iface.v1.WarehouseR\x0fwarehouseReturn\x120\n" +
 	"\vuser_return\x18\x02 \x01(\v2\x0f.common.v1.UserR\n" +
@@ -1032,10 +1819,15 @@ const file_warehouse_iface_v1_warehouse_proto_rawDesc = "" +
 	"\x1cTRANSACTION_NOTE_TYPE_RETURN\x10\x02\x12 \n" +
 	"\x1cTRANSACTION_NOTE_TYPE_CANCEL\x10\x03\x12 \n" +
 	"\x1cTRANSACTION_NOTE_TYPE_BROKEN\x10\x04\x12!\n" +
-	"\x1dTRANSACTION_NOTE_TYPE_PROBLEM\x10\x052\x88\a\n" +
+	"\x1dTRANSACTION_NOTE_TYPE_PROBLEM\x10\x052\xb8\n" +
+	"\n" +
 	"\x10WarehouseService\x12a\n" +
 	"\fWarehouseIDs\x12'.warehouse_iface.v1.WarehouseIDsRequest\x1a(.warehouse_iface.v1.WarehouseIDsResponse\x12d\n" +
-	"\rWarehouseList\x12(.warehouse_iface.v1.WarehouseListRequest\x1a).warehouse_iface.v1.WarehouseListResponse\x12\x88\x01\n" +
+	"\rWarehouseList\x12(.warehouse_iface.v1.WarehouseListRequest\x1a).warehouse_iface.v1.WarehouseListResponse\x12j\n" +
+	"\x0fWarehouseDetail\x12*.warehouse_iface.v1.WarehouseDetailRequest\x1a+.warehouse_iface.v1.WarehouseDetailResponse\x12j\n" +
+	"\x0fWarehouseCreate\x12*.warehouse_iface.v1.WarehouseCreateRequest\x1a+.warehouse_iface.v1.WarehouseCreateResponse\x12j\n" +
+	"\x0fWarehouseUpdate\x12*.warehouse_iface.v1.WarehouseUpdateRequest\x1a+.warehouse_iface.v1.WarehouseUpdateResponse\x12j\n" +
+	"\x0fWarehouseDelete\x12*.warehouse_iface.v1.WarehouseDeleteRequest\x1a+.warehouse_iface.v1.WarehouseDeleteResponse\x12\x88\x01\n" +
 	"\x17TeamWarehouseReturnInfo\x122.warehouse_iface.v1.TeamWarehouseReturnInfoRequest\x1a3.warehouse_iface.v1.TeamWarehouseReturnInfoResponse\"\x04\x88\xa6\x1d\x01\x12|\n" +
 	"\x15TransactionNoteCreate\x120.warehouse_iface.v1.TransactionNoteCreateRequest\x1a1.warehouse_iface.v1.TransactionNoteCreateResponse\x12|\n" +
 	"\x13TransactionNoteList\x12..warehouse_iface.v1.TransactionNoteListRequest\x1a/.warehouse_iface.v1.TransactionNoteListResponse\"\x04\x88\xa6\x1d\x01\x12p\n" +
@@ -1057,7 +1849,7 @@ func file_warehouse_iface_v1_warehouse_proto_rawDescGZIP() []byte {
 }
 
 var file_warehouse_iface_v1_warehouse_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_warehouse_iface_v1_warehouse_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
+var file_warehouse_iface_v1_warehouse_proto_msgTypes = make([]protoimpl.MessageInfo, 27)
 var file_warehouse_iface_v1_warehouse_proto_goTypes = []any{
 	(TransactionNoteType)(0),                // 0: warehouse_iface.v1.TransactionNoteType
 	(*Rack)(nil),                            // 1: warehouse_iface.v1.Rack
@@ -1075,50 +1867,68 @@ var file_warehouse_iface_v1_warehouse_proto_goTypes = []any{
 	(*WarehouseIDsResponse)(nil),            // 13: warehouse_iface.v1.WarehouseIDsResponse
 	(*WarehouseListRequest)(nil),            // 14: warehouse_iface.v1.WarehouseListRequest
 	(*WarehouseListResponse)(nil),           // 15: warehouse_iface.v1.WarehouseListResponse
-	(*TeamWarehouseReturnInfoRequest)(nil),  // 16: warehouse_iface.v1.TeamWarehouseReturnInfoRequest
-	(*TeamWarehouseReturnInfoResponse)(nil), // 17: warehouse_iface.v1.TeamWarehouseReturnInfoResponse
-	nil,                                     // 18: warehouse_iface.v1.WarehouseIDsResponse.DataEntry
-	(*v1.PageFilter)(nil),                   // 19: common.v1.PageFilter
-	(*v1.Team)(nil),                         // 20: common.v1.Team
-	(*v1.PageInfo)(nil),                     // 21: common.v1.PageInfo
-	(*v1.User)(nil),                         // 22: common.v1.User
-	(*StatRequest)(nil),                     // 23: warehouse_iface.v1.StatRequest
-	(*StatResponse)(nil),                    // 24: warehouse_iface.v1.StatResponse
+	(*WarehouseDetail)(nil),                 // 16: warehouse_iface.v1.WarehouseDetail
+	(*WarehouseDetailRequest)(nil),          // 17: warehouse_iface.v1.WarehouseDetailRequest
+	(*WarehouseDetailResponse)(nil),         // 18: warehouse_iface.v1.WarehouseDetailResponse
+	(*WarehouseCreateRequest)(nil),          // 19: warehouse_iface.v1.WarehouseCreateRequest
+	(*WarehouseCreateResponse)(nil),         // 20: warehouse_iface.v1.WarehouseCreateResponse
+	(*WarehouseUpdateRequest)(nil),          // 21: warehouse_iface.v1.WarehouseUpdateRequest
+	(*WarehouseUpdateResponse)(nil),         // 22: warehouse_iface.v1.WarehouseUpdateResponse
+	(*WarehouseDeleteRequest)(nil),          // 23: warehouse_iface.v1.WarehouseDeleteRequest
+	(*WarehouseDeleteResponse)(nil),         // 24: warehouse_iface.v1.WarehouseDeleteResponse
+	(*TeamWarehouseReturnInfoRequest)(nil),  // 25: warehouse_iface.v1.TeamWarehouseReturnInfoRequest
+	(*TeamWarehouseReturnInfoResponse)(nil), // 26: warehouse_iface.v1.TeamWarehouseReturnInfoResponse
+	nil,                                     // 27: warehouse_iface.v1.WarehouseIDsResponse.DataEntry
+	(*v1.PageFilter)(nil),                   // 28: common.v1.PageFilter
+	(*v1.Team)(nil),                         // 29: common.v1.Team
+	(*v1.PageInfo)(nil),                     // 30: common.v1.PageInfo
+	(*v1.User)(nil),                         // 31: common.v1.User
+	(*StatRequest)(nil),                     // 32: warehouse_iface.v1.StatRequest
+	(*StatResponse)(nil),                    // 33: warehouse_iface.v1.StatResponse
 }
 var file_warehouse_iface_v1_warehouse_proto_depIdxs = []int32{
 	1,  // 0: warehouse_iface.v1.TeamRackListResponse.list:type_name -> warehouse_iface.v1.Rack
-	19, // 1: warehouse_iface.v1.SellingTeamListRequest.page:type_name -> common.v1.PageFilter
-	20, // 2: warehouse_iface.v1.SellingTeamListResponse.list:type_name -> common.v1.Team
-	21, // 3: warehouse_iface.v1.SellingTeamListResponse.page_info:type_name -> common.v1.PageInfo
+	28, // 1: warehouse_iface.v1.SellingTeamListRequest.page:type_name -> common.v1.PageFilter
+	29, // 2: warehouse_iface.v1.SellingTeamListResponse.list:type_name -> common.v1.Team
+	30, // 3: warehouse_iface.v1.SellingTeamListResponse.page_info:type_name -> common.v1.PageInfo
 	0,  // 4: warehouse_iface.v1.Note.type:type_name -> warehouse_iface.v1.TransactionNoteType
 	6,  // 5: warehouse_iface.v1.TransactionNoteCreateRequest.notes:type_name -> warehouse_iface.v1.Note
 	6,  // 6: warehouse_iface.v1.TransactionNoteListResponse.list:type_name -> warehouse_iface.v1.Note
-	18, // 7: warehouse_iface.v1.WarehouseIDsResponse.data:type_name -> warehouse_iface.v1.WarehouseIDsResponse.DataEntry
+	27, // 7: warehouse_iface.v1.WarehouseIDsResponse.data:type_name -> warehouse_iface.v1.WarehouseIDsResponse.DataEntry
 	11, // 8: warehouse_iface.v1.WarehouseListResponse.list:type_name -> warehouse_iface.v1.Warehouse
-	11, // 9: warehouse_iface.v1.TeamWarehouseReturnInfoResponse.warehouse_return:type_name -> warehouse_iface.v1.Warehouse
-	22, // 10: warehouse_iface.v1.TeamWarehouseReturnInfoResponse.user_return:type_name -> common.v1.User
-	11, // 11: warehouse_iface.v1.WarehouseIDsResponse.DataEntry.value:type_name -> warehouse_iface.v1.Warehouse
-	12, // 12: warehouse_iface.v1.WarehouseService.WarehouseIDs:input_type -> warehouse_iface.v1.WarehouseIDsRequest
-	14, // 13: warehouse_iface.v1.WarehouseService.WarehouseList:input_type -> warehouse_iface.v1.WarehouseListRequest
-	16, // 14: warehouse_iface.v1.WarehouseService.TeamWarehouseReturnInfo:input_type -> warehouse_iface.v1.TeamWarehouseReturnInfoRequest
-	7,  // 15: warehouse_iface.v1.WarehouseService.TransactionNoteCreate:input_type -> warehouse_iface.v1.TransactionNoteCreateRequest
-	9,  // 16: warehouse_iface.v1.WarehouseService.TransactionNoteList:input_type -> warehouse_iface.v1.TransactionNoteListRequest
-	4,  // 17: warehouse_iface.v1.WarehouseService.SellingTeamList:input_type -> warehouse_iface.v1.SellingTeamListRequest
-	2,  // 18: warehouse_iface.v1.WarehouseService.TeamRackList:input_type -> warehouse_iface.v1.TeamRackListRequest
-	23, // 19: warehouse_iface.v1.WarehouseService.Stat:input_type -> warehouse_iface.v1.StatRequest
-	13, // 20: warehouse_iface.v1.WarehouseService.WarehouseIDs:output_type -> warehouse_iface.v1.WarehouseIDsResponse
-	15, // 21: warehouse_iface.v1.WarehouseService.WarehouseList:output_type -> warehouse_iface.v1.WarehouseListResponse
-	17, // 22: warehouse_iface.v1.WarehouseService.TeamWarehouseReturnInfo:output_type -> warehouse_iface.v1.TeamWarehouseReturnInfoResponse
-	8,  // 23: warehouse_iface.v1.WarehouseService.TransactionNoteCreate:output_type -> warehouse_iface.v1.TransactionNoteCreateResponse
-	10, // 24: warehouse_iface.v1.WarehouseService.TransactionNoteList:output_type -> warehouse_iface.v1.TransactionNoteListResponse
-	5,  // 25: warehouse_iface.v1.WarehouseService.SellingTeamList:output_type -> warehouse_iface.v1.SellingTeamListResponse
-	3,  // 26: warehouse_iface.v1.WarehouseService.TeamRackList:output_type -> warehouse_iface.v1.TeamRackListResponse
-	24, // 27: warehouse_iface.v1.WarehouseService.Stat:output_type -> warehouse_iface.v1.StatResponse
-	20, // [20:28] is the sub-list for method output_type
-	12, // [12:20] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	16, // 9: warehouse_iface.v1.WarehouseDetailResponse.data:type_name -> warehouse_iface.v1.WarehouseDetail
+	11, // 10: warehouse_iface.v1.TeamWarehouseReturnInfoResponse.warehouse_return:type_name -> warehouse_iface.v1.Warehouse
+	31, // 11: warehouse_iface.v1.TeamWarehouseReturnInfoResponse.user_return:type_name -> common.v1.User
+	11, // 12: warehouse_iface.v1.WarehouseIDsResponse.DataEntry.value:type_name -> warehouse_iface.v1.Warehouse
+	12, // 13: warehouse_iface.v1.WarehouseService.WarehouseIDs:input_type -> warehouse_iface.v1.WarehouseIDsRequest
+	14, // 14: warehouse_iface.v1.WarehouseService.WarehouseList:input_type -> warehouse_iface.v1.WarehouseListRequest
+	17, // 15: warehouse_iface.v1.WarehouseService.WarehouseDetail:input_type -> warehouse_iface.v1.WarehouseDetailRequest
+	19, // 16: warehouse_iface.v1.WarehouseService.WarehouseCreate:input_type -> warehouse_iface.v1.WarehouseCreateRequest
+	21, // 17: warehouse_iface.v1.WarehouseService.WarehouseUpdate:input_type -> warehouse_iface.v1.WarehouseUpdateRequest
+	23, // 18: warehouse_iface.v1.WarehouseService.WarehouseDelete:input_type -> warehouse_iface.v1.WarehouseDeleteRequest
+	25, // 19: warehouse_iface.v1.WarehouseService.TeamWarehouseReturnInfo:input_type -> warehouse_iface.v1.TeamWarehouseReturnInfoRequest
+	7,  // 20: warehouse_iface.v1.WarehouseService.TransactionNoteCreate:input_type -> warehouse_iface.v1.TransactionNoteCreateRequest
+	9,  // 21: warehouse_iface.v1.WarehouseService.TransactionNoteList:input_type -> warehouse_iface.v1.TransactionNoteListRequest
+	4,  // 22: warehouse_iface.v1.WarehouseService.SellingTeamList:input_type -> warehouse_iface.v1.SellingTeamListRequest
+	2,  // 23: warehouse_iface.v1.WarehouseService.TeamRackList:input_type -> warehouse_iface.v1.TeamRackListRequest
+	32, // 24: warehouse_iface.v1.WarehouseService.Stat:input_type -> warehouse_iface.v1.StatRequest
+	13, // 25: warehouse_iface.v1.WarehouseService.WarehouseIDs:output_type -> warehouse_iface.v1.WarehouseIDsResponse
+	15, // 26: warehouse_iface.v1.WarehouseService.WarehouseList:output_type -> warehouse_iface.v1.WarehouseListResponse
+	18, // 27: warehouse_iface.v1.WarehouseService.WarehouseDetail:output_type -> warehouse_iface.v1.WarehouseDetailResponse
+	20, // 28: warehouse_iface.v1.WarehouseService.WarehouseCreate:output_type -> warehouse_iface.v1.WarehouseCreateResponse
+	22, // 29: warehouse_iface.v1.WarehouseService.WarehouseUpdate:output_type -> warehouse_iface.v1.WarehouseUpdateResponse
+	24, // 30: warehouse_iface.v1.WarehouseService.WarehouseDelete:output_type -> warehouse_iface.v1.WarehouseDeleteResponse
+	26, // 31: warehouse_iface.v1.WarehouseService.TeamWarehouseReturnInfo:output_type -> warehouse_iface.v1.TeamWarehouseReturnInfoResponse
+	8,  // 32: warehouse_iface.v1.WarehouseService.TransactionNoteCreate:output_type -> warehouse_iface.v1.TransactionNoteCreateResponse
+	10, // 33: warehouse_iface.v1.WarehouseService.TransactionNoteList:output_type -> warehouse_iface.v1.TransactionNoteListResponse
+	5,  // 34: warehouse_iface.v1.WarehouseService.SellingTeamList:output_type -> warehouse_iface.v1.SellingTeamListResponse
+	3,  // 35: warehouse_iface.v1.WarehouseService.TeamRackList:output_type -> warehouse_iface.v1.TeamRackListResponse
+	33, // 36: warehouse_iface.v1.WarehouseService.Stat:output_type -> warehouse_iface.v1.StatResponse
+	25, // [25:37] is the sub-list for method output_type
+	13, // [13:25] is the sub-list for method input_type
+	13, // [13:13] is the sub-list for extension type_name
+	13, // [13:13] is the sub-list for extension extendee
+	0,  // [0:13] is the sub-list for field type_name
 }
 
 func init() { file_warehouse_iface_v1_warehouse_proto_init() }
@@ -1133,7 +1943,7 @@ func file_warehouse_iface_v1_warehouse_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_warehouse_iface_v1_warehouse_proto_rawDesc), len(file_warehouse_iface_v1_warehouse_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   18,
+			NumMessages:   27,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

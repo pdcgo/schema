@@ -6,12 +6,20 @@ import "buf/validate/validate.proto";
 import "common/v1/common.proto";
 import "mcp_iface/v1/option.proto";
 import "warehouse_iface/v1/stat.proto";
+import "role_base/v1/role.proto";
 
 option go_package = "github.com/pdcgo/schema/services/warehouse_iface/v1;warehouse_iface";
 
 service WarehouseService {
   rpc WarehouseIDs(WarehouseIDsRequest) returns (WarehouseIDsResponse);
   rpc WarehouseList(WarehouseListRequest) returns (WarehouseListResponse);
+  rpc WarehouseDetail(WarehouseDetailRequest) returns (WarehouseDetailResponse);
+
+  // Warehouse management — admin team only.
+  rpc WarehouseCreate(WarehouseCreateRequest) returns (WarehouseCreateResponse);
+  rpc WarehouseUpdate(WarehouseUpdateRequest) returns (WarehouseUpdateResponse);
+  rpc WarehouseDelete(WarehouseDeleteRequest) returns (WarehouseDeleteResponse);
+
   rpc TeamWarehouseReturnInfo(TeamWarehouseReturnInfoRequest) returns (TeamWarehouseReturnInfoResponse) {
     option (mcp_iface.v1.include) = true;
   }
@@ -51,6 +59,8 @@ message Rack {
 }
 
 message TeamRackListRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
   uint64 warehouse_id = 1 [(buf.validate.field).uint64.gt = 0];
   repeated uint64 team_ids = 2 [(buf.validate.field).repeated = {
     min_items: 1
@@ -67,6 +77,8 @@ message TeamRackListResponse {
 }
 
 message SellingTeamListRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
   string q = 1;
   uint64 warehouse_id = 2 [(buf.validate.field).uint64.gt = 0];
   common.v1.PageFilter page = 3;
@@ -83,6 +95,8 @@ message Note {
 }
 
 message TransactionNoteCreateRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
   uint64 tx_id = 1 [(buf.validate.field).uint64.gt = 0];
   uint64 team_id = 2 [(buf.validate.field).uint64.gt = 0];
   uint64 order_id = 3;
@@ -95,6 +109,8 @@ message TransactionNoteCreateResponse {
 }
 
 message TransactionNoteListRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
   uint64 tx_id = 1 [(buf.validate.field).uint64.gt = 0];
   uint64 team_id = 2 [(buf.validate.field).uint64.gt = 0];
   uint64 order_id = 3;
@@ -111,6 +127,9 @@ message Warehouse {
 }
 
 message WarehouseIDsRequest {
+  // Public id lookup — no auth required.
+  option (role_base.v1.request_policy) = {allow_all: true};
+
   repeated uint64 ids = 1 [(buf.validate.field).repeated = {
     min_items: 1 // must have at least 1 id
     max_items: 200
@@ -126,6 +145,8 @@ message WarehouseIDsResponse {
 }
 
 message WarehouseListRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
   string q = 1;
 }
 
@@ -133,7 +154,115 @@ message WarehouseListResponse {
   repeated Warehouse list = 1;
 }
 
+// Rich, read-only warehouse detail (management form + detail page).
+message WarehouseDetail {
+  uint64 id = 1;
+  string name = 2;
+  string desc = 3;
+  string address = 4;
+
+  bool is_full = 5;
+  bool is_closed = 6;
+
+  bool use_fixed_fee = 7;
+  double fee_fix = 8;
+  float fee_percent = 9;
+  double max_fee = 10;
+
+  // Time-of-day, "HH:MM" (empty = unset).
+  string open_time = 11;
+  string close_time = 12;
+  string close_order = 13;
+
+  // read-only stats
+  uint64 rack_count = 14;
+  uint64 order_count = 15;
+  uint64 capacity = 16;
+  uint64 max_capacity = 17;
+  uint64 product_count = 18;
+}
+
+message WarehouseDetailRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
+  uint64 id = 1 [(buf.validate.field).uint64.gt = 0];
+}
+message WarehouseDetailResponse {
+  WarehouseDetail data = 1;
+}
+
+message WarehouseCreateRequest {
+  option (role_base.v1.request_policy) = {
+    roles: [
+      ROLE_ROOT,
+      ROLE_ADMIN
+    ]
+  };
+
+  // Client-supplied id (warehouses.id is not auto-increment).
+  uint64 id = 1 [(buf.validate.field).uint64.gt = 0];
+  string name = 2 [(buf.validate.field).string = {min_len: 1}];
+  string desc = 3;
+  string address = 4;
+
+  bool is_full = 5;
+  bool is_closed = 6;
+
+  bool use_fixed_fee = 7;
+  double fee_fix = 8;
+  float fee_percent = 9;
+  double max_fee = 10;
+
+  string open_time = 11;
+  string close_time = 12;
+  string close_order = 13;
+}
+message WarehouseCreateResponse {
+  uint64 id = 1;
+}
+
+message WarehouseUpdateRequest {
+  option (role_base.v1.request_policy) = {
+    roles: [
+      ROLE_ROOT,
+      ROLE_ADMIN
+    ]
+  };
+
+  uint64 id = 1 [(buf.validate.field).uint64.gt = 0];
+  string name = 2 [(buf.validate.field).string = {min_len: 1}];
+  string desc = 3;
+  string address = 4;
+
+  bool is_full = 5;
+  bool is_closed = 6;
+
+  bool use_fixed_fee = 7;
+  double fee_fix = 8;
+  float fee_percent = 9;
+  double max_fee = 10;
+
+  string open_time = 11;
+  string close_time = 12;
+  string close_order = 13;
+}
+message WarehouseUpdateResponse {}
+
+message WarehouseDeleteRequest {
+  option (role_base.v1.request_policy) = {
+    roles: [
+      ROLE_ROOT,
+      ROLE_ADMIN
+    ]
+  };
+
+  uint64 id = 1 [(buf.validate.field).uint64.gt = 0];
+}
+message WarehouseDeleteResponse {}
+
 message TeamWarehouseReturnInfoRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
   uint64 team_id = 1;
 }
 

@@ -41,6 +41,12 @@ const (
 	// InventoryServicePushStockEventProcedure is the fully-qualified name of the InventoryService's
 	// PushStockEvent RPC.
 	InventoryServicePushStockEventProcedure = "/inventory_iface.v1.InventoryService/PushStockEvent"
+	// InventoryServiceTransactionCreateProcedure is the fully-qualified name of the InventoryService's
+	// TransactionCreate RPC.
+	InventoryServiceTransactionCreateProcedure = "/inventory_iface.v1.InventoryService/TransactionCreate"
+	// InventoryServiceTransactionCancelProcedure is the fully-qualified name of the InventoryService's
+	// TransactionCancel RPC.
+	InventoryServiceTransactionCancelProcedure = "/inventory_iface.v1.InventoryService/TransactionCancel"
 	// InventoryServiceProductPlacementListProcedure is the fully-qualified name of the
 	// InventoryService's ProductPlacementList RPC.
 	InventoryServiceProductPlacementListProcedure = "/inventory_iface.v1.InventoryService/ProductPlacementList"
@@ -53,6 +59,33 @@ const (
 	// InventoryServiceProductReconcileProcedure is the fully-qualified name of the InventoryService's
 	// ProductReconcile RPC.
 	InventoryServiceProductReconcileProcedure = "/inventory_iface.v1.InventoryService/ProductReconcile"
+	// InventoryServiceRackCreateProcedure is the fully-qualified name of the InventoryService's
+	// RackCreate RPC.
+	InventoryServiceRackCreateProcedure = "/inventory_iface.v1.InventoryService/RackCreate"
+	// InventoryServiceRackUpdateProcedure is the fully-qualified name of the InventoryService's
+	// RackUpdate RPC.
+	InventoryServiceRackUpdateProcedure = "/inventory_iface.v1.InventoryService/RackUpdate"
+	// InventoryServiceRackDeleteProcedure is the fully-qualified name of the InventoryService's
+	// RackDelete RPC.
+	InventoryServiceRackDeleteProcedure = "/inventory_iface.v1.InventoryService/RackDelete"
+	// InventoryServiceRackDetailProcedure is the fully-qualified name of the InventoryService's
+	// RackDetail RPC.
+	InventoryServiceRackDetailProcedure = "/inventory_iface.v1.InventoryService/RackDetail"
+	// InventoryServiceRackListProcedure is the fully-qualified name of the InventoryService's RackList
+	// RPC.
+	InventoryServiceRackListProcedure = "/inventory_iface.v1.InventoryService/RackList"
+	// InventoryServiceProductConfigProcedure is the fully-qualified name of the InventoryService's
+	// ProductConfig RPC.
+	InventoryServiceProductConfigProcedure = "/inventory_iface.v1.InventoryService/ProductConfig"
+	// InventoryServiceProductConfigUpdateProcedure is the fully-qualified name of the
+	// InventoryService's ProductConfigUpdate RPC.
+	InventoryServiceProductConfigUpdateProcedure = "/inventory_iface.v1.InventoryService/ProductConfigUpdate"
+	// InventoryServiceProductListProcedure is the fully-qualified name of the InventoryService's
+	// ProductList RPC.
+	InventoryServiceProductListProcedure = "/inventory_iface.v1.InventoryService/ProductList"
+	// InventoryServiceProductDetailProcedure is the fully-qualified name of the InventoryService's
+	// ProductDetail RPC.
+	InventoryServiceProductDetailProcedure = "/inventory_iface.v1.InventoryService/ProductDetail"
 )
 
 // InventoryServiceClient is a client for the inventory_iface.v1.InventoryService service.
@@ -62,11 +95,26 @@ type InventoryServiceClient interface {
 	// PushStockEvent ingests a warehouse StockEvent (the RPC counterpart of the
 	// Pub/Sub push handler) and applies it to inventory state in one transaction.
 	PushStockEvent(context.Context, *connect.Request[v1.PushStockEventRequest]) (*connect.Response[v1.PushStockEventResponse], error)
+	// Transaction management: a request-driven, inventory-owned stock mutation
+	// (order/restock/return/found_back/problem). TransactionCancel reverses one.
+	TransactionCreate(context.Context, *connect.Request[v1.TransactionCreateRequest]) (*connect.Response[v1.TransactionCreateResponse], error)
+	TransactionCancel(context.Context, *connect.Request[v1.TransactionCancelRequest]) (*connect.Response[v1.TransactionCancelResponse], error)
 	ProductPlacementList(context.Context, *connect.Request[v1.ProductPlacementListRequest]) (*connect.Response[v1.ProductPlacementListResponse], error)
 	ProductPlacementLog(context.Context, *connect.Request[v1.ProductPlacementLogRequest]) (*connect.Response[v1.ProductPlacementLogResponse], error)
 	ProductBatchList(context.Context, *connect.Request[v1.ProductBatchListRequest]) (*connect.Response[v1.ProductBatchListResponse], error)
 	// untuk rekonsiliasi legacy
-	ProductReconcile(context.Context, *connect.Request[v1.ProductReconcileRequest]) (*connect.Response[v1.ProductReconcileResponse], error)
+	ProductReconcile(context.Context, *connect.Request[v1.ProductReconcileRequest]) (*connect.ServerStreamForClient[v1.ProductReconcileResponse], error)
+	// Rack management. All except RackList are scoped by warehouse_id.
+	RackCreate(context.Context, *connect.Request[v1.RackCreateRequest]) (*connect.Response[v1.RackCreateResponse], error)
+	RackUpdate(context.Context, *connect.Request[v1.RackUpdateRequest]) (*connect.Response[v1.RackUpdateResponse], error)
+	RackDelete(context.Context, *connect.Request[v1.RackDeleteRequest]) (*connect.Response[v1.RackDeleteResponse], error)
+	RackDetail(context.Context, *connect.Request[v1.RackDetailRequest]) (*connect.Response[v1.RackDetailResponse], error)
+	RackList(context.Context, *connect.Request[v1.RackListRequest]) (*connect.Response[v1.RackListResponse], error)
+	// Product management (config + views), scoped by warehouse_id.
+	ProductConfig(context.Context, *connect.Request[v1.ProductConfigRequest]) (*connect.Response[v1.ProductConfigResponse], error)
+	ProductConfigUpdate(context.Context, *connect.Request[v1.ProductConfigUpdateRequest]) (*connect.Response[v1.ProductConfigUpdateResponse], error)
+	ProductList(context.Context, *connect.Request[v1.ProductListRequest]) (*connect.Response[v1.ProductListResponse], error)
+	ProductDetail(context.Context, *connect.Request[v1.ProductDetailRequest]) (*connect.Response[v1.ProductDetailResponse], error)
 }
 
 // NewInventoryServiceClient constructs a client for the inventory_iface.v1.InventoryService
@@ -98,6 +146,18 @@ func NewInventoryServiceClient(httpClient connect.HTTPClient, baseURL string, op
 			connect.WithSchema(inventoryServiceMethods.ByName("PushStockEvent")),
 			connect.WithClientOptions(opts...),
 		),
+		transactionCreate: connect.NewClient[v1.TransactionCreateRequest, v1.TransactionCreateResponse](
+			httpClient,
+			baseURL+InventoryServiceTransactionCreateProcedure,
+			connect.WithSchema(inventoryServiceMethods.ByName("TransactionCreate")),
+			connect.WithClientOptions(opts...),
+		),
+		transactionCancel: connect.NewClient[v1.TransactionCancelRequest, v1.TransactionCancelResponse](
+			httpClient,
+			baseURL+InventoryServiceTransactionCancelProcedure,
+			connect.WithSchema(inventoryServiceMethods.ByName("TransactionCancel")),
+			connect.WithClientOptions(opts...),
+		),
 		productPlacementList: connect.NewClient[v1.ProductPlacementListRequest, v1.ProductPlacementListResponse](
 			httpClient,
 			baseURL+InventoryServiceProductPlacementListProcedure,
@@ -122,6 +182,60 @@ func NewInventoryServiceClient(httpClient connect.HTTPClient, baseURL string, op
 			connect.WithSchema(inventoryServiceMethods.ByName("ProductReconcile")),
 			connect.WithClientOptions(opts...),
 		),
+		rackCreate: connect.NewClient[v1.RackCreateRequest, v1.RackCreateResponse](
+			httpClient,
+			baseURL+InventoryServiceRackCreateProcedure,
+			connect.WithSchema(inventoryServiceMethods.ByName("RackCreate")),
+			connect.WithClientOptions(opts...),
+		),
+		rackUpdate: connect.NewClient[v1.RackUpdateRequest, v1.RackUpdateResponse](
+			httpClient,
+			baseURL+InventoryServiceRackUpdateProcedure,
+			connect.WithSchema(inventoryServiceMethods.ByName("RackUpdate")),
+			connect.WithClientOptions(opts...),
+		),
+		rackDelete: connect.NewClient[v1.RackDeleteRequest, v1.RackDeleteResponse](
+			httpClient,
+			baseURL+InventoryServiceRackDeleteProcedure,
+			connect.WithSchema(inventoryServiceMethods.ByName("RackDelete")),
+			connect.WithClientOptions(opts...),
+		),
+		rackDetail: connect.NewClient[v1.RackDetailRequest, v1.RackDetailResponse](
+			httpClient,
+			baseURL+InventoryServiceRackDetailProcedure,
+			connect.WithSchema(inventoryServiceMethods.ByName("RackDetail")),
+			connect.WithClientOptions(opts...),
+		),
+		rackList: connect.NewClient[v1.RackListRequest, v1.RackListResponse](
+			httpClient,
+			baseURL+InventoryServiceRackListProcedure,
+			connect.WithSchema(inventoryServiceMethods.ByName("RackList")),
+			connect.WithClientOptions(opts...),
+		),
+		productConfig: connect.NewClient[v1.ProductConfigRequest, v1.ProductConfigResponse](
+			httpClient,
+			baseURL+InventoryServiceProductConfigProcedure,
+			connect.WithSchema(inventoryServiceMethods.ByName("ProductConfig")),
+			connect.WithClientOptions(opts...),
+		),
+		productConfigUpdate: connect.NewClient[v1.ProductConfigUpdateRequest, v1.ProductConfigUpdateResponse](
+			httpClient,
+			baseURL+InventoryServiceProductConfigUpdateProcedure,
+			connect.WithSchema(inventoryServiceMethods.ByName("ProductConfigUpdate")),
+			connect.WithClientOptions(opts...),
+		),
+		productList: connect.NewClient[v1.ProductListRequest, v1.ProductListResponse](
+			httpClient,
+			baseURL+InventoryServiceProductListProcedure,
+			connect.WithSchema(inventoryServiceMethods.ByName("ProductList")),
+			connect.WithClientOptions(opts...),
+		),
+		productDetail: connect.NewClient[v1.ProductDetailRequest, v1.ProductDetailResponse](
+			httpClient,
+			baseURL+InventoryServiceProductDetailProcedure,
+			connect.WithSchema(inventoryServiceMethods.ByName("ProductDetail")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -130,10 +244,21 @@ type inventoryServiceClient struct {
 	order                *connect.Client[v1.OrderRequest, v1.OrderResponse]
 	stockMovement        *connect.Client[v1.StockMovementRequest, v1.StockMovementResponse]
 	pushStockEvent       *connect.Client[v1.PushStockEventRequest, v1.PushStockEventResponse]
+	transactionCreate    *connect.Client[v1.TransactionCreateRequest, v1.TransactionCreateResponse]
+	transactionCancel    *connect.Client[v1.TransactionCancelRequest, v1.TransactionCancelResponse]
 	productPlacementList *connect.Client[v1.ProductPlacementListRequest, v1.ProductPlacementListResponse]
 	productPlacementLog  *connect.Client[v1.ProductPlacementLogRequest, v1.ProductPlacementLogResponse]
 	productBatchList     *connect.Client[v1.ProductBatchListRequest, v1.ProductBatchListResponse]
 	productReconcile     *connect.Client[v1.ProductReconcileRequest, v1.ProductReconcileResponse]
+	rackCreate           *connect.Client[v1.RackCreateRequest, v1.RackCreateResponse]
+	rackUpdate           *connect.Client[v1.RackUpdateRequest, v1.RackUpdateResponse]
+	rackDelete           *connect.Client[v1.RackDeleteRequest, v1.RackDeleteResponse]
+	rackDetail           *connect.Client[v1.RackDetailRequest, v1.RackDetailResponse]
+	rackList             *connect.Client[v1.RackListRequest, v1.RackListResponse]
+	productConfig        *connect.Client[v1.ProductConfigRequest, v1.ProductConfigResponse]
+	productConfigUpdate  *connect.Client[v1.ProductConfigUpdateRequest, v1.ProductConfigUpdateResponse]
+	productList          *connect.Client[v1.ProductListRequest, v1.ProductListResponse]
+	productDetail        *connect.Client[v1.ProductDetailRequest, v1.ProductDetailResponse]
 }
 
 // Order calls inventory_iface.v1.InventoryService.Order.
@@ -149,6 +274,16 @@ func (c *inventoryServiceClient) StockMovement(ctx context.Context, req *connect
 // PushStockEvent calls inventory_iface.v1.InventoryService.PushStockEvent.
 func (c *inventoryServiceClient) PushStockEvent(ctx context.Context, req *connect.Request[v1.PushStockEventRequest]) (*connect.Response[v1.PushStockEventResponse], error) {
 	return c.pushStockEvent.CallUnary(ctx, req)
+}
+
+// TransactionCreate calls inventory_iface.v1.InventoryService.TransactionCreate.
+func (c *inventoryServiceClient) TransactionCreate(ctx context.Context, req *connect.Request[v1.TransactionCreateRequest]) (*connect.Response[v1.TransactionCreateResponse], error) {
+	return c.transactionCreate.CallUnary(ctx, req)
+}
+
+// TransactionCancel calls inventory_iface.v1.InventoryService.TransactionCancel.
+func (c *inventoryServiceClient) TransactionCancel(ctx context.Context, req *connect.Request[v1.TransactionCancelRequest]) (*connect.Response[v1.TransactionCancelResponse], error) {
+	return c.transactionCancel.CallUnary(ctx, req)
 }
 
 // ProductPlacementList calls inventory_iface.v1.InventoryService.ProductPlacementList.
@@ -167,8 +302,53 @@ func (c *inventoryServiceClient) ProductBatchList(ctx context.Context, req *conn
 }
 
 // ProductReconcile calls inventory_iface.v1.InventoryService.ProductReconcile.
-func (c *inventoryServiceClient) ProductReconcile(ctx context.Context, req *connect.Request[v1.ProductReconcileRequest]) (*connect.Response[v1.ProductReconcileResponse], error) {
-	return c.productReconcile.CallUnary(ctx, req)
+func (c *inventoryServiceClient) ProductReconcile(ctx context.Context, req *connect.Request[v1.ProductReconcileRequest]) (*connect.ServerStreamForClient[v1.ProductReconcileResponse], error) {
+	return c.productReconcile.CallServerStream(ctx, req)
+}
+
+// RackCreate calls inventory_iface.v1.InventoryService.RackCreate.
+func (c *inventoryServiceClient) RackCreate(ctx context.Context, req *connect.Request[v1.RackCreateRequest]) (*connect.Response[v1.RackCreateResponse], error) {
+	return c.rackCreate.CallUnary(ctx, req)
+}
+
+// RackUpdate calls inventory_iface.v1.InventoryService.RackUpdate.
+func (c *inventoryServiceClient) RackUpdate(ctx context.Context, req *connect.Request[v1.RackUpdateRequest]) (*connect.Response[v1.RackUpdateResponse], error) {
+	return c.rackUpdate.CallUnary(ctx, req)
+}
+
+// RackDelete calls inventory_iface.v1.InventoryService.RackDelete.
+func (c *inventoryServiceClient) RackDelete(ctx context.Context, req *connect.Request[v1.RackDeleteRequest]) (*connect.Response[v1.RackDeleteResponse], error) {
+	return c.rackDelete.CallUnary(ctx, req)
+}
+
+// RackDetail calls inventory_iface.v1.InventoryService.RackDetail.
+func (c *inventoryServiceClient) RackDetail(ctx context.Context, req *connect.Request[v1.RackDetailRequest]) (*connect.Response[v1.RackDetailResponse], error) {
+	return c.rackDetail.CallUnary(ctx, req)
+}
+
+// RackList calls inventory_iface.v1.InventoryService.RackList.
+func (c *inventoryServiceClient) RackList(ctx context.Context, req *connect.Request[v1.RackListRequest]) (*connect.Response[v1.RackListResponse], error) {
+	return c.rackList.CallUnary(ctx, req)
+}
+
+// ProductConfig calls inventory_iface.v1.InventoryService.ProductConfig.
+func (c *inventoryServiceClient) ProductConfig(ctx context.Context, req *connect.Request[v1.ProductConfigRequest]) (*connect.Response[v1.ProductConfigResponse], error) {
+	return c.productConfig.CallUnary(ctx, req)
+}
+
+// ProductConfigUpdate calls inventory_iface.v1.InventoryService.ProductConfigUpdate.
+func (c *inventoryServiceClient) ProductConfigUpdate(ctx context.Context, req *connect.Request[v1.ProductConfigUpdateRequest]) (*connect.Response[v1.ProductConfigUpdateResponse], error) {
+	return c.productConfigUpdate.CallUnary(ctx, req)
+}
+
+// ProductList calls inventory_iface.v1.InventoryService.ProductList.
+func (c *inventoryServiceClient) ProductList(ctx context.Context, req *connect.Request[v1.ProductListRequest]) (*connect.Response[v1.ProductListResponse], error) {
+	return c.productList.CallUnary(ctx, req)
+}
+
+// ProductDetail calls inventory_iface.v1.InventoryService.ProductDetail.
+func (c *inventoryServiceClient) ProductDetail(ctx context.Context, req *connect.Request[v1.ProductDetailRequest]) (*connect.Response[v1.ProductDetailResponse], error) {
+	return c.productDetail.CallUnary(ctx, req)
 }
 
 // InventoryServiceHandler is an implementation of the inventory_iface.v1.InventoryService service.
@@ -178,11 +358,26 @@ type InventoryServiceHandler interface {
 	// PushStockEvent ingests a warehouse StockEvent (the RPC counterpart of the
 	// Pub/Sub push handler) and applies it to inventory state in one transaction.
 	PushStockEvent(context.Context, *connect.Request[v1.PushStockEventRequest]) (*connect.Response[v1.PushStockEventResponse], error)
+	// Transaction management: a request-driven, inventory-owned stock mutation
+	// (order/restock/return/found_back/problem). TransactionCancel reverses one.
+	TransactionCreate(context.Context, *connect.Request[v1.TransactionCreateRequest]) (*connect.Response[v1.TransactionCreateResponse], error)
+	TransactionCancel(context.Context, *connect.Request[v1.TransactionCancelRequest]) (*connect.Response[v1.TransactionCancelResponse], error)
 	ProductPlacementList(context.Context, *connect.Request[v1.ProductPlacementListRequest]) (*connect.Response[v1.ProductPlacementListResponse], error)
 	ProductPlacementLog(context.Context, *connect.Request[v1.ProductPlacementLogRequest]) (*connect.Response[v1.ProductPlacementLogResponse], error)
 	ProductBatchList(context.Context, *connect.Request[v1.ProductBatchListRequest]) (*connect.Response[v1.ProductBatchListResponse], error)
 	// untuk rekonsiliasi legacy
-	ProductReconcile(context.Context, *connect.Request[v1.ProductReconcileRequest]) (*connect.Response[v1.ProductReconcileResponse], error)
+	ProductReconcile(context.Context, *connect.Request[v1.ProductReconcileRequest], *connect.ServerStream[v1.ProductReconcileResponse]) error
+	// Rack management. All except RackList are scoped by warehouse_id.
+	RackCreate(context.Context, *connect.Request[v1.RackCreateRequest]) (*connect.Response[v1.RackCreateResponse], error)
+	RackUpdate(context.Context, *connect.Request[v1.RackUpdateRequest]) (*connect.Response[v1.RackUpdateResponse], error)
+	RackDelete(context.Context, *connect.Request[v1.RackDeleteRequest]) (*connect.Response[v1.RackDeleteResponse], error)
+	RackDetail(context.Context, *connect.Request[v1.RackDetailRequest]) (*connect.Response[v1.RackDetailResponse], error)
+	RackList(context.Context, *connect.Request[v1.RackListRequest]) (*connect.Response[v1.RackListResponse], error)
+	// Product management (config + views), scoped by warehouse_id.
+	ProductConfig(context.Context, *connect.Request[v1.ProductConfigRequest]) (*connect.Response[v1.ProductConfigResponse], error)
+	ProductConfigUpdate(context.Context, *connect.Request[v1.ProductConfigUpdateRequest]) (*connect.Response[v1.ProductConfigUpdateResponse], error)
+	ProductList(context.Context, *connect.Request[v1.ProductListRequest]) (*connect.Response[v1.ProductListResponse], error)
+	ProductDetail(context.Context, *connect.Request[v1.ProductDetailRequest]) (*connect.Response[v1.ProductDetailResponse], error)
 }
 
 // NewInventoryServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -210,6 +405,18 @@ func NewInventoryServiceHandler(svc InventoryServiceHandler, opts ...connect.Han
 		connect.WithSchema(inventoryServiceMethods.ByName("PushStockEvent")),
 		connect.WithHandlerOptions(opts...),
 	)
+	inventoryServiceTransactionCreateHandler := connect.NewUnaryHandler(
+		InventoryServiceTransactionCreateProcedure,
+		svc.TransactionCreate,
+		connect.WithSchema(inventoryServiceMethods.ByName("TransactionCreate")),
+		connect.WithHandlerOptions(opts...),
+	)
+	inventoryServiceTransactionCancelHandler := connect.NewUnaryHandler(
+		InventoryServiceTransactionCancelProcedure,
+		svc.TransactionCancel,
+		connect.WithSchema(inventoryServiceMethods.ByName("TransactionCancel")),
+		connect.WithHandlerOptions(opts...),
+	)
 	inventoryServiceProductPlacementListHandler := connect.NewUnaryHandler(
 		InventoryServiceProductPlacementListProcedure,
 		svc.ProductPlacementList,
@@ -228,10 +435,64 @@ func NewInventoryServiceHandler(svc InventoryServiceHandler, opts ...connect.Han
 		connect.WithSchema(inventoryServiceMethods.ByName("ProductBatchList")),
 		connect.WithHandlerOptions(opts...),
 	)
-	inventoryServiceProductReconcileHandler := connect.NewUnaryHandler(
+	inventoryServiceProductReconcileHandler := connect.NewServerStreamHandler(
 		InventoryServiceProductReconcileProcedure,
 		svc.ProductReconcile,
 		connect.WithSchema(inventoryServiceMethods.ByName("ProductReconcile")),
+		connect.WithHandlerOptions(opts...),
+	)
+	inventoryServiceRackCreateHandler := connect.NewUnaryHandler(
+		InventoryServiceRackCreateProcedure,
+		svc.RackCreate,
+		connect.WithSchema(inventoryServiceMethods.ByName("RackCreate")),
+		connect.WithHandlerOptions(opts...),
+	)
+	inventoryServiceRackUpdateHandler := connect.NewUnaryHandler(
+		InventoryServiceRackUpdateProcedure,
+		svc.RackUpdate,
+		connect.WithSchema(inventoryServiceMethods.ByName("RackUpdate")),
+		connect.WithHandlerOptions(opts...),
+	)
+	inventoryServiceRackDeleteHandler := connect.NewUnaryHandler(
+		InventoryServiceRackDeleteProcedure,
+		svc.RackDelete,
+		connect.WithSchema(inventoryServiceMethods.ByName("RackDelete")),
+		connect.WithHandlerOptions(opts...),
+	)
+	inventoryServiceRackDetailHandler := connect.NewUnaryHandler(
+		InventoryServiceRackDetailProcedure,
+		svc.RackDetail,
+		connect.WithSchema(inventoryServiceMethods.ByName("RackDetail")),
+		connect.WithHandlerOptions(opts...),
+	)
+	inventoryServiceRackListHandler := connect.NewUnaryHandler(
+		InventoryServiceRackListProcedure,
+		svc.RackList,
+		connect.WithSchema(inventoryServiceMethods.ByName("RackList")),
+		connect.WithHandlerOptions(opts...),
+	)
+	inventoryServiceProductConfigHandler := connect.NewUnaryHandler(
+		InventoryServiceProductConfigProcedure,
+		svc.ProductConfig,
+		connect.WithSchema(inventoryServiceMethods.ByName("ProductConfig")),
+		connect.WithHandlerOptions(opts...),
+	)
+	inventoryServiceProductConfigUpdateHandler := connect.NewUnaryHandler(
+		InventoryServiceProductConfigUpdateProcedure,
+		svc.ProductConfigUpdate,
+		connect.WithSchema(inventoryServiceMethods.ByName("ProductConfigUpdate")),
+		connect.WithHandlerOptions(opts...),
+	)
+	inventoryServiceProductListHandler := connect.NewUnaryHandler(
+		InventoryServiceProductListProcedure,
+		svc.ProductList,
+		connect.WithSchema(inventoryServiceMethods.ByName("ProductList")),
+		connect.WithHandlerOptions(opts...),
+	)
+	inventoryServiceProductDetailHandler := connect.NewUnaryHandler(
+		InventoryServiceProductDetailProcedure,
+		svc.ProductDetail,
+		connect.WithSchema(inventoryServiceMethods.ByName("ProductDetail")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/inventory_iface.v1.InventoryService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -242,6 +503,10 @@ func NewInventoryServiceHandler(svc InventoryServiceHandler, opts ...connect.Han
 			inventoryServiceStockMovementHandler.ServeHTTP(w, r)
 		case InventoryServicePushStockEventProcedure:
 			inventoryServicePushStockEventHandler.ServeHTTP(w, r)
+		case InventoryServiceTransactionCreateProcedure:
+			inventoryServiceTransactionCreateHandler.ServeHTTP(w, r)
+		case InventoryServiceTransactionCancelProcedure:
+			inventoryServiceTransactionCancelHandler.ServeHTTP(w, r)
 		case InventoryServiceProductPlacementListProcedure:
 			inventoryServiceProductPlacementListHandler.ServeHTTP(w, r)
 		case InventoryServiceProductPlacementLogProcedure:
@@ -250,6 +515,24 @@ func NewInventoryServiceHandler(svc InventoryServiceHandler, opts ...connect.Han
 			inventoryServiceProductBatchListHandler.ServeHTTP(w, r)
 		case InventoryServiceProductReconcileProcedure:
 			inventoryServiceProductReconcileHandler.ServeHTTP(w, r)
+		case InventoryServiceRackCreateProcedure:
+			inventoryServiceRackCreateHandler.ServeHTTP(w, r)
+		case InventoryServiceRackUpdateProcedure:
+			inventoryServiceRackUpdateHandler.ServeHTTP(w, r)
+		case InventoryServiceRackDeleteProcedure:
+			inventoryServiceRackDeleteHandler.ServeHTTP(w, r)
+		case InventoryServiceRackDetailProcedure:
+			inventoryServiceRackDetailHandler.ServeHTTP(w, r)
+		case InventoryServiceRackListProcedure:
+			inventoryServiceRackListHandler.ServeHTTP(w, r)
+		case InventoryServiceProductConfigProcedure:
+			inventoryServiceProductConfigHandler.ServeHTTP(w, r)
+		case InventoryServiceProductConfigUpdateProcedure:
+			inventoryServiceProductConfigUpdateHandler.ServeHTTP(w, r)
+		case InventoryServiceProductListProcedure:
+			inventoryServiceProductListHandler.ServeHTTP(w, r)
+		case InventoryServiceProductDetailProcedure:
+			inventoryServiceProductDetailHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -271,6 +554,14 @@ func (UnimplementedInventoryServiceHandler) PushStockEvent(context.Context, *con
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory_iface.v1.InventoryService.PushStockEvent is not implemented"))
 }
 
+func (UnimplementedInventoryServiceHandler) TransactionCreate(context.Context, *connect.Request[v1.TransactionCreateRequest]) (*connect.Response[v1.TransactionCreateResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory_iface.v1.InventoryService.TransactionCreate is not implemented"))
+}
+
+func (UnimplementedInventoryServiceHandler) TransactionCancel(context.Context, *connect.Request[v1.TransactionCancelRequest]) (*connect.Response[v1.TransactionCancelResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory_iface.v1.InventoryService.TransactionCancel is not implemented"))
+}
+
 func (UnimplementedInventoryServiceHandler) ProductPlacementList(context.Context, *connect.Request[v1.ProductPlacementListRequest]) (*connect.Response[v1.ProductPlacementListResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory_iface.v1.InventoryService.ProductPlacementList is not implemented"))
 }
@@ -283,6 +574,42 @@ func (UnimplementedInventoryServiceHandler) ProductBatchList(context.Context, *c
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory_iface.v1.InventoryService.ProductBatchList is not implemented"))
 }
 
-func (UnimplementedInventoryServiceHandler) ProductReconcile(context.Context, *connect.Request[v1.ProductReconcileRequest]) (*connect.Response[v1.ProductReconcileResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory_iface.v1.InventoryService.ProductReconcile is not implemented"))
+func (UnimplementedInventoryServiceHandler) ProductReconcile(context.Context, *connect.Request[v1.ProductReconcileRequest], *connect.ServerStream[v1.ProductReconcileResponse]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("inventory_iface.v1.InventoryService.ProductReconcile is not implemented"))
+}
+
+func (UnimplementedInventoryServiceHandler) RackCreate(context.Context, *connect.Request[v1.RackCreateRequest]) (*connect.Response[v1.RackCreateResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory_iface.v1.InventoryService.RackCreate is not implemented"))
+}
+
+func (UnimplementedInventoryServiceHandler) RackUpdate(context.Context, *connect.Request[v1.RackUpdateRequest]) (*connect.Response[v1.RackUpdateResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory_iface.v1.InventoryService.RackUpdate is not implemented"))
+}
+
+func (UnimplementedInventoryServiceHandler) RackDelete(context.Context, *connect.Request[v1.RackDeleteRequest]) (*connect.Response[v1.RackDeleteResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory_iface.v1.InventoryService.RackDelete is not implemented"))
+}
+
+func (UnimplementedInventoryServiceHandler) RackDetail(context.Context, *connect.Request[v1.RackDetailRequest]) (*connect.Response[v1.RackDetailResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory_iface.v1.InventoryService.RackDetail is not implemented"))
+}
+
+func (UnimplementedInventoryServiceHandler) RackList(context.Context, *connect.Request[v1.RackListRequest]) (*connect.Response[v1.RackListResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory_iface.v1.InventoryService.RackList is not implemented"))
+}
+
+func (UnimplementedInventoryServiceHandler) ProductConfig(context.Context, *connect.Request[v1.ProductConfigRequest]) (*connect.Response[v1.ProductConfigResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory_iface.v1.InventoryService.ProductConfig is not implemented"))
+}
+
+func (UnimplementedInventoryServiceHandler) ProductConfigUpdate(context.Context, *connect.Request[v1.ProductConfigUpdateRequest]) (*connect.Response[v1.ProductConfigUpdateResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory_iface.v1.InventoryService.ProductConfigUpdate is not implemented"))
+}
+
+func (UnimplementedInventoryServiceHandler) ProductList(context.Context, *connect.Request[v1.ProductListRequest]) (*connect.Response[v1.ProductListResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory_iface.v1.InventoryService.ProductList is not implemented"))
+}
+
+func (UnimplementedInventoryServiceHandler) ProductDetail(context.Context, *connect.Request[v1.ProductDetailRequest]) (*connect.Response[v1.ProductDetailResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory_iface.v1.InventoryService.ProductDetail is not implemented"))
 }

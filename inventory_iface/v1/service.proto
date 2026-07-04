@@ -18,19 +18,84 @@ service InventoryService {
   // Pub/Sub push handler) and applies it to inventory state in one transaction.
   rpc PushStockEvent(PushStockEventRequest) returns (PushStockEventResponse);
 
+  // Transaction management: a request-driven, inventory-owned stock mutation
+  // (order/restock/return/found_back/problem). TransactionCancel reverses one.
+  rpc TransactionCreate(TransactionCreateRequest) returns (TransactionCreateResponse);
+  rpc TransactionCancel(TransactionCancelRequest) returns (TransactionCancelResponse);
+
   rpc ProductPlacementList(ProductPlacementListRequest) returns (ProductPlacementListResponse);
   rpc ProductPlacementLog(ProductPlacementLogRequest) returns (ProductPlacementLogResponse);
   rpc ProductBatchList(ProductBatchListRequest) returns (ProductBatchListResponse);
 
   // untuk rekonsiliasi legacy
-  rpc ProductReconcile(ProductReconcileRequest) returns (ProductReconcileResponse);
+  rpc ProductReconcile(ProductReconcileRequest) returns (stream ProductReconcileResponse);
+
+  // Rack management. All except RackList are scoped by warehouse_id.
+  rpc RackCreate(RackCreateRequest) returns (RackCreateResponse);
+  rpc RackUpdate(RackUpdateRequest) returns (RackUpdateResponse);
+  rpc RackDelete(RackDeleteRequest) returns (RackDeleteResponse);
+  rpc RackDetail(RackDetailRequest) returns (RackDetailResponse);
+  rpc RackList(RackListRequest) returns (RackListResponse);
+
+  // Product management (config + views), scoped by warehouse_id.
+  rpc ProductConfig(ProductConfigRequest) returns (ProductConfigResponse);
+  rpc ProductConfigUpdate(ProductConfigUpdateRequest) returns (ProductConfigUpdateResponse);
+  rpc ProductList(ProductListRequest) returns (ProductListResponse);
+  rpc ProductDetail(ProductDetailRequest) returns (ProductDetailResponse);
 }
+
+// One product line in a transaction. price is the per-unit value.
+message TransactionItem {
+  uint64 product_id = 1 [(buf.validate.field).uint64.gt = 0];
+  int64 count = 2 [(buf.validate.field).int64.gt = 0];
+  double price = 3;
+}
+
+// Five same-shaped transaction kinds (distinct types so they can diverge later).
+message TransactionOrder {
+  repeated TransactionItem items = 1 [(buf.validate.field).repeated.min_items = 1];
+}
+message TransactionRestock {
+  repeated TransactionItem items = 1 [(buf.validate.field).repeated.min_items = 1];
+}
+message TransactionReturn {
+  repeated TransactionItem items = 1 [(buf.validate.field).repeated.min_items = 1];
+}
+message TransactionFoundBack {
+  repeated TransactionItem items = 1 [(buf.validate.field).repeated.min_items = 1];
+}
+message TransactionProblem {
+  repeated TransactionItem items = 1 [(buf.validate.field).repeated.min_items = 1];
+}
+
+message TransactionCreateRequest {
+  uint64 team_id = 1;
+  uint64 warehouse_id = 2 [(buf.validate.field).uint64.gt = 0];
+  oneof tx {
+    TransactionOrder order = 3;
+    TransactionRestock restock = 4;
+    TransactionReturn stock_return = 5;
+    TransactionFoundBack found_back = 6;
+    TransactionProblem problem = 7;
+  }
+}
+message TransactionCreateResponse {
+  uint64 transaction_id = 1;
+}
+
+message TransactionCancelRequest {
+  uint64 transaction_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 warehouse_id = 2;
+}
+message TransactionCancelResponse {}
 
 message ProductReconcileRequest {
   uint64 product_id = 1 [(buf.validate.field).uint64.gt = 0];
   uint64 warehouse_id = 2 [(buf.validate.field).uint64.gt = 0];
 }
-message ProductReconcileResponse {}
+message ProductReconcileResponse {
+  string message = 1;
+}
 
 message ProductPlacementListRequest {
   uint64 product_id = 1 [(buf.validate.field).uint64.gt = 0];
@@ -172,3 +237,253 @@ message OrderResponse {
 
 message HelloRequest {}
 message HelloResponse {}
+
+// --- Rack management ---
+
+message RackCreateRequest {
+  uint64 warehouse_id = 1 [(buf.validate.field).uint64.gt = 0];
+  string name = 2 [(buf.validate.field).string.min_len = 1];
+}
+message RackCreateResponse {
+  uint64 id = 1;
+}
+
+message RackUpdateRequest {
+  uint64 id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 warehouse_id = 2 [(buf.validate.field).uint64.gt = 0];
+  string name = 3 [(buf.validate.field).string.min_len = 1];
+}
+message RackUpdateResponse {}
+
+message RackDeleteRequest {
+  uint64 id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 warehouse_id = 2 [(buf.validate.field).uint64.gt = 0];
+}
+message RackDeleteResponse {}
+
+message RackDetailRequest {
+  uint64 id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 warehouse_id = 2 [(buf.validate.field).uint64.gt = 0];
+}
+message RackDetailResponse {
+  uint64 id = 1;
+  uint64 warehouse_id = 2;
+  string name = 3;
+  bool is_system = 4;
+  int64 stock_count = 5;
+  int64 product_count = 6;
+  string warehouse_name = 7;
+  google.protobuf.Timestamp created_at = 8;
+}
+
+// RackList follows the flexible list convention (see docs/proto-guideline.md).
+enum RackListDataType {
+  RACK_LIST_DATA_TYPE_UNSPECIFIED = 0;
+  RACK_LIST_DATA_TYPE_GENERAL = 1;
+  RACK_LIST_DATA_TYPE_STOCK = 2;
+  RACK_LIST_DATA_TYPE_WAREHOUSE = 3;
+}
+
+enum RackGeneralSort {
+  RACK_GENERAL_SORT_UNSPECIFIED = 0;
+  RACK_GENERAL_SORT_NAME = 1;
+  RACK_GENERAL_SORT_CREATED = 2;
+}
+
+enum RackStockSort {
+  RACK_STOCK_SORT_UNSPECIFIED = 0;
+  RACK_STOCK_SORT_STOCK_COUNT = 1;
+  RACK_STOCK_SORT_PRODUCT_COUNT = 2;
+}
+
+message RackListFilter {
+  uint64 warehouse_id = 1;
+  uint64 team_id = 2; // racks holding this team's stock (optional)
+  string search = 3; // name ILIKE (optional)
+  common.v1.PageFilter page = 4 [(buf.validate.field).required = true];
+  uint64 product_id = 5; // racks currently holding this product (optional)
+}
+
+message RackListSort {
+  common.v1.SortType sort_type = 1;
+  oneof s {
+    RackGeneralSort general = 2;
+    RackStockSort stock = 3;
+  }
+}
+
+message RackListRequest {
+  RackListFilter filter = 1 [(buf.validate.field).required = true];
+  RackListSort sort = 2;
+  repeated RackListDataType data_types = 3 [(buf.validate.field).repeated.min_items = 1];
+}
+
+message RackGeneralItem {
+  uint64 id = 1;
+  string name = 2;
+  google.protobuf.Timestamp created_at = 3;
+}
+message RackGeneralData {
+  map<uint64, RackGeneralItem> data = 1;
+}
+
+message RackStockItem {
+  int64 stock_count = 1;
+  int64 product_count = 2;
+}
+message RackStockData {
+  map<uint64, RackStockItem> data = 1;
+}
+
+message RackWarehouseItem {
+  uint64 warehouse_id = 1;
+  string warehouse_name = 2;
+}
+message RackWarehouseData {
+  map<uint64, RackWarehouseItem> data = 1;
+}
+
+message RackData {
+  oneof data {
+    RackGeneralData general = 1;
+    RackStockData stock = 2;
+    RackWarehouseData warehouse = 3;
+  }
+}
+
+message RackListResponse {
+  repeated RackData data = 1;
+  repeated uint64 ids = 2;
+}
+
+// --- Product management ---
+
+message ProductConfigRequest {
+  uint64 product_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 warehouse_id = 2 [(buf.validate.field).uint64.gt = 0];
+}
+message ProductConfigResponse {
+  uint64 product_id = 1;
+  uint64 warehouse_id = 2;
+  QueueType queue_type = 3; // stock batch price-ordering queue
+  PlacementPickingType placement_picking = 4;
+  bool configured = 5; // false => defaults returned (no stored config)
+}
+
+message ProductConfigUpdateRequest {
+  uint64 product_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 warehouse_id = 2 [(buf.validate.field).uint64.gt = 0];
+  QueueType queue_type = 3;
+  PlacementPickingType placement_picking = 4;
+}
+message ProductConfigUpdateResponse {}
+
+message ProductDetailRequest {
+  uint64 product_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 warehouse_id = 2 [(buf.validate.field).uint64.gt = 0];
+}
+message ProductDetailResponse {
+  uint64 product_id = 1;
+  uint64 warehouse_id = 2;
+  string name = 3;
+  uint64 team_id = 4;
+  string team_name = 5;
+  int64 stock_ready = 6;
+  double stock_ready_amount = 7;
+  int64 batch_count = 8;
+  int64 rack_count = 9;
+  QueueType queue_type = 10;
+  PlacementPickingType placement_picking = 11;
+  bool configured = 12;
+  google.protobuf.Timestamp updated_at = 13;
+}
+
+// ProductList follows the flexible list convention (see docs/proto-guideline.md).
+enum ProductListDataType {
+  PRODUCT_LIST_DATA_TYPE_UNSPECIFIED = 0;
+  PRODUCT_LIST_DATA_TYPE_GENERAL = 1;
+  PRODUCT_LIST_DATA_TYPE_STOCK = 2;
+  PRODUCT_LIST_DATA_TYPE_TEAM = 3;
+  PRODUCT_LIST_DATA_TYPE_CONFIG = 4;
+}
+
+enum ProductGeneralSort {
+  PRODUCT_GENERAL_SORT_UNSPECIFIED = 0;
+  PRODUCT_GENERAL_SORT_NAME = 1;
+}
+
+enum ProductStockSort {
+  PRODUCT_STOCK_SORT_UNSPECIFIED = 0;
+  PRODUCT_STOCK_SORT_STOCK_READY = 1;
+  PRODUCT_STOCK_SORT_STOCK_AMOUNT = 2;
+}
+
+message ProductListFilter {
+  uint64 warehouse_id = 1;
+  uint64 team_id = 2; // optional
+  string search = 3; // name ILIKE (optional)
+  common.v1.PageFilter page = 4 [(buf.validate.field).required = true];
+}
+
+message ProductListSort {
+  common.v1.SortType sort_type = 1;
+  oneof s {
+    ProductGeneralSort general = 2;
+    ProductStockSort stock = 3;
+  }
+}
+
+message ProductListRequest {
+  ProductListFilter filter = 1 [(buf.validate.field).required = true];
+  ProductListSort sort = 2;
+  repeated ProductListDataType data_types = 3 [(buf.validate.field).repeated.min_items = 1];
+}
+
+message ProductGeneralItem {
+  uint64 id = 1;
+  string name = 2;
+}
+message ProductGeneralData {
+  map<uint64, ProductGeneralItem> data = 1;
+}
+
+message ProductStockItem {
+  int64 stock_ready = 1;
+  double stock_ready_amount = 2;
+  int64 batch_count = 3;
+  int64 rack_count = 4;
+}
+message ProductStockData {
+  map<uint64, ProductStockItem> data = 1;
+}
+
+message ProductTeamItem {
+  uint64 team_id = 1;
+  string team_name = 2;
+}
+message ProductTeamData {
+  map<uint64, ProductTeamItem> data = 1;
+}
+
+message ProductConfigItem {
+  QueueType queue_type = 1;
+  PlacementPickingType placement_picking = 2;
+  bool configured = 3;
+}
+message ProductConfigData {
+  map<uint64, ProductConfigItem> data = 1;
+}
+
+message ProductData {
+  oneof data {
+    ProductGeneralData general = 1;
+    ProductStockData stock = 2;
+    ProductTeamData team = 3;
+    ProductConfigData config = 4;
+  }
+}
+
+message ProductListResponse {
+  repeated ProductData data = 1;
+  repeated uint64 ids = 2;
+}

@@ -23,6 +23,8 @@ const _ = connect.IsAtLeastVersion1_13_0
 const (
 	// ProductServiceName is the fully-qualified name of the ProductService service.
 	ProductServiceName = "product_iface.v1.ProductService"
+	// CategoryServiceName is the fully-qualified name of the CategoryService service.
+	CategoryServiceName = "product_iface.v1.CategoryService"
 )
 
 // These constants are the fully-qualified names of the RPCs defined in this package. They're
@@ -51,6 +53,36 @@ const (
 	// ProductServiceProductSearchProcedure is the fully-qualified name of the ProductService's
 	// ProductSearch RPC.
 	ProductServiceProductSearchProcedure = "/product_iface.v1.ProductService/ProductSearch"
+	// ProductServiceProductCreateProcedure is the fully-qualified name of the ProductService's
+	// ProductCreate RPC.
+	ProductServiceProductCreateProcedure = "/product_iface.v1.ProductService/ProductCreate"
+	// ProductServiceProductUpdateProcedure is the fully-qualified name of the ProductService's
+	// ProductUpdate RPC.
+	ProductServiceProductUpdateProcedure = "/product_iface.v1.ProductService/ProductUpdate"
+	// ProductServiceProductDeleteProcedure is the fully-qualified name of the ProductService's
+	// ProductDelete RPC.
+	ProductServiceProductDeleteProcedure = "/product_iface.v1.ProductService/ProductDelete"
+	// ProductServiceProductListProcedure is the fully-qualified name of the ProductService's
+	// ProductList RPC.
+	ProductServiceProductListProcedure = "/product_iface.v1.ProductService/ProductList"
+	// ProductServiceProductDetailProcedure is the fully-qualified name of the ProductService's
+	// ProductDetail RPC.
+	ProductServiceProductDetailProcedure = "/product_iface.v1.ProductService/ProductDetail"
+	// ProductServiceProductCodeGenerateProcedure is the fully-qualified name of the ProductService's
+	// ProductCodeGenerate RPC.
+	ProductServiceProductCodeGenerateProcedure = "/product_iface.v1.ProductService/ProductCodeGenerate"
+	// CategoryServiceCategoryCreateProcedure is the fully-qualified name of the CategoryService's
+	// CategoryCreate RPC.
+	CategoryServiceCategoryCreateProcedure = "/product_iface.v1.CategoryService/CategoryCreate"
+	// CategoryServiceCategoryUpdateProcedure is the fully-qualified name of the CategoryService's
+	// CategoryUpdate RPC.
+	CategoryServiceCategoryUpdateProcedure = "/product_iface.v1.CategoryService/CategoryUpdate"
+	// CategoryServiceCategoryDeleteProcedure is the fully-qualified name of the CategoryService's
+	// CategoryDelete RPC.
+	CategoryServiceCategoryDeleteProcedure = "/product_iface.v1.CategoryService/CategoryDelete"
+	// CategoryServiceCategoryListProcedure is the fully-qualified name of the CategoryService's
+	// CategoryList RPC.
+	CategoryServiceCategoryListProcedure = "/product_iface.v1.CategoryService/CategoryList"
 )
 
 // ProductServiceClient is a client for the product_iface.v1.ProductService service.
@@ -62,6 +94,14 @@ type ProductServiceClient interface {
 	ProductByIDs(context.Context, *connect.Request[v1.ProductByIDsRequest]) (*connect.Response[v1.ProductByIDsResponse], error)
 	ProductListExport(context.Context, *connect.Request[v1.ProductListExportRequest]) (*connect.ServerStreamForClient[v1.ProductListExportResponse], error)
 	ProductSearch(context.Context, *connect.Request[v1.ProductSearchRequest]) (*connect.Response[v1.ProductSearchResponse], error)
+	// Product Management (CRUD) — operates on the legacy `products` table.
+	ProductCreate(context.Context, *connect.Request[v1.ProductCreateRequest]) (*connect.Response[v1.ProductCreateResponse], error)
+	ProductUpdate(context.Context, *connect.Request[v1.ProductUpdateRequest]) (*connect.Response[v1.ProductUpdateResponse], error)
+	ProductDelete(context.Context, *connect.Request[v1.ProductDeleteRequest]) (*connect.Response[v1.ProductDeleteResponse], error)
+	ProductList(context.Context, *connect.Request[v1.ProductListRequest]) (*connect.Response[v1.ProductListResponse], error)
+	ProductDetail(context.Context, *connect.Request[v1.ProductDetailRequest]) (*connect.Response[v1.ProductDetailResponse], error)
+	// Previews the product code (legacy RefID) the next created product would get.
+	ProductCodeGenerate(context.Context, *connect.Request[v1.ProductCodeGenerateRequest]) (*connect.Response[v1.ProductCodeGenerateResponse], error)
 }
 
 // NewProductServiceClient constructs a client for the product_iface.v1.ProductService service. By
@@ -111,17 +151,59 @@ func NewProductServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			connect.WithSchema(productServiceMethods.ByName("ProductSearch")),
 			connect.WithClientOptions(opts...),
 		),
+		productCreate: connect.NewClient[v1.ProductCreateRequest, v1.ProductCreateResponse](
+			httpClient,
+			baseURL+ProductServiceProductCreateProcedure,
+			connect.WithSchema(productServiceMethods.ByName("ProductCreate")),
+			connect.WithClientOptions(opts...),
+		),
+		productUpdate: connect.NewClient[v1.ProductUpdateRequest, v1.ProductUpdateResponse](
+			httpClient,
+			baseURL+ProductServiceProductUpdateProcedure,
+			connect.WithSchema(productServiceMethods.ByName("ProductUpdate")),
+			connect.WithClientOptions(opts...),
+		),
+		productDelete: connect.NewClient[v1.ProductDeleteRequest, v1.ProductDeleteResponse](
+			httpClient,
+			baseURL+ProductServiceProductDeleteProcedure,
+			connect.WithSchema(productServiceMethods.ByName("ProductDelete")),
+			connect.WithClientOptions(opts...),
+		),
+		productList: connect.NewClient[v1.ProductListRequest, v1.ProductListResponse](
+			httpClient,
+			baseURL+ProductServiceProductListProcedure,
+			connect.WithSchema(productServiceMethods.ByName("ProductList")),
+			connect.WithClientOptions(opts...),
+		),
+		productDetail: connect.NewClient[v1.ProductDetailRequest, v1.ProductDetailResponse](
+			httpClient,
+			baseURL+ProductServiceProductDetailProcedure,
+			connect.WithSchema(productServiceMethods.ByName("ProductDetail")),
+			connect.WithClientOptions(opts...),
+		),
+		productCodeGenerate: connect.NewClient[v1.ProductCodeGenerateRequest, v1.ProductCodeGenerateResponse](
+			httpClient,
+			baseURL+ProductServiceProductCodeGenerateProcedure,
+			connect.WithSchema(productServiceMethods.ByName("ProductCodeGenerate")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // productServiceClient implements ProductServiceClient.
 type productServiceClient struct {
-	productDuplicate  *connect.Client[v1.ProductDuplicateRequest, v1.ProductDuplicateResponse]
-	productMapGet     *connect.Client[v1.ProductMapGetRequest, v1.ProductMapGetResponse]
-	productMapConnect *connect.Client[v1.ProductMapConnectRequest, v1.ProductMapConnectResponse]
-	productByIDs      *connect.Client[v1.ProductByIDsRequest, v1.ProductByIDsResponse]
-	productListExport *connect.Client[v1.ProductListExportRequest, v1.ProductListExportResponse]
-	productSearch     *connect.Client[v1.ProductSearchRequest, v1.ProductSearchResponse]
+	productDuplicate    *connect.Client[v1.ProductDuplicateRequest, v1.ProductDuplicateResponse]
+	productMapGet       *connect.Client[v1.ProductMapGetRequest, v1.ProductMapGetResponse]
+	productMapConnect   *connect.Client[v1.ProductMapConnectRequest, v1.ProductMapConnectResponse]
+	productByIDs        *connect.Client[v1.ProductByIDsRequest, v1.ProductByIDsResponse]
+	productListExport   *connect.Client[v1.ProductListExportRequest, v1.ProductListExportResponse]
+	productSearch       *connect.Client[v1.ProductSearchRequest, v1.ProductSearchResponse]
+	productCreate       *connect.Client[v1.ProductCreateRequest, v1.ProductCreateResponse]
+	productUpdate       *connect.Client[v1.ProductUpdateRequest, v1.ProductUpdateResponse]
+	productDelete       *connect.Client[v1.ProductDeleteRequest, v1.ProductDeleteResponse]
+	productList         *connect.Client[v1.ProductListRequest, v1.ProductListResponse]
+	productDetail       *connect.Client[v1.ProductDetailRequest, v1.ProductDetailResponse]
+	productCodeGenerate *connect.Client[v1.ProductCodeGenerateRequest, v1.ProductCodeGenerateResponse]
 }
 
 // ProductDuplicate calls product_iface.v1.ProductService.ProductDuplicate.
@@ -154,6 +236,36 @@ func (c *productServiceClient) ProductSearch(ctx context.Context, req *connect.R
 	return c.productSearch.CallUnary(ctx, req)
 }
 
+// ProductCreate calls product_iface.v1.ProductService.ProductCreate.
+func (c *productServiceClient) ProductCreate(ctx context.Context, req *connect.Request[v1.ProductCreateRequest]) (*connect.Response[v1.ProductCreateResponse], error) {
+	return c.productCreate.CallUnary(ctx, req)
+}
+
+// ProductUpdate calls product_iface.v1.ProductService.ProductUpdate.
+func (c *productServiceClient) ProductUpdate(ctx context.Context, req *connect.Request[v1.ProductUpdateRequest]) (*connect.Response[v1.ProductUpdateResponse], error) {
+	return c.productUpdate.CallUnary(ctx, req)
+}
+
+// ProductDelete calls product_iface.v1.ProductService.ProductDelete.
+func (c *productServiceClient) ProductDelete(ctx context.Context, req *connect.Request[v1.ProductDeleteRequest]) (*connect.Response[v1.ProductDeleteResponse], error) {
+	return c.productDelete.CallUnary(ctx, req)
+}
+
+// ProductList calls product_iface.v1.ProductService.ProductList.
+func (c *productServiceClient) ProductList(ctx context.Context, req *connect.Request[v1.ProductListRequest]) (*connect.Response[v1.ProductListResponse], error) {
+	return c.productList.CallUnary(ctx, req)
+}
+
+// ProductDetail calls product_iface.v1.ProductService.ProductDetail.
+func (c *productServiceClient) ProductDetail(ctx context.Context, req *connect.Request[v1.ProductDetailRequest]) (*connect.Response[v1.ProductDetailResponse], error) {
+	return c.productDetail.CallUnary(ctx, req)
+}
+
+// ProductCodeGenerate calls product_iface.v1.ProductService.ProductCodeGenerate.
+func (c *productServiceClient) ProductCodeGenerate(ctx context.Context, req *connect.Request[v1.ProductCodeGenerateRequest]) (*connect.Response[v1.ProductCodeGenerateResponse], error) {
+	return c.productCodeGenerate.CallUnary(ctx, req)
+}
+
 // ProductServiceHandler is an implementation of the product_iface.v1.ProductService service.
 type ProductServiceHandler interface {
 	ProductDuplicate(context.Context, *connect.Request[v1.ProductDuplicateRequest]) (*connect.Response[v1.ProductDuplicateResponse], error)
@@ -163,6 +275,14 @@ type ProductServiceHandler interface {
 	ProductByIDs(context.Context, *connect.Request[v1.ProductByIDsRequest]) (*connect.Response[v1.ProductByIDsResponse], error)
 	ProductListExport(context.Context, *connect.Request[v1.ProductListExportRequest], *connect.ServerStream[v1.ProductListExportResponse]) error
 	ProductSearch(context.Context, *connect.Request[v1.ProductSearchRequest]) (*connect.Response[v1.ProductSearchResponse], error)
+	// Product Management (CRUD) — operates on the legacy `products` table.
+	ProductCreate(context.Context, *connect.Request[v1.ProductCreateRequest]) (*connect.Response[v1.ProductCreateResponse], error)
+	ProductUpdate(context.Context, *connect.Request[v1.ProductUpdateRequest]) (*connect.Response[v1.ProductUpdateResponse], error)
+	ProductDelete(context.Context, *connect.Request[v1.ProductDeleteRequest]) (*connect.Response[v1.ProductDeleteResponse], error)
+	ProductList(context.Context, *connect.Request[v1.ProductListRequest]) (*connect.Response[v1.ProductListResponse], error)
+	ProductDetail(context.Context, *connect.Request[v1.ProductDetailRequest]) (*connect.Response[v1.ProductDetailResponse], error)
+	// Previews the product code (legacy RefID) the next created product would get.
+	ProductCodeGenerate(context.Context, *connect.Request[v1.ProductCodeGenerateRequest]) (*connect.Response[v1.ProductCodeGenerateResponse], error)
 }
 
 // NewProductServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -208,6 +328,42 @@ func NewProductServiceHandler(svc ProductServiceHandler, opts ...connect.Handler
 		connect.WithSchema(productServiceMethods.ByName("ProductSearch")),
 		connect.WithHandlerOptions(opts...),
 	)
+	productServiceProductCreateHandler := connect.NewUnaryHandler(
+		ProductServiceProductCreateProcedure,
+		svc.ProductCreate,
+		connect.WithSchema(productServiceMethods.ByName("ProductCreate")),
+		connect.WithHandlerOptions(opts...),
+	)
+	productServiceProductUpdateHandler := connect.NewUnaryHandler(
+		ProductServiceProductUpdateProcedure,
+		svc.ProductUpdate,
+		connect.WithSchema(productServiceMethods.ByName("ProductUpdate")),
+		connect.WithHandlerOptions(opts...),
+	)
+	productServiceProductDeleteHandler := connect.NewUnaryHandler(
+		ProductServiceProductDeleteProcedure,
+		svc.ProductDelete,
+		connect.WithSchema(productServiceMethods.ByName("ProductDelete")),
+		connect.WithHandlerOptions(opts...),
+	)
+	productServiceProductListHandler := connect.NewUnaryHandler(
+		ProductServiceProductListProcedure,
+		svc.ProductList,
+		connect.WithSchema(productServiceMethods.ByName("ProductList")),
+		connect.WithHandlerOptions(opts...),
+	)
+	productServiceProductDetailHandler := connect.NewUnaryHandler(
+		ProductServiceProductDetailProcedure,
+		svc.ProductDetail,
+		connect.WithSchema(productServiceMethods.ByName("ProductDetail")),
+		connect.WithHandlerOptions(opts...),
+	)
+	productServiceProductCodeGenerateHandler := connect.NewUnaryHandler(
+		ProductServiceProductCodeGenerateProcedure,
+		svc.ProductCodeGenerate,
+		connect.WithSchema(productServiceMethods.ByName("ProductCodeGenerate")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/product_iface.v1.ProductService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case ProductServiceProductDuplicateProcedure:
@@ -222,6 +378,18 @@ func NewProductServiceHandler(svc ProductServiceHandler, opts ...connect.Handler
 			productServiceProductListExportHandler.ServeHTTP(w, r)
 		case ProductServiceProductSearchProcedure:
 			productServiceProductSearchHandler.ServeHTTP(w, r)
+		case ProductServiceProductCreateProcedure:
+			productServiceProductCreateHandler.ServeHTTP(w, r)
+		case ProductServiceProductUpdateProcedure:
+			productServiceProductUpdateHandler.ServeHTTP(w, r)
+		case ProductServiceProductDeleteProcedure:
+			productServiceProductDeleteHandler.ServeHTTP(w, r)
+		case ProductServiceProductListProcedure:
+			productServiceProductListHandler.ServeHTTP(w, r)
+		case ProductServiceProductDetailProcedure:
+			productServiceProductDetailHandler.ServeHTTP(w, r)
+		case ProductServiceProductCodeGenerateProcedure:
+			productServiceProductCodeGenerateHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -253,4 +421,176 @@ func (UnimplementedProductServiceHandler) ProductListExport(context.Context, *co
 
 func (UnimplementedProductServiceHandler) ProductSearch(context.Context, *connect.Request[v1.ProductSearchRequest]) (*connect.Response[v1.ProductSearchResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("product_iface.v1.ProductService.ProductSearch is not implemented"))
+}
+
+func (UnimplementedProductServiceHandler) ProductCreate(context.Context, *connect.Request[v1.ProductCreateRequest]) (*connect.Response[v1.ProductCreateResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("product_iface.v1.ProductService.ProductCreate is not implemented"))
+}
+
+func (UnimplementedProductServiceHandler) ProductUpdate(context.Context, *connect.Request[v1.ProductUpdateRequest]) (*connect.Response[v1.ProductUpdateResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("product_iface.v1.ProductService.ProductUpdate is not implemented"))
+}
+
+func (UnimplementedProductServiceHandler) ProductDelete(context.Context, *connect.Request[v1.ProductDeleteRequest]) (*connect.Response[v1.ProductDeleteResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("product_iface.v1.ProductService.ProductDelete is not implemented"))
+}
+
+func (UnimplementedProductServiceHandler) ProductList(context.Context, *connect.Request[v1.ProductListRequest]) (*connect.Response[v1.ProductListResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("product_iface.v1.ProductService.ProductList is not implemented"))
+}
+
+func (UnimplementedProductServiceHandler) ProductDetail(context.Context, *connect.Request[v1.ProductDetailRequest]) (*connect.Response[v1.ProductDetailResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("product_iface.v1.ProductService.ProductDetail is not implemented"))
+}
+
+func (UnimplementedProductServiceHandler) ProductCodeGenerate(context.Context, *connect.Request[v1.ProductCodeGenerateRequest]) (*connect.Response[v1.ProductCodeGenerateResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("product_iface.v1.ProductService.ProductCodeGenerate is not implemented"))
+}
+
+// CategoryServiceClient is a client for the product_iface.v1.CategoryService service.
+type CategoryServiceClient interface {
+	CategoryCreate(context.Context, *connect.Request[v1.CategoryCreateRequest]) (*connect.Response[v1.CategoryCreateResponse], error)
+	CategoryUpdate(context.Context, *connect.Request[v1.CategoryUpdateRequest]) (*connect.Response[v1.CategoryUpdateResponse], error)
+	CategoryDelete(context.Context, *connect.Request[v1.CategoryDeleteRequest]) (*connect.Response[v1.CategoryDeleteResponse], error)
+	CategoryList(context.Context, *connect.Request[v1.CategoryListRequest]) (*connect.Response[v1.CategoryListResponse], error)
+}
+
+// NewCategoryServiceClient constructs a client for the product_iface.v1.CategoryService service. By
+// default, it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses,
+// and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the
+// connect.WithGRPC() or connect.WithGRPCWeb() options.
+//
+// The URL supplied here should be the base URL for the Connect or gRPC server (for example,
+// http://api.acme.com or https://acme.com/grpc).
+func NewCategoryServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) CategoryServiceClient {
+	baseURL = strings.TrimRight(baseURL, "/")
+	categoryServiceMethods := v1.File_product_iface_v1_product_proto.Services().ByName("CategoryService").Methods()
+	return &categoryServiceClient{
+		categoryCreate: connect.NewClient[v1.CategoryCreateRequest, v1.CategoryCreateResponse](
+			httpClient,
+			baseURL+CategoryServiceCategoryCreateProcedure,
+			connect.WithSchema(categoryServiceMethods.ByName("CategoryCreate")),
+			connect.WithClientOptions(opts...),
+		),
+		categoryUpdate: connect.NewClient[v1.CategoryUpdateRequest, v1.CategoryUpdateResponse](
+			httpClient,
+			baseURL+CategoryServiceCategoryUpdateProcedure,
+			connect.WithSchema(categoryServiceMethods.ByName("CategoryUpdate")),
+			connect.WithClientOptions(opts...),
+		),
+		categoryDelete: connect.NewClient[v1.CategoryDeleteRequest, v1.CategoryDeleteResponse](
+			httpClient,
+			baseURL+CategoryServiceCategoryDeleteProcedure,
+			connect.WithSchema(categoryServiceMethods.ByName("CategoryDelete")),
+			connect.WithClientOptions(opts...),
+		),
+		categoryList: connect.NewClient[v1.CategoryListRequest, v1.CategoryListResponse](
+			httpClient,
+			baseURL+CategoryServiceCategoryListProcedure,
+			connect.WithSchema(categoryServiceMethods.ByName("CategoryList")),
+			connect.WithClientOptions(opts...),
+		),
+	}
+}
+
+// categoryServiceClient implements CategoryServiceClient.
+type categoryServiceClient struct {
+	categoryCreate *connect.Client[v1.CategoryCreateRequest, v1.CategoryCreateResponse]
+	categoryUpdate *connect.Client[v1.CategoryUpdateRequest, v1.CategoryUpdateResponse]
+	categoryDelete *connect.Client[v1.CategoryDeleteRequest, v1.CategoryDeleteResponse]
+	categoryList   *connect.Client[v1.CategoryListRequest, v1.CategoryListResponse]
+}
+
+// CategoryCreate calls product_iface.v1.CategoryService.CategoryCreate.
+func (c *categoryServiceClient) CategoryCreate(ctx context.Context, req *connect.Request[v1.CategoryCreateRequest]) (*connect.Response[v1.CategoryCreateResponse], error) {
+	return c.categoryCreate.CallUnary(ctx, req)
+}
+
+// CategoryUpdate calls product_iface.v1.CategoryService.CategoryUpdate.
+func (c *categoryServiceClient) CategoryUpdate(ctx context.Context, req *connect.Request[v1.CategoryUpdateRequest]) (*connect.Response[v1.CategoryUpdateResponse], error) {
+	return c.categoryUpdate.CallUnary(ctx, req)
+}
+
+// CategoryDelete calls product_iface.v1.CategoryService.CategoryDelete.
+func (c *categoryServiceClient) CategoryDelete(ctx context.Context, req *connect.Request[v1.CategoryDeleteRequest]) (*connect.Response[v1.CategoryDeleteResponse], error) {
+	return c.categoryDelete.CallUnary(ctx, req)
+}
+
+// CategoryList calls product_iface.v1.CategoryService.CategoryList.
+func (c *categoryServiceClient) CategoryList(ctx context.Context, req *connect.Request[v1.CategoryListRequest]) (*connect.Response[v1.CategoryListResponse], error) {
+	return c.categoryList.CallUnary(ctx, req)
+}
+
+// CategoryServiceHandler is an implementation of the product_iface.v1.CategoryService service.
+type CategoryServiceHandler interface {
+	CategoryCreate(context.Context, *connect.Request[v1.CategoryCreateRequest]) (*connect.Response[v1.CategoryCreateResponse], error)
+	CategoryUpdate(context.Context, *connect.Request[v1.CategoryUpdateRequest]) (*connect.Response[v1.CategoryUpdateResponse], error)
+	CategoryDelete(context.Context, *connect.Request[v1.CategoryDeleteRequest]) (*connect.Response[v1.CategoryDeleteResponse], error)
+	CategoryList(context.Context, *connect.Request[v1.CategoryListRequest]) (*connect.Response[v1.CategoryListResponse], error)
+}
+
+// NewCategoryServiceHandler builds an HTTP handler from the service implementation. It returns the
+// path on which to mount the handler and the handler itself.
+//
+// By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
+// and JSON codecs. They also support gzip compression.
+func NewCategoryServiceHandler(svc CategoryServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	categoryServiceMethods := v1.File_product_iface_v1_product_proto.Services().ByName("CategoryService").Methods()
+	categoryServiceCategoryCreateHandler := connect.NewUnaryHandler(
+		CategoryServiceCategoryCreateProcedure,
+		svc.CategoryCreate,
+		connect.WithSchema(categoryServiceMethods.ByName("CategoryCreate")),
+		connect.WithHandlerOptions(opts...),
+	)
+	categoryServiceCategoryUpdateHandler := connect.NewUnaryHandler(
+		CategoryServiceCategoryUpdateProcedure,
+		svc.CategoryUpdate,
+		connect.WithSchema(categoryServiceMethods.ByName("CategoryUpdate")),
+		connect.WithHandlerOptions(opts...),
+	)
+	categoryServiceCategoryDeleteHandler := connect.NewUnaryHandler(
+		CategoryServiceCategoryDeleteProcedure,
+		svc.CategoryDelete,
+		connect.WithSchema(categoryServiceMethods.ByName("CategoryDelete")),
+		connect.WithHandlerOptions(opts...),
+	)
+	categoryServiceCategoryListHandler := connect.NewUnaryHandler(
+		CategoryServiceCategoryListProcedure,
+		svc.CategoryList,
+		connect.WithSchema(categoryServiceMethods.ByName("CategoryList")),
+		connect.WithHandlerOptions(opts...),
+	)
+	return "/product_iface.v1.CategoryService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		switch r.URL.Path {
+		case CategoryServiceCategoryCreateProcedure:
+			categoryServiceCategoryCreateHandler.ServeHTTP(w, r)
+		case CategoryServiceCategoryUpdateProcedure:
+			categoryServiceCategoryUpdateHandler.ServeHTTP(w, r)
+		case CategoryServiceCategoryDeleteProcedure:
+			categoryServiceCategoryDeleteHandler.ServeHTTP(w, r)
+		case CategoryServiceCategoryListProcedure:
+			categoryServiceCategoryListHandler.ServeHTTP(w, r)
+		default:
+			http.NotFound(w, r)
+		}
+	})
+}
+
+// UnimplementedCategoryServiceHandler returns CodeUnimplemented from all methods.
+type UnimplementedCategoryServiceHandler struct{}
+
+func (UnimplementedCategoryServiceHandler) CategoryCreate(context.Context, *connect.Request[v1.CategoryCreateRequest]) (*connect.Response[v1.CategoryCreateResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("product_iface.v1.CategoryService.CategoryCreate is not implemented"))
+}
+
+func (UnimplementedCategoryServiceHandler) CategoryUpdate(context.Context, *connect.Request[v1.CategoryUpdateRequest]) (*connect.Response[v1.CategoryUpdateResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("product_iface.v1.CategoryService.CategoryUpdate is not implemented"))
+}
+
+func (UnimplementedCategoryServiceHandler) CategoryDelete(context.Context, *connect.Request[v1.CategoryDeleteRequest]) (*connect.Response[v1.CategoryDeleteResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("product_iface.v1.CategoryService.CategoryDelete is not implemented"))
+}
+
+func (UnimplementedCategoryServiceHandler) CategoryList(context.Context, *connect.Request[v1.CategoryListRequest]) (*connect.Response[v1.CategoryListResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("product_iface.v1.CategoryService.CategoryList is not implemented"))
 }

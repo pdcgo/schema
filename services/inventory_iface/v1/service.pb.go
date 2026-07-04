@@ -25,6 +25,868 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// RackList follows the flexible list convention (see docs/proto-guideline.md).
+type RackListDataType int32
+
+const (
+	RackListDataType_RACK_LIST_DATA_TYPE_UNSPECIFIED RackListDataType = 0
+	RackListDataType_RACK_LIST_DATA_TYPE_GENERAL     RackListDataType = 1
+	RackListDataType_RACK_LIST_DATA_TYPE_STOCK       RackListDataType = 2
+	RackListDataType_RACK_LIST_DATA_TYPE_WAREHOUSE   RackListDataType = 3
+)
+
+// Enum value maps for RackListDataType.
+var (
+	RackListDataType_name = map[int32]string{
+		0: "RACK_LIST_DATA_TYPE_UNSPECIFIED",
+		1: "RACK_LIST_DATA_TYPE_GENERAL",
+		2: "RACK_LIST_DATA_TYPE_STOCK",
+		3: "RACK_LIST_DATA_TYPE_WAREHOUSE",
+	}
+	RackListDataType_value = map[string]int32{
+		"RACK_LIST_DATA_TYPE_UNSPECIFIED": 0,
+		"RACK_LIST_DATA_TYPE_GENERAL":     1,
+		"RACK_LIST_DATA_TYPE_STOCK":       2,
+		"RACK_LIST_DATA_TYPE_WAREHOUSE":   3,
+	}
+)
+
+func (x RackListDataType) Enum() *RackListDataType {
+	p := new(RackListDataType)
+	*p = x
+	return p
+}
+
+func (x RackListDataType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (RackListDataType) Descriptor() protoreflect.EnumDescriptor {
+	return file_inventory_iface_v1_service_proto_enumTypes[0].Descriptor()
+}
+
+func (RackListDataType) Type() protoreflect.EnumType {
+	return &file_inventory_iface_v1_service_proto_enumTypes[0]
+}
+
+func (x RackListDataType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use RackListDataType.Descriptor instead.
+func (RackListDataType) EnumDescriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{0}
+}
+
+type RackGeneralSort int32
+
+const (
+	RackGeneralSort_RACK_GENERAL_SORT_UNSPECIFIED RackGeneralSort = 0
+	RackGeneralSort_RACK_GENERAL_SORT_NAME        RackGeneralSort = 1
+	RackGeneralSort_RACK_GENERAL_SORT_CREATED     RackGeneralSort = 2
+)
+
+// Enum value maps for RackGeneralSort.
+var (
+	RackGeneralSort_name = map[int32]string{
+		0: "RACK_GENERAL_SORT_UNSPECIFIED",
+		1: "RACK_GENERAL_SORT_NAME",
+		2: "RACK_GENERAL_SORT_CREATED",
+	}
+	RackGeneralSort_value = map[string]int32{
+		"RACK_GENERAL_SORT_UNSPECIFIED": 0,
+		"RACK_GENERAL_SORT_NAME":        1,
+		"RACK_GENERAL_SORT_CREATED":     2,
+	}
+)
+
+func (x RackGeneralSort) Enum() *RackGeneralSort {
+	p := new(RackGeneralSort)
+	*p = x
+	return p
+}
+
+func (x RackGeneralSort) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (RackGeneralSort) Descriptor() protoreflect.EnumDescriptor {
+	return file_inventory_iface_v1_service_proto_enumTypes[1].Descriptor()
+}
+
+func (RackGeneralSort) Type() protoreflect.EnumType {
+	return &file_inventory_iface_v1_service_proto_enumTypes[1]
+}
+
+func (x RackGeneralSort) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use RackGeneralSort.Descriptor instead.
+func (RackGeneralSort) EnumDescriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{1}
+}
+
+type RackStockSort int32
+
+const (
+	RackStockSort_RACK_STOCK_SORT_UNSPECIFIED   RackStockSort = 0
+	RackStockSort_RACK_STOCK_SORT_STOCK_COUNT   RackStockSort = 1
+	RackStockSort_RACK_STOCK_SORT_PRODUCT_COUNT RackStockSort = 2
+)
+
+// Enum value maps for RackStockSort.
+var (
+	RackStockSort_name = map[int32]string{
+		0: "RACK_STOCK_SORT_UNSPECIFIED",
+		1: "RACK_STOCK_SORT_STOCK_COUNT",
+		2: "RACK_STOCK_SORT_PRODUCT_COUNT",
+	}
+	RackStockSort_value = map[string]int32{
+		"RACK_STOCK_SORT_UNSPECIFIED":   0,
+		"RACK_STOCK_SORT_STOCK_COUNT":   1,
+		"RACK_STOCK_SORT_PRODUCT_COUNT": 2,
+	}
+)
+
+func (x RackStockSort) Enum() *RackStockSort {
+	p := new(RackStockSort)
+	*p = x
+	return p
+}
+
+func (x RackStockSort) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (RackStockSort) Descriptor() protoreflect.EnumDescriptor {
+	return file_inventory_iface_v1_service_proto_enumTypes[2].Descriptor()
+}
+
+func (RackStockSort) Type() protoreflect.EnumType {
+	return &file_inventory_iface_v1_service_proto_enumTypes[2]
+}
+
+func (x RackStockSort) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use RackStockSort.Descriptor instead.
+func (RackStockSort) EnumDescriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{2}
+}
+
+// ProductList follows the flexible list convention (see docs/proto-guideline.md).
+type ProductListDataType int32
+
+const (
+	ProductListDataType_PRODUCT_LIST_DATA_TYPE_UNSPECIFIED ProductListDataType = 0
+	ProductListDataType_PRODUCT_LIST_DATA_TYPE_GENERAL     ProductListDataType = 1
+	ProductListDataType_PRODUCT_LIST_DATA_TYPE_STOCK       ProductListDataType = 2
+	ProductListDataType_PRODUCT_LIST_DATA_TYPE_TEAM        ProductListDataType = 3
+	ProductListDataType_PRODUCT_LIST_DATA_TYPE_CONFIG      ProductListDataType = 4
+)
+
+// Enum value maps for ProductListDataType.
+var (
+	ProductListDataType_name = map[int32]string{
+		0: "PRODUCT_LIST_DATA_TYPE_UNSPECIFIED",
+		1: "PRODUCT_LIST_DATA_TYPE_GENERAL",
+		2: "PRODUCT_LIST_DATA_TYPE_STOCK",
+		3: "PRODUCT_LIST_DATA_TYPE_TEAM",
+		4: "PRODUCT_LIST_DATA_TYPE_CONFIG",
+	}
+	ProductListDataType_value = map[string]int32{
+		"PRODUCT_LIST_DATA_TYPE_UNSPECIFIED": 0,
+		"PRODUCT_LIST_DATA_TYPE_GENERAL":     1,
+		"PRODUCT_LIST_DATA_TYPE_STOCK":       2,
+		"PRODUCT_LIST_DATA_TYPE_TEAM":        3,
+		"PRODUCT_LIST_DATA_TYPE_CONFIG":      4,
+	}
+)
+
+func (x ProductListDataType) Enum() *ProductListDataType {
+	p := new(ProductListDataType)
+	*p = x
+	return p
+}
+
+func (x ProductListDataType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ProductListDataType) Descriptor() protoreflect.EnumDescriptor {
+	return file_inventory_iface_v1_service_proto_enumTypes[3].Descriptor()
+}
+
+func (ProductListDataType) Type() protoreflect.EnumType {
+	return &file_inventory_iface_v1_service_proto_enumTypes[3]
+}
+
+func (x ProductListDataType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ProductListDataType.Descriptor instead.
+func (ProductListDataType) EnumDescriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{3}
+}
+
+type ProductGeneralSort int32
+
+const (
+	ProductGeneralSort_PRODUCT_GENERAL_SORT_UNSPECIFIED ProductGeneralSort = 0
+	ProductGeneralSort_PRODUCT_GENERAL_SORT_NAME        ProductGeneralSort = 1
+)
+
+// Enum value maps for ProductGeneralSort.
+var (
+	ProductGeneralSort_name = map[int32]string{
+		0: "PRODUCT_GENERAL_SORT_UNSPECIFIED",
+		1: "PRODUCT_GENERAL_SORT_NAME",
+	}
+	ProductGeneralSort_value = map[string]int32{
+		"PRODUCT_GENERAL_SORT_UNSPECIFIED": 0,
+		"PRODUCT_GENERAL_SORT_NAME":        1,
+	}
+)
+
+func (x ProductGeneralSort) Enum() *ProductGeneralSort {
+	p := new(ProductGeneralSort)
+	*p = x
+	return p
+}
+
+func (x ProductGeneralSort) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ProductGeneralSort) Descriptor() protoreflect.EnumDescriptor {
+	return file_inventory_iface_v1_service_proto_enumTypes[4].Descriptor()
+}
+
+func (ProductGeneralSort) Type() protoreflect.EnumType {
+	return &file_inventory_iface_v1_service_proto_enumTypes[4]
+}
+
+func (x ProductGeneralSort) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ProductGeneralSort.Descriptor instead.
+func (ProductGeneralSort) EnumDescriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{4}
+}
+
+type ProductStockSort int32
+
+const (
+	ProductStockSort_PRODUCT_STOCK_SORT_UNSPECIFIED  ProductStockSort = 0
+	ProductStockSort_PRODUCT_STOCK_SORT_STOCK_READY  ProductStockSort = 1
+	ProductStockSort_PRODUCT_STOCK_SORT_STOCK_AMOUNT ProductStockSort = 2
+)
+
+// Enum value maps for ProductStockSort.
+var (
+	ProductStockSort_name = map[int32]string{
+		0: "PRODUCT_STOCK_SORT_UNSPECIFIED",
+		1: "PRODUCT_STOCK_SORT_STOCK_READY",
+		2: "PRODUCT_STOCK_SORT_STOCK_AMOUNT",
+	}
+	ProductStockSort_value = map[string]int32{
+		"PRODUCT_STOCK_SORT_UNSPECIFIED":  0,
+		"PRODUCT_STOCK_SORT_STOCK_READY":  1,
+		"PRODUCT_STOCK_SORT_STOCK_AMOUNT": 2,
+	}
+)
+
+func (x ProductStockSort) Enum() *ProductStockSort {
+	p := new(ProductStockSort)
+	*p = x
+	return p
+}
+
+func (x ProductStockSort) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ProductStockSort) Descriptor() protoreflect.EnumDescriptor {
+	return file_inventory_iface_v1_service_proto_enumTypes[5].Descriptor()
+}
+
+func (ProductStockSort) Type() protoreflect.EnumType {
+	return &file_inventory_iface_v1_service_proto_enumTypes[5]
+}
+
+func (x ProductStockSort) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ProductStockSort.Descriptor instead.
+func (ProductStockSort) EnumDescriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{5}
+}
+
+// One product line in a transaction. price is the per-unit value.
+type TransactionItem struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ProductId     uint64                 `protobuf:"varint,1,opt,name=product_id,json=productId,proto3" json:"product_id,omitempty"`
+	Count         int64                  `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
+	Price         float64                `protobuf:"fixed64,3,opt,name=price,proto3" json:"price,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TransactionItem) Reset() {
+	*x = TransactionItem{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TransactionItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TransactionItem) ProtoMessage() {}
+
+func (x *TransactionItem) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TransactionItem.ProtoReflect.Descriptor instead.
+func (*TransactionItem) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *TransactionItem) GetProductId() uint64 {
+	if x != nil {
+		return x.ProductId
+	}
+	return 0
+}
+
+func (x *TransactionItem) GetCount() int64 {
+	if x != nil {
+		return x.Count
+	}
+	return 0
+}
+
+func (x *TransactionItem) GetPrice() float64 {
+	if x != nil {
+		return x.Price
+	}
+	return 0
+}
+
+// Five same-shaped transaction kinds (distinct types so they can diverge later).
+type TransactionOrder struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Items         []*TransactionItem     `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TransactionOrder) Reset() {
+	*x = TransactionOrder{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TransactionOrder) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TransactionOrder) ProtoMessage() {}
+
+func (x *TransactionOrder) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TransactionOrder.ProtoReflect.Descriptor instead.
+func (*TransactionOrder) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *TransactionOrder) GetItems() []*TransactionItem {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
+type TransactionRestock struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Items         []*TransactionItem     `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TransactionRestock) Reset() {
+	*x = TransactionRestock{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TransactionRestock) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TransactionRestock) ProtoMessage() {}
+
+func (x *TransactionRestock) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TransactionRestock.ProtoReflect.Descriptor instead.
+func (*TransactionRestock) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *TransactionRestock) GetItems() []*TransactionItem {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
+type TransactionReturn struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Items         []*TransactionItem     `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TransactionReturn) Reset() {
+	*x = TransactionReturn{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TransactionReturn) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TransactionReturn) ProtoMessage() {}
+
+func (x *TransactionReturn) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TransactionReturn.ProtoReflect.Descriptor instead.
+func (*TransactionReturn) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *TransactionReturn) GetItems() []*TransactionItem {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
+type TransactionFoundBack struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Items         []*TransactionItem     `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TransactionFoundBack) Reset() {
+	*x = TransactionFoundBack{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TransactionFoundBack) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TransactionFoundBack) ProtoMessage() {}
+
+func (x *TransactionFoundBack) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TransactionFoundBack.ProtoReflect.Descriptor instead.
+func (*TransactionFoundBack) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *TransactionFoundBack) GetItems() []*TransactionItem {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
+type TransactionProblem struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Items         []*TransactionItem     `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TransactionProblem) Reset() {
+	*x = TransactionProblem{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TransactionProblem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TransactionProblem) ProtoMessage() {}
+
+func (x *TransactionProblem) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TransactionProblem.ProtoReflect.Descriptor instead.
+func (*TransactionProblem) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *TransactionProblem) GetItems() []*TransactionItem {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
+type TransactionCreateRequest struct {
+	state       protoimpl.MessageState `protogen:"open.v1"`
+	TeamId      uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	WarehouseId uint64                 `protobuf:"varint,2,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
+	// Types that are valid to be assigned to Tx:
+	//
+	//	*TransactionCreateRequest_Order
+	//	*TransactionCreateRequest_Restock
+	//	*TransactionCreateRequest_StockReturn
+	//	*TransactionCreateRequest_FoundBack
+	//	*TransactionCreateRequest_Problem
+	Tx            isTransactionCreateRequest_Tx `protobuf_oneof:"tx"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TransactionCreateRequest) Reset() {
+	*x = TransactionCreateRequest{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TransactionCreateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TransactionCreateRequest) ProtoMessage() {}
+
+func (x *TransactionCreateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TransactionCreateRequest.ProtoReflect.Descriptor instead.
+func (*TransactionCreateRequest) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *TransactionCreateRequest) GetTeamId() uint64 {
+	if x != nil {
+		return x.TeamId
+	}
+	return 0
+}
+
+func (x *TransactionCreateRequest) GetWarehouseId() uint64 {
+	if x != nil {
+		return x.WarehouseId
+	}
+	return 0
+}
+
+func (x *TransactionCreateRequest) GetTx() isTransactionCreateRequest_Tx {
+	if x != nil {
+		return x.Tx
+	}
+	return nil
+}
+
+func (x *TransactionCreateRequest) GetOrder() *TransactionOrder {
+	if x != nil {
+		if x, ok := x.Tx.(*TransactionCreateRequest_Order); ok {
+			return x.Order
+		}
+	}
+	return nil
+}
+
+func (x *TransactionCreateRequest) GetRestock() *TransactionRestock {
+	if x != nil {
+		if x, ok := x.Tx.(*TransactionCreateRequest_Restock); ok {
+			return x.Restock
+		}
+	}
+	return nil
+}
+
+func (x *TransactionCreateRequest) GetStockReturn() *TransactionReturn {
+	if x != nil {
+		if x, ok := x.Tx.(*TransactionCreateRequest_StockReturn); ok {
+			return x.StockReturn
+		}
+	}
+	return nil
+}
+
+func (x *TransactionCreateRequest) GetFoundBack() *TransactionFoundBack {
+	if x != nil {
+		if x, ok := x.Tx.(*TransactionCreateRequest_FoundBack); ok {
+			return x.FoundBack
+		}
+	}
+	return nil
+}
+
+func (x *TransactionCreateRequest) GetProblem() *TransactionProblem {
+	if x != nil {
+		if x, ok := x.Tx.(*TransactionCreateRequest_Problem); ok {
+			return x.Problem
+		}
+	}
+	return nil
+}
+
+type isTransactionCreateRequest_Tx interface {
+	isTransactionCreateRequest_Tx()
+}
+
+type TransactionCreateRequest_Order struct {
+	Order *TransactionOrder `protobuf:"bytes,3,opt,name=order,proto3,oneof"`
+}
+
+type TransactionCreateRequest_Restock struct {
+	Restock *TransactionRestock `protobuf:"bytes,4,opt,name=restock,proto3,oneof"`
+}
+
+type TransactionCreateRequest_StockReturn struct {
+	StockReturn *TransactionReturn `protobuf:"bytes,5,opt,name=stock_return,json=stockReturn,proto3,oneof"`
+}
+
+type TransactionCreateRequest_FoundBack struct {
+	FoundBack *TransactionFoundBack `protobuf:"bytes,6,opt,name=found_back,json=foundBack,proto3,oneof"`
+}
+
+type TransactionCreateRequest_Problem struct {
+	Problem *TransactionProblem `protobuf:"bytes,7,opt,name=problem,proto3,oneof"`
+}
+
+func (*TransactionCreateRequest_Order) isTransactionCreateRequest_Tx() {}
+
+func (*TransactionCreateRequest_Restock) isTransactionCreateRequest_Tx() {}
+
+func (*TransactionCreateRequest_StockReturn) isTransactionCreateRequest_Tx() {}
+
+func (*TransactionCreateRequest_FoundBack) isTransactionCreateRequest_Tx() {}
+
+func (*TransactionCreateRequest_Problem) isTransactionCreateRequest_Tx() {}
+
+type TransactionCreateResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TransactionId uint64                 `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TransactionCreateResponse) Reset() {
+	*x = TransactionCreateResponse{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TransactionCreateResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TransactionCreateResponse) ProtoMessage() {}
+
+func (x *TransactionCreateResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TransactionCreateResponse.ProtoReflect.Descriptor instead.
+func (*TransactionCreateResponse) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *TransactionCreateResponse) GetTransactionId() uint64 {
+	if x != nil {
+		return x.TransactionId
+	}
+	return 0
+}
+
+type TransactionCancelRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TransactionId uint64                 `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	WarehouseId   uint64                 `protobuf:"varint,2,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TransactionCancelRequest) Reset() {
+	*x = TransactionCancelRequest{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TransactionCancelRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TransactionCancelRequest) ProtoMessage() {}
+
+func (x *TransactionCancelRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TransactionCancelRequest.ProtoReflect.Descriptor instead.
+func (*TransactionCancelRequest) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *TransactionCancelRequest) GetTransactionId() uint64 {
+	if x != nil {
+		return x.TransactionId
+	}
+	return 0
+}
+
+func (x *TransactionCancelRequest) GetWarehouseId() uint64 {
+	if x != nil {
+		return x.WarehouseId
+	}
+	return 0
+}
+
+type TransactionCancelResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TransactionCancelResponse) Reset() {
+	*x = TransactionCancelResponse{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TransactionCancelResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TransactionCancelResponse) ProtoMessage() {}
+
+func (x *TransactionCancelResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TransactionCancelResponse.ProtoReflect.Descriptor instead.
+func (*TransactionCancelResponse) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{9}
+}
+
 type ProductReconcileRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ProductId     uint64                 `protobuf:"varint,1,opt,name=product_id,json=productId,proto3" json:"product_id,omitempty"`
@@ -35,7 +897,7 @@ type ProductReconcileRequest struct {
 
 func (x *ProductReconcileRequest) Reset() {
 	*x = ProductReconcileRequest{}
-	mi := &file_inventory_iface_v1_service_proto_msgTypes[0]
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -47,7 +909,7 @@ func (x *ProductReconcileRequest) String() string {
 func (*ProductReconcileRequest) ProtoMessage() {}
 
 func (x *ProductReconcileRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_inventory_iface_v1_service_proto_msgTypes[0]
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -60,7 +922,7 @@ func (x *ProductReconcileRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProductReconcileRequest.ProtoReflect.Descriptor instead.
 func (*ProductReconcileRequest) Descriptor() ([]byte, []int) {
-	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{0}
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *ProductReconcileRequest) GetProductId() uint64 {
@@ -79,13 +941,14 @@ func (x *ProductReconcileRequest) GetWarehouseId() uint64 {
 
 type ProductReconcileResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Message       string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ProductReconcileResponse) Reset() {
 	*x = ProductReconcileResponse{}
-	mi := &file_inventory_iface_v1_service_proto_msgTypes[1]
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -97,7 +960,7 @@ func (x *ProductReconcileResponse) String() string {
 func (*ProductReconcileResponse) ProtoMessage() {}
 
 func (x *ProductReconcileResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_inventory_iface_v1_service_proto_msgTypes[1]
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -110,7 +973,14 @@ func (x *ProductReconcileResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProductReconcileResponse.ProtoReflect.Descriptor instead.
 func (*ProductReconcileResponse) Descriptor() ([]byte, []int) {
-	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{1}
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *ProductReconcileResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
 }
 
 type ProductPlacementListRequest struct {
@@ -125,7 +995,7 @@ type ProductPlacementListRequest struct {
 
 func (x *ProductPlacementListRequest) Reset() {
 	*x = ProductPlacementListRequest{}
-	mi := &file_inventory_iface_v1_service_proto_msgTypes[2]
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -137,7 +1007,7 @@ func (x *ProductPlacementListRequest) String() string {
 func (*ProductPlacementListRequest) ProtoMessage() {}
 
 func (x *ProductPlacementListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_inventory_iface_v1_service_proto_msgTypes[2]
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -150,7 +1020,7 @@ func (x *ProductPlacementListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProductPlacementListRequest.ProtoReflect.Descriptor instead.
 func (*ProductPlacementListRequest) Descriptor() ([]byte, []int) {
-	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{2}
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *ProductPlacementListRequest) GetProductId() uint64 {
@@ -196,7 +1066,7 @@ type ProductPlacementItem struct {
 
 func (x *ProductPlacementItem) Reset() {
 	*x = ProductPlacementItem{}
-	mi := &file_inventory_iface_v1_service_proto_msgTypes[3]
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -208,7 +1078,7 @@ func (x *ProductPlacementItem) String() string {
 func (*ProductPlacementItem) ProtoMessage() {}
 
 func (x *ProductPlacementItem) ProtoReflect() protoreflect.Message {
-	mi := &file_inventory_iface_v1_service_proto_msgTypes[3]
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -221,7 +1091,7 @@ func (x *ProductPlacementItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProductPlacementItem.ProtoReflect.Descriptor instead.
 func (*ProductPlacementItem) Descriptor() ([]byte, []int) {
-	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{3}
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *ProductPlacementItem) GetId() uint64 {
@@ -283,7 +1153,7 @@ type ProductPlacementListResponse struct {
 
 func (x *ProductPlacementListResponse) Reset() {
 	*x = ProductPlacementListResponse{}
-	mi := &file_inventory_iface_v1_service_proto_msgTypes[4]
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -295,7 +1165,7 @@ func (x *ProductPlacementListResponse) String() string {
 func (*ProductPlacementListResponse) ProtoMessage() {}
 
 func (x *ProductPlacementListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_inventory_iface_v1_service_proto_msgTypes[4]
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -308,7 +1178,7 @@ func (x *ProductPlacementListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProductPlacementListResponse.ProtoReflect.Descriptor instead.
 func (*ProductPlacementListResponse) Descriptor() ([]byte, []int) {
-	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{4}
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *ProductPlacementListResponse) GetPlacements() []*ProductPlacementItem {
@@ -337,7 +1207,7 @@ type ProductPlacementLogRequest struct {
 
 func (x *ProductPlacementLogRequest) Reset() {
 	*x = ProductPlacementLogRequest{}
-	mi := &file_inventory_iface_v1_service_proto_msgTypes[5]
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -349,7 +1219,7 @@ func (x *ProductPlacementLogRequest) String() string {
 func (*ProductPlacementLogRequest) ProtoMessage() {}
 
 func (x *ProductPlacementLogRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_inventory_iface_v1_service_proto_msgTypes[5]
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -362,7 +1232,7 @@ func (x *ProductPlacementLogRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProductPlacementLogRequest.ProtoReflect.Descriptor instead.
 func (*ProductPlacementLogRequest) Descriptor() ([]byte, []int) {
-	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{5}
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *ProductPlacementLogRequest) GetProductId() uint64 {
@@ -411,7 +1281,7 @@ type ProductPlacementLogItem struct {
 
 func (x *ProductPlacementLogItem) Reset() {
 	*x = ProductPlacementLogItem{}
-	mi := &file_inventory_iface_v1_service_proto_msgTypes[6]
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -423,7 +1293,7 @@ func (x *ProductPlacementLogItem) String() string {
 func (*ProductPlacementLogItem) ProtoMessage() {}
 
 func (x *ProductPlacementLogItem) ProtoReflect() protoreflect.Message {
-	mi := &file_inventory_iface_v1_service_proto_msgTypes[6]
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -436,7 +1306,7 @@ func (x *ProductPlacementLogItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProductPlacementLogItem.ProtoReflect.Descriptor instead.
 func (*ProductPlacementLogItem) Descriptor() ([]byte, []int) {
-	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{6}
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *ProductPlacementLogItem) GetId() uint64 {
@@ -519,7 +1389,7 @@ type ProductPlacementLogResponse struct {
 
 func (x *ProductPlacementLogResponse) Reset() {
 	*x = ProductPlacementLogResponse{}
-	mi := &file_inventory_iface_v1_service_proto_msgTypes[7]
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -531,7 +1401,7 @@ func (x *ProductPlacementLogResponse) String() string {
 func (*ProductPlacementLogResponse) ProtoMessage() {}
 
 func (x *ProductPlacementLogResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_inventory_iface_v1_service_proto_msgTypes[7]
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -544,7 +1414,7 @@ func (x *ProductPlacementLogResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProductPlacementLogResponse.ProtoReflect.Descriptor instead.
 func (*ProductPlacementLogResponse) Descriptor() ([]byte, []int) {
-	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{7}
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *ProductPlacementLogResponse) GetLogs() []*ProductPlacementLogItem {
@@ -572,7 +1442,7 @@ type ProductBatchListRequest struct {
 
 func (x *ProductBatchListRequest) Reset() {
 	*x = ProductBatchListRequest{}
-	mi := &file_inventory_iface_v1_service_proto_msgTypes[8]
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -584,7 +1454,7 @@ func (x *ProductBatchListRequest) String() string {
 func (*ProductBatchListRequest) ProtoMessage() {}
 
 func (x *ProductBatchListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_inventory_iface_v1_service_proto_msgTypes[8]
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -597,7 +1467,7 @@ func (x *ProductBatchListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProductBatchListRequest.ProtoReflect.Descriptor instead.
 func (*ProductBatchListRequest) Descriptor() ([]byte, []int) {
-	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{8}
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *ProductBatchListRequest) GetProductId() uint64 {
@@ -638,7 +1508,7 @@ type ProductBatchItem struct {
 
 func (x *ProductBatchItem) Reset() {
 	*x = ProductBatchItem{}
-	mi := &file_inventory_iface_v1_service_proto_msgTypes[9]
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -650,7 +1520,7 @@ func (x *ProductBatchItem) String() string {
 func (*ProductBatchItem) ProtoMessage() {}
 
 func (x *ProductBatchItem) ProtoReflect() protoreflect.Message {
-	mi := &file_inventory_iface_v1_service_proto_msgTypes[9]
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -663,7 +1533,7 @@ func (x *ProductBatchItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProductBatchItem.ProtoReflect.Descriptor instead.
 func (*ProductBatchItem) Descriptor() ([]byte, []int) {
-	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{9}
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *ProductBatchItem) GetId() uint64 {
@@ -739,7 +1609,7 @@ type ProductBatchListResponse struct {
 
 func (x *ProductBatchListResponse) Reset() {
 	*x = ProductBatchListResponse{}
-	mi := &file_inventory_iface_v1_service_proto_msgTypes[10]
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -751,7 +1621,7 @@ func (x *ProductBatchListResponse) String() string {
 func (*ProductBatchListResponse) ProtoMessage() {}
 
 func (x *ProductBatchListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_inventory_iface_v1_service_proto_msgTypes[10]
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -764,7 +1634,7 @@ func (x *ProductBatchListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProductBatchListResponse.ProtoReflect.Descriptor instead.
 func (*ProductBatchListResponse) Descriptor() ([]byte, []int) {
-	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{10}
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *ProductBatchListResponse) GetBatches() []*ProductBatchItem {
@@ -790,7 +1660,7 @@ type PushStockEventRequest struct {
 
 func (x *PushStockEventRequest) Reset() {
 	*x = PushStockEventRequest{}
-	mi := &file_inventory_iface_v1_service_proto_msgTypes[11]
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -802,7 +1672,7 @@ func (x *PushStockEventRequest) String() string {
 func (*PushStockEventRequest) ProtoMessage() {}
 
 func (x *PushStockEventRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_inventory_iface_v1_service_proto_msgTypes[11]
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -815,7 +1685,7 @@ func (x *PushStockEventRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PushStockEventRequest.ProtoReflect.Descriptor instead.
 func (*PushStockEventRequest) Descriptor() ([]byte, []int) {
-	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{11}
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *PushStockEventRequest) GetEvent() *v11.StockEvent {
@@ -833,7 +1703,7 @@ type PushStockEventResponse struct {
 
 func (x *PushStockEventResponse) Reset() {
 	*x = PushStockEventResponse{}
-	mi := &file_inventory_iface_v1_service_proto_msgTypes[12]
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -845,7 +1715,7 @@ func (x *PushStockEventResponse) String() string {
 func (*PushStockEventResponse) ProtoMessage() {}
 
 func (x *PushStockEventResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_inventory_iface_v1_service_proto_msgTypes[12]
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -858,7 +1728,7 @@ func (x *PushStockEventResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PushStockEventResponse.ProtoReflect.Descriptor instead.
 func (*PushStockEventResponse) Descriptor() ([]byte, []int) {
-	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{12}
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{22}
 }
 
 type StockMovementRequest struct {
@@ -873,7 +1743,7 @@ type StockMovementRequest struct {
 
 func (x *StockMovementRequest) Reset() {
 	*x = StockMovementRequest{}
-	mi := &file_inventory_iface_v1_service_proto_msgTypes[13]
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -885,7 +1755,7 @@ func (x *StockMovementRequest) String() string {
 func (*StockMovementRequest) ProtoMessage() {}
 
 func (x *StockMovementRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_inventory_iface_v1_service_proto_msgTypes[13]
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -898,7 +1768,7 @@ func (x *StockMovementRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StockMovementRequest.ProtoReflect.Descriptor instead.
 func (*StockMovementRequest) Descriptor() ([]byte, []int) {
-	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{13}
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *StockMovementRequest) GetProductId() uint64 {
@@ -943,7 +1813,7 @@ type MovementTransactionInfo struct {
 
 func (x *MovementTransactionInfo) Reset() {
 	*x = MovementTransactionInfo{}
-	mi := &file_inventory_iface_v1_service_proto_msgTypes[14]
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -955,7 +1825,7 @@ func (x *MovementTransactionInfo) String() string {
 func (*MovementTransactionInfo) ProtoMessage() {}
 
 func (x *MovementTransactionInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_inventory_iface_v1_service_proto_msgTypes[14]
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -968,7 +1838,7 @@ func (x *MovementTransactionInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MovementTransactionInfo.ProtoReflect.Descriptor instead.
 func (*MovementTransactionInfo) Descriptor() ([]byte, []int) {
-	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{14}
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *MovementTransactionInfo) GetTransactionId() uint64 {
@@ -1035,7 +1905,7 @@ type MovementItem struct {
 
 func (x *MovementItem) Reset() {
 	*x = MovementItem{}
-	mi := &file_inventory_iface_v1_service_proto_msgTypes[15]
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1047,7 +1917,7 @@ func (x *MovementItem) String() string {
 func (*MovementItem) ProtoMessage() {}
 
 func (x *MovementItem) ProtoReflect() protoreflect.Message {
-	mi := &file_inventory_iface_v1_service_proto_msgTypes[15]
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1060,7 +1930,7 @@ func (x *MovementItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MovementItem.ProtoReflect.Descriptor instead.
 func (*MovementItem) Descriptor() ([]byte, []int) {
-	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{15}
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *MovementItem) GetId() uint64 {
@@ -1157,7 +2027,7 @@ type StockMovementResponse struct {
 
 func (x *StockMovementResponse) Reset() {
 	*x = StockMovementResponse{}
-	mi := &file_inventory_iface_v1_service_proto_msgTypes[16]
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1169,7 +2039,7 @@ func (x *StockMovementResponse) String() string {
 func (*StockMovementResponse) ProtoMessage() {}
 
 func (x *StockMovementResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_inventory_iface_v1_service_proto_msgTypes[16]
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1182,7 +2052,7 @@ func (x *StockMovementResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StockMovementResponse.ProtoReflect.Descriptor instead.
 func (*StockMovementResponse) Descriptor() ([]byte, []int) {
-	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{16}
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *StockMovementResponse) GetMovements() []*MovementItem {
@@ -1209,7 +2079,7 @@ type ProvisionItem struct {
 
 func (x *ProvisionItem) Reset() {
 	*x = ProvisionItem{}
-	mi := &file_inventory_iface_v1_service_proto_msgTypes[17]
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1221,7 +2091,7 @@ func (x *ProvisionItem) String() string {
 func (*ProvisionItem) ProtoMessage() {}
 
 func (x *ProvisionItem) ProtoReflect() protoreflect.Message {
-	mi := &file_inventory_iface_v1_service_proto_msgTypes[17]
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1234,7 +2104,7 @@ func (x *ProvisionItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProvisionItem.ProtoReflect.Descriptor instead.
 func (*ProvisionItem) Descriptor() ([]byte, []int) {
-	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{17}
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *ProvisionItem) GetProductId() uint64 {
@@ -1263,7 +2133,7 @@ type OrderRequest struct {
 
 func (x *OrderRequest) Reset() {
 	*x = OrderRequest{}
-	mi := &file_inventory_iface_v1_service_proto_msgTypes[18]
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1275,7 +2145,7 @@ func (x *OrderRequest) String() string {
 func (*OrderRequest) ProtoMessage() {}
 
 func (x *OrderRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_inventory_iface_v1_service_proto_msgTypes[18]
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1288,7 +2158,7 @@ func (x *OrderRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderRequest.ProtoReflect.Descriptor instead.
 func (*OrderRequest) Descriptor() ([]byte, []int) {
-	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{18}
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *OrderRequest) GetTeamId() uint64 {
@@ -1331,7 +2201,7 @@ type ProvisionItemRes struct {
 
 func (x *ProvisionItemRes) Reset() {
 	*x = ProvisionItemRes{}
-	mi := &file_inventory_iface_v1_service_proto_msgTypes[19]
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1343,7 +2213,7 @@ func (x *ProvisionItemRes) String() string {
 func (*ProvisionItemRes) ProtoMessage() {}
 
 func (x *ProvisionItemRes) ProtoReflect() protoreflect.Message {
-	mi := &file_inventory_iface_v1_service_proto_msgTypes[19]
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1356,7 +2226,7 @@ func (x *ProvisionItemRes) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProvisionItemRes.ProtoReflect.Descriptor instead.
 func (*ProvisionItemRes) Descriptor() ([]byte, []int) {
-	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{19}
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *ProvisionItemRes) GetProductId() uint64 {
@@ -1397,7 +2267,7 @@ type OrderResponse struct {
 
 func (x *OrderResponse) Reset() {
 	*x = OrderResponse{}
-	mi := &file_inventory_iface_v1_service_proto_msgTypes[20]
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1409,7 +2279,7 @@ func (x *OrderResponse) String() string {
 func (*OrderResponse) ProtoMessage() {}
 
 func (x *OrderResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_inventory_iface_v1_service_proto_msgTypes[20]
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1422,7 +2292,7 @@ func (x *OrderResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderResponse.ProtoReflect.Descriptor instead.
 func (*OrderResponse) Descriptor() ([]byte, []int) {
-	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{20}
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *OrderResponse) GetProvisions() []*ProvisionItemRes {
@@ -1447,7 +2317,7 @@ type HelloRequest struct {
 
 func (x *HelloRequest) Reset() {
 	*x = HelloRequest{}
-	mi := &file_inventory_iface_v1_service_proto_msgTypes[21]
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1459,7 +2329,7 @@ func (x *HelloRequest) String() string {
 func (*HelloRequest) ProtoMessage() {}
 
 func (x *HelloRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_inventory_iface_v1_service_proto_msgTypes[21]
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1472,7 +2342,7 @@ func (x *HelloRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HelloRequest.ProtoReflect.Descriptor instead.
 func (*HelloRequest) Descriptor() ([]byte, []int) {
-	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{21}
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{31}
 }
 
 type HelloResponse struct {
@@ -1483,7 +2353,7 @@ type HelloResponse struct {
 
 func (x *HelloResponse) Reset() {
 	*x = HelloResponse{}
-	mi := &file_inventory_iface_v1_service_proto_msgTypes[22]
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1495,7 +2365,7 @@ func (x *HelloResponse) String() string {
 func (*HelloResponse) ProtoMessage() {}
 
 func (x *HelloResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_inventory_iface_v1_service_proto_msgTypes[22]
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1508,19 +2378,2371 @@ func (x *HelloResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HelloResponse.ProtoReflect.Descriptor instead.
 func (*HelloResponse) Descriptor() ([]byte, []int) {
-	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{22}
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{32}
+}
+
+type RackCreateRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	WarehouseId   uint64                 `protobuf:"varint,1,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RackCreateRequest) Reset() {
+	*x = RackCreateRequest{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[33]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RackCreateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RackCreateRequest) ProtoMessage() {}
+
+func (x *RackCreateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[33]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RackCreateRequest.ProtoReflect.Descriptor instead.
+func (*RackCreateRequest) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{33}
+}
+
+func (x *RackCreateRequest) GetWarehouseId() uint64 {
+	if x != nil {
+		return x.WarehouseId
+	}
+	return 0
+}
+
+func (x *RackCreateRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+type RackCreateResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RackCreateResponse) Reset() {
+	*x = RackCreateResponse{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[34]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RackCreateResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RackCreateResponse) ProtoMessage() {}
+
+func (x *RackCreateResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[34]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RackCreateResponse.ProtoReflect.Descriptor instead.
+func (*RackCreateResponse) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{34}
+}
+
+func (x *RackCreateResponse) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type RackUpdateRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	WarehouseId   uint64                 `protobuf:"varint,2,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
+	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RackUpdateRequest) Reset() {
+	*x = RackUpdateRequest{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[35]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RackUpdateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RackUpdateRequest) ProtoMessage() {}
+
+func (x *RackUpdateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[35]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RackUpdateRequest.ProtoReflect.Descriptor instead.
+func (*RackUpdateRequest) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{35}
+}
+
+func (x *RackUpdateRequest) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *RackUpdateRequest) GetWarehouseId() uint64 {
+	if x != nil {
+		return x.WarehouseId
+	}
+	return 0
+}
+
+func (x *RackUpdateRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+type RackUpdateResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RackUpdateResponse) Reset() {
+	*x = RackUpdateResponse{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[36]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RackUpdateResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RackUpdateResponse) ProtoMessage() {}
+
+func (x *RackUpdateResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[36]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RackUpdateResponse.ProtoReflect.Descriptor instead.
+func (*RackUpdateResponse) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{36}
+}
+
+type RackDeleteRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	WarehouseId   uint64                 `protobuf:"varint,2,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RackDeleteRequest) Reset() {
+	*x = RackDeleteRequest{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[37]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RackDeleteRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RackDeleteRequest) ProtoMessage() {}
+
+func (x *RackDeleteRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[37]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RackDeleteRequest.ProtoReflect.Descriptor instead.
+func (*RackDeleteRequest) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{37}
+}
+
+func (x *RackDeleteRequest) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *RackDeleteRequest) GetWarehouseId() uint64 {
+	if x != nil {
+		return x.WarehouseId
+	}
+	return 0
+}
+
+type RackDeleteResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RackDeleteResponse) Reset() {
+	*x = RackDeleteResponse{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[38]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RackDeleteResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RackDeleteResponse) ProtoMessage() {}
+
+func (x *RackDeleteResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[38]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RackDeleteResponse.ProtoReflect.Descriptor instead.
+func (*RackDeleteResponse) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{38}
+}
+
+type RackDetailRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	WarehouseId   uint64                 `protobuf:"varint,2,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RackDetailRequest) Reset() {
+	*x = RackDetailRequest{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[39]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RackDetailRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RackDetailRequest) ProtoMessage() {}
+
+func (x *RackDetailRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[39]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RackDetailRequest.ProtoReflect.Descriptor instead.
+func (*RackDetailRequest) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{39}
+}
+
+func (x *RackDetailRequest) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *RackDetailRequest) GetWarehouseId() uint64 {
+	if x != nil {
+		return x.WarehouseId
+	}
+	return 0
+}
+
+type RackDetailResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	WarehouseId   uint64                 `protobuf:"varint,2,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
+	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	IsSystem      bool                   `protobuf:"varint,4,opt,name=is_system,json=isSystem,proto3" json:"is_system,omitempty"`
+	StockCount    int64                  `protobuf:"varint,5,opt,name=stock_count,json=stockCount,proto3" json:"stock_count,omitempty"`
+	ProductCount  int64                  `protobuf:"varint,6,opt,name=product_count,json=productCount,proto3" json:"product_count,omitempty"`
+	WarehouseName string                 `protobuf:"bytes,7,opt,name=warehouse_name,json=warehouseName,proto3" json:"warehouse_name,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RackDetailResponse) Reset() {
+	*x = RackDetailResponse{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[40]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RackDetailResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RackDetailResponse) ProtoMessage() {}
+
+func (x *RackDetailResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[40]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RackDetailResponse.ProtoReflect.Descriptor instead.
+func (*RackDetailResponse) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{40}
+}
+
+func (x *RackDetailResponse) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *RackDetailResponse) GetWarehouseId() uint64 {
+	if x != nil {
+		return x.WarehouseId
+	}
+	return 0
+}
+
+func (x *RackDetailResponse) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *RackDetailResponse) GetIsSystem() bool {
+	if x != nil {
+		return x.IsSystem
+	}
+	return false
+}
+
+func (x *RackDetailResponse) GetStockCount() int64 {
+	if x != nil {
+		return x.StockCount
+	}
+	return 0
+}
+
+func (x *RackDetailResponse) GetProductCount() int64 {
+	if x != nil {
+		return x.ProductCount
+	}
+	return 0
+}
+
+func (x *RackDetailResponse) GetWarehouseName() string {
+	if x != nil {
+		return x.WarehouseName
+	}
+	return ""
+}
+
+func (x *RackDetailResponse) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+type RackListFilter struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	WarehouseId   uint64                 `protobuf:"varint,1,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
+	TeamId        uint64                 `protobuf:"varint,2,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"` // racks holding this team's stock (optional)
+	Search        string                 `protobuf:"bytes,3,opt,name=search,proto3" json:"search,omitempty"`                // name ILIKE (optional)
+	Page          *v1.PageFilter         `protobuf:"bytes,4,opt,name=page,proto3" json:"page,omitempty"`
+	ProductId     uint64                 `protobuf:"varint,5,opt,name=product_id,json=productId,proto3" json:"product_id,omitempty"` // racks currently holding this product (optional)
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RackListFilter) Reset() {
+	*x = RackListFilter{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[41]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RackListFilter) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RackListFilter) ProtoMessage() {}
+
+func (x *RackListFilter) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[41]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RackListFilter.ProtoReflect.Descriptor instead.
+func (*RackListFilter) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{41}
+}
+
+func (x *RackListFilter) GetWarehouseId() uint64 {
+	if x != nil {
+		return x.WarehouseId
+	}
+	return 0
+}
+
+func (x *RackListFilter) GetTeamId() uint64 {
+	if x != nil {
+		return x.TeamId
+	}
+	return 0
+}
+
+func (x *RackListFilter) GetSearch() string {
+	if x != nil {
+		return x.Search
+	}
+	return ""
+}
+
+func (x *RackListFilter) GetPage() *v1.PageFilter {
+	if x != nil {
+		return x.Page
+	}
+	return nil
+}
+
+func (x *RackListFilter) GetProductId() uint64 {
+	if x != nil {
+		return x.ProductId
+	}
+	return 0
+}
+
+type RackListSort struct {
+	state    protoimpl.MessageState `protogen:"open.v1"`
+	SortType v1.SortType            `protobuf:"varint,1,opt,name=sort_type,json=sortType,proto3,enum=common.v1.SortType" json:"sort_type,omitempty"`
+	// Types that are valid to be assigned to S:
+	//
+	//	*RackListSort_General
+	//	*RackListSort_Stock
+	S             isRackListSort_S `protobuf_oneof:"s"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RackListSort) Reset() {
+	*x = RackListSort{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[42]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RackListSort) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RackListSort) ProtoMessage() {}
+
+func (x *RackListSort) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[42]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RackListSort.ProtoReflect.Descriptor instead.
+func (*RackListSort) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{42}
+}
+
+func (x *RackListSort) GetSortType() v1.SortType {
+	if x != nil {
+		return x.SortType
+	}
+	return v1.SortType(0)
+}
+
+func (x *RackListSort) GetS() isRackListSort_S {
+	if x != nil {
+		return x.S
+	}
+	return nil
+}
+
+func (x *RackListSort) GetGeneral() RackGeneralSort {
+	if x != nil {
+		if x, ok := x.S.(*RackListSort_General); ok {
+			return x.General
+		}
+	}
+	return RackGeneralSort_RACK_GENERAL_SORT_UNSPECIFIED
+}
+
+func (x *RackListSort) GetStock() RackStockSort {
+	if x != nil {
+		if x, ok := x.S.(*RackListSort_Stock); ok {
+			return x.Stock
+		}
+	}
+	return RackStockSort_RACK_STOCK_SORT_UNSPECIFIED
+}
+
+type isRackListSort_S interface {
+	isRackListSort_S()
+}
+
+type RackListSort_General struct {
+	General RackGeneralSort `protobuf:"varint,2,opt,name=general,proto3,enum=inventory_iface.v1.RackGeneralSort,oneof"`
+}
+
+type RackListSort_Stock struct {
+	Stock RackStockSort `protobuf:"varint,3,opt,name=stock,proto3,enum=inventory_iface.v1.RackStockSort,oneof"`
+}
+
+func (*RackListSort_General) isRackListSort_S() {}
+
+func (*RackListSort_Stock) isRackListSort_S() {}
+
+type RackListRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Filter        *RackListFilter        `protobuf:"bytes,1,opt,name=filter,proto3" json:"filter,omitempty"`
+	Sort          *RackListSort          `protobuf:"bytes,2,opt,name=sort,proto3" json:"sort,omitempty"`
+	DataTypes     []RackListDataType     `protobuf:"varint,3,rep,packed,name=data_types,json=dataTypes,proto3,enum=inventory_iface.v1.RackListDataType" json:"data_types,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RackListRequest) Reset() {
+	*x = RackListRequest{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[43]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RackListRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RackListRequest) ProtoMessage() {}
+
+func (x *RackListRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[43]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RackListRequest.ProtoReflect.Descriptor instead.
+func (*RackListRequest) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{43}
+}
+
+func (x *RackListRequest) GetFilter() *RackListFilter {
+	if x != nil {
+		return x.Filter
+	}
+	return nil
+}
+
+func (x *RackListRequest) GetSort() *RackListSort {
+	if x != nil {
+		return x.Sort
+	}
+	return nil
+}
+
+func (x *RackListRequest) GetDataTypes() []RackListDataType {
+	if x != nil {
+		return x.DataTypes
+	}
+	return nil
+}
+
+type RackGeneralItem struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RackGeneralItem) Reset() {
+	*x = RackGeneralItem{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[44]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RackGeneralItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RackGeneralItem) ProtoMessage() {}
+
+func (x *RackGeneralItem) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[44]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RackGeneralItem.ProtoReflect.Descriptor instead.
+func (*RackGeneralItem) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{44}
+}
+
+func (x *RackGeneralItem) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *RackGeneralItem) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *RackGeneralItem) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+type RackGeneralData struct {
+	state         protoimpl.MessageState      `protogen:"open.v1"`
+	Data          map[uint64]*RackGeneralItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RackGeneralData) Reset() {
+	*x = RackGeneralData{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[45]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RackGeneralData) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RackGeneralData) ProtoMessage() {}
+
+func (x *RackGeneralData) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[45]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RackGeneralData.ProtoReflect.Descriptor instead.
+func (*RackGeneralData) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{45}
+}
+
+func (x *RackGeneralData) GetData() map[uint64]*RackGeneralItem {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+type RackStockItem struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	StockCount    int64                  `protobuf:"varint,1,opt,name=stock_count,json=stockCount,proto3" json:"stock_count,omitempty"`
+	ProductCount  int64                  `protobuf:"varint,2,opt,name=product_count,json=productCount,proto3" json:"product_count,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RackStockItem) Reset() {
+	*x = RackStockItem{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[46]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RackStockItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RackStockItem) ProtoMessage() {}
+
+func (x *RackStockItem) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[46]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RackStockItem.ProtoReflect.Descriptor instead.
+func (*RackStockItem) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{46}
+}
+
+func (x *RackStockItem) GetStockCount() int64 {
+	if x != nil {
+		return x.StockCount
+	}
+	return 0
+}
+
+func (x *RackStockItem) GetProductCount() int64 {
+	if x != nil {
+		return x.ProductCount
+	}
+	return 0
+}
+
+type RackStockData struct {
+	state         protoimpl.MessageState    `protogen:"open.v1"`
+	Data          map[uint64]*RackStockItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RackStockData) Reset() {
+	*x = RackStockData{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[47]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RackStockData) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RackStockData) ProtoMessage() {}
+
+func (x *RackStockData) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[47]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RackStockData.ProtoReflect.Descriptor instead.
+func (*RackStockData) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{47}
+}
+
+func (x *RackStockData) GetData() map[uint64]*RackStockItem {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+type RackWarehouseItem struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	WarehouseId   uint64                 `protobuf:"varint,1,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
+	WarehouseName string                 `protobuf:"bytes,2,opt,name=warehouse_name,json=warehouseName,proto3" json:"warehouse_name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RackWarehouseItem) Reset() {
+	*x = RackWarehouseItem{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[48]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RackWarehouseItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RackWarehouseItem) ProtoMessage() {}
+
+func (x *RackWarehouseItem) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[48]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RackWarehouseItem.ProtoReflect.Descriptor instead.
+func (*RackWarehouseItem) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{48}
+}
+
+func (x *RackWarehouseItem) GetWarehouseId() uint64 {
+	if x != nil {
+		return x.WarehouseId
+	}
+	return 0
+}
+
+func (x *RackWarehouseItem) GetWarehouseName() string {
+	if x != nil {
+		return x.WarehouseName
+	}
+	return ""
+}
+
+type RackWarehouseData struct {
+	state         protoimpl.MessageState        `protogen:"open.v1"`
+	Data          map[uint64]*RackWarehouseItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RackWarehouseData) Reset() {
+	*x = RackWarehouseData{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[49]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RackWarehouseData) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RackWarehouseData) ProtoMessage() {}
+
+func (x *RackWarehouseData) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[49]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RackWarehouseData.ProtoReflect.Descriptor instead.
+func (*RackWarehouseData) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{49}
+}
+
+func (x *RackWarehouseData) GetData() map[uint64]*RackWarehouseItem {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+type RackData struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to Data:
+	//
+	//	*RackData_General
+	//	*RackData_Stock
+	//	*RackData_Warehouse
+	Data          isRackData_Data `protobuf_oneof:"data"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RackData) Reset() {
+	*x = RackData{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[50]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RackData) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RackData) ProtoMessage() {}
+
+func (x *RackData) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[50]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RackData.ProtoReflect.Descriptor instead.
+func (*RackData) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{50}
+}
+
+func (x *RackData) GetData() isRackData_Data {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+func (x *RackData) GetGeneral() *RackGeneralData {
+	if x != nil {
+		if x, ok := x.Data.(*RackData_General); ok {
+			return x.General
+		}
+	}
+	return nil
+}
+
+func (x *RackData) GetStock() *RackStockData {
+	if x != nil {
+		if x, ok := x.Data.(*RackData_Stock); ok {
+			return x.Stock
+		}
+	}
+	return nil
+}
+
+func (x *RackData) GetWarehouse() *RackWarehouseData {
+	if x != nil {
+		if x, ok := x.Data.(*RackData_Warehouse); ok {
+			return x.Warehouse
+		}
+	}
+	return nil
+}
+
+type isRackData_Data interface {
+	isRackData_Data()
+}
+
+type RackData_General struct {
+	General *RackGeneralData `protobuf:"bytes,1,opt,name=general,proto3,oneof"`
+}
+
+type RackData_Stock struct {
+	Stock *RackStockData `protobuf:"bytes,2,opt,name=stock,proto3,oneof"`
+}
+
+type RackData_Warehouse struct {
+	Warehouse *RackWarehouseData `protobuf:"bytes,3,opt,name=warehouse,proto3,oneof"`
+}
+
+func (*RackData_General) isRackData_Data() {}
+
+func (*RackData_Stock) isRackData_Data() {}
+
+func (*RackData_Warehouse) isRackData_Data() {}
+
+type RackListResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Data          []*RackData            `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
+	Ids           []uint64               `protobuf:"varint,2,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RackListResponse) Reset() {
+	*x = RackListResponse{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[51]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RackListResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RackListResponse) ProtoMessage() {}
+
+func (x *RackListResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[51]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RackListResponse.ProtoReflect.Descriptor instead.
+func (*RackListResponse) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{51}
+}
+
+func (x *RackListResponse) GetData() []*RackData {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+func (x *RackListResponse) GetIds() []uint64 {
+	if x != nil {
+		return x.Ids
+	}
+	return nil
+}
+
+type ProductConfigRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ProductId     uint64                 `protobuf:"varint,1,opt,name=product_id,json=productId,proto3" json:"product_id,omitempty"`
+	WarehouseId   uint64                 `protobuf:"varint,2,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ProductConfigRequest) Reset() {
+	*x = ProductConfigRequest{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[52]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProductConfigRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProductConfigRequest) ProtoMessage() {}
+
+func (x *ProductConfigRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[52]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProductConfigRequest.ProtoReflect.Descriptor instead.
+func (*ProductConfigRequest) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{52}
+}
+
+func (x *ProductConfigRequest) GetProductId() uint64 {
+	if x != nil {
+		return x.ProductId
+	}
+	return 0
+}
+
+func (x *ProductConfigRequest) GetWarehouseId() uint64 {
+	if x != nil {
+		return x.WarehouseId
+	}
+	return 0
+}
+
+type ProductConfigResponse struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	ProductId        uint64                 `protobuf:"varint,1,opt,name=product_id,json=productId,proto3" json:"product_id,omitempty"`
+	WarehouseId      uint64                 `protobuf:"varint,2,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
+	QueueType        QueueType              `protobuf:"varint,3,opt,name=queue_type,json=queueType,proto3,enum=inventory_iface.v1.QueueType" json:"queue_type,omitempty"` // stock batch price-ordering queue
+	PlacementPicking PlacementPickingType   `protobuf:"varint,4,opt,name=placement_picking,json=placementPicking,proto3,enum=inventory_iface.v1.PlacementPickingType" json:"placement_picking,omitempty"`
+	Configured       bool                   `protobuf:"varint,5,opt,name=configured,proto3" json:"configured,omitempty"` // false => defaults returned (no stored config)
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *ProductConfigResponse) Reset() {
+	*x = ProductConfigResponse{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[53]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProductConfigResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProductConfigResponse) ProtoMessage() {}
+
+func (x *ProductConfigResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[53]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProductConfigResponse.ProtoReflect.Descriptor instead.
+func (*ProductConfigResponse) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{53}
+}
+
+func (x *ProductConfigResponse) GetProductId() uint64 {
+	if x != nil {
+		return x.ProductId
+	}
+	return 0
+}
+
+func (x *ProductConfigResponse) GetWarehouseId() uint64 {
+	if x != nil {
+		return x.WarehouseId
+	}
+	return 0
+}
+
+func (x *ProductConfigResponse) GetQueueType() QueueType {
+	if x != nil {
+		return x.QueueType
+	}
+	return QueueType_QUEUE_TYPE_UNSPECIFIED
+}
+
+func (x *ProductConfigResponse) GetPlacementPicking() PlacementPickingType {
+	if x != nil {
+		return x.PlacementPicking
+	}
+	return PlacementPickingType_PLACEMENT_PICKING_TYPE_UNSPECIFIED
+}
+
+func (x *ProductConfigResponse) GetConfigured() bool {
+	if x != nil {
+		return x.Configured
+	}
+	return false
+}
+
+type ProductConfigUpdateRequest struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	ProductId        uint64                 `protobuf:"varint,1,opt,name=product_id,json=productId,proto3" json:"product_id,omitempty"`
+	WarehouseId      uint64                 `protobuf:"varint,2,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
+	QueueType        QueueType              `protobuf:"varint,3,opt,name=queue_type,json=queueType,proto3,enum=inventory_iface.v1.QueueType" json:"queue_type,omitempty"`
+	PlacementPicking PlacementPickingType   `protobuf:"varint,4,opt,name=placement_picking,json=placementPicking,proto3,enum=inventory_iface.v1.PlacementPickingType" json:"placement_picking,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *ProductConfigUpdateRequest) Reset() {
+	*x = ProductConfigUpdateRequest{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[54]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProductConfigUpdateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProductConfigUpdateRequest) ProtoMessage() {}
+
+func (x *ProductConfigUpdateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[54]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProductConfigUpdateRequest.ProtoReflect.Descriptor instead.
+func (*ProductConfigUpdateRequest) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{54}
+}
+
+func (x *ProductConfigUpdateRequest) GetProductId() uint64 {
+	if x != nil {
+		return x.ProductId
+	}
+	return 0
+}
+
+func (x *ProductConfigUpdateRequest) GetWarehouseId() uint64 {
+	if x != nil {
+		return x.WarehouseId
+	}
+	return 0
+}
+
+func (x *ProductConfigUpdateRequest) GetQueueType() QueueType {
+	if x != nil {
+		return x.QueueType
+	}
+	return QueueType_QUEUE_TYPE_UNSPECIFIED
+}
+
+func (x *ProductConfigUpdateRequest) GetPlacementPicking() PlacementPickingType {
+	if x != nil {
+		return x.PlacementPicking
+	}
+	return PlacementPickingType_PLACEMENT_PICKING_TYPE_UNSPECIFIED
+}
+
+type ProductConfigUpdateResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ProductConfigUpdateResponse) Reset() {
+	*x = ProductConfigUpdateResponse{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[55]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProductConfigUpdateResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProductConfigUpdateResponse) ProtoMessage() {}
+
+func (x *ProductConfigUpdateResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[55]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProductConfigUpdateResponse.ProtoReflect.Descriptor instead.
+func (*ProductConfigUpdateResponse) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{55}
+}
+
+type ProductDetailRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ProductId     uint64                 `protobuf:"varint,1,opt,name=product_id,json=productId,proto3" json:"product_id,omitempty"`
+	WarehouseId   uint64                 `protobuf:"varint,2,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ProductDetailRequest) Reset() {
+	*x = ProductDetailRequest{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[56]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProductDetailRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProductDetailRequest) ProtoMessage() {}
+
+func (x *ProductDetailRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[56]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProductDetailRequest.ProtoReflect.Descriptor instead.
+func (*ProductDetailRequest) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{56}
+}
+
+func (x *ProductDetailRequest) GetProductId() uint64 {
+	if x != nil {
+		return x.ProductId
+	}
+	return 0
+}
+
+func (x *ProductDetailRequest) GetWarehouseId() uint64 {
+	if x != nil {
+		return x.WarehouseId
+	}
+	return 0
+}
+
+type ProductDetailResponse struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	ProductId        uint64                 `protobuf:"varint,1,opt,name=product_id,json=productId,proto3" json:"product_id,omitempty"`
+	WarehouseId      uint64                 `protobuf:"varint,2,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
+	Name             string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	TeamId           uint64                 `protobuf:"varint,4,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	TeamName         string                 `protobuf:"bytes,5,opt,name=team_name,json=teamName,proto3" json:"team_name,omitempty"`
+	StockReady       int64                  `protobuf:"varint,6,opt,name=stock_ready,json=stockReady,proto3" json:"stock_ready,omitempty"`
+	StockReadyAmount float64                `protobuf:"fixed64,7,opt,name=stock_ready_amount,json=stockReadyAmount,proto3" json:"stock_ready_amount,omitempty"`
+	BatchCount       int64                  `protobuf:"varint,8,opt,name=batch_count,json=batchCount,proto3" json:"batch_count,omitempty"`
+	RackCount        int64                  `protobuf:"varint,9,opt,name=rack_count,json=rackCount,proto3" json:"rack_count,omitempty"`
+	QueueType        QueueType              `protobuf:"varint,10,opt,name=queue_type,json=queueType,proto3,enum=inventory_iface.v1.QueueType" json:"queue_type,omitempty"`
+	PlacementPicking PlacementPickingType   `protobuf:"varint,11,opt,name=placement_picking,json=placementPicking,proto3,enum=inventory_iface.v1.PlacementPickingType" json:"placement_picking,omitempty"`
+	Configured       bool                   `protobuf:"varint,12,opt,name=configured,proto3" json:"configured,omitempty"`
+	UpdatedAt        *timestamppb.Timestamp `protobuf:"bytes,13,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *ProductDetailResponse) Reset() {
+	*x = ProductDetailResponse{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[57]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProductDetailResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProductDetailResponse) ProtoMessage() {}
+
+func (x *ProductDetailResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[57]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProductDetailResponse.ProtoReflect.Descriptor instead.
+func (*ProductDetailResponse) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{57}
+}
+
+func (x *ProductDetailResponse) GetProductId() uint64 {
+	if x != nil {
+		return x.ProductId
+	}
+	return 0
+}
+
+func (x *ProductDetailResponse) GetWarehouseId() uint64 {
+	if x != nil {
+		return x.WarehouseId
+	}
+	return 0
+}
+
+func (x *ProductDetailResponse) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *ProductDetailResponse) GetTeamId() uint64 {
+	if x != nil {
+		return x.TeamId
+	}
+	return 0
+}
+
+func (x *ProductDetailResponse) GetTeamName() string {
+	if x != nil {
+		return x.TeamName
+	}
+	return ""
+}
+
+func (x *ProductDetailResponse) GetStockReady() int64 {
+	if x != nil {
+		return x.StockReady
+	}
+	return 0
+}
+
+func (x *ProductDetailResponse) GetStockReadyAmount() float64 {
+	if x != nil {
+		return x.StockReadyAmount
+	}
+	return 0
+}
+
+func (x *ProductDetailResponse) GetBatchCount() int64 {
+	if x != nil {
+		return x.BatchCount
+	}
+	return 0
+}
+
+func (x *ProductDetailResponse) GetRackCount() int64 {
+	if x != nil {
+		return x.RackCount
+	}
+	return 0
+}
+
+func (x *ProductDetailResponse) GetQueueType() QueueType {
+	if x != nil {
+		return x.QueueType
+	}
+	return QueueType_QUEUE_TYPE_UNSPECIFIED
+}
+
+func (x *ProductDetailResponse) GetPlacementPicking() PlacementPickingType {
+	if x != nil {
+		return x.PlacementPicking
+	}
+	return PlacementPickingType_PLACEMENT_PICKING_TYPE_UNSPECIFIED
+}
+
+func (x *ProductDetailResponse) GetConfigured() bool {
+	if x != nil {
+		return x.Configured
+	}
+	return false
+}
+
+func (x *ProductDetailResponse) GetUpdatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return nil
+}
+
+type ProductListFilter struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	WarehouseId   uint64                 `protobuf:"varint,1,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
+	TeamId        uint64                 `protobuf:"varint,2,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"` // optional
+	Search        string                 `protobuf:"bytes,3,opt,name=search,proto3" json:"search,omitempty"`                // name ILIKE (optional)
+	Page          *v1.PageFilter         `protobuf:"bytes,4,opt,name=page,proto3" json:"page,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ProductListFilter) Reset() {
+	*x = ProductListFilter{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[58]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProductListFilter) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProductListFilter) ProtoMessage() {}
+
+func (x *ProductListFilter) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[58]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProductListFilter.ProtoReflect.Descriptor instead.
+func (*ProductListFilter) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{58}
+}
+
+func (x *ProductListFilter) GetWarehouseId() uint64 {
+	if x != nil {
+		return x.WarehouseId
+	}
+	return 0
+}
+
+func (x *ProductListFilter) GetTeamId() uint64 {
+	if x != nil {
+		return x.TeamId
+	}
+	return 0
+}
+
+func (x *ProductListFilter) GetSearch() string {
+	if x != nil {
+		return x.Search
+	}
+	return ""
+}
+
+func (x *ProductListFilter) GetPage() *v1.PageFilter {
+	if x != nil {
+		return x.Page
+	}
+	return nil
+}
+
+type ProductListSort struct {
+	state    protoimpl.MessageState `protogen:"open.v1"`
+	SortType v1.SortType            `protobuf:"varint,1,opt,name=sort_type,json=sortType,proto3,enum=common.v1.SortType" json:"sort_type,omitempty"`
+	// Types that are valid to be assigned to S:
+	//
+	//	*ProductListSort_General
+	//	*ProductListSort_Stock
+	S             isProductListSort_S `protobuf_oneof:"s"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ProductListSort) Reset() {
+	*x = ProductListSort{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[59]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProductListSort) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProductListSort) ProtoMessage() {}
+
+func (x *ProductListSort) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[59]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProductListSort.ProtoReflect.Descriptor instead.
+func (*ProductListSort) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{59}
+}
+
+func (x *ProductListSort) GetSortType() v1.SortType {
+	if x != nil {
+		return x.SortType
+	}
+	return v1.SortType(0)
+}
+
+func (x *ProductListSort) GetS() isProductListSort_S {
+	if x != nil {
+		return x.S
+	}
+	return nil
+}
+
+func (x *ProductListSort) GetGeneral() ProductGeneralSort {
+	if x != nil {
+		if x, ok := x.S.(*ProductListSort_General); ok {
+			return x.General
+		}
+	}
+	return ProductGeneralSort_PRODUCT_GENERAL_SORT_UNSPECIFIED
+}
+
+func (x *ProductListSort) GetStock() ProductStockSort {
+	if x != nil {
+		if x, ok := x.S.(*ProductListSort_Stock); ok {
+			return x.Stock
+		}
+	}
+	return ProductStockSort_PRODUCT_STOCK_SORT_UNSPECIFIED
+}
+
+type isProductListSort_S interface {
+	isProductListSort_S()
+}
+
+type ProductListSort_General struct {
+	General ProductGeneralSort `protobuf:"varint,2,opt,name=general,proto3,enum=inventory_iface.v1.ProductGeneralSort,oneof"`
+}
+
+type ProductListSort_Stock struct {
+	Stock ProductStockSort `protobuf:"varint,3,opt,name=stock,proto3,enum=inventory_iface.v1.ProductStockSort,oneof"`
+}
+
+func (*ProductListSort_General) isProductListSort_S() {}
+
+func (*ProductListSort_Stock) isProductListSort_S() {}
+
+type ProductListRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Filter        *ProductListFilter     `protobuf:"bytes,1,opt,name=filter,proto3" json:"filter,omitempty"`
+	Sort          *ProductListSort       `protobuf:"bytes,2,opt,name=sort,proto3" json:"sort,omitempty"`
+	DataTypes     []ProductListDataType  `protobuf:"varint,3,rep,packed,name=data_types,json=dataTypes,proto3,enum=inventory_iface.v1.ProductListDataType" json:"data_types,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ProductListRequest) Reset() {
+	*x = ProductListRequest{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[60]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProductListRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProductListRequest) ProtoMessage() {}
+
+func (x *ProductListRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[60]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProductListRequest.ProtoReflect.Descriptor instead.
+func (*ProductListRequest) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{60}
+}
+
+func (x *ProductListRequest) GetFilter() *ProductListFilter {
+	if x != nil {
+		return x.Filter
+	}
+	return nil
+}
+
+func (x *ProductListRequest) GetSort() *ProductListSort {
+	if x != nil {
+		return x.Sort
+	}
+	return nil
+}
+
+func (x *ProductListRequest) GetDataTypes() []ProductListDataType {
+	if x != nil {
+		return x.DataTypes
+	}
+	return nil
+}
+
+type ProductGeneralItem struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ProductGeneralItem) Reset() {
+	*x = ProductGeneralItem{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[61]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProductGeneralItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProductGeneralItem) ProtoMessage() {}
+
+func (x *ProductGeneralItem) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[61]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProductGeneralItem.ProtoReflect.Descriptor instead.
+func (*ProductGeneralItem) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{61}
+}
+
+func (x *ProductGeneralItem) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *ProductGeneralItem) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+type ProductGeneralData struct {
+	state         protoimpl.MessageState         `protogen:"open.v1"`
+	Data          map[uint64]*ProductGeneralItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ProductGeneralData) Reset() {
+	*x = ProductGeneralData{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[62]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProductGeneralData) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProductGeneralData) ProtoMessage() {}
+
+func (x *ProductGeneralData) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[62]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProductGeneralData.ProtoReflect.Descriptor instead.
+func (*ProductGeneralData) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{62}
+}
+
+func (x *ProductGeneralData) GetData() map[uint64]*ProductGeneralItem {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+type ProductStockItem struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	StockReady       int64                  `protobuf:"varint,1,opt,name=stock_ready,json=stockReady,proto3" json:"stock_ready,omitempty"`
+	StockReadyAmount float64                `protobuf:"fixed64,2,opt,name=stock_ready_amount,json=stockReadyAmount,proto3" json:"stock_ready_amount,omitempty"`
+	BatchCount       int64                  `protobuf:"varint,3,opt,name=batch_count,json=batchCount,proto3" json:"batch_count,omitempty"`
+	RackCount        int64                  `protobuf:"varint,4,opt,name=rack_count,json=rackCount,proto3" json:"rack_count,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *ProductStockItem) Reset() {
+	*x = ProductStockItem{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[63]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProductStockItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProductStockItem) ProtoMessage() {}
+
+func (x *ProductStockItem) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[63]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProductStockItem.ProtoReflect.Descriptor instead.
+func (*ProductStockItem) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{63}
+}
+
+func (x *ProductStockItem) GetStockReady() int64 {
+	if x != nil {
+		return x.StockReady
+	}
+	return 0
+}
+
+func (x *ProductStockItem) GetStockReadyAmount() float64 {
+	if x != nil {
+		return x.StockReadyAmount
+	}
+	return 0
+}
+
+func (x *ProductStockItem) GetBatchCount() int64 {
+	if x != nil {
+		return x.BatchCount
+	}
+	return 0
+}
+
+func (x *ProductStockItem) GetRackCount() int64 {
+	if x != nil {
+		return x.RackCount
+	}
+	return 0
+}
+
+type ProductStockData struct {
+	state         protoimpl.MessageState       `protogen:"open.v1"`
+	Data          map[uint64]*ProductStockItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ProductStockData) Reset() {
+	*x = ProductStockData{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[64]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProductStockData) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProductStockData) ProtoMessage() {}
+
+func (x *ProductStockData) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[64]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProductStockData.ProtoReflect.Descriptor instead.
+func (*ProductStockData) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{64}
+}
+
+func (x *ProductStockData) GetData() map[uint64]*ProductStockItem {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+type ProductTeamItem struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	TeamName      string                 `protobuf:"bytes,2,opt,name=team_name,json=teamName,proto3" json:"team_name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ProductTeamItem) Reset() {
+	*x = ProductTeamItem{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[65]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProductTeamItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProductTeamItem) ProtoMessage() {}
+
+func (x *ProductTeamItem) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[65]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProductTeamItem.ProtoReflect.Descriptor instead.
+func (*ProductTeamItem) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{65}
+}
+
+func (x *ProductTeamItem) GetTeamId() uint64 {
+	if x != nil {
+		return x.TeamId
+	}
+	return 0
+}
+
+func (x *ProductTeamItem) GetTeamName() string {
+	if x != nil {
+		return x.TeamName
+	}
+	return ""
+}
+
+type ProductTeamData struct {
+	state         protoimpl.MessageState      `protogen:"open.v1"`
+	Data          map[uint64]*ProductTeamItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ProductTeamData) Reset() {
+	*x = ProductTeamData{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[66]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProductTeamData) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProductTeamData) ProtoMessage() {}
+
+func (x *ProductTeamData) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[66]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProductTeamData.ProtoReflect.Descriptor instead.
+func (*ProductTeamData) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{66}
+}
+
+func (x *ProductTeamData) GetData() map[uint64]*ProductTeamItem {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+type ProductConfigItem struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	QueueType        QueueType              `protobuf:"varint,1,opt,name=queue_type,json=queueType,proto3,enum=inventory_iface.v1.QueueType" json:"queue_type,omitempty"`
+	PlacementPicking PlacementPickingType   `protobuf:"varint,2,opt,name=placement_picking,json=placementPicking,proto3,enum=inventory_iface.v1.PlacementPickingType" json:"placement_picking,omitempty"`
+	Configured       bool                   `protobuf:"varint,3,opt,name=configured,proto3" json:"configured,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *ProductConfigItem) Reset() {
+	*x = ProductConfigItem{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[67]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProductConfigItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProductConfigItem) ProtoMessage() {}
+
+func (x *ProductConfigItem) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[67]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProductConfigItem.ProtoReflect.Descriptor instead.
+func (*ProductConfigItem) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{67}
+}
+
+func (x *ProductConfigItem) GetQueueType() QueueType {
+	if x != nil {
+		return x.QueueType
+	}
+	return QueueType_QUEUE_TYPE_UNSPECIFIED
+}
+
+func (x *ProductConfigItem) GetPlacementPicking() PlacementPickingType {
+	if x != nil {
+		return x.PlacementPicking
+	}
+	return PlacementPickingType_PLACEMENT_PICKING_TYPE_UNSPECIFIED
+}
+
+func (x *ProductConfigItem) GetConfigured() bool {
+	if x != nil {
+		return x.Configured
+	}
+	return false
+}
+
+type ProductConfigData struct {
+	state         protoimpl.MessageState        `protogen:"open.v1"`
+	Data          map[uint64]*ProductConfigItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ProductConfigData) Reset() {
+	*x = ProductConfigData{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[68]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProductConfigData) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProductConfigData) ProtoMessage() {}
+
+func (x *ProductConfigData) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[68]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProductConfigData.ProtoReflect.Descriptor instead.
+func (*ProductConfigData) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{68}
+}
+
+func (x *ProductConfigData) GetData() map[uint64]*ProductConfigItem {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+type ProductData struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to Data:
+	//
+	//	*ProductData_General
+	//	*ProductData_Stock
+	//	*ProductData_Team
+	//	*ProductData_Config
+	Data          isProductData_Data `protobuf_oneof:"data"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ProductData) Reset() {
+	*x = ProductData{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[69]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProductData) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProductData) ProtoMessage() {}
+
+func (x *ProductData) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[69]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProductData.ProtoReflect.Descriptor instead.
+func (*ProductData) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{69}
+}
+
+func (x *ProductData) GetData() isProductData_Data {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+func (x *ProductData) GetGeneral() *ProductGeneralData {
+	if x != nil {
+		if x, ok := x.Data.(*ProductData_General); ok {
+			return x.General
+		}
+	}
+	return nil
+}
+
+func (x *ProductData) GetStock() *ProductStockData {
+	if x != nil {
+		if x, ok := x.Data.(*ProductData_Stock); ok {
+			return x.Stock
+		}
+	}
+	return nil
+}
+
+func (x *ProductData) GetTeam() *ProductTeamData {
+	if x != nil {
+		if x, ok := x.Data.(*ProductData_Team); ok {
+			return x.Team
+		}
+	}
+	return nil
+}
+
+func (x *ProductData) GetConfig() *ProductConfigData {
+	if x != nil {
+		if x, ok := x.Data.(*ProductData_Config); ok {
+			return x.Config
+		}
+	}
+	return nil
+}
+
+type isProductData_Data interface {
+	isProductData_Data()
+}
+
+type ProductData_General struct {
+	General *ProductGeneralData `protobuf:"bytes,1,opt,name=general,proto3,oneof"`
+}
+
+type ProductData_Stock struct {
+	Stock *ProductStockData `protobuf:"bytes,2,opt,name=stock,proto3,oneof"`
+}
+
+type ProductData_Team struct {
+	Team *ProductTeamData `protobuf:"bytes,3,opt,name=team,proto3,oneof"`
+}
+
+type ProductData_Config struct {
+	Config *ProductConfigData `protobuf:"bytes,4,opt,name=config,proto3,oneof"`
+}
+
+func (*ProductData_General) isProductData_Data() {}
+
+func (*ProductData_Stock) isProductData_Data() {}
+
+func (*ProductData_Team) isProductData_Data() {}
+
+func (*ProductData_Config) isProductData_Data() {}
+
+type ProductListResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Data          []*ProductData         `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
+	Ids           []uint64               `protobuf:"varint,2,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ProductListResponse) Reset() {
+	*x = ProductListResponse{}
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[70]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProductListResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProductListResponse) ProtoMessage() {}
+
+func (x *ProductListResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_inventory_iface_v1_service_proto_msgTypes[70]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProductListResponse.ProtoReflect.Descriptor instead.
+func (*ProductListResponse) Descriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_service_proto_rawDescGZIP(), []int{70}
+}
+
+func (x *ProductListResponse) GetData() []*ProductData {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+func (x *ProductListResponse) GetIds() []uint64 {
+	if x != nil {
+		return x.Ids
+	}
+	return nil
 }
 
 var File_inventory_iface_v1_service_proto protoreflect.FileDescriptor
 
 const file_inventory_iface_v1_service_proto_rawDesc = "" +
 	"\n" +
-	" inventory_iface/v1/service.proto\x12\x12inventory_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1einventory_iface/v1/types.proto\x1a\x1ewarehouse_iface/v1/event.proto\"m\n" +
+	" inventory_iface/v1/service.proto\x12\x12inventory_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1einventory_iface/v1/types.proto\x1a\x1ewarehouse_iface/v1/event.proto\"n\n" +
+	"\x0fTransactionItem\x12&\n" +
+	"\n" +
+	"product_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\tproductId\x12\x1d\n" +
+	"\x05count\x18\x02 \x01(\x03B\a\xbaH\x04\"\x02 \x00R\x05count\x12\x14\n" +
+	"\x05price\x18\x03 \x01(\x01R\x05price\"W\n" +
+	"\x10TransactionOrder\x12C\n" +
+	"\x05items\x18\x01 \x03(\v2#.inventory_iface.v1.TransactionItemB\b\xbaH\x05\x92\x01\x02\b\x01R\x05items\"Y\n" +
+	"\x12TransactionRestock\x12C\n" +
+	"\x05items\x18\x01 \x03(\v2#.inventory_iface.v1.TransactionItemB\b\xbaH\x05\x92\x01\x02\b\x01R\x05items\"X\n" +
+	"\x11TransactionReturn\x12C\n" +
+	"\x05items\x18\x01 \x03(\v2#.inventory_iface.v1.TransactionItemB\b\xbaH\x05\x92\x01\x02\b\x01R\x05items\"[\n" +
+	"\x14TransactionFoundBack\x12C\n" +
+	"\x05items\x18\x01 \x03(\v2#.inventory_iface.v1.TransactionItemB\b\xbaH\x05\x92\x01\x02\b\x01R\x05items\"Y\n" +
+	"\x12TransactionProblem\x12C\n" +
+	"\x05items\x18\x01 \x03(\v2#.inventory_iface.v1.TransactionItemB\b\xbaH\x05\x92\x01\x02\b\x01R\x05items\"\xc2\x03\n" +
+	"\x18TransactionCreateRequest\x12\x17\n" +
+	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12*\n" +
+	"\fwarehouse_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\vwarehouseId\x12<\n" +
+	"\x05order\x18\x03 \x01(\v2$.inventory_iface.v1.TransactionOrderH\x00R\x05order\x12B\n" +
+	"\arestock\x18\x04 \x01(\v2&.inventory_iface.v1.TransactionRestockH\x00R\arestock\x12J\n" +
+	"\fstock_return\x18\x05 \x01(\v2%.inventory_iface.v1.TransactionReturnH\x00R\vstockReturn\x12I\n" +
+	"\n" +
+	"found_back\x18\x06 \x01(\v2(.inventory_iface.v1.TransactionFoundBackH\x00R\tfoundBack\x12B\n" +
+	"\aproblem\x18\a \x01(\v2&.inventory_iface.v1.TransactionProblemH\x00R\aproblemB\x04\n" +
+	"\x02tx\"B\n" +
+	"\x19TransactionCreateResponse\x12%\n" +
+	"\x0etransaction_id\x18\x01 \x01(\x04R\rtransactionId\"m\n" +
+	"\x18TransactionCancelRequest\x12.\n" +
+	"\x0etransaction_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\rtransactionId\x12!\n" +
+	"\fwarehouse_id\x18\x02 \x01(\x04R\vwarehouseId\"\x1b\n" +
+	"\x19TransactionCancelResponse\"m\n" +
 	"\x17ProductReconcileRequest\x12&\n" +
 	"\n" +
 	"product_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\tproductId\x12*\n" +
-	"\fwarehouse_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\vwarehouseId\"\x1a\n" +
-	"\x18ProductReconcileResponse\"\xbd\x01\n" +
+	"\fwarehouse_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\vwarehouseId\"4\n" +
+	"\x18ProductReconcileResponse\x12\x18\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage\"\xbd\x01\n" +
 	"\x1bProductPlacementListRequest\x12&\n" +
 	"\n" +
 	"product_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\tproductId\x12*\n" +
@@ -1651,15 +4873,250 @@ const file_inventory_iface_v1_service_proto_rawDesc = "" +
 	"provisions\x12\x14\n" +
 	"\x05total\x18\x05 \x01(\x01R\x05total\"\x0e\n" +
 	"\fHelloRequest\"\x0f\n" +
-	"\rHelloResponse2\x80\x06\n" +
+	"\rHelloResponse\"\\\n" +
+	"\x11RackCreateRequest\x12*\n" +
+	"\fwarehouse_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\vwarehouseId\x12\x1b\n" +
+	"\x04name\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\"$\n" +
+	"\x12RackCreateResponse\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\"u\n" +
+	"\x11RackUpdateRequest\x12\x17\n" +
+	"\x02id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12*\n" +
+	"\fwarehouse_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\vwarehouseId\x12\x1b\n" +
+	"\x04name\x18\x03 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\"\x14\n" +
+	"\x12RackUpdateResponse\"X\n" +
+	"\x11RackDeleteRequest\x12\x17\n" +
+	"\x02id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12*\n" +
+	"\fwarehouse_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\vwarehouseId\"\x14\n" +
+	"\x12RackDeleteResponse\"X\n" +
+	"\x11RackDetailRequest\x12\x17\n" +
+	"\x02id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12*\n" +
+	"\fwarehouse_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\vwarehouseId\"\xa0\x02\n" +
+	"\x12RackDetailResponse\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\x12!\n" +
+	"\fwarehouse_id\x18\x02 \x01(\x04R\vwarehouseId\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12\x1b\n" +
+	"\tis_system\x18\x04 \x01(\bR\bisSystem\x12\x1f\n" +
+	"\vstock_count\x18\x05 \x01(\x03R\n" +
+	"stockCount\x12#\n" +
+	"\rproduct_count\x18\x06 \x01(\x03R\fproductCount\x12%\n" +
+	"\x0ewarehouse_name\x18\a \x01(\tR\rwarehouseName\x129\n" +
+	"\n" +
+	"created_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\xb6\x01\n" +
+	"\x0eRackListFilter\x12!\n" +
+	"\fwarehouse_id\x18\x01 \x01(\x04R\vwarehouseId\x12\x17\n" +
+	"\ateam_id\x18\x02 \x01(\x04R\x06teamId\x12\x16\n" +
+	"\x06search\x18\x03 \x01(\tR\x06search\x121\n" +
+	"\x04page\x18\x04 \x01(\v2\x15.common.v1.PageFilterB\x06\xbaH\x03\xc8\x01\x01R\x04page\x12\x1d\n" +
+	"\n" +
+	"product_id\x18\x05 \x01(\x04R\tproductId\"\xc1\x01\n" +
+	"\fRackListSort\x120\n" +
+	"\tsort_type\x18\x01 \x01(\x0e2\x13.common.v1.SortTypeR\bsortType\x12?\n" +
+	"\ageneral\x18\x02 \x01(\x0e2#.inventory_iface.v1.RackGeneralSortH\x00R\ageneral\x129\n" +
+	"\x05stock\x18\x03 \x01(\x0e2!.inventory_iface.v1.RackStockSortH\x00R\x05stockB\x03\n" +
+	"\x01s\"\xda\x01\n" +
+	"\x0fRackListRequest\x12B\n" +
+	"\x06filter\x18\x01 \x01(\v2\".inventory_iface.v1.RackListFilterB\x06\xbaH\x03\xc8\x01\x01R\x06filter\x124\n" +
+	"\x04sort\x18\x02 \x01(\v2 .inventory_iface.v1.RackListSortR\x04sort\x12M\n" +
+	"\n" +
+	"data_types\x18\x03 \x03(\x0e2$.inventory_iface.v1.RackListDataTypeB\b\xbaH\x05\x92\x01\x02\b\x01R\tdataTypes\"p\n" +
+	"\x0fRackGeneralItem\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x129\n" +
+	"\n" +
+	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\xb2\x01\n" +
+	"\x0fRackGeneralData\x12A\n" +
+	"\x04data\x18\x01 \x03(\v2-.inventory_iface.v1.RackGeneralData.DataEntryR\x04data\x1a\\\n" +
+	"\tDataEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\x04R\x03key\x129\n" +
+	"\x05value\x18\x02 \x01(\v2#.inventory_iface.v1.RackGeneralItemR\x05value:\x028\x01\"U\n" +
+	"\rRackStockItem\x12\x1f\n" +
+	"\vstock_count\x18\x01 \x01(\x03R\n" +
+	"stockCount\x12#\n" +
+	"\rproduct_count\x18\x02 \x01(\x03R\fproductCount\"\xac\x01\n" +
+	"\rRackStockData\x12?\n" +
+	"\x04data\x18\x01 \x03(\v2+.inventory_iface.v1.RackStockData.DataEntryR\x04data\x1aZ\n" +
+	"\tDataEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\x04R\x03key\x127\n" +
+	"\x05value\x18\x02 \x01(\v2!.inventory_iface.v1.RackStockItemR\x05value:\x028\x01\"]\n" +
+	"\x11RackWarehouseItem\x12!\n" +
+	"\fwarehouse_id\x18\x01 \x01(\x04R\vwarehouseId\x12%\n" +
+	"\x0ewarehouse_name\x18\x02 \x01(\tR\rwarehouseName\"\xb8\x01\n" +
+	"\x11RackWarehouseData\x12C\n" +
+	"\x04data\x18\x01 \x03(\v2/.inventory_iface.v1.RackWarehouseData.DataEntryR\x04data\x1a^\n" +
+	"\tDataEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\x04R\x03key\x12;\n" +
+	"\x05value\x18\x02 \x01(\v2%.inventory_iface.v1.RackWarehouseItemR\x05value:\x028\x01\"\xd5\x01\n" +
+	"\bRackData\x12?\n" +
+	"\ageneral\x18\x01 \x01(\v2#.inventory_iface.v1.RackGeneralDataH\x00R\ageneral\x129\n" +
+	"\x05stock\x18\x02 \x01(\v2!.inventory_iface.v1.RackStockDataH\x00R\x05stock\x12E\n" +
+	"\twarehouse\x18\x03 \x01(\v2%.inventory_iface.v1.RackWarehouseDataH\x00R\twarehouseB\x06\n" +
+	"\x04data\"V\n" +
+	"\x10RackListResponse\x120\n" +
+	"\x04data\x18\x01 \x03(\v2\x1c.inventory_iface.v1.RackDataR\x04data\x12\x10\n" +
+	"\x03ids\x18\x02 \x03(\x04R\x03ids\"j\n" +
+	"\x14ProductConfigRequest\x12&\n" +
+	"\n" +
+	"product_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\tproductId\x12*\n" +
+	"\fwarehouse_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\vwarehouseId\"\x8e\x02\n" +
+	"\x15ProductConfigResponse\x12\x1d\n" +
+	"\n" +
+	"product_id\x18\x01 \x01(\x04R\tproductId\x12!\n" +
+	"\fwarehouse_id\x18\x02 \x01(\x04R\vwarehouseId\x12<\n" +
+	"\n" +
+	"queue_type\x18\x03 \x01(\x0e2\x1d.inventory_iface.v1.QueueTypeR\tqueueType\x12U\n" +
+	"\x11placement_picking\x18\x04 \x01(\x0e2(.inventory_iface.v1.PlacementPickingTypeR\x10placementPicking\x12\x1e\n" +
+	"\n" +
+	"configured\x18\x05 \x01(\bR\n" +
+	"configured\"\x85\x02\n" +
+	"\x1aProductConfigUpdateRequest\x12&\n" +
+	"\n" +
+	"product_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\tproductId\x12*\n" +
+	"\fwarehouse_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\vwarehouseId\x12<\n" +
+	"\n" +
+	"queue_type\x18\x03 \x01(\x0e2\x1d.inventory_iface.v1.QueueTypeR\tqueueType\x12U\n" +
+	"\x11placement_picking\x18\x04 \x01(\x0e2(.inventory_iface.v1.PlacementPickingTypeR\x10placementPicking\"\x1d\n" +
+	"\x1bProductConfigUpdateResponse\"j\n" +
+	"\x14ProductDetailRequest\x12&\n" +
+	"\n" +
+	"product_id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\tproductId\x12*\n" +
+	"\fwarehouse_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\vwarehouseId\"\xa2\x04\n" +
+	"\x15ProductDetailResponse\x12\x1d\n" +
+	"\n" +
+	"product_id\x18\x01 \x01(\x04R\tproductId\x12!\n" +
+	"\fwarehouse_id\x18\x02 \x01(\x04R\vwarehouseId\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12\x17\n" +
+	"\ateam_id\x18\x04 \x01(\x04R\x06teamId\x12\x1b\n" +
+	"\tteam_name\x18\x05 \x01(\tR\bteamName\x12\x1f\n" +
+	"\vstock_ready\x18\x06 \x01(\x03R\n" +
+	"stockReady\x12,\n" +
+	"\x12stock_ready_amount\x18\a \x01(\x01R\x10stockReadyAmount\x12\x1f\n" +
+	"\vbatch_count\x18\b \x01(\x03R\n" +
+	"batchCount\x12\x1d\n" +
+	"\n" +
+	"rack_count\x18\t \x01(\x03R\trackCount\x12<\n" +
+	"\n" +
+	"queue_type\x18\n" +
+	" \x01(\x0e2\x1d.inventory_iface.v1.QueueTypeR\tqueueType\x12U\n" +
+	"\x11placement_picking\x18\v \x01(\x0e2(.inventory_iface.v1.PlacementPickingTypeR\x10placementPicking\x12\x1e\n" +
+	"\n" +
+	"configured\x18\f \x01(\bR\n" +
+	"configured\x129\n" +
+	"\n" +
+	"updated_at\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\x9a\x01\n" +
+	"\x11ProductListFilter\x12!\n" +
+	"\fwarehouse_id\x18\x01 \x01(\x04R\vwarehouseId\x12\x17\n" +
+	"\ateam_id\x18\x02 \x01(\x04R\x06teamId\x12\x16\n" +
+	"\x06search\x18\x03 \x01(\tR\x06search\x121\n" +
+	"\x04page\x18\x04 \x01(\v2\x15.common.v1.PageFilterB\x06\xbaH\x03\xc8\x01\x01R\x04page\"\xca\x01\n" +
+	"\x0fProductListSort\x120\n" +
+	"\tsort_type\x18\x01 \x01(\x0e2\x13.common.v1.SortTypeR\bsortType\x12B\n" +
+	"\ageneral\x18\x02 \x01(\x0e2&.inventory_iface.v1.ProductGeneralSortH\x00R\ageneral\x12<\n" +
+	"\x05stock\x18\x03 \x01(\x0e2$.inventory_iface.v1.ProductStockSortH\x00R\x05stockB\x03\n" +
+	"\x01s\"\xe6\x01\n" +
+	"\x12ProductListRequest\x12E\n" +
+	"\x06filter\x18\x01 \x01(\v2%.inventory_iface.v1.ProductListFilterB\x06\xbaH\x03\xc8\x01\x01R\x06filter\x127\n" +
+	"\x04sort\x18\x02 \x01(\v2#.inventory_iface.v1.ProductListSortR\x04sort\x12P\n" +
+	"\n" +
+	"data_types\x18\x03 \x03(\x0e2'.inventory_iface.v1.ProductListDataTypeB\b\xbaH\x05\x92\x01\x02\b\x01R\tdataTypes\"8\n" +
+	"\x12ProductGeneralItem\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\"\xbb\x01\n" +
+	"\x12ProductGeneralData\x12D\n" +
+	"\x04data\x18\x01 \x03(\v20.inventory_iface.v1.ProductGeneralData.DataEntryR\x04data\x1a_\n" +
+	"\tDataEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\x04R\x03key\x12<\n" +
+	"\x05value\x18\x02 \x01(\v2&.inventory_iface.v1.ProductGeneralItemR\x05value:\x028\x01\"\xa1\x01\n" +
+	"\x10ProductStockItem\x12\x1f\n" +
+	"\vstock_ready\x18\x01 \x01(\x03R\n" +
+	"stockReady\x12,\n" +
+	"\x12stock_ready_amount\x18\x02 \x01(\x01R\x10stockReadyAmount\x12\x1f\n" +
+	"\vbatch_count\x18\x03 \x01(\x03R\n" +
+	"batchCount\x12\x1d\n" +
+	"\n" +
+	"rack_count\x18\x04 \x01(\x03R\trackCount\"\xb5\x01\n" +
+	"\x10ProductStockData\x12B\n" +
+	"\x04data\x18\x01 \x03(\v2..inventory_iface.v1.ProductStockData.DataEntryR\x04data\x1a]\n" +
+	"\tDataEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\x04R\x03key\x12:\n" +
+	"\x05value\x18\x02 \x01(\v2$.inventory_iface.v1.ProductStockItemR\x05value:\x028\x01\"G\n" +
+	"\x0fProductTeamItem\x12\x17\n" +
+	"\ateam_id\x18\x01 \x01(\x04R\x06teamId\x12\x1b\n" +
+	"\tteam_name\x18\x02 \x01(\tR\bteamName\"\xb2\x01\n" +
+	"\x0fProductTeamData\x12A\n" +
+	"\x04data\x18\x01 \x03(\v2-.inventory_iface.v1.ProductTeamData.DataEntryR\x04data\x1a\\\n" +
+	"\tDataEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\x04R\x03key\x129\n" +
+	"\x05value\x18\x02 \x01(\v2#.inventory_iface.v1.ProductTeamItemR\x05value:\x028\x01\"\xc8\x01\n" +
+	"\x11ProductConfigItem\x12<\n" +
+	"\n" +
+	"queue_type\x18\x01 \x01(\x0e2\x1d.inventory_iface.v1.QueueTypeR\tqueueType\x12U\n" +
+	"\x11placement_picking\x18\x02 \x01(\x0e2(.inventory_iface.v1.PlacementPickingTypeR\x10placementPicking\x12\x1e\n" +
+	"\n" +
+	"configured\x18\x03 \x01(\bR\n" +
+	"configured\"\xb8\x01\n" +
+	"\x11ProductConfigData\x12C\n" +
+	"\x04data\x18\x01 \x03(\v2/.inventory_iface.v1.ProductConfigData.DataEntryR\x04data\x1a^\n" +
+	"\tDataEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\x04R\x03key\x12;\n" +
+	"\x05value\x18\x02 \x01(\v2%.inventory_iface.v1.ProductConfigItemR\x05value:\x028\x01\"\x93\x02\n" +
+	"\vProductData\x12B\n" +
+	"\ageneral\x18\x01 \x01(\v2&.inventory_iface.v1.ProductGeneralDataH\x00R\ageneral\x12<\n" +
+	"\x05stock\x18\x02 \x01(\v2$.inventory_iface.v1.ProductStockDataH\x00R\x05stock\x129\n" +
+	"\x04team\x18\x03 \x01(\v2#.inventory_iface.v1.ProductTeamDataH\x00R\x04team\x12?\n" +
+	"\x06config\x18\x04 \x01(\v2%.inventory_iface.v1.ProductConfigDataH\x00R\x06configB\x06\n" +
+	"\x04data\"\\\n" +
+	"\x13ProductListResponse\x123\n" +
+	"\x04data\x18\x01 \x03(\v2\x1f.inventory_iface.v1.ProductDataR\x04data\x12\x10\n" +
+	"\x03ids\x18\x02 \x03(\x04R\x03ids*\x9a\x01\n" +
+	"\x10RackListDataType\x12#\n" +
+	"\x1fRACK_LIST_DATA_TYPE_UNSPECIFIED\x10\x00\x12\x1f\n" +
+	"\x1bRACK_LIST_DATA_TYPE_GENERAL\x10\x01\x12\x1d\n" +
+	"\x19RACK_LIST_DATA_TYPE_STOCK\x10\x02\x12!\n" +
+	"\x1dRACK_LIST_DATA_TYPE_WAREHOUSE\x10\x03*o\n" +
+	"\x0fRackGeneralSort\x12!\n" +
+	"\x1dRACK_GENERAL_SORT_UNSPECIFIED\x10\x00\x12\x1a\n" +
+	"\x16RACK_GENERAL_SORT_NAME\x10\x01\x12\x1d\n" +
+	"\x19RACK_GENERAL_SORT_CREATED\x10\x02*t\n" +
+	"\rRackStockSort\x12\x1f\n" +
+	"\x1bRACK_STOCK_SORT_UNSPECIFIED\x10\x00\x12\x1f\n" +
+	"\x1bRACK_STOCK_SORT_STOCK_COUNT\x10\x01\x12!\n" +
+	"\x1dRACK_STOCK_SORT_PRODUCT_COUNT\x10\x02*\xc7\x01\n" +
+	"\x13ProductListDataType\x12&\n" +
+	"\"PRODUCT_LIST_DATA_TYPE_UNSPECIFIED\x10\x00\x12\"\n" +
+	"\x1ePRODUCT_LIST_DATA_TYPE_GENERAL\x10\x01\x12 \n" +
+	"\x1cPRODUCT_LIST_DATA_TYPE_STOCK\x10\x02\x12\x1f\n" +
+	"\x1bPRODUCT_LIST_DATA_TYPE_TEAM\x10\x03\x12!\n" +
+	"\x1dPRODUCT_LIST_DATA_TYPE_CONFIG\x10\x04*Y\n" +
+	"\x12ProductGeneralSort\x12$\n" +
+	" PRODUCT_GENERAL_SORT_UNSPECIFIED\x10\x00\x12\x1d\n" +
+	"\x19PRODUCT_GENERAL_SORT_NAME\x10\x01*\x7f\n" +
+	"\x10ProductStockSort\x12\"\n" +
+	"\x1ePRODUCT_STOCK_SORT_UNSPECIFIED\x10\x00\x12\"\n" +
+	"\x1ePRODUCT_STOCK_SORT_STOCK_READY\x10\x01\x12#\n" +
+	"\x1fPRODUCT_STOCK_SORT_STOCK_AMOUNT\x10\x022\xd5\x0e\n" +
 	"\x10InventoryService\x12L\n" +
 	"\x05Order\x12 .inventory_iface.v1.OrderRequest\x1a!.inventory_iface.v1.OrderResponse\x12d\n" +
 	"\rStockMovement\x12(.inventory_iface.v1.StockMovementRequest\x1a).inventory_iface.v1.StockMovementResponse\x12g\n" +
-	"\x0ePushStockEvent\x12).inventory_iface.v1.PushStockEventRequest\x1a*.inventory_iface.v1.PushStockEventResponse\x12y\n" +
+	"\x0ePushStockEvent\x12).inventory_iface.v1.PushStockEventRequest\x1a*.inventory_iface.v1.PushStockEventResponse\x12p\n" +
+	"\x11TransactionCreate\x12,.inventory_iface.v1.TransactionCreateRequest\x1a-.inventory_iface.v1.TransactionCreateResponse\x12p\n" +
+	"\x11TransactionCancel\x12,.inventory_iface.v1.TransactionCancelRequest\x1a-.inventory_iface.v1.TransactionCancelResponse\x12y\n" +
 	"\x14ProductPlacementList\x12/.inventory_iface.v1.ProductPlacementListRequest\x1a0.inventory_iface.v1.ProductPlacementListResponse\x12v\n" +
 	"\x13ProductPlacementLog\x12..inventory_iface.v1.ProductPlacementLogRequest\x1a/.inventory_iface.v1.ProductPlacementLogResponse\x12m\n" +
-	"\x10ProductBatchList\x12+.inventory_iface.v1.ProductBatchListRequest\x1a,.inventory_iface.v1.ProductBatchListResponse\x12m\n" +
-	"\x10ProductReconcile\x12+.inventory_iface.v1.ProductReconcileRequest\x1a,.inventory_iface.v1.ProductReconcileResponseB\xd0\x01\n" +
+	"\x10ProductBatchList\x12+.inventory_iface.v1.ProductBatchListRequest\x1a,.inventory_iface.v1.ProductBatchListResponse\x12o\n" +
+	"\x10ProductReconcile\x12+.inventory_iface.v1.ProductReconcileRequest\x1a,.inventory_iface.v1.ProductReconcileResponse0\x01\x12[\n" +
+	"\n" +
+	"RackCreate\x12%.inventory_iface.v1.RackCreateRequest\x1a&.inventory_iface.v1.RackCreateResponse\x12[\n" +
+	"\n" +
+	"RackUpdate\x12%.inventory_iface.v1.RackUpdateRequest\x1a&.inventory_iface.v1.RackUpdateResponse\x12[\n" +
+	"\n" +
+	"RackDelete\x12%.inventory_iface.v1.RackDeleteRequest\x1a&.inventory_iface.v1.RackDeleteResponse\x12[\n" +
+	"\n" +
+	"RackDetail\x12%.inventory_iface.v1.RackDetailRequest\x1a&.inventory_iface.v1.RackDetailResponse\x12U\n" +
+	"\bRackList\x12#.inventory_iface.v1.RackListRequest\x1a$.inventory_iface.v1.RackListResponse\x12d\n" +
+	"\rProductConfig\x12(.inventory_iface.v1.ProductConfigRequest\x1a).inventory_iface.v1.ProductConfigResponse\x12v\n" +
+	"\x13ProductConfigUpdate\x12..inventory_iface.v1.ProductConfigUpdateRequest\x1a/.inventory_iface.v1.ProductConfigUpdateResponse\x12^\n" +
+	"\vProductList\x12&.inventory_iface.v1.ProductListRequest\x1a'.inventory_iface.v1.ProductListResponse\x12d\n" +
+	"\rProductDetail\x12(.inventory_iface.v1.ProductDetailRequest\x1a).inventory_iface.v1.ProductDetailResponseB\xd0\x01\n" +
 	"\x16com.inventory_iface.v1B\fServiceProtoP\x01ZCgithub.com/pdcgo/schema/services/inventory_iface/v1;inventory_iface\xa2\x02\x03IXX\xaa\x02\x11InventoryIface.V1\xca\x02\x11InventoryIface\\V1\xe2\x02\x1dInventoryIface\\V1\\GPBMetadata\xea\x02\x12InventoryIface::V1b\x06proto3"
 
 var (
@@ -1674,86 +5131,230 @@ func file_inventory_iface_v1_service_proto_rawDescGZIP() []byte {
 	return file_inventory_iface_v1_service_proto_rawDescData
 }
 
-var file_inventory_iface_v1_service_proto_msgTypes = make([]protoimpl.MessageInfo, 23)
+var file_inventory_iface_v1_service_proto_enumTypes = make([]protoimpl.EnumInfo, 6)
+var file_inventory_iface_v1_service_proto_msgTypes = make([]protoimpl.MessageInfo, 78)
 var file_inventory_iface_v1_service_proto_goTypes = []any{
-	(*ProductReconcileRequest)(nil),      // 0: inventory_iface.v1.ProductReconcileRequest
-	(*ProductReconcileResponse)(nil),     // 1: inventory_iface.v1.ProductReconcileResponse
-	(*ProductPlacementListRequest)(nil),  // 2: inventory_iface.v1.ProductPlacementListRequest
-	(*ProductPlacementItem)(nil),         // 3: inventory_iface.v1.ProductPlacementItem
-	(*ProductPlacementListResponse)(nil), // 4: inventory_iface.v1.ProductPlacementListResponse
-	(*ProductPlacementLogRequest)(nil),   // 5: inventory_iface.v1.ProductPlacementLogRequest
-	(*ProductPlacementLogItem)(nil),      // 6: inventory_iface.v1.ProductPlacementLogItem
-	(*ProductPlacementLogResponse)(nil),  // 7: inventory_iface.v1.ProductPlacementLogResponse
-	(*ProductBatchListRequest)(nil),      // 8: inventory_iface.v1.ProductBatchListRequest
-	(*ProductBatchItem)(nil),             // 9: inventory_iface.v1.ProductBatchItem
-	(*ProductBatchListResponse)(nil),     // 10: inventory_iface.v1.ProductBatchListResponse
-	(*PushStockEventRequest)(nil),        // 11: inventory_iface.v1.PushStockEventRequest
-	(*PushStockEventResponse)(nil),       // 12: inventory_iface.v1.PushStockEventResponse
-	(*StockMovementRequest)(nil),         // 13: inventory_iface.v1.StockMovementRequest
-	(*MovementTransactionInfo)(nil),      // 14: inventory_iface.v1.MovementTransactionInfo
-	(*MovementItem)(nil),                 // 15: inventory_iface.v1.MovementItem
-	(*StockMovementResponse)(nil),        // 16: inventory_iface.v1.StockMovementResponse
-	(*ProvisionItem)(nil),                // 17: inventory_iface.v1.ProvisionItem
-	(*OrderRequest)(nil),                 // 18: inventory_iface.v1.OrderRequest
-	(*ProvisionItemRes)(nil),             // 19: inventory_iface.v1.ProvisionItemRes
-	(*OrderResponse)(nil),                // 20: inventory_iface.v1.OrderResponse
-	(*HelloRequest)(nil),                 // 21: inventory_iface.v1.HelloRequest
-	(*HelloResponse)(nil),                // 22: inventory_iface.v1.HelloResponse
-	(*v1.PageFilter)(nil),                // 23: common.v1.PageFilter
-	(*timestamppb.Timestamp)(nil),        // 24: google.protobuf.Timestamp
-	(*v1.PageInfo)(nil),                  // 25: common.v1.PageInfo
-	(StockChangeType)(0),                 // 26: inventory_iface.v1.StockChangeType
-	(*v11.StockEvent)(nil),               // 27: warehouse_iface.v1.StockEvent
-	(*v1.TimeFilter)(nil),                // 28: common.v1.TimeFilter
-	(*v1.PageInfoWithoutCount)(nil),      // 29: common.v1.PageInfoWithoutCount
-	(QueueType)(0),                       // 30: inventory_iface.v1.QueueType
+	(RackListDataType)(0),                // 0: inventory_iface.v1.RackListDataType
+	(RackGeneralSort)(0),                 // 1: inventory_iface.v1.RackGeneralSort
+	(RackStockSort)(0),                   // 2: inventory_iface.v1.RackStockSort
+	(ProductListDataType)(0),             // 3: inventory_iface.v1.ProductListDataType
+	(ProductGeneralSort)(0),              // 4: inventory_iface.v1.ProductGeneralSort
+	(ProductStockSort)(0),                // 5: inventory_iface.v1.ProductStockSort
+	(*TransactionItem)(nil),              // 6: inventory_iface.v1.TransactionItem
+	(*TransactionOrder)(nil),             // 7: inventory_iface.v1.TransactionOrder
+	(*TransactionRestock)(nil),           // 8: inventory_iface.v1.TransactionRestock
+	(*TransactionReturn)(nil),            // 9: inventory_iface.v1.TransactionReturn
+	(*TransactionFoundBack)(nil),         // 10: inventory_iface.v1.TransactionFoundBack
+	(*TransactionProblem)(nil),           // 11: inventory_iface.v1.TransactionProblem
+	(*TransactionCreateRequest)(nil),     // 12: inventory_iface.v1.TransactionCreateRequest
+	(*TransactionCreateResponse)(nil),    // 13: inventory_iface.v1.TransactionCreateResponse
+	(*TransactionCancelRequest)(nil),     // 14: inventory_iface.v1.TransactionCancelRequest
+	(*TransactionCancelResponse)(nil),    // 15: inventory_iface.v1.TransactionCancelResponse
+	(*ProductReconcileRequest)(nil),      // 16: inventory_iface.v1.ProductReconcileRequest
+	(*ProductReconcileResponse)(nil),     // 17: inventory_iface.v1.ProductReconcileResponse
+	(*ProductPlacementListRequest)(nil),  // 18: inventory_iface.v1.ProductPlacementListRequest
+	(*ProductPlacementItem)(nil),         // 19: inventory_iface.v1.ProductPlacementItem
+	(*ProductPlacementListResponse)(nil), // 20: inventory_iface.v1.ProductPlacementListResponse
+	(*ProductPlacementLogRequest)(nil),   // 21: inventory_iface.v1.ProductPlacementLogRequest
+	(*ProductPlacementLogItem)(nil),      // 22: inventory_iface.v1.ProductPlacementLogItem
+	(*ProductPlacementLogResponse)(nil),  // 23: inventory_iface.v1.ProductPlacementLogResponse
+	(*ProductBatchListRequest)(nil),      // 24: inventory_iface.v1.ProductBatchListRequest
+	(*ProductBatchItem)(nil),             // 25: inventory_iface.v1.ProductBatchItem
+	(*ProductBatchListResponse)(nil),     // 26: inventory_iface.v1.ProductBatchListResponse
+	(*PushStockEventRequest)(nil),        // 27: inventory_iface.v1.PushStockEventRequest
+	(*PushStockEventResponse)(nil),       // 28: inventory_iface.v1.PushStockEventResponse
+	(*StockMovementRequest)(nil),         // 29: inventory_iface.v1.StockMovementRequest
+	(*MovementTransactionInfo)(nil),      // 30: inventory_iface.v1.MovementTransactionInfo
+	(*MovementItem)(nil),                 // 31: inventory_iface.v1.MovementItem
+	(*StockMovementResponse)(nil),        // 32: inventory_iface.v1.StockMovementResponse
+	(*ProvisionItem)(nil),                // 33: inventory_iface.v1.ProvisionItem
+	(*OrderRequest)(nil),                 // 34: inventory_iface.v1.OrderRequest
+	(*ProvisionItemRes)(nil),             // 35: inventory_iface.v1.ProvisionItemRes
+	(*OrderResponse)(nil),                // 36: inventory_iface.v1.OrderResponse
+	(*HelloRequest)(nil),                 // 37: inventory_iface.v1.HelloRequest
+	(*HelloResponse)(nil),                // 38: inventory_iface.v1.HelloResponse
+	(*RackCreateRequest)(nil),            // 39: inventory_iface.v1.RackCreateRequest
+	(*RackCreateResponse)(nil),           // 40: inventory_iface.v1.RackCreateResponse
+	(*RackUpdateRequest)(nil),            // 41: inventory_iface.v1.RackUpdateRequest
+	(*RackUpdateResponse)(nil),           // 42: inventory_iface.v1.RackUpdateResponse
+	(*RackDeleteRequest)(nil),            // 43: inventory_iface.v1.RackDeleteRequest
+	(*RackDeleteResponse)(nil),           // 44: inventory_iface.v1.RackDeleteResponse
+	(*RackDetailRequest)(nil),            // 45: inventory_iface.v1.RackDetailRequest
+	(*RackDetailResponse)(nil),           // 46: inventory_iface.v1.RackDetailResponse
+	(*RackListFilter)(nil),               // 47: inventory_iface.v1.RackListFilter
+	(*RackListSort)(nil),                 // 48: inventory_iface.v1.RackListSort
+	(*RackListRequest)(nil),              // 49: inventory_iface.v1.RackListRequest
+	(*RackGeneralItem)(nil),              // 50: inventory_iface.v1.RackGeneralItem
+	(*RackGeneralData)(nil),              // 51: inventory_iface.v1.RackGeneralData
+	(*RackStockItem)(nil),                // 52: inventory_iface.v1.RackStockItem
+	(*RackStockData)(nil),                // 53: inventory_iface.v1.RackStockData
+	(*RackWarehouseItem)(nil),            // 54: inventory_iface.v1.RackWarehouseItem
+	(*RackWarehouseData)(nil),            // 55: inventory_iface.v1.RackWarehouseData
+	(*RackData)(nil),                     // 56: inventory_iface.v1.RackData
+	(*RackListResponse)(nil),             // 57: inventory_iface.v1.RackListResponse
+	(*ProductConfigRequest)(nil),         // 58: inventory_iface.v1.ProductConfigRequest
+	(*ProductConfigResponse)(nil),        // 59: inventory_iface.v1.ProductConfigResponse
+	(*ProductConfigUpdateRequest)(nil),   // 60: inventory_iface.v1.ProductConfigUpdateRequest
+	(*ProductConfigUpdateResponse)(nil),  // 61: inventory_iface.v1.ProductConfigUpdateResponse
+	(*ProductDetailRequest)(nil),         // 62: inventory_iface.v1.ProductDetailRequest
+	(*ProductDetailResponse)(nil),        // 63: inventory_iface.v1.ProductDetailResponse
+	(*ProductListFilter)(nil),            // 64: inventory_iface.v1.ProductListFilter
+	(*ProductListSort)(nil),              // 65: inventory_iface.v1.ProductListSort
+	(*ProductListRequest)(nil),           // 66: inventory_iface.v1.ProductListRequest
+	(*ProductGeneralItem)(nil),           // 67: inventory_iface.v1.ProductGeneralItem
+	(*ProductGeneralData)(nil),           // 68: inventory_iface.v1.ProductGeneralData
+	(*ProductStockItem)(nil),             // 69: inventory_iface.v1.ProductStockItem
+	(*ProductStockData)(nil),             // 70: inventory_iface.v1.ProductStockData
+	(*ProductTeamItem)(nil),              // 71: inventory_iface.v1.ProductTeamItem
+	(*ProductTeamData)(nil),              // 72: inventory_iface.v1.ProductTeamData
+	(*ProductConfigItem)(nil),            // 73: inventory_iface.v1.ProductConfigItem
+	(*ProductConfigData)(nil),            // 74: inventory_iface.v1.ProductConfigData
+	(*ProductData)(nil),                  // 75: inventory_iface.v1.ProductData
+	(*ProductListResponse)(nil),          // 76: inventory_iface.v1.ProductListResponse
+	nil,                                  // 77: inventory_iface.v1.RackGeneralData.DataEntry
+	nil,                                  // 78: inventory_iface.v1.RackStockData.DataEntry
+	nil,                                  // 79: inventory_iface.v1.RackWarehouseData.DataEntry
+	nil,                                  // 80: inventory_iface.v1.ProductGeneralData.DataEntry
+	nil,                                  // 81: inventory_iface.v1.ProductStockData.DataEntry
+	nil,                                  // 82: inventory_iface.v1.ProductTeamData.DataEntry
+	nil,                                  // 83: inventory_iface.v1.ProductConfigData.DataEntry
+	(*v1.PageFilter)(nil),                // 84: common.v1.PageFilter
+	(*timestamppb.Timestamp)(nil),        // 85: google.protobuf.Timestamp
+	(*v1.PageInfo)(nil),                  // 86: common.v1.PageInfo
+	(StockChangeType)(0),                 // 87: inventory_iface.v1.StockChangeType
+	(*v11.StockEvent)(nil),               // 88: warehouse_iface.v1.StockEvent
+	(*v1.TimeFilter)(nil),                // 89: common.v1.TimeFilter
+	(*v1.PageInfoWithoutCount)(nil),      // 90: common.v1.PageInfoWithoutCount
+	(QueueType)(0),                       // 91: inventory_iface.v1.QueueType
+	(v1.SortType)(0),                     // 92: common.v1.SortType
+	(PlacementPickingType)(0),            // 93: inventory_iface.v1.PlacementPickingType
 }
 var file_inventory_iface_v1_service_proto_depIdxs = []int32{
-	23, // 0: inventory_iface.v1.ProductPlacementListRequest.page:type_name -> common.v1.PageFilter
-	24, // 1: inventory_iface.v1.ProductPlacementItem.created_at:type_name -> google.protobuf.Timestamp
-	24, // 2: inventory_iface.v1.ProductPlacementItem.updated_at:type_name -> google.protobuf.Timestamp
-	3,  // 3: inventory_iface.v1.ProductPlacementListResponse.placements:type_name -> inventory_iface.v1.ProductPlacementItem
-	25, // 4: inventory_iface.v1.ProductPlacementListResponse.page_info:type_name -> common.v1.PageInfo
-	23, // 5: inventory_iface.v1.ProductPlacementLogRequest.page:type_name -> common.v1.PageFilter
-	26, // 6: inventory_iface.v1.ProductPlacementLogItem.change_type:type_name -> inventory_iface.v1.StockChangeType
-	24, // 7: inventory_iface.v1.ProductPlacementLogItem.created_at:type_name -> google.protobuf.Timestamp
-	6,  // 8: inventory_iface.v1.ProductPlacementLogResponse.logs:type_name -> inventory_iface.v1.ProductPlacementLogItem
-	25, // 9: inventory_iface.v1.ProductPlacementLogResponse.page_info:type_name -> common.v1.PageInfo
-	23, // 10: inventory_iface.v1.ProductBatchListRequest.page:type_name -> common.v1.PageFilter
-	24, // 11: inventory_iface.v1.ProductBatchItem.created_at:type_name -> google.protobuf.Timestamp
-	24, // 12: inventory_iface.v1.ProductBatchItem.updated_at:type_name -> google.protobuf.Timestamp
-	9,  // 13: inventory_iface.v1.ProductBatchListResponse.batches:type_name -> inventory_iface.v1.ProductBatchItem
-	25, // 14: inventory_iface.v1.ProductBatchListResponse.page_info:type_name -> common.v1.PageInfo
-	27, // 15: inventory_iface.v1.PushStockEventRequest.event:type_name -> warehouse_iface.v1.StockEvent
-	28, // 16: inventory_iface.v1.StockMovementRequest.time_range:type_name -> common.v1.TimeFilter
-	23, // 17: inventory_iface.v1.StockMovementRequest.page:type_name -> common.v1.PageFilter
-	26, // 18: inventory_iface.v1.MovementItem.change_type:type_name -> inventory_iface.v1.StockChangeType
-	24, // 19: inventory_iface.v1.MovementItem.created_at:type_name -> google.protobuf.Timestamp
-	14, // 20: inventory_iface.v1.MovementItem.transaction_info:type_name -> inventory_iface.v1.MovementTransactionInfo
-	15, // 21: inventory_iface.v1.StockMovementResponse.movements:type_name -> inventory_iface.v1.MovementItem
-	29, // 22: inventory_iface.v1.StockMovementResponse.page_info:type_name -> common.v1.PageInfoWithoutCount
-	30, // 23: inventory_iface.v1.OrderRequest.queue_type:type_name -> inventory_iface.v1.QueueType
-	17, // 24: inventory_iface.v1.OrderRequest.provisions:type_name -> inventory_iface.v1.ProvisionItem
-	19, // 25: inventory_iface.v1.OrderResponse.provisions:type_name -> inventory_iface.v1.ProvisionItemRes
-	18, // 26: inventory_iface.v1.InventoryService.Order:input_type -> inventory_iface.v1.OrderRequest
-	13, // 27: inventory_iface.v1.InventoryService.StockMovement:input_type -> inventory_iface.v1.StockMovementRequest
-	11, // 28: inventory_iface.v1.InventoryService.PushStockEvent:input_type -> inventory_iface.v1.PushStockEventRequest
-	2,  // 29: inventory_iface.v1.InventoryService.ProductPlacementList:input_type -> inventory_iface.v1.ProductPlacementListRequest
-	5,  // 30: inventory_iface.v1.InventoryService.ProductPlacementLog:input_type -> inventory_iface.v1.ProductPlacementLogRequest
-	8,  // 31: inventory_iface.v1.InventoryService.ProductBatchList:input_type -> inventory_iface.v1.ProductBatchListRequest
-	0,  // 32: inventory_iface.v1.InventoryService.ProductReconcile:input_type -> inventory_iface.v1.ProductReconcileRequest
-	20, // 33: inventory_iface.v1.InventoryService.Order:output_type -> inventory_iface.v1.OrderResponse
-	16, // 34: inventory_iface.v1.InventoryService.StockMovement:output_type -> inventory_iface.v1.StockMovementResponse
-	12, // 35: inventory_iface.v1.InventoryService.PushStockEvent:output_type -> inventory_iface.v1.PushStockEventResponse
-	4,  // 36: inventory_iface.v1.InventoryService.ProductPlacementList:output_type -> inventory_iface.v1.ProductPlacementListResponse
-	7,  // 37: inventory_iface.v1.InventoryService.ProductPlacementLog:output_type -> inventory_iface.v1.ProductPlacementLogResponse
-	10, // 38: inventory_iface.v1.InventoryService.ProductBatchList:output_type -> inventory_iface.v1.ProductBatchListResponse
-	1,  // 39: inventory_iface.v1.InventoryService.ProductReconcile:output_type -> inventory_iface.v1.ProductReconcileResponse
-	33, // [33:40] is the sub-list for method output_type
-	26, // [26:33] is the sub-list for method input_type
-	26, // [26:26] is the sub-list for extension type_name
-	26, // [26:26] is the sub-list for extension extendee
-	0,  // [0:26] is the sub-list for field type_name
+	6,   // 0: inventory_iface.v1.TransactionOrder.items:type_name -> inventory_iface.v1.TransactionItem
+	6,   // 1: inventory_iface.v1.TransactionRestock.items:type_name -> inventory_iface.v1.TransactionItem
+	6,   // 2: inventory_iface.v1.TransactionReturn.items:type_name -> inventory_iface.v1.TransactionItem
+	6,   // 3: inventory_iface.v1.TransactionFoundBack.items:type_name -> inventory_iface.v1.TransactionItem
+	6,   // 4: inventory_iface.v1.TransactionProblem.items:type_name -> inventory_iface.v1.TransactionItem
+	7,   // 5: inventory_iface.v1.TransactionCreateRequest.order:type_name -> inventory_iface.v1.TransactionOrder
+	8,   // 6: inventory_iface.v1.TransactionCreateRequest.restock:type_name -> inventory_iface.v1.TransactionRestock
+	9,   // 7: inventory_iface.v1.TransactionCreateRequest.stock_return:type_name -> inventory_iface.v1.TransactionReturn
+	10,  // 8: inventory_iface.v1.TransactionCreateRequest.found_back:type_name -> inventory_iface.v1.TransactionFoundBack
+	11,  // 9: inventory_iface.v1.TransactionCreateRequest.problem:type_name -> inventory_iface.v1.TransactionProblem
+	84,  // 10: inventory_iface.v1.ProductPlacementListRequest.page:type_name -> common.v1.PageFilter
+	85,  // 11: inventory_iface.v1.ProductPlacementItem.created_at:type_name -> google.protobuf.Timestamp
+	85,  // 12: inventory_iface.v1.ProductPlacementItem.updated_at:type_name -> google.protobuf.Timestamp
+	19,  // 13: inventory_iface.v1.ProductPlacementListResponse.placements:type_name -> inventory_iface.v1.ProductPlacementItem
+	86,  // 14: inventory_iface.v1.ProductPlacementListResponse.page_info:type_name -> common.v1.PageInfo
+	84,  // 15: inventory_iface.v1.ProductPlacementLogRequest.page:type_name -> common.v1.PageFilter
+	87,  // 16: inventory_iface.v1.ProductPlacementLogItem.change_type:type_name -> inventory_iface.v1.StockChangeType
+	85,  // 17: inventory_iface.v1.ProductPlacementLogItem.created_at:type_name -> google.protobuf.Timestamp
+	22,  // 18: inventory_iface.v1.ProductPlacementLogResponse.logs:type_name -> inventory_iface.v1.ProductPlacementLogItem
+	86,  // 19: inventory_iface.v1.ProductPlacementLogResponse.page_info:type_name -> common.v1.PageInfo
+	84,  // 20: inventory_iface.v1.ProductBatchListRequest.page:type_name -> common.v1.PageFilter
+	85,  // 21: inventory_iface.v1.ProductBatchItem.created_at:type_name -> google.protobuf.Timestamp
+	85,  // 22: inventory_iface.v1.ProductBatchItem.updated_at:type_name -> google.protobuf.Timestamp
+	25,  // 23: inventory_iface.v1.ProductBatchListResponse.batches:type_name -> inventory_iface.v1.ProductBatchItem
+	86,  // 24: inventory_iface.v1.ProductBatchListResponse.page_info:type_name -> common.v1.PageInfo
+	88,  // 25: inventory_iface.v1.PushStockEventRequest.event:type_name -> warehouse_iface.v1.StockEvent
+	89,  // 26: inventory_iface.v1.StockMovementRequest.time_range:type_name -> common.v1.TimeFilter
+	84,  // 27: inventory_iface.v1.StockMovementRequest.page:type_name -> common.v1.PageFilter
+	87,  // 28: inventory_iface.v1.MovementItem.change_type:type_name -> inventory_iface.v1.StockChangeType
+	85,  // 29: inventory_iface.v1.MovementItem.created_at:type_name -> google.protobuf.Timestamp
+	30,  // 30: inventory_iface.v1.MovementItem.transaction_info:type_name -> inventory_iface.v1.MovementTransactionInfo
+	31,  // 31: inventory_iface.v1.StockMovementResponse.movements:type_name -> inventory_iface.v1.MovementItem
+	90,  // 32: inventory_iface.v1.StockMovementResponse.page_info:type_name -> common.v1.PageInfoWithoutCount
+	91,  // 33: inventory_iface.v1.OrderRequest.queue_type:type_name -> inventory_iface.v1.QueueType
+	33,  // 34: inventory_iface.v1.OrderRequest.provisions:type_name -> inventory_iface.v1.ProvisionItem
+	35,  // 35: inventory_iface.v1.OrderResponse.provisions:type_name -> inventory_iface.v1.ProvisionItemRes
+	85,  // 36: inventory_iface.v1.RackDetailResponse.created_at:type_name -> google.protobuf.Timestamp
+	84,  // 37: inventory_iface.v1.RackListFilter.page:type_name -> common.v1.PageFilter
+	92,  // 38: inventory_iface.v1.RackListSort.sort_type:type_name -> common.v1.SortType
+	1,   // 39: inventory_iface.v1.RackListSort.general:type_name -> inventory_iface.v1.RackGeneralSort
+	2,   // 40: inventory_iface.v1.RackListSort.stock:type_name -> inventory_iface.v1.RackStockSort
+	47,  // 41: inventory_iface.v1.RackListRequest.filter:type_name -> inventory_iface.v1.RackListFilter
+	48,  // 42: inventory_iface.v1.RackListRequest.sort:type_name -> inventory_iface.v1.RackListSort
+	0,   // 43: inventory_iface.v1.RackListRequest.data_types:type_name -> inventory_iface.v1.RackListDataType
+	85,  // 44: inventory_iface.v1.RackGeneralItem.created_at:type_name -> google.protobuf.Timestamp
+	77,  // 45: inventory_iface.v1.RackGeneralData.data:type_name -> inventory_iface.v1.RackGeneralData.DataEntry
+	78,  // 46: inventory_iface.v1.RackStockData.data:type_name -> inventory_iface.v1.RackStockData.DataEntry
+	79,  // 47: inventory_iface.v1.RackWarehouseData.data:type_name -> inventory_iface.v1.RackWarehouseData.DataEntry
+	51,  // 48: inventory_iface.v1.RackData.general:type_name -> inventory_iface.v1.RackGeneralData
+	53,  // 49: inventory_iface.v1.RackData.stock:type_name -> inventory_iface.v1.RackStockData
+	55,  // 50: inventory_iface.v1.RackData.warehouse:type_name -> inventory_iface.v1.RackWarehouseData
+	56,  // 51: inventory_iface.v1.RackListResponse.data:type_name -> inventory_iface.v1.RackData
+	91,  // 52: inventory_iface.v1.ProductConfigResponse.queue_type:type_name -> inventory_iface.v1.QueueType
+	93,  // 53: inventory_iface.v1.ProductConfigResponse.placement_picking:type_name -> inventory_iface.v1.PlacementPickingType
+	91,  // 54: inventory_iface.v1.ProductConfigUpdateRequest.queue_type:type_name -> inventory_iface.v1.QueueType
+	93,  // 55: inventory_iface.v1.ProductConfigUpdateRequest.placement_picking:type_name -> inventory_iface.v1.PlacementPickingType
+	91,  // 56: inventory_iface.v1.ProductDetailResponse.queue_type:type_name -> inventory_iface.v1.QueueType
+	93,  // 57: inventory_iface.v1.ProductDetailResponse.placement_picking:type_name -> inventory_iface.v1.PlacementPickingType
+	85,  // 58: inventory_iface.v1.ProductDetailResponse.updated_at:type_name -> google.protobuf.Timestamp
+	84,  // 59: inventory_iface.v1.ProductListFilter.page:type_name -> common.v1.PageFilter
+	92,  // 60: inventory_iface.v1.ProductListSort.sort_type:type_name -> common.v1.SortType
+	4,   // 61: inventory_iface.v1.ProductListSort.general:type_name -> inventory_iface.v1.ProductGeneralSort
+	5,   // 62: inventory_iface.v1.ProductListSort.stock:type_name -> inventory_iface.v1.ProductStockSort
+	64,  // 63: inventory_iface.v1.ProductListRequest.filter:type_name -> inventory_iface.v1.ProductListFilter
+	65,  // 64: inventory_iface.v1.ProductListRequest.sort:type_name -> inventory_iface.v1.ProductListSort
+	3,   // 65: inventory_iface.v1.ProductListRequest.data_types:type_name -> inventory_iface.v1.ProductListDataType
+	80,  // 66: inventory_iface.v1.ProductGeneralData.data:type_name -> inventory_iface.v1.ProductGeneralData.DataEntry
+	81,  // 67: inventory_iface.v1.ProductStockData.data:type_name -> inventory_iface.v1.ProductStockData.DataEntry
+	82,  // 68: inventory_iface.v1.ProductTeamData.data:type_name -> inventory_iface.v1.ProductTeamData.DataEntry
+	91,  // 69: inventory_iface.v1.ProductConfigItem.queue_type:type_name -> inventory_iface.v1.QueueType
+	93,  // 70: inventory_iface.v1.ProductConfigItem.placement_picking:type_name -> inventory_iface.v1.PlacementPickingType
+	83,  // 71: inventory_iface.v1.ProductConfigData.data:type_name -> inventory_iface.v1.ProductConfigData.DataEntry
+	68,  // 72: inventory_iface.v1.ProductData.general:type_name -> inventory_iface.v1.ProductGeneralData
+	70,  // 73: inventory_iface.v1.ProductData.stock:type_name -> inventory_iface.v1.ProductStockData
+	72,  // 74: inventory_iface.v1.ProductData.team:type_name -> inventory_iface.v1.ProductTeamData
+	74,  // 75: inventory_iface.v1.ProductData.config:type_name -> inventory_iface.v1.ProductConfigData
+	75,  // 76: inventory_iface.v1.ProductListResponse.data:type_name -> inventory_iface.v1.ProductData
+	50,  // 77: inventory_iface.v1.RackGeneralData.DataEntry.value:type_name -> inventory_iface.v1.RackGeneralItem
+	52,  // 78: inventory_iface.v1.RackStockData.DataEntry.value:type_name -> inventory_iface.v1.RackStockItem
+	54,  // 79: inventory_iface.v1.RackWarehouseData.DataEntry.value:type_name -> inventory_iface.v1.RackWarehouseItem
+	67,  // 80: inventory_iface.v1.ProductGeneralData.DataEntry.value:type_name -> inventory_iface.v1.ProductGeneralItem
+	69,  // 81: inventory_iface.v1.ProductStockData.DataEntry.value:type_name -> inventory_iface.v1.ProductStockItem
+	71,  // 82: inventory_iface.v1.ProductTeamData.DataEntry.value:type_name -> inventory_iface.v1.ProductTeamItem
+	73,  // 83: inventory_iface.v1.ProductConfigData.DataEntry.value:type_name -> inventory_iface.v1.ProductConfigItem
+	34,  // 84: inventory_iface.v1.InventoryService.Order:input_type -> inventory_iface.v1.OrderRequest
+	29,  // 85: inventory_iface.v1.InventoryService.StockMovement:input_type -> inventory_iface.v1.StockMovementRequest
+	27,  // 86: inventory_iface.v1.InventoryService.PushStockEvent:input_type -> inventory_iface.v1.PushStockEventRequest
+	12,  // 87: inventory_iface.v1.InventoryService.TransactionCreate:input_type -> inventory_iface.v1.TransactionCreateRequest
+	14,  // 88: inventory_iface.v1.InventoryService.TransactionCancel:input_type -> inventory_iface.v1.TransactionCancelRequest
+	18,  // 89: inventory_iface.v1.InventoryService.ProductPlacementList:input_type -> inventory_iface.v1.ProductPlacementListRequest
+	21,  // 90: inventory_iface.v1.InventoryService.ProductPlacementLog:input_type -> inventory_iface.v1.ProductPlacementLogRequest
+	24,  // 91: inventory_iface.v1.InventoryService.ProductBatchList:input_type -> inventory_iface.v1.ProductBatchListRequest
+	16,  // 92: inventory_iface.v1.InventoryService.ProductReconcile:input_type -> inventory_iface.v1.ProductReconcileRequest
+	39,  // 93: inventory_iface.v1.InventoryService.RackCreate:input_type -> inventory_iface.v1.RackCreateRequest
+	41,  // 94: inventory_iface.v1.InventoryService.RackUpdate:input_type -> inventory_iface.v1.RackUpdateRequest
+	43,  // 95: inventory_iface.v1.InventoryService.RackDelete:input_type -> inventory_iface.v1.RackDeleteRequest
+	45,  // 96: inventory_iface.v1.InventoryService.RackDetail:input_type -> inventory_iface.v1.RackDetailRequest
+	49,  // 97: inventory_iface.v1.InventoryService.RackList:input_type -> inventory_iface.v1.RackListRequest
+	58,  // 98: inventory_iface.v1.InventoryService.ProductConfig:input_type -> inventory_iface.v1.ProductConfigRequest
+	60,  // 99: inventory_iface.v1.InventoryService.ProductConfigUpdate:input_type -> inventory_iface.v1.ProductConfigUpdateRequest
+	66,  // 100: inventory_iface.v1.InventoryService.ProductList:input_type -> inventory_iface.v1.ProductListRequest
+	62,  // 101: inventory_iface.v1.InventoryService.ProductDetail:input_type -> inventory_iface.v1.ProductDetailRequest
+	36,  // 102: inventory_iface.v1.InventoryService.Order:output_type -> inventory_iface.v1.OrderResponse
+	32,  // 103: inventory_iface.v1.InventoryService.StockMovement:output_type -> inventory_iface.v1.StockMovementResponse
+	28,  // 104: inventory_iface.v1.InventoryService.PushStockEvent:output_type -> inventory_iface.v1.PushStockEventResponse
+	13,  // 105: inventory_iface.v1.InventoryService.TransactionCreate:output_type -> inventory_iface.v1.TransactionCreateResponse
+	15,  // 106: inventory_iface.v1.InventoryService.TransactionCancel:output_type -> inventory_iface.v1.TransactionCancelResponse
+	20,  // 107: inventory_iface.v1.InventoryService.ProductPlacementList:output_type -> inventory_iface.v1.ProductPlacementListResponse
+	23,  // 108: inventory_iface.v1.InventoryService.ProductPlacementLog:output_type -> inventory_iface.v1.ProductPlacementLogResponse
+	26,  // 109: inventory_iface.v1.InventoryService.ProductBatchList:output_type -> inventory_iface.v1.ProductBatchListResponse
+	17,  // 110: inventory_iface.v1.InventoryService.ProductReconcile:output_type -> inventory_iface.v1.ProductReconcileResponse
+	40,  // 111: inventory_iface.v1.InventoryService.RackCreate:output_type -> inventory_iface.v1.RackCreateResponse
+	42,  // 112: inventory_iface.v1.InventoryService.RackUpdate:output_type -> inventory_iface.v1.RackUpdateResponse
+	44,  // 113: inventory_iface.v1.InventoryService.RackDelete:output_type -> inventory_iface.v1.RackDeleteResponse
+	46,  // 114: inventory_iface.v1.InventoryService.RackDetail:output_type -> inventory_iface.v1.RackDetailResponse
+	57,  // 115: inventory_iface.v1.InventoryService.RackList:output_type -> inventory_iface.v1.RackListResponse
+	59,  // 116: inventory_iface.v1.InventoryService.ProductConfig:output_type -> inventory_iface.v1.ProductConfigResponse
+	61,  // 117: inventory_iface.v1.InventoryService.ProductConfigUpdate:output_type -> inventory_iface.v1.ProductConfigUpdateResponse
+	76,  // 118: inventory_iface.v1.InventoryService.ProductList:output_type -> inventory_iface.v1.ProductListResponse
+	63,  // 119: inventory_iface.v1.InventoryService.ProductDetail:output_type -> inventory_iface.v1.ProductDetailResponse
+	102, // [102:120] is the sub-list for method output_type
+	84,  // [84:102] is the sub-list for method input_type
+	84,  // [84:84] is the sub-list for extension type_name
+	84,  // [84:84] is the sub-list for extension extendee
+	0,   // [0:84] is the sub-list for field type_name
 }
 
 func init() { file_inventory_iface_v1_service_proto_init() }
@@ -1762,18 +5363,45 @@ func file_inventory_iface_v1_service_proto_init() {
 		return
 	}
 	file_inventory_iface_v1_types_proto_init()
+	file_inventory_iface_v1_service_proto_msgTypes[6].OneofWrappers = []any{
+		(*TransactionCreateRequest_Order)(nil),
+		(*TransactionCreateRequest_Restock)(nil),
+		(*TransactionCreateRequest_StockReturn)(nil),
+		(*TransactionCreateRequest_FoundBack)(nil),
+		(*TransactionCreateRequest_Problem)(nil),
+	}
+	file_inventory_iface_v1_service_proto_msgTypes[42].OneofWrappers = []any{
+		(*RackListSort_General)(nil),
+		(*RackListSort_Stock)(nil),
+	}
+	file_inventory_iface_v1_service_proto_msgTypes[50].OneofWrappers = []any{
+		(*RackData_General)(nil),
+		(*RackData_Stock)(nil),
+		(*RackData_Warehouse)(nil),
+	}
+	file_inventory_iface_v1_service_proto_msgTypes[59].OneofWrappers = []any{
+		(*ProductListSort_General)(nil),
+		(*ProductListSort_Stock)(nil),
+	}
+	file_inventory_iface_v1_service_proto_msgTypes[69].OneofWrappers = []any{
+		(*ProductData_General)(nil),
+		(*ProductData_Stock)(nil),
+		(*ProductData_Team)(nil),
+		(*ProductData_Config)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_inventory_iface_v1_service_proto_rawDesc), len(file_inventory_iface_v1_service_proto_rawDesc)),
-			NumEnums:      0,
-			NumMessages:   23,
+			NumEnums:      6,
+			NumMessages:   78,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
 		GoTypes:           file_inventory_iface_v1_service_proto_goTypes,
 		DependencyIndexes: file_inventory_iface_v1_service_proto_depIdxs,
+		EnumInfos:         file_inventory_iface_v1_service_proto_enumTypes,
 		MessageInfos:      file_inventory_iface_v1_service_proto_msgTypes,
 	}.Build()
 	File_inventory_iface_v1_service_proto = out.File

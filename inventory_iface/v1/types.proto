@@ -10,6 +10,15 @@ enum QueueType {
   QUEUE_TYPE_UNSPECIFIED = 0;
   QUEUE_TYPE_FIFO = 1;
   QUEUE_TYPE_LIFO = 2;
+  QUEUE_TYPE_BY_EXPIRING_DATE = 3;
+}
+
+// PlacementPickingType — pick goods from the rack holding the smaller vs bigger
+// quantity of the product first.
+enum PlacementPickingType {
+  PLACEMENT_PICKING_TYPE_UNSPECIFIED = 0;
+  PLACEMENT_PICKING_TYPE_SMALLER = 1;
+  PLACEMENT_PICKING_TYPE_BIGGER = 2;
 }
 
 enum StockChangeType {

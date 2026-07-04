@@ -39,6 +39,18 @@ const (
 	// WarehouseServiceWarehouseListProcedure is the fully-qualified name of the WarehouseService's
 	// WarehouseList RPC.
 	WarehouseServiceWarehouseListProcedure = "/warehouse_iface.v1.WarehouseService/WarehouseList"
+	// WarehouseServiceWarehouseDetailProcedure is the fully-qualified name of the WarehouseService's
+	// WarehouseDetail RPC.
+	WarehouseServiceWarehouseDetailProcedure = "/warehouse_iface.v1.WarehouseService/WarehouseDetail"
+	// WarehouseServiceWarehouseCreateProcedure is the fully-qualified name of the WarehouseService's
+	// WarehouseCreate RPC.
+	WarehouseServiceWarehouseCreateProcedure = "/warehouse_iface.v1.WarehouseService/WarehouseCreate"
+	// WarehouseServiceWarehouseUpdateProcedure is the fully-qualified name of the WarehouseService's
+	// WarehouseUpdate RPC.
+	WarehouseServiceWarehouseUpdateProcedure = "/warehouse_iface.v1.WarehouseService/WarehouseUpdate"
+	// WarehouseServiceWarehouseDeleteProcedure is the fully-qualified name of the WarehouseService's
+	// WarehouseDelete RPC.
+	WarehouseServiceWarehouseDeleteProcedure = "/warehouse_iface.v1.WarehouseService/WarehouseDelete"
 	// WarehouseServiceTeamWarehouseReturnInfoProcedure is the fully-qualified name of the
 	// WarehouseService's TeamWarehouseReturnInfo RPC.
 	WarehouseServiceTeamWarehouseReturnInfoProcedure = "/warehouse_iface.v1.WarehouseService/TeamWarehouseReturnInfo"
@@ -62,6 +74,11 @@ const (
 type WarehouseServiceClient interface {
 	WarehouseIDs(context.Context, *connect.Request[v1.WarehouseIDsRequest]) (*connect.Response[v1.WarehouseIDsResponse], error)
 	WarehouseList(context.Context, *connect.Request[v1.WarehouseListRequest]) (*connect.Response[v1.WarehouseListResponse], error)
+	WarehouseDetail(context.Context, *connect.Request[v1.WarehouseDetailRequest]) (*connect.Response[v1.WarehouseDetailResponse], error)
+	// Warehouse management — admin team only.
+	WarehouseCreate(context.Context, *connect.Request[v1.WarehouseCreateRequest]) (*connect.Response[v1.WarehouseCreateResponse], error)
+	WarehouseUpdate(context.Context, *connect.Request[v1.WarehouseUpdateRequest]) (*connect.Response[v1.WarehouseUpdateResponse], error)
+	WarehouseDelete(context.Context, *connect.Request[v1.WarehouseDeleteRequest]) (*connect.Response[v1.WarehouseDeleteResponse], error)
 	TeamWarehouseReturnInfo(context.Context, *connect.Request[v1.TeamWarehouseReturnInfoRequest]) (*connect.Response[v1.TeamWarehouseReturnInfoResponse], error)
 	TransactionNoteCreate(context.Context, *connect.Request[v1.TransactionNoteCreateRequest]) (*connect.Response[v1.TransactionNoteCreateResponse], error)
 	TransactionNoteList(context.Context, *connect.Request[v1.TransactionNoteListRequest]) (*connect.Response[v1.TransactionNoteListResponse], error)
@@ -93,6 +110,30 @@ func NewWarehouseServiceClient(httpClient connect.HTTPClient, baseURL string, op
 			httpClient,
 			baseURL+WarehouseServiceWarehouseListProcedure,
 			connect.WithSchema(warehouseServiceMethods.ByName("WarehouseList")),
+			connect.WithClientOptions(opts...),
+		),
+		warehouseDetail: connect.NewClient[v1.WarehouseDetailRequest, v1.WarehouseDetailResponse](
+			httpClient,
+			baseURL+WarehouseServiceWarehouseDetailProcedure,
+			connect.WithSchema(warehouseServiceMethods.ByName("WarehouseDetail")),
+			connect.WithClientOptions(opts...),
+		),
+		warehouseCreate: connect.NewClient[v1.WarehouseCreateRequest, v1.WarehouseCreateResponse](
+			httpClient,
+			baseURL+WarehouseServiceWarehouseCreateProcedure,
+			connect.WithSchema(warehouseServiceMethods.ByName("WarehouseCreate")),
+			connect.WithClientOptions(opts...),
+		),
+		warehouseUpdate: connect.NewClient[v1.WarehouseUpdateRequest, v1.WarehouseUpdateResponse](
+			httpClient,
+			baseURL+WarehouseServiceWarehouseUpdateProcedure,
+			connect.WithSchema(warehouseServiceMethods.ByName("WarehouseUpdate")),
+			connect.WithClientOptions(opts...),
+		),
+		warehouseDelete: connect.NewClient[v1.WarehouseDeleteRequest, v1.WarehouseDeleteResponse](
+			httpClient,
+			baseURL+WarehouseServiceWarehouseDeleteProcedure,
+			connect.WithSchema(warehouseServiceMethods.ByName("WarehouseDelete")),
 			connect.WithClientOptions(opts...),
 		),
 		teamWarehouseReturnInfo: connect.NewClient[v1.TeamWarehouseReturnInfoRequest, v1.TeamWarehouseReturnInfoResponse](
@@ -138,6 +179,10 @@ func NewWarehouseServiceClient(httpClient connect.HTTPClient, baseURL string, op
 type warehouseServiceClient struct {
 	warehouseIDs            *connect.Client[v1.WarehouseIDsRequest, v1.WarehouseIDsResponse]
 	warehouseList           *connect.Client[v1.WarehouseListRequest, v1.WarehouseListResponse]
+	warehouseDetail         *connect.Client[v1.WarehouseDetailRequest, v1.WarehouseDetailResponse]
+	warehouseCreate         *connect.Client[v1.WarehouseCreateRequest, v1.WarehouseCreateResponse]
+	warehouseUpdate         *connect.Client[v1.WarehouseUpdateRequest, v1.WarehouseUpdateResponse]
+	warehouseDelete         *connect.Client[v1.WarehouseDeleteRequest, v1.WarehouseDeleteResponse]
 	teamWarehouseReturnInfo *connect.Client[v1.TeamWarehouseReturnInfoRequest, v1.TeamWarehouseReturnInfoResponse]
 	transactionNoteCreate   *connect.Client[v1.TransactionNoteCreateRequest, v1.TransactionNoteCreateResponse]
 	transactionNoteList     *connect.Client[v1.TransactionNoteListRequest, v1.TransactionNoteListResponse]
@@ -154,6 +199,26 @@ func (c *warehouseServiceClient) WarehouseIDs(ctx context.Context, req *connect.
 // WarehouseList calls warehouse_iface.v1.WarehouseService.WarehouseList.
 func (c *warehouseServiceClient) WarehouseList(ctx context.Context, req *connect.Request[v1.WarehouseListRequest]) (*connect.Response[v1.WarehouseListResponse], error) {
 	return c.warehouseList.CallUnary(ctx, req)
+}
+
+// WarehouseDetail calls warehouse_iface.v1.WarehouseService.WarehouseDetail.
+func (c *warehouseServiceClient) WarehouseDetail(ctx context.Context, req *connect.Request[v1.WarehouseDetailRequest]) (*connect.Response[v1.WarehouseDetailResponse], error) {
+	return c.warehouseDetail.CallUnary(ctx, req)
+}
+
+// WarehouseCreate calls warehouse_iface.v1.WarehouseService.WarehouseCreate.
+func (c *warehouseServiceClient) WarehouseCreate(ctx context.Context, req *connect.Request[v1.WarehouseCreateRequest]) (*connect.Response[v1.WarehouseCreateResponse], error) {
+	return c.warehouseCreate.CallUnary(ctx, req)
+}
+
+// WarehouseUpdate calls warehouse_iface.v1.WarehouseService.WarehouseUpdate.
+func (c *warehouseServiceClient) WarehouseUpdate(ctx context.Context, req *connect.Request[v1.WarehouseUpdateRequest]) (*connect.Response[v1.WarehouseUpdateResponse], error) {
+	return c.warehouseUpdate.CallUnary(ctx, req)
+}
+
+// WarehouseDelete calls warehouse_iface.v1.WarehouseService.WarehouseDelete.
+func (c *warehouseServiceClient) WarehouseDelete(ctx context.Context, req *connect.Request[v1.WarehouseDeleteRequest]) (*connect.Response[v1.WarehouseDeleteResponse], error) {
+	return c.warehouseDelete.CallUnary(ctx, req)
 }
 
 // TeamWarehouseReturnInfo calls warehouse_iface.v1.WarehouseService.TeamWarehouseReturnInfo.
@@ -190,6 +255,11 @@ func (c *warehouseServiceClient) Stat(ctx context.Context, req *connect.Request[
 type WarehouseServiceHandler interface {
 	WarehouseIDs(context.Context, *connect.Request[v1.WarehouseIDsRequest]) (*connect.Response[v1.WarehouseIDsResponse], error)
 	WarehouseList(context.Context, *connect.Request[v1.WarehouseListRequest]) (*connect.Response[v1.WarehouseListResponse], error)
+	WarehouseDetail(context.Context, *connect.Request[v1.WarehouseDetailRequest]) (*connect.Response[v1.WarehouseDetailResponse], error)
+	// Warehouse management — admin team only.
+	WarehouseCreate(context.Context, *connect.Request[v1.WarehouseCreateRequest]) (*connect.Response[v1.WarehouseCreateResponse], error)
+	WarehouseUpdate(context.Context, *connect.Request[v1.WarehouseUpdateRequest]) (*connect.Response[v1.WarehouseUpdateResponse], error)
+	WarehouseDelete(context.Context, *connect.Request[v1.WarehouseDeleteRequest]) (*connect.Response[v1.WarehouseDeleteResponse], error)
 	TeamWarehouseReturnInfo(context.Context, *connect.Request[v1.TeamWarehouseReturnInfoRequest]) (*connect.Response[v1.TeamWarehouseReturnInfoResponse], error)
 	TransactionNoteCreate(context.Context, *connect.Request[v1.TransactionNoteCreateRequest]) (*connect.Response[v1.TransactionNoteCreateResponse], error)
 	TransactionNoteList(context.Context, *connect.Request[v1.TransactionNoteListRequest]) (*connect.Response[v1.TransactionNoteListResponse], error)
@@ -217,6 +287,30 @@ func NewWarehouseServiceHandler(svc WarehouseServiceHandler, opts ...connect.Han
 		WarehouseServiceWarehouseListProcedure,
 		svc.WarehouseList,
 		connect.WithSchema(warehouseServiceMethods.ByName("WarehouseList")),
+		connect.WithHandlerOptions(opts...),
+	)
+	warehouseServiceWarehouseDetailHandler := connect.NewUnaryHandler(
+		WarehouseServiceWarehouseDetailProcedure,
+		svc.WarehouseDetail,
+		connect.WithSchema(warehouseServiceMethods.ByName("WarehouseDetail")),
+		connect.WithHandlerOptions(opts...),
+	)
+	warehouseServiceWarehouseCreateHandler := connect.NewUnaryHandler(
+		WarehouseServiceWarehouseCreateProcedure,
+		svc.WarehouseCreate,
+		connect.WithSchema(warehouseServiceMethods.ByName("WarehouseCreate")),
+		connect.WithHandlerOptions(opts...),
+	)
+	warehouseServiceWarehouseUpdateHandler := connect.NewUnaryHandler(
+		WarehouseServiceWarehouseUpdateProcedure,
+		svc.WarehouseUpdate,
+		connect.WithSchema(warehouseServiceMethods.ByName("WarehouseUpdate")),
+		connect.WithHandlerOptions(opts...),
+	)
+	warehouseServiceWarehouseDeleteHandler := connect.NewUnaryHandler(
+		WarehouseServiceWarehouseDeleteProcedure,
+		svc.WarehouseDelete,
+		connect.WithSchema(warehouseServiceMethods.ByName("WarehouseDelete")),
 		connect.WithHandlerOptions(opts...),
 	)
 	warehouseServiceTeamWarehouseReturnInfoHandler := connect.NewUnaryHandler(
@@ -261,6 +355,14 @@ func NewWarehouseServiceHandler(svc WarehouseServiceHandler, opts ...connect.Han
 			warehouseServiceWarehouseIDsHandler.ServeHTTP(w, r)
 		case WarehouseServiceWarehouseListProcedure:
 			warehouseServiceWarehouseListHandler.ServeHTTP(w, r)
+		case WarehouseServiceWarehouseDetailProcedure:
+			warehouseServiceWarehouseDetailHandler.ServeHTTP(w, r)
+		case WarehouseServiceWarehouseCreateProcedure:
+			warehouseServiceWarehouseCreateHandler.ServeHTTP(w, r)
+		case WarehouseServiceWarehouseUpdateProcedure:
+			warehouseServiceWarehouseUpdateHandler.ServeHTTP(w, r)
+		case WarehouseServiceWarehouseDeleteProcedure:
+			warehouseServiceWarehouseDeleteHandler.ServeHTTP(w, r)
 		case WarehouseServiceTeamWarehouseReturnInfoProcedure:
 			warehouseServiceTeamWarehouseReturnInfoHandler.ServeHTTP(w, r)
 		case WarehouseServiceTransactionNoteCreateProcedure:
@@ -288,6 +390,22 @@ func (UnimplementedWarehouseServiceHandler) WarehouseIDs(context.Context, *conne
 
 func (UnimplementedWarehouseServiceHandler) WarehouseList(context.Context, *connect.Request[v1.WarehouseListRequest]) (*connect.Response[v1.WarehouseListResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("warehouse_iface.v1.WarehouseService.WarehouseList is not implemented"))
+}
+
+func (UnimplementedWarehouseServiceHandler) WarehouseDetail(context.Context, *connect.Request[v1.WarehouseDetailRequest]) (*connect.Response[v1.WarehouseDetailResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("warehouse_iface.v1.WarehouseService.WarehouseDetail is not implemented"))
+}
+
+func (UnimplementedWarehouseServiceHandler) WarehouseCreate(context.Context, *connect.Request[v1.WarehouseCreateRequest]) (*connect.Response[v1.WarehouseCreateResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("warehouse_iface.v1.WarehouseService.WarehouseCreate is not implemented"))
+}
+
+func (UnimplementedWarehouseServiceHandler) WarehouseUpdate(context.Context, *connect.Request[v1.WarehouseUpdateRequest]) (*connect.Response[v1.WarehouseUpdateResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("warehouse_iface.v1.WarehouseService.WarehouseUpdate is not implemented"))
+}
+
+func (UnimplementedWarehouseServiceHandler) WarehouseDelete(context.Context, *connect.Request[v1.WarehouseDeleteRequest]) (*connect.Response[v1.WarehouseDeleteResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("warehouse_iface.v1.WarehouseService.WarehouseDelete is not implemented"))
 }
 
 func (UnimplementedWarehouseServiceHandler) TeamWarehouseReturnInfo(context.Context, *connect.Request[v1.TeamWarehouseReturnInfoRequest]) (*connect.Response[v1.TeamWarehouseReturnInfoResponse], error) {

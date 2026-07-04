@@ -6,6 +6,7 @@ import "buf/validate/validate.proto";
 // import "common/v1/common.proto";
 // import "google/protobuf/timestamp.proto";
 import "common/v1/stat.proto";
+import "role_base/v1/role.proto";
 
 option go_package = "github.com/pdcgo/schema/services/warehouse_iface/v1;warehouse_iface";
 
@@ -33,6 +34,8 @@ message StatFilter {
 }
 
 message StatRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
   common.v1.StatTimeRange range = 1 [(buf.validate.field).required = true];
   StatFilter filter = 2;
   repeated MetricType metric_types = 3 [(buf.validate.field).repeated = {
