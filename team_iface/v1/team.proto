@@ -1,0 +1,179 @@
+syntax = "proto3";
+package team_iface.v1;
+
+import "buf/validate/validate.proto";
+import "common/v1/common.proto";
+import "common/v1/team.proto";
+import "role_base/v1/role.proto";
+
+option go_package = "github.com/pdcgo/schema/services/team_iface/v1;team_iface";
+
+// TeamService is the v2 replacement for the legacy Team system. Management RPCs
+// (create/update/delete) are admin-only; list/detail are open to any authenticated
+// caller. Authorization is enforced declaratively via the (role_base.v1.request_policy)
+// on each request message (see user_service/access_interceptors).
+service TeamService {
+  // TeamCreate follows the long-running-task pattern (streaming progress): it creates
+  // the team, its team info, then adds the caller as team owner — all in one tx.
+  rpc TeamCreate(TeamCreateRequest) returns (stream TeamCreateResponse);
+  rpc TeamUpdate(TeamUpdateRequest) returns (TeamUpdateResponse);
+  rpc TeamDelete(TeamDeleteRequest) returns (TeamDeleteResponse);
+  rpc TeamList(TeamListRequest) returns (TeamListResponse);
+  rpc TeamDetail(TeamDetailRequest) returns (TeamDetailResponse);
+  // TeamByIds bulk-loads teams by id (for preloading team names in other UIs so raw
+  // ids are never shown). Any authenticated caller; missing/deleted ids are omitted.
+  rpc TeamByIds(TeamByIdsRequest) returns (TeamByIdsResponse);
+  // TeamInfoUpdate edits a team's transfer/return metadata. Team-scoped: a team
+  // owner/admin may edit their own team (root/admin bypass).
+  rpc TeamInfoUpdate(TeamInfoUpdateRequest) returns (TeamInfoUpdateResponse);
+}
+
+// TeamInfo is the per-team transfer/return metadata. 0 for return_warehouse_id /
+// return_user_id means unset.
+message TeamInfo {
+  uint64 team_id = 1;
+  string contact_number = 2;
+  string bank_type = 3;
+  string bank_owner_name = 4;
+  string bank_account_number = 5;
+  uint64 return_warehouse_id = 6;
+  uint64 return_user_id = 7;
+}
+
+// Team mirrors the legacy team record. `type` is the stored TeamType string
+// (root/admin/warehouse/selling); `info` is present on detail reads.
+message Team {
+  uint64 id = 1;
+  string type = 2;
+  string name = 3;
+  string team_code = 4;
+  string description = 5;
+  bool deleted = 6;
+  TeamInfo info = 7;
+}
+
+message TeamCreateRequest {
+  option (role_base.v1.request_policy) = {
+    roles: [
+      ROLE_ROOT,
+      ROLE_ADMIN
+    ]
+  };
+
+  common.v1.TeamType type = 1 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+  string name = 2 [(buf.validate.field).string = {
+    min_len: 4
+    max_len: 128
+  }];
+  string team_code = 3 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 10
+  }];
+  string description = 4 [(buf.validate.field).string = {max_len: 300}];
+}
+
+// TeamCreateResponse carries the progress `message` (long-task pattern); the final
+// stream message also carries the created `team`.
+message TeamCreateResponse {
+  Team team = 1;
+  string message = 2;
+}
+
+message TeamUpdateRequest {
+  option (role_base.v1.request_policy) = {
+    roles: [
+      ROLE_ROOT,
+      ROLE_ADMIN
+    ]
+  };
+
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+  string name = 2 [(buf.validate.field).string = {
+    min_len: 4
+    max_len: 128
+  }];
+  string description = 3 [(buf.validate.field).string = {max_len: 300}];
+}
+message TeamUpdateResponse {
+  Team team = 1;
+}
+
+message TeamDeleteRequest {
+  option (role_base.v1.request_policy) = {
+    roles: [
+      ROLE_ROOT,
+      ROLE_ADMIN
+    ]
+  };
+
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+}
+message TeamDeleteResponse {}
+
+message TeamListRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
+  string q = 1;
+  // Filter by team type; TEAM_TYPE_UNSPECIFIED (default) returns all types.
+  common.v1.TeamType team_type = 2;
+  common.v1.PageFilter page = 3 [(buf.validate.field).required = true];
+}
+message TeamListResponse {
+  repeated Team teams = 1;
+  common.v1.PageInfo page_info = 2;
+}
+
+message TeamDetailRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
+  uint64 team_id = 1 [(buf.validate.field).uint64.gt = 0];
+}
+message TeamDetailResponse {
+  Team team = 1;
+}
+
+message TeamByIdsRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
+  repeated uint64 ids = 1 [(buf.validate.field).repeated = {
+    min_items: 1
+    max_items: 200
+    unique: true
+    items: {
+      uint64: {gt: 0}
+    }
+  }];
+}
+message TeamByIdsResponse {
+  // Keyed by team id; missing/deleted ids are omitted.
+  map<uint64, Team> data = 1;
+}
+
+message TeamInfoUpdateRequest {
+  option (role_base.v1.request_policy) = {
+    roles: [
+      ROLE_ROOT,
+      ROLE_ADMIN,
+      ROLE_TEAM_OWNER,
+      ROLE_TEAM_ADMIN
+    ]
+  };
+
+  // Team-scoped: a team owner/admin may edit their own team (root/admin bypass).
+  uint64 team_id = 1 [
+    (buf.validate.field).uint64.gt = 0,
+    (role_base.v1.use_scope) = true
+  ];
+  string contact_number = 2 [(buf.validate.field).string = {max_len: 40}];
+  string bank_type = 3 [(buf.validate.field).string = {max_len: 60}];
+  string bank_owner_name = 4 [(buf.validate.field).string = {max_len: 128}];
+  string bank_account_number = 5 [(buf.validate.field).string = {max_len: 60}];
+  uint64 return_warehouse_id = 6; // 0 = clear (NULL)
+  uint64 return_user_id = 7; // 0 = clear (NULL)
+}
+message TeamInfoUpdateResponse {
+  TeamInfo info = 1;
+}

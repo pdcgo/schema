@@ -53,6 +53,9 @@ const (
 	// ProductServiceProductSearchProcedure is the fully-qualified name of the ProductService's
 	// ProductSearch RPC.
 	ProductServiceProductSearchProcedure = "/product_iface.v1.ProductService/ProductSearch"
+	// ProductServiceProductListSearchProcedure is the fully-qualified name of the ProductService's
+	// ProductListSearch RPC.
+	ProductServiceProductListSearchProcedure = "/product_iface.v1.ProductService/ProductListSearch"
 	// ProductServiceProductCreateProcedure is the fully-qualified name of the ProductService's
 	// ProductCreate RPC.
 	ProductServiceProductCreateProcedure = "/product_iface.v1.ProductService/ProductCreate"
@@ -94,6 +97,8 @@ type ProductServiceClient interface {
 	ProductByIDs(context.Context, *connect.Request[v1.ProductByIDsRequest]) (*connect.Response[v1.ProductByIDsResponse], error)
 	ProductListExport(context.Context, *connect.Request[v1.ProductListExportRequest]) (*connect.ServerStreamForClient[v1.ProductListExportResponse], error)
 	ProductSearch(context.Context, *connect.Request[v1.ProductSearchRequest]) (*connect.Response[v1.ProductSearchResponse], error)
+	// Fastest-ops product list for picker components: one q matches name OR code.
+	ProductListSearch(context.Context, *connect.Request[v1.ProductListSearchRequest]) (*connect.Response[v1.ProductListSearchResponse], error)
 	// Product Management (CRUD) — operates on the legacy `products` table.
 	ProductCreate(context.Context, *connect.Request[v1.ProductCreateRequest]) (*connect.Response[v1.ProductCreateResponse], error)
 	ProductUpdate(context.Context, *connect.Request[v1.ProductUpdateRequest]) (*connect.Response[v1.ProductUpdateResponse], error)
@@ -151,6 +156,12 @@ func NewProductServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			connect.WithSchema(productServiceMethods.ByName("ProductSearch")),
 			connect.WithClientOptions(opts...),
 		),
+		productListSearch: connect.NewClient[v1.ProductListSearchRequest, v1.ProductListSearchResponse](
+			httpClient,
+			baseURL+ProductServiceProductListSearchProcedure,
+			connect.WithSchema(productServiceMethods.ByName("ProductListSearch")),
+			connect.WithClientOptions(opts...),
+		),
 		productCreate: connect.NewClient[v1.ProductCreateRequest, v1.ProductCreateResponse](
 			httpClient,
 			baseURL+ProductServiceProductCreateProcedure,
@@ -198,6 +209,7 @@ type productServiceClient struct {
 	productByIDs        *connect.Client[v1.ProductByIDsRequest, v1.ProductByIDsResponse]
 	productListExport   *connect.Client[v1.ProductListExportRequest, v1.ProductListExportResponse]
 	productSearch       *connect.Client[v1.ProductSearchRequest, v1.ProductSearchResponse]
+	productListSearch   *connect.Client[v1.ProductListSearchRequest, v1.ProductListSearchResponse]
 	productCreate       *connect.Client[v1.ProductCreateRequest, v1.ProductCreateResponse]
 	productUpdate       *connect.Client[v1.ProductUpdateRequest, v1.ProductUpdateResponse]
 	productDelete       *connect.Client[v1.ProductDeleteRequest, v1.ProductDeleteResponse]
@@ -234,6 +246,11 @@ func (c *productServiceClient) ProductListExport(ctx context.Context, req *conne
 // ProductSearch calls product_iface.v1.ProductService.ProductSearch.
 func (c *productServiceClient) ProductSearch(ctx context.Context, req *connect.Request[v1.ProductSearchRequest]) (*connect.Response[v1.ProductSearchResponse], error) {
 	return c.productSearch.CallUnary(ctx, req)
+}
+
+// ProductListSearch calls product_iface.v1.ProductService.ProductListSearch.
+func (c *productServiceClient) ProductListSearch(ctx context.Context, req *connect.Request[v1.ProductListSearchRequest]) (*connect.Response[v1.ProductListSearchResponse], error) {
+	return c.productListSearch.CallUnary(ctx, req)
 }
 
 // ProductCreate calls product_iface.v1.ProductService.ProductCreate.
@@ -275,6 +292,8 @@ type ProductServiceHandler interface {
 	ProductByIDs(context.Context, *connect.Request[v1.ProductByIDsRequest]) (*connect.Response[v1.ProductByIDsResponse], error)
 	ProductListExport(context.Context, *connect.Request[v1.ProductListExportRequest], *connect.ServerStream[v1.ProductListExportResponse]) error
 	ProductSearch(context.Context, *connect.Request[v1.ProductSearchRequest]) (*connect.Response[v1.ProductSearchResponse], error)
+	// Fastest-ops product list for picker components: one q matches name OR code.
+	ProductListSearch(context.Context, *connect.Request[v1.ProductListSearchRequest]) (*connect.Response[v1.ProductListSearchResponse], error)
 	// Product Management (CRUD) — operates on the legacy `products` table.
 	ProductCreate(context.Context, *connect.Request[v1.ProductCreateRequest]) (*connect.Response[v1.ProductCreateResponse], error)
 	ProductUpdate(context.Context, *connect.Request[v1.ProductUpdateRequest]) (*connect.Response[v1.ProductUpdateResponse], error)
@@ -328,6 +347,12 @@ func NewProductServiceHandler(svc ProductServiceHandler, opts ...connect.Handler
 		connect.WithSchema(productServiceMethods.ByName("ProductSearch")),
 		connect.WithHandlerOptions(opts...),
 	)
+	productServiceProductListSearchHandler := connect.NewUnaryHandler(
+		ProductServiceProductListSearchProcedure,
+		svc.ProductListSearch,
+		connect.WithSchema(productServiceMethods.ByName("ProductListSearch")),
+		connect.WithHandlerOptions(opts...),
+	)
 	productServiceProductCreateHandler := connect.NewUnaryHandler(
 		ProductServiceProductCreateProcedure,
 		svc.ProductCreate,
@@ -378,6 +403,8 @@ func NewProductServiceHandler(svc ProductServiceHandler, opts ...connect.Handler
 			productServiceProductListExportHandler.ServeHTTP(w, r)
 		case ProductServiceProductSearchProcedure:
 			productServiceProductSearchHandler.ServeHTTP(w, r)
+		case ProductServiceProductListSearchProcedure:
+			productServiceProductListSearchHandler.ServeHTTP(w, r)
 		case ProductServiceProductCreateProcedure:
 			productServiceProductCreateHandler.ServeHTTP(w, r)
 		case ProductServiceProductUpdateProcedure:
@@ -421,6 +448,10 @@ func (UnimplementedProductServiceHandler) ProductListExport(context.Context, *co
 
 func (UnimplementedProductServiceHandler) ProductSearch(context.Context, *connect.Request[v1.ProductSearchRequest]) (*connect.Response[v1.ProductSearchResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("product_iface.v1.ProductService.ProductSearch is not implemented"))
+}
+
+func (UnimplementedProductServiceHandler) ProductListSearch(context.Context, *connect.Request[v1.ProductListSearchRequest]) (*connect.Response[v1.ProductListSearchResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("product_iface.v1.ProductService.ProductListSearch is not implemented"))
 }
 
 func (UnimplementedProductServiceHandler) ProductCreate(context.Context, *connect.Request[v1.ProductCreateRequest]) (*connect.Response[v1.ProductCreateResponse], error) {

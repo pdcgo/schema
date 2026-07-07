@@ -126,6 +126,288 @@ func (PlacementPickingType) EnumDescriptor() ([]byte, []int) {
 	return file_inventory_iface_v1_types_proto_rawDescGZIP(), []int{1}
 }
 
+// RestockStatus is the restock document lifecycle: PENDING (created, no stock
+// effect) -> ACCEPTED (goods received; stock mutated) / PROBLEM (marker) /
+// CANCELED (reversed if it was accepted).
+type RestockStatus int32
+
+const (
+	RestockStatus_RESTOCK_STATUS_UNSPECIFIED RestockStatus = 0
+	RestockStatus_RESTOCK_STATUS_PENDING     RestockStatus = 1
+	RestockStatus_RESTOCK_STATUS_ACCEPTED    RestockStatus = 2
+	RestockStatus_RESTOCK_STATUS_PROBLEM     RestockStatus = 3
+	RestockStatus_RESTOCK_STATUS_CANCELED    RestockStatus = 4
+)
+
+// Enum value maps for RestockStatus.
+var (
+	RestockStatus_name = map[int32]string{
+		0: "RESTOCK_STATUS_UNSPECIFIED",
+		1: "RESTOCK_STATUS_PENDING",
+		2: "RESTOCK_STATUS_ACCEPTED",
+		3: "RESTOCK_STATUS_PROBLEM",
+		4: "RESTOCK_STATUS_CANCELED",
+	}
+	RestockStatus_value = map[string]int32{
+		"RESTOCK_STATUS_UNSPECIFIED": 0,
+		"RESTOCK_STATUS_PENDING":     1,
+		"RESTOCK_STATUS_ACCEPTED":    2,
+		"RESTOCK_STATUS_PROBLEM":     3,
+		"RESTOCK_STATUS_CANCELED":    4,
+	}
+)
+
+func (x RestockStatus) Enum() *RestockStatus {
+	p := new(RestockStatus)
+	*p = x
+	return p
+}
+
+func (x RestockStatus) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (RestockStatus) Descriptor() protoreflect.EnumDescriptor {
+	return file_inventory_iface_v1_types_proto_enumTypes[2].Descriptor()
+}
+
+func (RestockStatus) Type() protoreflect.EnumType {
+	return &file_inventory_iface_v1_types_proto_enumTypes[2]
+}
+
+func (x RestockStatus) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use RestockStatus.Descriptor instead.
+func (RestockStatus) EnumDescriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_types_proto_rawDescGZIP(), []int{2}
+}
+
+// TransferStatus is the warehouse-to-warehouse transfer lifecycle: PENDING (created;
+// stock already left the source — in transit) -> ACCEPTED (stock entered the
+// destination) / CANCELED (pre-accept only; the source is restored).
+type TransferStatus int32
+
+const (
+	TransferStatus_TRANSFER_STATUS_UNSPECIFIED TransferStatus = 0
+	TransferStatus_TRANSFER_STATUS_PENDING     TransferStatus = 1
+	TransferStatus_TRANSFER_STATUS_ACCEPTED    TransferStatus = 2
+	TransferStatus_TRANSFER_STATUS_CANCELED    TransferStatus = 3
+)
+
+// Enum value maps for TransferStatus.
+var (
+	TransferStatus_name = map[int32]string{
+		0: "TRANSFER_STATUS_UNSPECIFIED",
+		1: "TRANSFER_STATUS_PENDING",
+		2: "TRANSFER_STATUS_ACCEPTED",
+		3: "TRANSFER_STATUS_CANCELED",
+	}
+	TransferStatus_value = map[string]int32{
+		"TRANSFER_STATUS_UNSPECIFIED": 0,
+		"TRANSFER_STATUS_PENDING":     1,
+		"TRANSFER_STATUS_ACCEPTED":    2,
+		"TRANSFER_STATUS_CANCELED":    3,
+	}
+)
+
+func (x TransferStatus) Enum() *TransferStatus {
+	p := new(TransferStatus)
+	*p = x
+	return p
+}
+
+func (x TransferStatus) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (TransferStatus) Descriptor() protoreflect.EnumDescriptor {
+	return file_inventory_iface_v1_types_proto_enumTypes[3].Descriptor()
+}
+
+func (TransferStatus) Type() protoreflect.EnumType {
+	return &file_inventory_iface_v1_types_proto_enumTypes[3]
+}
+
+func (x TransferStatus) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use TransferStatus.Descriptor instead.
+func (TransferStatus) EnumDescriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_types_proto_rawDescGZIP(), []int{3}
+}
+
+// OpnameStatus is the stock-take session lifecycle: PENDING (counting; no stock
+// effect) -> COMPLETED (counted values applied as ADJUSTMENT stock mutations) /
+// CANCELED (pre-complete only; counts discarded, no stock effect).
+type OpnameStatus int32
+
+const (
+	OpnameStatus_OPNAME_STATUS_UNSPECIFIED OpnameStatus = 0
+	OpnameStatus_OPNAME_STATUS_PENDING     OpnameStatus = 1
+	OpnameStatus_OPNAME_STATUS_COMPLETED   OpnameStatus = 2
+	OpnameStatus_OPNAME_STATUS_CANCELED    OpnameStatus = 3
+)
+
+// Enum value maps for OpnameStatus.
+var (
+	OpnameStatus_name = map[int32]string{
+		0: "OPNAME_STATUS_UNSPECIFIED",
+		1: "OPNAME_STATUS_PENDING",
+		2: "OPNAME_STATUS_COMPLETED",
+		3: "OPNAME_STATUS_CANCELED",
+	}
+	OpnameStatus_value = map[string]int32{
+		"OPNAME_STATUS_UNSPECIFIED": 0,
+		"OPNAME_STATUS_PENDING":     1,
+		"OPNAME_STATUS_COMPLETED":   2,
+		"OPNAME_STATUS_CANCELED":    3,
+	}
+)
+
+func (x OpnameStatus) Enum() *OpnameStatus {
+	p := new(OpnameStatus)
+	*p = x
+	return p
+}
+
+func (x OpnameStatus) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (OpnameStatus) Descriptor() protoreflect.EnumDescriptor {
+	return file_inventory_iface_v1_types_proto_enumTypes[4].Descriptor()
+}
+
+func (OpnameStatus) Type() protoreflect.EnumType {
+	return &file_inventory_iface_v1_types_proto_enumTypes[4]
+}
+
+func (x OpnameStatus) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use OpnameStatus.Descriptor instead.
+func (OpnameStatus) EnumDescriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_types_proto_rawDescGZIP(), []int{4}
+}
+
+// OpnameReasonType is why a counted (rack, product) line differs from the expected
+// snapshot. Optional per line; flows into the ADJUSTMENT placement-log note on complete.
+type OpnameReasonType int32
+
+const (
+	OpnameReasonType_OPNAME_REASON_TYPE_UNSPECIFIED OpnameReasonType = 0
+	OpnameReasonType_OPNAME_REASON_TYPE_LOST        OpnameReasonType = 1
+	OpnameReasonType_OPNAME_REASON_TYPE_BROKEN      OpnameReasonType = 2
+	OpnameReasonType_OPNAME_REASON_TYPE_DISASTER    OpnameReasonType = 3
+)
+
+// Enum value maps for OpnameReasonType.
+var (
+	OpnameReasonType_name = map[int32]string{
+		0: "OPNAME_REASON_TYPE_UNSPECIFIED",
+		1: "OPNAME_REASON_TYPE_LOST",
+		2: "OPNAME_REASON_TYPE_BROKEN",
+		3: "OPNAME_REASON_TYPE_DISASTER",
+	}
+	OpnameReasonType_value = map[string]int32{
+		"OPNAME_REASON_TYPE_UNSPECIFIED": 0,
+		"OPNAME_REASON_TYPE_LOST":        1,
+		"OPNAME_REASON_TYPE_BROKEN":      2,
+		"OPNAME_REASON_TYPE_DISASTER":    3,
+	}
+)
+
+func (x OpnameReasonType) Enum() *OpnameReasonType {
+	p := new(OpnameReasonType)
+	*p = x
+	return p
+}
+
+func (x OpnameReasonType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (OpnameReasonType) Descriptor() protoreflect.EnumDescriptor {
+	return file_inventory_iface_v1_types_proto_enumTypes[5].Descriptor()
+}
+
+func (OpnameReasonType) Type() protoreflect.EnumType {
+	return &file_inventory_iface_v1_types_proto_enumTypes[5]
+}
+
+func (x OpnameReasonType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use OpnameReasonType.Descriptor instead.
+func (OpnameReasonType) EnumDescriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_types_proto_rawDescGZIP(), []int{5}
+}
+
+// RestockLogAction is what happened to a restock document (audit trail entries
+// returned by RestockLogList).
+type RestockLogAction int32
+
+const (
+	RestockLogAction_RESTOCK_LOG_ACTION_UNSPECIFIED RestockLogAction = 0
+	RestockLogAction_RESTOCK_LOG_ACTION_CREATED     RestockLogAction = 1
+	RestockLogAction_RESTOCK_LOG_ACTION_EDITED      RestockLogAction = 2
+	RestockLogAction_RESTOCK_LOG_ACTION_ACCEPTED    RestockLogAction = 3
+	RestockLogAction_RESTOCK_LOG_ACTION_PROBLEM     RestockLogAction = 4
+	RestockLogAction_RESTOCK_LOG_ACTION_CANCELED    RestockLogAction = 5
+)
+
+// Enum value maps for RestockLogAction.
+var (
+	RestockLogAction_name = map[int32]string{
+		0: "RESTOCK_LOG_ACTION_UNSPECIFIED",
+		1: "RESTOCK_LOG_ACTION_CREATED",
+		2: "RESTOCK_LOG_ACTION_EDITED",
+		3: "RESTOCK_LOG_ACTION_ACCEPTED",
+		4: "RESTOCK_LOG_ACTION_PROBLEM",
+		5: "RESTOCK_LOG_ACTION_CANCELED",
+	}
+	RestockLogAction_value = map[string]int32{
+		"RESTOCK_LOG_ACTION_UNSPECIFIED": 0,
+		"RESTOCK_LOG_ACTION_CREATED":     1,
+		"RESTOCK_LOG_ACTION_EDITED":      2,
+		"RESTOCK_LOG_ACTION_ACCEPTED":    3,
+		"RESTOCK_LOG_ACTION_PROBLEM":     4,
+		"RESTOCK_LOG_ACTION_CANCELED":    5,
+	}
+)
+
+func (x RestockLogAction) Enum() *RestockLogAction {
+	p := new(RestockLogAction)
+	*p = x
+	return p
+}
+
+func (x RestockLogAction) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (RestockLogAction) Descriptor() protoreflect.EnumDescriptor {
+	return file_inventory_iface_v1_types_proto_enumTypes[6].Descriptor()
+}
+
+func (RestockLogAction) Type() protoreflect.EnumType {
+	return &file_inventory_iface_v1_types_proto_enumTypes[6]
+}
+
+func (x RestockLogAction) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use RestockLogAction.Descriptor instead.
+func (RestockLogAction) EnumDescriptor() ([]byte, []int) {
+	return file_inventory_iface_v1_types_proto_rawDescGZIP(), []int{6}
+}
+
 type StockChangeType int32
 
 const (
@@ -138,6 +420,7 @@ const (
 	StockChangeType_STOCK_CHANGE_TYPE_FOUND_BACK     StockChangeType = 6
 	StockChangeType_STOCK_CHANGE_TYPE_ADJUSTMENT     StockChangeType = 7
 	StockChangeType_STOCK_CHANGE_TYPE_TRANSFER       StockChangeType = 8
+	StockChangeType_STOCK_CHANGE_TYPE_MOVE           StockChangeType = 9
 )
 
 // Enum value maps for StockChangeType.
@@ -152,6 +435,7 @@ var (
 		6: "STOCK_CHANGE_TYPE_FOUND_BACK",
 		7: "STOCK_CHANGE_TYPE_ADJUSTMENT",
 		8: "STOCK_CHANGE_TYPE_TRANSFER",
+		9: "STOCK_CHANGE_TYPE_MOVE",
 	}
 	StockChangeType_value = map[string]int32{
 		"STOCK_CHANGE_TYPE_UNSPECIFIED":    0,
@@ -163,6 +447,7 @@ var (
 		"STOCK_CHANGE_TYPE_FOUND_BACK":     6,
 		"STOCK_CHANGE_TYPE_ADJUSTMENT":     7,
 		"STOCK_CHANGE_TYPE_TRANSFER":       8,
+		"STOCK_CHANGE_TYPE_MOVE":           9,
 	}
 )
 
@@ -177,11 +462,11 @@ func (x StockChangeType) String() string {
 }
 
 func (StockChangeType) Descriptor() protoreflect.EnumDescriptor {
-	return file_inventory_iface_v1_types_proto_enumTypes[2].Descriptor()
+	return file_inventory_iface_v1_types_proto_enumTypes[7].Descriptor()
 }
 
 func (StockChangeType) Type() protoreflect.EnumType {
-	return &file_inventory_iface_v1_types_proto_enumTypes[2]
+	return &file_inventory_iface_v1_types_proto_enumTypes[7]
 }
 
 func (x StockChangeType) Number() protoreflect.EnumNumber {
@@ -190,7 +475,7 @@ func (x StockChangeType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use StockChangeType.Descriptor instead.
 func (StockChangeType) EnumDescriptor() ([]byte, []int) {
-	return file_inventory_iface_v1_types_proto_rawDescGZIP(), []int{2}
+	return file_inventory_iface_v1_types_proto_rawDescGZIP(), []int{7}
 }
 
 type OrderCreated struct {
@@ -834,7 +1119,35 @@ const file_inventory_iface_v1_types_proto_rawDesc = "" +
 	"\x14PlacementPickingType\x12&\n" +
 	"\"PLACEMENT_PICKING_TYPE_UNSPECIFIED\x10\x00\x12\"\n" +
 	"\x1ePLACEMENT_PICKING_TYPE_SMALLER\x10\x01\x12!\n" +
-	"\x1dPLACEMENT_PICKING_TYPE_BIGGER\x10\x02*\xbf\x02\n" +
+	"\x1dPLACEMENT_PICKING_TYPE_BIGGER\x10\x02*\xa1\x01\n" +
+	"\rRestockStatus\x12\x1e\n" +
+	"\x1aRESTOCK_STATUS_UNSPECIFIED\x10\x00\x12\x1a\n" +
+	"\x16RESTOCK_STATUS_PENDING\x10\x01\x12\x1b\n" +
+	"\x17RESTOCK_STATUS_ACCEPTED\x10\x02\x12\x1a\n" +
+	"\x16RESTOCK_STATUS_PROBLEM\x10\x03\x12\x1b\n" +
+	"\x17RESTOCK_STATUS_CANCELED\x10\x04*\x8a\x01\n" +
+	"\x0eTransferStatus\x12\x1f\n" +
+	"\x1bTRANSFER_STATUS_UNSPECIFIED\x10\x00\x12\x1b\n" +
+	"\x17TRANSFER_STATUS_PENDING\x10\x01\x12\x1c\n" +
+	"\x18TRANSFER_STATUS_ACCEPTED\x10\x02\x12\x1c\n" +
+	"\x18TRANSFER_STATUS_CANCELED\x10\x03*\x81\x01\n" +
+	"\fOpnameStatus\x12\x1d\n" +
+	"\x19OPNAME_STATUS_UNSPECIFIED\x10\x00\x12\x19\n" +
+	"\x15OPNAME_STATUS_PENDING\x10\x01\x12\x1b\n" +
+	"\x17OPNAME_STATUS_COMPLETED\x10\x02\x12\x1a\n" +
+	"\x16OPNAME_STATUS_CANCELED\x10\x03*\x93\x01\n" +
+	"\x10OpnameReasonType\x12\"\n" +
+	"\x1eOPNAME_REASON_TYPE_UNSPECIFIED\x10\x00\x12\x1b\n" +
+	"\x17OPNAME_REASON_TYPE_LOST\x10\x01\x12\x1d\n" +
+	"\x19OPNAME_REASON_TYPE_BROKEN\x10\x02\x12\x1f\n" +
+	"\x1bOPNAME_REASON_TYPE_DISASTER\x10\x03*\xd7\x01\n" +
+	"\x10RestockLogAction\x12\"\n" +
+	"\x1eRESTOCK_LOG_ACTION_UNSPECIFIED\x10\x00\x12\x1e\n" +
+	"\x1aRESTOCK_LOG_ACTION_CREATED\x10\x01\x12\x1d\n" +
+	"\x19RESTOCK_LOG_ACTION_EDITED\x10\x02\x12\x1f\n" +
+	"\x1bRESTOCK_LOG_ACTION_ACCEPTED\x10\x03\x12\x1e\n" +
+	"\x1aRESTOCK_LOG_ACTION_PROBLEM\x10\x04\x12\x1f\n" +
+	"\x1bRESTOCK_LOG_ACTION_CANCELED\x10\x05*\xdb\x02\n" +
 	"\x0fStockChangeType\x12!\n" +
 	"\x1dSTOCK_CHANGE_TYPE_UNSPECIFIED\x10\x00\x12#\n" +
 	"\x1fSTOCK_CHANGE_TYPE_ORDER_CREATED\x10\x01\x12$\n" +
@@ -844,7 +1157,8 @@ const file_inventory_iface_v1_types_proto_rawDesc = "" +
 	"\x19STOCK_CHANGE_TYPE_PROBLEM\x10\x05\x12 \n" +
 	"\x1cSTOCK_CHANGE_TYPE_FOUND_BACK\x10\x06\x12 \n" +
 	"\x1cSTOCK_CHANGE_TYPE_ADJUSTMENT\x10\a\x12\x1e\n" +
-	"\x1aSTOCK_CHANGE_TYPE_TRANSFER\x10\bB\xce\x01\n" +
+	"\x1aSTOCK_CHANGE_TYPE_TRANSFER\x10\b\x12\x1a\n" +
+	"\x16STOCK_CHANGE_TYPE_MOVE\x10\tB\xce\x01\n" +
 	"\x16com.inventory_iface.v1B\n" +
 	"TypesProtoP\x01ZCgithub.com/pdcgo/schema/services/inventory_iface/v1;inventory_iface\xa2\x02\x03IXX\xaa\x02\x11InventoryIface.V1\xca\x02\x11InventoryIface\\V1\xe2\x02\x1dInventoryIface\\V1\\GPBMetadata\xea\x02\x12InventoryIface::V1b\x06proto3"
 
@@ -860,35 +1174,40 @@ func file_inventory_iface_v1_types_proto_rawDescGZIP() []byte {
 	return file_inventory_iface_v1_types_proto_rawDescData
 }
 
-var file_inventory_iface_v1_types_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
+var file_inventory_iface_v1_types_proto_enumTypes = make([]protoimpl.EnumInfo, 8)
 var file_inventory_iface_v1_types_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_inventory_iface_v1_types_proto_goTypes = []any{
 	(QueueType)(0),                // 0: inventory_iface.v1.QueueType
 	(PlacementPickingType)(0),     // 1: inventory_iface.v1.PlacementPickingType
-	(StockChangeType)(0),          // 2: inventory_iface.v1.StockChangeType
-	(*OrderCreated)(nil),          // 3: inventory_iface.v1.OrderCreated
-	(*OrderCanceled)(nil),         // 4: inventory_iface.v1.OrderCanceled
-	(*Restock)(nil),               // 5: inventory_iface.v1.Restock
-	(*Return)(nil),                // 6: inventory_iface.v1.Return
-	(*Problem)(nil),               // 7: inventory_iface.v1.Problem
-	(*FoundBack)(nil),             // 8: inventory_iface.v1.FoundBack
-	(*Adjustment)(nil),            // 9: inventory_iface.v1.Adjustment
-	(*Transfer)(nil),              // 10: inventory_iface.v1.Transfer
-	(*ChangeItem)(nil),            // 11: inventory_iface.v1.ChangeItem
-	(*StockChange)(nil),           // 12: inventory_iface.v1.StockChange
-	(*timestamppb.Timestamp)(nil), // 13: google.protobuf.Timestamp
+	(RestockStatus)(0),            // 2: inventory_iface.v1.RestockStatus
+	(TransferStatus)(0),           // 3: inventory_iface.v1.TransferStatus
+	(OpnameStatus)(0),             // 4: inventory_iface.v1.OpnameStatus
+	(OpnameReasonType)(0),         // 5: inventory_iface.v1.OpnameReasonType
+	(RestockLogAction)(0),         // 6: inventory_iface.v1.RestockLogAction
+	(StockChangeType)(0),          // 7: inventory_iface.v1.StockChangeType
+	(*OrderCreated)(nil),          // 8: inventory_iface.v1.OrderCreated
+	(*OrderCanceled)(nil),         // 9: inventory_iface.v1.OrderCanceled
+	(*Restock)(nil),               // 10: inventory_iface.v1.Restock
+	(*Return)(nil),                // 11: inventory_iface.v1.Return
+	(*Problem)(nil),               // 12: inventory_iface.v1.Problem
+	(*FoundBack)(nil),             // 13: inventory_iface.v1.FoundBack
+	(*Adjustment)(nil),            // 14: inventory_iface.v1.Adjustment
+	(*Transfer)(nil),              // 15: inventory_iface.v1.Transfer
+	(*ChangeItem)(nil),            // 16: inventory_iface.v1.ChangeItem
+	(*StockChange)(nil),           // 17: inventory_iface.v1.StockChange
+	(*timestamppb.Timestamp)(nil), // 18: google.protobuf.Timestamp
 }
 var file_inventory_iface_v1_types_proto_depIdxs = []int32{
-	13, // 0: inventory_iface.v1.StockChange.at:type_name -> google.protobuf.Timestamp
-	11, // 1: inventory_iface.v1.StockChange.changes:type_name -> inventory_iface.v1.ChangeItem
-	3,  // 2: inventory_iface.v1.StockChange.order_created:type_name -> inventory_iface.v1.OrderCreated
-	4,  // 3: inventory_iface.v1.StockChange.order_canceled:type_name -> inventory_iface.v1.OrderCanceled
-	5,  // 4: inventory_iface.v1.StockChange.restock:type_name -> inventory_iface.v1.Restock
-	6,  // 5: inventory_iface.v1.StockChange.return:type_name -> inventory_iface.v1.Return
-	7,  // 6: inventory_iface.v1.StockChange.problem:type_name -> inventory_iface.v1.Problem
-	8,  // 7: inventory_iface.v1.StockChange.found_back:type_name -> inventory_iface.v1.FoundBack
-	9,  // 8: inventory_iface.v1.StockChange.adjustment:type_name -> inventory_iface.v1.Adjustment
-	10, // 9: inventory_iface.v1.StockChange.transfer:type_name -> inventory_iface.v1.Transfer
+	18, // 0: inventory_iface.v1.StockChange.at:type_name -> google.protobuf.Timestamp
+	16, // 1: inventory_iface.v1.StockChange.changes:type_name -> inventory_iface.v1.ChangeItem
+	8,  // 2: inventory_iface.v1.StockChange.order_created:type_name -> inventory_iface.v1.OrderCreated
+	9,  // 3: inventory_iface.v1.StockChange.order_canceled:type_name -> inventory_iface.v1.OrderCanceled
+	10, // 4: inventory_iface.v1.StockChange.restock:type_name -> inventory_iface.v1.Restock
+	11, // 5: inventory_iface.v1.StockChange.return:type_name -> inventory_iface.v1.Return
+	12, // 6: inventory_iface.v1.StockChange.problem:type_name -> inventory_iface.v1.Problem
+	13, // 7: inventory_iface.v1.StockChange.found_back:type_name -> inventory_iface.v1.FoundBack
+	14, // 8: inventory_iface.v1.StockChange.adjustment:type_name -> inventory_iface.v1.Adjustment
+	15, // 9: inventory_iface.v1.StockChange.transfer:type_name -> inventory_iface.v1.Transfer
 	10, // [10:10] is the sub-list for method output_type
 	10, // [10:10] is the sub-list for method input_type
 	10, // [10:10] is the sub-list for extension type_name
@@ -916,7 +1235,7 @@ func file_inventory_iface_v1_types_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_inventory_iface_v1_types_proto_rawDesc), len(file_inventory_iface_v1_types_proto_rawDesc)),
-			NumEnums:      3,
+			NumEnums:      8,
 			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   0,

@@ -76,7 +76,8 @@ type WarehouseServiceClient interface {
 	WarehouseList(context.Context, *connect.Request[v1.WarehouseListRequest]) (*connect.Response[v1.WarehouseListResponse], error)
 	WarehouseDetail(context.Context, *connect.Request[v1.WarehouseDetailRequest]) (*connect.Response[v1.WarehouseDetailResponse], error)
 	// Warehouse management — admin team only.
-	WarehouseCreate(context.Context, *connect.Request[v1.WarehouseCreateRequest]) (*connect.Response[v1.WarehouseCreateResponse], error)
+	// Long-running task: streams progress (see docs long-running-task guideline).
+	WarehouseCreate(context.Context, *connect.Request[v1.WarehouseCreateRequest]) (*connect.ServerStreamForClient[v1.WarehouseCreateResponse], error)
 	WarehouseUpdate(context.Context, *connect.Request[v1.WarehouseUpdateRequest]) (*connect.Response[v1.WarehouseUpdateResponse], error)
 	WarehouseDelete(context.Context, *connect.Request[v1.WarehouseDeleteRequest]) (*connect.Response[v1.WarehouseDeleteResponse], error)
 	TeamWarehouseReturnInfo(context.Context, *connect.Request[v1.TeamWarehouseReturnInfoRequest]) (*connect.Response[v1.TeamWarehouseReturnInfoResponse], error)
@@ -207,8 +208,8 @@ func (c *warehouseServiceClient) WarehouseDetail(ctx context.Context, req *conne
 }
 
 // WarehouseCreate calls warehouse_iface.v1.WarehouseService.WarehouseCreate.
-func (c *warehouseServiceClient) WarehouseCreate(ctx context.Context, req *connect.Request[v1.WarehouseCreateRequest]) (*connect.Response[v1.WarehouseCreateResponse], error) {
-	return c.warehouseCreate.CallUnary(ctx, req)
+func (c *warehouseServiceClient) WarehouseCreate(ctx context.Context, req *connect.Request[v1.WarehouseCreateRequest]) (*connect.ServerStreamForClient[v1.WarehouseCreateResponse], error) {
+	return c.warehouseCreate.CallServerStream(ctx, req)
 }
 
 // WarehouseUpdate calls warehouse_iface.v1.WarehouseService.WarehouseUpdate.
@@ -257,7 +258,8 @@ type WarehouseServiceHandler interface {
 	WarehouseList(context.Context, *connect.Request[v1.WarehouseListRequest]) (*connect.Response[v1.WarehouseListResponse], error)
 	WarehouseDetail(context.Context, *connect.Request[v1.WarehouseDetailRequest]) (*connect.Response[v1.WarehouseDetailResponse], error)
 	// Warehouse management — admin team only.
-	WarehouseCreate(context.Context, *connect.Request[v1.WarehouseCreateRequest]) (*connect.Response[v1.WarehouseCreateResponse], error)
+	// Long-running task: streams progress (see docs long-running-task guideline).
+	WarehouseCreate(context.Context, *connect.Request[v1.WarehouseCreateRequest], *connect.ServerStream[v1.WarehouseCreateResponse]) error
 	WarehouseUpdate(context.Context, *connect.Request[v1.WarehouseUpdateRequest]) (*connect.Response[v1.WarehouseUpdateResponse], error)
 	WarehouseDelete(context.Context, *connect.Request[v1.WarehouseDeleteRequest]) (*connect.Response[v1.WarehouseDeleteResponse], error)
 	TeamWarehouseReturnInfo(context.Context, *connect.Request[v1.TeamWarehouseReturnInfoRequest]) (*connect.Response[v1.TeamWarehouseReturnInfoResponse], error)
@@ -295,7 +297,7 @@ func NewWarehouseServiceHandler(svc WarehouseServiceHandler, opts ...connect.Han
 		connect.WithSchema(warehouseServiceMethods.ByName("WarehouseDetail")),
 		connect.WithHandlerOptions(opts...),
 	)
-	warehouseServiceWarehouseCreateHandler := connect.NewUnaryHandler(
+	warehouseServiceWarehouseCreateHandler := connect.NewServerStreamHandler(
 		WarehouseServiceWarehouseCreateProcedure,
 		svc.WarehouseCreate,
 		connect.WithSchema(warehouseServiceMethods.ByName("WarehouseCreate")),
@@ -396,8 +398,8 @@ func (UnimplementedWarehouseServiceHandler) WarehouseDetail(context.Context, *co
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("warehouse_iface.v1.WarehouseService.WarehouseDetail is not implemented"))
 }
 
-func (UnimplementedWarehouseServiceHandler) WarehouseCreate(context.Context, *connect.Request[v1.WarehouseCreateRequest]) (*connect.Response[v1.WarehouseCreateResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("warehouse_iface.v1.WarehouseService.WarehouseCreate is not implemented"))
+func (UnimplementedWarehouseServiceHandler) WarehouseCreate(context.Context, *connect.Request[v1.WarehouseCreateRequest], *connect.ServerStream[v1.WarehouseCreateResponse]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("warehouse_iface.v1.WarehouseService.WarehouseCreate is not implemented"))
 }
 
 func (UnimplementedWarehouseServiceHandler) WarehouseUpdate(context.Context, *connect.Request[v1.WarehouseUpdateRequest]) (*connect.Response[v1.WarehouseUpdateResponse], error) {

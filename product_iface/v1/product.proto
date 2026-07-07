@@ -20,6 +20,9 @@ service ProductService {
   rpc ProductListExport(ProductListExportRequest) returns (stream ProductListExportResponse);
   rpc ProductSearch(ProductSearchRequest) returns (ProductSearchResponse);
 
+  // Fastest-ops product list for picker components: one q matches name OR code.
+  rpc ProductListSearch(ProductListSearchRequest) returns (ProductListSearchResponse);
+
   // Product Management (CRUD) — operates on the legacy `products` table.
   rpc ProductCreate(ProductCreateRequest) returns (ProductCreateResponse);
   rpc ProductUpdate(ProductUpdateRequest) returns (ProductUpdateResponse);
@@ -115,8 +118,40 @@ message ProductListExportResponse {
   bytes data = 4;
 }
 
-message ProductByIDsRequest {
-  option (role_base.v1.request_policy) = {allow_all: true};
+// ProductListSearch is the "Product List for Fastest Ops" RPC (see
+// product_service/docs/readme.md): a lean, team-scoped search backing picker
+// components — a single q matches product name OR product code (ref_id).
+message ProductListSearchRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+  uint64 team_id = 1 [
+    (buf.validate.field).uint64.gt = 0,
+    (role_base.v1.use_scope) = true
+  ];
+  string q = 2; // matches name OR ref_id (code), ILIKE; empty = newest products
+  int64 limit = 3; // default 25, cap 100
+}
+
+message ProductListSearchItem {
+  uint64 id = 1;
+  string name = 2;
+  string ref_id = 3;
+  string image = 4;
+}
+
+message ProductListSearchResponse {
+  repeated ProductListSearchItem products = 1;
+}
+
+// ProductByIDs follows the "Rule Rpc that load Data By IDs" guideline
+// (docs/proto-guideline.md): filter + data_request in; a map keyed by product id out,
+// each id carrying one oneof-typed item per requested data type.
+enum ProductByIdsDataType {
+  PRODUCT_BY_IDS_DATA_TYPE_UNSPECIFIED = 0;
+  PRODUCT_BY_IDS_DATA_TYPE_GENERAL = 1; // name, ref_id, image
+  PRODUCT_BY_IDS_DATA_TYPE_TEAM = 2; // team_id, team_name
+}
+
+message ProductByIdsFilter {
   repeated uint64 ids = 1 [(buf.validate.field).repeated = {
     min_items: 1
     max_items: 100
@@ -124,20 +159,48 @@ message ProductByIDsRequest {
       uint64: {gt: 0}
     }
   }];
-
-  bool include_variant = 2;
+  uint64 team_id = 2; // optional scope
 }
 
-message ProductIDsData {
+message ProductByIDsRequest {
+  option (role_base.v1.request_policy) = {allow_all: true};
+  ProductByIdsFilter filter = 1 [(buf.validate.field).required = true];
+  repeated ProductByIdsDataType data_request = 2 [(buf.validate.field).repeated = {
+    min_items: 1
+    items: {
+      enum: {
+        defined_only: true
+        not_in: [0]
+      }
+    }
+  }];
+}
+
+message ProductByIdsGeneralItem {
   uint64 id = 1;
   string name = 2;
-  string image = 3;
-  string ref_id = 4;
-  uint64 team_id = 5;
+  string ref_id = 3;
+  string image = 4;
+}
+
+message ProductByIdsTeamItem {
+  uint64 team_id = 1;
+  string team_name = 2;
+}
+
+message ProductByIdsItem {
+  oneof d {
+    ProductByIdsGeneralItem general = 1;
+    ProductByIdsTeamItem team = 2;
+  }
+}
+
+message ProductByIdsItemList {
+  repeated ProductByIdsItem items = 1;
 }
 
 message ProductByIDsResponse {
-  map<uint64, ProductIDsData> products = 1;
+  map<uint64, ProductByIdsItemList> items = 1; // keyed by product id
 }
 
 message ProductDuplicateRequest {

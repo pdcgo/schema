@@ -124,23 +124,22 @@ func (mr *MockWarehouseServiceClientMockRecorder) WarehouseDetail(ctx, req inter
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "WarehouseDetail", reflect.TypeOf((*MockWarehouseService)(nil).WarehouseDetail), ctx, req)
 }
 
-func (m *MockWarehouseService) WarehouseCreate(ctx context.Context, req *connect.Request[v1.WarehouseCreateRequest]) (*connect.Response[v1.WarehouseCreateResponse], error) {
+func (m *MockWarehouseService) WarehouseCreate(ctx context.Context, req *connect.Request[v1.WarehouseCreateRequest], stream *connect.ServerStream[v1.WarehouseCreateResponse]) error {
     m.ctrl.T.Helper()
-    ret := m.ctrl.Call(m, "WarehouseCreate", ctx, req)
-    ret0, _ := ret[0].(*connect.Response[v1.WarehouseCreateResponse])
-    ret1, _ := ret[1].(error)
-    return ret0, ret1
+    ret := m.ctrl.Call(m, "WarehouseCreate", ctx, req, stream)
+    ret0, _ := ret[0].(error)
+    return ret0
 }
 
-func (mr *MockWarehouseServiceMockRecorder) WarehouseCreate(ctx, req interface{}) *gomock.Call {
+func (mr *MockWarehouseServiceMockRecorder) WarehouseCreate(ctx, req, stream interface{}) *gomock.Call {
     mr.mock.ctrl.T.Helper()
-    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "WarehouseCreate", reflect.TypeOf((*MockWarehouseService)(nil).WarehouseCreate), ctx, req)
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "WarehouseCreate", reflect.TypeOf((*MockWarehouseService)(nil).WarehouseCreate), ctx, req, stream)
 }
 
-func (m *MockWarehouseServiceClient) WarehouseCreate(ctx context.Context, req *connect.Request[v1.WarehouseCreateRequest]) (*connect.Response[v1.WarehouseCreateResponse], error) {
+func (m *MockWarehouseServiceClient) WarehouseCreate(ctx context.Context, req *connect.Request[v1.WarehouseCreateRequest]) (*connect.ServerStreamForClient[v1.WarehouseCreateResponse], error) {
     m.ctrl.T.Helper()
     ret := m.ctrl.Call(m, "WarehouseCreate", ctx, req)
-    ret0, _ := ret[0].(*connect.Response[v1.WarehouseCreateResponse])
+    ret0, _ := ret[0].(*connect.ServerStreamForClient[v1.WarehouseCreateResponse])
     ret1, _ := ret[1].(error)
     return ret0, ret1
 }

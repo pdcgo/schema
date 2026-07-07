@@ -1144,8 +1144,9 @@ func (x *WarehouseDetailResponse) GetData() *WarehouseDetail {
 
 type WarehouseCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Client-supplied id (warehouses.id is not auto-increment).
-	Id            uint64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	// Code for the warehouse team created for this warehouse (uppercased server-side;
+	// must be unique). The warehouse id is server-assigned (= the new team's id).
+	TeamCode      string  `protobuf:"bytes,1,opt,name=team_code,json=teamCode,proto3" json:"team_code,omitempty"`
 	Name          string  `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Desc          string  `protobuf:"bytes,3,opt,name=desc,proto3" json:"desc,omitempty"`
 	Address       string  `protobuf:"bytes,4,opt,name=address,proto3" json:"address,omitempty"`
@@ -1192,11 +1193,11 @@ func (*WarehouseCreateRequest) Descriptor() ([]byte, []int) {
 	return file_warehouse_iface_v1_warehouse_proto_rawDescGZIP(), []int{18}
 }
 
-func (x *WarehouseCreateRequest) GetId() uint64 {
+func (x *WarehouseCreateRequest) GetTeamCode() string {
 	if x != nil {
-		return x.Id
+		return x.TeamCode
 	}
-	return 0
+	return ""
 }
 
 func (x *WarehouseCreateRequest) GetName() string {
@@ -1284,8 +1285,11 @@ func (x *WarehouseCreateRequest) GetCloseOrder() string {
 }
 
 type WarehouseCreateResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Set on the final message: the created warehouse/team id.
+	Id uint64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	// Progress line for the long-running create task.
+	Message       string `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1325,6 +1329,13 @@ func (x *WarehouseCreateResponse) GetId() uint64 {
 		return x.Id
 	}
 	return 0
+}
+
+func (x *WarehouseCreateResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
 }
 
 type WarehouseUpdateRequest struct {
@@ -1761,9 +1772,9 @@ const file_warehouse_iface_v1_warehouse_proto_rawDesc = "" +
 	"\x16WarehouseDetailRequest\x12\x17\n" +
 	"\x02id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id:\x06\x92\xb5\x18\x02 \x01\"R\n" +
 	"\x17WarehouseDetailResponse\x127\n" +
-	"\x04data\x18\x01 \x01(\v2#.warehouse_iface.v1.WarehouseDetailR\x04data\"\x90\x03\n" +
-	"\x16WarehouseCreateRequest\x12\x17\n" +
-	"\x02id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12\x1b\n" +
+	"\x04data\x18\x01 \x01(\v2#.warehouse_iface.v1.WarehouseDetailR\x04data\"\x9f\x03\n" +
+	"\x16WarehouseCreateRequest\x12&\n" +
+	"\tteam_code\x18\x01 \x01(\tB\t\xbaH\x06r\x04\x10\x01\x18\x06R\bteamCode\x12\x1b\n" +
 	"\x04name\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12\x12\n" +
 	"\x04desc\x18\x03 \x01(\tR\x04desc\x12\x18\n" +
 	"\aaddress\x18\x04 \x01(\tR\aaddress\x12\x17\n" +
@@ -1780,9 +1791,10 @@ const file_warehouse_iface_v1_warehouse_proto_rawDesc = "" +
 	"close_time\x18\f \x01(\tR\tcloseTime\x12\x1f\n" +
 	"\vclose_order\x18\r \x01(\tR\n" +
 	"closeOrder:\b\x92\xb5\x18\x04\n" +
-	"\x02\x01\x02\")\n" +
+	"\x02\x01\x02\"C\n" +
 	"\x17WarehouseCreateResponse\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x04R\x02id\"\x90\x03\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x18\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\"\x90\x03\n" +
 	"\x16WarehouseUpdateRequest\x12\x17\n" +
 	"\x02id\x18\x01 \x01(\x04B\a\xbaH\x042\x02 \x00R\x02id\x12\x1b\n" +
 	"\x04name\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04name\x12\x12\n" +
@@ -1819,13 +1831,13 @@ const file_warehouse_iface_v1_warehouse_proto_rawDesc = "" +
 	"\x1cTRANSACTION_NOTE_TYPE_RETURN\x10\x02\x12 \n" +
 	"\x1cTRANSACTION_NOTE_TYPE_CANCEL\x10\x03\x12 \n" +
 	"\x1cTRANSACTION_NOTE_TYPE_BROKEN\x10\x04\x12!\n" +
-	"\x1dTRANSACTION_NOTE_TYPE_PROBLEM\x10\x052\xb8\n" +
+	"\x1dTRANSACTION_NOTE_TYPE_PROBLEM\x10\x052\xba\n" +
 	"\n" +
 	"\x10WarehouseService\x12a\n" +
 	"\fWarehouseIDs\x12'.warehouse_iface.v1.WarehouseIDsRequest\x1a(.warehouse_iface.v1.WarehouseIDsResponse\x12d\n" +
 	"\rWarehouseList\x12(.warehouse_iface.v1.WarehouseListRequest\x1a).warehouse_iface.v1.WarehouseListResponse\x12j\n" +
-	"\x0fWarehouseDetail\x12*.warehouse_iface.v1.WarehouseDetailRequest\x1a+.warehouse_iface.v1.WarehouseDetailResponse\x12j\n" +
-	"\x0fWarehouseCreate\x12*.warehouse_iface.v1.WarehouseCreateRequest\x1a+.warehouse_iface.v1.WarehouseCreateResponse\x12j\n" +
+	"\x0fWarehouseDetail\x12*.warehouse_iface.v1.WarehouseDetailRequest\x1a+.warehouse_iface.v1.WarehouseDetailResponse\x12l\n" +
+	"\x0fWarehouseCreate\x12*.warehouse_iface.v1.WarehouseCreateRequest\x1a+.warehouse_iface.v1.WarehouseCreateResponse0\x01\x12j\n" +
 	"\x0fWarehouseUpdate\x12*.warehouse_iface.v1.WarehouseUpdateRequest\x1a+.warehouse_iface.v1.WarehouseUpdateResponse\x12j\n" +
 	"\x0fWarehouseDelete\x12*.warehouse_iface.v1.WarehouseDeleteRequest\x1a+.warehouse_iface.v1.WarehouseDeleteResponse\x12\x88\x01\n" +
 	"\x17TeamWarehouseReturnInfo\x122.warehouse_iface.v1.TeamWarehouseReturnInfoRequest\x1a3.warehouse_iface.v1.TeamWarehouseReturnInfoResponse\"\x04\x88\xa6\x1d\x01\x12|\n" +

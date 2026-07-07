@@ -5,7 +5,9 @@ import "buf/validate/validate.proto";
 import "common/v1/common.proto";
 import "google/protobuf/timestamp.proto";
 import "inventory_iface/v1/types.proto";
+import "role_base/v1/role.proto";
 import "warehouse_iface/v1/event.proto";
+import "warehouse_iface/v1/inbound.proto";
 
 option go_package = "github.com/pdcgo/schema/services/inventory_iface/v1;inventory_iface";
 
@@ -25,6 +27,10 @@ service InventoryService {
 
   rpc ProductPlacementList(ProductPlacementListRequest) returns (ProductPlacementListResponse);
   rpc ProductPlacementLog(ProductPlacementLogRequest) returns (ProductPlacementLogResponse);
+  // PlacementMove moves stock between racks of ONE warehouse (multi-item, partial
+  // counts). Net-zero for the warehouse: StockState/StockBatch are untouched; only
+  // StockPlacement balances change, logged as MOVE placement-log pairs carrying note.
+  rpc PlacementMove(PlacementMoveRequest) returns (PlacementMoveResponse);
   rpc ProductBatchList(ProductBatchListRequest) returns (ProductBatchListResponse);
 
   // untuk rekonsiliasi legacy
@@ -36,12 +42,54 @@ service InventoryService {
   rpc RackDelete(RackDeleteRequest) returns (RackDeleteResponse);
   rpc RackDetail(RackDetailRequest) returns (RackDetailResponse);
   rpc RackList(RackListRequest) returns (RackListResponse);
+  // RackByIds bulk-loads racks by id (for preloading rack names in other UIs so raw
+  // ids are never shown). Any authenticated caller; missing/deleted ids are omitted.
+  rpc RackByIds(RackByIdsRequest) returns (RackByIdsResponse);
+  // Rack Detail tabs (rack-scoped, all products): RackProductList = products currently
+  // placed on the rack (with names + counts); RackHistory = the rack's placement log
+  // across every product, with an optional time window.
+  rpc RackProductList(RackProductListRequest) returns (RackProductListResponse);
+  rpc RackHistory(RackHistoryRequest) returns (RackHistoryResponse);
 
   // Product management (config + views), scoped by warehouse_id.
   rpc ProductConfig(ProductConfigRequest) returns (ProductConfigResponse);
   rpc ProductConfigUpdate(ProductConfigUpdateRequest) returns (ProductConfigUpdateResponse);
   rpc ProductList(ProductListRequest) returns (ProductListResponse);
   rpc ProductDetail(ProductDetailRequest) returns (ProductDetailResponse);
+
+  // Restock workflow documents. RestockCreate makes a PENDING document (no stock
+  // effect); RestockUpdate{accept} mints the internal inventory transaction (stock
+  // enters + StockBatch); cancel is pre-accept only. Scoped by warehouse_id.
+  rpc RestockCreate(RestockCreateRequest) returns (RestockCreateResponse);
+  rpc RestockUpdate(RestockUpdateRequest) returns (RestockUpdateResponse);
+  rpc RestockDetail(RestockDetailRequest) returns (RestockDetailResponse);
+  rpc RestockList(RestockListRequest) returns (RestockListResponse);
+  // Audit trail of a restock document (created/edited/accepted/problem/canceled).
+  rpc RestockLogList(RestockLogListRequest) returns (RestockLogListResponse);
+
+  // Transfer stock between warehouses — two-legged, in-transit: TransferCreate applies
+  // the OUT leg at the source (stock exits immediately); TransferAccept applies the IN
+  // leg at the destination (stock enters + StockBatch); TransferCancel is pre-accept
+  // only and restores the source.
+  rpc TransferCreate(TransferCreateRequest) returns (TransferCreateResponse);
+  rpc TransferCancel(TransferCancelRequest) returns (TransferCancelResponse);
+  rpc TransferAccept(TransferAcceptRequest) returns (TransferAcceptResponse);
+  rpc TransferDetail(TransferDetailRequest) returns (TransferDetailResponse);
+  rpc TransferList(TransferListRequest) returns (TransferListResponse);
+
+  // Opname (stock-take) sessions over a warehouse's racks, counted per
+  // (rack, product) — the StockPlacement grain. OpnameCreate seeds a PENDING
+  // session with expected counts snapshotted from the warehouse's placements;
+  // OpnameLineCount records counted quantities (re-count overwrites, pending
+  // only); OpnameComplete mints an InventoryTransaction and applies counted
+  // values as ADJUSTMENT mutations (placements + stock state; uncounted lines
+  // untouched); OpnameCancel is pre-complete only and applies nothing.
+  rpc OpnameCreate(OpnameCreateRequest) returns (OpnameCreateResponse);
+  rpc OpnameList(OpnameListRequest) returns (OpnameListResponse);
+  rpc OpnameDetail(OpnameDetailRequest) returns (OpnameDetailResponse);
+  rpc OpnameLineCount(OpnameLineCountRequest) returns (OpnameLineCountResponse);
+  rpc OpnameComplete(OpnameCompleteRequest) returns (OpnameCompleteResponse);
+  rpc OpnameCancel(OpnameCancelRequest) returns (OpnameCancelResponse);
 }
 
 // One product line in a transaction. price is the per-unit value.
@@ -124,6 +172,9 @@ message ProductPlacementLogRequest {
   uint64 warehouse_id = 2 [(buf.validate.field).uint64.gt = 0];
   uint64 rack_id = 3;
   common.v1.PageFilter page = 4 [(buf.validate.field).required = true];
+  // Optional created_at window; epoch MICROseconds (time.UnixMicro, matching the
+  // existing common.v1.TimeFilter consumers). Zero start/end = unbounded side.
+  common.v1.TimeFilter time_range = 5;
 }
 
 message ProductPlacementLogItem {
@@ -137,12 +188,29 @@ message ProductPlacementLogItem {
   int64 change = 8;
   int64 balance_count = 9;
   google.protobuf.Timestamp created_at = 10;
+  string note = 11;
 }
 
 message ProductPlacementLogResponse {
   repeated ProductPlacementLogItem logs = 1;
   common.v1.PageInfo page_info = 2;
 }
+
+// One product move between two racks of the same warehouse (partial count).
+message PlacementMoveItem {
+  uint64 product_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 from_rack_id = 2 [(buf.validate.field).uint64.gt = 0];
+  uint64 to_rack_id = 3 [(buf.validate.field).uint64.gt = 0];
+  int64 count = 4 [(buf.validate.field).int64.gt = 0];
+}
+
+message PlacementMoveRequest {
+  uint64 warehouse_id = 1 [(buf.validate.field).uint64.gt = 0];
+  repeated PlacementMoveItem placements = 2 [(buf.validate.field).repeated.min_items = 1];
+  string note = 3;
+}
+
+message PlacementMoveResponse {}
 
 message ProductBatchListRequest {
   uint64 product_id = 1 [(buf.validate.field).uint64.gt = 0];
@@ -276,6 +344,47 @@ message RackDetailResponse {
   google.protobuf.Timestamp created_at = 8;
 }
 
+// Rack Detail "Products" tab: the products currently placed on a rack (count > 0).
+message RackProductListRequest {
+  uint64 rack_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 warehouse_id = 2 [(buf.validate.field).uint64.gt = 0];
+  common.v1.PageFilter page = 3 [(buf.validate.field).required = true];
+}
+message RackProductItem {
+  uint64 product_id = 1;
+  string product_name = 2;
+  int64 count = 3;
+}
+message RackProductListResponse {
+  repeated RackProductItem items = 1;
+  common.v1.PageInfo page_info = 2;
+}
+
+// Rack Detail "Histories" tab: the rack's placement log across every product, with an
+// optional created_at window (time_range is epoch MICROseconds; zero side = unbounded).
+message RackHistoryRequest {
+  uint64 rack_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 warehouse_id = 2 [(buf.validate.field).uint64.gt = 0];
+  common.v1.PageFilter page = 3 [(buf.validate.field).required = true];
+  common.v1.TimeFilter time_range = 4;
+}
+message RackHistoryItem {
+  uint64 id = 1;
+  uint64 product_id = 2;
+  string product_name = 3;
+  StockChangeType change_type = 4;
+  int64 change = 5;
+  int64 balance_count = 6;
+  uint64 user_id = 7;
+  uint64 transaction_id = 8;
+  string note = 9;
+  google.protobuf.Timestamp created_at = 10;
+}
+message RackHistoryResponse {
+  repeated RackHistoryItem items = 1;
+  common.v1.PageInfo page_info = 2;
+}
+
 // RackList follows the flexible list convention (see docs/proto-guideline.md).
 enum RackListDataType {
   RACK_LIST_DATA_TYPE_UNSPECIFIED = 0;
@@ -356,6 +465,60 @@ message RackListResponse {
   repeated uint64 ids = 2;
 }
 
+// RackByIds follows the "Rule Rpc that load Data By IDs" guideline
+// (docs/proto-guideline.md): filter + data_request in; a map keyed by rack id out,
+// each id carrying one oneof-typed item per requested data type.
+enum RackByIdsDataType {
+  RACK_BY_IDS_DATA_TYPE_UNSPECIFIED = 0;
+  RACK_BY_IDS_DATA_TYPE_GENERAL = 1; // name
+}
+
+message RackByIdsFilter {
+  repeated uint64 ids = 1 [(buf.validate.field).repeated = {
+    min_items: 1
+    max_items: 100
+    items: {
+      uint64: {gt: 0}
+    }
+  }];
+}
+
+message RackByIdsRequest {
+  // Any authenticated caller (per inventory docs). Inert until inventory_service
+  // mounts the v2 access interceptor; declared now so the gate applies when it does.
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
+  RackByIdsFilter filter = 1 [(buf.validate.field).required = true];
+  repeated RackByIdsDataType data_request = 2 [(buf.validate.field).repeated = {
+    min_items: 1
+    items: {
+      enum: {
+        defined_only: true
+        not_in: [0]
+      }
+    }
+  }];
+}
+
+message RackByIdsGeneralItem {
+  uint64 id = 1;
+  string name = 2;
+}
+
+message RackByIdsItem {
+  oneof d {
+    RackByIdsGeneralItem general = 1;
+  }
+}
+
+message RackByIdsItemList {
+  repeated RackByIdsItem items = 1;
+}
+
+message RackByIdsResponse {
+  map<uint64, RackByIdsItemList> items = 1; // keyed by rack id; missing/deleted ids omitted
+}
+
 // --- Product management ---
 
 message ProductConfigRequest {
@@ -396,6 +559,13 @@ message ProductDetailResponse {
   PlacementPickingType placement_picking = 11;
   bool configured = 12;
   google.protobuf.Timestamp updated_at = 13;
+  // Ongoing (in-transit) inbound/outbound for this product+warehouse — pending docs only.
+  int64 ongoing_restock_count = 14; // pending/problem restocks into this warehouse
+  double ongoing_restock_amount = 15;
+  int64 ongoing_transfer_out_count = 16; // pending transfers where this warehouse is the source
+  double ongoing_transfer_out_amount = 17;
+  int64 ongoing_transfer_in_count = 18; // pending transfers where this warehouse is the destination
+  double ongoing_transfer_in_amount = 19;
 }
 
 // ProductList follows the flexible list convention (see docs/proto-guideline.md).
@@ -487,3 +657,547 @@ message ProductListResponse {
   repeated ProductData data = 1;
   repeated uint64 ids = 2;
 }
+
+// --- Restock workflow ---
+
+// One product line of a restock document. price is the per-unit value.
+message RestockItem {
+  uint64 product_id = 1 [(buf.validate.field).uint64.gt = 0];
+  int64 count = 2 [(buf.validate.field).int64.gt = 0];
+  double price = 3;
+}
+
+message RestockCreateRequest {
+  uint64 team_id = 1;
+  uint64 warehouse_id = 2 [(buf.validate.field).uint64.gt = 0];
+  string supplier = 3;
+  string receipt = 4;
+  string note = 5;
+  repeated RestockItem items = 6 [(buf.validate.field).repeated.min_items = 1];
+  // Purchase/order info (selling-team create-restock flow).
+  string extern_order_id = 7;
+  uint64 shipping_id = 8; // courier (common shipment id)
+  double shipping_cost = 9; // ongkir
+  warehouse_iface.v1.PaymentType payment_type = 10;
+}
+message RestockCreateResponse {
+  uint64 restock_id = 1;
+}
+
+// Status marker toggle (pre-accept only): PENDING <-> PROBLEM, optional note append.
+message ChangeStatus {
+  RestockStatus status = 1 [(buf.validate.field).enum = {
+    defined_only: true
+    in: [
+      1,
+      3
+    ]
+  }]; // PENDING | PROBLEM
+  string note = 2;
+}
+
+// Replace the restock's item lines (pre-accept only).
+message UpdateItems {
+  repeated RestockItem items = 1 [(buf.validate.field).repeated.min_items = 1];
+}
+
+// Update the shipping fee / ongkir (pre-accept only).
+message UpdateShippingFee {
+  double shipping_cost = 1;
+}
+
+// Update the purchase/shipping info (pre-accept only).
+message UpdateShippingInfo {
+  uint64 shipping_id = 1; // courier
+  string receipt = 2;
+  string extern_order_id = 3;
+  warehouse_iface.v1.PaymentType payment_type = 4;
+}
+
+// Cancel: PENDING/PROBLEM -> status flip. Pre-accept only — canceling an
+// accepted restock is rejected.
+message RestockCancel {}
+
+// One problematic line of a restock (which product, how many, why).
+message RestockProblemItem {
+  uint64 product_id = 1 [(buf.validate.field).uint64.gt = 0];
+  int64 count = 2 [(buf.validate.field).int64.gt = 0];
+  string note = 3;
+}
+
+// Goods placement into racks at accept time.
+message RestockPlacementItem {
+  uint64 product_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 rack_id = 2 [(buf.validate.field).uint64.gt = 0];
+  int64 count = 3 [(buf.validate.field).int64.gt = 0];
+}
+
+message RestockPlacements {
+  repeated RestockPlacementItem items = 1;
+}
+
+message RestockProblems {
+  repeated RestockProblemItem items = 1;
+}
+
+// Accept the goods: mints the internal inventory transaction. Problem counts are
+// EXCLUDED from stock (recorded on the item rows). Placements are REQUIRED and must
+// fully account the accepted goods (placed + problem == ordered, per product).
+message RestockAccept {
+  RestockPlacements placements = 1; // required: every accepted unit placed on a rack
+  RestockProblems problems = 2; // optional (goods with a problem, excluded from stock)
+  double warehouse_accept_fee = 3; // > 0 → selling team payable to the accepting warehouse
+}
+
+message RestockUpdateAction {
+  oneof act {
+    ChangeStatus change_status = 1;
+    UpdateItems update_items = 2;
+    UpdateShippingFee update_shipping_fee = 3;
+    UpdateShippingInfo update_shipping_info = 4;
+    RestockCancel restock_cancel = 5;
+    RestockAccept restock_accept = 6;
+  }
+}
+
+message RestockUpdateRequest {
+  uint64 restock_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 warehouse_id = 2; // optional scope
+  // Applied in order, all-or-nothing in one transaction. change_status /
+  // update_items / update_shipping_fee / update_shipping_info are rejected once
+  // the restock is accepted.
+  repeated RestockUpdateAction actions = 3 [(buf.validate.field).repeated.min_items = 1];
+}
+message RestockUpdateResponse {}
+
+message RestockDetailRequest {
+  uint64 restock_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 warehouse_id = 2;
+}
+
+message RestockDetailItem {
+  uint64 product_id = 1;
+  string product_name = 2;
+  int64 count = 3;
+  double price = 4;
+  double total = 5;
+  // Per-item problem detail (set via RestockUpdate{problem}.items).
+  int64 problem_count = 6;
+  string problem_note = 7;
+}
+
+message RestockDetailResponse {
+  uint64 id = 1;
+  uint64 team_id = 2;
+  uint64 warehouse_id = 3;
+  string supplier = 4;
+  string receipt = 5;
+  string note = 6;
+  RestockStatus status = 7;
+  uint64 inventory_transaction_id = 8; // 0 when not accepted (nullable in the model)
+  uint64 created_by_id = 9;
+  google.protobuf.Timestamp created_at = 10;
+  google.protobuf.Timestamp accepted_at = 11;
+  google.protobuf.Timestamp canceled_at = 12;
+  int64 item_count = 13;
+  double amount = 14;
+  repeated RestockDetailItem items = 15;
+  string extern_order_id = 16;
+  uint64 shipping_id = 17;
+  double shipping_cost = 18; // ongkir
+  warehouse_iface.v1.PaymentType payment_type = 19;
+  double warehouse_accept_fee = 20; // fee charged by the warehouse on accept (0 = none)
+}
+
+// RestockList follows the flexible list convention (see docs/proto-guideline.md).
+enum RestockListDataType {
+  RESTOCK_LIST_DATA_TYPE_UNSPECIFIED = 0;
+  RESTOCK_LIST_DATA_TYPE_GENERAL = 1;
+  RESTOCK_LIST_DATA_TYPE_TOTAL = 2;
+}
+
+enum RestockGeneralSort {
+  RESTOCK_GENERAL_SORT_UNSPECIFIED = 0;
+  RESTOCK_GENERAL_SORT_CREATED = 1;
+  RESTOCK_GENERAL_SORT_RECEIPT = 2;
+}
+
+enum RestockTotalSort {
+  RESTOCK_TOTAL_SORT_UNSPECIFIED = 0;
+  RESTOCK_TOTAL_SORT_AMOUNT = 1;
+  RESTOCK_TOTAL_SORT_ITEM_COUNT = 2;
+}
+
+message RestockListFilter {
+  uint64 warehouse_id = 1;
+  uint64 team_id = 2; // optional
+  RestockStatus status = 3; // optional
+  string search = 4; // receipt/supplier ILIKE (optional)
+  common.v1.PageFilter page = 5 [(buf.validate.field).required = true];
+}
+
+message RestockListSort {
+  common.v1.SortType sort_type = 1;
+  oneof s {
+    RestockGeneralSort general = 2;
+    RestockTotalSort total = 3;
+  }
+}
+
+message RestockListRequest {
+  RestockListFilter filter = 1 [(buf.validate.field).required = true];
+  RestockListSort sort = 2;
+  repeated RestockListDataType data_types = 3 [(buf.validate.field).repeated.min_items = 1];
+}
+
+message RestockGeneralItem {
+  uint64 id = 1;
+  string receipt = 2;
+  string supplier = 3;
+  RestockStatus status = 4;
+  google.protobuf.Timestamp created_at = 5;
+  google.protobuf.Timestamp accepted_at = 6;
+}
+message RestockGeneralData {
+  map<uint64, RestockGeneralItem> data = 1;
+}
+
+message RestockTotalItem {
+  int64 item_count = 1;
+  double amount = 2;
+}
+message RestockTotalData {
+  map<uint64, RestockTotalItem> data = 1;
+}
+
+message RestockData {
+  oneof data {
+    RestockGeneralData general = 1;
+    RestockTotalData total = 2;
+  }
+}
+
+message RestockListResponse {
+  repeated RestockData data = 1;
+  repeated uint64 ids = 2;
+}
+
+// Flat per-document audit log (ProductPlacementLog precedent), chronological.
+message RestockLogListRequest {
+  uint64 restock_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 warehouse_id = 2; // optional scope
+  common.v1.PageFilter page = 3 [(buf.validate.field).required = true];
+}
+
+message RestockLogItem {
+  RestockLogAction action = 1;
+  string note = 2;
+  uint64 created_by_id = 3;
+  google.protobuf.Timestamp created_at = 4;
+}
+
+message RestockLogListResponse {
+  repeated RestockLogItem logs = 1;
+  common.v1.PageInfo page_info = 2;
+}
+
+// --- Transfer stock between warehouses ---
+
+// One product line of a transfer. No price: the per-unit value is derived from the
+// source warehouse's StockState average at create time (value is conserved).
+message TransferItem {
+  uint64 product_id = 1 [(buf.validate.field).uint64.gt = 0];
+  int64 count = 2 [(buf.validate.field).int64.gt = 0];
+}
+
+message TransferCreateRequest {
+  uint64 team_id = 1;
+  uint64 from_warehouse_id = 2 [(buf.validate.field).uint64.gt = 0];
+  uint64 to_warehouse_id = 3 [(buf.validate.field).uint64.gt = 0];
+  string note = 4;
+  repeated TransferItem items = 5 [(buf.validate.field).repeated.min_items = 1];
+}
+message TransferCreateResponse {
+  uint64 transfer_id = 1;
+}
+
+message TransferPlacementItem {
+  uint64 product_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 rack_id = 2 [(buf.validate.field).uint64.gt = 0];
+  int64 count = 3 [(buf.validate.field).int64.gt = 0];
+}
+
+message TransferPlacements {
+  repeated TransferPlacementItem items = 1;
+}
+
+message TransferAcceptRequest {
+  uint64 transfer_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 warehouse_id = 2; // optional scope: the destination warehouse
+  // Required: every received unit of each product placed on a live rack of the
+  // destination warehouse (placed == received count per product).
+  TransferPlacements placements = 3;
+}
+message TransferAcceptResponse {}
+
+message TransferCancelRequest {
+  uint64 transfer_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 warehouse_id = 2; // optional scope: the source warehouse
+}
+message TransferCancelResponse {}
+
+message TransferDetailRequest {
+  uint64 transfer_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 warehouse_id = 2; // optional scope: matches either side
+}
+
+message TransferDetailItem {
+  uint64 product_id = 1;
+  string product_name = 2;
+  int64 count = 3;
+  double price = 4;
+  double total = 5;
+}
+
+message TransferDetailResponse {
+  uint64 id = 1;
+  uint64 team_id = 2;
+  uint64 from_warehouse_id = 3;
+  string from_warehouse_name = 4;
+  uint64 to_warehouse_id = 5;
+  string to_warehouse_name = 6;
+  string note = 7;
+  TransferStatus status = 8;
+  uint64 out_transaction_id = 9;
+  uint64 in_transaction_id = 10;
+  uint64 created_by_id = 11;
+  google.protobuf.Timestamp created_at = 12;
+  google.protobuf.Timestamp accepted_at = 13;
+  google.protobuf.Timestamp canceled_at = 14;
+  int64 item_count = 15;
+  double amount = 16;
+  repeated TransferDetailItem items = 17;
+}
+
+// TransferList follows the flexible list convention (see docs/proto-guideline.md).
+enum TransferListDataType {
+  TRANSFER_LIST_DATA_TYPE_UNSPECIFIED = 0;
+  TRANSFER_LIST_DATA_TYPE_GENERAL = 1;
+  TRANSFER_LIST_DATA_TYPE_TOTAL = 2;
+}
+
+enum TransferGeneralSort {
+  TRANSFER_GENERAL_SORT_UNSPECIFIED = 0;
+  TRANSFER_GENERAL_SORT_CREATED = 1;
+}
+
+enum TransferTotalSort {
+  TRANSFER_TOTAL_SORT_UNSPECIFIED = 0;
+  TRANSFER_TOTAL_SORT_AMOUNT = 1;
+  TRANSFER_TOTAL_SORT_ITEM_COUNT = 2;
+}
+
+message TransferListFilter {
+  uint64 warehouse_id = 1; // matches EITHER side (from or to)
+  uint64 from_warehouse_id = 2; // optional
+  uint64 to_warehouse_id = 3; // optional
+  uint64 team_id = 4; // optional
+  TransferStatus status = 5; // optional
+  common.v1.PageFilter page = 6 [(buf.validate.field).required = true];
+}
+
+message TransferListSort {
+  common.v1.SortType sort_type = 1;
+  oneof s {
+    TransferGeneralSort general = 2;
+    TransferTotalSort total = 3;
+  }
+}
+
+message TransferListRequest {
+  TransferListFilter filter = 1 [(buf.validate.field).required = true];
+  TransferListSort sort = 2;
+  repeated TransferListDataType data_types = 3 [(buf.validate.field).repeated.min_items = 1];
+}
+
+message TransferGeneralItem {
+  uint64 id = 1;
+  uint64 from_warehouse_id = 2;
+  string from_warehouse_name = 3;
+  uint64 to_warehouse_id = 4;
+  string to_warehouse_name = 5;
+  TransferStatus status = 6;
+  google.protobuf.Timestamp created_at = 7;
+  google.protobuf.Timestamp accepted_at = 8;
+}
+message TransferGeneralData {
+  map<uint64, TransferGeneralItem> data = 1;
+}
+
+message TransferTotalItem {
+  int64 item_count = 1;
+  double amount = 2;
+}
+message TransferTotalData {
+  map<uint64, TransferTotalItem> data = 1;
+}
+
+message TransferData {
+  oneof data {
+    TransferGeneralData general = 1;
+    TransferTotalData total = 2;
+  }
+}
+
+message TransferListResponse {
+  repeated TransferData data = 1;
+  repeated uint64 ids = 2;
+}
+
+// --- Opname (stock-take) ---
+
+message OpnameCreateRequest {
+  uint64 team_id = 1;
+  uint64 warehouse_id = 2 [(buf.validate.field).uint64.gt = 0];
+  string name = 3 [(buf.validate.field).string.min_len = 1];
+}
+message OpnameCreateResponse {
+  uint64 opname_id = 1;
+}
+
+// OpnameList follows the flexible list convention (see docs/proto-guideline.md).
+enum OpnameListDataType {
+  OPNAME_LIST_DATA_TYPE_UNSPECIFIED = 0;
+  OPNAME_LIST_DATA_TYPE_GENERAL = 1;
+  OPNAME_LIST_DATA_TYPE_PROGRESS = 2;
+}
+
+enum OpnameGeneralSort {
+  OPNAME_GENERAL_SORT_UNSPECIFIED = 0;
+  OPNAME_GENERAL_SORT_CREATED = 1;
+}
+
+message OpnameListFilter {
+  uint64 warehouse_id = 1;
+  uint64 team_id = 2; // optional
+  OpnameStatus status = 3; // optional
+  common.v1.PageFilter page = 4 [(buf.validate.field).required = true];
+}
+
+message OpnameListSort {
+  common.v1.SortType sort_type = 1;
+  oneof s {
+    OpnameGeneralSort general = 2;
+  }
+}
+
+message OpnameListRequest {
+  OpnameListFilter filter = 1 [(buf.validate.field).required = true];
+  OpnameListSort sort = 2;
+  repeated OpnameListDataType data_types = 3 [(buf.validate.field).repeated.min_items = 1];
+}
+
+message OpnameGeneralItem {
+  uint64 id = 1;
+  string name = 2;
+  OpnameStatus status = 3;
+  uint64 created_by_id = 4;
+  google.protobuf.Timestamp created_at = 5;
+  uint64 completed_by_id = 6;
+  google.protobuf.Timestamp completed_at = 7;
+}
+message OpnameGeneralData {
+  map<uint64, OpnameGeneralItem> data = 1;
+}
+
+// Counting progress: total lines, lines counted, and counted lines whose
+// counted value differs from the expected snapshot.
+message OpnameProgressItem {
+  int64 line_count = 1;
+  int64 counted_count = 2;
+  int64 discrepancy_count = 3;
+}
+message OpnameProgressData {
+  map<uint64, OpnameProgressItem> data = 1;
+}
+
+message OpnameData {
+  oneof data {
+    OpnameGeneralData general = 1;
+    OpnameProgressData progress = 2;
+  }
+}
+
+message OpnameListResponse {
+  repeated OpnameData data = 1;
+  repeated uint64 ids = 2;
+}
+
+message OpnameDetailRequest {
+  uint64 opname_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 warehouse_id = 2 [(buf.validate.field).uint64.gt = 0];
+}
+
+// One (rack, product) counting line. expected_count is the placement snapshot
+// taken at session create; counted=false means not counted yet.
+message OpnameLineItem {
+  uint64 id = 1;
+  uint64 rack_id = 2;
+  string rack_name = 3;
+  uint64 product_id = 4;
+  string product_name = 5;
+  int64 expected_count = 6;
+  int64 counted_count = 7;
+  bool counted = 8;
+  OpnameReasonType reason = 9;
+  string note = 10;
+}
+
+message OpnameDetailResponse {
+  uint64 id = 1;
+  uint64 team_id = 2;
+  uint64 warehouse_id = 3;
+  string name = 4;
+  OpnameStatus status = 5;
+  uint64 inventory_transaction_id = 6; // 0 until completed
+  uint64 created_by_id = 7;
+  google.protobuf.Timestamp created_at = 8;
+  uint64 completed_by_id = 9;
+  google.protobuf.Timestamp completed_at = 10;
+  google.protobuf.Timestamp canceled_at = 11;
+  repeated OpnameLineItem lines = 12;
+}
+
+// One counted quantity for a product on the rack being counted. reason/note are
+// optional (why the count differs — lost/broken/disaster — plus free text).
+message OpnameCountItem {
+  uint64 product_id = 1 [(buf.validate.field).uint64.gt = 0];
+  int64 counted_count = 2 [(buf.validate.field).int64.gte = 0];
+  OpnameReasonType reason = 3;
+  string note = 4 [(buf.validate.field).string.max_len = 300];
+}
+
+// Batch count for ONE rack of a pending session. Re-counting overwrites. A
+// product not in the seeded lines upserts a new line with expected_count 0
+// (found-but-not-expected).
+message OpnameLineCountRequest {
+  uint64 opname_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 warehouse_id = 2 [(buf.validate.field).uint64.gt = 0];
+  uint64 rack_id = 3 [(buf.validate.field).uint64.gt = 0];
+  repeated OpnameCountItem items = 4 [(buf.validate.field).repeated.min_items = 1];
+}
+message OpnameLineCountResponse {}
+
+message OpnameCompleteRequest {
+  uint64 opname_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 warehouse_id = 2 [(buf.validate.field).uint64.gt = 0];
+}
+message OpnameCompleteResponse {
+  uint64 transaction_id = 1; // the minted opname InventoryTransaction
+}
+
+message OpnameCancelRequest {
+  uint64 opname_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 warehouse_id = 2 [(buf.validate.field).uint64.gt = 0];
+}
+message OpnameCancelResponse {}

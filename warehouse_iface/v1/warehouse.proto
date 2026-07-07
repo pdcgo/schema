@@ -16,7 +16,8 @@ service WarehouseService {
   rpc WarehouseDetail(WarehouseDetailRequest) returns (WarehouseDetailResponse);
 
   // Warehouse management — admin team only.
-  rpc WarehouseCreate(WarehouseCreateRequest) returns (WarehouseCreateResponse);
+  // Long-running task: streams progress (see docs long-running-task guideline).
+  rpc WarehouseCreate(WarehouseCreateRequest) returns (stream WarehouseCreateResponse);
   rpc WarehouseUpdate(WarehouseUpdateRequest) returns (WarehouseUpdateResponse);
   rpc WarehouseDelete(WarehouseDeleteRequest) returns (WarehouseDeleteResponse);
 
@@ -199,8 +200,12 @@ message WarehouseCreateRequest {
     ]
   };
 
-  // Client-supplied id (warehouses.id is not auto-increment).
-  uint64 id = 1 [(buf.validate.field).uint64.gt = 0];
+  // Code for the warehouse team created for this warehouse (uppercased server-side;
+  // must be unique). The warehouse id is server-assigned (= the new team's id).
+  string team_code = 1 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 6
+  }];
   string name = 2 [(buf.validate.field).string = {min_len: 1}];
   string desc = 3;
   string address = 4;
@@ -218,7 +223,10 @@ message WarehouseCreateRequest {
   string close_order = 13;
 }
 message WarehouseCreateResponse {
+  // Set on the final message: the created warehouse/team id.
   uint64 id = 1;
+  // Progress line for the long-running create task.
+  string message = 2;
 }
 
 message WarehouseUpdateRequest {

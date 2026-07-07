@@ -9,6 +9,7 @@ import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/pdcgo/schema/services/revenue_iface/v1;revenue_iface";
 
+// bakalan hilang dan diakomodasi di selling service.
 service RevenueService {
   // rpc OnOrderAsync(OnOrderAsyncRequest) returns (OnOrderAsyncResponse);
   rpc OnOrder(OnOrderRequest) returns (OnOrderResponse);

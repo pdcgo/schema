@@ -21,6 +21,57 @@ enum PlacementPickingType {
   PLACEMENT_PICKING_TYPE_BIGGER = 2;
 }
 
+// RestockStatus is the restock document lifecycle: PENDING (created, no stock
+// effect) -> ACCEPTED (goods received; stock mutated) / PROBLEM (marker) /
+// CANCELED (reversed if it was accepted).
+enum RestockStatus {
+  RESTOCK_STATUS_UNSPECIFIED = 0;
+  RESTOCK_STATUS_PENDING = 1;
+  RESTOCK_STATUS_ACCEPTED = 2;
+  RESTOCK_STATUS_PROBLEM = 3;
+  RESTOCK_STATUS_CANCELED = 4;
+}
+
+// TransferStatus is the warehouse-to-warehouse transfer lifecycle: PENDING (created;
+// stock already left the source — in transit) -> ACCEPTED (stock entered the
+// destination) / CANCELED (pre-accept only; the source is restored).
+enum TransferStatus {
+  TRANSFER_STATUS_UNSPECIFIED = 0;
+  TRANSFER_STATUS_PENDING = 1;
+  TRANSFER_STATUS_ACCEPTED = 2;
+  TRANSFER_STATUS_CANCELED = 3;
+}
+
+// OpnameStatus is the stock-take session lifecycle: PENDING (counting; no stock
+// effect) -> COMPLETED (counted values applied as ADJUSTMENT stock mutations) /
+// CANCELED (pre-complete only; counts discarded, no stock effect).
+enum OpnameStatus {
+  OPNAME_STATUS_UNSPECIFIED = 0;
+  OPNAME_STATUS_PENDING = 1;
+  OPNAME_STATUS_COMPLETED = 2;
+  OPNAME_STATUS_CANCELED = 3;
+}
+
+// OpnameReasonType is why a counted (rack, product) line differs from the expected
+// snapshot. Optional per line; flows into the ADJUSTMENT placement-log note on complete.
+enum OpnameReasonType {
+  OPNAME_REASON_TYPE_UNSPECIFIED = 0;
+  OPNAME_REASON_TYPE_LOST = 1;
+  OPNAME_REASON_TYPE_BROKEN = 2;
+  OPNAME_REASON_TYPE_DISASTER = 3;
+}
+
+// RestockLogAction is what happened to a restock document (audit trail entries
+// returned by RestockLogList).
+enum RestockLogAction {
+  RESTOCK_LOG_ACTION_UNSPECIFIED = 0;
+  RESTOCK_LOG_ACTION_CREATED = 1;
+  RESTOCK_LOG_ACTION_EDITED = 2;
+  RESTOCK_LOG_ACTION_ACCEPTED = 3;
+  RESTOCK_LOG_ACTION_PROBLEM = 4;
+  RESTOCK_LOG_ACTION_CANCELED = 5;
+}
+
 enum StockChangeType {
   STOCK_CHANGE_TYPE_UNSPECIFIED = 0;
   STOCK_CHANGE_TYPE_ORDER_CREATED = 1;
@@ -31,6 +82,7 @@ enum StockChangeType {
   STOCK_CHANGE_TYPE_FOUND_BACK = 6;
   STOCK_CHANGE_TYPE_ADJUSTMENT = 7;
   STOCK_CHANGE_TYPE_TRANSFER = 8;
+  STOCK_CHANGE_TYPE_MOVE = 9;
 }
 
 message OrderCreated {
