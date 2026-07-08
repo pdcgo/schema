@@ -351,22 +351,22 @@ func (x *OverviewDataItem) GetTotalPayment() float64 {
 	return 0
 }
 
-func (x *OverviewDataItem) GetTotalPayable() float64 {
+func (x *OverviewDataItem) GetTotalPayable() *TeamBalanceTotalPayableItem {
 	if x != nil {
 		if x, ok := x.Data.(*OverviewDataItem_TotalPayable); ok {
 			return x.TotalPayable
 		}
 	}
-	return 0
+	return nil
 }
 
-func (x *OverviewDataItem) GetTotalReceivable() float64 {
+func (x *OverviewDataItem) GetTotalReceivable() *TeamBalanceTotalReceivableItem {
 	if x != nil {
 		if x, ok := x.Data.(*OverviewDataItem_TotalReceivable); ok {
 			return x.TotalReceivable
 		}
 	}
-	return 0
+	return nil
 }
 
 func (x *OverviewDataItem) GetIncomingPayment() float64 {
@@ -399,11 +399,11 @@ type OverviewDataItem_TotalPayment struct {
 }
 
 type OverviewDataItem_TotalPayable struct {
-	TotalPayable float64 `protobuf:"fixed64,5,opt,name=total_payable,json=totalPayable,proto3,oneof"`
+	TotalPayable *TeamBalanceTotalPayableItem `protobuf:"bytes,5,opt,name=total_payable,json=totalPayable,proto3,oneof"`
 }
 
 type OverviewDataItem_TotalReceivable struct {
-	TotalReceivable float64 `protobuf:"fixed64,6,opt,name=total_receivable,json=totalReceivable,proto3,oneof"`
+	TotalReceivable *TeamBalanceTotalReceivableItem `protobuf:"bytes,6,opt,name=total_receivable,json=totalReceivable,proto3,oneof"`
 }
 
 type OverviewDataItem_IncomingPayment struct {
@@ -472,7 +472,7 @@ var File_invoice_iface_v2_v2_overview_proto protoreflect.FileDescriptor
 
 const file_invoice_iface_v2_v2_overview_proto_rawDesc = "" +
 	"\n" +
-	"\"invoice_iface/v2/v2_overview.proto\x12\x10invoice_iface.v2\x1a\x1bbuf/validate/validate.proto\x1a\x14common/v1/team.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x17role_base/v1/role.proto\"\x84\x01\n" +
+	"\"invoice_iface/v2/v2_overview.proto\x12\x10invoice_iface.v2\x1a\x1bbuf/validate/validate.proto\x1a\x14common/v1/team.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a+invoice_iface/v2/v2_team_balance_list.proto\x1a\x17role_base/v1/role.proto\"\x84\x01\n" +
 	"\x12OverviewTimeFilter\x128\n" +
 	"\x05start\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\x05start\x124\n" +
 	"\x03end\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x06\xbaH\x03\xc8\x01\x01R\x03end\"{\n" +
@@ -485,16 +485,16 @@ const file_invoice_iface_v2_v2_overview_proto_rawDesc = "" +
 	"time_range\x18\x01 \x01(\v2$.invoice_iface.v2.OverviewTimeFilterB\x06\xbaH\x03\xc8\x01\x01R\ttimeRange\x12@\n" +
 	"\x06filter\x18\x02 \x01(\v2 .invoice_iface.v2.OverviewFilterB\x06\xbaH\x03\xc8\x01\x01R\x06filter\x12X\n" +
 	"\vmetric_type\x18\x03 \x03(\x0e2$.invoice_iface.v2.OverviewMetricTypeB\x11\xbaH\x0e\x92\x01\v\b\x01\"\a\x82\x01\x04\x10\x01 \x00R\n" +
-	"metricType:\x06\x92\xb5\x18\x02 \x01\"\xab\x02\n" +
+	"metricType:\x06\x92\xb5\x18\x02 \x01\"\x8c\x03\n" +
 	"\x10OverviewDataItem\x12\x1a\n" +
 	"\apayable\x18\x01 \x01(\x01H\x00R\apayable\x12 \n" +
 	"\n" +
 	"receivable\x18\x02 \x01(\x01H\x00R\n" +
 	"receivable\x12)\n" +
 	"\x0fpending_payment\x18\x03 \x01(\x01H\x00R\x0ependingPayment\x12%\n" +
-	"\rtotal_payment\x18\x04 \x01(\x01H\x00R\ftotalPayment\x12%\n" +
-	"\rtotal_payable\x18\x05 \x01(\x01H\x00R\ftotalPayable\x12+\n" +
-	"\x10total_receivable\x18\x06 \x01(\x01H\x00R\x0ftotalReceivable\x12+\n" +
+	"\rtotal_payment\x18\x04 \x01(\x01H\x00R\ftotalPayment\x12T\n" +
+	"\rtotal_payable\x18\x05 \x01(\v2-.invoice_iface.v2.TeamBalanceTotalPayableItemH\x00R\ftotalPayable\x12]\n" +
+	"\x10total_receivable\x18\x06 \x01(\v20.invoice_iface.v2.TeamBalanceTotalReceivableItemH\x00R\x0ftotalReceivable\x12+\n" +
 	"\x10incoming_payment\x18\a \x01(\x01H\x00R\x0fincomingPaymentB\x06\n" +
 	"\x04data\"J\n" +
 	"\x10OverviewResponse\x126\n" +
@@ -525,14 +525,16 @@ func file_invoice_iface_v2_v2_overview_proto_rawDescGZIP() []byte {
 var file_invoice_iface_v2_v2_overview_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_invoice_iface_v2_v2_overview_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_invoice_iface_v2_v2_overview_proto_goTypes = []any{
-	(OverviewMetricType)(0),       // 0: invoice_iface.v2.OverviewMetricType
-	(*OverviewTimeFilter)(nil),    // 1: invoice_iface.v2.OverviewTimeFilter
-	(*OverviewFilter)(nil),        // 2: invoice_iface.v2.OverviewFilter
-	(*OverviewRequest)(nil),       // 3: invoice_iface.v2.OverviewRequest
-	(*OverviewDataItem)(nil),      // 4: invoice_iface.v2.OverviewDataItem
-	(*OverviewResponse)(nil),      // 5: invoice_iface.v2.OverviewResponse
-	(*timestamppb.Timestamp)(nil), // 6: google.protobuf.Timestamp
-	(v1.TeamType)(0),              // 7: common.v1.TeamType
+	(OverviewMetricType)(0),                // 0: invoice_iface.v2.OverviewMetricType
+	(*OverviewTimeFilter)(nil),             // 1: invoice_iface.v2.OverviewTimeFilter
+	(*OverviewFilter)(nil),                 // 2: invoice_iface.v2.OverviewFilter
+	(*OverviewRequest)(nil),                // 3: invoice_iface.v2.OverviewRequest
+	(*OverviewDataItem)(nil),               // 4: invoice_iface.v2.OverviewDataItem
+	(*OverviewResponse)(nil),               // 5: invoice_iface.v2.OverviewResponse
+	(*timestamppb.Timestamp)(nil),          // 6: google.protobuf.Timestamp
+	(v1.TeamType)(0),                       // 7: common.v1.TeamType
+	(*TeamBalanceTotalPayableItem)(nil),    // 8: invoice_iface.v2.TeamBalanceTotalPayableItem
+	(*TeamBalanceTotalReceivableItem)(nil), // 9: invoice_iface.v2.TeamBalanceTotalReceivableItem
 }
 var file_invoice_iface_v2_v2_overview_proto_depIdxs = []int32{
 	6, // 0: invoice_iface.v2.OverviewTimeFilter.start:type_name -> google.protobuf.Timestamp
@@ -541,12 +543,14 @@ var file_invoice_iface_v2_v2_overview_proto_depIdxs = []int32{
 	1, // 3: invoice_iface.v2.OverviewRequest.time_range:type_name -> invoice_iface.v2.OverviewTimeFilter
 	2, // 4: invoice_iface.v2.OverviewRequest.filter:type_name -> invoice_iface.v2.OverviewFilter
 	0, // 5: invoice_iface.v2.OverviewRequest.metric_type:type_name -> invoice_iface.v2.OverviewMetricType
-	4, // 6: invoice_iface.v2.OverviewResponse.data:type_name -> invoice_iface.v2.OverviewDataItem
-	7, // [7:7] is the sub-list for method output_type
-	7, // [7:7] is the sub-list for method input_type
-	7, // [7:7] is the sub-list for extension type_name
-	7, // [7:7] is the sub-list for extension extendee
-	0, // [0:7] is the sub-list for field type_name
+	8, // 6: invoice_iface.v2.OverviewDataItem.total_payable:type_name -> invoice_iface.v2.TeamBalanceTotalPayableItem
+	9, // 7: invoice_iface.v2.OverviewDataItem.total_receivable:type_name -> invoice_iface.v2.TeamBalanceTotalReceivableItem
+	4, // 8: invoice_iface.v2.OverviewResponse.data:type_name -> invoice_iface.v2.OverviewDataItem
+	9, // [9:9] is the sub-list for method output_type
+	9, // [9:9] is the sub-list for method input_type
+	9, // [9:9] is the sub-list for extension type_name
+	9, // [9:9] is the sub-list for extension extendee
+	0, // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_invoice_iface_v2_v2_overview_proto_init() }
@@ -554,6 +558,7 @@ func file_invoice_iface_v2_v2_overview_proto_init() {
 	if File_invoice_iface_v2_v2_overview_proto != nil {
 		return
 	}
+	file_invoice_iface_v2_v2_team_balance_list_proto_init()
 	file_invoice_iface_v2_v2_overview_proto_msgTypes[3].OneofWrappers = []any{
 		(*OverviewDataItem_Payable)(nil),
 		(*OverviewDataItem_Receivable)(nil),

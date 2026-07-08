@@ -45,6 +45,11 @@ enum TeamBalancePendingPaymentSort {
   TEAM_BALANCE_PENDING_PAYMENT_SORT_AMOUNT = 1;
 }
 
+enum TeamBalanceIncomingPaymentSort {
+  TEAM_BALANCE_INCOMING_PAYMENT_SORT_UNSPECIFIED = 0;
+  TEAM_BALANCE_INCOMING_PAYMENT_SORT_AMOUNT = 1;
+}
+
 enum TeamBalanceTotalPaymentSort {
   TEAM_BALANCE_TOTAL_PAYMENT_SORT_UNSPECIFIED = 0;
   TEAM_BALANCE_TOTAL_PAYMENT_SORT_AMOUNT = 1;
@@ -70,6 +75,7 @@ message TeamBalanceListSort {
     TeamBalanceTotalPaymentSort total_payment = 6;
     TeamBalanceTotalPayableSort total_payable = 7;
     TeamBalanceTotalReceivableSort total_receivable = 8;
+    TeamBalanceIncomingPaymentSort incoming_payment = 9;
   }
 }
 
@@ -82,6 +88,7 @@ enum TeamBalanceListDataType {
   TEAM_BALANCE_LIST_DATA_TYPE_TOTAL_PAYMENT = 5;
   TEAM_BALANCE_LIST_DATA_TYPE_TOTAL_PAYABLE = 6;
   TEAM_BALANCE_LIST_DATA_TYPE_TOTAL_RECEIVABLE = 7;
+  TEAM_BALANCE_LIST_DATA_TYPE_INCOMING_PAYMENT = 8;
 }
 
 message TeamBalanceListRequest {
@@ -135,6 +142,14 @@ message TeamBalancePendingPaymentData {
   map<uint64, TeamBalancePendingPaymentItem> data = 1;
 }
 
+message TeamBalanceIncomingPaymentItem {
+  double amount = 1;
+}
+
+message TeamBalanceIncomingPaymentData {
+  map<uint64, TeamBalanceIncomingPaymentItem> data = 1;
+}
+
 message TeamBalanceTotalPaymentItem {
   double amount = 1;
 }
@@ -176,6 +191,7 @@ message TeamBalanceData {
     TeamBalanceTotalPaymentData total_payment = 5;
     TeamBalanceTotalPayableData total_payable = 6;
     TeamBalanceTotalReceivableData total_receivable = 7;
+    TeamBalanceIncomingPaymentData incoming_payment = 8;
   }
 }
 

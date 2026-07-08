@@ -212,6 +212,52 @@ func (TeamBalancePendingPaymentSort) EnumDescriptor() ([]byte, []int) {
 	return file_invoice_iface_v2_v2_team_balance_list_proto_rawDescGZIP(), []int{3}
 }
 
+type TeamBalanceIncomingPaymentSort int32
+
+const (
+	TeamBalanceIncomingPaymentSort_TEAM_BALANCE_INCOMING_PAYMENT_SORT_UNSPECIFIED TeamBalanceIncomingPaymentSort = 0
+	TeamBalanceIncomingPaymentSort_TEAM_BALANCE_INCOMING_PAYMENT_SORT_AMOUNT      TeamBalanceIncomingPaymentSort = 1
+)
+
+// Enum value maps for TeamBalanceIncomingPaymentSort.
+var (
+	TeamBalanceIncomingPaymentSort_name = map[int32]string{
+		0: "TEAM_BALANCE_INCOMING_PAYMENT_SORT_UNSPECIFIED",
+		1: "TEAM_BALANCE_INCOMING_PAYMENT_SORT_AMOUNT",
+	}
+	TeamBalanceIncomingPaymentSort_value = map[string]int32{
+		"TEAM_BALANCE_INCOMING_PAYMENT_SORT_UNSPECIFIED": 0,
+		"TEAM_BALANCE_INCOMING_PAYMENT_SORT_AMOUNT":      1,
+	}
+)
+
+func (x TeamBalanceIncomingPaymentSort) Enum() *TeamBalanceIncomingPaymentSort {
+	p := new(TeamBalanceIncomingPaymentSort)
+	*p = x
+	return p
+}
+
+func (x TeamBalanceIncomingPaymentSort) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (TeamBalanceIncomingPaymentSort) Descriptor() protoreflect.EnumDescriptor {
+	return file_invoice_iface_v2_v2_team_balance_list_proto_enumTypes[4].Descriptor()
+}
+
+func (TeamBalanceIncomingPaymentSort) Type() protoreflect.EnumType {
+	return &file_invoice_iface_v2_v2_team_balance_list_proto_enumTypes[4]
+}
+
+func (x TeamBalanceIncomingPaymentSort) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use TeamBalanceIncomingPaymentSort.Descriptor instead.
+func (TeamBalanceIncomingPaymentSort) EnumDescriptor() ([]byte, []int) {
+	return file_invoice_iface_v2_v2_team_balance_list_proto_rawDescGZIP(), []int{4}
+}
+
 type TeamBalanceTotalPaymentSort int32
 
 const (
@@ -242,11 +288,11 @@ func (x TeamBalanceTotalPaymentSort) String() string {
 }
 
 func (TeamBalanceTotalPaymentSort) Descriptor() protoreflect.EnumDescriptor {
-	return file_invoice_iface_v2_v2_team_balance_list_proto_enumTypes[4].Descriptor()
+	return file_invoice_iface_v2_v2_team_balance_list_proto_enumTypes[5].Descriptor()
 }
 
 func (TeamBalanceTotalPaymentSort) Type() protoreflect.EnumType {
-	return &file_invoice_iface_v2_v2_team_balance_list_proto_enumTypes[4]
+	return &file_invoice_iface_v2_v2_team_balance_list_proto_enumTypes[5]
 }
 
 func (x TeamBalanceTotalPaymentSort) Number() protoreflect.EnumNumber {
@@ -255,7 +301,7 @@ func (x TeamBalanceTotalPaymentSort) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use TeamBalanceTotalPaymentSort.Descriptor instead.
 func (TeamBalanceTotalPaymentSort) EnumDescriptor() ([]byte, []int) {
-	return file_invoice_iface_v2_v2_team_balance_list_proto_rawDescGZIP(), []int{4}
+	return file_invoice_iface_v2_v2_team_balance_list_proto_rawDescGZIP(), []int{5}
 }
 
 type TeamBalanceTotalPayableSort int32
@@ -288,11 +334,11 @@ func (x TeamBalanceTotalPayableSort) String() string {
 }
 
 func (TeamBalanceTotalPayableSort) Descriptor() protoreflect.EnumDescriptor {
-	return file_invoice_iface_v2_v2_team_balance_list_proto_enumTypes[5].Descriptor()
+	return file_invoice_iface_v2_v2_team_balance_list_proto_enumTypes[6].Descriptor()
 }
 
 func (TeamBalanceTotalPayableSort) Type() protoreflect.EnumType {
-	return &file_invoice_iface_v2_v2_team_balance_list_proto_enumTypes[5]
+	return &file_invoice_iface_v2_v2_team_balance_list_proto_enumTypes[6]
 }
 
 func (x TeamBalanceTotalPayableSort) Number() protoreflect.EnumNumber {
@@ -301,7 +347,7 @@ func (x TeamBalanceTotalPayableSort) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use TeamBalanceTotalPayableSort.Descriptor instead.
 func (TeamBalanceTotalPayableSort) EnumDescriptor() ([]byte, []int) {
-	return file_invoice_iface_v2_v2_team_balance_list_proto_rawDescGZIP(), []int{5}
+	return file_invoice_iface_v2_v2_team_balance_list_proto_rawDescGZIP(), []int{6}
 }
 
 type TeamBalanceTotalReceivableSort int32
@@ -334,11 +380,11 @@ func (x TeamBalanceTotalReceivableSort) String() string {
 }
 
 func (TeamBalanceTotalReceivableSort) Descriptor() protoreflect.EnumDescriptor {
-	return file_invoice_iface_v2_v2_team_balance_list_proto_enumTypes[6].Descriptor()
+	return file_invoice_iface_v2_v2_team_balance_list_proto_enumTypes[7].Descriptor()
 }
 
 func (TeamBalanceTotalReceivableSort) Type() protoreflect.EnumType {
-	return &file_invoice_iface_v2_v2_team_balance_list_proto_enumTypes[6]
+	return &file_invoice_iface_v2_v2_team_balance_list_proto_enumTypes[7]
 }
 
 func (x TeamBalanceTotalReceivableSort) Number() protoreflect.EnumNumber {
@@ -347,7 +393,7 @@ func (x TeamBalanceTotalReceivableSort) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use TeamBalanceTotalReceivableSort.Descriptor instead.
 func (TeamBalanceTotalReceivableSort) EnumDescriptor() ([]byte, []int) {
-	return file_invoice_iface_v2_v2_team_balance_list_proto_rawDescGZIP(), []int{6}
+	return file_invoice_iface_v2_v2_team_balance_list_proto_rawDescGZIP(), []int{7}
 }
 
 type TeamBalanceListDataType int32
@@ -361,6 +407,7 @@ const (
 	TeamBalanceListDataType_TEAM_BALANCE_LIST_DATA_TYPE_TOTAL_PAYMENT    TeamBalanceListDataType = 5
 	TeamBalanceListDataType_TEAM_BALANCE_LIST_DATA_TYPE_TOTAL_PAYABLE    TeamBalanceListDataType = 6
 	TeamBalanceListDataType_TEAM_BALANCE_LIST_DATA_TYPE_TOTAL_RECEIVABLE TeamBalanceListDataType = 7
+	TeamBalanceListDataType_TEAM_BALANCE_LIST_DATA_TYPE_INCOMING_PAYMENT TeamBalanceListDataType = 8
 )
 
 // Enum value maps for TeamBalanceListDataType.
@@ -374,6 +421,7 @@ var (
 		5: "TEAM_BALANCE_LIST_DATA_TYPE_TOTAL_PAYMENT",
 		6: "TEAM_BALANCE_LIST_DATA_TYPE_TOTAL_PAYABLE",
 		7: "TEAM_BALANCE_LIST_DATA_TYPE_TOTAL_RECEIVABLE",
+		8: "TEAM_BALANCE_LIST_DATA_TYPE_INCOMING_PAYMENT",
 	}
 	TeamBalanceListDataType_value = map[string]int32{
 		"TEAM_BALANCE_LIST_DATA_TYPE_UNSPECIFIED":      0,
@@ -384,6 +432,7 @@ var (
 		"TEAM_BALANCE_LIST_DATA_TYPE_TOTAL_PAYMENT":    5,
 		"TEAM_BALANCE_LIST_DATA_TYPE_TOTAL_PAYABLE":    6,
 		"TEAM_BALANCE_LIST_DATA_TYPE_TOTAL_RECEIVABLE": 7,
+		"TEAM_BALANCE_LIST_DATA_TYPE_INCOMING_PAYMENT": 8,
 	}
 )
 
@@ -398,11 +447,11 @@ func (x TeamBalanceListDataType) String() string {
 }
 
 func (TeamBalanceListDataType) Descriptor() protoreflect.EnumDescriptor {
-	return file_invoice_iface_v2_v2_team_balance_list_proto_enumTypes[7].Descriptor()
+	return file_invoice_iface_v2_v2_team_balance_list_proto_enumTypes[8].Descriptor()
 }
 
 func (TeamBalanceListDataType) Type() protoreflect.EnumType {
-	return &file_invoice_iface_v2_v2_team_balance_list_proto_enumTypes[7]
+	return &file_invoice_iface_v2_v2_team_balance_list_proto_enumTypes[8]
 }
 
 func (x TeamBalanceListDataType) Number() protoreflect.EnumNumber {
@@ -411,7 +460,7 @@ func (x TeamBalanceListDataType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use TeamBalanceListDataType.Descriptor instead.
 func (TeamBalanceListDataType) EnumDescriptor() ([]byte, []int) {
-	return file_invoice_iface_v2_v2_team_balance_list_proto_rawDescGZIP(), []int{7}
+	return file_invoice_iface_v2_v2_team_balance_list_proto_rawDescGZIP(), []int{8}
 }
 
 type TeamBalanceListTimeFilter struct {
@@ -546,6 +595,7 @@ type TeamBalanceListSort struct {
 	//	*TeamBalanceListSort_TotalPayment
 	//	*TeamBalanceListSort_TotalPayable
 	//	*TeamBalanceListSort_TotalReceivable
+	//	*TeamBalanceListSort_IncomingPayment
 	S             isTeamBalanceListSort_S `protobuf_oneof:"s"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -658,6 +708,15 @@ func (x *TeamBalanceListSort) GetTotalReceivable() TeamBalanceTotalReceivableSor
 	return TeamBalanceTotalReceivableSort_TEAM_BALANCE_TOTAL_RECEIVABLE_SORT_UNSPECIFIED
 }
 
+func (x *TeamBalanceListSort) GetIncomingPayment() TeamBalanceIncomingPaymentSort {
+	if x != nil {
+		if x, ok := x.S.(*TeamBalanceListSort_IncomingPayment); ok {
+			return x.IncomingPayment
+		}
+	}
+	return TeamBalanceIncomingPaymentSort_TEAM_BALANCE_INCOMING_PAYMENT_SORT_UNSPECIFIED
+}
+
 type isTeamBalanceListSort_S interface {
 	isTeamBalanceListSort_S()
 }
@@ -690,6 +749,10 @@ type TeamBalanceListSort_TotalReceivable struct {
 	TotalReceivable TeamBalanceTotalReceivableSort `protobuf:"varint,8,opt,name=total_receivable,json=totalReceivable,proto3,enum=invoice_iface.v2.TeamBalanceTotalReceivableSort,oneof"`
 }
 
+type TeamBalanceListSort_IncomingPayment struct {
+	IncomingPayment TeamBalanceIncomingPaymentSort `protobuf:"varint,9,opt,name=incoming_payment,json=incomingPayment,proto3,enum=invoice_iface.v2.TeamBalanceIncomingPaymentSort,oneof"`
+}
+
 func (*TeamBalanceListSort_Common) isTeamBalanceListSort_S() {}
 
 func (*TeamBalanceListSort_Payable) isTeamBalanceListSort_S() {}
@@ -703,6 +766,8 @@ func (*TeamBalanceListSort_TotalPayment) isTeamBalanceListSort_S() {}
 func (*TeamBalanceListSort_TotalPayable) isTeamBalanceListSort_S() {}
 
 func (*TeamBalanceListSort_TotalReceivable) isTeamBalanceListSort_S() {}
+
+func (*TeamBalanceListSort_IncomingPayment) isTeamBalanceListSort_S() {}
 
 type TeamBalanceListRequest struct {
 	state         protoimpl.MessageState     `protogen:"open.v1"`
@@ -1140,6 +1205,94 @@ func (x *TeamBalancePendingPaymentData) GetData() map[uint64]*TeamBalancePending
 	return nil
 }
 
+type TeamBalanceIncomingPaymentItem struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Amount        float64                `protobuf:"fixed64,1,opt,name=amount,proto3" json:"amount,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TeamBalanceIncomingPaymentItem) Reset() {
+	*x = TeamBalanceIncomingPaymentItem{}
+	mi := &file_invoice_iface_v2_v2_team_balance_list_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TeamBalanceIncomingPaymentItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TeamBalanceIncomingPaymentItem) ProtoMessage() {}
+
+func (x *TeamBalanceIncomingPaymentItem) ProtoReflect() protoreflect.Message {
+	mi := &file_invoice_iface_v2_v2_team_balance_list_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TeamBalanceIncomingPaymentItem.ProtoReflect.Descriptor instead.
+func (*TeamBalanceIncomingPaymentItem) Descriptor() ([]byte, []int) {
+	return file_invoice_iface_v2_v2_team_balance_list_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *TeamBalanceIncomingPaymentItem) GetAmount() float64 {
+	if x != nil {
+		return x.Amount
+	}
+	return 0
+}
+
+type TeamBalanceIncomingPaymentData struct {
+	state         protoimpl.MessageState                     `protogen:"open.v1"`
+	Data          map[uint64]*TeamBalanceIncomingPaymentItem `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TeamBalanceIncomingPaymentData) Reset() {
+	*x = TeamBalanceIncomingPaymentData{}
+	mi := &file_invoice_iface_v2_v2_team_balance_list_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TeamBalanceIncomingPaymentData) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TeamBalanceIncomingPaymentData) ProtoMessage() {}
+
+func (x *TeamBalanceIncomingPaymentData) ProtoReflect() protoreflect.Message {
+	mi := &file_invoice_iface_v2_v2_team_balance_list_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TeamBalanceIncomingPaymentData.ProtoReflect.Descriptor instead.
+func (*TeamBalanceIncomingPaymentData) Descriptor() ([]byte, []int) {
+	return file_invoice_iface_v2_v2_team_balance_list_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *TeamBalanceIncomingPaymentData) GetData() map[uint64]*TeamBalanceIncomingPaymentItem {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
 type TeamBalanceTotalPaymentItem struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Amount        float64                `protobuf:"fixed64,1,opt,name=amount,proto3" json:"amount,omitempty"`
@@ -1149,7 +1302,7 @@ type TeamBalanceTotalPaymentItem struct {
 
 func (x *TeamBalanceTotalPaymentItem) Reset() {
 	*x = TeamBalanceTotalPaymentItem{}
-	mi := &file_invoice_iface_v2_v2_team_balance_list_proto_msgTypes[12]
+	mi := &file_invoice_iface_v2_v2_team_balance_list_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1161,7 +1314,7 @@ func (x *TeamBalanceTotalPaymentItem) String() string {
 func (*TeamBalanceTotalPaymentItem) ProtoMessage() {}
 
 func (x *TeamBalanceTotalPaymentItem) ProtoReflect() protoreflect.Message {
-	mi := &file_invoice_iface_v2_v2_team_balance_list_proto_msgTypes[12]
+	mi := &file_invoice_iface_v2_v2_team_balance_list_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1174,7 +1327,7 @@ func (x *TeamBalanceTotalPaymentItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TeamBalanceTotalPaymentItem.ProtoReflect.Descriptor instead.
 func (*TeamBalanceTotalPaymentItem) Descriptor() ([]byte, []int) {
-	return file_invoice_iface_v2_v2_team_balance_list_proto_rawDescGZIP(), []int{12}
+	return file_invoice_iface_v2_v2_team_balance_list_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *TeamBalanceTotalPaymentItem) GetAmount() float64 {
@@ -1193,7 +1346,7 @@ type TeamBalanceTotalPaymentData struct {
 
 func (x *TeamBalanceTotalPaymentData) Reset() {
 	*x = TeamBalanceTotalPaymentData{}
-	mi := &file_invoice_iface_v2_v2_team_balance_list_proto_msgTypes[13]
+	mi := &file_invoice_iface_v2_v2_team_balance_list_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1205,7 +1358,7 @@ func (x *TeamBalanceTotalPaymentData) String() string {
 func (*TeamBalanceTotalPaymentData) ProtoMessage() {}
 
 func (x *TeamBalanceTotalPaymentData) ProtoReflect() protoreflect.Message {
-	mi := &file_invoice_iface_v2_v2_team_balance_list_proto_msgTypes[13]
+	mi := &file_invoice_iface_v2_v2_team_balance_list_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1218,7 +1371,7 @@ func (x *TeamBalanceTotalPaymentData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TeamBalanceTotalPaymentData.ProtoReflect.Descriptor instead.
 func (*TeamBalanceTotalPaymentData) Descriptor() ([]byte, []int) {
-	return file_invoice_iface_v2_v2_team_balance_list_proto_rawDescGZIP(), []int{13}
+	return file_invoice_iface_v2_v2_team_balance_list_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *TeamBalanceTotalPaymentData) GetData() map[uint64]*TeamBalanceTotalPaymentItem {
@@ -1239,7 +1392,7 @@ type ChangeSumAmount struct {
 
 func (x *ChangeSumAmount) Reset() {
 	*x = ChangeSumAmount{}
-	mi := &file_invoice_iface_v2_v2_team_balance_list_proto_msgTypes[14]
+	mi := &file_invoice_iface_v2_v2_team_balance_list_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1251,7 +1404,7 @@ func (x *ChangeSumAmount) String() string {
 func (*ChangeSumAmount) ProtoMessage() {}
 
 func (x *ChangeSumAmount) ProtoReflect() protoreflect.Message {
-	mi := &file_invoice_iface_v2_v2_team_balance_list_proto_msgTypes[14]
+	mi := &file_invoice_iface_v2_v2_team_balance_list_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1264,7 +1417,7 @@ func (x *ChangeSumAmount) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChangeSumAmount.ProtoReflect.Descriptor instead.
 func (*ChangeSumAmount) Descriptor() ([]byte, []int) {
-	return file_invoice_iface_v2_v2_team_balance_list_proto_rawDescGZIP(), []int{14}
+	return file_invoice_iface_v2_v2_team_balance_list_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *ChangeSumAmount) GetChangeType() BalanceChangeType {
@@ -1298,7 +1451,7 @@ type TeamBalanceTotalPayableItem struct {
 
 func (x *TeamBalanceTotalPayableItem) Reset() {
 	*x = TeamBalanceTotalPayableItem{}
-	mi := &file_invoice_iface_v2_v2_team_balance_list_proto_msgTypes[15]
+	mi := &file_invoice_iface_v2_v2_team_balance_list_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1310,7 +1463,7 @@ func (x *TeamBalanceTotalPayableItem) String() string {
 func (*TeamBalanceTotalPayableItem) ProtoMessage() {}
 
 func (x *TeamBalanceTotalPayableItem) ProtoReflect() protoreflect.Message {
-	mi := &file_invoice_iface_v2_v2_team_balance_list_proto_msgTypes[15]
+	mi := &file_invoice_iface_v2_v2_team_balance_list_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1323,7 +1476,7 @@ func (x *TeamBalanceTotalPayableItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TeamBalanceTotalPayableItem.ProtoReflect.Descriptor instead.
 func (*TeamBalanceTotalPayableItem) Descriptor() ([]byte, []int) {
-	return file_invoice_iface_v2_v2_team_balance_list_proto_rawDescGZIP(), []int{15}
+	return file_invoice_iface_v2_v2_team_balance_list_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *TeamBalanceTotalPayableItem) GetTotalAmount() float64 {
@@ -1349,7 +1502,7 @@ type TeamBalanceTotalPayableData struct {
 
 func (x *TeamBalanceTotalPayableData) Reset() {
 	*x = TeamBalanceTotalPayableData{}
-	mi := &file_invoice_iface_v2_v2_team_balance_list_proto_msgTypes[16]
+	mi := &file_invoice_iface_v2_v2_team_balance_list_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1361,7 +1514,7 @@ func (x *TeamBalanceTotalPayableData) String() string {
 func (*TeamBalanceTotalPayableData) ProtoMessage() {}
 
 func (x *TeamBalanceTotalPayableData) ProtoReflect() protoreflect.Message {
-	mi := &file_invoice_iface_v2_v2_team_balance_list_proto_msgTypes[16]
+	mi := &file_invoice_iface_v2_v2_team_balance_list_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1374,7 +1527,7 @@ func (x *TeamBalanceTotalPayableData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TeamBalanceTotalPayableData.ProtoReflect.Descriptor instead.
 func (*TeamBalanceTotalPayableData) Descriptor() ([]byte, []int) {
-	return file_invoice_iface_v2_v2_team_balance_list_proto_rawDescGZIP(), []int{16}
+	return file_invoice_iface_v2_v2_team_balance_list_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *TeamBalanceTotalPayableData) GetData() map[uint64]*TeamBalanceTotalPayableItem {
@@ -1394,7 +1547,7 @@ type TeamBalanceTotalReceivableItem struct {
 
 func (x *TeamBalanceTotalReceivableItem) Reset() {
 	*x = TeamBalanceTotalReceivableItem{}
-	mi := &file_invoice_iface_v2_v2_team_balance_list_proto_msgTypes[17]
+	mi := &file_invoice_iface_v2_v2_team_balance_list_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1406,7 +1559,7 @@ func (x *TeamBalanceTotalReceivableItem) String() string {
 func (*TeamBalanceTotalReceivableItem) ProtoMessage() {}
 
 func (x *TeamBalanceTotalReceivableItem) ProtoReflect() protoreflect.Message {
-	mi := &file_invoice_iface_v2_v2_team_balance_list_proto_msgTypes[17]
+	mi := &file_invoice_iface_v2_v2_team_balance_list_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1419,7 +1572,7 @@ func (x *TeamBalanceTotalReceivableItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TeamBalanceTotalReceivableItem.ProtoReflect.Descriptor instead.
 func (*TeamBalanceTotalReceivableItem) Descriptor() ([]byte, []int) {
-	return file_invoice_iface_v2_v2_team_balance_list_proto_rawDescGZIP(), []int{17}
+	return file_invoice_iface_v2_v2_team_balance_list_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *TeamBalanceTotalReceivableItem) GetTotalAmount() float64 {
@@ -1445,7 +1598,7 @@ type TeamBalanceTotalReceivableData struct {
 
 func (x *TeamBalanceTotalReceivableData) Reset() {
 	*x = TeamBalanceTotalReceivableData{}
-	mi := &file_invoice_iface_v2_v2_team_balance_list_proto_msgTypes[18]
+	mi := &file_invoice_iface_v2_v2_team_balance_list_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1457,7 +1610,7 @@ func (x *TeamBalanceTotalReceivableData) String() string {
 func (*TeamBalanceTotalReceivableData) ProtoMessage() {}
 
 func (x *TeamBalanceTotalReceivableData) ProtoReflect() protoreflect.Message {
-	mi := &file_invoice_iface_v2_v2_team_balance_list_proto_msgTypes[18]
+	mi := &file_invoice_iface_v2_v2_team_balance_list_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1470,7 +1623,7 @@ func (x *TeamBalanceTotalReceivableData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TeamBalanceTotalReceivableData.ProtoReflect.Descriptor instead.
 func (*TeamBalanceTotalReceivableData) Descriptor() ([]byte, []int) {
-	return file_invoice_iface_v2_v2_team_balance_list_proto_rawDescGZIP(), []int{18}
+	return file_invoice_iface_v2_v2_team_balance_list_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *TeamBalanceTotalReceivableData) GetData() map[uint64]*TeamBalanceTotalReceivableItem {
@@ -1491,6 +1644,7 @@ type TeamBalanceData struct {
 	//	*TeamBalanceData_TotalPayment
 	//	*TeamBalanceData_TotalPayable
 	//	*TeamBalanceData_TotalReceivable
+	//	*TeamBalanceData_IncomingPayment
 	Data          isTeamBalanceData_Data `protobuf_oneof:"data"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1498,7 +1652,7 @@ type TeamBalanceData struct {
 
 func (x *TeamBalanceData) Reset() {
 	*x = TeamBalanceData{}
-	mi := &file_invoice_iface_v2_v2_team_balance_list_proto_msgTypes[19]
+	mi := &file_invoice_iface_v2_v2_team_balance_list_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1510,7 +1664,7 @@ func (x *TeamBalanceData) String() string {
 func (*TeamBalanceData) ProtoMessage() {}
 
 func (x *TeamBalanceData) ProtoReflect() protoreflect.Message {
-	mi := &file_invoice_iface_v2_v2_team_balance_list_proto_msgTypes[19]
+	mi := &file_invoice_iface_v2_v2_team_balance_list_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1523,7 +1677,7 @@ func (x *TeamBalanceData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TeamBalanceData.ProtoReflect.Descriptor instead.
 func (*TeamBalanceData) Descriptor() ([]byte, []int) {
-	return file_invoice_iface_v2_v2_team_balance_list_proto_rawDescGZIP(), []int{19}
+	return file_invoice_iface_v2_v2_team_balance_list_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *TeamBalanceData) GetData() isTeamBalanceData_Data {
@@ -1596,6 +1750,15 @@ func (x *TeamBalanceData) GetTotalReceivable() *TeamBalanceTotalReceivableData {
 	return nil
 }
 
+func (x *TeamBalanceData) GetIncomingPayment() *TeamBalanceIncomingPaymentData {
+	if x != nil {
+		if x, ok := x.Data.(*TeamBalanceData_IncomingPayment); ok {
+			return x.IncomingPayment
+		}
+	}
+	return nil
+}
+
 type isTeamBalanceData_Data interface {
 	isTeamBalanceData_Data()
 }
@@ -1628,6 +1791,10 @@ type TeamBalanceData_TotalReceivable struct {
 	TotalReceivable *TeamBalanceTotalReceivableData `protobuf:"bytes,7,opt,name=total_receivable,json=totalReceivable,proto3,oneof"`
 }
 
+type TeamBalanceData_IncomingPayment struct {
+	IncomingPayment *TeamBalanceIncomingPaymentData `protobuf:"bytes,8,opt,name=incoming_payment,json=incomingPayment,proto3,oneof"`
+}
+
 func (*TeamBalanceData_Common) isTeamBalanceData_Data() {}
 
 func (*TeamBalanceData_Payable) isTeamBalanceData_Data() {}
@@ -1642,6 +1809,8 @@ func (*TeamBalanceData_TotalPayable) isTeamBalanceData_Data() {}
 
 func (*TeamBalanceData_TotalReceivable) isTeamBalanceData_Data() {}
 
+func (*TeamBalanceData_IncomingPayment) isTeamBalanceData_Data() {}
+
 type TeamBalanceListResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Data          []*TeamBalanceData     `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
@@ -1652,7 +1821,7 @@ type TeamBalanceListResponse struct {
 
 func (x *TeamBalanceListResponse) Reset() {
 	*x = TeamBalanceListResponse{}
-	mi := &file_invoice_iface_v2_v2_team_balance_list_proto_msgTypes[20]
+	mi := &file_invoice_iface_v2_v2_team_balance_list_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1664,7 +1833,7 @@ func (x *TeamBalanceListResponse) String() string {
 func (*TeamBalanceListResponse) ProtoMessage() {}
 
 func (x *TeamBalanceListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_invoice_iface_v2_v2_team_balance_list_proto_msgTypes[20]
+	mi := &file_invoice_iface_v2_v2_team_balance_list_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1677,7 +1846,7 @@ func (x *TeamBalanceListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TeamBalanceListResponse.ProtoReflect.Descriptor instead.
 func (*TeamBalanceListResponse) Descriptor() ([]byte, []int) {
-	return file_invoice_iface_v2_v2_team_balance_list_proto_rawDescGZIP(), []int{20}
+	return file_invoice_iface_v2_v2_team_balance_list_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *TeamBalanceListResponse) GetData() []*TeamBalanceData {
@@ -1706,7 +1875,7 @@ const file_invoice_iface_v2_v2_team_balance_list_proto_rawDesc = "" +
 	"\ateam_id\x18\x02 \x01(\x04R\x06teamId\x12\x1e\n" +
 	"\vfor_team_id\x18\x03 \x01(\x04R\tforTeamId\x120\n" +
 	"\tteam_type\x18\x04 \x01(\x0e2\x13.common.v1.TeamTypeR\bteamType\x12)\n" +
-	"\x04page\x18\x05 \x01(\v2\x15.common.v1.PageFilterR\x04page\"\x92\x05\n" +
+	"\x04page\x18\x05 \x01(\v2\x15.common.v1.PageFilterR\x04page\"\xf1\x05\n" +
 	"\x13TeamBalanceListSort\x127\n" +
 	"\tsort_type\x18\x01 \x01(\x0e2\x1a.invoice_iface.v2.SortTypeR\bsortType\x12A\n" +
 	"\x06common\x18\x02 \x01(\x0e2'.invoice_iface.v2.TeamBalanceCommonSortH\x00R\x06common\x12D\n" +
@@ -1717,7 +1886,8 @@ const file_invoice_iface_v2_v2_team_balance_list_proto_rawDesc = "" +
 	"\x0fpending_payment\x18\x05 \x01(\x0e2/.invoice_iface.v2.TeamBalancePendingPaymentSortH\x00R\x0ependingPayment\x12T\n" +
 	"\rtotal_payment\x18\x06 \x01(\x0e2-.invoice_iface.v2.TeamBalanceTotalPaymentSortH\x00R\ftotalPayment\x12T\n" +
 	"\rtotal_payable\x18\a \x01(\x0e2-.invoice_iface.v2.TeamBalanceTotalPayableSortH\x00R\ftotalPayable\x12]\n" +
-	"\x10total_receivable\x18\b \x01(\x0e20.invoice_iface.v2.TeamBalanceTotalReceivableSortH\x00R\x0ftotalReceivableB\x03\n" +
+	"\x10total_receivable\x18\b \x01(\x0e20.invoice_iface.v2.TeamBalanceTotalReceivableSortH\x00R\x0ftotalReceivable\x12]\n" +
+	"\x10incoming_payment\x18\t \x01(\x0e20.invoice_iface.v2.TeamBalanceIncomingPaymentSortH\x00R\x0fincomingPaymentB\x03\n" +
 	"\x01s\"\xdd\x02\n" +
 	"\x16TeamBalanceListRequest\x12R\n" +
 	"\n" +
@@ -1755,7 +1925,14 @@ const file_invoice_iface_v2_v2_team_balance_list_proto_rawDesc = "" +
 	"\x04data\x18\x01 \x03(\v29.invoice_iface.v2.TeamBalancePendingPaymentData.DataEntryR\x04data\x1ah\n" +
 	"\tDataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\x04R\x03key\x12E\n" +
-	"\x05value\x18\x02 \x01(\v2/.invoice_iface.v2.TeamBalancePendingPaymentItemR\x05value:\x028\x01\"5\n" +
+	"\x05value\x18\x02 \x01(\v2/.invoice_iface.v2.TeamBalancePendingPaymentItemR\x05value:\x028\x01\"8\n" +
+	"\x1eTeamBalanceIncomingPaymentItem\x12\x16\n" +
+	"\x06amount\x18\x01 \x01(\x01R\x06amount\"\xdb\x01\n" +
+	"\x1eTeamBalanceIncomingPaymentData\x12N\n" +
+	"\x04data\x18\x01 \x03(\v2:.invoice_iface.v2.TeamBalanceIncomingPaymentData.DataEntryR\x04data\x1ai\n" +
+	"\tDataEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\x04R\x03key\x12F\n" +
+	"\x05value\x18\x02 \x01(\v20.invoice_iface.v2.TeamBalanceIncomingPaymentItemR\x05value:\x028\x01\"5\n" +
 	"\x1bTeamBalanceTotalPaymentItem\x12\x16\n" +
 	"\x06amount\x18\x01 \x01(\x01R\x06amount\"\xd2\x01\n" +
 	"\x1bTeamBalanceTotalPaymentData\x12K\n" +
@@ -1783,7 +1960,7 @@ const file_invoice_iface_v2_v2_team_balance_list_proto_rawDesc = "" +
 	"\x04data\x18\x01 \x03(\v2:.invoice_iface.v2.TeamBalanceTotalReceivableData.DataEntryR\x04data\x1ai\n" +
 	"\tDataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\x04R\x03key\x12F\n" +
-	"\x05value\x18\x02 \x01(\v20.invoice_iface.v2.TeamBalanceTotalReceivableItemR\x05value:\x028\x01\"\xd8\x04\n" +
+	"\x05value\x18\x02 \x01(\v20.invoice_iface.v2.TeamBalanceTotalReceivableItemR\x05value:\x028\x01\"\xb7\x05\n" +
 	"\x0fTeamBalanceData\x12A\n" +
 	"\x06common\x18\x01 \x01(\v2'.invoice_iface.v2.TeamBalanceCommonDataH\x00R\x06common\x12D\n" +
 	"\apayable\x18\x02 \x01(\v2(.invoice_iface.v2.TeamBalancePayableDataH\x00R\apayable\x12M\n" +
@@ -1793,7 +1970,8 @@ const file_invoice_iface_v2_v2_team_balance_list_proto_rawDesc = "" +
 	"\x0fpending_payment\x18\x04 \x01(\v2/.invoice_iface.v2.TeamBalancePendingPaymentDataH\x00R\x0ependingPayment\x12T\n" +
 	"\rtotal_payment\x18\x05 \x01(\v2-.invoice_iface.v2.TeamBalanceTotalPaymentDataH\x00R\ftotalPayment\x12T\n" +
 	"\rtotal_payable\x18\x06 \x01(\v2-.invoice_iface.v2.TeamBalanceTotalPayableDataH\x00R\ftotalPayable\x12]\n" +
-	"\x10total_receivable\x18\a \x01(\v20.invoice_iface.v2.TeamBalanceTotalReceivableDataH\x00R\x0ftotalReceivableB\x06\n" +
+	"\x10total_receivable\x18\a \x01(\v20.invoice_iface.v2.TeamBalanceTotalReceivableDataH\x00R\x0ftotalReceivable\x12]\n" +
+	"\x10incoming_payment\x18\b \x01(\v20.invoice_iface.v2.TeamBalanceIncomingPaymentDataH\x00R\x0fincomingPaymentB\x06\n" +
 	"\x04data\"b\n" +
 	"\x17TeamBalanceListResponse\x125\n" +
 	"\x04data\x18\x01 \x03(\v2!.invoice_iface.v2.TeamBalanceDataR\x04data\x12\x10\n" +
@@ -1810,7 +1988,10 @@ const file_invoice_iface_v2_v2_team_balance_list_proto_rawDesc = "" +
 	"$TEAM_BALANCE_RECEIVABLE_SORT_BALANCE\x10\x01*\x80\x01\n" +
 	"\x1dTeamBalancePendingPaymentSort\x121\n" +
 	"-TEAM_BALANCE_PENDING_PAYMENT_SORT_UNSPECIFIED\x10\x00\x12,\n" +
-	"(TEAM_BALANCE_PENDING_PAYMENT_SORT_AMOUNT\x10\x01*z\n" +
+	"(TEAM_BALANCE_PENDING_PAYMENT_SORT_AMOUNT\x10\x01*\x83\x01\n" +
+	"\x1eTeamBalanceIncomingPaymentSort\x122\n" +
+	".TEAM_BALANCE_INCOMING_PAYMENT_SORT_UNSPECIFIED\x10\x00\x12-\n" +
+	")TEAM_BALANCE_INCOMING_PAYMENT_SORT_AMOUNT\x10\x01*z\n" +
 	"\x1bTeamBalanceTotalPaymentSort\x12/\n" +
 	"+TEAM_BALANCE_TOTAL_PAYMENT_SORT_UNSPECIFIED\x10\x00\x12*\n" +
 	"&TEAM_BALANCE_TOTAL_PAYMENT_SORT_AMOUNT\x10\x01*\x80\x01\n" +
@@ -1819,7 +2000,7 @@ const file_invoice_iface_v2_v2_team_balance_list_proto_rawDesc = "" +
 	",TEAM_BALANCE_TOTAL_PAYABLE_SORT_TOTAL_AMOUNT\x10\x01*\x89\x01\n" +
 	"\x1eTeamBalanceTotalReceivableSort\x122\n" +
 	".TEAM_BALANCE_TOTAL_RECEIVABLE_SORT_UNSPECIFIED\x10\x00\x123\n" +
-	"/TEAM_BALANCE_TOTAL_RECEIVABLE_SORT_TOTAL_AMOUNT\x10\x01*\x84\x03\n" +
+	"/TEAM_BALANCE_TOTAL_RECEIVABLE_SORT_TOTAL_AMOUNT\x10\x01*\xb6\x03\n" +
 	"\x17TeamBalanceListDataType\x12+\n" +
 	"'TEAM_BALANCE_LIST_DATA_TYPE_UNSPECIFIED\x10\x00\x12&\n" +
 	"\"TEAM_BALANCE_LIST_DATA_TYPE_COMMON\x10\x01\x12'\n" +
@@ -1828,7 +2009,8 @@ const file_invoice_iface_v2_v2_team_balance_list_proto_rawDesc = "" +
 	"+TEAM_BALANCE_LIST_DATA_TYPE_PENDING_PAYMENT\x10\x04\x12-\n" +
 	")TEAM_BALANCE_LIST_DATA_TYPE_TOTAL_PAYMENT\x10\x05\x12-\n" +
 	")TEAM_BALANCE_LIST_DATA_TYPE_TOTAL_PAYABLE\x10\x06\x120\n" +
-	",TEAM_BALANCE_LIST_DATA_TYPE_TOTAL_RECEIVABLE\x10\aB\xcc\x01\n" +
+	",TEAM_BALANCE_LIST_DATA_TYPE_TOTAL_RECEIVABLE\x10\a\x120\n" +
+	",TEAM_BALANCE_LIST_DATA_TYPE_INCOMING_PAYMENT\x10\bB\xcc\x01\n" +
 	"\x14com.invoice_iface.v2B\x16V2TeamBalanceListProtoP\x01Z?github.com/pdcgo/schema/services/invoice_iface/v2;invoice_iface\xa2\x02\x03IXX\xaa\x02\x0fInvoiceIface.V2\xca\x02\x0fInvoiceIface\\V2\xe2\x02\x1bInvoiceIface\\V2\\GPBMetadata\xea\x02\x10InvoiceIface::V2b\x06proto3"
 
 var (
@@ -1843,99 +2025,107 @@ func file_invoice_iface_v2_v2_team_balance_list_proto_rawDescGZIP() []byte {
 	return file_invoice_iface_v2_v2_team_balance_list_proto_rawDescData
 }
 
-var file_invoice_iface_v2_v2_team_balance_list_proto_enumTypes = make([]protoimpl.EnumInfo, 8)
-var file_invoice_iface_v2_v2_team_balance_list_proto_msgTypes = make([]protoimpl.MessageInfo, 28)
+var file_invoice_iface_v2_v2_team_balance_list_proto_enumTypes = make([]protoimpl.EnumInfo, 9)
+var file_invoice_iface_v2_v2_team_balance_list_proto_msgTypes = make([]protoimpl.MessageInfo, 31)
 var file_invoice_iface_v2_v2_team_balance_list_proto_goTypes = []any{
 	(TeamBalanceCommonSort)(0),             // 0: invoice_iface.v2.TeamBalanceCommonSort
 	(TeamBalancePayableSort)(0),            // 1: invoice_iface.v2.TeamBalancePayableSort
 	(TeamBalanceReceivableSort)(0),         // 2: invoice_iface.v2.TeamBalanceReceivableSort
 	(TeamBalancePendingPaymentSort)(0),     // 3: invoice_iface.v2.TeamBalancePendingPaymentSort
-	(TeamBalanceTotalPaymentSort)(0),       // 4: invoice_iface.v2.TeamBalanceTotalPaymentSort
-	(TeamBalanceTotalPayableSort)(0),       // 5: invoice_iface.v2.TeamBalanceTotalPayableSort
-	(TeamBalanceTotalReceivableSort)(0),    // 6: invoice_iface.v2.TeamBalanceTotalReceivableSort
-	(TeamBalanceListDataType)(0),           // 7: invoice_iface.v2.TeamBalanceListDataType
-	(*TeamBalanceListTimeFilter)(nil),      // 8: invoice_iface.v2.TeamBalanceListTimeFilter
-	(*TeamBalanceListFilter)(nil),          // 9: invoice_iface.v2.TeamBalanceListFilter
-	(*TeamBalanceListSort)(nil),            // 10: invoice_iface.v2.TeamBalanceListSort
-	(*TeamBalanceListRequest)(nil),         // 11: invoice_iface.v2.TeamBalanceListRequest
-	(*TeamBalanceCommonItem)(nil),          // 12: invoice_iface.v2.TeamBalanceCommonItem
-	(*TeamBalanceCommonData)(nil),          // 13: invoice_iface.v2.TeamBalanceCommonData
-	(*TeamBalancePayableItem)(nil),         // 14: invoice_iface.v2.TeamBalancePayableItem
-	(*TeamBalancePayableData)(nil),         // 15: invoice_iface.v2.TeamBalancePayableData
-	(*TeamBalanceReceivableItem)(nil),      // 16: invoice_iface.v2.TeamBalanceReceivableItem
-	(*TeamBalanceReceivableData)(nil),      // 17: invoice_iface.v2.TeamBalanceReceivableData
-	(*TeamBalancePendingPaymentItem)(nil),  // 18: invoice_iface.v2.TeamBalancePendingPaymentItem
-	(*TeamBalancePendingPaymentData)(nil),  // 19: invoice_iface.v2.TeamBalancePendingPaymentData
-	(*TeamBalanceTotalPaymentItem)(nil),    // 20: invoice_iface.v2.TeamBalanceTotalPaymentItem
-	(*TeamBalanceTotalPaymentData)(nil),    // 21: invoice_iface.v2.TeamBalanceTotalPaymentData
-	(*ChangeSumAmount)(nil),                // 22: invoice_iface.v2.ChangeSumAmount
-	(*TeamBalanceTotalPayableItem)(nil),    // 23: invoice_iface.v2.TeamBalanceTotalPayableItem
-	(*TeamBalanceTotalPayableData)(nil),    // 24: invoice_iface.v2.TeamBalanceTotalPayableData
-	(*TeamBalanceTotalReceivableItem)(nil), // 25: invoice_iface.v2.TeamBalanceTotalReceivableItem
-	(*TeamBalanceTotalReceivableData)(nil), // 26: invoice_iface.v2.TeamBalanceTotalReceivableData
-	(*TeamBalanceData)(nil),                // 27: invoice_iface.v2.TeamBalanceData
-	(*TeamBalanceListResponse)(nil),        // 28: invoice_iface.v2.TeamBalanceListResponse
-	nil,                                    // 29: invoice_iface.v2.TeamBalanceCommonData.DataEntry
-	nil,                                    // 30: invoice_iface.v2.TeamBalancePayableData.DataEntry
-	nil,                                    // 31: invoice_iface.v2.TeamBalanceReceivableData.DataEntry
-	nil,                                    // 32: invoice_iface.v2.TeamBalancePendingPaymentData.DataEntry
-	nil,                                    // 33: invoice_iface.v2.TeamBalanceTotalPaymentData.DataEntry
-	nil,                                    // 34: invoice_iface.v2.TeamBalanceTotalPayableData.DataEntry
-	nil,                                    // 35: invoice_iface.v2.TeamBalanceTotalReceivableData.DataEntry
-	(*timestamppb.Timestamp)(nil),          // 36: google.protobuf.Timestamp
-	(v1.TeamType)(0),                       // 37: common.v1.TeamType
-	(*v1.PageFilter)(nil),                  // 38: common.v1.PageFilter
-	(SortType)(0),                          // 39: invoice_iface.v2.SortType
-	(BalanceChangeType)(0),                 // 40: invoice_iface.v2.BalanceChangeType
+	(TeamBalanceIncomingPaymentSort)(0),    // 4: invoice_iface.v2.TeamBalanceIncomingPaymentSort
+	(TeamBalanceTotalPaymentSort)(0),       // 5: invoice_iface.v2.TeamBalanceTotalPaymentSort
+	(TeamBalanceTotalPayableSort)(0),       // 6: invoice_iface.v2.TeamBalanceTotalPayableSort
+	(TeamBalanceTotalReceivableSort)(0),    // 7: invoice_iface.v2.TeamBalanceTotalReceivableSort
+	(TeamBalanceListDataType)(0),           // 8: invoice_iface.v2.TeamBalanceListDataType
+	(*TeamBalanceListTimeFilter)(nil),      // 9: invoice_iface.v2.TeamBalanceListTimeFilter
+	(*TeamBalanceListFilter)(nil),          // 10: invoice_iface.v2.TeamBalanceListFilter
+	(*TeamBalanceListSort)(nil),            // 11: invoice_iface.v2.TeamBalanceListSort
+	(*TeamBalanceListRequest)(nil),         // 12: invoice_iface.v2.TeamBalanceListRequest
+	(*TeamBalanceCommonItem)(nil),          // 13: invoice_iface.v2.TeamBalanceCommonItem
+	(*TeamBalanceCommonData)(nil),          // 14: invoice_iface.v2.TeamBalanceCommonData
+	(*TeamBalancePayableItem)(nil),         // 15: invoice_iface.v2.TeamBalancePayableItem
+	(*TeamBalancePayableData)(nil),         // 16: invoice_iface.v2.TeamBalancePayableData
+	(*TeamBalanceReceivableItem)(nil),      // 17: invoice_iface.v2.TeamBalanceReceivableItem
+	(*TeamBalanceReceivableData)(nil),      // 18: invoice_iface.v2.TeamBalanceReceivableData
+	(*TeamBalancePendingPaymentItem)(nil),  // 19: invoice_iface.v2.TeamBalancePendingPaymentItem
+	(*TeamBalancePendingPaymentData)(nil),  // 20: invoice_iface.v2.TeamBalancePendingPaymentData
+	(*TeamBalanceIncomingPaymentItem)(nil), // 21: invoice_iface.v2.TeamBalanceIncomingPaymentItem
+	(*TeamBalanceIncomingPaymentData)(nil), // 22: invoice_iface.v2.TeamBalanceIncomingPaymentData
+	(*TeamBalanceTotalPaymentItem)(nil),    // 23: invoice_iface.v2.TeamBalanceTotalPaymentItem
+	(*TeamBalanceTotalPaymentData)(nil),    // 24: invoice_iface.v2.TeamBalanceTotalPaymentData
+	(*ChangeSumAmount)(nil),                // 25: invoice_iface.v2.ChangeSumAmount
+	(*TeamBalanceTotalPayableItem)(nil),    // 26: invoice_iface.v2.TeamBalanceTotalPayableItem
+	(*TeamBalanceTotalPayableData)(nil),    // 27: invoice_iface.v2.TeamBalanceTotalPayableData
+	(*TeamBalanceTotalReceivableItem)(nil), // 28: invoice_iface.v2.TeamBalanceTotalReceivableItem
+	(*TeamBalanceTotalReceivableData)(nil), // 29: invoice_iface.v2.TeamBalanceTotalReceivableData
+	(*TeamBalanceData)(nil),                // 30: invoice_iface.v2.TeamBalanceData
+	(*TeamBalanceListResponse)(nil),        // 31: invoice_iface.v2.TeamBalanceListResponse
+	nil,                                    // 32: invoice_iface.v2.TeamBalanceCommonData.DataEntry
+	nil,                                    // 33: invoice_iface.v2.TeamBalancePayableData.DataEntry
+	nil,                                    // 34: invoice_iface.v2.TeamBalanceReceivableData.DataEntry
+	nil,                                    // 35: invoice_iface.v2.TeamBalancePendingPaymentData.DataEntry
+	nil,                                    // 36: invoice_iface.v2.TeamBalanceIncomingPaymentData.DataEntry
+	nil,                                    // 37: invoice_iface.v2.TeamBalanceTotalPaymentData.DataEntry
+	nil,                                    // 38: invoice_iface.v2.TeamBalanceTotalPayableData.DataEntry
+	nil,                                    // 39: invoice_iface.v2.TeamBalanceTotalReceivableData.DataEntry
+	(*timestamppb.Timestamp)(nil),          // 40: google.protobuf.Timestamp
+	(v1.TeamType)(0),                       // 41: common.v1.TeamType
+	(*v1.PageFilter)(nil),                  // 42: common.v1.PageFilter
+	(SortType)(0),                          // 43: invoice_iface.v2.SortType
+	(BalanceChangeType)(0),                 // 44: invoice_iface.v2.BalanceChangeType
 }
 var file_invoice_iface_v2_v2_team_balance_list_proto_depIdxs = []int32{
-	36, // 0: invoice_iface.v2.TeamBalanceListTimeFilter.start:type_name -> google.protobuf.Timestamp
-	36, // 1: invoice_iface.v2.TeamBalanceListTimeFilter.end:type_name -> google.protobuf.Timestamp
-	37, // 2: invoice_iface.v2.TeamBalanceListFilter.team_type:type_name -> common.v1.TeamType
-	38, // 3: invoice_iface.v2.TeamBalanceListFilter.page:type_name -> common.v1.PageFilter
-	39, // 4: invoice_iface.v2.TeamBalanceListSort.sort_type:type_name -> invoice_iface.v2.SortType
+	40, // 0: invoice_iface.v2.TeamBalanceListTimeFilter.start:type_name -> google.protobuf.Timestamp
+	40, // 1: invoice_iface.v2.TeamBalanceListTimeFilter.end:type_name -> google.protobuf.Timestamp
+	41, // 2: invoice_iface.v2.TeamBalanceListFilter.team_type:type_name -> common.v1.TeamType
+	42, // 3: invoice_iface.v2.TeamBalanceListFilter.page:type_name -> common.v1.PageFilter
+	43, // 4: invoice_iface.v2.TeamBalanceListSort.sort_type:type_name -> invoice_iface.v2.SortType
 	0,  // 5: invoice_iface.v2.TeamBalanceListSort.common:type_name -> invoice_iface.v2.TeamBalanceCommonSort
 	1,  // 6: invoice_iface.v2.TeamBalanceListSort.payable:type_name -> invoice_iface.v2.TeamBalancePayableSort
 	2,  // 7: invoice_iface.v2.TeamBalanceListSort.receivable:type_name -> invoice_iface.v2.TeamBalanceReceivableSort
 	3,  // 8: invoice_iface.v2.TeamBalanceListSort.pending_payment:type_name -> invoice_iface.v2.TeamBalancePendingPaymentSort
-	4,  // 9: invoice_iface.v2.TeamBalanceListSort.total_payment:type_name -> invoice_iface.v2.TeamBalanceTotalPaymentSort
-	5,  // 10: invoice_iface.v2.TeamBalanceListSort.total_payable:type_name -> invoice_iface.v2.TeamBalanceTotalPayableSort
-	6,  // 11: invoice_iface.v2.TeamBalanceListSort.total_receivable:type_name -> invoice_iface.v2.TeamBalanceTotalReceivableSort
-	8,  // 12: invoice_iface.v2.TeamBalanceListRequest.time_range:type_name -> invoice_iface.v2.TeamBalanceListTimeFilter
-	9,  // 13: invoice_iface.v2.TeamBalanceListRequest.filter:type_name -> invoice_iface.v2.TeamBalanceListFilter
-	10, // 14: invoice_iface.v2.TeamBalanceListRequest.sort:type_name -> invoice_iface.v2.TeamBalanceListSort
-	7,  // 15: invoice_iface.v2.TeamBalanceListRequest.data_types:type_name -> invoice_iface.v2.TeamBalanceListDataType
-	37, // 16: invoice_iface.v2.TeamBalanceCommonItem.type:type_name -> common.v1.TeamType
-	29, // 17: invoice_iface.v2.TeamBalanceCommonData.data:type_name -> invoice_iface.v2.TeamBalanceCommonData.DataEntry
-	30, // 18: invoice_iface.v2.TeamBalancePayableData.data:type_name -> invoice_iface.v2.TeamBalancePayableData.DataEntry
-	31, // 19: invoice_iface.v2.TeamBalanceReceivableData.data:type_name -> invoice_iface.v2.TeamBalanceReceivableData.DataEntry
-	32, // 20: invoice_iface.v2.TeamBalancePendingPaymentData.data:type_name -> invoice_iface.v2.TeamBalancePendingPaymentData.DataEntry
-	33, // 21: invoice_iface.v2.TeamBalanceTotalPaymentData.data:type_name -> invoice_iface.v2.TeamBalanceTotalPaymentData.DataEntry
-	40, // 22: invoice_iface.v2.ChangeSumAmount.change_type:type_name -> invoice_iface.v2.BalanceChangeType
-	22, // 23: invoice_iface.v2.TeamBalanceTotalPayableItem.change:type_name -> invoice_iface.v2.ChangeSumAmount
-	34, // 24: invoice_iface.v2.TeamBalanceTotalPayableData.data:type_name -> invoice_iface.v2.TeamBalanceTotalPayableData.DataEntry
-	22, // 25: invoice_iface.v2.TeamBalanceTotalReceivableItem.change:type_name -> invoice_iface.v2.ChangeSumAmount
-	35, // 26: invoice_iface.v2.TeamBalanceTotalReceivableData.data:type_name -> invoice_iface.v2.TeamBalanceTotalReceivableData.DataEntry
-	13, // 27: invoice_iface.v2.TeamBalanceData.common:type_name -> invoice_iface.v2.TeamBalanceCommonData
-	15, // 28: invoice_iface.v2.TeamBalanceData.payable:type_name -> invoice_iface.v2.TeamBalancePayableData
-	17, // 29: invoice_iface.v2.TeamBalanceData.receivable:type_name -> invoice_iface.v2.TeamBalanceReceivableData
-	19, // 30: invoice_iface.v2.TeamBalanceData.pending_payment:type_name -> invoice_iface.v2.TeamBalancePendingPaymentData
-	21, // 31: invoice_iface.v2.TeamBalanceData.total_payment:type_name -> invoice_iface.v2.TeamBalanceTotalPaymentData
-	24, // 32: invoice_iface.v2.TeamBalanceData.total_payable:type_name -> invoice_iface.v2.TeamBalanceTotalPayableData
-	26, // 33: invoice_iface.v2.TeamBalanceData.total_receivable:type_name -> invoice_iface.v2.TeamBalanceTotalReceivableData
-	27, // 34: invoice_iface.v2.TeamBalanceListResponse.data:type_name -> invoice_iface.v2.TeamBalanceData
-	12, // 35: invoice_iface.v2.TeamBalanceCommonData.DataEntry.value:type_name -> invoice_iface.v2.TeamBalanceCommonItem
-	14, // 36: invoice_iface.v2.TeamBalancePayableData.DataEntry.value:type_name -> invoice_iface.v2.TeamBalancePayableItem
-	16, // 37: invoice_iface.v2.TeamBalanceReceivableData.DataEntry.value:type_name -> invoice_iface.v2.TeamBalanceReceivableItem
-	18, // 38: invoice_iface.v2.TeamBalancePendingPaymentData.DataEntry.value:type_name -> invoice_iface.v2.TeamBalancePendingPaymentItem
-	20, // 39: invoice_iface.v2.TeamBalanceTotalPaymentData.DataEntry.value:type_name -> invoice_iface.v2.TeamBalanceTotalPaymentItem
-	23, // 40: invoice_iface.v2.TeamBalanceTotalPayableData.DataEntry.value:type_name -> invoice_iface.v2.TeamBalanceTotalPayableItem
-	25, // 41: invoice_iface.v2.TeamBalanceTotalReceivableData.DataEntry.value:type_name -> invoice_iface.v2.TeamBalanceTotalReceivableItem
-	42, // [42:42] is the sub-list for method output_type
-	42, // [42:42] is the sub-list for method input_type
-	42, // [42:42] is the sub-list for extension type_name
-	42, // [42:42] is the sub-list for extension extendee
-	0,  // [0:42] is the sub-list for field type_name
+	5,  // 9: invoice_iface.v2.TeamBalanceListSort.total_payment:type_name -> invoice_iface.v2.TeamBalanceTotalPaymentSort
+	6,  // 10: invoice_iface.v2.TeamBalanceListSort.total_payable:type_name -> invoice_iface.v2.TeamBalanceTotalPayableSort
+	7,  // 11: invoice_iface.v2.TeamBalanceListSort.total_receivable:type_name -> invoice_iface.v2.TeamBalanceTotalReceivableSort
+	4,  // 12: invoice_iface.v2.TeamBalanceListSort.incoming_payment:type_name -> invoice_iface.v2.TeamBalanceIncomingPaymentSort
+	9,  // 13: invoice_iface.v2.TeamBalanceListRequest.time_range:type_name -> invoice_iface.v2.TeamBalanceListTimeFilter
+	10, // 14: invoice_iface.v2.TeamBalanceListRequest.filter:type_name -> invoice_iface.v2.TeamBalanceListFilter
+	11, // 15: invoice_iface.v2.TeamBalanceListRequest.sort:type_name -> invoice_iface.v2.TeamBalanceListSort
+	8,  // 16: invoice_iface.v2.TeamBalanceListRequest.data_types:type_name -> invoice_iface.v2.TeamBalanceListDataType
+	41, // 17: invoice_iface.v2.TeamBalanceCommonItem.type:type_name -> common.v1.TeamType
+	32, // 18: invoice_iface.v2.TeamBalanceCommonData.data:type_name -> invoice_iface.v2.TeamBalanceCommonData.DataEntry
+	33, // 19: invoice_iface.v2.TeamBalancePayableData.data:type_name -> invoice_iface.v2.TeamBalancePayableData.DataEntry
+	34, // 20: invoice_iface.v2.TeamBalanceReceivableData.data:type_name -> invoice_iface.v2.TeamBalanceReceivableData.DataEntry
+	35, // 21: invoice_iface.v2.TeamBalancePendingPaymentData.data:type_name -> invoice_iface.v2.TeamBalancePendingPaymentData.DataEntry
+	36, // 22: invoice_iface.v2.TeamBalanceIncomingPaymentData.data:type_name -> invoice_iface.v2.TeamBalanceIncomingPaymentData.DataEntry
+	37, // 23: invoice_iface.v2.TeamBalanceTotalPaymentData.data:type_name -> invoice_iface.v2.TeamBalanceTotalPaymentData.DataEntry
+	44, // 24: invoice_iface.v2.ChangeSumAmount.change_type:type_name -> invoice_iface.v2.BalanceChangeType
+	25, // 25: invoice_iface.v2.TeamBalanceTotalPayableItem.change:type_name -> invoice_iface.v2.ChangeSumAmount
+	38, // 26: invoice_iface.v2.TeamBalanceTotalPayableData.data:type_name -> invoice_iface.v2.TeamBalanceTotalPayableData.DataEntry
+	25, // 27: invoice_iface.v2.TeamBalanceTotalReceivableItem.change:type_name -> invoice_iface.v2.ChangeSumAmount
+	39, // 28: invoice_iface.v2.TeamBalanceTotalReceivableData.data:type_name -> invoice_iface.v2.TeamBalanceTotalReceivableData.DataEntry
+	14, // 29: invoice_iface.v2.TeamBalanceData.common:type_name -> invoice_iface.v2.TeamBalanceCommonData
+	16, // 30: invoice_iface.v2.TeamBalanceData.payable:type_name -> invoice_iface.v2.TeamBalancePayableData
+	18, // 31: invoice_iface.v2.TeamBalanceData.receivable:type_name -> invoice_iface.v2.TeamBalanceReceivableData
+	20, // 32: invoice_iface.v2.TeamBalanceData.pending_payment:type_name -> invoice_iface.v2.TeamBalancePendingPaymentData
+	24, // 33: invoice_iface.v2.TeamBalanceData.total_payment:type_name -> invoice_iface.v2.TeamBalanceTotalPaymentData
+	27, // 34: invoice_iface.v2.TeamBalanceData.total_payable:type_name -> invoice_iface.v2.TeamBalanceTotalPayableData
+	29, // 35: invoice_iface.v2.TeamBalanceData.total_receivable:type_name -> invoice_iface.v2.TeamBalanceTotalReceivableData
+	22, // 36: invoice_iface.v2.TeamBalanceData.incoming_payment:type_name -> invoice_iface.v2.TeamBalanceIncomingPaymentData
+	30, // 37: invoice_iface.v2.TeamBalanceListResponse.data:type_name -> invoice_iface.v2.TeamBalanceData
+	13, // 38: invoice_iface.v2.TeamBalanceCommonData.DataEntry.value:type_name -> invoice_iface.v2.TeamBalanceCommonItem
+	15, // 39: invoice_iface.v2.TeamBalancePayableData.DataEntry.value:type_name -> invoice_iface.v2.TeamBalancePayableItem
+	17, // 40: invoice_iface.v2.TeamBalanceReceivableData.DataEntry.value:type_name -> invoice_iface.v2.TeamBalanceReceivableItem
+	19, // 41: invoice_iface.v2.TeamBalancePendingPaymentData.DataEntry.value:type_name -> invoice_iface.v2.TeamBalancePendingPaymentItem
+	21, // 42: invoice_iface.v2.TeamBalanceIncomingPaymentData.DataEntry.value:type_name -> invoice_iface.v2.TeamBalanceIncomingPaymentItem
+	23, // 43: invoice_iface.v2.TeamBalanceTotalPaymentData.DataEntry.value:type_name -> invoice_iface.v2.TeamBalanceTotalPaymentItem
+	26, // 44: invoice_iface.v2.TeamBalanceTotalPayableData.DataEntry.value:type_name -> invoice_iface.v2.TeamBalanceTotalPayableItem
+	28, // 45: invoice_iface.v2.TeamBalanceTotalReceivableData.DataEntry.value:type_name -> invoice_iface.v2.TeamBalanceTotalReceivableItem
+	46, // [46:46] is the sub-list for method output_type
+	46, // [46:46] is the sub-list for method input_type
+	46, // [46:46] is the sub-list for extension type_name
+	46, // [46:46] is the sub-list for extension extendee
+	0,  // [0:46] is the sub-list for field type_name
 }
 
 func init() { file_invoice_iface_v2_v2_team_balance_list_proto_init() }
@@ -1952,8 +2142,9 @@ func file_invoice_iface_v2_v2_team_balance_list_proto_init() {
 		(*TeamBalanceListSort_TotalPayment)(nil),
 		(*TeamBalanceListSort_TotalPayable)(nil),
 		(*TeamBalanceListSort_TotalReceivable)(nil),
+		(*TeamBalanceListSort_IncomingPayment)(nil),
 	}
-	file_invoice_iface_v2_v2_team_balance_list_proto_msgTypes[19].OneofWrappers = []any{
+	file_invoice_iface_v2_v2_team_balance_list_proto_msgTypes[21].OneofWrappers = []any{
 		(*TeamBalanceData_Common)(nil),
 		(*TeamBalanceData_Payable)(nil),
 		(*TeamBalanceData_Receivable)(nil),
@@ -1961,14 +2152,15 @@ func file_invoice_iface_v2_v2_team_balance_list_proto_init() {
 		(*TeamBalanceData_TotalPayment)(nil),
 		(*TeamBalanceData_TotalPayable)(nil),
 		(*TeamBalanceData_TotalReceivable)(nil),
+		(*TeamBalanceData_IncomingPayment)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_invoice_iface_v2_v2_team_balance_list_proto_rawDesc), len(file_invoice_iface_v2_v2_team_balance_list_proto_rawDesc)),
-			NumEnums:      8,
-			NumMessages:   28,
+			NumEnums:      9,
+			NumMessages:   31,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

@@ -6,6 +6,7 @@ import "common/v1/team.proto";
 // import "common/v1/common.proto";
 import "google/protobuf/timestamp.proto";
 // import "invoice_iface/v2/v2_balance.proto";
+import "invoice_iface/v2/v2_team_balance_list.proto";
 import "role_base/v1/role.proto";
 // import "invoice_iface/v2/v2_types.proto";
 
@@ -56,8 +57,8 @@ message OverviewDataItem {
     double receivable = 2;
     double pending_payment = 3;
     double total_payment = 4;
-    double total_payable = 5;
-    double total_receivable = 6;
+    TeamBalanceTotalPayableItem total_payable = 5;
+    TeamBalanceTotalReceivableItem total_receivable = 6;
     double incoming_payment = 7;
   }
 }
