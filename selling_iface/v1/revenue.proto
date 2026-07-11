@@ -1,0 +1,175 @@
+syntax = "proto3";
+package selling_iface.v1;
+
+import "buf/validate/validate.proto";
+import "common/v1/common.proto";
+import "google/protobuf/timestamp.proto";
+import "role_base/v1/role.proto";
+
+option go_package = "github.com/pdcgo/schema/services/selling_iface/v1;selling_iface";
+
+// RevenueService — selling-domain revenue. Authorization is the User v2 role system,
+// declared per-request via (role_base.v1.request_policy) + (role_base.v1.use_scope)
+// on team_id and enforced by the user_service access interceptor (registered in
+// selling_service/register.go). Handlers carry no imperative auth.
+service RevenueService {
+  rpc HelloWorld(HelloWorldRequest) returns (HelloWorldResponse);
+
+  // Withdrawal ledger — team-scoped, per-shop funds withdrawn from a marketplace.
+  // Create/Update/Delete each write a WithdrawalLog row in the same transaction;
+  // WithdrawalLogList returns that change history. Delete is a soft delete that frees
+  // the (team_id, ref_id, source) unique key by renaming ref_id.
+  rpc WithdrawalCreate(WithdrawalCreateRequest) returns (WithdrawalCreateResponse);
+  rpc WithdrawalUpdate(WithdrawalUpdateRequest) returns (WithdrawalUpdateResponse);
+  rpc WithdrawalDelete(WithdrawalDeleteRequest) returns (WithdrawalDeleteResponse);
+  rpc WithdrawalList(WithdrawalListRequest) returns (WithdrawalListResponse);
+  rpc WithdrawalLogList(WithdrawalLogListRequest) returns (WithdrawalLogListResponse);
+}
+
+message HelloWorldRequest {
+  // v2 roling: any authenticated caller (valid bearer). Real RPCs will add
+  // team-scoped roles + (role_base.v1.use_scope) on a team_id field.
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
+  string name = 1;
+}
+
+message HelloWorldResponse {
+  string message = 1;
+}
+
+// WithdrawalSource — how the withdrawal entered the ledger: MANUAL (a user records it;
+// ref_id is caller-supplied) or IMPORTER (a settlement importer; ref_id is computed
+// from shop_id + funded date).
+enum WithdrawalSource {
+  WITHDRAWAL_SOURCE_UNSPECIFIED = 0;
+  WITHDRAWAL_SOURCE_MANUAL = 1;
+  WITHDRAWAL_SOURCE_IMPORTER = 2;
+}
+
+// WithdrawalLogChangeType — the lifecycle event a WithdrawalLog row records.
+enum WithdrawalLogChangeType {
+  WITHDRAWAL_LOG_CHANGE_TYPE_UNSPECIFIED = 0;
+  WITHDRAWAL_LOG_CHANGE_TYPE_CREATED = 1;
+  WITHDRAWAL_LOG_CHANGE_TYPE_CHANGE_AMOUNT = 2;
+  WITHDRAWAL_LOG_CHANGE_TYPE_DELETED = 3;
+}
+
+message WithdrawalItem {
+  uint64 id = 1;
+  uint64 team_id = 2;
+  uint64 shop_id = 3;
+  double amount = 4;
+  google.protobuf.Timestamp funded_at = 5;
+  string ref_id = 6;
+  WithdrawalSource source = 7;
+  google.protobuf.Timestamp created_at = 8;
+}
+
+message WithdrawalLogItem {
+  uint64 id = 1;
+  uint64 withdrawal_id = 2;
+  uint64 shop_id = 3;
+  WithdrawalLogChangeType change_type = 4;
+  double amount = 5;
+  google.protobuf.Timestamp created_at = 6;
+}
+
+message WithdrawalCreateRequest {
+  option (role_base.v1.request_policy) = {
+    roles: [
+      ROLE_ROOT,
+      ROLE_ADMIN,
+      ROLE_TEAM_OWNER,
+      ROLE_TEAM_ADMIN
+    ]
+  };
+
+  uint64 team_id = 1 [
+    (buf.validate.field).uint64.gt = 0,
+    (role_base.v1.use_scope) = true
+  ];
+  uint64 shop_id = 2 [(buf.validate.field).uint64.gt = 0];
+  double amount = 3;
+  google.protobuf.Timestamp funded_at = 4 [(buf.validate.field).required = true];
+  // Required for MANUAL source; ignored for IMPORTER (computed shop_id/year/month/day).
+  string ref_id = 5 [(buf.validate.field).string = {max_len: 200}];
+  WithdrawalSource source = 6 [(buf.validate.field).enum = {
+    defined_only: true
+    not_in: [0]
+  }];
+}
+message WithdrawalCreateResponse {
+  uint64 id = 1;
+}
+
+message WithdrawalUpdateRequest {
+  option (role_base.v1.request_policy) = {
+    roles: [
+      ROLE_ROOT,
+      ROLE_ADMIN,
+      ROLE_TEAM_OWNER,
+      ROLE_TEAM_ADMIN
+    ]
+  };
+
+  uint64 id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 team_id = 2 [
+    (buf.validate.field).uint64.gt = 0,
+    (role_base.v1.use_scope) = true
+  ];
+  double amount = 3;
+  google.protobuf.Timestamp funded_at = 4 [(buf.validate.field).required = true];
+}
+message WithdrawalUpdateResponse {}
+
+message WithdrawalDeleteRequest {
+  option (role_base.v1.request_policy) = {
+    roles: [
+      ROLE_ROOT,
+      ROLE_ADMIN,
+      ROLE_TEAM_OWNER,
+      ROLE_TEAM_ADMIN
+    ]
+  };
+
+  uint64 id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 team_id = 2 [
+    (buf.validate.field).uint64.gt = 0,
+    (role_base.v1.use_scope) = true
+  ];
+}
+message WithdrawalDeleteResponse {}
+
+message WithdrawalListRequest {
+  // Any member with a role in the team may view withdrawals.
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
+  uint64 team_id = 1 [
+    (buf.validate.field).uint64.gt = 0,
+    (role_base.v1.use_scope) = true
+  ];
+  uint64 shop_id = 2; // optional
+  WithdrawalSource source = 3; // optional
+  common.v1.PageFilter page = 4 [(buf.validate.field).required = true];
+}
+message WithdrawalListResponse {
+  repeated WithdrawalItem data = 1;
+  common.v1.PageInfo page_info = 2;
+}
+
+message WithdrawalLogListRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
+  uint64 team_id = 1 [
+    (buf.validate.field).uint64.gt = 0,
+    (role_base.v1.use_scope) = true
+  ];
+  uint64 withdrawal_id = 2; // optional scope
+  uint64 shop_id = 3; // optional scope
+  common.v1.PageFilter page = 4 [(buf.validate.field).required = true];
+}
+message WithdrawalLogListResponse {
+  repeated WithdrawalLogItem data = 1;
+  common.v1.PageInfo page_info = 2;
+}

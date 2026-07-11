@@ -18,6 +18,11 @@ message BalanceChangeLog {
   double balance = 7;
   string note = 8;
   google.protobuf.Timestamp created_at = 9;
+
+  // Order source (0 / UNSPECIFIED when the change is not order-sourced).
+  uint64 order_id = 10;
+  uint64 warehouse_id = 11;
+  OrderSystem order_system = 12;
 }
 
 message TeamBalance {

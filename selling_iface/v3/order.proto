@@ -1,0 +1,217 @@
+syntax = "proto3";
+package selling_iface.v3;
+
+import "buf/validate/validate.proto";
+import "common/v1/common.proto";
+import "google/protobuf/timestamp.proto";
+import "role_base/v1/role.proto";
+
+option go_package = "github.com/pdcgo/schema/services/selling_iface/v3;selling_iface";
+
+// OrderService — the next-gen selling-domain order system (design:
+// plans/brainstroming.md). Flow A: OrderCreate deducts stock at create via
+// inventory TransactionCreate{order} (which also auto-picks racks per ProductConfig)
+// and posts PRODUCT_FEE / WAREHOUSE_FEE to the invoice v2 ledger in the same
+// transaction. Statuses are DIMENSIONAL: a warehouse-driven fulfillment pipeline
+// (`status`), a courier dimension (`shipment_status`), and canceled/problem flags —
+// the UI derives one display status by precedence. Authorization is the User v2 role
+// system, declared per-request via (role_base.v1.request_policy) + use_scope(team_id).
+service OrderService {
+  rpc OrderCreate(OrderCreateRequest) returns (OrderCreateResponse);
+  rpc OrderList(OrderListRequest) returns (OrderListResponse);
+  rpc OrderDetail(OrderDetailRequest) returns (OrderDetailResponse);
+  // OrderCancel fully reverses a not-yet-shipped order: inventory TransactionCancel
+  // (stock + placements return) + mirrored reverse fee entries. Idempotent.
+  rpc OrderCancel(OrderCancelRequest) returns (OrderCancelResponse);
+}
+
+// The warehouse-driven fulfillment pipeline (forward-only). Stock and fees moved at
+// CREATED (Flow A); SHIPPED ends the pipeline and the shipment dimension takes over.
+enum OrderStatus {
+  ORDER_STATUS_UNSPECIFIED = 0;
+  ORDER_STATUS_CREATED = 1;
+  ORDER_STATUS_PROCESS = 2;
+  ORDER_STATUS_PICKING = 3;
+  ORDER_STATUS_PACKING = 4;
+  ORDER_STATUS_PACKING_COMPLETED = 5;
+  ORDER_STATUS_SHIPPED = 6;
+}
+
+// The courier dimension (UNSPECIFIED = none; dormant until the order is SHIPPED).
+enum ShipmentStatus {
+  SHIPMENT_STATUS_UNSPECIFIED = 0;
+  SHIPMENT_STATUS_IN_TRANSIT = 1;
+  SHIPMENT_STATUS_DELIVERED = 2;
+  SHIPMENT_STATUS_RETURN_IN_TRANSIT = 3;
+  SHIPMENT_STATUS_RETURNED = 4;
+}
+
+// Which dimension a status-log row belongs to.
+enum StatusDimension {
+  STATUS_DIMENSION_UNSPECIFIED = 0;
+  STATUS_DIMENSION_FULFILLMENT = 1;
+  STATUS_DIMENSION_SHIPMENT = 2;
+  STATUS_DIMENSION_FLAG = 3;
+}
+
+// Buyer data — same field set as legacy CustomerAddress, stored 1:1 with the order.
+// All fields optional.
+message OrderCustomer {
+  string name = 1 [(buf.validate.field).string.max_len = 200];
+  string phone = 2 [(buf.validate.field).string.max_len = 50];
+  string province = 3 [(buf.validate.field).string.max_len = 100];
+  string city = 4 [(buf.validate.field).string.max_len = 100];
+  string district = 5 [(buf.validate.field).string.max_len = 100];
+  string postal_code = 6 [(buf.validate.field).string.max_len = 20];
+  string address = 7 [(buf.validate.field).string.max_len = 500];
+}
+
+// One order line. price is the per-unit SELLING price (what the buyer pays); the
+// inventory stock-out is valued at the warehouse's average COST independently.
+message OrderItemInput {
+  uint64 product_id = 1 [(buf.validate.field).uint64.gt = 0];
+  int64 count = 2 [(buf.validate.field).int64.gt = 0];
+  double price = 3 [(buf.validate.field).double.gte = 0];
+}
+
+message OrderCreateRequest {
+  option (role_base.v1.request_policy) = {
+    roles: [
+      ROLE_ROOT,
+      ROLE_ADMIN,
+      ROLE_TEAM_OWNER,
+      ROLE_TEAM_ADMIN
+    ]
+  };
+
+  uint64 team_id = 1 [
+    (buf.validate.field).uint64.gt = 0,
+    (role_base.v1.use_scope) = true
+  ];
+  uint64 shop_id = 2 [(buf.validate.field).uint64.gt = 0];
+  // The fulfilling warehouse (stock exits here at create). Caller picks per order.
+  uint64 warehouse_id = 3 [(buf.validate.field).uint64.gt = 0];
+  // Marketplace order number / reference; unique per team.
+  string ref_id = 4 [(buf.validate.field).string = {
+    min_len: 1
+    max_len: 200
+  }];
+  repeated OrderItemInput items = 5 [(buf.validate.field).repeated.min_items = 1];
+  OrderCustomer customer = 6;
+  double shipping_fee = 7 [(buf.validate.field).double.gte = 0];
+  // Estimated revenue: the expected marketplace payout (legacy: order_mp_total).
+  double est_revenue_amount = 8 [(buf.validate.field).double.gte = 0];
+}
+message OrderCreateResponse {
+  uint64 order_id = 1;
+}
+
+message OrderListRequest {
+  // Any member with a role in the team may view orders.
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
+  uint64 team_id = 1 [
+    (buf.validate.field).uint64.gt = 0,
+    (role_base.v1.use_scope) = true
+  ];
+  uint64 shop_id = 2; // optional
+  string search = 3; // ref_id / customer name ILIKE (optional)
+  repeated OrderStatus statuses = 4; // optional fulfillment filter
+  repeated ShipmentStatus shipment_statuses = 5; // optional courier filter
+  optional bool canceled = 6; // unset = any
+  optional bool problem = 7; // unset = any
+  common.v1.PageFilter page = 8 [(buf.validate.field).required = true];
+}
+
+message OrderRow {
+  uint64 id = 1;
+  string ref_id = 2;
+  uint64 shop_id = 3;
+  uint64 warehouse_id = 4;
+  OrderStatus status = 5;
+  ShipmentStatus shipment_status = 6;
+  google.protobuf.Timestamp canceled_at = 7; // unset = not canceled
+  bool problem = 8;
+  string customer_name = 9;
+  int64 item_count = 10;
+  double total = 11;
+  double est_revenue_amount = 12;
+  google.protobuf.Timestamp created_at = 13;
+}
+
+message OrderListResponse {
+  repeated OrderRow data = 1;
+  common.v1.PageInfo page_info = 2;
+}
+
+message OrderDetailRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
+  uint64 order_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 team_id = 2 [
+    (buf.validate.field).uint64.gt = 0,
+    (role_base.v1.use_scope) = true
+  ];
+}
+
+// One order line with the frozen fee context (owned/markup/product_fee are set at
+// create from ProductOrderInfo + the inventory cost valuation).
+message OrderDetailItem {
+  uint64 product_id = 1;
+  string product_name = 2; // snapshot at order time
+  int64 count = 3;
+  double price = 4; // per-unit selling price
+  double subtotal = 5;
+  bool owned = 6;
+  double markup_percent = 7;
+  double product_fee = 8; // 0 for owned items
+}
+
+message OrderStatusLogItem {
+  StatusDimension dimension = 1;
+  string from_status = 2; // empty on the create row
+  string to_status = 3;
+  string note = 4;
+  google.protobuf.Timestamp created_at = 5;
+}
+
+message OrderDetailResponse {
+  uint64 id = 1;
+  uint64 team_id = 2;
+  uint64 shop_id = 3;
+  uint64 warehouse_id = 4;
+  string ref_id = 5;
+  OrderStatus status = 6;
+  ShipmentStatus shipment_status = 7;
+  google.protobuf.Timestamp canceled_at = 8;
+  bool problem = 9;
+  string problem_note = 10;
+  uint64 inventory_transaction_id = 11;
+  double shipping_fee = 12;
+  double total = 13;
+  double est_revenue_amount = 14;
+  double warehouse_fee = 15; // frozen at create (GetWarehouseFee)
+  google.protobuf.Timestamp created_at = 16;
+  google.protobuf.Timestamp updated_at = 17;
+  OrderCustomer customer = 18;
+  repeated OrderDetailItem items = 19;
+  repeated OrderStatusLogItem status_logs = 20; // chronological
+}
+
+message OrderCancelRequest {
+  option (role_base.v1.request_policy) = {
+    roles: [
+      ROLE_ROOT,
+      ROLE_ADMIN,
+      ROLE_TEAM_OWNER,
+      ROLE_TEAM_ADMIN
+    ]
+  };
+
+  uint64 order_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 team_id = 2 [
+    (buf.validate.field).uint64.gt = 0,
+    (role_base.v1.use_scope) = true
+  ];
+}
+message OrderCancelResponse {}

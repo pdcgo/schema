@@ -201,6 +201,32 @@ func (mr *MockWarehouseServiceClientMockRecorder) WarehouseDelete(ctx, req inter
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "WarehouseDelete", reflect.TypeOf((*MockWarehouseService)(nil).WarehouseDelete), ctx, req)
 }
 
+func (m *MockWarehouseService) GetWarehouseFee(ctx context.Context, req *connect.Request[v1.GetWarehouseFeeRequest]) (*connect.Response[v1.GetWarehouseFeeResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "GetWarehouseFee", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.GetWarehouseFeeResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockWarehouseServiceMockRecorder) GetWarehouseFee(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetWarehouseFee", reflect.TypeOf((*MockWarehouseService)(nil).GetWarehouseFee), ctx, req)
+}
+
+func (m *MockWarehouseServiceClient) GetWarehouseFee(ctx context.Context, req *connect.Request[v1.GetWarehouseFeeRequest]) (*connect.Response[v1.GetWarehouseFeeResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "GetWarehouseFee", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.GetWarehouseFeeResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockWarehouseServiceClientMockRecorder) GetWarehouseFee(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetWarehouseFee", reflect.TypeOf((*MockWarehouseService)(nil).GetWarehouseFee), ctx, req)
+}
+
 func (m *MockWarehouseService) TeamWarehouseReturnInfo(ctx context.Context, req *connect.Request[v1.TeamWarehouseReturnInfoRequest]) (*connect.Response[v1.TeamWarehouseReturnInfoResponse], error) {
     m.ctrl.T.Helper()
     ret := m.ctrl.Call(m, "TeamWarehouseReturnInfo", ctx, req)

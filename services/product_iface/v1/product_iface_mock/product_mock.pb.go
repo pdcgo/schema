@@ -150,6 +150,32 @@ func (mr *MockProductServiceClientMockRecorder) ProductByIDs(ctx, req interface{
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ProductByIDs", reflect.TypeOf((*MockProductService)(nil).ProductByIDs), ctx, req)
 }
 
+func (m *MockProductService) ProductOrderInfo(ctx context.Context, req *connect.Request[v1.ProductOrderInfoRequest]) (*connect.Response[v1.ProductOrderInfoResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "ProductOrderInfo", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.ProductOrderInfoResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockProductServiceMockRecorder) ProductOrderInfo(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ProductOrderInfo", reflect.TypeOf((*MockProductService)(nil).ProductOrderInfo), ctx, req)
+}
+
+func (m *MockProductServiceClient) ProductOrderInfo(ctx context.Context, req *connect.Request[v1.ProductOrderInfoRequest]) (*connect.Response[v1.ProductOrderInfoResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "ProductOrderInfo", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.ProductOrderInfoResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockProductServiceClientMockRecorder) ProductOrderInfo(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ProductOrderInfo", reflect.TypeOf((*MockProductService)(nil).ProductOrderInfo), ctx, req)
+}
+
 func (m *MockProductService) ProductListExport(ctx context.Context, req *connect.Request[v1.ProductListExportRequest], stream *connect.ServerStream[v1.ProductListExportResponse]) error {
     m.ctrl.T.Helper()
     ret := m.ctrl.Call(m, "ProductListExport", ctx, req, stream)

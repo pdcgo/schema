@@ -180,6 +180,58 @@ func (BalanceChangeType) EnumDescriptor() ([]byte, []int) {
 	return file_invoice_iface_v2_v2_types_proto_rawDescGZIP(), []int{2}
 }
 
+// OrderSystem discriminates which order generation a balance change originated
+// from, so order-scoped queries disambiguate the (legacy orders.id vs v3
+// v3_orders.id) shared numeric id-space.
+type OrderSystem int32
+
+const (
+	OrderSystem_ORDER_SYSTEM_UNSPECIFIED OrderSystem = 0
+	OrderSystem_ORDER_SYSTEM_V3          OrderSystem = 1
+	OrderSystem_ORDER_SYSTEM_LEGACY      OrderSystem = 2
+)
+
+// Enum value maps for OrderSystem.
+var (
+	OrderSystem_name = map[int32]string{
+		0: "ORDER_SYSTEM_UNSPECIFIED",
+		1: "ORDER_SYSTEM_V3",
+		2: "ORDER_SYSTEM_LEGACY",
+	}
+	OrderSystem_value = map[string]int32{
+		"ORDER_SYSTEM_UNSPECIFIED": 0,
+		"ORDER_SYSTEM_V3":          1,
+		"ORDER_SYSTEM_LEGACY":      2,
+	}
+)
+
+func (x OrderSystem) Enum() *OrderSystem {
+	p := new(OrderSystem)
+	*p = x
+	return p
+}
+
+func (x OrderSystem) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (OrderSystem) Descriptor() protoreflect.EnumDescriptor {
+	return file_invoice_iface_v2_v2_types_proto_enumTypes[3].Descriptor()
+}
+
+func (OrderSystem) Type() protoreflect.EnumType {
+	return &file_invoice_iface_v2_v2_types_proto_enumTypes[3]
+}
+
+func (x OrderSystem) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use OrderSystem.Descriptor instead.
+func (OrderSystem) EnumDescriptor() ([]byte, []int) {
+	return file_invoice_iface_v2_v2_types_proto_rawDescGZIP(), []int{3}
+}
+
 var File_invoice_iface_v2_v2_types_proto protoreflect.FileDescriptor
 
 const file_invoice_iface_v2_v2_types_proto_rawDesc = "" +
@@ -200,7 +252,11 @@ const file_invoice_iface_v2_v2_types_proto_rawDesc = "" +
 	"\x1bBALANCE_CHANGE_TYPE_COD_FEE\x10\x03\x12#\n" +
 	"\x1fBALANCE_CHANGE_TYPE_PRODUCT_FEE\x10\x04\x12\x1f\n" +
 	"\x1bBALANCE_CHANGE_TYPE_PAYMENT\x10\x05\x12%\n" +
-	"!BALANCE_CHANGE_TYPE_STOCK_PROBLEM\x10\x06B\xc2\x01\n" +
+	"!BALANCE_CHANGE_TYPE_STOCK_PROBLEM\x10\x06*Y\n" +
+	"\vOrderSystem\x12\x1c\n" +
+	"\x18ORDER_SYSTEM_UNSPECIFIED\x10\x00\x12\x13\n" +
+	"\x0fORDER_SYSTEM_V3\x10\x01\x12\x17\n" +
+	"\x13ORDER_SYSTEM_LEGACY\x10\x02B\xc2\x01\n" +
 	"\x14com.invoice_iface.v2B\fV2TypesProtoP\x01Z?github.com/pdcgo/schema/services/invoice_iface/v2;invoice_iface\xa2\x02\x03IXX\xaa\x02\x0fInvoiceIface.V2\xca\x02\x0fInvoiceIface\\V2\xe2\x02\x1bInvoiceIface\\V2\\GPBMetadata\xea\x02\x10InvoiceIface::V2b\x06proto3"
 
 var (
@@ -215,11 +271,12 @@ func file_invoice_iface_v2_v2_types_proto_rawDescGZIP() []byte {
 	return file_invoice_iface_v2_v2_types_proto_rawDescData
 }
 
-var file_invoice_iface_v2_v2_types_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
+var file_invoice_iface_v2_v2_types_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
 var file_invoice_iface_v2_v2_types_proto_goTypes = []any{
 	(BalanceType)(0),       // 0: invoice_iface.v2.BalanceType
 	(SortType)(0),          // 1: invoice_iface.v2.SortType
 	(BalanceChangeType)(0), // 2: invoice_iface.v2.BalanceChangeType
+	(OrderSystem)(0),       // 3: invoice_iface.v2.OrderSystem
 }
 var file_invoice_iface_v2_v2_types_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
@@ -239,7 +296,7 @@ func file_invoice_iface_v2_v2_types_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_invoice_iface_v2_v2_types_proto_rawDesc), len(file_invoice_iface_v2_v2_types_proto_rawDesc)),
-			NumEnums:      3,
+			NumEnums:      4,
 			NumMessages:   0,
 			NumExtensions: 0,
 			NumServices:   0,

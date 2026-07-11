@@ -332,3 +332,29 @@ func (mr *MockInvoiceServiceClientMockRecorder) TeamReconcile(ctx, req interface
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "TeamReconcile", reflect.TypeOf((*MockInvoiceService)(nil).TeamReconcile), ctx, req)
 }
 
+func (m *MockInvoiceService) CheckOweLimit(ctx context.Context, req *connect.Request[v2.CheckOweLimitRequest]) (*connect.Response[v2.CheckOweLimitResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "CheckOweLimit", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v2.CheckOweLimitResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInvoiceServiceMockRecorder) CheckOweLimit(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CheckOweLimit", reflect.TypeOf((*MockInvoiceService)(nil).CheckOweLimit), ctx, req)
+}
+
+func (m *MockInvoiceServiceClient) CheckOweLimit(ctx context.Context, req *connect.Request[v2.CheckOweLimitRequest]) (*connect.Response[v2.CheckOweLimitResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "CheckOweLimit", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v2.CheckOweLimitResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInvoiceServiceClientMockRecorder) CheckOweLimit(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CheckOweLimit", reflect.TypeOf((*MockInvoiceService)(nil).CheckOweLimit), ctx, req)
+}
+

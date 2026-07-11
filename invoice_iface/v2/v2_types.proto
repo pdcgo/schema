@@ -30,3 +30,12 @@ enum BalanceChangeType {
   BALANCE_CHANGE_TYPE_PAYMENT = 5;
   BALANCE_CHANGE_TYPE_STOCK_PROBLEM = 6;
 }
+
+// OrderSystem discriminates which order generation a balance change originated
+// from, so order-scoped queries disambiguate the (legacy orders.id vs v3
+// v3_orders.id) shared numeric id-space.
+enum OrderSystem {
+  ORDER_SYSTEM_UNSPECIFIED = 0;
+  ORDER_SYSTEM_V3 = 1;
+  ORDER_SYSTEM_LEGACY = 2;
+}

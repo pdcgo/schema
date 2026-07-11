@@ -51,6 +51,9 @@ const (
 	// WarehouseServiceWarehouseDeleteProcedure is the fully-qualified name of the WarehouseService's
 	// WarehouseDelete RPC.
 	WarehouseServiceWarehouseDeleteProcedure = "/warehouse_iface.v1.WarehouseService/WarehouseDelete"
+	// WarehouseServiceGetWarehouseFeeProcedure is the fully-qualified name of the WarehouseService's
+	// GetWarehouseFee RPC.
+	WarehouseServiceGetWarehouseFeeProcedure = "/warehouse_iface.v1.WarehouseService/GetWarehouseFee"
 	// WarehouseServiceTeamWarehouseReturnInfoProcedure is the fully-qualified name of the
 	// WarehouseService's TeamWarehouseReturnInfo RPC.
 	WarehouseServiceTeamWarehouseReturnInfoProcedure = "/warehouse_iface.v1.WarehouseService/TeamWarehouseReturnInfo"
@@ -80,6 +83,11 @@ type WarehouseServiceClient interface {
 	WarehouseCreate(context.Context, *connect.Request[v1.WarehouseCreateRequest]) (*connect.ServerStreamForClient[v1.WarehouseCreateResponse], error)
 	WarehouseUpdate(context.Context, *connect.Request[v1.WarehouseUpdateRequest]) (*connect.Response[v1.WarehouseUpdateResponse], error)
 	WarehouseDelete(context.Context, *connect.Request[v1.WarehouseDeleteRequest]) (*connect.Response[v1.WarehouseDeleteResponse], error)
+	// GetWarehouseFee computes the warehouse's fulfillment fee for an order value using
+	// the warehouse fee config (use_fixed_fee/fee_fix/fee_percent/max_fee — the legacy
+	// GetWarehouseFee formula: flat, OR percent-of-value rounded up to 100s capped at
+	// max_fee). Called by the selling v3 OrderService at order create.
+	GetWarehouseFee(context.Context, *connect.Request[v1.GetWarehouseFeeRequest]) (*connect.Response[v1.GetWarehouseFeeResponse], error)
 	TeamWarehouseReturnInfo(context.Context, *connect.Request[v1.TeamWarehouseReturnInfoRequest]) (*connect.Response[v1.TeamWarehouseReturnInfoResponse], error)
 	TransactionNoteCreate(context.Context, *connect.Request[v1.TransactionNoteCreateRequest]) (*connect.Response[v1.TransactionNoteCreateResponse], error)
 	TransactionNoteList(context.Context, *connect.Request[v1.TransactionNoteListRequest]) (*connect.Response[v1.TransactionNoteListResponse], error)
@@ -137,6 +145,12 @@ func NewWarehouseServiceClient(httpClient connect.HTTPClient, baseURL string, op
 			connect.WithSchema(warehouseServiceMethods.ByName("WarehouseDelete")),
 			connect.WithClientOptions(opts...),
 		),
+		getWarehouseFee: connect.NewClient[v1.GetWarehouseFeeRequest, v1.GetWarehouseFeeResponse](
+			httpClient,
+			baseURL+WarehouseServiceGetWarehouseFeeProcedure,
+			connect.WithSchema(warehouseServiceMethods.ByName("GetWarehouseFee")),
+			connect.WithClientOptions(opts...),
+		),
 		teamWarehouseReturnInfo: connect.NewClient[v1.TeamWarehouseReturnInfoRequest, v1.TeamWarehouseReturnInfoResponse](
 			httpClient,
 			baseURL+WarehouseServiceTeamWarehouseReturnInfoProcedure,
@@ -184,6 +198,7 @@ type warehouseServiceClient struct {
 	warehouseCreate         *connect.Client[v1.WarehouseCreateRequest, v1.WarehouseCreateResponse]
 	warehouseUpdate         *connect.Client[v1.WarehouseUpdateRequest, v1.WarehouseUpdateResponse]
 	warehouseDelete         *connect.Client[v1.WarehouseDeleteRequest, v1.WarehouseDeleteResponse]
+	getWarehouseFee         *connect.Client[v1.GetWarehouseFeeRequest, v1.GetWarehouseFeeResponse]
 	teamWarehouseReturnInfo *connect.Client[v1.TeamWarehouseReturnInfoRequest, v1.TeamWarehouseReturnInfoResponse]
 	transactionNoteCreate   *connect.Client[v1.TransactionNoteCreateRequest, v1.TransactionNoteCreateResponse]
 	transactionNoteList     *connect.Client[v1.TransactionNoteListRequest, v1.TransactionNoteListResponse]
@@ -220,6 +235,11 @@ func (c *warehouseServiceClient) WarehouseUpdate(ctx context.Context, req *conne
 // WarehouseDelete calls warehouse_iface.v1.WarehouseService.WarehouseDelete.
 func (c *warehouseServiceClient) WarehouseDelete(ctx context.Context, req *connect.Request[v1.WarehouseDeleteRequest]) (*connect.Response[v1.WarehouseDeleteResponse], error) {
 	return c.warehouseDelete.CallUnary(ctx, req)
+}
+
+// GetWarehouseFee calls warehouse_iface.v1.WarehouseService.GetWarehouseFee.
+func (c *warehouseServiceClient) GetWarehouseFee(ctx context.Context, req *connect.Request[v1.GetWarehouseFeeRequest]) (*connect.Response[v1.GetWarehouseFeeResponse], error) {
+	return c.getWarehouseFee.CallUnary(ctx, req)
 }
 
 // TeamWarehouseReturnInfo calls warehouse_iface.v1.WarehouseService.TeamWarehouseReturnInfo.
@@ -262,6 +282,11 @@ type WarehouseServiceHandler interface {
 	WarehouseCreate(context.Context, *connect.Request[v1.WarehouseCreateRequest], *connect.ServerStream[v1.WarehouseCreateResponse]) error
 	WarehouseUpdate(context.Context, *connect.Request[v1.WarehouseUpdateRequest]) (*connect.Response[v1.WarehouseUpdateResponse], error)
 	WarehouseDelete(context.Context, *connect.Request[v1.WarehouseDeleteRequest]) (*connect.Response[v1.WarehouseDeleteResponse], error)
+	// GetWarehouseFee computes the warehouse's fulfillment fee for an order value using
+	// the warehouse fee config (use_fixed_fee/fee_fix/fee_percent/max_fee — the legacy
+	// GetWarehouseFee formula: flat, OR percent-of-value rounded up to 100s capped at
+	// max_fee). Called by the selling v3 OrderService at order create.
+	GetWarehouseFee(context.Context, *connect.Request[v1.GetWarehouseFeeRequest]) (*connect.Response[v1.GetWarehouseFeeResponse], error)
 	TeamWarehouseReturnInfo(context.Context, *connect.Request[v1.TeamWarehouseReturnInfoRequest]) (*connect.Response[v1.TeamWarehouseReturnInfoResponse], error)
 	TransactionNoteCreate(context.Context, *connect.Request[v1.TransactionNoteCreateRequest]) (*connect.Response[v1.TransactionNoteCreateResponse], error)
 	TransactionNoteList(context.Context, *connect.Request[v1.TransactionNoteListRequest]) (*connect.Response[v1.TransactionNoteListResponse], error)
@@ -315,6 +340,12 @@ func NewWarehouseServiceHandler(svc WarehouseServiceHandler, opts ...connect.Han
 		connect.WithSchema(warehouseServiceMethods.ByName("WarehouseDelete")),
 		connect.WithHandlerOptions(opts...),
 	)
+	warehouseServiceGetWarehouseFeeHandler := connect.NewUnaryHandler(
+		WarehouseServiceGetWarehouseFeeProcedure,
+		svc.GetWarehouseFee,
+		connect.WithSchema(warehouseServiceMethods.ByName("GetWarehouseFee")),
+		connect.WithHandlerOptions(opts...),
+	)
 	warehouseServiceTeamWarehouseReturnInfoHandler := connect.NewUnaryHandler(
 		WarehouseServiceTeamWarehouseReturnInfoProcedure,
 		svc.TeamWarehouseReturnInfo,
@@ -365,6 +396,8 @@ func NewWarehouseServiceHandler(svc WarehouseServiceHandler, opts ...connect.Han
 			warehouseServiceWarehouseUpdateHandler.ServeHTTP(w, r)
 		case WarehouseServiceWarehouseDeleteProcedure:
 			warehouseServiceWarehouseDeleteHandler.ServeHTTP(w, r)
+		case WarehouseServiceGetWarehouseFeeProcedure:
+			warehouseServiceGetWarehouseFeeHandler.ServeHTTP(w, r)
 		case WarehouseServiceTeamWarehouseReturnInfoProcedure:
 			warehouseServiceTeamWarehouseReturnInfoHandler.ServeHTTP(w, r)
 		case WarehouseServiceTransactionNoteCreateProcedure:
@@ -408,6 +441,10 @@ func (UnimplementedWarehouseServiceHandler) WarehouseUpdate(context.Context, *co
 
 func (UnimplementedWarehouseServiceHandler) WarehouseDelete(context.Context, *connect.Request[v1.WarehouseDeleteRequest]) (*connect.Response[v1.WarehouseDeleteResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("warehouse_iface.v1.WarehouseService.WarehouseDelete is not implemented"))
+}
+
+func (UnimplementedWarehouseServiceHandler) GetWarehouseFee(context.Context, *connect.Request[v1.GetWarehouseFeeRequest]) (*connect.Response[v1.GetWarehouseFeeResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("warehouse_iface.v1.WarehouseService.GetWarehouseFee is not implemented"))
 }
 
 func (UnimplementedWarehouseServiceHandler) TeamWarehouseReturnInfo(context.Context, *connect.Request[v1.TeamWarehouseReturnInfoRequest]) (*connect.Response[v1.TeamWarehouseReturnInfoResponse], error) {

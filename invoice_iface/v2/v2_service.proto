@@ -29,6 +29,8 @@ service InvoiceService {
   rpc CreateBalanceLog(CreateBalanceLogRequest) returns (CreateBalanceLogResponse);
 
   rpc TeamReconcile(TeamReconcileRequest) returns (TeamReconcileResponse);
+
+  rpc CheckOweLimit(CheckOweLimitRequest) returns (CheckOweLimitResponse);
 }
 
 message TeamReconcileRequest {
@@ -37,6 +39,35 @@ message TeamReconcileRequest {
   uint64 team_id = 1;
 }
 message TeamReconcileResponse {}
+
+// CheckOweLimit reports, for a debtor team (team_id, the caller), whether it may
+// still owe each listed creditor (cfg_team_ids) — i.e. its current PAYABLE to that
+// creditor is below the creditor's configured owe threshold. Debt is read from the
+// invoice v2 ledger (team_balances); config from owe_limit_configurations.
+message CheckOweLimitRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
+  uint64 team_id = 1 [
+    (buf.validate.field).uint64.gt = 0,
+    (role_base.v1.use_scope) = true
+  ];
+  repeated uint64 cfg_team_ids = 2 [
+    (buf.validate.field).repeated.min_items = 1,
+    (buf.validate.field).repeated.max_items = 100,
+    (buf.validate.field).repeated.unique = true,
+    (buf.validate.field).repeated.items.uint64.gt = 0
+  ];
+}
+
+message OweLimitAllow {
+  bool allow = 1;
+  double active_amount = 2;
+  double threshold = 3;
+}
+
+message CheckOweLimitResponse {
+  map<uint64, OweLimitAllow> can_owe = 1;
+}
 
 message CreateBalanceLogRequest {
   option (role_base.v1.request_policy) = {allow_only_authenticated: true};
@@ -103,6 +134,10 @@ message ListTeamBalanceLogRequest {
   google.protobuf.Timestamp to_time = 4;
   BalanceType balance_type = 5 [(buf.validate.field).enum.defined_only = true];
   common.v1.PageFilter page = 6 [(buf.validate.field).required = true];
+  // Optional order-source filters (0 / UNSPECIFIED = no filter).
+  uint64 order_id = 7;
+  uint64 warehouse_id = 8;
+  OrderSystem order_system = 9;
 }
 
 message ListTeamBalanceLogResponse {

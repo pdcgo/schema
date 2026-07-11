@@ -47,6 +47,9 @@ const (
 	// ProductServiceProductByIDsProcedure is the fully-qualified name of the ProductService's
 	// ProductByIDs RPC.
 	ProductServiceProductByIDsProcedure = "/product_iface.v1.ProductService/ProductByIDs"
+	// ProductServiceProductOrderInfoProcedure is the fully-qualified name of the ProductService's
+	// ProductOrderInfo RPC.
+	ProductServiceProductOrderInfoProcedure = "/product_iface.v1.ProductService/ProductOrderInfo"
 	// ProductServiceProductListExportProcedure is the fully-qualified name of the ProductService's
 	// ProductListExport RPC.
 	ProductServiceProductListExportProcedure = "/product_iface.v1.ProductService/ProductListExport"
@@ -95,6 +98,10 @@ type ProductServiceClient interface {
 	ProductMapConnect(context.Context, *connect.Request[v1.ProductMapConnectRequest]) (*connect.Response[v1.ProductMapConnectResponse], error)
 	// info Product
 	ProductByIDs(context.Context, *connect.Request[v1.ProductByIDsRequest]) (*connect.Response[v1.ProductByIDsResponse], error)
+	// ProductOrderInfo is the dedicated order-create lookup: everything the selling v3
+	// OrderService needs per item in one flat batched call (name snapshot, owning team
+	// + owned check, cross-selling markup config). Missing ids are omitted.
+	ProductOrderInfo(context.Context, *connect.Request[v1.ProductOrderInfoRequest]) (*connect.Response[v1.ProductOrderInfoResponse], error)
 	ProductListExport(context.Context, *connect.Request[v1.ProductListExportRequest]) (*connect.ServerStreamForClient[v1.ProductListExportResponse], error)
 	ProductSearch(context.Context, *connect.Request[v1.ProductSearchRequest]) (*connect.Response[v1.ProductSearchResponse], error)
 	// Fastest-ops product list for picker components: one q matches name OR code.
@@ -142,6 +149,12 @@ func NewProductServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			httpClient,
 			baseURL+ProductServiceProductByIDsProcedure,
 			connect.WithSchema(productServiceMethods.ByName("ProductByIDs")),
+			connect.WithClientOptions(opts...),
+		),
+		productOrderInfo: connect.NewClient[v1.ProductOrderInfoRequest, v1.ProductOrderInfoResponse](
+			httpClient,
+			baseURL+ProductServiceProductOrderInfoProcedure,
+			connect.WithSchema(productServiceMethods.ByName("ProductOrderInfo")),
 			connect.WithClientOptions(opts...),
 		),
 		productListExport: connect.NewClient[v1.ProductListExportRequest, v1.ProductListExportResponse](
@@ -207,6 +220,7 @@ type productServiceClient struct {
 	productMapGet       *connect.Client[v1.ProductMapGetRequest, v1.ProductMapGetResponse]
 	productMapConnect   *connect.Client[v1.ProductMapConnectRequest, v1.ProductMapConnectResponse]
 	productByIDs        *connect.Client[v1.ProductByIDsRequest, v1.ProductByIDsResponse]
+	productOrderInfo    *connect.Client[v1.ProductOrderInfoRequest, v1.ProductOrderInfoResponse]
 	productListExport   *connect.Client[v1.ProductListExportRequest, v1.ProductListExportResponse]
 	productSearch       *connect.Client[v1.ProductSearchRequest, v1.ProductSearchResponse]
 	productListSearch   *connect.Client[v1.ProductListSearchRequest, v1.ProductListSearchResponse]
@@ -236,6 +250,11 @@ func (c *productServiceClient) ProductMapConnect(ctx context.Context, req *conne
 // ProductByIDs calls product_iface.v1.ProductService.ProductByIDs.
 func (c *productServiceClient) ProductByIDs(ctx context.Context, req *connect.Request[v1.ProductByIDsRequest]) (*connect.Response[v1.ProductByIDsResponse], error) {
 	return c.productByIDs.CallUnary(ctx, req)
+}
+
+// ProductOrderInfo calls product_iface.v1.ProductService.ProductOrderInfo.
+func (c *productServiceClient) ProductOrderInfo(ctx context.Context, req *connect.Request[v1.ProductOrderInfoRequest]) (*connect.Response[v1.ProductOrderInfoResponse], error) {
+	return c.productOrderInfo.CallUnary(ctx, req)
 }
 
 // ProductListExport calls product_iface.v1.ProductService.ProductListExport.
@@ -290,6 +309,10 @@ type ProductServiceHandler interface {
 	ProductMapConnect(context.Context, *connect.Request[v1.ProductMapConnectRequest]) (*connect.Response[v1.ProductMapConnectResponse], error)
 	// info Product
 	ProductByIDs(context.Context, *connect.Request[v1.ProductByIDsRequest]) (*connect.Response[v1.ProductByIDsResponse], error)
+	// ProductOrderInfo is the dedicated order-create lookup: everything the selling v3
+	// OrderService needs per item in one flat batched call (name snapshot, owning team
+	// + owned check, cross-selling markup config). Missing ids are omitted.
+	ProductOrderInfo(context.Context, *connect.Request[v1.ProductOrderInfoRequest]) (*connect.Response[v1.ProductOrderInfoResponse], error)
 	ProductListExport(context.Context, *connect.Request[v1.ProductListExportRequest], *connect.ServerStream[v1.ProductListExportResponse]) error
 	ProductSearch(context.Context, *connect.Request[v1.ProductSearchRequest]) (*connect.Response[v1.ProductSearchResponse], error)
 	// Fastest-ops product list for picker components: one q matches name OR code.
@@ -333,6 +356,12 @@ func NewProductServiceHandler(svc ProductServiceHandler, opts ...connect.Handler
 		ProductServiceProductByIDsProcedure,
 		svc.ProductByIDs,
 		connect.WithSchema(productServiceMethods.ByName("ProductByIDs")),
+		connect.WithHandlerOptions(opts...),
+	)
+	productServiceProductOrderInfoHandler := connect.NewUnaryHandler(
+		ProductServiceProductOrderInfoProcedure,
+		svc.ProductOrderInfo,
+		connect.WithSchema(productServiceMethods.ByName("ProductOrderInfo")),
 		connect.WithHandlerOptions(opts...),
 	)
 	productServiceProductListExportHandler := connect.NewServerStreamHandler(
@@ -399,6 +428,8 @@ func NewProductServiceHandler(svc ProductServiceHandler, opts ...connect.Handler
 			productServiceProductMapConnectHandler.ServeHTTP(w, r)
 		case ProductServiceProductByIDsProcedure:
 			productServiceProductByIDsHandler.ServeHTTP(w, r)
+		case ProductServiceProductOrderInfoProcedure:
+			productServiceProductOrderInfoHandler.ServeHTTP(w, r)
 		case ProductServiceProductListExportProcedure:
 			productServiceProductListExportHandler.ServeHTTP(w, r)
 		case ProductServiceProductSearchProcedure:
@@ -440,6 +471,10 @@ func (UnimplementedProductServiceHandler) ProductMapConnect(context.Context, *co
 
 func (UnimplementedProductServiceHandler) ProductByIDs(context.Context, *connect.Request[v1.ProductByIDsRequest]) (*connect.Response[v1.ProductByIDsResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("product_iface.v1.ProductService.ProductByIDs is not implemented"))
+}
+
+func (UnimplementedProductServiceHandler) ProductOrderInfo(context.Context, *connect.Request[v1.ProductOrderInfoRequest]) (*connect.Response[v1.ProductOrderInfoResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("product_iface.v1.ProductService.ProductOrderInfo is not implemented"))
 }
 
 func (UnimplementedProductServiceHandler) ProductListExport(context.Context, *connect.Request[v1.ProductListExportRequest], *connect.ServerStream[v1.ProductListExportResponse]) error {

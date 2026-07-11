@@ -17,6 +17,11 @@ service ProductService {
   // info Product
   rpc ProductByIDs(ProductByIDsRequest) returns (ProductByIDsResponse);
 
+  // ProductOrderInfo is the dedicated order-create lookup: everything the selling v3
+  // OrderService needs per item in one flat batched call (name snapshot, owning team
+  // + owned check, cross-selling markup config). Missing ids are omitted.
+  rpc ProductOrderInfo(ProductOrderInfoRequest) returns (ProductOrderInfoResponse);
+
   rpc ProductListExport(ProductListExportRequest) returns (stream ProductListExportResponse);
   rpc ProductSearch(ProductSearchRequest) returns (ProductSearchResponse);
 
@@ -201,6 +206,37 @@ message ProductByIdsItemList {
 
 message ProductByIDsResponse {
   map<uint64, ProductByIdsItemList> items = 1; // keyed by product id
+}
+
+// ProductOrderInfo — dedicated order-create lookup (see the rpc comment). Kept flat
+// on purpose: the by-ids oneof shape was judged too heavy for the create hot path.
+message ProductOrderInfoRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
+  repeated uint64 product_ids = 1 [(buf.validate.field).repeated = {
+    min_items: 1
+    max_items: 100
+    items: {
+      uint64: {gt: 0}
+    }
+  }];
+  // The ordering team — the server computes `owned` against it.
+  uint64 team_id = 2 [
+    (buf.validate.field).uint64.gt = 0,
+    (role_base.v1.use_scope) = true
+  ];
+}
+
+message ProductOrderInfoItem {
+  string name = 1; // for the order-item snapshot
+  uint64 owner_team_id = 2;
+  bool owned = 3; // owner_team_id == request team_id
+  double markup_percent = 4; // cross-team markup config
+  bool cross_locked = 5; // true = non-owners may NOT order this product
+}
+
+message ProductOrderInfoResponse {
+  map<uint64, ProductOrderInfoItem> items = 1; // keyed by product id; missing ids omitted
 }
 
 message ProductDuplicateRequest {

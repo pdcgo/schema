@@ -21,6 +21,12 @@ service WarehouseService {
   rpc WarehouseUpdate(WarehouseUpdateRequest) returns (WarehouseUpdateResponse);
   rpc WarehouseDelete(WarehouseDeleteRequest) returns (WarehouseDeleteResponse);
 
+  // GetWarehouseFee computes the warehouse's fulfillment fee for an order value using
+  // the warehouse fee config (use_fixed_fee/fee_fix/fee_percent/max_fee — the legacy
+  // GetWarehouseFee formula: flat, OR percent-of-value rounded up to 100s capped at
+  // max_fee). Called by the selling v3 OrderService at order create.
+  rpc GetWarehouseFee(GetWarehouseFeeRequest) returns (GetWarehouseFeeResponse);
+
   rpc TeamWarehouseReturnInfo(TeamWarehouseReturnInfoRequest) returns (TeamWarehouseReturnInfoResponse) {
     option (mcp_iface.v1.include) = true;
   }
@@ -267,6 +273,17 @@ message WarehouseDeleteRequest {
   uint64 id = 1 [(buf.validate.field).uint64.gt = 0];
 }
 message WarehouseDeleteResponse {}
+
+message GetWarehouseFeeRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
+  uint64 warehouse_id = 1 [(buf.validate.field).uint64.gt = 0];
+  // The order's sku value (Σ count × price) the percent formula applies to.
+  double order_value = 2 [(buf.validate.field).double.gte = 0];
+}
+message GetWarehouseFeeResponse {
+  double fee = 1;
+}
 
 message TeamWarehouseReturnInfoRequest {
   option (role_base.v1.request_policy) = {allow_only_authenticated: true};

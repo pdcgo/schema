@@ -23,16 +23,20 @@ const (
 )
 
 type BalanceChangeLog struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	TeamId        uint64                 `protobuf:"varint,2,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
-	ForTeamId     uint64                 `protobuf:"varint,3,opt,name=for_team_id,json=forTeamId,proto3" json:"for_team_id,omitempty"`
-	ChangeType    BalanceChangeType      `protobuf:"varint,4,opt,name=change_type,json=changeType,proto3,enum=invoice_iface.v2.BalanceChangeType" json:"change_type,omitempty"`
-	ChangeAmount  float64                `protobuf:"fixed64,5,opt,name=change_amount,json=changeAmount,proto3" json:"change_amount,omitempty"`
-	BalanceType   BalanceType            `protobuf:"varint,6,opt,name=balance_type,json=balanceType,proto3,enum=invoice_iface.v2.BalanceType" json:"balance_type,omitempty"`
-	Balance       float64                `protobuf:"fixed64,7,opt,name=balance,proto3" json:"balance,omitempty"`
-	Note          string                 `protobuf:"bytes,8,opt,name=note,proto3" json:"note,omitempty"`
-	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	state        protoimpl.MessageState `protogen:"open.v1"`
+	Id           uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	TeamId       uint64                 `protobuf:"varint,2,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	ForTeamId    uint64                 `protobuf:"varint,3,opt,name=for_team_id,json=forTeamId,proto3" json:"for_team_id,omitempty"`
+	ChangeType   BalanceChangeType      `protobuf:"varint,4,opt,name=change_type,json=changeType,proto3,enum=invoice_iface.v2.BalanceChangeType" json:"change_type,omitempty"`
+	ChangeAmount float64                `protobuf:"fixed64,5,opt,name=change_amount,json=changeAmount,proto3" json:"change_amount,omitempty"`
+	BalanceType  BalanceType            `protobuf:"varint,6,opt,name=balance_type,json=balanceType,proto3,enum=invoice_iface.v2.BalanceType" json:"balance_type,omitempty"`
+	Balance      float64                `protobuf:"fixed64,7,opt,name=balance,proto3" json:"balance,omitempty"`
+	Note         string                 `protobuf:"bytes,8,opt,name=note,proto3" json:"note,omitempty"`
+	CreatedAt    *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	// Order source (0 / UNSPECIFIED when the change is not order-sourced).
+	OrderId       uint64      `protobuf:"varint,10,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	WarehouseId   uint64      `protobuf:"varint,11,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
+	OrderSystem   OrderSystem `protobuf:"varint,12,opt,name=order_system,json=orderSystem,proto3,enum=invoice_iface.v2.OrderSystem" json:"order_system,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -128,6 +132,27 @@ func (x *BalanceChangeLog) GetCreatedAt() *timestamppb.Timestamp {
 		return x.CreatedAt
 	}
 	return nil
+}
+
+func (x *BalanceChangeLog) GetOrderId() uint64 {
+	if x != nil {
+		return x.OrderId
+	}
+	return 0
+}
+
+func (x *BalanceChangeLog) GetWarehouseId() uint64 {
+	if x != nil {
+		return x.WarehouseId
+	}
+	return 0
+}
+
+func (x *BalanceChangeLog) GetOrderSystem() OrderSystem {
+	if x != nil {
+		return x.OrderSystem
+	}
+	return OrderSystem_ORDER_SYSTEM_UNSPECIFIED
 }
 
 type TeamBalance struct {
@@ -342,7 +367,7 @@ var File_invoice_iface_v2_v2_balance_proto protoreflect.FileDescriptor
 
 const file_invoice_iface_v2_v2_balance_proto_rawDesc = "" +
 	"\n" +
-	"!invoice_iface/v2/v2_balance.proto\x12\x10invoice_iface.v2\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1finvoice_iface/v2/v2_types.proto\"\xf1\x02\n" +
+	"!invoice_iface/v2/v2_balance.proto\x12\x10invoice_iface.v2\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1finvoice_iface/v2/v2_types.proto\"\xf1\x03\n" +
 	"\x10BalanceChangeLog\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x17\n" +
 	"\ateam_id\x18\x02 \x01(\x04R\x06teamId\x12\x1e\n" +
@@ -354,7 +379,11 @@ const file_invoice_iface_v2_v2_balance_proto_rawDesc = "" +
 	"\abalance\x18\a \x01(\x01R\abalance\x12\x12\n" +
 	"\x04note\x18\b \x01(\tR\x04note\x129\n" +
 	"\n" +
-	"created_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\xde\x02\n" +
+	"created_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x19\n" +
+	"\border_id\x18\n" +
+	" \x01(\x04R\aorderId\x12!\n" +
+	"\fwarehouse_id\x18\v \x01(\x04R\vwarehouseId\x12@\n" +
+	"\forder_system\x18\f \x01(\x0e2\x1d.invoice_iface.v2.OrderSystemR\vorderSystem\"\xde\x02\n" +
 	"\vTeamBalance\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x17\n" +
 	"\ateam_id\x18\x02 \x01(\x04R\x06teamId\x12\x1e\n" +
@@ -402,23 +431,25 @@ var file_invoice_iface_v2_v2_balance_proto_goTypes = []any{
 	(BalanceChangeType)(0),        // 3: invoice_iface.v2.BalanceChangeType
 	(BalanceType)(0),              // 4: invoice_iface.v2.BalanceType
 	(*timestamppb.Timestamp)(nil), // 5: google.protobuf.Timestamp
+	(OrderSystem)(0),              // 6: invoice_iface.v2.OrderSystem
 }
 var file_invoice_iface_v2_v2_balance_proto_depIdxs = []int32{
 	3,  // 0: invoice_iface.v2.BalanceChangeLog.change_type:type_name -> invoice_iface.v2.BalanceChangeType
 	4,  // 1: invoice_iface.v2.BalanceChangeLog.balance_type:type_name -> invoice_iface.v2.BalanceType
 	5,  // 2: invoice_iface.v2.BalanceChangeLog.created_at:type_name -> google.protobuf.Timestamp
-	4,  // 3: invoice_iface.v2.TeamBalance.balance_type:type_name -> invoice_iface.v2.BalanceType
-	5,  // 4: invoice_iface.v2.TeamBalance.created_at:type_name -> google.protobuf.Timestamp
-	5,  // 5: invoice_iface.v2.TeamBalance.updated_at:type_name -> google.protobuf.Timestamp
-	5,  // 6: invoice_iface.v2.TeamBalanceDailyLog.day:type_name -> google.protobuf.Timestamp
-	4,  // 7: invoice_iface.v2.TeamBalanceDailyLog.balance_type:type_name -> invoice_iface.v2.BalanceType
-	5,  // 8: invoice_iface.v2.TeamBalanceDailyLog.updated_at:type_name -> google.protobuf.Timestamp
-	5,  // 9: invoice_iface.v2.TeamBalanceDailyLog.created_at:type_name -> google.protobuf.Timestamp
-	10, // [10:10] is the sub-list for method output_type
-	10, // [10:10] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	6,  // 3: invoice_iface.v2.BalanceChangeLog.order_system:type_name -> invoice_iface.v2.OrderSystem
+	4,  // 4: invoice_iface.v2.TeamBalance.balance_type:type_name -> invoice_iface.v2.BalanceType
+	5,  // 5: invoice_iface.v2.TeamBalance.created_at:type_name -> google.protobuf.Timestamp
+	5,  // 6: invoice_iface.v2.TeamBalance.updated_at:type_name -> google.protobuf.Timestamp
+	5,  // 7: invoice_iface.v2.TeamBalanceDailyLog.day:type_name -> google.protobuf.Timestamp
+	4,  // 8: invoice_iface.v2.TeamBalanceDailyLog.balance_type:type_name -> invoice_iface.v2.BalanceType
+	5,  // 9: invoice_iface.v2.TeamBalanceDailyLog.updated_at:type_name -> google.protobuf.Timestamp
+	5,  // 10: invoice_iface.v2.TeamBalanceDailyLog.created_at:type_name -> google.protobuf.Timestamp
+	11, // [11:11] is the sub-list for method output_type
+	11, // [11:11] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_invoice_iface_v2_v2_balance_proto_init() }

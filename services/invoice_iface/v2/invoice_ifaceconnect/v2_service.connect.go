@@ -65,6 +65,9 @@ const (
 	// InvoiceServiceTeamReconcileProcedure is the fully-qualified name of the InvoiceService's
 	// TeamReconcile RPC.
 	InvoiceServiceTeamReconcileProcedure = "/invoice_iface.v2.InvoiceService/TeamReconcile"
+	// InvoiceServiceCheckOweLimitProcedure is the fully-qualified name of the InvoiceService's
+	// CheckOweLimit RPC.
+	InvoiceServiceCheckOweLimitProcedure = "/invoice_iface.v2.InvoiceService/CheckOweLimit"
 )
 
 // InvoiceServiceClient is a client for the invoice_iface.v2.InvoiceService service.
@@ -80,6 +83,7 @@ type InvoiceServiceClient interface {
 	ListTeamBalanceLog(context.Context, *connect.Request[v2.ListTeamBalanceLogRequest]) (*connect.Response[v2.ListTeamBalanceLogResponse], error)
 	CreateBalanceLog(context.Context, *connect.Request[v2.CreateBalanceLogRequest]) (*connect.Response[v2.CreateBalanceLogResponse], error)
 	TeamReconcile(context.Context, *connect.Request[v2.TeamReconcileRequest]) (*connect.Response[v2.TeamReconcileResponse], error)
+	CheckOweLimit(context.Context, *connect.Request[v2.CheckOweLimitRequest]) (*connect.Response[v2.CheckOweLimitResponse], error)
 }
 
 // NewInvoiceServiceClient constructs a client for the invoice_iface.v2.InvoiceService service. By
@@ -159,6 +163,12 @@ func NewInvoiceServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			connect.WithSchema(invoiceServiceMethods.ByName("TeamReconcile")),
 			connect.WithClientOptions(opts...),
 		),
+		checkOweLimit: connect.NewClient[v2.CheckOweLimitRequest, v2.CheckOweLimitResponse](
+			httpClient,
+			baseURL+InvoiceServiceCheckOweLimitProcedure,
+			connect.WithSchema(invoiceServiceMethods.ByName("CheckOweLimit")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -175,6 +185,7 @@ type invoiceServiceClient struct {
 	listTeamBalanceLog  *connect.Client[v2.ListTeamBalanceLogRequest, v2.ListTeamBalanceLogResponse]
 	createBalanceLog    *connect.Client[v2.CreateBalanceLogRequest, v2.CreateBalanceLogResponse]
 	teamReconcile       *connect.Client[v2.TeamReconcileRequest, v2.TeamReconcileResponse]
+	checkOweLimit       *connect.Client[v2.CheckOweLimitRequest, v2.CheckOweLimitResponse]
 }
 
 // Overview calls invoice_iface.v2.InvoiceService.Overview.
@@ -232,6 +243,11 @@ func (c *invoiceServiceClient) TeamReconcile(ctx context.Context, req *connect.R
 	return c.teamReconcile.CallUnary(ctx, req)
 }
 
+// CheckOweLimit calls invoice_iface.v2.InvoiceService.CheckOweLimit.
+func (c *invoiceServiceClient) CheckOweLimit(ctx context.Context, req *connect.Request[v2.CheckOweLimitRequest]) (*connect.Response[v2.CheckOweLimitResponse], error) {
+	return c.checkOweLimit.CallUnary(ctx, req)
+}
+
 // InvoiceServiceHandler is an implementation of the invoice_iface.v2.InvoiceService service.
 type InvoiceServiceHandler interface {
 	Overview(context.Context, *connect.Request[v2.OverviewRequest]) (*connect.Response[v2.OverviewResponse], error)
@@ -245,6 +261,7 @@ type InvoiceServiceHandler interface {
 	ListTeamBalanceLog(context.Context, *connect.Request[v2.ListTeamBalanceLogRequest]) (*connect.Response[v2.ListTeamBalanceLogResponse], error)
 	CreateBalanceLog(context.Context, *connect.Request[v2.CreateBalanceLogRequest]) (*connect.Response[v2.CreateBalanceLogResponse], error)
 	TeamReconcile(context.Context, *connect.Request[v2.TeamReconcileRequest]) (*connect.Response[v2.TeamReconcileResponse], error)
+	CheckOweLimit(context.Context, *connect.Request[v2.CheckOweLimitRequest]) (*connect.Response[v2.CheckOweLimitResponse], error)
 }
 
 // NewInvoiceServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -320,6 +337,12 @@ func NewInvoiceServiceHandler(svc InvoiceServiceHandler, opts ...connect.Handler
 		connect.WithSchema(invoiceServiceMethods.ByName("TeamReconcile")),
 		connect.WithHandlerOptions(opts...),
 	)
+	invoiceServiceCheckOweLimitHandler := connect.NewUnaryHandler(
+		InvoiceServiceCheckOweLimitProcedure,
+		svc.CheckOweLimit,
+		connect.WithSchema(invoiceServiceMethods.ByName("CheckOweLimit")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/invoice_iface.v2.InvoiceService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case InvoiceServiceOverviewProcedure:
@@ -344,6 +367,8 @@ func NewInvoiceServiceHandler(svc InvoiceServiceHandler, opts ...connect.Handler
 			invoiceServiceCreateBalanceLogHandler.ServeHTTP(w, r)
 		case InvoiceServiceTeamReconcileProcedure:
 			invoiceServiceTeamReconcileHandler.ServeHTTP(w, r)
+		case InvoiceServiceCheckOweLimitProcedure:
+			invoiceServiceCheckOweLimitHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -395,4 +420,8 @@ func (UnimplementedInvoiceServiceHandler) CreateBalanceLog(context.Context, *con
 
 func (UnimplementedInvoiceServiceHandler) TeamReconcile(context.Context, *connect.Request[v2.TeamReconcileRequest]) (*connect.Response[v2.TeamReconcileResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("invoice_iface.v2.InvoiceService.TeamReconcile is not implemented"))
+}
+
+func (UnimplementedInvoiceServiceHandler) CheckOweLimit(context.Context, *connect.Request[v2.CheckOweLimitRequest]) (*connect.Response[v2.CheckOweLimitResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("invoice_iface.v2.InvoiceService.CheckOweLimit is not implemented"))
 }

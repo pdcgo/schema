@@ -157,6 +157,166 @@ func (*TeamReconcileResponse) Descriptor() ([]byte, []int) {
 	return file_invoice_iface_v2_v2_service_proto_rawDescGZIP(), []int{1}
 }
 
+// CheckOweLimit reports, for a debtor team (team_id, the caller), whether it may
+// still owe each listed creditor (cfg_team_ids) — i.e. its current PAYABLE to that
+// creditor is below the creditor's configured owe threshold. Debt is read from the
+// invoice v2 ledger (team_balances); config from owe_limit_configurations.
+type CheckOweLimitRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	CfgTeamIds    []uint64               `protobuf:"varint,2,rep,packed,name=cfg_team_ids,json=cfgTeamIds,proto3" json:"cfg_team_ids,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CheckOweLimitRequest) Reset() {
+	*x = CheckOweLimitRequest{}
+	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CheckOweLimitRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CheckOweLimitRequest) ProtoMessage() {}
+
+func (x *CheckOweLimitRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CheckOweLimitRequest.ProtoReflect.Descriptor instead.
+func (*CheckOweLimitRequest) Descriptor() ([]byte, []int) {
+	return file_invoice_iface_v2_v2_service_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *CheckOweLimitRequest) GetTeamId() uint64 {
+	if x != nil {
+		return x.TeamId
+	}
+	return 0
+}
+
+func (x *CheckOweLimitRequest) GetCfgTeamIds() []uint64 {
+	if x != nil {
+		return x.CfgTeamIds
+	}
+	return nil
+}
+
+type OweLimitAllow struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Allow         bool                   `protobuf:"varint,1,opt,name=allow,proto3" json:"allow,omitempty"`
+	ActiveAmount  float64                `protobuf:"fixed64,2,opt,name=active_amount,json=activeAmount,proto3" json:"active_amount,omitempty"`
+	Threshold     float64                `protobuf:"fixed64,3,opt,name=threshold,proto3" json:"threshold,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *OweLimitAllow) Reset() {
+	*x = OweLimitAllow{}
+	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *OweLimitAllow) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*OweLimitAllow) ProtoMessage() {}
+
+func (x *OweLimitAllow) ProtoReflect() protoreflect.Message {
+	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use OweLimitAllow.ProtoReflect.Descriptor instead.
+func (*OweLimitAllow) Descriptor() ([]byte, []int) {
+	return file_invoice_iface_v2_v2_service_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *OweLimitAllow) GetAllow() bool {
+	if x != nil {
+		return x.Allow
+	}
+	return false
+}
+
+func (x *OweLimitAllow) GetActiveAmount() float64 {
+	if x != nil {
+		return x.ActiveAmount
+	}
+	return 0
+}
+
+func (x *OweLimitAllow) GetThreshold() float64 {
+	if x != nil {
+		return x.Threshold
+	}
+	return 0
+}
+
+type CheckOweLimitResponse struct {
+	state         protoimpl.MessageState    `protogen:"open.v1"`
+	CanOwe        map[uint64]*OweLimitAllow `protobuf:"bytes,1,rep,name=can_owe,json=canOwe,proto3" json:"can_owe,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CheckOweLimitResponse) Reset() {
+	*x = CheckOweLimitResponse{}
+	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CheckOweLimitResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CheckOweLimitResponse) ProtoMessage() {}
+
+func (x *CheckOweLimitResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CheckOweLimitResponse.ProtoReflect.Descriptor instead.
+func (*CheckOweLimitResponse) Descriptor() ([]byte, []int) {
+	return file_invoice_iface_v2_v2_service_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *CheckOweLimitResponse) GetCanOwe() map[uint64]*OweLimitAllow {
+	if x != nil {
+		return x.CanOwe
+	}
+	return nil
+}
+
 type CreateBalanceLogRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
@@ -171,7 +331,7 @@ type CreateBalanceLogRequest struct {
 
 func (x *CreateBalanceLogRequest) Reset() {
 	*x = CreateBalanceLogRequest{}
-	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[2]
+	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -183,7 +343,7 @@ func (x *CreateBalanceLogRequest) String() string {
 func (*CreateBalanceLogRequest) ProtoMessage() {}
 
 func (x *CreateBalanceLogRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[2]
+	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -196,7 +356,7 @@ func (x *CreateBalanceLogRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateBalanceLogRequest.ProtoReflect.Descriptor instead.
 func (*CreateBalanceLogRequest) Descriptor() ([]byte, []int) {
-	return file_invoice_iface_v2_v2_service_proto_rawDescGZIP(), []int{2}
+	return file_invoice_iface_v2_v2_service_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *CreateBalanceLogRequest) GetTeamId() uint64 {
@@ -249,7 +409,7 @@ type CreateBalanceLogResponse struct {
 
 func (x *CreateBalanceLogResponse) Reset() {
 	*x = CreateBalanceLogResponse{}
-	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[3]
+	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -261,7 +421,7 @@ func (x *CreateBalanceLogResponse) String() string {
 func (*CreateBalanceLogResponse) ProtoMessage() {}
 
 func (x *CreateBalanceLogResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[3]
+	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -274,7 +434,7 @@ func (x *CreateBalanceLogResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateBalanceLogResponse.ProtoReflect.Descriptor instead.
 func (*CreateBalanceLogResponse) Descriptor() ([]byte, []int) {
-	return file_invoice_iface_v2_v2_service_proto_rawDescGZIP(), []int{3}
+	return file_invoice_iface_v2_v2_service_proto_rawDescGZIP(), []int{6}
 }
 
 type ListPaymentRequest struct {
@@ -291,7 +451,7 @@ type ListPaymentRequest struct {
 
 func (x *ListPaymentRequest) Reset() {
 	*x = ListPaymentRequest{}
-	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[4]
+	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -303,7 +463,7 @@ func (x *ListPaymentRequest) String() string {
 func (*ListPaymentRequest) ProtoMessage() {}
 
 func (x *ListPaymentRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[4]
+	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -316,7 +476,7 @@ func (x *ListPaymentRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListPaymentRequest.ProtoReflect.Descriptor instead.
 func (*ListPaymentRequest) Descriptor() ([]byte, []int) {
-	return file_invoice_iface_v2_v2_service_proto_rawDescGZIP(), []int{4}
+	return file_invoice_iface_v2_v2_service_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *ListPaymentRequest) GetTeamId() uint64 {
@@ -371,7 +531,7 @@ type ListPaymentResponse struct {
 
 func (x *ListPaymentResponse) Reset() {
 	*x = ListPaymentResponse{}
-	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[5]
+	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -383,7 +543,7 @@ func (x *ListPaymentResponse) String() string {
 func (*ListPaymentResponse) ProtoMessage() {}
 
 func (x *ListPaymentResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[5]
+	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -396,7 +556,7 @@ func (x *ListPaymentResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListPaymentResponse.ProtoReflect.Descriptor instead.
 func (*ListPaymentResponse) Descriptor() ([]byte, []int) {
-	return file_invoice_iface_v2_v2_service_proto_rawDescGZIP(), []int{5}
+	return file_invoice_iface_v2_v2_service_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *ListPaymentResponse) GetPayments() []*Payment {
@@ -427,7 +587,7 @@ type ListIncomingPaymentRequest struct {
 
 func (x *ListIncomingPaymentRequest) Reset() {
 	*x = ListIncomingPaymentRequest{}
-	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[6]
+	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -439,7 +599,7 @@ func (x *ListIncomingPaymentRequest) String() string {
 func (*ListIncomingPaymentRequest) ProtoMessage() {}
 
 func (x *ListIncomingPaymentRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[6]
+	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -452,7 +612,7 @@ func (x *ListIncomingPaymentRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListIncomingPaymentRequest.ProtoReflect.Descriptor instead.
 func (*ListIncomingPaymentRequest) Descriptor() ([]byte, []int) {
-	return file_invoice_iface_v2_v2_service_proto_rawDescGZIP(), []int{6}
+	return file_invoice_iface_v2_v2_service_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *ListIncomingPaymentRequest) GetForTeamId() uint64 {
@@ -507,7 +667,7 @@ type ListIncomingPaymentResponse struct {
 
 func (x *ListIncomingPaymentResponse) Reset() {
 	*x = ListIncomingPaymentResponse{}
-	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[7]
+	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -519,7 +679,7 @@ func (x *ListIncomingPaymentResponse) String() string {
 func (*ListIncomingPaymentResponse) ProtoMessage() {}
 
 func (x *ListIncomingPaymentResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[7]
+	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -532,7 +692,7 @@ func (x *ListIncomingPaymentResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListIncomingPaymentResponse.ProtoReflect.Descriptor instead.
 func (*ListIncomingPaymentResponse) Descriptor() ([]byte, []int) {
-	return file_invoice_iface_v2_v2_service_proto_rawDescGZIP(), []int{7}
+	return file_invoice_iface_v2_v2_service_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *ListIncomingPaymentResponse) GetPayments() []*Payment {
@@ -550,20 +710,24 @@ func (x *ListIncomingPaymentResponse) GetPageInfo() *v1.PageInfo {
 }
 
 type ListTeamBalanceLogRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	TeamId        uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
-	ForTeamId     uint64                 `protobuf:"varint,2,opt,name=for_team_id,json=forTeamId,proto3" json:"for_team_id,omitempty"`
-	FromTime      *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=from_time,json=fromTime,proto3" json:"from_time,omitempty"`
-	ToTime        *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=to_time,json=toTime,proto3" json:"to_time,omitempty"`
-	BalanceType   BalanceType            `protobuf:"varint,5,opt,name=balance_type,json=balanceType,proto3,enum=invoice_iface.v2.BalanceType" json:"balance_type,omitempty"`
-	Page          *v1.PageFilter         `protobuf:"bytes,6,opt,name=page,proto3" json:"page,omitempty"`
+	state       protoimpl.MessageState `protogen:"open.v1"`
+	TeamId      uint64                 `protobuf:"varint,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	ForTeamId   uint64                 `protobuf:"varint,2,opt,name=for_team_id,json=forTeamId,proto3" json:"for_team_id,omitempty"`
+	FromTime    *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=from_time,json=fromTime,proto3" json:"from_time,omitempty"`
+	ToTime      *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=to_time,json=toTime,proto3" json:"to_time,omitempty"`
+	BalanceType BalanceType            `protobuf:"varint,5,opt,name=balance_type,json=balanceType,proto3,enum=invoice_iface.v2.BalanceType" json:"balance_type,omitempty"`
+	Page        *v1.PageFilter         `protobuf:"bytes,6,opt,name=page,proto3" json:"page,omitempty"`
+	// Optional order-source filters (0 / UNSPECIFIED = no filter).
+	OrderId       uint64      `protobuf:"varint,7,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	WarehouseId   uint64      `protobuf:"varint,8,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
+	OrderSystem   OrderSystem `protobuf:"varint,9,opt,name=order_system,json=orderSystem,proto3,enum=invoice_iface.v2.OrderSystem" json:"order_system,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListTeamBalanceLogRequest) Reset() {
 	*x = ListTeamBalanceLogRequest{}
-	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[8]
+	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -575,7 +739,7 @@ func (x *ListTeamBalanceLogRequest) String() string {
 func (*ListTeamBalanceLogRequest) ProtoMessage() {}
 
 func (x *ListTeamBalanceLogRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[8]
+	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -588,7 +752,7 @@ func (x *ListTeamBalanceLogRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListTeamBalanceLogRequest.ProtoReflect.Descriptor instead.
 func (*ListTeamBalanceLogRequest) Descriptor() ([]byte, []int) {
-	return file_invoice_iface_v2_v2_service_proto_rawDescGZIP(), []int{8}
+	return file_invoice_iface_v2_v2_service_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *ListTeamBalanceLogRequest) GetTeamId() uint64 {
@@ -633,6 +797,27 @@ func (x *ListTeamBalanceLogRequest) GetPage() *v1.PageFilter {
 	return nil
 }
 
+func (x *ListTeamBalanceLogRequest) GetOrderId() uint64 {
+	if x != nil {
+		return x.OrderId
+	}
+	return 0
+}
+
+func (x *ListTeamBalanceLogRequest) GetWarehouseId() uint64 {
+	if x != nil {
+		return x.WarehouseId
+	}
+	return 0
+}
+
+func (x *ListTeamBalanceLogRequest) GetOrderSystem() OrderSystem {
+	if x != nil {
+		return x.OrderSystem
+	}
+	return OrderSystem_ORDER_SYSTEM_UNSPECIFIED
+}
+
 type ListTeamBalanceLogResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Logs          []*BalanceChangeLog    `protobuf:"bytes,1,rep,name=logs,proto3" json:"logs,omitempty"`
@@ -643,7 +828,7 @@ type ListTeamBalanceLogResponse struct {
 
 func (x *ListTeamBalanceLogResponse) Reset() {
 	*x = ListTeamBalanceLogResponse{}
-	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[9]
+	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -655,7 +840,7 @@ func (x *ListTeamBalanceLogResponse) String() string {
 func (*ListTeamBalanceLogResponse) ProtoMessage() {}
 
 func (x *ListTeamBalanceLogResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[9]
+	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -668,7 +853,7 @@ func (x *ListTeamBalanceLogResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListTeamBalanceLogResponse.ProtoReflect.Descriptor instead.
 func (*ListTeamBalanceLogResponse) Descriptor() ([]byte, []int) {
-	return file_invoice_iface_v2_v2_service_proto_rawDescGZIP(), []int{9}
+	return file_invoice_iface_v2_v2_service_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *ListTeamBalanceLogResponse) GetLogs() []*BalanceChangeLog {
@@ -705,7 +890,7 @@ type Payment struct {
 
 func (x *Payment) Reset() {
 	*x = Payment{}
-	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[10]
+	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -717,7 +902,7 @@ func (x *Payment) String() string {
 func (*Payment) ProtoMessage() {}
 
 func (x *Payment) ProtoReflect() protoreflect.Message {
-	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[10]
+	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -730,7 +915,7 @@ func (x *Payment) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Payment.ProtoReflect.Descriptor instead.
 func (*Payment) Descriptor() ([]byte, []int) {
-	return file_invoice_iface_v2_v2_service_proto_rawDescGZIP(), []int{10}
+	return file_invoice_iface_v2_v2_service_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *Payment) GetId() uint64 {
@@ -830,7 +1015,7 @@ type CreatePaymentRequest struct {
 
 func (x *CreatePaymentRequest) Reset() {
 	*x = CreatePaymentRequest{}
-	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[11]
+	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -842,7 +1027,7 @@ func (x *CreatePaymentRequest) String() string {
 func (*CreatePaymentRequest) ProtoMessage() {}
 
 func (x *CreatePaymentRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[11]
+	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -855,7 +1040,7 @@ func (x *CreatePaymentRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreatePaymentRequest.ProtoReflect.Descriptor instead.
 func (*CreatePaymentRequest) Descriptor() ([]byte, []int) {
-	return file_invoice_iface_v2_v2_service_proto_rawDescGZIP(), []int{11}
+	return file_invoice_iface_v2_v2_service_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *CreatePaymentRequest) GetTeamId() uint64 {
@@ -902,7 +1087,7 @@ type CreatePaymentResponse struct {
 
 func (x *CreatePaymentResponse) Reset() {
 	*x = CreatePaymentResponse{}
-	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[12]
+	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -914,7 +1099,7 @@ func (x *CreatePaymentResponse) String() string {
 func (*CreatePaymentResponse) ProtoMessage() {}
 
 func (x *CreatePaymentResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[12]
+	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -927,7 +1112,7 @@ func (x *CreatePaymentResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreatePaymentResponse.ProtoReflect.Descriptor instead.
 func (*CreatePaymentResponse) Descriptor() ([]byte, []int) {
-	return file_invoice_iface_v2_v2_service_proto_rawDescGZIP(), []int{12}
+	return file_invoice_iface_v2_v2_service_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *CreatePaymentResponse) GetId() uint64 {
@@ -948,7 +1133,7 @@ type AcceptPaymentRequest struct {
 
 func (x *AcceptPaymentRequest) Reset() {
 	*x = AcceptPaymentRequest{}
-	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[13]
+	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -960,7 +1145,7 @@ func (x *AcceptPaymentRequest) String() string {
 func (*AcceptPaymentRequest) ProtoMessage() {}
 
 func (x *AcceptPaymentRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[13]
+	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -973,7 +1158,7 @@ func (x *AcceptPaymentRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AcceptPaymentRequest.ProtoReflect.Descriptor instead.
 func (*AcceptPaymentRequest) Descriptor() ([]byte, []int) {
-	return file_invoice_iface_v2_v2_service_proto_rawDescGZIP(), []int{13}
+	return file_invoice_iface_v2_v2_service_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *AcceptPaymentRequest) GetTeamId() uint64 {
@@ -1005,7 +1190,7 @@ type AcceptPaymentResponse struct {
 
 func (x *AcceptPaymentResponse) Reset() {
 	*x = AcceptPaymentResponse{}
-	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[14]
+	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1017,7 +1202,7 @@ func (x *AcceptPaymentResponse) String() string {
 func (*AcceptPaymentResponse) ProtoMessage() {}
 
 func (x *AcceptPaymentResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[14]
+	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1030,7 +1215,7 @@ func (x *AcceptPaymentResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AcceptPaymentResponse.ProtoReflect.Descriptor instead.
 func (*AcceptPaymentResponse) Descriptor() ([]byte, []int) {
-	return file_invoice_iface_v2_v2_service_proto_rawDescGZIP(), []int{14}
+	return file_invoice_iface_v2_v2_service_proto_rawDescGZIP(), []int{17}
 }
 
 type RejectPaymentRequest struct {
@@ -1044,7 +1229,7 @@ type RejectPaymentRequest struct {
 
 func (x *RejectPaymentRequest) Reset() {
 	*x = RejectPaymentRequest{}
-	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[15]
+	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1056,7 +1241,7 @@ func (x *RejectPaymentRequest) String() string {
 func (*RejectPaymentRequest) ProtoMessage() {}
 
 func (x *RejectPaymentRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[15]
+	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1069,7 +1254,7 @@ func (x *RejectPaymentRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RejectPaymentRequest.ProtoReflect.Descriptor instead.
 func (*RejectPaymentRequest) Descriptor() ([]byte, []int) {
-	return file_invoice_iface_v2_v2_service_proto_rawDescGZIP(), []int{15}
+	return file_invoice_iface_v2_v2_service_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *RejectPaymentRequest) GetTeamId() uint64 {
@@ -1101,7 +1286,7 @@ type RejectPaymentResponse struct {
 
 func (x *RejectPaymentResponse) Reset() {
 	*x = RejectPaymentResponse{}
-	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[16]
+	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1113,7 +1298,7 @@ func (x *RejectPaymentResponse) String() string {
 func (*RejectPaymentResponse) ProtoMessage() {}
 
 func (x *RejectPaymentResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[16]
+	mi := &file_invoice_iface_v2_v2_service_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1126,7 +1311,7 @@ func (x *RejectPaymentResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RejectPaymentResponse.ProtoReflect.Descriptor instead.
 func (*RejectPaymentResponse) Descriptor() ([]byte, []int) {
-	return file_invoice_iface_v2_v2_service_proto_rawDescGZIP(), []int{16}
+	return file_invoice_iface_v2_v2_service_proto_rawDescGZIP(), []int{19}
 }
 
 var File_invoice_iface_v2_v2_service_proto protoreflect.FileDescriptor
@@ -1136,7 +1321,20 @@ const file_invoice_iface_v2_v2_service_proto_rawDesc = "" +
 	"!invoice_iface/v2/v2_service.proto\x12\x10invoice_iface.v2\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!invoice_iface/v2/v2_balance.proto\x1a\"invoice_iface/v2/v2_overview.proto\x1a+invoice_iface/v2/v2_team_balance_list.proto\x1a/invoice_iface/v2/v2_team_balance_timeline.proto\x1a\x1finvoice_iface/v2/v2_types.proto\x1a\x17role_base/v1/role.proto\"7\n" +
 	"\x14TeamReconcileRequest\x12\x17\n" +
 	"\ateam_id\x18\x01 \x01(\x04R\x06teamId:\x06\x92\xb5\x18\x02 \x01\"\x17\n" +
-	"\x15TeamReconcileResponse\"\xd5\x02\n" +
+	"\x15TeamReconcileResponse\"z\n" +
+	"\x14CheckOweLimitRequest\x12$\n" +
+	"\ateam_id\x18\x01 \x01(\x04B\v\xbaH\x042\x02 \x00\x90\xb5\x18\x01R\x06teamId\x124\n" +
+	"\fcfg_team_ids\x18\x02 \x03(\x04B\x12\xbaH\x0f\x92\x01\f\b\x01\x10d\x18\x01\"\x042\x02 \x00R\n" +
+	"cfgTeamIds:\x06\x92\xb5\x18\x02 \x01\"h\n" +
+	"\rOweLimitAllow\x12\x14\n" +
+	"\x05allow\x18\x01 \x01(\bR\x05allow\x12#\n" +
+	"\ractive_amount\x18\x02 \x01(\x01R\factiveAmount\x12\x1c\n" +
+	"\tthreshold\x18\x03 \x01(\x01R\tthreshold\"\xc1\x01\n" +
+	"\x15CheckOweLimitResponse\x12L\n" +
+	"\acan_owe\x18\x01 \x03(\v23.invoice_iface.v2.CheckOweLimitResponse.CanOweEntryR\x06canOwe\x1aZ\n" +
+	"\vCanOweEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\x04R\x03key\x125\n" +
+	"\x05value\x18\x02 \x01(\v2\x1f.invoice_iface.v2.OweLimitAllowR\x05value:\x028\x01\"\xd5\x02\n" +
 	"\x17CreateBalanceLogRequest\x12$\n" +
 	"\ateam_id\x18\x01 \x01(\x04B\v\xbaH\x042\x02 \x00\x90\xb5\x18\x01R\x06teamId\x12'\n" +
 	"\vfor_team_id\x18\x02 \x01(\x04B\a\xbaH\x042\x02 \x00R\tforTeamId\x12N\n" +
@@ -1165,14 +1363,17 @@ const file_invoice_iface_v2_v2_service_proto_rawDesc = "" +
 	"\ato_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\x06toTime:\x06\x92\xb5\x18\x02 \x01\"\x86\x01\n" +
 	"\x1bListIncomingPaymentResponse\x125\n" +
 	"\bpayments\x18\x01 \x03(\v2\x19.invoice_iface.v2.PaymentR\bpayments\x120\n" +
-	"\tpage_info\x18\x02 \x01(\v2\x13.common.v1.PageInfoR\bpageInfo\"\xd6\x02\n" +
+	"\tpage_info\x18\x02 \x01(\v2\x13.common.v1.PageInfoR\bpageInfo\"\xd6\x03\n" +
 	"\x19ListTeamBalanceLogRequest\x12$\n" +
 	"\ateam_id\x18\x01 \x01(\x04B\v\xbaH\x042\x02 \x00\x90\xb5\x18\x01R\x06teamId\x12\x1e\n" +
 	"\vfor_team_id\x18\x02 \x01(\x04R\tforTeamId\x127\n" +
 	"\tfrom_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\bfromTime\x123\n" +
 	"\ato_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\x06toTime\x12J\n" +
 	"\fbalance_type\x18\x05 \x01(\x0e2\x1d.invoice_iface.v2.BalanceTypeB\b\xbaH\x05\x82\x01\x02\x10\x01R\vbalanceType\x121\n" +
-	"\x04page\x18\x06 \x01(\v2\x15.common.v1.PageFilterB\x06\xbaH\x03\xc8\x01\x01R\x04page:\x06\x92\xb5\x18\x02 \x01\"\x86\x01\n" +
+	"\x04page\x18\x06 \x01(\v2\x15.common.v1.PageFilterB\x06\xbaH\x03\xc8\x01\x01R\x04page\x12\x19\n" +
+	"\border_id\x18\a \x01(\x04R\aorderId\x12!\n" +
+	"\fwarehouse_id\x18\b \x01(\x04R\vwarehouseId\x12@\n" +
+	"\forder_system\x18\t \x01(\x0e2\x1d.invoice_iface.v2.OrderSystemR\vorderSystem:\x06\x92\xb5\x18\x02 \x01\"\x86\x01\n" +
 	"\x1aListTeamBalanceLogResponse\x126\n" +
 	"\x04logs\x18\x01 \x03(\v2\".invoice_iface.v2.BalanceChangeLogR\x04logs\x120\n" +
 	"\tpage_info\x18\x02 \x01(\v2\x13.common.v1.PageInfoR\bpageInfo\"\xd9\x03\n" +
@@ -1223,7 +1424,7 @@ const file_invoice_iface_v2_v2_service_proto_rawDesc = "" +
 	"\x1aPAYMENT_STATUS_UNSPECIFIED\x10\x00\x12\x1a\n" +
 	"\x16PAYMENT_STATUS_PENDING\x10\x01\x12\x1b\n" +
 	"\x17PAYMENT_STATUS_ACCEPTED\x10\x02\x12\x1b\n" +
-	"\x17PAYMENT_STATUS_REJECTED\x10\x032\xf3\b\n" +
+	"\x17PAYMENT_STATUS_REJECTED\x10\x032\xd5\t\n" +
 	"\x0eInvoiceService\x12Q\n" +
 	"\bOverview\x12!.invoice_iface.v2.OverviewRequest\x1a\".invoice_iface.v2.OverviewResponse\x12f\n" +
 	"\x0fTeamBalanceList\x12(.invoice_iface.v2.TeamBalanceListRequest\x1a).invoice_iface.v2.TeamBalanceListResponse\x12r\n" +
@@ -1235,7 +1436,8 @@ const file_invoice_iface_v2_v2_service_proto_rawDesc = "" +
 	"\x13ListIncomingPayment\x12,.invoice_iface.v2.ListIncomingPaymentRequest\x1a-.invoice_iface.v2.ListIncomingPaymentResponse\x12o\n" +
 	"\x12ListTeamBalanceLog\x12+.invoice_iface.v2.ListTeamBalanceLogRequest\x1a,.invoice_iface.v2.ListTeamBalanceLogResponse\x12i\n" +
 	"\x10CreateBalanceLog\x12).invoice_iface.v2.CreateBalanceLogRequest\x1a*.invoice_iface.v2.CreateBalanceLogResponse\x12`\n" +
-	"\rTeamReconcile\x12&.invoice_iface.v2.TeamReconcileRequest\x1a'.invoice_iface.v2.TeamReconcileResponseB\xc4\x01\n" +
+	"\rTeamReconcile\x12&.invoice_iface.v2.TeamReconcileRequest\x1a'.invoice_iface.v2.TeamReconcileResponse\x12`\n" +
+	"\rCheckOweLimit\x12&.invoice_iface.v2.CheckOweLimitRequest\x1a'.invoice_iface.v2.CheckOweLimitResponseB\xc4\x01\n" +
 	"\x14com.invoice_iface.v2B\x0eV2ServiceProtoP\x01Z?github.com/pdcgo/schema/services/invoice_iface/v2;invoice_iface\xa2\x02\x03IXX\xaa\x02\x0fInvoiceIface.V2\xca\x02\x0fInvoiceIface\\V2\xe2\x02\x1bInvoiceIface\\V2\\GPBMetadata\xea\x02\x10InvoiceIface::V2b\x06proto3"
 
 var (
@@ -1251,91 +1453,101 @@ func file_invoice_iface_v2_v2_service_proto_rawDescGZIP() []byte {
 }
 
 var file_invoice_iface_v2_v2_service_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_invoice_iface_v2_v2_service_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
+var file_invoice_iface_v2_v2_service_proto_msgTypes = make([]protoimpl.MessageInfo, 21)
 var file_invoice_iface_v2_v2_service_proto_goTypes = []any{
 	(PaymentStatus)(0),                  // 0: invoice_iface.v2.PaymentStatus
 	(*TeamReconcileRequest)(nil),        // 1: invoice_iface.v2.TeamReconcileRequest
 	(*TeamReconcileResponse)(nil),       // 2: invoice_iface.v2.TeamReconcileResponse
-	(*CreateBalanceLogRequest)(nil),     // 3: invoice_iface.v2.CreateBalanceLogRequest
-	(*CreateBalanceLogResponse)(nil),    // 4: invoice_iface.v2.CreateBalanceLogResponse
-	(*ListPaymentRequest)(nil),          // 5: invoice_iface.v2.ListPaymentRequest
-	(*ListPaymentResponse)(nil),         // 6: invoice_iface.v2.ListPaymentResponse
-	(*ListIncomingPaymentRequest)(nil),  // 7: invoice_iface.v2.ListIncomingPaymentRequest
-	(*ListIncomingPaymentResponse)(nil), // 8: invoice_iface.v2.ListIncomingPaymentResponse
-	(*ListTeamBalanceLogRequest)(nil),   // 9: invoice_iface.v2.ListTeamBalanceLogRequest
-	(*ListTeamBalanceLogResponse)(nil),  // 10: invoice_iface.v2.ListTeamBalanceLogResponse
-	(*Payment)(nil),                     // 11: invoice_iface.v2.Payment
-	(*CreatePaymentRequest)(nil),        // 12: invoice_iface.v2.CreatePaymentRequest
-	(*CreatePaymentResponse)(nil),       // 13: invoice_iface.v2.CreatePaymentResponse
-	(*AcceptPaymentRequest)(nil),        // 14: invoice_iface.v2.AcceptPaymentRequest
-	(*AcceptPaymentResponse)(nil),       // 15: invoice_iface.v2.AcceptPaymentResponse
-	(*RejectPaymentRequest)(nil),        // 16: invoice_iface.v2.RejectPaymentRequest
-	(*RejectPaymentResponse)(nil),       // 17: invoice_iface.v2.RejectPaymentResponse
-	(BalanceChangeType)(0),              // 18: invoice_iface.v2.BalanceChangeType
-	(BalanceType)(0),                    // 19: invoice_iface.v2.BalanceType
-	(*v1.PageFilter)(nil),               // 20: common.v1.PageFilter
-	(*timestamppb.Timestamp)(nil),       // 21: google.protobuf.Timestamp
-	(*v1.PageInfo)(nil),                 // 22: common.v1.PageInfo
-	(*BalanceChangeLog)(nil),            // 23: invoice_iface.v2.BalanceChangeLog
-	(*OverviewRequest)(nil),             // 24: invoice_iface.v2.OverviewRequest
-	(*TeamBalanceListRequest)(nil),      // 25: invoice_iface.v2.TeamBalanceListRequest
-	(*TeamBalanceTimelineRequest)(nil),  // 26: invoice_iface.v2.TeamBalanceTimelineRequest
-	(*OverviewResponse)(nil),            // 27: invoice_iface.v2.OverviewResponse
-	(*TeamBalanceListResponse)(nil),     // 28: invoice_iface.v2.TeamBalanceListResponse
-	(*TeamBalanceTimelineResponse)(nil), // 29: invoice_iface.v2.TeamBalanceTimelineResponse
+	(*CheckOweLimitRequest)(nil),        // 3: invoice_iface.v2.CheckOweLimitRequest
+	(*OweLimitAllow)(nil),               // 4: invoice_iface.v2.OweLimitAllow
+	(*CheckOweLimitResponse)(nil),       // 5: invoice_iface.v2.CheckOweLimitResponse
+	(*CreateBalanceLogRequest)(nil),     // 6: invoice_iface.v2.CreateBalanceLogRequest
+	(*CreateBalanceLogResponse)(nil),    // 7: invoice_iface.v2.CreateBalanceLogResponse
+	(*ListPaymentRequest)(nil),          // 8: invoice_iface.v2.ListPaymentRequest
+	(*ListPaymentResponse)(nil),         // 9: invoice_iface.v2.ListPaymentResponse
+	(*ListIncomingPaymentRequest)(nil),  // 10: invoice_iface.v2.ListIncomingPaymentRequest
+	(*ListIncomingPaymentResponse)(nil), // 11: invoice_iface.v2.ListIncomingPaymentResponse
+	(*ListTeamBalanceLogRequest)(nil),   // 12: invoice_iface.v2.ListTeamBalanceLogRequest
+	(*ListTeamBalanceLogResponse)(nil),  // 13: invoice_iface.v2.ListTeamBalanceLogResponse
+	(*Payment)(nil),                     // 14: invoice_iface.v2.Payment
+	(*CreatePaymentRequest)(nil),        // 15: invoice_iface.v2.CreatePaymentRequest
+	(*CreatePaymentResponse)(nil),       // 16: invoice_iface.v2.CreatePaymentResponse
+	(*AcceptPaymentRequest)(nil),        // 17: invoice_iface.v2.AcceptPaymentRequest
+	(*AcceptPaymentResponse)(nil),       // 18: invoice_iface.v2.AcceptPaymentResponse
+	(*RejectPaymentRequest)(nil),        // 19: invoice_iface.v2.RejectPaymentRequest
+	(*RejectPaymentResponse)(nil),       // 20: invoice_iface.v2.RejectPaymentResponse
+	nil,                                 // 21: invoice_iface.v2.CheckOweLimitResponse.CanOweEntry
+	(BalanceChangeType)(0),              // 22: invoice_iface.v2.BalanceChangeType
+	(BalanceType)(0),                    // 23: invoice_iface.v2.BalanceType
+	(*v1.PageFilter)(nil),               // 24: common.v1.PageFilter
+	(*timestamppb.Timestamp)(nil),       // 25: google.protobuf.Timestamp
+	(*v1.PageInfo)(nil),                 // 26: common.v1.PageInfo
+	(OrderSystem)(0),                    // 27: invoice_iface.v2.OrderSystem
+	(*BalanceChangeLog)(nil),            // 28: invoice_iface.v2.BalanceChangeLog
+	(*OverviewRequest)(nil),             // 29: invoice_iface.v2.OverviewRequest
+	(*TeamBalanceListRequest)(nil),      // 30: invoice_iface.v2.TeamBalanceListRequest
+	(*TeamBalanceTimelineRequest)(nil),  // 31: invoice_iface.v2.TeamBalanceTimelineRequest
+	(*OverviewResponse)(nil),            // 32: invoice_iface.v2.OverviewResponse
+	(*TeamBalanceListResponse)(nil),     // 33: invoice_iface.v2.TeamBalanceListResponse
+	(*TeamBalanceTimelineResponse)(nil), // 34: invoice_iface.v2.TeamBalanceTimelineResponse
 }
 var file_invoice_iface_v2_v2_service_proto_depIdxs = []int32{
-	18, // 0: invoice_iface.v2.CreateBalanceLogRequest.change_type:type_name -> invoice_iface.v2.BalanceChangeType
-	19, // 1: invoice_iface.v2.CreateBalanceLogRequest.balance_type:type_name -> invoice_iface.v2.BalanceType
-	0,  // 2: invoice_iface.v2.ListPaymentRequest.status:type_name -> invoice_iface.v2.PaymentStatus
-	20, // 3: invoice_iface.v2.ListPaymentRequest.page:type_name -> common.v1.PageFilter
-	21, // 4: invoice_iface.v2.ListPaymentRequest.from_time:type_name -> google.protobuf.Timestamp
-	21, // 5: invoice_iface.v2.ListPaymentRequest.to_time:type_name -> google.protobuf.Timestamp
-	11, // 6: invoice_iface.v2.ListPaymentResponse.payments:type_name -> invoice_iface.v2.Payment
-	22, // 7: invoice_iface.v2.ListPaymentResponse.page_info:type_name -> common.v1.PageInfo
-	0,  // 8: invoice_iface.v2.ListIncomingPaymentRequest.status:type_name -> invoice_iface.v2.PaymentStatus
-	20, // 9: invoice_iface.v2.ListIncomingPaymentRequest.page:type_name -> common.v1.PageFilter
-	21, // 10: invoice_iface.v2.ListIncomingPaymentRequest.from_time:type_name -> google.protobuf.Timestamp
-	21, // 11: invoice_iface.v2.ListIncomingPaymentRequest.to_time:type_name -> google.protobuf.Timestamp
-	11, // 12: invoice_iface.v2.ListIncomingPaymentResponse.payments:type_name -> invoice_iface.v2.Payment
-	22, // 13: invoice_iface.v2.ListIncomingPaymentResponse.page_info:type_name -> common.v1.PageInfo
-	21, // 14: invoice_iface.v2.ListTeamBalanceLogRequest.from_time:type_name -> google.protobuf.Timestamp
-	21, // 15: invoice_iface.v2.ListTeamBalanceLogRequest.to_time:type_name -> google.protobuf.Timestamp
-	19, // 16: invoice_iface.v2.ListTeamBalanceLogRequest.balance_type:type_name -> invoice_iface.v2.BalanceType
-	20, // 17: invoice_iface.v2.ListTeamBalanceLogRequest.page:type_name -> common.v1.PageFilter
-	23, // 18: invoice_iface.v2.ListTeamBalanceLogResponse.logs:type_name -> invoice_iface.v2.BalanceChangeLog
-	22, // 19: invoice_iface.v2.ListTeamBalanceLogResponse.page_info:type_name -> common.v1.PageInfo
-	0,  // 20: invoice_iface.v2.Payment.status:type_name -> invoice_iface.v2.PaymentStatus
-	21, // 21: invoice_iface.v2.Payment.created_at:type_name -> google.protobuf.Timestamp
-	21, // 22: invoice_iface.v2.Payment.accepted_at:type_name -> google.protobuf.Timestamp
-	21, // 23: invoice_iface.v2.Payment.rejected_at:type_name -> google.protobuf.Timestamp
-	24, // 24: invoice_iface.v2.InvoiceService.Overview:input_type -> invoice_iface.v2.OverviewRequest
-	25, // 25: invoice_iface.v2.InvoiceService.TeamBalanceList:input_type -> invoice_iface.v2.TeamBalanceListRequest
-	26, // 26: invoice_iface.v2.InvoiceService.TeamBalanceTimeline:input_type -> invoice_iface.v2.TeamBalanceTimelineRequest
-	12, // 27: invoice_iface.v2.InvoiceService.CreatePayment:input_type -> invoice_iface.v2.CreatePaymentRequest
-	14, // 28: invoice_iface.v2.InvoiceService.AcceptPayment:input_type -> invoice_iface.v2.AcceptPaymentRequest
-	16, // 29: invoice_iface.v2.InvoiceService.RejectPayment:input_type -> invoice_iface.v2.RejectPaymentRequest
-	5,  // 30: invoice_iface.v2.InvoiceService.ListPayment:input_type -> invoice_iface.v2.ListPaymentRequest
-	7,  // 31: invoice_iface.v2.InvoiceService.ListIncomingPayment:input_type -> invoice_iface.v2.ListIncomingPaymentRequest
-	9,  // 32: invoice_iface.v2.InvoiceService.ListTeamBalanceLog:input_type -> invoice_iface.v2.ListTeamBalanceLogRequest
-	3,  // 33: invoice_iface.v2.InvoiceService.CreateBalanceLog:input_type -> invoice_iface.v2.CreateBalanceLogRequest
-	1,  // 34: invoice_iface.v2.InvoiceService.TeamReconcile:input_type -> invoice_iface.v2.TeamReconcileRequest
-	27, // 35: invoice_iface.v2.InvoiceService.Overview:output_type -> invoice_iface.v2.OverviewResponse
-	28, // 36: invoice_iface.v2.InvoiceService.TeamBalanceList:output_type -> invoice_iface.v2.TeamBalanceListResponse
-	29, // 37: invoice_iface.v2.InvoiceService.TeamBalanceTimeline:output_type -> invoice_iface.v2.TeamBalanceTimelineResponse
-	13, // 38: invoice_iface.v2.InvoiceService.CreatePayment:output_type -> invoice_iface.v2.CreatePaymentResponse
-	15, // 39: invoice_iface.v2.InvoiceService.AcceptPayment:output_type -> invoice_iface.v2.AcceptPaymentResponse
-	17, // 40: invoice_iface.v2.InvoiceService.RejectPayment:output_type -> invoice_iface.v2.RejectPaymentResponse
-	6,  // 41: invoice_iface.v2.InvoiceService.ListPayment:output_type -> invoice_iface.v2.ListPaymentResponse
-	8,  // 42: invoice_iface.v2.InvoiceService.ListIncomingPayment:output_type -> invoice_iface.v2.ListIncomingPaymentResponse
-	10, // 43: invoice_iface.v2.InvoiceService.ListTeamBalanceLog:output_type -> invoice_iface.v2.ListTeamBalanceLogResponse
-	4,  // 44: invoice_iface.v2.InvoiceService.CreateBalanceLog:output_type -> invoice_iface.v2.CreateBalanceLogResponse
-	2,  // 45: invoice_iface.v2.InvoiceService.TeamReconcile:output_type -> invoice_iface.v2.TeamReconcileResponse
-	35, // [35:46] is the sub-list for method output_type
-	24, // [24:35] is the sub-list for method input_type
-	24, // [24:24] is the sub-list for extension type_name
-	24, // [24:24] is the sub-list for extension extendee
-	0,  // [0:24] is the sub-list for field type_name
+	21, // 0: invoice_iface.v2.CheckOweLimitResponse.can_owe:type_name -> invoice_iface.v2.CheckOweLimitResponse.CanOweEntry
+	22, // 1: invoice_iface.v2.CreateBalanceLogRequest.change_type:type_name -> invoice_iface.v2.BalanceChangeType
+	23, // 2: invoice_iface.v2.CreateBalanceLogRequest.balance_type:type_name -> invoice_iface.v2.BalanceType
+	0,  // 3: invoice_iface.v2.ListPaymentRequest.status:type_name -> invoice_iface.v2.PaymentStatus
+	24, // 4: invoice_iface.v2.ListPaymentRequest.page:type_name -> common.v1.PageFilter
+	25, // 5: invoice_iface.v2.ListPaymentRequest.from_time:type_name -> google.protobuf.Timestamp
+	25, // 6: invoice_iface.v2.ListPaymentRequest.to_time:type_name -> google.protobuf.Timestamp
+	14, // 7: invoice_iface.v2.ListPaymentResponse.payments:type_name -> invoice_iface.v2.Payment
+	26, // 8: invoice_iface.v2.ListPaymentResponse.page_info:type_name -> common.v1.PageInfo
+	0,  // 9: invoice_iface.v2.ListIncomingPaymentRequest.status:type_name -> invoice_iface.v2.PaymentStatus
+	24, // 10: invoice_iface.v2.ListIncomingPaymentRequest.page:type_name -> common.v1.PageFilter
+	25, // 11: invoice_iface.v2.ListIncomingPaymentRequest.from_time:type_name -> google.protobuf.Timestamp
+	25, // 12: invoice_iface.v2.ListIncomingPaymentRequest.to_time:type_name -> google.protobuf.Timestamp
+	14, // 13: invoice_iface.v2.ListIncomingPaymentResponse.payments:type_name -> invoice_iface.v2.Payment
+	26, // 14: invoice_iface.v2.ListIncomingPaymentResponse.page_info:type_name -> common.v1.PageInfo
+	25, // 15: invoice_iface.v2.ListTeamBalanceLogRequest.from_time:type_name -> google.protobuf.Timestamp
+	25, // 16: invoice_iface.v2.ListTeamBalanceLogRequest.to_time:type_name -> google.protobuf.Timestamp
+	23, // 17: invoice_iface.v2.ListTeamBalanceLogRequest.balance_type:type_name -> invoice_iface.v2.BalanceType
+	24, // 18: invoice_iface.v2.ListTeamBalanceLogRequest.page:type_name -> common.v1.PageFilter
+	27, // 19: invoice_iface.v2.ListTeamBalanceLogRequest.order_system:type_name -> invoice_iface.v2.OrderSystem
+	28, // 20: invoice_iface.v2.ListTeamBalanceLogResponse.logs:type_name -> invoice_iface.v2.BalanceChangeLog
+	26, // 21: invoice_iface.v2.ListTeamBalanceLogResponse.page_info:type_name -> common.v1.PageInfo
+	0,  // 22: invoice_iface.v2.Payment.status:type_name -> invoice_iface.v2.PaymentStatus
+	25, // 23: invoice_iface.v2.Payment.created_at:type_name -> google.protobuf.Timestamp
+	25, // 24: invoice_iface.v2.Payment.accepted_at:type_name -> google.protobuf.Timestamp
+	25, // 25: invoice_iface.v2.Payment.rejected_at:type_name -> google.protobuf.Timestamp
+	4,  // 26: invoice_iface.v2.CheckOweLimitResponse.CanOweEntry.value:type_name -> invoice_iface.v2.OweLimitAllow
+	29, // 27: invoice_iface.v2.InvoiceService.Overview:input_type -> invoice_iface.v2.OverviewRequest
+	30, // 28: invoice_iface.v2.InvoiceService.TeamBalanceList:input_type -> invoice_iface.v2.TeamBalanceListRequest
+	31, // 29: invoice_iface.v2.InvoiceService.TeamBalanceTimeline:input_type -> invoice_iface.v2.TeamBalanceTimelineRequest
+	15, // 30: invoice_iface.v2.InvoiceService.CreatePayment:input_type -> invoice_iface.v2.CreatePaymentRequest
+	17, // 31: invoice_iface.v2.InvoiceService.AcceptPayment:input_type -> invoice_iface.v2.AcceptPaymentRequest
+	19, // 32: invoice_iface.v2.InvoiceService.RejectPayment:input_type -> invoice_iface.v2.RejectPaymentRequest
+	8,  // 33: invoice_iface.v2.InvoiceService.ListPayment:input_type -> invoice_iface.v2.ListPaymentRequest
+	10, // 34: invoice_iface.v2.InvoiceService.ListIncomingPayment:input_type -> invoice_iface.v2.ListIncomingPaymentRequest
+	12, // 35: invoice_iface.v2.InvoiceService.ListTeamBalanceLog:input_type -> invoice_iface.v2.ListTeamBalanceLogRequest
+	6,  // 36: invoice_iface.v2.InvoiceService.CreateBalanceLog:input_type -> invoice_iface.v2.CreateBalanceLogRequest
+	1,  // 37: invoice_iface.v2.InvoiceService.TeamReconcile:input_type -> invoice_iface.v2.TeamReconcileRequest
+	3,  // 38: invoice_iface.v2.InvoiceService.CheckOweLimit:input_type -> invoice_iface.v2.CheckOweLimitRequest
+	32, // 39: invoice_iface.v2.InvoiceService.Overview:output_type -> invoice_iface.v2.OverviewResponse
+	33, // 40: invoice_iface.v2.InvoiceService.TeamBalanceList:output_type -> invoice_iface.v2.TeamBalanceListResponse
+	34, // 41: invoice_iface.v2.InvoiceService.TeamBalanceTimeline:output_type -> invoice_iface.v2.TeamBalanceTimelineResponse
+	16, // 42: invoice_iface.v2.InvoiceService.CreatePayment:output_type -> invoice_iface.v2.CreatePaymentResponse
+	18, // 43: invoice_iface.v2.InvoiceService.AcceptPayment:output_type -> invoice_iface.v2.AcceptPaymentResponse
+	20, // 44: invoice_iface.v2.InvoiceService.RejectPayment:output_type -> invoice_iface.v2.RejectPaymentResponse
+	9,  // 45: invoice_iface.v2.InvoiceService.ListPayment:output_type -> invoice_iface.v2.ListPaymentResponse
+	11, // 46: invoice_iface.v2.InvoiceService.ListIncomingPayment:output_type -> invoice_iface.v2.ListIncomingPaymentResponse
+	13, // 47: invoice_iface.v2.InvoiceService.ListTeamBalanceLog:output_type -> invoice_iface.v2.ListTeamBalanceLogResponse
+	7,  // 48: invoice_iface.v2.InvoiceService.CreateBalanceLog:output_type -> invoice_iface.v2.CreateBalanceLogResponse
+	2,  // 49: invoice_iface.v2.InvoiceService.TeamReconcile:output_type -> invoice_iface.v2.TeamReconcileResponse
+	5,  // 50: invoice_iface.v2.InvoiceService.CheckOweLimit:output_type -> invoice_iface.v2.CheckOweLimitResponse
+	39, // [39:51] is the sub-list for method output_type
+	27, // [27:39] is the sub-list for method input_type
+	27, // [27:27] is the sub-list for extension type_name
+	27, // [27:27] is the sub-list for extension extendee
+	0,  // [0:27] is the sub-list for field type_name
 }
 
 func init() { file_invoice_iface_v2_v2_service_proto_init() }
@@ -1354,7 +1566,7 @@ func file_invoice_iface_v2_v2_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_invoice_iface_v2_v2_service_proto_rawDesc), len(file_invoice_iface_v2_v2_service_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   17,
+			NumMessages:   21,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

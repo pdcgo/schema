@@ -127,8 +127,20 @@ message TransactionCreateRequest {
     TransactionProblem problem = 7;
   }
 }
+// Per-item cost valuation of the mutation. For the ORDER kind this is the
+// warehouse's average cost the stock-out was valued at (not the caller price) —
+// the selling v3 order service derives cross-team product fees from it. Other
+// kinds echo the caller-supplied price.
+message TransactionCostItem {
+  uint64 product_id = 1;
+  int64 count = 2;
+  double unit_cost = 3;
+  double total_cost = 4;
+}
+
 message TransactionCreateResponse {
   uint64 transaction_id = 1;
+  repeated TransactionCostItem items = 2;
 }
 
 message TransactionCancelRequest {
