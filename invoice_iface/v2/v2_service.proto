@@ -31,6 +31,15 @@ service InvoiceService {
   rpc TeamReconcile(TeamReconcileRequest) returns (TeamReconcileResponse);
 
   rpc CheckOweLimit(CheckOweLimitRequest) returns (CheckOweLimitResponse);
+
+  // Owe-limit config CRUD. team_id is always the CREDITOR (the limit owner): it
+  // declares how much a debtor may owe it. A custom row for a specific debtor
+  // beats the creditor's default row; threshold 0 = unlimited; no row = allow.
+  rpc OweLimitDefaultGet(OweLimitDefaultGetRequest) returns (OweLimitDefaultGetResponse);
+  rpc OweLimitDefaultSet(OweLimitDefaultSetRequest) returns (OweLimitDefaultSetResponse);
+  rpc OweLimitCustomList(OweLimitCustomListRequest) returns (OweLimitCustomListResponse);
+  rpc OweLimitCustomSet(OweLimitCustomSetRequest) returns (OweLimitCustomSetResponse);
+  rpc OweLimitCustomDelete(OweLimitCustomDeleteRequest) returns (OweLimitCustomDeleteResponse);
 }
 
 message TeamReconcileRequest {
@@ -68,6 +77,101 @@ message OweLimitAllow {
 message CheckOweLimitResponse {
   map<uint64, OweLimitAllow> can_owe = 1;
 }
+
+// ---- Owe-limit config CRUD (team_id = the CREDITOR / limit owner) ----
+
+message OweLimitDefaultGetRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
+  uint64 team_id = 1 [
+    (buf.validate.field).uint64.gt = 0,
+    (role_base.v1.use_scope) = true
+  ];
+}
+
+message OweLimitDefaultGetResponse {
+  bool configured = 1; // false = no default rule (any debtor allowed)
+  double threshold = 2; // 0 = unlimited
+}
+
+message OweLimitDefaultSetRequest {
+  option (role_base.v1.request_policy) = {
+    roles: [
+      ROLE_ROOT,
+      ROLE_ADMIN,
+      ROLE_TEAM_OWNER,
+      ROLE_TEAM_ADMIN
+    ]
+  };
+
+  uint64 team_id = 1 [
+    (buf.validate.field).uint64.gt = 0,
+    (role_base.v1.use_scope) = true
+  ];
+  double threshold = 2 [(buf.validate.field).double.gte = 0];
+}
+
+message OweLimitDefaultSetResponse {}
+
+message OweLimitCustomItem {
+  uint64 id = 1;
+  uint64 for_team_id = 2; // the DEBTOR this custom threshold applies to
+  double threshold = 3;
+}
+
+message OweLimitCustomListRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
+  uint64 team_id = 1 [
+    (buf.validate.field).uint64.gt = 0,
+    (role_base.v1.use_scope) = true
+  ];
+  common.v1.PageFilter page = 2 [(buf.validate.field).required = true];
+}
+
+message OweLimitCustomListResponse {
+  repeated OweLimitCustomItem items = 1;
+  common.v1.PageInfo page_info = 2;
+}
+
+message OweLimitCustomSetRequest {
+  option (role_base.v1.request_policy) = {
+    roles: [
+      ROLE_ROOT,
+      ROLE_ADMIN,
+      ROLE_TEAM_OWNER,
+      ROLE_TEAM_ADMIN
+    ]
+  };
+
+  uint64 team_id = 1 [
+    (buf.validate.field).uint64.gt = 0,
+    (role_base.v1.use_scope) = true
+  ];
+  uint64 for_team_id = 2 [(buf.validate.field).uint64.gt = 0];
+  double threshold = 3 [(buf.validate.field).double.gte = 0];
+}
+
+message OweLimitCustomSetResponse {}
+
+message OweLimitCustomDeleteRequest {
+  option (role_base.v1.request_policy) = {
+    roles: [
+      ROLE_ROOT,
+      ROLE_ADMIN,
+      ROLE_TEAM_OWNER,
+      ROLE_TEAM_ADMIN
+    ]
+  };
+
+  uint64 team_id = 1 [
+    (buf.validate.field).uint64.gt = 0,
+    (role_base.v1.use_scope) = true
+  ];
+  uint64 for_team_id = 2 [(buf.validate.field).uint64.gt = 0];
+}
+
+message OweLimitCustomDeleteResponse {}
 
 message CreateBalanceLogRequest {
   option (role_base.v1.request_policy) = {allow_only_authenticated: true};

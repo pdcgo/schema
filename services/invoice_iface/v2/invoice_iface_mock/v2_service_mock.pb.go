@@ -358,3 +358,133 @@ func (mr *MockInvoiceServiceClientMockRecorder) CheckOweLimit(ctx, req interface
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CheckOweLimit", reflect.TypeOf((*MockInvoiceService)(nil).CheckOweLimit), ctx, req)
 }
 
+func (m *MockInvoiceService) OweLimitDefaultGet(ctx context.Context, req *connect.Request[v2.OweLimitDefaultGetRequest]) (*connect.Response[v2.OweLimitDefaultGetResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "OweLimitDefaultGet", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v2.OweLimitDefaultGetResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInvoiceServiceMockRecorder) OweLimitDefaultGet(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OweLimitDefaultGet", reflect.TypeOf((*MockInvoiceService)(nil).OweLimitDefaultGet), ctx, req)
+}
+
+func (m *MockInvoiceServiceClient) OweLimitDefaultGet(ctx context.Context, req *connect.Request[v2.OweLimitDefaultGetRequest]) (*connect.Response[v2.OweLimitDefaultGetResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "OweLimitDefaultGet", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v2.OweLimitDefaultGetResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInvoiceServiceClientMockRecorder) OweLimitDefaultGet(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OweLimitDefaultGet", reflect.TypeOf((*MockInvoiceService)(nil).OweLimitDefaultGet), ctx, req)
+}
+
+func (m *MockInvoiceService) OweLimitDefaultSet(ctx context.Context, req *connect.Request[v2.OweLimitDefaultSetRequest]) (*connect.Response[v2.OweLimitDefaultSetResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "OweLimitDefaultSet", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v2.OweLimitDefaultSetResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInvoiceServiceMockRecorder) OweLimitDefaultSet(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OweLimitDefaultSet", reflect.TypeOf((*MockInvoiceService)(nil).OweLimitDefaultSet), ctx, req)
+}
+
+func (m *MockInvoiceServiceClient) OweLimitDefaultSet(ctx context.Context, req *connect.Request[v2.OweLimitDefaultSetRequest]) (*connect.Response[v2.OweLimitDefaultSetResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "OweLimitDefaultSet", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v2.OweLimitDefaultSetResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInvoiceServiceClientMockRecorder) OweLimitDefaultSet(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OweLimitDefaultSet", reflect.TypeOf((*MockInvoiceService)(nil).OweLimitDefaultSet), ctx, req)
+}
+
+func (m *MockInvoiceService) OweLimitCustomList(ctx context.Context, req *connect.Request[v2.OweLimitCustomListRequest]) (*connect.Response[v2.OweLimitCustomListResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "OweLimitCustomList", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v2.OweLimitCustomListResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInvoiceServiceMockRecorder) OweLimitCustomList(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OweLimitCustomList", reflect.TypeOf((*MockInvoiceService)(nil).OweLimitCustomList), ctx, req)
+}
+
+func (m *MockInvoiceServiceClient) OweLimitCustomList(ctx context.Context, req *connect.Request[v2.OweLimitCustomListRequest]) (*connect.Response[v2.OweLimitCustomListResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "OweLimitCustomList", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v2.OweLimitCustomListResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInvoiceServiceClientMockRecorder) OweLimitCustomList(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OweLimitCustomList", reflect.TypeOf((*MockInvoiceService)(nil).OweLimitCustomList), ctx, req)
+}
+
+func (m *MockInvoiceService) OweLimitCustomSet(ctx context.Context, req *connect.Request[v2.OweLimitCustomSetRequest]) (*connect.Response[v2.OweLimitCustomSetResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "OweLimitCustomSet", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v2.OweLimitCustomSetResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInvoiceServiceMockRecorder) OweLimitCustomSet(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OweLimitCustomSet", reflect.TypeOf((*MockInvoiceService)(nil).OweLimitCustomSet), ctx, req)
+}
+
+func (m *MockInvoiceServiceClient) OweLimitCustomSet(ctx context.Context, req *connect.Request[v2.OweLimitCustomSetRequest]) (*connect.Response[v2.OweLimitCustomSetResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "OweLimitCustomSet", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v2.OweLimitCustomSetResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInvoiceServiceClientMockRecorder) OweLimitCustomSet(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OweLimitCustomSet", reflect.TypeOf((*MockInvoiceService)(nil).OweLimitCustomSet), ctx, req)
+}
+
+func (m *MockInvoiceService) OweLimitCustomDelete(ctx context.Context, req *connect.Request[v2.OweLimitCustomDeleteRequest]) (*connect.Response[v2.OweLimitCustomDeleteResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "OweLimitCustomDelete", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v2.OweLimitCustomDeleteResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInvoiceServiceMockRecorder) OweLimitCustomDelete(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OweLimitCustomDelete", reflect.TypeOf((*MockInvoiceService)(nil).OweLimitCustomDelete), ctx, req)
+}
+
+func (m *MockInvoiceServiceClient) OweLimitCustomDelete(ctx context.Context, req *connect.Request[v2.OweLimitCustomDeleteRequest]) (*connect.Response[v2.OweLimitCustomDeleteResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "OweLimitCustomDelete", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v2.OweLimitCustomDeleteResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInvoiceServiceClientMockRecorder) OweLimitCustomDelete(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OweLimitCustomDelete", reflect.TypeOf((*MockInvoiceService)(nil).OweLimitCustomDelete), ctx, req)
+}
+

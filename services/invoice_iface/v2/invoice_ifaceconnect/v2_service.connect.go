@@ -68,6 +68,21 @@ const (
 	// InvoiceServiceCheckOweLimitProcedure is the fully-qualified name of the InvoiceService's
 	// CheckOweLimit RPC.
 	InvoiceServiceCheckOweLimitProcedure = "/invoice_iface.v2.InvoiceService/CheckOweLimit"
+	// InvoiceServiceOweLimitDefaultGetProcedure is the fully-qualified name of the InvoiceService's
+	// OweLimitDefaultGet RPC.
+	InvoiceServiceOweLimitDefaultGetProcedure = "/invoice_iface.v2.InvoiceService/OweLimitDefaultGet"
+	// InvoiceServiceOweLimitDefaultSetProcedure is the fully-qualified name of the InvoiceService's
+	// OweLimitDefaultSet RPC.
+	InvoiceServiceOweLimitDefaultSetProcedure = "/invoice_iface.v2.InvoiceService/OweLimitDefaultSet"
+	// InvoiceServiceOweLimitCustomListProcedure is the fully-qualified name of the InvoiceService's
+	// OweLimitCustomList RPC.
+	InvoiceServiceOweLimitCustomListProcedure = "/invoice_iface.v2.InvoiceService/OweLimitCustomList"
+	// InvoiceServiceOweLimitCustomSetProcedure is the fully-qualified name of the InvoiceService's
+	// OweLimitCustomSet RPC.
+	InvoiceServiceOweLimitCustomSetProcedure = "/invoice_iface.v2.InvoiceService/OweLimitCustomSet"
+	// InvoiceServiceOweLimitCustomDeleteProcedure is the fully-qualified name of the InvoiceService's
+	// OweLimitCustomDelete RPC.
+	InvoiceServiceOweLimitCustomDeleteProcedure = "/invoice_iface.v2.InvoiceService/OweLimitCustomDelete"
 )
 
 // InvoiceServiceClient is a client for the invoice_iface.v2.InvoiceService service.
@@ -84,6 +99,14 @@ type InvoiceServiceClient interface {
 	CreateBalanceLog(context.Context, *connect.Request[v2.CreateBalanceLogRequest]) (*connect.Response[v2.CreateBalanceLogResponse], error)
 	TeamReconcile(context.Context, *connect.Request[v2.TeamReconcileRequest]) (*connect.Response[v2.TeamReconcileResponse], error)
 	CheckOweLimit(context.Context, *connect.Request[v2.CheckOweLimitRequest]) (*connect.Response[v2.CheckOweLimitResponse], error)
+	// Owe-limit config CRUD. team_id is always the CREDITOR (the limit owner): it
+	// declares how much a debtor may owe it. A custom row for a specific debtor
+	// beats the creditor's default row; threshold 0 = unlimited; no row = allow.
+	OweLimitDefaultGet(context.Context, *connect.Request[v2.OweLimitDefaultGetRequest]) (*connect.Response[v2.OweLimitDefaultGetResponse], error)
+	OweLimitDefaultSet(context.Context, *connect.Request[v2.OweLimitDefaultSetRequest]) (*connect.Response[v2.OweLimitDefaultSetResponse], error)
+	OweLimitCustomList(context.Context, *connect.Request[v2.OweLimitCustomListRequest]) (*connect.Response[v2.OweLimitCustomListResponse], error)
+	OweLimitCustomSet(context.Context, *connect.Request[v2.OweLimitCustomSetRequest]) (*connect.Response[v2.OweLimitCustomSetResponse], error)
+	OweLimitCustomDelete(context.Context, *connect.Request[v2.OweLimitCustomDeleteRequest]) (*connect.Response[v2.OweLimitCustomDeleteResponse], error)
 }
 
 // NewInvoiceServiceClient constructs a client for the invoice_iface.v2.InvoiceService service. By
@@ -169,23 +192,58 @@ func NewInvoiceServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			connect.WithSchema(invoiceServiceMethods.ByName("CheckOweLimit")),
 			connect.WithClientOptions(opts...),
 		),
+		oweLimitDefaultGet: connect.NewClient[v2.OweLimitDefaultGetRequest, v2.OweLimitDefaultGetResponse](
+			httpClient,
+			baseURL+InvoiceServiceOweLimitDefaultGetProcedure,
+			connect.WithSchema(invoiceServiceMethods.ByName("OweLimitDefaultGet")),
+			connect.WithClientOptions(opts...),
+		),
+		oweLimitDefaultSet: connect.NewClient[v2.OweLimitDefaultSetRequest, v2.OweLimitDefaultSetResponse](
+			httpClient,
+			baseURL+InvoiceServiceOweLimitDefaultSetProcedure,
+			connect.WithSchema(invoiceServiceMethods.ByName("OweLimitDefaultSet")),
+			connect.WithClientOptions(opts...),
+		),
+		oweLimitCustomList: connect.NewClient[v2.OweLimitCustomListRequest, v2.OweLimitCustomListResponse](
+			httpClient,
+			baseURL+InvoiceServiceOweLimitCustomListProcedure,
+			connect.WithSchema(invoiceServiceMethods.ByName("OweLimitCustomList")),
+			connect.WithClientOptions(opts...),
+		),
+		oweLimitCustomSet: connect.NewClient[v2.OweLimitCustomSetRequest, v2.OweLimitCustomSetResponse](
+			httpClient,
+			baseURL+InvoiceServiceOweLimitCustomSetProcedure,
+			connect.WithSchema(invoiceServiceMethods.ByName("OweLimitCustomSet")),
+			connect.WithClientOptions(opts...),
+		),
+		oweLimitCustomDelete: connect.NewClient[v2.OweLimitCustomDeleteRequest, v2.OweLimitCustomDeleteResponse](
+			httpClient,
+			baseURL+InvoiceServiceOweLimitCustomDeleteProcedure,
+			connect.WithSchema(invoiceServiceMethods.ByName("OweLimitCustomDelete")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // invoiceServiceClient implements InvoiceServiceClient.
 type invoiceServiceClient struct {
-	overview            *connect.Client[v2.OverviewRequest, v2.OverviewResponse]
-	teamBalanceList     *connect.Client[v2.TeamBalanceListRequest, v2.TeamBalanceListResponse]
-	teamBalanceTimeline *connect.Client[v2.TeamBalanceTimelineRequest, v2.TeamBalanceTimelineResponse]
-	createPayment       *connect.Client[v2.CreatePaymentRequest, v2.CreatePaymentResponse]
-	acceptPayment       *connect.Client[v2.AcceptPaymentRequest, v2.AcceptPaymentResponse]
-	rejectPayment       *connect.Client[v2.RejectPaymentRequest, v2.RejectPaymentResponse]
-	listPayment         *connect.Client[v2.ListPaymentRequest, v2.ListPaymentResponse]
-	listIncomingPayment *connect.Client[v2.ListIncomingPaymentRequest, v2.ListIncomingPaymentResponse]
-	listTeamBalanceLog  *connect.Client[v2.ListTeamBalanceLogRequest, v2.ListTeamBalanceLogResponse]
-	createBalanceLog    *connect.Client[v2.CreateBalanceLogRequest, v2.CreateBalanceLogResponse]
-	teamReconcile       *connect.Client[v2.TeamReconcileRequest, v2.TeamReconcileResponse]
-	checkOweLimit       *connect.Client[v2.CheckOweLimitRequest, v2.CheckOweLimitResponse]
+	overview             *connect.Client[v2.OverviewRequest, v2.OverviewResponse]
+	teamBalanceList      *connect.Client[v2.TeamBalanceListRequest, v2.TeamBalanceListResponse]
+	teamBalanceTimeline  *connect.Client[v2.TeamBalanceTimelineRequest, v2.TeamBalanceTimelineResponse]
+	createPayment        *connect.Client[v2.CreatePaymentRequest, v2.CreatePaymentResponse]
+	acceptPayment        *connect.Client[v2.AcceptPaymentRequest, v2.AcceptPaymentResponse]
+	rejectPayment        *connect.Client[v2.RejectPaymentRequest, v2.RejectPaymentResponse]
+	listPayment          *connect.Client[v2.ListPaymentRequest, v2.ListPaymentResponse]
+	listIncomingPayment  *connect.Client[v2.ListIncomingPaymentRequest, v2.ListIncomingPaymentResponse]
+	listTeamBalanceLog   *connect.Client[v2.ListTeamBalanceLogRequest, v2.ListTeamBalanceLogResponse]
+	createBalanceLog     *connect.Client[v2.CreateBalanceLogRequest, v2.CreateBalanceLogResponse]
+	teamReconcile        *connect.Client[v2.TeamReconcileRequest, v2.TeamReconcileResponse]
+	checkOweLimit        *connect.Client[v2.CheckOweLimitRequest, v2.CheckOweLimitResponse]
+	oweLimitDefaultGet   *connect.Client[v2.OweLimitDefaultGetRequest, v2.OweLimitDefaultGetResponse]
+	oweLimitDefaultSet   *connect.Client[v2.OweLimitDefaultSetRequest, v2.OweLimitDefaultSetResponse]
+	oweLimitCustomList   *connect.Client[v2.OweLimitCustomListRequest, v2.OweLimitCustomListResponse]
+	oweLimitCustomSet    *connect.Client[v2.OweLimitCustomSetRequest, v2.OweLimitCustomSetResponse]
+	oweLimitCustomDelete *connect.Client[v2.OweLimitCustomDeleteRequest, v2.OweLimitCustomDeleteResponse]
 }
 
 // Overview calls invoice_iface.v2.InvoiceService.Overview.
@@ -248,6 +306,31 @@ func (c *invoiceServiceClient) CheckOweLimit(ctx context.Context, req *connect.R
 	return c.checkOweLimit.CallUnary(ctx, req)
 }
 
+// OweLimitDefaultGet calls invoice_iface.v2.InvoiceService.OweLimitDefaultGet.
+func (c *invoiceServiceClient) OweLimitDefaultGet(ctx context.Context, req *connect.Request[v2.OweLimitDefaultGetRequest]) (*connect.Response[v2.OweLimitDefaultGetResponse], error) {
+	return c.oweLimitDefaultGet.CallUnary(ctx, req)
+}
+
+// OweLimitDefaultSet calls invoice_iface.v2.InvoiceService.OweLimitDefaultSet.
+func (c *invoiceServiceClient) OweLimitDefaultSet(ctx context.Context, req *connect.Request[v2.OweLimitDefaultSetRequest]) (*connect.Response[v2.OweLimitDefaultSetResponse], error) {
+	return c.oweLimitDefaultSet.CallUnary(ctx, req)
+}
+
+// OweLimitCustomList calls invoice_iface.v2.InvoiceService.OweLimitCustomList.
+func (c *invoiceServiceClient) OweLimitCustomList(ctx context.Context, req *connect.Request[v2.OweLimitCustomListRequest]) (*connect.Response[v2.OweLimitCustomListResponse], error) {
+	return c.oweLimitCustomList.CallUnary(ctx, req)
+}
+
+// OweLimitCustomSet calls invoice_iface.v2.InvoiceService.OweLimitCustomSet.
+func (c *invoiceServiceClient) OweLimitCustomSet(ctx context.Context, req *connect.Request[v2.OweLimitCustomSetRequest]) (*connect.Response[v2.OweLimitCustomSetResponse], error) {
+	return c.oweLimitCustomSet.CallUnary(ctx, req)
+}
+
+// OweLimitCustomDelete calls invoice_iface.v2.InvoiceService.OweLimitCustomDelete.
+func (c *invoiceServiceClient) OweLimitCustomDelete(ctx context.Context, req *connect.Request[v2.OweLimitCustomDeleteRequest]) (*connect.Response[v2.OweLimitCustomDeleteResponse], error) {
+	return c.oweLimitCustomDelete.CallUnary(ctx, req)
+}
+
 // InvoiceServiceHandler is an implementation of the invoice_iface.v2.InvoiceService service.
 type InvoiceServiceHandler interface {
 	Overview(context.Context, *connect.Request[v2.OverviewRequest]) (*connect.Response[v2.OverviewResponse], error)
@@ -262,6 +345,14 @@ type InvoiceServiceHandler interface {
 	CreateBalanceLog(context.Context, *connect.Request[v2.CreateBalanceLogRequest]) (*connect.Response[v2.CreateBalanceLogResponse], error)
 	TeamReconcile(context.Context, *connect.Request[v2.TeamReconcileRequest]) (*connect.Response[v2.TeamReconcileResponse], error)
 	CheckOweLimit(context.Context, *connect.Request[v2.CheckOweLimitRequest]) (*connect.Response[v2.CheckOweLimitResponse], error)
+	// Owe-limit config CRUD. team_id is always the CREDITOR (the limit owner): it
+	// declares how much a debtor may owe it. A custom row for a specific debtor
+	// beats the creditor's default row; threshold 0 = unlimited; no row = allow.
+	OweLimitDefaultGet(context.Context, *connect.Request[v2.OweLimitDefaultGetRequest]) (*connect.Response[v2.OweLimitDefaultGetResponse], error)
+	OweLimitDefaultSet(context.Context, *connect.Request[v2.OweLimitDefaultSetRequest]) (*connect.Response[v2.OweLimitDefaultSetResponse], error)
+	OweLimitCustomList(context.Context, *connect.Request[v2.OweLimitCustomListRequest]) (*connect.Response[v2.OweLimitCustomListResponse], error)
+	OweLimitCustomSet(context.Context, *connect.Request[v2.OweLimitCustomSetRequest]) (*connect.Response[v2.OweLimitCustomSetResponse], error)
+	OweLimitCustomDelete(context.Context, *connect.Request[v2.OweLimitCustomDeleteRequest]) (*connect.Response[v2.OweLimitCustomDeleteResponse], error)
 }
 
 // NewInvoiceServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -343,6 +434,36 @@ func NewInvoiceServiceHandler(svc InvoiceServiceHandler, opts ...connect.Handler
 		connect.WithSchema(invoiceServiceMethods.ByName("CheckOweLimit")),
 		connect.WithHandlerOptions(opts...),
 	)
+	invoiceServiceOweLimitDefaultGetHandler := connect.NewUnaryHandler(
+		InvoiceServiceOweLimitDefaultGetProcedure,
+		svc.OweLimitDefaultGet,
+		connect.WithSchema(invoiceServiceMethods.ByName("OweLimitDefaultGet")),
+		connect.WithHandlerOptions(opts...),
+	)
+	invoiceServiceOweLimitDefaultSetHandler := connect.NewUnaryHandler(
+		InvoiceServiceOweLimitDefaultSetProcedure,
+		svc.OweLimitDefaultSet,
+		connect.WithSchema(invoiceServiceMethods.ByName("OweLimitDefaultSet")),
+		connect.WithHandlerOptions(opts...),
+	)
+	invoiceServiceOweLimitCustomListHandler := connect.NewUnaryHandler(
+		InvoiceServiceOweLimitCustomListProcedure,
+		svc.OweLimitCustomList,
+		connect.WithSchema(invoiceServiceMethods.ByName("OweLimitCustomList")),
+		connect.WithHandlerOptions(opts...),
+	)
+	invoiceServiceOweLimitCustomSetHandler := connect.NewUnaryHandler(
+		InvoiceServiceOweLimitCustomSetProcedure,
+		svc.OweLimitCustomSet,
+		connect.WithSchema(invoiceServiceMethods.ByName("OweLimitCustomSet")),
+		connect.WithHandlerOptions(opts...),
+	)
+	invoiceServiceOweLimitCustomDeleteHandler := connect.NewUnaryHandler(
+		InvoiceServiceOweLimitCustomDeleteProcedure,
+		svc.OweLimitCustomDelete,
+		connect.WithSchema(invoiceServiceMethods.ByName("OweLimitCustomDelete")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/invoice_iface.v2.InvoiceService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case InvoiceServiceOverviewProcedure:
@@ -369,6 +490,16 @@ func NewInvoiceServiceHandler(svc InvoiceServiceHandler, opts ...connect.Handler
 			invoiceServiceTeamReconcileHandler.ServeHTTP(w, r)
 		case InvoiceServiceCheckOweLimitProcedure:
 			invoiceServiceCheckOweLimitHandler.ServeHTTP(w, r)
+		case InvoiceServiceOweLimitDefaultGetProcedure:
+			invoiceServiceOweLimitDefaultGetHandler.ServeHTTP(w, r)
+		case InvoiceServiceOweLimitDefaultSetProcedure:
+			invoiceServiceOweLimitDefaultSetHandler.ServeHTTP(w, r)
+		case InvoiceServiceOweLimitCustomListProcedure:
+			invoiceServiceOweLimitCustomListHandler.ServeHTTP(w, r)
+		case InvoiceServiceOweLimitCustomSetProcedure:
+			invoiceServiceOweLimitCustomSetHandler.ServeHTTP(w, r)
+		case InvoiceServiceOweLimitCustomDeleteProcedure:
+			invoiceServiceOweLimitCustomDeleteHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -424,4 +555,24 @@ func (UnimplementedInvoiceServiceHandler) TeamReconcile(context.Context, *connec
 
 func (UnimplementedInvoiceServiceHandler) CheckOweLimit(context.Context, *connect.Request[v2.CheckOweLimitRequest]) (*connect.Response[v2.CheckOweLimitResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("invoice_iface.v2.InvoiceService.CheckOweLimit is not implemented"))
+}
+
+func (UnimplementedInvoiceServiceHandler) OweLimitDefaultGet(context.Context, *connect.Request[v2.OweLimitDefaultGetRequest]) (*connect.Response[v2.OweLimitDefaultGetResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("invoice_iface.v2.InvoiceService.OweLimitDefaultGet is not implemented"))
+}
+
+func (UnimplementedInvoiceServiceHandler) OweLimitDefaultSet(context.Context, *connect.Request[v2.OweLimitDefaultSetRequest]) (*connect.Response[v2.OweLimitDefaultSetResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("invoice_iface.v2.InvoiceService.OweLimitDefaultSet is not implemented"))
+}
+
+func (UnimplementedInvoiceServiceHandler) OweLimitCustomList(context.Context, *connect.Request[v2.OweLimitCustomListRequest]) (*connect.Response[v2.OweLimitCustomListResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("invoice_iface.v2.InvoiceService.OweLimitCustomList is not implemented"))
+}
+
+func (UnimplementedInvoiceServiceHandler) OweLimitCustomSet(context.Context, *connect.Request[v2.OweLimitCustomSetRequest]) (*connect.Response[v2.OweLimitCustomSetResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("invoice_iface.v2.InvoiceService.OweLimitCustomSet is not implemented"))
+}
+
+func (UnimplementedInvoiceServiceHandler) OweLimitCustomDelete(context.Context, *connect.Request[v2.OweLimitCustomDeleteRequest]) (*connect.Response[v2.OweLimitCustomDeleteResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("invoice_iface.v2.InvoiceService.OweLimitCustomDelete is not implemented"))
 }
