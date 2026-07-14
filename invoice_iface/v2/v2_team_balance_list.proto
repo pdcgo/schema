@@ -18,6 +18,8 @@ message TeamBalanceListTimeFilter {
 }
 
 message TeamBalanceListFilter {
+  // q filters the counterparty teams by name (ILIKE '%q%'); empty = no filter.
+  string q = 1;
   uint64 team_id = 2;
   uint64 for_team_id = 3;
   common.v1.TeamType team_type = 4;
@@ -89,6 +91,12 @@ enum TeamBalanceListDataType {
   TEAM_BALANCE_LIST_DATA_TYPE_TOTAL_PAYABLE = 6;
   TEAM_BALANCE_LIST_DATA_TYPE_TOTAL_RECEIVABLE = 7;
   TEAM_BALANCE_LIST_DATA_TYPE_INCOMING_PAYMENT = 8;
+  // The owe limit the scoped team GRANTS each counterparty: scoped team is the
+  // creditor, the counterparty is the debtor. Pairs with RECEIVABLE.
+  TEAM_BALANCE_LIST_DATA_TYPE_OWE_LIMIT_AS_CREDITOR = 9;
+  // The owe limit each counterparty IMPOSES on the scoped team: scoped team is
+  // the debtor, the counterparty is the creditor. Pairs with PAYABLE.
+  TEAM_BALANCE_LIST_DATA_TYPE_OWE_LIMIT_AS_DEBTOR = 10;
 }
 
 message TeamBalanceListRequest {
@@ -182,6 +190,36 @@ message TeamBalanceTotalReceivableData {
   map<uint64, TeamBalanceTotalReceivableItem> data = 1;
 }
 
+// TeamBalanceOweLimitItem is one resolved owe-limit relationship between the
+// scoped team and one counterparty, in whichever direction the data type asked
+// for. The custom row for the pair beats the creditor's default rule.
+message TeamBalanceOweLimitItem {
+  // threshold is the resolved owe limit. 0 means UNLIMITED — never render it as
+  // a zero credit line. Meaningless when configured is false.
+  double threshold = 1;
+  // active_amount is the debtor's current debt to the creditor, always populated
+  // (even when no limit is configured).
+  double active_amount = 2;
+  // allow reports active_amount < threshold. True when unconfigured or unlimited.
+  bool allow = 3;
+  // configured is false when no owe_limit_configurations row applies to the pair,
+  // which disambiguates "no limit set" from a configured threshold of 0.
+  bool configured = 4;
+  // is_default reports that the threshold came from the creditor's default rule
+  // rather than a row custom to this pair.
+  bool is_default = 5;
+}
+
+// Limits the scoped team GRANTS its counterparties (scoped team = creditor).
+message TeamBalanceOweLimitAsCreditorData {
+  map<uint64, TeamBalanceOweLimitItem> data = 1;
+}
+
+// Limits the counterparties IMPOSE on the scoped team (scoped team = debtor).
+message TeamBalanceOweLimitAsDebtorData {
+  map<uint64, TeamBalanceOweLimitItem> data = 1;
+}
+
 message TeamBalanceData {
   oneof data {
     TeamBalanceCommonData common = 1;
@@ -192,6 +230,8 @@ message TeamBalanceData {
     TeamBalanceTotalPayableData total_payable = 6;
     TeamBalanceTotalReceivableData total_receivable = 7;
     TeamBalanceIncomingPaymentData incoming_payment = 8;
+    TeamBalanceOweLimitAsCreditorData owe_limit_as_creditor = 9;
+    TeamBalanceOweLimitAsDebtorData owe_limit_as_debtor = 10;
   }
 }
 
