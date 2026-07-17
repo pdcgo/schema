@@ -115,8 +115,22 @@ message OweLimitDefaultSetResponse {}
 
 message OweLimitCustomItem {
   uint64 id = 1;
-  uint64 for_team_id = 2; // the DEBTOR this custom threshold applies to
+  uint64 for_team_id = 2; // the DEBTOR this threshold applies to
   double threshold = 3;
+}
+
+message OweLimitCustomListFilter {
+  string q = 1;
+}
+
+enum OweLimitCustomSortType {
+  OWE_LIMIT_CUSTOM_SORT_TYPE_UNSPECIFIED = 0;
+  OWE_LIMIT_CUSTOM_SORT_TYPE_THRESHOLD = 1;
+}
+
+message OweLimitCustomSort {
+  OweLimitCustomSortType type = 1;
+  SortType sort_type = 2;
 }
 
 message OweLimitCustomListRequest {
@@ -127,6 +141,8 @@ message OweLimitCustomListRequest {
     (role_base.v1.use_scope) = true
   ];
   common.v1.PageFilter page = 2 [(buf.validate.field).required = true];
+  OweLimitCustomListFilter filter = 3;
+  OweLimitCustomSort sort = 4;
 }
 
 message OweLimitCustomListResponse {
