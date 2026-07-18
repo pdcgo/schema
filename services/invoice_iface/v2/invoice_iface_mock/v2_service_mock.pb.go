@@ -358,6 +358,58 @@ func (mr *MockInvoiceServiceClientMockRecorder) CheckOweLimit(ctx, req interface
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CheckOweLimit", reflect.TypeOf((*MockInvoiceService)(nil).CheckOweLimit), ctx, req)
 }
 
+func (m *MockInvoiceService) GetBalanceChangeSource(ctx context.Context, req *connect.Request[v2.GetBalanceChangeSourceRequest]) (*connect.Response[v2.GetBalanceChangeSourceResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "GetBalanceChangeSource", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v2.GetBalanceChangeSourceResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInvoiceServiceMockRecorder) GetBalanceChangeSource(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetBalanceChangeSource", reflect.TypeOf((*MockInvoiceService)(nil).GetBalanceChangeSource), ctx, req)
+}
+
+func (m *MockInvoiceServiceClient) GetBalanceChangeSource(ctx context.Context, req *connect.Request[v2.GetBalanceChangeSourceRequest]) (*connect.Response[v2.GetBalanceChangeSourceResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "GetBalanceChangeSource", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v2.GetBalanceChangeSourceResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInvoiceServiceClientMockRecorder) GetBalanceChangeSource(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetBalanceChangeSource", reflect.TypeOf((*MockInvoiceService)(nil).GetBalanceChangeSource), ctx, req)
+}
+
+func (m *MockInvoiceService) GetBalanceChangeSourceByChangeIds(ctx context.Context, req *connect.Request[v2.GetBalanceChangeSourceByChangeIdsRequest]) (*connect.Response[v2.GetBalanceChangeSourceByChangeIdsResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "GetBalanceChangeSourceByChangeIds", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v2.GetBalanceChangeSourceByChangeIdsResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInvoiceServiceMockRecorder) GetBalanceChangeSourceByChangeIds(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetBalanceChangeSourceByChangeIds", reflect.TypeOf((*MockInvoiceService)(nil).GetBalanceChangeSourceByChangeIds), ctx, req)
+}
+
+func (m *MockInvoiceServiceClient) GetBalanceChangeSourceByChangeIds(ctx context.Context, req *connect.Request[v2.GetBalanceChangeSourceByChangeIdsRequest]) (*connect.Response[v2.GetBalanceChangeSourceByChangeIdsResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "GetBalanceChangeSourceByChangeIds", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v2.GetBalanceChangeSourceByChangeIdsResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInvoiceServiceClientMockRecorder) GetBalanceChangeSourceByChangeIds(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetBalanceChangeSourceByChangeIds", reflect.TypeOf((*MockInvoiceService)(nil).GetBalanceChangeSourceByChangeIds), ctx, req)
+}
+
 func (m *MockInvoiceService) OweLimitDefaultGet(ctx context.Context, req *connect.Request[v2.OweLimitDefaultGetRequest]) (*connect.Response[v2.OweLimitDefaultGetResponse], error) {
     m.ctrl.T.Helper()
     ret := m.ctrl.Call(m, "OweLimitDefaultGet", ctx, req)

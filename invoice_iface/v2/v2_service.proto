@@ -27,10 +27,13 @@ service InvoiceService {
   rpc ListTeamBalanceLog(ListTeamBalanceLogRequest) returns (ListTeamBalanceLogResponse);
 
   rpc CreateBalanceLog(CreateBalanceLogRequest) returns (CreateBalanceLogResponse);
-
+  
   rpc TeamReconcile(TeamReconcileRequest) returns (TeamReconcileResponse);
-
+  
   rpc CheckOweLimit(CheckOweLimitRequest) returns (CheckOweLimitResponse);
+  
+  rpc GetBalanceChangeSource(GetBalanceChangeSourceRequest) returns (GetBalanceChangeSourceResponse);
+  rpc GetBalanceChangeSourceByChangeIds(GetBalanceChangeSourceByChangeIdsRequest) returns (GetBalanceChangeSourceByChangeIdsResponse);
 
   // Owe-limit config CRUD. team_id is always the CREDITOR (the limit owner): it
   // declares how much a debtor may owe it. A custom row for a specific debtor
@@ -263,6 +266,110 @@ message ListTeamBalanceLogRequest {
 message ListTeamBalanceLogResponse {
   repeated BalanceChangeLog logs = 1;
   common.v1.PageInfo page_info = 2;
+}
+
+message BalanceChangeOrderSourceType {
+  uint64 order_id = 1 [(buf.validate.field).uint64.gt = 0];
+  OrderSystem order_system = 2;
+}
+
+message BalanceChangeRestockSourceType {
+  uint64 tx_id = 1 [(buf.validate.field).uint64.gt = 0];
+}
+
+message BalanceChangeBrokenSourceType {
+  uint64 tx_id = 1 [(buf.validate.field).uint64.gt = 0];
+}
+
+message GetBalanceChangeSourceRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
+  uint64 team_id = 4 [
+    (buf.validate.field).uint64.gt = 0,
+    (role_base.v1.use_scope) = true
+  ];
+  oneof source_type {
+    option (buf.validate.oneof).required = true;
+
+    BalanceChangeOrderSourceType order = 1;
+    BalanceChangeRestockSourceType restock = 2;
+    BalanceChangeBrokenSourceType broken = 3;
+  }
+}
+
+message BalanceChangeOrderSourceItem {
+  uint64 balance_change_log_id = 1;
+  OrderSystem order_system = 2;
+  uint64 order_id = 3;
+  uint64 order_item_id = 4;
+  uint64 team_id = 5;
+  uint64 warehouse_id = 6;
+  google.protobuf.Timestamp created_at = 7;
+}
+
+message BalanceChangeRestockSourceItem {
+  uint64 balance_change_log_id = 1;
+  uint64 tx_id = 2;
+  uint64 tx_item_id = 3;
+  uint64 team_id = 4;
+  uint64 warehouse_id = 5;
+  google.protobuf.Timestamp created_at = 6;
+}
+
+message BalanceChangeBrokenSourceItem {
+  uint64 balance_change_log_id = 1;
+  uint64 tx_id = 2;
+  uint64 tx_item_id = 3;
+  uint64 team_id = 4;
+  uint64 warehouse_id = 5;
+  google.protobuf.Timestamp created_at = 6;
+}
+
+message BalanceChangeOrderSourceData {
+  repeated BalanceChangeOrderSourceItem items = 1;
+}
+
+message BalanceChangeRestockSourceData {
+  repeated BalanceChangeRestockSourceItem items = 1;
+}
+
+message BalanceChangeBrokenSourceData {
+  repeated BalanceChangeBrokenSourceItem items = 1;
+}
+
+message GetBalanceChangeSourceResponse {
+  oneof data {
+    BalanceChangeOrderSourceData order = 1;
+    BalanceChangeRestockSourceData restock = 2;
+    BalanceChangeBrokenSourceData broken = 3;
+  }
+}
+
+message GetBalanceChangeSourceByChangeIdsRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
+  uint64 team_id = 1 [
+    (buf.validate.field).uint64.gt = 0,
+    (role_base.v1.use_scope) = true
+  ];
+  repeated uint64 balance_change_log_ids = 2 [
+    (buf.validate.field).repeated.min_items = 1,
+    (buf.validate.field).repeated.max_items = 100,
+    (buf.validate.field).repeated.unique = true,
+    (buf.validate.field).repeated.items.uint64.gt = 0
+  ];
+}
+
+message BalanceChangeSourceEntry {
+  oneof source {
+    BalanceChangeOrderSourceItem order = 1;
+    BalanceChangeRestockSourceItem restock = 2;
+    BalanceChangeBrokenSourceItem broken = 3;
+  }
+}
+
+message GetBalanceChangeSourceByChangeIdsResponse {
+  map<uint64, BalanceChangeSourceEntry> entries = 1;
 }
 
 enum PaymentStatus {

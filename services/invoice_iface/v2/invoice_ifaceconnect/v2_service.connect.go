@@ -68,6 +68,12 @@ const (
 	// InvoiceServiceCheckOweLimitProcedure is the fully-qualified name of the InvoiceService's
 	// CheckOweLimit RPC.
 	InvoiceServiceCheckOweLimitProcedure = "/invoice_iface.v2.InvoiceService/CheckOweLimit"
+	// InvoiceServiceGetBalanceChangeSourceProcedure is the fully-qualified name of the InvoiceService's
+	// GetBalanceChangeSource RPC.
+	InvoiceServiceGetBalanceChangeSourceProcedure = "/invoice_iface.v2.InvoiceService/GetBalanceChangeSource"
+	// InvoiceServiceGetBalanceChangeSourceByChangeIdsProcedure is the fully-qualified name of the
+	// InvoiceService's GetBalanceChangeSourceByChangeIds RPC.
+	InvoiceServiceGetBalanceChangeSourceByChangeIdsProcedure = "/invoice_iface.v2.InvoiceService/GetBalanceChangeSourceByChangeIds"
 	// InvoiceServiceOweLimitDefaultGetProcedure is the fully-qualified name of the InvoiceService's
 	// OweLimitDefaultGet RPC.
 	InvoiceServiceOweLimitDefaultGetProcedure = "/invoice_iface.v2.InvoiceService/OweLimitDefaultGet"
@@ -99,6 +105,8 @@ type InvoiceServiceClient interface {
 	CreateBalanceLog(context.Context, *connect.Request[v2.CreateBalanceLogRequest]) (*connect.Response[v2.CreateBalanceLogResponse], error)
 	TeamReconcile(context.Context, *connect.Request[v2.TeamReconcileRequest]) (*connect.Response[v2.TeamReconcileResponse], error)
 	CheckOweLimit(context.Context, *connect.Request[v2.CheckOweLimitRequest]) (*connect.Response[v2.CheckOweLimitResponse], error)
+	GetBalanceChangeSource(context.Context, *connect.Request[v2.GetBalanceChangeSourceRequest]) (*connect.Response[v2.GetBalanceChangeSourceResponse], error)
+	GetBalanceChangeSourceByChangeIds(context.Context, *connect.Request[v2.GetBalanceChangeSourceByChangeIdsRequest]) (*connect.Response[v2.GetBalanceChangeSourceByChangeIdsResponse], error)
 	// Owe-limit config CRUD. team_id is always the CREDITOR (the limit owner): it
 	// declares how much a debtor may owe it. A custom row for a specific debtor
 	// beats the creditor's default row; threshold 0 = unlimited; no row = allow.
@@ -192,6 +200,18 @@ func NewInvoiceServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			connect.WithSchema(invoiceServiceMethods.ByName("CheckOweLimit")),
 			connect.WithClientOptions(opts...),
 		),
+		getBalanceChangeSource: connect.NewClient[v2.GetBalanceChangeSourceRequest, v2.GetBalanceChangeSourceResponse](
+			httpClient,
+			baseURL+InvoiceServiceGetBalanceChangeSourceProcedure,
+			connect.WithSchema(invoiceServiceMethods.ByName("GetBalanceChangeSource")),
+			connect.WithClientOptions(opts...),
+		),
+		getBalanceChangeSourceByChangeIds: connect.NewClient[v2.GetBalanceChangeSourceByChangeIdsRequest, v2.GetBalanceChangeSourceByChangeIdsResponse](
+			httpClient,
+			baseURL+InvoiceServiceGetBalanceChangeSourceByChangeIdsProcedure,
+			connect.WithSchema(invoiceServiceMethods.ByName("GetBalanceChangeSourceByChangeIds")),
+			connect.WithClientOptions(opts...),
+		),
 		oweLimitDefaultGet: connect.NewClient[v2.OweLimitDefaultGetRequest, v2.OweLimitDefaultGetResponse](
 			httpClient,
 			baseURL+InvoiceServiceOweLimitDefaultGetProcedure,
@@ -227,23 +247,25 @@ func NewInvoiceServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 
 // invoiceServiceClient implements InvoiceServiceClient.
 type invoiceServiceClient struct {
-	overview             *connect.Client[v2.OverviewRequest, v2.OverviewResponse]
-	teamBalanceList      *connect.Client[v2.TeamBalanceListRequest, v2.TeamBalanceListResponse]
-	teamBalanceTimeline  *connect.Client[v2.TeamBalanceTimelineRequest, v2.TeamBalanceTimelineResponse]
-	createPayment        *connect.Client[v2.CreatePaymentRequest, v2.CreatePaymentResponse]
-	acceptPayment        *connect.Client[v2.AcceptPaymentRequest, v2.AcceptPaymentResponse]
-	rejectPayment        *connect.Client[v2.RejectPaymentRequest, v2.RejectPaymentResponse]
-	listPayment          *connect.Client[v2.ListPaymentRequest, v2.ListPaymentResponse]
-	listIncomingPayment  *connect.Client[v2.ListIncomingPaymentRequest, v2.ListIncomingPaymentResponse]
-	listTeamBalanceLog   *connect.Client[v2.ListTeamBalanceLogRequest, v2.ListTeamBalanceLogResponse]
-	createBalanceLog     *connect.Client[v2.CreateBalanceLogRequest, v2.CreateBalanceLogResponse]
-	teamReconcile        *connect.Client[v2.TeamReconcileRequest, v2.TeamReconcileResponse]
-	checkOweLimit        *connect.Client[v2.CheckOweLimitRequest, v2.CheckOweLimitResponse]
-	oweLimitDefaultGet   *connect.Client[v2.OweLimitDefaultGetRequest, v2.OweLimitDefaultGetResponse]
-	oweLimitDefaultSet   *connect.Client[v2.OweLimitDefaultSetRequest, v2.OweLimitDefaultSetResponse]
-	oweLimitCustomList   *connect.Client[v2.OweLimitCustomListRequest, v2.OweLimitCustomListResponse]
-	oweLimitCustomSet    *connect.Client[v2.OweLimitCustomSetRequest, v2.OweLimitCustomSetResponse]
-	oweLimitCustomDelete *connect.Client[v2.OweLimitCustomDeleteRequest, v2.OweLimitCustomDeleteResponse]
+	overview                          *connect.Client[v2.OverviewRequest, v2.OverviewResponse]
+	teamBalanceList                   *connect.Client[v2.TeamBalanceListRequest, v2.TeamBalanceListResponse]
+	teamBalanceTimeline               *connect.Client[v2.TeamBalanceTimelineRequest, v2.TeamBalanceTimelineResponse]
+	createPayment                     *connect.Client[v2.CreatePaymentRequest, v2.CreatePaymentResponse]
+	acceptPayment                     *connect.Client[v2.AcceptPaymentRequest, v2.AcceptPaymentResponse]
+	rejectPayment                     *connect.Client[v2.RejectPaymentRequest, v2.RejectPaymentResponse]
+	listPayment                       *connect.Client[v2.ListPaymentRequest, v2.ListPaymentResponse]
+	listIncomingPayment               *connect.Client[v2.ListIncomingPaymentRequest, v2.ListIncomingPaymentResponse]
+	listTeamBalanceLog                *connect.Client[v2.ListTeamBalanceLogRequest, v2.ListTeamBalanceLogResponse]
+	createBalanceLog                  *connect.Client[v2.CreateBalanceLogRequest, v2.CreateBalanceLogResponse]
+	teamReconcile                     *connect.Client[v2.TeamReconcileRequest, v2.TeamReconcileResponse]
+	checkOweLimit                     *connect.Client[v2.CheckOweLimitRequest, v2.CheckOweLimitResponse]
+	getBalanceChangeSource            *connect.Client[v2.GetBalanceChangeSourceRequest, v2.GetBalanceChangeSourceResponse]
+	getBalanceChangeSourceByChangeIds *connect.Client[v2.GetBalanceChangeSourceByChangeIdsRequest, v2.GetBalanceChangeSourceByChangeIdsResponse]
+	oweLimitDefaultGet                *connect.Client[v2.OweLimitDefaultGetRequest, v2.OweLimitDefaultGetResponse]
+	oweLimitDefaultSet                *connect.Client[v2.OweLimitDefaultSetRequest, v2.OweLimitDefaultSetResponse]
+	oweLimitCustomList                *connect.Client[v2.OweLimitCustomListRequest, v2.OweLimitCustomListResponse]
+	oweLimitCustomSet                 *connect.Client[v2.OweLimitCustomSetRequest, v2.OweLimitCustomSetResponse]
+	oweLimitCustomDelete              *connect.Client[v2.OweLimitCustomDeleteRequest, v2.OweLimitCustomDeleteResponse]
 }
 
 // Overview calls invoice_iface.v2.InvoiceService.Overview.
@@ -306,6 +328,17 @@ func (c *invoiceServiceClient) CheckOweLimit(ctx context.Context, req *connect.R
 	return c.checkOweLimit.CallUnary(ctx, req)
 }
 
+// GetBalanceChangeSource calls invoice_iface.v2.InvoiceService.GetBalanceChangeSource.
+func (c *invoiceServiceClient) GetBalanceChangeSource(ctx context.Context, req *connect.Request[v2.GetBalanceChangeSourceRequest]) (*connect.Response[v2.GetBalanceChangeSourceResponse], error) {
+	return c.getBalanceChangeSource.CallUnary(ctx, req)
+}
+
+// GetBalanceChangeSourceByChangeIds calls
+// invoice_iface.v2.InvoiceService.GetBalanceChangeSourceByChangeIds.
+func (c *invoiceServiceClient) GetBalanceChangeSourceByChangeIds(ctx context.Context, req *connect.Request[v2.GetBalanceChangeSourceByChangeIdsRequest]) (*connect.Response[v2.GetBalanceChangeSourceByChangeIdsResponse], error) {
+	return c.getBalanceChangeSourceByChangeIds.CallUnary(ctx, req)
+}
+
 // OweLimitDefaultGet calls invoice_iface.v2.InvoiceService.OweLimitDefaultGet.
 func (c *invoiceServiceClient) OweLimitDefaultGet(ctx context.Context, req *connect.Request[v2.OweLimitDefaultGetRequest]) (*connect.Response[v2.OweLimitDefaultGetResponse], error) {
 	return c.oweLimitDefaultGet.CallUnary(ctx, req)
@@ -345,6 +378,8 @@ type InvoiceServiceHandler interface {
 	CreateBalanceLog(context.Context, *connect.Request[v2.CreateBalanceLogRequest]) (*connect.Response[v2.CreateBalanceLogResponse], error)
 	TeamReconcile(context.Context, *connect.Request[v2.TeamReconcileRequest]) (*connect.Response[v2.TeamReconcileResponse], error)
 	CheckOweLimit(context.Context, *connect.Request[v2.CheckOweLimitRequest]) (*connect.Response[v2.CheckOweLimitResponse], error)
+	GetBalanceChangeSource(context.Context, *connect.Request[v2.GetBalanceChangeSourceRequest]) (*connect.Response[v2.GetBalanceChangeSourceResponse], error)
+	GetBalanceChangeSourceByChangeIds(context.Context, *connect.Request[v2.GetBalanceChangeSourceByChangeIdsRequest]) (*connect.Response[v2.GetBalanceChangeSourceByChangeIdsResponse], error)
 	// Owe-limit config CRUD. team_id is always the CREDITOR (the limit owner): it
 	// declares how much a debtor may owe it. A custom row for a specific debtor
 	// beats the creditor's default row; threshold 0 = unlimited; no row = allow.
@@ -434,6 +469,18 @@ func NewInvoiceServiceHandler(svc InvoiceServiceHandler, opts ...connect.Handler
 		connect.WithSchema(invoiceServiceMethods.ByName("CheckOweLimit")),
 		connect.WithHandlerOptions(opts...),
 	)
+	invoiceServiceGetBalanceChangeSourceHandler := connect.NewUnaryHandler(
+		InvoiceServiceGetBalanceChangeSourceProcedure,
+		svc.GetBalanceChangeSource,
+		connect.WithSchema(invoiceServiceMethods.ByName("GetBalanceChangeSource")),
+		connect.WithHandlerOptions(opts...),
+	)
+	invoiceServiceGetBalanceChangeSourceByChangeIdsHandler := connect.NewUnaryHandler(
+		InvoiceServiceGetBalanceChangeSourceByChangeIdsProcedure,
+		svc.GetBalanceChangeSourceByChangeIds,
+		connect.WithSchema(invoiceServiceMethods.ByName("GetBalanceChangeSourceByChangeIds")),
+		connect.WithHandlerOptions(opts...),
+	)
 	invoiceServiceOweLimitDefaultGetHandler := connect.NewUnaryHandler(
 		InvoiceServiceOweLimitDefaultGetProcedure,
 		svc.OweLimitDefaultGet,
@@ -490,6 +537,10 @@ func NewInvoiceServiceHandler(svc InvoiceServiceHandler, opts ...connect.Handler
 			invoiceServiceTeamReconcileHandler.ServeHTTP(w, r)
 		case InvoiceServiceCheckOweLimitProcedure:
 			invoiceServiceCheckOweLimitHandler.ServeHTTP(w, r)
+		case InvoiceServiceGetBalanceChangeSourceProcedure:
+			invoiceServiceGetBalanceChangeSourceHandler.ServeHTTP(w, r)
+		case InvoiceServiceGetBalanceChangeSourceByChangeIdsProcedure:
+			invoiceServiceGetBalanceChangeSourceByChangeIdsHandler.ServeHTTP(w, r)
 		case InvoiceServiceOweLimitDefaultGetProcedure:
 			invoiceServiceOweLimitDefaultGetHandler.ServeHTTP(w, r)
 		case InvoiceServiceOweLimitDefaultSetProcedure:
@@ -555,6 +606,14 @@ func (UnimplementedInvoiceServiceHandler) TeamReconcile(context.Context, *connec
 
 func (UnimplementedInvoiceServiceHandler) CheckOweLimit(context.Context, *connect.Request[v2.CheckOweLimitRequest]) (*connect.Response[v2.CheckOweLimitResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("invoice_iface.v2.InvoiceService.CheckOweLimit is not implemented"))
+}
+
+func (UnimplementedInvoiceServiceHandler) GetBalanceChangeSource(context.Context, *connect.Request[v2.GetBalanceChangeSourceRequest]) (*connect.Response[v2.GetBalanceChangeSourceResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("invoice_iface.v2.InvoiceService.GetBalanceChangeSource is not implemented"))
+}
+
+func (UnimplementedInvoiceServiceHandler) GetBalanceChangeSourceByChangeIds(context.Context, *connect.Request[v2.GetBalanceChangeSourceByChangeIdsRequest]) (*connect.Response[v2.GetBalanceChangeSourceByChangeIdsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("invoice_iface.v2.InvoiceService.GetBalanceChangeSourceByChangeIds is not implemented"))
 }
 
 func (UnimplementedInvoiceServiceHandler) OweLimitDefaultGet(context.Context, *connect.Request[v2.OweLimitDefaultGetRequest]) (*connect.Response[v2.OweLimitDefaultGetResponse], error) {
