@@ -29,6 +29,7 @@ service InventoryService {
   // missing ids are omitted from the response map.
   rpc TransactionByIds(TransactionByIdsRequest) returns (TransactionByIdsResponse);
   rpc TransactionItemByIds(TransactionItemByIdsRequest) returns (TransactionItemByIdsResponse);
+  rpc TransactionProblemItemByTxItemIds(TransactionProblemItemByTxItemIdsRequest) returns (TransactionProblemItemByTxItemIdsResponse);
   rpc ProductBySkuIds(ProductBySkuIdsRequest) returns (ProductBySkuIdsResponse);
 
   rpc ProductPlacementList(ProductPlacementListRequest) returns (ProductPlacementListResponse);
@@ -204,6 +205,49 @@ message TransactionItemByIdsRequest {
 
 message TransactionItemByIdsResponse {
   map<uint64, TransactionItemDetail> items = 1; // keyed by item id
+}
+
+// What went wrong with the goods. Mirrors the stored `inv_item_problems.problem_type`
+// strings (ware_db.ProblemType); a value outside this set reads as UNSPECIFIED.
+enum ProblemType {
+  PROBLEM_TYPE_UNSPECIFIED = 0;
+  PROBLEM_TYPE_BROKEN_IN_SHIPPING = 1; // broken_s
+  PROBLEM_TYPE_LOST_IN_SHIPPING = 2; // lost_s
+  PROBLEM_TYPE_PRODUCT_DIFFERENT = 3; // diff_s
+  PROBLEM_TYPE_BROKEN_IN_WAREHOUSE = 4; // broken_w
+  PROBLEM_TYPE_LOST_IN_WAREHOUSE = 5; // lost_w
+  PROBLEM_TYPE_DISASTER = 6; // disaster
+  PROBLEM_TYPE_SAMPLE = 7; // sample
+}
+
+// One problem line recorded against a transaction item (goods excluded from stock).
+message TransactionProblemItemDetail {
+  uint64 id = 1;
+  uint64 tx_item_id = 2;
+  string sku_id = 3;
+  ProblemType problem_type = 4;
+  string problem_note = 5;
+  int64 count = 6;
+}
+
+message TransactionProblemItemByTxItemIdsRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
+  // tx item ids (inv_tx_items.id), not problem ids.
+  repeated uint64 tx_item_ids = 1 [(buf.validate.field).repeated = {
+    min_items: 1
+    max_items: 100
+    unique: true
+    items: {
+      uint64: {gt: 0}
+    }
+  }];
+}
+
+message TransactionProblemItemByTxItemIdsResponse {
+  // Keyed by tx_item_id. A tx item with several problem rows reports the
+  // highest-id one; tx item ids with no problem are omitted.
+  map<uint64, TransactionProblemItemDetail> items = 1;
 }
 
 message ProductBySkuDetail {

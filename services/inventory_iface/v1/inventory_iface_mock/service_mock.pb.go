@@ -228,6 +228,32 @@ func (mr *MockInventoryServiceClientMockRecorder) TransactionItemByIds(ctx, req 
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "TransactionItemByIds", reflect.TypeOf((*MockInventoryService)(nil).TransactionItemByIds), ctx, req)
 }
 
+func (m *MockInventoryService) TransactionProblemItemByTxItemIds(ctx context.Context, req *connect.Request[v1.TransactionProblemItemByTxItemIdsRequest]) (*connect.Response[v1.TransactionProblemItemByTxItemIdsResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "TransactionProblemItemByTxItemIds", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.TransactionProblemItemByTxItemIdsResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInventoryServiceMockRecorder) TransactionProblemItemByTxItemIds(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "TransactionProblemItemByTxItemIds", reflect.TypeOf((*MockInventoryService)(nil).TransactionProblemItemByTxItemIds), ctx, req)
+}
+
+func (m *MockInventoryServiceClient) TransactionProblemItemByTxItemIds(ctx context.Context, req *connect.Request[v1.TransactionProblemItemByTxItemIdsRequest]) (*connect.Response[v1.TransactionProblemItemByTxItemIdsResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "TransactionProblemItemByTxItemIds", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.TransactionProblemItemByTxItemIdsResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInventoryServiceClientMockRecorder) TransactionProblemItemByTxItemIds(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "TransactionProblemItemByTxItemIds", reflect.TypeOf((*MockInventoryService)(nil).TransactionProblemItemByTxItemIds), ctx, req)
+}
+
 func (m *MockInventoryService) ProductBySkuIds(ctx context.Context, req *connect.Request[v1.ProductBySkuIdsRequest]) (*connect.Response[v1.ProductBySkuIdsResponse], error) {
     m.ctrl.T.Helper()
     ret := m.ctrl.Call(m, "ProductBySkuIds", ctx, req)

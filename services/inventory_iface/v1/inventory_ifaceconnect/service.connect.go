@@ -53,6 +53,9 @@ const (
 	// InventoryServiceTransactionItemByIdsProcedure is the fully-qualified name of the
 	// InventoryService's TransactionItemByIds RPC.
 	InventoryServiceTransactionItemByIdsProcedure = "/inventory_iface.v1.InventoryService/TransactionItemByIds"
+	// InventoryServiceTransactionProblemItemByTxItemIdsProcedure is the fully-qualified name of the
+	// InventoryService's TransactionProblemItemByTxItemIds RPC.
+	InventoryServiceTransactionProblemItemByTxItemIdsProcedure = "/inventory_iface.v1.InventoryService/TransactionProblemItemByTxItemIds"
 	// InventoryServiceProductBySkuIdsProcedure is the fully-qualified name of the InventoryService's
 	// ProductBySkuIds RPC.
 	InventoryServiceProductBySkuIdsProcedure = "/inventory_iface.v1.InventoryService/ProductBySkuIds"
@@ -172,6 +175,7 @@ type InventoryServiceClient interface {
 	// missing ids are omitted from the response map.
 	TransactionByIds(context.Context, *connect.Request[v1.TransactionByIdsRequest]) (*connect.Response[v1.TransactionByIdsResponse], error)
 	TransactionItemByIds(context.Context, *connect.Request[v1.TransactionItemByIdsRequest]) (*connect.Response[v1.TransactionItemByIdsResponse], error)
+	TransactionProblemItemByTxItemIds(context.Context, *connect.Request[v1.TransactionProblemItemByTxItemIdsRequest]) (*connect.Response[v1.TransactionProblemItemByTxItemIdsResponse], error)
 	ProductBySkuIds(context.Context, *connect.Request[v1.ProductBySkuIdsRequest]) (*connect.Response[v1.ProductBySkuIdsResponse], error)
 	ProductPlacementList(context.Context, *connect.Request[v1.ProductPlacementListRequest]) (*connect.Response[v1.ProductPlacementListResponse], error)
 	ProductPlacementLog(context.Context, *connect.Request[v1.ProductPlacementLogRequest]) (*connect.Response[v1.ProductPlacementLogResponse], error)
@@ -285,6 +289,12 @@ func NewInventoryServiceClient(httpClient connect.HTTPClient, baseURL string, op
 			httpClient,
 			baseURL+InventoryServiceTransactionItemByIdsProcedure,
 			connect.WithSchema(inventoryServiceMethods.ByName("TransactionItemByIds")),
+			connect.WithClientOptions(opts...),
+		),
+		transactionProblemItemByTxItemIds: connect.NewClient[v1.TransactionProblemItemByTxItemIdsRequest, v1.TransactionProblemItemByTxItemIdsResponse](
+			httpClient,
+			baseURL+InventoryServiceTransactionProblemItemByTxItemIdsProcedure,
+			connect.WithSchema(inventoryServiceMethods.ByName("TransactionProblemItemByTxItemIds")),
 			connect.WithClientOptions(opts...),
 		),
 		productBySkuIds: connect.NewClient[v1.ProductBySkuIdsRequest, v1.ProductBySkuIdsResponse](
@@ -496,47 +506,48 @@ func NewInventoryServiceClient(httpClient connect.HTTPClient, baseURL string, op
 
 // inventoryServiceClient implements InventoryServiceClient.
 type inventoryServiceClient struct {
-	order                *connect.Client[v1.OrderRequest, v1.OrderResponse]
-	stockMovement        *connect.Client[v1.StockMovementRequest, v1.StockMovementResponse]
-	pushStockEvent       *connect.Client[v1.PushStockEventRequest, v1.PushStockEventResponse]
-	transactionCreate    *connect.Client[v1.TransactionCreateRequest, v1.TransactionCreateResponse]
-	transactionCancel    *connect.Client[v1.TransactionCancelRequest, v1.TransactionCancelResponse]
-	transactionByIds     *connect.Client[v1.TransactionByIdsRequest, v1.TransactionByIdsResponse]
-	transactionItemByIds *connect.Client[v1.TransactionItemByIdsRequest, v1.TransactionItemByIdsResponse]
-	productBySkuIds      *connect.Client[v1.ProductBySkuIdsRequest, v1.ProductBySkuIdsResponse]
-	productPlacementList *connect.Client[v1.ProductPlacementListRequest, v1.ProductPlacementListResponse]
-	productPlacementLog  *connect.Client[v1.ProductPlacementLogRequest, v1.ProductPlacementLogResponse]
-	placementMove        *connect.Client[v1.PlacementMoveRequest, v1.PlacementMoveResponse]
-	productBatchList     *connect.Client[v1.ProductBatchListRequest, v1.ProductBatchListResponse]
-	productReconcile     *connect.Client[v1.ProductReconcileRequest, v1.ProductReconcileResponse]
-	rackCreate           *connect.Client[v1.RackCreateRequest, v1.RackCreateResponse]
-	rackUpdate           *connect.Client[v1.RackUpdateRequest, v1.RackUpdateResponse]
-	rackDelete           *connect.Client[v1.RackDeleteRequest, v1.RackDeleteResponse]
-	rackDetail           *connect.Client[v1.RackDetailRequest, v1.RackDetailResponse]
-	rackList             *connect.Client[v1.RackListRequest, v1.RackListResponse]
-	rackByIds            *connect.Client[v1.RackByIdsRequest, v1.RackByIdsResponse]
-	rackProductList      *connect.Client[v1.RackProductListRequest, v1.RackProductListResponse]
-	rackHistory          *connect.Client[v1.RackHistoryRequest, v1.RackHistoryResponse]
-	productConfig        *connect.Client[v1.ProductConfigRequest, v1.ProductConfigResponse]
-	productConfigUpdate  *connect.Client[v1.ProductConfigUpdateRequest, v1.ProductConfigUpdateResponse]
-	productList          *connect.Client[v1.ProductListRequest, v1.ProductListResponse]
-	productDetail        *connect.Client[v1.ProductDetailRequest, v1.ProductDetailResponse]
-	restockCreate        *connect.Client[v1.RestockCreateRequest, v1.RestockCreateResponse]
-	restockUpdate        *connect.Client[v1.RestockUpdateRequest, v1.RestockUpdateResponse]
-	restockDetail        *connect.Client[v1.RestockDetailRequest, v1.RestockDetailResponse]
-	restockList          *connect.Client[v1.RestockListRequest, v1.RestockListResponse]
-	restockLogList       *connect.Client[v1.RestockLogListRequest, v1.RestockLogListResponse]
-	transferCreate       *connect.Client[v1.TransferCreateRequest, v1.TransferCreateResponse]
-	transferCancel       *connect.Client[v1.TransferCancelRequest, v1.TransferCancelResponse]
-	transferAccept       *connect.Client[v1.TransferAcceptRequest, v1.TransferAcceptResponse]
-	transferDetail       *connect.Client[v1.TransferDetailRequest, v1.TransferDetailResponse]
-	transferList         *connect.Client[v1.TransferListRequest, v1.TransferListResponse]
-	opnameCreate         *connect.Client[v1.OpnameCreateRequest, v1.OpnameCreateResponse]
-	opnameList           *connect.Client[v1.OpnameListRequest, v1.OpnameListResponse]
-	opnameDetail         *connect.Client[v1.OpnameDetailRequest, v1.OpnameDetailResponse]
-	opnameLineCount      *connect.Client[v1.OpnameLineCountRequest, v1.OpnameLineCountResponse]
-	opnameComplete       *connect.Client[v1.OpnameCompleteRequest, v1.OpnameCompleteResponse]
-	opnameCancel         *connect.Client[v1.OpnameCancelRequest, v1.OpnameCancelResponse]
+	order                             *connect.Client[v1.OrderRequest, v1.OrderResponse]
+	stockMovement                     *connect.Client[v1.StockMovementRequest, v1.StockMovementResponse]
+	pushStockEvent                    *connect.Client[v1.PushStockEventRequest, v1.PushStockEventResponse]
+	transactionCreate                 *connect.Client[v1.TransactionCreateRequest, v1.TransactionCreateResponse]
+	transactionCancel                 *connect.Client[v1.TransactionCancelRequest, v1.TransactionCancelResponse]
+	transactionByIds                  *connect.Client[v1.TransactionByIdsRequest, v1.TransactionByIdsResponse]
+	transactionItemByIds              *connect.Client[v1.TransactionItemByIdsRequest, v1.TransactionItemByIdsResponse]
+	transactionProblemItemByTxItemIds *connect.Client[v1.TransactionProblemItemByTxItemIdsRequest, v1.TransactionProblemItemByTxItemIdsResponse]
+	productBySkuIds                   *connect.Client[v1.ProductBySkuIdsRequest, v1.ProductBySkuIdsResponse]
+	productPlacementList              *connect.Client[v1.ProductPlacementListRequest, v1.ProductPlacementListResponse]
+	productPlacementLog               *connect.Client[v1.ProductPlacementLogRequest, v1.ProductPlacementLogResponse]
+	placementMove                     *connect.Client[v1.PlacementMoveRequest, v1.PlacementMoveResponse]
+	productBatchList                  *connect.Client[v1.ProductBatchListRequest, v1.ProductBatchListResponse]
+	productReconcile                  *connect.Client[v1.ProductReconcileRequest, v1.ProductReconcileResponse]
+	rackCreate                        *connect.Client[v1.RackCreateRequest, v1.RackCreateResponse]
+	rackUpdate                        *connect.Client[v1.RackUpdateRequest, v1.RackUpdateResponse]
+	rackDelete                        *connect.Client[v1.RackDeleteRequest, v1.RackDeleteResponse]
+	rackDetail                        *connect.Client[v1.RackDetailRequest, v1.RackDetailResponse]
+	rackList                          *connect.Client[v1.RackListRequest, v1.RackListResponse]
+	rackByIds                         *connect.Client[v1.RackByIdsRequest, v1.RackByIdsResponse]
+	rackProductList                   *connect.Client[v1.RackProductListRequest, v1.RackProductListResponse]
+	rackHistory                       *connect.Client[v1.RackHistoryRequest, v1.RackHistoryResponse]
+	productConfig                     *connect.Client[v1.ProductConfigRequest, v1.ProductConfigResponse]
+	productConfigUpdate               *connect.Client[v1.ProductConfigUpdateRequest, v1.ProductConfigUpdateResponse]
+	productList                       *connect.Client[v1.ProductListRequest, v1.ProductListResponse]
+	productDetail                     *connect.Client[v1.ProductDetailRequest, v1.ProductDetailResponse]
+	restockCreate                     *connect.Client[v1.RestockCreateRequest, v1.RestockCreateResponse]
+	restockUpdate                     *connect.Client[v1.RestockUpdateRequest, v1.RestockUpdateResponse]
+	restockDetail                     *connect.Client[v1.RestockDetailRequest, v1.RestockDetailResponse]
+	restockList                       *connect.Client[v1.RestockListRequest, v1.RestockListResponse]
+	restockLogList                    *connect.Client[v1.RestockLogListRequest, v1.RestockLogListResponse]
+	transferCreate                    *connect.Client[v1.TransferCreateRequest, v1.TransferCreateResponse]
+	transferCancel                    *connect.Client[v1.TransferCancelRequest, v1.TransferCancelResponse]
+	transferAccept                    *connect.Client[v1.TransferAcceptRequest, v1.TransferAcceptResponse]
+	transferDetail                    *connect.Client[v1.TransferDetailRequest, v1.TransferDetailResponse]
+	transferList                      *connect.Client[v1.TransferListRequest, v1.TransferListResponse]
+	opnameCreate                      *connect.Client[v1.OpnameCreateRequest, v1.OpnameCreateResponse]
+	opnameList                        *connect.Client[v1.OpnameListRequest, v1.OpnameListResponse]
+	opnameDetail                      *connect.Client[v1.OpnameDetailRequest, v1.OpnameDetailResponse]
+	opnameLineCount                   *connect.Client[v1.OpnameLineCountRequest, v1.OpnameLineCountResponse]
+	opnameComplete                    *connect.Client[v1.OpnameCompleteRequest, v1.OpnameCompleteResponse]
+	opnameCancel                      *connect.Client[v1.OpnameCancelRequest, v1.OpnameCancelResponse]
 }
 
 // Order calls inventory_iface.v1.InventoryService.Order.
@@ -572,6 +583,12 @@ func (c *inventoryServiceClient) TransactionByIds(ctx context.Context, req *conn
 // TransactionItemByIds calls inventory_iface.v1.InventoryService.TransactionItemByIds.
 func (c *inventoryServiceClient) TransactionItemByIds(ctx context.Context, req *connect.Request[v1.TransactionItemByIdsRequest]) (*connect.Response[v1.TransactionItemByIdsResponse], error) {
 	return c.transactionItemByIds.CallUnary(ctx, req)
+}
+
+// TransactionProblemItemByTxItemIds calls
+// inventory_iface.v1.InventoryService.TransactionProblemItemByTxItemIds.
+func (c *inventoryServiceClient) TransactionProblemItemByTxItemIds(ctx context.Context, req *connect.Request[v1.TransactionProblemItemByTxItemIdsRequest]) (*connect.Response[v1.TransactionProblemItemByTxItemIdsResponse], error) {
+	return c.transactionProblemItemByTxItemIds.CallUnary(ctx, req)
 }
 
 // ProductBySkuIds calls inventory_iface.v1.InventoryService.ProductBySkuIds.
@@ -759,6 +776,7 @@ type InventoryServiceHandler interface {
 	// missing ids are omitted from the response map.
 	TransactionByIds(context.Context, *connect.Request[v1.TransactionByIdsRequest]) (*connect.Response[v1.TransactionByIdsResponse], error)
 	TransactionItemByIds(context.Context, *connect.Request[v1.TransactionItemByIdsRequest]) (*connect.Response[v1.TransactionItemByIdsResponse], error)
+	TransactionProblemItemByTxItemIds(context.Context, *connect.Request[v1.TransactionProblemItemByTxItemIdsRequest]) (*connect.Response[v1.TransactionProblemItemByTxItemIdsResponse], error)
 	ProductBySkuIds(context.Context, *connect.Request[v1.ProductBySkuIdsRequest]) (*connect.Response[v1.ProductBySkuIdsResponse], error)
 	ProductPlacementList(context.Context, *connect.Request[v1.ProductPlacementListRequest]) (*connect.Response[v1.ProductPlacementListResponse], error)
 	ProductPlacementLog(context.Context, *connect.Request[v1.ProductPlacementLogRequest]) (*connect.Response[v1.ProductPlacementLogResponse], error)
@@ -868,6 +886,12 @@ func NewInventoryServiceHandler(svc InventoryServiceHandler, opts ...connect.Han
 		InventoryServiceTransactionItemByIdsProcedure,
 		svc.TransactionItemByIds,
 		connect.WithSchema(inventoryServiceMethods.ByName("TransactionItemByIds")),
+		connect.WithHandlerOptions(opts...),
+	)
+	inventoryServiceTransactionProblemItemByTxItemIdsHandler := connect.NewUnaryHandler(
+		InventoryServiceTransactionProblemItemByTxItemIdsProcedure,
+		svc.TransactionProblemItemByTxItemIds,
+		connect.WithSchema(inventoryServiceMethods.ByName("TransactionProblemItemByTxItemIds")),
 		connect.WithHandlerOptions(opts...),
 	)
 	inventoryServiceProductBySkuIdsHandler := connect.NewUnaryHandler(
@@ -1090,6 +1114,8 @@ func NewInventoryServiceHandler(svc InventoryServiceHandler, opts ...connect.Han
 			inventoryServiceTransactionByIdsHandler.ServeHTTP(w, r)
 		case InventoryServiceTransactionItemByIdsProcedure:
 			inventoryServiceTransactionItemByIdsHandler.ServeHTTP(w, r)
+		case InventoryServiceTransactionProblemItemByTxItemIdsProcedure:
+			inventoryServiceTransactionProblemItemByTxItemIdsHandler.ServeHTTP(w, r)
 		case InventoryServiceProductBySkuIdsProcedure:
 			inventoryServiceProductBySkuIdsHandler.ServeHTTP(w, r)
 		case InventoryServiceProductPlacementListProcedure:
@@ -1193,6 +1219,10 @@ func (UnimplementedInventoryServiceHandler) TransactionByIds(context.Context, *c
 
 func (UnimplementedInventoryServiceHandler) TransactionItemByIds(context.Context, *connect.Request[v1.TransactionItemByIdsRequest]) (*connect.Response[v1.TransactionItemByIdsResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory_iface.v1.InventoryService.TransactionItemByIds is not implemented"))
+}
+
+func (UnimplementedInventoryServiceHandler) TransactionProblemItemByTxItemIds(context.Context, *connect.Request[v1.TransactionProblemItemByTxItemIdsRequest]) (*connect.Response[v1.TransactionProblemItemByTxItemIdsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory_iface.v1.InventoryService.TransactionProblemItemByTxItemIds is not implemented"))
 }
 
 func (UnimplementedInventoryServiceHandler) ProductBySkuIds(context.Context, *connect.Request[v1.ProductBySkuIdsRequest]) (*connect.Response[v1.ProductBySkuIdsResponse], error) {
