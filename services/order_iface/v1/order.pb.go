@@ -9,6 +9,7 @@ package order_iface
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	v11 "github.com/pdcgo/schema/services/common/v1"
+	_ "github.com/pdcgo/schema/services/role_base/v1"
 	v1 "github.com/pdcgo/schema/services/tracking_iface/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -422,6 +423,326 @@ func (MpPaymentSource) EnumDescriptor() ([]byte, []int) {
 	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{6}
 }
 
+type OrderDetail struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Receipt       string                 `protobuf:"bytes,2,opt,name=receipt,proto3" json:"receipt,omitempty"`
+	OrderRefId    string                 `protobuf:"bytes,3,opt,name=order_ref_id,json=orderRefId,proto3" json:"order_ref_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *OrderDetail) Reset() {
+	*x = OrderDetail{}
+	mi := &file_order_iface_v1_order_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *OrderDetail) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*OrderDetail) ProtoMessage() {}
+
+func (x *OrderDetail) ProtoReflect() protoreflect.Message {
+	mi := &file_order_iface_v1_order_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use OrderDetail.ProtoReflect.Descriptor instead.
+func (*OrderDetail) Descriptor() ([]byte, []int) {
+	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *OrderDetail) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *OrderDetail) GetReceipt() string {
+	if x != nil {
+		return x.Receipt
+	}
+	return ""
+}
+
+func (x *OrderDetail) GetOrderRefId() string {
+	if x != nil {
+		return x.OrderRefId
+	}
+	return ""
+}
+
+type GetOrderByIdsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Ids           []uint64               `protobuf:"varint,1,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetOrderByIdsRequest) Reset() {
+	*x = GetOrderByIdsRequest{}
+	mi := &file_order_iface_v1_order_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetOrderByIdsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetOrderByIdsRequest) ProtoMessage() {}
+
+func (x *GetOrderByIdsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_order_iface_v1_order_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetOrderByIdsRequest.ProtoReflect.Descriptor instead.
+func (*GetOrderByIdsRequest) Descriptor() ([]byte, []int) {
+	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *GetOrderByIdsRequest) GetIds() []uint64 {
+	if x != nil {
+		return x.Ids
+	}
+	return nil
+}
+
+type GetOrderByIdsResponse struct {
+	state         protoimpl.MessageState  `protogen:"open.v1"`
+	Orders        map[uint64]*OrderDetail `protobuf:"bytes,1,rep,name=orders,proto3" json:"orders,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetOrderByIdsResponse) Reset() {
+	*x = GetOrderByIdsResponse{}
+	mi := &file_order_iface_v1_order_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetOrderByIdsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetOrderByIdsResponse) ProtoMessage() {}
+
+func (x *GetOrderByIdsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_order_iface_v1_order_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetOrderByIdsResponse.ProtoReflect.Descriptor instead.
+func (*GetOrderByIdsResponse) Descriptor() ([]byte, []int) {
+	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *GetOrderByIdsResponse) GetOrders() map[uint64]*OrderDetail {
+	if x != nil {
+		return x.Orders
+	}
+	return nil
+}
+
+type OrderItemDetail struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	ProductId     uint64                 `protobuf:"varint,2,opt,name=product_id,json=productId,proto3" json:"product_id,omitempty"`
+	VariationId   uint64                 `protobuf:"varint,3,opt,name=variation_id,json=variationId,proto3" json:"variation_id,omitempty"`
+	Price         float64                `protobuf:"fixed64,4,opt,name=price,proto3" json:"price,omitempty"`
+	Count         int64                  `protobuf:"varint,5,opt,name=count,proto3" json:"count,omitempty"`
+	Total         float64                `protobuf:"fixed64,6,opt,name=total,proto3" json:"total,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *OrderItemDetail) Reset() {
+	*x = OrderItemDetail{}
+	mi := &file_order_iface_v1_order_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *OrderItemDetail) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*OrderItemDetail) ProtoMessage() {}
+
+func (x *OrderItemDetail) ProtoReflect() protoreflect.Message {
+	mi := &file_order_iface_v1_order_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use OrderItemDetail.ProtoReflect.Descriptor instead.
+func (*OrderItemDetail) Descriptor() ([]byte, []int) {
+	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *OrderItemDetail) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *OrderItemDetail) GetProductId() uint64 {
+	if x != nil {
+		return x.ProductId
+	}
+	return 0
+}
+
+func (x *OrderItemDetail) GetVariationId() uint64 {
+	if x != nil {
+		return x.VariationId
+	}
+	return 0
+}
+
+func (x *OrderItemDetail) GetPrice() float64 {
+	if x != nil {
+		return x.Price
+	}
+	return 0
+}
+
+func (x *OrderItemDetail) GetCount() int64 {
+	if x != nil {
+		return x.Count
+	}
+	return 0
+}
+
+func (x *OrderItemDetail) GetTotal() float64 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+type GetOrderItemByIdsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Ids           []uint64               `protobuf:"varint,1,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetOrderItemByIdsRequest) Reset() {
+	*x = GetOrderItemByIdsRequest{}
+	mi := &file_order_iface_v1_order_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetOrderItemByIdsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetOrderItemByIdsRequest) ProtoMessage() {}
+
+func (x *GetOrderItemByIdsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_order_iface_v1_order_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetOrderItemByIdsRequest.ProtoReflect.Descriptor instead.
+func (*GetOrderItemByIdsRequest) Descriptor() ([]byte, []int) {
+	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *GetOrderItemByIdsRequest) GetIds() []uint64 {
+	if x != nil {
+		return x.Ids
+	}
+	return nil
+}
+
+type GetOrderItemByIdsResponse struct {
+	state         protoimpl.MessageState      `protogen:"open.v1"`
+	Items         map[uint64]*OrderItemDetail `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetOrderItemByIdsResponse) Reset() {
+	*x = GetOrderItemByIdsResponse{}
+	mi := &file_order_iface_v1_order_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetOrderItemByIdsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetOrderItemByIdsResponse) ProtoMessage() {}
+
+func (x *GetOrderItemByIdsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_order_iface_v1_order_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetOrderItemByIdsResponse.ProtoReflect.Descriptor instead.
+func (*GetOrderItemByIdsResponse) Descriptor() ([]byte, []int) {
+	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *GetOrderItemByIdsResponse) GetItems() map[uint64]*OrderItemDetail {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
 type ShippedTrack struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	SetShipment   bool                   `protobuf:"varint,1,opt,name=set_shipment,json=setShipment,proto3" json:"set_shipment,omitempty"`
@@ -432,7 +753,7 @@ type ShippedTrack struct {
 
 func (x *ShippedTrack) Reset() {
 	*x = ShippedTrack{}
-	mi := &file_order_iface_v1_order_proto_msgTypes[0]
+	mi := &file_order_iface_v1_order_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -444,7 +765,7 @@ func (x *ShippedTrack) String() string {
 func (*ShippedTrack) ProtoMessage() {}
 
 func (x *ShippedTrack) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_order_proto_msgTypes[0]
+	mi := &file_order_iface_v1_order_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -457,7 +778,7 @@ func (x *ShippedTrack) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ShippedTrack.ProtoReflect.Descriptor instead.
 func (*ShippedTrack) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{0}
+	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *ShippedTrack) GetSetShipment() bool {
@@ -486,7 +807,7 @@ type OrderTrackingRequest struct {
 
 func (x *OrderTrackingRequest) Reset() {
 	*x = OrderTrackingRequest{}
-	mi := &file_order_iface_v1_order_proto_msgTypes[1]
+	mi := &file_order_iface_v1_order_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -498,7 +819,7 @@ func (x *OrderTrackingRequest) String() string {
 func (*OrderTrackingRequest) ProtoMessage() {}
 
 func (x *OrderTrackingRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_order_proto_msgTypes[1]
+	mi := &file_order_iface_v1_order_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -511,7 +832,7 @@ func (x *OrderTrackingRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderTrackingRequest.ProtoReflect.Descriptor instead.
 func (*OrderTrackingRequest) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{1}
+	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *OrderTrackingRequest) GetTrack() isOrderTrackingRequest_Track {
@@ -549,7 +870,7 @@ type OrderTrackingResponse struct {
 
 func (x *OrderTrackingResponse) Reset() {
 	*x = OrderTrackingResponse{}
-	mi := &file_order_iface_v1_order_proto_msgTypes[2]
+	mi := &file_order_iface_v1_order_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -561,7 +882,7 @@ func (x *OrderTrackingResponse) String() string {
 func (*OrderTrackingResponse) ProtoMessage() {}
 
 func (x *OrderTrackingResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_order_proto_msgTypes[2]
+	mi := &file_order_iface_v1_order_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -574,7 +895,7 @@ func (x *OrderTrackingResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderTrackingResponse.ProtoReflect.Descriptor instead.
 func (*OrderTrackingResponse) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{2}
+	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *OrderTrackingResponse) GetResult() map[uint64]*v1.TrackInfo {
@@ -595,7 +916,7 @@ type ChangeEstRevenueRequest struct {
 
 func (x *ChangeEstRevenueRequest) Reset() {
 	*x = ChangeEstRevenueRequest{}
-	mi := &file_order_iface_v1_order_proto_msgTypes[3]
+	mi := &file_order_iface_v1_order_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -607,7 +928,7 @@ func (x *ChangeEstRevenueRequest) String() string {
 func (*ChangeEstRevenueRequest) ProtoMessage() {}
 
 func (x *ChangeEstRevenueRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_order_proto_msgTypes[3]
+	mi := &file_order_iface_v1_order_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -620,7 +941,7 @@ func (x *ChangeEstRevenueRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChangeEstRevenueRequest.ProtoReflect.Descriptor instead.
 func (*ChangeEstRevenueRequest) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{3}
+	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *ChangeEstRevenueRequest) GetTeamId() uint64 {
@@ -652,7 +973,7 @@ type ChangeEstRevenueResponse struct {
 
 func (x *ChangeEstRevenueResponse) Reset() {
 	*x = ChangeEstRevenueResponse{}
-	mi := &file_order_iface_v1_order_proto_msgTypes[4]
+	mi := &file_order_iface_v1_order_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -664,7 +985,7 @@ func (x *ChangeEstRevenueResponse) String() string {
 func (*ChangeEstRevenueResponse) ProtoMessage() {}
 
 func (x *ChangeEstRevenueResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_order_proto_msgTypes[4]
+	mi := &file_order_iface_v1_order_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -677,7 +998,7 @@ func (x *ChangeEstRevenueResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChangeEstRevenueResponse.ProtoReflect.Descriptor instead.
 func (*ChangeEstRevenueResponse) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{4}
+	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{10}
 }
 
 type OrderCompletedRequest struct {
@@ -691,7 +1012,7 @@ type OrderCompletedRequest struct {
 
 func (x *OrderCompletedRequest) Reset() {
 	*x = OrderCompletedRequest{}
-	mi := &file_order_iface_v1_order_proto_msgTypes[5]
+	mi := &file_order_iface_v1_order_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -703,7 +1024,7 @@ func (x *OrderCompletedRequest) String() string {
 func (*OrderCompletedRequest) ProtoMessage() {}
 
 func (x *OrderCompletedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_order_proto_msgTypes[5]
+	mi := &file_order_iface_v1_order_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -716,7 +1037,7 @@ func (x *OrderCompletedRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderCompletedRequest.ProtoReflect.Descriptor instead.
 func (*OrderCompletedRequest) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{5}
+	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *OrderCompletedRequest) GetTeamId() uint64 {
@@ -748,7 +1069,7 @@ type OrderCompletedResponse struct {
 
 func (x *OrderCompletedResponse) Reset() {
 	*x = OrderCompletedResponse{}
-	mi := &file_order_iface_v1_order_proto_msgTypes[6]
+	mi := &file_order_iface_v1_order_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -760,7 +1081,7 @@ func (x *OrderCompletedResponse) String() string {
 func (*OrderCompletedResponse) ProtoMessage() {}
 
 func (x *OrderCompletedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_order_proto_msgTypes[6]
+	mi := &file_order_iface_v1_order_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -773,7 +1094,7 @@ func (x *OrderCompletedResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderCompletedResponse.ProtoReflect.Descriptor instead.
 func (*OrderCompletedResponse) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{6}
+	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{12}
 }
 
 type ChangeOrderRefIDRequest struct {
@@ -787,7 +1108,7 @@ type ChangeOrderRefIDRequest struct {
 
 func (x *ChangeOrderRefIDRequest) Reset() {
 	*x = ChangeOrderRefIDRequest{}
-	mi := &file_order_iface_v1_order_proto_msgTypes[7]
+	mi := &file_order_iface_v1_order_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -799,7 +1120,7 @@ func (x *ChangeOrderRefIDRequest) String() string {
 func (*ChangeOrderRefIDRequest) ProtoMessage() {}
 
 func (x *ChangeOrderRefIDRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_order_proto_msgTypes[7]
+	mi := &file_order_iface_v1_order_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -812,7 +1133,7 @@ func (x *ChangeOrderRefIDRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChangeOrderRefIDRequest.ProtoReflect.Descriptor instead.
 func (*ChangeOrderRefIDRequest) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{7}
+	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *ChangeOrderRefIDRequest) GetOrderId() uint64 {
@@ -844,7 +1165,7 @@ type ChangeOrderRefIDResponse struct {
 
 func (x *ChangeOrderRefIDResponse) Reset() {
 	*x = ChangeOrderRefIDResponse{}
-	mi := &file_order_iface_v1_order_proto_msgTypes[8]
+	mi := &file_order_iface_v1_order_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -856,7 +1177,7 @@ func (x *ChangeOrderRefIDResponse) String() string {
 func (*ChangeOrderRefIDResponse) ProtoMessage() {}
 
 func (x *ChangeOrderRefIDResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_order_proto_msgTypes[8]
+	mi := &file_order_iface_v1_order_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -869,7 +1190,7 @@ func (x *ChangeOrderRefIDResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChangeOrderRefIDResponse.ProtoReflect.Descriptor instead.
 func (*ChangeOrderRefIDResponse) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{8}
+	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{14}
 }
 
 type MpPaymentCreateRequest struct {
@@ -890,7 +1211,7 @@ type MpPaymentCreateRequest struct {
 
 func (x *MpPaymentCreateRequest) Reset() {
 	*x = MpPaymentCreateRequest{}
-	mi := &file_order_iface_v1_order_proto_msgTypes[9]
+	mi := &file_order_iface_v1_order_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -902,7 +1223,7 @@ func (x *MpPaymentCreateRequest) String() string {
 func (*MpPaymentCreateRequest) ProtoMessage() {}
 
 func (x *MpPaymentCreateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_order_proto_msgTypes[9]
+	mi := &file_order_iface_v1_order_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -915,7 +1236,7 @@ func (x *MpPaymentCreateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MpPaymentCreateRequest.ProtoReflect.Descriptor instead.
 func (*MpPaymentCreateRequest) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{9}
+	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *MpPaymentCreateRequest) GetTeamId() uint64 {
@@ -1000,7 +1321,7 @@ type MpPaymentCreateResponse struct {
 
 func (x *MpPaymentCreateResponse) Reset() {
 	*x = MpPaymentCreateResponse{}
-	mi := &file_order_iface_v1_order_proto_msgTypes[10]
+	mi := &file_order_iface_v1_order_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1012,7 +1333,7 @@ func (x *MpPaymentCreateResponse) String() string {
 func (*MpPaymentCreateResponse) ProtoMessage() {}
 
 func (x *MpPaymentCreateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_order_proto_msgTypes[10]
+	mi := &file_order_iface_v1_order_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1025,7 +1346,7 @@ func (x *MpPaymentCreateResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MpPaymentCreateResponse.ProtoReflect.Descriptor instead.
 func (*MpPaymentCreateResponse) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{10}
+	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *MpPaymentCreateResponse) GetId() uint64 {
@@ -1065,7 +1386,7 @@ type MpPaymentOrderListRequest struct {
 
 func (x *MpPaymentOrderListRequest) Reset() {
 	*x = MpPaymentOrderListRequest{}
-	mi := &file_order_iface_v1_order_proto_msgTypes[11]
+	mi := &file_order_iface_v1_order_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1077,7 +1398,7 @@ func (x *MpPaymentOrderListRequest) String() string {
 func (*MpPaymentOrderListRequest) ProtoMessage() {}
 
 func (x *MpPaymentOrderListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_order_proto_msgTypes[11]
+	mi := &file_order_iface_v1_order_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1090,7 +1411,7 @@ func (x *MpPaymentOrderListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MpPaymentOrderListRequest.ProtoReflect.Descriptor instead.
 func (*MpPaymentOrderListRequest) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{11}
+	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *MpPaymentOrderListRequest) GetOrderId() uint64 {
@@ -1118,7 +1439,7 @@ type PaymentOrderItem struct {
 
 func (x *PaymentOrderItem) Reset() {
 	*x = PaymentOrderItem{}
-	mi := &file_order_iface_v1_order_proto_msgTypes[12]
+	mi := &file_order_iface_v1_order_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1130,7 +1451,7 @@ func (x *PaymentOrderItem) String() string {
 func (*PaymentOrderItem) ProtoMessage() {}
 
 func (x *PaymentOrderItem) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_order_proto_msgTypes[12]
+	mi := &file_order_iface_v1_order_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1143,7 +1464,7 @@ func (x *PaymentOrderItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PaymentOrderItem.ProtoReflect.Descriptor instead.
 func (*PaymentOrderItem) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{12}
+	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *PaymentOrderItem) GetId() uint64 {
@@ -1225,7 +1546,7 @@ type MpPaymentOrderListResponse struct {
 
 func (x *MpPaymentOrderListResponse) Reset() {
 	*x = MpPaymentOrderListResponse{}
-	mi := &file_order_iface_v1_order_proto_msgTypes[13]
+	mi := &file_order_iface_v1_order_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1237,7 +1558,7 @@ func (x *MpPaymentOrderListResponse) String() string {
 func (*MpPaymentOrderListResponse) ProtoMessage() {}
 
 func (x *MpPaymentOrderListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_order_proto_msgTypes[13]
+	mi := &file_order_iface_v1_order_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1250,7 +1571,7 @@ func (x *MpPaymentOrderListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MpPaymentOrderListResponse.ProtoReflect.Descriptor instead.
 func (*MpPaymentOrderListResponse) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{13}
+	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *MpPaymentOrderListResponse) GetItems() []*PaymentOrderItem {
@@ -1270,7 +1591,7 @@ type MpPaymentDeleteRequest struct {
 
 func (x *MpPaymentDeleteRequest) Reset() {
 	*x = MpPaymentDeleteRequest{}
-	mi := &file_order_iface_v1_order_proto_msgTypes[14]
+	mi := &file_order_iface_v1_order_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1282,7 +1603,7 @@ func (x *MpPaymentDeleteRequest) String() string {
 func (*MpPaymentDeleteRequest) ProtoMessage() {}
 
 func (x *MpPaymentDeleteRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_order_proto_msgTypes[14]
+	mi := &file_order_iface_v1_order_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1295,7 +1616,7 @@ func (x *MpPaymentDeleteRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MpPaymentDeleteRequest.ProtoReflect.Descriptor instead.
 func (*MpPaymentDeleteRequest) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{14}
+	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *MpPaymentDeleteRequest) GetTeamId() uint64 {
@@ -1320,7 +1641,7 @@ type MpPaymentDeleteResponse struct {
 
 func (x *MpPaymentDeleteResponse) Reset() {
 	*x = MpPaymentDeleteResponse{}
-	mi := &file_order_iface_v1_order_proto_msgTypes[15]
+	mi := &file_order_iface_v1_order_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1332,7 +1653,7 @@ func (x *MpPaymentDeleteResponse) String() string {
 func (*MpPaymentDeleteResponse) ProtoMessage() {}
 
 func (x *MpPaymentDeleteResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_order_proto_msgTypes[15]
+	mi := &file_order_iface_v1_order_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1345,7 +1666,7 @@ func (x *MpPaymentDeleteResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MpPaymentDeleteResponse.ProtoReflect.Descriptor instead.
 func (*MpPaymentDeleteResponse) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{15}
+	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{21}
 }
 
 type OrderKeywordFilter struct {
@@ -1358,7 +1679,7 @@ type OrderKeywordFilter struct {
 
 func (x *OrderKeywordFilter) Reset() {
 	*x = OrderKeywordFilter{}
-	mi := &file_order_iface_v1_order_proto_msgTypes[16]
+	mi := &file_order_iface_v1_order_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1370,7 +1691,7 @@ func (x *OrderKeywordFilter) String() string {
 func (*OrderKeywordFilter) ProtoMessage() {}
 
 func (x *OrderKeywordFilter) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_order_proto_msgTypes[16]
+	mi := &file_order_iface_v1_order_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1383,7 +1704,7 @@ func (x *OrderKeywordFilter) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderKeywordFilter.ProtoReflect.Descriptor instead.
 func (*OrderKeywordFilter) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{16}
+	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *OrderKeywordFilter) GetType() KeywordFilterType {
@@ -1410,7 +1731,7 @@ type OrderTimeFilter struct {
 
 func (x *OrderTimeFilter) Reset() {
 	*x = OrderTimeFilter{}
-	mi := &file_order_iface_v1_order_proto_msgTypes[17]
+	mi := &file_order_iface_v1_order_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1422,7 +1743,7 @@ func (x *OrderTimeFilter) String() string {
 func (*OrderTimeFilter) ProtoMessage() {}
 
 func (x *OrderTimeFilter) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_order_proto_msgTypes[17]
+	mi := &file_order_iface_v1_order_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1435,7 +1756,7 @@ func (x *OrderTimeFilter) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderTimeFilter.ProtoReflect.Descriptor instead.
 func (*OrderTimeFilter) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{17}
+	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *OrderTimeFilter) GetType() OrderTimeFilterType {
@@ -1462,7 +1783,7 @@ type StatusFilter struct {
 
 func (x *StatusFilter) Reset() {
 	*x = StatusFilter{}
-	mi := &file_order_iface_v1_order_proto_msgTypes[18]
+	mi := &file_order_iface_v1_order_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1474,7 +1795,7 @@ func (x *StatusFilter) String() string {
 func (*StatusFilter) ProtoMessage() {}
 
 func (x *StatusFilter) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_order_proto_msgTypes[18]
+	mi := &file_order_iface_v1_order_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1487,7 +1808,7 @@ func (x *StatusFilter) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StatusFilter.ProtoReflect.Descriptor instead.
 func (*StatusFilter) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{18}
+	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *StatusFilter) GetStatus() OrderStatus {
@@ -1523,7 +1844,7 @@ type OrderOverviewFilter struct {
 
 func (x *OrderOverviewFilter) Reset() {
 	*x = OrderOverviewFilter{}
-	mi := &file_order_iface_v1_order_proto_msgTypes[19]
+	mi := &file_order_iface_v1_order_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1535,7 +1856,7 @@ func (x *OrderOverviewFilter) String() string {
 func (*OrderOverviewFilter) ProtoMessage() {}
 
 func (x *OrderOverviewFilter) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_order_proto_msgTypes[19]
+	mi := &file_order_iface_v1_order_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1548,7 +1869,7 @@ func (x *OrderOverviewFilter) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderOverviewFilter.ProtoReflect.Descriptor instead.
 func (*OrderOverviewFilter) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{19}
+	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *OrderOverviewFilter) GetTeamId() uint64 {
@@ -1638,7 +1959,7 @@ type OrderOverviewRequest struct {
 
 func (x *OrderOverviewRequest) Reset() {
 	*x = OrderOverviewRequest{}
-	mi := &file_order_iface_v1_order_proto_msgTypes[20]
+	mi := &file_order_iface_v1_order_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1650,7 +1971,7 @@ func (x *OrderOverviewRequest) String() string {
 func (*OrderOverviewRequest) ProtoMessage() {}
 
 func (x *OrderOverviewRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_order_proto_msgTypes[20]
+	mi := &file_order_iface_v1_order_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1663,7 +1984,7 @@ func (x *OrderOverviewRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderOverviewRequest.ProtoReflect.Descriptor instead.
 func (*OrderOverviewRequest) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{20}
+	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *OrderOverviewRequest) GetFilter() *OrderOverviewFilter {
@@ -1688,7 +2009,7 @@ type OrderOverviewResponse struct {
 
 func (x *OrderOverviewResponse) Reset() {
 	*x = OrderOverviewResponse{}
-	mi := &file_order_iface_v1_order_proto_msgTypes[21]
+	mi := &file_order_iface_v1_order_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1700,7 +2021,7 @@ func (x *OrderOverviewResponse) String() string {
 func (*OrderOverviewResponse) ProtoMessage() {}
 
 func (x *OrderOverviewResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_order_proto_msgTypes[21]
+	mi := &file_order_iface_v1_order_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1713,7 +2034,7 @@ func (x *OrderOverviewResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderOverviewResponse.ProtoReflect.Descriptor instead.
 func (*OrderOverviewResponse) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{21}
+	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{27}
 }
 
 type OrderListRequest struct {
@@ -1724,7 +2045,7 @@ type OrderListRequest struct {
 
 func (x *OrderListRequest) Reset() {
 	*x = OrderListRequest{}
-	mi := &file_order_iface_v1_order_proto_msgTypes[22]
+	mi := &file_order_iface_v1_order_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1736,7 +2057,7 @@ func (x *OrderListRequest) String() string {
 func (*OrderListRequest) ProtoMessage() {}
 
 func (x *OrderListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_order_proto_msgTypes[22]
+	mi := &file_order_iface_v1_order_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1749,7 +2070,7 @@ func (x *OrderListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderListRequest.ProtoReflect.Descriptor instead.
 func (*OrderListRequest) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{22}
+	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{28}
 }
 
 type OrderListResponse struct {
@@ -1760,7 +2081,7 @@ type OrderListResponse struct {
 
 func (x *OrderListResponse) Reset() {
 	*x = OrderListResponse{}
-	mi := &file_order_iface_v1_order_proto_msgTypes[23]
+	mi := &file_order_iface_v1_order_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1772,7 +2093,7 @@ func (x *OrderListResponse) String() string {
 func (*OrderListResponse) ProtoMessage() {}
 
 func (x *OrderListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_order_proto_msgTypes[23]
+	mi := &file_order_iface_v1_order_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1785,7 +2106,7 @@ func (x *OrderListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderListResponse.ProtoReflect.Descriptor instead.
 func (*OrderListResponse) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{23}
+	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{29}
 }
 
 type OrderTagItem struct {
@@ -1798,7 +2119,7 @@ type OrderTagItem struct {
 
 func (x *OrderTagItem) Reset() {
 	*x = OrderTagItem{}
-	mi := &file_order_iface_v1_order_proto_msgTypes[24]
+	mi := &file_order_iface_v1_order_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1810,7 +2131,7 @@ func (x *OrderTagItem) String() string {
 func (*OrderTagItem) ProtoMessage() {}
 
 func (x *OrderTagItem) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_order_proto_msgTypes[24]
+	mi := &file_order_iface_v1_order_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1823,7 +2144,7 @@ func (x *OrderTagItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderTagItem.ProtoReflect.Descriptor instead.
 func (*OrderTagItem) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{24}
+	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *OrderTagItem) GetType() TagType {
@@ -1851,7 +2172,7 @@ type OrderTagAddRequest struct {
 
 func (x *OrderTagAddRequest) Reset() {
 	*x = OrderTagAddRequest{}
-	mi := &file_order_iface_v1_order_proto_msgTypes[25]
+	mi := &file_order_iface_v1_order_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1863,7 +2184,7 @@ func (x *OrderTagAddRequest) String() string {
 func (*OrderTagAddRequest) ProtoMessage() {}
 
 func (x *OrderTagAddRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_order_proto_msgTypes[25]
+	mi := &file_order_iface_v1_order_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1876,7 +2197,7 @@ func (x *OrderTagAddRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderTagAddRequest.ProtoReflect.Descriptor instead.
 func (*OrderTagAddRequest) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{25}
+	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *OrderTagAddRequest) GetTeamId() uint64 {
@@ -1908,7 +2229,7 @@ type OrderTagAddResponse struct {
 
 func (x *OrderTagAddResponse) Reset() {
 	*x = OrderTagAddResponse{}
-	mi := &file_order_iface_v1_order_proto_msgTypes[26]
+	mi := &file_order_iface_v1_order_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1920,7 +2241,7 @@ func (x *OrderTagAddResponse) String() string {
 func (*OrderTagAddResponse) ProtoMessage() {}
 
 func (x *OrderTagAddResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_order_proto_msgTypes[26]
+	mi := &file_order_iface_v1_order_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1933,7 +2254,7 @@ func (x *OrderTagAddResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderTagAddResponse.ProtoReflect.Descriptor instead.
 func (*OrderTagAddResponse) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{26}
+	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{32}
 }
 
 type OrderTagRemoveRequest struct {
@@ -1947,7 +2268,7 @@ type OrderTagRemoveRequest struct {
 
 func (x *OrderTagRemoveRequest) Reset() {
 	*x = OrderTagRemoveRequest{}
-	mi := &file_order_iface_v1_order_proto_msgTypes[27]
+	mi := &file_order_iface_v1_order_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1959,7 +2280,7 @@ func (x *OrderTagRemoveRequest) String() string {
 func (*OrderTagRemoveRequest) ProtoMessage() {}
 
 func (x *OrderTagRemoveRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_order_proto_msgTypes[27]
+	mi := &file_order_iface_v1_order_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1972,7 +2293,7 @@ func (x *OrderTagRemoveRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderTagRemoveRequest.ProtoReflect.Descriptor instead.
 func (*OrderTagRemoveRequest) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{27}
+	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *OrderTagRemoveRequest) GetTeamId() uint64 {
@@ -2004,7 +2325,7 @@ type OrderTagRemoveResponse struct {
 
 func (x *OrderTagRemoveResponse) Reset() {
 	*x = OrderTagRemoveResponse{}
-	mi := &file_order_iface_v1_order_proto_msgTypes[28]
+	mi := &file_order_iface_v1_order_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2016,7 +2337,7 @@ func (x *OrderTagRemoveResponse) String() string {
 func (*OrderTagRemoveResponse) ProtoMessage() {}
 
 func (x *OrderTagRemoveResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_order_proto_msgTypes[28]
+	mi := &file_order_iface_v1_order_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2029,7 +2350,7 @@ func (x *OrderTagRemoveResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderTagRemoveResponse.ProtoReflect.Descriptor instead.
 func (*OrderTagRemoveResponse) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{28}
+	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{34}
 }
 
 type OrderFundSet struct {
@@ -2049,7 +2370,7 @@ type OrderFundSet struct {
 
 func (x *OrderFundSet) Reset() {
 	*x = OrderFundSet{}
-	mi := &file_order_iface_v1_order_proto_msgTypes[29]
+	mi := &file_order_iface_v1_order_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2061,7 +2382,7 @@ func (x *OrderFundSet) String() string {
 func (*OrderFundSet) ProtoMessage() {}
 
 func (x *OrderFundSet) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_order_proto_msgTypes[29]
+	mi := &file_order_iface_v1_order_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2074,7 +2395,7 @@ func (x *OrderFundSet) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderFundSet.ProtoReflect.Descriptor instead.
 func (*OrderFundSet) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{29}
+	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *OrderFundSet) GetTeamId() uint64 {
@@ -2162,7 +2483,7 @@ type OrderCompletedSet struct {
 
 func (x *OrderCompletedSet) Reset() {
 	*x = OrderCompletedSet{}
-	mi := &file_order_iface_v1_order_proto_msgTypes[30]
+	mi := &file_order_iface_v1_order_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2174,7 +2495,7 @@ func (x *OrderCompletedSet) String() string {
 func (*OrderCompletedSet) ProtoMessage() {}
 
 func (x *OrderCompletedSet) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_order_proto_msgTypes[30]
+	mi := &file_order_iface_v1_order_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2187,7 +2508,7 @@ func (x *OrderCompletedSet) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderCompletedSet.ProtoReflect.Descriptor instead.
 func (*OrderCompletedSet) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{30}
+	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *OrderCompletedSet) GetTeamId() uint64 {
@@ -2261,7 +2582,7 @@ type OrderFundRollback struct {
 
 func (x *OrderFundRollback) Reset() {
 	*x = OrderFundRollback{}
-	mi := &file_order_iface_v1_order_proto_msgTypes[31]
+	mi := &file_order_iface_v1_order_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2273,7 +2594,7 @@ func (x *OrderFundRollback) String() string {
 func (*OrderFundRollback) ProtoMessage() {}
 
 func (x *OrderFundRollback) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_order_proto_msgTypes[31]
+	mi := &file_order_iface_v1_order_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2286,7 +2607,7 @@ func (x *OrderFundRollback) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderFundRollback.ProtoReflect.Descriptor instead.
 func (*OrderFundRollback) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{31}
+	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *OrderFundRollback) GetMessage() string {
@@ -2310,7 +2631,7 @@ type OrderFundSetRequest struct {
 
 func (x *OrderFundSetRequest) Reset() {
 	*x = OrderFundSetRequest{}
-	mi := &file_order_iface_v1_order_proto_msgTypes[32]
+	mi := &file_order_iface_v1_order_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2322,7 +2643,7 @@ func (x *OrderFundSetRequest) String() string {
 func (*OrderFundSetRequest) ProtoMessage() {}
 
 func (x *OrderFundSetRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_order_proto_msgTypes[32]
+	mi := &file_order_iface_v1_order_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2335,7 +2656,7 @@ func (x *OrderFundSetRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderFundSetRequest.ProtoReflect.Descriptor instead.
 func (*OrderFundSetRequest) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{32}
+	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *OrderFundSetRequest) GetKind() isOrderFundSetRequest_Kind {
@@ -2402,7 +2723,7 @@ type OrderFundSetResponse struct {
 
 func (x *OrderFundSetResponse) Reset() {
 	*x = OrderFundSetResponse{}
-	mi := &file_order_iface_v1_order_proto_msgTypes[33]
+	mi := &file_order_iface_v1_order_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2414,7 +2735,7 @@ func (x *OrderFundSetResponse) String() string {
 func (*OrderFundSetResponse) ProtoMessage() {}
 
 func (x *OrderFundSetResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_order_iface_v1_order_proto_msgTypes[33]
+	mi := &file_order_iface_v1_order_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2427,14 +2748,42 @@ func (x *OrderFundSetResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrderFundSetResponse.ProtoReflect.Descriptor instead.
 func (*OrderFundSetResponse) Descriptor() ([]byte, []int) {
-	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{33}
+	return file_order_iface_v1_order_proto_rawDescGZIP(), []int{39}
 }
 
 var File_order_iface_v1_order_proto protoreflect.FileDescriptor
 
 const file_order_iface_v1_order_proto_rawDesc = "" +
 	"\n" +
-	"\x1aorder_iface/v1/order.proto\x12\x0eorder_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1border_iface/v1/create.proto\x1a\x1aorder_iface/v1/draft.proto\x1a\x1forder_iface/v1/order_core.proto\x1a!order_iface/v1/order_return.proto\x1a tracking_iface/v1/tracking.proto\"b\n" +
+	"\x1aorder_iface/v1/order.proto\x12\x0eorder_iface.v1\x1a\x1bbuf/validate/validate.proto\x1a\x16common/v1/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1border_iface/v1/create.proto\x1a\x1aorder_iface/v1/draft.proto\x1a\x1forder_iface/v1/order_core.proto\x1a!order_iface/v1/order_return.proto\x1a\x17role_base/v1/role.proto\x1a tracking_iface/v1/tracking.proto\"Y\n" +
+	"\vOrderDetail\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x18\n" +
+	"\areceipt\x18\x02 \x01(\tR\areceipt\x12 \n" +
+	"\forder_ref_id\x18\x03 \x01(\tR\n" +
+	"orderRefId\"D\n" +
+	"\x14GetOrderByIdsRequest\x12$\n" +
+	"\x03ids\x18\x01 \x03(\x04B\x12\xbaH\x0f\x92\x01\f\b\x01\x10d\x18\x01\"\x042\x02 \x00R\x03ids:\x06\x92\xb5\x18\x02 \x01\"\xba\x01\n" +
+	"\x15GetOrderByIdsResponse\x12I\n" +
+	"\x06orders\x18\x01 \x03(\v21.order_iface.v1.GetOrderByIdsResponse.OrdersEntryR\x06orders\x1aV\n" +
+	"\vOrdersEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\x04R\x03key\x121\n" +
+	"\x05value\x18\x02 \x01(\v2\x1b.order_iface.v1.OrderDetailR\x05value:\x028\x01\"\xa5\x01\n" +
+	"\x0fOrderItemDetail\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x1d\n" +
+	"\n" +
+	"product_id\x18\x02 \x01(\x04R\tproductId\x12!\n" +
+	"\fvariation_id\x18\x03 \x01(\x04R\vvariationId\x12\x14\n" +
+	"\x05price\x18\x04 \x01(\x01R\x05price\x12\x14\n" +
+	"\x05count\x18\x05 \x01(\x03R\x05count\x12\x14\n" +
+	"\x05total\x18\x06 \x01(\x01R\x05total\"H\n" +
+	"\x18GetOrderItemByIdsRequest\x12$\n" +
+	"\x03ids\x18\x01 \x03(\x04B\x12\xbaH\x0f\x92\x01\f\b\x01\x10d\x18\x01\"\x042\x02 \x00R\x03ids:\x06\x92\xb5\x18\x02 \x01\"\xc2\x01\n" +
+	"\x19GetOrderItemByIdsResponse\x12J\n" +
+	"\x05items\x18\x01 \x03(\v24.order_iface.v1.GetOrderItemByIdsResponse.ItemsEntryR\x05items\x1aY\n" +
+	"\n" +
+	"ItemsEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\x04R\x03key\x125\n" +
+	"\x05value\x18\x02 \x01(\v2\x1f.order_iface.v1.OrderItemDetailR\x05value:\x028\x01\"b\n" +
 	"\fShippedTrack\x12!\n" +
 	"\fset_shipment\x18\x01 \x01(\bR\vsetShipment\x12/\n" +
 	"\torder_ids\x18\x04 \x03(\x04B\x12\xbaH\x0f\x92\x01\f\b\x01\x10d\x18\x01\"\x042\x02 \x00R\borderIds\"Y\n" +
@@ -2615,7 +2964,7 @@ const file_order_iface_v1_order_proto_rawDesc = "" +
 	"\x0fMpPaymentSource\x12!\n" +
 	"\x1dMP_PAYMENT_SOURCE_UNSPECIFIED\x10\x00\x12\x1c\n" +
 	"\x18MP_PAYMENT_SOURCE_MANUAL\x10\x01\x12\x1e\n" +
-	"\x1aMP_PAYMENT_SOURCE_IMPORTER\x10\x022\xb8\x0f\n" +
+	"\x1aMP_PAYMENT_SOURCE_IMPORTER\x10\x022\x80\x11\n" +
 	"\fOrderService\x12e\n" +
 	"\x10OrderDraftCreate\x12'.order_iface.v1.OrderDraftCreateRequest\x1a(.order_iface.v1.OrderDraftCreateResponse\x12e\n" +
 	"\x10OrderDraftDelete\x12'.order_iface.v1.OrderDraftDeleteRequest\x1a(.order_iface.v1.OrderDraftDeleteResponse\x12_\n" +
@@ -2636,7 +2985,9 @@ const file_order_iface_v1_order_proto_rawDesc = "" +
 	"\x0fMpPaymentCreate\x12&.order_iface.v1.MpPaymentCreateRequest\x1a'.order_iface.v1.MpPaymentCreateResponse\x12k\n" +
 	"\x12MpPaymentOrderList\x12).order_iface.v1.MpPaymentOrderListRequest\x1a*.order_iface.v1.MpPaymentOrderListResponse\x12b\n" +
 	"\x0fMpPaymentDelete\x12&.order_iface.v1.MpPaymentDeleteRequest\x1a'.order_iface.v1.MpPaymentDeleteResponse\x12\\\n" +
-	"\rOrderTracking\x12$.order_iface.v1.OrderTrackingRequest\x1a%.order_iface.v1.OrderTrackingResponseB\xb2\x01\n" +
+	"\rOrderTracking\x12$.order_iface.v1.OrderTrackingRequest\x1a%.order_iface.v1.OrderTrackingResponse\x12\\\n" +
+	"\rGetOrderByIds\x12$.order_iface.v1.GetOrderByIdsRequest\x1a%.order_iface.v1.GetOrderByIdsResponse\x12h\n" +
+	"\x11GetOrderItemByIds\x12(.order_iface.v1.GetOrderItemByIdsRequest\x1a).order_iface.v1.GetOrderItemByIdsResponseB\xb2\x01\n" +
 	"\x12com.order_iface.v1B\n" +
 	"OrderProtoP\x01Z;github.com/pdcgo/schema/services/order_iface/v1;order_iface\xa2\x02\x03OXX\xaa\x02\rOrderIface.V1\xca\x02\rOrderIface\\V1\xe2\x02\x19OrderIface\\V1\\GPBMetadata\xea\x02\x0eOrderIface::V1b\x06proto3"
 
@@ -2653,7 +3004,7 @@ func file_order_iface_v1_order_proto_rawDescGZIP() []byte {
 }
 
 var file_order_iface_v1_order_proto_enumTypes = make([]protoimpl.EnumInfo, 7)
-var file_order_iface_v1_order_proto_msgTypes = make([]protoimpl.MessageInfo, 35)
+var file_order_iface_v1_order_proto_msgTypes = make([]protoimpl.MessageInfo, 43)
 var file_order_iface_v1_order_proto_goTypes = []any{
 	(TagType)(0),                       // 0: order_iface.v1.TagType
 	(OrderTimeFilterType)(0),           // 1: order_iface.v1.OrderTimeFilterType
@@ -2662,141 +3013,157 @@ var file_order_iface_v1_order_proto_goTypes = []any{
 	(OrderStatus)(0),                   // 4: order_iface.v1.OrderStatus
 	(WarehouseStatus)(0),               // 5: order_iface.v1.WarehouseStatus
 	(MpPaymentSource)(0),               // 6: order_iface.v1.MpPaymentSource
-	(*ShippedTrack)(nil),               // 7: order_iface.v1.ShippedTrack
-	(*OrderTrackingRequest)(nil),       // 8: order_iface.v1.OrderTrackingRequest
-	(*OrderTrackingResponse)(nil),      // 9: order_iface.v1.OrderTrackingResponse
-	(*ChangeEstRevenueRequest)(nil),    // 10: order_iface.v1.ChangeEstRevenueRequest
-	(*ChangeEstRevenueResponse)(nil),   // 11: order_iface.v1.ChangeEstRevenueResponse
-	(*OrderCompletedRequest)(nil),      // 12: order_iface.v1.OrderCompletedRequest
-	(*OrderCompletedResponse)(nil),     // 13: order_iface.v1.OrderCompletedResponse
-	(*ChangeOrderRefIDRequest)(nil),    // 14: order_iface.v1.ChangeOrderRefIDRequest
-	(*ChangeOrderRefIDResponse)(nil),   // 15: order_iface.v1.ChangeOrderRefIDResponse
-	(*MpPaymentCreateRequest)(nil),     // 16: order_iface.v1.MpPaymentCreateRequest
-	(*MpPaymentCreateResponse)(nil),    // 17: order_iface.v1.MpPaymentCreateResponse
-	(*MpPaymentOrderListRequest)(nil),  // 18: order_iface.v1.MpPaymentOrderListRequest
-	(*PaymentOrderItem)(nil),           // 19: order_iface.v1.PaymentOrderItem
-	(*MpPaymentOrderListResponse)(nil), // 20: order_iface.v1.MpPaymentOrderListResponse
-	(*MpPaymentDeleteRequest)(nil),     // 21: order_iface.v1.MpPaymentDeleteRequest
-	(*MpPaymentDeleteResponse)(nil),    // 22: order_iface.v1.MpPaymentDeleteResponse
-	(*OrderKeywordFilter)(nil),         // 23: order_iface.v1.OrderKeywordFilter
-	(*OrderTimeFilter)(nil),            // 24: order_iface.v1.OrderTimeFilter
-	(*StatusFilter)(nil),               // 25: order_iface.v1.StatusFilter
-	(*OrderOverviewFilter)(nil),        // 26: order_iface.v1.OrderOverviewFilter
-	(*OrderOverviewRequest)(nil),       // 27: order_iface.v1.OrderOverviewRequest
-	(*OrderOverviewResponse)(nil),      // 28: order_iface.v1.OrderOverviewResponse
-	(*OrderListRequest)(nil),           // 29: order_iface.v1.OrderListRequest
-	(*OrderListResponse)(nil),          // 30: order_iface.v1.OrderListResponse
-	(*OrderTagItem)(nil),               // 31: order_iface.v1.OrderTagItem
-	(*OrderTagAddRequest)(nil),         // 32: order_iface.v1.OrderTagAddRequest
-	(*OrderTagAddResponse)(nil),        // 33: order_iface.v1.OrderTagAddResponse
-	(*OrderTagRemoveRequest)(nil),      // 34: order_iface.v1.OrderTagRemoveRequest
-	(*OrderTagRemoveResponse)(nil),     // 35: order_iface.v1.OrderTagRemoveResponse
-	(*OrderFundSet)(nil),               // 36: order_iface.v1.OrderFundSet
-	(*OrderCompletedSet)(nil),          // 37: order_iface.v1.OrderCompletedSet
-	(*OrderFundRollback)(nil),          // 38: order_iface.v1.OrderFundRollback
-	(*OrderFundSetRequest)(nil),        // 39: order_iface.v1.OrderFundSetRequest
-	(*OrderFundSetResponse)(nil),       // 40: order_iface.v1.OrderFundSetResponse
-	nil,                                // 41: order_iface.v1.OrderTrackingResponse.ResultEntry
-	(*timestamppb.Timestamp)(nil),      // 42: google.protobuf.Timestamp
-	(*v11.TimeFilterRange)(nil),        // 43: common.v1.TimeFilterRange
-	(v11.MarketplaceType)(0),           // 44: common.v1.MarketplaceType
-	(v11.PaymentMethod)(0),             // 45: common.v1.PaymentMethod
-	(*v11.PageFilter)(nil),             // 46: common.v1.PageFilter
-	(*v1.TrackInfo)(nil),               // 47: tracking_iface.v1.TrackInfo
-	(*OrderDraftCreateRequest)(nil),    // 48: order_iface.v1.OrderDraftCreateRequest
-	(*OrderDraftDeleteRequest)(nil),    // 49: order_iface.v1.OrderDraftDeleteRequest
-	(*OrderDraftListRequest)(nil),      // 50: order_iface.v1.OrderDraftListRequest
-	(*OrderDraftGetRequest)(nil),       // 51: order_iface.v1.OrderDraftGetRequest
-	(*OrderDraftCheckRequest)(nil),     // 52: order_iface.v1.OrderDraftCheckRequest
-	(*OrderCreateRequest)(nil),         // 53: order_iface.v1.OrderCreateRequest
-	(*OrderChangeStatusRequest)(nil),   // 54: order_iface.v1.OrderChangeStatusRequest
-	(*OrderReturnArrivedRequest)(nil),  // 55: order_iface.v1.OrderReturnArrivedRequest
-	(*OrderDraftCreateResponse)(nil),   // 56: order_iface.v1.OrderDraftCreateResponse
-	(*OrderDraftDeleteResponse)(nil),   // 57: order_iface.v1.OrderDraftDeleteResponse
-	(*OrderDraftListResponse)(nil),     // 58: order_iface.v1.OrderDraftListResponse
-	(*OrderDraftGetResponse)(nil),      // 59: order_iface.v1.OrderDraftGetResponse
-	(*OrderDraftCheckResponse)(nil),    // 60: order_iface.v1.OrderDraftCheckResponse
-	(*OrderCreateResponse)(nil),        // 61: order_iface.v1.OrderCreateResponse
-	(*OrderChangeStatusResponse)(nil),  // 62: order_iface.v1.OrderChangeStatusResponse
-	(*OrderReturnArrivedResponse)(nil), // 63: order_iface.v1.OrderReturnArrivedResponse
+	(*OrderDetail)(nil),                // 7: order_iface.v1.OrderDetail
+	(*GetOrderByIdsRequest)(nil),       // 8: order_iface.v1.GetOrderByIdsRequest
+	(*GetOrderByIdsResponse)(nil),      // 9: order_iface.v1.GetOrderByIdsResponse
+	(*OrderItemDetail)(nil),            // 10: order_iface.v1.OrderItemDetail
+	(*GetOrderItemByIdsRequest)(nil),   // 11: order_iface.v1.GetOrderItemByIdsRequest
+	(*GetOrderItemByIdsResponse)(nil),  // 12: order_iface.v1.GetOrderItemByIdsResponse
+	(*ShippedTrack)(nil),               // 13: order_iface.v1.ShippedTrack
+	(*OrderTrackingRequest)(nil),       // 14: order_iface.v1.OrderTrackingRequest
+	(*OrderTrackingResponse)(nil),      // 15: order_iface.v1.OrderTrackingResponse
+	(*ChangeEstRevenueRequest)(nil),    // 16: order_iface.v1.ChangeEstRevenueRequest
+	(*ChangeEstRevenueResponse)(nil),   // 17: order_iface.v1.ChangeEstRevenueResponse
+	(*OrderCompletedRequest)(nil),      // 18: order_iface.v1.OrderCompletedRequest
+	(*OrderCompletedResponse)(nil),     // 19: order_iface.v1.OrderCompletedResponse
+	(*ChangeOrderRefIDRequest)(nil),    // 20: order_iface.v1.ChangeOrderRefIDRequest
+	(*ChangeOrderRefIDResponse)(nil),   // 21: order_iface.v1.ChangeOrderRefIDResponse
+	(*MpPaymentCreateRequest)(nil),     // 22: order_iface.v1.MpPaymentCreateRequest
+	(*MpPaymentCreateResponse)(nil),    // 23: order_iface.v1.MpPaymentCreateResponse
+	(*MpPaymentOrderListRequest)(nil),  // 24: order_iface.v1.MpPaymentOrderListRequest
+	(*PaymentOrderItem)(nil),           // 25: order_iface.v1.PaymentOrderItem
+	(*MpPaymentOrderListResponse)(nil), // 26: order_iface.v1.MpPaymentOrderListResponse
+	(*MpPaymentDeleteRequest)(nil),     // 27: order_iface.v1.MpPaymentDeleteRequest
+	(*MpPaymentDeleteResponse)(nil),    // 28: order_iface.v1.MpPaymentDeleteResponse
+	(*OrderKeywordFilter)(nil),         // 29: order_iface.v1.OrderKeywordFilter
+	(*OrderTimeFilter)(nil),            // 30: order_iface.v1.OrderTimeFilter
+	(*StatusFilter)(nil),               // 31: order_iface.v1.StatusFilter
+	(*OrderOverviewFilter)(nil),        // 32: order_iface.v1.OrderOverviewFilter
+	(*OrderOverviewRequest)(nil),       // 33: order_iface.v1.OrderOverviewRequest
+	(*OrderOverviewResponse)(nil),      // 34: order_iface.v1.OrderOverviewResponse
+	(*OrderListRequest)(nil),           // 35: order_iface.v1.OrderListRequest
+	(*OrderListResponse)(nil),          // 36: order_iface.v1.OrderListResponse
+	(*OrderTagItem)(nil),               // 37: order_iface.v1.OrderTagItem
+	(*OrderTagAddRequest)(nil),         // 38: order_iface.v1.OrderTagAddRequest
+	(*OrderTagAddResponse)(nil),        // 39: order_iface.v1.OrderTagAddResponse
+	(*OrderTagRemoveRequest)(nil),      // 40: order_iface.v1.OrderTagRemoveRequest
+	(*OrderTagRemoveResponse)(nil),     // 41: order_iface.v1.OrderTagRemoveResponse
+	(*OrderFundSet)(nil),               // 42: order_iface.v1.OrderFundSet
+	(*OrderCompletedSet)(nil),          // 43: order_iface.v1.OrderCompletedSet
+	(*OrderFundRollback)(nil),          // 44: order_iface.v1.OrderFundRollback
+	(*OrderFundSetRequest)(nil),        // 45: order_iface.v1.OrderFundSetRequest
+	(*OrderFundSetResponse)(nil),       // 46: order_iface.v1.OrderFundSetResponse
+	nil,                                // 47: order_iface.v1.GetOrderByIdsResponse.OrdersEntry
+	nil,                                // 48: order_iface.v1.GetOrderItemByIdsResponse.ItemsEntry
+	nil,                                // 49: order_iface.v1.OrderTrackingResponse.ResultEntry
+	(*timestamppb.Timestamp)(nil),      // 50: google.protobuf.Timestamp
+	(*v11.TimeFilterRange)(nil),        // 51: common.v1.TimeFilterRange
+	(v11.MarketplaceType)(0),           // 52: common.v1.MarketplaceType
+	(v11.PaymentMethod)(0),             // 53: common.v1.PaymentMethod
+	(*v11.PageFilter)(nil),             // 54: common.v1.PageFilter
+	(*v1.TrackInfo)(nil),               // 55: tracking_iface.v1.TrackInfo
+	(*OrderDraftCreateRequest)(nil),    // 56: order_iface.v1.OrderDraftCreateRequest
+	(*OrderDraftDeleteRequest)(nil),    // 57: order_iface.v1.OrderDraftDeleteRequest
+	(*OrderDraftListRequest)(nil),      // 58: order_iface.v1.OrderDraftListRequest
+	(*OrderDraftGetRequest)(nil),       // 59: order_iface.v1.OrderDraftGetRequest
+	(*OrderDraftCheckRequest)(nil),     // 60: order_iface.v1.OrderDraftCheckRequest
+	(*OrderCreateRequest)(nil),         // 61: order_iface.v1.OrderCreateRequest
+	(*OrderChangeStatusRequest)(nil),   // 62: order_iface.v1.OrderChangeStatusRequest
+	(*OrderReturnArrivedRequest)(nil),  // 63: order_iface.v1.OrderReturnArrivedRequest
+	(*OrderDraftCreateResponse)(nil),   // 64: order_iface.v1.OrderDraftCreateResponse
+	(*OrderDraftDeleteResponse)(nil),   // 65: order_iface.v1.OrderDraftDeleteResponse
+	(*OrderDraftListResponse)(nil),     // 66: order_iface.v1.OrderDraftListResponse
+	(*OrderDraftGetResponse)(nil),      // 67: order_iface.v1.OrderDraftGetResponse
+	(*OrderDraftCheckResponse)(nil),    // 68: order_iface.v1.OrderDraftCheckResponse
+	(*OrderCreateResponse)(nil),        // 69: order_iface.v1.OrderCreateResponse
+	(*OrderChangeStatusResponse)(nil),  // 70: order_iface.v1.OrderChangeStatusResponse
+	(*OrderReturnArrivedResponse)(nil), // 71: order_iface.v1.OrderReturnArrivedResponse
 }
 var file_order_iface_v1_order_proto_depIdxs = []int32{
-	7,  // 0: order_iface.v1.OrderTrackingRequest.shipped:type_name -> order_iface.v1.ShippedTrack
-	41, // 1: order_iface.v1.OrderTrackingResponse.result:type_name -> order_iface.v1.OrderTrackingResponse.ResultEntry
-	42, // 2: order_iface.v1.MpPaymentCreateRequest.at:type_name -> google.protobuf.Timestamp
-	42, // 3: order_iface.v1.MpPaymentCreateRequest.wd_at:type_name -> google.protobuf.Timestamp
-	6,  // 4: order_iface.v1.MpPaymentCreateRequest.source:type_name -> order_iface.v1.MpPaymentSource
-	6,  // 5: order_iface.v1.PaymentOrderItem.source:type_name -> order_iface.v1.MpPaymentSource
-	42, // 6: order_iface.v1.PaymentOrderItem.at:type_name -> google.protobuf.Timestamp
-	42, // 7: order_iface.v1.PaymentOrderItem.fund_at:type_name -> google.protobuf.Timestamp
-	19, // 8: order_iface.v1.MpPaymentOrderListResponse.items:type_name -> order_iface.v1.PaymentOrderItem
-	2,  // 9: order_iface.v1.OrderKeywordFilter.type:type_name -> order_iface.v1.KeywordFilterType
-	1,  // 10: order_iface.v1.OrderTimeFilter.type:type_name -> order_iface.v1.OrderTimeFilterType
-	43, // 11: order_iface.v1.OrderTimeFilter.time_range:type_name -> common.v1.TimeFilterRange
-	4,  // 12: order_iface.v1.StatusFilter.status:type_name -> order_iface.v1.OrderStatus
-	5,  // 13: order_iface.v1.StatusFilter.warehouse_status:type_name -> order_iface.v1.WarehouseStatus
-	3,  // 14: order_iface.v1.OrderOverviewFilter.product_source:type_name -> order_iface.v1.ProductSourceType
-	44, // 15: order_iface.v1.OrderOverviewFilter.marketplaces:type_name -> common.v1.MarketplaceType
-	23, // 16: order_iface.v1.OrderOverviewFilter.keyword_filter:type_name -> order_iface.v1.OrderKeywordFilter
-	45, // 17: order_iface.v1.OrderOverviewFilter.payment_method:type_name -> common.v1.PaymentMethod
-	5,  // 18: order_iface.v1.OrderOverviewFilter.warehouse_status:type_name -> order_iface.v1.WarehouseStatus
-	24, // 19: order_iface.v1.OrderOverviewFilter.time_filter:type_name -> order_iface.v1.OrderTimeFilter
-	26, // 20: order_iface.v1.OrderOverviewRequest.filter:type_name -> order_iface.v1.OrderOverviewFilter
-	46, // 21: order_iface.v1.OrderOverviewRequest.page:type_name -> common.v1.PageFilter
-	0,  // 22: order_iface.v1.OrderTagItem.type:type_name -> order_iface.v1.TagType
-	31, // 23: order_iface.v1.OrderTagAddRequest.tags:type_name -> order_iface.v1.OrderTagItem
-	0,  // 24: order_iface.v1.OrderTagRemoveRequest.tag_type:type_name -> order_iface.v1.TagType
-	42, // 25: order_iface.v1.OrderFundSet.at:type_name -> google.protobuf.Timestamp
-	42, // 26: order_iface.v1.OrderCompletedSet.wd_at:type_name -> google.protobuf.Timestamp
-	36, // 27: order_iface.v1.OrderFundSetRequest.order_fund_set:type_name -> order_iface.v1.OrderFundSet
-	37, // 28: order_iface.v1.OrderFundSetRequest.order_completed_set:type_name -> order_iface.v1.OrderCompletedSet
-	38, // 29: order_iface.v1.OrderFundSetRequest.order_fund_rollback:type_name -> order_iface.v1.OrderFundRollback
-	47, // 30: order_iface.v1.OrderTrackingResponse.ResultEntry.value:type_name -> tracking_iface.v1.TrackInfo
-	48, // 31: order_iface.v1.OrderService.OrderDraftCreate:input_type -> order_iface.v1.OrderDraftCreateRequest
-	49, // 32: order_iface.v1.OrderService.OrderDraftDelete:input_type -> order_iface.v1.OrderDraftDeleteRequest
-	50, // 33: order_iface.v1.OrderService.OrderDraftList:input_type -> order_iface.v1.OrderDraftListRequest
-	51, // 34: order_iface.v1.OrderService.OrderDraftGet:input_type -> order_iface.v1.OrderDraftGetRequest
-	52, // 35: order_iface.v1.OrderService.OrderDraftCheck:input_type -> order_iface.v1.OrderDraftCheckRequest
-	53, // 36: order_iface.v1.OrderService.OrderCreate:input_type -> order_iface.v1.OrderCreateRequest
-	54, // 37: order_iface.v1.OrderService.OrderChangeStatus:input_type -> order_iface.v1.OrderChangeStatusRequest
-	39, // 38: order_iface.v1.OrderService.OrderFundSet:input_type -> order_iface.v1.OrderFundSetRequest
-	34, // 39: order_iface.v1.OrderService.OrderTagRemove:input_type -> order_iface.v1.OrderTagRemoveRequest
-	32, // 40: order_iface.v1.OrderService.OrderTagAdd:input_type -> order_iface.v1.OrderTagAddRequest
-	14, // 41: order_iface.v1.OrderService.ChangeOrderRefID:input_type -> order_iface.v1.ChangeOrderRefIDRequest
-	10, // 42: order_iface.v1.OrderService.ChangeEstRevenue:input_type -> order_iface.v1.ChangeEstRevenueRequest
-	12, // 43: order_iface.v1.OrderService.OrderCompleted:input_type -> order_iface.v1.OrderCompletedRequest
-	55, // 44: order_iface.v1.OrderService.OrderReturnArrived:input_type -> order_iface.v1.OrderReturnArrivedRequest
-	29, // 45: order_iface.v1.OrderService.OrderList:input_type -> order_iface.v1.OrderListRequest
-	27, // 46: order_iface.v1.OrderService.OrderOverview:input_type -> order_iface.v1.OrderOverviewRequest
-	16, // 47: order_iface.v1.OrderService.MpPaymentCreate:input_type -> order_iface.v1.MpPaymentCreateRequest
-	18, // 48: order_iface.v1.OrderService.MpPaymentOrderList:input_type -> order_iface.v1.MpPaymentOrderListRequest
-	21, // 49: order_iface.v1.OrderService.MpPaymentDelete:input_type -> order_iface.v1.MpPaymentDeleteRequest
-	8,  // 50: order_iface.v1.OrderService.OrderTracking:input_type -> order_iface.v1.OrderTrackingRequest
-	56, // 51: order_iface.v1.OrderService.OrderDraftCreate:output_type -> order_iface.v1.OrderDraftCreateResponse
-	57, // 52: order_iface.v1.OrderService.OrderDraftDelete:output_type -> order_iface.v1.OrderDraftDeleteResponse
-	58, // 53: order_iface.v1.OrderService.OrderDraftList:output_type -> order_iface.v1.OrderDraftListResponse
-	59, // 54: order_iface.v1.OrderService.OrderDraftGet:output_type -> order_iface.v1.OrderDraftGetResponse
-	60, // 55: order_iface.v1.OrderService.OrderDraftCheck:output_type -> order_iface.v1.OrderDraftCheckResponse
-	61, // 56: order_iface.v1.OrderService.OrderCreate:output_type -> order_iface.v1.OrderCreateResponse
-	62, // 57: order_iface.v1.OrderService.OrderChangeStatus:output_type -> order_iface.v1.OrderChangeStatusResponse
-	40, // 58: order_iface.v1.OrderService.OrderFundSet:output_type -> order_iface.v1.OrderFundSetResponse
-	35, // 59: order_iface.v1.OrderService.OrderTagRemove:output_type -> order_iface.v1.OrderTagRemoveResponse
-	33, // 60: order_iface.v1.OrderService.OrderTagAdd:output_type -> order_iface.v1.OrderTagAddResponse
-	15, // 61: order_iface.v1.OrderService.ChangeOrderRefID:output_type -> order_iface.v1.ChangeOrderRefIDResponse
-	11, // 62: order_iface.v1.OrderService.ChangeEstRevenue:output_type -> order_iface.v1.ChangeEstRevenueResponse
-	13, // 63: order_iface.v1.OrderService.OrderCompleted:output_type -> order_iface.v1.OrderCompletedResponse
-	63, // 64: order_iface.v1.OrderService.OrderReturnArrived:output_type -> order_iface.v1.OrderReturnArrivedResponse
-	30, // 65: order_iface.v1.OrderService.OrderList:output_type -> order_iface.v1.OrderListResponse
-	28, // 66: order_iface.v1.OrderService.OrderOverview:output_type -> order_iface.v1.OrderOverviewResponse
-	17, // 67: order_iface.v1.OrderService.MpPaymentCreate:output_type -> order_iface.v1.MpPaymentCreateResponse
-	20, // 68: order_iface.v1.OrderService.MpPaymentOrderList:output_type -> order_iface.v1.MpPaymentOrderListResponse
-	22, // 69: order_iface.v1.OrderService.MpPaymentDelete:output_type -> order_iface.v1.MpPaymentDeleteResponse
-	9,  // 70: order_iface.v1.OrderService.OrderTracking:output_type -> order_iface.v1.OrderTrackingResponse
-	51, // [51:71] is the sub-list for method output_type
-	31, // [31:51] is the sub-list for method input_type
-	31, // [31:31] is the sub-list for extension type_name
-	31, // [31:31] is the sub-list for extension extendee
-	0,  // [0:31] is the sub-list for field type_name
+	47, // 0: order_iface.v1.GetOrderByIdsResponse.orders:type_name -> order_iface.v1.GetOrderByIdsResponse.OrdersEntry
+	48, // 1: order_iface.v1.GetOrderItemByIdsResponse.items:type_name -> order_iface.v1.GetOrderItemByIdsResponse.ItemsEntry
+	13, // 2: order_iface.v1.OrderTrackingRequest.shipped:type_name -> order_iface.v1.ShippedTrack
+	49, // 3: order_iface.v1.OrderTrackingResponse.result:type_name -> order_iface.v1.OrderTrackingResponse.ResultEntry
+	50, // 4: order_iface.v1.MpPaymentCreateRequest.at:type_name -> google.protobuf.Timestamp
+	50, // 5: order_iface.v1.MpPaymentCreateRequest.wd_at:type_name -> google.protobuf.Timestamp
+	6,  // 6: order_iface.v1.MpPaymentCreateRequest.source:type_name -> order_iface.v1.MpPaymentSource
+	6,  // 7: order_iface.v1.PaymentOrderItem.source:type_name -> order_iface.v1.MpPaymentSource
+	50, // 8: order_iface.v1.PaymentOrderItem.at:type_name -> google.protobuf.Timestamp
+	50, // 9: order_iface.v1.PaymentOrderItem.fund_at:type_name -> google.protobuf.Timestamp
+	25, // 10: order_iface.v1.MpPaymentOrderListResponse.items:type_name -> order_iface.v1.PaymentOrderItem
+	2,  // 11: order_iface.v1.OrderKeywordFilter.type:type_name -> order_iface.v1.KeywordFilterType
+	1,  // 12: order_iface.v1.OrderTimeFilter.type:type_name -> order_iface.v1.OrderTimeFilterType
+	51, // 13: order_iface.v1.OrderTimeFilter.time_range:type_name -> common.v1.TimeFilterRange
+	4,  // 14: order_iface.v1.StatusFilter.status:type_name -> order_iface.v1.OrderStatus
+	5,  // 15: order_iface.v1.StatusFilter.warehouse_status:type_name -> order_iface.v1.WarehouseStatus
+	3,  // 16: order_iface.v1.OrderOverviewFilter.product_source:type_name -> order_iface.v1.ProductSourceType
+	52, // 17: order_iface.v1.OrderOverviewFilter.marketplaces:type_name -> common.v1.MarketplaceType
+	29, // 18: order_iface.v1.OrderOverviewFilter.keyword_filter:type_name -> order_iface.v1.OrderKeywordFilter
+	53, // 19: order_iface.v1.OrderOverviewFilter.payment_method:type_name -> common.v1.PaymentMethod
+	5,  // 20: order_iface.v1.OrderOverviewFilter.warehouse_status:type_name -> order_iface.v1.WarehouseStatus
+	30, // 21: order_iface.v1.OrderOverviewFilter.time_filter:type_name -> order_iface.v1.OrderTimeFilter
+	32, // 22: order_iface.v1.OrderOverviewRequest.filter:type_name -> order_iface.v1.OrderOverviewFilter
+	54, // 23: order_iface.v1.OrderOverviewRequest.page:type_name -> common.v1.PageFilter
+	0,  // 24: order_iface.v1.OrderTagItem.type:type_name -> order_iface.v1.TagType
+	37, // 25: order_iface.v1.OrderTagAddRequest.tags:type_name -> order_iface.v1.OrderTagItem
+	0,  // 26: order_iface.v1.OrderTagRemoveRequest.tag_type:type_name -> order_iface.v1.TagType
+	50, // 27: order_iface.v1.OrderFundSet.at:type_name -> google.protobuf.Timestamp
+	50, // 28: order_iface.v1.OrderCompletedSet.wd_at:type_name -> google.protobuf.Timestamp
+	42, // 29: order_iface.v1.OrderFundSetRequest.order_fund_set:type_name -> order_iface.v1.OrderFundSet
+	43, // 30: order_iface.v1.OrderFundSetRequest.order_completed_set:type_name -> order_iface.v1.OrderCompletedSet
+	44, // 31: order_iface.v1.OrderFundSetRequest.order_fund_rollback:type_name -> order_iface.v1.OrderFundRollback
+	7,  // 32: order_iface.v1.GetOrderByIdsResponse.OrdersEntry.value:type_name -> order_iface.v1.OrderDetail
+	10, // 33: order_iface.v1.GetOrderItemByIdsResponse.ItemsEntry.value:type_name -> order_iface.v1.OrderItemDetail
+	55, // 34: order_iface.v1.OrderTrackingResponse.ResultEntry.value:type_name -> tracking_iface.v1.TrackInfo
+	56, // 35: order_iface.v1.OrderService.OrderDraftCreate:input_type -> order_iface.v1.OrderDraftCreateRequest
+	57, // 36: order_iface.v1.OrderService.OrderDraftDelete:input_type -> order_iface.v1.OrderDraftDeleteRequest
+	58, // 37: order_iface.v1.OrderService.OrderDraftList:input_type -> order_iface.v1.OrderDraftListRequest
+	59, // 38: order_iface.v1.OrderService.OrderDraftGet:input_type -> order_iface.v1.OrderDraftGetRequest
+	60, // 39: order_iface.v1.OrderService.OrderDraftCheck:input_type -> order_iface.v1.OrderDraftCheckRequest
+	61, // 40: order_iface.v1.OrderService.OrderCreate:input_type -> order_iface.v1.OrderCreateRequest
+	62, // 41: order_iface.v1.OrderService.OrderChangeStatus:input_type -> order_iface.v1.OrderChangeStatusRequest
+	45, // 42: order_iface.v1.OrderService.OrderFundSet:input_type -> order_iface.v1.OrderFundSetRequest
+	40, // 43: order_iface.v1.OrderService.OrderTagRemove:input_type -> order_iface.v1.OrderTagRemoveRequest
+	38, // 44: order_iface.v1.OrderService.OrderTagAdd:input_type -> order_iface.v1.OrderTagAddRequest
+	20, // 45: order_iface.v1.OrderService.ChangeOrderRefID:input_type -> order_iface.v1.ChangeOrderRefIDRequest
+	16, // 46: order_iface.v1.OrderService.ChangeEstRevenue:input_type -> order_iface.v1.ChangeEstRevenueRequest
+	18, // 47: order_iface.v1.OrderService.OrderCompleted:input_type -> order_iface.v1.OrderCompletedRequest
+	63, // 48: order_iface.v1.OrderService.OrderReturnArrived:input_type -> order_iface.v1.OrderReturnArrivedRequest
+	35, // 49: order_iface.v1.OrderService.OrderList:input_type -> order_iface.v1.OrderListRequest
+	33, // 50: order_iface.v1.OrderService.OrderOverview:input_type -> order_iface.v1.OrderOverviewRequest
+	22, // 51: order_iface.v1.OrderService.MpPaymentCreate:input_type -> order_iface.v1.MpPaymentCreateRequest
+	24, // 52: order_iface.v1.OrderService.MpPaymentOrderList:input_type -> order_iface.v1.MpPaymentOrderListRequest
+	27, // 53: order_iface.v1.OrderService.MpPaymentDelete:input_type -> order_iface.v1.MpPaymentDeleteRequest
+	14, // 54: order_iface.v1.OrderService.OrderTracking:input_type -> order_iface.v1.OrderTrackingRequest
+	8,  // 55: order_iface.v1.OrderService.GetOrderByIds:input_type -> order_iface.v1.GetOrderByIdsRequest
+	11, // 56: order_iface.v1.OrderService.GetOrderItemByIds:input_type -> order_iface.v1.GetOrderItemByIdsRequest
+	64, // 57: order_iface.v1.OrderService.OrderDraftCreate:output_type -> order_iface.v1.OrderDraftCreateResponse
+	65, // 58: order_iface.v1.OrderService.OrderDraftDelete:output_type -> order_iface.v1.OrderDraftDeleteResponse
+	66, // 59: order_iface.v1.OrderService.OrderDraftList:output_type -> order_iface.v1.OrderDraftListResponse
+	67, // 60: order_iface.v1.OrderService.OrderDraftGet:output_type -> order_iface.v1.OrderDraftGetResponse
+	68, // 61: order_iface.v1.OrderService.OrderDraftCheck:output_type -> order_iface.v1.OrderDraftCheckResponse
+	69, // 62: order_iface.v1.OrderService.OrderCreate:output_type -> order_iface.v1.OrderCreateResponse
+	70, // 63: order_iface.v1.OrderService.OrderChangeStatus:output_type -> order_iface.v1.OrderChangeStatusResponse
+	46, // 64: order_iface.v1.OrderService.OrderFundSet:output_type -> order_iface.v1.OrderFundSetResponse
+	41, // 65: order_iface.v1.OrderService.OrderTagRemove:output_type -> order_iface.v1.OrderTagRemoveResponse
+	39, // 66: order_iface.v1.OrderService.OrderTagAdd:output_type -> order_iface.v1.OrderTagAddResponse
+	21, // 67: order_iface.v1.OrderService.ChangeOrderRefID:output_type -> order_iface.v1.ChangeOrderRefIDResponse
+	17, // 68: order_iface.v1.OrderService.ChangeEstRevenue:output_type -> order_iface.v1.ChangeEstRevenueResponse
+	19, // 69: order_iface.v1.OrderService.OrderCompleted:output_type -> order_iface.v1.OrderCompletedResponse
+	71, // 70: order_iface.v1.OrderService.OrderReturnArrived:output_type -> order_iface.v1.OrderReturnArrivedResponse
+	36, // 71: order_iface.v1.OrderService.OrderList:output_type -> order_iface.v1.OrderListResponse
+	34, // 72: order_iface.v1.OrderService.OrderOverview:output_type -> order_iface.v1.OrderOverviewResponse
+	23, // 73: order_iface.v1.OrderService.MpPaymentCreate:output_type -> order_iface.v1.MpPaymentCreateResponse
+	26, // 74: order_iface.v1.OrderService.MpPaymentOrderList:output_type -> order_iface.v1.MpPaymentOrderListResponse
+	28, // 75: order_iface.v1.OrderService.MpPaymentDelete:output_type -> order_iface.v1.MpPaymentDeleteResponse
+	15, // 76: order_iface.v1.OrderService.OrderTracking:output_type -> order_iface.v1.OrderTrackingResponse
+	9,  // 77: order_iface.v1.OrderService.GetOrderByIds:output_type -> order_iface.v1.GetOrderByIdsResponse
+	12, // 78: order_iface.v1.OrderService.GetOrderItemByIds:output_type -> order_iface.v1.GetOrderItemByIdsResponse
+	57, // [57:79] is the sub-list for method output_type
+	35, // [35:57] is the sub-list for method input_type
+	35, // [35:35] is the sub-list for extension type_name
+	35, // [35:35] is the sub-list for extension extendee
+	0,  // [0:35] is the sub-list for field type_name
 }
 
 func init() { file_order_iface_v1_order_proto_init() }
@@ -2808,18 +3175,18 @@ func file_order_iface_v1_order_proto_init() {
 	file_order_iface_v1_draft_proto_init()
 	file_order_iface_v1_order_core_proto_init()
 	file_order_iface_v1_order_return_proto_init()
-	file_order_iface_v1_order_proto_msgTypes[1].OneofWrappers = []any{
+	file_order_iface_v1_order_proto_msgTypes[7].OneofWrappers = []any{
 		(*OrderTrackingRequest_Shipped)(nil),
 	}
-	file_order_iface_v1_order_proto_msgTypes[29].OneofWrappers = []any{
+	file_order_iface_v1_order_proto_msgTypes[35].OneofWrappers = []any{
 		(*OrderFundSet_OrderId)(nil),
 		(*OrderFundSet_OrderRefId)(nil),
 	}
-	file_order_iface_v1_order_proto_msgTypes[30].OneofWrappers = []any{
+	file_order_iface_v1_order_proto_msgTypes[36].OneofWrappers = []any{
 		(*OrderCompletedSet_OrderId)(nil),
 		(*OrderCompletedSet_OrderRefId)(nil),
 	}
-	file_order_iface_v1_order_proto_msgTypes[32].OneofWrappers = []any{
+	file_order_iface_v1_order_proto_msgTypes[38].OneofWrappers = []any{
 		(*OrderFundSetRequest_OrderFundSet)(nil),
 		(*OrderFundSetRequest_OrderCompletedSet)(nil),
 		(*OrderFundSetRequest_OrderFundRollback)(nil),
@@ -2830,7 +3197,7 @@ func file_order_iface_v1_order_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_order_iface_v1_order_proto_rawDesc), len(file_order_iface_v1_order_proto_rawDesc)),
 			NumEnums:      7,
-			NumMessages:   35,
+			NumMessages:   43,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

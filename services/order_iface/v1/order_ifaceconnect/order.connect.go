@@ -92,6 +92,12 @@ const (
 	// OrderServiceOrderTrackingProcedure is the fully-qualified name of the OrderService's
 	// OrderTracking RPC.
 	OrderServiceOrderTrackingProcedure = "/order_iface.v1.OrderService/OrderTracking"
+	// OrderServiceGetOrderByIdsProcedure is the fully-qualified name of the OrderService's
+	// GetOrderByIds RPC.
+	OrderServiceGetOrderByIdsProcedure = "/order_iface.v1.OrderService/GetOrderByIds"
+	// OrderServiceGetOrderItemByIdsProcedure is the fully-qualified name of the OrderService's
+	// GetOrderItemByIds RPC.
+	OrderServiceGetOrderItemByIdsProcedure = "/order_iface.v1.OrderService/GetOrderItemByIds"
 )
 
 // OrderServiceClient is a client for the order_iface.v1.OrderService service.
@@ -125,6 +131,9 @@ type OrderServiceClient interface {
 	MpPaymentOrderList(context.Context, *connect.Request[v1.MpPaymentOrderListRequest]) (*connect.Response[v1.MpPaymentOrderListResponse], error)
 	MpPaymentDelete(context.Context, *connect.Request[v1.MpPaymentDeleteRequest]) (*connect.Response[v1.MpPaymentDeleteResponse], error)
 	OrderTracking(context.Context, *connect.Request[v1.OrderTrackingRequest]) (*connect.Response[v1.OrderTrackingResponse], error)
+	// batch fetch by ids
+	GetOrderByIds(context.Context, *connect.Request[v1.GetOrderByIdsRequest]) (*connect.Response[v1.GetOrderByIdsResponse], error)
+	GetOrderItemByIds(context.Context, *connect.Request[v1.GetOrderItemByIdsRequest]) (*connect.Response[v1.GetOrderItemByIdsResponse], error)
 }
 
 // NewOrderServiceClient constructs a client for the order_iface.v1.OrderService service. By
@@ -258,6 +267,18 @@ func NewOrderServiceClient(httpClient connect.HTTPClient, baseURL string, opts .
 			connect.WithSchema(orderServiceMethods.ByName("OrderTracking")),
 			connect.WithClientOptions(opts...),
 		),
+		getOrderByIds: connect.NewClient[v1.GetOrderByIdsRequest, v1.GetOrderByIdsResponse](
+			httpClient,
+			baseURL+OrderServiceGetOrderByIdsProcedure,
+			connect.WithSchema(orderServiceMethods.ByName("GetOrderByIds")),
+			connect.WithClientOptions(opts...),
+		),
+		getOrderItemByIds: connect.NewClient[v1.GetOrderItemByIdsRequest, v1.GetOrderItemByIdsResponse](
+			httpClient,
+			baseURL+OrderServiceGetOrderItemByIdsProcedure,
+			connect.WithSchema(orderServiceMethods.ByName("GetOrderItemByIds")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -283,6 +304,8 @@ type orderServiceClient struct {
 	mpPaymentOrderList *connect.Client[v1.MpPaymentOrderListRequest, v1.MpPaymentOrderListResponse]
 	mpPaymentDelete    *connect.Client[v1.MpPaymentDeleteRequest, v1.MpPaymentDeleteResponse]
 	orderTracking      *connect.Client[v1.OrderTrackingRequest, v1.OrderTrackingResponse]
+	getOrderByIds      *connect.Client[v1.GetOrderByIdsRequest, v1.GetOrderByIdsResponse]
+	getOrderItemByIds  *connect.Client[v1.GetOrderItemByIdsRequest, v1.GetOrderItemByIdsResponse]
 }
 
 // OrderDraftCreate calls order_iface.v1.OrderService.OrderDraftCreate.
@@ -385,6 +408,16 @@ func (c *orderServiceClient) OrderTracking(ctx context.Context, req *connect.Req
 	return c.orderTracking.CallUnary(ctx, req)
 }
 
+// GetOrderByIds calls order_iface.v1.OrderService.GetOrderByIds.
+func (c *orderServiceClient) GetOrderByIds(ctx context.Context, req *connect.Request[v1.GetOrderByIdsRequest]) (*connect.Response[v1.GetOrderByIdsResponse], error) {
+	return c.getOrderByIds.CallUnary(ctx, req)
+}
+
+// GetOrderItemByIds calls order_iface.v1.OrderService.GetOrderItemByIds.
+func (c *orderServiceClient) GetOrderItemByIds(ctx context.Context, req *connect.Request[v1.GetOrderItemByIdsRequest]) (*connect.Response[v1.GetOrderItemByIdsResponse], error) {
+	return c.getOrderItemByIds.CallUnary(ctx, req)
+}
+
 // OrderServiceHandler is an implementation of the order_iface.v1.OrderService service.
 type OrderServiceHandler interface {
 	// masalah creating order
@@ -416,6 +449,9 @@ type OrderServiceHandler interface {
 	MpPaymentOrderList(context.Context, *connect.Request[v1.MpPaymentOrderListRequest]) (*connect.Response[v1.MpPaymentOrderListResponse], error)
 	MpPaymentDelete(context.Context, *connect.Request[v1.MpPaymentDeleteRequest]) (*connect.Response[v1.MpPaymentDeleteResponse], error)
 	OrderTracking(context.Context, *connect.Request[v1.OrderTrackingRequest]) (*connect.Response[v1.OrderTrackingResponse], error)
+	// batch fetch by ids
+	GetOrderByIds(context.Context, *connect.Request[v1.GetOrderByIdsRequest]) (*connect.Response[v1.GetOrderByIdsResponse], error)
+	GetOrderItemByIds(context.Context, *connect.Request[v1.GetOrderItemByIdsRequest]) (*connect.Response[v1.GetOrderItemByIdsResponse], error)
 }
 
 // NewOrderServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -545,6 +581,18 @@ func NewOrderServiceHandler(svc OrderServiceHandler, opts ...connect.HandlerOpti
 		connect.WithSchema(orderServiceMethods.ByName("OrderTracking")),
 		connect.WithHandlerOptions(opts...),
 	)
+	orderServiceGetOrderByIdsHandler := connect.NewUnaryHandler(
+		OrderServiceGetOrderByIdsProcedure,
+		svc.GetOrderByIds,
+		connect.WithSchema(orderServiceMethods.ByName("GetOrderByIds")),
+		connect.WithHandlerOptions(opts...),
+	)
+	orderServiceGetOrderItemByIdsHandler := connect.NewUnaryHandler(
+		OrderServiceGetOrderItemByIdsProcedure,
+		svc.GetOrderItemByIds,
+		connect.WithSchema(orderServiceMethods.ByName("GetOrderItemByIds")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/order_iface.v1.OrderService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case OrderServiceOrderDraftCreateProcedure:
@@ -587,6 +635,10 @@ func NewOrderServiceHandler(svc OrderServiceHandler, opts ...connect.HandlerOpti
 			orderServiceMpPaymentDeleteHandler.ServeHTTP(w, r)
 		case OrderServiceOrderTrackingProcedure:
 			orderServiceOrderTrackingHandler.ServeHTTP(w, r)
+		case OrderServiceGetOrderByIdsProcedure:
+			orderServiceGetOrderByIdsHandler.ServeHTTP(w, r)
+		case OrderServiceGetOrderItemByIdsProcedure:
+			orderServiceGetOrderItemByIdsHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -674,4 +726,12 @@ func (UnimplementedOrderServiceHandler) MpPaymentDelete(context.Context, *connec
 
 func (UnimplementedOrderServiceHandler) OrderTracking(context.Context, *connect.Request[v1.OrderTrackingRequest]) (*connect.Response[v1.OrderTrackingResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("order_iface.v1.OrderService.OrderTracking is not implemented"))
+}
+
+func (UnimplementedOrderServiceHandler) GetOrderByIds(context.Context, *connect.Request[v1.GetOrderByIdsRequest]) (*connect.Response[v1.GetOrderByIdsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("order_iface.v1.OrderService.GetOrderByIds is not implemented"))
+}
+
+func (UnimplementedOrderServiceHandler) GetOrderItemByIds(context.Context, *connect.Request[v1.GetOrderItemByIdsRequest]) (*connect.Response[v1.GetOrderItemByIdsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("order_iface.v1.OrderService.GetOrderItemByIds is not implemented"))
 }

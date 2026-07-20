@@ -176,6 +176,84 @@ func (mr *MockInventoryServiceClientMockRecorder) TransactionCancel(ctx, req int
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "TransactionCancel", reflect.TypeOf((*MockInventoryService)(nil).TransactionCancel), ctx, req)
 }
 
+func (m *MockInventoryService) TransactionByIds(ctx context.Context, req *connect.Request[v1.TransactionByIdsRequest]) (*connect.Response[v1.TransactionByIdsResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "TransactionByIds", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.TransactionByIdsResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInventoryServiceMockRecorder) TransactionByIds(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "TransactionByIds", reflect.TypeOf((*MockInventoryService)(nil).TransactionByIds), ctx, req)
+}
+
+func (m *MockInventoryServiceClient) TransactionByIds(ctx context.Context, req *connect.Request[v1.TransactionByIdsRequest]) (*connect.Response[v1.TransactionByIdsResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "TransactionByIds", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.TransactionByIdsResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInventoryServiceClientMockRecorder) TransactionByIds(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "TransactionByIds", reflect.TypeOf((*MockInventoryService)(nil).TransactionByIds), ctx, req)
+}
+
+func (m *MockInventoryService) TransactionItemByIds(ctx context.Context, req *connect.Request[v1.TransactionItemByIdsRequest]) (*connect.Response[v1.TransactionItemByIdsResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "TransactionItemByIds", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.TransactionItemByIdsResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInventoryServiceMockRecorder) TransactionItemByIds(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "TransactionItemByIds", reflect.TypeOf((*MockInventoryService)(nil).TransactionItemByIds), ctx, req)
+}
+
+func (m *MockInventoryServiceClient) TransactionItemByIds(ctx context.Context, req *connect.Request[v1.TransactionItemByIdsRequest]) (*connect.Response[v1.TransactionItemByIdsResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "TransactionItemByIds", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.TransactionItemByIdsResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInventoryServiceClientMockRecorder) TransactionItemByIds(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "TransactionItemByIds", reflect.TypeOf((*MockInventoryService)(nil).TransactionItemByIds), ctx, req)
+}
+
+func (m *MockInventoryService) ProductBySkuIds(ctx context.Context, req *connect.Request[v1.ProductBySkuIdsRequest]) (*connect.Response[v1.ProductBySkuIdsResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "ProductBySkuIds", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.ProductBySkuIdsResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInventoryServiceMockRecorder) ProductBySkuIds(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ProductBySkuIds", reflect.TypeOf((*MockInventoryService)(nil).ProductBySkuIds), ctx, req)
+}
+
+func (m *MockInventoryServiceClient) ProductBySkuIds(ctx context.Context, req *connect.Request[v1.ProductBySkuIdsRequest]) (*connect.Response[v1.ProductBySkuIdsResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "ProductBySkuIds", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.ProductBySkuIdsResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockInventoryServiceClientMockRecorder) ProductBySkuIds(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ProductBySkuIds", reflect.TypeOf((*MockInventoryService)(nil).ProductBySkuIds), ctx, req)
+}
+
 func (m *MockInventoryService) ProductPlacementList(ctx context.Context, req *connect.Request[v1.ProductPlacementListRequest]) (*connect.Response[v1.ProductPlacementListResponse], error) {
     m.ctrl.T.Helper()
     ret := m.ctrl.Call(m, "ProductPlacementList", ctx, req)

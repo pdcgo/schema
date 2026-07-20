@@ -47,6 +47,15 @@ const (
 	// InventoryServiceTransactionCancelProcedure is the fully-qualified name of the InventoryService's
 	// TransactionCancel RPC.
 	InventoryServiceTransactionCancelProcedure = "/inventory_iface.v1.InventoryService/TransactionCancel"
+	// InventoryServiceTransactionByIdsProcedure is the fully-qualified name of the InventoryService's
+	// TransactionByIds RPC.
+	InventoryServiceTransactionByIdsProcedure = "/inventory_iface.v1.InventoryService/TransactionByIds"
+	// InventoryServiceTransactionItemByIdsProcedure is the fully-qualified name of the
+	// InventoryService's TransactionItemByIds RPC.
+	InventoryServiceTransactionItemByIdsProcedure = "/inventory_iface.v1.InventoryService/TransactionItemByIds"
+	// InventoryServiceProductBySkuIdsProcedure is the fully-qualified name of the InventoryService's
+	// ProductBySkuIds RPC.
+	InventoryServiceProductBySkuIdsProcedure = "/inventory_iface.v1.InventoryService/ProductBySkuIds"
 	// InventoryServiceProductPlacementListProcedure is the fully-qualified name of the
 	// InventoryService's ProductPlacementList RPC.
 	InventoryServiceProductPlacementListProcedure = "/inventory_iface.v1.InventoryService/ProductPlacementList"
@@ -159,6 +168,11 @@ type InventoryServiceClient interface {
 	// (order/restock/return/found_back/problem). TransactionCancel reverses one.
 	TransactionCreate(context.Context, *connect.Request[v1.TransactionCreateRequest]) (*connect.Response[v1.TransactionCreateResponse], error)
 	TransactionCancel(context.Context, *connect.Request[v1.TransactionCancelRequest]) (*connect.Response[v1.TransactionCancelResponse], error)
+	// Batch load by ids (see docs/proto-guideline.md). Any authenticated caller;
+	// missing ids are omitted from the response map.
+	TransactionByIds(context.Context, *connect.Request[v1.TransactionByIdsRequest]) (*connect.Response[v1.TransactionByIdsResponse], error)
+	TransactionItemByIds(context.Context, *connect.Request[v1.TransactionItemByIdsRequest]) (*connect.Response[v1.TransactionItemByIdsResponse], error)
+	ProductBySkuIds(context.Context, *connect.Request[v1.ProductBySkuIdsRequest]) (*connect.Response[v1.ProductBySkuIdsResponse], error)
 	ProductPlacementList(context.Context, *connect.Request[v1.ProductPlacementListRequest]) (*connect.Response[v1.ProductPlacementListResponse], error)
 	ProductPlacementLog(context.Context, *connect.Request[v1.ProductPlacementLogRequest]) (*connect.Response[v1.ProductPlacementLogResponse], error)
 	// PlacementMove moves stock between racks of ONE warehouse (multi-item, partial
@@ -259,6 +273,24 @@ func NewInventoryServiceClient(httpClient connect.HTTPClient, baseURL string, op
 			httpClient,
 			baseURL+InventoryServiceTransactionCancelProcedure,
 			connect.WithSchema(inventoryServiceMethods.ByName("TransactionCancel")),
+			connect.WithClientOptions(opts...),
+		),
+		transactionByIds: connect.NewClient[v1.TransactionByIdsRequest, v1.TransactionByIdsResponse](
+			httpClient,
+			baseURL+InventoryServiceTransactionByIdsProcedure,
+			connect.WithSchema(inventoryServiceMethods.ByName("TransactionByIds")),
+			connect.WithClientOptions(opts...),
+		),
+		transactionItemByIds: connect.NewClient[v1.TransactionItemByIdsRequest, v1.TransactionItemByIdsResponse](
+			httpClient,
+			baseURL+InventoryServiceTransactionItemByIdsProcedure,
+			connect.WithSchema(inventoryServiceMethods.ByName("TransactionItemByIds")),
+			connect.WithClientOptions(opts...),
+		),
+		productBySkuIds: connect.NewClient[v1.ProductBySkuIdsRequest, v1.ProductBySkuIdsResponse](
+			httpClient,
+			baseURL+InventoryServiceProductBySkuIdsProcedure,
+			connect.WithSchema(inventoryServiceMethods.ByName("ProductBySkuIds")),
 			connect.WithClientOptions(opts...),
 		),
 		productPlacementList: connect.NewClient[v1.ProductPlacementListRequest, v1.ProductPlacementListResponse](
@@ -469,6 +501,9 @@ type inventoryServiceClient struct {
 	pushStockEvent       *connect.Client[v1.PushStockEventRequest, v1.PushStockEventResponse]
 	transactionCreate    *connect.Client[v1.TransactionCreateRequest, v1.TransactionCreateResponse]
 	transactionCancel    *connect.Client[v1.TransactionCancelRequest, v1.TransactionCancelResponse]
+	transactionByIds     *connect.Client[v1.TransactionByIdsRequest, v1.TransactionByIdsResponse]
+	transactionItemByIds *connect.Client[v1.TransactionItemByIdsRequest, v1.TransactionItemByIdsResponse]
+	productBySkuIds      *connect.Client[v1.ProductBySkuIdsRequest, v1.ProductBySkuIdsResponse]
 	productPlacementList *connect.Client[v1.ProductPlacementListRequest, v1.ProductPlacementListResponse]
 	productPlacementLog  *connect.Client[v1.ProductPlacementLogRequest, v1.ProductPlacementLogResponse]
 	placementMove        *connect.Client[v1.PlacementMoveRequest, v1.PlacementMoveResponse]
@@ -527,6 +562,21 @@ func (c *inventoryServiceClient) TransactionCreate(ctx context.Context, req *con
 // TransactionCancel calls inventory_iface.v1.InventoryService.TransactionCancel.
 func (c *inventoryServiceClient) TransactionCancel(ctx context.Context, req *connect.Request[v1.TransactionCancelRequest]) (*connect.Response[v1.TransactionCancelResponse], error) {
 	return c.transactionCancel.CallUnary(ctx, req)
+}
+
+// TransactionByIds calls inventory_iface.v1.InventoryService.TransactionByIds.
+func (c *inventoryServiceClient) TransactionByIds(ctx context.Context, req *connect.Request[v1.TransactionByIdsRequest]) (*connect.Response[v1.TransactionByIdsResponse], error) {
+	return c.transactionByIds.CallUnary(ctx, req)
+}
+
+// TransactionItemByIds calls inventory_iface.v1.InventoryService.TransactionItemByIds.
+func (c *inventoryServiceClient) TransactionItemByIds(ctx context.Context, req *connect.Request[v1.TransactionItemByIdsRequest]) (*connect.Response[v1.TransactionItemByIdsResponse], error) {
+	return c.transactionItemByIds.CallUnary(ctx, req)
+}
+
+// ProductBySkuIds calls inventory_iface.v1.InventoryService.ProductBySkuIds.
+func (c *inventoryServiceClient) ProductBySkuIds(ctx context.Context, req *connect.Request[v1.ProductBySkuIdsRequest]) (*connect.Response[v1.ProductBySkuIdsResponse], error) {
+	return c.productBySkuIds.CallUnary(ctx, req)
 }
 
 // ProductPlacementList calls inventory_iface.v1.InventoryService.ProductPlacementList.
@@ -705,6 +755,11 @@ type InventoryServiceHandler interface {
 	// (order/restock/return/found_back/problem). TransactionCancel reverses one.
 	TransactionCreate(context.Context, *connect.Request[v1.TransactionCreateRequest]) (*connect.Response[v1.TransactionCreateResponse], error)
 	TransactionCancel(context.Context, *connect.Request[v1.TransactionCancelRequest]) (*connect.Response[v1.TransactionCancelResponse], error)
+	// Batch load by ids (see docs/proto-guideline.md). Any authenticated caller;
+	// missing ids are omitted from the response map.
+	TransactionByIds(context.Context, *connect.Request[v1.TransactionByIdsRequest]) (*connect.Response[v1.TransactionByIdsResponse], error)
+	TransactionItemByIds(context.Context, *connect.Request[v1.TransactionItemByIdsRequest]) (*connect.Response[v1.TransactionItemByIdsResponse], error)
+	ProductBySkuIds(context.Context, *connect.Request[v1.ProductBySkuIdsRequest]) (*connect.Response[v1.ProductBySkuIdsResponse], error)
 	ProductPlacementList(context.Context, *connect.Request[v1.ProductPlacementListRequest]) (*connect.Response[v1.ProductPlacementListResponse], error)
 	ProductPlacementLog(context.Context, *connect.Request[v1.ProductPlacementLogRequest]) (*connect.Response[v1.ProductPlacementLogResponse], error)
 	// PlacementMove moves stock between racks of ONE warehouse (multi-item, partial
@@ -801,6 +856,24 @@ func NewInventoryServiceHandler(svc InventoryServiceHandler, opts ...connect.Han
 		InventoryServiceTransactionCancelProcedure,
 		svc.TransactionCancel,
 		connect.WithSchema(inventoryServiceMethods.ByName("TransactionCancel")),
+		connect.WithHandlerOptions(opts...),
+	)
+	inventoryServiceTransactionByIdsHandler := connect.NewUnaryHandler(
+		InventoryServiceTransactionByIdsProcedure,
+		svc.TransactionByIds,
+		connect.WithSchema(inventoryServiceMethods.ByName("TransactionByIds")),
+		connect.WithHandlerOptions(opts...),
+	)
+	inventoryServiceTransactionItemByIdsHandler := connect.NewUnaryHandler(
+		InventoryServiceTransactionItemByIdsProcedure,
+		svc.TransactionItemByIds,
+		connect.WithSchema(inventoryServiceMethods.ByName("TransactionItemByIds")),
+		connect.WithHandlerOptions(opts...),
+	)
+	inventoryServiceProductBySkuIdsHandler := connect.NewUnaryHandler(
+		InventoryServiceProductBySkuIdsProcedure,
+		svc.ProductBySkuIds,
+		connect.WithSchema(inventoryServiceMethods.ByName("ProductBySkuIds")),
 		connect.WithHandlerOptions(opts...),
 	)
 	inventoryServiceProductPlacementListHandler := connect.NewUnaryHandler(
@@ -1013,6 +1086,12 @@ func NewInventoryServiceHandler(svc InventoryServiceHandler, opts ...connect.Han
 			inventoryServiceTransactionCreateHandler.ServeHTTP(w, r)
 		case InventoryServiceTransactionCancelProcedure:
 			inventoryServiceTransactionCancelHandler.ServeHTTP(w, r)
+		case InventoryServiceTransactionByIdsProcedure:
+			inventoryServiceTransactionByIdsHandler.ServeHTTP(w, r)
+		case InventoryServiceTransactionItemByIdsProcedure:
+			inventoryServiceTransactionItemByIdsHandler.ServeHTTP(w, r)
+		case InventoryServiceProductBySkuIdsProcedure:
+			inventoryServiceProductBySkuIdsHandler.ServeHTTP(w, r)
 		case InventoryServiceProductPlacementListProcedure:
 			inventoryServiceProductPlacementListHandler.ServeHTTP(w, r)
 		case InventoryServiceProductPlacementLogProcedure:
@@ -1106,6 +1185,18 @@ func (UnimplementedInventoryServiceHandler) TransactionCreate(context.Context, *
 
 func (UnimplementedInventoryServiceHandler) TransactionCancel(context.Context, *connect.Request[v1.TransactionCancelRequest]) (*connect.Response[v1.TransactionCancelResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory_iface.v1.InventoryService.TransactionCancel is not implemented"))
+}
+
+func (UnimplementedInventoryServiceHandler) TransactionByIds(context.Context, *connect.Request[v1.TransactionByIdsRequest]) (*connect.Response[v1.TransactionByIdsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory_iface.v1.InventoryService.TransactionByIds is not implemented"))
+}
+
+func (UnimplementedInventoryServiceHandler) TransactionItemByIds(context.Context, *connect.Request[v1.TransactionItemByIdsRequest]) (*connect.Response[v1.TransactionItemByIdsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory_iface.v1.InventoryService.TransactionItemByIds is not implemented"))
+}
+
+func (UnimplementedInventoryServiceHandler) ProductBySkuIds(context.Context, *connect.Request[v1.ProductBySkuIdsRequest]) (*connect.Response[v1.ProductBySkuIdsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory_iface.v1.InventoryService.ProductBySkuIds is not implemented"))
 }
 
 func (UnimplementedInventoryServiceHandler) ProductPlacementList(context.Context, *connect.Request[v1.ProductPlacementListRequest]) (*connect.Response[v1.ProductPlacementListResponse], error) {

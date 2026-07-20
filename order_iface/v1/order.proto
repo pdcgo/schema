@@ -9,6 +9,7 @@ import "order_iface/v1/create.proto";
 import "order_iface/v1/draft.proto";
 import "order_iface/v1/order_core.proto";
 import "order_iface/v1/order_return.proto";
+import "role_base/v1/role.proto";
 import "tracking_iface/v1/tracking.proto";
 
 option go_package = "github.com/pdcgo/schema/services/order_iface/v1;order_iface";
@@ -53,7 +54,56 @@ service OrderService {
 
   rpc OrderTracking(OrderTrackingRequest) returns (OrderTrackingResponse);
 
+  // batch fetch by ids
+  rpc GetOrderByIds(GetOrderByIdsRequest) returns (GetOrderByIdsResponse);
+  rpc GetOrderItemByIds(GetOrderItemByIdsRequest) returns (GetOrderItemByIdsResponse);
+
   // bagian ops frequently
+}
+
+message OrderDetail {
+  uint64 id = 1;
+  string receipt = 2;
+  string order_ref_id = 3;
+}
+
+message GetOrderByIdsRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
+  repeated uint64 ids = 1 [
+    (buf.validate.field).repeated.min_items = 1,
+    (buf.validate.field).repeated.max_items = 100,
+    (buf.validate.field).repeated.unique = true,
+    (buf.validate.field).repeated.items.uint64.gt = 0
+  ];
+}
+
+message GetOrderByIdsResponse {
+  map<uint64, OrderDetail> orders = 1;
+}
+
+message OrderItemDetail {
+  uint64 id = 1;
+  uint64 product_id = 2;
+  uint64 variation_id = 3;
+  double price = 4;
+  int64 count = 5;
+  double total = 6;
+}
+
+message GetOrderItemByIdsRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
+  repeated uint64 ids = 1 [
+    (buf.validate.field).repeated.min_items = 1,
+    (buf.validate.field).repeated.max_items = 100,
+    (buf.validate.field).repeated.unique = true,
+    (buf.validate.field).repeated.items.uint64.gt = 0
+  ];
+}
+
+message GetOrderItemByIdsResponse {
+  map<uint64, OrderItemDetail> items = 1;
 }
 
 enum TagType {

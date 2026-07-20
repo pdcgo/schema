@@ -25,6 +25,12 @@ service InventoryService {
   rpc TransactionCreate(TransactionCreateRequest) returns (TransactionCreateResponse);
   rpc TransactionCancel(TransactionCancelRequest) returns (TransactionCancelResponse);
 
+  // Batch load by ids (see docs/proto-guideline.md). Any authenticated caller;
+  // missing ids are omitted from the response map.
+  rpc TransactionByIds(TransactionByIdsRequest) returns (TransactionByIdsResponse);
+  rpc TransactionItemByIds(TransactionItemByIdsRequest) returns (TransactionItemByIdsResponse);
+  rpc ProductBySkuIds(ProductBySkuIdsRequest) returns (ProductBySkuIdsResponse);
+
   rpc ProductPlacementList(ProductPlacementListRequest) returns (ProductPlacementListResponse);
   rpc ProductPlacementLog(ProductPlacementLogRequest) returns (ProductPlacementLogResponse);
   // PlacementMove moves stock between racks of ONE warehouse (multi-item, partial
@@ -148,6 +154,82 @@ message TransactionCancelRequest {
   uint64 warehouse_id = 2;
 }
 message TransactionCancelResponse {}
+
+// --- Batch load by ids ---
+
+message TransactionDetail {
+  uint64 id = 1;
+  string extern_order_id = 2;
+  string receipt = 3;
+}
+
+message TransactionByIdsRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
+  repeated uint64 ids = 1 [(buf.validate.field).repeated = {
+    min_items: 1
+    max_items: 100
+    unique: true
+    items: {
+      uint64: {gt: 0}
+    }
+  }];
+}
+
+message TransactionByIdsResponse {
+  map<uint64, TransactionDetail> transactions = 1; // keyed by transaction id
+}
+
+message TransactionItemDetail {
+  uint64 id = 1;
+  uint64 inv_transaction_id = 2;
+  string sku_id = 3;
+  int64 count = 4;
+  double price = 5;
+  double total = 6;
+}
+
+message TransactionItemByIdsRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
+  repeated uint64 ids = 1 [(buf.validate.field).repeated = {
+    min_items: 1
+    max_items: 100
+    unique: true
+    items: {
+      uint64: {gt: 0}
+    }
+  }];
+}
+
+message TransactionItemByIdsResponse {
+  map<uint64, TransactionItemDetail> items = 1; // keyed by item id
+}
+
+message ProductBySkuDetail {
+  uint64 id = 1;
+  string name = 2;
+  string ref_id = 3;
+  string image = 4; // first image, empty when the product has none
+}
+
+message ProductBySkuIdsRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
+  // sku ids are the opaque encoded SkuID strings; the product is derived from each.
+  repeated string sku_ids = 1 [(buf.validate.field).repeated = {
+    min_items: 1
+    max_items: 100
+    unique: true
+    items: {
+      string: {min_len: 1}
+    }
+  }];
+}
+
+message ProductBySkuIdsResponse {
+  map<string, ProductBySkuDetail> products = 1; // keyed by sku_id
+}
 
 message ProductReconcileRequest {
   uint64 product_id = 1 [(buf.validate.field).uint64.gt = 0];

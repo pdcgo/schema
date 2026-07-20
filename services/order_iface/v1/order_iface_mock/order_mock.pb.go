@@ -564,3 +564,55 @@ func (mr *MockOrderServiceClientMockRecorder) OrderTracking(ctx, req interface{}
     return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "OrderTracking", reflect.TypeOf((*MockOrderService)(nil).OrderTracking), ctx, req)
 }
 
+func (m *MockOrderService) GetOrderByIds(ctx context.Context, req *connect.Request[v1.GetOrderByIdsRequest]) (*connect.Response[v1.GetOrderByIdsResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "GetOrderByIds", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.GetOrderByIdsResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockOrderServiceMockRecorder) GetOrderByIds(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrderByIds", reflect.TypeOf((*MockOrderService)(nil).GetOrderByIds), ctx, req)
+}
+
+func (m *MockOrderServiceClient) GetOrderByIds(ctx context.Context, req *connect.Request[v1.GetOrderByIdsRequest]) (*connect.Response[v1.GetOrderByIdsResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "GetOrderByIds", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.GetOrderByIdsResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockOrderServiceClientMockRecorder) GetOrderByIds(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrderByIds", reflect.TypeOf((*MockOrderService)(nil).GetOrderByIds), ctx, req)
+}
+
+func (m *MockOrderService) GetOrderItemByIds(ctx context.Context, req *connect.Request[v1.GetOrderItemByIdsRequest]) (*connect.Response[v1.GetOrderItemByIdsResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "GetOrderItemByIds", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.GetOrderItemByIdsResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockOrderServiceMockRecorder) GetOrderItemByIds(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrderItemByIds", reflect.TypeOf((*MockOrderService)(nil).GetOrderItemByIds), ctx, req)
+}
+
+func (m *MockOrderServiceClient) GetOrderItemByIds(ctx context.Context, req *connect.Request[v1.GetOrderItemByIdsRequest]) (*connect.Response[v1.GetOrderItemByIdsResponse], error) {
+    m.ctrl.T.Helper()
+    ret := m.ctrl.Call(m, "GetOrderItemByIds", ctx, req)
+    ret0, _ := ret[0].(*connect.Response[v1.GetOrderItemByIdsResponse])
+    ret1, _ := ret[1].(error)
+    return ret0, ret1
+}
+
+func (mr *MockOrderServiceClientMockRecorder) GetOrderItemByIds(ctx, req interface{}) *gomock.Call {
+    mr.mock.ctrl.T.Helper()
+    return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrderItemByIds", reflect.TypeOf((*MockOrderService)(nil).GetOrderItemByIds), ctx, req)
+}
+

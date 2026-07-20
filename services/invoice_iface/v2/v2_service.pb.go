@@ -1560,13 +1560,10 @@ func (x *ListTeamBalanceLogResponse) GetPageInfo() *v1.PageInfo {
 	return nil
 }
 
-// Legs caused by an order (product_fee / warehouse_fee).
 type BalanceChangeOrderSourceType struct {
-	state   protoimpl.MessageState `protogen:"open.v1"`
-	OrderId uint64                 `protobuf:"varint,1,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
-	// order_system disambiguates the id-space shared by legacy and v3 orders;
-	// UNSPECIFIED = both.
-	OrderSystem   OrderSystem `protobuf:"varint,2,opt,name=order_system,json=orderSystem,proto3,enum=invoice_iface.v2.OrderSystem" json:"order_system,omitempty"`
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	OrderId       uint64                 `protobuf:"varint,1,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	OrderSystem   OrderSystem            `protobuf:"varint,2,opt,name=order_system,json=orderSystem,proto3,enum=invoice_iface.v2.OrderSystem" json:"order_system,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1615,7 +1612,6 @@ func (x *BalanceChangeOrderSourceType) GetOrderSystem() OrderSystem {
 	return OrderSystem_ORDER_SYSTEM_UNSPECIFIED
 }
 
-// Legs caused by an accepted restock (cod_fee), keyed by inv_transactions.id.
 type BalanceChangeRestockSourceType struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TxId          uint64                 `protobuf:"varint,1,opt,name=tx_id,json=txId,proto3" json:"tx_id,omitempty"`
@@ -1660,7 +1656,6 @@ func (x *BalanceChangeRestockSourceType) GetTxId() uint64 {
 	return 0
 }
 
-// Legs caused by a stock problem, keyed by inv_transactions.id.
 type BalanceChangeBrokenSourceType struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TxId          uint64                 `protobuf:"varint,1,opt,name=tx_id,json=txId,proto3" json:"tx_id,omitempty"`
@@ -1708,8 +1703,6 @@ func (x *BalanceChangeBrokenSourceType) GetTxId() uint64 {
 type GetBalanceChangeSourceRequest struct {
 	state  protoimpl.MessageState `protogen:"open.v1"`
 	TeamId uint64                 `protobuf:"varint,4,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
-	// The source kind to look up; also selects which table is read.
-	//
 	// Types that are valid to be assigned to SourceType:
 	//
 	//	*GetBalanceChangeSourceRequest_Order
@@ -1818,14 +1811,12 @@ type BalanceChangeOrderSourceItem struct {
 	BalanceChangeLogId uint64                 `protobuf:"varint,1,opt,name=balance_change_log_id,json=balanceChangeLogId,proto3" json:"balance_change_log_id,omitempty"`
 	OrderSystem        OrderSystem            `protobuf:"varint,2,opt,name=order_system,json=orderSystem,proto3,enum=invoice_iface.v2.OrderSystem" json:"order_system,omitempty"`
 	OrderId            uint64                 `protobuf:"varint,3,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
-	// order_item_id is 0 when the fee is not attributable to a single item
-	// (warehouse fee is order-level; v3 product fee is aggregated per owner team).
-	OrderItemId   uint64                 `protobuf:"varint,4,opt,name=order_item_id,json=orderItemId,proto3" json:"order_item_id,omitempty"`
-	TeamId        uint64                 `protobuf:"varint,5,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
-	WarehouseId   uint64                 `protobuf:"varint,6,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
-	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	OrderItemId        uint64                 `protobuf:"varint,4,opt,name=order_item_id,json=orderItemId,proto3" json:"order_item_id,omitempty"`
+	TeamId             uint64                 `protobuf:"varint,5,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	WarehouseId        uint64                 `protobuf:"varint,6,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
+	CreatedAt          *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *BalanceChangeOrderSourceItem) Reset() {
@@ -1911,13 +1902,12 @@ type BalanceChangeRestockSourceItem struct {
 	state              protoimpl.MessageState `protogen:"open.v1"`
 	BalanceChangeLogId uint64                 `protobuf:"varint,1,opt,name=balance_change_log_id,json=balanceChangeLogId,proto3" json:"balance_change_log_id,omitempty"`
 	TxId               uint64                 `protobuf:"varint,2,opt,name=tx_id,json=txId,proto3" json:"tx_id,omitempty"`
-	// tx_item_id is 0 when the fee is transaction-level (cod fee always is).
-	TxItemId      uint64                 `protobuf:"varint,3,opt,name=tx_item_id,json=txItemId,proto3" json:"tx_item_id,omitempty"`
-	TeamId        uint64                 `protobuf:"varint,4,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
-	WarehouseId   uint64                 `protobuf:"varint,5,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
-	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	TxItemId           uint64                 `protobuf:"varint,3,opt,name=tx_item_id,json=txItemId,proto3" json:"tx_item_id,omitempty"`
+	TeamId             uint64                 `protobuf:"varint,4,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	WarehouseId        uint64                 `protobuf:"varint,5,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
+	CreatedAt          *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *BalanceChangeRestockSourceItem) Reset() {
@@ -1996,13 +1986,12 @@ type BalanceChangeBrokenSourceItem struct {
 	state              protoimpl.MessageState `protogen:"open.v1"`
 	BalanceChangeLogId uint64                 `protobuf:"varint,1,opt,name=balance_change_log_id,json=balanceChangeLogId,proto3" json:"balance_change_log_id,omitempty"`
 	TxId               uint64                 `protobuf:"varint,2,opt,name=tx_id,json=txId,proto3" json:"tx_id,omitempty"`
-	// tx_item_id is 0 when the problem is not attributable to a single item.
-	TxItemId      uint64                 `protobuf:"varint,3,opt,name=tx_item_id,json=txItemId,proto3" json:"tx_item_id,omitempty"`
-	TeamId        uint64                 `protobuf:"varint,4,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
-	WarehouseId   uint64                 `protobuf:"varint,5,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
-	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	TxItemId           uint64                 `protobuf:"varint,3,opt,name=tx_item_id,json=txItemId,proto3" json:"tx_item_id,omitempty"`
+	TeamId             uint64                 `protobuf:"varint,4,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
+	WarehouseId        uint64                 `protobuf:"varint,5,opt,name=warehouse_id,json=warehouseId,proto3" json:"warehouse_id,omitempty"`
+	CreatedAt          *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *BalanceChangeBrokenSourceItem) Reset() {
@@ -2211,9 +2200,6 @@ func (x *BalanceChangeBrokenSourceData) GetItems() []*BalanceChangeBrokenSourceI
 
 type GetBalanceChangeSourceResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Mirrors the requested source_type; the data arm is set (with an empty items
-	// list) even when the source has no legs.
-	//
 	// Types that are valid to be assigned to Data:
 	//
 	//	*GetBalanceChangeSourceResponse_Order
@@ -2362,10 +2348,6 @@ func (x *GetBalanceChangeSourceByChangeIdsRequest) GetBalanceChangeLogIds() []ui
 	return nil
 }
 
-// BalanceChangeSourceEntry is the source one change id resolved to. Only change ids
-// that have a source appear in the response map; an id with no fee attribution
-// (adjustment, payment, reconcile) or one the caller's team does not own is simply
-// absent. The oneof therefore always has an arm set.
 type BalanceChangeSourceEntry struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Types that are valid to be assigned to Source:
