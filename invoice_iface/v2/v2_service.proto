@@ -281,6 +281,15 @@ message BalanceChangeBrokenSourceType {
   uint64 tx_id = 1 [(buf.validate.field).uint64.gt = 0];
 }
 
+message BalanceChangeFoundBackSourceType {
+  oneof by {
+    option (buf.validate.oneof).required = true;
+
+    uint64 problem_tx_id = 1 [(buf.validate.field).uint64.gt = 0];
+    uint64 recovery_tx_id = 2 [(buf.validate.field).uint64.gt = 0];
+  }
+}
+
 message GetBalanceChangeSourceRequest {
   option (role_base.v1.request_policy) = {allow_only_authenticated: true};
 
@@ -294,6 +303,7 @@ message GetBalanceChangeSourceRequest {
     BalanceChangeOrderSourceType order = 1;
     BalanceChangeRestockSourceType restock = 2;
     BalanceChangeBrokenSourceType broken = 3;
+    BalanceChangeFoundBackSourceType found_back = 5;
   }
 }
 
@@ -325,6 +335,16 @@ message BalanceChangeBrokenSourceItem {
   google.protobuf.Timestamp created_at = 6;
 }
 
+message BalanceChangeFoundBackSourceItem {
+  uint64 balance_change_log_id = 1;
+  uint64 problem_tx_id = 2;
+  uint64 recovery_tx_id = 3;
+  uint64 recovery_tx_item_id = 4;
+  uint64 team_id = 5;
+  uint64 warehouse_id = 6;
+  google.protobuf.Timestamp created_at = 7;
+}
+
 message BalanceChangeOrderSourceData {
   repeated BalanceChangeOrderSourceItem items = 1;
 }
@@ -337,11 +357,16 @@ message BalanceChangeBrokenSourceData {
   repeated BalanceChangeBrokenSourceItem items = 1;
 }
 
+message BalanceChangeFoundBackSourceData {
+  repeated BalanceChangeFoundBackSourceItem items = 1;
+}
+
 message GetBalanceChangeSourceResponse {
   oneof data {
     BalanceChangeOrderSourceData order = 1;
     BalanceChangeRestockSourceData restock = 2;
     BalanceChangeBrokenSourceData broken = 3;
+    BalanceChangeFoundBackSourceData found_back = 4;
   }
 }
 
@@ -365,6 +390,7 @@ message BalanceChangeSourceEntry {
     BalanceChangeOrderSourceItem order = 1;
     BalanceChangeRestockSourceItem restock = 2;
     BalanceChangeBrokenSourceItem broken = 3;
+    BalanceChangeFoundBackSourceItem found_back = 4;
   }
 }
 

@@ -158,10 +158,47 @@ message TransactionCancelResponse {}
 
 // --- Batch load by ids ---
 
+// What moved the stock. Mirrors the stored `inv_transactions.type` strings
+// (db_models.InvTxType); a value outside this set reads as UNSPECIFIED.
+enum TransactionType {
+  TRANSACTION_TYPE_UNSPECIFIED = 0;
+  TRANSACTION_TYPE_RESTOCK = 1; // restock
+  TRANSACTION_TYPE_ADJ_RESTOCK = 2; // adj_restock
+  TRANSACTION_TYPE_ORDER = 3; // order
+  TRANSACTION_TYPE_RETURN = 4; // return
+  TRANSACTION_TYPE_TRANSFER_IN = 5; // transfer_in
+  TRANSACTION_TYPE_TRANSFER_OUT = 6; // transfer_out
+  TRANSACTION_TYPE_TRANSIT = 7; // transit
+  TRANSACTION_TYPE_BROKEN = 8; // broken
+  TRANSACTION_TYPE_CHANGE_SKU_OUT = 9; // ch_sku_out
+  TRANSACTION_TYPE_CHANGE_SKU_IN = 10; // ch_sku_in
+  TRANSACTION_TYPE_ADJ_IN = 11; // adj_in
+  TRANSACTION_TYPE_ADJ_OUT = 12; // adj_out
+  TRANSACTION_TYPE_SYS_ERR_IN = 13; // sys_err_in
+  TRANSACTION_TYPE_SYS_ERR_OUT = 14; // sys_err_out
+}
+
+// Where the transaction sits in its workflow. Mirrors the stored
+// `inv_transactions.status` strings (db_models.InvTxStatus); a value outside this
+// set reads as UNSPECIFIED.
+enum TransactionStatus {
+  TRANSACTION_STATUS_UNSPECIFIED = 0;
+  TRANSACTION_STATUS_WAITING = 1; // waiting
+  TRANSACTION_STATUS_ONGOING = 2; // ongoing
+  TRANSACTION_STATUS_CANCEL = 3; // cancel
+  TRANSACTION_STATUS_COMPLETED = 4; // completed
+  TRANSACTION_STATUS_PICKING = 5; // picking
+  TRANSACTION_STATUS_PICKED = 6; // picked
+  TRANSACTION_STATUS_PACKING = 7; // packing
+  TRANSACTION_STATUS_PACKING_COMPLETED = 8; // packing_completed
+}
+
 message TransactionDetail {
   uint64 id = 1;
   string extern_order_id = 2;
   string receipt = 3;
+  TransactionType type = 4;
+  TransactionStatus status = 5;
 }
 
 message TransactionByIdsRequest {
