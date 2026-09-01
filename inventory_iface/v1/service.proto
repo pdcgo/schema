@@ -15,6 +15,9 @@ service InventoryService {
   rpc Order(OrderRequest) returns (OrderResponse);
 
   rpc StockMovement(StockMovementRequest) returns (StockMovementResponse);
+  rpc StockMovementSelling(StockMovementSellingRequest) returns (StockMovementSellingResponse);
+  rpc StockMovementDaily(StockMovementDailyRequest) returns (StockMovementDailyResponse);
+  rpc StockMovementBreakdown(StockMovementBreakdownRequest) returns (StockMovementBreakdownResponse);
 
   // PushStockEvent ingests a warehouse StockEvent (the RPC counterpart of the
   // Pub/Sub push handler) and applies it to inventory state in one transaction.
@@ -452,6 +455,66 @@ message MovementItem {
 message StockMovementResponse {
   repeated MovementItem movements = 1;
   common.v1.PageInfoWithoutCount page_info = 2;
+}
+
+message StockMovementSellingRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
+  uint64 product_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 warehouse_id = 2;
+  common.v1.TimeFilterRange time_range = 3 [(buf.validate.field).required = true];
+  common.v1.PageFilter page = 4 [(buf.validate.field).required = true];
+}
+
+message StockMovementSellingResponse {
+  repeated MovementItem movements = 1;
+  common.v1.PageInfoWithoutCount page_info = 2;
+}
+
+message StockMovementDailyRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
+  uint64 product_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 warehouse_id = 2;
+  common.v1.TimeFilterRange time_range = 3 [(buf.validate.field).required = true];
+  common.v1.PageFilter page = 4 [(buf.validate.field).required = true];
+}
+
+message DailyMovementItem {
+  google.protobuf.Timestamp day = 1;
+
+  int64 total_in = 2;
+  int64 total_out = 3;
+  double amount_in = 4;
+  double amount_out = 5;
+
+  int64 balance_count = 6;
+  double balance_amount = 7;
+  double price = 8;
+}
+
+message StockMovementDailyResponse {
+  repeated DailyMovementItem days = 1;
+  common.v1.PageInfoWithoutCount page_info = 2;
+}
+
+message StockMovementBreakdownRequest {
+  option (role_base.v1.request_policy) = {allow_only_authenticated: true};
+
+  uint64 product_id = 1 [(buf.validate.field).uint64.gt = 0];
+  uint64 warehouse_id = 2;
+  common.v1.TimeFilterRange time_range = 3 [(buf.validate.field).required = true];
+}
+
+message MovementBreakdownItem {
+  StockChangeType change_type = 1;
+  int64 change_count = 2;
+  double change_amount = 3;
+  int64 transaction_count = 4;
+}
+
+message StockMovementBreakdownResponse {
+  repeated MovementBreakdownItem breakdowns = 1;
 }
 
 message ProvisionItem {

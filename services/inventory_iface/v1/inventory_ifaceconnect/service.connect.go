@@ -38,6 +38,15 @@ const (
 	// InventoryServiceStockMovementProcedure is the fully-qualified name of the InventoryService's
 	// StockMovement RPC.
 	InventoryServiceStockMovementProcedure = "/inventory_iface.v1.InventoryService/StockMovement"
+	// InventoryServiceStockMovementSellingProcedure is the fully-qualified name of the
+	// InventoryService's StockMovementSelling RPC.
+	InventoryServiceStockMovementSellingProcedure = "/inventory_iface.v1.InventoryService/StockMovementSelling"
+	// InventoryServiceStockMovementDailyProcedure is the fully-qualified name of the InventoryService's
+	// StockMovementDaily RPC.
+	InventoryServiceStockMovementDailyProcedure = "/inventory_iface.v1.InventoryService/StockMovementDaily"
+	// InventoryServiceStockMovementBreakdownProcedure is the fully-qualified name of the
+	// InventoryService's StockMovementBreakdown RPC.
+	InventoryServiceStockMovementBreakdownProcedure = "/inventory_iface.v1.InventoryService/StockMovementBreakdown"
 	// InventoryServicePushStockEventProcedure is the fully-qualified name of the InventoryService's
 	// PushStockEvent RPC.
 	InventoryServicePushStockEventProcedure = "/inventory_iface.v1.InventoryService/PushStockEvent"
@@ -164,6 +173,9 @@ const (
 type InventoryServiceClient interface {
 	Order(context.Context, *connect.Request[v1.OrderRequest]) (*connect.Response[v1.OrderResponse], error)
 	StockMovement(context.Context, *connect.Request[v1.StockMovementRequest]) (*connect.Response[v1.StockMovementResponse], error)
+	StockMovementSelling(context.Context, *connect.Request[v1.StockMovementSellingRequest]) (*connect.Response[v1.StockMovementSellingResponse], error)
+	StockMovementDaily(context.Context, *connect.Request[v1.StockMovementDailyRequest]) (*connect.Response[v1.StockMovementDailyResponse], error)
+	StockMovementBreakdown(context.Context, *connect.Request[v1.StockMovementBreakdownRequest]) (*connect.Response[v1.StockMovementBreakdownResponse], error)
 	// PushStockEvent ingests a warehouse StockEvent (the RPC counterpart of the
 	// Pub/Sub push handler) and applies it to inventory state in one transaction.
 	PushStockEvent(context.Context, *connect.Request[v1.PushStockEventRequest]) (*connect.Response[v1.PushStockEventResponse], error)
@@ -259,6 +271,24 @@ func NewInventoryServiceClient(httpClient connect.HTTPClient, baseURL string, op
 			httpClient,
 			baseURL+InventoryServiceStockMovementProcedure,
 			connect.WithSchema(inventoryServiceMethods.ByName("StockMovement")),
+			connect.WithClientOptions(opts...),
+		),
+		stockMovementSelling: connect.NewClient[v1.StockMovementSellingRequest, v1.StockMovementSellingResponse](
+			httpClient,
+			baseURL+InventoryServiceStockMovementSellingProcedure,
+			connect.WithSchema(inventoryServiceMethods.ByName("StockMovementSelling")),
+			connect.WithClientOptions(opts...),
+		),
+		stockMovementDaily: connect.NewClient[v1.StockMovementDailyRequest, v1.StockMovementDailyResponse](
+			httpClient,
+			baseURL+InventoryServiceStockMovementDailyProcedure,
+			connect.WithSchema(inventoryServiceMethods.ByName("StockMovementDaily")),
+			connect.WithClientOptions(opts...),
+		),
+		stockMovementBreakdown: connect.NewClient[v1.StockMovementBreakdownRequest, v1.StockMovementBreakdownResponse](
+			httpClient,
+			baseURL+InventoryServiceStockMovementBreakdownProcedure,
+			connect.WithSchema(inventoryServiceMethods.ByName("StockMovementBreakdown")),
 			connect.WithClientOptions(opts...),
 		),
 		pushStockEvent: connect.NewClient[v1.PushStockEventRequest, v1.PushStockEventResponse](
@@ -508,6 +538,9 @@ func NewInventoryServiceClient(httpClient connect.HTTPClient, baseURL string, op
 type inventoryServiceClient struct {
 	order                             *connect.Client[v1.OrderRequest, v1.OrderResponse]
 	stockMovement                     *connect.Client[v1.StockMovementRequest, v1.StockMovementResponse]
+	stockMovementSelling              *connect.Client[v1.StockMovementSellingRequest, v1.StockMovementSellingResponse]
+	stockMovementDaily                *connect.Client[v1.StockMovementDailyRequest, v1.StockMovementDailyResponse]
+	stockMovementBreakdown            *connect.Client[v1.StockMovementBreakdownRequest, v1.StockMovementBreakdownResponse]
 	pushStockEvent                    *connect.Client[v1.PushStockEventRequest, v1.PushStockEventResponse]
 	transactionCreate                 *connect.Client[v1.TransactionCreateRequest, v1.TransactionCreateResponse]
 	transactionCancel                 *connect.Client[v1.TransactionCancelRequest, v1.TransactionCancelResponse]
@@ -558,6 +591,21 @@ func (c *inventoryServiceClient) Order(ctx context.Context, req *connect.Request
 // StockMovement calls inventory_iface.v1.InventoryService.StockMovement.
 func (c *inventoryServiceClient) StockMovement(ctx context.Context, req *connect.Request[v1.StockMovementRequest]) (*connect.Response[v1.StockMovementResponse], error) {
 	return c.stockMovement.CallUnary(ctx, req)
+}
+
+// StockMovementSelling calls inventory_iface.v1.InventoryService.StockMovementSelling.
+func (c *inventoryServiceClient) StockMovementSelling(ctx context.Context, req *connect.Request[v1.StockMovementSellingRequest]) (*connect.Response[v1.StockMovementSellingResponse], error) {
+	return c.stockMovementSelling.CallUnary(ctx, req)
+}
+
+// StockMovementDaily calls inventory_iface.v1.InventoryService.StockMovementDaily.
+func (c *inventoryServiceClient) StockMovementDaily(ctx context.Context, req *connect.Request[v1.StockMovementDailyRequest]) (*connect.Response[v1.StockMovementDailyResponse], error) {
+	return c.stockMovementDaily.CallUnary(ctx, req)
+}
+
+// StockMovementBreakdown calls inventory_iface.v1.InventoryService.StockMovementBreakdown.
+func (c *inventoryServiceClient) StockMovementBreakdown(ctx context.Context, req *connect.Request[v1.StockMovementBreakdownRequest]) (*connect.Response[v1.StockMovementBreakdownResponse], error) {
+	return c.stockMovementBreakdown.CallUnary(ctx, req)
 }
 
 // PushStockEvent calls inventory_iface.v1.InventoryService.PushStockEvent.
@@ -765,6 +813,9 @@ func (c *inventoryServiceClient) OpnameCancel(ctx context.Context, req *connect.
 type InventoryServiceHandler interface {
 	Order(context.Context, *connect.Request[v1.OrderRequest]) (*connect.Response[v1.OrderResponse], error)
 	StockMovement(context.Context, *connect.Request[v1.StockMovementRequest]) (*connect.Response[v1.StockMovementResponse], error)
+	StockMovementSelling(context.Context, *connect.Request[v1.StockMovementSellingRequest]) (*connect.Response[v1.StockMovementSellingResponse], error)
+	StockMovementDaily(context.Context, *connect.Request[v1.StockMovementDailyRequest]) (*connect.Response[v1.StockMovementDailyResponse], error)
+	StockMovementBreakdown(context.Context, *connect.Request[v1.StockMovementBreakdownRequest]) (*connect.Response[v1.StockMovementBreakdownResponse], error)
 	// PushStockEvent ingests a warehouse StockEvent (the RPC counterpart of the
 	// Pub/Sub push handler) and applies it to inventory state in one transaction.
 	PushStockEvent(context.Context, *connect.Request[v1.PushStockEventRequest]) (*connect.Response[v1.PushStockEventResponse], error)
@@ -856,6 +907,24 @@ func NewInventoryServiceHandler(svc InventoryServiceHandler, opts ...connect.Han
 		InventoryServiceStockMovementProcedure,
 		svc.StockMovement,
 		connect.WithSchema(inventoryServiceMethods.ByName("StockMovement")),
+		connect.WithHandlerOptions(opts...),
+	)
+	inventoryServiceStockMovementSellingHandler := connect.NewUnaryHandler(
+		InventoryServiceStockMovementSellingProcedure,
+		svc.StockMovementSelling,
+		connect.WithSchema(inventoryServiceMethods.ByName("StockMovementSelling")),
+		connect.WithHandlerOptions(opts...),
+	)
+	inventoryServiceStockMovementDailyHandler := connect.NewUnaryHandler(
+		InventoryServiceStockMovementDailyProcedure,
+		svc.StockMovementDaily,
+		connect.WithSchema(inventoryServiceMethods.ByName("StockMovementDaily")),
+		connect.WithHandlerOptions(opts...),
+	)
+	inventoryServiceStockMovementBreakdownHandler := connect.NewUnaryHandler(
+		InventoryServiceStockMovementBreakdownProcedure,
+		svc.StockMovementBreakdown,
+		connect.WithSchema(inventoryServiceMethods.ByName("StockMovementBreakdown")),
 		connect.WithHandlerOptions(opts...),
 	)
 	inventoryServicePushStockEventHandler := connect.NewUnaryHandler(
@@ -1104,6 +1173,12 @@ func NewInventoryServiceHandler(svc InventoryServiceHandler, opts ...connect.Han
 			inventoryServiceOrderHandler.ServeHTTP(w, r)
 		case InventoryServiceStockMovementProcedure:
 			inventoryServiceStockMovementHandler.ServeHTTP(w, r)
+		case InventoryServiceStockMovementSellingProcedure:
+			inventoryServiceStockMovementSellingHandler.ServeHTTP(w, r)
+		case InventoryServiceStockMovementDailyProcedure:
+			inventoryServiceStockMovementDailyHandler.ServeHTTP(w, r)
+		case InventoryServiceStockMovementBreakdownProcedure:
+			inventoryServiceStockMovementBreakdownHandler.ServeHTTP(w, r)
 		case InventoryServicePushStockEventProcedure:
 			inventoryServicePushStockEventHandler.ServeHTTP(w, r)
 		case InventoryServiceTransactionCreateProcedure:
@@ -1199,6 +1274,18 @@ func (UnimplementedInventoryServiceHandler) Order(context.Context, *connect.Requ
 
 func (UnimplementedInventoryServiceHandler) StockMovement(context.Context, *connect.Request[v1.StockMovementRequest]) (*connect.Response[v1.StockMovementResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory_iface.v1.InventoryService.StockMovement is not implemented"))
+}
+
+func (UnimplementedInventoryServiceHandler) StockMovementSelling(context.Context, *connect.Request[v1.StockMovementSellingRequest]) (*connect.Response[v1.StockMovementSellingResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory_iface.v1.InventoryService.StockMovementSelling is not implemented"))
+}
+
+func (UnimplementedInventoryServiceHandler) StockMovementDaily(context.Context, *connect.Request[v1.StockMovementDailyRequest]) (*connect.Response[v1.StockMovementDailyResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory_iface.v1.InventoryService.StockMovementDaily is not implemented"))
+}
+
+func (UnimplementedInventoryServiceHandler) StockMovementBreakdown(context.Context, *connect.Request[v1.StockMovementBreakdownRequest]) (*connect.Response[v1.StockMovementBreakdownResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory_iface.v1.InventoryService.StockMovementBreakdown is not implemented"))
 }
 
 func (UnimplementedInventoryServiceHandler) PushStockEvent(context.Context, *connect.Request[v1.PushStockEventRequest]) (*connect.Response[v1.PushStockEventResponse], error) {
